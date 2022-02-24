@@ -49,9 +49,7 @@ def get_string_representation(string) :
 Section 2 : PushShift API calls for getting data
 '''
 
-from psaw import PushshiftAPI
 
-api = PushshiftAPI()
 sleep_time = 1
 subreddit = 'fantasyfootball'
 time_filter = int(time.time())
@@ -59,6 +57,8 @@ oldest_created_utc = time_filter
 more_posts_exist = True
 posts_per_file = 1000
 output_dir = '/scratch/summit/dasr8731/needfinder'
+
+url = "https://api.pushshift.io/reddit/search/submission/"
 
 
 if not os.path.exists(output_dir) :
@@ -69,10 +69,13 @@ def parse_submission(submission) :
 	attributes = ('url', 'upvote_ratio', 'title', 'subreddit', 'selftext', 'score', 'num_comments', 'created', 'created_utc', 'author', 'full_link')
 	parsed = {}
 
-	for attribute in attributes : 
-		parsed[attribute] = getattr(submission, attribute, None)
+	for attribute in attributes :
+		if attribute in submission :  
+			parsed[attribute] = submission[attribute]
+		else : 
+			parsed[attribute] = None
 
-	parsed['bert_title'] = get_string_representation(submission.title)
+	parsed['bert_title'] = get_string_representation(submission['title'])
 	parsed_str = json.dumps(parsed)
 	return parsed_str
 
@@ -94,19 +97,20 @@ def save_to_file(start_time, end_time, string_list) :
 i = 0
 while more_posts_exist : 
 
-	results = api.search_submissions(subreddit=subreddit, 
-						before=time_filter,
-					   	limit=posts_per_file)
+	response = requests.get(url, params={
+						  'subreddit':subreddit,
+                          'before':time_filter, 
+                          'posts_per_file':100})
 
 	parsed_results = []
 
 	num_submissions = 0
-	for submission in results : 
+	for submission in response.json()['data'] : 
 
 		parsed_results.append(parse_submission(submission))
 
-		if int(submission.created_utc) < oldest_created_utc:
-			oldest_created_utc = int(submission.created_utc)
+		if int(submission['created_utc']) < oldest_created_utc:
+			oldest_created_utc = int(submission['created_utc'])
 
 		num_submissions += 1
 
