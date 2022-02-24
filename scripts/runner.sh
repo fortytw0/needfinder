@@ -2,8 +2,6 @@
 
 cd /projects/dasr8731/needfinder
 
-conda activate reddit-needfinding-0.0
-
-conda install -y --file requirements.txt
+conda activate needfinder0.0
 
 python -m src.reddit_scraper

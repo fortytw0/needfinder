@@ -23,8 +23,10 @@ Section 1 : BERT Initialization with Hugging Face
 from transformers import BertConfig, BertTokenizer, TFBertModel
 
 try : 
-	bert = TFBertModel.from_pretrained('bert-base-uncased')
-	tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
+	bert = TFBertModel.from_pretrained('/projects/dasr8731/needfinder/models/bert-base-uncased', local_files_only=True)
+	tokenizer = BertTokenizer.from_pretrained('/projects/dasr8731/needfinder/models/bert-base-uncased', local_files_only=True)
+	# bert = TFBertModel.from_pretrained('bert-base-uncased')
+	# tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
 	sample_text = 'When the levee breaks, you got not place to stay.'
 	tokens = tokenizer(sample_text, return_tensors="tf")
 	model_output = bert(tokens)
@@ -32,11 +34,11 @@ try :
 
 	assert cls.numpy().shape == (768, )
   
-	logging.DEBUG("BERT Initialized successfully...")
+	logging.debug("BERT Initialized successfully...")
 
 except Exception as e : 
 
-	logging.ERROR("There was an error in initializing BERT : {}".format(e))
+	logging.error("There was an error in initializing BERT : {}".format(e))
 
 
 def get_string_representation(string) : 
@@ -62,7 +64,7 @@ url = "https://api.pushshift.io/reddit/search/submission/"
 
 
 if not os.path.exists(output_dir) :
-	logging.DEBUG("{} : This directory did not exist before. Creating a new directory.".format(output_dir))
+	logging.debug("{} : This directory did not exist before. Creating a new directory.".format(output_dir))
 	os.mkdir(output_dir)
 
 def parse_submission(submission) :
