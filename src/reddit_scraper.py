@@ -45,7 +45,7 @@ def get_string_representation(string) :
 	tokens = tokenizer(string, return_tensors="tf")
 	model_output = bert(tokens)
 	cls = model_output.last_hidden_state[0, 0, :]
-	return cls.numpy()
+	return str(cls.numpy())
 
 '''
 Section 2 : PushShift API calls for getting data
@@ -73,7 +73,11 @@ def parse_submission(submission) :
 
 	for attribute in attributes :
 		if attribute in submission :  
-			parsed[attribute] = submission[attribute]
+			if type(submission[attribute]) in [float] :  
+				parsed[attribute] = str(submission[attribute])
+			else : 
+				parsed[attribute] = submission[attribute]
+
 		else : 
 			parsed[attribute] = None
 
