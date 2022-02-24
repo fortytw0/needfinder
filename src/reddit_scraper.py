@@ -45,7 +45,7 @@ def get_string_representation(string) :
 	tokens = tokenizer(string, return_tensors="tf")
 	model_output = bert(tokens)
 	cls = model_output.last_hidden_state[0, 0, :]
-	return str(cls.numpy())
+	return str(list(cls.numpy()))
 
 '''
 Section 2 : PushShift API calls for getting data
@@ -126,6 +126,7 @@ while more_posts_exist :
 	save_to_file(oldest_created_utc, time_filter, parsed_results)
 	time_filter = oldest_created_utc
 
+	logging.debug("Finished processing upto : {}".format(time.strftime("%Y-%m-%d | %H:%M:%S",  time.localtime(time_filter))))
 	time.sleep(sleep_time)
 
 	i += 1
