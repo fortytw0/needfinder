@@ -100,13 +100,13 @@ def save_to_file(start_time, end_time, string_list) :
 
 	return True
 
-i = 0
+
 while more_posts_exist : 
 
 	response = requests.get(url, params={
 						  'subreddit':subreddit,
                           'before':time_filter, 
-                          'posts_per_file':100})
+                          'limit':posts_per_file})
 
 	parsed_results = []
 
@@ -127,10 +127,7 @@ while more_posts_exist :
 	time_filter = oldest_created_utc
 
 	logging.debug("Finished processing upto : {}".format(time.strftime("%Y-%m-%d | %H:%M:%S",  time.localtime(time_filter))))
+	logging.debug("There are {} submissions in this file.".format(num_submissions))
 	time.sleep(sleep_time)
 
-	i += 1
-
-	if i>2 : 
-		break
 
