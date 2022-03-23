@@ -1,15 +1,13 @@
 #! /bin/bash
 
 #SBATCH --nodes=1
-#SBATCH --ntasks=12
-#SBATCH --time=12:10:00
+#SBATCH --ntasks=24
 #SBATCH --output=sample-%j.out
+#SBATCH --mail-type=ALL
+#SBATCH --mail-user=dasr8731@colorado.edu
 
-module purge
-module load anaconda
 
-cd /projects/dasr8731/needfinder
+cd /scratch/summit/dasr8731/needfinder
 
-conda activate needfinder0.0
 
-python -m src.reddit_scraper
+python -m src.quotes_matcher

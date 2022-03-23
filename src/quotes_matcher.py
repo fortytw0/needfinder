@@ -17,9 +17,9 @@ import time
 quotes_path = "data/labels.json"
 
 with open(quotes_path) as f :
-    
+    print("Loading labels.json") 
     quotes_dict = json.load(f)
-    
+    print("Finished loading labels.json")
 
 
 # In[6]:
@@ -74,9 +74,8 @@ def parse_submission(submission) :
 
 for quotes in quotes_dict : 
     
+    print("Starting to process for paper : " , quotes['title'])
     sleep_time = 0.5
-    time_filter = int(time.time())
-    oldest_encountered_timestamp = time_filter
     posts_per_file = 1000
     output_dir = 'data/quotes_matcher'
 
@@ -85,7 +84,10 @@ for quotes in quotes_dict :
     
     for subreddit in quotes['subreddits'] : 
         
-    
+        print("Working on subreddit : " , subreddit)
+        time_filter = int(time.time())
+        oldest_encountered_timestamp = time_filter
+        
         save_dir = os.path.join(output_dir, subreddit)
         
         if not os.path.exists(save_dir) :
@@ -102,6 +104,8 @@ for quotes in quotes_dict :
 
             parsed_results = []
             num_submissions = 0
+            
+            print(response.status_code)
 
             for submission in response.json()['data'] : 
 
