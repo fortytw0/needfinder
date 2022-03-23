@@ -11,9 +11,6 @@ import requests
 import time
 
 
-# In[5]:
-
-
 quotes_path = "data/labels.json"
 
 with open(quotes_path) as f :
@@ -22,13 +19,12 @@ with open(quotes_path) as f :
     print("Finished loading labels.json")
 
 
-# In[6]:
 
+def convert_to_utc(timestamp) : 
+    return int(time.mktime(time.strftime(str(timestamp) , '%Y%m%d%H%M%S')))
 
-oldest_timestamp_limit = 1332375612 # 22/3/2012
-
-
-# In[24]:
+def convert_to_localtime(utc) : 
+    return time.strftime("%Y%m%d%H%M%S",  int(utc))
 
 
 def get_filename(start_time, end_time, output_dir) : 
@@ -45,10 +41,6 @@ def save_to_file(start_time, end_time, string_list, output_dir='data') :
 		json.dump(string_list, f)
 
 	return True
-
-
-# In[14]:
-
 
 def parse_submission(submission) :
 	attributes = ('url', 'upvote_ratio', 'title', 'subreddit', 'selftext', 'score', 'num_comments', 'created', 'created_utc', 'author', 'full_link')
@@ -68,8 +60,10 @@ def parse_submission(submission) :
 	parsed_str = json.dumps(parsed)
 	return parsed_str
 
+#-end of function definition-#
 
-# In[28]:
+oldest_timestamp_limit = 20180322120000
+oldest_timestamp_limit = convert_to_utc(oldest_timestamp_limit)
 
 
 for quotes in quotes_dict : 
@@ -80,18 +74,43 @@ for quotes in quotes_dict :
     output_dir = 'data/quotes_matcher'
 
     url = "https://api.pushshift.io/reddit/search/submission/"
+    first_run = True
     
-    
-    for subreddit in quotes['subreddits'] : 
+    for subreddit in enumerate(quotes['subreddits']) : 
         
         print("Working on subreddit : " , subreddit)
-        time_filter = int(time.time())
-        oldest_encountered_timestamp = time_filter
+
+        
+        first_run = False
+
         
         save_dir = os.path.join(output_dir, subreddit)
         
         if not os.path.exists(save_dir) :
             os.mkdir(save_dir)
+            time_filter = int(time.time())
+            oldest_encountered_timestamp = time_filter
+
+        else : 
+            
+            # there has already been some processing that has done
+
+            print("Found a file with name : " , save_dir)
+
+            file_paths  =  os.path.listdir(save_dir)
+            oldest_encountered_timestamp = time.time()
+            for f in file_paths : 
+                time_period = f.split(".")[0]
+                old, new = time_period.split("_")
+                if int(old) < oldest_encountered_timestamp : 
+                    oldest_encountered_timestamp = int(old)
+
+            print("Oldest timestamp found : ", oldest_encountered_timestamp)
+
+            oldest_encountered_timestamp = convert_to_utc(oldest_encountered_timestamp)
+            time_filter = oldest_encountered_timestamp
+
+            print("Converting timestamp to UTC : " , oldest_encountered_timestamp)
             
             
         while True   : 
@@ -128,5 +147,3 @@ for quotes in quotes_dict :
             print('Saving to : ' , save_dir)
             print('Finished processing from {}'.format(time.strftime("%Y-%m-%d | %H:%M:%S",  time.localtime(time_filter))))
             print("There are {} submissions in this file.".format(num_submissions))
-
-            time.sleep(sleep_time)
