@@ -21,10 +21,10 @@ with open(quotes_path) as f :
 
 
 def convert_to_utc(timestamp) : 
-    return int(time.mktime(time.strftime(str(timestamp) , '%Y%m%d%H%M%S')))
+    return int(time.mktime(time.strptime(str(int(timestamp)) , '%Y%m%d%H%M%S')))
 
 def convert_to_localtime(utc) : 
-    return time.strftime("%Y%m%d%H%M%S",  int(utc))
+    return time.strftime("%Y%m%d%H%M%S",  time.localtime(int(utc)))
 
 
 def get_filename(start_time, end_time, output_dir) : 
@@ -64,7 +64,7 @@ def parse_submission(submission) :
 
 oldest_timestamp_limit = 20180322120000
 oldest_timestamp_limit = convert_to_utc(oldest_timestamp_limit)
-
+print('Maximum time to look back to history is : ' , oldest_timestamp_limit)
 
 for quotes in quotes_dict : 
     
@@ -76,7 +76,7 @@ for quotes in quotes_dict :
     url = "https://api.pushshift.io/reddit/search/submission/"
     first_run = True
     
-    for subreddit in enumerate(quotes['subreddits']) : 
+    for subreddit in quotes['subreddits'] : 
         
         print("Working on subreddit : " , subreddit)
 
@@ -97,21 +97,20 @@ for quotes in quotes_dict :
 
             print("Found a file with name : " , save_dir)
 
-            file_paths  =  os.path.listdir(save_dir)
-            oldest_encountered_timestamp = time.time()
+            file_paths  =  os.listdir(save_dir)
+            oldest_encountered_timestamp = int(convert_to_localtime(time.time()))
             for f in file_paths : 
                 time_period = f.split(".")[0]
                 old, new = time_period.split("_")
                 if int(old) < oldest_encountered_timestamp : 
                     oldest_encountered_timestamp = int(old)
 
-            print("Oldest timestamp found : ", oldest_encountered_timestamp)
+            print("Oldest timestamp found : ",oldest_encountered_timestamp)
 
             oldest_encountered_timestamp = convert_to_utc(oldest_encountered_timestamp)
             time_filter = oldest_encountered_timestamp
 
             print("Converting timestamp to UTC : " , oldest_encountered_timestamp)
-            
             
         while True   : 
 

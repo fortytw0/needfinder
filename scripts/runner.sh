@@ -9,5 +9,6 @@
 
 cd /scratch/summit/dasr8731/needfinder
 
+source activate ./venv/
 
-python -m src.quotes_matcher
+python -m src.embedding_similarity
