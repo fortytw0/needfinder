@@ -133,7 +133,7 @@ def sbert_similarity(str1, str2) :
     '''
     str1_repr = st.encode(str1)
     str2_repr = st.encode(str2)
-    return distance.cosine(qr, comment_repr)
+    return distance.cosine(str1_repr, str2_repr)
     
 
 # In[ ]:

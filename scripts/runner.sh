@@ -9,6 +9,5 @@
 
 cd /scratch/summit/dasr8731/needfinder
 
-source activate ./venv/
 
 python -m src.embedding_similarity
