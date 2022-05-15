@@ -48,7 +48,7 @@ class AroraBeam(object) :
             content_field_name (str, optional): The field name in the Reddit jsonl file that contains 
             the content. Defaults to 'content'.
         """
-        self._build_embeddings_and_vocab(embedding_fpath)
+        self._build_embeddings(embedding_fpath)
         self._count_words_in_reddit_posts(jsonl_fpath, content_field_name)
         
 
@@ -140,6 +140,7 @@ class AroraBeam(object) :
         word_count_matrix = vectorizer.fit_transform(contents)
         word_counts = word_count_matrix.toarray().sum(axis=0)
         words = vectorizer.get_feature_names()
+        self.vocab = words
         self.num_total_words = np.sum(word_counts)
 
         assert len(word_counts) == len(words)
@@ -148,15 +149,17 @@ class AroraBeam(object) :
             self.word_counts[w] = wc
             self.word_probabilities[w] = wc/self.num_total_words
 
-    def _build_embeddings_and_vocab(self, embedding_fpath:str)->None : 
+    def _build_embeddings(self, embedding_fpath:str)->None : 
 
         with open(embedding_fpath) as f :
             for line in f.readlines() :
                 word, embedding = line.split(' ', 1)
 
                 embedding = np.fromstring(embedding, sep=' ')
-                self.word_embeddings[word] = embedding
-                self.vocab.append(word)
+
+                if word in self.vocab : 
+                    self.word_embeddings[word] = embedding
+
 
 
 if __name__ == '__main__' : 
