@@ -127,7 +127,7 @@ class AroraBeam(object) :
 
 
         contents = []
-        vectorizer = CountVectorizer(vocabulary=self.vocab)
+        vectorizer = CountVectorizer()
         
         with open(jsonl_fpath) as f : 
 
