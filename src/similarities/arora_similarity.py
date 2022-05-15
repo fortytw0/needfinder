@@ -1,3 +1,4 @@
+from functools import reduce
 import numpy as np
 import pandas as pd
 import json
@@ -48,13 +49,10 @@ class AroraBeam(object) :
             content_field_name (str, optional): The field name in the Reddit jsonl file that contains 
             the content. Defaults to 'content'.
         """
-        self._build_embeddings(embedding_fpath)
+
         self._count_words_in_reddit_posts(jsonl_fpath, content_field_name)
-        
-
-
-
-
+        self._build_embeddings(embedding_fpath)
+        self. _remove_words_without_embeddings()
 
     def _get_sentence_embedding(self, sentence:str) -> None : 
 
@@ -139,15 +137,13 @@ class AroraBeam(object) :
 
         word_count_matrix = vectorizer.fit_transform(contents)
         word_counts = word_count_matrix.toarray().sum(axis=0)
-        words = vectorizer.get_feature_names()
+        words = vectorizer.get_feature_names_out()
         self.vocab = words
-        self.num_total_words = np.sum(word_counts)
 
         assert len(word_counts) == len(words)
 
         for w, wc in zip(words, word_counts) : 
             self.word_counts[w] = wc
-            self.word_probabilities[w] = wc/self.num_total_words
 
     def _build_embeddings(self, embedding_fpath:str)->None : 
 
@@ -160,6 +156,31 @@ class AroraBeam(object) :
                 if word in self.vocab : 
                     self.word_embeddings[word] = embedding
 
+        self.embedding_dimension = embedding.shape[0]
+
+
+    def _remove_words_without_embeddings(self)->None :
+        
+        reduced_word_counts = {}
+        reduced_vocab  = []
+        total_words = 0
+
+        for w, wc in self.word_counts.items() : 
+
+            if w in self.word_embeddings : 
+                reduced_word_counts[w] = wc
+                reduced_vocab.append(w)
+                total_words += wc
+
+        self.word_counts = reduced_word_counts
+        self.vocab = reduced_vocab
+        self.num_total_words = total_words
+
+        for w, wc in self.word_counts.items() : 
+            self.word_probabilities[w] = wc/self.num_total_words
+
+
+
 
 
 if __name__ == '__main__' : 
@@ -169,5 +190,8 @@ if __name__ == '__main__' :
     embedding_fpath='data/glove.6B.300d.txt',
     content_field_name='body')
     print(arora_beam.word_counts)
+    # print(arora_beam.word_probabilities)
+    print(arora_beam.num_total_words)
+    # print(arora_beam.vocab)
     
 
