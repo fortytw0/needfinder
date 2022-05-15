@@ -4,9 +4,7 @@ import json
 import spacy
 from scipy.sparse.linalg import svds
 from sklearn.feature_extraction.text import CountVectorizer
-import validators
-import string
-import time
+
 
 # Setting up Logging
 import logging
