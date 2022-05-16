@@ -1,3 +1,5 @@
+from src.similarities.similarity import Sim
+
 from functools import reduce
 import numpy as np
 import pandas as pd
@@ -20,52 +22,54 @@ nlp = spacy.load('en_core_web_sm')
 
 
 # AroraBeam 
-class AroraBeam(object) : 
+class AroraBeam(Sim) : 
 
-    def __init__(self, alpha:float=1e-4) -> None:
+
+    def __init__(self, alpha:float=1e-4, embedding_path:str='data/glove.6B.50d.txt', embedding_dimension:int=50) -> None:
+
+        super().__init__()
         
+        # User Defined
         self.alpha = alpha
+        self.embedding_dimension = embedding_dimension      
+        self.embedding_path = embedding_path
+
+        # Will be built
         self.word_embeddings = {}
         self.word_counts = {}
         self.word_probabilities = {}
         self.vocab = []
-        self.num_total_words = None
-        self.embedding_dimension = None
+        self.num_total_words = 0
+        
+        # Will be declared/calculated
+        self.vectorizer = None
+        
 
-    def fit(self, jsonl_fpath:str, 
-            embedding_fpath:str, 
-            content_field_name:str='content') -> None : 
-        """
-        1. Given a jsonl file that contains all the Reddit posts, get all the content from the 
-        jsonl file and extract all the post contents. 
-        2. Given an embedding file, create a dictionary to map each word to its respective embedding.
+    def build(self, jsonl_path: str, content_field: str) -> None:
+        content = super().build(jsonl_path, content_field)
+        self._build_vocab(content)
+        self._build_embeddings()
+        self._build_probabilities()
 
-        Args:
-            jsonl_fpath (str): Path to the Reddit posts, captured in a jsonl file.
-            
-            embedding_fpath (str): Path to the embedding file. We assume that the word and 
-            its respective embedding is delimited by tab. 
-            
-            content_field_name (str, optional): The field name in the Reddit jsonl file that contains 
-            the content. Defaults to 'content'.
-        """
+        '''
+        Unable to resolve 2 things : 
 
-        self._count_words_in_reddit_posts(jsonl_fpath, content_field_name)
-        self._build_embeddings(embedding_fpath)
-        self. _remove_words_without_embeddings()
+        1. How to find embeddings for unknown words?
+        2. Is there a quick and easy way to tokenize? Spacy takes too long. 
+            - Looked up - regex is very quick, and probably gives a crude way of tokenization. 
+            Turns out, sklearn's text vectorizer uses a similar approach. 
+            - NLTK tokenize is another one we can consider, but it also takes too long (for the 
+            scale that we are working on)
+        
+        '''
+
+
+        
+
+
+
 
     def _get_sentence_embedding(self, sentence:str) -> None : 
-
-        '''
-        sum = 0
-        for word in sentence : 
-            smoothing_factor = alpha/(alpha + word_probabilities[word])
-            word_vector = word_embeddings[word]
-            sum +=  smoothing_factor*word_vector
-        
-        sentence_embedding = sum/len(sentence)
-
-        '''
 
         sum = 0 
 
@@ -80,23 +84,7 @@ class AroraBeam(object) :
 
     def _get_context_embedding(self, context:str) -> None : 
 
-        '''
-
-            context_matrix = np.zeros( len(word_vector) , len(context))
-
-            for i, sentence in enumerate(context) : 
-                context_matrix[: , i] = self._get_sentence_embedding(sentence)
-
-            U, S, VT = svds(context_matrix, k=1)
-            
-            for i, sentence in enumerate(context) : 
-                context_matrix[: , i] -= U@U.T@context_matrix[: , i]
-
-            return context_matrix
-
-        '''
-
-        context_matrix = np.zeros((self.embedding_dimension , context))
+        context_matrix = np.zeros((self.embedding_dimension , len(context)))
         
         for i, sentence in enumerate(context) : 
             context_matrix[: , i] = self._get_sentence_embedding(sentence)
@@ -109,72 +97,34 @@ class AroraBeam(object) :
         return context_matrix
 
 
-    def _count_words_in_reddit_posts(self, 
-                                    jsonl_fpath:str, 
-                                    content_field_name:str='content') : 
+    def _build_vocab(self, content:list) : 
 
-        """Given a jsonl file contain Reddit comments, it counts the number of words in each sample
-        and updates self.num_total_words, self.word_counts, self.word_probabilities
+        self.vectorizer = CountVectorizer()
 
-        Args:
-            jsonl_fpath (str): Path to Reddit comment submission. 
-
-            content_field_name (str, optional): The field in the json that contains the 
-            content of the post. Defaults to 'content'.
-        """
-
-
-        contents = []
-        vectorizer = CountVectorizer()
-        
-        with open(jsonl_fpath) as f : 
-
-            for i, line in enumerate(f.readlines()) : 
-                reddit_post = json.loads(line)
-
-                if content_field_name in reddit_post : 
-                    contents.append(reddit_post[content_field_name])
-
-        word_count_matrix = vectorizer.fit_transform(contents)
+        word_count_matrix = self.vectorizer.fit_transform(content)
         word_counts = word_count_matrix.toarray().sum(axis=0)
-        words = vectorizer.get_feature_names_out()
-        self.vocab = words
+        self.vocab = self.vectorizer.get_feature_names_out()
 
-        assert len(word_counts) == len(words)
+        assert len(word_counts) == len(self.vocab)
 
-        for w, wc in zip(words, word_counts) : 
+        for w, wc in zip(self.vocab, word_counts) : 
             self.word_counts[w] = wc
+            self.num_total_words += wc
 
-    def _build_embeddings(self, embedding_fpath:str)->None : 
+ 
 
-        with open(embedding_fpath) as f :
+    def _build_embeddings(self)->None : 
+
+        with open(self.embedding_path) as f :
             for line in f.readlines() :
                 word, embedding = line.split(' ', 1)
 
-                embedding = np.fromstring(embedding, sep=' ')
-
                 if word in self.vocab : 
+                    embedding = np.fromstring(embedding, sep=' ')
                     self.word_embeddings[word] = embedding
 
-        self.embedding_dimension = embedding.shape[0]
 
-
-    def _remove_words_without_embeddings(self)->None :
-        
-        reduced_word_counts = {}
-        reduced_vocab  = []
-        total_words = 0
-
-        for w, wc in self.word_counts.items() : 
-
-            if w in self.word_embeddings : 
-                reduced_word_counts[w] = wc
-                reduced_vocab.append(w)
-                total_words += wc
-
-        self.word_counts = reduced_word_counts
-        self.vocab = reduced_vocab
-        self.num_total_words = total_words
+    def _build_probabilities(self) -> None : 
 
         for w, wc in self.word_counts.items() : 
             self.word_probabilities[w] = wc/self.num_total_words
@@ -183,15 +133,12 @@ class AroraBeam(object) :
 
 
 
+
 if __name__ == '__main__' : 
 
     arora_beam = AroraBeam()
-    arora_beam.fit(jsonl_fpath='data/airbnb_hosts.jsonl',
-    embedding_fpath='data/glove.6B.300d.txt',
-    content_field_name='body')
+    arora_beam.build('data/airbnb_hosts.jsonl','body')
     print(arora_beam.word_counts)
-    # print(arora_beam.word_probabilities)
     print(arora_beam.num_total_words)
-    # print(arora_beam.vocab)
     
 
