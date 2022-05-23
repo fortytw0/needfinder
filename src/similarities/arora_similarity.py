@@ -1,12 +1,14 @@
+from torch import embedding
 from src.similarities.similarity import Sim
 
-from functools import reduce
+import time
+from tqdm import tqdm
 import numpy as np
-import pandas as pd
-import json
+import re
 import spacy
 from scipy.sparse.linalg import svds
 from sklearn.feature_extraction.text import CountVectorizer
+
 
 
 # Setting up Logging
@@ -40,43 +42,75 @@ class AroraBeam(Sim) :
         self.word_probabilities = {}
         self.vocab = []
         self.num_total_words = 0
+        self.unk_words = 0
         
         # Will be declared/calculated
         self.vectorizer = None
         
 
-    def build(self, jsonl_path: str, content_field: str) -> None:
-        content = super().build(jsonl_path, content_field)
+    def build(self, jsonl_path: str, content_field: str, id_field:str) -> None:
+        content, ids = super().build(jsonl_path, content_field, id_field)
+        self.ids = ids
+
         self._build_vocab(content)
         self._build_embeddings()
         self._build_probabilities()
 
-        '''
-        Unable to resolve 2 things : 
+        self.matrix = np.zeros((self.embedding_dimension, ))
 
-        1. How to find embeddings for unknown words?
-        2. Is there a quick and easy way to tokenize? Spacy takes too long. 
-            - Looked up - regex is very quick, and probably gives a crude way of tokenization. 
-            Turns out, sklearn's text vectorizer uses a similar approach. 
-            - NLTK tokenize is another one we can consider, but it also takes too long (for the 
-            scale that we are working on)
+        for i in tqdm(range(len(content))) : 
+             
+            sentence = content[i]
+            embedding = self._get_sentence_embedding(sentence) 
+
+            try :
+                self.matrix = np.vstack((self.matrix, embedding))
+
+            except Exception as e :
+                print(e)
+                self.matrix = np.vstack((self.matrix, np.zeros((self.embedding_dimension, ))))
+
+        self.matrix = self.matrix[1:, :]
+
+    def fit(self, texts: list) -> np.array:
         
-        '''
+        text_repr = []
 
+        for text in texts : 
+            text_repr.append(self._get_sentence_embedding(text))
 
+        return np.array(text_repr)
+
+    def similarity(self, text_repr: np.array) -> float:
+        return super().similarity(text_repr)
+
+    
         
-
-
-
-
     def _get_sentence_embedding(self, sentence:str) -> None : 
+
+        sentence = self._process_sentence(sentence)
+        if len(sentence) == 0 : 
+            return np.zeros((self.embedding_dimension,))
 
         sum = 0 
 
         for word in sentence : 
-            smoothing_factor = self.alpha / (self.alpha + self.word_probabilities[word])
-            word_vector = self.word_embeddings[word]
-            sum+=smoothing_factor*word_vector
+
+            try : 
+                if word in self.word_probabilities :     
+                    smoothing_factor = self.alpha / (self.alpha + self.word_probabilities[word])
+                    word_vector = self._get_word_embedding(word)
+                    sum+=smoothing_factor*word_vector
+
+                else : 
+                    self.unk_words += 1
+
+            except Exception as e :
+
+                print(e)
+                print(self._get_word_embedding(word))
+                print('Word : ' , word)
+
 
         sentence_embedding = sum/len(sentence)
         return sentence_embedding
@@ -99,7 +133,7 @@ class AroraBeam(Sim) :
 
     def _build_vocab(self, content:list) : 
 
-        self.vectorizer = CountVectorizer()
+        self.vectorizer = CountVectorizer(token_pattern=r"(\w+)")
 
         word_count_matrix = self.vectorizer.fit_transform(content)
         word_counts = word_count_matrix.toarray().sum(axis=0)
@@ -111,10 +145,8 @@ class AroraBeam(Sim) :
             self.word_counts[w] = wc
             self.num_total_words += wc
 
- 
-
     def _build_embeddings(self)->None : 
-
+        
         with open(self.embedding_path) as f :
             for line in f.readlines() :
                 word, embedding = line.split(' ', 1)
@@ -123,22 +155,58 @@ class AroraBeam(Sim) :
                     embedding = np.fromstring(embedding, sep=' ')
                     self.word_embeddings[word] = embedding
 
+        # prepare unknown embedding
+        self.word_embeddings['<UNK>'] = np.mean(list(self.word_embeddings.values()), axis=0)
+        
 
     def _build_probabilities(self) -> None : 
 
         for w, wc in self.word_counts.items() : 
             self.word_probabilities[w] = wc/self.num_total_words
 
+    def _get_word_embedding(self, word:str) -> np.array : 
 
+        if word in self.word_embeddings : 
+            return self.word_embeddings[word]
 
+        return self.word_embeddings['<UNK>']
 
+    def _process_sentence(self, sentence:str) -> list:
+
+        sentence = sentence.replace("'", '').strip().lower()
+        sentence_matches = re.findall(r"(\w+)", sentence)
+        return sentence_matches
 
 
 if __name__ == '__main__' : 
 
     arora_beam = AroraBeam()
-    arora_beam.build('data/airbnb_hosts.jsonl','body')
-    print(arora_beam.word_counts)
-    print(arora_beam.num_total_words)
+    arora_beam.build('data/airbnb_hosts.jsonl','body', 'body')
+    
+    import json
+    with open('data/labels.json') as f : 
+        data = json.load(f)
+        print('Finished loading data.')
+        airbnb_data = data[1]['quotes']
+        print('Airbnb Data : \n' , airbnb_data)
+    
+
+
+    airbnb_data_repr = arora_beam.fit(airbnb_data)
+    print(airbnb_data_repr)
+
+    print(arora_beam.similarity(airbnb_data_repr).shape)
+
+    import pandas as pd 
+
+    df = pd.DataFrame(arora_beam.similarity(airbnb_data_repr), index=arora_beam.ids, columns=airbnb_data)
+    df.to_csv('arora_similarity.csv')
+
+    
+
+
+
+    
+
     
 
