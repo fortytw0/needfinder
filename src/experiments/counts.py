@@ -1,5 +1,4 @@
 import os
-os.chdir('/scratch/summit/dasr8731/needfinder')
 
 import pandas as pd
 import numpy as np
@@ -12,10 +11,11 @@ Datasets to consider.
 
 datapaths = {
     'airbnb' : 'data/airbnb_hosts.jsonl',
-    'truegaming' : 'data/truegaming.jsonl',
-    'gaming' : 'data/gaming.jsonl',
-    'caloriecount' : 'data/caloriecount.jsonl',
 }
+
+    # 'truegaming' : 'data/truegaming.jsonl',
+    # 'gaming' : 'data/gaming.jsonl',
+    # 'caloriecount' : 'data/caloriecount.jsonl',
 
 num_datasets = len(datapaths)
 
@@ -87,6 +87,11 @@ vocab = list(set(vocab))
 num_words = len(vocab)
 print('Identified {} unique words across all subreddits.'.format(num_words))
 
+print('Saving Vocab...')
+
+with open('data/vocab.txt', 'w') as f : 
+    f.write('\n'.join(vocab))
+
 
 '''
 Building Numpy Array
@@ -95,8 +100,6 @@ Building Numpy Array
 term_frequency_matrix = np.zeros((num_words, num_datasets))
 
 i = 0 
-
-
 
 
 for subreddit, word_counts in unigram_counts.items() :
@@ -136,7 +139,3 @@ df = pd.DataFrame(softmax_matrix, index=vocab, columns=list(unigram_counts.keys(
 
 df.to_csv('data/softmax_matrix.csv')
 
-    
-    
-    
-    
