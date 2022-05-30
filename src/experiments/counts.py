@@ -11,12 +11,12 @@ Datasets to consider.
 
 datapaths = {
     'airbnb' : 'data/airbnb_hosts.jsonl',
+    'truegaming' : 'data/truegaming.jsonl',
+    'gaming' : 'data/gaming.jsonl',
+    'caloriecount' : 'data/caloriecount.jsonl',
 }
 
-    # 'truegaming' : 'data/truegaming.jsonl',
-    # 'gaming' : 'data/gaming.jsonl',
-    # 'caloriecount' : 'data/caloriecount.jsonl',
-
+    
 num_datasets = len(datapaths)
 
 '''

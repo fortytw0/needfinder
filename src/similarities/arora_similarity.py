@@ -1,4 +1,4 @@
-from torch import embedding
+from gensim.models import KeyedVectors
 from src.similarities.similarity import Sim
 
 import time
@@ -11,16 +11,16 @@ from sklearn.feature_extraction.text import CountVectorizer
 
 
 
-# Setting up Logging
-import logging
-logging.basicConfig(filename='logs/main.log',
-                    level=logging.INFO, 
-                    format='%(asctime)s :: %(levelname)s :: %(module)s :: %(message)s')
-logging.info('Logging has been setup.')
+# # Setting up Logging
+# import logging
+# logging.basicConfig(filename='logs/main.log',
+#                     level=logging.INFO, 
+#                     format='%(asctime)s :: %(levelname)s :: %(module)s :: %(message)s')
+# logging.info('Logging has been setup.')
 
 
-# Loading Spacy
-nlp = spacy.load('en_core_web_sm')
+# # Loading Spacy
+# nlp = spacy.load('en_core_web_sm')
 
 
 # AroraBeam 
@@ -146,19 +146,11 @@ class AroraBeam(Sim) :
             self.num_total_words += wc
 
     def _build_embeddings(self)->None : 
+    
+        self.word_embeddings = KeyedVectors.load(self.embedding_path)
+
+
         
-        with open(self.embedding_path) as f :
-            for line in f.readlines() :
-                word, embedding = line.split(' ', 1)
-
-                if word in self.vocab : 
-                    embedding = np.fromstring(embedding, sep=' ')
-                    self.word_embeddings[word] = embedding
-
-        # prepare unknown embedding
-        self.word_embeddings['<UNK>'] = np.mean(list(self.word_embeddings.values()), axis=0)
-        
-
     def _build_probabilities(self) -> None : 
 
         for w, wc in self.word_counts.items() : 
@@ -166,7 +158,7 @@ class AroraBeam(Sim) :
 
     def _get_word_embedding(self, word:str) -> np.array : 
 
-        if word in self.word_embeddings : 
+        if word in self.word_embeddings.key_to_index.keys() : 
             return self.word_embeddings[word]
 
         return self.word_embeddings['<UNK>']
@@ -180,7 +172,7 @@ class AroraBeam(Sim) :
 
 if __name__ == '__main__' : 
 
-    arora_beam = AroraBeam()
+    arora_beam = AroraBeam(embedding_path='data/airbnb_hosts.wordvectors', embedding_dimension=100)
     arora_beam.build('data/airbnb_hosts.jsonl','body', 'body')
     
     import json
@@ -194,7 +186,6 @@ if __name__ == '__main__' :
 
     airbnb_data_repr = arora_beam.fit(airbnb_data)
     print(airbnb_data_repr)
-
     print(arora_beam.similarity(airbnb_data_repr).shape)
 
     import pandas as pd 
