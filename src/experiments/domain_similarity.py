@@ -5,10 +5,6 @@ import pandas as pd
 import numpy as np
 
 
-'''
-Class definitions
-'''
-
 class DomainSim(Sim) : 
 
     def __init__(self, wv_save_path, term_prob_csv, community, 
