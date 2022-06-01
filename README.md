@@ -6,6 +6,7 @@ Setting this code up at the moment is quite straightforward :
 1. Setup Conda Environment
 
 `conda create --prefix=./venv/ --file conda.env` 
+`source activate ./venv/`
 
 2. Run the Arora Similarity  
 
@@ -13,6 +14,8 @@ Setting this code up at the moment is quite straightforward :
 
 3. Run the Domain Similarity
 
+`python -m src.experiments.counts`
+`python -m src.experiments.embeddings`
 `python -m src.experiments.domain_similarity`
 
 4. Run SBERT similarity 
