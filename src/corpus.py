@@ -1,7 +1,7 @@
 from sklearn.feature_extraction.text import CountVectorizer
 import numpy as np
 import pandas as pd
-
+from tqdm import tqdm
 from src.utils import read_jsonl
 
 
@@ -37,6 +37,8 @@ class Corpus(object) :
 
         self.corpus_vocab, self.corpus_vocab_sizes = self._build_corpus_vocab()
 
+        self._build_term_probability_matrix()
+
     def _build_corpus(self) -> None :
 
         print('Building the corpus...')
@@ -70,21 +72,23 @@ class Corpus(object) :
             print('...Finished extracting {}s for {}.'.format(vectorizer_type , community))
 
 
-
-
-
     def _build_corpus_vocab(self) : 
 
         corpus_vocab = {}
         corpus_vocab_sizes = {}
 
+        print('Building corpus vocab...')
+
         for vectorizer_type, community_vocabs in self.vocabs.items() :  
+
+            print('Working on {}s...'.format(vectorizer_type))
             
             corpus_vocab[vectorizer_type] = []
 
             for community, vocab in community_vocabs.items() : 
                 corpus_vocab[vectorizer_type] += vocab
                 corpus_vocab[vectorizer_type] = list(set(corpus_vocab[vectorizer_type]))
+                print('...Finished processing vocab for community {} ....'.format(community))
 
             corpus_vocab_sizes[vectorizer_type] = len(corpus_vocab[vectorizer_type])
 
@@ -94,22 +98,38 @@ class Corpus(object) :
 
         term_prob_matrices = {}
 
+        print('Building term probability matrix...')
+
         for vectorizer_type, vocab in self.corpus_vocab : 
+
+            print('Working on {}s...'.format(vectorizer_type))
 
             term_prob_matrices[vectorizer_type] = np.zeros(self.corpus_vocab_sizes[vectorizer_type] , self.num_communities)
 
-            for i, word in enumerate(vocab) : 
+            for i in tqdm(range(self.corpus_vocab_sizes[vectorizer_type])) : 
 
+                word = vocab[i]
                 for j, community in enumerate(self.communities) : 
 
-                    term_prob_matrices[vectorizer_type][i , j] = self.counts[vectorizer_type][community][word]
+                    if word in self.counts[vectorizer_type][community][word] : 
+                        term_prob_matrices[vectorizer_type][i , j] = self.counts[vectorizer_type][community][word]
 
             
             print(pd.DataFrame(term_prob_matrices[vectorizer_type], index=vocab, columns=self.communities))
 
 
 
+if __name__ == '__main__' : 
 
+
+    corpus = Corpus({'airbnb_hosts' : [{'subreddit' : 'airbnb_hosts' , 'subreddit_path' : 'data/airbnb_hosts.jsonl'}], 
+                    'airbnb' : [{'subreddit' : 'airbnb' , 'subreddit_path' : 'data/airbnb.jsonl'}], 
+                    'vrbo' : [{'subreddit' : 'vrbo' , 'subreddit_path' : 'data/vrbo.jsonl'}], 
+                    'caloriecount' : [{'subreddit' : 'caloriecount' , 'subreddit_path' : 'data/caloriecount.jsonl'}],
+                    'loseit' : [{'subreddit' : 'loseit' , 'subreddit_path' : 'data/loseit.jsonl'}],
+                    })
+
+    
 
 
 
