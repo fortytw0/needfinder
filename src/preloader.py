@@ -41,8 +41,6 @@ class PreLoader(object) :
         if corpus_definition_json : corpus_definition = read_json(corpus_definition_json)
         return corpus_definition
 
-
-
     def _wordvectors_exist(self) -> dict : 
         
         exists = {}

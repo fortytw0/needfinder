@@ -2,9 +2,12 @@ import json
 import os
 from tqdm import tqdm
 
+# --- Iteration Utils --- #
+
 def iterate(func, num_iter, pass_counter=False, message='', start_iter=0) : 
 
     returned_object = []
+    num_iter = int(num_iter)
 
     for i in tqdm(range(start_iter, num_iter)) : 
 
@@ -16,6 +19,7 @@ def iterate(func, num_iter, pass_counter=False, message='', start_iter=0) :
 
     return returned_object
 
+# --- JSON Utils --- #
 
 def read_json(json_path, mode='r') : 
 
@@ -24,13 +28,7 @@ def read_json(json_path, mode='r') :
     with open(json_path , mode) as f : 
         return json.load(f)
 
-def create_dir_if_not_exist(dir) : 
-
-    if not os.path.isdir(dir) : 
-        os.mkdir(dir)
-        return False
-
-    return True
+# --- JSONL Utils --- #
 
 def _read_jsonl_with_multiple_fields(jsonl_lines, fields) : 
 
@@ -90,7 +88,15 @@ def read_jsonl(jsonl_path, field=None, fields=None, max_lines=None, mode='r') :
         
     else : return _read_jsonl_with_all_fields(lines)
 
+# --- Dir Utils --- #
 
+def create_dir_if_not_exist(dir) : 
+
+    if not os.path.isdir(dir) : 
+        os.mkdir(dir)
+        return False
+
+    return True
 
 
 
