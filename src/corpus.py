@@ -66,11 +66,9 @@ class Corpus(object) :
 
             vectorizer = CountVectorizer(max_features=int(max_features), ngram_range=ngram_range)
             X = vectorizer.fit_transform(data).toarray().sum(axis=0)
-            total_count = np.sum(X)
             self.vectorizers[vectorizer_type][community] =   vectorizer
             self.counts[vectorizer_type][community] = {word:count for word,count in zip(vectorizer.get_feature_names(), X)}
             self.vocabs[vectorizer_type][community] = vectorizer.get_feature_names()
-            # self.prob_word_given_domain[vectorizer_type][community] = {word:count/total_count for word,count in zip(vectorizer.get_feature_names(), X)}
 
             print('...Finished extracting {}s for {}.'.format(vectorizer_type , community))
 
@@ -138,9 +136,7 @@ if __name__ == '__main__' :
     
 
 
-#         {'max_features' : 1e5, 'vectorizer_type' : 'bigram' , 'ngram_range' : (2 , 2)},
-#                                 {'max_features' : 1e5, 'vectorizer_type' : 'trigram' , 'ngram_range' : (3 , 3)}
-            
+    
 
 
 
