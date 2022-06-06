@@ -36,7 +36,7 @@ def _read_jsonl_with_multiple_fields(jsonl_lines, fields) :
 
     for line in jsonl_lines : 
         try : 
-            d = json.load(line) 
+            d = json.loads(line) 
             data.append({f:d[f] for f in fields})
         except :
             pass
@@ -49,7 +49,7 @@ def _read_jsonl_with_single_field(jsonl_lines, field) :
 
     for line in jsonl_lines : 
         try : 
-            d = json.load(line) 
+            d = json.loads(line) 
             data.append(d[field])
         except : 
             pass
@@ -62,7 +62,7 @@ def _read_jsonl_with_all_fields(jsonl_lines) :
 
     for line in jsonl_lines : 
         try : 
-            d = json.load(line)
+            d = json.loads(line)
             data.append(d)
         except : 
             pass

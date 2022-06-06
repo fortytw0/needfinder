@@ -9,14 +9,14 @@ class Corpus(object) :
 
     def __init__(self, 
                 corpus_definition, 
-                maxlines=4e5, 
+                maxlines=1e5, 
                 vectorizer_definitions=[
                                 {'max_features' : 1e4, 'vectorizer_type' : 'unigram' , 'ngram_range' : (1 , 1)},
-                                {'max_features' : 1e5, 'vectorizer_type' : 'bigram' , 'ngram_range' : (2 , 2)},
-                                {'max_features' : 1e5, 'vectorizer_type' : 'trigram' , 'ngram_range' : (3 , 3)}
                                 ],
                 content_field='body') -> None:
 
+
+        
         self.corpus_definition = corpus_definition
         self.content_field = content_field
         self.maxlines = maxlines
@@ -28,7 +28,8 @@ class Corpus(object) :
         self.vectorizers = {}
         self.vocabs = {}
         self.counts = {}
-        self.prob_word_given_domain = {}
+        self.domain_frequency_matrix = {}
+        self.term_frequency_matrix = {}
 
         self._build_corpus()
 
@@ -36,7 +37,7 @@ class Corpus(object) :
             self._build_vectorizers(**vec_def)
 
         self.corpus_vocab, self.corpus_vocab_sizes = self._build_corpus_vocab()
-
+        
         self._build_term_probability_matrix()
 
     def _build_corpus(self) -> None :
@@ -47,7 +48,7 @@ class Corpus(object) :
             self.corpus[community] = []            
             for subreddit in corpus : 
                 self.corpus[community].extend(read_jsonl(subreddit['subreddit_path'], field=self.content_field, max_lines=self.maxlines))
-                print('...Finished extracting posts from subreddit : r/{} belonging to the community : {}.'.format(subreddit, community))
+                print('...Finished extracting posts from subreddit : r/{} belonging to the community : {}.'.format(subreddit['subreddit'], community))
 
 
     def _build_vectorizers(self, max_features, ngram_range=(1, 1), vectorizer_type='unigram') : 
@@ -60,8 +61,10 @@ class Corpus(object) :
             self.vocabs [vectorizer_type] = {}
             
         for community, data in self.corpus.items() : 
+            
+            print('Building {} vectorizer for {} community...'.format(vectorizer_type , community))
 
-            vectorizer = CountVectorizer(max_features=max_features, ngram_range=ngram_range)
+            vectorizer = CountVectorizer(max_features=int(max_features), ngram_range=ngram_range)
             X = vectorizer.fit_transform(data).toarray().sum(axis=0)
             total_count = np.sum(X)
             self.vectorizers[vectorizer_type][community] =   vectorizer
@@ -100,21 +103,24 @@ class Corpus(object) :
 
         print('Building term probability matrix...')
 
-        for vectorizer_type, vocab in self.corpus_vocab : 
+        for vectorizer_type, vocab in self.corpus_vocab.items() : 
 
             print('Working on {}s...'.format(vectorizer_type))
 
-            term_prob_matrices[vectorizer_type] = np.zeros(self.corpus_vocab_sizes[vectorizer_type] , self.num_communities)
+            term_prob_matrices[vectorizer_type] = np.zeros((self.corpus_vocab_sizes[vectorizer_type] , self.num_communities))
 
             for i in tqdm(range(self.corpus_vocab_sizes[vectorizer_type])) : 
 
                 word = vocab[i]
                 for j, community in enumerate(self.communities) : 
 
-                    if word in self.counts[vectorizer_type][community][word] : 
+                    if word in self.counts[vectorizer_type][community] : 
                         term_prob_matrices[vectorizer_type][i , j] = self.counts[vectorizer_type][community][word]
-
             
+            term_prob_matrices[vectorizer_type] = term_prob_matrices[vectorizer_type]/np.sum(term_prob_matrices[vectorizer_type] , axis=0)
+            self.term_frequency_matrix[vectorizer_type] = pd.DataFrame(term_prob_matrices[vectorizer_type], index=vocab, columns=self.communities)
+            term_prob_matrices[vectorizer_type] = term_prob_matrices[vectorizer_type]/np.sum(term_prob_matrices[vectorizer_type] , axis=1)[:, None]
+            self.domain_frequency_matrix[vectorizer_type] = pd.DataFrame(term_prob_matrices[vectorizer_type], index=vocab, columns=self.communities)
             print(pd.DataFrame(term_prob_matrices[vectorizer_type], index=vocab, columns=self.communities))
 
 
@@ -132,7 +138,8 @@ if __name__ == '__main__' :
     
 
 
-
+#         {'max_features' : 1e5, 'vectorizer_type' : 'bigram' , 'ngram_range' : (2 , 2)},
+#                                 {'max_features' : 1e5, 'vectorizer_type' : 'trigram' , 'ngram_range' : (3 , 3)}
             
 
 
