@@ -62,12 +62,12 @@ class W2VEmbedding(object) :
         print('Working on {}...'.format(community))
         print('Processing sentences...')
 
-        processed_sentences = self._process_sentences(self.corpus.corpus[community], self.corpus.vocabs[community])
+        processed_sentences = self._process_sentences(self.corpus.corpus[community], self.corpus.vocabs['unigram'][community])
         
         print('...Finished processing sentences')
         print('Training word2vec model...')
 
-        model = self._train_model(processed_sentences, self.corpus.vocabs[community], num_epochs=num_epochs)
+        model = self._train_model(processed_sentences, self.corpus.vocabs['unigram'][community], num_epochs=num_epochs)
 
         print('...Finished training model')
         print('Saving word2vec model...')
@@ -103,14 +103,14 @@ class W2VEmbedding(object) :
 
             for community in self.corpus.communities : 
 
-                wv_fpath = os.path.join(self.save_dir , 'word2vec' , community)
+                wv_fpath = os.path.join(self.save_dir , 'word2vec' , community + self.extension)
                 print('Checking for word_vectors at : ' , wv_fpath)
 
                 if os.path.exists(wv_fpath) : 
-                    print('{} community already has a wordvector file, which will be loaded...')
+                    print('{} community already has a wordvector file, which will be loaded...'.format(community))
                     self.embeddings[community] = KeyedVectors.load(wv_fpath)
                 else : 
-                    print('{} community does not have a wordvector file, hence will be trained...')
+                    print('{} community does not have a wordvector file, hence will be trained...'.format(community))
                     self._train_community_embeddings(community)
                     
 
@@ -122,7 +122,8 @@ if __name__ == '__main__' :
                     'caloriecount' : [{'subreddit' : 'caloriecount' , 'subreddit_path' : 'data/caloriecount.jsonl'}],
                     'loseit' : [{'subreddit' : 'loseit' , 'subreddit_path' : 'data/loseit.jsonl'}],
                     })
-
+    print((corpus.corpus.keys()))
+    print(corpus.vocabs.keys())
 
     embedding = W2VEmbedding(corpus, 'data/wordvectors')
 
