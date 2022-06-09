@@ -32,7 +32,7 @@ if not os.path.exists(results_dir) :
 
 print('Building Arora Beam...')
 arora_beam = AroraBeam()
-arora_beam.build(reddit_jsonl_path,
+arora_beam._build(reddit_jsonl_path,
                 content_field_name, 
                 id_field_name)
 print('Finished Building Arora Beam...')

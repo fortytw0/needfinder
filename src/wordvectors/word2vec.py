@@ -23,7 +23,7 @@ class W2VEmbedding(object) :
         self.dimension = dimension
         self.alpha = alpha
         self.embeddings = {}
-        self.extension = 'wordvector'
+        self.extension = '.wordvector'
 
         self.load()
 
