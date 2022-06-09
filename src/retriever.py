@@ -1,6 +1,4 @@
-from nltk.data import retrieve
 from src.corpus import Corpus
-from src.wordvectors.word2vec import Word2Vec
 
 import re
 from tqdm import tqdm
@@ -13,6 +11,8 @@ class Retriever(object) :
         self.threshold = threshold
 
         self.community_words = self._build_community_words()
+        
+        print(type(self.corpus.corpus[self.community]))
 
     def retrieve(self, query_sentences, match_criteria=0.5, topk=10) -> None : 
         
@@ -29,10 +29,12 @@ class Retriever(object) :
         print('Preparing retrieved object...')
         retrived_object = {}
         for query_index, corpus_indices in tqdm(matches.items()) : 
-            retrived_object[query_sentences[query_index]] = []
+            qs = query_sentences[query_index]
+            retrived_object[qs] = []
 
             for c in corpus_indices : 
-                retrived_object[query_index].append({'reddit_post':self.corpus.corpus[c['index']] , 
+                
+                retrived_object[qs].append({'reddit_post':self.corpus.corpus[self.community][c['index']] , 
                                                 'matched_words':c['matched_words']})
 
         print('...Finished preparing retrieved object')
@@ -40,7 +42,7 @@ class Retriever(object) :
 
         
 
-    def _match_based_on_CW(queryCW, corpusCW) : 
+    def _match_based_on_CW(self, queryCW, corpusCW) : 
         '''
         TODO : Match Criteria not implemented. Top-K not implemented.
         '''
@@ -57,15 +59,15 @@ class Retriever(object) :
 
         return matches
 
-    def _build_community_words(self) -> list(str) : 
-
-        community_words = self.corpus['unigram'][self.community]
+    def _build_community_words(self) -> list : 
+        
+        community_words = self.corpus.domain_frequency_matrix['unigram'][self.community]
         community_words = community_words[community_words>self.threshold].to_dict()
         return community_words
 
         
 
-    def _identify_community_words(self, sentences:str) -> tuple(list(str), list(str), list(str)) : 
+    def _identify_community_words(self, sentences:str) -> tuple : 
         sentences = self._process_sentences(sentences)
         community_words = []
 
@@ -74,7 +76,7 @@ class Retriever(object) :
 
         return community_words
 
-    def _process_sentences(self, sentences, vocab) : 
+    def _process_sentences(self, sentences) : 
 
         processed_sentences = []
         num_sentences = len(sentences)
@@ -83,7 +85,7 @@ class Retriever(object) :
             sentence = sentences[i].strip().lower()
             tokens = re.findall(r'(\w+)' , sentence)
             tokens = [t for t in tokens if len(t) > 1]
-            tokens = [t if t in vocab else '<UNK>' for t in tokens]
+            tokens = [t if t in self.corpus.vocabs['unigram'][self.community] else '<UNK>' for t in tokens]
             processed_sentences.append(tokens)
 
         return processed_sentences
@@ -92,6 +94,8 @@ class Retriever(object) :
 
 if __name__ == '__main__' : 
 
+    import json
+    
     corpus = Corpus({'airbnb_hosts' : [{'subreddit' : 'airbnb_hosts' , 'subreddit_path' : 'data/airbnb_hosts.jsonl'}], 
                     'airbnb' : [{'subreddit' : 'airbnb' , 'subreddit_path' : 'data/airbnb.jsonl'}], 
                     'vrbo' : [{'subreddit' : 'vrbo' , 'subreddit_path' : 'data/vrbo.jsonl'}], 
@@ -100,6 +104,19 @@ if __name__ == '__main__' :
                     })
 
     retriever = Retriever(corpus, 'airbnb_hosts' , 0.4)
+    
+    with open('data/labels.json') as f: 
+        quotes = json.load(f)[1]['quotes']
+        
+    print(quotes)
+    
+    
+    
+    with open('data/results/retrieved_object.json' , 'w') as f : 
+        
+        json.dump(retriever.retrieve(quotes), f)
+        
+    print('saved!')
 
     
 
