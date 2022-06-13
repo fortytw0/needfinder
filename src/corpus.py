@@ -117,6 +117,7 @@ class Corpus(object) :
             
             term_prob_matrices[vectorizer_type] = term_prob_matrices[vectorizer_type]/np.sum(term_prob_matrices[vectorizer_type] , axis=0)
             self.term_frequency_matrix[vectorizer_type] = pd.DataFrame(term_prob_matrices[vectorizer_type], index=vocab, columns=self.communities)
+            print(pd.DataFrame(self.term_frequency_matrix[vectorizer_type], index=vocab, columns=self.communities))
             term_prob_matrices[vectorizer_type] = term_prob_matrices[vectorizer_type]/np.sum(term_prob_matrices[vectorizer_type] , axis=1)[:, None]
             self.domain_frequency_matrix[vectorizer_type] = pd.DataFrame(term_prob_matrices[vectorizer_type], index=vocab, columns=self.communities)
             print(pd.DataFrame(self.domain_frequency_matrix[vectorizer_type], index=vocab, columns=self.communities))

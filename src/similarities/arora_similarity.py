@@ -31,8 +31,11 @@ class AroraBeam(object) :
         self.word_probabilities = self.corpus.term_frequency_matrix['unigram'][self.community].to_dict()
         self.embedding_dimension = embedding_dimension      
         self.unk_words = 0
+#         self.word_probabilities['<UNK>'] = 'abc'
+#         print('UNK word probability : ' , self.word_probabilities['<UNK>'])
         print("Preparing Corpus embedding repr...")
         self.corpus_repr = self._fit_corpus()
+        
 
     
     def _fit_corpus(self) -> np.array : 
@@ -43,14 +46,17 @@ class AroraBeam(object) :
         
         text_repr = []
         for text in tqdm(texts) : 
-            text_repr.append(self._get_sentence_embedding(text))
+            sentence_embedding = self._get_sentence_embedding(text)
+            text_repr.append(sentence_embedding)
 
         return np.array(text_repr)
 
     def rank(self, queries) -> float:
         print('Preparing queries embedding repr... ')
         text_repr = self._fit(queries)
-        return cosine_similarity(text_repr, self.corpus_repr)
+        print('Corpus_REPR.shape' , self.corpus_repr.shape)
+        print('Query_REPR.shape' , text_repr.shape)
+        return cosine_similarity(self.corpus_repr, text_repr)
 
     def _get_sentence_embedding(self, sentence:str) -> None : 
 
@@ -58,27 +64,34 @@ class AroraBeam(object) :
         if len(sentence) == 0 : 
             return np.zeros((self.embedding_dimension,))
 
-        sum = 0 
+        sum = np.zeros((self.embedding_dimension,))
 
         for word in sentence : 
 
-            try : 
-                if word in self.word_probabilities :     
+            try :    
+                
+                if word != '<UNK>' : 
                     smoothing_factor = self.alpha / (self.alpha + self.word_probabilities[word])
                     word_vector = self._get_word_embedding(word)
                     sum+=smoothing_factor*word_vector
-
-                else : 
-                    self.unk_words += 1
 
             except Exception as e :
 
                 print(e)
                 print(self._get_word_embedding(word))
                 print('Word : ' , word)
-
-
-        sentence_embedding = sum/len(sentence)
+        
+        sentence_embedding = sum/len(sentence)        
+        
+        try : 
+            sentence_embedding.shape
+            assert type(sentence_embedding) == np.ndarray
+            
+        except  : 
+            
+            print('Word :  ' , word , ' ' , sentence)
+            print(sentence_embedding)
+                
         return sentence_embedding
 
 
@@ -130,12 +143,34 @@ if __name__ == '__main__' :
     import json
     with open('data/labels.json') as f: 
         quotes = json.load(f)[1]['quotes']
-        
-    print(quotes)
 
     sim = ab.rank(quotes)
 
-    print(sim)
+    import pandas as pd 
+
+    df = pd.DataFrame(sim, index=corpus.corpus[community], columns=quotes)
+    df.to_csv('data/results/arora_similarity_no_unks.csv')
+
+    
+#     output = {}
+    
+#     for i , r in enumerate(sim) : 
+        
+#         top_k = np.argsort(-r)[:100]
+#         output[quotes[i]] = []
+        
+#         for k in top_k : 
+#             output[quotes[i]].append((corpus.corpus[community][k] + ' {}'.format(sim[i , k])))
+            
+            
+#     print(output)
+    
+#     with open('data/results/ignore_unks_results.json' , 'w') as f : 
+#         json.dump(output , f)
+            
+            
+            
+            
 
 
     
