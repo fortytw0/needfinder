@@ -152,22 +152,6 @@ if __name__ == '__main__' :
     df.to_csv('data/results/arora_similarity_no_unks.csv')
 
     
-#     output = {}
-    
-#     for i , r in enumerate(sim) : 
-        
-#         top_k = np.argsort(-r)[:100]
-#         output[quotes[i]] = []
-        
-#         for k in top_k : 
-#             output[quotes[i]].append((corpus.corpus[community][k] + ' {}'.format(sim[i , k])))
-            
-            
-#     print(output)
-    
-#     with open('data/results/ignore_unks_results.json' , 'w') as f : 
-#         json.dump(output , f)
-            
             
             
             
