@@ -16,6 +16,7 @@ class Retriever(object) :
 
     def retrieve(self, query_sentences, match_criteria=0.5, topk=10) -> None : 
         
+        
         print('Identifying community words in query sentences...')
         queryCW = self._identify_community_words(query_sentences)
 
@@ -23,22 +24,23 @@ class Retriever(object) :
         corpusCW = self._identify_community_words(self.corpus.corpus[self.community])
 
         print('Matching based on community words...')
-        matches = self._match_based_on_CW(queryCW, corpusCW)
+        result = {}
+        for vec_type, qCW in queryCW.items() : 
+            matches = self._match_based_on_CW(qCW, corpusCW[vec_type])
         
+            print('Preparing retrieved object for {}...'.format(vec_type))
+            retrived_object = {}
+            for query_index, corpus_indices in tqdm(matches.items()) : 
+                qs = query_sentences[query_index]
+                retrived_object[qs] = []
 
-        print('Preparing retrieved object...')
-        retrived_object = {}
-        for query_index, corpus_indices in tqdm(matches.items()) : 
-            qs = query_sentences[query_index]
-            retrived_object[qs] = []
+                for c in corpus_indices : 
 
-            for c in corpus_indices : 
-                
-                retrived_object[qs].append({'reddit_post':self.corpus.corpus[self.community][c['index']] , 
-                                                'matched_words':c['matched_words']})
-
+                    retrived_object[qs].append({'reddit_post':self.corpus.corpus[self.community][c['index']] , 
+                                                    'matched_words':c['matched_words']})
+            result[vec_type] = retrived_object
         print('...Finished preparing retrieved object')
-        return retrived_object
+        return result
 
         
 
@@ -61,18 +63,28 @@ class Retriever(object) :
 
     def _build_community_words(self) -> list : 
         
-        community_words = self.corpus.domain_frequency_matrix['unigram'][self.community]
-        community_words = community_words[community_words>self.threshold].to_dict()
+        community_words = {}
+        
+        for vectorizer_type, dfm in self.corpus.domain_frequency_matrix.items() :
+            
+            community_words[vectorizer_type] = dfm[self.community]
+            community_words[vectorizer_type] = community_words[vectorizer_type][community_words[vectorizer_type] > self.threshold].to_dict()
+            
         return community_words
-
         
 
     def _identify_community_words(self, sentences:str) -> tuple : 
         sentences = self._process_sentences(sentences)
-        community_words = []
-
-        for sentence in sentences : 
-            community_words.append([w for w in sentence if w in self.community_words])
+        community_words = {}
+        
+        for vec_def in self.corpus.vectorizer_definitions : 
+            vec_type = vec_def['vectorizer_type']
+            n = vec_def['ngram_range'][0]
+            community_words[vec_type] = []
+            
+            for sentence in sentences : 
+                sentence = self._get_ngrams(sentence, n)
+                community_words[vec_type].append([w for w in sentence if w in self.community_words[vec_type]])
 
         return community_words
 
@@ -89,6 +101,13 @@ class Retriever(object) :
             processed_sentences.append(tokens)
 
         return processed_sentences
+    
+    def _get_ngrams(self, tokens, n=1) :
+        
+        ngram = []
+        for i in range(len(tokens)-n+1) : 
+            ngram.append(' '.join(tokens[i:i+n]))
+        return ngram
 
         
 
@@ -101,7 +120,13 @@ if __name__ == '__main__' :
                     'vrbo' : [{'subreddit' : 'vrbo' , 'subreddit_path' : 'data/vrbo.jsonl'}], 
                     'caloriecount' : [{'subreddit' : 'caloriecount' , 'subreddit_path' : 'data/caloriecount.jsonl'}],
                     'loseit' : [{'subreddit' : 'loseit' , 'subreddit_path' : 'data/loseit.jsonl'}],
-                    })
+                    }, 
+                   vectorizer_definitions = [
+                                {'max_features' : 1e4, 'vectorizer_type' : 'unigram' , 'ngram_range' : (1 , 1)},
+                                {'max_features' : 1e4, 'vectorizer_type' : 'bigram' , 'ngram_range' : (2 , 2)},
+                                {'max_features' : 1e4, 'vectorizer_type' : 'trigram' , 'ngram_range' : (3 , 3)},
+                                ]
+                   )
 
     retriever = Retriever(corpus, 'airbnb_hosts' , 0.4)
     
