@@ -14,8 +14,6 @@ class Corpus(object) :
                 content_field:str='body',
                 maxlines:float=1e5,
                 ) -> None:
-
-
         
         self.corpus_files = corpus_files
         self.data = []
@@ -27,12 +25,11 @@ class Corpus(object) :
         self.vectorizer = CountVectorizer()
         X = self.vectorizer.fit_transform(self.data).sum(axis=0).getA1()
         
-        print(X)
-        print(type(X))
-        print(X.shape)
-
+        self.total_words = np.sum(X)
         self.counts = {word:count for word,count in zip(self.vectorizer.get_feature_names_out(), X)}
-        self.vocabs = self.vectorizer.get_feature_names_out()
+        self.vocab = self.vectorizer.get_feature_names_out()
+        self.vocab_size = len(self.vocab)
+        self.word_probs = {word:count/self.total_words for word,count in self.counts.items()}
 
 
 if __name__ == '__main__' : 
