@@ -25,7 +25,11 @@ class Corpus(object) :
 
 
         self.vectorizer = CountVectorizer()
-        X = self.vectorizer.fit_transform(self.data).sum(axis=0)
+        X = self.vectorizer.fit_transform(self.data).sum(axis=0).getA1()
+        
+        print(X)
+        print(type(X))
+        print(X.shape)
 
         self.counts = {word:count for word,count in zip(self.vectorizer.get_feature_names_out(), X)}
         self.vocabs = self.vectorizer.get_feature_names_out()
@@ -37,8 +41,12 @@ if __name__ == '__main__' :
     corpus = Corpus(['data/airbnb_hosts.jsonl'])
     singletons = []
     for w, wc in corpus.counts.items() : 
-
+        
+        print(w)
+        print(wc)
+        
         if wc <= 1 : 
+            
             singletons.append(w)
 
     print('Signletons : ')
