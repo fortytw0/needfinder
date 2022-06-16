@@ -96,7 +96,7 @@ class W2VEmbedding(object) :
             print('Checking if all communities have embeddings...')
 
             if not os.path.isdir(self.save_dir) : 
-                raise FileNotFoundError('Your specified save directory could not be found : ' , self.save_dir)
+                raise FileNotFoundError('Your specified save directory could not be found : {}'.format(self.save_dir))
 
             if not create_dir_if_not_exist(os.path.join(self.save_dir, 'word2vec')) :  # create_dir_if_not_exist creates word2vec model if it does not exists and returns False
                 self._train_all_community_embeddings() # since create_dir_if_not_exist returns False, that means the embeddings need to be trained
