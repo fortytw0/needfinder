@@ -1,118 +1,97 @@
 from gensim.models import KeyedVectors
 from src.similarities.similarity import Sim
+from src.wordvectors.word2vec import W2VEmbedding
+
+from src.corpus import Corpus
+
 
 import time
 from tqdm import tqdm
 import numpy as np
 import re
-import spacy
 from scipy.sparse.linalg import svds
-from sklearn.feature_extraction.text import CountVectorizer
+from sklearn.metrics.pairwise import cosine_similarity
 
 
-
-# # Setting up Logging
-# import logging
-# logging.basicConfig(filename='logs/main.log',
-#                     level=logging.INFO, 
-#                     format='%(asctime)s :: %(levelname)s :: %(module)s :: %(message)s')
-# logging.info('Logging has been setup.')
+class AroraBeam(object) : 
 
 
-# # Loading Spacy
-# nlp = spacy.load('en_core_web_sm')
-
-
-# AroraBeam 
-class AroraBeam(Sim) : 
-
-
-    def __init__(self, alpha:float=1e-4, embedding_path:str='data/glove.6B.50d.txt', embedding_dimension:int=50) -> None:
-
-        super().__init__()
+    def __init__(self, embedding:W2VEmbedding, 
+                corpus:Corpus,  
+                community:str, 
+                alpha:float=1e-4,  
+                embedding_dimension:int=50) -> None:
         
         # User Defined
         self.alpha = alpha
+        self.corpus = corpus
+        self.community = community
+        self.word_embeddings = embedding.embeddings[self.community]
+        self.vocab = self.corpus.vocabs['unigram'][self.community]
+        self.word_probabilities = self.corpus.term_frequency_matrix['unigram'][self.community].to_dict()
         self.embedding_dimension = embedding_dimension      
-        self.embedding_path = embedding_path
-
-        # Will be built
-        self.word_embeddings = {}
-        self.word_counts = {}
-        self.word_probabilities = {}
-        self.vocab = []
-        self.num_total_words = 0
         self.unk_words = 0
+#         self.word_probabilities['<UNK>'] = 'abc'
+#         print('UNK word probability : ' , self.word_probabilities['<UNK>'])
+        print("Preparing Corpus embedding repr...")
+        self.corpus_repr = self._fit_corpus()
         
-        # Will be declared/calculated
-        self.vectorizer = None
-        
 
-    def build(self, jsonl_path: str, content_field: str, id_field:str) -> None:
-        content, ids = super().build(jsonl_path, content_field, id_field)
-        self.ids = ids
+    
+    def _fit_corpus(self) -> np.array : 
+        return self._fit(self.corpus.corpus[self.community]) 
 
-        self._build_vocab(content)
-        self._build_embeddings()
-        self._build_probabilities()
 
-        self.matrix = np.zeros((self.embedding_dimension, ))
-
-        for i in tqdm(range(len(content))) : 
-             
-            sentence = content[i]
-            embedding = self._get_sentence_embedding(sentence) 
-
-            try :
-                self.matrix = np.vstack((self.matrix, embedding))
-
-            except Exception as e :
-                print(e)
-                self.matrix = np.vstack((self.matrix, np.zeros((self.embedding_dimension, ))))
-
-        self.matrix = self.matrix[1:, :]
-
-    def fit(self, texts: list) -> np.array:
+    def _fit(self, texts: list) -> np.array:
         
         text_repr = []
-
-        for text in texts : 
-            text_repr.append(self._get_sentence_embedding(text))
+        for text in tqdm(texts) : 
+            sentence_embedding = self._get_sentence_embedding(text)
+            text_repr.append(sentence_embedding)
 
         return np.array(text_repr)
 
-    def similarity(self, text_repr: np.array) -> float:
-        return super().similarity(text_repr)
+    def rank(self, queries) -> float:
+        print('Preparing queries embedding repr... ')
+        text_repr = self._fit(queries)
+        print('Corpus_REPR.shape' , self.corpus_repr.shape)
+        print('Query_REPR.shape' , text_repr.shape)
+        return cosine_similarity(self.corpus_repr, text_repr)
 
-    
-        
     def _get_sentence_embedding(self, sentence:str) -> None : 
 
         sentence = self._process_sentence(sentence)
         if len(sentence) == 0 : 
             return np.zeros((self.embedding_dimension,))
 
-        sum = 0 
+        sum = np.zeros((self.embedding_dimension,))
 
         for word in sentence : 
 
-            try : 
-                if word in self.word_probabilities :     
+            try :    
+                
+                if word != '<UNK>' : 
                     smoothing_factor = self.alpha / (self.alpha + self.word_probabilities[word])
                     word_vector = self._get_word_embedding(word)
                     sum+=smoothing_factor*word_vector
-
-                else : 
-                    self.unk_words += 1
 
             except Exception as e :
 
                 print(e)
                 print(self._get_word_embedding(word))
                 print('Word : ' , word)
-
-
-        sentence_embedding = sum/len(sentence)
+        
+        sentence_embedding = sum/len(sentence)        
+        
+        try : 
+            sentence_embedding.shape
+            assert type(sentence_embedding) == np.ndarray
+            
+        except  : 
+            
+            print('Word :  ' , word , ' ' , sentence)
+            print(sentence_embedding)
+                
         return sentence_embedding
 
 
@@ -130,32 +109,6 @@ class AroraBeam(Sim) :
 
         return context_matrix
 
-
-    def _build_vocab(self, content:list) : 
-
-        self.vectorizer = CountVectorizer(token_pattern=r"(\w+)")
-
-        word_count_matrix = self.vectorizer.fit_transform(content)
-        word_counts = word_count_matrix.toarray().sum(axis=0)
-        self.vocab = self.vectorizer.get_feature_names_out()
-
-        assert len(word_counts) == len(self.vocab)
-
-        for w, wc in zip(self.vocab, word_counts) : 
-            self.word_counts[w] = wc
-            self.num_total_words += wc
-
-    def _build_embeddings(self)->None : 
-    
-        self.word_embeddings = KeyedVectors.load(self.embedding_path)
-
-
-        
-    def _build_probabilities(self) -> None : 
-
-        for w, wc in self.word_counts.items() : 
-            self.word_probabilities[w] = wc/self.num_total_words
-
     def _get_word_embedding(self, word:str) -> np.array : 
 
         if word in self.word_embeddings.key_to_index.keys() : 
@@ -163,35 +116,46 @@ class AroraBeam(Sim) :
 
         return self.word_embeddings['<UNK>']
 
-    def _process_sentence(self, sentence:str) -> list:
+    def _process_sentence(self, sentence) : 
 
-        sentence = sentence.replace("'", '').strip().lower()
-        sentence_matches = re.findall(r"(\w+)", sentence)
-        return sentence_matches
+        tokens = re.findall(r'(\w+)' , sentence)
+        tokens = [t for t in tokens if len(t) > 1]
+        tokens = [t if t in self.vocab else '<UNK>' for t in tokens]
+
+        return tokens
 
 
 if __name__ == '__main__' : 
 
-    arora_beam = AroraBeam(embedding_path='data/airbnb_hosts.wordvectors', embedding_dimension=100)
-    arora_beam.build('data/airbnb_hosts.jsonl','body', 'body')
+    corpus = Corpus({'airbnb_hosts' : [{'subreddit' : 'airbnb_hosts' , 'subreddit_path' : 'data/airbnb_hosts.jsonl'}], 
+                    'airbnb' : [{'subreddit' : 'airbnb' , 'subreddit_path' : 'data/airbnb.jsonl'}], 
+                    'vrbo' : [{'subreddit' : 'vrbo' , 'subreddit_path' : 'data/vrbo.jsonl'}], 
+                    'caloriecount' : [{'subreddit' : 'caloriecount' , 'subreddit_path' : 'data/caloriecount.jsonl'}],
+                    'loseit' : [{'subreddit' : 'loseit' , 'subreddit_path' : 'data/loseit.jsonl'}],
+                    })
+
+    embedding = W2VEmbedding(corpus, 'data/wordvectors')
+
+    community = 'airbnb_hosts'
     
+    ab = AroraBeam(embedding, corpus, community, embedding_dimension=100)
+
     import json
-    with open('data/labels.json') as f : 
-        data = json.load(f)
-        print('Finished loading data.')
-        airbnb_data = data[1]['quotes']
-        print('Airbnb Data : \n' , airbnb_data)
-    
+    with open('data/labels.json') as f: 
+        quotes = json.load(f)[1]['quotes']
 
-
-    airbnb_data_repr = arora_beam.fit(airbnb_data)
-    print(airbnb_data_repr)
-    print(arora_beam.similarity(airbnb_data_repr).shape)
+    sim = ab.rank(quotes)
 
     import pandas as pd 
 
-    df = pd.DataFrame(arora_beam.similarity(airbnb_data_repr), index=arora_beam.ids, columns=airbnb_data)
-    df.to_csv('arora_similarity.csv')
+    df = pd.DataFrame(sim, index=corpus.corpus[community], columns=quotes)
+    df.to_csv('data/results/arora_similarity_no_unks.csv')
+
+    
+            
+            
+            
+
 
     
 

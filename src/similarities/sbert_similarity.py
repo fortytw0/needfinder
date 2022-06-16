@@ -1,47 +1,58 @@
-from src.similarities.similarity import Sim
+from src.corpus import Corpus 
 from sentence_transformers import SentenceTransformer
-import numpy as np
+from sklearn.metrics.pairwise import cosine_similarity
+import pandas as pd
 
-class SBERTSim(Sim) : 
+class SBERTSim(object) : 
 
-    def __init__(self, model_name:str='paraphrase-MiniLM-L3-v2') -> None:
-        super().__init__()
+    def __init__(self, 
+                corpus:Corpus,  
+                community:str, 
+                model_name:str='paraphrase-MiniLM-L3-v2') -> None:
+        
+        self.corpus = corpus
+        self.community = community
         self.model = SentenceTransformer(model_name)
 
-    def build(self, jsonl_path: str, content_field: str, id_field:str) -> None:
-        content, ids = super().build(jsonl_path, content_field, id_field)
-        print('len(content) : ' , len(content))
-        self.matrix = self.model.encode(content)
-        self.ids = ids
+        print('Finding contextual embeddings of sentences...')
+        self.matrix = self._fit_corpus()
 
-    def fit(self, texts: list) -> np.array:
-        return self.model.encode(texts)
+    def _fit(self, sentences) : 
+        return self.model.encode(sentences)
 
-    def similarity(self, text_repr: np.array) -> float:
-        return super().similarity(text_repr)
+    def _fit_corpus(self) : 
+        return self._fit(self.corpus.corpus[self.community])
+
+
+    def _similarity(self, sentences) : 
+        sentence_repr = self._fit(sentences)
+        return cosine_similarity(self.matrix, sentence_repr)
+
+    def rank(self, sentences, save_path='sbert_results.csv') : 
+        sim = self._similarity(sentences)
+        df = pd.DataFrame(sim, index=self.corpus.corpus[self.community] , columns=sentences)
+        df.to_csv(save_path)
+        return df
+
+
+
         
 
 if __name__ == '__main__' : 
 
-    sbert_sim = SBERTSim()
-    sbert_sim.build('data/airbnb_hosts.jsonl', 'body', 'body')
-    print(sbert_sim.matrix.shape)
+    corpus = Corpus({'airbnb_hosts' : [{'subreddit' : 'airbnb_hosts' , 'subreddit_path' : 'data/airbnb_hosts.jsonl'}], 
+                    'airbnb' : [{'subreddit' : 'airbnb' , 'subreddit_path' : 'data/airbnb.jsonl'}], 
+                    'vrbo' : [{'subreddit' : 'vrbo' , 'subreddit_path' : 'data/vrbo.jsonl'}], 
+                    'caloriecount' : [{'subreddit' : 'caloriecount' , 'subreddit_path' : 'data/caloriecount.jsonl'}],
+                    'loseit' : [{'subreddit' : 'loseit' , 'subreddit_path' : 'data/loseit.jsonl'}],
+                    })
     
-    import json
-    with open('data/labels.json') as f : 
-        data = json.load(f)
-        print('Finished loading data.')
-        airbnb_data = data[1]['quotes']
-
-    airbnb_data_repr = sbert_sim.fit(airbnb_data)
+    sbert_sim = SBERTSim(corpus, 'airbnb_hosts')
 
     print(sbert_sim.matrix.shape)
-    print(airbnb_data_repr)
 
-    print(sbert_sim.similarity(airbnb_data_repr).shape)
+    import json
+    with open('data/labels.json') as f: 
+        quotes = json.load(f)[1]['quotes']
 
-
-    import pandas as pd 
-
-    df = pd.DataFrame(sbert_sim.similarity(airbnb_data_repr), index=sbert_sim.ids, columns=airbnb_data)
-    df.to_csv('sbert_similarity.csv')
+    sbert_sim.rank(quotes)
