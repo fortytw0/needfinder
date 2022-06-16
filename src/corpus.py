@@ -36,7 +36,7 @@ if __name__ == '__main__' :
 
     corpus = Corpus(['data/airbnb_hosts.jsonl'])
     singletons = []
-    for w, wc in corpus.counts : 
+    for w, wc in corpus.counts.items() : 
 
         if wc <= 1 : 
             singletons.append(w)
