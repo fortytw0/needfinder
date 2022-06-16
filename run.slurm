@@ -1,8 +1,8 @@
 #!/bin/bash
 
 #SBATCH --partition=amilan-ucb
-#SBATCH --job-name=make_subs
-#SBATCH --output=make_subs.out
+#SBATCH --job-name=run_needfinder
+#SBATCH --output=run_needfinder
 #SBATCH --time=24:00:00
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
@@ -13,5 +13,4 @@
 
 source /curc/sw/anaconda3/latest
 conda activate need
-
-cd /scratch/alpine/abha4861/needfinder/needfinder
+python -m src.main
