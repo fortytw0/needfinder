@@ -18,28 +18,22 @@ class AroraBeam(object) :
 
     def __init__(self, embedding:W2VEmbedding, 
                 corpus:Corpus,  
-                community:str, 
                 alpha:float=1e-4,  
                 embedding_dimension:int=50) -> None:
         
         # User Defined
         self.alpha = alpha
         self.corpus = corpus
-        self.community = community
-        self.word_embeddings = embedding.embeddings[self.community]
-        self.vocab = self.corpus.vocabs['unigram'][self.community]
-        self.word_probabilities = self.corpus.term_frequency_matrix['unigram'][self.community].to_dict()
+        self.word_embedding = embedding.embeddings
         self.embedding_dimension = embedding_dimension      
-        self.unk_words = 0
-#         self.word_probabilities['<UNK>'] = 'abc'
-#         print('UNK word probability : ' , self.word_probabilities['<UNK>'])
+
         print("Preparing Corpus embedding repr...")
         self.corpus_repr = self._fit_corpus()
         
 
     
     def _fit_corpus(self) -> np.array : 
-        return self._fit(self.corpus.corpus[self.community]) 
+        return self._fit(self.corpus.data) 
 
 
     def _fit(self, texts: list) -> np.array:
@@ -60,6 +54,7 @@ class AroraBeam(object) :
 
     def _get_sentence_embedding(self, sentence:str) -> None : 
 
+        num_unks = 0
         sentence = self._process_sentence(sentence)
         if len(sentence) == 0 : 
             return np.zeros((self.embedding_dimension,))
@@ -70,10 +65,13 @@ class AroraBeam(object) :
 
             try :    
                 
-                if word != '<UNK>' : 
-                    smoothing_factor = self.alpha / (self.alpha + self.word_probabilities[word])
+                if word in self.corpus.vocab : 
+                    smoothing_factor = self.alpha / (self.alpha + self.corpus.word_probs[word])
                     word_vector = self._get_word_embedding(word)
                     sum+=smoothing_factor*word_vector
+
+                else : 
+                    num_unks += 1
 
             except Exception as e :
 
@@ -83,15 +81,7 @@ class AroraBeam(object) :
         
         sentence_embedding = sum/len(sentence)        
         
-        try : 
-            sentence_embedding.shape
-            assert type(sentence_embedding) == np.ndarray
-            
-        except  : 
-            
-            print('Word :  ' , word , ' ' , sentence)
-            print(sentence_embedding)
-                
+        print('Total number of unks found is : ' ,  num_unks)
         return sentence_embedding
 
 
@@ -111,8 +101,8 @@ class AroraBeam(object) :
 
     def _get_word_embedding(self, word:str) -> np.array : 
 
-        if word in self.word_embeddings.key_to_index.keys() : 
-            return self.word_embeddings[word]
+        if word in self.word_embedding.key_to_index.keys() : 
+            return self.word_embedding[word]
 
         return self.word_embeddings['<UNK>']
 
@@ -127,18 +117,14 @@ class AroraBeam(object) :
 
 if __name__ == '__main__' : 
 
-    corpus = Corpus({'airbnb_hosts' : [{'subreddit' : 'airbnb_hosts' , 'subreddit_path' : 'data/airbnb_hosts.jsonl'}], 
-                    'airbnb' : [{'subreddit' : 'airbnb' , 'subreddit_path' : 'data/airbnb.jsonl'}], 
-                    'vrbo' : [{'subreddit' : 'vrbo' , 'subreddit_path' : 'data/vrbo.jsonl'}], 
-                    'caloriecount' : [{'subreddit' : 'caloriecount' , 'subreddit_path' : 'data/caloriecount.jsonl'}],
-                    'loseit' : [{'subreddit' : 'loseit' , 'subreddit_path' : 'data/loseit.jsonl'}],
-                    })
+    corpus = Corpus(['data/airbnb_hosts.jsonl'])
 
-    embedding = W2VEmbedding(corpus, 'data/wordvectors')
+    embedding = W2VEmbedding(corpus, savedir='data/wordvectors', community='airbnb_hosts' )
 
-    community = 'airbnb_hosts'
     
-    ab = AroraBeam(embedding, corpus, community, embedding_dimension=100)
+    ab = AroraBeam(embedding=embedding, 
+                    corpus=corpus, 
+                    embedding_dimension=100)
 
     import json
     with open('data/labels.json') as f: 
@@ -148,8 +134,8 @@ if __name__ == '__main__' :
 
     import pandas as pd 
 
-    df = pd.DataFrame(sim, index=corpus.corpus[community], columns=quotes)
-    df.to_csv('data/results/arora_similarity_no_unks.csv')
+    df = pd.DataFrame(sim, index=corpus.data, columns=quotes)
+    df.to_csv('data/results/arora_sim_jun19.csv')
 
     
             
