@@ -32,12 +32,11 @@ class W2VEmbedding(object) :
         
 
     def _process_sentences(self, sentences:List[str]) : 
-
+        
         processed_sentences = []
-        num_sentences = len(sentences)
 
-        for i in tqdm(range(num_sentences)) : 
-            sentence = sentences[i].strip().lower()
+        for sentence in tqdm(sentences) : 
+            sentence = sentence.strip().lower()
             tokens = re.findall(r'(\w+)' , sentence)
             tokens = [t for t in tokens if len(t) > 1]
             tokens = [t if t in self.corpus.vocab else '<UNK>' for t in tokens]

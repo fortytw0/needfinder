@@ -62,12 +62,13 @@ class AroraBeam(object) :
         sum = np.zeros((self.embedding_dimension,))
 
         for word in sentence : 
+            
+            word_vector = self._get_word_embedding(word)
 
             try :    
                 
-                if word in self.corpus.vocab : 
+                if (word in self.corpus.vocab) and (word_vector is not None) : 
                     smoothing_factor = self.alpha / (self.alpha + self.corpus.word_probs[word])
-                    word_vector = self._get_word_embedding(word)
                     sum+=smoothing_factor*word_vector
 
                 else : 
@@ -78,10 +79,8 @@ class AroraBeam(object) :
                 print(e)
                 print(self._get_word_embedding(word))
                 print('Word : ' , word)
-        
+
         sentence_embedding = sum/len(sentence)        
-        
-        print('Total number of unks found is : ' ,  num_unks)
         return sentence_embedding
 
 
@@ -100,17 +99,19 @@ class AroraBeam(object) :
         return context_matrix
 
     def _get_word_embedding(self, word:str) -> np.array : 
-
-        if word in self.word_embedding.key_to_index.keys() : 
+            
+        try :
             return self.word_embedding[word]
+        except : 
+            return None
 
-        return self.word_embeddings['<UNK>']
 
     def _process_sentence(self, sentence) : 
-
+        
+        sentence = sentence.lower().strip()
         tokens = re.findall(r'(\w+)' , sentence)
         tokens = [t for t in tokens if len(t) > 1]
-        tokens = [t if t in self.vocab else '<UNK>' for t in tokens]
+        tokens = [t if t in self.corpus.vocab else '<UNK>' for t in tokens]
 
         return tokens
 
