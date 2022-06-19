@@ -78,7 +78,7 @@ class W2VEmbedding(object) :
         model.wv.save(os.path.join(self.save_dir , 'word2vec' , self.community + self.extension))
         print('Finished training and saving word embedding for community {} ...'.format(self.community))
 
-        return model
+        return model.wv
         
 
             
@@ -92,6 +92,10 @@ class W2VEmbedding(object) :
             return self._train_community_embeddings()
 
         else :
+            
+            # Checking if the directory exists/contains pre-trained embeddings. 
+            # Only train if the directory does not exist, or the community does 
+            # not have previously trained embeddings. 
 
             if not os.path.exists(self.save_dir) : 
                 print('Your specified save directory could not be found : ' , self.save_dir)
@@ -100,7 +104,7 @@ class W2VEmbedding(object) :
 
             if not create_dir_if_not_exist(os.path.join(self.save_dir, 'word2vec')) :  # create_dir_if_not_exist creates word2vec folder if it does not exists and returns False
                 return self._train_community_embeddings() # since create_dir_if_not_exist returns False, that means the embeddings need to be trained
-
+            
 
             wv_fpath = os.path.join(self.save_dir , 'word2vec' , self.community + self.extension)
             print('Checking for word_vectors at : ' , wv_fpath)
@@ -116,7 +120,7 @@ class W2VEmbedding(object) :
 if __name__ == '__main__' : 
 
     corpus = Corpus(['data/airbnb_hosts.jsonl'])
-    embedding = W2VEmbedding(corpus, 'data/wordvectors')
+    embedding = W2VEmbedding(corpus, savedir='data/wordvectors', community='airbnb_hosts' )
     print(embedding['<UNK>'])
 
 
