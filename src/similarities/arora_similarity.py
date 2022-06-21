@@ -28,7 +28,7 @@ class AroraBeam(object) :
         self.embedding_dimension = embedding_dimension      
 
         print("Preparing Corpus embedding repr...")
-        self.corpus_repr = self._fit_corpus()
+        # self.corpus_repr = self._fit_corpus()
         
 
     
@@ -51,6 +51,39 @@ class AroraBeam(object) :
         print('Corpus_REPR.shape' , self.corpus_repr.shape)
         print('Query_REPR.shape' , text_repr.shape)
         return cosine_similarity(self.corpus_repr, text_repr)
+
+
+    def word_wise_rank(self, quote:str, post:str) : 
+
+        quote = self._process_sentence(quote)
+        post = self._process_sentence(post)
+
+        quote_vectors = []
+        post_vectors = []
+
+        quote_labels = []
+        post_labels = []
+
+        sum = np.zeros((self.embedding_dimension,))
+
+        for word in quote : 
+            word_vector = self._get_word_embedding(word)
+            if (word in self.corpus.vocab) and (word_vector is not None) : 
+                smoothing_factor = self.alpha / (self.alpha + self.corpus.word_probs[word])
+                smoothing_factor = round(smoothing_factor, 2)
+                quote_labels.append(word + '_{}'.format(smoothing_factor))
+                quote_vectors.append(word_vector)
+
+        for word in post : 
+            word_vector = self._get_word_embedding(word)
+            if (word in self.corpus.vocab) and (word_vector is not None) : 
+                smoothing_factor = self.alpha / (self.alpha + self.corpus.word_probs[word])
+                smoothing_factor = round(smoothing_factor, 2)
+                post_labels.append(word + '_{}'.format(smoothing_factor))
+                post_vectors.append(word_vector)
+
+        return post_labels, post_vectors, quote_labels, quote_vectors 
+
 
     def _get_sentence_embedding(self, sentence:str) -> None : 
 
@@ -131,12 +164,49 @@ if __name__ == '__main__' :
     with open('data/labels.json') as f: 
         quotes = json.load(f)[1]['quotes']
 
-    sim = ab.rank(quotes)
+    # sim = ab.rank(quotes)
+
+    sample_quote = quotes[0]
+    sample_post = '''
+    &gt; Sure but one block can be very different from another block in terms the renter's experience -- as I wrote being in a unit on a quiet residential street is very different than being in a unit in between a bar and drug store -- and both of those units could be within a circle on a map.
+
+this is simply not accurate at all. Yes this is true for LOCALS where they would know "oh this street is sketchy" and what have you. 
+
+But expecting tourist to know what street is what is just naive.
+
+&gt;Why? And even if it really is a huge security issue then AirBnB could set it up so that only "vetted" renters can see it, or only renters with a review score above a certain threshold.
+
+what is a "vetted" renter? just because you got 5*s before, doesn't mean you are trust worthy when you are anonymous. especially since there is no way to know if you were the one that broke into my house or not.
+
+&gt;I suspect the top 2 reasons that AirBnB hides it are:
+
+you are wrong already. hosts hide it, not airbnb. Airbnb default is to show it.
+
+
+&gt;They don't want people bypassing AirBnB and renting the unit directly with the host (same reason they hide the host's contact info on pages prior to booking).
+
+This is just plain reach. the address alone doesnt magically mean I can contact the owner to set up off site payments. more over any host that randomly accepts offsite payments are idiots themselves.
+
+most hosts thatDO have off site booking (via their own site) usually has their branding info right on their description. a quick google will get you this info. as well as those that have offsite bookings will likely enable `show full address`
+
+&gt;In cities where AirBnBs are currently not legal it makes it harder for people to see if their neighbor is violating the law.
+
+Also not even remotely accurate. you already know the house by pictures AND the general location of the house. if you dont know the look of your neighbors houses....you gotta get out more.
+
+
+
+Whats more plausible? Airbnb hosts hiding for security reasons (thieves can see when a house is "empty")
+
+or whatever thoughts you just spewed that makes next to no sense?
+    '''
+
+    post_labels, post_vectors, quote_labels, quote_vectors = ab.word_wise_rank(sample_quote, sample_post)
+    sim = cosine_similarity(post_vectors, quote_vectors)
 
     import pandas as pd 
 
-    df = pd.DataFrame(sim, index=corpus.data, columns=quotes)
-    df.to_csv('data/results/arora_sim_jun19.csv')
+    df = pd.DataFrame(sim, index=post_labels, columns=quote_labels)
+    df.to_csv('data/results/arora_sim_wordwise_june21.csv')
 
     
             
