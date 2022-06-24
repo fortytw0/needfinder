@@ -63,25 +63,32 @@ vectorizer_definitions = [
                         {'max_features' : 1e4, 'vectorizer_type' : 'unigram' , 'ngram_range' : (1 , 1)},
                         ]
 
+
+
+config = {"wordvector_path": "data/wordvectors",
+         "community": "airbnb_hosts",
+         "input_quotes": "data/labels.json",
+         "output_path": "data/results/arora_similarity_results.csv",
+         "corpus_dictionary": corpus_dictionary, 
+         "community": 'airbnb_hosts',
+         "embedding_dimension": 100,
+         "vectorizer_definitions": vectorizer_definitions}
+
 # Defining CHI quotes
-with open('data/labels.json') as f: 
+with open(config['input_quotes']) as f: 
     quotes = json.load(f)[1]['quotes']
-
-wordvector_path = 'data/wordvectors'
-community = 'airbnb_hosts'
-output_path = 'data/results/arora_similarity_results.csv'
-
-
 
 if __name__ == '__main__' :            
 
-    corpus = Corpus(corpus_dictionary , vectorizer_definitions=vectorizer_definitions)
-    embedding = W2VEmbedding(corpus, wordvector_path)
-    ab = AroraBeam(embedding, corpus, community, embedding_dimension=100)
+    corpus = Corpus(config["corpus_dictionary"], 
+                    vectorizer_definitions=config["vectorizer_definitions"])
+    embedding = W2VEmbedding(corpus, config["wordvector_path"])
+    ab = AroraBeam(embedding, corpus, config["community"], 
+                  config["embedding_dimension"])
     sim = ab.rank(quotes)
 
     import pandas as pd 
 
-    df = pd.DataFrame(sim, index=corpus.corpus[community], columns=quotes)
-    df.to_csv(output_path)
+    df = pd.DataFrame(sim, index=corpus.corpus[config['community']], columns=quotes)
+    df.to_csv(config['output_path'])
 
