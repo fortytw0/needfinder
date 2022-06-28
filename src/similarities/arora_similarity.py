@@ -19,7 +19,8 @@ class AroraBeam(object) :
     def __init__(self, embedding:W2VEmbedding, 
                 corpus:Corpus,  
                 alpha:float=1e-4,  
-                embedding_dimension:int=50) -> None:
+                embedding_dimension:int=50, 
+                eager_load:bool=False) -> None:
         
         # User Defined
         self.alpha = alpha
@@ -27,16 +28,24 @@ class AroraBeam(object) :
         self.word_embedding = embedding.embeddings
         self.embedding_dimension = embedding_dimension      
 
-        print("Preparing Corpus embedding repr...")
-        # self.corpus_repr = self._fit_corpus()
+        
+
+        if eager_load : 
+            self.corpus_repr = self._fit_corpus()
+        else : 
+            self.corpus_repr = None
         
 
     
     def _fit_corpus(self) -> np.array : 
+        print("Preparing Corpus embedding repr...")
         return self._fit(self.corpus.data) 
 
 
     def _fit(self, texts: list) -> np.array:
+
+        if self.corpus_repr == None :
+            self._fit_corpus()
         
         text_repr = []
         for text in tqdm(texts) : 
@@ -63,8 +72,6 @@ class AroraBeam(object) :
 
         quote_labels = []
         post_labels = []
-
-        sum = np.zeros((self.embedding_dimension,))
 
         for word in quote : 
             word_vector = self._get_word_embedding(word)

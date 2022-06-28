@@ -16,7 +16,7 @@ class W2VEmbedding(object) :
                 community:str,
                 retrain=False, 
                 dimension=100, 
-                alpha=1e4) -> None:
+                alpha=1e-4) -> None:
 
         self.save_dir = savedir
         self.corpus = corpus
