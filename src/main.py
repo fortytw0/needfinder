@@ -69,12 +69,12 @@ sbert = SBERTSim(corpus=Corpus,
 Sample usages
 '''
 
+
 # Standard Arora similarity. 
 # Feed in the CHI quotes to compare with the respective corpus. 
 arora_similarity = asim.rank(airbnb_quotes)
 df = pd.DataFrame(arora_similarity, index=corpus.data , columns=airbnb_quotes)
 df.to_csv('data/results/arora_sim.csv')
-
 
 # Wordwise Arora similarity. 
 # Feed in 1 CHI quote and 1 Reddit Post
@@ -90,5 +90,3 @@ df.to_csv('data/results/arora_sim_wordwise_june21.csv')
 sbert_similarity = sbert.rank(airbnb_quotes)
 df = pd.DataFrame(sbert_similarity, index=corpus.data , columns=airbnb_quotes)
 df.to_csv('data/results/sbert_sim.csv')
-
-

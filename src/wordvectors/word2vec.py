@@ -121,8 +121,3 @@ if __name__ == '__main__' :
     corpus = Corpus(['data/airbnb_hosts.jsonl'])
     embedding = W2VEmbedding(corpus, savedir='data/wordvectors', community='airbnb_hosts' )
     print(embedding['<UNK>'])
-
-
-
-
-    
