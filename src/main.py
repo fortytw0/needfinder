@@ -15,18 +15,19 @@ from src.wordvectors.glove import GloveEmbedding
 User Defined Variables.
 '''
 
-corpus_files = ['data/airbnb_hosts.jsonl']
-embedding_type = 'word2vec' # 'word2vec' or 'glove'
-community_name = 'airbnb_hosts' # what should the community embeddings be called? 
-embedding_dimension = 100
-
+config = {"corpus_files": ['data/airbnb_hosts.jsonl'],
+          "embedding_type": "word2vec",
+          "embedding_dimension": 100,
+          "model_name": 'paraphrase-MiniLM-L3-v2',
+          "community_name": 'airbnb_hosts',
+          "interview_quotes": 'data/labels.json'}
 
 '''
 Read Quotes from CHI papers
 '''
 
 import json
-with open('data/labels.json') as f: 
+with open(config["interview_quotes"]) as f: 
     quotes = json.load(f)
 
 calorie_count_quotes = quotes[0]['quotes']
@@ -38,10 +39,9 @@ gaming_quotes = quotes[2]['quotes']
 Program Variables
 '''
 
-corpus = Corpus(corpus_files)
+corpus = Corpus(config['corpus_files'])
 
-
-if embedding_type == 'word2vec' : 
+if config['embedding_type'] == 'word2vec' : 
 
     # set retrain=True if you want to retrain word2vec embeddings.
     # it will automatically train if it doesn't find embeddings. 
@@ -49,21 +49,23 @@ if embedding_type == 'word2vec' :
     embedding = W2VEmbedding(corpus, 
                             savedir='data/wordvectors', 
                             community='airbnb_hosts', 
-                            dimension=embedding_dimension, 
+                            dimension=config['embedding_dimension'], 
                             retrain=False)
-else : 
+elif config['embedding_type'] == 'glove': 
     embedding =  GloveEmbedding(save_dir='data/glove', 
-                            dimension=100)
+                                dimension=config['embedding_dimension'])
 
+else:
+    assert "There is a" == "problem"
 
 
 asim = AroraBeam(embedding=embedding, 
                 corpus=corpus, 
-                embedding_dimension=100)
+                embedding_dimension=config['embedding_dimension'])
 
-sbert = SBERTSim(corpus=Corpus, 
-                community='airbnb_hosts' , 
-                model_name='paraphrase-MiniLM-L3-v2')
+sbert = SBERTSim(corpus=corpus, 
+                 community=config["community_name"] , 
+                 model_name=config["model_name"])
 
 '''
 Sample usages
