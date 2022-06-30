@@ -31,7 +31,7 @@ class SBERTSim(object) :
     def _similarity(self, sentences) : 
         
         if self.matrix == None : 
-            self._fit_corpus()
+            self.matrix = self._fit_corpus()
 
         sentence_repr = self._fit(sentences)
         return cosine_similarity(self.matrix, sentence_repr)

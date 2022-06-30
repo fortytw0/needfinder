@@ -45,7 +45,7 @@ class AroraBeam(object) :
     def _fit(self, texts: list) -> np.array:
 
         if self.corpus_repr == None :
-            self._fit_corpus()
+            self.corpus_repr = self._fit_corpus()
         
         text_repr = []
         for text in tqdm(texts) : 
