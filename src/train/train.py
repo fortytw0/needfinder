@@ -118,8 +118,13 @@ logger.info(tokenizer.encode('Life, The Universe and Everything'))
 
 from datasets import Dataset
 
-dataset = Dataset.from_dict({'train' : train_data,
-                            'val' : val_data})
+dataset = Dataset.from_dict({'split':{'train' : {'text' : train_data},
+                            'val': {'text': val_data}}})
+
+# class TokenizedDataset(Dataset) : 
+
+#     def __init__(self, arrow_table: Table, info: Optional[DatasetInfo] = None, split: Optional[NamedSplit] = None, indices_table: Optional[Table] = None, fingerprint: Optional[str] = None):
+#         super().__init__(arrow_table, info, split, indices_table, fingerprint)
 
 print(dataset)
 
