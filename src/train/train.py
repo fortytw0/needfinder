@@ -130,4 +130,3 @@ tokenized_dataset = dataset.map(tokenizer_function, batched=True)
 
 print(tokenized_dataset)
 print(tokenizer.model_max_length)
-                        
