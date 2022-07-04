@@ -94,11 +94,13 @@ if pretrained_tokenizer_model is None :
     else : 
         logging.error('There is an error with your tokenizer selection.')
 
-    tokenizer = Tokenizer() 
+    tokenizer = Tokenizer(model()) 
     tokenizer.normalizer = BertNormalizer()
-    tokenizer.pre_tokenizer = Sequence(Whitespace(), Digits(individual_digits=True), Punctuation(behavior='removed'))
+    tokenizer.pre_tokenizer = Sequence([Whitespace(), Digits(individual_digits=True), Punctuation(behavior='removed')])
     tokenizer.post_processor = BertProcessing(sep=('<\s>' , 1) , cls=('<s>' , 0))
-    tokenizer.train_from_iterator(train_data , trainer=trainer(special_tokens=['<s>' , '<\s>' , '<unk>' , '<pad>' , '<mask>']))
+    tokenizer.train_from_iterator(train_data , 
+                                  trainer=trainer(special_tokens=['<s>' , '<\s>' , '<unk>' , '<pad>' , '<mask>']),
+                                  length=num_train_data)
     tokenizer.save(tokenizer_save_path)
 
     logger.info('Finished training tokenizer from scratch...')
