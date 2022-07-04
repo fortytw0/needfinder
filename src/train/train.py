@@ -113,3 +113,21 @@ else :
 
 logger.info('Testing tokenizer on sample sequence "Life, The Universe and Everything"')
 logger.info(tokenizer.encode('Life, The Universe and Everything'))
+
+# Setting up model for finetuning
+
+from datasets import Dataset
+
+dataset = Dataset.from_dict({'train' : train_data,
+                            'val' : val_data})
+
+print(dataset)
+
+def tokenizer_function(examples) : 
+    return tokenizer(examples)                            
+
+tokenized_dataset = dataset.map(tokenizer_function, batched=True)
+
+print(tokenized_dataset)
+print(tokenizer.model_max_length)
+                        
