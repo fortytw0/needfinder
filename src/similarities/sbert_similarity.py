@@ -30,7 +30,7 @@ class SBERTSim(object) :
 
     def _similarity(self, sentences) : 
         
-        if self.matrix == None : 
+        if self.matrix is None : 
             self.matrix = self._fit_corpus()
 
         sentence_repr = self._fit(sentences)
