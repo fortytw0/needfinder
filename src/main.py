@@ -58,14 +58,15 @@ elif config['embedding_type'] == 'glove':
 else:
     assert "There is a" == "problem"
 
-
-asim = AroraBeam(embedding=embedding, 
-                corpus=corpus, 
-                embedding_dimension=config['embedding_dimension'])
-
 sbert = SBERTSim(corpus=corpus, 
                  community=config["community_name"] , 
                  model_name=config["model_name"])
+
+asim = AroraBeam(embedding=embedding, 
+                corpus=corpus,
+                eager_load=True,
+                embedding_dimension=config['embedding_dimension'])
+
 
 '''
 Sample usages
