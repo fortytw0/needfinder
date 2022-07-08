@@ -43,20 +43,20 @@ class AroraBeam(object) :
 
 
     def _fit(self, texts: list) -> np.array:
-
-        if self.corpus_repr == None :
-            self.corpus_repr = self._fit_corpus()
-        
         text_repr = []
         for text in tqdm(texts) : 
             sentence_embedding = self._get_sentence_embedding(text)
             text_repr.append(sentence_embedding)
-
         return np.array(text_repr)
 
     def rank(self, queries) -> float:
         print('Preparing queries embedding repr... ')
         text_repr = self._fit(queries)
+        
+        if self.corpus_repr == None :
+            self.corpus_repr = self._fit_corpus()
+            
+            
         print('Corpus_REPR.shape' , self.corpus_repr.shape)
         print('Query_REPR.shape' , text_repr.shape)
         return cosine_similarity(self.corpus_repr, text_repr)

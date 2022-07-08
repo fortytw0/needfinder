@@ -126,11 +126,13 @@ logger.info(tokenizer('Life, The Universe and Everything'))
 from datasets import Dataset, load_dataset
 from transformers import DataCollatorForLanguageModeling
 
-
+logger.info('Building dataset...')
 train_dataset = Dataset.from_dict({'text' : train_data})
 val_dataset = Dataset.from_dict({'text' : val_data})
+logger.info('Finished building dataset...')
 
 
+logger.info('Tokenizing dataset...')
 if pretrained_tokenizer_model is None : 
 
     def tokenizer_function(example) : 
@@ -159,45 +161,47 @@ else :
 
     tokenized_train_dataset = train_dataset.map(tokenizer_function, batched=False)
     tokenized_val_dataset = val_dataset.map(tokenizer_function, batched=False)
-    
-print(tokenized_train_dataset)
-print(tokenized_val_dataset)
 
+logger.info('Finished tokenizing dataset...')
+logger.info(tokenized_train_dataset)
+logger.info(tokenized_val_dataset)
+
+
+logger.info('Testing data collator...')
 data_collator = DataCollatorForLanguageModeling(tokenizer=tokenizer, mlm_probability=0.15, return_tensors='tf')
 
 sample_data = [tokenized_train_dataset[i] for i in range(2)]
-print(sample_data)
-print(type(sample_data))
+logger.info(sample_data)
+logger.info(type(sample_data))
 for data in sample_data : 
     data.pop('labels')
     data.pop('text')
-print(sample_data)  
+logger.info(sample_data)  
     
 for data in data_collator(sample_data)["input_ids"] : 
-    print(f"\n'>>> {tokenizer.decode(data)}'")
-    
+    logger.info(f"\n'>>> {tokenizer.decode(data)}'")
 
 
-collated = data_collator(sample_data)
-print(collated)
-
-
+logger.info('Setting up train masking for dataset...')
 tf_train_set = tokenized_train_dataset.to_tf_dataset(
     columns = ["attention_mask", "input_ids", "labels"],
     shuffle=True, 
     batch_size = 4, 
     collate_fn=data_collator,
 )
+logger.info('Finished setting up train masking for dataset...')
 
+logger.info('Setting up val masking for dataset...')
 tf_val_set = tokenized_val_dataset.to_tf_dataset(
     columns = ["attention_mask", "input_ids", "labels"],
     shuffle=True, 
     batch_size = 4, 
     collate_fn=data_collator,
 )
+logger.info('Finished setting up val masking for dataset...')
 
-print(tf_train_set)
-print(tf_val_set)
+logger.info(tf_train_set)
+logger.info(tf_val_set)
 
 # Model Definition
 
@@ -205,11 +209,28 @@ import tensorflow as tf
 from transformers import TFAutoModelForMaskedLM
 from transformers import create_optimizer, AdamWeightDecay
 
+
+logger.info('Setting up model...')
 optimizer = AdamWeightDecay(learning_rate=2e-5, weight_decay_rate=0.01)
 model = TFAutoModelForMaskedLM.from_pretrained(pretrained_transformer_model)
+logger.info('Finished setting up model...')
 
+logger.info('Compiling model...')
 model.compile(optimizer=optimizer)
-model.fit(x=tf_train_set, validation_data=tf_val_set, epochs=3)
+logger.info('Finished compiling model...')
 
+logger.info('Preparing callbacks...')
+from tensorflow.keras.callbacks import ModelCheckpoint, CSVLogger
+model_ckpt = ModelCheckpoint(filepath='models/transformers/'+pretrained_transformer_model)
+csv_logger = CSVLogger('logs/train_logging.csv')
+logger.info('Finished preparing callbacks...')
+
+logger.info('Running training...')
+model.fit(x=tf_train_set, validation_data=tf_val_set, epochs=3, callbacks=[model_ckpt, csv_logger])
+logger.info('Finished running training...')
+
+logger.info('Saving model...')
+model.save('models/' + pretrained_transformer_model)
+logger.info('Finished saving model...')
 
 
