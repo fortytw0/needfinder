@@ -53,7 +53,7 @@ class AroraBeam(object) :
         print('Preparing queries embedding repr... ')
         text_repr = self._fit(queries)
         
-        if self.corpus_repr == None :
+        if self.corpus_repr is None:
             self.corpus_repr = self._fit_corpus()
             
             
