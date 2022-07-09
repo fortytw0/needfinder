@@ -74,7 +74,7 @@ asim = AroraBeam(embedding=embedding,
 Sample usages
 '''
 
-output_folder = "data/results/{}/".format((time.time()))
+output_folder = "data/results/{}/".format(int(time.time()))
 os.mkdir(output_folder)
 
 with open(output_folder + "config.json", "w") as of:
