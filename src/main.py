@@ -1,4 +1,6 @@
+import os
 import json
+import time
 import pandas as pd
 import numpy as np
 from sklearn.metrics.pairwise import cosine_similarity
@@ -72,12 +74,17 @@ asim = AroraBeam(embedding=embedding,
 Sample usages
 '''
 
+output_folder = "data/results/{}/".format((time.time()))
+os.mkdir(output_folder)
+
+with open(output_folder + "config.json", "w") as of:
+    json.dump(config, of)
 
 # Standard Arora similarity. 
 # Feed in the CHI quotes to compare with the respective corpus. 
 arora_similarity = asim.rank(airbnb_quotes)
 df = pd.DataFrame(arora_similarity, index=corpus.data , columns=airbnb_quotes)
-df.to_csv('data/results/arora_sim.csv')
+df.to_csv(output_folder + 'arora_sim.csv')
 
 # Wordwise Arora similarity. 
 # Feed in 1 CHI quote and 1 Reddit Post
@@ -85,11 +92,11 @@ post_labels, post_vectors, quote_labels, quote_vectors = asim.word_wise_rank(quo
                                                                             post='Reddit Post goes here.')
 sim = cosine_similarity(post_vectors, quote_vectors)
 df = pd.DataFrame(sim, index=post_labels, columns=quote_labels)
-df.to_csv('data/results/arora_sim_wordwise_june21.csv')
+df.to_csv(output_folder + 'arora_sim_wordwise_june21.csv')
 
 
 # SBert Similarity
 # Feed in the CHI quotes to compare with the respective corpus.
 sbert_similarity = sbert.rank(airbnb_quotes)
 df = pd.DataFrame(sbert_similarity, index=corpus.data , columns=airbnb_quotes)
-df.to_csv('data/results/sbert_sim.csv')
+df.to_csv(output_folder + 'sbert_sim.csv')
