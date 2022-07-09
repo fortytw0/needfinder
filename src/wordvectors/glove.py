@@ -20,7 +20,7 @@ class GloveEmbedding(object) :
         if not os.path.exists(self.embedding_path) :
             raise FileNotFoundError('Could not find the GloVe embeddings.' 
             'Please download them from https://nlp.stanford.edu/data/glove.6B.zip,'
-            'and place the decompressed conents in {}'.format(self.save_dir))
+            'and place the decompressed conents in {}. Dont forget to unzip'.format(self.save_dir))
 
         self.embeddings = self._build_embedding()
 
