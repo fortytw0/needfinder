@@ -1,5 +1,6 @@
 import json
 import os
+from sklearn.feature_extraction.text import CountVectorizer
 from tqdm import tqdm
 
 # --- Iteration Utils --- #
@@ -50,7 +51,10 @@ def _read_jsonl_with_single_field(jsonl_lines, field) :
     for line in jsonl_lines : 
         try : 
             d = json.loads(line) 
+            assert field in d
             data.append(d[field])
+        except AssertionError:
+            print(f"Can't find the field {field}")
         except : 
             pass
 
@@ -99,5 +103,31 @@ def create_dir_if_not_exist(dir) :
     return True
 
 
+def get_count_vectorizer_for_tokenized_lists():
+    '''
+    A vectorizer that assumes corpus is list of lists of tokens 
+
+    https://stackoverflow.com/questions/35867484/pass-tokens-to-countvectorizer
+
+    e.g. 
+    docs = [
+    ['hello', 'world', '.'],
+    ['hello', 'world'],
+    ['again', 'hello', 'world']
+    ]
+    '''
+
+    def dummy(doc):
+        return doc
+
+    return CountVectorizer(tokenizer=dummy, preprocessor=dummy)
 
 
+class WhitespaceTokenizer(object):
+    '''a really dumb whitespace tokenizer'''
+    def __init__(self):
+        pass
+
+    # assume python 3.9 AH https://stackoverflow.com/questions/52623204/how-to-specify-method-return-type-list-of-what-in-python
+    def tokenize(self, document: str) -> list[str]: 
+        return document.split(" ")
