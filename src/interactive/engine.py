@@ -164,6 +164,8 @@ if __name__ == "__main__":
 
     phrase_count_ranker = PhraseCountRanker(corpus)
 
+    ### Figure out what the top phrases are
+
     top_phrases = phrase_count_ranker.get_top_phrases_by_count(targets)
 
     console.print(renderer.top_phrases_2_prompt(top_phrases))
@@ -171,11 +173,14 @@ if __name__ == "__main__":
     with open("data/phrases.txt", "w") as of:
         of.write("\n".join(top_phrases + ["no"]))
 
-    top_phrases_str = ", ".join(top_phrases)
+    top_phrases_str = renderer.make_top_phrases_str(top_phrases)
     console.print(
         f"Do you want to investigate any of the following: {top_phrases_str}?")
 
     completer = FuzzyCompleter(BaseCompleter("data/phrases.txt"))
+
+    ### Ask if they want to investigate a phrase
+
     phrase = prompt("\n Type the phrase you \
                     want to invesigate, or type no .. ",
                     completer=completer)
