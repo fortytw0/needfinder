@@ -7,7 +7,7 @@ from src.corpus import Corpus
 from prompt_toolkit.completion import Completer, Completion, FuzzyCompleter
 from prompt_toolkit.shortcuts import CompleteStyle, prompt
 
-class ColorCompleter(Completer):
+class BaseCompleter(Completer):
 
     def __init__(self, quote_path="data/interviewee_quotes.txt"):
         quotes = []
@@ -99,13 +99,11 @@ if __name__ == "__main__":
 
     corpus = Corpus(["data/airbnb_hosts.phrases.jsonl"], phrases=True)
 
-    quote = prompt("Pick a quote: ", completer=FuzzyCompleter(ColorCompleter()))
+    quote = prompt("Pick a quote: ", completer=FuzzyCompleter(BaseCompleter()))
 
     quote2ix = {quote: ix for ix, quote in enumerate(corpus.data)}
 
     col = quote
-
-    console.print("\n" + col, style="white")
 
     lexical_requirements = []
 
@@ -127,9 +125,18 @@ if __name__ == "__main__":
         if phrase_counts[ix] > 1:
             top_phrases.append(phrase)
 
-    print(top_phrases)
 
-    import ipdb; ipdb.set_trace()
+    top_phrases_str =  ", ".join(top_phrases)
+    out = renderer.insert_markup_literal_match(top_phrases_str, bolded_words=top_phrases)
+    console.print("\n" + "On reddit, they may discuss the following concepts related to this quote: " + out)
+
+    with open("data/phrases.txt", "w") as of:
+        of.write("\n".join(top_phrases + ["no"]))
+
+    console.print(f"Do you want to investigate any of the following: {top_phrases_str}?")
+    
+    quote = prompt(f"\n Type the phrase you want to invesigate, or type no .. ", completer=FuzzyCompleter(BaseCompleter("data/phrases.txt")))
+
 
     for k in top_k:
         lexical_matches = get_overlapping_words_simple(
