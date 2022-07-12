@@ -138,15 +138,19 @@ if __name__ == "__main__":
     phrase = prompt(f"\n Type the phrase you want to invesigate, or type no .. ", completer=FuzzyCompleter(BaseCompleter("data/phrases.txt")))
 
     lexical_requirements = [phrase]
-    top_k = engine.get_top_K_with_substring_constraints(col, lexical_requirements)
+
+    if phrase != "no":
+        top_k = engine.get_top_K_with_substring_constraints(col, lexical_requirements)
 
     for k in top_k:
         lexical_matches = get_overlapping_words_simple(
             k["query_quote"], k["target_quote"])
-        if phrase[0] != "no":
+
+        if phrase != "no":
             lexical_matches = lexical_requirements
         else:
-            lexical_matches = lexical_matches + lexical_requirements
+            lexical_matches = lexical_matches
+
         out = renderer.insert_markup_literal_match(
             k['query_quote'], bolded_words=lexical_matches)
         console.print("\nChi: " + out.replace("\n", ""), style="white")
