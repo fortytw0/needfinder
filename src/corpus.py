@@ -24,13 +24,25 @@ class Corpus(object):
                 corpus_file, field=content_field, max_lines=maxlines))
 
         if phrases:
-            import phrasemachine
-            data_phrases = []
-            for post in tqdm(self.data):
-                post_phrases = phrasemachine.get_phrases(post)["counts"]
-                post_phrases = list(post_phrases.keys())
-                data_phrases.append({"phrases": post_phrases})
-            self.data_phrases = pd.DataFrame(data_phrases, index=self.data)
+            self.data_phrases = []
+            assert ".phrases" in corpus_file, f"you need to run $py scripts/add_phrases.py {corpus_file} first"
+            for corpus_file in self.corpus_files:
+                self.data_phrases.extend(read_jsonl(
+                    corpus_file, field="phrases", max_lines=maxlines))
+
+            def dummy(doc):
+                return doc
+            self.phrase_vectorizer = CountVectorizer(
+                tokenizer=dummy, preprocessor=dummy)
+
+            assert len(self.data_phrases) > 0
+            X = self.phrase_vectorizer.fit_transform(self.data_phrases)
+            phrase_dfs = X.sum(axis=0)
+            # document frequencies for phrases
+            self.phrase_dfs = np.asarray(phrase_dfs)[0]
+            self.phrase_vocab = self.phrase_vectorizer.get_feature_names_out()
+            # a df indexed by data that stores the phrases in each post
+            self.data_phrases = pd.DataFrame(self.data_phrases, index=self.data)
 
         # a binary count of document frequencies
         # see tests/test_df and tests/fixtures/twodocs
@@ -47,12 +59,13 @@ class Corpus(object):
         self.vocab = self.vectorizer.get_feature_names_out()
         self.vocab_size = len(self.vocab)
         self.word_probs = {
-            word: count/self.total_words for word, count in self.counts.items()}
+            word: count/self.total_words
+            for word, count in self.counts.items()}
 
 
 if __name__ == '__main__':
 
-    corpus = Corpus(['data/airbnb_hosts.jsonl'], phrases=True)
+    corpus = Corpus(['tests/fixtures/demo.phrases.jsonl'], phrases=True)
     singletons = []
     for w, wc in corpus.counts.items():
 

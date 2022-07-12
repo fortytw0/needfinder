@@ -50,7 +50,10 @@ def _read_jsonl_with_single_field(jsonl_lines, field) :
     for line in jsonl_lines : 
         try : 
             d = json.loads(line) 
+            assert field in d
             data.append(d[field])
+        except AssertionError:
+            print(f"Can't find the field {field}")
         except : 
             pass
 

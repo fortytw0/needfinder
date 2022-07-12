@@ -19,7 +19,6 @@ class Renderer(object):
                 bolded_word, self.start + bolded_word + self.end)
         return input_string
 
-
 class QueryEngine(object):
 
     def __init__(self, similarity_file, quote_column_name='Unnamed: 0'):
@@ -42,7 +41,6 @@ class QueryEngine(object):
 
         for score, target_quote in zip(scores, target_quotes):
             score = "{:.2%}".format(score)
-            target_quote = target_quote.replace("\n", "")
             output.append({"score": score,
                            "query_quote": query_quote,
                            "target_quote": target_quote})
@@ -67,7 +65,7 @@ def get_overlapping_words_simple(query_quote, target_quote):
 
 
 if __name__ == "__main__":
-    corpus = Corpus(["data/airbnb_hosts.jsonl"])
+    corpus = Corpus(["data/airbnb_hosts.phrases.jsonl"], phrases=True)
     engine = QueryEngine("data/results/arora_sim.csv")
     renderer = Renderer()
     console = Console(highlighter=None)
@@ -77,13 +75,21 @@ if __name__ == "__main__":
     for col in engine.df.columns[1:]:
         console.print("\n" + col, style="bold red")
         top_k = engine.get_top_K_with_constraints(col, lexical_requirements)
+
+        targets = [o["target_quote"] for o in top_k]
+        phrases = corpus.data_phrases.loc[targets]
+        
+        import ipdb; ipdb.set_trace()
+
+        import os; os._exit(0)
+
         for k in top_k:
             lexical_matches = get_overlapping_words_simple(
                 k["query_quote"], k["target_quote"])
             lexical_matches = lexical_matches + lexical_requirements
             out = renderer.insert_markup_literal_match(
                 k['query_quote'], bolded_words=lexical_matches)
-            console.print("\nChi: " + out, style="white")
+            console.print("\nChi: " + out.replace("\n", ""), style="white")
             out = renderer.insert_markup_literal_match(
                 k['target_quote'], bolded_words=lexical_matches)
-            console.print("Reddit: " + out, style="white")
+            console.print("Reddit: " + out.replace("\n", ""), style="white")
