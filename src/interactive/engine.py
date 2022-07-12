@@ -4,6 +4,29 @@ from rich import print
 from rich.console import Console
 from src.corpus import Corpus
 
+from prompt_toolkit.completion import Completer, Completion, FuzzyCompleter
+from prompt_toolkit.shortcuts import CompleteStyle, prompt
+
+class ColorCompleter(Completer):
+
+    def __init__(self, quote_path="data/interviewee_quotes.txt"):
+        quotes = []
+        with open(quote_path, "r") as inf:
+            for i in inf:
+                i = i.replace("\n", "")
+                quotes.append(i)
+        self.quotes = quotes
+
+    def get_completions(self, document, complete_event):
+        word = document.get_word_before_cursor()
+        for quote in self.quotes:
+            if quote.startswith(word):
+                yield Completion(
+                    quote,
+                    start_position=-len(word),
+                    style="fg:" + "green",
+                    selected_style="fg:white bg:" + "green",
+                )
 
 class Renderer(object):
     def __init__(self, color="bold red"):
@@ -19,6 +42,7 @@ class Renderer(object):
             input_string = input_string.replace(
                 bolded_word, self.start + bolded_word + self.end)
         return input_string
+
 
 class QueryEngine(object):
 
@@ -66,37 +90,54 @@ def get_overlapping_words_simple(query_quote, target_quote):
 
 
 if __name__ == "__main__":
+
+    engine = QueryEngine("data/results/arora_sim.csv")
+    
+    renderer = Renderer()
+
+    console = Console(highlighter=None)
+
     corpus = Corpus(["data/airbnb_hosts.phrases.jsonl"], phrases=True)
+
+    quote = prompt("Pick a quote: ", completer=FuzzyCompleter(ColorCompleter()))
 
     quote2ix = {quote: ix for ix, quote in enumerate(corpus.data)}
 
-    engine = QueryEngine("data/results/arora_sim.csv")
-    renderer = Renderer()
-    console = Console(highlighter=None)
+    col = quote
 
-    lexical_requirements = ["clean"]
+    console.print("\n" + col, style="white")
 
-    for col in engine.df.columns[1:2]:
-        console.print("\n" + col, style="bold red")
-        top_k = engine.get_top_K_with_constraints(col, lexical_requirements)
+    lexical_requirements = []
 
-        targets = [o["target_quote"] for o in top_k]
-        
-        ixs = [quote2ix[quote] for quote in targets]
+    top_k = engine.get_top_K_with_constraints(col, lexical_requirements)
 
-        phrases_in_top = corpus.data_phrases_counts[ixs,:]
-        phrase_counts = np.asarray(phrases_in_top.sum(axis=0))[0]
-        top_phrases = np.argpartition(phrase_counts, -4)[-4:]
-        top_phrases = [corpus.phrase_vocab[i] for i in top_phrases]
-        print(top_phrases)
+    targets = [o["target_quote"] for o in top_k]
+    
+    ixs = [quote2ix[quote] for quote in targets]
 
-        for k in top_k:
-            lexical_matches = get_overlapping_words_simple(
-                k["query_quote"], k["target_quote"])
-            lexical_matches = lexical_matches + lexical_requirements
-            out = renderer.insert_markup_literal_match(
-                k['query_quote'], bolded_words=lexical_matches)
-            console.print("\nChi: " + out.replace("\n", ""), style="white")
-            out = renderer.insert_markup_literal_match(
-                k['target_quote'], bolded_words=lexical_matches)
-            console.print("Reddit: " + out.replace("\n", ""), style="white")
+    top_k_threshold = 25
+
+    phrases_in_top = corpus.data_phrases_counts[ixs,:]
+    phrase_counts = np.asarray(phrases_in_top.sum(axis=0))[0]
+
+    top_phrases_ix = np.argpartition(phrase_counts, -top_k_threshold)[-top_k_threshold:]
+    top_phrases = []
+    for ix in top_phrases_ix:
+        phrase = corpus.phrase_vocab[ix]
+        if phrase_counts[ix] > 1:
+            top_phrases.append(phrase)
+
+    print(top_phrases)
+
+    import ipdb; ipdb.set_trace()
+
+    for k in top_k:
+        lexical_matches = get_overlapping_words_simple(
+            k["query_quote"], k["target_quote"])
+        lexical_matches = lexical_matches + lexical_requirements
+        out = renderer.insert_markup_literal_match(
+            k['query_quote'], bolded_words=lexical_matches)
+        console.print("\nChi: " + out.replace("\n", ""), style="white")
+        out = renderer.insert_markup_literal_match(
+            k['target_quote'], bolded_words=lexical_matches)
+        console.print("Reddit: " + out.replace("\n", ""), style="white")

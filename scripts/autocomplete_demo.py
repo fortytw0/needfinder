@@ -6,20 +6,22 @@ matching.
 from prompt_toolkit.completion import Completer, Completion, FuzzyCompleter
 from prompt_toolkit.shortcuts import CompleteStyle, prompt
 
-colors = []
-with open("chi.txt", "r") as inf:
-    for i in inf:
-        i = i.replace("\n", "")
-        colors.append(i)
-
-
 class ColorCompleter(Completer):
+
+    def __init__(self, quote_path="data/interviewee_quotes.txt"):
+        quotes = []
+        with open(quote_path, "r") as inf:
+            for i in inf:
+                i = i.replace("\n", "")
+                quotes.append(i)
+        self.quotes = quotes
+
     def get_completions(self, document, complete_event):
         word = document.get_word_before_cursor()
-        for color in colors:
-            if color.startswith(word):
+        for quote in self.quotes:
+            if quote.startswith(word):
                 yield Completion(
-                    color,
+                    quote,
                     start_position=-len(word),
                     style="fg:" + "green",
                     selected_style="fg:white bg:" + "green",
@@ -28,8 +30,8 @@ class ColorCompleter(Completer):
 
 def main():
     # Simple completion menu.
-    print("(The completion menu displays colors.)")
-    prompt("Type a color: ", completer=FuzzyCompleter(ColorCompleter()))
+
+    prompt("Pick a quote: ", completer=FuzzyCompleter(ColorCompleter()))
 
     '''
     # Multi-column menu.
