@@ -36,15 +36,12 @@ class Corpus(object):
                 tokenizer=dummy, preprocessor=dummy)
 
             assert len(self.data_phrases) > 0
-            X = self.phrase_vectorizer.fit_transform(self.data_phrases)
+            self.data_phrases_counts = self.phrase_vectorizer.fit_transform(self.data_phrases)
 
             # document frequencies for phrases
-            self.phrase_dfs = np.asarray(X.sum(axis=0))[0]
+            self.phrase_dfs = np.asarray(self.data_phrases_counts.sum(axis=0))[0]
 
             self.phrase_vocab = self.phrase_vectorizer.get_feature_names_out()
-
-            # sparse matrix of phrase counts, N rows x V columns where V is size of phrase vocab
-            self.data_phrases_counts = X
 
         # a binary count of document frequencies
         # see tests/test_df and tests/fixtures/twodocs

@@ -88,6 +88,7 @@ if __name__ == "__main__":
         phrase_counts = np.asarray(phrases_in_top.sum(axis=0))[0]
         top_phrases = np.argpartition(phrase_counts, -4)[-4:]
         top_phrases = [corpus.phrase_vocab[i] for i in top_phrases]
+        print(top_phrases)
 
         for k in top_k:
             lexical_matches = get_overlapping_words_simple(
