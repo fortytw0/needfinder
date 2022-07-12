@@ -62,7 +62,7 @@ class Renderer(object):
 
         return str_
 
-    def render_pair(self, query_quote, target_quote):
+    def render_pair(self, query_quote, target_quote, lexical_matches):
         out = self.insert_markup_literal_match(query_quote,
                                                bolded_words=lexical_matches)
         console.print("\nChi: " + out.replace("\n", ""), style="white")
@@ -192,20 +192,19 @@ if __name__ == "__main__":
     str_ = "\n Type the phrase you want to invesigate, or type no .. "
     phrase = prompt(str_, completer=completer)
 
-    lexical_requirements = [phrase]
-
+    # get a new top K 
     if phrase != "no":
         top_k = engine.get_top_K_with_substring_constraints(
-            quote, lexical_requirements)
+            quote, constraints=[phrase])
 
     for k in top_k:
-        lexical_matches = get_overlapping_words(
-            k["query_quote"], k["target_quote"])
 
         if phrase != "no":
-            lexical_matches = lexical_requirements
+            lexical_matches = [phrase]
         else:
-            lexical_matches = lexical_matches
-
+            lexical_matches = get_overlapping_words(
+                             k["query_quote"], k["target_quote"])
+        
         renderer.render_pair(k['query_quote'],
-                             k['target_quote'])
+                             k['target_quote'],
+                             lexical_matches)
