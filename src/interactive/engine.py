@@ -72,7 +72,7 @@ class QueryEngine(object):
 
         return output
 
-    def get_top_K_with_constraints(self, query_quote: str, constraints: list = [], K: int = 10) -> list[dict]:
+    def get_top_K_with_substring_constraints(self, query_quote: str, constraints: list = [], K: int = 10) -> list[dict]:
 
         df = self.df
         for constraint in constraints:
@@ -107,7 +107,7 @@ if __name__ == "__main__":
 
     lexical_requirements = []
 
-    top_k = engine.get_top_K_with_constraints(col, lexical_requirements)
+    top_k = engine.get_top_K_with_substring_constraints(col, lexical_requirements)
 
     targets = [o["target_quote"] for o in top_k]
     
@@ -135,13 +135,18 @@ if __name__ == "__main__":
 
     console.print(f"Do you want to investigate any of the following: {top_phrases_str}?")
     
-    quote = prompt(f"\n Type the phrase you want to invesigate, or type no .. ", completer=FuzzyCompleter(BaseCompleter("data/phrases.txt")))
+    phrase = prompt(f"\n Type the phrase you want to invesigate, or type no .. ", completer=FuzzyCompleter(BaseCompleter("data/phrases.txt")))
 
+    lexical_requirements = [phrase]
+    top_k = engine.get_top_K_with_substring_constraints(col, lexical_requirements)
 
     for k in top_k:
         lexical_matches = get_overlapping_words_simple(
             k["query_quote"], k["target_quote"])
-        lexical_matches = lexical_matches + lexical_requirements
+        if phrase[0] != "no":
+            lexical_matches = lexical_requirements
+        else:
+            lexical_matches = lexical_matches + lexical_requirements
         out = renderer.insert_markup_literal_match(
             k['query_quote'], bolded_words=lexical_matches)
         console.print("\nChi: " + out.replace("\n", ""), style="white")
