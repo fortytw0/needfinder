@@ -47,6 +47,20 @@ class Renderer(object):
                 bolded_word, self.start + bolded_word + self.end)
         return input_string
 
+    def make_top_phrases_str(self, top_phrases):
+        return ", ".join(top_phrases)
+
+    def top_phrases_2_prompt(self, top_phrases: list[str]) -> str:
+
+        top_phrases_str = self.make_top_phrases_str(top_phrases)
+        out = self.insert_markup_literal_match(
+             top_phrases_str,
+             bolded_words=top_phrases)
+
+        str_ = "\n" + "On reddit, they may discuss the following \
+                       concepts related to this quote: " + out
+
+        return str_
 
 class QueryEngine(object):
 
@@ -152,17 +166,12 @@ if __name__ == "__main__":
 
     top_phrases = phrase_count_ranker.get_top_phrases_by_count(targets)
 
-    top_phrases_str = ", ".join(top_phrases)
-    out = renderer.insert_markup_literal_match(
-        top_phrases_str, bolded_words=top_phrases)
-
-    str_ = "\n" + "On reddit, they may discuss the following \
-                   concepts related to this quote: " + out
-    console.print(str_)
+    console.print(renderer.top_phrases_2_prompt(top_phrases))
 
     with open("data/phrases.txt", "w") as of:
         of.write("\n".join(top_phrases + ["no"]))
 
+    top_phrases_str = ", ".join(top_phrases)
     console.print(
         f"Do you want to investigate any of the following: {top_phrases_str}?")
 
