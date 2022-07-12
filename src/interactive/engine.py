@@ -100,6 +100,38 @@ def get_overlapping_words(query_quote: str,
     return query_quote_words & target_quote_words
 
 
+class PhraseCountRanker(object):
+
+    def __init__(self, corpus):
+
+        self.corpus = corpus
+        self.quote2ix = {quote: ix for ix, quote in enumerate(corpus.data)}
+
+    def get_top_phrases_by_count(self,
+                                 targets,
+                                 top_k_threshold: int = 25,
+                                 min_threshold: int = 1):
+        '''
+        return the top phrases in some posts.
+        The posts are "targets" and are entered as a list
+        '''
+
+        ixs = [self.quote2ix[quote] for quote in targets]
+
+        phrases_in_top = self.corpus.data_phrases_counts[ixs, :]
+        phrase_counts = np.asarray(phrases_in_top.sum(axis=0))[0]
+
+        top_phrases_ix = np.argpartition(
+            phrase_counts, -top_k_threshold)[-top_k_threshold:]
+
+        top_phrases = []
+        for ix in top_phrases_ix:
+            phrase = self.corpus.phrase_vocab[ix]
+            if phrase_counts[ix] > min_threshold:
+                top_phrases.append(phrase)
+        return top_phrases
+
+
 if __name__ == "__main__":
 
     engine = QueryEngine("data/results/arora_sim.csv")
@@ -112,31 +144,13 @@ if __name__ == "__main__":
 
     quote = prompt("Pick a quote: ", completer=FuzzyCompleter(BaseCompleter()))
 
-    quote2ix = {quote: ix for ix, quote in enumerate(corpus.data)}
-
-    col = quote
-
-    lexical_requirements = []
-
-    top_k = engine.get_top_K_with_substring_constraints(
-        col, lexical_requirements)
+    top_k = engine.get_top_K(quote)
 
     targets = [o["target_quote"] for o in top_k]
 
-    ixs = [quote2ix[quote] for quote in targets]
+    phrase_count_ranker = PhraseCountRanker(corpus)
 
-    top_k_threshold = 25
-
-    phrases_in_top = corpus.data_phrases_counts[ixs, :]
-    phrase_counts = np.asarray(phrases_in_top.sum(axis=0))[0]
-
-    top_phrases_ix = np.argpartition(
-        phrase_counts, -top_k_threshold)[-top_k_threshold:]
-    top_phrases = []
-    for ix in top_phrases_ix:
-        phrase = corpus.phrase_vocab[ix]
-        if phrase_counts[ix] > 1:
-            top_phrases.append(phrase)
+    top_phrases = phrase_count_ranker.get_top_phrases_by_count(targets)
 
     top_phrases_str = ", ".join(top_phrases)
     out = renderer.insert_markup_literal_match(
@@ -161,7 +175,7 @@ if __name__ == "__main__":
 
     if phrase != "no":
         top_k = engine.get_top_K_with_substring_constraints(
-            col, lexical_requirements)
+            quote, lexical_requirements)
 
     for k in top_k:
         lexical_matches = get_overlapping_words(
