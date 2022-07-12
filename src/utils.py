@@ -121,3 +121,13 @@ def get_count_vectorizer_for_tokenized_lists():
         return doc
 
     return CountVectorizer(tokenizer=dummy, preprocessor=dummy)
+
+
+class WhitespaceTokenizer(object):
+    '''a really dumb whitespace tokenizer'''
+    def __init__(self):
+        pass
+
+    # assume python 3.9 AH https://stackoverflow.com/questions/52623204/how-to-specify-method-return-type-list-of-what-in-python
+    def tokenize(self, document: str) -> list[str]: 
+        return document.split(" ")

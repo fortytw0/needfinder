@@ -2,17 +2,11 @@ from typing import List
 from rank_bm25 import BM25Okapi
 # https://pypi.org/project/rank-bm25/
 from src.corpus import Corpus
+from src.utils import WhitespaceTokenizer
 import numpy as np
 
 # python -m src.bm25
 
-class WhitespaceTokenizer(object):
-    def __init__(self):
-        pass
-
-    # assume python 3.9 AH https://stackoverflow.com/questions/52623204/how-to-specify-method-return-type-list-of-what-in-python
-    def tokenize(self, document: str) -> List[str]: 
-        return document.split(" ")
 
 class BM25Prefetcher(object) : 
 
