@@ -37,12 +37,13 @@ class Corpus(object):
 
             assert len(self.data_phrases) > 0
             X = self.phrase_vectorizer.fit_transform(self.data_phrases)
-            phrase_dfs = X.sum(axis=0)
-            # document frequencies for phrases
-            self.phrase_dfs = np.asarray(phrase_dfs)[0]
-            self.phrase_vocab = self.phrase_vectorizer.get_feature_names_out()
-            # a df indexed by data that stores the phrases in each post
 
+            # document frequencies for phrases
+            self.phrase_dfs = np.asarray(X.sum(axis=0))[0]
+
+            self.phrase_vocab = self.phrase_vectorizer.get_feature_names_out()
+
+            # sparse matrix of phrase counts, N rows x V columns where V is size of phrase vocab
             self.data_phrases_counts = X
 
         # a binary count of document frequencies
