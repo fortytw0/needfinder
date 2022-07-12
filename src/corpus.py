@@ -42,7 +42,8 @@ class Corpus(object):
             self.phrase_dfs = np.asarray(phrase_dfs)[0]
             self.phrase_vocab = self.phrase_vectorizer.get_feature_names_out()
             # a df indexed by data that stores the phrases in each post
-            self.data_phrases = pd.DataFrame(self.data_phrases, index=self.data)
+
+            self.data_phrases_counts = X
 
         # a binary count of document frequencies
         # see tests/test_df and tests/fixtures/twodocs

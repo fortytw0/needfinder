@@ -1,4 +1,5 @@
 import pandas as pd
+import numpy as np
 from rich import print
 from rich.console import Console
 from src.corpus import Corpus
@@ -66,22 +67,27 @@ def get_overlapping_words_simple(query_quote, target_quote):
 
 if __name__ == "__main__":
     corpus = Corpus(["data/airbnb_hosts.phrases.jsonl"], phrases=True)
+
+    quote2ix = {quote: ix for ix, quote in enumerate(corpus.data)}
+
     engine = QueryEngine("data/results/arora_sim.csv")
     renderer = Renderer()
     console = Console(highlighter=None)
 
     lexical_requirements = ["clean"]
 
-    for col in engine.df.columns[1:]:
+    for col in engine.df.columns[1:2]:
         console.print("\n" + col, style="bold red")
         top_k = engine.get_top_K_with_constraints(col, lexical_requirements)
 
         targets = [o["target_quote"] for o in top_k]
-        phrases = corpus.data_phrases.loc[targets]
         
-        import ipdb; ipdb.set_trace()
+        ixs = [quote2ix[quote] for quote in targets]
 
-        import os; os._exit(0)
+        phrases_in_top = corpus.data_phrases_counts[ixs,:]
+        phrase_counts = np.asarray(phrases_in_top.sum(axis=0))[0]
+        top_phrases = np.argpartition(phrase_counts, -4)[-4:]
+        top_phrases = [corpus.phrase_vocab[i] for i in top_phrases]
 
         for k in top_k:
             lexical_matches = get_overlapping_words_simple(
