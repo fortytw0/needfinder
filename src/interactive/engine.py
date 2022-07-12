@@ -189,9 +189,8 @@ if __name__ == "__main__":
 
     ### Ask if they want to investigate a phrase
 
-    phrase = prompt("\n Type the phrase you \
-                    want to invesigate, or type no .. ",
-                    completer=completer)
+    str_ = "\n Type the phrase you want to invesigate, or type no .. "
+    phrase = prompt(str_, completer=completer)
 
     lexical_requirements = [phrase]
 
