@@ -1,5 +1,6 @@
 import json
 import os
+from sklearn.feature_extraction.text import CountVectorizer
 from tqdm import tqdm
 
 # --- Iteration Utils --- #
@@ -102,5 +103,21 @@ def create_dir_if_not_exist(dir) :
     return True
 
 
+def get_count_vectorizer_for_tokenized_lists():
+    '''
+    A vectorizer that assumes corpus is list of lists of tokens 
 
+    https://stackoverflow.com/questions/35867484/pass-tokens-to-countvectorizer
 
+    e.g. 
+    docs = [
+    ['hello', 'world', '.'],
+    ['hello', 'world'],
+    ['again', 'hello', 'world']
+    ]
+    '''
+
+    def dummy(doc):
+        return doc
+
+    return CountVectorizer(tokenizer=dummy, preprocessor=dummy)

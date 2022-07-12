@@ -3,6 +3,7 @@ from tqdm import tqdm as tqdm
 import numpy as np
 import pandas as pd
 from src.utils import read_jsonl
+from src.utils import get_count_vectorizer_for_tokenized_lists
 
 from typing import List
 
@@ -30,10 +31,7 @@ class Corpus(object):
                 self.data_phrases.extend(read_jsonl(
                     corpus_file, field="phrases", max_lines=maxlines))
 
-            def dummy(doc):
-                return doc
-            self.phrase_vectorizer = CountVectorizer(
-                tokenizer=dummy, preprocessor=dummy)
+            self.phrase_vectorizer = get_count_vectorizer_for_tokenized_lists()
 
             assert len(self.data_phrases) > 0
             self.data_phrases_counts = self.phrase_vectorizer.fit_transform(self.data_phrases)
