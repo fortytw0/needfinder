@@ -1,11 +1,11 @@
 import pandas as pd
 import numpy as np
-from rich import print
 from rich.console import Console
 from src.corpus import Corpus
-
+from src.utils import WhitespaceTokenizer
 from prompt_toolkit.completion import Completer, Completion, FuzzyCompleter
-from prompt_toolkit.shortcuts import CompleteStyle, prompt
+from prompt_toolkit.shortcuts import prompt
+
 
 class BaseCompleter(Completer):
 
@@ -28,15 +28,19 @@ class BaseCompleter(Completer):
                     selected_style="fg:white bg:" + "green",
                 )
 
+
 class Renderer(object):
     def __init__(self, color="bold red"):
         self.color = color
         self.start = "[{}]".format(color)
         self.end = "[/{}]".format(color)
 
-    def insert_markup_literal_match(self, input_string: str, bolded_words: list) -> str:
+    def insert_markup_literal_match(self,
+                                    input_string: str,
+                                    bolded_words: list) -> str:
         '''
-        This is a very simple function that will replace literal strings, e.g "banana" in "bananas"
+        This is a very simple function that will
+        replace literal substrings, e.g "banana" in "bananas"
         '''
         for bolded_word in bolded_words:
             input_string = input_string.replace(
@@ -72,7 +76,10 @@ class QueryEngine(object):
 
         return output
 
-    def get_top_K_with_substring_constraints(self, query_quote: str, constraints: list = [], K: int = 10) -> list[dict]:
+    def get_top_K_with_substring_constraints(self,
+                                             query_quote: str,
+                                             constraints: list = [],
+                                             K: int = 10) -> list[dict]:
 
         df = self.df
         for constraint in constraints:
@@ -82,17 +89,21 @@ class QueryEngine(object):
         return self.get_top_K(query_quote, K, df)
 
 
-def get_overlapping_words_simple(query_quote, target_quote):
-    query_quote_words = [o for o in query_quote.split(" ") if len(o) > 5]
-    target_quote_words = target_quote.split(" ")
-    lexical_matches = set(query_quote_words) & set(target_quote_words)
-    return list(lexical_matches)
+def get_overlapping_words(query_quote: str,
+                          target_quote: str,
+                          min_length: int = 5,
+                          tokenizer=WhitespaceTokenizer()) -> list[str]:
+    query_quote_words = set(o for o in tokenizer.tokenize(query_quote))
+    query_quote_words = set(
+        o for o in query_quote_words if len(o) > min_length)
+    target_quote_words = set(tokenizer.tokenize(target_quote))
+    return query_quote_words & target_quote_words
 
 
 if __name__ == "__main__":
 
     engine = QueryEngine("data/results/arora_sim.csv")
-    
+
     renderer = Renderer()
 
     console = Console(highlighter=None)
@@ -107,43 +118,53 @@ if __name__ == "__main__":
 
     lexical_requirements = []
 
-    top_k = engine.get_top_K_with_substring_constraints(col, lexical_requirements)
+    top_k = engine.get_top_K_with_substring_constraints(
+        col, lexical_requirements)
 
     targets = [o["target_quote"] for o in top_k]
-    
+
     ixs = [quote2ix[quote] for quote in targets]
 
     top_k_threshold = 25
 
-    phrases_in_top = corpus.data_phrases_counts[ixs,:]
+    phrases_in_top = corpus.data_phrases_counts[ixs, :]
     phrase_counts = np.asarray(phrases_in_top.sum(axis=0))[0]
 
-    top_phrases_ix = np.argpartition(phrase_counts, -top_k_threshold)[-top_k_threshold:]
+    top_phrases_ix = np.argpartition(
+        phrase_counts, -top_k_threshold)[-top_k_threshold:]
     top_phrases = []
     for ix in top_phrases_ix:
         phrase = corpus.phrase_vocab[ix]
         if phrase_counts[ix] > 1:
             top_phrases.append(phrase)
 
+    top_phrases_str = ", ".join(top_phrases)
+    out = renderer.insert_markup_literal_match(
+        top_phrases_str, bolded_words=top_phrases)
 
-    top_phrases_str =  ", ".join(top_phrases)
-    out = renderer.insert_markup_literal_match(top_phrases_str, bolded_words=top_phrases)
-    console.print("\n" + "On reddit, they may discuss the following concepts related to this quote: " + out)
+    str_ = "\n" + "On reddit, they may discuss the following \
+                   concepts related to this quote: " + out
+    console.print(str_)
 
     with open("data/phrases.txt", "w") as of:
         of.write("\n".join(top_phrases + ["no"]))
 
-    console.print(f"Do you want to investigate any of the following: {top_phrases_str}?")
-    
-    phrase = prompt(f"\n Type the phrase you want to invesigate, or type no .. ", completer=FuzzyCompleter(BaseCompleter("data/phrases.txt")))
+    console.print(
+        f"Do you want to investigate any of the following: {top_phrases_str}?")
+
+    completer = FuzzyCompleter(BaseCompleter("data/phrases.txt"))
+    phrase = prompt("\n Type the phrase you \
+                    want to invesigate, or type no .. ",
+                    completer=completer)
 
     lexical_requirements = [phrase]
 
     if phrase != "no":
-        top_k = engine.get_top_K_with_substring_constraints(col, lexical_requirements)
+        top_k = engine.get_top_K_with_substring_constraints(
+            col, lexical_requirements)
 
     for k in top_k:
-        lexical_matches = get_overlapping_words_simple(
+        lexical_matches = get_overlapping_words(
             k["query_quote"], k["target_quote"])
 
         if phrase != "no":
