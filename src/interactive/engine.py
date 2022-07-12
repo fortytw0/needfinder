@@ -62,6 +62,14 @@ class Renderer(object):
 
         return str_
 
+    def render_pair(self, query_quote, target_quote):
+        out = self.insert_markup_literal_match(query_quote,
+                                               bolded_words=lexical_matches)
+        console.print("\nChi: " + out.replace("\n", ""), style="white")
+        out = self.insert_markup_literal_match(target_quote,
+                                               bolded_words=lexical_matches)
+        console.print("Reddit: " + out.replace("\n", ""), style="white")
+
 class QueryEngine(object):
 
     def __init__(self, similarity_file, quote_column_name='Unnamed: 0'):
@@ -200,9 +208,5 @@ if __name__ == "__main__":
         else:
             lexical_matches = lexical_matches
 
-        out = renderer.insert_markup_literal_match(
-            k['query_quote'], bolded_words=lexical_matches)
-        console.print("\nChi: " + out.replace("\n", ""), style="white")
-        out = renderer.insert_markup_literal_match(
-            k['target_quote'], bolded_words=lexical_matches)
-        console.print("Reddit: " + out.replace("\n", ""), style="white")
+        renderer.render_pair(k['query_quote'],
+                             k['target_quote'])
