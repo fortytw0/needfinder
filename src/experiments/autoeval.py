@@ -48,5 +48,18 @@ for res in raw_eval_set :
                 ids2quotes[id].append(quote)
 
 
-print(quotes)
-    
+sentences = list(quotes.keys())
+
+
+from sentence_transformers import SentenceTransformer
+from sklearn.metrics.pairwise import cosine_similarity
+
+model_name = 'paraphrase-MiniLM-L3-v2'
+model = SentenceTransformer(model_name)
+
+
+sentence_repr = model.encode(sentences)
+
+sim = cosine_similarity(sentence_repr, sentence_repr)
+
+print(sim)
