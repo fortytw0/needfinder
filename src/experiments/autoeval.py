@@ -24,7 +24,7 @@ quotes = {}
 ids2quotes = {}
 
 files = glob.glob(os.path.join(eval_dirpath , '*.json'))
-
+print(files)
 
 for f in files : 
     raw_eval_set.append(json.load(open(f)))
@@ -50,6 +50,7 @@ for res in raw_eval_set :
 
 sentences = list(quotes.keys())
 
+print('Num sentences :  ' , len(sentences))
 
 from sentence_transformers import SentenceTransformer
 from sklearn.metrics.pairwise import cosine_similarity
@@ -60,6 +61,17 @@ model = SentenceTransformer(model_name)
 
 sentence_repr = model.encode(sentences)
 
+print(sentence_repr.shape)
+
+
 sim = cosine_similarity(sentence_repr, sentence_repr)
 
 print(sim)
+print(sim.shape)
+
+import pandas as pd
+
+df = pd.DataFrame(sim, index=sentences, columns=sentences)
+df.to_csv('data/autoeval_results.csv')
+
+ 
