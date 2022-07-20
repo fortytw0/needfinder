@@ -71,17 +71,16 @@ for query in eval_df.columns :
     target_title = quotes2ids[query]['title']
     target_documents = ids2quotes[target_title][target_section]
     print(target_documents)
-    total_targets = len(target_documents)
+    total_targets = len(target_documents)-1
     print(total_targets)
 
     # 2. Sorting predictions based on similarity
     sorted = eval_df[query].sort_values(ascending=False)
-    print(sorted)
     predictions = sorted.index.values.tolist()
-    print(predictions)
 
     # 3. Finding the rank at which a groundtruth target has occured in the prediction
-    prediction_indexes = [predictions.index(target) for target in target_documents]
+    prediction_indexes = [predictions.index(target)+1 for target in target_documents]
+    prediction_indexes.pop(0)
     print(prediction_indexes)
 
     # 4. Calculating Average Precision for the query
