@@ -70,30 +70,35 @@ for query in eval_df.columns :
     target_section = quotes2ids[query]['section']
     target_title = quotes2ids[query]['title']
     target_documents = ids2quotes[target_title][target_section]
-    print(target_documents)
+    print(query)
     total_targets = len(target_documents)-1
-    print(total_targets)
+    if total_targets > 0 :
 
-    # 2. Sorting predictions based on similarity
-    sorted = eval_df[query].sort_values(ascending=False)
-    predictions = sorted.index.values.tolist()
+        print(total_targets)
 
-    # 3. Finding the rank at which a groundtruth target has occured in the prediction
-    prediction_indexes = [predictions.index(target)+1 for target in target_documents]
-    prediction_indexes.pop(0)
-    print(prediction_indexes)
+        # 2. Sorting predictions based on similarity
+        sorted = eval_df[query].sort_values(ascending=False)
+        predictions = sorted.index.values.tolist()
 
-    # 4. Calculating Average Precision for the query
-    average_precision = 0
-    for k, index in enumerate(prediction_indexes) : 
-        average_precision += (k+1)/index
-    average_precision /= total_targets
-    print(average_precision)
+        # 3. Finding the rank at which a groundtruth target has occured in the prediction
+        prediction_indexes = [predictions.index(target)+1 for target in target_documents]
+        prediction_indexes.pop(0)
+        prediction_indexes = prediction_indexes.sort()
+        print(prediction_indexes)
 
-    # 5. Storing the average precision in a large list
-    average_precisions.append(average_precision)
+        # 4. Calculating Average Precision for the query
+        average_precision = 0
+        for k, index in enumerate(prediction_indexes) : 
+            average_precision += (k+1)/index
+        average_precision /= total_targets
+        print(average_precision)
 
-    break
+        # 5. Storing the average precision in a large list
+        average_precisions.append(average_precision)
+
+    else : 
+
+        print('Encountered no matching quotes...')
     
 
 
