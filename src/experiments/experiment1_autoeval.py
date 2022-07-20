@@ -81,9 +81,13 @@ for query in eval_df.columns :
         predictions = sorted.index.values.tolist()
 
         # 3. Finding the rank at which a groundtruth target has occured in the prediction
-        prediction_indexes = [predictions.index(target)+1 for target in target_documents]
+        prediction_indexes = [predictions.index(target) for target in target_documents]
+        print('Original : ' , prediction_indexes)
+        prediction_indexes.sort()
+        print('After sorting : ' , prediction_indexes)
         prediction_indexes.pop(0)
-        prediction_indexes = prediction_indexes.sort()
+        print('After popping : ' , prediction_indexes)
+        print(predictions[prediction_indexes[0]])
         print(prediction_indexes)
 
         # 4. Calculating Average Precision for the query
