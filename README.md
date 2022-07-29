@@ -3,22 +3,26 @@ Cheap and Fast - But is it better?
 
 Setting this code up at the moment is quite straightforward : 
 
-1. Setup Conda Environment
+### Setup Conda Environment
 
 `conda create --prefix=./venv/ --file conda.env` 
 `source activate ./venv/`
 
-2. Run the Arora Similarity  
+### Main experiment runner 
+
+`python -m src.main -config config/demo.json` will read from config.demo json and write to data/results in a directory timestamped with the unix time
+
+### Run the Arora Similarity  
 
 `python -m src.similarities.arora_similarity`
 
-3. Run the Domain Similarity
+### Run the Domain Similarity
 
 `python -m src.experiments.counts`
 `python -m src.experiments.embeddings`
 `python -m src.experiments.domain_similarity`
 
-4. Run SBERT similarity 
+### Run SBERT similarity 
 
 `python -m src.similarities.sbert_similarity`
 
