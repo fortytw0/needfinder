@@ -26,16 +26,12 @@ with open(args.config, "r") as inf:
     config = json.load(inf)
 
 '''
-Read Quotes from CHI papers
+Read Quotes from papers
 '''
 
 with open(config["interview_quotes"]) as f:
-    quotes = json.load(f)
-
-calorie_count_quotes = quotes[0]['quotes']
-airbnb_quotes = quotes[1]['quotes']
-gaming_quotes = quotes[2]['quotes']
-
+    title = config["papertitle"]
+    paper_quotes = json.load(f)[title]["quotes"]
 
 '''
 Program Variables
@@ -50,7 +46,7 @@ if config['embedding_type'] == 'word2vec':
 
     embedding = W2VEmbedding(corpus,
                              savedir='data/wordvectors',
-                             community='airbnb_hosts',
+                             community=config["community_name"],
                              dimension=config['embedding_dimension'],
                              retrain=False)
 elif config['embedding_type'] == 'glove':
@@ -82,8 +78,8 @@ with open(output_folder + "config.json", "w") as of:
 
 # Standard Arora similarity.
 # Feed in the CHI quotes to compare with the respective corpus.
-arora_similarity = asim.rank(airbnb_quotes)
-df = pd.DataFrame(arora_similarity, index=corpus.data, columns=airbnb_quotes)
+arora_similarity = asim.rank(paper_quotes)
+df = pd.DataFrame(arora_similarity, index=corpus.data, columns=paper_quotes)
 df.to_csv(output_folder + 'arora_sim.csv')
 
 # Wordwise Arora similarity.
@@ -97,6 +93,6 @@ df.to_csv(output_folder + 'arora_sim_wordwise_june21.csv')
 
 # SBert Similarity
 # Feed in the CHI quotes to compare with the respective corpus.
-sbert_similarity = sbert.rank(airbnb_quotes)
-df = pd.DataFrame(sbert_similarity, index=corpus.data, columns=airbnb_quotes)
+sbert_similarity = sbert.rank(paper_quotes)
+df = pd.DataFrame(sbert_similarity, index=corpus.data, columns=paper_quotes)
 df.to_csv(output_folder + 'sbert_sim.csv')

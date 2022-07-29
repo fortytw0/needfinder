@@ -3,16 +3,23 @@ Cheap and Fast - But is it better?
 
 Setting this code up at the moment is quite straightforward : 
 
-### Setup Conda Environment
+### How to setup the conda Environment
 
 `conda create --prefix=./venv/ --file conda.env` 
 `source activate ./venv/`
 
-### Main experiment runner 
+### How to add a new paper
+
+1. Add posts from the relevant online community in `data/` following the format in `data/demo.json`
+2. Add labels to `data/labels.json` following the format in the file; note the paper title is the key in the JSON structure
+3. Add a config file to `config/my.config.json` following the format in `config/demo.json`
+4. Run `python -m src.main -config config/my.config.json` to run the similarity algorithms based on the config file
+
+### Main experiment runner
 
 `python -m src.main -config config/demo.json` will read from config.demo json and write to data/results in a directory timestamped with the unix time
 
-### Run the Arora Similarity  
+### Run the Arora Similarity
 
 `python -m src.similarities.arora_similarity`
 
@@ -22,7 +29,7 @@ Setting this code up at the moment is quite straightforward :
 `python -m src.experiments.embeddings`
 `python -m src.experiments.domain_similarity`
 
-### Run SBERT similarity 
+### Run SBERT similarity
 
 `python -m src.similarities.sbert_similarity`
 
