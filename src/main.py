@@ -16,12 +16,14 @@ from src.wordvectors.glove import GloveEmbedding
 User Defined Variables.
 '''
 
-config = {"corpus_files": ['data/airbnb_hosts.jsonl'],
-          "embedding_type": "word2vec",
-          "embedding_dimension": 100,
-          "model_name": 'paraphrase-MiniLM-L3-v2',
-          "community_name": 'airbnb_hosts',
-          "interview_quotes": 'data/labels.json'}
+import argparse
+parser = argparse.ArgumentParser()
+parser.add_argument('-c', '-config', '--config', action="store", dest="config", default="config/demo.json")
+args = parser.parse_args()
+print(args)
+
+with open(args.config, "r") as inf:
+    config = json.load(inf)
 
 '''
 Read Quotes from CHI papers

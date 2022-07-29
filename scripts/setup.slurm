@@ -9,6 +9,8 @@
 
 # module load slurm/summit to access summit scheduler
 
+cp ../../../data/uberpeople/corpus.jsonl data/uberpeople.jsonl
+
 cat ../../dj/reddits.jsonl | rg '"AirBnB"' -F > data/airbnb.jsonl
 
 cat ../../dj/reddits.jsonl | rg '"airbnb_hosts"' -F > data/airbnb_hosts.jsonl
