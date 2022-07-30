@@ -14,4 +14,4 @@
 
 source /curc/sw/anaconda3/latest
 conda activate need
-python -m src.main
+python -m src.main -config config/demo.json
