@@ -30,7 +30,7 @@ Read Quotes from papers
 '''
 
 with open(config["interview_quotes"]) as f:
-    title = config["papertitle"]
+    title = config["title"]
     paper_quotes = json.load(f)[title]["quotes"]
 
 '''
