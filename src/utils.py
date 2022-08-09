@@ -3,6 +3,8 @@ import os
 from sklearn.feature_extraction.text import CountVectorizer
 from tqdm import tqdm
 
+from typing import List
+
 # --- Iteration Utils --- #
 
 def iterate(func, num_iter, pass_counter=False, message='', start_iter=0) : 
@@ -129,5 +131,5 @@ class WhitespaceTokenizer(object):
         pass
 
     # assume python 3.9 AH https://stackoverflow.com/questions/52623204/how-to-specify-method-return-type-list-of-what-in-python
-    def tokenize(self, document: str) -> list[str]: 
+    def tokenize(self, document: str) -> List[str]: 
         return document.split(" ")

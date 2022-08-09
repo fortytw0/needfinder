@@ -4,6 +4,10 @@ import numpy as np
 import pandas as pd
 from src.utils import read_jsonl
 from src.utils import get_count_vectorizer_for_tokenized_lists
+import random
+
+from copy import deepcopy
+
 
 from typing import List
 
@@ -58,6 +62,30 @@ class Corpus(object):
         self.word_probs = {
             word: count/self.total_words
             for word, count in self.counts.items()}
+        
+        self.corpus_size = len(self.data)
+        
+        
+    def insert(self, string:str, index:int=None) :
+        
+        if index==None : 
+            index = random.randint(0 , self.corpus_size-1)
+            
+        self.data = self.data[:index] + [string] + self.data[index:]
+        self.corpus_size += 1
+            
+        print('Successfully inserted string at index : ' , index)
+        
+        return index
+    
+    
+    def pop(self, index:int) : 
+        self.data.pop(index)
+    
+        
+    def copy(self) : 
+        return deepcopy(self)
+        
 
 
 if __name__ == '__main__':
