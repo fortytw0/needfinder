@@ -18,4 +18,6 @@
 source /curc/sw/anaconda3/latest
 conda activate need
 
+mkdir -p data/experiment2
+
 python -m src.experiments.experiment2_autoeval
