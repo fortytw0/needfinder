@@ -70,13 +70,9 @@ class Experiment(object) :
         #--- Load Model ---#
         model = self._get_model(model)
         model.__init__(**model_params)
-        print(model)
 
         #--- Calculate similarity between Query-Targets, encode corpus ---#
         relation_df = self._get_relation_df(model)
-
-        print(self.corpus)
-        print(type(self.corpus))
         corpus_repr = model.encode(self.corpus)
 
         #--- Variables to track our results ---#
