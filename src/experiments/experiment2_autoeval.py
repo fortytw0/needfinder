@@ -46,7 +46,6 @@ with open(query_target_json , 'r') as f :
 '''
 
 def get_sentence_sim(query, target) :
-
     sentence_repr = model.encode([query, target])
     return cosine_similarity([sentence_repr[0]] , [sentence_repr[1]])[0 , 0]
     

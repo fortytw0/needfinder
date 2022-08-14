@@ -85,6 +85,10 @@ class Corpus(object):
         
     def copy(self) : 
         return deepcopy(self)
+
+    def sample(self , count:int) : 
+        self.data = np.random.choice(self.data, count)
+        self.corpus_size = len(self.data)
         
 
 
