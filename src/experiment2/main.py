@@ -23,6 +23,7 @@ class Experiment(object) :
                 ) : 
 
         self.corpus = self._get_corpus(corpus_files, max_corpus_size)
+        self.corpus_size = len(self.corpus)
         self.results_dir = results_dir
         with open(query_target_json , 'r') as f : 
             self.query_targets = json.load(f)
@@ -42,7 +43,7 @@ class Experiment(object) :
         return cosine_similarity([sentence_repr[0]] , [sentence_repr[1]])[0 , 0]
 
     def _get_corpus(self, corpus_files, max_corpus_size) : 
-        corpus = Corpus(corpus_files)
+        corpus = Corpus(corpus_files, maxlines=10000)
         corpus.sample(max_corpus_size)
         return list(corpus.data)
 
@@ -68,13 +69,32 @@ class Experiment(object) :
     def execute(self, model, model_params) : 
 
         #--- Load Model ---#
+        
+        print('Initializing model...' , flush=True)
         model = self._get_model(model)
         model.__init__(**model_params)
+        print('Finished initializing model...' , flush=True)
+        
 
-        #--- Calculate similarity between Query-Targets, encode corpus ---#
+        #--- Calculate similarity between Query-Targets ---#
+        
+        print('Calculating similarity between query and targets...' , flush=True)
         relation_df = self._get_relation_df(model)
-        corpus_repr = model.encode(self.corpus)
-
+        print('Finished calculating similarity...' , flush=True)
+        
+        #--- Encode the corpus ---#
+        
+        print('Encoding corpus...' , flush=True)
+        batch_size = 250
+        corpus_repr = []
+        for i in tqdm(range(0 , self.corpus_size, batch_size)) : 
+            encoding = model.encode(self.corpus[i : i + batch_size])
+            print('Encoding Shape : ' + str(encoding.shape) , flush=True)
+            corpus_repr.append(encoding)
+        corpus_repr = np.concatenate(corpus_repr)
+        print('Corpus Repr Shape : ' + str(corpus_repr.shape) , flush=True)
+        print('Finished encoding corpus...' , flush=True)
+        
         #--- Variables to track our results ---#
         top_5 = {
             'rank_1' : [],
@@ -90,22 +110,35 @@ class Experiment(object) :
         for iterindex, row in tqdm(relation_df.iterrows()) : 
             
             #--- Get Target and Query, encode ---#
+            
+            print('Encoding query/target...' , flush=True)
             target = row['target']
             query = row['query']
+            
+            print('Target : ' + target , flush=True)
+            print('Query : ' + query , flush=True)
             
             target_repr = model.encode([target])
             query_repr = model.encode([query])
             
             #--- Insert target representation at a random index ---#
+            
+            print('Acquiring random index...' , flush=True)
             index = random.randint(1 , corpus_repr.shape[0]-1)
             
+            print('Inserting target into random index in the corpus...' , flush=True)
             inserted = np.concatenate((corpus_repr[0:index, : ] , 
                                     target_repr , 
                                     corpus_repr[index:, : ]))
             
+            print('Shape of corpus seeded with target : ' + str(inserted.shape) , flush=True)
             
             #--- Calculate Cosine Similarity, get top_5 preds, get rank of target ---#
-            sim  = cosine_similarity(inserted, query_repr)  
+            
+            print('Calculating cosine similarity between query and inserted_corpus...' , flush=True)
+            sim  = cosine_similarity(inserted , query_repr)  
+            
+            print('Calculating topk...' , flush=True)
             topk = (-sim).argsort(axis=0)
             
             for iterindex ,i in enumerate(topk[:5]) : 
@@ -120,12 +153,15 @@ class Experiment(object) :
                     
                 else :
                     top_5['rank_{}'.format(iterindex+1)].append(self.corpus[i])
-                    
+
+            print('Finding the rank of target|query...' , flush=True)
             target_rank = np.where(topk == index)[0]
             target_index.append(target_rank)
                 
                 
         #--- Saving Results ---#
+        
+        print('Saving results...' , flush=True)
         for key in top_5.keys() : 
             relation_df[key] = top_5[key]
 
@@ -133,3 +169,5 @@ class Experiment(object) :
 
         results_save_path = os.path.join(self.results_dir , model_params['experiment_name'] + '.tsv')
         relation_df.to_csv(results_save_path , index=False , sep='\t')
+        
+        print('Saved results to ' +  results_save_path , flush=True)

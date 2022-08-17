@@ -7,7 +7,7 @@ eval_results_dir = 'data/results/experiment2/'
 '''
 2. Corpus Definitions
 '''
-max_corpus_size = 1e4
+max_corpus_size = int(1e4)
 
 
 corpus_files = [
@@ -20,9 +20,7 @@ corpus_files = [
 2. Experiment Definitions
 '''
 
-
-experiment_definitions = {
-    'BERT' : [
+old_experiments = {'BERT' : [
         {
             'model_name' : 'bert-base-uncased' , 
             'max_length' : 512 , 
@@ -38,14 +36,16 @@ experiment_definitions = {
             'max_length' : 128 , 
             'experiment_name' : 'bert-uncased-128'
         }
-        ] , 
+        ]  
+                  
+        }
+
+ 
+
+
+experiment_definitions = {
+   
     'Longformer' : [
-        {
-            'model_name' : 'allenai/longformer-base-4096' , 
-            'tokenizer_name' : 'roberta-base' , 
-            'max_length' : 2048 , 
-            'experiment_name' : 'longformer-2048'
-        } , 
         {
             'model_name' : 'allenai/longformer-base-4096' , 
             'tokenizer_name' : 'roberta-base' , 
