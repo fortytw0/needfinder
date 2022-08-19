@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#SBATCH --partition=amilan-ucb
+#SBATCH --partition=amilan
 #SBATCH --job-name=run_needfinder
 #SBATCH --output=run_needfinder.out
 #SBATCH --mem=8G
@@ -14,4 +14,4 @@
 
 source /curc/sw/anaconda3/latest
 conda activate need
-python -m src.main -config config/uber.json
+python -m src.main -config $config
