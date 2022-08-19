@@ -10,7 +10,7 @@ Setting this code up at the moment is quite straightforward :
 
 ### How to add a new paper
 
-1. Add posts from the relevant online community in `data/` following the format in `data/demo.airbnb_hosts.jsonl`
+1. Add posts from the relevant online community in `data/` following the format in `data/demo.airbnb_hosts.jsonl`. The easiest thing to just have an id and body field, though the code is flexible and allows other keys.
 2. Add labels to `data/labels.json` following the format in the file; note the paper title is the key in the JSON structure
 3. Add a config file to `config/[your config name].json` following the format in `config/demo.json`
 4. Run `python -m src.main -config config/[your config name].json` to run the similarity algorithms based on the config file
