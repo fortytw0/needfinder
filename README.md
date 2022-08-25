@@ -19,6 +19,8 @@ Setting this code up at the moment is quite straightforward :
 
 `python -m src.main -config config/demo.json` will read from config.demo json and write to data/results in a directory timestamped with the unix time
 
+- `scripts/experiment2_runner.sh` will run experiment 2
+
 ### Run the Arora Similarity
 
 `python -m src.similarities.arora_similarity`
