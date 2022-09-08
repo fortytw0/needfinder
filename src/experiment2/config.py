@@ -35,17 +35,27 @@ old_experiments = {'BERT' : [
             'model_name' : 'bert-base-uncased' , 
             'max_length' : 128 , 
             'experiment_name' : 'bert-uncased-128'
+        },
+        
+        ] , 
+
+        'SBERT' : [
+
+        
+        {
+            'model_name' : 'paraphrase-MiniLM-L3-v2' , 
+            'experiment_name' : 'paraphrase',
+            'sim' : 'cos'
+        } , 
+        {
+            'model_name' : 'multi-qa-mpnet-base-dot-v1' , 
+            'experiment_name' : 'multi-qa-mpnet',
+            'sim' : 'dot'
+
         }
-        ]  
-                  
-        }
+        ]  , 
 
- 
-
-
-experiment_definitions = {
-   
-    'Longformer' : [
+        'Longformer' : [
         {
             'model_name' : 'allenai/longformer-base-4096' , 
             'tokenizer_name' : 'roberta-base' , 
@@ -58,20 +68,27 @@ experiment_definitions = {
             'max_length' : 512 , 
             'experiment_name' : 'longformer-512'
         }
-    ] , 
+        ] , 
+    }
+
+ 
+
+
+experiment_definitions = {
+    
     'SBERT' : [
         {
-            'model_name' : 'all-mpnet-base-v2' , 
-            'experiment_name' : 'all-mpnet'
+            'model_name' : 'multi-qa-distilbert-cos-v1' , 
+            'experiment_name' : 'multi-qa-distilbert',
+            'sim' : 'cos'
         } , 
-        {
-            'model_name' : 'paraphrase-MiniLM-L3-v2' , 
-            'experiment_name' : 'paraphrase'
-        } , 
+
         {
             'model_name' : 'multi-qa-mpnet-base-dot-v1' , 
-            'experiment_name' : 'multi-qa-mpnet'
+            'experiment_name' : 'multi-qa-mpnet' , 
+            'sim' : 'dot'
         }
+
     ]
 }
 

@@ -7,10 +7,14 @@ import numpy as np
 from tqdm import tqdm
 from sklearn.metrics.pairwise import cosine_similarity 
 
+from sentence_transformers.util import pairwise_dot_score, pairwise_cos_sim
+
 from src.experiment2.models.bert import BERT
 from src.experiment2.models.longformer import Longformer
 from src.experiment2.models.sbert import SBERT
 from src.corpus import Corpus
+
+
 
 class Experiment(object) : 
 
@@ -47,6 +51,15 @@ class Experiment(object) :
         corpus.sample(max_corpus_size)
         return list(corpus.data)
 
+    def _get_similarity_function(self, sim) : 
+
+        if sim == 'dot' : 
+            return pairwise_dot_score
+
+        else : 
+            return pairwise_cos_sim
+
+
     def _get_relation_df(self , model) : 
 
         relation_dict = {'query' : [] ,
@@ -74,6 +87,12 @@ class Experiment(object) :
         model = self._get_model(model)
         model.__init__(**model_params)
         print('Finished initializing model...' , flush=True)
+
+        #--- Load Similarity Function ---# 
+
+        print('Loading similarity function...' , flush=True)
+        similarity_function = self._get_similarity_function(model_params['sim'])
+        print('Loaded similarity function : ' , similarity_function)
         
 
         #--- Calculate similarity between Query-Targets ---#
@@ -135,8 +154,8 @@ class Experiment(object) :
             
             #--- Calculate Cosine Similarity, get top_5 preds, get rank of target ---#
             
-            print('Calculating cosine similarity between query and inserted_corpus...' , flush=True)
-            sim  = cosine_similarity(inserted , query_repr)  
+            print('Calculating similarity between query and inserted_corpus...' , flush=True)
+            sim  = similarity_function(inserted , query_repr)  
             
             print('Calculating topk...' , flush=True)
             topk = (-sim).argsort(axis=0)
