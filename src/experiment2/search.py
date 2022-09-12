@@ -41,7 +41,6 @@ class Search(Experiment) :
         corpus_repr = []
         for i in tqdm(range(0 , self.corpus_size, batch_size)) : 
             encoding = model.encode(self.corpus[i : i + batch_size])
-            print('Encoding Shape : ' + str(encoding.shape) , flush=True)
             corpus_repr.append(encoding)
         corpus_repr = np.concatenate(corpus_repr)
         print('Corpus Repr Shape : ' + str(corpus_repr.shape) , flush=True)
@@ -63,7 +62,7 @@ class Search(Experiment) :
             query_repr = model.encode([query])
 
             query = query.replace('\n' , '').strip().lower()
-            query = ''.join([char for char in query if char in string.ascii_lowercase])
+            query = ''.join([char for char in query if char in string.ascii_lowercase + ' _-\'".,;'])
 
             top_30['query'].append(query)
             sim  = similarity_function(corpus_repr , query_repr)
