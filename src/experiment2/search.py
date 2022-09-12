@@ -65,7 +65,10 @@ class Search(Experiment) :
             query = query.replace('\n' , '').strip().lower()
             query = ''.join([char for char in query if char not in string.ascii_lowercase])
 
+            
+            print(query)
             top_30['query'].append(query)
+            print(top_30['query'])
             sim  = similarity_function(corpus_repr , query_repr)
             topk = (-sim).argsort(axis=0)
 
