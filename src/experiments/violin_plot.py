@@ -7,7 +7,7 @@ import pandas as pd
 import numpy as np
 
 eval_dirpath = 'data/eval_set'
-eval_results_path = 'data/autoeval_results.csv' 
+eval_results_path = 'data/*autoeval_results.csv' 
 
 # Reading Groundtruth
 
@@ -98,35 +98,43 @@ def check_relation(query, target) :
         
 # reading results
 
-results_df  = pd.read_csv(eval_results_path, index_col=0)
-print(results_df)
+eval_results = glob.glob(eval_results_path)
+
+for eval_result in eval_results : 
+
+    model_name = os.path.basename(eval_result).replace('_autoeval_results.csv' , '')
+    print(model_name)
+    results_df  = pd.read_csv(eval_result, index_col=0)
+    print(results_df)
 
 
-# compiling relations and similarity 
+    # compiling relations and similarity 
 
-relation_dict = {'query' : [] ,
-                'target' : [] , 
-                'sim' : [] , 
-                'relation' : []
-                }
+    relation_dict = {'query' : [] ,
+                    'target' : [] , 
+                    'sim' : [] , 
+                    'relation' : []
+                    }
 
-for query, row in results_df.iterrows() : 
-    
-    for target , sim in row.items() : 
-    
-        relation_dict['query'].append(query)
-        relation_dict['target'].append(target)
-        relation_dict['sim'].append(sim)
-        relation_dict['relation'].append(check_relation(query, target))
-    
-relation_df = pd.DataFrame(relation_dict)
+    for query, row in results_df.iterrows() : 
 
-print(relation_df)
+        for target , sim in row.items() : 
 
-# plotting violin plot
+            relation_dict['query'].append(query)
+            relation_dict['target'].append(target)
+            relation_dict['sim'].append(sim)
+            relation_dict['relation'].append(check_relation(query, target))
 
-import seaborn as sns
+    relation_df = pd.DataFrame(relation_dict)
 
-sns.set_theme(style="whitegrid")
-ax = sns.violinplot(y=relation_df["sim"], x=relation_df["relation"])
-ax.figure.savefig('data/violin_plot.png')
+    print(relation_df)
+    print(relation_df['sim'].describe())
+
+    # plotting violin plot
+
+    import seaborn as sns
+
+    sns.set_theme(style="whitegrid")
+    ax = sns.violinplot(y=relation_df["sim"], x=relation_df["relation"])
+    ax.figure.savefig('data/{}_violin_plot.png'.format(model_name))
+    del ax

@@ -157,15 +157,13 @@ class Experiment(object) :
             print('Calculating similarity between query and inserted_corpus...' , flush=True)
             sim  = similarity_function(inserted , query_repr)  
             print('Similarity : ' ,  sim)
-
+            print('Number of sim : ' , len(sim))
 
             print('Calculating topk...' , flush=True)
             topk = (-sim).argsort(axis=0)
             
             for iterindex ,i in enumerate(topk[:5]) : 
-                
-                i = i[0]
-                
+               
                 if i > index : 
                     top_5['rank_{}'.format(iterindex+1)].append(self.corpus[i-1])
                     

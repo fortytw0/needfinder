@@ -53,25 +53,43 @@ sentences = list(quotes.keys())
 print('Num sentences :  ' , len(sentences))
 
 from sentence_transformers import SentenceTransformer
+from sentence_transformers.util import dot_score, pairwise_cos_sim
 from sklearn.metrics.pairwise import cosine_similarity
 
-model_name = 'paraphrase-MiniLM-L3-v2'
-model = SentenceTransformer(model_name)
+model_names = ['paraphrase-MiniLM-L3-v2' , 
+              'multi-qa-mpnet-base-dot-v1' , 
+              'all-mpnet-base-v2' , 
+              'multi-qa-distilbert-cos-v1']
 
 
-sentence_repr = model.encode(sentences)
 
-print(sentence_repr.shape)
+for model_name in model_names : 
+
+    model = SentenceTransformer(model_name)
 
 
-sim = cosine_similarity(sentence_repr, sentence_repr)
+    sentence_repr = model.encode(sentences)
+    
+    
 
-print(sim)
-print(sim.shape)
+    print('sentence_repr.shape' , sentence_repr.shape)
+    print(sentence_repr)
+    
+    if 'dot' in model_name : 
+        
+        print('Using Dot product')
+        sim = dot_score(sentence_repr, sentence_repr)
+        
+    else : 
+        print('Using Cos Sim')
+        sim = cosine_similarity(sentence_repr, sentence_repr)
 
-import pandas as pd
+    print(sim)
+    print(sim.shape)
 
-df = pd.DataFrame(sim, index=sentences, columns=sentences)
-df.to_csv('data/autoeval_results.csv')
+    import pandas as pd
+
+    df = pd.DataFrame(sim, index=sentences, columns=sentences)
+    df.to_csv('data/{}_autoeval_results.csv'.format(model_name))
 
  
