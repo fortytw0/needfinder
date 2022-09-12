@@ -48,9 +48,11 @@ class Search(Experiment) :
 
         #--- Variables to Track Result ---#
 
-        top_30 = {'rank_{}'.format(i + 1) : [] for i in range(30)}
-        top_30 = {'score_{}'.format(i + 1) : [] for i in range(30)}
-        top_30['query'] = []
+        top_30 = {'query':[]}
+        for i in range(30) : 
+            top_30['rank_{}'.format(i + 1)] = []
+            top_30['score{}'.format(i + 1)] = []
+        
 
 
         #--- Search Each Query ---#
