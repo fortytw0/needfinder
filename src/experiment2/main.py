@@ -7,7 +7,7 @@ import numpy as np
 from tqdm import tqdm
 from sklearn.metrics.pairwise import cosine_similarity 
 
-from sentence_transformers.util import pairwise_dot_score, pairwise_cos_sim
+from sentence_transformers.util import dot_score, cos_sim
 
 from src.experiment2.models.bert import BERT
 from src.experiment2.models.longformer import Longformer
@@ -54,10 +54,10 @@ class Experiment(object) :
     def _get_similarity_function(self, sim) : 
 
         if sim == 'dot' : 
-            return pairwise_dot_score
+            return dot_score
 
         else : 
-            return pairwise_cos_sim
+            return cos_sim
 
 
     def _get_relation_df(self , model) : 
