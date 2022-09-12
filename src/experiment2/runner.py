@@ -27,3 +27,8 @@ else :
     results_dir=eval_results_dir)
 
 
+    for model, model_params in experiment_definitions.items() : 
+        for model_param in model_params : 
+            search.execute(model, model_param)
+
+
