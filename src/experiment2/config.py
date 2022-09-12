@@ -44,8 +44,9 @@ max_corpus_size = int(1e4)
 
 
 corpus_files = [
-        'data/disability.jsonl',
+        'data/makeupaddiction.jsonl',
         'data/blind.jsonl' , 
+        'data/makeup.jsonl' , 
         ]
 
 
