@@ -3,6 +3,7 @@ from tqdm import tqdm
 import numpy as np
 import pandas as pd
 import os
+import string
 from src.experiment2.main import Experiment
 
 
@@ -61,6 +62,9 @@ class Search(Experiment) :
 
             query_repr = model.encode([query])
 
+            query = query.replace('\n' , '').strip().lower()
+            query = ''.join([char for char in query if char not in string.ascii_lowercase])
+
             top_30['query'].append(query)
             sim  = similarity_function(corpus_repr , query_repr)
             topk = (-sim).argsort(axis=0)
@@ -74,7 +78,6 @@ class Search(Experiment) :
 
         print('Saving results...')
         top_30_df = pd.DataFrame(top_30)
-
 
         results_save_path = os.path.join(self.results_dir , model_params['experiment_name']+'_SEARCH' + '.tsv')
         top_30_df.to_csv(results_save_path , index=False , sep='\t')
