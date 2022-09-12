@@ -63,7 +63,7 @@ class Search(Experiment) :
             query_repr = model.encode([query])
 
             query = query.replace('\n' , '').strip().lower()
-            query = ''.join([char for char in query if char not in string.ascii_lowercase])
+            query = ''.join([char for char in query if char in string.ascii_lowercase])
 
             
             print(query)
