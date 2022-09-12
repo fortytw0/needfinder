@@ -50,9 +50,12 @@ def _read_jsonl_with_single_field(jsonl_lines, field) :
 
     data = []
 
+
     for line in jsonl_lines : 
+
         try : 
-            d = json.loads(line) 
+            _ , l  = line.split(':' , 1)
+            d = json.loads(l) 
             assert field in d
             data.append(d[field])
         except AssertionError:
@@ -86,7 +89,6 @@ def read_jsonl(jsonl_path, field=None, fields=None, max_lines=None, mode='r') :
                 
         else : 
             lines = iterate(f.readline, max_lines)
-
 
     if field is not None : return _read_jsonl_with_single_field(lines, field)
                 
