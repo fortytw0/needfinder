@@ -13,26 +13,36 @@ eval_results_dir = 'data/results/experiment2/'
 
 queries = [
     '''
-    “By using the pump buttons of my CC cream, it allows
-    me to easily track the exact amount I have applied or need to apply
+    We have a relatively strict routine. For a few reasons. I just want to
+    instill healthy sleeping habits for my kids, but also we want our kids
+    to go to bed so that we can have a few hours to ourselves. Yeah. So at,
+    or maybe 10 minutes before bedtime ... We’ll give them a countdown.
+    We’ll say, "It’s 10 minutes before bedtime, five until bedtime, one
+    minute.
     ''' , 
 
     '''
-    I use smell to distinguish makeup products with diferent
-    scents, especially when they have similar physical packaging, such as
-    lipsticks
+    Yeah. So yeah, knitting and yarn are definitely things that make me
+    feel centered, and help me breathe again. I think part of that is the
+    rhythm of working through a row of knitting. It really helps me to
+    breathe and center myself, so that’s good. 
     ''' , 
 
     '''
-    I normally
-    would have someone to do eyeliner for me because I cannot do it very
-    well myself 
+    After she goes to bed, I need to do some housework and I also need to
+    prepare for my job. Some work for my job too. I teach and I need to
+    prepare the teaching materials... It’s because during the day I have to
+    be with her and only after she went to bed or fall asleep, I can work.
+    I can do whatever I need to do. . . I always tell myself that good for
+    our health and you should go to bed early. Go to bed early, go to bed
+    early, but every day I end up with bed... Yesterday, I went to bed at
+    2:00am.
     ''' , 
 
     '''
-    “I am legally blind and can see
-    color contours with magnifers, I often use the huge 10x magnifcation mirrors for help with knowing colors and contours while doing
-    makeup and checking after makeup
+    “We try as much as possible to keep our daily routine. So if we take a
+    vacation, we still try to have quiet time and bedtime might be a little
+    bit later, but we still follow everything.
     ''' , 
 ]
 
@@ -44,9 +54,9 @@ max_corpus_size = int(1e4)
 
 
 corpus_files = [
-        'data/makeupaddiction.jsonl',
-        'data/blind.jsonl' , 
-        'data/makeup.jsonl' , 
+        'data/mommit.jsonl',
+        'data/parenting.jsonl' , 
+        'data/parents.jsonl' , 
         ]
 
 
