@@ -18,7 +18,10 @@ def iterate(func, num_iter, pass_counter=False, message='', start_iter=0) :
             returned_object.append(func(i))
 
         else : 
-            returned_object.append(func())
+            new_object = func()
+            if not new_object:
+                return returned_object
+            returned_object.append(new_object)
 
     return returned_object
 
@@ -54,8 +57,8 @@ def _read_jsonl_with_single_field(jsonl_lines, field) :
     for line in jsonl_lines : 
 
         try : 
-            _ , l  = line.split(':' , 1)
-            d = json.loads(l) 
+            #_ , l  = line.split(':' , 1)
+            d = json.loads(line)
             assert field in d
             data.append(d[field])
         except AssertionError:

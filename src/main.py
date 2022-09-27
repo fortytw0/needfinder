@@ -22,14 +22,14 @@ parser.add_argument('-c', '-config', '--config', action="store", dest="config", 
 args = parser.parse_args()
 print(args)
 
-with open(args.config, "r") as inf:
+with open(args.config, "r", encoding="utf-8") as inf:
     config = json.load(inf)
 
 '''
 Read Quotes from papers
 '''
 
-with open(config["interview_quotes"]) as f:
+with open(config["interview_quotes"], encoding="utf-8") as f:
     title = config["title"]
     paper_quotes = json.load(f)[title]["quotes"]
 
@@ -70,10 +70,10 @@ asim = AroraBeam(embedding=embedding,
 Sample usages
 '''
 
-output_folder = "data/results/{}/".format(int(time.time()))
+output_folder = "./data/results/{}/".format(int(time.time()))
 os.mkdir(output_folder)
 
-with open(output_folder + "config.json", "w") as of:
+with open(output_folder + "config.json", "w", encoding="utf-8") as of:
     json.dump(config, of)
 
 # Standard Arora similarity.
@@ -86,9 +86,9 @@ df.to_csv(output_folder + 'arora_sim.csv')
 # Feed in 1 CHI quote and 1 Reddit Post
 post_labels, post_vectors, quote_labels, quote_vectors = asim.word_wise_rank(quote='CHI quote goes here.',
                                                                              post='Reddit Post goes here.')
-sim = cosine_similarity(post_vectors, quote_vectors)
-df = pd.DataFrame(sim, index=post_labels, columns=quote_labels)
-df.to_csv(output_folder + 'arora_sim_wordwise_june21.csv')
+#sim = cosine_similarity(post_vectors, quote_vectors)
+#df = pd.DataFrame(sim, index=post_labels, columns=quote_labels)
+#df.to_csv(output_folder + 'arora_sim_wordwise_june21.csv')
 
 
 # SBert Similarity

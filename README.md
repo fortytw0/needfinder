@@ -8,6 +8,11 @@ Setting this code up at the moment is quite straightforward :
 `conda create --prefix=./venv/ --file conda.env` 
 `source activate ./venv/`
 
+### Setup on Windows
+`conda env create`
+`conda activate needfinder` 
+`conda install -c conda-forge sentence-transformers` (will take a while)
+
 ### How to add a new paper
 
 1. Add posts from the relevant online community in `data/` following the format in `data/demo.airbnb_hosts.jsonl`. The easiest thing to just have an id and body field, though the code is flexible and allows other keys.
