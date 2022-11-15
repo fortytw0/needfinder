@@ -13,36 +13,19 @@ eval_results_dir = 'data/results/experiment2/'
 
 queries = [
     '''
-    We have a relatively strict routine. For a few reasons. I just want to
-    instill healthy sleeping habits for my kids, but also we want our kids
-    to go to bed so that we can have a few hours to ourselves. Yeah. So at,
-    or maybe 10 minutes before bedtime ... We’ll give them a countdown.
-    We’ll say, "It’s 10 minutes before bedtime, five until bedtime, one
-    minute.
+    Entrepreneurs might’ve forgotten the class material by the time they have that need, especially
+    if it’s not required, and then they won’t attend a session until the
+    need is there.
     ''' , 
 
     '''
-    Yeah. So yeah, knitting and yarn are definitely things that make me
-    feel centered, and help me breathe again. I think part of that is the
-    rhythm of working through a row of knitting. It really helps me to
-    breathe and center myself, so that’s good. 
+    I kept calling and he went on FaceTime and he went through
+    all the settings and he told me what to punch in
     ''' , 
 
     '''
-    After she goes to bed, I need to do some housework and I also need to
-    prepare for my job. Some work for my job too. I teach and I need to
-    prepare the teaching materials... It’s because during the day I have to
-    be with her and only after she went to bed or fall asleep, I can work.
-    I can do whatever I need to do. . . I always tell myself that good for
-    our health and you should go to bed early. Go to bed early, go to bed
-    early, but every day I end up with bed... Yesterday, I went to bed at
-    2:00am.
-    ''' , 
-
-    '''
-    “We try as much as possible to keep our daily routine. So if we take a
-    vacation, we still try to have quiet time and bedtime might be a little
-    bit later, but we still follow everything.
+    I was held hostage at one point with my website. I was
+    so frustrated and it brought tears because that’s how I sell my products. And for probably close to three months, my website was down
     ''' , 
 ]
 
@@ -54,9 +37,7 @@ max_corpus_size = int(1e4)
 
 
 corpus_files = [
-        'data/mommit.jsonl',
-        'data/parenting.jsonl' , 
-        'data/parents.jsonl' , 
+        'data/local_entrepreneurs.txt',
         ]
 
 
