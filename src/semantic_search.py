@@ -48,11 +48,11 @@ for quote in quotes:
     top_results = torch.topk(cos_scores, k=30)
 
     f.write("\n\n======================\n\n")
-    f.write("Quote:", quote)
+    f.write("Quote: " + quote)
     f.write("\nTop 5 most similar sentences in corpus:")
 
     for score, idx in zip(top_results[0], top_results[1]):
-        f.write(comments[idx], "(Score: {:.4f})".format(score))
+        f.write(comments[idx] + "(Score: {:.4f})".format(score))
 
 f.flush()
 f.close()
