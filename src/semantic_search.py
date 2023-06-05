@@ -56,7 +56,7 @@ for quote in quotes:
     f.write("Quote: " + quote)
     f.write("\nTop 5 most similar sentences in corpus:")
 
-    for i , score, idx in enumerate(zip(top_results[0], top_results[1])):
+    for i , (score, idx) in enumerate(zip(top_results[0], top_results[1])):
         f.write('\n' + comments[idx] + "(Score: {:.4f})".format(score))
         result[f'rank_{i+1}'] = comments[idx]
         result[f'sim_score_{i+1}'] = score
