@@ -1,0 +1,1048 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xml:space="preserve" xmlns="http://www.tei-c.org/ns/1.0" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.com/kermitt2/grobid/master/grobid-home/schemas/xsd/Grobid.xsd"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+	<teiHeader xml:lang="en">
+		<fileDesc>
+			<titleStmt>
+				<title level="a" type="main">Understanding the Accessibility of Smartphone Photography for People with Motor Impairments</title>
+			</titleStmt>
+			<publicationStmt>
+				<publisher/>
+				<availability status="unknown"><licence/></availability>
+			</publicationStmt>
+			<sourceDesc>
+				<biblStruct>
+					<analytic>
+						<author>
+							<persName><forename type="first">Martez</forename><forename type="middle">E</forename><surname>Mott</surname></persName>
+							<email>memott@uw.edu</email>
+							<affiliation key="aff0">
+								<orgName type="institution">Microsoft Research</orgName>
+								<address>
+									<settlement>Redmond</settlement>
+									<region>WA</region>
+									<country key="US">USA</country>
+								</address>
+							</affiliation>
+							<affiliation key="aff1">
+								<orgName type="institution">University of Washington</orgName>
+								<address>
+									<settlement>Seattle</settlement>
+									<region>WA</region>
+									<country>USA |</country>
+								</address>
+							</affiliation>
+							<affiliation key="aff2">
+								<orgName type="institution">Stanford University</orgName>
+								<address>
+									<settlement>Stanford</settlement>
+									<region>CA</region>
+									<country key="US">USA</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Cynthia</forename><forename type="middle">L</forename><surname>Bennett</surname></persName>
+							<email>bennec3@uw.edu</email>
+							<affiliation key="aff0">
+								<orgName type="institution">Microsoft Research</orgName>
+								<address>
+									<settlement>Redmond</settlement>
+									<region>WA</region>
+									<country key="US">USA</country>
+								</address>
+							</affiliation>
+							<affiliation key="aff1">
+								<orgName type="institution">University of Washington</orgName>
+								<address>
+									<settlement>Seattle</settlement>
+									<region>WA</region>
+									<country>USA |</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Edward</forename><surname>Cutrell</surname></persName>
+							<email>cutrell@microsoft.com</email>
+							<affiliation key="aff0">
+								<orgName type="institution">Microsoft Research</orgName>
+								<address>
+									<settlement>Redmond</settlement>
+									<region>WA</region>
+									<country key="US">USA</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Meredith</forename><forename type="middle">Ringel</forename><surname>Morris</surname></persName>
+							<email>merrie@microsoft.com</email>
+							<affiliation key="aff0">
+								<orgName type="institution">Microsoft Research</orgName>
+								<address>
+									<settlement>Redmond</settlement>
+									<region>WA</region>
+									<country key="US">USA</country>
+								</address>
+							</affiliation>
+						</author>
+						<title level="a" type="main">Understanding the Accessibility of Smartphone Photography for People with Motor Impairments</title>
+					</analytic>
+					<monogr>
+						<imprint>
+							<date/>
+						</imprint>
+					</monogr>
+					<idno type="DOI">10.1145/3173574.3174094</idno>
+				</biblStruct>
+			</sourceDesc>
+		</fileDesc>
+		<encodingDesc>
+			<appInfo>
+				<application version="0.7.1" ident="GROBID" when="2022-07-22T05:00+0000">
+					<desc>GROBID - A machine learning software for extracting information from scholarly documents</desc>
+					<ref target="https://github.com/kermitt2/grobid"/>
+				</application>
+			</appInfo>
+		</encodingDesc>
+		<profileDesc>
+			<textClass>
+				<keywords>
+					<term>Accessibility</term>
+					<term>camera phone</term>
+					<term>mobile</term>
+					<term>motor impairment</term>
+					<term>photography</term>
+					<term>photo sharing</term>
+					<term>photo editing</term>
+					<term>smartphone K.4.2. Assistive technologies for persons with disabilities</term>
+				</keywords>
+			</textClass>
+			<abstract>
+<div xmlns="http://www.tei-c.org/ns/1.0"><p>We present the results of an exploration to understand the accessibility of smartphone photography for people with motor impairments. We surveyed forty-six people and interviewed twelve people about capturing, editing, and sharing photographs on smartphones. We found that people with motor impairments encounter many challenges with smartphone photography, resulting in users capturing fewer photographs than they would like. Participants described various strategies they used to overcome challenges in order to capture a quality photograph. We also found that photograph quality plays a large role in deciding which photographs users share and how often they share, with most participants rating their photographs as average or poor quality compared to photos shared on their social networks. Additionally, we created design probes of two novel photography interfaces and received feedback from our interview participants about their usefulness and functionality. Based on our findings, we propose design recommendations for how to improve the accessibility of mobile photoware for people with motor impairments.</p></div>
+			</abstract>
+		</profileDesc>
+	</teiHeader>
+	<text xml:lang="en">
+		<body>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>INTRODUCTION</head><p>Personal photography is an important aspect of contemporary life. Traditionally, people engaged in personal photography to capture memories from vacations, family gatherings, and special events such as weddings and graduations <ref type="bibr" target="#b25">[22,</ref><ref type="bibr" target="#b29">27]</ref>. Today, with the proliferation of smartphones capable of capturing digital images, personal photography has evolved to include everyday mundane activities <ref type="bibr" target="#b25">[22]</ref>. The increase in photographs taken by smartphone users has led to the development and popularity of applications like Instagram and Snapchat that support the capture, editing, and sharing of photographs.</p><p>Although smartphone cameras have expanded the accessibility of photography to general users by making photography simple, cheap, and ubiquitous, smartphone photography still poses significant accessibility challenges to people with motor impairing conditions such as Parkinson's disease, and for people who experience motor difficulties as the result of injury, age-related tremor, or other impairments. Smartphone photography poses different challenges compared to other activities users perform on smartphones, such as composing emails or browsing the internet. Capturing photographs on a smartphone requires users to lift the phone, aim the lens toward their object of interest, and actuate the shutter, all within a limited amount of time to capture the intended shot. For many people with motor impairments, performing these actions requires a great deal of time and physical effort.</p><p>Previous research has explored the accessibility challenges faced by users who are blind or have low vision when taking photographs with a smartphone <ref type="bibr" target="#b0">[1,</ref><ref type="bibr">12,</ref><ref type="bibr" target="#b32">29]</ref>. However, the accessibility challenges for photography faced by users with motor impairments has been unexplored. To make smartphone photography more accessible to people with motor impairments, we must first understand the challenges users with motor impairments face and the strategies users employ to overcome those challenges.</p><p>To further our understanding of the accessibility of smartphone photography for people with motor impairments, we surveyed forty-six people with motor impairments about their behaviors and experiences with capturing, editing, and sharing photographs. We also conducted twelve semistructured interviews to gain a detailed understanding of the experiences and behaviors of people with motor impairments when engaging with smartphone photography. During these interviews, we presented design probes of two novel accessible photography interfaces to our participants and solicited feedback about their usefulness and functionality.</p><p>The contributions of this work are: (1) a description of the challenges experienced by people with motor impairments when taking photographs on a smartphone; (2) a description of the strategies users employ to ensure they capture the best possible photograph; (3) a description of how users' perceptions of their photographs influence their photo sharing behaviors; (4) user feedback on two novel accessible photography interfaces; and (5) design recommendations for how to improve the accessibility of mobile photoware (i.e., mobile software for photo capture, editing, and sharing <ref type="bibr" target="#b2">[3]</ref>) for people with motor impairments.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>RELATED WORK</head><p>Our work adds to, and builds upon, previous research on the importance of personal photography, the practice of photo sharing, the accessibility of smartphone photography for users with visual impairments, and the accessibility of smartphones for people with motor impairments.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Personal Photography</head><p>Personal photography is photography that "is done by nonprofessionals for themselves and their friends and intimates" <ref type="bibr" target="#b29">[27]</ref>. The role of personal photography in our daily life has changed throughout the years. Family and tourist photography were the dominant forms of personal photography before digital cameras became mainstream <ref type="bibr" target="#b25">[22]</ref>. When the price of digital cameras become more affordable to consumers, personal photography expanded to include capturing special and rare moments as well as capturing the mundane experiences of daily life <ref type="bibr" target="#b25">[22]</ref>.</p><p>Mobile phones capable of capturing digital images furthered this trend of capturing everyday life. In their analysis of photographs captured by camera phone users, <ref type="bibr">Kindberg et al.</ref> found that photographs taken by their participants fell into two dimensions, affective (conveys emotion) versus functional (aids in the completion of a task), and social (intended to share with others) versus individual (for oneself) <ref type="bibr" target="#b17">[15,</ref><ref type="bibr" target="#b18">16]</ref>. This taxonomy demonstrates that personal photography in the age of digital cameras and camera phones-including smartphones-can serve many different roles and functions, making it a versatile and important part of daily life for many people.</p><p>Many people with motor impairments, however, cannot participate in smartphone photography-and consequently personal photography-as often as they would like due to the time and effort required to take photographs. By understanding what challenges people with motor impairments encounter when taking photographs, we can create more accessible photography solutions to allow users to engage in and reap the benefits of personal photography.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Photo Sharing</head><p>Sharing photographs is a common practice people have participated in throughout the history of photography <ref type="bibr">[6]</ref>. Photo sharing often serves as a form of storytelling, with users telling stories with and about the photographs they take <ref type="bibr">[6,</ref><ref type="bibr" target="#b20">18,</ref><ref type="bibr">26]</ref>. Photo sharing can also serve social uses such as constructing personal and group memory, creating and maintaining social relationships, self-presentation, and selfexpression <ref type="bibr" target="#b30">[28]</ref>. Before the ubiquity of digital photography, photo sharing was often co-located, with photographers sharing their printed photographs in photo albums or by placing photographs throughout their home <ref type="bibr" target="#b20">[18,</ref><ref type="bibr">26]</ref>. Today, digital photographs are distributed through various mediums such as multimedia messaging services (MMS), email, and social networking sites such as Facebook, Instagram, and Snapchat <ref type="bibr" target="#b14">[13,</ref><ref type="bibr" target="#b20">18,</ref><ref type="bibr" target="#b35">32]</ref>. As a result, photo sharing has become increasingly public, placing additional importance on the quality and aesthetics of shared photos <ref type="bibr" target="#b4">[5,</ref><ref type="bibr" target="#b14">13]</ref>.</p><p>Many people with motor impairments would like to engage in more photo sharing practices, but poor-quality photos that arise from difficulties experienced during photo capture are an impediment to users sharing as much as they would like. Improving the accessibility of smartphone photography will allow users to participate more in photo sharing practices.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Accessibility of Smartphone Photography</head><p>Investigations into the accessibility of smartphone photography have focused primarily on the experiences of users who are blind or have low vision. Researchers have found that blind and low-vision people do take photographs, but the lack of non-visual feedback about objects in the camera's view was a significant barrier to access <ref type="bibr">[2,</ref><ref type="bibr">12]</ref>. Techniques to assist blind and low vision users with aiming the camera and receiving feedback on objects in the scene have been created and tested with users <ref type="bibr" target="#b0">[1,</ref><ref type="bibr" target="#b32">29,</ref><ref type="bibr" target="#b33">30]</ref>.</p><p>So far, the experiences of people with motor impairments with smartphone photography have been unexplored. TeleTourist [8] by de Greef et al. allows users with mobility restrictions to capture photos from a livestream, but they did not focus on smartphone photography. We hope our investigation into the behaviors and experiences of people with motor impairments will lead to the development of more accessible smartphone photoware.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Smartphone Accessibility and Motor Impairments</head><p>Numerous researchers have investigated the accessibility of smartphones for people with motor impairments. Researchers who investigated how people with motor impairments interact with smartphones in their daily lives found that smartphones can provide more independence <ref type="bibr" target="#b3">[4,</ref><ref type="bibr" target="#b15">14,</ref><ref type="bibr" target="#b26">23]</ref>. Although smartphones do provide benefits, people with motor impairments still encounter difficulties operating their devices. The biggest difficulty is the accessibility of smartphone touchscreens <ref type="bibr" target="#b9">[9,</ref><ref type="bibr" target="#b10">10]</ref>. People with motor impairments may use multiple fingers or various parts of their hand to touch the screen, which results in inaccurate or unrecognized touch gestures <ref type="bibr" target="#b3">[4,</ref><ref type="bibr" target="#b23">21,</ref><ref type="bibr" target="#b28">25]</ref>. As a result, performing actions that require precise touch and gesture input can be a challenge <ref type="bibr" target="#b3">[4,</ref><ref type="bibr" target="#b6">7,</ref><ref type="bibr" target="#b21">19,</ref><ref type="bibr">20]</ref>.</p><p>Smartphone photography presents different accessibility challenges that have not yet been explored. Photography requires the user to lift their phone, frame the intended shot, and actuate the shutter. Our research highlights accessibility challenges users encounter while performing the actions required to capture, edit, and share quality photos.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>SURVEY: DATA COLLECTION AND ANALYSIS</head><p>To better understand the experiences of people with motor impairments when they engage in smartphone photography, we surveyed people with motor impairments to learn about their behaviors and experiences using a smartphone to capture, edit, and share photographs. Our survey contained closed-and open-ended questions to gather information about the respondents' behaviors and experiences with smartphone-based photoware.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Participants</head><p>We surveyed adults in the U.S. with motor impairments. We recruited respondents by advertising our survey on Twitter and Facebook (targeting followers of organizations associated with motor-impairing conditions), by contacting local and national organizations that serve people with motor-impairing conditions, and through word-of-mouth. As an incentive to take our survey, each respondent who completed the survey could choose a motor-disability-related non-profit organization from a predetermined list to receive a $1 donation. We received a total of 91 responses, of which 45 were discarded due to incompleteness, resulting in a total of 46 survey responses suitable for analysis. The average age of our survey respondents was 42.6 (SD=14.5). Twentythree respondents were female, and 23 were male. Respondents reported various motor impairing conditions and effects, including cerebral palsy, spinal muscular atrophy, arthritis, hand tremors, and muscle weakness.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Analysis</head><p>The first author read and open coded the open-ended survey responses. Together with a second researcher, the open codes were reduced to codes which were most relevant to our investigation. Codes were constructed around two themes, challenges experienced by users when engaging in smartphone photography, and strategies users employ to overcome challenges. Codes used for analysis can be found in our supplementary materials.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>SURVEY: FINDINGS</head><p>This section presents results from our survey of people with motor impairments about their photo capture, editing, and sharing behaviors. Overall, we found that people with motor impairments do use smartphones for photography, but that they capture and share fewer photos than they would like due to the perceived poor quality of captured photos. We designate quotes from our forty-six survey respondents using R# (survey respondent identification numbers go above forty-six because our survey software also assigned numbers to incomplete responses).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Photo Capture</head><p>Our survey respondents typically capture photos using the default camera app on their devices (85.7%). Fourteen respondents <ref type="bibr">(33.3%)</ref>  action shots (e.g., photos captured at sporting competitions or dance recitals), although twenty (43%) reported that they would like to take live-action shots, indicating that liveaction shots are difficult for some users to capture. There was no other difference between what photos respondents currently capture and what they would like to capture.</p><p>We asked respondents to report how often they currently take photographs, and how often they would like to take photographs. Table <ref type="table" target="#tab_1">1</ref> shows the response breakdown from our respondents. Only 19 respondents (45%) reported taking photos daily, but 31 respondents (74%) reported wanting to take photos daily. Six respondents (14%) reported never taking photographs, a number that dropped to zero when asked how often respondents would like to take photographs.</p><p>These results indicate that people with motor impairments do take photographs with smartphones, but that they would like to take photos more often. From our survey data, we identified four primary challenges that users with motor impairments encounter when capturing smartphone photos: steadying the phone, framing the shot, zooming, and actuating the shutter.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Steadying the Phone</head><p>Keeping the phone steady during photo capture was a major concern for 25 respondents (69.4%). Respondents reported using a steady surface-including their own bodies-to steady their phone before photo capture. R80 described his strategy: "I have to try to set my hand on something to help minimize the tremor, sometimes that is my leg, a table or arm rest." Another common strategy was to take multiple photos in rapid succession with the hope that at least one of the photos would be of good quality. R100 described his strategy as: "hitting capture as many times as possible or capturing stills from a video." Respondents also reported asking others to capture photos on their behalf. When asked what strategies do you employ to assist you with taking photos on a smartphone, R58 wrote: "If I want to take a picture when my symptoms are prevalent, I just don't do it, or ask someone else to take the picture for me."</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Framing the Shot</head><p>Twelve survey respondents (33.3%) experienced difficulties accurately framing their object of interest within the photo. Some respondents reported difficulties with involuntary movements that caused their photos to be poorly framed. R42 described how tremors impact his framing: "My hand tics/tremors affect framing and focus. I sometimes miss shots I want because I have to move my hand instead of lining up a shot."</p><p>Other respondents had difficulty framing specific type of shots, such as close-up shots: "…taking close up photos is difficult due to the fact that focusing and getting the right frame are things that take an extra hand to setup. Or if I'm holding onto the object in question…I often have to press the in-frame hand against the outer case of my phone and manipulate the object to fit the frame rather than manipulate the camera to fit the shot. It's awkward to do it that way to say the least" (R68).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Zooming</head><p>Twenty-eight survey respondents (77.8%) reported difficulties accessing and controlling the zoom functionality on their camera apps. Respondents found it difficult to zoom while keeping the phone steady. R26 wrote: "Zooming can be a challenge both because it requires a two-finger movement while holding the phone and also keeping the phone steady in high zoom situations." In some situations, accessing the zoom accidently triggered other functions: "…also, it's difficult to operate the zoom while holding the phone and to keep from taking multiple shots accidentally (pressing too hard/holding the pressure too long)" (R51).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Actuating the Shutter</head><p>Twelve survey respondents (33.3%) reported challenges actuating their camera's shutter. The location of the camera button was a particular point of concern: "I have to use one hand to hold the phone and my other hand to press the camera button. If the camera button were put closer to the edge of the screen, I might be able to take photos with one hand and use the other hand for balance, etc." (R18). R42 described how changing the placement of the camera button could be beneficial: "A camera button in the middle of the screen would let my tics/tremors affect the camera position less. Having the camera button on one end makes it like a fulcrum and the tiniest movement is amplified on the opposite end. I imagine gripping my phone near the middle (to hit a centered tap target) would lead to smaller changes in position."</p><p>Voice activation was seldom used by respondents to actuate the shutter. Six respondents (14%) reported that they use voice activation occasionally, one respondent (2%) reported that they use speech input frequently, while the remaining respondents (83%) reported never using voice activation.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Post Capture</head><p>Post capture includes practices and behaviors surrounding the editing and sharing of captured photographs. Survey respondents reported using several kinds of software to edit photos. The most popular choice was to edit photos using the default camera app (55%), followed by Instagram (33%) and Facebook (33%). Only four respondents (11%) reported never using any photo editing software.  Regarding photo sharing, we asked our survey respondents how often they share photos, and how often they would like to share photos. A breakdown of these survey responses can be found in Table <ref type="table" target="#tab_3">2</ref>. Five respondents (12%) reported sharing photos daily, while seventeen respondents (42%) indicated they would like to share photos daily. Six respondents (14%) reported never sharing photos or sharing less than one photo a month, but all respondents indicated that they would like to at least share photos monthly. Email (73%), Facebook (66%), and in-person (42%), were the most common ways respondents shared photographs.</p><p>When survey respondents were asked what prevents them from sharing photos, the overwhelming response was poor photo quality: "My photos aren't that great" (R53); "My tremors often cause blurred photos" (R80); "Less shareworthy photos. Photo quality" (R26).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Discussion</head><p>Our survey results show that people with motor impairments do engage with smartphone photography, but that they encounter many challenges when taking photos with a smartphone. The primary challenges we identified were steadying the phone, framing the shot, zooming, and actuating the shutter. We found that users employ various strategies to overcome these challenges, such as asking others to take photos on their behalf and using a solid surface or body part to steady their phone before photo capture. Our results also show that people with motor impairments do not share photos as often as they would like due to poor photo quality.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>DESIGN PROBES</head><p>The results from our survey study showed that people with motor impairments have difficulty physically controlling their phone, which tends to lead to shaky or poorly framed photos. To understand users' thoughts and preferences toward alternative methods of photo capture, we created two design probes of novel accessible photography interfaces. Design probes serve as "tools for design and understanding" <ref type="bibr" target="#b34">[31]</ref>. As such, we used our design probes to elicit feedback on two proposed concepts that we developed in response to themes arising from our survey data: Pair Photography and Infrastructure Camera Control.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Pair Photography</head><p>Pair Photography is a form of cooperative photography <ref type="bibr" target="#b12">[11,</ref><ref type="bibr" target="#b36">33,</ref><ref type="bibr" target="#b37">34]</ref> which allows two smartphone users to collaborate to capture photos. This was inspired by the fact that many of our survey respondents described asking others to take photographs for them; our probe aims to give people with motor disabilities increased agency and control when they must ask someone else to take a photo on their behalf. In Pair Photography, one user serves as the camera operator, and the second user (i.e., the person with a motor impairment) serves as the director. The operator is responsible for framing and capturing the photo, while the director is responsible for telling the operator what should be in the shot and how to frame it. To ensure that the director and operator are in sync, the image in the operator's view finder is streamed to the director's phone in real-time. As a result, the director can provide real-time instructions over a voice channel to the operator, and any actions performed by the operator will be immediately visible to the director. When the operator captures the photograph, the image will be stored directly on the director's phone.</p><p>We demonstrated Pair Photography using two smartphones running Skype (Figure <ref type="figure" target="#fig_0">1</ref>). The director phone was given to the participant, and the operator phone was handled by one of the researchers. A Skype video call was made between the operator and director phones. The camera feed of the operator's phone was set to stream images from the rearfacing camera, allowing the participant to see the shot the interviewer was framing on the director phone. </p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Infrastructure Camera Control (ICC)</head><p>Infrastructure Camera Control (ICC) allows a smartphone user to access, control, and capture images from cameras located at a specific location, such as an amusement park, public square, or the user's home. ICC was inspired by survey respondents who mentioned difficulties controlling their phone and navigating inaccessible environments; our probe aims to give people with motor impairments opportunities to capture photos from perspectives or vantage points that may not have been accessible to them. Once a user has gained access to the network of cameras, the user can alternate between different cameras to find the desired view.</p><p>The user can also tilt and pan the camera, as well as zoom in and out. When the user captures a photograph, it will be stored directly on the user's phone. We demonstrated ICC using a custom setup located at our facilities (Figure <ref type="figure" target="#fig_1">2</ref>). Our setup consisted of a meeting room outfitted with eleven webcams placed throughout the room in such a way that each camera provided a different view. A custom web app allowed users to alternate between different cameras located in the room and to see their respective feeds.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>INTERVIEWS: DATA COLLECTION AND ANALYSIS</head><p>We conducted semi-structured interviews to gain a more indepth understanding of the smartphone photography behaviors and experiences of people with motor impairments. The interview questions were designed to further probe themes that emerged from our survey results.</p><p>Participants were asked about their smartphone photography practices, including how often they take, edit, and share photographs, what their experience is like when engaging in smartphone photography, and what challenges, if any, they encounter when engaging in smartphone photography practices. Participants were also asked to share examples of photographs they have taken and to discuss their experiences of taking the photographs. Some participants were asked to photograph a doll in the interview room so that we could view their photography strategies first-hand. Finally, we asked participants to provide feedback on our two design probes of novel accessible photography interfaces.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Participants</head><p>We conducted semi-structured interviews with twelve participants (7 female, 5 male, average age 39.1 years, SD=12.0). Participants were recruited through the same  means as our survey study (see above). Interviews were held at our facilities and lasted about one hour. At least two researchers were present for each interview, with one researcher leading the interview and the other(s) taking notes and asking follow-up questions. Each participant was compensated with a $100 Amazon gift card, and participants request up to $50 in travel reimbursement costs, also provided in the form of an Amazon gift card. Participant details can be found in Table <ref type="table" target="#tab_5">3</ref>.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Analysis</head><p>Each interview was recorded and transcribed. Transcripts were coded by the first author using inductive analysis <ref type="bibr" target="#b19">[17]</ref> and refined in collaboration with a member of the research team. Like our survey data, codes were constructed around two themes, challenges users experience when capturing, editing, and sharing photographs, and strategies users employed to overcome those challenges. Codes used for analysis can be found in our supplementary materials.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>INTERVIEWS: FINDINGS</head><p>This section presents the results of our investigation into understanding the behaviors and experiences of people with motor impairments when using smartphones to capture, edit, and share photographs. We found that the time and physical effort required to capture photographs deterred our participants from capturing many photos. We also found that participants perceived their photos to be of lower quality compared to people in their social network, resulting in them sharing fewer photos than they would like. Similar to the results from our survey, our interview results show that people with motor impairments do engage in smartphone photography, but current smartphone photoware presents significant accessibility challenges that prevent users from engaging in personal photography as often as they would like. Interview participants' feedback on our two design probes offers insight into possible avenues for creating accessible photoware. We designate quotes from our twelve interview participants using P#.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Photo Capture</head><p>Our interview participants typically captured photos with the default camera app. All twelve participants stated that the default camera app was their primary way of capturing photos. A couple of participants used Instagram, Facebook, or Snapchat for photo capture, but typically only in specific situations: "Occasionally I will take some pictures with just to send to someone or I'll also use Snapchat a little bit, but typically just the default camera app" (P10).</p><p>Challenges experienced during photo capture for our interview participants were similar to the challenges experienced by our survey respondents: steadying the phone, framing the shot, zooming, and actuating the shutter. In addition to identifying challenges, we also identified strategies participants employed to overcome them.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Steadying the Phone</head><p>For all 12 participants, steadying the phone was a major challenge and required significant effort. P9 described how stabilization is key to preventing blurry photos: "I have so much muscle spasticity because of my CP [cerebral palsy], that when I'm not stabilizing the camera with both hands, it will move a little bit. It moves, it gets blurry, my picture's toast." P8 had a similar experience: "I would say because I move a lot, sort of the crutches and things, my hands aren't steady, my button's not steady. Then I get certain movements which causes, I don't know what the terms are but like lack of focus, or like a hazy focus or photo where you see movement that you didn't intend." Like our survey respondents, interview participants mentioned steadying themselves on solid surfaces before attempting to capture a photo: "If I can steady myself, if I'm walking down the middle of the sidewalk, whatever, if I can actually rest my body on a pole or on a wall of a building. Actually, I lean on my wife to take a photo because my body just can't stop. It seems like I'm constantly in motion" (P4). For P3, attempting to steady the phone introduced other problems into the photo: "…you saw me earlier trying to balance it on my left hand rather than actually taking it onehanded, cause if there's something specific I want to get and I want to hold the camera steady, I'll try to do that. But then I end up sometimes with my finger in the shot, because of the way my dexterity in my left hand is."</p><p>Capturing multiple photographs quickly was another strategy participants employed, and was useful for situations where people or objects were in motion: "We were at a 10K run and I was taking pictures of my husband and his brother and some of the other family members. I literally just did the function where you hold the button down and you take a million pictures, so then at least I knew that there was going to be a better chance of me getting one that was actually clear instead of holding it and trying to take the picture" (P1).</p><p>When participants felt they could not adequately steady the phone, they often asked others for assistance. P1 explained: "I'm never going to take a picture like this by myself or with friends just because it never turns out. I just know that. Anything that is like, 'this is really cool' and I kind of frame it up and then I'll hand the phone to somebody and I'm like 'can you take it?' because my hands shake." Participants also mentioned that they ask others to capture cool or interesting photos: "The fountain was really pretty, and so I'm like, 'hey, can you take a picture of the fountain and send it to me?' Because I want to see this really pretty stuff, and I don't think I can do it very justified" (P2).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Framing the Shot</head><p>Ten interviewees (83.3%) experienced difficulties accurately framing their object of interest within the photo. When asked to describe issues with their photos, P9 responded: "…things would be kind of off center maybe, not framed well. They are not aesthetically pleasing photographs." P2 described difficulties taking photos of her dog: "I would say the framing has been one of the top things that's happened. I'll get [my dog] here [points in front of her], and I would take a picture and she would be like here [points off to the side]." Involuntary movements before capture were a problem for P3: "I'll have it framed, and then as I'm trying to figure out how to hit that button, whether even I try with my left hand if I'm in the right range of motion. Like somehow I'll jiggle the camera, or something, and the photo doesn't turn out the way I wanted it to" (P3). Framing group shots were a problem for P1: "I can't keep everybody in the frame. It's not going to be clear."</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Zooming</head><p>Ten participants (83.3%) reported difficulties zooming with their camera apps. P2 described her experience: "…for people with my disability, with the zoom, since I can only use one hand, I have to support it on a table and then zoom in. So you don't get a good picture when you're doing that, because often you'll the picture of the table, not the cute, fuzzy little puppy that you're trying a picture of." Zooming poses a challenge because users like to frame their shot and zoom-in simultaneously. Participants noted that performing these actions together can be difficult: "Yeah, zooming is a bit of a challenge as well. Because I'm holding the phone here [with two hands] while trying to adjust and hit the button and zoom, it's just a lot to do at once. Cause most of it's a two-finger pinch kind of zoom, and that just takes extra hands away" (P10).</p><p>To zoom effectively, several participants employed a strategy of lowering their phone to a more comfortable position, zooming to the desired level, then raising their phone again to reframe the image. P3 explains: "I can try, but sometimes it doesn't work, to try to hold it in the position I need it, cause I don't have the flexibility, I can't really hold it with the left hand then zoom it. So I basically will go like this [lowers the phone] and zoom it, and then go back."</p><p>Zooming can be particularly challenging and inconvenient when capturing videos. P9 described his experience with zooming while filming a video: "You could maybe take a video of something and then pretty seamlessly zoom on it without it affecting your picture, whereas for me because I have to take my left hand off, I'm probably going to get some finger as I try to position the grip with my right hand. I'm probably going to block some image a little bit. I'm also probably going to try to put the camera down so I can zoom and then I'll bring it back up."</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Actuating the Shutter</head><p>Eight interview participants (66.7%) reported challenges with actuating their camera's shutter. Camera button placement was a factor in determining which orientation, either portrait or landscape, some participants would use capturing photos. P3 describes why she prefers the portrait orientation: "I think portrait is probably easier because the button is closer to where your thumb would be. Versus landscape, it's harder to get to the spot that you'd click the button."</p><p>No interview respondents reported using voice activation to capture photos. Most participants were unaware that they could use voice in this way. When asked about the possibility of using voice, many participants responded favorably: "Yeah, can you imagine if I had both hands on the camera, and I could just tell it like 'zoom five', and then whatever else. If it was actually good at doing those things, yeah, that would be sweet." (P9). Similarly, P2 stated, "That would be pretty cool. Just saying 'take a photo'. Boom, done. If you could do that, I would be very interested, and I would happily trade in my phone. I'd be like, 'Okay, give me the voice activated one.' Done.". Some participants expressed hesitation about voice control because they doubted the phone would be able to recognize their voice: "One of the challenges I have is people tell me they have a hard time understanding me. My voice can get softer if I'm not on fully, so voice recognition, I guess, might have to be very precise or trained for that difference. There are different variations in your voice. I think in Parkinson's they call it facial paralysis in your voice when you talk." (P11). P5 stated simply: "No. With my speech impediment it doesn't know what I mean."</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Missed Capture Opportunities</head><p>Steadying the phone, framing the shot, zooming to the desired level, and actuating the shutter often required substantial time and effort on the part of our participants. Participants often recounted times when they wanted to capture a photo but did not due to the time and effort required. P8 described a time she tried to capture photos at a popular tourist destination: "There's a lot of visitors and things like that, and able-bodied folks will get right in front of something and they squat and they get down on the ground, and they get the right angle and everything, and I'm waiting for what can I balance myself against. Is there a wall that is proximal to the shot I want? Is there a bench that I can sit on? Can I zoom in to get the level of depth or close shot that I want from that vantage point? Sometimes I'll see something and I want it, and I really don't know how I'm going to get it." P9 spoke more generally about missed photo capture opportunities: "It's hard to point them out because you don't always think about it, but I can think of plenty of times when, if it was just as easy as whipping out my phone and there it is, then I would have taken tons of photos, but because it's a thing where I have to go, and I hold it, then I have to steady it, which is difficult for me, and then I have to take it." P2 described how social pressure can play a role as well: "We were in San Francisco, and I wanted to take a picture of the ticket so I would remember what time we're leaving. I took it really fast because there was a long line. I looked at the ticket and it was blurry. That made me sad."</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Post Capture</head><p>Post capture includes practices and behaviors surrounding the editing and sharing of captured photographs. Two participants said they never edit their photos, while other ten said they edit photos at least occasionally. Cropping was the most common form of photo editing. Participants also used filters and editing tools to change the of sharpness of their images.</p><p>We found that photo editing and photo sharing practices were tightly coupled. Participants typically edited photos they intended to share with others through social networking sites like Facebook or Instagram, or through personal communication channels such as email. Some participants edited their photos before sharing cover up perceived deficiencies the image: "A lot of times what I'll do is, I'll try to filters that will enhance detract from any sort of if I'm text do it in the camera, brighten it, something a to it just to send it off, just to send it off, just to make it a little bit better, a little bit more clear." (P1).</p><p>Photo quality played a significant role in participants' deciding which photos to share with others, especially on their social networks. P9 describes the importance of photo quality when sharing: "I would say it's a big role because it's one of the main reasons why it is so rare for me to do it, because I fear that the quality is not something that I'm proud of, so why would I post it?" Participants expressed less about the quality of photos shared privately: "They don't really care about the sharpness, so I feel less pressured to have a good quality thing with close friends and my family" (P2).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Design Probe 1: Pair Photography</head><p>Pair Photography is a cooperative photography concept that allows two smartphone users, a director and a camera operator, to take photographs cooperatively by allowing the director to communicate with and see the camera view of the camera operator. Participants responded favorably to Pair Photography. They liked the ability to communicate directly with the person taking their photo to ensure they are capturing what they intended: "When you hand your camera over, even like when my husband and I hand it over for someone to take a photo of us, you never know how it's going to turn out…to be able to kind of see exactly what's happening and to be able to say something to someone, I think that's awesome." (P7). Instant access to the photo was another positive feature: "I would really like that a because it would be like I'm taking the photo. I could have my wife or my friend do it the way that I want it to look, but I would be able to have the photo because that actually annoys me a lot…she'll take the photo, it will be on her phone, and then either she'll forget to send it to me or I'll forgot to say can you send that to me, and I won't get it."</p><p>Participants noted that Pair Photography would be beneficial when attempting to capture photographs from angles or vantage points which are inaccessible to them: "Yeah, so for example, at the lake when I was trying to take pictures of the fireworks, the reason why they're covered by the tree is because I couldn't go down a hill to get to the vantage that wouldn't have had the tree in the way. Versus my sister or my nephew, they could have taken five steps down a hill the same thing on my behalf, to get a much better picture than what I was able to get, based on where I was limited for where I could get to." (P3).</p><p>Participants reported feeling most comfortable with the idea of engaging in Pair Photography with close friends and family. Participants felt less comfortable about the prospect of engaging in Pair Photography with strangers: "I can see asking a stranger to take your photograph or to take a photography for you, but to have an app where you're both looking at the same image, it might be oddly discomforting, a sense of privacy, that kind of thing." (P6). However, in some situations, such as attending sporting events or concerts, participants said they might feel comfortable engaging in Pair Photography with strangers, but only if the experience could be limited to that specific interaction: "In that case, I feel comfortable enough to ask a stranger like, 'hey, can you link up with me and do that because', as long as it's not like linking our phones for indefinite periods of time or something like that, I'd pretty much do it with anybody." (P9).</p><p>The biggest criticism participants had about Pair Photography was that it required network connectivity, which may not be available in all places: "I think it's great, especially if you're in an area that has connectivity to the web. If you get into some more remote areas, like I mentioned hiking earlier, it might be a challenge." (P11).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Design Probe 2: Infrastructure Camera Control</head><p>Infrastructure camera control (ICC) is an accessible photography concept that allows users to control and capture images from cameras located in specific locations like an amusement park or the user's home. We received mixed feedback about ICC. P4 liked the concept because it would allow him to take photographs from a more comfortable position: "Yeah, I mean in crowded situations where I definitely could not safely…I lose my balance very easily, so in a crowded situation I try not to grab my phone or have anything in my hand or what not because I'm very unbalanced or I'll fall. I can see that definitely being very helpful…if I could do it sitting down, yeah I think that would be very helpful" (P4). P8 liked the idea of being able to capture images from unique vantage points: "I go to a lot of museums and things like that. I think that would be super interesting in the context of trying to capture an incident or a piece of art from an angle that you can't otherwise do."</p><p>P9 would be interested in the concept assuming the cameras are located in places that would allow the user to capture a good shot: "…it sounds neat because the I'm thinking of when you say that me, I'm thinking 'these types of cameras that you are describing are going to be located in places where they are going to be for maximum visibility or something.' If a in a room or setup in a location like Times Square, people located that for a reason, it had a good view." P9 also added that the environment allows you control camera camera is always tied to your It's in your hand, and when you can eliminate that, it frees your camera from your own physical limitations." Many participants expressed privacy and security concerns for themselves and others if accessing cameras located in public settings: "I think it's an interesting concept. I would wonder a little bit though for myself around the security of just random people taking control of cameras that are in public spaces and taking a picture of me that I don't realize is being taken." (P3).</p><p>The viewing angles of the cameras were a point of concern for P10: "Because I like getting pictures of where I am, or from my perspective as much as possible, and or at least in close proximity. So if I'm trying to get a picture of something that's in that corner to remember and I'm using that camera [environment camera], I probably wouldn't like the angle it's getting because it wouldn't be as memorable because it wasn't a picture of my perspective."</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>DISCUSSION</head><p>The results from our survey and interviews highlight the numerous accessibility challenges faced by people with motor impairments when engaging in smartphone photography. From these results, it is apparent that current mobile photoware is not designed to accommodate the various abilities of people with motor impairments. Steadying a phone, framing a shot, and actuating the shutter can be difficult tasks for people with motor impairments. The problem does not lie with these users, but rather with the design of camera applications that do not consider how people with motor impairments may want or need to capture photos using a smartphone. For example, previous research has shown that people with motor impairments experience difficulties selecting and controlling widgets on a touchscreen <ref type="bibr" target="#b26">[23,</ref><ref type="bibr" target="#b28">25]</ref>. Thus, it is problematic that camera apps rely heavily on on-screen controls to capture and manipulate photos. Alternative methods that rely on voice, eye-gaze, or some combination of input methods may be more suitable for people with motor impairments, not only for camera applications, but for other smartphone applications as well.</p><p>Improving the accessibility of smartphone photography for people with motor impairments will also provide benefits for people under the effects of situational impairments <ref type="bibr" target="#b27">[24]</ref>. For example, a user encumbered by luggage may want to take a photo with one hand, or users in cold weather may want to capture a photo without removing their gloves. By designing more accessible photo capture methods for people with motor impairments, users under these and similar situational impairments will have more photo capture options available them, improving their photography experience.</p><p>Our two design probes, Pair Photography and Infrastructure Camera Control (ICC), were generally well received by participants. Our probes are just two possible designs out of many that can and should be created and evaluated with people with motor impairments. It is our hope that the results from our studies will encourage and inspire other researchers to create and evaluate new forms of mobile photoware for, and with people with motor impairments. Engaging in participatory design with people with motor impairments may unearth new design possibilities that designers and researchers may not be able to imagine on their own. These new designs should focus on all aspects of mobile photoware, including photo capture, editing, and sharing.</p><p>Overall, our results show that the inaccessibility of smartphone photography does not just make the act of photography more difficult, it is also a barrier to engaging in the social aspects of personal photography. As photo capture sharing continue to become more commonplace, designers must be aware that mobile photoware should be designed to accommodate users with varying motor abilities engaging in smartphone photography in a variety of different social and physical environments.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Design Recommendations</head><p>Based on our survey and interview findings, we propose the following recommendations on how to improve the accessibility of photo capture for people with motor impairments. It is important to note that ability is a spectrum, as such, not all recommendations will apply to every user who experiences motor difficulties. There is no "one size fits all" solution, and our intent is not to propose one. Rather, we wish to highlight some changes that can-based on the feedback from our participants-significantly improve the accessibility of current and future mobile photoware.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Adjustable Camera Button</head><p>Pressing the on-screen camera button to capture a photo was a big problem for many participants because the location of the button was inconvenient given their hand placement. We recommend allowing users to self-adjust the location of the on-screen camera button. Allowing users to place the camera button wherever it is most comfortable and convenient for them will offer users more flexibility in how they capture photos. Adjusting the location of the camera button will also help users steady the phone before capture, as users could hold the phone in a more comfortable position without worrying that the camera button will be inaccessible to them.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>One Finger Zoom</head><p>Zooming to their desired level was a difficult and timeconsuming task for participants. Performing two-finger pinch-to-zoom gestures requires a great deal of dexterity-a level of dexterity not possessed by all users with motor impairments. We recommend allowing users to control the zoom level with a single finger, either a continuous on-screen control like a slider, or through a discreet control that allows users to select from predetermined zoom levels. A continuous control would allow users to more accurately select their desired zoom level, but may take additional time. A discrete control would allow users to set their level of zoom more quickly, but with less precision. The decision between speed and accuracy should be left to the user's discretion. The amount of motor control possessed by the user will also play a role; some users may experience difficulties controlling a slider widget, making a discrete control a more appealing choice for those users.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Promote and Expand Voice Commands</head><p>Most participants expressed interest in using voice commands to capture photos, but none of them reported using voice to do so. Apple's iOS does not currently allow users to capture photos using voice commands in their default camera app. Google's Android does allow voice capture it on in the default camera app's option menu. voice to capture photos can drastically the photo experience for many users with impairments, users use to control and steady device, their voice to actuate the We promoting of commands photo capture apps. currently do not allow voice commands for photo capture should. For apps that allow voice commands to capture photos, it should be made more apparent that voice control is an option. A voice control icon should appear along other on-screen icons, such as the icons indicating the level of flash and the current filter applied to the image. Promoting the availability of voice commands will make users more aware of the functionality, and as a result, users should be more likely to take advantage of it.</p><p>Voice commands should be expanded to control more than just photo capture. Users should be able to control other features as well, such as the zoom level and which filter they would like to apply. Affording users more voice control will allow them to use their hands to steady and frame the shot without worrying about performing actions on the screen which may require additional time and physical effort.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Limitations</head><p>People with motor impairments have diverse abilities and experiences. Not all of those abilities and experiences are represented by our survey respondents and interview participants. We are pleased with the diversity of experiences we were able to capture through our survey and interviews, but we recognize that there are more perspectives that should be heard and considered. For example, teens with motor impairments may have unique perspectives and exhibit different behaviors around photo capture and sharing given the role and importance of social media in their lives.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>CONCLUSION</head><p>We have presented results of our exploration into understanding the accessibility of smartphone photography for people with motor impairments. We found that people with motor impairments experience many challenges during the photo capture process. As a result, they capture photos less often than they would like due to the time and physical effort required to capture a good photo. We also found that they share fewer photos than they would like because of perceived deficiencies in their photos. We introduced accessible photography concepts, Pair Photography and Infrastructure Camera Control, and received feedback from participants about their functionality and usefulness. Finally, we presented design recommendations for how to improve the accessibility of smartphone photography for people with motor impairments.</p><p>Our research shows that people with motor impairments do engage in smartphone photography, but the inaccessibility of mobile photoware deters users from enjoying the personal and social benefits smartphone photography offers. We end with a quote from P9 about the importance of smartphone photography in his life: "The photographs are for social media. Social media is for expanding your social network, which is something that people with a disability typically struggle with, the size or sphere of their social network, either because they don't have mobility, they can't get places or because the activities that they are doing just aren't as widely varied as everybody else. I like to think about it more than just the accessibility of cameras."</p></div><figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_0"><head>Figure 1 .</head><label>1</label><figDesc>Figure 1. We used two smartphones connected through a Skype call to demonstrate Pair Photography. The image framed by the operator (left) is streamed to the director's phone (right) in real-time.</figDesc><graphic url="image-1.png" coords="5,54.00,405.52,241.20,78.45" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_1"><head>Figure 2 .</head><label>2</label><figDesc>Figure 2. We demonstrated ICC using a meeting room outfitted with 11 webcams (top). Different perspectives of the room (bottom) could be viewed by selecting hotspots (the red circles in the top image) in the web app.</figDesc><graphic url="image-2.png" coords="5,316.80,61.20,241.20,261.80" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_0"><head>How often do you capture photos? How often would you like to capture photos?</head><label></label><figDesc></figDesc><table><row><cell>Daily</cell><cell>19 (45.2%)</cell><cell>31 (73.8%)</cell></row><row><cell>Weekly</cell><cell>14 (33.3%)</cell><cell>9 (21.4%)</cell></row><row><cell>Monthly</cell><cell>2 (4.8%)</cell><cell>1 (2.4%)</cell></row><row><cell>Less than once a month</cell><cell>1 (2.4%)</cell><cell>1 (2.4%)</cell></row><row><cell>Never</cell><cell>6 (14.3%)</cell><cell>0 (0.0%)</cell></row><row><cell>used Facebook, 10 (23.8%) used</cell><cell></cell><cell></cell></row><row><cell>Instagram, 8 (19.0%) used Snapchat, and 3 (7.1%) used</cell><cell></cell><cell></cell></row><row><cell>Microsoft Pix.</cell><cell></cell><cell></cell></row><row><cell>Respondents reported capturing a variety of different types</cell><cell></cell><cell></cell></row><row><cell>of photos, including photos of nature, pets, and food. We</cell><cell></cell><cell></cell></row><row><cell>asked survey respondents to report what they currently take</cell><cell></cell><cell></cell></row><row><cell>photos of, and what they would like to be able to photograph.</cell><cell></cell><cell></cell></row><row><cell>Ten respondents (22%) reported that they currently take live-</cell><cell></cell><cell></cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_1"><head>Table 1 . Number of responses for each category for self- reported photo capture frequency and preferred frequency.</head><label>1</label><figDesc></figDesc><table /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_2"><head>How often do you share photos? How often would you like to share photos?</head><label></label><figDesc></figDesc><table><row><cell>Daily</cell><cell>5 (12.2%)</cell><cell>17 (41.5%)</cell></row><row><cell>Weekly</cell><cell>19 (46.3%)</cell><cell>21 (51.2%)</cell></row><row><cell>Monthly</cell><cell>11 (26.8%)</cell><cell>3 (7.3%)</cell></row><row><cell>Less than once a month</cell><cell>3 (7.3%)</cell><cell>1 (2.4%)</cell></row><row><cell>Never</cell><cell>3 (7.3%)</cell><cell>0 (0.0%)</cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_3"><head>Table 2 . Number of responses for each category for self- reported photo sharing frequency and preferred frequency.</head><label>2</label><figDesc></figDesc><table /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_5"><head>Table 3 . Demographic information for interview participants.</head><label>3</label><figDesc></figDesc><table /></figure>
+		</body>
+		<back>
+
+			<div type="acknowledgement">
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>ACKNOWLEDGEMENTS</head><p>We thank all of our interview participants and survey respondents for their time and feedback. We also thank Neel Joshi for his contributions and assistance with this work, and Baris Unver for his assistance with the design probes.</p></div>
+			</div>
+
+			<div type="references">
+
+				<listBibl>
+
+<biblStruct xml:id="b0">
+	<analytic>
+		<title level="a" type="main">Blind photographers and VizSnap: A long-term study</title>
+		<author>
+			<persName><forename type="first">Dustin</forename><surname>Adams</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sri</forename><surname>Kurniawan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Cynthia</forename><surname>Herrera</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Veronica</forename><surname>Kang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Natalie</forename><surname>Friedman</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2982142.2982169</idno>
+		<ptr target="https://doi.org/10.1145/2982142.2982169" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the ACM SIGACCESS Conference on Computers and Accessibility (ASSETS &apos;16)</title>
+				<meeting>the ACM SIGACCESS Conference on Computers and Accessibility (ASSETS &apos;16)</meeting>
+		<imprint>
+			<date type="published" when="2016">2016</date>
+			<biblScope unit="page" from="201" to="208" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b1">
+	<analytic>
+		<title level="a" type="main">A qualitative study to support a blind photography mobile application</title>
+		<author>
+			<persName><forename type="first">Dustin</forename><surname>Adams</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Lourdes</forename><surname>Morales</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sri</forename><surname>Kurniawan</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2504335.2504360</idno>
+		<ptr target="https://doi.org/10.1145/2504335.2504360" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the International Conference on PErvasive Technologies Related to Assistive Environments (PETRA &apos;13)</title>
+				<meeting>the International Conference on PErvasive Technologies Related to Assistive Environments (PETRA &apos;13)</meeting>
+		<imprint>
+			<date type="published" when="2013">2013</date>
+			<biblScope unit="volume">25</biblScope>
+			<biblScope unit="page" from="1" to="25" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b2">
+	<analytic>
+		<title level="a" type="main">Requirements for mobile photoware</title>
+		<author>
+			<persName><forename type="first">Morgan</forename><surname>Ames</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Dean</forename><surname>Eckles</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mor</forename><surname>Naaman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mirjana</forename><surname>Spasojevic</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Nancy</forename><surname>House</surname></persName>
+		</author>
+		<idno type="DOI">10.1007/s00779-009-0237-4</idno>
+		<ptr target="https://doi.org/10.1007/s00779-009-0237-4" />
+	</analytic>
+	<monogr>
+		<title level="j">Personal Ubiquitous Computing</title>
+		<imprint>
+			<biblScope unit="volume">14</biblScope>
+			<biblScope unit="page" from="95" to="109" />
+			<date type="published" when="2010">2010</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b3">
+	<analytic>
+		<title level="a" type="main">Analyzing user-generated Youtube videos to understand touchscreen by people with motor impairments</title>
+		<author>
+			<persName><forename type="first">Lisa</forename><surname>Anthony</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yoojin</forename><surname>Kim</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Leah</forename><surname>Findlater</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2470654.2466158</idno>
+		<ptr target="https://doi.org/10.1145/2470654.2466158" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the ACM Conference on Human Factors in Computing Systems (CHI &apos;13)</title>
+				<meeting>the ACM Conference on Human Factors in Computing Systems (CHI &apos;13)</meeting>
+		<imprint>
+			<date type="published" when="2013">2013</date>
+			<biblScope unit="page" from="1223" to="1232" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b4">
+	<analytic>
+		<title level="a" type="main">Faces engage us: with faces attract more likes and comments on instagram</title>
+		<author>
+			<persName><forename type="first">David</forename><forename type="middle">A</forename><surname>Bakhshi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Eric</forename><surname>Shamma</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Gilbert</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2556288.2557403</idno>
+		<ptr target="https://doi.org/10.1145/2556288.2557403" />
+	</analytic>
+	<monogr>
+		<title level="m">ACM Conference on Human Factors in Computing Systems (CHI 965-974</title>
+				<imprint>
+			<date type="published" when="2014">2014</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b5">
+	<monogr>
+		<title level="m" type="main">Snapshot Versions of Life</title>
+		<author>
+			<persName><forename type="first">Richard</forename><surname>Chalfen</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="1987">1987</date>
+			<publisher>University of Wisconsin Press</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b6">
+	<analytic>
+		<title level="a" type="main">Comparing touchscreen and mouse input performance by people with and without upper body motor impairments</title>
+		<author>
+			<persName><forename type="first">Leah</forename><surname>Findlater</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Karyn</forename><surname>Moffatt</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jon</forename><forename type="middle">E</forename><surname>Froehlich</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Meethu</forename><surname>Malu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Joan</forename><surname>Zhang</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3025453.3025603</idno>
+		<ptr target="https://doi.org/10.1145/3025453.3025603" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the ACM Conference on Human Factors in Computing Systems (CHI &apos;17)</title>
+				<meeting>the ACM Conference on Human Factors in Computing Systems (CHI &apos;17)</meeting>
+		<imprint>
+			<date type="published" when="2017">2017</date>
+			<biblScope unit="page" from="6056" to="6061" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b7">
+	<analytic>
+		<title level="a" type="main">TeleTourist: Immersive telepresence tourism for mobility-restricted participants</title>
+		<author>
+			<persName><forename type="first">Lilian</forename><surname>De Greef</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Meredith</forename><surname>Morris</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kori</forename><surname>Inkpen</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the ACM Conference on Computer Supported Cooperative Work and Social Computing Companion (CSCW &apos;16 Companion)</title>
+				<meeting>the ACM Conference on Computer Supported Cooperative Work and Social Computing Companion (CSCW &apos;16 Companion)</meeting>
+		<imprint>
+			<date type="published" when="2016">2016</date>
+			<biblScope unit="page" from="273" to="276" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b8">
+	<monogr>
+		<title/>
+		<idno type="DOI">10.1145/2818052.2869082</idno>
+		<ptr target="https://doi.org/10.1145/2818052.2869082" />
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b9">
+	<analytic>
+		<title level="a" type="main">Assessing mobile touch interfaces for tetraplegics</title>
+		<author>
+			<persName><forename type="first">Tiago João Vieira</forename><surname>Guerreiro</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Hugo</forename><surname>Nicolau</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Joaquim</forename><surname>Jorge</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Daniel</forename><surname>Gonçalves</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/1851600.1851608</idno>
+		<ptr target="https://doi.org/10.1145/1851600.1851608" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the Conference on Human Computer Interaction with Mobile Devices and Services (MobileHCI &apos;10)</title>
+				<meeting>the Conference on Human Computer Interaction with Mobile Devices and Services (MobileHCI &apos;10)</meeting>
+		<imprint>
+			<date type="published" when="2010">2010</date>
+			<biblScope unit="page" from="31" to="34" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b10">
+	<analytic>
+		<title level="a" type="main">Towards accessible touch interfaces</title>
+		<author>
+			<persName><forename type="first">Tiago</forename><surname>Guerreiro</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Hugo</forename><surname>Nicolau</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Joaquim</forename><surname>Jorge</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Daniel</forename><surname>Gonçalves</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the ACM SIGACCESS Conference on Computers and Accessibility (ASSETS &apos;10)</title>
+				<meeting>the ACM SIGACCESS Conference on Computers and Accessibility (ASSETS &apos;10)</meeting>
+		<imprint>
+			<date type="published" when="2010">2010</date>
+			<biblScope unit="page" from="19" to="26" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b11">
+	<monogr>
+		<title/>
+		<idno type="DOI">10.1145/1878803.1878809</idno>
+		<ptr target="https://doi.org/10.1145/1878803.1878809" />
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b12">
+	<analytic>
+		<title level="a" type="main">Let&apos;s take photos together: Exploring asymmetrical interaction abilities on mobile camera phones</title>
+		<author>
+			<persName><forename type="first">Pradthana</forename><surname>Jarusriboonchai</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Thomas</forename><surname>Olsson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kaisa</forename><surname>Sus Lundgren Lyckvi</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Väänänen</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2935334.2935385</idno>
+		<ptr target="https://doi.org/10.1145/2935334.2935385" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the ACM Conference on Human-Computer Interaction with Mobile Devices and Services (MobileHCI &apos;16)</title>
+				<meeting>the ACM Conference on Human-Computer Interaction with Mobile Devices and Services (MobileHCI &apos;16)</meeting>
+		<imprint>
+			<date type="published" when="2016">2016</date>
+			<biblScope unit="page" from="529" to="540" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b13">
+	<analytic>
+		<title level="a" type="main">Supporting blind photography</title>
+		<author>
+			<persName><forename type="first">Hanjie</forename><surname>Jayant</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Samuel</forename><surname>Ji</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jeffrey</forename><forename type="middle">P</forename><surname>White</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Bigham</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2049536.2049573</idno>
+		<ptr target="https://doi.org/10.1145/2049536.2049573" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the ACM Conference on Computers and Accessibility (ASSETS &apos;11)</title>
+				<meeting>the ACM Conference on Computers and Accessibility (ASSETS &apos;11)</meeting>
+		<imprint>
+			<date type="published" when="2011">2011</date>
+			<biblScope unit="page" from="203" to="210" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b14">
+	<analytic>
+		<title level="a" type="main">Snap decisions?: How users, content, and aesthetics interact to shape photo sharing behaviors</title>
+		<author>
+			<persName><forename type="first">Sanjay</forename><surname>Kairam</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Joseph "jofish"</forename><surname>Kaye</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">John</forename><forename type="middle">Alexis</forename><surname>Guerra-Gomez</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">David</forename><forename type="middle">A</forename><surname>Shamma</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2858036.2858451</idno>
+		<ptr target="https://doi.org/10.1145/2858036.2858451" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the ACM Conference on Human Factors in Computing Systems (CHI &apos;16)</title>
+				<meeting>the ACM Conference on Human Factors in Computing Systems (CHI &apos;16)</meeting>
+		<imprint>
+			<date type="published" when="2016">2016</date>
+			<biblScope unit="page" from="113" to="124" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b15">
+	<analytic>
+		<title level="a" type="main">Freedom to roam: A study of mobile device adoption and accessibility for people with visual and motor disabilities</title>
+		<author>
+			<persName><forename type="first">Shaun</forename><forename type="middle">K</forename><surname>Kane</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Chandrika</forename><surname>Jayant</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jacob</forename><forename type="middle">O</forename><surname>Wobbrock</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Richard</forename><forename type="middle">E</forename><surname>Ladner</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the ACM SIGACCESS Conference on Computers and Accessibility (Assets &apos;09)</title>
+				<meeting>the ACM SIGACCESS Conference on Computers and Accessibility (Assets &apos;09)</meeting>
+		<imprint>
+			<date type="published" when="2009">2009</date>
+			<biblScope unit="page" from="115" to="122" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b16">
+	<monogr>
+		<title/>
+		<idno type="DOI">10.1145/1639642.1639663</idno>
+		<ptr target="https://doi.org/10.1145/1639642.1639663" />
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b17">
+	<analytic>
+		<title level="a" type="main">I saw this and thought of you: Some social uses of camera phones</title>
+		<author>
+			<persName><forename type="first">Tim</forename><surname>Kindberg</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mirjana</forename><surname>Spasojevic</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Rowanne</forename><surname>Fleck</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Abigail</forename><surname>Sellen</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/1056808.1056962</idno>
+		<ptr target="https://doi.org/10.1145/1056808.1056962" />
+	</analytic>
+	<monogr>
+		<title level="m">Extended Abstracts on Human Factors in Computing Systems (CHI EA &apos;05)</title>
+				<imprint>
+			<date type="published" when="2005">2005</date>
+			<biblScope unit="page" from="1545" to="1548" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b18">
+	<analytic>
+		<title level="a" type="main">The ubiquitous camera: An in-depth study of camera phone use</title>
+		<author>
+			<persName><forename type="first">Tim</forename><surname>Kindberg</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mirjana</forename><surname>Spasojevic</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Rowanne</forename><surname>Fleck</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Abigail</forename><surname>Sellen</surname></persName>
+		</author>
+		<idno type="DOI">10.1109/MPRV.2005.42</idno>
+		<ptr target="https://doi.org/10.1109/MPRV.2005.42" />
+	</analytic>
+	<monogr>
+		<title level="j">IEEE Pervasive Computing</title>
+		<imprint>
+			<biblScope unit="volume">4</biblScope>
+			<biblScope unit="page" from="42" to="50" />
+			<date type="published" when="2005">2005</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b19">
+	<monogr>
+		<author>
+			<persName><forename type="first">Matthew</forename><forename type="middle">B</forename><surname>Miles</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">Michael</forename><surname>Huberman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Johnny</forename><surname>Saldaña</surname></persName>
+		</author>
+		<title level="m">Qualitative Data Analysis. SAGE</title>
+				<imprint>
+			<date type="published" when="2013">2013</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b20">
+	<analytic>
+		<title level="a" type="main">Give and take: A study of consumer photo-sharing culture and practice</title>
+		<author>
+			<persName><forename type="first">Andrew</forename><forename type="middle">D</forename><surname>Miller</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">W</forename><forename type="middle">Keith</forename><surname>Edwards</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/1240624.1240682</idno>
+		<ptr target="https://doi.org/10.1145/1240624.1240682" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the ACM Conference on Human Factors in Computing Systems (CHI &apos;07)</title>
+				<meeting>the ACM Conference on Human Factors in Computing Systems (CHI &apos;07)</meeting>
+		<imprint>
+			<date type="published" when="2007">2007</date>
+			<biblScope unit="page" from="347" to="356" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b21">
+	<analytic>
+		<title level="a" type="main">Designing for individuals: Usable touch-screen interaction through shared user models</title>
+		<author>
+			<persName><forename type="first">Kyle</forename><surname>Montague</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Vicki</forename><forename type="middle">L</forename><surname>Hanson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Andy</forename><surname>Cobley</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2384916.2384943</idno>
+		<ptr target="https://doi.org/10.1145/2384916.2384943" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the ACM SIGACCESS Conference on Computers and Accessibility (ASSETS &apos;12)</title>
+				<meeting>the ACM SIGACCESS Conference on Computers and Accessibility (ASSETS &apos;12)</meeting>
+		<imprint>
+			<date type="published" when="2012">2012</date>
+			<biblScope unit="page" from="151" to="158" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b22">
+	<monogr>
+		<author>
+			<persName><forename type="first">Kyle</forename><surname>Montague</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Hugo</forename><surname>Nicolau</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Vicki</forename><forename type="middle">L</forename><surname>Hanson</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2661334.2661362</idno>
+		<ptr target="https://doi.org/10.1145/2661334.2661362" />
+		<title level="m">Motor-impaired touchscreen interactions wild. the ACM SIGACCESS Conference Computers (ASSETS &apos;14)</title>
+				<imprint>
+			<date type="published" when="2014">2014</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b23">
+	<analytic>
+		<title level="a" type="main">Smart Touch: Improving touch accuracy for people with motor Impairments with template matching</title>
+		<author>
+			<persName><forename type="first">E</forename><surname>Martez</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Radu-Daniel</forename><surname>Mott</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Shaun</forename><forename type="middle">K</forename><surname>Vatavu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jacob</forename><forename type="middle">O</forename><surname>Kane</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Wobbrock</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the ACM Conference on Human Factors in Computing Systems (CHI &apos;16</title>
+				<meeting>the ACM Conference on Human Factors in Computing Systems (CHI &apos;16</meeting>
+		<imprint>
+			<date type="published" when="2016">2016</date>
+			<biblScope unit="page" from="1934" to="1946" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b24">
+	<monogr>
+		<title/>
+		<idno type="DOI">10.1145/2858036.2858390</idno>
+		<ptr target="https://doi.org/10.1145/2858036.2858390" />
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b25">
+	<analytic>
+		<title level="a" type="main">Digital images, photo-sharing, and our shifting notions of everyday aesthetics</title>
+		<author>
+			<persName><forename type="first">Susan</forename><surname>Murray</surname></persName>
+		</author>
+		<idno type="DOI">10.1177/1470412908091935</idno>
+		<ptr target="https://doi.org/10.1177/1470412908091935" />
+	</analytic>
+	<monogr>
+		<title level="j">Journal of Visual Culture</title>
+		<imprint>
+			<biblScope unit="volume">7</biblScope>
+			<biblScope unit="page" from="147" to="163" />
+			<date type="published" when="2008">2008</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b26">
+	<analytic>
+		<title level="a" type="main">Accessibility in context: Understanding the truly mobile experience of smartphone users with motor impairments</title>
+		<author>
+			<persName><forename type="first">Maia</forename><surname>Naftali</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Leah</forename><surname>Findlater</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2661334.2661372</idno>
+		<ptr target="https://doi.org/10.1145/2661334.2661372" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the ACM SIGACCESS Conference on Computers and Accessibility (ASSETS &apos;14)</title>
+				<meeting>the ACM SIGACCESS Conference on Computers and Accessibility (ASSETS &apos;14)</meeting>
+		<imprint>
+			<date type="published" when="2014">2014</date>
+			<biblScope unit="page" from="209" to="216" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b27">
+	<analytic>
+		<title level="a" type="main">When computers fade … pervasive computing and situationally-induced impairments and disabilities. 1298-1302</title>
+		<author>
+			<persName><forename type="first">Andrew</forename><surname>Sears</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Min</forename><surname>Lin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Julie</forename><surname>Jacko</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yan</forename><surname>Xiao</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 10 th International on Human-Computer Interaction (HCI Int&apos;l &apos;03</title>
+				<meeting>the 10 th International on Human-Computer Interaction (HCI Int&apos;l &apos;03</meeting>
+		<imprint>
+			<date type="published" when="2003">2003</date>
+			<biblScope unit="page" from="1298" to="1302" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b28">
+	<analytic>
+		<title level="a" type="main">Collocated photo sharing, story-telling, the performance</title>
+		<author>
+			<persName><forename type="first">Shari</forename><surname>Trewin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Cal</forename><surname>Swart</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Donna</forename><surname>Pettick</surname></persName>
+		</author>
+		<idno type="DOI">10.1016/j.ijhcs.2009.09.003</idno>
+		<ptr target="https://doi.org/10.1016/j.ijhcs.2009.09.003" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of ACM Computers (ASSETS &apos;13</title>
+				<meeting>ACM Computers (ASSETS &apos;13</meeting>
+		<imprint>
+			<date type="published" when="2009">2013. 2009</date>
+			<biblScope unit="volume">67</biblScope>
+			<biblScope unit="page" from="1073" to="1086" />
+		</imprint>
+	</monogr>
+	<note>Physical accessibility of touchscreen smartphones</note>
+</biblStruct>
+
+<biblStruct xml:id="b29">
+	<analytic>
+		<title level="a" type="main">Personal photography, digital technologies and the uses of the visual</title>
+		<author>
+			<persName><forename type="first">Nancy</forename><forename type="middle">A</forename><surname>Van House</surname></persName>
+		</author>
+		<idno type="DOI">10.1080/1472586X.2011.571888</idno>
+		<ptr target="https://doi.org/10.1080/1472586X.2011.571888" />
+	</analytic>
+	<monogr>
+		<title level="j">Visual Studies</title>
+		<imprint>
+			<biblScope unit="volume">26</biblScope>
+			<biblScope unit="page" from="125" to="134" />
+			<date type="published" when="2011">2011</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b30">
+	<analytic>
+		<title level="a" type="main">The uses of personal networked digital imaging: An empirical study of cameraphone photos and sharing</title>
+		<author>
+			<persName><forename type="first">Nancy</forename><surname>Van House</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Marc</forename><surname>Davis</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Morgan</forename><surname>Ames</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Megan</forename><surname>Finn</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Vijay</forename><surname>Viswanathan</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Extended on Human Factors in Computing Systems (CHI EA &apos;05)</title>
+				<imprint>
+			<date type="published" when="2005">2005</date>
+			<biblScope unit="page" from="1853" to="1856" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b31">
+	<monogr>
+		<title/>
+		<idno type="DOI">10.1145/1056808.1057039</idno>
+		<ptr target="https://doi.org/10.1145/1056808.1057039" />
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b32">
+	<analytic>
+		<title level="a" type="main">Helping visually impaired users properly aim a camera</title>
+		<author>
+			<persName><forename type="first">Marynel</forename><surname>Vázquez</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Aaron</forename><surname>Steinfeld</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the ACM SIGACCESS Conference on Computers and Accessibility (ASSETS &apos;12)</title>
+				<meeting>the ACM SIGACCESS Conference on Computers and Accessibility (ASSETS &apos;12)</meeting>
+		<imprint>
+			<date type="published" when="2012">2012</date>
+			<biblScope unit="page" from="95" to="102" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b33">
+	<analytic>
+		<title level="a" type="main">An assisted photography framework to help visually impaired users properly aim a camera</title>
+		<author>
+			<persName><forename type="first">Marynel</forename><surname>Vázquez</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Aaron</forename><surname>Steinfeld</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2651380</idno>
+		<ptr target="https://doi.org/10.1145/2651380" />
+	</analytic>
+	<monogr>
+		<title level="j">ACM Transactions on Computer-Human Interaction</title>
+		<imprint>
+			<biblScope unit="volume">21</biblScope>
+			<biblScope unit="page">29</biblScope>
+			<date type="published" when="2014">2014</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b34">
+	<analytic>
+		<title level="a" type="main">Making design probes work</title>
+		<author>
+			<persName><forename type="first">Jayne</forename><surname>Wallace</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">John</forename><surname>Mccarthy</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Peter</forename><forename type="middle">C</forename><surname>Wright</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Patrick</forename><surname>Olivier</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2470654.2466473</idno>
+		<ptr target="https://doi.org/10.1145/2470654.2466473" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the ACM Conference on Human Factors in Computing Systems (CHI &apos;13)</title>
+				<meeting>the ACM Conference on Human Factors in Computing Systems (CHI &apos;13)</meeting>
+		<imprint>
+			<date type="published" when="2013">2013</date>
+			<biblScope unit="page" from="3441" to="3450" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b35">
+	<analytic>
+		<title level="a" type="main">Instagram at the museum: Communicating the museum experience through social photo sharing</title>
+		<author>
+			<persName><forename type="first">Alexandra</forename><surname>Weilenmann</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Thomas</forename><surname>Hillman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Beata</forename><surname>Jungselius</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2470654.2466243</idno>
+		<ptr target="https://doi.org/10.1145/2470654.2466243" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the ACM Conference on Human Factors in Computing Systems (CHI &apos;13)</title>
+				<meeting>the ACM Conference on Human Factors in Computing Systems (CHI &apos;13)</meeting>
+		<imprint>
+			<date type="published" when="2013">2013</date>
+			<biblScope unit="page" from="1843" to="1852" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b36">
+	<analytic>
+		<title level="a" type="main">Getting things started in cooperative photography</title>
+		<author>
+			<persName><forename type="first">James</forename><surname>Wen</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2685553.2702684</idno>
+		<ptr target="https://doi.org/10.1145/2685553.2702684" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the ACM Conference Companion on Computer Supported Cooperative Work &amp; Social Computing (CSCW&apos;15 Companion)</title>
+				<meeting>the ACM Conference Companion on Computer Supported Cooperative Work &amp; Social Computing (CSCW&apos;15 Companion)</meeting>
+		<imprint>
+			<date type="published" when="2015">2015</date>
+			<biblScope unit="page" from="49" to="52" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b37">
+	<analytic>
+		<title level="a" type="main">Redefining the fundamentals of photography with cooperative photography</title>
+		<author>
+			<persName><forename type="first">James</forename><surname>Wen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ayça</forename><surname>Ünlüer</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2836041.2836045</idno>
+		<ptr target="https://doi.org/10.1145/2836041.2836045" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the ACM Conference on Mobile and Ubiquitous Multimedia (MUM &apos;15)</title>
+				<meeting>the ACM Conference on Mobile and Ubiquitous Multimedia (MUM &apos;15)</meeting>
+		<imprint>
+			<date type="published" when="2015">2015</date>
+			<biblScope unit="page" from="37" to="47" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+				</listBibl>
+			</div>
+		</back>
+	</text>
+</TEI>

@@ -1,0 +1,1491 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xml:space="preserve" xmlns="http://www.tei-c.org/ns/1.0" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.com/kermitt2/grobid/master/grobid-home/schemas/xsd/Grobid.xsd"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+	<teiHeader xml:lang="en">
+		<fileDesc>
+			<titleStmt>
+				<title level="a" type="main">Understanding How People with Limited Mobility Use Multi-Modal Input</title>
+			</titleStmt>
+			<publicationStmt>
+				<publisher/>
+				<availability status="unknown"><licence/></availability>
+			</publicationStmt>
+			<sourceDesc>
+				<biblStruct>
+					<analytic>
+						<author>
+							<persName><forename type="first">Johann</forename><surname>Wentzel</surname></persName>
+							<email>jdwentze@uwaterloo.ca</email>
+						</author>
+						<author>
+							<persName><forename type="first">Sasa</forename><surname>Junuzovic</surname></persName>
+							<email>sasa.junuzovic@microsoft.com</email>
+						</author>
+						<author>
+							<persName><forename type="first">James</forename><surname>Devine</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">John</forename><forename type="middle">R</forename><surname>Porter Martez</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">E</forename><surname>Mott Microsoft</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Washington</forename><surname>Redmond</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">John</forename><forename type="middle">R</forename><surname>Porter</surname></persName>
+							<email>john.porter@microsoft.com</email>
+						</author>
+						<author>
+							<persName><forename type="first">Martez</forename><forename type="middle">E</forename><surname>Mott</surname></persName>
+							<email>martez.mott@microsoft.com</email>
+						</author>
+						<author>
+							<affiliation key="aff0">
+								<orgName type="institution">University of Waterloo</orgName>
+								<address>
+									<settlement>Waterloo</settlement>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<affiliation key="aff1">
+								<orgName type="institution">Microsoft Research</orgName>
+								<address>
+									<settlement>Redmond</settlement>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<affiliation key="aff2">
+								<orgName type="institution">Microsoft Research</orgName>
+								<address>
+									<settlement>Cambridge, Washington, Cambridgeshire</settlement>
+									<region>Ontario</region>
+									<country>Canada, USA, United Kingdom</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<affiliation key="aff3">
+								<orgName type="institution">Microsoft Research</orgName>
+								<address>
+									<settlement>Redmond, Washington</settlement>
+									<country>USA, USA</country>
+								</address>
+							</affiliation>
+						</author>
+						<title level="a" type="main">Understanding How People with Limited Mobility Use Multi-Modal Input</title>
+					</analytic>
+					<monogr>
+						<imprint>
+							<date/>
+						</imprint>
+					</monogr>
+					<idno type="DOI">10.1145/3491102.3517458</idno>
+				</biblStruct>
+			</sourceDesc>
+		</fileDesc>
+		<encodingDesc>
+			<appInfo>
+				<application version="0.7.1" ident="GROBID" when="2022-07-22T04:56+0000">
+					<desc>GROBID - A machine learning software for extracting information from scholarly documents</desc>
+					<ref target="https://github.com/kermitt2/grobid"/>
+				</application>
+			</appInfo>
+		</encodingDesc>
+		<profileDesc>
+			<abstract>
+<div xmlns="http://www.tei-c.org/ns/1.0"><p>Figure 1: Examples of various accessible multi-modal input devices: (a) multiple QuadSticks; (b) a custom controller connected to the Xbox Adaptive controller; (c) mouse and keyboard used with a typing stick; and (d) switches connected to the Xbox Adaptive Controller (via YouTube [1, 11, 15, 16]). Images © Shot Callers Esports, ELEAGUE, MIZINO: In Over My Head, and ABSHOW, respectively.</p></div>
+			</abstract>
+		</profileDesc>
+	</teiHeader>
+	<text xml:lang="en">
+		<body>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="1">INTRODUCTION</head><p>Input devices are a crucial component of communicating with computers. At their core, input devices convert user-generated signals, such as physical movements, to input intelligible by computers <ref type="bibr" target="#b17">[18]</ref>. For example, a mouse converts arm and wrist movement into 2D cursor movement, and fnger fexion into selection. Embedded in the design of a mouse are the assumptions that users can make both coarse-and fne-grained arm movements, and that they possess the dexterity in their fngers to press buttons. Similarly, a standard video game controller enables a variety of game input but assumes that users have the strength and dexterity in their hands and fngers to interact with the joysticks, buttons, and triggers while simultaneously gripping the controller.</p><p>When users' movement abilities do not match the movement assumptions made by input devices, those devices, and the experiences they enable, may be inaccessible. Prior work has shown that people with limited mobility often encounter accessibility barriers when their abilities do not match these assumptions <ref type="bibr" target="#b48">[49,</ref><ref type="bibr" target="#b49">50]</ref>. For example, people who experience tremors might have difculty button and joystick placement implicitly assumes a two-handed grip.</p><p>Although an experience can be made more accessible by application developers (e.g., through accessibility options in the application) and hardware designers (e.g., adaptive devices such as the Xbox Adaptive Controller <ref type="bibr" target="#b52">[53]</ref>), it is often up to individuals to address their own accessibility needs. In some cases, overcoming accessibility challenges involves creating a unique input device confguration with multiple devices working in tandem. This approach, known as multi-modality, is a topic of interest within the feld of HCI <ref type="bibr" target="#b34">[35,</ref><ref type="bibr" target="#b35">36,</ref><ref type="bibr" target="#b39">40]</ref>. Previous work has established various conceptual models of multi-modal computation for accessibility <ref type="bibr" target="#b19">[20,</ref><ref type="bibr" target="#b42">43]</ref> without exploring how these models are applied. Further work applies and evaluates these multi-modal input techniques <ref type="bibr" target="#b6">[7,</ref><ref type="bibr" target="#b23">24,</ref><ref type="bibr" target="#b37">38]</ref> in lab settings. However, in addition to a lack of emphasis on people with limited mobility, these works lack a practical understanding of how people use multi-modal input and what infuences their decisions when constructing input confgurations in real-world scenarios. If researchers and practitioners were to know more about how people with limited mobility use, confgure, and experience multimodal input, they could create more accessible experiences that take advantage of peoples' real-world practices and preferences.</p><p>Our work contributes to the wider discussion of accessibility within cross-device computing by exploring three research questions: (RQ1) Which input devices do people with mobility limitations use, and how do they combine and confgure these devices? (RQ2) How does application or usage context afect these device or confguration choices? (RQ3) How could developers and designers use these existing input confgurations and practices to inform the design of future accessible multi-modal systems? We grounded our investigation within the context of video games, as previous work shows that gaming is a common setting for both real-world multi-modal input and accessibility research <ref type="bibr" target="#b1">[2,</ref><ref type="bibr" target="#b33">34,</ref><ref type="bibr" target="#b50">51]</ref>.</p><p>To illustrate how people with limited mobility choose, set up, and use multi-modal input, we explored the device ecology <ref type="bibr" target="#b4">[5,</ref><ref type="bibr">17]</ref> of this space through a three-part investigation. First, we surveyed 43 people with limited mobility about the input devices and confgurations they use. We found that multi-modal input was common and that most multi-modal device confgurations were user specifc. Next, we interviewed 14 people with limited mobility to gain a deeper understanding of the experiences and challenges associated with creating and personalizing multi-modal input confgurations. We found that most accessibility issues with multi-modal confgurations-as with input in general-occur at two key connection points: between the user and the device, and between the device and the application. Failures at each connection point have their own unique remedies, as described by participants. Additionally, participants often looked to online videos for inspiration when creating and confguring multi-modal setups (Figure <ref type="figure">1</ref>). Inspired by our participants' discovery process, we performed a systematic review of 74 YouTube videos to categorize and illustrate real-world examples of multi-modal input. We found that input confgurations and usage styles vary based on individual platform and device compatibility.</p><p>Our paper makes the following three contributions: (1) empirical results from a three-part investigation on the landscape of multimodal input for people with limited mobility, including setups, compatibility challenges, and associated remedies; (2) the identifcation and description of users' adaptation processes for combining input devices to overcome accessibility barriers; and (3) a discussion on how our fndings can infuence research and practice within HCI and the wider accessibility community. Together, these fndings provide a description of the ecology of multi-modal device use by people with limited mobility.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2">RELATED WORK</head><p>We discuss related work on multi-modal input and the research methods used to study it in-situ. The evaluation of multi-modal interfaces is a common topic within HCI, with previous work providing broader reviews of the area <ref type="bibr" target="#b34">[35,</ref><ref type="bibr" target="#b39">40,</ref><ref type="bibr" target="#b45">46]</ref>. In addition to underlying conceptual models of multi-modality, we discuss work involving combinations of multiple software or hardware input systems. To inform our methods and help us examine real-world multi-modal input, we also discuss research about accessibilityoriented systematic reviews and research on accessible gaming devices.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.1">Conceptual Models of Multi-Modality</head><p>Understanding how people use multi-modality involves the theoretical knowledge of how to categorize both unimodal and multi-modal input. Buxton <ref type="bibr" target="#b8">[9]</ref> unifed two taxonomies of input into a generic scheme for classifying sensing properties of input devices, establishing a tableau of continuous input devices alongside ways that these devices can be combined. Similarly, Mackinlay et al. <ref type="bibr" target="#b23">[24]</ref> examined the inputs involved in a system, conceptualizing generic interactions as tuples including device, input domain, output domain, and system state. Oviatt <ref type="bibr" target="#b35">[36]</ref> described a broader overview of multimodal interaction design and provided a basic groundwork for the cognitive science behind multi-modal interaction. Expanding on the wider theory of input devices, Savidis and Stephanidis <ref type="bibr" target="#b42">[43]</ref> discussed the Unifed Interface Design Method, ultimately decomposing multi-modal input tasks into three sub-tasks: user tasks (what the user has to physically do), system tasks (feedback the system must provide), and physical design (the various physical interfaces upon which the user performs the task). Within accessibility, Karpov and Ronzhin <ref type="bibr" target="#b19">[20]</ref> proposed a conceptual model of a universal assistive technology architecture, using multi-modality to span several input devices across both software and hardware. Karpov and Ronzhin used this model to propose a system with a fve-layer structure that bridges computer hardware, middleware, signal processing, interaction techniques, and assistive technologies in its design, but they did not evaluate the system's real-world utility or user preference.</p><p>Conceptual models of multi-modality are important as they supply initial structure for describing and discussing multi-modal interaction. However, as implementations of these models develop, messy tradeofs, cuts, and optimizations happen that are not necessarily present in their theoretical underpinnings. As a result, these models provide insufcient insight into the experiences, confgurations, and wider design ramifcations of real-world multi-modal input usage. Our work uses the structures defned in these conceptual models as a tool for describing real-world multi-modal input confgurations.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.2">Multi-Modality in Practice</head><p>In addition to conceptual investigations, prior work has also evaluated a variety of instances of multi-modal interfaces. Zander et al. <ref type="bibr" target="#b51">[52]</ref> created and evaluated a system that combined eye gaze and brain signal input applied to a search-and-select task, fnding that their multi-modal interface was slower but more accurate than using eye gaze alone. Lee et al. <ref type="bibr" target="#b22">[23]</ref> evaluated the efectiveness of a multi-modal augmented reality interface that combined freehand gestures with speech input to change the shape and color of virtual objects, and Kammerer et al. <ref type="bibr" target="#b18">[19]</ref> evaluated the combination of speech and gaze to understand how combinations of menu designs and input devices impacted accuracy and completion time of a menu selection task. The multi-modal interfaces were not clear winners in either investigation when compared to their constituent input devices, leading the authors to suggest that cognitive load should be a prominent consideration in multi-modal interface design. This insight was corroborated by Ruiz et al. <ref type="bibr" target="#b40">[41]</ref>, who demonstrated that users choose difering input methods (in their case, redundant or complementary) depending on cognitive load. Other applications of multi-modality include combining inputs commonly found within cars for use while driving <ref type="bibr" target="#b32">[33]</ref>, combining speech and pen input to write mathematical equations <ref type="bibr" target="#b3">[4]</ref>, and combining pen and touch input using the edges, faces, and corners of a small pencil tool <ref type="bibr" target="#b11">[12,</ref><ref type="bibr" target="#b46">47]</ref>.</p><p>More relevant to our work is literature that examined multimodality for accessibility and in assistive technology. Smith et al. <ref type="bibr" target="#b43">[44]</ref> used speech and head tracking for object selection in both general computer use as well as Augmented and Alternative Communication (AAC) systems. Similar work combined gaze-tracking with a keyboard <ref type="bibr" target="#b5">[6]</ref> and with face-tracking <ref type="bibr" target="#b38">[39]</ref> to emulate mouseand-keyboard input. Keates et al. <ref type="bibr" target="#b20">[21]</ref> combined head-tracking and joystick input to emulate keyboard-and-mouse input, fnding that cognitive load and training impact the usability of a multi-modal system.</p><p>These evaluations show that cognitive load is a prominent factor in a user's preference between traditional and multi-modal input systems, and that emulation of input is a benefcial feature of accessible multi-modal systems. Additionally, work like that of Smith et al. <ref type="bibr" target="#b43">[44]</ref> and Keates et al. <ref type="bibr" target="#b20">[21]</ref> show that combining devices has clear usability benefts. However, these works do not describe how people use these input combinations outside of laboratory settings. There remains a gap in understanding the organic preferences, challenges, and overall experiences of people who use accessible multi-modal input in their daily lives. Our work uses the usability insights from these studies to inform our interviews with participants, and identifes additional real-world factors that afect users' preferences between traditional and multi-modal input systems.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.3">Evaluating Accessibility: Gaming and Social Media</head><p>We examine how people who play video games use multi-modal input. Previous works frequently used gaming as a lens for evaluating accessible input devices and techniques, the insights from which can be applied to wider HCI contexts. In addition to systematic reviews <ref type="bibr" target="#b1">[2]</ref>, evaluating assistive technology's prevalence in realworld applications has involved surveys of individual games <ref type="bibr" target="#b50">[51]</ref>,</p><p>diary studies <ref type="bibr" target="#b33">[34]</ref>, and using web content accessibility guidelines as a heuristic to evaluate the accessibility of individual games <ref type="bibr" target="#b41">[42]</ref>.</p><p>Evaluating technology accessibility can also involve in-situ observations. While in-situ observations can provide high ecological validity, they may not scale well and are sometimes not logistically possible. Furthermore, lab studies that include people with limited mobility often face low participant numbers or small population cross-samples. Anthony et al. <ref type="bibr" target="#b2">[3]</ref>, in a study of accessible touchscreen use in people with limited mobility, bypassed participant recruitment issues by examining user-generated YouTube videos instead of interacting with people directly. The authors presented the analysis of the videos alongside survey data, showing the efectiveness of social media for collecting in-situ examples.</p><p>Our investigation used a multifaceted approach to understanding the range of user experiences associated with accessible multimodal input systems. As such, in conjunction with traditional qualitative analysis techniques, we explored this space using the tools described in earlier gaming, accessibility, and social media research. We combined the more applied focus of the gaming-related works with the social media approach of Anthony et al. <ref type="bibr" target="#b2">[3]</ref> to more thoroughly describe real-world usage behaviors.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.4">Summary</head><p>Designing accessible multi-modal input systems requires knowledge of users' real-world usage habits, including the relationship between people and their own devices. Prior work has explored conceptual models, applications, and accessibility evaluation methodologies of multi-modal input, but lack a practical understanding of multi-modal input from a real-world user perspective. This lack of understanding is especially prevalent when focusing on accessibility and people with limited mobility. Previous work has shown that describing device ecologies is a critical early step in understanding the afordances and implications of various categories of computing <ref type="bibr" target="#b7">[8,</ref><ref type="bibr" target="#b24">25]</ref>. As such, to provide a full understanding of realworld usage, we focus our investigation on describing the ecology of multi-modal input devices for users of conventional computing systems with limited mobility. We describe this ecology with the results of a three-part investigation that uses the prior conceptual models <ref type="bibr" target="#b8">[9,</ref><ref type="bibr" target="#b19">20]</ref> as a framework for analysis, the usability insights of the lab studies <ref type="bibr" target="#b5">[6,</ref><ref type="bibr" target="#b21">22,</ref><ref type="bibr" target="#b38">39]</ref> to guide our interviews, and the social media approach of Anthony et al. <ref type="bibr" target="#b2">[3]</ref> for our systematic review methodology.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3">A THREE-PART INVESTIGATION THROUGH VIDEO GAMES</head><p>While multi-modal input systems are a common topic within HCI research, the prevalence, user habits, and accessibility ramifcations of multi-modal input systems are currently unclear. Our work illustrates these habits and contributes to the wider discussion of accessibility within cross-device computing through three topics: the prevalence of input devices in users with limited mobility, including combinations and confgurations (RQ1); the impact of usage context on these input confgurations and their associated usability (RQ2); and how these confgurations can be better discovered and supported in conventional applications (RQ3).</p><p>To recruit survey respondents and interview participants, we contacted organizations and communities that focus on video game accessibility for people with physical disabilities. As a result, gaming was a common consideration in our respondents' and participants' multi-modal setups. In addition to previous work evaluating accessibility through gaming <ref type="bibr" target="#b36">[37,</ref><ref type="bibr" target="#b50">51]</ref>, we believe gaming was an appropriate context for our investigation because it fts three primary criteria: it requires complex multi-modal input to cover a reasonable range of input scenarios; it demands multi-modal input frequently enough that users must prepare or adapt to it for full utility; and it uses devices that are or could be used within other computing contexts. Video games often require quick and repetitive input across several devices (e.g., mouse and keyboard in PC gaming; headset and controllers for VR), which is usually pivotal to efective control of the game. Video game input devices are used in other contexts within HCI as well as general input scenarios <ref type="bibr" target="#b25">[26,</ref><ref type="bibr" target="#b28">29,</ref><ref type="bibr" target="#b47">48]</ref>.</p><p>The multi-modal input situations common in games also frequently occur within general computing. For example, 3D CAD (Computer Aided Design) software such as Fusion 360 often requires complex multi-modal input combinations to manipulate objects in a 3D space -an action that occurs often in video games. Similarly, as VR gains popularity in non-gaming social and productivity contexts, the multi-modal input techniques originally developed for VR games enter the realm of conventional non-gaming VR usage <ref type="bibr" target="#b29">[30]</ref>. We grounded our investigation within the context of video games as it is a generalizable real-world setting for multi-modal input.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4">SURVEY</head><p>Previous work categorized and characterized multi-modal input <ref type="bibr" target="#b6">[7]</ref> but lacked insight into how multi-modal input is utilized in real-world scenarios. To answer RQ1 and understand how people with limited mobility use multi-modal input, we frst assessed the prevalence of their input devices and frequently utilized combinations.</p><p>We surveyed 43 respondents recruited via online postings and word-of-mouth. The survey took approximately 20 minutes to complete and respondents who completed the survey were entered into a draw for one of three $50 Amazon gift cards.</p><p>Our survey covered the following topics: respondents' demographic information and the nature of their mobility limitations; computing devices they use regularly; input devices they use regularly; and their experiences with combining multiple input devices to complete tasks. Answer formats included open-ended text responses, multiple-choice questions, and scale ratings. The supplementary materials provide more details about the survey, including all questions asked of our participants.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.1">Analysis</head><p>We analyzed the survey data using a combination of open and axial coding <ref type="bibr" target="#b9">[10]</ref>. The frst author read and open coded responses to the open-ended survey questions, using inductive analysis <ref type="bibr" target="#b27">[28]</ref> to identify common topics. Then, the frst author and three additional authors conducted an axial coding step, creating and iterating on six thematic categories based on participants' responses. Our cooperative approach allowed us to work towards agreement on the key themes present in the data, which is a common method in qualitative data analysis <ref type="bibr" target="#b26">[27]</ref>.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.2">Demographics and Mobility Limitations</head><p>Respondents were aged between 8 and 62 with a median age of 33. Of the 43 respondents, 32 identifed as men, 8 as women, and 2 as non-binary. One respondent did not list their gender. As a condition of participation, all participants self-reported as having limited mobility. Respondents reported a variety of mobility limitations, the most frequent being difculty holding (34 respondents), difculty gripping <ref type="bibr" target="#b33">(34)</ref>, low strength <ref type="bibr" target="#b25">(26)</ref>, slow movements <ref type="bibr" target="#b22">(23)</ref>, and difculty controlling movement distance <ref type="bibr" target="#b18">(19)</ref>. Respondents considered themselves experienced with computers, as 42 of 43 respondents rated their computer expertise 3 or higher on a 1-to-5 scale. Fifty percent of respondents started using computers at or before age 10, and 50% acquired their disability at or before age 16. When asked on a scale from 1 ("Never") to 10 ("Always") how often they use two or more devices simultaneously, 33 respondents (77%) rated 5 or higher, with 22 respondents (51%) answering 10. Table <ref type="table" target="#tab_0">1</ref> shows the number of mobility limitations reported by survey respondents, and full respondent demographics can be found in the appendix (Table <ref type="table">6</ref>).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.3">Computing Devices</head><p>To establish a baseline usage rate for each device, respondents were asked to list the computing devices they have in their home (Figure <ref type="figure" target="#fig_0">2</ref>). Unsurprisingly, smartphones, desktops, and laptop computers were the most common. The adoption of game consoles was lower than we expected considering this population was more oriented towards gaming. One possible explanation could be that despite recent improvements to accessible game controller platforms <ref type="bibr" target="#b52">[53]</ref>, consoles' lower compatibility with third-party input devices can still present a challenge to end-users, prompting them to play games on other platforms like desktop or laptop computers.</p><p>Similarly, the low adoption of standalone VR systems speaks to the still-pervasive inaccessibility of these devices [14, 32], particularly for people with limited mobility. The reason for this diference in adoption, especially compared to devices like smartphones, could be the extremely diferent assumptions these devices make about users' mobility. The most pervasive mobility limitations in the survey were difculties with gripping, holding, and general strength, all of which can present challenges when using current VR controllers <ref type="bibr" target="#b12">[13,</ref><ref type="bibr">14,</ref><ref type="bibr" target="#b31">32]</ref>. Respondents confrmed their accessibility issues with VR in the open-ended questions, for example respondent #3: "For normal gaming and computer usage I am fne. I would like to be able to use VR/MR technology that depends on full mobility, e.g., leg-based mobility. "</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.4">Individual Input Devices</head><p>We also asked respondents to list input devices they use to interact with their computing devices (Figure <ref type="figure" target="#fig_1">3</ref>). Mouse and keyboard are the de facto standard for desktop computer input, making their popularity unsurprising. Respondents also reported using voice input as often as a keyboard and mouse, which is similarly unsurprising  given the prevalence of voice input in society (e.g., smartphone voice assistants, smart home devices). Devices specifcally marketed as assistive devices (e.g., switches, mouth-controlled joysticks) only begin to appear at the 8 th most common position, which could be due to cost or compatibility barriers. Alternatively, disability is a wide spectrum, meaning it could be the case that our respondents' movement abilities did not necessitate more specialized devices.</p><p>Overall, the device use data illustrates how individuals' abilities and preferences can lead to a wide variety of adopted input devices. We further categorized these input devices based on the signal domain <ref type="bibr" target="#b8">[9,</ref><ref type="bibr" target="#b23">24]</ref> they support. At a sensor level, input signals are categorized as either discrete (on or of, like a button) or continuous (any intermediate point within a given input space, like a dial) <ref type="bibr" target="#b8">[9,</ref><ref type="bibr" target="#b23">24]</ref>. These two categories cover most but not all devices. For instance, modern devices often combine multiple continuous and discrete inputs, like a controller with multiple joysticks and buttons, which makes these categories complicated to apply at a device level. Likewise, the broad range of natural language makes voice input hard to categorize as either discrete or continuous. As a result, we separated controllers and voice into independent categories. Other devices, like mice with several buttons, could ft this characterization, but we addressed this variance by categorizing each device's primary axis of input. For example, the mouse's two-dimensional motion sensing places it in the Continuous category.</p><p>While it is unsurprising that continuous devices are the most common based on the commonality of the mouse and touchscreen, the lack of diversity in discrete input devices is interesting. Keyboards are common, while other discrete input devices see little use. This could indicate compatibility issues or difculty in setting up a switch-based confguration. For example, respondent #43 writes: "Complicated games need too many switches, making setups bulky to use".</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.5">Input Combinations</head><p>Respondents also answered questions about how they combined their input devices. They answered open-ended questions which prompted them to describe and rate each combination of input devices they use. Further questions involved describing the experience of setting up, switching to, and using these input combinations.</p><p>Respondents reported 37 unique combinations of 21 unique input devices, and 52 combinations in total (Figure <ref type="figure" target="#fig_2">4</ref>). Most input confgurations involved 2 or 3 devices, four others used 4 devices,   and one combination used 5. In addition to the most popular combination of mouse and keyboard, most input combinations reported by at least 2 participants each used a pointing device (like a mouse or trackpad) alongside a typing device (like a physical or virtual keyboard). However, this commonality in confgurations describes only a small part of the data set. Most device combinations occurred only once among all respondents, and 14 of 37 did not feature mice or keyboards. Detailed information on each device combination can be found in supplementary materials. When asked how to improve each input combination, respondents provided a variety of answers describing their experiences.</p><p>We used a combination of open and axial coding to categorize these responses into 6 themes listed in Table <ref type="table" target="#tab_1">2</ref> Our device combination data showed that there is no one-sizefts-all design solution for accessible multi-modal input. When the use of the most common input devices (in this case, mice, touchscreens, and keyboards) is difcult or impossible, the device combinations used to compensate can vary just as much as individual users' abilities. Respondents described this issue in detail, citing inter-compatibility and switching between input confgurations as some of the main avenues for improving input combinations. As the number of devices available to users continues to grow, it will </p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5">USER INTERVIEWS</head><p>Our survey shows that multi-modal input is common, but setups can vary widely depending on individual accessibility needs (RQ1). Deeper insight into these needs, including experiences, challenges, and solutions, can be useful to designers and developers supporting multi-modal input systems. To gain these insights and answer RQ2, we interviewed people with limited mobility about their multimodal input confgurations.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.1">Participants</head><p>We recruited 14 people with limited mobility to participate in our study. Participant ages ranged from 19 to 44 with a median age of 33.</p><p>Of the participants, 11 identifed as men and 3 identifed as women. Three of the interview participants also completed the survey. Table <ref type="table" target="#tab_2">3</ref> provides full demographics and mobility limitations.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.2">Interview Protocol</head><p>Participants and interviewers connected over Microsoft Teams.</p><p>Each interview lasted approximately one hour, and participants were compensated with a $50 Amazon gift card. After a small introduction of the interviewers and explanation of the topic, participants answered demographic questions and discussed their selfidentifed disability. Participants then listed all computing devices they actively use. For each device, we asked participants to describe their preferred input devices, followed by open-ended questions exploring their usage experience. We took inspiration for the openended questions from the categories for input improvement from the survey results (Table <ref type="table" target="#tab_1">2</ref>), and a sample of the questions can be found in supplementary materials.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.3">Analysis</head><p>We recorded and transcribed each interview, and this data is available to participants upon request. We analyzed the interviews using thematic analysis, employing a combination of open and axial coding <ref type="bibr" target="#b9">[10]</ref>. The frst author (also the primary interviewer) performed open coding, using an inductive approach to separate participants' device usage and customization practices into codes. Following the open coding step, the frst author and three additional authors conducted an axial coding step, iteratively refning the codes into themes based on similarity and relevance. Similar to our analysis of the survey data, our cooperative and iterative coding approach allowed us to work towards consensus on relevant themes <ref type="bibr" target="#b26">[27]</ref>.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.4">Results</head><p>Participant discussions focused primarily on fve aspects of multimodal input: how accessibility drives their input device and game purchase decisions, adapting individual devices to their accessibility needs, customizing their applications, confguring multi-modal input setups, and fnding new multi-modal confgurations. We describe the results and primary themes from the participant discussions.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.4.1">Choosing</head><p>Platforms, Input Devices, and Games. Discussion with participants involved several open-ended questions about their input devices, as well as their preferred games and game genres. Table <ref type="table" target="#tab_3">4</ref> shows participant input device and game genre preferences, and specifc game titles mentioned by participants are included in the supplementary materials. Participants reported playing games on a variety of platforms including mobile and console, but primarily preferred PC games due to the higher level of compatibility with assistive devices. Participants often gravitated toward slower-paced games like role-playing games and adventure games because the fast reaction times needed in genres like frst-person shooters was often an obstacle with their custom input confgurations. Some participants avoided online games entirely due to their limitations. P1 explained: "I have to make the choice between moving my character and [performing other Mouse, virtual keyboard, voice input, physical keyboard, controller, VR headset, touch Strategy screen in-game actions]. I don't move that fast to begin with and that can be tiring. I don't often play in groups since they usually don't understand why I'm moving slow." 8 of the 14 participants mentioned their preference for slower-paced role-playing games.</p><p>Participants noted their use of word-of-mouth recommendations and accessibility forums as a frst step in their game research process, as described by P4: "if we [herself and similarly-abled friends on accessibility forums] fnd a game that works really well for us, we'll tell each other so that we can play together. "</p><p>Participants noted making extensive use of subscription game trials, and return systems as a safeguard against buying games that are incompatible their capabilities or input confgurations. If a purchased game is inaccessible, participants will return these games using the refund system available in most online game stores. Game subscription services let users download unlimited games from an online catalog at a single monthly cost, meaning that trying inaccessible games has no fnancial consequence. P9 confrms: "Xbox Game Pass [a game subscription service] has been great for trying games to explore their accessibility. " 5.4.2 Individual Device Adaptations. Participants noted the use of several devices (Table <ref type="table" target="#tab_3">4</ref>) and discussed their experience using these input devices as well as how these devices ft into their setups. If they found a device to be inaccessible, participants would often adapt their usage of the device for improved accessibility. Each device usage variation reported by participants fts into one of four categories:</p><p>1. Conventional usage involves a user interacting with a system's typical input device (e.g., controller on a game console) in the most common way, albeit with potential alternate control schemes to make easier. For example, P14 used a mouse conventionally, but added additional software functionality to its buttons to compensate for his reduced ability to use a keyboard. 2. Adapted grip involves using the device in a position diferent than conventional. For example, using an Xbox controller with only one's feet (P9) or holding a PlayStation controller sideways in one hand (P3). 3. Adapted device usage involves physically modifying the input device to make it more accessible. For example, P12 wrapped the left joystick of his Xbox 360 controller in tape to make it easier to manipulate with reduced dexterity (Figure <ref type="figure">5a</ref>). 4. Alternate device usage involves substituting a input device for another device entirely. This includes using a custom-made accessible gamepad (P10, Figure <ref type="figure">5b</ref>), or aftermarket assistive devices a QuadStick 1 or Xbox Adaptive Controller 2 . Participants adopted these individual device adaptations to address mismatches between their movement abilities and devices' supported movements. As in the survey, the range of adaptations and alternate devices depended on users' unique mobility. Moreover, users reported adapting their existing devices when more accessible alternate devices were unavailable or unsupported, trying to "[change the] ergonomics as best you can within the confnes of the controller" (P10).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.4.3">Customization.</head><p>The wide range of input devices and user adaptations means that ensuring software compatibility is a process often left up to the user. In conjunction with usage style adaptations, 5: (a) controller P12 modifed to make its joystick easier to use. (b) The custom controller created for P10 as an accessible substitute for other game participants would apply software customizations to make applications more compatible with their input confgurations. Participants described using remapping, or reassigning software functions to alternative controls or input Several participants felt that remapping was important to accessibility. P2 elaborates: "A lot of games have controls on diferent ends of the keyboard, and that's a hard thing for me to do. Games that support remapping are really great for me".</p><p>Two forms of remapping emerged: changing between premade control schemes provided by an application, or reassigning functionality to diferent inputs individually. Important to note is that premade control schemes commonly only swap controls within the same input device (e.g., alternate button mappings on a standard controller), rather than supporting the use of multiple devices. Participants noted that premade control schemes were frequently incompatible with assistive input devices thus forcing them to remap individual functions and inputs, which often required several hours of trial and error. P10 describes this increased cognitive load: "the frst two full sessions [using a remapped control layout] are just fguring it out". strategies infuenced by the game's controls, the game's genre (i.e., frst-person shooters diferent controls than role-playing games), and even context within a single game. An example from P8: "Overwatch [a frst-person shooter] has diferent game mechanics and controls for each character, so my remapping settings are totally diferent each time".</p><p>Applications sometimes demanded the use of inaccessible devices, while simultaneously ofering minimal support for remapping. To address this issue, participants would often use virtualization, or emulating the use of an inaccessible device through software. For example, P1's limited ability to use a keyboard prompted to use a mouse alongside an onscreen keyboard playing certain games, efectively virtualizing the keyboard through the mouse. P4 described virtualizing a touchscreen through her computer input devices: "A lot of games are hard for me to use through my phone, so I use [a phone companion program] to use my phone through my computer". Several participants mentioned using voice to virtualize keyboard input, either for typing or for individual game commands through applications like VoiceAttack 3 . Similarly, several participants reported using joystick input to virtualize keyboard input using applications like Joy2Key 4 .</p><p>Combining Multiple Devices. Like in the survey, reported using a wide array of multi-device input confgurations which matched their individual abilities. Most participants reported using multiple devices at the same time, such as a trackball and trackpad (P7) or a joystick and switches (P8), to do one input task. Participants used these devices in tandem to complete a typically inaccessible task, or to supplement the functionality of an existing assistive device. For example, P7 found click-and-drag interactions inaccessible, so he separated the task's components between devices, maintaining a mouse click with the trackpad in his left hand and moving the cursor with a trackball in his right hand. P4 uses a touchscreen and joystick simultaneously to interact with her smartphone, describing her usage: "Phone screens are so big these days so I can't reach [items at the top of the screen]. In those cases, I use the joystick".</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.4.5">Discovering New Configurations.</head><p>The wide range of disability makes the process of fnding an accessible and sufciently compatible device confguration extensive and complicated. To remedy this, participants often looked to social media to fnd content creators with similar abilities, using creators' depicted confgurations as inspiration for their own accessible device setups. P7, who plays games with a combination of a trackball, trackpad, and joystick, learned about this confguration from creators on YouTube and Twitch. Similarly, P8 noted: "usually I'll search around for setups using Google, further research using YouTube". described how reviews on YouTube and Reddit were a critical part of his process for setting up his input devices. Every six months, he and his recreational consulted videos on YouTube and Reddit for gamers with his disability and observed and recreated input setups.</p><p>Despite these processes, barriers to exploration persist. Motivation and time to a new input confguration is often an obstacle when searching for and creating new setups. As P6 described: "Even if it's more or less helpful, it's still another device to learn". Participants reported knowledge of dedicated assistive devices but were less knowledgeable in creating their personal ideal setup. As P3 described: "I've heard of devices like the Xbox Adaptive Controller, I'm not sure what kind of a setup would be best for me". Likewise, often-arduous process of customizing accessibility settings is its own barrier. P5 explains: "Even when you're looking for the accessibility options, they're hidden. It takes you out of the immersion of the game to go hunting for the settings that make the game playable".</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.5">Discussion</head><p>To understand how people use multi-modality to address inaccessible computing systems, we must understand the underlying Figure <ref type="figure">6</ref>: The two-stage matching process between the three components of interaction with a system. Accessibility issues reported by came from mismatches either between the user and device, or device and application.</p><p>of the people who use multi-modal setups. Discussions with participants revealed common theme between topics adaptation, customization, and exploration.</p><p>Consider a complete interaction involving three sequential components, inspired by Savidis and Stephanidis <ref type="bibr" target="#b42">[43]</ref>: a user, a device, and an application. The preservation of input fdelity from user to application can vary within each component. User input varies with the user's movement ability. Device input varies based on the range of user movement a device detects, and likewise the range of signal it can relay to the application. Finally, application input varies depending on the range of signals an application is prepared to receive and interpret from input devices. Each accessibility issue identifed by participants fell at some point in this sequence.</p><p>This user-device-application input chain involves a two-step matching process: user-device matching, and device-application matching (Figure <ref type="figure">6</ref>). We describe the matching process through its ability assumptions, similarly to Wobbrock et al. <ref type="bibr" target="#b48">[49,</ref><ref type="bibr" target="#b49">50]</ref>. Userdevice matching involves central assumption that a user can manipulate a given input device with the precision and amplitude the device expects. includes both the mobility of the user and correct placement of the device relative to the user. Mismatches occur when a user's abilities do not match the device's assumptions cannot provide input along the device's expected degrees of freedom. Participants remedied these mismatches by adopting alternative usage styles for conventional input devices (e.g., adapted grip, adapted device) or using alternate combinations of devices (e.g., trackball and trackpad). Similarly, device-application matching involves the central assumption that a given device can provide all categories of input which the application expects. Mismatches in this step typically signify an input device which is unable to supply sufcient input fdelity, or an application not natively supporting a given input device. Participants remedied this situation by either reassigning application controls (e.g., game control remapping) or virtualizing the system's expected device (e.g., virtual keyboards).</p><p>often involved a combination of remedies to these mismatches. Participants reported creating multidevice setups to overcome specifc in hardware or software. Changing existing hardware or adding more devices addressed userdevice mismatches. Likewise, changing software controls or adding more software layers for added application compatibility addressed device-application mismatches. Interesting to note is that one could consider virtualizing alternative input devices as its own form of multi-modality, as it efectively assigns several categories of input to a single device. Designers and developers consider this adaptation process to better support multi-modal systems.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="6">SYSTEMATIC REVIEW: YOUTUBE</head><p>Designing to holistically support accessible multi-modality involves understanding how people with limited mobility search for new accessibility solutions. Participants in our interviews would often look to social media when creating a new device confguration, including Facebook, Twitch, and primarily YouTube. We this process of browsing social media to better answer RQ2 and contextualize our input categorizations with additional real-world examples. We conducted a systematic review of 74 YouTube videos to fnd and categorize additional examples of accessible input setups.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="6.1">Procedure, Inclusion Criteria, and Analysis</head><p>Following the example of Anthony et al. <ref type="bibr" target="#b2">[3]</ref>, we assembled a list of 60 accessibility-related keywords and 8 gaming-related keywords (Table <ref type="table">5</ref>). We constructed queries using one accessibility-related keyword and one gaming-related keyword, resulting in 480 total queries. Keywords multiple words (e.g., "assistive technology") were placed in quotation marks upon inclusion in a query. An automated script constructed all possible queries from each combination of two keywords, used the YouTube Search API to construct a list of results for each query. After manual searching revealed that videos past the top 10 results showed low relevance, we limited the searches to the top 10 results for each query. After fltering duplicate results, our initial analysis set included 2061 total videos.</p><p>We fltered videos in our initial analysis set based on their relevance. Relevant videos had to: (1) show a person with limited mobility; (2) clearly display the input device(s) being used; and (3) be uploaded frst-party, by either the player of the game, the player's caretaker, or an organization with the player's consent (e.g., a news interview). third condition specifcally excludes content aggregators like compilation channels, re-uploads, or unauthorized stream recordings. After fltering for relevance, fnal dataset had 74 videos from 66 unique YouTube channels. The median length of the included videos was 12 and 2 seconds, and we examined each video for its entire duration. The full list of videos is included in supplementary materials.</p><p>Next, we created a set of codes for video analysis. We refned and used these codes with a three-phase process. Two researchers individually coded a set of 15 videos (20% of the dataset), followed by discussion of disagreements and refnement of coding dimensions. After this, the two researchers re-coded the same set and calculated Cohen's kappa as a measure of inter-rater reliability for Table <ref type="table">5</ref>: The 60 accessibility keywords <ref type="bibr" target="#b2">[3]</ref> and 8 gaming keywords used to construct YouTube search queries.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Accessibility Keywords (N=60)</head><p>AAC, accessibility, ALS, amputation, amputee, arthritis, assistive technology, ataxia, augmentative communication, brain injury, cerebral palsy, congenital amputation, congenital amputee, disabilities, disability, disease, dystonia, essential tremor, Friedreich Friedreich's ataxia, handicap, hemiplegia, hemiplegic, hydrocephalus, hydrocephaly, Lou Gehrig's, Lou Gehrig's disease, medical amputation, medical amputee, motor disabilities, motor impairment, MS -Microsoft, multiple sclerosis, muscular, muscular dystrophy, myopathy, paralysis, paralyzed, paraplegia, paraplegic, Parkinson's, Parkinson's disease, physical disabilities, psychomotor agitation, quadriplegia, quadriplegic, rehabilitation, sclerosis, seizure disorder, SMA, special needs, spina bifda, spinal, spinal cord injury, muscular atrophy, stroke, TBI, traumatic brain injury, tremor, wheelchair</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Gaming Keywords</head><p>Gaming, video games, videogames, PC gaming, console gaming, gaming setup, XBOX, PlayStation each dimension. Finally, one researcher coded the remaining videos using the refned coding scheme.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="6.2">Results</head><p>We identify general trends in the video dataset. Where relevant, each dimension is accompanied by its Cohen's kappa (κ) as a measure of inter-rater reliability.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="6.2.1">Device Setup.</head><p>In our dataset, 44 videos showed playing on a game console, 27 were on a PC, and 3 were on mobile devices (κ = 0.85, "near perfect agreement"). Videos showing console players showed total unique input combinations, videos of PC players showed unique combinations, and videos of mobile players showed one (Figure <ref type="figure" target="#fig_3">7a</ref>). The most common console confguration was a single game controller (22 videos), while the 3 next most common all involved the Xbox Adaptive Controller and devices that connect to it. The most common PC combination was mouse and keyboard (5 videos), followed a single QuadStick (4 videos), controller plus switches (2 videos), and a single eye tracker (2 videos), with all other unique combinations appearing only once.</p><p>Over all setups depicted in the videos, 38 (51.3%) featured one device used, 23 (31.1%) featured two devices simultaneously, 11 (14.9%) featured three devices simultaneously, and 2 (2.7%) featured four devices simultaneously (κ = 0.76, "substantial agreement"). Most console videos showed device used at a time, while most PC videos showed at least 2 devices used (Figure <ref type="figure" target="#fig_3">7b</ref>). However, the 11 videos showing 3 devices being used, 8 were on console and 3 were on PC. Further analysis showed that all 3-device console videos involved Xbox Adaptive Controller and input devices that interact with it, through either hardware connection or software features like Xbox's Copilot <ref type="bibr">[54]</ref>. One video showed input devices used simultaneously on a PC, and all 3 videos showing mobile phone play used only one input device (touchscreen). Specifc device combination data can be found in supplementary materials.</p><p>The dataset contained 25 videos which showed devices that were customized to the user in some way, including aftermarket hardware customizations, attachments like joystick extensions, or switch placement custom to the depicted user (κ = 0.84, "near perfect agreement"). Of these 25 videos, 16 used consoles and 9 used PC.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="6.2.2">User Position.</head><p>As described in the interviews, adaptations in device usage can fall into one of four categories: conventional usage (typical device, typical usage), adapted grip (typical device, held or used in a non-typical position), adapted device (typical device with hardware customizations), and alternate device (separate device entirely). In our dataset, 31 videos used an alternate device, 27 used an adapted grip, 14 used an adapted device, and only 2 used the conventional style (κ = 0.82, "near perfect agreement"). The console videos showed more even spread between adapted device, adapted grip, and alternate device (12, 18, and 13 respectively, 44 videos), while PC videos skewed toward alternate device with 18 of 27 total videos (Figure <ref type="figure" target="#fig_3">7c</ref>). Over all videos, 11 videos showed users actively swapping between devices or setups mid-game. 71 of the users in the videos were sitting, and 3 were lying down.</p><p>Our dataset showed players using several diferent body parts to interact with their input devices, including fngers, palms of hands, feet, mouth, and chin (κ = 0.72, "substantial agreement"). Most console videos showed people using two body parts at the same time (e.g., chin plus palm of hand), while most PC videos showed people using one body part at a time (Figure <ref type="figure" target="#fig_3">7d</ref>). Console and PC videos each had one video of 3 body parts used simultaneously, and the only video showing four body parts used simultaneously was using PC. Of the 44 console users, only 5 interacted with their devices without using hands or fngers, while 16 of 27 PC users interacted without hands or fngers. The most common non-hand interaction used the mouth (8 videos).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="6.3">Discussion</head><p>Our systematic review simulated the discovery process of a person consulting YouTube for accessible device confgurations and illustrates the range of input confgurations that a typical user could discover. review found further evidence that people with mobility limitations often employ multi-modal input in their gaming setups and demonstrated further just how varied accessible computing setups can be.</p><p>interviews cited compatibility as a prominent consideration in accessible device confgurations, and this efect is also evident in the Device Setup results. Despite console-based setups appearing more often in our video dataset, their input device combinations varied less. Controllers were much more common in console videos than mouse-and-keyboard for PC videos, suggesting that users tended to choose the typical input device for their respective platform more often on console than on PC. Consoles generally have lower compatibility with third-party input devices, and as a result, most console-based confgurations used either a standard controller or the lone frst-party accessible controller (Xbox Adaptive Controller). The higher compatibility of PC might be why users could use an alternate device more often.</p><p>Moreover, while the PC videos tended to favor the simultaneous use of two relatively independent inputs (e.g., QuadStick and voice input), the Xbox Adaptive Controller serves as a hub for more atomic input devices like external switches or joysticks, explaining its prominence in 3-device console confgurations as well as the higher representation of 3-device confgurations in consoles as a whole.</p><p>The impact of device compatibility is especially clear in the User Position results. While PC videos tended to favor using a completely diferent device, console videos were more spread, with most users preferring to adapt their existing device or adapt their usage of it. This result suggests that console users, with less choice in devices and lower compatibility with their existing assistive inputs, remedy their accessibility issues with adapted usage styles instead of swapping out their device altogether. Figure <ref type="figure" target="#fig_4">8</ref> shows examples of these adaptations. The reduced variety of input devices for consoles could also explain the more prominent 2-body part and hand use in console players. Although console players used adapted usage styles more often, it remains true that controllers are primarily designed for use with two hands or fngers, prompting those body parts' usage. Devices that use non-hand body parts, like the mouthcontrolled QuadStick or eye trackers, were more common in PC videos, explaining the higher representation of 1-body part devices in PC videos.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="7">GENERAL DISCUSSION</head><p>Researchers and practitioners have made signifcant progress in making computer systems and video games more accessible to peowith limited mobility. Advancements in software (e.g., VoiceAttack), hardware (e.g., Freedom 5 , and multi-modal interaction 5 https://ablegamers.org/charting-the-future-with-the-freedom-wing/) techniques <ref type="bibr" target="#b6">[7,</ref><ref type="bibr" target="#b23">24,</ref><ref type="bibr" target="#b37">38]</ref> have allowed people to interact with previously inaccessible systems. Although these advancements have improved access for many, people still encounter challenges with input devices and applications. Our investigation builds on previous accessibility work <ref type="bibr" target="#b2">[3,</ref><ref type="bibr" target="#b19">20,</ref><ref type="bibr" target="#b20">21]</ref> to illustrate how with limited mobility multi-modality to overcome these challenges.</p><p>Although many of our were situated within the context of gaming, our fndings are relevant to diferent applications and contexts that rely on multi-modal input. Our survey found that multi-modal input confgurations are a common remedy for accessibility issues, with specifc setups varying widely with user ability (RQ1). Our interviews found that participants faced a variety of context-sensitive accessibility issues including lack of knowledge about optimal input confgurations, and they remedied issues by adapting their usage style to the device (user-device matching) or adapting their device to the application (device-application matching). Our YouTube analysis showed that these remedies and associated style categorizations common in a wider realworld dataset, with prominent confguration diferences depending on compatibility as well as user and application context (RQ2).</p><p>We conclude by providing design recommendations informed by this investigation, discussing opportunities for researchers and practitioners to use our fndings to improve the accessibility of current and emerging computing systems (RQ3), and possible limitations in our methods.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="7.1">Design Recommendations (RQ3)</head><p>Our results provide general design guidelines for designers, developers, and researchers creating accessible multi-modal applications and games.</p><p>7.1.1 Generalized Platform-Level Multi-Modality Support. Our results show that users often remedy accessibility issues by creating multi-modal input confgurations involving devices they can already use, but they vary depending on individual mobility. However, the utility of these confgurations greatly depends on the ability of applications and platforms to support them. While it is true that individual developers could add support for the most common input confgurations, the wide variance of combinations (as seen in Section 4) means that covering all combinations would be hard or even impossible. As such, we recommend that developers generalized input compatibility layers that consider signal domain (e.g., continuous, discrete) rather than hardware input recognition (e.g., joystick, button) in their applications. Recognizing input at a more general level allows for greater fexibility in compatible input devices, as well as greater variety of device usage contexts (e.g., adapted device, alternate device from Section 5.4.2).</p><p>Enhanced accessibility support often comes with a greater responsibility placed on developers, meaning that smaller development teams may place less emphasis on accessibility due to time or budget constraints. As such, we emphasize this recommendation for developers operating systems or game platforms. We recommend that developers accessibility and compatibility solutions at the platform or operating system level rather than at the application level. For example, game platforms like Steam or Xbox provide support for remapping the controls of their frst-party devices and conventional input devices, the efects of which propagate to any supported application. Supporting multi-modality at a platform level allows applications to make use of multi-modal input with minimal added work for individual application developers. Wider adoption of these compatibility layers, and compatibility with more devices and input axes, can allow applications and games to support people with limited mobility more easily. Participants in our study often use social media for discovering and sharing input confgurations. However, specifc settings and adjustments needed to accurately recreate online confgurations are hard to infer from social media posts alone. P6 from the interviews describes an example: "I'm really bad at Apex Legends [a frst-person shooter] because I just don't know a good way to lay out buttons in a way that works best for me". Game platforms like Steam have created systems for users to create and share button confgurations, but as of yet, only for frst-party controllers conventional input devices 6  One way to implement this recommendation is with the creation and use of a centralized manifest of hardware confgurations, allowing users to create and share their unique input confgurations on a or per-device basis. This manifest could allow users to upload their device layouts and button mappings for individual applications or games (with accompanying like usage style or additional equipment) and allow prospective users of these applications who own similar devices to more easily discover confgurations that would work for them. In addition to helping end-users directly, developers who pull control schemes from such a system can make applications more responsive to individual user accessibility needs, and reduce the burden on the user to discover, create, and confgure their devices individually. A common confguration discovery tool benefts application developers and end-users mutually, and can make deeper accessibility support a collective, collaborative efort. 7.1.3 Consider Virtual Devices. Our fndings illustrate an input category not included within earlier device ecologies and applications: input devices. One can imagine virtualization as a "translation" of one device's input fdelity (the physical device) to (the virtual device). As such, each combination of physical and virtual device presents diferent afordances input translation fdelity. For example, consider a partial access to the keyboard but supplements this with a mouse-controlled virtual keyboard. Although the hardware is equivalent to traditional keyboard-and-mouse usage, usage habits and accessibility ramifcations difer dramatically. Designers of cross-device applications should consider the role virtual devices play in their applications' broader user experience, and researchers in cross-device computing should consider virtual devices as a meaningful part of future device ecologies.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="7.2">Present Applications and Future Work (RQ3)</head><p>Our work is part of continuing efort to make applicationsincluding games-more accessible to people with limited mobility. We discuss how practitioners can apply our current work and avenues for further exploration.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="7.2.1">Improving Input Customization.</head><p>As our data showed, people a variety of input confgurations, making it difcult to design control schemes that will work for everyone. interview participants fnding inspiration for input confgurations and button mappings using social media, in the case of insufcient online search results the process of creating new confgurations often involved trial and error. This situation surfaces opportunities to improve the control scheme customization experience. One approach to improve customization is to supply details about the importance and frequency diferent actions run jump in a game). Other details, such as if a user must perform actions in rapid succession, could also be useful. With this information, users could more easily map important or common actions to controls that are comfortable and easy to access. Although our work provides insights into the challenges involved in input confguration, future in HCI and application design should resolve these through improvements to the input customization process. 7.2.2 Further Understanding Device Ecologies. Brudy et al. <ref type="bibr" target="#b6">[7]</ref> provided an overview on the ecology of devices within a typical user space and discussed a key challenge in the area of cross-device computing: the importance the symbiosis between cross-device interfaces and human As computing devices take new form factors and contexts, there will be a perpetual opportunity to re-evaluate user device ecologies. This relationship between users' abilities and device requirements extends to multimodal in a similar way. As computing devices-and thus their expected input-grow in number and variety, there are opportunities to evaluate the relationship between abilities and the ability assumptions made by input devices. Our fndings contribute eforts to understand users' device ecologies by describing the input confgurations created by people with limited mobility.</p><p>Researchers utilize knowledge of device ecologies to develop new approaches that allow users to interact with data and applications across multiple devices <ref type="bibr">[8,</ref> It is important to recognize that people with limited mobility use input confgurations that researchers might not have expected accounted for. As a result, advancements in this space might ignore the practices and preferences of people with limited mobility, which can ultimately lead to the development of inaccessible cross-device interactions. Our results give researchers useful data to consult when envisioning accessible interaction methods for diferent scenarios.</p><p>Our fndings show that virtual devices play a critical role within the greater ecology of accessible multi-modal input. However, new input technologies such as brain-computer interfaces (BCI) could redefne the relationship between users and their devices, for example, by allowing the user to eschew physical devices entirely. It is yet to be understood how the relationship between a user and their input devices changes when minimal physical devices are involved. Moreover, the conversion of physical load to cognitive load <ref type="bibr" target="#b18">[19,</ref><ref type="bibr" target="#b40">41]</ref> for BCI could resolve accessibility issues for people mobility limitations but introduce new ones for those with cognitive limitations. While our results provide insight into the role of virtual devices in current accessible device ecologies, future work should explore how these ecologies adapt and respond to the changing landscape of virtual devices. 7.2.3 Spatial Interfaces. Spatial interfaces, like those found in virtual reality (VR) and augmented reality (AR) systems, stretch our current understanding of multi-modal device ecologies. Previous taxonomies take into account the individual sensors involved with 6 degree-of-freedom input <ref type="bibr" target="#b23">[24]</ref>, but the combination of these sensors defnes a gestural language which presents unique challenges that have yet to be solved. Previous work showed that people with limited mobility encountered accessibility barriers when using these systems, which included hard-to-grasp and the expectation of bodily involvement <ref type="bibr" target="#b12">[13,</ref><ref type="bibr">14,</ref><ref type="bibr" target="#b31">32]</ref>. Interview participants were interested in VR, but as P5 described: "It didn't feel immersive because it was clearly designed for able-bodied people. Because the movement and controls were clearly designed for people with a full range of motion, it kind of felt like being disabled all over again".</p><p>Understanding how users can adapt and confgure their existing devices to manipulate spatial interfaces is particularly important for ensuring that the next generation of computing devices are accessible to people with limited mobility. More importantly, it can lead to more inclusive spatial interfaces where virtual representations can be customized to accurately represent users with limited mobility, and where users' input devices are incorporated as frst-party input rather than remapped, adapted, or substitute options. Future work should explore how best to incorporate multi-modal input into the gestural language of spatial interfaces.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Limitations</head><p>We conducted interviews remotely due to the COVID-19 pandemic. As a result, our insights are based on what participants described instead of what we could observe directly. Although our interviews probed for as many input combinations as possible, participants could have neglected to describe prominent input combinations or priorities. Future work should include in-person studies to obtain further insights about multi-modal input setups.</p><p>Disability is a wide spectrum, so our results cannot account for all input device confgurations. Although our fndings highlighted several instances of how people with limited mobility use multimodal input, there will always be perspectives our investigation did not represent. Accessibility considerations evolve as technology advances, and as such, we present this work as the frst of several future iterative investigations.</p><p>We ground our investigation within the context of video games due to its common need for multi-modal input and previous work establishing gaming as an appropriate and generalizable venue for accessibility research <ref type="bibr" target="#b37">[38,</ref><ref type="bibr" target="#b50">51]</ref>. As a result, many of our interview participants and survey respondents were members from accessible gaming communities, which resulted in several insights that were particularly focused on gaming. Although we believe our methods and fndings are generalizable to diferent contexts that might require multi-modal input, there might be other challenges and practices for contexts that our participants have not experienced. Further work could examine people's multi-modal preferences and practices for a broader range of contexts.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="8">CONCLUSION</head><p>As digital devices further embed themselves into every facet of modern life, interactions with computer systems will continue to grow in both number and complexity. As a result, multi-modal computing is becoming increasingly common as both a feld of study and a category of everyday input. Without a specifc focus on accessibility, and considerations for the ability assumptions embedded in multi-modal device confgurations, the constant evolution of technology may leave people with limited mobility behind. While earlier works examined conceptual frameworks or individual multi-modal input techniques for the general population, little work has investigated the everyday of multi-modality by people with limited mobility. We examined how people with limited mobility used multi-modal input as a frst step toward empowering developers and designers to support accessible multi-modality more holistically.</p><p>Accessibility is, at its core, a relational and human efort. As P5 describes, "When you're engaging with someone that might need accessibility features, there really does need to be a relational aspect that says, 'you are invited into this space'". As understanding the considerations, obstacles, and adaptations associated with accessible multi-modality is pivotal to creating inclusive input experiences that invite all users to take part. Though more work will always remain as technology evolves, we provide this investigation as one more resource to help make multi-modal more accessible to everyone.</p><p>APPENDIX A: FULL DEMOGRAPHICS Table <ref type="table">6</ref>: Full demographics of the survey participants. Participant demographics age at which they started using computers ("Computer Age"), acquired their mobility limitation ("Limitation Age"), and their self-reported computer exper-("Computer Skill"). Mobility limitations are in shorthand * for presentation purposes. </p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>ID</head></div><figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_0"><head>Figure 2 :</head><label>2</label><figDesc>Figure 2: Number of respondents who reported using each computing device.</figDesc><graphic url="image-2.png" coords="5,53.80,394.60,249.06,99.73" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_1"><head>Figure 3 :</head><label>3</label><figDesc>Figure 3: The number of respondents who reported using each individual input device.</figDesc><graphic url="image-3.png" coords="6,173.00,83.69,265.99,151.92" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_2"><head>Figure 4 :</head><label>4</label><figDesc>Figure 4: The distribution of 37 unique device combinations and the number of respondents who reported them.</figDesc><graphic url="image-4.png" coords="6,93.80,270.48,424.38,149.93" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_3"><head>7 :</head><label>7</label><figDesc>Proportions of input confguration properties over all videos from the YouTube dataset, separated by computing device used. Properties include the number of: (a) unique input device combinations; (b) simultaneous devices used; (c) usage styles adopted; and (d) body parts used simultaneously.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_4"><head>Figure 8 :</head><label>8</label><figDesc>Figure 8: Examples of adaptations from YouTube videos: a user manipulating a controller with their mouth (adapted grip); (b) a user manipulating a controller with their arm (adapted grip); (c) a controller under the palms of the user's hands with additional buttons provided by the Xbox Adaptive Controller (adapted device); and (d) a switch layout functioning as a completely new controller (alternate device). Via YouTube [55-58]. Images © Gizmo XYT, ABSHOW, Zack Collie, and Charles Diaz, respectively.</figDesc><graphic url="image-8.png" coords="12,330.98,280.69,214.21,145.95" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_5"><head>7. 1 . 2</head><label>12</label><figDesc>Tools Configuration Discovery and Sharing. Designers and developers consider implementing tools that allow easier discovery implementation of user-defned input confgurations.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_0"><head>Table 1 :</head><label>1</label><figDesc>All mobility limitations and the number of times they were reported by survey respondents.</figDesc><table><row><cell>Mobility Limitation</cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_1"><head>Table 2 :</head><label>2</label><figDesc>Categories for improving multi-device input as reported by survey respondents.</figDesc><table><row><cell>Theme</cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_2"><head>Table 3 :</head><label>3</label><figDesc>Demographic information for interview participants.</figDesc><table><row><cell>ID</cell><cell>Age</cell><cell>Gender</cell><cell>Mobility Limitations</cell></row><row><cell>P1</cell><cell>37</cell><cell>W</cell><cell>Progressive neuromuscular disorder, quadriplegia, limited fnger dexterity</cell></row><row><cell>P2</cell><cell>33</cell><cell>W</cell><cell>Underdeveloped left hand, low hand dexterity</cell></row><row><cell>P3</cell><cell>36</cell><cell>M</cell><cell>Quadriplegia, limited arm and leg mobility, limited fnger dexterity, muscle spasms</cell></row><row><cell>P4</cell><cell>25</cell><cell>W</cell><cell>Muscular atrophy, limited arm mobility, limited fnger dexterity</cell></row><row><cell>P5</cell><cell>34</cell><cell>M</cell><cell>Cerebral palsy, paraplegia, muscle weakness, poor coordination, low dexterity</cell></row><row><cell>P6</cell><cell>30</cell><cell>M</cell><cell>Asymmetric paralysis, limited arm mobility, limited fne motor skills on right side</cell></row><row><cell>P7</cell><cell>19</cell><cell>M</cell><cell>Paralyzed in fngers, limited wrist mobility</cell></row><row><cell>P8</cell><cell>25</cell><cell>M</cell><cell>Cannot walk, limited arm/fnger movement</cell></row><row><cell>P9</cell><cell>27</cell><cell>M</cell><cell>Limited arm mobility, limited leg mobility</cell></row><row><cell>P10</cell><cell>30</cell><cell>M</cell><cell>Quadriplegia, limited arm mobility, limited fnger dexterity, rapid fatigue</cell></row><row><cell>P11</cell><cell>33</cell><cell>M</cell><cell>Duchenne muscular dystrophy, paralyzed from neck down, low fnger movement</cell></row><row><cell>P12</cell><cell>44</cell><cell>M</cell><cell>Limited hand mobility, cannot walk, limited fnger dexterity</cell></row><row><cell>P13</cell><cell>34</cell><cell>M</cell><cell>Quadriplegia, paralyzed from chest down, limited fnger dexterity</cell></row><row><cell>P14</cell><cell>41</cell><cell>M</cell><cell>Limb girdle muscular dystrophy, rapid fatigue, limited arm mobility</cell></row></table><note>become increasingly difcult for designers to anticipate which devices people use. Designing for customization, inter-compatibility, and robustness to accommodate the extensive variety of input setups remains a priority when supporting accessible multi-modal interaction.</note></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_3"><head>Table 4 :</head><label>4</label><figDesc>Input devices used and preferred genres of interview participants.</figDesc><table><row><cell>ID</cell><cell>Input Devices Used</cell></row></table></figure>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="1">https://www.quadstick.com/ 2 https://www.xbox.com/accessories/controllers/xbox-adaptive-controller</note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="3">http://voiceattack.com 4 http://joy2key.net</note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="6">https://partner.steamgames.com/doc/features/steam_controller/browse_confgs</note>
+		</body>
+		<back>
+			<div type="references">
+
+				<listBibl>
+
+<biblStruct xml:id="b0">
+	<monogr>
+		<author>
+			<persName><surname>Abshow</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Xbox</surname></persName>
+		</author>
+		<ptr target="https://www.youtube.com/watch?v=Yk6Oeix0AH0" />
+		<title level="m">Adaptive Controller ONE Handed | Gaming With My Feet??? -YouTube. Retrieved</title>
+				<imprint>
+			<date type="published" when="2021-09-02">September 2, 2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b1">
+	<analytic>
+		<title level="a" type="main">Accessibility in video games: a systematic review</title>
+		<author>
+			<persName><forename type="first">Juan</forename><surname>Aguado-Delgado</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">José</forename><surname>María José</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Hilera</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Luis</forename><surname>De-Marcos</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Salvador</forename><surname>Otón</surname></persName>
+		</author>
+		<idno type="DOI">10.1007/s10209-018-0628-2</idno>
+		<ptr target="https://doi.org/10.1007/s10209-018-0628-2" />
+	</analytic>
+	<monogr>
+		<title level="j">Universal Access in the Information Society</title>
+		<imprint>
+			<biblScope unit="volume">19</biblScope>
+			<biblScope unit="page" from="169" to="193" />
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b2">
+	<analytic>
+		<title level="a" type="main">Analyzing user-generated youtube videos to understand touchscreen use by people with motor impairments</title>
+		<author>
+			<persName><forename type="first">Lisa</forename><surname>Anthony</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yoojin</forename><surname>Kim</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Leah</forename><surname>Findlater</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2470654.2466158</idno>
+		<ptr target="https://doi.org/10.1145/2470654.2466158" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the Conference on Human Factors in Computing Systems</title>
+				<meeting>the Conference on Human Factors in Computing Systems</meeting>
+		<imprint>
+			<date type="published" when="2013">2013</date>
+			<biblScope unit="page" from="1223" to="1232" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b3">
+	<analytic>
+		<title level="a" type="main">Evaluation multimodal input for entering mathematical equations on the computer</title>
+		<author>
+			<persName><forename type="first">Lisa</forename><surname>Anthony</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jie</forename><surname>Yang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kenneth</forename><forename type="middle">R</forename><surname>Koedinger</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/1056808.1056872</idno>
+		<ptr target="https://doi.org/10.1145/1056808.1056872" />
+	</analytic>
+	<monogr>
+		<title level="m">Conference on Human Factors in Computing Systems -Proceedings: 1184-1187</title>
+				<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b4">
+	<analytic>
+		<title level="a" type="main">Proxemic interaction: Designing for a Proximity and Orientation-Aware Environment</title>
+		<author>
+			<persName><forename type="first">Till</forename><surname>Ballendat</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Nicolai</forename><surname>Marquardt</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Saul</forename><surname>Greenberg</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/1936652.1936676</idno>
+		<ptr target="https://doi.org/10.1145/1936652.1936676" />
+	</analytic>
+	<monogr>
+		<title level="m">ACM International Conference on Interactive Tabletops and Surfaces -ITS &apos;10, 121</title>
+				<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b5">
+	<analytic>
+		<title level="a" type="main">A Multi Modal Interaction Paradigm Combining Gaze Tracking and Keyboard</title>
+		<author>
+			<persName><forename type="first">Luisa</forename><surname>Brinkschulte</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Robert</forename><surname>Mertens</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Leon</forename><surname>Strapper</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sebastian</forename><surname>Pospiech</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Lars</forename><surname>Knipping</surname></persName>
+		</author>
+		<idno type="DOI">10.1109/ISM.2017.72</idno>
+		<ptr target="https://doi.org/10.1109/ISM.2017.72" />
+	</analytic>
+	<monogr>
+		<title level="m">2017 IEEE International Symposium on Multimedia (ISM)</title>
+				<imprint>
+			<date type="published" when="2017">2017</date>
+			<biblScope unit="page" from="370" to="371" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b6">
+	<analytic>
+		<title level="a" type="main">Cross-device taxonomy: Survey, opportunities and challenges of interactions spanning across multiple devices</title>
+		<author>
+			<persName><forename type="first">Frederik</forename><surname>Brudy</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Christian</forename><surname>Holz</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Roman</forename><surname>Rädle</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Chi</forename><forename type="middle">Jui</forename><surname>Wu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Steven</forename><surname>Houben</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3290605.3300792</idno>
+		<ptr target="https://doi.org/10.1145/3290605.3300792" />
+	</analytic>
+	<monogr>
+		<title level="m">Conference on Human Factors in Computing Systems -Proceed-1-28</title>
+				<imprint>
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+	<note>Clemens Nylandsted Klokmose, and Nicolai Marquardt</note>
+</biblStruct>
+
+<biblStruct xml:id="b7">
+	<analytic>
+		<title level="a" type="main">SurfaceFleet: Exploring distributed interactions unbounded from device, application, user, and time</title>
+		<author>
+			<persName><forename type="first">Frederik</forename><surname>Brudy</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">David</forename><surname>Ledo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Michel</forename><surname>Pahud</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Nathalie</forename><forename type="middle">Henry</forename><surname>Riche</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Christian</forename><surname>Holz</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Anand</forename><surname>Waghmare</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Bhaskar</forename><surname>Surale</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Marcus</forename><surname>Peinado</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Xiaokuan</forename><surname>Zhang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Shannon</forename><surname>Joyner</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Badrish</forename><surname>Chandramouli</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jonathan</forename><surname>Umar Farooq Minhas</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">William</forename><surname>Goldstein</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ken</forename><surname>Buxton</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Hinckley</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3379337.3415874</idno>
+		<ptr target="https://doi.org/10.1145/3379337.3415874" />
+	</analytic>
+	<monogr>
+		<title level="m">UIST 2020 -Proceedings the 33rd Annual ACM Symposium on User Interface Software and Technology</title>
+				<imprint>
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b8">
+	<analytic>
+		<title level="a" type="main">Lexical and Pragmatic Considerations of Input Structures</title>
+		<author>
+			<persName><forename type="first">William</forename><surname>Buxton</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/988584.988586</idno>
+		<ptr target="https://doi.org/10.1145/988584.988586" />
+	</analytic>
+	<monogr>
+		<title level="j">Computer Graphics (ACM)</title>
+		<imprint>
+			<biblScope unit="volume">1</biblScope>
+			<biblScope unit="page" from="31" to="37" />
+			<date type="published" when="1983">1983</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b9">
+	<monogr>
+		<title level="m" type="main">Basics of qualitative research: Techniques and procedures developing grounded theory</title>
+		<author>
+			<persName><forename type="first">Juliet</forename><surname>Corbin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Anselm</forename></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2014">2014</date>
+			<publisher>Sage publications</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b10">
+	<monogr>
+		<title level="m" type="main">Builds Adaptive Controller for Disabled Daughter | Super Punch -YouTube</title>
+		<author>
+			<persName><surname>Eleague</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Dad</surname></persName>
+		</author>
+		<ptr target="https://www.youtube.com/watch" />
+		<imprint>
+			<date>September 2</date>
+		</imprint>
+	</monogr>
+	<note>Retrieved</note>
+</biblStruct>
+
+<biblStruct xml:id="b11">
+	<analytic>
+		<title level="a" type="main">Manipulation, Learning, and Recall with Tangible Pen-Like Input</title>
+		<author>
+			<persName><forename type="first">Lisa</forename><forename type="middle">A</forename><surname>Elkin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jean-Baptiste</forename><surname>Beau</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Géry</forename><surname>Casiez</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Daniel</forename><surname>Vogel</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings the 2020 CHI Conference on Human Factors in Computing Systems</title>
+				<meeting>the 2020 CHI Conference on Human Factors in Computing Systems</meeting>
+		<imprint>
+			<date type="published" when="2020">2020</date>
+			<biblScope unit="page" from="1" to="12" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b12">
+	<analytic>
+		<title level="a" type="main">Simeone, and Katta Spiel. 2020. Virtual Reality Games for People Using Wheelchairs</title>
+		<author>
+			<persName><forename type="first">Kathrin</forename><surname>Gerling</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Patrick</forename><surname>Dickinson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kieran</forename><surname>Hicks</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Liam</forename><surname>Mason</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Adalberto</forename><forename type="middle">L</forename></persName>
+		</author>
+		<idno type="DOI">10.1145/3313831.3376265</idno>
+		<ptr target="https://doi.org/10.1145/3313831.3376265" />
+	</analytic>
+	<monogr>
+		<title level="m">Conference on Human Factors in Computing Systems -Proceedings: 1-11</title>
+				<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b13">
+	<analytic>
+		<title level="a" type="main">A Critical of Virtual Reality in the Context of the Minority Body</title>
+		<author>
+			<persName><forename type="first">Kathrin</forename><surname>Gerling</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Katta</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3411764.3445196</idno>
+		<ptr target="https://doi.org/10.1145/3411764.3445196" />
+	</analytic>
+	<monogr>
+		<title level="m">the 2021 CHI Conference on Human Factors in Computing Systems</title>
+				<imprint>
+			<date type="published" when="2021">2021</date>
+			<biblScope unit="page" from="1" to="14" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b14">
+	<monogr>
+		<author>
+			<persName><surname>Mizino</surname></persName>
+		</author>
+		<ptr target="https://www.youtube.com/watch?v=" />
+		<title level="m">Over My Head. Gaming with one hand: Computer Games -YouTube. Retrieved</title>
+				<imprint>
+			<date>September 2</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b15">
+	<monogr>
+		<title level="m" type="main">RockyNoHands: The Gamer Who Can Beat You With His Mouth | Twitch Documentary Preview Stream On</title>
+		<author>
+			<persName><forename type="first">Dave</forename><surname>Hodgson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Geofrey</forename><surname>Webster</surname></persName>
+		</author>
+		<imprint/>
+	</monogr>
+	<note>Retrieved 2021 from</note>
+</biblStruct>
+
+<biblStruct xml:id="b16">
+	<analytic>
+		<title level="a" type="main">ActivitySpace: Managing Device Ecologies in an Activity-Centric Confguration Space</title>
+		<author>
+			<persName><forename type="first">Steven</forename><surname>Houben</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Paolo</forename><surname>Tell</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jakob</forename><forename type="middle">E</forename><surname>Bardram</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2669485.2669493</idno>
+		<ptr target="https://doi.org/10.1145/2669485.2669493" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings the Ninth ACM International Conference on Interactive Tabletops and Surfaces -ITS &apos;14</title>
+				<meeting>the Ninth ACM International Conference on Interactive Tabletops and Surfaces -ITS &apos;14</meeting>
+		<imprint>
+			<date type="published" when="2014">2014</date>
+			<biblScope unit="page" from="119" to="128" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b17">
+	<analytic>
+		<title level="a" type="main">Human-Computer Interaction: Input Devices</title>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">K</forename><surname>Robert</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Jacob</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/234313.234387</idno>
+		<ptr target="https://doi.org/10.1145/234313.234387" />
+	</analytic>
+	<monogr>
+		<title level="j">Computing Surveys</title>
+		<imprint>
+			<biblScope unit="volume">28</biblScope>
+			<biblScope unit="page" from="177" to="179" />
+			<date type="published" when="1996">1996</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b18">
+	<analytic>
+		<title level="a" type="main">Looking my Way through the Menu: The Impact of Menu Design and Multimodal Input on Gaze-based Menu Selection</title>
+		<author>
+			<persName><forename type="first">Yvonne</forename><surname>Kammerer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Katharina</forename><surname>Scheiter</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Wolfgang</forename><surname>Beinhauer</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/1344471.1344522</idno>
+		<ptr target="https://doi.org/10.1145/1344471.1344522" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings the 2008 symposium on Eye tracking research &amp; applications -ETRA &apos;08, 213</title>
+				<meeting>the 2008 symposium on Eye tracking research &amp; applications -ETRA &apos;08, 213</meeting>
+		<imprint>
+			<date type="published" when="2008">2008</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b19">
+	<analytic>
+		<title level="a" type="main">A universal assistive technology with multimodal input and multimedia output interfaces</title>
+		<author>
+			<persName><forename type="first">Alexey</forename><surname>Karpov</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Andrey</forename><surname>Ronzhin</surname></persName>
+		</author>
+		<idno type="DOI">10.1007/978-3-319-07437-5_35</idno>
+		<ptr target="https://doi.org/10.1007/978-3-319-07437-5_35" />
+	</analytic>
+	<monogr>
+		<title level="j">LNCS, PART</title>
+		<imprint>
+			<biblScope unit="volume">8513</biblScope>
+			<biblScope unit="page" from="369" to="378" />
+			<date type="published" when="2014">2014</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b20">
+	<analytic>
+		<title level="a" type="main">The use of gestures in multimodal input</title>
+		<author>
+			<persName><forename type="first">Simeon</forename><surname>Keates</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Peter</forename><surname>Robinson</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/274497.274505</idno>
+		<ptr target="https://doi.org/10.1145/274497.274505" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings the third international ACM conference on Assistive technologies -Assets &apos;98</title>
+				<meeting>the third international ACM conference on Assistive technologies -Assets &apos;98</meeting>
+		<imprint>
+			<date type="published" when="1998">1998</date>
+			<biblScope unit="page" from="35" to="42" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b21">
+	<analytic>
+		<title level="a" type="main">Efect of Age and Parkinson&apos;s Disease on Cursor Positioning Using a Mouse</title>
+		<author>
+			<persName><forename type="first">Simeon</forename><surname>Keates</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Shari</forename><surname>Trewin</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/1090785</idno>
+		<ptr target="https://doi.org/10.1145/1090785" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings the 7th international ACM SIGACCESS conference on Computers and accessibility -Assets &apos;05</title>
+				<meeting>the 7th international ACM SIGACCESS conference on Computers and accessibility -Assets &apos;05</meeting>
+		<imprint>
+			<date type="published" when="2005">2005</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b22">
+	<monogr>
+		<title level="m" type="main">A usability study of multimodal input in an augmented reality environment</title>
+		<author>
+			<persName><forename type="first">Minkyung</forename><surname>Lee</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mark</forename><surname>Billinghurst</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Woonhyuk</forename><surname>Baek</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Richard</forename><surname>Green</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Woontack</forename><surname>Woo</surname></persName>
+		</author>
+		<idno type="DOI">10.1007/s10055-013-0230-0</idno>
+		<idno>s10055-013-0230-0</idno>
+		<ptr target="https://doi.org/10.1007/" />
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b23">
+	<analytic>
+		<title level="a" type="main">A Semantic Analysis of the Design Space of Input Devices</title>
+		<author>
+			<persName><forename type="first">Jock</forename><surname>Mackinlay</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Stuart</forename><surname>Card</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">George</forename><surname>Robertson</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Human-Computer Interaction</title>
+		<imprint>
+			<biblScope unit="volume">5</biblScope>
+			<biblScope unit="page" from="145" to="190" />
+			<date type="published" when="1990">1990</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b24">
+	<analytic>
+		<title level="a" type="main">Surfaceconstellations: A modular hardware platform for ad-hoc reconfgurable cross-device workspaces</title>
+		<author>
+			<persName><forename type="first">Nicolai</forename><surname>Marquardt</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Frederik</forename><surname>Brudy</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Can</forename><surname>Liu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Benedikt</forename><surname>Bengler</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Christian</forename><surname>Holz</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3173574.3173928</idno>
+		<ptr target="https://doi.org/10.1145/3173574.3173928" />
+	</analytic>
+	<monogr>
+		<title level="m">Conference on Human Factors in Computing Systems -Proceedings</title>
+				<imprint>
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b25">
+	<analytic>
+		<title level="a" type="main">An empirical comparison of &quot;Wiimote&quot; gun attachments for pointing tasks</title>
+		<author>
+			<persName><forename type="first">Victoria</forename><surname>Mcarthur</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Steven</forename><forename type="middle">J</forename><surname>Castellucci</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">I</forename><surname>Scott Mackenzie</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/1570433.1570471</idno>
+		<ptr target="https://doi.org/10.1145/1570433.1570471" />
+	</analytic>
+	<monogr>
+		<title level="m">EICS&apos;09 -Proceedings of the ACM SIGCHI Symposium on Engineering Interactive Computing Systems</title>
+				<imprint>
+			<date type="published" when="2009">2009</date>
+			<biblScope unit="page" from="203" to="208" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b26">
+	<analytic>
+		<title level="a" type="main">Reliability and Inter-rater Reliability in Qualitative Research</title>
+		<author>
+			<persName><forename type="first">Nora</forename><surname>Mcdonald</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sarita</forename><surname>Schoenebeck</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Andrea</forename><surname>Forte</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3359174</idno>
+		<ptr target="https://doi.org/10.1145/3359174" />
+	</analytic>
+	<monogr>
+		<title level="j">Proceedings of the ACM on Human-Computer Interaction</title>
+		<imprint>
+			<biblScope unit="volume">3</biblScope>
+			<biblScope unit="page" from="1" to="23" />
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b27">
+	<monogr>
+		<title level="m" type="main">Qualitative Data Analysis: A Methods Sourcebook</title>
+		<author>
+			<persName><forename type="first">M B</forename><surname>Miles</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Huberman</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Saldana</surname></persName>
+		</author>
+		<ptr target="https://books.google.ca/books?id=Bt0uuQEACAAJ" />
+		<imprint>
+			<date type="published" when="2019">2019</date>
+			<publisher>SAGE Publications</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b28">
+	<analytic>
+		<title level="a" type="main">Erg-O: Ergonomic Optimization of Immersive Virtual Environments</title>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">Montano</forename><surname>Roberto</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sriram</forename><surname>Murillo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Diego</forename><forename type="middle">Martinez</forename><surname>Subramanian</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Plasencia</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3126594.3126605</idno>
+		<ptr target="https://doi.org/10.1145/3126594.3126605" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 30th Annual ACM Symposium on User Interface Software and Technology</title>
+				<meeting>the 30th Annual ACM Symposium on User Interface Software and Technology</meeting>
+		<imprint>
+			<date type="published" when="2017">2017</date>
+			<biblScope unit="page" from="759" to="771" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b29">
+	<analytic>
+		<title level="a" type="main">Accessible by design: An opportunity for virtual reality</title>
+		<author>
+			<persName><forename type="first">Martez</forename><surname>Mott</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Edward</forename><surname>Cutrell</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mar</forename><forename type="middle">Gonzalez</forename><surname>Franco</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Christian</forename><surname>Holz</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Eyal</forename><surname>Ofek</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Richard</forename><surname>Stoakley</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Meredith Ringel</forename><surname>Morris</surname></persName>
+		</author>
+		<idno type="DOI">10.1109/ISMAR-ADJUNCT.2019.00122</idno>
+		<ptr target="https://doi.org/10.1109/ISMAR-ADJUNCT.2019.00122" />
+	</analytic>
+	<monogr>
+		<title level="m">Adjunct Proceedings the 2019 IEEE International Symposium on Mixed and Augmented Reality</title>
+				<imprint>
+			<date type="published" when="2019">2019</date>
+			<biblScope unit="volume">2019</biblScope>
+			<biblScope unit="page" from="451" to="454" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b30">
+	<analytic>
+		<title level="a" type="main">Cluster Touch: Improving Touch Accuracy on Smartphones for People with Motor and Situational Impairments</title>
+		<author>
+			<persName><forename type="first">E</forename><surname>Martez</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jacob O</forename><surname>Mott</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Wobbrock</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3290605</idno>
+		<ptr target="https://doi.org/10.1145/3290605" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings the 2019 CHI Conference on Human Factors in Computing Systems</title>
+				<meeting>the 2019 CHI Conference on Human Factors in Computing Systems</meeting>
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b31">
+	<analytic>
+		<title level="a" type="main">I just went into it assuming that I wouldn&apos;t be able to have the full experience</title>
+		<author>
+			<persName><forename type="first">Martez</forename><surname>Mott</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">John</forename><surname>Tang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Shaun</forename><surname>Kane</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Edward</forename><surname>Cutrell</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Meredith Ringel</forename><surname>Morris</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3373625.3416998</idno>
+		<ptr target="https://doi.org/10.1145/3373625.3416998" />
+	</analytic>
+	<monogr>
+		<title level="m">The 22nd International ACM SIGACCESS Conference on Computers and Accessibility</title>
+				<imprint>
+			<date type="published" when="2020">2020</date>
+			<biblScope unit="page" from="1" to="13" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b32">
+	<analytic>
+		<title level="a" type="main">Multimodal Input in the Car</title>
+		<author>
+			<persName><forename type="first">Christian</forename><surname>Müller</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Garrett</forename></persName>
+		</author>
+		<idno type="DOI">10.1109/MMUL.2011.14</idno>
+		<ptr target="https://doi.org/10.1109/MMUL.2011.14" />
+	</analytic>
+	<monogr>
+		<title level="j">Today and Tomorrow. Multimedia</title>
+		<imprint>
+			<biblScope unit="volume">18</biblScope>
+			<biblScope unit="page" from="98" to="103" />
+			<date type="published" when="2011">2011</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b33">
+	<monogr>
+		<title level="m" type="main">Accessibility in Context: Understanding the Truly Mobile Experience of Smartphone Users with Motor Impairments</title>
+		<author>
+			<persName><forename type="first">Maia</forename><surname>Naftali</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Leah</forename><surname>Findlater</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2661334.2661372</idno>
+		<ptr target="https://doi.org/10.1145/2661334.2661372" />
+		<imprint>
+			<date type="published" when="2014">2014</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b34">
+	<analytic>
+		<title level="a" type="main">Ten myths of multimodal interaction</title>
+		<author>
+			<persName><forename type="first">Sharon</forename><surname>Oviatt</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/319382.319398</idno>
+		<ptr target="https://doi.org/10.1145/319382.319398" />
+	</analytic>
+	<monogr>
+		<title level="j">Communications of the ACM</title>
+		<imprint>
+			<biblScope unit="volume">42</biblScope>
+			<biblScope unit="page" from="74" to="81" />
+			<date type="published" when="1999">1999</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b35">
+	<monogr>
+		<title level="m" type="main">Multimodal Interfaces. In The human-computer interaction handbook</title>
+		<author>
+			<persName><forename type="first">Sharon</forename><surname>Oviatt</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2007">2007</date>
+			<publisher>CRC press</publisher>
+			<biblScope unit="page" from="439" to="458" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b36">
+	<analytic>
+		<title level="a" type="main">Understanding and addressing real-world accessibility issues in mainstream video games</title>
+		<author>
+			<persName><forename type="first">R</forename><surname>John</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Porter</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2591357.2591364</idno>
+		<ptr target="https://doi.org/10.1145/2591357.2591364" />
+	</analytic>
+	<monogr>
+		<title level="j">ACM SIGACCESS Accessibility and Computing</title>
+		<imprint>
+			<biblScope unit="volume">108</biblScope>
+			<biblScope unit="page" from="42" to="45" />
+			<date type="published" when="2014">2014</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b37">
+	<analytic>
+		<title level="a" type="main">Guidelines for multimodal user interface design</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Leah</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jennifer</forename><surname>Reeves</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Lai</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>James</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sharon</forename><surname>Larson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T S</forename><surname>Oviatt</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Stéphanie</forename><surname>Balaji</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Penny</forename><surname>Buisine</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Phil</forename><surname>Collings</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Cohen</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Communications of the ACM</title>
+		<imprint>
+			<biblScope unit="volume">47</biblScope>
+			<biblScope unit="page" from="57" to="59" />
+			<date type="published" when="2004">2004</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b38">
+	<analytic>
+		<title level="a" type="main">FaceSwitchaccessibility software for control combining gaze interaction and face gestures</title>
+		<author>
+			<persName><forename type="first">David</forename><surname>Rozado</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jason</forename><surname>Niu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Andreas</forename><surname>Duenser</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2838739.2838809</idno>
+		<ptr target="https://doi.org/10.1145/2838739.2838809" />
+	</analytic>
+	<monogr>
+		<title level="m">OzCHI 2015: Being Human -Conference Proceedings</title>
+				<imprint>
+			<date type="published" when="2015">2015</date>
+			<biblScope unit="page" from="197" to="201" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b39">
+	<analytic>
+		<title/>
+		<author>
+			<persName><forename type="first">Natalie</forename><surname>Ruiz</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Fang</forename><surname>Chen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sharon</forename><surname>Oviatt</surname></persName>
+		</author>
+		<idno type="DOI">10.1016/B978-0-12-374825-6.00010-1</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Multimodal Input. Multimodal Signal Processing</title>
+		<imprint>
+			<date type="published" when="2010">2010</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b40">
+	<analytic>
+		<title level="a" type="main">Examining the redundancy of multimodal input</title>
+		<author>
+			<persName><forename type="first">Natalie</forename><surname>Ruiz</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ronnie</forename><surname>Taib</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Fang</forename><surname>Chen</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">ACM International Conference Proceeding Series</title>
+				<imprint>
+			<date type="published" when="2006">2006</date>
+			<biblScope unit="volume">206</biblScope>
+			<biblScope unit="page" from="389" to="392" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b41">
+	<analytic>
+		<title level="a" type="main">Combined method for evaluating accessibility in serious games</title>
+		<author>
+			<persName><forename type="first">Luis</forename><surname>Salvador-Ullauri</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Patricia</forename><surname>Acosta-Vargas</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Gonzalez</forename></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sergio</forename><surname>Luján-Mora</surname></persName>
+		</author>
+		<idno type="DOI">10.3390/APP10186324</idno>
+		<ptr target="https://doi.org/10.3390/APP10186324" />
+	</analytic>
+	<monogr>
+		<title level="j">Applied Sciences (Switzerland)</title>
+		<imprint>
+			<biblScope unit="volume">10</biblScope>
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b42">
+	<analytic>
+		<title level="a" type="main">Unifed user interface design: Designing universally accessible interactions</title>
+		<author>
+			<persName><forename type="first">Anthony</forename><surname>Savidis</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Constantine</forename><surname>Stephanidis</surname></persName>
+		</author>
+		<idno type="DOI">10.1016/j.intcom.2003.12.003</idno>
+		<ptr target="https://doi.org/10.1016/j.intcom.2003.12.003" />
+	</analytic>
+	<monogr>
+		<title level="j">Interacting with Computers</title>
+		<imprint>
+			<biblScope unit="volume">16</biblScope>
+			<biblScope unit="page" from="243" to="270" />
+			<date type="published" when="2004">2004</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b43">
+	<analytic>
+		<title level="a" type="main">Multimodal input for computer access and augmentative communication</title>
+		<author>
+			<persName><forename type="first">Alice</forename><surname>Smith</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">John</forename><surname>Dunaway</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Patrick</forename><surname>Demasco</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Denise</forename><surname>Peischl</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/228347.228361</idno>
+		<ptr target="https://doi.org/10.1145/228347.228361" />
+	</analytic>
+	<monogr>
+		<title level="m">Annual ACM Conference on Assistive Technologies</title>
+				<imprint>
+			<date type="published" when="1996">1996</date>
+			<biblScope unit="page" from="80" to="85" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b44">
+	<analytic>
+		<title level="a" type="main">Developing steady clicks: A method of cursor assistance for people with motor impairments</title>
+		<author>
+			<persName><forename type="first">Shari</forename><surname>Trewin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Simeon</forename><surname>Keates</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Karyn</forename></persName>
+		</author>
+		<idno type="DOI">10.1145/1168987.1168993</idno>
+		<ptr target="https://doi.org/10.1145/1168987.1168993" />
+	</analytic>
+	<monogr>
+		<title level="j">Eighth International ACM SIGACCESS Conference on Computers and Accessibility</title>
+		<imprint>
+			<biblScope unit="page" from="26" to="33" />
+			<date type="published" when="2006">2006. 2006 2006</date>
+		</imprint>
+	</monogr>
+	<note>ASSETS</note>
+</biblStruct>
+
+<biblStruct xml:id="b45">
+	<analytic>
+		<title level="a" type="main">Multimodal interaction: A review</title>
+		<author>
+			<persName><forename type="first">Matthew</forename><surname>Turk</surname></persName>
+		</author>
+		<idno type="DOI">10.1016/j.patrec.2013.07.003</idno>
+		<ptr target="https://doi.org/10.1016/j.patrec.2013.07.003" />
+	</analytic>
+	<monogr>
+		<title level="j">Recognition Letters</title>
+		<imprint>
+			<biblScope unit="volume">36</biblScope>
+			<biblScope unit="page" from="189" to="195" />
+			<date type="published" when="2014">2014</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b46">
+	<analytic>
+		<title level="a" type="main">Conté: Multimodal Input Inspired by an Artist&apos;s Crayon</title>
+		<author>
+			<persName><forename type="first">Daniel</forename><surname>Vogel</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Géry</forename><surname>Casiez</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2047196.2047242</idno>
+		<ptr target="https://doi.org/10.1145/2047196.2047242" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings the 24th annual ACM symposium on User interface software and technology -UIST &apos;11 (UIST &apos;11)</title>
+				<meeting>the 24th annual ACM symposium on User interface software and technology -UIST &apos;11 (UIST &apos;11)</meeting>
+		<imprint>
+			<date type="published" when="2011">2011</date>
+			<biblScope unit="page">357</biblScope>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b47">
+	<analytic>
+		<title level="a" type="main">A critical review of the use of virtual reality in construction engineering education and training</title>
+		<author>
+			<persName><forename type="first">Peng</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Peng</forename><surname>Wu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jun</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Hung</forename><forename type="middle">Lin</forename><surname>Chi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Xiangyu</forename><surname>Wang</surname></persName>
+		</author>
+		<idno type="DOI">10.3390/ijerph15061204</idno>
+		<ptr target="https://doi.org/10.3390/ijerph15061204" />
+	</analytic>
+	<monogr>
+		<title level="j">International Journal of Environmental Research and Public Health</title>
+		<imprint>
+			<biblScope unit="volume">15</biblScope>
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b48">
+	<analytic>
+		<title level="a" type="main">Ability-Based Design</title>
+		<author>
+			<persName><forename type="first">Jacob</forename><forename type="middle">O</forename><surname>Wobbrock</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Z</forename><surname>Gajos</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Shaun</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Gregg C</forename><surname>Kane</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Vanderheiden</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Communications of the ACM</title>
+		<imprint>
+			<biblScope unit="volume">61</biblScope>
+			<biblScope unit="page" from="62" to="71" />
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b49">
+	<analytic>
+		<title level="a" type="main">Ability-based design: Concept, principles and examples</title>
+		<author>
+			<persName><forename type="first">Jacob</forename><forename type="middle">O</forename><surname>Wobbrock</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Kane</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Krzysztof</forename><forename type="middle">Z</forename><surname>Gajos</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Susumu</forename><surname>Harada</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jon</forename><surname>Froehlich</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/1952383.1952384</idno>
+		<ptr target="https://doi.org/10.1145/1952383.1952384" />
+	</analytic>
+	<monogr>
+		<title level="j">ACM Transactions on Accessible Computing</title>
+		<imprint>
+			<biblScope unit="volume">3</biblScope>
+			<biblScope unit="page" from="1" to="27" />
+			<date type="published" when="2011">2011</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b50">
+	<analytic>
+		<title level="a" type="main">Game accessibility: A survey</title>
+		<author>
+			<persName><forename type="first">Bei</forename><surname>Yuan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Eelke</forename><surname>Folmer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Frederick</forename><forename type="middle">C</forename><surname>Harris</surname></persName>
+		</author>
+		<idno type="DOI">10.1007/s10209-010-0189-5</idno>
+		<ptr target="https://doi.org/10.1007/s10209-010-0189-5" />
+	</analytic>
+	<monogr>
+		<title level="j">Universal Access in the Information Society</title>
+		<imprint>
+			<biblScope unit="volume">10</biblScope>
+			<biblScope unit="page" from="81" to="100" />
+			<date type="published" when="2011">2011</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b51">
+	<analytic>
+		<title level="a" type="main">Combining Eye Gaze Input With a Brain-Computer Interface for Touchless Human-Computer Interaction</title>
+		<author>
+			<persName><forename type="first">Thorsten</forename><forename type="middle">O</forename><surname>Zander</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Matti</forename><surname>Gaertner</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Christian</forename><surname>Kothe</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Roman</forename><surname>Vilimek</surname></persName>
+		</author>
+		<idno type="DOI">10.1080/10447318.2011.535752</idno>
+		<ptr target="https://doi.org/10.1080/10447318.2011.535752" />
+	</analytic>
+	<monogr>
+		<title level="j">International Journal of Human-Computer Interaction</title>
+		<imprint>
+			<biblScope unit="volume">27</biblScope>
+			<biblScope unit="page" from="38" to="51" />
+			<date type="published" when="2010">2010</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b52">
+	<analytic>
+		<title level="a" type="main">-adaptive-Use Co-pilot on your Xbox console | Xbox Support</title>
+		<ptr target="https://support.xbox.com/en-CA/help/account-profle/accessibility/copilot" />
+	</analytic>
+	<monogr>
+		<title level="m">The new Xbox adaptive controller, another step towards digital inclusion? | Masters of Media</title>
+				<imprint>
+			<date>September 1. September 1</date>
+		</imprint>
+	</monogr>
+	<note>Retrieved</note>
+</biblStruct>
+
+<biblStruct xml:id="b53">
+	<monogr>
+		<title level="m" type="main">Boy With Cerebral Palsy Has The Most Creative Use Of Xbox Controller -YouTube</title>
+		<ptr target="https://www.youtube.com/watch" />
+		<imprint>
+			<date>September 10</date>
+		</imprint>
+	</monogr>
+	<note>Retrieved</note>
+</biblStruct>
+
+<biblStruct xml:id="b54">
+	<monogr>
+		<title level="m" type="main">How I Play Video Games With 5 Fingers! (One Handed Video Gamer Girl) -YouTube</title>
+		<ptr target="https://www.youtube.com/watch" />
+		<imprint>
+			<biblScope unit="volume">10</biblScope>
+		</imprint>
+	</monogr>
+	<note>Retrieved September</note>
+</biblStruct>
+
+<biblStruct xml:id="b55">
+	<monogr>
+		<title level="m" type="main">How a quadriplegic can play shooter video games. -YouTube. Retrieved September 10, 2021 from Quadriplegic&apos;s Adaptive Gaming Set Up! (W/ Gameplay) -YouTube</title>
+		<ptr target="https://www.youtube.com/watch?v=4UtDzZTuLCk" />
+		<imprint>
+			<biblScope unit="volume">10</biblScope>
+		</imprint>
+	</monogr>
+	<note>Retrieved September</note>
+</biblStruct>
+
+				</listBibl>
+			</div>
+		</back>
+	</text>
+</TEI>

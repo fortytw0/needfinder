@@ -1,0 +1,1155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xml:space="preserve" xmlns="http://www.tei-c.org/ns/1.0" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.com/kermitt2/grobid/master/grobid-home/schemas/xsd/Grobid.xsd"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+	<teiHeader xml:lang="en">
+		<fileDesc>
+			<titleStmt>
+				<title level="a" type="main">Semi-Automated Coding for Qualitative Research: A User-Centered Inquiry and Initial Prototypes</title>
+			</titleStmt>
+			<publicationStmt>
+				<publisher/>
+				<availability status="unknown"><licence/></availability>
+			</publicationStmt>
+			<sourceDesc>
+				<biblStruct>
+					<analytic>
+						<author>
+							<persName><forename type="first">Megh</forename><surname>Marathe</surname></persName>
+							<email>marathem@umich.edu</email>
+							<affiliation key="aff0">
+								<orgName type="department">School of Information</orgName>
+								<orgName type="institution">University of Michigan</orgName>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Kentaro</forename><surname>Toyama</surname></persName>
+							<email>toyama@umich.edu</email>
+							<affiliation key="aff0">
+								<orgName type="department">School of Information</orgName>
+								<orgName type="institution">University of Michigan</orgName>
+							</affiliation>
+						</author>
+						<title level="a" type="main">Semi-Automated Coding for Qualitative Research: A User-Centered Inquiry and Initial Prototypes</title>
+					</analytic>
+					<monogr>
+						<imprint>
+							<date/>
+						</imprint>
+					</monogr>
+					<idno type="DOI">10.1145/3173574.3173922</idno>
+				</biblStruct>
+			</sourceDesc>
+		</fileDesc>
+		<encodingDesc>
+			<appInfo>
+				<application version="0.7.1" ident="GROBID" when="2022-07-22T05:01+0000">
+					<desc>GROBID - A machine learning software for extracting information from scholarly documents</desc>
+					<ref target="https://github.com/kermitt2/grobid"/>
+				</application>
+			</appInfo>
+		</encodingDesc>
+		<profileDesc>
+			<textClass>
+				<keywords>
+					<term>H.5.m. Information Interfaces and Presentation (e.g. HCI): Miscellaneous Qualitative research</term>
+					<term>Natural language processing</term>
+					<term>Qualitative coding</term>
+					<term>User-centered design</term>
+					<term>Qualitative Data Analysis</term>
+				</keywords>
+			</textClass>
+			<abstract>
+<div xmlns="http://www.tei-c.org/ns/1.0"><p>Qualitative researchers perform an important and painstaking data annotation process known as coding. However, much of the process can be tedious and repetitive, becoming prohibitive for large datasets. Could coding be partially automated, and should it be? To answer this question, we interviewed researchers and observed them code interview transcripts. We found that across disciplines, researchers follow several coding practices well-suited to automation. Further, researchers desire automation after having developed a codebook and coded a subset of data, particularly in extending their coding to unseen data. Researchers also require any assistive tool to be transparent about its recommendations. Based on our findings, we built prototypes to partially automate coding using simple natural language processing techniques. Our top-performing system generates coding that matches human coders on inter-rater reliability measures. We discuss implications for interface and algorithm design, meta-issues around automating qualitative research, and suggestions for future work.</p></div>
+			</abstract>
+		</profileDesc>
+	</teiHeader>
+	<text xml:lang="en">
+		<body>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>INTRODUCTION</head><p>Unstructured text forms most of the primary data in qualitative research, coming from sources such as transcribed interviews, field notes, and organizational reports. Making sense of the data requires researchers to annotate the text with short labels in a process known as coding. Good coding is both a science and an art, requiring years of training and experience. As the first step in qualitative data analysis (QDA), first-pass coding facilitates further rounds of coding and analysis that consider deeper patterns and relationships in data, in order to build a Meanwhile, the field of natural language processing (NLP) has as its mission the categorization and analysis of textual data. Indeed, there has been substantial research in the social sciences and the human computer interaction (HCI) community suggesting that NLP and machine learning (ML) techniques have the potential to assist certain types of analyses of qualitative data <ref type="bibr" target="#b0">[1,</ref><ref type="bibr" target="#b9">10,</ref><ref type="bibr" target="#b10">11,</ref><ref type="bibr" target="#b12">13,</ref><ref type="bibr" target="#b16">17,</ref><ref type="bibr" target="#b17">18,</ref><ref type="bibr" target="#b26">27,</ref><ref type="bibr" target="#b35">36,</ref><ref type="bibr" target="#b38">39,</ref><ref type="bibr" target="#b44">45]</ref>. However, scholars from both fields note the paucity of research aimed at understanding the practices and needs of qualitative researchers, and as a result, existing tools for qualitative coding do not necessarily meet user needs.</p><p>As a first step to addressing this gap, we conduct a usercentered design inquiry and build assistive tools, investigating two research questions: First, how do qualitative researchers code? Understanding the status quo helps us gain an insight into coding-related practices, needs, and desires of qualitative researchers. Second, could first-pass coding be partially automated, and should it be? If so, how far can the simplest natural language processing techniques go?</p><p>Our novel contributions include the following: Through interviews with qualitative researchers, we found that across disciplines, researchers follow several practices well-suited to automation. Further, researchers desire automation, but only after having developed a codebook and coded a subset of data, particularly in extending their coding to unseen data. Additionally, researchers want any assistive tool to be transparent about its coding recommendations. Based on our findings, we then built prototypes to partially automate coding. Our topperforming system uses simple NLP techniques to generate coding that performs as well as human coders on inter-rater reliability measures. Finally, we discuss the successive performance gains achieved by using progressively more complex NLP techniques; interface and algorithm design implications for QDA tools; meta-issues around automating qualitative research; and suggestions for future work.</p><p>nomenology, and methods such as interviews, field observation, and text analysis <ref type="bibr" target="#b15">[16]</ref>. While an in-depth review is beyond the scope of this paper, there are several excellent books and articles on research design <ref type="bibr" target="#b11">[12,</ref><ref type="bibr" target="#b32">33]</ref>, methodology <ref type="bibr" target="#b8">[9,</ref><ref type="bibr" target="#b15">16,</ref><ref type="bibr" target="#b18">19,</ref><ref type="bibr" target="#b24">25]</ref>, and methods <ref type="bibr" target="#b8">[9,</ref><ref type="bibr" target="#b33">34,</ref><ref type="bibr" target="#b37">38,</ref><ref type="bibr" target="#b42">43]</ref>.</p><p>In any case, much qualitative data analysis involves some form of coding, wherein researchers assign short labels or codestypically single words or short phrases -to chunks of text to indicate something about their content <ref type="bibr" target="#b4">[5,</ref><ref type="bibr" target="#b8">9,</ref><ref type="bibr" target="#b11">12,</ref><ref type="bibr" target="#b24">25,</ref><ref type="bibr" target="#b32">33,</ref><ref type="bibr" target="#b33">34,</ref><ref type="bibr" target="#b37">38,</ref><ref type="bibr" target="#b40">41]</ref>. Though researchers develop their own coding style over time, certain types of coding are common <ref type="bibr" target="#b33">[34,</ref><ref type="bibr" target="#b37">38]</ref>: descriptive coding annotates text with a code describing its high-level content; whereas in vivo coding uses respondents' own words and phrases to create codes and highlight salient topics. Further, coding can be inductive and data-driven, where researchers read and reread data for emergent codes in the form of keywords, ideas and trends present in the data; or deductive and theory-driven, where codes are determined a priori based on theories or hypotheses before a close reading of the data; or a hybrid <ref type="bibr" target="#b33">[34,</ref><ref type="bibr" target="#b37">38]</ref>. Coding enables researchers to group data into categories and examine relationships between codes.</p><p>Researchers cherish first-pass coding as an essential step in building a nuanced understanding of data. However, it is time and effort intensive, typically requiring hours of highlyskilled researcher attention for a single interview. With larger datasets, this is further compounded by data management and retrieval challenges. This has historically led to the creation and widespread adoption of a specialized category of software, called qualitative data analysis (QDA) software <ref type="bibr" target="#b1">[2,</ref><ref type="bibr" target="#b21">22,</ref><ref type="bibr" target="#b28">29,</ref><ref type="bibr" target="#b29">30]</ref>.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Computer-Assisted Qualitative Data Analysis</head><p>Though paper-based coding is still practised, qualitative and mixed methods researchers regularly use QDA software suites that offer features to organize, retrieve, code, and analyze text and other digitized data such as audio and video.</p><p>The specific software used by a research team tends to be dictated by informal networks, institutional infrastructure and funding, and access to training and tech support <ref type="bibr" target="#b29">[30]</ref>. Atlas.ti, NVivo, QDA Miner, and Dedoose are popular examples <ref type="bibr" target="#b30">[31,</ref><ref type="bibr" target="#b34">35]</ref>, all of which were developed primarily for (and often by) social scientists. The computational focus of QDA suites is on supporting data analysis after codes have been assigned to the text <ref type="bibr" target="#b23">[24]</ref>. For example, all of the popular tools provide a range of visualizations that allow researchers to examine coded text and conduct co-occurrence analysis of codes.</p><p>However, over the past 20 years, Fielding et al. have consistently found that a majority of researchers use QDA suites primarily as "electronic filing cabinets" <ref type="bibr" target="#b21">[22]</ref>, finding it difficult to master their analytical features <ref type="bibr" target="#b21">[22,</ref><ref type="bibr" target="#b22">23,</ref><ref type="bibr" target="#b29">30]</ref>. They argue for more empirical research on the actual use of QDA suites, citing a paucity of such work <ref type="bibr" target="#b22">[23,</ref><ref type="bibr" target="#b25">26]</ref>. This paper makes one attempt at answering this call by conducting contextual inquiry to understand researcher practices, needs, and desires in the process of qualitative coding.</p><p>Finally, despite the potential tedium of coding, QDA tools provide little support to speed it up. Even QDA Miner with WordStat, the technologically most advanced QDA suite, only offers basic keyword search and topic modeling. We believe that sophisticated NLP techniques can be used to assist coding specifically and qualitative data analysis in general.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Applying Computational Techniques to Qualitative Data</head><p>There has been growing interest in employing NLP techniques for certain types of qualitative data analysis. Dam and Kaufman <ref type="bibr" target="#b12">[13]</ref> applied latent semantic analysis 1 , a topic modeling technique, on student interviews to assess learning, achieving 90% accuracy. This methodology, however, is not suited to coding, as it assigns one topic per interview. Sherin <ref type="bibr" target="#b38">[39]</ref> applied hierarchical agglomerative clustering 2 , also a topic modeling technique, to generate a finer-grained analysis of learning assessment, concluding that it helps discover latent themes and aspects of student reasoning. Sherin hypothesizes that topic modeling techniques could be used in semi-automatically generating data-driven codes.</p><p>In the human-computer interaction (HCI) community, the availability of large textual datasets along with the creation of robust interactive machine learning 3 techniques has led to renewed efforts to use computational techniques for qualitative data analysis. Hoque and Carenini <ref type="bibr" target="#b26">[27]</ref> develop an interface that presents users with topic model visualizations alongside long asynchronous online conversations (e.g., online forums). User feedback, such as splitting or merging topics, triggers a retraining of the topic model. Hoque and Carenini report that while users appreciate their interface, topic models add clutter and may increase interaction costs. Dinakar et al. <ref type="bibr" target="#b16">[17,</ref><ref type="bibr" target="#b17">18]</ref> create a tool that provides crisis hotline counselors with realtime topic models and graphical visualizations of text-based conversations, finding that both serve as useful supplements.</p><p>As above, most scholarship so far has focused on using topic modeling to build interfaces that enable users to handle largescale data within a specific task or domain, without systematic attention to the HCI and NLP problems posed by qualitative data analysis <ref type="bibr" target="#b43">[44]</ref>. Along the latter lines, some work has begun to consider qualitative coding specifically. Yan et al. <ref type="bibr" target="#b44">[45]</ref> train an interactive support vector machine to code emails for a qualitative inference technique called content analysis. While their model achieves a commendable recall of 70%, its precision is merely 8%, despite interactive coaching by human judges 4 . Similarly, Bakharia et al. <ref type="bibr" target="#b0">[1]</ref> conduct a between-subjects experiment to compare the performance of two interactive topic modeling techniques in gathering evidence for content analysis of open-ended survey responses, allowing participant feedback 1 Latent semantic analysis comprises a family of methods that use word co-occurrence information to build vector representations of text. Similarity between texts is estimated by the distance between their vector representations. See <ref type="bibr" target="#b14">[15]</ref> for details. 2 Hierarchical agglomerative clustering iteratively assigns vectors to clusters and combines smaller clusters into larger clusters, until there is only one cluster left. See <ref type="bibr" target="#b31">[32]</ref> for details. 3 Interactive machine learning overcomes the slow training and high sensitivity of classical machine learning classifiers. See <ref type="bibr" target="#b19">[20]</ref>. 4 In natural language processing, a technique's performance is reported in terms of the precision and recall of its predictions. Precision is the number of correct predictions divided by the total number of predictions. Recall is the number of correct predictions divided by the number of actually correct instances. See <ref type="bibr" target="#b39">[40]</ref> for details. via creating, merging and splitting topics. While not evaluating the performance of the two topic modeling techniques, Bakharia et al. report that participants were able to exploit interactivity and improve auto-generated topics. More recently, Chen et al. <ref type="bibr" target="#b9">[10]</ref> and Paredes et al. <ref type="bibr" target="#b35">[36]</ref> built interactive tools for exploring large-scale social datasets, finding that qualitative researchers could use the tools to discover trends and other analytic insights in the data. Chen et al. <ref type="bibr" target="#b10">[11]</ref> also call for approaches that are interactive, easy to interpret and visualize, and importantly, based on an understanding of the practices and needs of qualitative researchers.</p><p>Overall, this review indicates that there is both interest and promise in the application of NLP techniques to analyze qualitative data. Social scientists and HCI researchers alike (e.g. <ref type="bibr" target="#b10">[11,</ref><ref type="bibr" target="#b22">23]</ref>) have called for user studies to identify opportunities for computational approaches to assist researchers with qualitative data analysis, without which we risk building tools that do not meet user needs. In this paper, we present a first step to bridging this gap: we conduct a researcher-centered design inquiry to identify implications for interface and algorithm design, and report initial results from building assistive tools for qualitative coding.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>A USER STUDY OF QUALITATIVE CODING</head><p>We began with a user study to understand researcher practices, needs, and desires in qualitative coding.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Methods</head></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Participant Recruitment and Data Collection</head><p>We conducted two rounds of data collection with fifteen participants: in the first round, five qualitative researchers participated in three-hour long contextual inquiry sessions, and in the second, ten researchers participated in hour-long semistructured interviews. For both rounds, we recruited via graduate humanities and social sciences mailing lists at the University of Michigan, soliciting participants with prior training in qualitative research methods who had personally conducted coding and analysis for at least one research project.</p><p>Five people ultimately agreed to participate. Table <ref type="table">1</ref> presents a summary of participant characteristics, namely their pseudonym, academic discipline, research methodology, primary QDA software, and the number (if any) of codes and code annotations they created during the in situ observation. All participants had significant qualitative research experience, having conducted coding and analysis for over four projects.</p><p>We decided to prioritize in-depth engagement over increasing the sample size. We used contextual inquiry <ref type="bibr" target="#b2">[3,</ref><ref type="bibr" target="#b36">37]</ref> to guide our data collection: we conducted one three-hour-long audio-recorded session per participant, comprising an initial interview, in situ observation, and a post-observation interview. The initial interview asked participants for a high-level overview of their research process. Next, we provided participants a verbal and written description of a real-world research project examining the role of the arts in universities, and a set of five anonymized interview transcripts. Each transcript corresponds to an hour-long semi-structured interview, representing the type of textual data that qualitative researchers encounter in their work. We then observed participants code the transcripts in their QDA tool of choice (if any), occasionally asking questions to understand how they identified and formulated codes, and what knowledge they brought to bear during this process. The observation formed the major chunk of each session, lasting on average two hours. We retained participant-coded data. Each session concluded with an indepth, semi-structured interview, during which we asked participants about their research experience; the parts they found the most interesting and the most tedious in coding; how they used the data from first-pass coding for further analysis; the features they most liked and disliked in QDA tools; their willingness to use software that partially automates coding; and finally, under which conditions and when in the coding process they would appreciate such assistance. Participants were compensated $75 for their time and expertise.</p><p>To ensure the validity and applicability of our findings, we conducted a second round of data collection in parallel with data analysis, consisting of hour-long semi-structured interviews that followed the same protocol as the first round interviews. Theoretical saturation was reached after ten participants. We use participant-chosen pseudonyms for anonymity, and present slightly edited quotes for readability.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Data Analysis</head><p>We wrote field notes and analytic memos after every data collection session. We also transcribed verbatim the audio recordings of all sessions. The first author conducted inductive coding on the transcripts and field notes, followed by discussions and data sessions involving both authors to iteratively refine emergent themes. We triangulated findings at the per-participant level by comparing observations from different parts of each contextual inquiry session, and overall through the second round of interviews. The goal was to surface users' work practices; opinions about QDA software; and the kinds of assistance users would most appreciate in the coding process.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Findings</head><p>We detail three types of findings: (1) Disciplinary variation in QDA notes disciplinary differences in the purpose of coding, the importance of collaboration, and the use of QDA software.</p><p>(2) Implications for QDA interface design highlights four user practices not supported by QDA software. (3) Implications for QDA algorithm design presents four recommendations for automated QDA assistants.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Disciplinary Variation in QDA</head><p>Our participants represent diverse disciplinary orientations: three work on social media and communication; four study human computer interaction; two focus on digital preservation and archives; another two are science and technology studies scholars; Emily is a sociologist whose research intersects with social work; Tatiana's research centers on human rights; Caleb studies education; and Max is a linguistic anthropologist. This diversity meant that participants differed in research philosophy, methods, and goals. For example, in Jane, Tom, Preeti, Kaisa, and Rachel's disciplines, it is common practice to conduct research in teams, and to report quantitative measures of coding replicability. On the other hand, Emily and Max, in the humanities, had never seen replicability reported and only rarely encountered team research in their fields of study.  <ref type="table">1</ref>. A summary of participant characteristics, viz. their pseudonym, academic discipline, QDA method, primary QDA software, and the number of codes (Code) and annotations (Ann) they created during in situ observation. Code and Ann do not apply to second round participants because they did not code. We use 'Media &amp; com' for media and communication studies, 'Archives' for digital preservation and archives, 'STS' for science and technology studies, 'HCI' for human computer interaction, and 'Docs' and 'Sheets' for Google Docs and Sheets.</p><p>Participants also differed in the primary software they used for coding, sometimes along disciplinary lines. The social scientists all used NVivo or Atlas.ti for coding, whereas LL, Max, and the HCI researchers used spreadsheet and word processing software because they found special-purpose QDA software "too heavyweight and not flexible enough" (Rosalyn).</p><p>Another point of divergence was what each discipline sees as the purpose or goal of coding. For Max, the anthropologist, coding is simply "a way to organize the variety of things I saw, so I can pose them off of each other or get new details that I didn't notice before, but I would never report on or write about that per se." At best, said Max, "it's a jumping off point from which to do ethnographic writing." For the social scientists, there is a much more direct connection between coding and the final reporting, as Jane explains: "Sometimes there are codes that translate directly to a section of the results, but usually it's like these three codes have the types of things that we have determined fit into this section."</p><p>Participants also displayed individual stylistic preferences: Jane and Rachel, for instance, are cautious and methodical coders who always create a 'Good Quotes' code to call out particularly illustrative snippets for use in the final reporting, whereas Tom and Arundati take a 'quick and dirty' approach to first-pass coding, treating it more as a bucketing process.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Implications for QDA Interface Design</head><p>Despite the diversity in disciplinary orientation, personal coding style, and preferred QDA software, four common themes emerged across participants. Some findings will not be new to qualitative researchers, but for designers and engineers they highlight areas in which existing QDA suites lack support.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Codebook development is a complex process</head><p>All participants spent the majority of their initial time and analytical effort in developing the set of codes, called the codebook or coding scheme, on which they base further rounds of coding and analysis. Codebooks range from a simple listing of code names, to elaborate spreadsheets containing, per code, its name; a definition of what the code is intended to describe or capture; its place in the code hierarchy; and usage notes with positive and negative quote examples.</p><p>Codes in the initial codebook come from a variety of sources, such as the analyst's research interests, prior literature, research questions, respondent backgrounds, and common themes observed during data collection. Surprisingly, the list of sources did not vary by methodology. Rachel, who does purposeful coding, said, "We start with the literature that we used to build the proposal. [...] We always have a participant background code. Also, we don't start coding until we've done at least a handful of interviews, so we think about what we're seeing: oh, everybody talks about this, we should have a code for it. But I don't do grounded theory." Emily, who does in fact use grounded theory, a methodology that uses only inductive codes, answered very similarly to Rachel: "there's always a framework for the project. [...] Codes come from in-vivo categories in the data -things I didn't plan to look for that seem relevant; and they also come from bodies of theory -oh, this is a good example of cultural capital."</p><p>Researchers refine the initial codebook by coding a small subset of their data. This process clarifies existing code definitions, adds new codes, merges codes, and rarely, removes unimportant codes. The refined codebook is intended to remain unchanged throughout the first pass of coding and analysis, as Jane explains: "The initial codebook is always-indevelopment, but you definitely want to get to a point where the codebook stays the same." This is because later changes are difficult to incorporate: "if you add a code, you have to go back and recode all earlier transcripts to make sure that code is captured." Changes are especially difficult in collaborative research and require substantial justification: "If it's later in the project, past the fifth to seventh transcript, everyone has to agree that [the change] is important and relevant to the research question and likely to crop up in future transcripts."</p><p>Despite the importance researchers attach to codebook development, no popular QDA tool supports it, causing participants resort to workarounds. Rachel explains, "we develop our code set in Excel or Google Sheets, so that we can have the parent code, child code, definition and usage notes. NVivo does that but you can't see it all at once. And because the screen makes it so small, I always have my codes printed and taped up to the wall." All participants valued this ability to arrange their codes visually, but this too is not supported in QDA tools. "In Atlas," said Jane, "I spend all this time, making this beautiful, categorized codebook that is then arranged alphabetically [against my wishes]. [...] It would be cool if I had a more interactive codebook that would let me see everything in one place, and have my mental groupings represented."</p><p>To summarize, researchers attach significant importance and invest considerable time in codebook development, which involves adding, trying out, and modifying codes derived from multiple sources. However, codebook creation, piloting, and visualization are poorly supported by QDA tools.</p><p>Codes are created at four levels of complexity Codes that participants created during in-situ observation could be classified into four broad classes at varying levels of conceptual complexity and data granularity, based in part on Saldaña's coding manual <ref type="bibr" target="#b37">[38]</ref>.</p><p>Demographic codes capture demographic characteristics, such as age, gender, educational background, and work experience. This information is typically solicited early on in interviews, and thus clusters towards the beginning of transcripts. Such codes are analytically useful in correlating responses and other codes with demographic characteristics. Four out of five firstround participants created demographic codes.</p><p>In vivo codes are created from terms or phrases directly present in the interview transcript, e.g., Rachel's 'arts research definition', Emily's 'research versus pedagogy', and Tom's 'academic venues'. Such codes seek to retain respondents' voice and terminology, especially instances of respondents using a phrase to mean something contextually relevant that differs from its popular usage. All participants used in-vivo codes.</p><p>Descriptive codes seek to summarize the essential content of a portion of text. Unlike in-vivo codes, the transcript does not necessarily contain the words used in the code. For example, Jane created the code 'drawbacks of collaboration with the arts' to annotate disadvantages faced in partnering with artists, though the transcript contained neither 'drawbacks' nor 'collaboration'. All participants created descriptive codes.</p><p>Meta codes are descriptive in nature, but they seek to describe a phenomenon that occurs at the level of the dataset as a whole. Thus, meta codes are at a higher level of complexity and/or granularity than descriptive codes. For example, Jane created the code 'research as funded' to stand for some respondents' understanding of research as restricted to work that receives funding, in contrast to others' view of 'research as a creative practice'. All five participants used meta codes.</p><p>No QDA suite allows users to spatially organize codes into classes beyond a simple parent-child hierarchy. All codes, from demographic codes to codes at higher levels of complexity, are presented to users in a flat, undifferentiated list.</p><p>Codes are applied to 'units of analysis' When coding, participants consciously decide the length of the span of text they annotate. In particular, they consistently choose one of the following 'units of analysis': a sentence, a paragraph, or a conversational turn. 5 The coding process serves as a data reduction task, as Emily explains: "reading the transcript of two-hour long semi-structured interviews from start to finish is really costly time-wise. There are things that are relevant, but there's a lot of filler too. The goal is to focus in on what is analytically significant." Every coded chunk is a meaningful unit containing sufficient context to be understood in isolation.</p><p>Importantly, researchers consistently use one unit of analysis throughout the coding process for a given study for two main reasons. One, to be able to tell at a glance whether a transcript has been coded thoroughly, as Jane explains: "I like to look at my transcript and see very clearly what the units of analysis are, and that every unit of analysis has some codes. Otherwise I just don't feel like it's been coded thoroughly." Second, a consistent unit of analysis aids in the establishing of inter-rater reliability (IRR) among coders. 6 Coders start by independently coding a small sample of data. Then, the IRR score is calculated and coders discuss and come to an agreement about observed differences in coding. Teams often go through multiple rounds of IRR until they attain a score above 70% (Scott's pi). Establishing IRR serves as a crucial onboarding process, ensuring that all coders share a common understanding of the codebook and apply codes consistently, before the dataset is partitioned and assigned to individual coders. In some social sciences, individual researchers also engage in the IRR process with an external coder who acts as a second pair of eyes to ensure that the researcher's coding is valid, rigorous, and repeatable.</p><p>Despite clear delineation between adjacent units of analysis, QDA tools make users explicitly highlight the start and end of the text to code; and do not correct errors in cursor positioning. Such mistakes are not only hard to catch but often costly to fix. Citing a prior experience establishing IRR with a colleague, Jane said, "I coded each of these utterances as 'X' and he had done the same thing, really, but had just coded this whole big thing as 'X'." NVivo treated these "goofy unit differences" as complete disagreements, lowering their IRR score. To resolve the differences, her colleague had to manually readjust his coding to units of analysis identical to hers. "There has to be a way to reconcile that computationally without him having to recode everything," Jane urged. This is a missed opportunity for speeding up the coding process. An obvious solution is to ask users up front for their preferred unit of analysis and to automatically adjust cursor boundaries to conform accordingly.</p><p>QDA software is an evil necessity Eight participants use NVivo or Atlas.ti, state-of-the-art software that they nevertheless find frustrating and badly designed. This has prompted her research group to adopt the philosophy that "NVivo should never be the only place that information is stored. Once we're done coding, we run a report and save a PDF document for every code. We're just very skeptical of that reliability."</p><p>Indeed, all but one participant reported working with paper copies on smaller projects, because they much preferred the visual, spatial, and tactile experience of "laying things out sideby-side in a very simple way, like on a desk" (Max), of "having a physical space where the data is all around you" (Garry), and of "physically moving quotes around" (Arundati). Despite the various shortcomings of QDA software, participants agreed that it helped them organize, search, analyze, and to a small extent visualize larger datasets, and was hence necessary.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Implications for QDA Algorithm Design</head><p>Participants expressed a mix of curiosity, interest, skepticism, and concern about the idea of algorithms that can code, though none entirely rejected the possibility of using automated assistance in their own research.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Researchers should retain control over the codebook</head><p>All participants expressed the firm belief that research interests and theoretical beliefs influence how they perceive data and create codes. That is, the same data can be interpreted and analyzed in many different ways depending on the analyst and the codebook. Says Max, "your theoretical outlook influences your whole analytical process. So how I interpret what this guy said completely depends on my stance towards him. Do I believe what he's saying or is it propaganda? And don't think any kind of machine would be able to tell me that, ever." Other participants echoed Max's concerns, and were averse to the idea of using codebooks generated by an algorithm whose basis for code-creation were not visible or modifiable. This again was not based on a blanket mistrust of technology; indeed, said Jane, "I think that computers are very good at discerning patterns in language. So, I would be really interested to see what a computer generated as a codebook, especially in comparison to my own codebook. Would I trust it without review and potential revisions? Nah." Thus, though not open to using an auto-generated codebook, ten participants welcomed automated assistance in identifying codes. "Think about the way Amazon makes suggestions," says Emily, "'We think you'd like this' -and you could say, no, actually I don't like that. If there were some sort of interactional process," she would be more likely to use it. Though Tom agreed that this would be useful for experienced researchers, he cautioned that it could harm researchers new to coding: "the problem with machine learning is that it depends on the corpus that you have. So, there must be a way for people who are new to coding to understand that the system cannot give them exact answers and that it's a suggestion, and it should only be taken as a suggestion."</p><p>In summary, while participants were deeply uncomfortable trusting auto-generated codebooks, they welcomed automated suggestions for themes or patterns of interest in the data, with the caveat that these be presented to the user as suggestions and not definitive answers.</p><p>Automated recommendations need to be transparent An assistive tool that cannot explain the reasoning behind its recommendations, said Max, "is like a friend who's not that helpful or smart giving advice. Like a freshman, right? They have good ideas but they just don't have the level of knowledge that would be needed." The knowledge Max is referring to here is the background and context of a specific project and the academic literature upon which it is based.</p><p>Though Rachel makes extensive use of NVivo's advanced querying functionalities for analyzing coded data, she never uses the feature that automatically suggests annotations for a user-created code. NVivo does this by searching for synonyms of the words that constitute the user-created code. Rachel does not trust NVivo's recommendations because it does not explain why particular excerpts were recommended, nor does it make visible the synonyms used to do so. In our session, for example, she created the code 'ethics' to mean moral codes of conduct. When asked to suggest annotations, NVivo recommended interview excerpts containing the word 'honor'. While the words 'honor' and 'ethics' do sometimes overlap in meaning, the excerpts used 'honor' to mean 'respect' or 'esteem' and bore no relation to Rachel's 'ethics' code. "This is why I didn't [take the suggestions]," she said. "The query was ethics and it showed up honor. Not the same thing! I wish I knew what dictionary they were using." Agreeing with Rachel, Emily said she would most appreciate a tool that not only showed her its reasoning but also allowed her to "move around or broaden or in some way refine the criteria and have the program go back and search for the refined versions. I would need to be able to edit the criteria."</p><p>Thus, participants stipulated that to gain acceptance and be considered reliable, an assistive tool must express the criteria driving its recommendations, preferably without technical jargon. An ideal tool would not only display criteria but also allow users to edit and iteratively refine them.</p><p>Proprietary data formats should be avoided Author: "Can you can share the coded file with me?" Jane: "I can, but the problem is you're not going to be able to open it unless you have Atlas." This is true of all popular QDA suites, because they store coded data in proprietary data formats that are not interoperable. Further, coded data can only be exported to Word or PDF files, not even to basic spreadsheets. This is an often-ignored feature with two important repercussions: one, it locks researchers into QDA suites that charge recurring licensing fees. Two, it hinders collaboration: collaborators must have access to and familiarity with the same QDA suite. For doctoral students like Rachel, this can complicate access to their own data on changing institutions after graduation. She says of NVivo, "I'm going to use it for my dissertation but then who knows if the place that I go to is going to pay for it? We are always trying to get what we need out of NVivo so that we are not totally reliant on the software. If it was less costly, we have to worry, but it's $5000 for a student licence."</p><p>In addition to being expensive and non-interoperable, popular QDA suites either do not support simultaneous coding by multiple coders or add a substantial surcharge to enable such collaboration. Without such support, changes made by any one team member have to be manually synced with others. Participants related stories where teams essentially implemented their own 'locking' system, whereby only one team member at a time could 'take' the lock to make changes, with others having to wait for the lock to be 'released' before making any changes themselves. This has led student researchers in particular to code using software such as Google Docs and Sheets that were designed for collaboration. Thus, easy interoperability and efficient collaboration at reasonable cost are important considerations.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Automate to extend researchers' coding to unseen data</head><p>While most participants would not use automated assistance to code an entire dataset, they would to different degrees use a tool that (1) helped extend their coding to a large portion of data, and (2) allowed transparent control over the process.</p><p>Ten participants said they would neither trust nor use software that took as input a user-developed codebook and automatically applied it to the entire dataset. Jane and Tom would use it in one case alone, that of annotating codes that correspond directly to the structured questions 7 in semi-structured interview studies. This would allow Jane to maintain a separate set of 'structured codes' that she "wouldn't necessarily have to incorporate into [her] codebook." Echoing this, Tom said, "we call them semi-structured interviews because there is a structured part. I'm going to ask each person these 5 or 6 questions that are demographic or they might as well be part of a survey." Except for structured codes, Jane and Tom would not use software that automatically coded the entire dataset. There were two main reasons for this reluctance: one, coding a small sample of the data is crucial to the process of developing a good codebook, ensuring that it contains codes granular enough to surface the nuances of a theme while being comprehensive enough to capture the whole range of opinions related to the theme. This process also helps researchers build a better understanding of the data and the direction that their analysis is headed towards. Second, automated coding of the entire dataset is too drastic and irreversible-seeming an action for researchers for whom coding usually implies several hours of intensive effort. Indeed, participants said they would rather code the data themselves than go through every auto-generated annotation to verify that it is valid. In Jane's words, "I almost feel that would be adding one more step. Not only do I have to read the unit [of text] and determine what I think the codes would be, but then I have to look at what the computer said."</p><p>Instead, participants desired software that would extend their coding to unseen data, i.e., apply their codebook -once fully developed on a subset of the data -to the remaining data. Once participants gained a sense of what the data contained by going through the process of codebook development, they found it tedious to code the rest, as Rachel explains: "When you reach saturation, in those last interviews, you're like, 'We know. We know. We got all this, cool, in the bag.' But you still have to code them. And there are so few interesting nuggets... for the most part you're seeing the same things." Indeed, most consider this phase repetitive and dull: it is where the majority of time coding is spent, with little need for active interpretation and almost no new insights. Participants would particularly appreciate such assistance in projects with large datasets (roughly above 30-50 interviews).</p><p>Why were participants more open to automation once they had already coded a portion of the data? Because, to them, the initial coding would serve as a way for the software to learn from and understand their coding process and thus make customized suggestions: "If it said, 'You annotated these five things, maybe you want to code them as this.' Yeah, because it was based on my own annotations, I would trust that" (Rachel). However, some participants mentioned that they "still want it to actually code" (Tom). Instead, they preferred an interactive process, where instead of teaching the software to code from scratch, they would be fine-tuning it, thus providing "a way of working with the software to say, yes this is right or no, this isn't helpful," according to Emily.</p><p>To summarize, participants welcomed the idea of software that used the data they coded and the codebook they developed to semi-automatically extend their coding to unseen data, relieving them of a repetitive and time-consuming task with little analytical reward. Further, participants would happily provide oversight to improve the accuracy and reliability of such software.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>EXPERIMENTS IN PROTOTYPING</head><p>Since our user study emphasized that qualitative researchers would most appreciate automation after having developed a codebook and coded a subset of data, and that automated recommendations should be transparent, we decided to evaluate the performance of three NLP techniques that performed coding given a pre-developed codebook in which the high-level instructions are determined entirely by the researcher.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Method</head><p>We preprocessed codebooks and transcripts to make them amenable to computational processing. We built a Python framework that takes as input a codebook and un-coded transcripts; applies the codes to the transcripts using one of three NLP-based techniques; and visualizes the technique's performance in relation to the participant's own coding.</p><p>Data preprocessing was performed with the objective of simplifying the task of computer-aided coding, and increasing the likelihood of achieving high inter-rater reliability with human coders. This required choices that balanced the coding needs and practices of researchers with task simplification for the sake of computer-aided coding. Participants used NVivo or Atlas.ti to create a codebook and code interview transcripts, but both QDA suites store data in encrypted proprietary formats. Hence, we manually converted coded data into machinereadable text files using brat <ref type="bibr" target="#b41">[42]</ref>, an open-source tool that facilitates text annotation and visualization.</p><p>We tested three different ways of segmenting interview transcripts. First, we divided transcripts into conversational turns. While this worked well for our participants, we found that individual segments often contained too much information, making it difficult for NLP techniques to home in on key content words. Hence, we divided transcripts into paragraphs. However, the words participants used in creating codes were often present in the interviewer question and not in the interviewee response, meaning that paragraph level segmentation performed poorly. Hence, we used a novel two-level technique we call contextual paragraph segmentation that provides additional context to individual paragraphs as follows: first, transcripts are segmented by conversational turn. Within each turn, the interviewer's question is appended to each answering paragraph, thus creating contextual paragraph segments. This method drastically improved the performance of all three techniques, compared to traditional paragraph-or conversational-turn segmentation. We used the Python Natural Language Toolkit <ref type="bibr" target="#b3">[4]</ref> default settings to tokenize 8 and eliminate stopwords 9 from text in coded and un-coded interview segments, and participant-created codes. Finally, we created case-insensitive bag-of-words vector representations 10 of all transcript segments and participantcreated codes. We used Whoosh <ref type="bibr" target="#b7">[8]</ref> to index and make searchable the contextual paragraphs of all un-coded transcripts.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Scoring and Displaying Results</head><p>We use the participant's coding as ground truth in scoring semi-automatically coded data. For every coded transcript, we generate a spreadsheet that displays correctly-identified (true positives), wrongly-assigned (false positives), and missed (false negatives) code annotations at the paragraph level. We also report scores for precision, recall, and the Scott's pi meaof IRR between the participant and the NLP technique. Ideal ranges for precision and recall vary by task, but prototypes with both above 70% are considered promising. We omit Max's data because his annotations did not meet the minimum number recommended to compute Scott's pi. 8 Tokenization splits text into meaningful chunks, such as words and punctuation in the case of word tokenization. 9 Stopwords are words that occur with a high frequency independent of textual genre, e.g. 'the' in English. 10 Bag-of-words vectorization transforms each piece of text into a vector in a high-dimensional space where every word in the vocabulary acts as an independent dimension. See <ref type="bibr" target="#b39">[40]</ref> for more details.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Partially-Automated Coding Assistants</head><p>We chose to experiment with three methods for partiallyautomated coding: simple keyword matching, augmented keyword matching, and search-style query matching, because they can display the criteria driving their recommendations; they accept user modification of criteria; and they are highly explainable, i.e., they can provide non-technical explanations for their recommendations. We hypothesized that each technique would successively improve on its predecessors in terms of precision, recall, and inter-rater reliability.</p><p>The simple keyword matching technique computes the cosine similarity 11 between each contextual paragraph vector and the vector of every code in the codebook; selecting codes whose similarity score exceeds a predefined numerical threshold. An automated assistant backed by this technique would require no additional input from the user beyond the list of codes.</p><p>The augmented keyword matching technique augments code vectors by including synonyms of user-proposed keywords. We experimented with sophisticated synonym generators such as Empath <ref type="bibr" target="#b20">[21]</ref>, but found the resultant keywords too generic or broad. On providing 'conference' and 'journal' as seed keywords, for instance, Empath generated the synonyms 'diary', 'book', 'library', and 'pen'. Hence, we manually chose keywords by skimming un-coded transcripts, mainly adding a small number of spelling variations, inflections, and near synonyms. For instance, the code 'definition of arts research' was augmented with the keywords: 'define' and 'art'. This technique is meant to simulate an improved version of the previous assistant, while still requiring no additional input unless the user wanted to specify custom synonyms.</p><p>The popularity of online search engines for information seeking behaviors inspired us to try the search-style query matching technique. We allow users to specify one search engine-style query per code. Search queries can include keywords, e.g., 'research', or phrases, e.g., 'art research', combined using Boolean operators AND, OR, and NOT. The search-style query technique intends to simulate a search engine backed automated assistant. This assistant, though technologically more complex than its predecessors, can still explain its recommendations by highlighting matched words as search engines do. It requires users to specify a boolean query per code.</p><p>The first author iteratively hand-formulated one search query per code for each participant by skimming 20% of their coded annotations, explicitly aiming to maximize precision and recall. Here are some examples from least to most complex: We recognize that our queries may be different from those created by real users. Our evaluation scenario thus represents a best-case baseline for the search-style technique, and is not necessarily evidence of real-world performance.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Findings</head><p>Recall from Table <ref type="table">1</ref> that participants coded between one and five transcripts, creating between 11 and 39 codes that occurred zero to 25 times per transcript. Table <ref type="table" target="#tab_3">2</ref> summarizes the performance, averaged over participants, of the simple keyword, augmented keyword, and search-style query matching techniques. Headers abbreviate precision, recall, and Scott's pi as P, R, and Pi respectively. The three measures are reported overall (AVG), and per type of code, viz. in-vivo (VIV), descriptive (DES), meta (MET), and demographic (DEM). Note that '&lt; 0' denotes that Scott's pi cannot be computed due to too few annotations.</p><p>The simple and augmented keyword techniques perform similarly on in-vivo codes. This is because in-vivo codes are created using language present in the transcript. Except for in-vivo and to a small extent descriptive codes, the simple keyword technique performs poorly overall. This is expected: once the codes turn descriptive or meta, it fails to match most participant-created annotations. While this drop in performance is also present for demographic codes, Tom is a notable exception because his demographic codes bear in-vivo names. Noting that interviewees were typically asked, "What is your educational background?" Tom created a demographic code named 'educational background'. Jane and Rachel took a different approach, creating demographic codes organized around particulars such as disciplinary affiliations (e.g., 'demo -Science' and 'participant background -Arts') or professional titles (e.g., 'demo -Assistant professor'). The strength of the augmented keyword technique is visible in the descriptive and meta code categories: it consistently shows more than double the recall achieved by the simple keyword technique while retaining or exceeding its modest precision scores. Despite its simplicity, the augmented keyword technique achieves IRR scores that are typical of human coders after the first pass of the inter-rater reliability process <ref type="bibr" target="#b6">[7]</ref>.</p><p>While the addition of synonyms and spelling variants helps boost the recall and IRR of keyword matching, both techniques suffer from poor precision for two main reasons. First, the techniques treat all words as equally important when assigning codes. However, in a project that is primarily about art and research, matching 'art' or 'research' in the text is less important than matching, say, 'definition'. This severely limits the achievable precision of codes like 'definition of arts research', which was used by all participants. Second, these techniques do not utilize negative indicators, i.e., words whose presence means that a code should definitely not apply. This is useful for parallel codes such as 'definition of research' and 'definition of arts research', where the presence of 'arts' in the text rules out the first code. The creation of parallel codes being a commonly-observed practice in our participants, this again results in low precision. Problems of over-prediction are typically solved by thresholding, i.e. discarding predictions whose match score is below a fixed value. But the combined lack of weighting and negative indicators meant that both techniques exhibited consistent over-prediction despite thresholding.</p><p>Search-style query matching combines the flexibility, ease of use, and mix-and-match capabilities of search queries. This technique exhibited a dramatic increase in all measures of performance across participants and types of code, as seen in Table <ref type="table" target="#tab_3">2</ref>. We manually inspected cases where the technique's predictions did not agree with the participant's. Over half were instances of human coding error. Thus, this technique shows the potential to help researchers identify instances of omission in their own coding, thereby performing one of the key tasks of a second coder in the inter-rater reliability process. The surprise came in the form of Jane's demographic codes, not one of which was matched despite the technique making several demographic predictions. This was, however, an artefact of Jane marking the entire transcript with demographic codes. Jane has a good reason for doing this, saying, "I highlight the full text and add document-level codes for gender and age, for example. That way it shows up at the top of every document, so you can see easily: this was a 30-something woman. It's a lot easier if you have that, especially later when you're in the process of writing." Since such codes show up at the top of the transcript, we marked them on the first line in the preprocessing stage. The first line is typically a greeting and contains no demographic questions, causing the search-style query matching to ignore it. This was the only case where keyword matching techniques benefitted from over-prediction.</p><p>The search-style querying technique achieved 88% precision and 82% recall on average, which is commendable for an early prototype. Further, it achieves an IRR score of 89%, indicating high agreement with participant coders. Since queries were author-formulated, these results establish a best-case baseline. That such a simple technique achieves promising results indicates that there is great potential in using NLP techniques to partially automate coding.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>DISCUSSION</head></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Avenues for Interface and Algorithm Design</head><p>We confirm Fielding et al.'s report of researchers using QDA suites primarily as "electronic filing cabinets" <ref type="bibr" target="#b21">[22,</ref><ref type="bibr" target="#b22">23,</ref><ref type="bibr" target="#b29">30]</ref>: despite using a QDA suite for multiple studies over several years and in one case being the departmental expert, participants used only basic coding functionality, choosing instead to export data out of it after first-pass coding. Further, participants did not know and could not figure out how to use advanced features. We identify four reasons for this "electronic filing cabinet" syndrome in our sample: one, the steep learning curve of basic coding functionality coupled with short project timelines leave little incentive for researchers to pursue advanced features. Second, experiences with the loss of data or analytical work leave permanent scars, making users forever suspicious of tool reliability. Third, QDA tools lack support for some of the most effort-intensive parts of the coding process, viz. codebook development and inter-rater reliability. Finally, the few analytical features that participants had experience with neither performed well nor made visible the criteria driving their recommendations. The good news is that these problems can be addressed by interface and algorithm design, and that researchers want to better utilize their expensive software and highly-skilled labor <ref type="bibr" target="#b13">[14,</ref><ref type="bibr" target="#b43">44]</ref>. This paper steps towards this goal, generating design implications based on research practices that are common across disciplines.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Automated Assistance and Researcher Agency</head><p>While prior work has focused on data exploration <ref type="bibr" target="#b9">[10,</ref><ref type="bibr" target="#b16">17,</ref><ref type="bibr" target="#b17">18,</ref><ref type="bibr" target="#b26">27,</ref><ref type="bibr" target="#b35">36,</ref><ref type="bibr" target="#b38">39]</ref> and evidence gathering <ref type="bibr" target="#b0">[1,</ref><ref type="bibr" target="#b44">45]</ref>, automation can help qualitative researchers in a variety of other ways. We can exploit the structure in interviews to suggest and annotate demographic and protocol-based codes. We can free users of the repetitive burden of selecting precise boundaries for code annotations by selecting the closest unit of analysis. Relatedly, we can ensure that minor mismatches in units of analysis do not affect inter-rater reliability calculations. Automated assistants could even serve as proxies for the second coder in establishing inter-rater reliability: teaching a machine to reproduce with high confidence a researcher's coding would be a good test of its rigor and repeatability.</p><p>We pursue a less contentious but ambitious goal in this paper, that of speeding up first-pass coding after the codebook has been developed. We chose this specific task after observing, both in the user study and from personal experience, that this phase of coding was the most repetitive, where human interpretation is not as crucial as in codebook development and further rounds of coding and analysis. The prototypes we present use simple NLP techniques while still producing promising results. Why are these simple techniques able to get so far? We believe that the repetitive nature of coding with a well-developed codebook lends itself to automation. Harnessing sophisticated NLP techniques would improve our results, opening the doors to interactive assistants that learn from researchers' coding and extend it to large datasets.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Commonalities in User Practices and Preferences</head><p>Methodological texts and even data analysis textbooks are typically written at the conceptual level, providing approaches, models, definitions, and strategies without delving into operationalizable details such as the recommendation to use a consistent unit of analysis. We found evidence of concrete guidelines only at select methods-focused venues ( <ref type="bibr" target="#b6">[7]</ref> for instance provides an excellent discussion of best practices for the inter-rater reliability process). Hence, we were surprised by the commonalities in user practices and preferences despite the disciplinary diversity in our sample. We hypothesize that practice-oriented guidelines are passed on via apprenticeship, whereby students start by assisting on projects led by supervisors and mentors to get trained in qualitative research. This might also explain why participants from disciplines where collaboration is not common, such as the humanities, were often at the fringes of observed commonalities.</p><p>Studying automated coding also encourages us to think more formally about what the process of coding involves. The diversity of disciplines, research philosophies, methodologies, and even goals that come under the umbrella of qualitative research suggests that very different things might happen in practice even when people use the same methodological description. This is especially relevant to the HCI community given the interdisciplinary nature of our work.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Limitations and Future Work</head><p>This work can be improved in several ways. First, we asked participants to code data they had never before seen with no exposure to prior literature and in a limited time frame. Prototype evaluation results can therefore serve as only a proof of concept of their promise. It would be interesting to test prototypes on data from researchers' own projects. Second, in the user study, we prioritized in-depth engagement over increasing sample size. We intend to investigate whether our findings hold more generally, particularly for older researchers, since our participants were age 35 and under. The third avenue for future work is in employing sophisticated NLP instead of the simple techniques we experimented with. Finally, we cannot estimate the performance of assistive coding tools based solely on quantitative measures. There is thus an opportunity in building and evaluating a user-facing interface.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>CONCLUSION</head><p>Could parts of qualitative coding be automated, and should they be? To answer these questions, we conducted a user study, interviewing researchers and observing them code. We found that across disciplines, researchers follow several practices well-suited to automation. Researchers desire automation, but only after having developed a codebook and coded a subset of data, particularly in extending their coding to unseen data. They also require any assistive tool to be transparent about its recommendations. Based on our findings, we built prototypes to partially automate coding using simple NLP techniques. Our top-performing system generates coding that performs as well as human coders on inter-rater reliability measures. We present implications for interface and algorithm design.</p></div><figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_1"><head></head><label></label><figDesc>Tom sums it up best: "they're all bad in different ways." Jane, the Atlas.ti expert in her research group, finds the software unintuitive and awkward. Moreover, its uninformative and confusing messaging creates a steep learning curve for newcomers: "It gives you really alarming sounding messages. Like 'DO YOU WANT TO DELETE YOUR WHOLE DOCU-MENT?' But that's not what it's doing. [...] Also, if you open a project incorrectly, it sounds like you've deleted everything and there's no way to recover it. And you just have to reopen it. Just make less dramatic software." NVivo does better on messaging, but three of six participants have lost work due to its misleading data saving interface. Therefore, Emily and Rachel, who have used NVivo for over six years, severely mistrust its reliability. Rachel explains, "when you hit Save, it doesn't actually save it, it a temp file. And it doesn't save properly until you close the program. So, if you're in a Remote Desktop environment and you lose your connection before you've closed it, you lose however much work you've done. [...] I lost six hours of work."</figDesc><table /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_3"><head>Table 2 .</head><label>2</label><figDesc>Performance of simple keyword, augmented keyword, and searchstyle query matching techniques averaged over participants. Table headers abbreviate precision, recall, and Scott's pi as P, R, and Pi respectively. Performance is reported per type of code, viz. in vivo (VIV), descriptive (DES), meta (MET), demographic (DEM), and averaged over all codes (AVG). The best results are in bold type.</figDesc><table><row><cell></cell><cell></cell><cell>SIMPLE</cell><cell></cell><cell cols="3">AUGMENTED</cell><cell cols="2">SEARCH-STYLE</cell></row><row><cell></cell><cell>P</cell><cell>R</cell><cell>Pi</cell><cell>P</cell><cell>R</cell><cell cols="2">Pi P</cell><cell>R</cell><cell>Pi</cell></row><row><cell>VIV</cell><cell cols="4">30.3 45.2 30 34</cell><cell cols="4">62.4 33 93.7 92.9 93</cell></row><row><cell>DES</cell><cell cols="8">14.9 24.3 24 18.6 43.8 28 92.5 82.7 88</cell></row><row><cell cols="2">MET 5.4</cell><cell cols="7">20.6 &lt;0 19.1 50.6 27 89.3 88.4 86</cell></row><row><cell cols="4">DEM 19.1 48.5 9</cell><cell cols="5">16.8 51.3 12 44.9 21</cell></row><row><cell>AVG</cell><cell cols="8">15.1 32.5 27 18.4 42.8 35 88.4 82.6 89</cell></row></table></figure>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="5">In the context of interviews, a conversational turn comprises of one question and the respondent's contribution to that question.</note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="6">Inter-rater reliability (IRR) is a statistical measure used to estimate the replicability of coding, calculated as the agreement between two independent coders given the same codebook and dataset. It is often reported using Scott's pi. See<ref type="bibr" target="#b6">[7]</ref> for details.</note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="7">In studies involving semi-structured interviews, researchers create a set of questions that are asked of every respondent, which comprise the 'structured' section of the interview, separate from respondentspecific questions, i.e., the 'unstructured' section.</note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="11">Cosine similarity measures the similarity between two vectors, assigning a score between 0 (to orthogonal, i.e. dissimilar vectors) and 1 (to identical vectors). It is one of the most easy-to-interpret measures of document similarity. See<ref type="bibr" target="#b39">[40]</ref> for more details.</note>
+		</body>
+		<back>
+
+			<div type="acknowledgement">
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>ACKNOWLEDGMENTS</head><p>We are indebted to our participants for their time and expertise. We thank Sarita Schoenebeck, Ceren Budak, Joyojeet Pal, and our anonymous reviewers for feedback on drafts.</p></div>
+			</div>
+
+			<div type="annex">
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Data Preprocessing</head></div>			</div>
+			<div type="references">
+
+				<listBibl>
+
+<biblStruct xml:id="b0">
+	<analytic>
+		<title level="a" type="main">Interactive Topic Modeling for aiding Qualitative Content Analysis</title>
+		<author>
+			<persName><forename type="first">Aneesha</forename><surname>Bakharia</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Peter</forename><surname>Bruza</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jim</forename><surname>Watters</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Bhuva</forename><surname>Narayan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Laurianne</forename><surname>Sitbon</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2854946.2854960</idno>
+		<ptr target="http://dx.doi.org/10.1145/2854946.2854960" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2016 ACM on Conference on Human Information Interaction and Retrieval -CHIIR &apos;16</title>
+				<meeting>the 2016 ACM on Conference on Human Information Interaction and Retrieval -CHIIR &apos;16</meeting>
+		<imprint>
+			<date type="published" when="2016">2016. 2016</date>
+			<biblScope unit="page" from="213" to="222" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b1">
+	<analytic>
+		<title level="a" type="main">Manual or electronic? The role of coding in qualitative data analysis</title>
+		<author>
+			<persName><forename type="first">N</forename><surname>Tehmina</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Basit</surname></persName>
+		</author>
+		<idno type="DOI">10.1080/0013188032000133548</idno>
+		<ptr target="http://dx.doi.org/10.1080/0013188032000133548" />
+	</analytic>
+	<monogr>
+		<title level="j">Educational Research</title>
+		<imprint>
+			<biblScope unit="volume">45</biblScope>
+			<biblScope unit="issue">2</biblScope>
+			<biblScope unit="page" from="143" to="154" />
+			<date type="published" when="2003">2003. 2003</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b2">
+	<monogr>
+		<title level="m" type="main">Information Systems Development Challenges in Practice Theory and Education Vols</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Peter</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Christine</forename><surname>Bednar</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Welch</surname></persName>
+		</author>
+		<idno type="DOI">10.1007/978-0-387-68772-8_18</idno>
+		<ptr target="http://dx.doi.org/10.1007/978-0-387-68772-8_18" />
+		<imprint>
+			<date type="published" when="2009">2009. 2009</date>
+			<biblScope unit="volume">1</biblScope>
+			<biblScope unit="page" from="225" to="236" />
+		</imprint>
+	</monogr>
+	<note>Contextual Inquiry and Requirements Shaping</note>
+</biblStruct>
+
+<biblStruct xml:id="b3">
+	<monogr>
+		<author>
+			<persName><forename type="first">Steven</forename><surname>Bird</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ewan</forename><surname>Klein</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Edward</forename><surname>Loper</surname></persName>
+		</author>
+		<title level="m">Natural Language Processing with Python. O&apos;Reilly Media Inc. 479 pages</title>
+				<imprint>
+			<date type="published" when="2009">2009</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b4">
+	<analytic>
+		<title level="a" type="main">Using thematic analysis in psychology</title>
+		<author>
+			<persName><forename type="first">V</forename><surname>Braun</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">V</forename><surname>Clarke</surname></persName>
+		</author>
+		<idno type="DOI">10.1191/1478088706qp063oa</idno>
+		<ptr target="http://dx.doi.org/10.1191/1478088706qp063oa" />
+	</analytic>
+	<monogr>
+		<title level="j">Qualitative Research in Psychology</title>
+		<imprint>
+			<biblScope unit="volume">3</biblScope>
+			<biblScope unit="page" from="77" to="101" />
+			<date type="published" when="2006">2006. 2006</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b5">
+	<analytic>
+		<title level="a" type="main">Beyond the lone ranger researcher: Team work in qualitative research</title>
+		<author>
+			<persName><forename type="first">Liora</forename><surname>Bresler</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Judy</forename><forename type="middle">Davidson</forename><surname>Wasser</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Nancy</forename><forename type="middle">B</forename><surname>Hertzog</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mary</forename><surname>Lemons</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Research Studies in Music Education</title>
+		<imprint>
+			<biblScope unit="volume">7</biblScope>
+			<biblScope unit="page" from="13" to="27" />
+			<date type="published" when="1996">1996. 1996</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b6">
+	<analytic>
+		<title level="a" type="main">Coding In-depth Semistructured Interviews: Problems of Unitization and Intercoder Reliability and Agreement</title>
+		<author>
+			<persName><forename type="first">L</forename><surname>John</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Charles</forename><surname>Campbell</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jordan</forename><surname>Quincy</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ove K</forename><surname>Osserman</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Pedersen</surname></persName>
+		</author>
+		<idno type="DOI">10.1177/0049124113500475</idno>
+		<ptr target="http://dx.doi.org/10.1177/0049124113500475" />
+	</analytic>
+	<monogr>
+		<title level="j">Sociological Methods &amp; Research</title>
+		<imprint>
+			<biblScope unit="volume">42</biblScope>
+			<biblScope unit="issue">3</biblScope>
+			<biblScope unit="page" from="294" to="320" />
+			<date type="published" when="2013">2013. 2013</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b7">
+	<monogr>
+		<title level="m" type="main">Whoosh: A fast, pure-Python full text indexing, search, and spell checking library</title>
+		<author>
+			<persName><forename type="first">Matt</forename><surname>Chaput</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2016">2016. 2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b8">
+	<monogr>
+		<title level="m" type="main">Constructing Grounded Theory: A Practical Guide Through Qualitative Analysisâ Ȃ Ŕ</title>
+		<author>
+			<persName><forename type="first">Kathy</forename><surname>Charmaz</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2006">2006</date>
+			<publisher>Sage Publications</publisher>
+			<pubPlace>Thousand Oaks, CA</pubPlace>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b9">
+	<analytic>
+		<title level="a" type="main">Lariat : A Visual Analytics Tool for Social Media Researchers to Explore Twitter Datasets</title>
+		<author>
+			<persName><forename type="first">Nan-Chen</forename><surname>Chen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Michael</forename><surname>Brooks</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Rafal</forename><surname>Kocielnik</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sungsoo</forename><forename type="middle">Ray</forename><surname>Hong</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jeff</forename><surname>Smith</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sanny</forename><surname>Lin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Zening</forename><surname>Qu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Cecilia</forename><surname>Aragon</surname></persName>
+		</author>
+		<ptr target="http://dx.doi.org/10125/41382" />
+	</analytic>
+	<monogr>
+		<title level="m">Hawaii International Conference on System Sciences</title>
+				<meeting><address><addrLine>Honolulu, HI</addrLine></address></meeting>
+		<imprint>
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b10">
+	<analytic>
+		<title level="a" type="main">Challenges of Applying Machine Learning to Qualitative Coding</title>
+		<author>
+			<persName><forename type="first">Nan-Chen</forename><surname>Chen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Rafal</forename><surname>Kocielnik</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Margaret</forename><surname>Drouhard</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Vanessa</forename><surname>Peña-Araya</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jina</forename><surname>Suh</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Keting</forename><surname>Cen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Xiangyi</forename><surname>Zheng</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Cecilia</forename><surname>Aragon</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">ACM SIGCHI Workshop on Human-Centered Machine Learning</title>
+				<imprint>
+			<date type="published" when="2016">2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b11">
+	<monogr>
+		<title level="m" type="main">Qualitative Inquiry and Research Design: Choosing Among Five Approaches</title>
+		<author>
+			<persName><forename type="first">J W</forename><surname>Creswell</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2007">2007</date>
+			<publisher>SAGE Publications</publisher>
+			<pubPlace>Thousand Oaks, CA</pubPlace>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b12">
+	<analytic>
+		<title level="a" type="main">Computer assessment of interview data using latent semantic analysis</title>
+		<author>
+			<persName><forename type="first">Gregory</forename><surname>Dam</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Stefan</forename><surname>Kaufmann</surname></persName>
+		</author>
+		<idno type="DOI">10.3758/BRM.40.1.8</idno>
+		<ptr target="http://dx.doi.org/10.3758/BRM.40.1.8" />
+	</analytic>
+	<monogr>
+		<title level="j">Behavior Research Methods</title>
+		<imprint>
+			<biblScope unit="volume">40</biblScope>
+			<biblScope unit="page" from="8" to="20" />
+			<date type="published" when="2008">2008. 2008</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b13">
+	<analytic>
+		<title level="a" type="main">Speculating on the Future of Digital Tools for Qualitative Research</title>
+		<author>
+			<persName><forename type="first">J</forename><surname>Davidson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Paulus</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Jackson</surname></persName>
+		</author>
+		<idno type="DOI">10.1177/1077800415622505</idno>
+		<ptr target="http://dx.doi.org/10.1177/1077800415622505" />
+	</analytic>
+	<monogr>
+		<title level="j">Qualitative Inquiry</title>
+		<imprint>
+			<biblScope unit="volume">22</biblScope>
+			<biblScope unit="page" from="606" to="610" />
+			<date type="published" when="2016">2016. 2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b14">
+	<analytic>
+		<title level="a" type="main">Indexing by Latent Semantic Analysis</title>
+		<author>
+			<persName><forename type="first">S</forename><surname>Deerwester</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Dumais</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Furnas</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Landauer</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Harshman</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Journal of the American Society for Information Science</title>
+		<imprint>
+			<biblScope unit="volume">41</biblScope>
+			<biblScope unit="page" from="391" to="407" />
+			<date type="published" when="1990">1990. 1990</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b15">
+	<monogr>
+		<title level="m" type="main">Handbook of Qualitative Research</title>
+		<author>
+			<persName><forename type="first">N</forename><forename type="middle">K</forename><surname>Denzin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><forename type="middle">S</forename><surname>Lincoln</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="1994">1994</date>
+			<publisher>Sage Publications</publisher>
+			<pubPlace>Thousand Oaks, CA</pubPlace>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b16">
+	<analytic>
+		<title level="a" type="main">Mixed-Initiative Real-Time Topic Modeling &amp; Visualization for Crisis Counseling</title>
+		<author>
+			<persName><forename type="first">Karthik</forename><surname>Dinakar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jackie</forename><surname>Chen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Henry</forename><surname>Lieberman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Rosalind</forename><surname>Picard</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Robert</forename><surname>Filbin</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2678025.2701395</idno>
+		<ptr target="http://dx.doi.org/10.1145/2678025.2701395" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 20th International Conference on Intelligent User Interfaces -IUI &apos;15</title>
+				<meeting>the 20th International Conference on Intelligent User Interfaces -IUI &apos;15</meeting>
+		<imprint>
+			<date type="published" when="2015">2015. 2015</date>
+			<biblScope unit="page" from="417" to="426" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b17">
+	<monogr>
+		<title level="m" type="main">Real-time Topic Models for Crisis Counseling</title>
+		<author>
+			<persName><forename type="first">Karthik</forename><surname>Dinakar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Henry</forename><surname>Lieberman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Allison J B</forename><surname>Chaney</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">David</forename><forename type="middle">M</forename><surname>Blei</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2014">2014. 2014</date>
+			<biblScope unit="page" from="1" to="4" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b18">
+	<monogr>
+		<title level="m" type="main">Writing Ethnographic Fieldnotes</title>
+		<author>
+			<persName><forename type="first">Robert</forename><surname>Emerson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Rachel</forename><surname>Fretz</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Linda</forename><surname>Shaw</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2011">2011</date>
+			<publisher>University of Chicago Press</publisher>
+			<pubPlace>Chicago, IL</pubPlace>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b19">
+	<analytic>
+		<title level="a" type="main">Interactive machine learning</title>
+		<author>
+			<persName><forename type="first">Jerry</forename></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Alan</forename><surname>Fails</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Dan</forename><forename type="middle">R</forename><surname>Olsen</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/604045.604056</idno>
+		<ptr target="http://dx.doi.org/10.1145/604045.604056" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 8th international conference on Intelligent user interfaces IUI 03</title>
+				<meeting>the 8th international conference on Intelligent user interfaces IUI 03</meeting>
+		<imprint>
+			<date type="published" when="2003">2003. 2003</date>
+			<biblScope unit="page" from="39" to="45" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b20">
+	<analytic>
+		<title level="a" type="main">Empath: Understanding Topic Signals in Large-Scale Text</title>
+		<author>
+			<persName><forename type="first">Ethan</forename><surname>Fast</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Binbin</forename><surname>Chen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Michael</forename><forename type="middle">S</forename><surname>Bernstein</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2858036.2858535</idno>
+		<ptr target="http://dx.doi.org/10.1145/2858036.2858535" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2016 CHI Conference on Human Factors in Computing Systems -CHI &apos;16</title>
+				<meeting>the 2016 CHI Conference on Human Factors in Computing Systems -CHI &apos;16</meeting>
+		<imprint>
+			<date type="published" when="2016">2016. 2016</date>
+			<biblScope unit="page" from="4647" to="4657" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b21">
+	<analytic>
+		<title level="a" type="main">New Patterns in the Adoption and Use of Qualitative Software</title>
+		<author>
+			<persName><forename type="first">Nigel</forename><surname>Fielding</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Raymond</forename><surname>Lee</surname></persName>
+		</author>
+		<idno type="DOI">10.1177/1525822X02014002005</idno>
+		<ptr target="http://dx.doi.org/10.1177/1525822X02014002005" />
+	</analytic>
+	<monogr>
+		<title level="j">Field Methods</title>
+		<imprint>
+			<biblScope unit="volume">14</biblScope>
+			<biblScope unit="page" from="197" to="216" />
+			<date type="published" when="2002">2002. 2002</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b22">
+	<analytic>
+		<title level="a" type="main">Triangulation and Mixed Methods Designs: Data Integration With New Research Technologies</title>
+		<author>
+			<persName><forename type="first">N</forename><forename type="middle">G</forename><surname>Fielding</surname></persName>
+		</author>
+		<idno type="DOI">10.1177/1558689812437101</idno>
+		<ptr target="http://dx.doi.org/10.1177/1558689812437101" />
+	</analytic>
+	<monogr>
+		<title level="j">Journal of Mixed Methods Research</title>
+		<imprint>
+			<biblScope unit="volume">6</biblScope>
+			<biblScope unit="issue">2</biblScope>
+			<biblScope unit="page" from="124" to="136" />
+			<date type="published" when="2012">2012. 2012</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b23">
+	<analytic>
+		<title level="a" type="main">Tools for Analyzing Qualitative Data: The History and Relevance of Qualitative Data Analysis Software</title>
+		<author>
+			<persName><forename type="first">Linda</forename><forename type="middle">S</forename><surname>Gilbert</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kristi</forename><surname>Jackson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Silvana</forename><surname>Di</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Gregorio</forename></persName>
+		</author>
+		<idno type="DOI">10.1007/978-1-4614-3185-5</idno>
+		<ptr target="http://dx.doi.org/10.1007/978-1-4614-3185-5" />
+	</analytic>
+	<monogr>
+		<title level="m">Handbook of Research on Educational Communications and Technology</title>
+				<imprint>
+			<date type="published" when="2014">2014</date>
+			<biblScope unit="page" from="221" to="236" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b24">
+	<analytic>
+		<title level="a" type="main">The discovery of grounded theory</title>
+		<author>
+			<persName><forename type="first">G</forename><surname>Barney</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Anselm</forename><forename type="middle">L</forename><surname>Glaser</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Strauss</surname></persName>
+		</author>
+		<idno type="DOI">10.2307/588533</idno>
+		<ptr target="http://dx.doi.org/10.2307/588533" />
+	</analytic>
+	<monogr>
+		<title level="j">International Journal of Qualitative Methods</title>
+		<imprint>
+			<biblScope unit="volume">5</biblScope>
+			<biblScope unit="page" from="1" to="10" />
+			<date type="published" when="1967">1967. 1967</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b25">
+	<analytic>
+		<title level="a" type="main">Coder training: Theoretical training or practical socialization?</title>
+		<author>
+			<persName><forename type="first">Tony</forename><surname>Hak</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ton</forename><surname>Bernts</surname></persName>
+		</author>
+		<idno type="DOI">10.1007/BF02393420</idno>
+		<ptr target="http://dx.doi.org/10.1007/BF02393420" />
+	</analytic>
+	<monogr>
+		<title level="j">Qualitative Sociology</title>
+		<imprint>
+			<biblScope unit="volume">19</biblScope>
+			<biblScope unit="page" from="235" to="257" />
+			<date type="published" when="1996-06">1996. jun 1996</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b26">
+	<analytic>
+		<title level="a" type="main">ConVisIT : Interactive Topic Modeling for Exploring Asynchronous Online Conversations</title>
+		<author>
+			<persName><forename type="first">Enamul</forename><surname>Hoque</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Giuseppe</forename><surname>Carenini</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 20th International Conference on Intelligent User Interfaces -IUI &apos;15</title>
+				<meeting>the 20th International Conference on Intelligent User Interfaces -IUI &apos;15</meeting>
+		<imprint>
+			<date type="published" when="2015">2015. 2015</date>
+			<biblScope unit="page" from="169" to="180" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b27">
+	<analytic>
+		<title level="a" type="main">Conducting global team-based ethnography: Methodological challenges and practical methods</title>
+		<author>
+			<persName><forename type="first">Paula</forename><surname>Jarzabkowski</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Rebecca</forename><surname>Bednarek</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Laure</forename><surname>Cabantous</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Human Relations</title>
+		<imprint>
+			<biblScope unit="page">0018726714535449</biblScope>
+			<date type="published" when="2014">2014. 2014</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b28">
+	<monogr>
+		<title level="m" type="main">Computer-aided qualitative data analysis : theory, methods and practice</title>
+		<author>
+			<persName><forename type="first">Udo</forename><surname>Kelle</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Gerald</forename><surname>Prein</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Katherine</forename><surname>Bird</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="1995">1995</date>
+			<publisher>Sage Publications</publisher>
+			<biblScope unit="volume">224</biblScope>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b29">
+	<analytic>
+		<title level="a" type="main">Users&apos; Experiences of Qualitative Data Analysis Software</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Raymond</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Nigel</forename><forename type="middle">G</forename><surname>Lee</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Fielding</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Computer-aided qualitative data analysis: theory, methods and practice</title>
+				<editor>
+			<persName><forename type="first">Katherine</forename><surname>Prein</surname></persName>
+		</editor>
+		<editor>
+			<persName><surname>Bird</surname></persName>
+		</editor>
+		<meeting><address><addrLine>Udo Kelle, Gerald; London</addrLine></address></meeting>
+		<imprint>
+			<publisher>SAGE Publications</publisher>
+			<date type="published" when="1995">1995</date>
+			<biblScope unit="page">29</biblScope>
+		</imprint>
+	</monogr>
+	<note>Thousand Oaks</note>
+</biblStruct>
+
+<biblStruct xml:id="b30">
+	<analytic>
+		<title level="a" type="main">NVivo 2.0 and ATLAS.ti 5.0: A Comparative Review of Two Popular Qualitative Data-Analysis Programs</title>
+		<author>
+			<persName><forename type="first">R</forename><forename type="middle">B</forename><surname>Lewis</surname></persName>
+		</author>
+		<idno type="DOI">10.1177/1525822X04269174</idno>
+		<ptr target="http://dx.doi.org/10.1177/1525822X04269174" />
+	</analytic>
+	<monogr>
+		<title level="j">Field Methods</title>
+		<imprint>
+			<biblScope unit="volume">16</biblScope>
+			<biblScope unit="page" from="439" to="464" />
+			<date type="published" when="2004">2004. 2004</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b31">
+	<monogr>
+		<title level="m" type="main">Introduction to Information Retrieval</title>
+		<author>
+			<persName><forename type="first">D</forename><surname>Christopher</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Prabhakar</forename><surname>Manning</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Hinrich</forename><surname>Raghavan</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Schütze</surname></persName>
+		</author>
+		<idno type="DOI">10.1109/LPT.2009.2020494</idno>
+		<ptr target="http://dx.doi.org/10.1109/LPT.2009.2020494" />
+		<imprint>
+			<date type="published" when="2008">2008. 2008 1, c (2008</date>
+			<biblScope unit="page">496</biblScope>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b32">
+	<monogr>
+		<title level="m" type="main">Qualitative Research Design: An Interactive Approach</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Joseph</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Maxwell</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2010">2010</date>
+			<publisher>SAGE Publications</publisher>
+			<pubPlace>Thousand Oaks, CA</pubPlace>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b33">
+	<monogr>
+		<title level="m" type="main">Qualitative Data Analysis: A Methods Sourcebook</title>
+		<author>
+			<persName><forename type="first">M B</forename><surname>Miles</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Johnny</forename><surname>Huberman</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Saldaña</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2014">2014</date>
+			<pubPlace>Thousand Oaks, CA</pubPlace>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b34">
+	<monogr>
+		<title level="m" type="main">Collaborative Coding of Qualitative Data</title>
+		<author>
+			<persName><surname>Peter Axel Nielsen</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2012">2012. 2012</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b35">
+	<analytic>
+		<title level="a" type="main">Inquire: Large-scale Early Insight Discovery for Qualitative Research</title>
+		<author>
+			<persName><forename type="first">Pablo</forename><surname>Paredes</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ana</forename><forename type="middle">Rufino</forename><surname>Ferreira</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Cory</forename><surname>Schillaci</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Gene</forename><surname>Yoo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Pierre</forename><surname>Karashchuk</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Dennis</forename><surname>Xing</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Coye</forename><surname>Cheshire</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">John</forename><surname>Canny</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2998181.2998363</idno>
+		<ptr target="http://dx.doi.org/10.1145/2998181.2998363" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 20th ACM Conference on Computer-Supported Cooperative Work &amp; Social Computing</title>
+				<meeting>the 20th ACM Conference on Computer-Supported Cooperative Work &amp; Social Computing</meeting>
+		<imprint>
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b36">
+	<analytic>
+		<title level="a" type="main">Using contextual inquiry to learn about your audiences</title>
+		<author>
+			<persName><forename type="first">Mary</forename><forename type="middle">Elizabeth</forename></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Raven</forename></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Alicia</forename><surname>Flanders</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/227614.227615</idno>
+		<ptr target="http://dx.doi.org/10.1145/227614.227615" />
+	</analytic>
+	<monogr>
+		<title level="j">ACM SIGDOC Asterisk Journal of Computer Documentation</title>
+		<imprint>
+			<biblScope unit="volume">20</biblScope>
+			<biblScope unit="page" from="1" to="13" />
+			<date type="published" when="1996">1996. 1996</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b37">
+	<monogr>
+		<title level="m" type="main">The Coding Manual for Qualitative Researchers</title>
+		<author>
+			<persName><forename type="first">Johnny</forename><surname>Saldaña</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2012">2012</date>
+			<publisher>Sage Publications</publisher>
+			<pubPlace>Thousand Oaks, CA</pubPlace>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b38">
+	<analytic>
+		<title level="a" type="main">A Computational Study of Commonsense Science: An Exploration in the Automated Analysis of Clinical Interview Data</title>
+		<author>
+			<persName><forename type="first">Bruce</forename><surname>Sherin</surname></persName>
+		</author>
+		<idno type="DOI">10.1080/10508406.2013.836654</idno>
+		<ptr target="http://dx.doi.org/10.1080/10508406.2013.836654" />
+	</analytic>
+	<monogr>
+		<title level="j">Journal of the Learning Sciences</title>
+		<imprint>
+			<biblScope unit="volume">22</biblScope>
+			<biblScope unit="page" from="600" to="638" />
+			<date type="published" when="2013">2013. 2013</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b39">
+	<analytic>
+		<title level="a" type="main">Modern Information Retrieval: A Brief Overview</title>
+		<author>
+			<persName><forename type="first">Amit</forename><surname>Singhal</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Bulletin of the IEEEE Computer Society Technical Committee on Data Engineering</title>
+		<imprint>
+			<biblScope unit="volume">24</biblScope>
+			<biblScope unit="page" from="1" to="9" />
+			<date type="published" when="2001">2001. 2001</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b40">
+	<analytic>
+		<title level="a" type="main">Interpretative phenomenological analysis</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Jonathan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mike</forename><surname>Smith</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Osborn</surname></persName>
+		</author>
+		<idno type="DOI">10.1002/9780470776278.ch10</idno>
+		<ptr target="http://dx.doi.org/10.1002/9780470776278.ch10" />
+	</analytic>
+	<monogr>
+		<title level="m">Qualitative Psychology: A Practical Guide to Research Methods. 54-80</title>
+				<imprint>
+			<date type="published" when="2015">2015</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b41">
+	<analytic>
+		<title level="a" type="main">BRAT : a Web-based Tool for NLP-Assisted Text Annotation</title>
+		<author>
+			<persName><forename type="first">Pontus</forename><surname>Stenetorp</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sampo</forename><surname>Pyysalo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Goran</forename><surname>Topi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Tomoko</forename><surname>Ohta</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sophia</forename><surname>Ananiadou</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jun'ichi</forename><surname>Tsujii</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the Demonstrations at the 13th Conference of the European Chapter of the Association for Computational Linguistics (EACL &apos;12) Figure</title>
+				<meeting>the Demonstrations at the 13th Conference of the European Chapter of the Association for Computational Linguistics (EACL &apos;12) Figure</meeting>
+		<imprint>
+			<date type="published" when="2012">2012. 2012</date>
+			<biblScope unit="volume">1</biblScope>
+			<biblScope unit="page" from="102" to="107" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b42">
+	<analytic>
+		<title level="a" type="main">A general inductive approach for analyzing qualiative evaluation data</title>
+		<author>
+			<persName><forename type="first">R</forename><surname>David</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Thomas</surname></persName>
+		</author>
+		<idno type="DOI">10.1177/1098214005283748</idno>
+		<ptr target="http://dx.doi.org/10.1177/1098214005283748" />
+	</analytic>
+	<monogr>
+		<title level="j">American Journal of Evaluation</title>
+		<imprint>
+			<biblScope unit="volume">27</biblScope>
+			<biblScope unit="page" from="237" to="246" />
+			<date type="published" when="2006">2006. 2006</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b43">
+	<analytic>
+		<title level="a" type="main">Opening up to big data: Computer-assisted analysis of textual data in social sciences</title>
+		<author>
+			<persName><forename type="first">Gregor</forename><surname>Wiedemann</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Historical Social Research</title>
+		<imprint>
+			<biblScope unit="volume">38</biblScope>
+			<biblScope unit="issue">4</biblScope>
+			<biblScope unit="page" from="332" to="357" />
+			<date type="published" when="2013">2013. 2013</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b44">
+	<analytic>
+		<title level="a" type="main">Semi-Automatic Content Analysis of Qualitative Data</title>
+		<author>
+			<persName><forename type="first">Jasy</forename><surname>Suet Liew Yan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Nancy</forename><surname>Mccracken</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kevin</forename><surname>Crowston</surname></persName>
+		</author>
+		<idno type="DOI">10.9776/14399</idno>
+		<ptr target="http://dx.doi.org/10.9776/14399" />
+	</analytic>
+	<monogr>
+		<title level="m">iConference Proceedings</title>
+				<imprint>
+			<date type="published" when="2014">2014</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+				</listBibl>
+			</div>
+		</back>
+	</text>
+</TEI>

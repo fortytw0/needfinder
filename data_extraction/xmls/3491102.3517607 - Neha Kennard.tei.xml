@@ -1,0 +1,2113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xml:space="preserve" xmlns="http://www.tei-c.org/ns/1.0" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.com/kermitt2/grobid/master/grobid-home/schemas/xsd/Grobid.xsd"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+	<teiHeader xml:lang="en">
+		<fileDesc>
+			<titleStmt>
+				<title level="a" type="main">A study of UX practitioners roles in designing real-world, enterprise ML systems</title>
+			</titleStmt>
+			<publicationStmt>
+				<publisher/>
+				<availability status="unknown"><licence/></availability>
+			</publicationStmt>
+			<sourceDesc>
+				<biblStruct>
+					<analytic>
+						<author>
+							<persName><forename type="first">Sabah</forename><surname>Zdanowska</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="department">Centre for HCID</orgName>
+								<orgName type="institution">University of London London</orgName>
+								<address>
+									<settlement>City</settlement>
+									<country key="GB">UK</country>
+								</address>
+							</affiliation>
+						</author>
+						<author role="corresp">
+							<persName><forename type="first">Alex</forename><forename type="middle">S</forename><surname>Taylor</surname></persName>
+							<email>alex.taylor@city.ac.uk</email>
+							<affiliation key="aff1">
+								<orgName type="department">Centre for HCID</orgName>
+								<orgName type="institution">University of London London</orgName>
+								<address>
+									<settlement>City</settlement>
+									<country key="GB">UK</country>
+								</address>
+							</affiliation>
+						</author>
+						<title level="a" type="main">A study of UX practitioners roles in designing real-world, enterprise ML systems</title>
+					</analytic>
+					<monogr>
+						<imprint>
+							<date/>
+						</imprint>
+					</monogr>
+					<idno type="DOI">10.1145/3491102.3517607</idno>
+				</biblStruct>
+			</sourceDesc>
+		</fileDesc>
+		<encodingDesc>
+			<appInfo>
+				<application version="0.7.1" ident="GROBID" when="2022-07-22T05:00+0000">
+					<desc>GROBID - A machine learning software for extracting information from scholarly documents</desc>
+					<ref target="https://github.com/kermitt2/grobid"/>
+				</application>
+			</appInfo>
+		</encodingDesc>
+		<profileDesc>
+			<textClass>
+				<keywords>
+					<term>AI</term>
+					<term>Machine Learning</term>
+					<term>Human-Centred Design</term>
+					<term>Design</term>
+				</keywords>
+			</textClass>
+			<abstract>
+<div xmlns="http://www.tei-c.org/ns/1.0"><p>Opportunities for AI and machine learning (ML) are vast in current interactive systems development. However, comparatively little is known about how functionality for the system behind the interface is designed and how design methodologies such as user-centered design have influence. This research focuses on how interdisciplinary teams that include UX practitioners design real-world enterprise ML systems outside of big technology companies. We conducted a survey with product managers, and interviews with interdisciplinary teams and individual UX practitioners. The findings show that nontechnical UX practitioners are highly capable in designing AI/ML systems. In addition to applying UX and interaction design expertise to make decisions regarding functionality, they employ skills that aid collaboration across interdisciplinary teams. However, our findings suggest existing HCI design techniques such as prototyping and simulating complexity of enterprise ML systems are insufficient. We propose adaptations to design practices and conclude that some existing research should be reconsidered.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>CCS CONCEPTS</head><p>• Human-centered computing → Empirical studies in HCI; • Software and its engineering → Designing software.</p></div>
+			</abstract>
+		</profileDesc>
+	</teiHeader>
+	<text xml:lang="en">
+		<body>
+<div xmlns="http://www.tei-c.org/ns/1.0"><p>and IBM. AI and ML based products and services have become pervasive across different industries, with the market research firm Gartner expecting the global AI economy to increase from about 1.2 trillion in 2018 to about 3.9 trillion USD by 2022 <ref type="bibr" target="#b55">[53]</ref>. Research from McKinsey Global Institute estimates this figure to grow to 13 trillion USD by 2030 <ref type="bibr" target="#b0">[1]</ref>.</p><p>With this growing presence of AI and ML systems, key design issues have been frequently raised by the HCI community but also from those concerned with ethics and the wider societal impact of AI. Much of the ensuing work has targeted mitigating bias <ref type="bibr" target="#b21">[19,</ref><ref type="bibr" target="#b56">54]</ref>, improving algorithmic transparency and setting out AI governance agendas <ref type="bibr" target="#b26">[24,</ref><ref type="bibr" target="#b64">61]</ref> (as AI/ML systems have come under heavy scrutiny over how well they actually work in real-world environments <ref type="bibr" target="#b60">[58]</ref>). New data science techniques <ref type="bibr" target="#b61">[59]</ref>, human understandable explanations for when AI/ML systems make decisions <ref type="bibr" target="#b2">[3,</ref><ref type="bibr" target="#b16">15]</ref>, techniques for adaptable user interfaces (UIs) <ref type="bibr" target="#b45">[44,</ref><ref type="bibr" target="#b68">65]</ref> and ways for humans to interact with the AI/ML system to help it learn <ref type="bibr" target="#b27">[25,</ref><ref type="bibr" target="#b65">62]</ref> all have the goal of creating effective and 'fit for purpose' systems as the technology becomes more pervasive.</p><p>Yet, while there is considerable academic research on AI/ML such as this, there remains relatively little in the way of research exploring how the systems are designed in practice-as it were, in the 'real world'. This paper builds on the limited work which has focused on UX practitioners in real-world AI/ML system development (e.g. <ref type="bibr">[16,</ref><ref type="bibr">20,</ref><ref type="bibr" target="#b76">73]</ref>). Rather than exploring all possible software products in the real world, this research focuses on enterprise or business-to-business (B2B) ML systems that are designed to answer specific business questions or provide decision support and conversational chatbots. Broadly, the contribution we make is to draw attention to design's influence across the development life-cycle of a AI/ML system and not specifically to designers' influence over the system's UX and UI elements. The reported research examines, for instance, how UX practitioners get involved in the functionality of the system, how they contribute to the building and testing of proofof-concept (PoC) prototypes, and how they help with what, exactly, AI/ML systems should be learning and what data to gather to do so. Thus, the work that follows offers insights into how UX/HCI design methodologies and practices are used across the real-world development of AI/ML systems, and at the same time where there might be a need to rethink or adapt current ways of involving design.</p><p>A further emphasis in the presented work is placed on the interdisciplinary nature of the teams working on AI/ML systems in the real world. As user-centred design and Design Thinking (DT) <ref type="bibr" target="#b12">[11]</ref> have seen traction in businesses beyond interaction design <ref type="bibr" target="#b44">[43]</ref>, part of our study looked beyond the involvement of UX practitioners alone and sought to understand how UX methodologies and practices have played a role for teams with varied technical and nontechnical skills. Some research in this area already exists <ref type="bibr">[57,</ref><ref type="bibr" target="#b72">69]</ref>. However, we wanted to explore design by AI/ML professionals and teams outside of the big technology companies such as Microsoft, Google and IBM who have access to vast amounts of money, resources and often near monopolies on data <ref type="bibr" target="#b29">[27]</ref> that most other organisations don't and so can't be expected to reflect the real world.</p><p>In sum, this paper will make three contributions to HCI design research. First, it will probe the design methodologies, frameworks and practices used by interdisciplinary teams in the real-world when designing AI/ML systems and how these operates in practice. Second, it will study how collaboration happens, if at all on AI/ML systems design. Third, we will attempt to answer the question as to whether HCI needs a different design methodology for designing AI/ML systems and if so what future research will need to consider.</p><p>Below, we present an overview of related work and the details of the methods used. Following this, we present the findings and discuss the implications of our research. Finally we address the challenges of collaboration between the HCI and AI academic fields and the need for more "in vivo" research to develop better methods for designing ML systems.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2">RELATED WORK</head><p>A great deal of research has been published about HCI-related issues associated with AI and ML. A significant strand of work focuses on the low-level interactive aspects of use with AI/ML systems and here considerable focus is given to improving the intelligibility, transparency and explainability of models and algorithms that are often inaccessible to users [2, <ref type="bibr" target="#b9">9,</ref><ref type="bibr" target="#b23">21,</ref><ref type="bibr" target="#b53">52]</ref>. Much research has also been concerned with the inherent biases that come with systems built on large data corpi and how, if at all, such biases can be mitigated <ref type="bibr" target="#b26">[24]</ref>. These problems of intelligibility and bias have, in part, given rise to considerable work around the ethics of AI, and in particular the means of achieving fairness and accountability in designing and operating AI/ML systems <ref type="bibr" target="#b38">[36,</ref><ref type="bibr" target="#b70">67]</ref>.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.1">Designing With Complex Systems</head><p>Of these various strands of research, this paper engages with a relatively small though growing area that investigates the actual design of AI/ML systems. That is, the focus is on how, in practice, designers approach not only system design, but AI/ML systems design where the outcome is non-deterministic. Moreover, real world enterprise ML systems often have the additional challenge of needing to be compliant with regulations or providing a minimum level of service. For instance, misdiagnosing an illness or not flagging a potentially fraudulent transaction has serious consequences. Therefore it is unlikely that the system can be left unsupervised after being deployed.</p><p>Across the work in this area, what is largely accepted is that the growing use of AI/ML in interactive systems is raising pressing questions for the skills that are regularly deployed in design. There is some debate over whether there is need for new knowledge or methods; nevertheless, the adequacy of what designers know and how they go about designing AI/ML-based interactive systems continues to provoke inquiry <ref type="bibr" target="#b2">[3,</ref><ref type="bibr" target="#b3">4,</ref><ref type="bibr" target="#b19">17,</ref><ref type="bibr" target="#b28">26,</ref><ref type="bibr">38,</ref><ref type="bibr">40,</ref><ref type="bibr" target="#b75">72,</ref><ref type="bibr" target="#b76">73]</ref>.</p><p>A recent paper from Yang et al. <ref type="bibr" target="#b77">[74]</ref> presents a particularly thorough review of the challenges faced. Through their review, the paper's authors produce a valuable framework for understanding where UX design encounters problems in developing AI/ML systems. They characterise such systems in terms of their complexity and show where different challenges are encountered at the phases of development, implementation and design. As an example, they place 'evolving and adaptive systems' at the extreme end of AI system complexity. At this extreme, they demonstrate how challenges are faced across 'understanding AI capabilities', 'envisioning novel and technically feasible designs', 'iterative prototyping and testing', and 'collaborating with engineers'.</p><p>Especially relevant for the work that follows are the implications Yang et al. draw from their research. Beyond what they refer to as the 'root challenges' inherent in AI systems (such as system adaptation and scale), they point to the need for 'new insights' into human's relations to technology on the one hand and the importance of 'emergent design methods, tools and processes' on the other. Below, we aim to illustrate how work has been pursued in both these areas. We also describe our own aims to better understand the latter, the practical use of methods, tools and processes in design.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.2">New Human-Machine Partnerships Demanding New Knowledge</head><p>For some, the challenges arising in the design of AI/ML systems point to long-established user-centred methodologies falling short.</p><p>Given their development alongside relatively stable, rule-based systems, existing design methods would appear ill-equipped to account for the dynamic qualities of AI/ML systems and what is seen to be the greater potential for collaboration between user and system. Here, the research is motivated to develop new perspectives for understanding human-machine interactions and partnerships <ref type="bibr" target="#b25">[23,</ref><ref type="bibr">30,</ref><ref type="bibr" target="#b33">31,</ref><ref type="bibr">50,</ref><ref type="bibr">51</ref>]. Farooq and Grudin <ref type="bibr" target="#b25">[23]</ref>, for example, aim to capture the hybrid or symbiotic relationship between the user and system with their notion of 'Human-Computer Integration'. This they see as a partnership where humans and software collaborate in such a way that activities are negotiated and meanings for both parties are subject to change as an activity unfolds. This form of dynamic 'integration' highlights the challenges of approaching system design where the shifting goals of the human and the system must be both captured and communicated between the parties. The extent to which this integration is common in current AI and ML systems is debatable. However, questions are again provoked about the suitability of existing human-centered design methods and where new knowledge and practises might be needed to accommodate the much more emergent forms of partnership between human and machine.</p><p>A number of approaches have been proposed that aim to address the complexities of human-machine partnerships and account for them in design (e.g. <ref type="bibr" target="#b78">[75]</ref>). One that draws on Farooq and Grudin's work is the Interaction, Process, Integration and Intelligence (IPII) framework <ref type="bibr" target="#b74">[71]</ref>. This framework is ostensibly concerned with wider organisational processes and software deployments, but it foregrounds the importance of Human-Centred approaches to AI and ML system design. It explicitly builds on the core principles of UCD but, in acknowledging new human-machine integrations, it also involves decisions on which activities should be classed as human, machine or hybrid operations.</p><p>For the purposes of this paper, the notable point to research such as Farooq and Grudin's and the IPII framework is that design is being led by new developments in understanding and specifically using more collaborative models of human-machine interaction. In effect, the design of AI/ML systems is being led by a perceived need for new knowledge.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.3">New and Extended Design Practices</head><p>Other research confronting the complexities of AI/ML systems has placed less emphasis on new knowledge and more on changes in practices and processes. Yang et al. <ref type="bibr" target="#b76">[73]</ref>, for example, argue that a common preconception is that designers lack sufficient understanding of AI/ML, thus limiting their full participation in development life cycles (also see <ref type="bibr">[20,</ref><ref type="bibr">45,</ref><ref type="bibr" target="#b76">73]</ref>). Through their own study with experienced designers working in ML development, however, they show that in practice the action, as it were, is located around developments in design processes and less importance is given to substantial changes to what designers need to know.</p><p>What especially distinguishes the work from Yang and colleagues is their stated aim to understand how designers work with AI/ML on the ground or in real-world professional practice. They place particular focus on the ways those in HCI (including UX and IxD practitioners) use existing skills and methods such as sketching, Wizard of Oz systems and paper prototyping, and how AI necessitates new orientations to such existing practices. Their work points in particular to a greater need for collaboration with technical members in teams, and the creative use of abstractions and exemplars in aid of the design process. Here, then, we see how designers, rather than restricted by their limits in understanding, apply a pragmatic approach and employ their creative skills to extend what they are able to contribute in the development of AI/ML systems.</p><p>An engaging example of this orientation is van Allen's AI prototyping toolkit <ref type="bibr" target="#b69">[66]</ref>. Known as the Delft AI Toolkit, it incorporates a 'visual authoring system' that allows users to quickly visually programme software-and/or hardware-based AI prototypes. Key to the toolkit is that users have a built-in ability to 'marrionette' the system, effectively enabling a Wizard of Oz like approach to simulating the AI/ML. van Allen acknowledges the inherent technical complexities of AI/ML systems, but his approach has been to extend well-established processes in design-prototyping and Wizard of Oz approaches-to allow designers to experiment and better understand what they are working with.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.4">What Is It Like on the Ground?</head><p>The work that follows builds on the threads of research above. First and foremost, our work follows in the footsteps of research like that of <ref type="bibr">Dove et al.'s [20]</ref> and Yang et al.'s <ref type="bibr" target="#b76">[73]</ref>, by engaging with designers directly and seeking to capture and understand what is being done to design AI/ML systems. We recognise that problems are encountered because of the dynamic, evolving nature of AI/ML systems, and complexities such as human-machine partnerships are to some extent new, but at the same time our interest centres on the practical realities of the decisions made and what influence they have on the eventual outcome of the AI/ML system. This also separates our work from the AI design guidelines from the likes of Microsoft <ref type="bibr" target="#b3">[4]</ref>, IBM <ref type="bibr" target="#b41">[39,</ref><ref type="bibr" target="#b51">49]</ref> and others <ref type="bibr" target="#b20">[18,</ref><ref type="bibr" target="#b43">42]</ref> which are also developed for real-world deployments, but have been created to support UX practitioners with designing interactions and explainability rather than how the AI/ML system should be designed to function.</p><p>One area in which our work aims to further contribute to the studies of AI/ML system design is by giving particular attention to the collaborative ways in which the systems are built. While Yang et al. <ref type="bibr" target="#b76">[73]</ref> and others have recognised the role of teamwork, and especially the work between designers and data scientists, their insights have largely come from interviews with only designers <ref type="bibr" target="#b76">[73]</ref>. Other research focuses solely on data scientists [57] or natural language practitioners <ref type="bibr" target="#b39">[37]</ref>. Our work-though still design focusedhas been conducted by approaching people with different skills in development teams (e.g. product managers), and also interviewing teams together.</p><p>As we shall see, by investigating AI/ML system development not just through the perspective of design, so to speak, but with an interest in how design comes to be part of wider teams, we gain access to different aspects of what designers do and how design becomes part of the wider process. Generally, we find we are able to investigate how design skills and know-how extend beyond the UI and UX, and play into more functional and technical aspects of system development.</p><p>Illustrative of this is how we might explore design's impact on the approach taken or choice of model or algorithm. Many AI/ML projects are described in technical papers <ref type="bibr" target="#b4">[5,</ref><ref type="bibr" target="#b7">7,</ref><ref type="bibr" target="#b36">34]</ref>, where a problem is described, an ML based solution proposed and used, and finally the approach is evaluated. In some cases an iteration of the ML model is reported, but otherwise the process is described as linear and the decision of any algorithm largely implicit or ad hoc <ref type="bibr" target="#b35">[33]</ref>. In a paper by Azar and El-Metwally <ref type="bibr" target="#b7">[7]</ref>, for example, the authors conclude that several other techniques must be tested to find the optimal solution. It may be that several types of ML approaches were considered or tested to solve the problem, but little is known about how this happened or how decisions were made that the wider community might learn from. Thus there is very little that can be gleaned from existing research on how AI/ML models and algorithms were experimented with vis-á-vis design, and whether design played a role in this process.</p><p>In sum, then, in the following we make a critical distinction between studying interaction design in AI/ML system development and studying the design of AI/ML systems. Understandably, much of the HCI-related work has sought to understand AL/ML systems design from the perspective of the designer and UX/interaction design. What we have sought to do in the research we present is examine in more general terms what role IX and UX design plays in developing AI/ML systems.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3">METHODS</head><p>Overall the presented research involved three related studies: an online survey targeting product managers leading AI/ML system development projects; group interviews with teams working on ML systems; and individual interviews with UX practitioners.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.1">Survey of ML Product Managers</head><p>Product managers (PMs) involved in real-world AI/ML projects were recruited to participate in an online survey designed using the Qualtrics platform. Over a period of six weeks, twenty-seven PMs identified using social media channels and via professional networks participated in the survey. The results of this survey helped to inform the questions and discussions during the interdisciplinary team and individual interviews with UX practitioners. Below, we summarise the main results in order to provide context for the following methods and the analyses presented in sections 3.2 and 3.3.</p><p>Participants had been involved conversational chatbot projects or in a variety of enterprise ML projects including computer vision and decision support systems, and with domain foci in healthcare, money laundering and text analysis. 25.9% of teams (n=7) did not have a design methodology that they used for the projects. In 64.9% of cases, PMs stated that their teams adapted the chosen design methodology for their project, but there were no trends in how they adapted them i.e. they all appeared to be using them differently. In 14.8% (n=4) of responses, the user interaction for the AI/ML system was not considered at all, and in 37% (n=10), neither fairness or transparency were considered. Ten out of 27 teams had a core team member with HCI experience/skills compared to 24 out of 27 with AI experience/skills. Eight out of 28 respondents said user needs was not the first step in the design process. Most participants stated that their AI/ML project was "successful", so the results should be seen as heavily skewed towards completed and deployed systems.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.2">Interdisciplinary Team Semi-Structured Interviews</head><p>Two interdisciplinary teams that had worked on enterprise ML projects were recruited to participate in semi-structured interviews via an online, group conference call. The first team (M1) worked on ML projects around business operations and the second team (M2) were developing a decision support system. The team interview also included a exercise where the participants collectively sketched our the design process for a project. Following the team interview, each team member was also interviewed individually to reflect on the group discussion.</p><p>Having interdisciplinary teams that included a UX practitioner that contributed to the design of the AI/ML system as a whole, rather than solely focused on the interface and experience design was a key requirement. We also wanted teams to include at least one business or product professional and at least one technical professional that could be either an engineer or data scientist, so that the requirement for an interdisciplinary team could be met. A low minimum requirement for team size of three was due to the fact that previous studies (e.g. [20]) highlighted how many individuals do not work on AI/ML projects from start to finish, so finding large teams outside of big technology companies (who we were not focusing on) was seen to be impractical. All participants were required to have worked on the AI/ML project across multiple stages, such as during the initial scoping, system design as well as during the development of some sort of prototype or product.</p><p>Teams were identified using a snowball sampling approach and by direct enquiries with companies that were known to have produced and utilised ML. Adverts were also placed on social media sites and on online community groups. Additional team members were in product or commercial and in technical roles. The interviews were semi-structured to ensure that all team members participated in the conversation and that no one person dominated. This transpired not to be an issue as team members themselves encouraged each other to speak and sometimes asked each other questions during their discussions.</p><p>At the start of the group interviews, the purpose and format of the session was explained. A documented session guide served to keep the interview on track. Having consented to participate, teams were asked to provide an outline of the AI/ML project and then to give a detailed account of the design process(es) and practices they used and why. Open questions were used to encourage participants to elaborate on parts of the project that were related to system design. If the team faced a challenge at a particular stage, they were asked to elaborate on this and how their methods or practices helped or failed on these occasions. A Miro project board was set up and shared in advance for the team to jointly sketch out the design process as part of the interview. After the team agreed on their diagram, they were asked to reflect on their process and to share if there was anything they would want change for future projects.</p><p>Each team interview lasted around an hour after which individual interviews with each of the team members was arranged. The main reason for the individual follow-up was to give participants the opportunity to reflect on the team interview. Team members were also asked about what successful collaboration between UX and technical team members looked like when it came to designing AI/ML systems and about future challenges regarding collaboration on these kinds of projects. The individual team member interviews lasted approximately 15 minutes. For the purposes on analysis, each team was given a code consisting of the method, team number (T1 and T2). In addition, to identify each participant within the team, a suffix was added (HCI, Prod, DS and Eng) (see summary of participants in Table <ref type="table" target="#tab_0">1</ref>).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.3">Individual Semi-Structured Interviews with UX Practitioners</head><p>Seven UX practitioners were recruited to participate in semi-structured interviews via a video call. These individual discussions focused on the challenges UX practitioners generally face in designing enterprise AI/ML systems or conversational chatbots and whether HCI design methodologies and practices were used for their projects and if so how. Participants were required to have experience of working on AI/ML system design for at least one project and, where possible, participants with experience of working on multiple ML projects were sought. Snowball sampling was used as with the team interviews. Each participant was given a code to identify them (see summary of participants in Table <ref type="table" target="#tab_1">2</ref>).</p><p>As with the team interviews, to begin the purpose and format of the study was explained and signed consent obtained. Participants were then asked to talk about their background and how they came to work on AI/ML system design and the skills they had that they felt were important to the work. Participants were asked if they used a particular HCI design methodology or framework and to explain this. Those that did not were asked about the practices they used. Throughout this part of the interview, participants were asked to expand on how collaboration happened within the interdisciplinary team and what the challenges were. Participants were asked specifically about the ethical considerations of their projects such as fairness, transparency and explainability, whether this was a concern, why they thought it was important and what they did about it. Finally, participants were asked to discuss topics around the value of design for AI/ML system design projects, the skills designers need -not only to design AI/ML systems but to be able to collaborate with others in the interdisciplinary team and to identify future challenges that UX practitioners face. Each interview lasted at least an hour.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.4">Data Collection and Analysis</head><p>Microsoft Teams or Zoom was used to conduct and record the team and individual interviews. These tools were selected because participants were familiar with them and the need to maintain social distancing. The recordings were uploaded to Otter.ai, a speech to text transcription application. Each interview recording was watched, listened to and cross referenced with the Otter.ai transcript to ensure that all responses were being attributed to the correct participant and to correct difficult to hear words and phrases, as the software did make mistakes. The transcripts were also anonymised. A complete coding approach was taken <ref type="bibr" target="#b11">[10]</ref>. Segments of text from the transcripts were coded and had an initial 'candidate theme' assigned. These candidate themes were then grouped into 'overarching themes'. The candidate themes across the team and individual interviews were similar, but not necessarily the same. The individual interviews revealed a far richer picture of what designing AI/ML systems was like for UX practitioners and so included a number of 'sub-themes' within the candidate theme. To reach the final combination of themes, many variations were experimented and the transcripts were regularly referred back to during this process of sculpting the data.</p><p>The team sketches were used to understand the design practices used within the wider project and also helped to visualise the actual design process used by teams and if it matched current HCI methodologies.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4">FINDINGS</head><p>In this section, we summarise some of the key themes from the team and individual interviews. These split into three broad sections.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.1">AI/ML Design Processes and Practices Are Work In Progress</head><p>The first category of themes relate to the design methodologies and practices that were used and adapted for designing real-world AI/ML systems. There were a wide range of adaptations due to each project having very specific challenges. The complexity involved in designing AI/ML systems was a major challenge and although teams and UX practitioners were able to devise new ways of working, this is very much work in progress and would take time as they continue to develop experience.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.1.1">Adaptations Made To Existing Design Methodologies and HCI</head><p>Practices. The first theme to emerge was that participants were able to describe an existing HCI design methodology, but that it had to be adapted in a number of ways. Some of the adaptations were specific to the AI/ML project, but others were described as ways that the HCI design methodology used needs to be adapted generally for when designing AI/ML systems. The teams described a number of different adaptations to conventional user-centered design processes that were specific to AI/ML. Both teams focused on designing and creating the AI/ML prototype first and iterating using sample data. It was after this part of the process that the front-end UX or workflow was considered. M2T1 stated that this second part followed more of a user centered design process. Additionally, the AI/ML projects originated with a question that needed exploring. For instance: can we automate this workflow using AI/ML? Can we use AI/ML to continually assess a certain type of risk? These questions did not originate within the interdisciplinary team, but from other parts of the business or the client.</p><p>Both teams used mock-ups not only to test the user journey, but also to test the AI/ML concept with users. M2T2 felt it was more useful to skip designing low fidelity prototypes and put their effort into a few high fidelity prototypes to better engage the user and elicit more meaningful feedback:"We might get some things wrong and throw away some effort for the benefit of having a one hour meeting where we can answer three questions with quite a degree of certainty" [M2T2-Prod]. As a result, the AI/ML prototype was only iterated and tested internally within the organisation as a PoC. This part of the process was more about the feasibility of the system based on what data was available, selecting the most appropriate AI/ML technique(s) and iterating to see if the goal is achievable. It meant that the design process was less iterative based on user feedback, whilst the model was continually being iterated based on new data. Both teams thought this was the most reasonable process.</p><p>The most common adaptation cited by UX practitioners in the individual interviews was also to split the AI/ML design work from designing the product that went around it. All participants that worked on the design of chatbots did this. This was partly because a separate development team worked on the AI/ML part of the chatbot, but mainly because the two iteration cycles were of different lengths.</p><p>"It was a very temperamental process. They were very used to it and told us "this takes three weeks. " But we [the UX team] were more used to running at a much faster rate. So there came a point in time where we had to separate the experience building from the machine learning building. " <ref type="bibr">[M3P3]</ref> M3P1 and M3P4 also split the AI/ML model design work from the UX prototyping, but rather than working on the two concurrently, they would tackle the AI/ML model first.</p><p>Five of the seven participants in from the individual interviews with UX practitioners commented on how the design process tended to start with a question that needed answering or a client brief with a list of requirements. In some cases the technology would be specified as well. As a result, the first step involved exploration. Participants noted that they would also try to understand if the question(s) being asked was relevant or if there was a more appropriate technology choice, even though this was not always what was asked of them.</p><p>Participants also highlighted how the technology choice would be made at the outset (M3P1, M3P2, M3P5, M3P6), but as part of the initial exploration they would try to validate whether AI/ML was actually needed and would attempt to challenge clients. They were not always successful.</p><p>M3P1 had an "designing for aftercare" stage in the design process that he was in the process of developing for AI/ML because it was such an important part of projects. This involved designing support processes if something went wrong and how to triage potential problems with the AI/ML model. M3P2 also highlighted designing for post-launch as an issue, simply stating "If you had a brilliantly trained image recognition algorithm that was brilliantly trained 15 years ago, then every time you hold up an iPhone, it would say iPod. "</p><p>M3P3, M3P5 and M3P3 found that launching a chatbot was far from being the end of the AI/ML project. It was only really possible to test the chatbot thoroughly with real conversation data. Furthermore, additional conversation topics would always need to be added, which would require further tuning of the system.</p><p>M2T1 raised concerns about their organisations' process of handing over the AI/ML product to a different team once the early stage design work had been completed. M2T1-DS was concerned about the lack of understanding that AI/ML models needed to be monitored and maintained and that there were dangers with letting models drift.</p><p>UX practitioners in the individual interviews highlighted a diverse range of HCI practices that were adapted to the needs of the AI/ML project. The purpose of utilising a particular practice was not necessarily the same as why it would be used for a traditional product.</p><p>M3P1 used affinity mapping to understand what data was important to users instead of what users wanted to see on the screen, M3P3 and M3P5 mapped conversation journeys instead of user journeys. M3P3 and M3P7 used conceptual designs to test design hypotheses that had been developed at the start of the design process. M3P4 had the additional task of investigating what AI/ML solution the end client would be able to afford so that this could be factored into the design. M3P4 and M3P7 used service blueprints <ref type="bibr" target="#b8">[8]</ref> to map client journeys along with the data and AI/ML processes as well as the back-end and support processes in one document.</p><p>Interestingly, five of the seven UX practitioners used participatory design approaches to co-create AI/ML products and workflows. The main reason for this was so that participants could be confident that the design would be accepted by end users, since the behind the scenes AI/ML was difficult for users to grasp."Then it comes to final design and you are sure they have been part of the process, they co created with you, they understand the reasoning behind it" [M3P7]. The participatory design approach also helped UX practitioners to reverse engineer complex processes and user mental models, which helped with designing. M3P1 highlighted how a participatory design process could be used to build trust and better explainability of the system: "So I generally switch to, "okay, here's what's going on in the model". And then that kind of builds a bit of confidence... And then what happens is you're then co-creating explainability with the user, because now they understand what the model's doing. They'll then go "Oh, well actually a label like this is better with an explanation like that. "" 4.1.2 Managing Complexity of AI/ML Systems Is A Challenge. Participants from both the team and individual interviews pointed out that dealing with complexity was a challenge. This complexity arose from a number factors including the complexity of the workflow being automated, the quality and availability of the data and for enterprise AI/ML systems the different users within organisation that needed to be As a result, how to design AI/ML systems is very much in flux. Mapping out existing journeys was not a simple process either. This made it hard to the AI/ML product to fit the mental model of all the different users in just one organisation, let alone multiple organisations.</p><p>Participants from the individual interviews also raised the issue that AI/ML projects usually involved trying to understand how flowed through multiple connected systems, that would be used by multiple users making decisions individually or collectively and that these relationship structures themselves could be complex. stated that: "in a B2B context you need to think about the context. If you begin to think about the edge case, then it's unmanageable. " These challenges made it difficult for participants to ascertain the feasibility of a proposed design idea, which most participants thought was very much part of the design process. This was not just about technical feasibility, but also what would be the impact of a new AI/ML system on the organisation as a whole.</p><p>Acquiring enough quality data to train the model was also very hard and this added another level of complexity. M3P3 and M3P5 who worked on the design of chatbots preferred the for users that met a certain profile and to hand off other to a human. This gave the chatbot some time to train on real-world data for them to be confident about the UX first.</p><p>M2T1 was able to create synthetic data in some cases just to the project started. However, this was not ideal as participants felt that AI/ML models could not be assessed without real life data, in many cases was never to the expected quality. M3P4 thought that it was the designers' role to understand fully the realdata available and that they needed to give their input into the being used by AI/ML models based on their user research show that there is no process for this in existing HCI design methodologies.</p><p>"I realised that the difference between designing basic software and designing an AI is that the applied research changes that will design the model really needs a lot of input of what our orders, the user is thinking; what is the different variable he needs to in consideration. "</p><p>and M3P3 also found that they needed to get deep into the data. For M3P1 it was about understanding what data users use, and why, as well as the data journey flow through multiple connected systems. M3P3 found that it was necessary to dig into log files to analyse conversations and the user experience of the product, to find specific places where the chatbot was failing.</p><p>"We were actually physically ourselves manually going into the utterances that were being collected from data now that we'd been online for a while. And we were starting to look at what was failing, what was not failing, what were the topics that people are asking... so our iteration process was coming from the live data at that point. Not something that we necessarily do in standard design. "</p><p>Participants stated that they were still learning what the capabilities of AI/ML are, what can be done successfully and what data needed to achieve a specific goal. This was the case even though some of the UX practitioners in the individual interviews had a few AI/ML projects under their belt. As a result, participants M3P2, M3P3, M3P4, M3P6 said they just utilised different UX practices that they felt were appropriate for the AI/ML project at the time "there was a sort of artisanal quality to what we were doing" [M3P3]. M3P1, M3P5 and M3P7 were working on developing a design themselves for the types of AI/ML they were focused on, for instance for chatbots or business information systems. These stated that they needed to gain more experience to finish developing their process.</p><p>UX practitioners in the team and individual interviews stated that there was more for designers to think about when designing for AI/ML, which made the job harder. Firstly, some participants felt a better grounding was needed when working with data and how AI/ML makes predictions. Other participants were comfortable working with data and using it to make design decisions for their AI/ML projects. M3P4 in particular was keen to stress that UX needed to work on how to design for explainability, stating that much of the thinking that explainability of AI/ML models being an interface only issue was "wishful thinking".</p><p>Experimentation and developing PoC using sample datasets was an important practice. In the case of M2T1, experimentation could be about exploring ideas that came about internally and then getting feedback on them from users and clients afterwards.</p><p>An important sub-theme that emerged was that turning a PoC a product was hard to do. A PoC might only have been a chart or an answer to a particular question, but this still needed be wrapped into a product. Both teams highlighted that this challenging from a technical and design perspective, especially when it came to incorporating the AI/ML PoC into an established have this cliff edge of a gap between moving this from Python stack, for example, into a production level ... that's the for the industry. " [M2T1-HCI] M2T2 found that their client did not have a well thought out idea what an AI/ML product would do in practice or if they were ready to trust such a system to make decisions without a human, even though they specifically wanted an 'AI solution'. Getting answers these questions during the user research phase, required putting a conceptual design or a description in-front of a client to elicit a "When we started talking to them, and they're like, "Oh, yeah, we want to, we want an AI solution for And you're like, "Okay, well, you know, if it's good enough, will you trust it?" And they're like "No, a person has to at some point, verify every single action taken. They just want to do it efficiently. " It just switches to a very different type of solution. " [M2T2a result, whether to design A UX prototype or the AI/ML PoC is not a settled question. M2T1 was keen for the AI/ML to be first, but acknowledged that turning it into a product was then hard. On the contrary, M2T2 found in their experience that understanding how the client wanted to use the AI/ML in their workflow set a key requirement for how accurate the AI/ML model needed to be for the whole product to work.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.2">Team Collaboration and Decision Making</head><p>For AI/ML Functionality</p><p>The second category of themes related to the role of the UX practitioners in the interdisciplinary team and how they were to collaborate on the design of AI/ML systems.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.2.1">All Team Members Contribute To</head><p>The Design for AI/ML Systems. Team collaboration was not for UX practitioners.</p><p>Generally the feedback was interdisciplinary team working functioned well. Any issues stemmed from organisations being siloed and stakeholder expectations of what is feasible with AI/ML being difficult for teams to Both team interviews showed AI/ML design deciwere being made collectively rather than being left to an individual team member. The team members in M2T1 were more in terms of their roles. However there was still an awareness each other's perspectives and skills which helped when it came to making design decisions. For instance the data scientist would use the UX team member as a conduit to ask users questions that were difficult for a technical person to articulate. M2T2 team members the other hand were in an environment that was not siloed: very collaborative. So we would be fine to bring up ideas of how it might look, as well. And [M2T2-HCI], on the design side, would challenge us and sort of say, "Would this be possible? Could we show them this information at this point?" So we're having ideas each other's domain as well. "</p><p>The high level of collaboration was linked to the fact that teams they were still working out how to design for AI/ML. As a result, both teams preferred to discuss design decisions together and as early on as possible and continue to do so at all stages the process. However, participants in both teams found that team members needed to be encouraged to ask questions and engage with the design process more.</p><p>Many of the participants from the individual interviews were keen that technical team members should be involved in the early stage design discussions. M3P5 stated that when technical members were not involved early on, then this caused collaboration issues further into the AI/ML project. M3P6 highlighted that companies did not want to have technical team members involved work that was not directly coding, but that this was quite unfair for technical team members to have to come in quite suddenly and give their input into AI/ML system design decisions:"Often technical stakeholders are not pulled into initial ideation and discovery ..</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>. I don't really know how they're meant to know what's " [M3P6]</head><p>Other participants had more success with being able to involve a wider range of colleagues earlier on in the process. M3P3 and M3P7 experienced a more interdisciplinary collaborative culture had been cultivated over time. However, participants M3P1, M3P4 and M3P5 noted that technical team members did not have a human-centric mindset and so there was a need to regularly bring conversations back to being about the user, but also making adjustments for technical team members in terms of ways of working.</p><p>Both M2T1-DS and M2T2-Prod stated that in retrospect that AI/ML projects would still have benefitted from more work on the AI/ML system design earlier and that this was an important learning. UX team members also valued getting to grips with the technical details earlier in the design process, rather than just havconceptual design ideas: think there's an element when your of complexity that you can only really solve a problem by doing it, by grappling it's hard to plan it all out in advance. "</p><p>The collaboration challenge that teams faced was working with business stakeholders. Both teams stated that their AI/ML projects were initiated by the sales side of the business.</p><p>Additionally, both teams found that building a prototype was the only way to get buy-in from the business stakeholders to develop a product. This made designing difficult as the question for whether UX prototype or the AI/ML PoC should be built first was not settled. M2T1-Prod stated plainly that the best way to get buy-in to create an "aesthetically pleasing" prototype which could be frustrating as team M2T1 did not consider usability to be as for a PoC.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.2.2">Designers</head><p>Using HCI Skills to Drive AI/ML Projects. pants were not only using HCI practices for interface and experience designing, they were also using their HCI skills to collaborate better with technical team members. Firstly, they used their HCI skills to understand technical team members' mental models and how they made design decisions for the AI/ML system. M3P3 utilised observation to understand how technical team members worked on the AI/ML for chatbots and then conducted role-play exercises to help them think about aspects of the conversations that she felt they had not considered. M3P1 also utilised role-playing with team basically laid out the hospital in a miniaturised version and we walked through what's happening with clinical staff. And they all obviously laughed, but it was, okay "so if they've got this problem, how could we re-enact this?"" were also able to dive into hard data in order to backup their points to technical team members. M3P3 and M3P5 would mine qualitative data from chatbot conversations to show technical team members that there was a problem, when all the quantitative data was pointing at the AI/ML system working successfully.</p><p>Similarly, UX practitioners specifically adapted design outputs to improve collaboration with technical team members. Data journey maps, conversation maps, curated recordings of user observations and service blueprints were particularly helpful for encouraging discussion with different team members on the AI/ML system design.</p><p>documentation was delivered to the AI/ML developers was also iterated so that engineers could better understand the AI/ML system requirements. M3P3 summarised that HCI practitioners are well equipped to facilitate collaboration in interdisciplinary teams and that designers should see driving system design as a key part of their role.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.3">Current HCI Design Methodologies Are</head><p>Not Enough For Real-World AI/ML Projects</p><p>The third category of themes relates to findings on the shortcomings of existing HCI design methodologies and what needs to be done help support the design of systems that utilise AI/ML techniques. Participants were of HCI methodologies and practices for too high level and too interface focused to deal with the complexity of designing AI/ML systems in the real-world.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.3.1">Designing AI/ML Systems The Same Way as Traditional Prod-</head><p>Is Not Practical. Methodologies such as UCD and Design Thinkwere not practical for the large complex projects that included AI/ML. A key missing piece in existing HCI design methodologies was that after launch, AI/ML models that are continuing to learn data need to be monitored, supported and maintained and this can have important implications on the UX design and user journeys. Furthermore, traditional design processes and the realities of designing AI/ML systems were also found to be out of sync. For instance, the methods such as humans-in-the-learning-loop <ref type="bibr" target="#b42">[41]</ref> where humans support learning of the AI/ML system and testing and iterating prototypes were seen as unrealistic for AI/ML projects. Designing for post launch is not defined separately in any of the existing HCI design methodologies but was highlighted by teams as an important part of their process and as a cause for concern by participants in the team interviews. "Model maintenance and drift and that's more like building it out in the lean way and then monitoring use. That's not something you cover in design thinking"</p><p>In the case of M2T2, they needed to allow the AI/ML continue learning over a period of time based on users feeding back to the system while it was live.</p><p>"So the efficiencies that they thought they would get with the first iteration probably didn't come through as much as they wanted. And it's only when we start to iterate on it and improve that piece that they get more and more efficient. " [M2T2-Prod] a result, a whole user workflow needed to be built around the AI/ML system by M2T2 to get the system to a target level of ac-Once the target was reached, the user workflow had to be re-designed again so that the system could be left to make decisions M3P3, M3P4 and M3P7 were critical about how viable using humans to label data was in the real-world. M3P3 found that the of the data generated from the process was too poor for it to be usable. M3P4 thought the practicalities of getting humans to data over long periods of time was unrealistic and incredibly difficult to achieve for niche enterprise AI/ML products. M2T2</p><p>that their client was disappointed with being asked to provide as they expected an AI/ML system to reduce if not completely the need for manual tasks. M3P7 found that clients were too afraid to have their customers be "guinea pigs" in case something backfired.</p><p>In addition to the adaptations being made to the practice of prototyping, the traditional process of creating low-fidelity, followed by high-fidelity prototypes was being challenged. M3P1 and M3P2 stated that iterating prototypes and PoCs was non-trivial as unlike based systems since AI/ML models can behave in unexpected ways when they are altered. M3P3 found that iterating AI/ML models and then testing the changes took much longer than the process of testing of visual prototypes in UCD and Design Thinking.</p><p>the feedback was that HCI design methodologies are too simplistic and assume that all problems can be solved. A majority of the participants felt that following a HCI design methodology would not help them to effectively design an AI/ML system. M2T1was clear that "only certain classes of problems are solvable" and even this depended on the quality of the data available. M2T1-HCI strongly that "You can't just take a Design Thinking process and say "aha, let's go to solve it!"" Similarly, M2T2-Prod felt like a more thorough HCI design process would have helped them understand some of the complexities earlier on in the AI/ML project.</p><p>Finally, multiple participants across both methods put it plainly that HCI design methodologies are too focused on interaction and missing what is important; how the AI/ML system is going to work. M3P3, M3P5 and M3P7 who all worked on the design of chatbots the most vocal about HCI being too interface focused and that this was not the most important thing for designing AI/ML products. M3P1 and M3P4 felt like service design techniques were not utilised enough and M3P6 made the point that the value of the designer for AI/ML products is much less about the visual design, which he was concerned was also becoming an increasingly commoditised skill.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.3.2">Ethical Considerations Need To Be Part Of The Design Pro-</head><p>Ethical considerations relating to fairness, transparency and accountability were highlighted by nearly all participants. Participants were acquainted with academic research on the subject and aware that they did not have all the solutions for the problems with their AI/ML projects and that current HCI design methodologies did not help.</p><p>M3P2 felt that it was the designers' responsibility to ensure that the AI/ML product was ethical and safe for users try and figure out those unintended consequences ... is, I think, very much of our job." M3P3 thought that empathy with users was an skill as it enables one to become aware of biases in data the potential implications. M3P4 also thought that designers were best positioned to spot potential harm to users. course, this definitely us, because we are the ones in direct communication with users and have a macro view of the situation and seeing what are the potential problems. "</p><p>Both M3P2 and M3P4 suggested that issues should be raised at a user research stage of the design process, when data options for the AI/ML system would also be investigated, but this was not the only stage of the process where potential issues would arise.</p><p>In terms of how designers could mitigate problems due to ethical issues M3P7 and M3P6 had developed their own set of guidelines.</p><p>included things like not pretending to be a human for a chatbot or UI patterns for different use cases. When it came to practices for AI/ML system design, only M3P3 had developed a mitigation strategy where users interacting with a chatbot would be handed off to a human based on the analysis of multiple potential paths. " The remaining participants were unsure about what could be realistically achieved for their projects.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5">DISCUSSION</head><p>Below, we discuss the main findings, and the implications for AI/ML systems design and collaboration across disciplines. We also discuss the direction needed from HCI research to guide design and how a significant shift in thinking may be required in the approach to designing AI/ML systems.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.1">Adapting Design Methodologies for AI/ML Systems</head><p>In this section, we discuss the findings demonstrate a need for new HCI design methodologies when designing AI/ML systems.</p><p>5.1.1 Designing For Post Launch. Iterating post-launch was the most visible adaptation in the two team sketches made during the interviews. It was also highlighted by several participants in the individual interviews. This practice was attributed to the additional challenges AI/ML systems introduce as they continually learn from data and, as result, they can function or produce outputs in unpredictable ways. For example, a performance metric such as model accuracy is not guaranteed to remain the same. In the real-world, this can have significant consequences. If the AI/ML model is designed to detect fraud or diagnose medical conditions, instance, the consequences of making an error or failing altogether are profound. The monitoring of model performance design of support processes to deal with failures were thus seen to be important adaptations to existing design methodologies. Teams particularly valued continuity here, enabling them to utilise their diverse skills to iterate their product's functionality design and fix issues across the launch cycle. The importance of this has been raised an issue fairness and transparency <ref type="bibr" target="#b30">[28,</ref><ref type="bibr" target="#b70">67]</ref>, and in computer science with technical research papers on AI/ML model <ref type="bibr">[60]</ref> and AI/ML model monitoring <ref type="bibr" target="#b58">[56]</ref>. Further HCI research on design practices for the post launch maintenance of AI/ML systems would add further value. For instance, beyond collecting quantitative telemetry data, consideration should be given how user feedback and assessments of user experience can be integrated into post launch and prolonged cycles of development.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.1.2">Experience Prototyping Versus Building AI/ML PoCs -Chicken</head><p>Egg? For AI/ML systems, uncertainty remains as to what should be done first, the application of UX prototyping methods or the development of a working PoC. and iterating the interaction and experience desired users is important, but so to is the need to investigate what the constraints are in terms of technical feasibility and limitations of any data sets. In our study, we found that in some cases a feasibility discussion with the technical team was sufficient. However, this was not always enough; teams needed to conceive and build PoCs to better understand what was technically possible, define the scope of the system, and project the possibility of potential issues. stake here, is the eventual value of the system to the end user. UX prototyping methods help to determine users' needs and, we saw in our findings, when such methods are circumvented can be seen as 'useless'. However, prototyping can also yield unrealistic functional requirements for the system that simply cannot be implemented.</p><p>A potential lesson emerges from the results of our study. The individual interviews showed that some adaptations were made to the design of chatbots to manage the issue of experience versus functionality. Work was split into two concurrent streams, on the one side the development of the AI/ML PoC and the other UX prototyping. This was seen as a way to limit wasted effort on both fronts. This idea of splitting the work into streams presents a potentially valuable process for interdisciplinary teams so long routes of communication are built into it. To our knowledge, this possibility of different approaches to teamwork has not reattention in HCI, where the focus has largely been on the UX designer/practitioner and their specific methods such as UX <ref type="bibr" target="#b66">[63]</ref> or where understanding of user requirements part of an onboarding process after the product was launched [13]. HCI's contribution might thus be to study potential models of teamwork that combine UX prototyping and PoC development and explore processes of communication between interdisciplinary teams and development streams. A co-creation approach by Subraet. al <ref type="bibr" target="#b67">[64]</ref> tackled the decluttering of photo albums. They that more complex problems and data types would be more challenging and that more work needs to be done to understand how teams can evolve designs into high-fidelity prototypes.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.1.3">The Design Methodology Needs To Incorporate Ethics.</head><p>topics of fairness, transparency and explainability have received considerable focus in the HCI academic community <ref type="bibr" target="#b5">[6,</ref><ref type="bibr" target="#b38">36,</ref><ref type="bibr" target="#b50">48,</ref><ref type="bibr" target="#b70">67]</ref>. This study showed that concerns and learnings filtered down to those working on the design of real-world AI/ML systems and not just through the alarmist media articles on AI. Additionally, our study's participants saw ethical issues as an important part of designing AI/ML systems and very specifically a core part of their responsibility, which was a positive finding.</p><p>Transparency and explainability is a vast area that was not covin detail within the scope of this study. However, the findings did show there was a healthy skepticism of whether this was an isthat could be resolved through the interface and in any generic approaches to UI design. Instead UX practitioners stated that they saw ethics as something they needed to think about and design for throughout the design process rather than it being a particular stage in a design process. M3P4 in particular saw designing for ethics as an iterative process in the same way that interfaces are designed and iterated. M3P1's experience was that context matters users needed to be engaged to understand their feelings and boundaries on specific ethical issues that might arise.</p><p>In line with previous findings <ref type="bibr" target="#b47">[46]</ref>, user-needs were acknowlto be unclear and very dependent on the specific contexts the were being built for and planned to be used in. However, interesting possibility arising from our research suggests an important role for participatory design (PD) methods. Our participating teams and UX practitioners found involving users in design especially effective in real-world development and deployments, where the issues of fairness and needs for explainability and were very particular to context. PD methods helped in identifying what active roles users might play in making sense of AI/ML algorithms and models and, in turn, judging fairness. In PD methods were used to move beyond generic solutions to explainability and transparency in UI design, helping to develop a much richer understanding of the context and respond to the unique situations inherent in real-world system use. This underscores the importance HCI should give extending existing PD methods to support AI/ML system development <ref type="bibr" target="#b24">[22]</ref> and also suggests PD may provide help with determining where people can play active roles in tighter synergies between humans and machines <ref type="bibr" target="#b25">[23]</ref>.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.2">Collaboration On the Design Of AI/ML Systems</head><p>In this section we discuss the contrast in findings from this study with previous research on how UX practitioners work on AI/ML systems.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.2.1">No Dichotomy Between The Rationalistic &amp; HCI Approach.</head><p>A key argument that aims to explain the difficulties arising in AI/ML system development turns on different conceptualisations of how computers and humans should interact. As part of this argument, the technical perspective aligned with AI is seen to treat the problem as a rationalistic one where humans operate in deterministic ways, not unlike machines. The counter perspective, dominant in design and recent HCI, views interaction more in terms of how people arrange and organise themselves in their and social settings <ref type="bibr" target="#b73">[70]</ref>. The findings in this study suggest a much more practical is taken to human-computer interaction and its design. The study points less to any dichotomy or tension between the rationalistic and HCI approaches, and more an emphasis on working in practical ways within interdisciplinary teams to get on with the work of system Certainly, the team members in the study gave priority the technical limitations and the feasibility of the systems they were but they acknowledged that if the solution not accepted the user then any real-world problem had not in fact been solved. The practical approach taken was for technical team members to continue to propose technical or mathematical solutions to problems, but to see UX practitioners as on hand to steer the design back towards the needs of the user.</p><p>The 'not knowing how to design for AI/ML' was a major factor drove collaboration across the different disciplines and even led to team members coming up with ideas in each other's fields of Here there was a difference in the findings by Chivukula et al. <ref type="bibr">[16]</ref> who describe UX practitioners as finding it challenging to exert influence over all parts of the organisation.</p><p>Additionally, in contrast to previous studies <ref type="bibr">[20,</ref><ref type="bibr" target="#b76">73]</ref> that found UX to be an afterthought, only considered once the underlying design decisions had been made, we did not find this to the case. Many described projects where user research was conducted first and technical team members would then be brought afterwards. Furthermore, product and technical members in the team interviews stated that it was difficult when UX practitioners not at hand to answer specific questions about user needs during later development phases. This highlights the value of UX practitioners throughout the design and development process of AI/ML systems. A possible reason for the difference in findings could be that this study sought out UX practitioners that were in the design of AI/ML systems and screened them ac-The previous studies were focused on participants that worked on interaction and experience design, so the participants in this study are not directly analogous. The findings underscore that whether the UX or technical work comes first is not the question. Rather, for AI/ML projects it has become more important for interdisciplinary teams to make design decisions together. While the sample size in this study is small and not all AI/ML teams are interdisciplinary in nature, the findings show that collaboration between HCI and technical practitioners on the design of AI/ML systems can and does happen in the real-world. A question HCI should respond to is how these collaborations might be better integrated into its methods and practices.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.2.2">UX Practitioners Have The Skills To Collaborate On AI/ML</head><p>The challenge many UX practitioners face is opportunity. Siloed organisations meant that the UX participants in our study did not always have easy access to their technical colleagues. In some cases the technical team was part of a different organisation. Both stages of the research showed that issues with collaboration less about skills and more about how the organisations were Once participants had a seat at the table, they were that they needed to work hard to show the value of design. The findings call attention to the fact that UX practitioners have the skills to collaborate with technical team members. Indeed, the summary of participants in Tables <ref type="table" target="#tab_1">1 and 2</ref> show that the UX practitioners came from a diverse range of backgrounds and most were not technical. While design processes such as UCD and Double Diamond are described as 'interdisciplinary' what this means in practice is rather vague. In this study, UX practitioners were able to point to specific HCI practices they would normally use to understand mental models and the behaviour of end-users that were also being used to empathise with colleagues. UX practitioners were using their skills to understand their colleagues' ways of thinkhow they approached problems and proposed solutions and helped them to build empathy with end users and to think problem first instead of technology first. The result was more user-centered thinking, if you will, in the work of AI/ML system development.</p><p>The findings highlight how UX practitioners are able to adapt and are well suited to contributing to the design for AI/ML systems. This previous research <ref type="bibr" target="#b76">[73]</ref> that UX practitioners struggle to collaborate with data scientists. While we do not suggest that the findings from this study are applicable in all cases, it invites the question and further research to understand what lies at the heart of the challenges to collaboration and whether organisational structures may be one area to pay greater attention to.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.3">A Shift Is Needed To Design AI/ML Systems</head><p>In this section we discuss the shortcomings of existing HCI design methodologies and practices that cannot be resolved by making Rather we propose that a shift in mindset is required when designing AI/ML systems and dealing with complexity in the real-world.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.3.1">No Simple Solutions</head><p>When Designing For Complexity. pants described the end user organisations as having hierarchies and complex decision making processes, which did not always appear to be rational. In HCI, techniques for designing and evaluating systems, such as prototyping and usability testing <ref type="bibr" target="#b57">[55]</ref> often entail reducing the scope to one user and one task, which arguably bean artificial context of use. According to Hertzum this is far too simplistic and disregards 'organisational' usability. The findings in this study align with Hertzum's assertion that UX practitioners need to continue focusing on iterating the user experience the AI/ML product in the organisational setting in which it is used and ties in with our earlier point of having processes in place to iterate systems post launch.</p><p>Additionally, the study found that participants from the individinterviews in particular tried to reduce some of the complexity through more in-depth user research into specific niches, rather trying to go broad and creating a more general solution. Here it was important to acknowledge what the AI/ML system is designed do and to specify the 'edge cases' that will not be solved. This more in-depth user research entails mapping out workflows, possibly down to the detail of what users do with their spreadsheets. It also includes tracing the labyrinthine data flows between multiple connected systems so this can be factored in when making design decisions for the AI/ML system as Veale et. al <ref type="bibr" target="#b70">[67]</ref> prescribe in their paper. Our study shows that UX practitioners are capable of this, more research to support designing for complexity is needed in the HCI field and not just for designing AI/ML systems.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Prototyping Has Many Purposes &amp; Needs To Be High Fidelity.</head><p>Prototyping remains an important practice when designing AI/ML systems. Results from both the team and individual interviews demonstrated how important this was to manage internal stakeas well as to iterate designs. However, results from our suggest that HCI needs a shift in mindset around prototyping for AI/ML systems. For chatbots, we found UX prototyping was not important. For the remaining AI/ML projects in the study, particistated that prototypes needed to be high fidelity and where possible that they needed to based on real data for them to the engagement and user input they needed. This reflects the findings by Holstein et. al <ref type="bibr" target="#b37">[35]</ref> on the importance of leveraging data in the design process for designing systems that utilise algorithms. they found that a key benefit of using historical data was to make the complex behavior of systems more tangible to designers as well as stakeholders, further research into the future possibilities described by Holstein et. al would support teams incorporate historical data into AI/ML system design and make the practices more feasible in the real world.</p><p>from the interviews was that more effort was required by teams when prototyping, but it was not the case that participants found it difficult to prototype in contrast with existing research Additionally, the primary goal of prototypes was not to find usability problems, which has been the focus of studies in HCI when evaluating the use of low-fidelity versus high-fidelity prototypes <ref type="bibr" target="#b49">[47,</ref><ref type="bibr" target="#b71">68]</ref>. What was more important was to: understand if a design was feasible, to get feedback on the users' mental models and whether design would be accepted in terms of how the problem is solved, instance: is the proposed workflow efficient enough to invest in an AI/ML based approach?</p><p>Taking a participatory design approach also required the use prototypes to elicit detailed feedback on labels and to address explainability for what the AI/ML model is doing in order to build trust in what was being designed. Only high-fidelity prototypes, necessarily pixel perfect UIs, but with real data, were engaging enough for the AI/ML projects. The risk that effort might be wasted was an accepted part of the process that participants hoped might reduced in the future with experience. Finally, high-fidelity prototypes were also important for influencing stakeholders. Similar to findings by Chawda et al. <ref type="bibr" target="#b15">[14]</ref> on how attractive interfaces can imthe perception of usability, leading to an increase in tolerance difficulties with early stage AI/ML products, more aesthetically pleasing, high-fidelity prototypes encouraged stakeholders to persevere with projects.</p><p>These findings should make us reconsider the role of prototyping and especially what the value is in testing low-fidelity prototypes with users when designing AI/ML systems. Because of the added complexity creating higher fidelity prototypes and testing more thoroughly, this might be complimented with other evaluation techniques such as Design Critiques <ref type="bibr" target="#b31">[29]</ref> to appraise designs and challenge assumptions internally within interdisciplinary teams.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.3.3">The User Interface Is One Of Many Components Of the AI/ML</head><p>A recurring theme in this study was how participants felt interaction design and HCI are, with AI/ML systems, too focused on user interface. This, in the view of participants, made design methodologies in particular overly simplistic or ill-defined. For instance, in following conventional design methodologies, the Research stage for AI/ML projects would need to include: research into feasibility, data availability, the AI/ML approach to modelling, mental models for prototyping, and so on. These activities have been shown to be important in this study, however existing HCI methodologies do not help with what to do, when to do it or in Participants felt that needed to be adapted to a greater degree when designing AI/ML systems and so following existing HCI design processes made no sense.</p><p>Finally, the feedback on HCI design methodologies was that being too interface focused they were not suited to designing how things work behind the scenes. This was especially true for designing chatbots where the user experience is not necessarily bound to the design of the interface. The findings show that the result of these challenges has been to make UX practitioners think about the practices they utilise, rather than being fixated on design processes which did not meet their needs. These sentiments align with the studies referenced in the literature review (e.g. <ref type="bibr" target="#b16">[15,</ref><ref type="bibr" target="#b45">44,</ref><ref type="bibr" target="#b68">65]</ref>) which are focused on the interface and experience design for the AI/ML system, rather than the system design. The implication for the HCI academic community is to consider how they might engage in more research into system design as a whole, and at the same time account for the ways this is being done in practice in commercial settings.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.3.4">Scepticism &amp; Practical</head><p>Flaws With Some HCI Practices. ing about the experiences of UX practitioners in particular, shed light on how HCI design practices such as using humans to provide labels for the AI/ML system to learn <ref type="bibr" target="#b42">[41]</ref> and "Wizard of Oz Prototyping" [12], were not in fact practical for the projects in this Valid practicality concerns were raised about having humans label data for the AI/ML system to learn in the B2B context. It was not seen as realistic to achieve over a period of weeks or even given the niche user base. There was also scepticism over whether the quality of the data generated by the approach would be good enough. Here, participants spoke from experience. The study also found that UX practitioners need to consider that the end user may not want to be in the learning-loop for the AI/ML system, let alone pay for the privilege. These findings clearly contrast with previous research and with the fact that many AI/ML systems in the real world do support labelling data. Our findings indicate in some instances in the context, using humans to provide labels is not always feasible and that designers of the AI/ML system to understand whether this will be realistic for their project. We suggest that it should not be taken for granted that all AI/ML will be able to have humans available to provide labels. As result of this study, we find that this is especially for enterprise systems, where the user base is likely to be more niche.</p><p>Based on the findings from this study, the low-fidelity prototyping approach for AI/ML systems [12] is not viable either. "Wizard of Oz Prototyping" requires a detailed understanding of the AI/ML model and its limitations and a large enough sample of data to test with. It then places a heavy cognitive load on the UX practitioner to prototype and test on the fly. Meanwhile the benefits of having a high-fidelity prototype outlined in this study are lost.</p><p>The scepticism of using humans to label data and the practical flaws with "Wizard of Oz Prototyping" sheds light to the fact that instead of only conducting empirical studies for when developing HCI practices, these also need to be grounded in the real-world. For AI/ML projects this evaluation is likely to take longer, but it important if the HCI field is to develop practices that are useful and usable for our users: UX practitioners.</p><p>Other limitations are that we had only two interdisciplinary team interviews. Despite the depth of each of those interviews, we would encourage more research into collaboration on AI/ML system design, HCI design processes and practices that involves both technical and non-technical team members.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>CONCLUDING REMARKS</head><p>This study has shown that while HCI design methodologies need be updated in response to designing complex systems that utilise AI/ML techniques, UX practitioners have in practice developed adaptations to their methods and found new ways to impact wider AI/ML system development. Through their skills, they show an ability to contend with some of the challenges of complexity, data quality, multiple interconnected systems and sometimes difficult orstructures. Previous studies have been focused, largely, on interface design to assess the value that HCI can provide when designing AI/ML systems. What the presented work indicates is that the HCI community has much to learn from the study of real-world vivo system development. the above discussion, we propose a number of implications for our own study of design's role amongst teams developing AI/ML We suggest there are opportunities for HCI in rethinking where UX design should play a role, how design methodologies might be adapted and changed, and what part design could have in wider organisational structures. Central to these presented findings and implications is the view that UX design should be understood as a set of methods or practices tied to a specific practitioner as a resource that cuts through a diverse range of product and development activities from organisational and team-based work, to the technical implementation of AI/ML models and the architecture, and down to the level of UI and UX design; the methodologies and know-how tied to UX design are shown have key roles across many of these areas. The overarching lesson for HCI and specifically the work studying UX design in product development is that future research should broaden scope to look beyond the role of the practitioner and to the influence UX design has on development life-cycles, teamwork, and organisational structures.</p></div><figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_0"><head>Table 1 :</head><label>1</label><figDesc>Overview of participants from the interdisciplinary team interviews</figDesc><table><row><cell cols="2">Participant code Job title</cell><cell cols="2">Academic background AI/ML project experience</cell></row><row><cell>M2T1-HCI</cell><cell>UX Researcher</cell><cell>Psychology and HCI</cell><cell>Enterprise AI/ML systems</cell></row><row><cell>M2T1-Prod</cell><cell>Product Manager</cell><cell>Engineering</cell><cell>Enterprise AI/ML systems</cell></row><row><cell>M2T1-DS</cell><cell>Data Scientist</cell><cell>Mathematics</cell><cell>Enterprise AI/ML systems</cell></row><row><cell>M2T2-HCI</cell><cell>Head of Design</cell><cell>Arts</cell><cell>Enterprise AI/ML systems</cell></row><row><cell>M2T2-Prod</cell><cell>Product Director</cell><cell>Computer Science</cell><cell>Enterprise AI/ML systems</cell></row><row><cell>M2T2-Eng</cell><cell cols="2">Software Engineer Computer Science</cell><cell>Enterprise AI/ML systems</cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_1"><head>Table 2 :</head><label>2</label><figDesc>Overview of participants from the individual interviews with UX practitioners</figDesc><table><row><cell cols="2">Participant code Job title</cell><cell cols="2">Academic background AI/ML project experience</cell></row><row><cell>M3P1</cell><cell cols="2">Service and Product Design Engineering and HCI</cell><cell>Enterprise AI/ML systems</cell></row><row><cell>M3P2</cell><cell>AI Design Director</cell><cell>Natural Science</cell><cell>Enterprise AI/ML systems</cell></row><row><cell>M3P3</cell><cell>UX Designer</cell><cell>Arts</cell><cell>Chatbots</cell></row><row><cell>M3P4</cell><cell>Design Researcher</cell><cell>Industrial Design</cell><cell>Enterprise AI/ML systems</cell></row><row><cell>M3P5</cell><cell>UX Designer</cell><cell>Humanities</cell><cell>Chatbots</cell></row><row><cell>M3P6</cell><cell>UX Designer</cell><cell>Arts and Humanities</cell><cell>Enterprise and consumer AI/ML</cell></row><row><cell>M3P7</cell><cell>UX Consultant</cell><cell>Psychology</cell><cell>Chatbots</cell></row></table></figure>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot">'22, April 30-May 05, 2022, New Orleans, LA</note>
+		</body>
+		<back>
+			<div type="references">
+
+				<listBibl>
+
+<biblStruct xml:id="b0">
+	<monogr>
+		<title level="m" type="main">Notes from the AI Frontier: Modeling the Global Economic Impact of AI</title>
+		<author>
+			<persName><forename type="first">Mckinsey</forename><surname>Global</surname></persName>
+		</author>
+		<ptr target="https://www.mckinsey.com/featured-impact-of-ai-on-the-world-economy" />
+		<imprint>
+			<date type="published" when="2018">2018. 2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b1">
+	<analytic>
+		<title level="a" type="main">Transparency in Fair Machine Learning: the Case of Explainable Recommender Systems</title>
+		<author>
+			<persName><forename type="first">Behnoush</forename><surname>Abdollahi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Olfa</forename><surname>Nasraoui</surname></persName>
+		</author>
+		<idno type="DOI">10.1007/978-3-319-90403-0_2</idno>
+		<ptr target="https://doi.org/10.1007/978-3-319-90403-0_2" />
+	</analytic>
+	<monogr>
+		<title level="m">and Machine Learning: Visible, Explainable, Trustworthy and Transparent</title>
+				<meeting><address><addrLine>Cham</addrLine></address></meeting>
+		<imprint>
+			<publisher>Interna-Publishing</publisher>
+			<date type="published" when="2018">2018</date>
+			<biblScope unit="page" from="21" to="35" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b2">
+	<monogr>
+		<title level="m" type="main">Trends and Trajectories for Explainable, Accountable and Intelligible Systems: An HCI Research Agenda</title>
+		<author>
+			<persName><forename type="first">Jo</forename><surname>Abdul</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Danding</forename><surname>Vermeulen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Brian</forename><forename type="middle">Y</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mohan</forename><surname>Lim</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Kankan</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3173574.3174156</idno>
+		<ptr target="https://doi.org/10.1145/3173574.3174156" />
+		<imprint>
+			<date type="published" when="2018">2018</date>
+			<publisher>Association for Computing Machinery</publisher>
+			<biblScope unit="page" from="1" to="18" />
+			<pubPlace>New York, NY, USA</pubPlace>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b3">
+	<monogr>
+		<author>
+			<persName><forename type="first">Dan</forename><surname>Amershi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mihaela</forename><surname>Weld</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Adam</forename><surname>Vorvoreanu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Besmira</forename><surname>Fourney</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Penny</forename><surname>Nushi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jina</forename><surname>Collisson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Shamsi</forename><surname>Suh</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Paul</forename><forename type="middle">N</forename><surname>Iqbal</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kori</forename><surname>Bennett</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jaime</forename><surname>Inkpen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ruth</forename><surname>Teevan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Eric</forename><surname>Kikin-Gil</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Horvitz</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3290605.3300233</idno>
+		<ptr target="https://doi.org/10.1145/3290605.3300233" />
+		<title level="m">for Human-AI Interaction. for Computing Machinery</title>
+				<meeting><address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<date type="published" when="2019">2019</date>
+			<biblScope unit="page" from="1" to="13" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b4">
+	<monogr>
+		<author>
+			<persName><forename type="first">P</forename><surname>Arakeri</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><forename type="middle">S</forename><surname>Keerthana</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Madhura</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Anusha</forename><surname>Sankar</surname></persName>
+		</author>
+		<idno type="DOI">10.1109/ICACCI.2018.8554625</idno>
+		<ptr target="https" />
+		<title level="m">Assistive Technology for the Visually Impaired Using Computer In International Conference on Advances in Computing, Communications and Informatics (ICACCI)</title>
+				<meeting><address><addrLine>New York, NY</addrLine></address></meeting>
+		<imprint>
+			<publisher>IEEE</publisher>
+			<date type="published" when="2018">2018</date>
+			<biblScope unit="page" from="1725" to="1730" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b5">
+	<analytic>
+		<title/>
+		<author>
+			<persName><forename type="first">Alejandro</forename><surname>Barredo Arrieta</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Natalia</forename><surname>Díaz-Rodríguez</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Javier</forename><forename type="middle">Del</forename><surname>Ser</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Adrien</forename><surname>Bennetot</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Siham</forename><surname>Tabik</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Alberto</forename><surname>Barbado</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Salvador</forename><surname>García</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sergio</forename><surname>Gil-López</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Daniel</forename><forename type="middle">Richard</forename><surname>Benjamins</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Explainable Artificial Intelligence</title>
+		<imprint>
+			<date type="published" when="2020">2020</date>
+			<publisher>XAI</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b6">
+	<monogr>
+		<idno type="DOI">10.1016/j.inffus.2019.12.012</idno>
+		<ptr target="https://doi.org/10.1016/j.inffus.2019.12.012" />
+		<title level="m">Concepts, taxonomies, opportunities and challenges toward responsible AI. formation Fusion</title>
+				<imprint>
+			<date type="published" when="2020">2020</date>
+			<biblScope unit="volume">58</biblScope>
+			<biblScope unit="page" from="82" to="115" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b7">
+	<analytic>
+		<title level="a" type="main">Decision tree classifiers for automated medical diagnosis</title>
+		<author>
+			<persName><forename type="first">Shereen</forename><surname>Azar</surname></persName>
+		</author>
+		<author>
+			<persName><surname>El-Metwally</surname></persName>
+		</author>
+		<idno type="DOI">10.1007/s00521-012-1196-7</idno>
+		<ptr target="https://doi.org/10.1007/s00521-012-1196-7" />
+	</analytic>
+	<monogr>
+		<title level="j">Neural Computing and Applications</title>
+		<imprint>
+			<biblScope unit="volume">23</biblScope>
+			<biblScope unit="page" from="2387" to="2403" />
+			<date type="published" when="2013-11">2013. 11 2013</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b8">
+	<analytic>
+		<title level="a" type="main">Proposal of a methodology to integrate the human factor in the service blueprint</title>
+		<author>
+			<persName><forename type="first">Silvio</forename><surname>Barbieri</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Emmanuel</forename><surname>Fragniere</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Marshall</forename><forename type="middle">S</forename><surname>Sitten</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Gabriel</forename><surname>Zambrano</surname></persName>
+		</author>
+		<idno type="DOI">10.12720/joams.1.2</idno>
+		<ptr target="https://doi.org/10.12720/joams.1.2" />
+	</analytic>
+	<monogr>
+		<title level="j">Journal of Advanced Management Science</title>
+		<imprint>
+			<biblScope unit="volume">1</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page" from="207" to="213" />
+			<date type="published" when="2013-06">June 2013</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b9">
+	<analytic>
+		<title level="a" type="main">Uncertainty as a Form of Transparency: Mea-Communicating, and Using Uncertainty</title>
+		<author>
+			<persName><forename type="first">Umang</forename><surname>Bhatt</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Javier</forename><surname>Antorán</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yunfeng</forename><surname>Zhang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Q</forename><forename type="middle">Vera</forename><surname>Liao</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Prasanna</forename><surname>Sattigeri</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Riccardo</forename><surname>Fogliato</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Gabrielle</forename><surname>Melançon</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ranganath</forename><surname>Krishnan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jason</forename><surname>Stanley</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Omesh</forename><surname>Tickoo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Lama</forename><surname>Nachman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Rumi</forename><surname>Chunara</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Madhulika</forename><surname>Srikumar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Adrian</forename><surname>Weller</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Alice</forename><surname>Xiang</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2021</title>
+				<meeting>the 2021</meeting>
+		<imprint>
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b10">
+	<analytic>
+		<title level="a" type="main">USA) (AIES &apos;21). for Computing Machinery</title>
+	</analytic>
+	<monogr>
+		<title level="m">AAAI/ACM Conference on AI, Ethics, and Society</title>
+				<meeting><address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>Virtual Event</publisher>
+			<biblScope unit="page" from="401" to="413" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b11">
+	<analytic>
+		<title level="a" type="main">Successful qualitative research: A practical guide for</title>
+		<author>
+			<persName><forename type="first">Virginia</forename><surname>Braun</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Victoria</forename><surname>Clarke</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">First Analytic Steps: Familiarization and Data Coding</title>
+				<meeting><address><addrLine>UK, Chapter Chapter</addrLine></address></meeting>
+		<imprint>
+			<publisher>SAGE Publications</publisher>
+			<date type="published" when="2013">2013</date>
+			<biblScope unit="page" from="210" to="214" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b12">
+	<analytic>
+		<title level="a" type="main">Wizard of Oz Prototyping for Machine Learning Experi</title>
+		<author>
+			<persName><forename type="first">Tim</forename><surname>Brown</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3290607.3312877</idno>
+		<ptr target="https://doi.org/10.1145/3290607.3312877" />
+	</analytic>
+	<monogr>
+		<title level="m">Extended Abstracts of the 2019 CHI Conference on Human Factors in Com-Systems</title>
+				<meeting><address><addrLine>Glasgow, Scotland Uk; New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computing Machinery</publisher>
+			<date type="published" when="2008">2008</date>
+			<biblScope unit="page" from="1" to="6" />
+		</imprint>
+	</monogr>
+	<note>EA &apos;19)</note>
+</biblStruct>
+
+<biblStruct xml:id="b13">
+	<monogr>
+		<title/>
+		<author>
+			<persName><forename type="first">J</forename><surname>Carrie</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Samantha</forename><surname>Cai</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">David</forename><surname>Winter</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Lauren</forename><surname>Steiner</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Michael</forename><surname>Wilcox</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Terry</surname></persName>
+		</author>
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b14">
+	<analytic>
+		<title level="a" type="main">Onboarding Materials as Cross-Functional Boundary Objects for Developing AI Assistants</title>
+		<idno type="DOI">10.1145/3411763.3443435</idno>
+		<ptr target="https://doi.org/10.1145/3411763.3443435" />
+	</analytic>
+	<monogr>
+		<title level="m">Extended Abstracts of the 2021 CHI Conference on Human Factors in Computing Systems</title>
+				<meeting><address><addrLine>New York, NY, USA, Article</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computing Machinery</publisher>
+			<biblScope unit="volume">43</biblScope>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b15">
+	<analytic>
+		<title level="a" type="main">attractive things work better? An exploration of search tool visualisations</title>
+		<author>
+			<persName><forename type="first">Brock</forename><surname>Chawda</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Paul</forename><surname>Craft</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Daniel</forename><surname>Cairns</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Stefan</forename><surname>Heesch</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Rüger</surname></persName>
+		</author>
+		<ptr target="http://oro.open.ac.uk/29873/ISBN978-1-84628-192-1pp" />
+	</analytic>
+	<monogr>
+		<title level="m">19th British HCI Group Annual Conference: The Bigger Picture</title>
+				<meeting><address><addrLine>London, UK</addrLine></address></meeting>
+		<imprint>
+			<date type="published" when="2005">2005</date>
+			<biblScope unit="page" from="46" to="51" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b16">
+	<monogr>
+		<title level="m" type="main">Decision-Making Algorithms UI: Strategies to Help Non-Expert Stakeholders</title>
+		<author>
+			<persName><surname>Hao-Fei</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ruotong</forename><surname>Cheng</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Zheng</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Zhang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">O'</forename><surname>Fiona</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Terrance</forename><surname>Connell</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><forename type="middle">Maxwell</forename><surname>Gray</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Haiyi</forename><surname>Harper</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Zhu</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3290605.3300789</idno>
+		<ptr target="https://doi.org/10.1145/3290605.3300789" />
+		<imprint>
+			<date type="published" when="2019">2019</date>
+			<publisher>Association for Computing Machinery</publisher>
+			<biblScope unit="page" from="1" to="12" />
+			<pubPlace>New York, NY, USA</pubPlace>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b17">
+	<monogr>
+		<title/>
+		<author>
+			<persName><forename type="first">Chivukula</forename><surname>Shruthi Sai</surname></persName>
+		</author>
+		<imprint>
+			<pubPlace>Rhys Watkins, Rhea Manocha, Jingle Chen, and</pubPlace>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b18">
+	<monogr>
+		<title level="m" type="main">Dimensions of UX Practice That Shape Ethical Awareness. for Computing Machinery</title>
+		<author>
+			<persName><forename type="first">Colin</forename><forename type="middle">M</forename><surname>Gray</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3313831.3376459</idno>
+		<ptr target="https://doi.org/10.1145/3313831.3376459" />
+		<imprint>
+			<date type="published" when="2020">2020</date>
+			<biblScope unit="page" from="1" to="13" />
+			<pubPlace>New York, NY, USA</pubPlace>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b19">
+	<analytic>
+		<title level="a" type="main">Introduction to this special issue on unifying human interaction and artificial intelligence</title>
+		<author>
+			<persName><forename type="first">De</forename><surname>Choudhury</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Min</forename><forename type="middle">Kyung</forename><surname>Lee</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Haiyi</forename><surname>Zhu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">David</forename><forename type="middle">A</forename><surname>Shamma</surname></persName>
+		</author>
+		<idno type="DOI">10.1080/07370024.2020.1744146</idno>
+		<ptr target="https://doi.org/10.1080/07370024.2020.1744146" />
+	</analytic>
+	<monogr>
+		<title level="j">Interaction</title>
+		<imprint>
+			<biblScope unit="volume">35</biblScope>
+			<biblScope unit="page" from="355" to="361" />
+			<date type="published" when="2020">2020. 2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b20">
+	<monogr>
+		<title level="m" type="main">The People + AI Guidebook</title>
+		<author>
+			<persName><forename type="first">Google</forename><surname>Design</surname></persName>
+		</author>
+		<ptr target="https://pair.withgoogle.com/guidebook" />
+		<imprint>
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b21">
+	<analytic>
+		<title level="a" type="main">Measuring and Mitigating Unintended Bias in Text Classification</title>
+		<author>
+			<persName><forename type="first">Lucas</forename><surname>Dixon</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">John</forename><surname>Li</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jeffrey</forename><surname>Sorensen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Nithum</forename><surname>Thain</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Lucy</forename><surname>Vasserman</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3278721.3278729</idno>
+		<ptr target="https://doi.org/10.1145/3278721.3278729" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2018 AAAI/ACM Conference on AI, Ethics, and Society</title>
+				<meeting>the 2018 AAAI/ACM Conference on AI, Ethics, and Society<address><addrLine>New Orleans, LA, USA; New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computing Machinery</publisher>
+			<date type="published" when="2018">2018</date>
+			<biblScope unit="page" from="67" to="73" />
+		</imprint>
+	</monogr>
+	<note>AIES &apos;18)</note>
+</biblStruct>
+
+<biblStruct xml:id="b22">
+	<monogr>
+		<title level="m" type="main">UX Design Innovation: Challenges for Working with Machine Learning as a Design Material. Association Computing Machinery</title>
+		<author>
+			<persName><forename type="first">Graham</forename><surname>Dove</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kim</forename><surname>Halskov</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jodi</forename><surname>Forlizzi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">John</forename><surname>Zimmerman</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3025453.3025739</idno>
+		<ptr target="https://doi.org/10.1145/3025453.3025739" />
+		<imprint>
+			<date type="published" when="2017">2017</date>
+			<biblScope unit="page" from="278" to="288" />
+			<pubPlace>New York, NY, USA</pubPlace>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b23">
+	<analytic>
+		<title level="a" type="main">Expanding Explainability: Towards Social Transparency in AI Systems</title>
+		<author>
+			<persName><forename type="first">Q</forename><forename type="middle">Vera</forename><surname>Ehsan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Michael</forename><surname>Liao</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mark</forename><forename type="middle">O</forename><surname>Muller</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Justin</forename><forename type="middle">D</forename><surname>Riedl</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Weisz</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3411764.3445188</idno>
+		<ptr target="https://doi.org/10.1145/3411764.3445188" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2021 CHI Conference on Human Factors in Computing Systems. for Computing Machinery</title>
+				<meeting>the 2021 CHI Conference on Human Factors in Computing Systems. for Computing Machinery<address><addrLine>New York, NY, USA, Article</addrLine></address></meeting>
+		<imprint>
+			<biblScope unit="volume">82</biblScope>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b24">
+	<analytic>
+		<title level="a" type="main">Human-centered Explainable AI: Towards a Reflective Sociotechnical Approach</title>
+		<author>
+			<persName><forename type="first">Mark</forename><forename type="middle">O</forename><surname>Ehsan</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Riedl</surname></persName>
+		</author>
+		<idno type="DOI">10.1007/978-3-030-60117-1_33</idno>
+	</analytic>
+	<monogr>
+		<title level="j">HCII</title>
+		<imprint>
+			<biblScope unit="volume">2020</biblScope>
+			<biblScope unit="page" from="1" to="19" />
+			<date type="published" when="2020">2020. 2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b25">
+	<analytic>
+		<title/>
+		<author>
+			<persName><forename type="first">Umer</forename><surname>Farooq</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jonathan</forename><surname>Grudin</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3001896</idno>
+		<ptr target="https://doi.org/10.1145/3001896" />
+	</analytic>
+	<monogr>
+		<title level="j">Human-Computer Integration. Interactions</title>
+		<imprint>
+			<biblScope unit="volume">23</biblScope>
+			<biblScope unit="page" from="26" to="32" />
+			<date type="published" when="2016-10">2016. Oct. 2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b26">
+	<analytic>
+		<title level="a" type="main">Transparency you can trust: Transparency requirements for artificial intelligence between legal norms and contextual concerns</title>
+		<author>
+			<persName><forename type="first">Heike</forename><surname>Felzmann</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Eduard</forename><forename type="middle">F</forename><surname>Villaronga</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Christoph</forename><surname>Lutz</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Tamò-Larrieux</forename></persName>
+		</author>
+		<idno type="DOI">10.1177/2053951719860542</idno>
+		<ptr target="https://doi.org/10.1177/2053951719860542" />
+	</analytic>
+	<monogr>
+		<title level="j">Big Data &amp; Society</title>
+		<imprint>
+			<biblScope unit="volume">6</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page" from="1" to="14" />
+			<date type="published" when="2019-01">Aure-2019. 01 2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b27">
+	<monogr>
+		<title level="m" type="main">Model Evaluation in Interactive Supervised Learning</title>
+		<author>
+			<persName><forename type="first">Rebecca</forename><surname>Fiebrink</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Perry</forename><forename type="middle">R</forename><surname>Cook</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Dan</forename><surname>Trueman</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/1978942.1978965</idno>
+		<ptr target="https://doi.org/10.1145/1978942.1978965" />
+		<imprint>
+			<date type="published" when="2011">2011</date>
+			<publisher>Association for Computing Machinery</publisher>
+			<biblScope unit="page" from="147" to="156" />
+			<pubPlace>New York, NY, USA</pubPlace>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b28">
+	<monogr>
+		<title level="m" type="main">Moving beyond User-Centered Design</title>
+		<author>
+			<persName><forename type="first">Jodi</forename><surname>Forlizzi</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3239558</idno>
+		<ptr target="https://doi.org/10.1145/3239558" />
+		<imprint>
+			<date type="published" when="2018-08">2018. Aug. 2018</date>
+			<biblScope unit="volume">25</biblScope>
+			<biblScope unit="page" from="22" to="23" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b29">
+	<monogr>
+		<title level="m" type="main">Near-perfect market intelligence&apos;: Why a House report says Big Tech monopolies are uniquely powerful</title>
+		<author>
+			<persName><forename type="first">Brian</forename><surname>Fung</surname></persName>
+		</author>
+		<ptr target="https://edition.cnn.com/2020/10/10/tech/apple-amazon-facebook-amazon-monopoly-data/index.htmlAccessed" />
+		<imprint>
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b30">
+	<analytic>
+		<title level="a" type="main">Algorithmic Transparency and Decision-Making Accountability: Thoughts for Buying Machine Learning Algorithms. In to the Machine: Technical, Social, and Legal aspects of AI, Office of the Victorian Information Commissioner</title>
+		<author>
+			<persName><forename type="first">Jake</forename><surname>Goldenfein</surname></persName>
+		</author>
+		<ptr target="https://ssrn.com/abstract=" />
+	</analytic>
+	<monogr>
+		<title level="m">SSRN</title>
+				<meeting><address><addrLine>Rochester, NY</addrLine></address></meeting>
+		<imprint>
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b31">
+	<analytic>
+		<title level="a" type="main">Usability Evaluation Considered Harmful (Some of the Time)</title>
+		<author>
+			<persName><forename type="first">Saul</forename><surname>Greenberg</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Bill</forename><surname>Buxton</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/1357054.1357074</idno>
+		<ptr target="https://doi.org/10.1145/1357054.1357074" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the SIGCHI Conference on Factors in Systems</title>
+				<meeting>the SIGCHI Conference on Factors in Systems<address><addrLine>Florence, Italy; New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<date type="published" when="2008">2008</date>
+			<biblScope unit="page" from="111" to="120" />
+		</imprint>
+	</monogr>
+	<note>CHI &apos;08). Association for Computing Machinery</note>
+</biblStruct>
+
+<biblStruct xml:id="b32">
+	<analytic>
+		<title level="a" type="main">Agency plus automation: Designing artificial intelligence into systems</title>
+		<author>
+			<persName><forename type="first">Jeffrey</forename><surname>Heer</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Proceedings of the National Academy of Sciences</title>
+		<imprint>
+			<biblScope unit="volume">6</biblScope>
+			<biblScope unit="page" from="1844" to="1850" />
+			<date type="published" when="2019">2019. 2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b33">
+	<analytic>
+		<title level="a" type="main">AI Extenders: The Ethical and Societal Implications of Humans Cognitively Extended by AI</title>
+		<author>
+			<persName><forename type="first">José</forename><surname>Hernández</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">-</forename><surname>Orallo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Karina</forename><surname>Vold</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">of the 2019 AAAI/ACM Conference on AI, Ethics, and Society HI, USA) (AIES &apos;19). for Computing Machinery</title>
+				<meeting><address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<date type="published" when="2019">2019</date>
+			<biblScope unit="page" from="507" to="513" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b34">
+	<analytic>
+		<title/>
+		<author>
+			<persName><forename type="first">Morten</forename><surname>Hertzum</surname></persName>
+		</author>
+		<idno type="DOI">10.1080/10447311003781300</idno>
+		<ptr target="https://doi.org/10.1080/10447311003781300" />
+	</analytic>
+	<monogr>
+		<title level="j">Images of Usability. International Journal of Human-Computer Interaction</title>
+		<imprint>
+			<biblScope unit="volume">26</biblScope>
+			<biblScope unit="page" from="567" to="600" />
+			<date type="published" when="2010">2010. 2010</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b35">
+	<analytic>
+		<title level="a" type="main">2016. and tribulations of developers of intelligent systems: A field study</title>
+		<author>
+			<persName><forename type="first">Charles</forename><surname>Hill</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Rachel</forename><surname>Bellamy</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Thomas</forename><surname>Erickson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Margaret</forename><surname>Burnett</surname></persName>
+		</author>
+		<idno type="DOI">10.1109/VLHCC.2016.7739680</idno>
+		<ptr target="https://doi.org/10.1109/VLHCC" />
+	</analytic>
+	<monogr>
+		<title level="m">2016 Symposium on Visual Languages and Human-Centric Computing (VL/HCC</title>
+				<meeting><address><addrLine>Cambridge, UK; New York, NY</addrLine></address></meeting>
+		<imprint>
+			<publisher>IEEE</publisher>
+			<biblScope unit="page" from="162" to="170" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b36">
+	<analytic>
+		<title level="a" type="main">An Ensemble Learning Approach for the Kaggle Taxi Travel Time Prediction Challenge</title>
+		<author>
+			<persName><forename type="first">Thomas</forename><surname>Hoch</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2015th International Conference on ECML PKDD Discovery Challenge -Volume 1526 Portugal) (ECMLPKDDDC&apos;15). CEUR-WS.org</title>
+				<meeting>the 2015th International Conference on ECML PKDD Discovery Challenge -Volume 1526 Portugal) (ECMLPKDDDC&apos;15). CEUR-WS.org<address><addrLine>Aachen, DEU</addrLine></address></meeting>
+		<imprint>
+			<date type="published" when="2015">2015</date>
+			<biblScope unit="page" from="52" to="62" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b37">
+	<analytic>
+		<title level="a" type="main">Replay Enactments: Exploring Possible Futures through Historical Data</title>
+		<author>
+			<persName><forename type="first">Kenneth</forename><surname>Holstein</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Erik</forename><surname>Harpstead</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Rebecca</forename><surname>Gulotta</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jodi</forename><surname>Forlizzi</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">of the 2020 ACM Designing Interactive Systems Conference Netherlands) (DIS &apos;20). for Computing Machinery</title>
+				<meeting><address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<date type="published" when="2020">2020</date>
+			<biblScope unit="page" from="1607" to="1618" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b38">
+	<monogr>
+		<title level="m" type="main">Fairness in Machine Learning Systems: What Do Industry Practitioners Need?</title>
+		<author>
+			<persName><forename type="first">Kenneth</forename><surname>Holstein</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jennifer</forename><forename type="middle">Wortman</forename><surname>Vaughan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Hal</forename><surname>Daumé</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Miro</forename><surname>Dudik</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Wallach</forename></persName>
+		</author>
+		<idno type="DOI">10.1145/3290605.3300830</idno>
+		<ptr target="https://doi.org/10.1145/3290605.3300830" />
+		<imprint>
+			<date type="published" when="2019">2019</date>
+			<publisher>Association for Computing Machinery</publisher>
+			<biblScope unit="page" from="1" to="16" />
+			<pubPlace>New York, NY, USA</pubPlace>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b39">
+	<analytic>
+		<title level="a" type="main">Planning for Natural Language Failures with the AI Playbook</title>
+		<author>
+			<persName><forename type="first">K</forename><surname>Hong</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Adam</forename><surname>Fourney</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Derek</forename><surname>Debellis</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Saleema</forename><surname>Amershi</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3411764.3445735</idno>
+	</analytic>
+	<monogr>
+		<title level="m">of 2021 CHI Conference on Human Factors in Computing Systems. Association Computing Machinery</title>
+				<meeting><address><addrLine>New York, NY, USA, Article</addrLine></address></meeting>
+		<imprint>
+			<date type="published" when="2021">2021</date>
+			<biblScope unit="volume">386</biblScope>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b40">
+	<analytic>
+		<title level="a" type="main">Steps to take before intelligent user interfaces become</title>
+		<author>
+			<persName><forename type="first">K</forename><surname>Höök</surname></persName>
+		</author>
+		<idno type="DOI">10.1016/S0953-5438(99)00006-5</idno>
+		<ptr target="https://doi.org/10.1016/S0953" />
+	</analytic>
+	<monogr>
+		<title level="j">Interacting with Computers</title>
+		<imprint>
+			<biblScope unit="volume">12</biblScope>
+			<biblScope unit="issue">4</biblScope>
+			<biblScope unit="page" from="409" to="426" />
+			<date type="published" when="2000-02">2000. 02 2000</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b41">
+	<analytic>
+		<title level="a" type="main">Where is the Human? Bridging the Gap Between AI HCI</title>
+		<author>
+			<persName><forename type="first">Stevie</forename><surname>Chancellor</surname></persName>
+			<affiliation>
+				<orgName type="collaboration">IBM. 2019. IBM Design for AI</orgName>
+			</affiliation>
+		</author>
+		<author>
+			<persName><surname>Munmun De</surname></persName>
+			<affiliation>
+				<orgName type="collaboration">IBM. 2019. IBM Design for AI</orgName>
+			</affiliation>
+		</author>
+		<author>
+			<persName><forename type="first">Michael</forename><surname>Choudhury</surname></persName>
+			<affiliation>
+				<orgName type="collaboration">IBM. 2019. IBM Design for AI</orgName>
+			</affiliation>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><forename type="middle">S</forename><surname>Veale</surname></persName>
+			<affiliation>
+				<orgName type="collaboration">IBM. 2019. IBM Design for AI</orgName>
+			</affiliation>
+		</author>
+		<author>
+			<persName><surname>Baumer</surname></persName>
+			<affiliation>
+				<orgName type="collaboration">IBM. 2019. IBM Design for AI</orgName>
+			</affiliation>
+		</author>
+		<idno type="DOI">10.1145/3290607.3299002</idno>
+		<ptr target="https://doi.org/10.1145/3290607" />
+	</analytic>
+	<monogr>
+		<title level="m">Extended Abstracts of the 2019 CHI Conference on Human Factors Computing Systems</title>
+				<meeting><address><addrLine>Glasgow, Scotland Uk; New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computing Machinery</publisher>
+			<date type="published" when="2019">2019</date>
+			<biblScope unit="page" from="1" to="9" />
+		</imprint>
+	</monogr>
+	<note>CHI EA &apos;19)</note>
+</biblStruct>
+
+<biblStruct xml:id="b42">
+	<analytic>
+		<title level="a" type="main">Augmented Experiment: Participatory Design with Multiagent Simulation</title>
+		<author>
+			<persName><forename type="first">Toru</forename><surname>Ishida</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yuu</forename><surname>Nakajima</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yohei</forename><surname>Murakami</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Hideyuki</forename><surname>Nakanishi</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 20th International Joint Conference on Artifical Intelligence India) (IJCAI&apos;07)</title>
+				<meeting>the 20th International Joint Conference on Artifical Intelligence India) (IJCAI&apos;07)<address><addrLine>San Francisco, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>Morgan Kaufmann Publishers Inc</publisher>
+			<date type="published" when="2007">2007</date>
+			<biblScope unit="page" from="1341" to="1346" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b43">
+	<monogr>
+		<title level="m" type="main">A Visual Introduction to Explainable AI for Designers</title>
+		<author>
+			<persName><forename type="first">Mu-Ti</forename><surname>Kaushik</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Amy</forename><surname>Huang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Srikar</forename><surname>Turner</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Victor</forename><surname>Varanasi</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Grajski</surname></persName>
+		</author>
+		<ptr target="https://www.uxai" />
+		<imprint>
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b44">
+	<monogr>
+		<title level="m" type="main">Design Thinking Comes of Age</title>
+		<author>
+			<persName><surname>Kolko</surname></persName>
+		</author>
+		<ptr target="https://hbr.org/2015/09/design-" />
+		<imprint>
+			<date type="published" when="2015">2015</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b45">
+	<analytic>
+		<title level="a" type="main">Machine learning for adaptive user interfaces</title>
+		<author>
+			<persName><forename type="first">Pat</forename><surname>Langley</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Advances in Artificial Intelligence</title>
+				<editor>
+			<persName><forename type="first">Gerhard</forename><surname>Brewka</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">Christopher</forename><surname>Habel</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">Bernhard</forename><surname>Nebel</surname></persName>
+		</editor>
+		<meeting><address><addrLine>Berlin Heidelberg; Berlin, Heidelberg</addrLine></address></meeting>
+		<imprint>
+			<publisher>Springer</publisher>
+			<date type="published" when="1997">1997</date>
+			<biblScope unit="page" from="53" to="62" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b46">
+	<analytic>
+		<title level="a" type="main">A framework of artificial intelligence augmented design support</title>
+		<author>
+			<persName><forename type="first">Preben</forename><surname>Liao</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Chunlei</forename><surname>Hansen</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Chai</surname></persName>
+		</author>
+		<idno type="DOI">10.1080/07370024.2020.1733576</idno>
+		<ptr target="https://doi.org/10.1080/07370024.2020.1733576" />
+	</analytic>
+	<monogr>
+		<title level="j">Human-Computer Interaction</title>
+		<imprint>
+			<biblScope unit="volume">35</biblScope>
+			<biblScope unit="page" from="511" to="544" />
+			<date type="published" when="2020">2020. 2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b47">
+	<analytic>
+		<title level="a" type="main">Questioning the AI: Informing Practices for Explainable AI User Experiences</title>
+		<author>
+			<persName><forename type="first">Vera</forename><surname>Liao</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Daniel</forename><surname>Gruen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sarah</forename><surname>Miller</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2020</title>
+				<meeting>the 2020</meeting>
+		<imprint>
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b48">
+	<analytic>
+		<idno type="DOI">10.1145/3313831.3376590</idno>
+		<ptr target="https://doi.org/10.1145/3313831.3376590" />
+	</analytic>
+	<monogr>
+		<title level="m">Conference on Human Factors in Computing Systems</title>
+				<imprint>
+			<publisher>ACM</publisher>
+			<biblScope unit="page" from="1" to="15" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b49">
+	<analytic>
+		<title level="a" type="main">Comparative Analysis of High-and Low-Fidelity Prototypes for More Valid Usability Evaluations of Mobile Devices</title>
+		<author>
+			<persName><forename type="first">Youn-Kyung</forename><surname>Lim</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Apurva</forename><surname>Pangam</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Subashini</forename><surname>Periyasami</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Shweta</forename><surname>Aneja</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/1182475.1182506</idno>
+		<ptr target="https://doi.org/10.1145/1182475.1182506" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 4th Nordic Conference on Human-Computer Interaction: Changing Roles</title>
+				<meeting>the 4th Nordic Conference on Human-Computer Interaction: Changing Roles<address><addrLine>Oslo, Norway; New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<date type="published" when="2006">2006</date>
+			<biblScope unit="page" from="291" to="300" />
+		</imprint>
+	</monogr>
+	<note>NordiCHI &apos;06). for Computing Machinery</note>
+</biblStruct>
+
+<biblStruct xml:id="b50">
+	<analytic>
+		<title level="a" type="main">2021. A Survey on Bias and Fairness in Machine Learning</title>
+		<author>
+			<persName><forename type="first">Ninareh</forename><surname>Mehrabi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Fred</forename><surname>Morstatter</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Nripsuta</forename><surname>Saxena</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kristina</forename><surname>Lerman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Aram</forename><surname>Galstyan</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3457607</idno>
+		<ptr target="https://doi.org/10.1145/3457607" />
+	</analytic>
+	<monogr>
+		<title level="j">Comput. Surv</title>
+		<imprint>
+			<biblScope unit="volume">6</biblScope>
+			<date type="published" when="2021-07">July 2021</date>
+		</imprint>
+	</monogr>
+	<note>Article</note>
+</biblStruct>
+
+<biblStruct xml:id="b51">
+	<analytic>
+		<title level="a" type="main">Conversational UX Design: A Practitioner&apos;s Guide to the Natural Conversation Framework</title>
+		<author>
+			<persName><forename type="first">J</forename><surname>Robert</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Raphael</forename><surname>Moore</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">;</forename><surname>Arar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Usa</forename><surname>Morrison</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Edward</forename><surname>Cutrell</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Martin</forename><surname>Grayson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Anja</forename><surname>Thieme</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Alex</forename><surname>Taylor</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Geert</forename><surname>Roumen</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3411764.3445290</idno>
+		<ptr target="https://doi.org/10.1145/3411764.3445290" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2021 CHI Conference on Human in Computing Systems</title>
+				<meeting>the 2021 CHI Conference on Human in Computing Systems<address><addrLine>New York, NY; Camilla Longden, Sebastian Tschiatschek, Rita Faia Marques, and Abigail Sellen; New York, NY, USA, Article</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computing Machinery</publisher>
+			<date type="published" when="2019">2019. 2021</date>
+			<biblScope unit="volume">396</biblScope>
+		</imprint>
+	</monogr>
+	<note>Social Sensemaking with AI: Designing an Open-Ended AI Experience with a Blind Child</note>
+</biblStruct>
+
+<biblStruct xml:id="b52">
+	<monogr>
+		<author>
+			<persName><forename type="first">Floyd</forename><surname>Mueller</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Pedro</forename><surname>Lopes</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Paul</forename><surname>Strohmeier</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Wendy</forename><surname>Ju</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Caitlyn</forename><surname>Seim</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Suranga</forename><surname>Weigel</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Marianna</forename><surname>Nanayakkara</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Zhuying</forename><surname>Obrist</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Joseph</forename><surname>Li</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jun</forename><surname>Delfa</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Elizabeth</forename><forename type="middle">M</forename><surname>Nishida</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Dag</forename><surname>Gerber</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jonathan</forename><surname>Svanaes</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Stefan</forename><surname>Grudin</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Greuter</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Thomas</forename><surname>Kunze</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Steven</forename><surname>Erickson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Masahiko</forename><surname>Greenspan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Joe</forename><surname>Inami</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Marshall</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Katrin</forename><surname>Reiterer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jochen</forename><surname>Wolf</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Meyer</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3313831.3376242</idno>
+		<ptr target="https://doi.org/10.1145/" />
+		<title level="m">Thecla Schiphorst, Dakuo Wang, and Pattie Maes. 2020. Next Steps for Human-Computer Integration</title>
+				<meeting><address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computing Machinery</publisher>
+			<biblScope unit="page" from="1" to="15" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b53">
+	<analytic>
+		<title level="a" type="main">State of the Art of Fairness, Interpretability and Explainability in Machine Learning: Case of PRIM</title>
+		<author>
+			<persName><forename type="first">Rym</forename><surname>Nassih</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Abdelaziz</forename><surname>Berrado</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">of the 13th International Conference on Intelligent Systems: Theories and Applica</title>
+				<meeting><address><addrLine>Rabat, Morocco; New</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computing Machinery</publisher>
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+	<note>SITA&apos;20)</note>
+</biblStruct>
+
+<biblStruct xml:id="b54">
+	<monogr>
+		<title/>
+		<author>
+			<persName><forename type="first">N</forename><forename type="middle">Y</forename><surname>York</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Usa</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3419604.3419776</idno>
+		<ptr target="https://doi.org/10.1145/3419604.3419776" />
+		<imprint>
+			<biblScope unit="volume">32</biblScope>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b55">
+	<monogr>
+		<title level="m" type="main">Gartner Says Global Artificial Intelligence Business to Reach $1.2 Trillion</title>
+		<author>
+			<persName><forename type="first">Gartner</forename><surname>Newsroom</surname></persName>
+		</author>
+		<ptr target="https://www.gartner.com/en/newsroom/press-releases/2018-04-25-gartner-says-global-artificial-intelligence-business-value-to-reach-1-point-2-trillion-in-2018" />
+		<imprint>
+			<date type="published" when="2018">2018. 2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b56">
+	<analytic>
+		<title level="a" type="main">252-260. algorithms-machine-learning/docview/2130244072/se-2?accountid=14510 Copyright -©</title>
+		<author>
+			<persName><forename type="first">Turner</forename><forename type="middle">L</forename><surname>Nicol</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Communication &amp; Ethics in Society</title>
+		<imprint>
+			<biblScope unit="volume">16</biblScope>
+			<date type="published" when="2018">2018. 2018. 2018</date>
+			<publisher>Emerald Publishing</publisher>
+		</imprint>
+	</monogr>
+	<note>Detecting racial bias in algorithms and machine learning. Last updated -2020-11-17</note>
+</biblStruct>
+
+<biblStruct xml:id="b57">
+	<analytic>
+		<title level="a" type="main">The Usability Engineering Life Cycle</title>
+		<author>
+			<persName><forename type="first">Jakob</forename><surname>Nielsen</surname></persName>
+		</author>
+		<idno type="DOI">10.1109/2.121503</idno>
+		<ptr target="https://doi.org/10.1109/2.121503" />
+	</analytic>
+	<monogr>
+		<title level="j">Computer</title>
+		<imprint>
+			<biblScope unit="volume">25</biblScope>
+			<biblScope unit="page" from="12" to="22" />
+			<date type="published" when="1992-03">1992. March 1992</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b58">
+	<monogr>
+		<title level="m" type="main">A Monitoring System for Machine Learning Models a Large-Scale Context. Master&apos;s thesis</title>
+		<author>
+			<persName><forename type="first">Myeongjung</forename><surname>Park</surname></persName>
+		</author>
+		<ptr target="http://resolver.tudelft.nl/uuid:42f9cb1d-18fa-4dd0-9436-39d4d202c2e3" />
+		<imprint>
+			<date type="published" when="2020">2020</date>
+		</imprint>
+		<respStmt>
+			<orgName>Delft University of Technology</orgName>
+		</respStmt>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b59">
+	<analytic>
+		<title level="a" type="main">How AI Developers Overcome Communication Challenges in a Multidisciplinary Team</title>
+		<author>
+			<persName><forename type="first">David</forename><surname>Piorkowski</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Soya</forename><surname>Park</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">April</forename><forename type="middle">Yi</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Dakuo</forename><forename type="middle">Michael</forename><surname>Muller</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Felix</forename></persName>
+		</author>
+		<idno type="DOI">10.1145/3449205</idno>
+		<ptr target="https://doi.org/10.1145/3449205" />
+	</analytic>
+	<monogr>
+		<title level="j">A Case ACM Hum.-Comput</title>
+		<imprint>
+			<date type="published" when="2021-04">2021. apr 2021</date>
+		</imprint>
+	</monogr>
+	<note>Interact. 5, CSCW1, Article 131</note>
+</biblStruct>
+
+<biblStruct xml:id="b60">
+	<monogr>
+		<title level="m" type="main">Why AI can&apos;t solve everything</title>
+		<author>
+			<persName><forename type="first">V</forename><surname>Polonski</surname></persName>
+		</author>
+		<ptr target="https://theconversation.com/why-ai-cant-solve-everything-97022" />
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b61">
+	<analytic>
+		<title/>
+		<author>
+			<persName><forename type="first">Joacim</forename><surname>Rocklöv</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Albert</forename><forename type="middle">A</forename></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Data Science and Machine Learning: Mathematical and Statistical Methods. Z.I. Botev, T. and International Journal Epidemiology</title>
+		<imprint>
+			<biblScope unit="volume">49</biblScope>
+			<biblScope unit="page" from="2094" to="2095" />
+			<date type="published" when="2020-05">2020. 05 2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b62">
+	<monogr>
+		<title/>
+		<idno type="DOI">10.1093/ije/dyaa072</idno>
+		<ptr target="https://academic.oup.com/ije/article-" />
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b63">
+	<analytic>
+		<title level="a" type="main">On challenges in machine learning model Bulletin of the IEEE</title>
+		<author>
+			<persName><forename type="first">Sebastian</forename><surname>Schelter</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Felix</forename><surname>Biessmann</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Tim</forename><surname>Januschowski</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">David</forename><surname>Salinas</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Stephan</forename><surname>Seufert</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Gyuri</forename><surname>Szarvas</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Computer Society Technical Committee on Data</title>
+		<imprint>
+			<biblScope unit="volume">41</biblScope>
+			<biblScope unit="page" from="5" to="15" />
+			<date type="published" when="2015">2015. 2015</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b64">
+	<analytic>
+		<title level="a" type="main">Fairness and Abstraction in Sociotechnical Systems</title>
+		<author>
+			<persName><forename type="first">D</forename><surname>Selbst</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Danah</forename><surname>Boyd</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Sorelle</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Suresh</forename><surname>Friedler</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Janet</forename><surname>Venkatasubramanian</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Vertesi</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3287560.3287598</idno>
+		<ptr target="https://doi.org/10.1145/3287560.3287598" />
+	</analytic>
+	<monogr>
+		<title level="m">of the Conference on Fairness, Accountability, and Transparency</title>
+				<meeting><address><addrLine>Atlanta, GA, USA; New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computing Machinery</publisher>
+			<date type="published" when="2019">2019</date>
+			<biblScope unit="page" from="59" to="68" />
+		</imprint>
+	</monogr>
+	<note>) (FAT* &apos;19)</note>
+</biblStruct>
+
+<biblStruct xml:id="b65">
+	<monogr>
+		<idno type="DOI">10.1007/978-3-030-50334-5_9</idno>
+		<ptr target="https://doi.org/10.1007/978-3-030-50334-5_9" />
+		<title level="m">2020. Human-in-the-Loop Design Cycles -A Process Framework that Integrates Design Sprints, Agile Processes, and Machine Learning with In International Conference on Human-Computer Interaction</title>
+				<editor>
+			<persName><forename type="first">Lauren Reinerman-Jones</forename><surname>Helmut</surname></persName>
+		</editor>
+		<meeting><address><addrLine>Cham</addrLine></address></meeting>
+		<imprint>
+			<publisher>Springer International Publishing</publisher>
+			<biblScope unit="page" from="136" to="145" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b66">
+	<analytic>
+		<title level="a" type="main">ProtoAI: Model-Informed Prototyping for AI-Powered Interfaces</title>
+		<author>
+			<persName><forename type="first">Hariharan</forename><surname>Subramonyam</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Colleen</forename><surname>Seifert</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Eytan</forename><surname>Adar</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3397481.3450640</idno>
+		<ptr target="https://doi.org/10.1145/" />
+	</analytic>
+	<monogr>
+		<title level="m">International Conference on Intelligent User Interfaces</title>
+				<meeting><address><addrLine>College Station, TX, USA; New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computing Machinery</publisher>
+			<date type="published" when="2021">2021</date>
+			<biblScope unit="page" from="48" to="58" />
+		</imprint>
+	</monogr>
+	<note>IUI &apos;21)</note>
+</biblStruct>
+
+<biblStruct xml:id="b67">
+	<monogr>
+		<title level="m" type="main">Towards A Process Model for Co-Creating AI</title>
+		<author>
+			<persName><forename type="first">Hariharan</forename><surname>Subramonyam</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Colleen</forename><surname>Seifert</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Eytan</forename><surname>Adar</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3461778.3462012</idno>
+		<idno type="arXiv">arXiv:2104.07595</idno>
+		<ptr target="https://doi.org/10.1145/3461778" />
+		<imprint>
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+	<note>cs.HC</note>
+</biblStruct>
+
+<biblStruct xml:id="b68">
+	<analytic>
+		<title level="a" type="main">Adaptive user interface optimization for multi-screen based on machine learning</title>
+		<author>
+			<persName><forename type="first">Hua-Zhe</forename><surname>Tan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Wei</forename><surname>Zhao</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Hai-Hua</forename><surname>Shen</surname></persName>
+		</author>
+		<idno type="DOI">10.1109/CSCWD.2018.8465348</idno>
+		<ptr target="https://doi.org/10.1109/CSCWD.2018" />
+	</analytic>
+	<monogr>
+		<title level="m">IEEE 22nd International Conference on Computer Supported Cooperative Work in Design IEEE</title>
+				<meeting><address><addrLine>New York, NY</addrLine></address></meeting>
+		<imprint>
+			<date type="published" when="2018">2018</date>
+			<biblScope unit="page" from="743" to="748" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b69">
+	<analytic>
+		<title level="a" type="main">Prototyping Ways of Prototyping AI</title>
+		<author>
+			<persName><surname>Philip Van Allen</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3274566</idno>
+		<ptr target="https://doi.org/10.1145/3274566" />
+	</analytic>
+	<monogr>
+		<title level="j">Interactions</title>
+		<imprint>
+			<biblScope unit="volume">25</biblScope>
+			<biblScope unit="page" from="46" to="51" />
+			<date type="published" when="2018-10">2018. Oct. 2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b70">
+	<monogr>
+		<title level="m" type="main">and Accountability Design Needs for Algorithmic Support in High-Stakes Public Sector Decisionfor Computing Machinery</title>
+		<author>
+			<persName><forename type="first">Michael</forename><surname>Veale</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Max</forename><surname>Van Kleek</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Reuben</forename><surname>Binns</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2018">2018</date>
+			<biblScope unit="page" from="1" to="14" />
+			<pubPlace>New York, NY, USA</pubPlace>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b71">
+	<analytic>
+		<title level="a" type="main">High-Fidelity or Low-Fidelity, Paper or Computer? Choosing Attributes when Testing Web Proceedings of the</title>
+		<author>
+			<persName><forename type="first">Miriam</forename><surname>Walker</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Leila</forename><surname>Takayama</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">James</forename><forename type="middle">A</forename><surname>Landay</surname></persName>
+		</author>
+		<idno type="DOI">10.1177/154193120204600513</idno>
+		<ptr target="https://doi.org/10.1177/154193120204600513" />
+	</analytic>
+	<monogr>
+		<title level="j">Human Factors and Ergonomics Society Annual</title>
+		<imprint>
+			<biblScope unit="volume">46</biblScope>
+			<biblScope unit="page" from="661" to="665" />
+			<date type="published" when="2002">2002. 2002</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b72">
+	<analytic>
+		<title level="a" type="main">Human-AI Collaboration in Data Science: Exploring Data Scientists&apos; Perceptions of Auto-AI</title>
+		<author>
+			<persName><forename type="first">Justin</forename><forename type="middle">D</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Michael</forename><surname>Weisz</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Parikshit</forename><surname>Muller</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Werner</forename><surname>Ram</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Casey</forename><surname>Geyer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yla</forename><surname>Dugan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Horst</forename><surname>Tausczik</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Alexander</forename><surname>Samulowitz</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Gray</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3359313</idno>
+		<ptr target="https://doi.org/10.1145/3359313" />
+	</analytic>
+	<monogr>
+		<title level="j">Proc. ACM Hum.-Comput. Interact</title>
+		<imprint>
+			<biblScope unit="volume">3</biblScope>
+			<date type="published" when="2019-11">2019. Article 211. nov 2019</date>
+			<publisher>CSCW</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b73">
+	<analytic>
+		<title level="a" type="main">Shifting viewpoints: Artificial intelligence and humaninteraction</title>
+		<author>
+			<persName><forename type="first">T</forename><surname>Winograd</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Artif. Intell</title>
+		<imprint>
+			<biblScope unit="volume">170</biblScope>
+			<biblScope unit="page" from="1256" to="1258" />
+			<date type="published" when="2006">2006. 2006</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b74">
+	<monogr>
+		<title level="m" type="main">Applications of an interaction, process, integration and intelligence (IPII) design approach for ergonomics solutions</title>
+		<author>
+			<persName><forename type="first">Dov</forename><surname>Xu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Manjunath</forename><surname>Furie</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Bala</forename><surname>Mahabhaleshwar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Hardev</forename><surname>Suresh</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Chouhan</surname></persName>
+		</author>
+		<idno type="DOI">10.1080/00140139.2019.1588996</idno>
+		<ptr target="https://doi.org/10.1080/00140139.2019.1588996" />
+		<imprint>
+			<date type="published" when="2019">2019. 2019</date>
+			<biblScope unit="volume">62</biblScope>
+			<biblScope unit="page" from="954" to="980" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b75">
+	<monogr>
+		<title level="m" type="main">Sketching NLP: A Case Study of Exploring the Right Things To Design with Intelligence</title>
+		<author>
+			<persName><forename type="first">Justin</forename><surname>Yang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Saleema</forename><surname>Cranshaw</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Amershi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Shamsi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jaime</forename><surname>Iqbal</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Teevan</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3290605.3300415</idno>
+		<ptr target="https://doi.org/10.1145/3290605.3300415" />
+		<imprint>
+			<publisher>Association for Computing Machinery</publisher>
+			<biblScope unit="page" from="1" to="12" />
+			<pubPlace>New York, NY</pubPlace>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b76">
+	<analytic>
+		<title level="a" type="main">Investigating How Experienced UX Designers Effectively Work with Machine</title>
+		<author>
+			<persName><forename type="first">Alex</forename><surname>Yang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">John</forename><surname>Scuito</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jodi</forename><surname>Zimmerman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Aaron</forename><surname>Forlizzi</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Steinfeld</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3196709.3196730</idno>
+		<ptr target="https://doi.org/10.1145/3196709.3196730" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2018 Designing Interactive Systems Conference</title>
+				<meeting>the 2018 Designing Interactive Systems Conference<address><addrLine>Hong Kong, China; New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computing Machinery</publisher>
+			<date type="published" when="2018">2018</date>
+			<biblScope unit="page" from="585" to="596" />
+		</imprint>
+	</monogr>
+	<note>DIS &apos;18)</note>
+</biblStruct>
+
+<biblStruct xml:id="b77">
+	<monogr>
+		<title level="m" type="main">Examining Whether, Why, and How Human-AI Interaction Is Uniquely Difficult Design. for Computing Machinery</title>
+		<author>
+			<persName><forename type="first">Qian</forename><surname>Yang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Aaron</forename><surname>Steinfeld</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Carolyn</forename><surname>Rosé</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">John</forename><surname>Zimmerman</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2020">2020</date>
+			<biblScope unit="page" from="1" to="13" />
+			<pubPlace>New York, NY, USA</pubPlace>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b78">
+	<analytic>
+		<title level="a" type="main">ML Lifecycle Canvas: Designing Machine Learning-Empowered UX with Material Lifecycle Thinking</title>
+		<author>
+			<persName><forename type="first">Zhibin</forename><surname>Zhou</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Lingyun</forename><surname>Sun</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yuyang</forename><surname>Zhang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Xuanhui</forename><surname>Liu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Qing</forename><surname>Gong</surname></persName>
+		</author>
+		<idno type="DOI">10.1080/07370024.2020.1736075</idno>
+		<ptr target="https://doi.org/10.1080/07370024.2020.1736075" />
+	</analytic>
+	<monogr>
+		<title level="j">Human-Computer Interaction</title>
+		<imprint>
+			<biblScope unit="volume">35</biblScope>
+			<biblScope unit="page" from="362" to="386" />
+			<date type="published" when="2020">2020. 2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+				</listBibl>
+			</div>
+		</back>
+	</text>
+</TEI>

@@ -1,0 +1,1988 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xml:space="preserve" xmlns="http://www.tei-c.org/ns/1.0" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.com/kermitt2/grobid/master/grobid-home/schemas/xsd/Grobid.xsd"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+	<teiHeader xml:lang="en">
+		<fileDesc>
+			<titleStmt>
+				<title level="a" type="main">Care Infrastructures for Digital Security in Intimate Partner Violence</title>
+			</titleStmt>
+			<publicationStmt>
+				<publisher/>
+				<availability status="unknown"><licence/></availability>
+			</publicationStmt>
+			<sourceDesc>
+				<biblStruct>
+					<analytic>
+						<author>
+							<persName><forename type="first">Emily</forename><surname>Tseng</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Mehrnaz</forename><surname>Sabet</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Rosanna</forename><surname>Bellini</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Harkiran</forename><forename type="middle">Kaur</forename><surname>Sodhi</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Thomas</forename><surname>Ristenpart</surname></persName>
+							<email>ristenpart@cornell.edu</email>
+						</author>
+						<author>
+							<persName><forename type="first">Nicola</forename><surname>Dell</surname></persName>
+							<email>nixdell@cornell.edu</email>
+						</author>
+						<author>
+							<affiliation key="aff0">
+								<orgName type="institution">Cornell University Cornell University Cornell University New York</orgName>
+								<address>
+									<settlement>Ithaca, New York</settlement>
+									<region>NY, NY, NY</region>
+									<country>USA, USA, USA</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<affiliation key="aff1">
+								<orgName type="institution">Cornell Tech Cornell Tech Cornell Tech New York</orgName>
+								<address>
+									<settlement>New York, New York</settlement>
+									<region>NY, NY, NY</region>
+									<country>USA, USA, USA</country>
+								</address>
+							</affiliation>
+						</author>
+						<title level="a" type="main">Care Infrastructures for Digital Security in Intimate Partner Violence</title>
+					</analytic>
+					<monogr>
+						<imprint>
+							<date/>
+						</imprint>
+					</monogr>
+					<idno type="DOI">10.1145/3491102.3502038</idno>
+				</biblStruct>
+			</sourceDesc>
+		</fileDesc>
+		<encodingDesc>
+			<appInfo>
+				<application version="0.7.1" ident="GROBID" when="2022-07-22T05:05+0000">
+					<desc>GROBID - A machine learning software for extracting information from scholarly documents</desc>
+					<ref target="https://github.com/kermitt2/grobid"/>
+				</application>
+			</appInfo>
+		</encodingDesc>
+		<profileDesc>
+			<textClass>
+				<keywords>
+					<term>intimate partner violence</term>
+					<term>gender-based violence</term>
+					<term>computer security and privacy</term>
+					<term>care</term>
+				</keywords>
+			</textClass>
+			<abstract>
+<div xmlns="http://www.tei-c.org/ns/1.0"><p>Survivors of intimate partner violence (IPV) face complex threats to their digital privacy and security. Prior work has established protocols for directly helping them mitigate these harms; however, there remains a need for fexible and pluralistic systems that can support survivors' long-term needs. This paper describes the design and development of sociotechnical infrastructure that incorporates feminist notions of care to connect IPV survivors experiencing technology abuse with volunteer computer security consultants. We present fndings from a mixed methods study that draws on data from an 8-month, real-world deployment, as well as interviews with 7 volunteer technology consultants and 18 IPV professionals. Our fndings illuminate emergent challenges in safely and adaptively providing computer security advice as care. We discuss implications of these fndings for feminist approaches to computer security and privacy, and provide broader lessons for interventions that aim to directly assist at-risk and marginalized people experiencing digital insecurity.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>CCS CONCEPTS</head><p>• Human-centered computing → Empirical studies in HCI ; • Security and privacy → Social aspects of security and privacy.</p></div>
+			</abstract>
+		</profileDesc>
+	</teiHeader>
+	<text xml:lang="en">
+		<body>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="1">INTRODUCTION</head><p>While computer security has traditionally focused on protecting information systems, there is increasing recognition of the importance of centering the digital security of people. This perspective on security is most apparent in the growing body of work that aims to understand and improve digital security for vulnerable and at-risk populations, such as political dissidents <ref type="bibr" target="#b27">[30,</ref><ref type="bibr" target="#b41">43,</ref><ref type="bibr" target="#b43">45]</ref>, targets of intimate partner violence (IPV) <ref type="bibr" target="#b23">[26,</ref><ref type="bibr" target="#b24">27,</ref><ref type="bibr" target="#b47">48,</ref><ref type="bibr" target="#b74">75]</ref> or online harassment <ref type="bibr" target="#b51">[53]</ref>, sex workers <ref type="bibr" target="#b3">[4,</ref><ref type="bibr" target="#b60">62]</ref>, and journalists <ref type="bibr" target="#b48">[49,</ref><ref type="bibr" target="#b49">50]</ref>. In parallel, scholars have sought to advance frameworks of security as a set of moral obligations, in particular through the feminist ethic of care <ref type="bibr" target="#b7">[8,</ref><ref type="bibr" target="#b50">51,</ref><ref type="bibr" target="#b64">66]</ref>. Viewed through this lens, care is the establishment through social and technical infrastructures of ongoing care relations that prioritize maintenance of and continual afective attention to others' wellbeing. Care embraces broad consideration for the protection of people, centering collective responsibility and mutuality in the pursuit of fairer and more just sociotechnical systems. A caring approach to computer security and privacy has been considered by Kocksch et al. <ref type="bibr" target="#b39">[41]</ref>, who re-frame IT security away from the traditional model of (mis)alignment between developers, attackers, and end-users, and towards a notion of security as collective, infrastructural, and care-ful information practice <ref type="bibr" target="#b14">[15,</ref><ref type="bibr" target="#b17">18,</ref><ref type="bibr" target="#b18">19]</ref>.</p><p>In this paper, we initiate work on how to practically enact caring infrastructures for security. We do this through an 8-month deployment of an intervention supporting one population particularly in need of computer security assistance: survivors of IPV. Prior work has documented the far-ranging threats to digital security faced in IPV, including the use of spyware (also called stalkerware), abuse of location tracking features, harassment on social media, and more <ref type="bibr" target="#b23">[26,</ref><ref type="bibr" target="#b47">48,</ref><ref type="bibr" target="#b70">71,</ref><ref type="bibr" target="#b74">75]</ref>. These threats, termed tech abuse in the literature, have invited frameworks for direct interventions helping survivors, including an approach Havron et al. <ref type="bibr" target="#b30">[32]</ref> call clinical computer security. In this model, volunteer tech consultants met with an IPV survivor in an individualized appointment to address their tech abuse concerns. Prior work has shown this model has been of immediate value to survivors and the broader IPV support community, in both in-person contexts <ref type="bibr" target="#b22">[25]</ref> and delivered remotely during COVID-19 <ref type="bibr" target="#b71">[72]</ref>-still, there remain a number of open challenges with its one-size-fts-all consultation protocol. As an example, survivors who could not fnd a safe and private place to take a call were unable to access services. In addition, strict privacy protocols meant consultants remained completely anonymous, impacting their ability to build trust.</p><p>We consider how eforts to evolve clinical computer security for IPV survivors might be enhanced by adopting the ethic of care. Using this framing as a productive lens, we designed a new model for direct security assistance following the principles of care continuity <ref type="bibr" target="#b26">[29]</ref>, a concept central to professionalized care services in medicine and social work. We describe our new care model, and the social and technical infrastructures we created to enable it. We then report on lessons from our 8-month deployment of it within a computer security clinic operating in partnership with the New York City Mayor's Ofce to End Domestic and Gender-Based Violence (ENDGBV). Via a mixed-methods analysis of data from 62 client cases, as well as interviews with 18 IPV professionals and 7 volunteer tech consultants, we provide an analysis of the benefts and novel sociotechnical challenges of providing security advice as care infrastructure.</p><p>Our fndings show that this format of caregiving for computer security required stakeholders to adapt to new challenges around how to safely connect with clients (Section 5.1), how to personalize services for clients' unique needs while maintaining standards of practice (Section 5.2), and how to set appropriate boundaries (Section 5.3). All of this raised further questions around how to defne and measure the impact of such services, both within the context of IPV and in security more broadly (Section 5.4). All told, we fnd that this intervention was necessary and helpful for eforts to support IPV survivors facing digital insecurity, and invites substantial future research drawing ideas from care ethics into how we think about computer security and privacy at the interaction and infrastructure levels. We conclude with refections on how we might integrate the "emotional" and "technical" labors of security assistance (Section 6.1), as well as how we might better understand the efects of security interventions centering at-risk or vulnerable people (Section 6.2).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2">RELATED WORK</head><p>Working from an empirical basis in computer security and privacy for survivors of IPV (Section 2.1), our paper joins two areas of recent work: research defning clinical computer security, a protocol for assisting victims of targeted and persistent privacy threats (Section 2.2); and research within HCI, CSCW and STS examining sociotechnical infrastructures for care (Section 2.3).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.1">The Role of Digital Insecurity in Intimate</head><p>Partner Violence (IPV)</p><p>IPV refers to physical, emotional, verbal, sexual, or economic abuse of a person by a current or former intimate partner. It is a pervasive social problem in the United States of America, in which IPV afects 1 in 4 women and 1 in 10 men <ref type="bibr" target="#b56">[58]</ref>, including 1 in 2 transgender people <ref type="bibr" target="#b35">[37]</ref>. This is in accordance with global estimates that 1 in 3 women have experienced physical and/or sexual violence by an intimate partner, and that an estimated 38% of femicides are committed by former or current intimate partners <ref type="bibr" target="#b57">[59]</ref>. Prior work has discussed the role of technology in IPV, through pervasive surveillance and access Dragiewicz et al. call "digital coercive control" <ref type="bibr" target="#b19">[20]</ref>. Abusers may control victims' devices and accounts, which become conduits for surveillance and harassment even when victims are able to leave <ref type="bibr" target="#b24">[27,</ref><ref type="bibr" target="#b47">48,</ref><ref type="bibr" target="#b74">75]</ref>. Some harms are levied by installing spyware <ref type="bibr" target="#b12">[13]</ref>; however, many are via "dual-use" apps: tools built for innocuous purposes that can nevertheless be repurposed for harm by an abuser <ref type="bibr" target="#b23">[26]</ref>. Research has also shown how the mere perception of a threat can impact survivors, leading to lack of trust in technology and further isolation from support <ref type="bibr" target="#b45">[46]</ref>. Studies also suggest that abusers are enabled by social media, where they receive technical knowledge and narrative justifcations for surveillant behaviors <ref type="bibr" target="#b5">[6,</ref><ref type="bibr" target="#b70">71]</ref>.</p><p>A growing body of research also explores how to aid survivors. Research has highlighted limitations in assessment of tech abuse by existing service structures such as couples therapists <ref type="bibr" target="#b33">[35]</ref> and commercial tech support <ref type="bibr" target="#b76">[77]</ref>. In response, projects like the National Network to End Domestic Violence's Safety Net <ref type="bibr" target="#b62">[64]</ref> and the Coalition Against Stalkerware <ref type="bibr" target="#b59">[61]</ref> have created resources for victims, disseminated online and through community-based advocacy organizations. But leveraging resources like these is often challenging for survivors, many of whom are reluctant to engage with technology after their traumatic experiences <ref type="bibr" target="#b24">[27]</ref>. Meanwhile, alternative approaches like peer support networks similarly face ethical and practical challenges <ref type="bibr" target="#b6">[7]</ref>. Indeed, Kulkarni et al. <ref type="bibr" target="#b40">[42]</ref> emphasize that direct resources and services for survivors should center intersectionality and trauma-informed care, via services that consider survivors' specifc circumstances and interlocking axes of oppression. Such approaches should also attend to the ways in which ofering services can be emotionally arduous for those providing care <ref type="bibr" target="#b11">[12,</ref><ref type="bibr" target="#b13">14]</ref>, particularly as organizations are often overwhelmed with demand <ref type="bibr" target="#b4">[5]</ref>. To better address survivors' needs, advocacy groups and researchers have developed direct interventions in which survivors meet with technology consultants who assist them with tech abuse. Havron et al. <ref type="bibr" target="#b30">[32]</ref> called these approaches clinical computer security, drawing on work by Operation Safe Escape [22], the Citizen Clinic <ref type="bibr" target="#b21">[23]</ref>, and the Electronic Frontier Foundation [24].</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.2">A Technology Clinic for IPV Survivors</head><p>Our research took place within a technology clinic (clinic hereafter) that was established in late 2018 in New York City to enact clinical computer security and provide IPV survivors with direct help combating tech abuse. The clinic operates within an ecosystem of city-sponsored support services for IPV survivors run by the Mayor's Ofce to End Domestic and Gender-Based Violence (ENDGBV). Services are coordinated across the city's Family Justice Centers (FJCs), which ofer comprehensive support to clients (the term for survivors in this context), including housing, job-seeking, counseling, legal assistance, and more. Among this ecosystem of services, the clinic acts as an authority on technology, specializing in tech abuse. Each FJC assigns a client a specifc IPV professional, e.g. a social worker or lawyer, as their primary point of contact (caseworker hereafter). Caseworkers handle client referrals to various services, including the clinic. The city operates fve FJCs, one in each borough, which in total serve the city's entire population (8.8M as of the 2020 census <ref type="bibr">[52]</ref>). Each FJC has its own set of staf and leadership, and the clinic accepts referrals from all fve FJCs.</p><p>The clinic is stafed by volunteers (consultants hereafter) trained in the technical and social aspects of digital security and privacy, as well as the principles of trauma-informed care. At time of writing, the clinic had approximately 30 consultants, including faculty and graduate students in computer and information science, computer professionals, survivor advocates, and lawyers. To ready them for the challenges of working directly with survivors, each volunteer is equipped to identify symptoms and mitigate aspects of trauma, including vicarious or secondhand trauma. After receiving training delivered by FJC members and other senior clinic consultants, new consultants shadow appointments with more experienced consultants before handling client cases alone. Regular weekly meetings are held between volunteers to discuss cases confdentially, and to provide space for each consultant to refect on or gut-check their case management decisions. New consultants are also given a private, asynchronous communication channel to reach out to more experienced consultants for well-being support and general advice.</p><p>We build on several prior papers that discuss the clinic. Havron et al. <ref type="bibr" target="#b30">[32]</ref> describe a protocol in which consultants meet with clients via an individual, in-person appointment to discover and mitigate tech abuse in concert with safety planning by their caseworkers. Freed et al. <ref type="bibr" target="#b22">[25]</ref> explored survivor experiences with clinic appointments, analyzing discussions between clients and consultants to identify ethical, sustainability and scalability challenges of intervening. Tseng et al. <ref type="bibr" target="#b71">[72]</ref> described how the shift to providing remote appointments during the COVID-19 pandemic required navigating important safety challenges to ensure that remote communication did not put clients or consultants at risk.</p><p>Together, these papers provide essential frst steps towards understanding how to directly assist IPV survivors with tech abuse; however, they also raise important challenges. First, in prior work, all interactions with clients were strictly anonymous: clients and consultants did not know each others' names or any personally identifying information (PII) about each other to increase safety and minimise unnecessary exposure. However, anonymity also resulted in new burdens for consultants, including the need to quickly build rapport with clients without adequate context on clients' needs.</p><p>Second, the protocol described in prior papers focuses on a single hour-long appointment with a client. Consultants often could not get to all of a client's devices or accounts of concern in one appointment, and scheduling additional sessions required a lengthy back-and-forth with caseworkers <ref type="bibr" target="#b71">[72]</ref>. This was because the clinic had no mechanism for enabling the client to meet with same consultants they met with previously. Finally, as a result of the aforementioned safety and time constraints, all client appointments took place synchronously, either in-person <ref type="bibr" target="#b30">[32]</ref> or remotely <ref type="bibr" target="#b71">[72]</ref>. For clients who could not set aside an hour of their day to fnd a safe and private place for a call, or who were fearful or reluctant to talk on the phone, these appointments were less accessible.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.3">Creating Caring Infrastructures</head><p>To address the aforementioned challenges faced in the clinic, we drew on recent literature advancing the notion that computer security and privacy is less a matter of the shortcomings of a technical system or its users, but rather an ongoing social project of "collaborative tinkering and experimentation" spanning multiple sites, scales, and actors-a matter of care <ref type="bibr" target="#b39">[41]</ref>. This notion of computer security leverages the term care to refer to its service-orientation (i.e., the functional provision of necessary services for people, such as healthcare, self-care) and its appeal to feminist care ethics <ref type="bibr" target="#b16">[17,</ref><ref type="bibr" target="#b53">55,</ref><ref type="bibr" target="#b69">70]</ref>. Care is simultaneously practice, such as the continual afective work of attending to one another, and philosophical orientation, towards prioritizing mutual responsibility, concern, and relation with others so that we might "maintain, continue, and repair our 'world'" <ref type="bibr" target="#b66">[68]</ref>. In this, we follow in the footsteps of many scholars within HCI, CSCW and STS who have embraced care as a framework for analysis in the hope of building sociotechnical systems that are both equitable and responsible <ref type="bibr" target="#b7">[8,</ref><ref type="bibr" target="#b46">47,</ref><ref type="bibr" target="#b50">51,</ref><ref type="bibr" target="#b63">65]</ref>. Such works have scrutinized the complex relationships of care and caring between participants and researchers <ref type="bibr" target="#b2">[3,</ref><ref type="bibr" target="#b42">44]</ref>, in local communities <ref type="bibr" target="#b36">[38,</ref><ref type="bibr" target="#b73">74]</ref>, in organizational practice <ref type="bibr" target="#b73">[74]</ref>, and in the interactions between people and their devices <ref type="bibr" target="#b38">[40,</ref><ref type="bibr" target="#b64">66]</ref> and their personal data <ref type="bibr" target="#b1">[2,</ref><ref type="bibr" target="#b37">39]</ref>.</p><p>In work identifying the emotional and intellectual qualities of care inherent to these technosocial interactions, many scholars have grappled with how these relate to systems of labor, and how we build care into systems at scale <ref type="bibr" target="#b65">[67]</ref>. If care is to require that we rely on "momentary orientations and improvisations" by respecting lived practice and embodied experience <ref type="bibr" target="#b39">[41]</ref>, standardizing such approaches can be challenging. Berenice Fisher contributes that a core facet of what constitutes care is the notion of performing more than what is required, or to do something 'extra' <ref type="bibr" target="#b69">[70]</ref>. If care always involves something 'extra', then how might we move care from the status of 'extra' to 'routine', for instance in systems for formal caregiving in healthcare, social work-or security and privacy support <ref type="bibr" target="#b39">[41,</ref><ref type="bibr" target="#b67">69]</ref>?</p><p>An understanding of security as care also invites examination of how standardized caring behaviors run the risk of transforming ethical and moral relations into those that may cause oppression, inequality and injustice <ref type="bibr" target="#b53">[55,</ref><ref type="bibr" target="#b72">73]</ref>. Consider, for example, the criminal justice system that prosecutes those who cause harm to survivors, and which could be considered an institutional manifestation of caring for survivors' long-term protection <ref type="bibr" target="#b61">[63]</ref>. However, for many survivors, progressing through such a system can be a process of re-traumatization in which they must relive accounts of abuse <ref type="bibr" target="#b24">[27]</ref>. What's more, subjecting their abusers to incarceration may not ultimately reduce abusive behaviors in the long run. Adopting a lens of care for privacy and security for survivors of tech abuse entails that we do not simply understand security as protection from isolated threats such as perpetrators <ref type="bibr" target="#b39">[41,</ref><ref type="bibr" target="#b53">55]</ref>, but rather engage with how these threats can stem from a broader insecurity caused by a societal lack of attention to care <ref type="bibr" target="#b7">[8]</ref> in survivors' lives.</p><p>It is through this backdrop that we begin to explore the challenges in standardizing and scaling care for security. To do this, we introduce a model for helping survivors that centers the idea of care continuity, a principle in medicine, public health and social work that holds that people seeking formal care (clients henceforth, to align with the context of our study) should experience a seamless relationship with the entity providing it. Haggerty et al. <ref type="bibr" target="#b26">[29]</ref> defned the concept to consist of three dimensions: informational continuity, or the idea that a client's current providers are aware of their prior history and present circumstances; management continuity, the idea that the client experiences a "consistent and coherent" approach to care responsive to their changing needs, and relational continuity, or the idea that an ongoing therapeutic relationship persists between a client and their care providers.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3">PROVIDING LONG-TERM, CONTINUOUS CARE TO SURVIVORS OF TECH ABUSE</head><p>To bridge from the anonymous, single-session, and synchronous model of clinical computer security towards a sociotechnical infrastructure capable of providing more fexible, pluralistic, and long-term care, we built a new model to respond to tech abuse that draws on the principles of care continuity outlined by Haggerty et al. <ref type="bibr" target="#b26">[29]</ref>. The new model was designed by clinic leadership, in iterative consultation with volunteers, university information technology staf, IRB staf, and ENDGBV leadership. All procedures, including data management systems used, were IRB-approved.</p><p>The new model. To overcome the limitations of prior models mentioned in Section 2.2, we designed a new intake and case management process that enables care. Figure <ref type="figure" target="#fig_0">1</ref> depicts the high-level decisions and fow of a client case in the new model. Like previous models, this one was a referral model, where an FJC caseworker determines that a client may beneft from technology support. The caseworker and client fll out an online referral form that gets sent to the clinic administrator, who decides whether the case can be accepted, and if so, which consultant to assign to be the point person. The consultant then contacts the client via the information provided in the referral, and assists through a combination of synchronous phone calls and asynchronous texts and emails. We now highlight how aspects of the new model embody our target care principles of relational, informational, and management continuity.</p><p>Relational continuity. Enabling an ongoing therapeutic relationship between a client and their care provider is a key goal of care continuity <ref type="bibr" target="#b26">[29]</ref>, and more broadly of care as system of commitments and relations. Relational continuity was not possible in the previous model, where clients and consultants remained anonymous to each other and the clinic did not include a mechanism for clients to see the same consultant for multiple appointments.</p><p>Realizing this dimension meant creating a tiered model of case management where one specifc consultant is assigned to lead all client-facing activities of a specifc case-including handling their personally identifable information (PII). This required a clinic administrator to match clients to consultants, based on a combination of clients' needs and consultants' expertise. (We further detail these matching processes in Section 5.2). To enable each client's consultant to safely reach them while protecting their privacy, we created for each consultant a private email address and a phone number with call and SMS capabilities, neither of which was linked to their real name. This was facilitated via a virtual telephony product contracted by our university and used in other sensitive call centers. Access to these private communication lines was protected by the university's authorization infrastructure, which requires strong passwords and two-factor authentication. These systems aforded relational continuity in the near-and long-term: consultants could safely reach out directly to clients, and clients could reach out to consultants at any time. The boundary negotiations necessitated by these new afordances are discussed further in Section 5.3.</p><p>Informational continuity. Haggerty et al. <ref type="bibr" target="#b26">[29]</ref> defned informational continuity as the notion that a client's current care providers should have consistent access to details of their prior history and knowledge of their present circumstances. In prior incarnations of clinical computer security, the complete anonymity of the protocol meant consultants walked into appointments with little to no context on a client's situation. Practitioners in healthcare and social services have spent decades enabling informational continuity through case management systems like electronic health records; however, to meet the unique needs of tech abuse survivors, we needed adaptations to meet their stringent safety requirements.</p><p>To begin a case, clients and caseworkers work together to submit a referral form that collects details of the client's concerns (e.g., their devices and accounts, along with a general description of the issues they face), alongside their preferred contact method (e.g., phone and/or email), frst name, and pronouns. Clients may provide as much or as little information as they like-with the exception of a feld asking for contact information for their caseworkers, which was made mandatory to enable safety planning. Figure <ref type="figure" target="#fig_1">2</ref> presents a summary of clients' concerns as represented on the referral forms, including optional demographic information.</p><p>Client PII-name, phone number, and email-was made available to only the minimum number of clinic volunteers necessary and stored in the fewest systems possible. With respect to the former, both the PII and non-PII information on the form was sent to the clinic administrator, who sometimes assigned cases based on whether contact information was available (e.g., assigning phoneonly clients to consultants comfortable with the medium). The assigned consultant then received the PII as part of their notifcation that they had received a new case. Consultants were instructed to handle PII carefully, and in particular never store it on separate systems or accounts.</p><p>The rest of the data on the forms-containing non-PII data on clients' concerns-were stored in a separate and access-controlled cloud storage system used by our university for similarly sensitive data. The cloud storage system allowed joint editing of text documents and was used as a content management system (CMS). Data stored in this CMS consisted of the initial referral details alongside written records of clients' interactions with the clinic (case notes hereafter). Written by consultants, case notes consist of semi-structured text fles where consultants log clients' concerns as expressed in each appointment, the actions a client has taken, and the status of the case going forward.</p><p>Case notes for a client were initially available only to the consultant leading the case. This lead consultant was further granted the option to share the client's folder with additional consultants enlisted to provide specialized advice, so that they could review notes from the client's previous interactions before each appointment. Thus, we enabled informational continuity for both the consultant leading the case, who might go weeks or months between interactions with a client, and for whole consultant teams, in which specialists brought on for specifc concerns need a way to get up to speed on the case.</p><p>We secured both the PII storage and the CMS systems according to best-practice minimal access policies, and via access monitoring conducted by clinic administration and our institution's data management teams. Client PII was accessible only to the consultant leading a client's case and the clinic administrators. Case notes in the CMS were strictly anonymized and regularly checked by clinic administrators to ensure no PII was stored in those systems. Access to both systems required a two-factor authentication protocol managed by our institution. All data security practices were approved by our institutional IRB.</p><p>Management continuity. Lastly, Haggerty et al. <ref type="bibr" target="#b26">[29]</ref> reference continuity in management, which aims for clients to experience "consistent and coherent" care that is nevertheless still responsive to their changing needs. Consistency in care was achieved through the use of client-facing guides providing best-practice advice on common security problems, which were reported in previous work <ref type="bibr" target="#b71">[72]</ref>.</p><p>To create responsivity towards clients' changing needs, we additionally created fexible communication systems by which consultants and clients could correspond over synchronous or asynchronous lines, e.g. via phone calls, emails, or texts, at whatever cadence made the most sense to them. The types of advising interactions made possible in the new model are summarized in Figure <ref type="figure" target="#fig_0">1</ref> ("Consultation"). In brief, they include (1) holding a synchronous appointment via remote conferencing; (2) corresponding over asynchronous communication lines like email or text; and (3) sharing links to vetted resources, including guides for common security checks either externally produced or developed in-house. With the exception of the synchronous remote appointments, which were developed and described in previous work <ref type="bibr" target="#b30">[32,</ref><ref type="bibr" target="#b71">72]</ref>, all these modes of interaction are new to this model. We discuss these interactions further in Section 5.2.</p><p>Consistency in care also requires clear messaging on the limitations of a caring entity. As shown in Figure <ref type="figure" target="#fig_0">1</ref>, a key consideration for case management was whether the client's needs were a ft for the clinic's services. Clinic staf regularly emphasized with clients and caseworkers that consultants were tech experts, but were not lawyers, mental health counselors, or law enforcement. Clinic administration also emphasized that services were to be delivered remotely, as COVID-19 remained a public health threat in 2021, and, importantly, that consultants were volunteers available by appointment, not on an emergency basis. We discuss the negotiations around these boundaries in Section 5.3.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4">METHODS</head><p>To understand how the new model worked in practice, we analyzed data from an eight-month deployment of the model between December 2020 and August 2021. Over the course of our deployment, 107 clients were referred to the clinic. Of these, consultants were able to contact 72 to deliver services, and 62 consented to participate in our research. The clinic continues to ofer services to clients at the time of writing. To investigate how the new model was received by various stakeholders, we examined data from (1) real-world cases; (2) interviews with consultants who delivered them; (3) interviews with IPV professionals who refer clients to the clinic. Together, these data refect reactions to the new model for each of the groups involved, as well as in-depth refections from consultants and IPV professionals. (We discuss the challenges of eliciting in-depth refections from clients in Section 6.2). All study procedures were approved by our institutional IRB.</p><p>Refexivity and positionality. Our study embraced a refexive and autoethnographic form of research, in which researchers' personal biases and experiences are included in the fndings <ref type="bibr" target="#b54">[56,</ref><ref type="bibr" target="#b58">60]</ref>. The authors all volunteer in the clinic, where they are part of a larger team of 30+ people, and three authors' experiences as clinic volunteers are represented in the data. In a refexive study, researchers rotate between subjectivity and objectivity in collaborative sensemaking, creating sites for refection that enable greater trust and deeper insights than is possible in traditional third-party research.  Such methods have been used in prior work to achieve robust understanding of emotionally charged topics <ref type="bibr" target="#b20">[21]</ref>, and were selected for use here to account for the highly sensitive nature of caring for tech abuse survivors. As a research group, we are committed to a justice-oriented perspective on security, privacy, and HCI, and aim to support marginalized and vulnerable people through our work. In this, we employ refexivity throughout to ensure ethical research practice <ref type="bibr" target="#b58">[60]</ref>. This paper represents our best eforts to critically appraise our work, in pursuit of lessons for the clinic and for broader eforts in humancentered security and privacy. In the rest of this section, we detail how at each step of our data collection and analysis, we endeavored to create the interplay between researcher subjectivity and objectivity that would produce such appraisals.</p><p>Case records. Data from cases consisted of referral forms submitted to the clinic by clients and their caseworkers, written summaries and appointment logs composed by consultants, and professional transcripts of audio recordings of appointments. All participating clients consented to the use of their data for research, and all data were manually scrubbed for personally identifable details before analysis and reporting. Data from client referral forms, including categorical variables for client demographics and account and device concerns, are summarized in Figure <ref type="figure" target="#fig_1">2</ref>.</p><p>To more closely examine case progression, the frst two authors manually analyzed the 62 written summaries and case logs and identifed a diversity of interaction styles (e.g., kind of communication, length of engagement, number of appointments) and concerns addressed (e.g., device and account checkups or additional services sought). To balance subjectivity and objectivity in researcher perspective, these two authors included one whose experiences as a volunteer were represented in the data, and one who had not yet begun seeing clients at the time of data collection. These authors then selected a sample of 12 cases that refected this diversity for in-depth study.</p><p>Then, one author manually reviewed the transcripts of appointments from these cases (∼25 total transcripts) and, for each case, developed a set of probing questions for the corresponding consultants. This author was not delivering consults at the time of data collection, and was therefore not a part of the appointments at study. We then reached out to the consultants in this sample (each consultant had 1-3 cases in the sample) and asked if they were willing to participate in an interview. For each consultant who consented to participate, we added case-specifc questions to the general interview guide described below.</p><p>Interviews with clinic volunteers and IPV professionals. To understand interactions within cases, we conducted semi-structured interviews with clinic volunteers and referring IPV professionals. Interviews were done via 30-minute Zoom calls, which were audio recorded with participants' consent and professionally transcribed.</p><p>Our interview subjects included consultants and a clinic administrator in charge of matching clients to consultants. These interviews were led by two authors whose experiences as consultants were not part of the data, and therefore took on the objective role. In total, we interviewed seven volunteers, with levels of experience in the clinic ranging from 12 to 34 months. All had experience in both the previous single-session appointment model and the new care model. Three are authors on this paper. Interviews probed volunteers' experiences with specifc clients (identifed via the sampling described above), impressions of the new model, and ideas on how they evaluate their work. Appendix A reports the general interview guide used in these sessions, with questions for specifc clients redacted to preserve their privacy.</p><p>We also interviewed 18 IPV professionals whose clients were referred to the clinic, including caseworkers and leadership at the FJCs and ENDGBV. Since no author is a part of this group, all authors were eligible to take on the interviewing role in these sessions. These interviews inquired after experiences with the new care model, and how stakeholders evaluate the success of support services in their own work (see Appendix A for the interview guide). We recruited a total of seven caseworkers that had referred clients (who consented to participate) to the clinic. We also interviewed ten FJC staf from all fve FJCs (1-3 per site), including caseworker supervisors and administrators who manage referrals to partner organizations. Lastly, we interviewed one ENDGBV-level administrator who manages city-wide research and evaluation.</p><p>Analysis of our interview data adopted a constructivist thematic analysis approach adapted from grounded theory <ref type="bibr">[10,</ref><ref type="bibr" target="#b10">11]</ref>. We analyzed transcripts by stakeholder group, starting with consultants, then caseworkers, FJC leadership, and clinic administrator in that order. The frst two authors independently coded several transcripts from each stakeholder group, developing separate codebooks for each group. As stated previously, these authors included one whose experiences as a consultant were part of the case data and interviews, and one who was not. (The author who was a subject in the data did not code her own interview.)</p><p>These separate codebooks were refned via multiple rounds of reconciliation and consolidated into two codebooks: one for FJC/ENDGBV staf (e.g., challenges setting boundaries, coordination with support ecosystem, adjustments for clients' tech-savviness) and another for clinic staf (e.g., personalized approach, ways of measuring success, handling safety challenges). The two authors subsequently clustered these codes into one overarching set of themes, which was refned through multiple rounds of iteration with the broader authorship team, including three authors who were interview subjects, and three who were not. We engaged in continuous group refection throughout the analysis process, employing mutual, verbal sense-making to check our own biases and ensure analysis outputs were appropriately couched as critical refections. The fnal themes are reported as Findings in Section 5.</p><p>Safety, privacy, and ethics. Throughout our 8-month deployment, we placed great emphasis on ensuring safety and privacy for all participants. Principally, we ensured that participation in research did not interfere with any participant's existing methods of seeking support. Clients' safety was prioritized by making sure their caseworkers were looped in to safety planning, referring them to 911 where necessary, and securing their PII.</p><p>We also took extra precautions to respect the safety, privacy and autonomy of our clinic volunteer and IPV professional participants throughout the refexive interviewing phase of our work. Caring for IPV survivors (particularly amidst a global pandemic) is stressful, and asking care workers to refect on these experiences can itself be uniquely stress-inducing. We made sure that all interview participants knew they could pause, stop the recording, or decline participation at any point. All participants were assured of anonymity in the reporting of our fndings, and we ensured clinic volunteers were interviewed by their peers, not by people who held supervisory roles in their clinic or graduate school work.</p><p>Lastly, we took care to preserve participants' safety and privacy in the analysis and reporting of our fndings. No identifying information is reported in this paper. Potentially unique phrases have been removed from quotes and stories, and the names of any esoteric tools or apps have been removed.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5">FINDINGS</head><p>Our study fnds early signals that IPV professionals, clients, and clinic staf appreciate the benefts of a caring approach to computer security and privacy. Clients with shifting and higher-risk security situations are newly able to seek help (Section 5.1), consultants fnd it enables specialized teams to deliver more targeted assistance (Section 5.2), and caseworkers fnd it increases clients' confdence in their capacity to secure their profles and digital devices (Section 5.4). Indeed, IPV professionals and clinic consultants throughout our study were eager to see the clinic grow and serve more clients, from more backgrounds, facing a wider scope of problems. As one member of FJC leadership said: "I think the program is wonderful. It provides a great service to clients to now feel safer, whether in their home, using their device, their email-empowering them to have that ability to take it back and feel safe. " (FJC-01) Enabling this level of support was not, however, without its challenges-care naturally demands much from the caregiver, hence our strategies put in place to manage volunteer exposure to vicarious trauma and burnout. Our frst-of-its-kind implementation of security as care highlights the novel tensions that emerge from creating care relations, and how consultants, caseworkers, and clients adapted to them. We focus on describing clinic infrastructure, rather than individual survivor experiences, out of the intention to not speak on behalf of clients, who we observed in case data but did not interview. (We detail this tension further in Section 6.2.) As such, we report a limited number of frst-person survivor accounts, focusing instead on stakeholders' perspectives on organizational approaches to supporting them. To briefy summarize, we found that consultants and caseworkers worked hard to safely reach clients for services (Section 5.1), and to adapt to clients' dynamic and often ambiguous needs (Section 5.2). In doing so, consultants faced constant negotiations around the boundaries of the service and of their availabilities (Section 5.3). Lastly, we found consultants and IPV professionals wrestled with questions around how they could evaluate their work supporting clients (Section 5.4).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.1">Establishing safe connections with clients</head><p>A core challenge of this intervention lay in how to ensure that a person facing suspected compromise of their digital devices and accounts could reach out to fnd support-all while living in a potentially coercive controlling environment. This tension was evident in prior approaches to clinical computer security <ref type="bibr" target="#b23">[26,</ref><ref type="bibr" target="#b71">72]</ref>, but was intensifed in our new care model, which was designed to enable repeated reach-outs over a longer period of time.</p><p>Readiness to engage. We fnd encouraging signs that the new care model is enabling clients in high-risk safety situations to get help in ways that the previous model might not have aforded. Key to this increased capacity is the fexibility to accommodate clients' shifting security situations, e.g., an immediate change in safe contact details or living arrangements. In several cases in our data, clients stop responding for several weeks, prompting a consultant to register their case as inactive and move on-only to hear from the client again weeks later with a call, text, or email letting them know they had managed to fnd a secure communication line again, and wanted to get help. Enabling this fexibility permitted consultants to handle cases where clients may not be ready to engage with assistance initially, but would be in the future. Refecting on the new model, one consultant said: "I do think that it does sometimes open [clients] up to more risks depending on their situation, but it also gives them more convenience, and it's about weighing that added risks against the convenience. I'm just really being mindful of respecting their safety needs. " (Consultant-03) Our analysis fnds that in the new model, this "digital safety dilemma" was intensifed in large part because measures to create relational continuity meant consultants reached out directly to clients, including via cold-calls to initiate their case <ref type="bibr" target="#b71">[72]</ref>. The largest challenge, as one FJC leadership participant refected, was that clients often did not pick up: "There's defnitely a lot of cases where you end up playing phone tag. And we learned pretty early on, we had to be very blatant with people. 'We're calling from a private number, pick up that private number. If you're not going to, we get it. But we need another means of communication. ' It's been an interesting ride. " (FJC-04)</p><p>Clients' reticence to answer the phone was understandable given that they may have experienced harassing phone calls from their abusers-a form of technology-facilitated abuse-requiring consultants and caseworkers to rapidly adapt. As shown in Figure <ref type="figure" target="#fig_1">2</ref>, while the majority (42 of 62 clients) did have self-reported safe access to phone or email communication, 18 of 62 reported at time of intake that only one of their phone or email were safe, and two reported that neither line of communication was accessible. Several clients in our dataset provided the contact details of a close friend or family member, and asked the clinic to call at specifc days or times.</p><p>Ofering alternative methods for communication. Using the many afordances of the new care model for protecting client and consultant confdentiality (see Section 3), consultants were able to invest signifcant efort into ensuring when clients could safely speak, and what modes of communication worked for them. As one consultant described: "I've had clients who were still around their abuser. For them, it's all about making sure we time contact specifcally for when [the abuser] is at work or out of the house. I've also had clients who didn't feel safe picking up a call from [our conference line]. It made it really difcult to get things done, because I didn't know that . . . " (Consultant-03) Safety challenges persisted even for clients who did manage to connect with consultants. Anonymity measures in place to protect consultant privacy meant that when a consultant called a client, they would have to greet them, identify themselves and confrm they were speaking to the client-while giving away as few details as possible in case their abuser was listening. Per the new care model, most consultants were intentionally vague in their initial greetings, e.g., saying they were "calling from the clinic" before asking whether someone by the client's frst name was available. Several consultants took the extra step of using pseudonyms with clients, to protect their own identities.</p><p>Consultants agreed the safety constraints of these calls could often create confusion if clients could not realize who they were, or did not immediately remember they had been referred to the clinic. And as one consultant refected, there was often no good way to do this without referencing security in some way, which could itself retraumatize clients:</p><p>"Just getting a call from a stranger, saying, 'we're calling from a tech security clinic', they might be taken aback.</p><p>Especially given that they're already sufering, these words can be triggering. " (Consultant-04)</p><p>This authentication problem was particularly pronounced the frst time a consultant made contact, but persisted throughout longer-term engagements where consultants might contact a client weeks after an initial reach-out. It was also heightened by clients' understandable hypervigilance (a state of high alertness common to survivors of IPV, many of whom experience trauma-related stress reactions) to potential communication breaches. (We detail examples of hypervigilance further in Section 5.4). In one case in our data, a client asked a consultant to confrm that the consultant had emailed them weeks before. The consultant had sent a response at an of-hour, using a diferent greeting and signature than usual, and this deviation in their written communication had made the client concerned someone else (e.g., their abuser) had taken over the consultant's account. Ultimately, the consultant reassured the client verbally on a phone call that it was indeed them who had sent the email, and the case was able to proceed as normal.</p><p>Lastly, all of these safety challenges were further complicated by the pressure clients faced to change their contact details. Doing so can be considered best practice for survivors of tech abuse, but it also meant that phone numbers and/or email addresses could change quickly over the course of a client's engagement with the clinic. Such actions made it complicated for consultants to maintain consistent conversations with clients across their multiple accounts.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.2">Adapting to clients' diverse and changing needs</head><p>Another major design goal of our caregiving infrastructure was the ability to specialize the services ofered to a client for their unique situation. Our new model allowed for more explicit matching of consultants to cases, and for more personalized plans for clients, through the use of referral forms and case record systems.</p><p>Matching client needs with consultant expertise. Our analysis shows the system was successful in enabling clinic administrators to match particularly specialized cases to consultants who could handle them. Most clients sought help for straightforward concerns, for example the security of a Google or Facebook account, which any consultant could take on. In what the clinic administrator estimated as 20-25% of cases, however, clients required more specialized assistance, defned by not only their technical needs (e.g., a more specialized concern like WiFi compromise) but also by their level of risk. Refecting on how they assigned consultants to clients, the clinic administrator explained:</p><p>"Technical expertise is only one part of it. Some people might have high technical expertise, but low experience with clients. Other people might have a lot of experience working with survivors, but don't feel very confdent about the technical capabilities a certain case needs. I consider an all-rounded picture of expertise ... and for high-risk cases, I try and assign people who have experience and are comfortable with high-risk clients. " (Clinic-Admin)</p><p>Assigning cases to consultants based on an "all-rounded picture of expertise" helped the clinic provide a fexible service capable of accounting for clients' situated and intersectional needs as expressed in their referral forms. However, consultants explained that often in initial interviews, a diferent set of problems emerged than what had been evident at the time of the referral, a misalignment consistent with prior work <ref type="bibr" target="#b22">[25]</ref>. As one consultant described: "[The client] always selects a ton of things, like Facebook, Instagram, but then when we ask about their concerns, it doesn't usually include a lot of the things they said. I'm not sure what the disconnect is there. " (Consultant-03) Refecting on this factor, consultants in our study described it was frustrating, as they wanted to provide the right kind of support upfront. Many consultants did considerable preparation before each session, for example research to refresh their understanding of particular platforms or tools, only to be directed by the client towards an area that they had not prepared for. Still, many consultants said these mismatches were a natural consequence of the complexity of clients' changing situations, and the need to reduce traumas throughout clients' experiences of care by not asking them to exhaustively detail their experiences at every step. To respect clients' concerns, consultants were trained to take the intake form at face value, but were given the option to request that consultants with diferent expertise be added to the case if needed.</p><p>Building rapport over time. To adapt, consultants used the information on referral forms to prepare ahead of time, but also kept their conversations open-ended and investigational, should new concerns emerge. Importantly, consultants described the care model newly enabled them to build rapport over multiple interactions with clients, in ways that helped them reassure clients and assess concerns over the longer term. For one consultant with a long-running case, the mix of asynchronous and synchronous interactions helped to create a quasi-therapeutic relationship:</p><p>"A huge amount of the interaction has been [the client] sending me notes every couple of weeks because something new happens, there's some new suspicion. I say some words of reassurance and ofer an appointment, and then it's a couple more weeks before she's able to reach back out. Then, when we can talk, she describes something, and I afrm, 'Oh, I remember that happening too. You told me about it. ' " (Consultant-05) Building this rapport through the new system had clear benefts for clients and consultants, but it also required consultants to deal with inefciencies to protect clients' privacy. Longer-term cases like this often required consultants to link new incoming messages to old clients, who as described previously may have been reaching out from a diferent phone or email since the last time they were able to get in touch. In order to provide these clients with relational and informational continuity, consultants had to take the extra step of independently linking new reach-outs to client PII. Consultants also described they took more detailed notes in the case record system specifcally to help themselves and others recall important details of clients' cases, should they reach out months in the future.</p><p>In addition to enabling consultants and clients to build longerterm rapport, we found that for some clients, the new model had the beneft of encouraging them to seek their own personalized mix of educational resources. Several clients in our study told consultants they had frst availed themselves of online privacy guides, including those produced by the clinic, before reaching out to clinic services for a second opinion. As one explained: "I went through the protocol sheets that your organization has, and I changed passwords and updated things. But for maintenance purposes, and as new things have happened, I haven't really had a resource, or someone to bounce things of of, to make sure that everything-even down to our cable modem-is secure. " (Client-30) Lastly, consultants described they adapted to clients' changing needs through a key new afordance: the ability to bring in additional consultants as needed, to handle new and emerging issues. Consultants described pulling in other consultants for advice on diferent devices (e.g., an iPhone user asking an Android user for assistance), to work with clients who were more comfortable in different languages (e.g., an English-speaker asking a Spanish-speaker for help), and to address particularly high-risk clients (e.g., a less experienced consultant pulling in a consultant with more experience in trauma-informed counseling). Assembling custom consult teams also helped consultants spread the emotional labor of serving in a quasi-therapeutic role for an IPV survivor (discussed further in Section 6.1). As one consultant in our study refected: "For a particularly emotionally heavy case, it's nice to be able to share that with somebody and not have that just on your shoulders. " (Consultant-06). This quote exemplifes that sharing heavier cases with other consultants enabled tacit expressions of care through knowledge-sharing and coaching of best practice, while simultaneously validating a consultants need to process their emotions that may be difcult to make sense of independently.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.3">Establishing boundaries over time</head><p>The new care model did have many positive benefts, in enabling the safer connections and more adaptive services we have described in the last two sections. However, our analysis found delivering security as care also required consultants to set boundaries with clients, on the scope of clinic services and on their own availability. These concerns were exacerbated by what consultants described as a lack of clear endpoints in tech abuse cases: fundamentally, our consultants said, it was difcult to know when they had done as best as they could, and step away from the case.</p><p>Staying within the clinic's scope. Our data show clients often asked consultants for specifc forms of assistance that strained the clinic's scope. Clinic volunteers made every efort to be clear with FJC partners that clinic services included remote assistance with digital privacy and security, for example by investigating clients' devices for spyware or privacy misconfgurations leading to abuseand did not include, e.g., coming to their homes to scan for hidden cameras or listening devices (which would raise signifcant safety concerns). One consultant described these misunderstandings were often frustrating for them in their role trying to help: "I feel like I let them down. I do feel we did everything we could, but it's just not in line with what the client wishes would happen" (Consultant-03).</p><p>Another common misunderstanding involved clients asking consultants to help assemble proof of their abusers' actions, often by fnding evidence of intrusion on their devices, routers, or accounts. Some of these clients had done research online and found blogs or articles describing how to fnd such proof, e.g., using network trafc traces sourced via tools like Wireshark. Such requests stretched the technical capabilities of the clinic: intrusions are inherently difcult to assess remotely, and volunteers did not have the forensic tools or training to handle the ambiguities e.g., browsing a router's log of IP addresses to determine which might be cause for concern. More fundamentally, forensic activities involve legal interpretation about evidentiary value for particular statutes. Consultants were always clear these were outside of the clinic's scope and better addressed by legal counsel, such as a district attorney. Still, clients often sought this form of assistance as part of their eforts to win orders of protection, and other legal matters. expectation be "always on". Consultants in our study also reported challenges in setting boundaries around their availability to clients. The many new methods of communication available in the care model had the efect of creating the illusion and expecthat consultants were "always on", one said. The pressure of continuous availability, worsened by the remote and asynchronous nature of the work, created new burdens for consultants: many described responding to emails or texts at odd hours, or sporadically during the day at their full-time jobs, out of an obligation to quickly attend to clients. For one consultant, this pressure sharply contrasted the previous model of single appointments: "Because clients can reach back out to me in theory anytime, I have to respond to them pretty quickly. I think [before this model] it was very easy to feel like, 'My job is just to show up to this for this one hour, and then send an email, and then I'll never have to think about this again. ' Now that it's my problem for the it takes up a lot more time ... It feels like more responsibility. " (Consultant-05)</p><p>The pressure to monitor and respond to many lines of communication was heightened in situations where clients reached out with a self-identifed emergency. The clinic is not an emergency service, and makes clear to FJCs and clients that they should call 911 or their caseworkers in those situations. Still, our data show establishing this boundary was a source of tension for consultants. One consultant reported that on two separate occasions, clients had reached out to them through emails or texts with messages that suggested they might be immediately unsafe. In both occasions, the consultant was able to respond right away to clarify the client's situation, and instruct them to seek immediate help. However, refecting on these incidents, the consultant was unsure how to handle future incidents when they might not happen to be available. We discuss the implications of this fnding on consultants' roles further in Section 6.1.</p><p>Finding the "sweet spot". Our analysis found that difculties around boundary-setting for the scope of clinic services and for consultants' availabilities were exacerbated by a fundamental problem all consultants agreed they faced: how to know when to stop services. As described by our clinic administration participant, the clinic naturally needed consultants to cycle through cases in order to take on new ones: "Probably the biggest challenge for me is actually trying to get our consultants to try and deal with cases in a reasonable timeframe, or keep the pipeline moving, because [a consultant] having one client for four months means that we're not helping another 10 people. " (Clinic-Admin)</p><p>The challenge, this participant elaborated, was to fnd the "sweet spot" where a consultant could support a survivor in higher-touch and longer-term ways-without such engagement becoming unsustainable for the consultant individually and the clinic as a whole. This was easily done in many cases in our data where clients sought help for a fxed question, e.g., whether their abuser had access to a particular email account. In these cases, consultants were able to see the client for an appointment lasting approximately one hour, provide additional resources asynchronously if needed, leave them with the clinic's contact information for the future, and move on.</p><p>But in several cases, clients sought "as much help as possible", requesting additional appointments and sending texts and emails with additional questions. Out of a desire to help, consultants sometimes ended up working with them over many appointments stretching on for weeks or months. Refecting on this time investment, one consultant said: "[The clinic administrator] once told me, 'We cannot be like personal assistants. ' But sometimes, based on the frst appointment with the client, I feel this person is not very tech-savvy-they do really need some help. So then I end up accepting more and more calls. " (Consultant-01)</p><p>As seen in this quote, consultants often struggled to balance becoming "personal assistants" for clients' ongoing technical questions, a problem worsened by some clients' relative unfamiliarity with technology, against the broad goal of continuously being available for tech abuse concerns. In many of these cases, working with a client over many appointments was not a de facto problem but rather a natural consequence of progression in their tech abuse needs: for example, several in our data show consultants checking in with clients over several weeks guide them through reporting abusive content to social media platforms, a process that by defnition takes time.</p><p>Difculties fnding natural endpoints. Other cases extended because they began to involve forms of assistance that simply did not have a natural endpoint. Notably, in several cases in our data, consultants struggle to end engagements when it becomes clear that clients' primary needs are further in the realm of emotional support than what consultants are comfortable providing. Refecting on this dynamic, one consultant described: "I've defnitely had a few clients that want to have more appointments, and I get the sense the client just wants to talk. They are scared about the technology stuf, but they want to chat. I've been trying to politely set up boundaries, because I don't know what to do in terms of helping further. It defnitely takes up time. " (Consultant-02) Clinic services explicitly did not include psychotherapy or mental health counseling, for which consultants referred back to clients' caseworkers. But consultants in our study refected it was often difcult to fnd the line between tech abuse concerns and concerns that should be routed to a qualifed mental health professional. Many interactions within the clinic involved reassuring clients, validating their worries, and providing general psychosocial support, in concordance with the principles of trauma-informed care-but within the new care model, consultants described this form of service began taking up more and more time relative to privacy checks and security analyses. We discuss the implications of this fnding further in Section 6.1.</p><p>Ultimately, whether due to clients' needs for more technical or emotional support, or guidance on protracted reporting processes with tech companies, consultants often found it difcult to reach "resolution" on a case. As one said: "It's kind of hard to tell when things are going to be at a fxed point. I think in most of my cases, we don't actually resolve the issues in any fundamentally 'we're done' kind of way. " (Consultant-02)</p><p>Consultants in our study refected that this fundamental tension also had immediate consequences for a related problem: how they evaluated clinic services, clients' needs, and their own work.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.4">Looking back on evaluating care</head><p>Questions of evaluation reverberated throughout our as caseworkers, consultants, and other stakeholders refected on how they could best help clients. The model of providing continuous and longer-term care to clients brought out the need to balance between the many possible outcomes one might aim for when helping survivors overcome tech abuse, and particularly how measure outcomes within this at-risk population.</p><p>Defnitions positive outcomes, and a lack of "ground truth". A core difculty of security-as-care lay the uncertainties inherent in securing digital devices for IPV survivors, a fnding concordant with previous work <ref type="bibr" target="#b22">[25,</ref><ref type="bibr" target="#b71">72]</ref>. As described in Section 5.3, some clients came to the clinic with straightforward concerns within the clinic's scope, e.g. a request for help walking through the privacy settings on a particular platform or device. But many expressed they did not know what they needed-just that they wanted to feel safe and secure. As one client explained to their consultant:</p><p>"I guess I'm paranoid about everything, don't know. Helping clients achieve this "peace of mind" was difcult for consultants on both a technical and interpersonal level. Clinic investigations used best practices in digital privacy, delivered to the of consultants' ability, and in many cases, these protocols were able to surface problems that could be leading to the identifed compromise. But consultants were often troubled by the fundamental inscrutability of clients' security postures. As one described:</p><p>"We often don't get any tangible ground truth on what we might've missed. And we don't get feedback often later on . . . where they're like, oh, this led to some harm that actually happened for the clients. So it can be very ambiguous. " (Consultant-02) The lack of "ground truth" meant consultants had to carefully navigate how to communicate both positive results, in which clinic investigations turned up identifable compromise, and negative results, in which clinic checkups did not fnd any evidence of abuse. In both circumstances, consultants had to relay explanations for this lack of visual indicators of technology abuse through the client's devices or profles. example, consultants suggested an abuser may have accessed a client's account through another mechanism, or that all traces of an intrusion were likely lost by the time the client sought assistance (e.g., due to resetting a device). The new care model exacerbated these uncertainties, consultants refected, because they now dealt with cases that could also change over the length of a client's engagement.</p><p>The ambiguous and dynamic landscape of clients' concerns were further complicated by what several consultants described as hypervigilance, or the tendency of survivors to remain highly on-alert at all times. Recognized in the clinic's trauma-informed approach to care as a key stress reaction in IPV survivors, hypervigilance manifested in the tech abuse context as continuing suspicion of their devices' every behaviors. As an example, in several cases in our study, a client asks a consultant to check the security of a brand new phone to which the abuser, to their knowledge, never had physical access, because it has recently dropped calls.</p><p>When working with hypervigilant clients, consultants had to navigate how to accurately communicate the uncertainties inherent to security, while being reassuring. For example, a consultant might explain that most phones are known to occasionally drop calls, and a brand new phone is highly unlikely to have been compromised an abuser who no longer has physical access-but with the appropriate caveat that their situation might be unique. Consultants pointed out that the new care model was actually uniquely benefcial for cases where clients might be hypervigilant: the longer-term rapport made possible by this model gave consultants more opportunities to provide nuanced risk assessments and proactive advice on future best practices. We unpack this tension further in Section 6.1.</p><p>The ever-changing ambiguity around whether clients' security postures could be accurately assessed meant consultants often focused their eforts on other elements of service delivery more under their control. Several said they were often preoccupied immediate concerns like whether they could connect to a client, and how quickly they could respond to a client's calls, emails and texts. Consultants refected this was a natural part of service work, a sentiment echoed by the caseworkers in our study. However, parties acknowledged could often be frustrating, as they could not control whether clients ultimately availed themselves of services:</p><p>"Have I done my part, basically, have I put the ball back in their court? I can't control whether this client actually has an appointment, but I can write back to them whenever they reach out. " (Consultant-05) More fundamentally, consultants and caseworkers in our study refected they aimed for a general notion of empowering in their work. Notions of empowerment are key to the healing and recovery of IPV survivors, per the principles of trauma-informed care. Applicable defnitions of empowerment ranged from restoration of a client's locus of control, e.g., "giving the client that sense of safety again" (FJC-01), to giving the client tools to handle future problems, e.g., "they feel like they have more information, they're in the driver's seat" (FJC-02). For many participants, empowerment for clients also meant demonstrating the extent to which they were supported. As one member of FJC leadership refected: "I think it can be helpful just knowing that somebody was willing to go that extra mile for them [clients], when they've never been accustomed to this type of behavior, or service, or support. I think that does make a diference in their way of thinking, and how they manage moving forward. It's like, perhaps they're not ready now, at least they have the tools and the folks they can reach out to when they are." (FJC-07) Empowerment-related outcomes, including those around validating clients' concerns and equipping them to handle future privacy problems, were especially powerful for clients who came in with a baseline low level of "technical literacy" (Consultant-06). These clients' concerns could often be addressed by mechanisms like existing privacy controls. Caseworkers felt consultations were especially impactful for these clients. As one said:</p><p>" After hearing a lot of the things that [the consultant] was helping her with, [the client] was like, 'Oh my god. ' It was literally like a and just turning of certain things, like sharing or stuf like that. She felt empowered because she was like, 'Well, I could do this. ' " (Caseworker-07) For consultants, helping to progress a client's technical literacy was a core positive outcome that, in many cases, developed over the multiple engagements enabled by the new care model. As one consultant said: "It's great to see how they progress-how they start learning new concepts and realizing what is going on with all their tech. [When] we only have one appointment, that progress can't be spotted easily. But when we have more appointments, progress is noticeable, and it's great to see how clients learn from us. " (Consultant-01) While progress in technical knowledge may have been easy to intuit for this consultant, our study found stakeholders agreed there were numerous other challenges in measuring positive outcomes for clients, which we now describe.</p><p>Challenges measuring outcomes with IPV survivors. Given any of the aforementioned positive outcomes, how can stakeholders measure progress towards these outcomes? According to our participants, getting feedback on clients' progress required overcoming several fundamental challenges in measurement.</p><p>First and foremost, consultants, caseworkers, FJC leadership, and clinic administration voiced that clients were by defnition "difcult to reach". As previously discussed, clients facing digital insecurity often cannot reliably communicate through digital systems. It follows that survivors who face difculty even to reach their caseworker may be expected face difculty flling out, for example, a feedback survey. FJC leadership described they actually did have a brief satisfaction survey in place-but that it was a city-mandated exercise that did not yield meaningful data, because participation rates were low. FJC leadership looked to higher-touch forms of feedback like focus groups.</p><p>To overcome these challenges, some caseworkers said it might be plausible to have them help clients fll out surveys asking for feedback, the same way they helped clients fll out referral forms. Caseworkers felt this could be a way to not overly burden clients while still enabling their experiences to be known. However, several also refected that clients may be reluctant to share with their caseworker honest feedback on a service to which their caseworker had referred them.</p><p>As another workaround for these measurement challenges, consultants said it may be possible to take a client's verbal feedback during an appointment as a signal for satisfaction. However, they were quick to point out that social desirability biases preclude this from being an accurate signal for clients' opinions: clients had a tendency to always thank consultants for their time, regardless of whether they had actually helped. As one consultant said:</p><p>" As this quote points out, consultants often relied on not on a literal expression of gratitude but more on the client's verbal cues for understanding, e.g., their tone of voice or their words, to signal whether they had successfully reassured them and explained technical concepts. This was often doable in synchronous appointments; however, for asynchronous interactions, consultants said it was often difcult to ensure they were appropriately reassuring clients:</p><p>"In an in-person appointment, I have a bit of an internal barometer for, do they seem like they believe Are they with me? Am I making them feel reassured? Am I conveying confdence? None of those cues exist in an asynchronous conversation. And of course, misunderstandings are very easy over email. " (Consultant-05)</p><p>We unpack tensions around defning and measuring outcomes for tech abuse interventions further in section 6.2.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="6">DISCUSSION</head><p>The development of standardized caring infrastructure for digital security and privacy advice is still in its infancy <ref type="bibr" target="#b65">[67]</ref>. Our fndings show how our new care model-incorporating a case management system, client-consultant matching, and options for asynchronous communication-enables the "consistent and coherent" approach to interventional services that care continuity intends <ref type="bibr" target="#b26">[29]</ref>. Accordingly, many of the challenges highlighted, e.g., the need for consultants to set and negotiate boundaries (Section 5.3), can be taken as an indication that the model is establishing care relations, which require ongoing mutual exchange and efort from caregivers.</p><p>Addressing these challenges in ways that enable these care relations while lessening burdens on consultants is a fruitful area of future work. In this section, we detail the need for future research in two directions: integrating the and emotional labors involved in security advice (Section 6.1); and measuring security and privacy in at-risk communities (Section 6.2). Within each consideration, we provide lessons for security professionals and researchers around how a lens of care can help us work towards "rethinking in more fruitful ways how we ought to guide our lives" <ref type="bibr" target="#b32">[34]</ref>, towards enabling care infrastructures like the clinic in this study to help more at-risk and vulnerable people facing severe digital insecurity. We close with limitations of the present study (Section 6.3).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="6.1">Reconfguring security towards infrastructural care</head><p>Our fndings show consultants struggled balancing what may appear at frst to be two distinct roles: emotional support and reassurance versus technical computer security advice. Clinic staf were abundantly clear to caseworkers and clients that volunteers were not mental health professionals. Still, many the interactions in our data resemble interactions one might see in counseling and psychotherapy: rapport-building via demonstrations of empathy and congruence, the encouragement of disclosure and refection, and the need to set boundaries <ref type="bibr" target="#b34">[36]</ref>. In creating the relational continuity that enabled us to support survivors over the long term, we also created conditions for interactions between consultants and clients that take on qualities of a therapeutic attachment. This type of convergence mirrors what Balaam and Hirsch have noted about many types of interpersonal interactions, for example design research: many non-therapeutic interactions can have therapeutic qualities, and in some cases can even have therapeutic efects <ref type="bibr" target="#b2">[3,</ref><ref type="bibr" target="#b34">36]</ref>.</p><p>The blurring of lines between the "emotional" and "technical" labors of security assistance is not without discomfort-there certainly exist moments where a client needs specialized professional mental health services, including where emergency specialists are warranted. However, our fndings demonstrate a vast gray area beneath this threshold in which clients seek and receive psychosocial support as a necessary of support for tech abuse. For example, the interviewing and rapport-building required to elicit enough detail from clients to understand possible sources of compromise are necessarily infected with empathetic cues and moments of reassurance, and require attention to trauma-informed interviewing techniques so as to not to cause further harm to the client. More subtly, consultants' eforts to provide an "expert opinion" on the security of clients' devices and accounts resembles the type risk assessments and reframings of negative thoughts characteristic of therapeutic approaches in psychodynamic counseling like cognitive behavioral therapy (CBT) <ref type="bibr" target="#b0">[1]</ref>.</p><p>The concordance we between security advice and CBTesque techniques highlights a core difculty of security-as-care: how can consultants navigate providing security advice in a way that both acknowledges clients' expertise on their own lives and the frequent "lack of ground truth" about digital insecurity? Consider, for example, the cases in our study where clients expressed that the abuser could hear the calls they made on a brand new phone, one to which the abuser had never had access. The consultants in these situations did the best they could to emphasize that, to the best knowledge available, the risk of compromise was extremely low. But to properly embed care into these interactions, this risk assessment requires not only addressing technical feasibility, but also addressing the clients' knowledge about their situation. Previous results have shown survivor-identifed risk of physical or emotional violence is often as accurate or more than standardized risk inventories <ref type="bibr" target="#b15">[16,</ref><ref type="bibr" target="#b31">33]</ref>; the same may be true of technology issues. As such, we consider that security-as-care can be both dyadic and dynamic: a survivor's knowledge can be informed by the consultant carefully providing knowledge of the likelihood and/or possibility of attacks, and a client can likewise inform a consultant of their lived realities with their abuser's unique strategies for causing harm.</p><p>That client interactions begin to take on the qualities and difculties of therapy does not necessarily mean security consultants should shy away from them altogether: volunteers and lay people have always played an important role in the networked schemes of care that constitute "teletherapy", in ways that complement but do not replace professional mental health services <ref type="bibr" target="#b75">[76]</ref>. Rather, we view this discomfort as a generative site for future research in clinical computer security, to be done in close collaboration with experts in counseling and psychotherapy. In concert with a shift towards viewing privacy and security as not only a function of the refnement of computer systems but also a function of personal and social data management <ref type="bibr" target="#b18">[19,</ref><ref type="bibr" target="#b39">41]</ref>, we need the according attention to how we can standardize these caring practices by integrating what are currently considered two distinct and rarely overlapping skill sets. Doing so might align security as profession more closely with, e.g., teaching and medicine, where natural human instincts to care for one another are not severed the name of providing expertise. This integration might help emphasize a more global and infrastructural of care, one that encourages the creation of "more humanly responsive that can be curated to include diferent actors and practices <ref type="bibr" target="#b52">[54]</ref>. More broadly, such work might improve computer security research and practice for only IPV survivors, but also for other vulnerable and at-risk people who stand to beneft from direct computer security assistance, e.g., sex workers, child abuse survivors, and victims of identity theft, to name a few.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="6.2">Measuring security outcomes at-risk communities</head><p>Our fndings also point to compelling future work negotiating the tensions in evaluation highlighted by our participants (Section 5.4). Security and privacy researchers with quantitative and positivist training, often from computer science, tend to reach for scalable measurements to understand the efect of a given intervention. For example, it is tempting to pursue evidence of impact through individual self-reports solicited from clients (e.g. surveys), or population-level econometric assessments of quality of life, with an eye towards social laws from empirical observation. However, in our work developing and analyzing this intervention, we found challenges with taking this approach at both the philosophical and practical levels: clients are often difcult to reach, as our participants pointed out, and the fexible and personalized nature of tech abuse advice-given by consultants working against security's fundamental "lack of ground truth"-make it difcult to imagine an impact assessment for a security intervention that is standardized, fair, and valid. What's more, our fndings show stakeholders difer in their understandings of what constitute positive or negative outcomes. Clients say they want "peace of mind" (5.3), and the knowledge to handle future difculties. Caseworkers and IPV professionals speak of working towards a sense of "empowerment" clients (5.3), in line with the principles of trauma-informed care, that is often infected by clients' technical literacy. Consultants, for their part, describe goals around high-quality service delivery (e.g. fast and accurate responses to client reach-outs), and successful communication with clients around realistic assessment of risks.</p><p>Drawing on the literature in care ethics <ref type="bibr" target="#b8">[9,</ref><ref type="bibr" target="#b53">55,</ref><ref type="bibr" target="#b67">69]</ref>, we argue these tensions point to a need to foreground or qualitative notions of assessment when seeking to understand the impact of these interventions. At issue is the core epistemic tension in security as care: where computer security and privacy research is oriented towards measurable outcomes, such a framework may experience tensions with the goals of care relations. Care ethicists have made clear that care has the potential to beneft society at a wider level than being solely confned to the historically feminized private sphere of care work-but when care is formalized in more public spheres, through institutions and social services, it can rub up against existing service infrastructures and requirements for concrete measurements. Ongoing processes of maintenance and care do not ft neatly into a deterministic and positivist framework of assessment, in which desired outcomes are formalized into proxy variables and measured quantitatively to understand their efect. As an example, when care continuity has been formalized into survey instruments in healthcare settings, it has resulted in scales that efectively count the number of providers a patient sees in the course of a hospital stay <ref type="bibr" target="#b25">[28]</ref>. At best, we are reminded caring behaviors can "fall through cracks" of being measured [41, and at worst, we are concerned that a preoccupation with quantifable measurement or datafcation can actually impose a lack of care, through a framework that understands care as labor alone <ref type="bibr" target="#b65">[67,</ref><ref type="bibr" target="#b69">70]</ref>. Indeed, ethicists have observed that eforts to standardize and measure care, when not implemented carefully, can infict the same harm as systems designed to be devoid of it <ref type="bibr" target="#b67">[69,</ref><ref type="bibr" target="#b72">73]</ref>.</p><p>Yet, the issue remains that if we are to care about caring at a wider scale, we must ofer a set of measurements of caring in some way. While stakeholders in our study may have had diferent interpretations of success, they retained implicit measures of "good" or "bad" engagements. Further, it is important to teach individuals of the importance of care, even an individual may be initially reluctant to adopt this view themselves, and it would be challenging to do this without some form of measurement. Practicing caring behaviors can, ideally, lead to the growth of a genuine caring ethicwhat begins as a strategic requirement to meet measurable goals can result in genuine care in practice <ref type="bibr" target="#b67">[69]</ref>. Notably, though, such calls must be sensitive towards an insincere appearance of caring, or the calcifcation of caring behaviors into forms of emotional labor as care is professionalized.</p><p>As a way forward, we see further research developing ways to evaluate ongoing security care relations from survivors' perspectives-after all, our eforts at care are in service to their needs. Crucially, this work must do so in ways that do not re-traumatize them through lengthy or abstract means to gather data. Indeed, the feld of HCI has been gradually moving toward the use of qualitative and participatory measurements as indicators of improvement and impact in sensitive contexts such as IPV <ref type="bibr" target="#b2">[3,</ref><ref type="bibr" target="#b6">7,</ref><ref type="bibr" target="#b55">57]</ref>. This is acute concern for survivors from marginalized communities, who may be further disadvantaged such creative approaches if they are used uncritically <ref type="bibr" target="#b29">[31]</ref>. We highlight these tensions as lessons for security and privacy researchers intent on doing work that improves conditions for at-risk and marginalized people, an intriguing point of unifcation with a growing community in HCI seeking to do the same.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="6.3">Limitations</head><p>Our study examines problems of security-as-care in one specifc context: a clinic for tech abuse survivors in the urban context of New York City, USA, delivered volunteers with training in the specifc security and privacy needs IPV. work is needed to develop context-specifc insights on how to care for tech abuse survivors in other settings, e.g. in other nationalities and municipalities, in rural or suburban contexts, or in more specifc populations (e.g. dedicated to supporting trans survivors). Similarly, our fndings do not purport to generalize to securityas-care delivered by other caring systems, e.g. professionals in customer support <ref type="bibr" target="#b76">[77]</ref>, or by survivors' friends and family. Lastly, our study took a refexive mixed-methods approach drawing on autoethnography to produce a rich and interpretive picture of the new care model played out in practice. It is therefore subject to the limitations of all such work: the fndings are the product of the authors' lenses. Future work might pursue alternative methods of study, e.g. traditional ethnography by an observer with no frsthand experience in the system at the center of the study, which in conjunction with this paper might triangulate a fuller picture of the phenomenon at hand.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="7">CONCLUSION</head><p>We discuss a model for providing security advice to at-risk people that incorporates feminist notions of care into an overall sociotechnical infrastructure for caring. We studied this model through an analysis of records from an 8-month deployment in a clinic connecting IPV survivors with volunteer computer security consultants. Our fndings show how the approach succeeds in enabling support for survivors with complex and high-risk needs, and invites future work addressing attendant challenges in delivering and assessing security interventions as care infrastructures.  </p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>C FJC CASEWORKERS &amp; LEADERSHIP CODEBOOK</head></div><figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_0"><head>Figure 1 :</head><label>1</label><figDesc>Figure 1: Flowchart depicting the lifecycle of a client's case, including the major entities involved, decisions made, and actions.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_1"><head>Figure 2 :</head><label>2</label><figDesc>Figure 2: Client demographics, preferred contact information, and device and account safety concerns, as taken from the referral forms initially submitted by clients. Over the course of our 8-month deployment, n = 62 clients consented to participate in our research.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_2"><head></head><label></label><figDesc>You always get thank you. You have to read between the lines to understand how you did. Like from the little cues, how they're responding. Are they confused, or do they have clarity? If they're asking the same thing again and again, they're not getting what you're saying. So you would like, guess from there. But you can't really guess from the end, because at the end of the day, they will always be thankful to you. " (Consultant-04)</figDesc><table /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_3"><head></head><label></label><figDesc>Success as progression in client's knowledge Client-centered approach means success is ad-hoc Clients are hard to reach for follow-up Client's survey can be biased Existing satisfaction survey isn't used for evaluation Caseworkers imagine stepwise success measurement Clients volunteer feedback to caseworkers when things go well Measuring success via evidence gathering for client Measuring success via service delivery Measuring success requires multi-pronged approach Measuring success via client's verbal feedback Measuring success via focus groups with survivors Measuring success by following up with client Lofty expectations computer security Uncertainty around safety Caseworkers and FJCs don't understand tech concerns When in doubt, caseworkers bias towards referring to CETA Caseworkers don't know what CETA expects from them Criteria for referral to CETA Constantly managing client expectations to client for safety of communication line Caseworker still needs to coordinate when devices are compromised Caseworker and FJC flling out intake helps safety and coordination Coordination with support ecosystem Challenges around boundary-setting CETA's role is tech only Demand for on-call services Caseworkers screening for tech abuse upstream Demand for increased capacity Caseworker and FJC are connector to other resources Caseworker serves as crisis support DTC has coordination benefts Hybrid method for service delivery would work best Caseworkers fnd intake form helpful Consultants need to persistently follow up with recaps and next steps Scheduling is improved still cumbersome Clients request additional services for new issues Adjustments for clients' tech-savviness Clients don't know how much more CETA can help Clients decide they don't want service after all CETA is very helpful for less tech-savvy Less tech-savvy need more follow-up</figDesc><table><row><cell>Theme / Code</cell><cell>Theme / Code</cell></row><row><cell>Diferent defnitions of success</cell><cell>Measuring success</cell></row><row><cell>Success as addressed</cell><cell></cell></row><row><cell>Success as happier emotional state</cell><cell></cell></row><row><cell>Success as empowering for the future</cell><cell></cell></row><row><cell>as impact in client's life</cell><cell></cell></row><row><cell>Success as engagement</cell><cell></cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_4"><head>Table 2 :</head><label>2</label><figDesc>The codebook that resulted from our thematic analysis of interviews with FJC caseworkers (see Appendix A.2 for interview guide) and leadership (see Appendix A.3).</figDesc><table /></figure>
+		</body>
+		<back>
+
+			<div type="acknowledgement">
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>ACKNOWLEDGMENTS</head><p>research funded by NSF Award #1916096, as well as gifts from Google. ET was additionally supported by a Digital Life Initiative Doctoral Fellowship. We sincerely thank all of our participants for lending their time and expertise, additionally thank our reviewers comments that greatly improved paper. Lastly, we thank all CETA volunteers and staf for their time and commitment to the intervention at the center of this study.</p></div>
+			</div>
+
+			<div type="annex">
+<div xmlns="http://www.tei-c.org/ns/1.0"><p>Care Infrastructures for Digital Security in Intimate Partner Violence CHI April 5, 2022, New Orleans, LA, USA</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>A INTERVIEW GUIDES A.1 Consultants</head><p>With the new model, we have introduced several capabilities: an intake form, reaching out to clients directly for scheduling, the ability to schedule follow-up appointments, and/or conduct our work with clients asynchronously, e.g. via email or text.</p><p>• this model been helpful in providing services to clients? Why or why not? • What are some of the challenges that you have experienced with this model? • What are some of the benefts? <ref type="bibr" target="#b1">(2)</ref> Has this model changed your approach to addressing client concerns? In what ways are the substance of your consults diferent from pre-DTC?</p><p>Intake form (3) How do you use the information on an intake prior to a consult? During a consult? (4) Is the intake form helpful for you?</p><p>• In what ways?</p><p>• How could it be improved?</p><p>out to the clients (5) How do you usually reach out to clients? (6) How often do you never hear back from clients? <ref type="bibr" target="#b6">(7)</ref> What are some of the challenges that you've faced reaching out to clients to schedule an appointment? <ref type="bibr" target="#b7">(8)</ref>  A.4 CETA Administrator</p><p>(1) Can you describe the process you go through from the moment you receive an intake form to when you assign it to a consultant? (2) How do you process (flter) the information on the intake form to decide about who to assign it to?</p><p>• Which parts of the intake form information are most important to you for assigning consultants?</p><p>• Which parts have priority to you when you want to process the information? (e.g. type of devices, number of concerns, etc) • Do you also take any consultant preference into consideration when assigning the cases? -If yes, does it cause any imbalance in terms of the type of the cases (like for example the mode of communication) that are assigned to consultants? </p></div>			</div>
+			<div type="references">
+
+				<listBibl>
+
+<biblStruct xml:id="b0">
+	<monogr>
+		<title level="m" type="main">What is Cognitive Behavioral Therapy?</title>
+		<ptr target="https://www.apa.org/ptsd-guideline/patients-and-families/cognitive-" />
+		<imprint>
+			<date type="published" when="2017">2017</date>
+			<publisher>American Psychological Association</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b1">
+	<analytic>
+		<title level="a" type="main">Data care and its politics: designing for local collective data management as a neglected thing</title>
+		<author>
+			<persName><forename type="first">Karen</forename><surname>Baker</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Helena</forename><surname>Karasti</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3210586.3210587</idno>
+		<ptr target="https://doi.org/10.1145/3210586.3210587" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings the 15th Participatory Design Conference: Full Papers</title>
+				<meeting>the 15th Participatory Design Conference: Full Papers<address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computing Machinery</publisher>
+			<date type="published" when="2018">2018</date>
+			<biblScope unit="volume">1</biblScope>
+			<biblScope unit="page" from="1" to="12" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b2">
+	<analytic>
+		<title level="a" type="main">Emotion Work in Experience-Centered Design</title>
+		<author>
+			<persName><forename type="first">Madeline</forename><surname>Balaam</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Rob</forename><surname>Comber</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Rachel</forename><forename type="middle">E</forename><surname>Clarke</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Charles</forename><surname>Windlin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Anna</forename><surname>Ståhl</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kristina</forename><surname>Höök</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Geraldine</forename><surname>Fitzpatrick</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings the 2019 CHI Conference on Human Factors in Computing Systems</title>
+				<meeting>the 2019 CHI Conference on Human Factors in Computing Systems<address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computing Machinery</publisher>
+			<date type="published" when="2019">2019</date>
+			<biblScope unit="page" from="1" to="12" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b3">
+	<analytic>
+		<title level="a" type="main">Disadvantaged in the American-dominated Internet&quot;: Sex, Work, and Technology</title>
+		<author>
+			<persName><forename type="first">Catherine</forename><surname>Barwulor</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Allison</forename><surname>Mcdonald</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Eszter</forename><surname>Hargittai</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Elissa</forename><forename type="middle">M</forename><surname>Redmiles</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings the 2021 CHI Conference on Human Factors in Computing Systems</title>
+				<meeting>the 2021 CHI Conference on Human Factors in Computing Systems<address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computing Machinery</publisher>
+			<date type="published" when="2021">2021</date>
+			<biblScope unit="page" from="1" to="16" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b4">
+	<analytic>
+		<title level="a" type="main">Mapping the margins: the ecologies of domestic violence service provision</title>
+		<author>
+			<persName><forename type="first">Rosanna</forename><surname>Bellini</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Angelika</forename><surname>Strohmayer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Olivier</forename></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Clara</forename><surname>Crivellaro</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of 2019 CHI Conference on Human Factors in Computing Systems</title>
+				<meeting>2019 CHI Conference on Human Factors in Computing Systems</meeting>
+		<imprint>
+			<date type="published" when="2019">2019</date>
+			<biblScope unit="page" from="1" to="13" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b5">
+	<analytic>
+		<title level="a" type="main">So-called privacy breeds evil&quot; Narrative Justifcations for Intimate Partner Surveillance in Online Forums</title>
+		<author>
+			<persName><forename type="first">Rosanna</forename><surname>Bellini</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Emily</forename><surname>Tseng</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Nora</forename><surname>Mcdonald</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Rachel</forename><surname>Greenstadt</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Damon</forename><surname>Mccoy</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Thomas</forename><surname>Ristenpart</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Nicola</forename><surname>Dell</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Proceedings of the ACM on Human-Computer Interaction</title>
+		<imprint>
+			<biblScope unit="volume">4</biblScope>
+			<biblScope unit="page" from="1" to="27" />
+			<date type="published" when="2021">2021. 2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b6">
+	<analytic>
+		<title level="a" type="main">Fragments of the Past: Curating Peer Support with Perpetrators of Domestic Violence</title>
+		<author>
+			<persName><forename type="first">Rosanna</forename><surname>Bellini</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Alexander</forename><surname>Wilson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jan</forename><forename type="middle">David</forename><surname>Smeddinck</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2021 CHI Conference Human Factors in Computing</title>
+				<meeting>the 2021 CHI Conference Human Factors in Computing</meeting>
+		<imprint>
+			<date type="published" when="2021">2021</date>
+			<biblScope unit="page" from="1" to="14" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b7">
+	<analytic>
+		<title level="a" type="main">The Care Work of Access</title>
+		<author>
+			<persName><forename type="first">Cynthia</forename><forename type="middle">L</forename><surname>Bennett</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Daniela</forename><forename type="middle">K</forename><surname>Rosner</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Alex</forename><forename type="middle">S</forename><surname>Taylor</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3313831.3376568</idno>
+		<ptr target="https://doi.org/10.1145/3313831.3376568" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings the 2020 CHI Conference on Human Factors in Computing Systems</title>
+				<meeting>the 2020 CHI Conference on Human Factors in Computing Systems<address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computing Machinery</publisher>
+			<date type="published" when="2020">2020</date>
+			<biblScope unit="page" from="1" to="15" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b8">
+	<analytic>
+		<title level="a" type="main">Creating Conditions for Patients&apos; Values to Emerge in Clinical Conversations: Perspectives of Health Care Team Members</title>
+		<author>
+			<persName><forename type="first">Andrew</forename><surname>Berry</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Catherine</forename><surname>Lim</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Andrea</forename><forename type="middle">L</forename><surname>Hartzler</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Tad</forename><surname>Hirsch</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Evette</forename><surname>Ludman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Edward</forename><forename type="middle">H</forename><surname>Wagner</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">James</forename><forename type="middle">D</forename><surname>Ralston</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3064663.3064669</idno>
+		<ptr target="https://doi.org/10.1145/3064663.3064669" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings the 2017 Conference on Designing Interactive Systems (DIS &apos;17)</title>
+				<meeting>the 2017 Conference on Designing Interactive Systems (DIS &apos;17)<address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computing Machinery</publisher>
+			<date type="published" when="2017">2017</date>
+			<biblScope unit="page" from="1165" to="1174" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b9">
+	<analytic>
+		<title level="a" type="main">Using thematic analysis in psychology</title>
+		<author>
+			<persName><forename type="first">Virginia</forename><surname>Braun</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Victoria</forename><surname>Clarke</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Qualitative research in psychology</title>
+		<imprint>
+			<biblScope unit="volume">3</biblScope>
+			<biblScope unit="issue">2</biblScope>
+			<biblScope unit="page" from="77" to="101" />
+			<date type="published" when="2006">2006. 2006</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b10">
+	<analytic>
+		<title level="a" type="main">Conceptual and design thinking for thematic analysis</title>
+		<author>
+			<persName><forename type="first">Virginia</forename><surname>Braun</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Victoria</forename><surname>Clarke</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Qualitative Psychology</title>
+		<imprint>
+			<date type="published" when="2021">2021. 2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b11">
+	<monogr>
+		<title level="m" type="main">Emotionally involved: The impact of researching rape</title>
+		<author>
+			<persName><forename type="first">Rebecca</forename><surname>Campbell</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2013">2013</date>
+		</imprint>
+	</monogr>
+	<note>Routledge</note>
+</biblStruct>
+
+<biblStruct xml:id="b12">
+	<analytic>
+		<title level="a" type="main">The spyware used in intimate partner violence</title>
+		<author>
+			<persName><forename type="first">Rahul</forename><surname>Chatterjee</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Periwinkle</forename><surname>Doerfer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Hadas</forename><surname>Orgad</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sam</forename><surname>Havron</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jackeline</forename><surname>Palmer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Diana</forename><surname>Freed</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Karen</forename><surname>Levy</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Damon</forename><surname>Dell</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Thomas</forename><surname>Mccoy</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Ristenpart</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">2018 IEEE Symposium on Security and Privacy (SP)</title>
+				<imprint>
+			<publisher>IEEE</publisher>
+			<date type="published" when="2018">2018</date>
+			<biblScope unit="page" from="441" to="458" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b13">
+	<analytic>
+		<title level="a" type="main">A qualitative exploration of researcher trauma and researchers&apos; responses to investigating sexual violence</title>
+		<author>
+			<persName><forename type="first">Jan</forename><surname>Coles</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jill</forename><surname>Astbury</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Elizabeth</forename><surname>Dartnall</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Shazneen</forename><surname>Limjerwala</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Violence against women</title>
+		<imprint>
+			<biblScope unit="volume">20</biblScope>
+			<biblScope unit="page" from="95" to="117" />
+			<date type="published" when="2014">2014. 2014</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b14">
+	<analytic>
+		<title level="a" type="main">Inclusive Security: Digital Security Meets Web Science</title>
+		<author>
+			<persName><forename type="first">Lizzie</forename><surname>Coles-Kemp</surname></persName>
+		</author>
+		<idno type="DOI">10.1561/1800000030</idno>
+		<ptr target="https://doi.org/10.1561/1800000030Publisher" />
+	</analytic>
+	<monogr>
+		<title level="j">Foundations and Trends® in Web Science</title>
+		<imprint>
+			<biblScope unit="volume">7</biblScope>
+			<biblScope unit="issue">2</biblScope>
+			<biblScope unit="page" from="88" to="241" />
+			<date type="published" when="2020-12">2020. Dec. 2020</date>
+			<publisher>Now Publishers, Inc</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b15">
+	<analytic>
+		<title level="a" type="main">Risk Assessments by Female Victims of Intimate Partner Violence: Predictors of Risk Perceptions and Comparison to an Actuarial Measure</title>
+		<author>
+			<persName><forename type="first">Jennifer</forename><forename type="middle">K</forename><surname>Connor-Smith</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kris</forename><surname>Henning</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Stephanie</forename><surname>Moore</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Holdford</forename></persName>
+		</author>
+		<idno type="DOI">10.1177/0886260510383024</idno>
+		<ptr target="https://doi.org/10.1177/0886260510383024Publisher" />
+	</analytic>
+	<monogr>
+		<title level="j">Journal of Interpersonal Violence</title>
+		<imprint>
+			<biblScope unit="volume">26</biblScope>
+			<biblScope unit="page" from="2517" to="2550" />
+			<date type="published" when="2011-08">2011. Aug. 2011</date>
+			<publisher>SAGE Publications Inc</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b16">
+	<monogr>
+		<title level="m" type="main">Matters of Care: Speculative Ethics in More than Human Worlds</title>
+		<author>
+			<persName><forename type="first">María Puig De La</forename><surname>Bellacasa</surname></persName>
+		</author>
+		<idno type="DOI">10.5749/j.ctt1mmfspt</idno>
+		<ptr target="https://www.jstor.org/stable/10.5749/j.ctt1mmfspt" />
+		<imprint>
+			<date type="published" when="2017">2017</date>
+			<publisher>University of Press</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b17">
+	<analytic>
+		<title level="a" type="main">Collective information practice: Exploring privacy and security as social and cultural phenomena</title>
+		<author>
+			<persName><forename type="first">Paul</forename><surname>Dourish</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ken</forename><surname>Anderson</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Human-computer interaction</title>
+		<imprint>
+			<biblScope unit="volume">21</biblScope>
+			<biblScope unit="issue">3</biblScope>
+			<biblScope unit="page" from="319" to="342" />
+			<date type="published" when="2006">2006. 2006</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b18">
+	<monogr>
+		<title level="m" type="main">Security in the wild: user strategies for managing security as an everyday, practical problem. Personal and Ubiquitous Computing</title>
+		<author>
+			<persName><forename type="first">Rebecca</forename><forename type="middle">E</forename><surname>Dourish</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jessica</forename><surname>Grinter</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Flor</forename><surname>Delgado De La</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Melissa</forename><surname>Joseph</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2004">2004. 2004</date>
+			<biblScope unit="volume">8</biblScope>
+			<biblScope unit="page" from="391" to="401" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b19">
+	<monogr>
+		<author>
+			<persName><forename type="first">Molly</forename><surname>Dragiewicz</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jean</forename><surname>Burgess</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ariadna</forename><surname>Matamoros-Fernández</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Michael</forename><surname>Salter</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Nicolas</forename><forename type="middle">P</forename><surname>Suzor</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Delanie</forename><surname>Woodlock</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Bridget</forename><surname>Harris</surname></persName>
+		</author>
+		<title level="m">Technology facilitated coercive control: Domestic violence and the competing roles of digital media Feminist Media Studies</title>
+				<imprint>
+			<date type="published" when="2018">2018. 2018</date>
+			<biblScope unit="volume">18</biblScope>
+			<biblScope unit="page" from="609" to="625" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b20">
+	<monogr>
+		<title level="m" type="main">Autoethnography, personal refexivity: Researcher as subject</title>
+		<author>
+			<persName><forename type="first">Carolyn</forename><surname>Ellis</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Art</forename><surname>Bochner</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2000">2000. 2000</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b21">
+	<analytic>
+		<title level="a" type="main">Citizen clinic. https: //cltc.berkeley.edu/about-us/citizen-clinic/ Electronic Frontier Foundation</title>
+		<ptr target="https://www.ef.org/" />
+	</analytic>
+	<monogr>
+		<title level="m">Electronic Frontier Foundation</title>
+				<imprint>
+			<date type="published" when="2021">2021</date>
+		</imprint>
+		<respStmt>
+			<orgName>UC Berkeley Center for Long-Term Cybersecurity</orgName>
+		</respStmt>
+	</monogr>
+	<note>n.d.</note>
+</biblStruct>
+
+<biblStruct xml:id="b22">
+	<analytic>
+		<title level="a" type="main">Analyzing Clinical Computer Security Interventions with Survivors of Intimate Partner Violence</title>
+		<author>
+			<persName><forename type="first">Diana</forename><surname>Freed</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sam</forename><surname>Havron</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Emily</forename><surname>Tseng</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Andrea</forename><surname>Gallardo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Rahul</forename><surname>Chatterjee</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Thomas</forename><surname>Ristenpart</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Nicola</forename><surname>Dell</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Proceedings of the ACM on Human-Computer Interaction</title>
+		<imprint>
+			<biblScope unit="volume">3</biblScope>
+			<biblScope unit="page" from="1" to="24" />
+			<date type="published" when="2019">2019. 2019</date>
+			<publisher>CSCW</publisher>
+		</imprint>
+	</monogr>
+	<note>Is my phone hacked?</note>
+</biblStruct>
+
+<biblStruct xml:id="b23">
+	<analytic>
+		<title level="a" type="main">A Stalker&apos;s Paradise&quot; How Intimate Partner Abusers Exploit Technology</title>
+		<author>
+			<persName><forename type="first">Diana</forename><surname>Freed</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jackeline</forename><surname>Palmer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Diana</forename><surname>Minchala</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Karen</forename><surname>Levy</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Thomas</forename><surname>Ristenpart</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Nicola</forename><surname>Dell</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings the 2018 CHI conference on human factors in computing systems</title>
+				<meeting>the 2018 CHI conference on human factors in computing systems</meeting>
+		<imprint>
+			<date type="published" when="2018">2018</date>
+			<biblScope unit="page" from="1" to="13" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b24">
+	<analytic>
+		<title level="a" type="main">Digital technologies and intimate partner violence: A qualitative analysis with multiple stakeholders</title>
+		<author>
+			<persName><forename type="first">Diana</forename><surname>Freed</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jackeline</forename><surname>Palmer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Diana</forename><forename type="middle">Elizabeth</forename><surname>Minchala</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Karen</forename><surname>Levy</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Thomas</forename><surname>Ristenpart</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Nicola</forename><surname>Dell</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Proceedings the ACM on Human-Computer Interaction</title>
+		<imprint>
+			<biblScope unit="volume">1</biblScope>
+			<biblScope unit="page" from="1" to="22" />
+			<date type="published" when="2017">2017. 2017</date>
+			<publisher>CSCW</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b25">
+	<analytic>
+		<title level="a" type="main">What is&apos; continuity of care&apos;?</title>
+		<author>
+			<persName><forename type="first">Martin</forename><surname>Gulliford</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Smriti</forename><surname>Naithani</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Myfanwy</forename><surname>Morgan</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Journal of health services research &amp; policy</title>
+		<imprint>
+			<biblScope unit="volume">11</biblScope>
+			<biblScope unit="issue">4</biblScope>
+			<biblScope unit="page" from="248" to="250" />
+			<date type="published" when="2006">2006. 2006</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b26">
+	<analytic>
+		<title level="a" type="main">Continuity of care: a multidisciplinary review</title>
+		<author>
+			<persName><forename type="first">L</forename><surname>Jeannie</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Robert</forename><forename type="middle">J</forename><surname>Haggerty</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">George</forename><forename type="middle">K</forename><surname>Reid</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Freeman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Barbara</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Carol</forename><forename type="middle">E</forename><surname>Starfeld</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Rachael</forename><surname>Adair</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Mckendry</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Bmj</title>
+		<imprint>
+			<biblScope unit="volume">327</biblScope>
+			<biblScope unit="page" from="1219" to="1221" />
+			<date type="published" when="2003">2003</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b27">
+	<monogr>
+		<author>
+			<persName><forename type="first">Seth</forename><surname>Hardy</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Masashi</forename><surname>Crete-Nishihata</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Katharine</forename><surname>Kleemola</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Adam</forename><surname>Senft</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Byron</forename><surname>Sonne</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Greg</forename><surname>Wiseman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Gill</forename></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ronald J</forename><surname>Deibert</surname></persName>
+		</author>
+		<title level="m">Targeted Threat Index: Characterizing and Quantifying Politically-Motivated Targeted Malware</title>
+				<imprint>
+			<date type="published" when="2014">2014</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b28">
+	<monogr>
+		<title level="m">USENIX Security Symposium</title>
+				<imprint>
+			<biblScope unit="page" from="527" to="541" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b29">
+	<analytic>
+		<title level="a" type="main">Deconstructing Community-Based Collaborative Design: Towards More Equitable Participatory Design Engagements</title>
+		<author>
+			<persName><forename type="first">Christina</forename><surname>Harrington</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sheena</forename><surname>Erete</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Anne</forename><forename type="middle">Marie</forename><surname>Piper</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3359318</idno>
+		<ptr target="https://doi.org/10.1145/3359318" />
+	</analytic>
+	<monogr>
+		<title level="j">Proceedings the ACM on Human-Computer Interaction</title>
+		<imprint>
+			<biblScope unit="volume">3</biblScope>
+			<biblScope unit="page" from="1" to="216" />
+			<date type="published" when="2019-11">2019. Nov. 2019</date>
+			<publisher>CSCW</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b30">
+	<analytic>
+		<title level="a" type="main">Clinical computer security for victims of intimate partner violence</title>
+		<author>
+			<persName><forename type="first">Sam</forename><surname>Havron</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Diana</forename><surname>Freed</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Rahul</forename><surname>Chatterjee</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Dell</forename><surname>Mccoy</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Thomas</forename><surname>Ristenpart</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">28th {USENIX} Security Symposium ({USENIX} Security 19</title>
+				<imprint>
+			<date type="published" when="2019">2019</date>
+			<biblScope unit="page" from="105" to="122" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b31">
+	<analytic>
+		<title level="a" type="main">Battered Perceptions of Risk Versus Risk Factors and Instruments in Predicting Repeat Reassault</title>
+		<author>
+			<persName><forename type="first">D</forename></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Alex</forename><surname>Heckert</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Edward</forename><forename type="middle">W</forename><surname>Gondolf</surname></persName>
+		</author>
+		<idno type="DOI">10.1177/0886260504265619</idno>
+		<ptr target="https://doi.org/10.1177/0886260504265619Publisher" />
+	</analytic>
+	<monogr>
+		<title level="j">Journal of Interpersonal Violence</title>
+		<imprint>
+			<biblScope unit="volume">19</biblScope>
+			<biblScope unit="issue">7</biblScope>
+			<biblScope unit="page" from="778" to="800" />
+			<date type="published" when="2004-07">2004. July 2004</date>
+			<publisher>SAGE Publications</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b32">
+	<monogr>
+		<title level="m" type="main">The Ethics of Care: Personal, Political, and Global</title>
+		<author>
+			<persName><surname>Held</surname></persName>
+		</author>
+		<idno type="DOI">10.1093/0195180992.001.0001</idno>
+		<ptr target="https://doi.org/10.1093/0195180992.001.0001" />
+		<imprint>
+			<date type="published" when="2005">2005</date>
+			<publisher>Oxford University Press</publisher>
+			<pubPlace>New York</pubPlace>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b33">
+	<analytic>
+		<title level="a" type="main">A Framework for Assessing Technology-Mediated IPV</title>
+		<author>
+			<persName><surname>Katherine M Hertlein</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Brandon</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Morgan Lancaster</forename><surname>Eddy</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Strickland</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Journal of Couple &amp; Relationship Therapy</title>
+		<imprint>
+			<biblScope unit="volume">19</biblScope>
+			<biblScope unit="page" from="296" to="321" />
+			<date type="published" when="2020">2020. 2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b34">
+	<analytic>
+		<title level="a" type="main">Practicing Without a License: Design Research as Psychotherapy</title>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings the 2020 CHI Conference on Human Factors in Computing Systems</title>
+				<meeting>the 2020 CHI Conference on Human Factors in Computing Systems<address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computing Machinery</publisher>
+			<date type="published" when="2020">2020</date>
+			<biblScope unit="page" from="1" to="11" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b35">
+	<monogr>
+		<author>
+			<persName><forename type="first">Sandy</forename><surname>James</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jody</forename><surname>Herman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Susan</forename><surname>Rankin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mara</forename><surname>Keisling</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Lisa</forename><surname>Mottet</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ma'ayan</forename><surname>Anaf</surname></persName>
+		</author>
+		<title level="m">The report of the 2015 US transgender survey</title>
+				<imprint>
+			<date type="published" when="2016">2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b36">
+	<analytic>
+		<title level="a" type="main">Precarious Interventions: Designing for Ecologies of Care</title>
+		<author>
+			<persName><forename type="first">Elizabeth</forename><surname>Kaziunas</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Michael</forename><forename type="middle">S</forename><surname>Klinkman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mark</forename><forename type="middle">S</forename><surname>Ackerman</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3359215</idno>
+		<ptr target="https://doi.org/10.1145/3359215" />
+	</analytic>
+	<monogr>
+		<title level="j">Proceedings the ACM on Human-Computer Interaction</title>
+		<imprint>
+			<biblScope unit="volume">3</biblScope>
+			<biblScope unit="page">27</biblScope>
+			<date type="published" when="2019-11">2019. Nov. 2019</date>
+			<publisher>CSCW</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b37">
+	<analytic>
+		<title level="a" type="main">Lived Data: Tinkering With Bodies, Code, and Care Work</title>
+		<author>
+			<persName><forename type="first">Elizabeth</forename><surname>Kaziunas</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Silvia</forename><surname>Lindtner</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mark</forename><forename type="middle">S</forename><surname>Ackerman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Joyce</forename><forename type="middle">M</forename><surname>Lee</surname></persName>
+		</author>
+		<idno type="DOI">10.1080/07370024.2017.1307749</idno>
+		<ptr target="https://doi.org/10.1080/07370024.2017.1307749" />
+	</analytic>
+	<monogr>
+		<title level="m">https: Publisher: Taylor &amp; Francis _eprint</title>
+				<imprint>
+			<date type="published" when="2018-01">2018. Jan. 2018</date>
+			<biblScope unit="volume">33</biblScope>
+			<biblScope unit="page" from="49" to="92" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b38">
+	<analytic>
+		<title level="a" type="main">Proceed Care: Reimagining Home IoT Through a Care Perspective</title>
+		<author>
+			<persName><forename type="first">Cayla</forename><surname>Key</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Fiona</forename><surname>Browne</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings the 2021 CHI Conference on Human Factors in Computing Systems</title>
+				<meeting>the 2021 CHI Conference on Human Factors in Computing Systems<address><addrLine>Nick Taylor, Jon Rogers</addrLine></address></meeting>
+		<imprint>
+			<date type="published" when="2021">2021</date>
+			<biblScope unit="page" from="1" to="15" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b39">
+	<analytic>
+		<title level="a" type="main">Caring for IT security: Accountabilities, moralities, and oscillations in IT security practices</title>
+		<author>
+			<persName><forename type="first">Laura</forename><surname>Kocksch</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Matthias</forename><surname>Korn</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Andreas</forename><surname>Poller</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Susann</forename><surname>Wagenknecht</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Proceedings the ACM on Human-Computer Interaction</title>
+		<imprint>
+			<biblScope unit="volume">2</biblScope>
+			<biblScope unit="page" from="1" to="20" />
+			<date type="published" when="2018">2018. 2018</date>
+			<publisher>CSCW</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b40">
+	<analytic>
+		<title level="a" type="main">Intersectional trauma-informed intimate partner violence (IPV) services: Narrowing the gap between IPV service delivery and survivor needs</title>
+		<author>
+			<persName><forename type="first">Shanti</forename><surname>Kulkarni</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Journal of family violence</title>
+		<imprint>
+			<biblScope unit="volume">34</biblScope>
+			<biblScope unit="page" from="55" to="64" />
+			<date type="published" when="2019">2019. 2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b41">
+	<analytic>
+		<title level="a" type="main">A Look at Targeted Attacks Through the Lens of an NGO</title>
+		<author>
+			<persName><forename type="first">Stevens</forename><surname>Blond</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Adina</forename><surname>Uritesc</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Cédric</forename><surname>Gilbert</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Zheng</forename><surname>Leong Chua</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Prateek</forename><surname>Saxena</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Engin</forename><surname>Kirda</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">USENIX Security Symposium</title>
+				<imprint>
+			<date type="published" when="2014">2014</date>
+			<biblScope unit="page" from="543" to="558" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b42">
+	<analytic>
+		<title level="a" type="main">Structuring future social relations: the politics of care in participatory practice</title>
+		<author>
+			<persName><forename type="first">Ann</forename><surname>Light</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yoko</forename><surname>Akama</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings the 13th Participatory Design Conference</title>
+				<meeting>the 13th Participatory Design Conference<address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<date type="published" when="2014">2014</date>
+			<biblScope unit="volume">1</biblScope>
+			<biblScope unit="page" from="151" to="160" />
+		</imprint>
+	</monogr>
+	<note>Association for Computing Machinery</note>
+</biblStruct>
+
+<biblStruct xml:id="b43">
+	<monogr>
+		<title level="m" type="main">When Governments Hack Opponents: A Look at Actors and Technology</title>
+		<author>
+			<persName><forename type="first">John</forename><surname>William R Marczak</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Morgan</forename><surname>Scott-Railton</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Vern</forename><surname>Marquis-Boire</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Paxson</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2014">2014</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b44">
+	<monogr>
+		<title level="m">USENIX Security Symposium</title>
+				<imprint>
+			<biblScope unit="page" from="511" to="525" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b45">
+	<analytic>
+		<title level="a" type="main">Finding a new normal: the role of technology in life disruptions</title>
+		<author>
+			<persName><forename type="first">Michael</forename><surname>Massimi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jill</forename><forename type="middle">P</forename><surname>Dimond</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Christopher A Le</forename><surname>Dantec</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings the acm 2012 conference on computer supported cooperative work</title>
+				<meeting>the acm 2012 conference on computer supported cooperative work</meeting>
+		<imprint>
+			<date type="published" when="2012">2012</date>
+			<biblScope unit="page" from="719" to="728" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b46">
+	<analytic>
+		<title level="a" type="main">Maintenance and Care</title>
+		<author>
+			<persName><forename type="first">Shannon</forename><surname>Mattern</surname></persName>
+		</author>
+		<idno type="DOI">10.22269/181120</idno>
+		<ptr target="https://doi.org/10.22269/181120" />
+	</analytic>
+	<monogr>
+		<title level="j">Places Journal</title>
+		<imprint>
+			<date type="published" when="2018-11">2018. Nov. 2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b47">
+	<analytic>
+		<title level="a" type="main">Stories from survivors: Privacy &amp; security practices when coping with intimate partner abuse</title>
+		<author>
+			<persName><forename type="first">Tara</forename><surname>Matthews</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">O'</forename><surname>Kathleen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Anna</forename><surname>Leary</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Turner</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jill</forename><forename type="middle">Palzkill</forename><surname>Sleeper</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Martin</forename><surname>Woelfer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Cori</forename><surname>Shelton</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Elizabeth</forename><forename type="middle">F</forename><surname>Manthorne</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sunny</forename><surname>Churchill</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Consolvo</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings the 2017 CHI Conference on Human Factors in Computing Systems</title>
+				<meeting>the 2017 CHI Conference on Human Factors in Computing Systems</meeting>
+		<imprint>
+			<date type="published" when="2017">2017</date>
+			<biblScope unit="page" from="2189" to="2201" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b48">
+	<monogr>
+		<title level="m" type="main">Investigating the Computer Security Practices and Needs of Journalists</title>
+		<author>
+			<persName><forename type="first">Susan</forename><forename type="middle">E</forename><surname>Mcgregor</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Polina</forename><surname>Charters</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Tobin</forename><surname>Holliday</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Franziska</forename><surname>Roesner</surname></persName>
+		</author>
+		<ptr target="https://www.usenix.org/conference/usenixsecurity15/technical-sessions/" />
+		<imprint>
+			<date type="published" when="2015">2015</date>
+			<biblScope unit="page" from="399" to="414" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b49">
+	<monogr>
+		<title level="m" type="main">When the Weakest Link is Strong: Secure Collaboration in the Case of the Panama Papers</title>
+		<author>
+			<persName><forename type="first">Susan</forename><forename type="middle">E</forename><surname>Mcgregor</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Elizabeth</forename><forename type="middle">Anne</forename><surname>Watkins</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mahdi Nasrullah</forename><surname>Al-Ameen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kelly</forename><surname>Caine</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Franziska</forename><surname>Roesner</surname></persName>
+		</author>
+		<ptr target="https://www.usenix" />
+		<imprint>
+			<date type="published" when="2017">2017</date>
+			<biblScope unit="page" from="505" to="522" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b50">
+	<analytic>
+		<title level="a" type="main">Collaborative Data Work Towards a Caring Democracy</title>
+		<author>
+			<persName><forename type="first">Amanda</forename><surname>Meng</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Carl</forename><surname>Disalvo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ellen</forename><surname>Zegura</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3359144</idno>
+		<ptr target="https://doi.org/10.1145/3359144" />
+	</analytic>
+	<monogr>
+		<title level="j">Proceedings of the ACM on Human-Computer Interaction</title>
+		<imprint>
+			<biblScope unit="volume">3</biblScope>
+			<date type="published" when="2019-11">2019. Nov</date>
+			<publisher>CSCW</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b51">
+	<monogr>
+		<title level="m" type="main">SocialHEISTing: Understanding Stolen Facebook Accounts</title>
+		<author>
+			<persName><forename type="first">Jeremiah</forename><surname>Onaolapo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Nektarios</forename><surname>Leontiadis</surname></persName>
+		</author>
+		<ptr target="https://www.usenix.org/conference/usenixsecurity21/presentation/onaolapo" />
+		<imprint>
+			<date type="published" when="2021">2021</date>
+			<biblScope unit="page" from="4115" to="4132" />
+		</imprint>
+	</monogr>
+	<note>Despoina and Gianluca Stringhini</note>
+</biblStruct>
+
+<biblStruct xml:id="b52">
+	<analytic>
+		<title level="a" type="main">Care: Ethics, Feminist and International Relations</title>
+		<author>
+			<persName><forename type="first">Fiona</forename><surname>Robinson</surname></persName>
+		</author>
+		<ptr target="https://www.jstor.org/stable/40644882Publisher" />
+	</analytic>
+	<monogr>
+		<title level="j">Alternatives: Global, Local, Political</title>
+		<imprint>
+			<biblScope unit="volume">22</biblScope>
+			<biblScope unit="page" from="113" to="133" />
+			<date type="published" when="1997">1997. 1997</date>
+			<publisher>Sage Publications, Inc</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b53">
+	<monogr>
+		<title level="m" type="main">The Ethics of Care: A Feminist Approach to Human Security</title>
+		<author>
+			<persName><forename type="first">Fiona</forename><surname>Robinson</surname></persName>
+		</author>
+		<ptr target="https://www.jstor.org/stable/j.ctt14bt8bq" />
+		<imprint>
+			<publisher>Temple University Press</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b54">
+	<analytic>
+		<title level="a" type="main">Refective HCI: Articulating an Agenda for Critical Practice</title>
+		<author>
+			<persName><forename type="first">Phoebe</forename><surname>Sengers</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">John</forename><surname>Mccarthy</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Paul</forename><surname>Dourish</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/1125451.1125762</idno>
+		<ptr target="https://doi.org/10.1145/1125451.1125762" />
+	</analytic>
+	<monogr>
+		<title level="m">CHI &apos;06 Extended Abstracts on Human Factors in Computing Systems</title>
+				<meeting><address><addrLine>Montréal, Québec, Canada; New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computing Machinery</publisher>
+			<date type="published" when="2006">2006</date>
+			<biblScope unit="page" from="1683" to="1686" />
+		</imprint>
+	</monogr>
+	<note>CHI EA &apos;06)</note>
+</biblStruct>
+
+<biblStruct xml:id="b55">
+	<monogr>
+		<title level="m" type="main">Threat Modeling Intimate Partner Violence: Tech Abuse as a Cybersecurity Challenge in Internet of Things. In The Emerald International Handbook of Technology Facilitated Violence and Abuse</title>
+		<author>
+			<persName><forename type="first">Julia</forename><surname>Slupska</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Leonie</forename><forename type="middle">Maria</forename><surname>Tanczer</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2021">2021</date>
+			<publisher>Emerald Publishing Limited</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b56">
+	<monogr>
+		<title level="m" type="main">The national intimate partner and sexual violence survey: 2015 data brief-updated release</title>
+		<author>
+			<persName><forename type="first">G</forename><surname>Sharon</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Xinjian</forename><surname>Smith</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kathleen</forename><forename type="middle">C</forename><surname>Zhang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Melissa</forename><forename type="middle">T</forename><surname>Basile</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jing</forename><surname>Merrick</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Marcie-Jo</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jieru</forename><surname>Kresnow</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Chen</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2018">2018. 2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b57">
+	<monogr>
+		<title level="m" type="main">Global status report on violence prevention</title>
+		<ptr target="https://www.who.int/publications-detail-redirect/9789241564793" />
+		<imprint>
+			<date type="published" when="2014">2014</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">Technical Report</note>
+	<note>World Health Organisation. 1-274 pages</note>
+</biblStruct>
+
+<biblStruct xml:id="b58">
+	<analytic>
+		<title level="a" type="main">Toward Active Refexivity: and Practice in the Production of Knowledge</title>
+		<author>
+			<persName><forename type="first">Jessica</forename><surname>Soedirgo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Aarie</forename><surname>Glas</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Political Science &amp; Politics</title>
+		<imprint>
+			<biblScope unit="volume">53</biblScope>
+			<biblScope unit="page" from="527" to="531" />
+			<date type="published" when="2020">2020. 2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b59">
+	<monogr>
+		<ptr target="https://stopstalkerware.org/" />
+		<title level="m">Coalition Against Stalkerware</title>
+				<imprint/>
+		<respStmt>
+			<orgName>Coalition Against Stalkerware</orgName>
+		</respStmt>
+	</monogr>
+	<note>n.d.</note>
+</biblStruct>
+
+<biblStruct xml:id="b60">
+	<analytic>
+		<title level="a" type="main">Technologies for Social Justice: Lessons from Sex Workers on the Front Lines</title>
+		<author>
+			<persName><forename type="first">Angelika</forename><surname>Strohmayer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Clamen</forename></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mary</forename><surname>Laing</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3290605.3300882</idno>
+		<ptr target="https://doi.org/10.1145/3290605.3300882" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings the 2019 CHI Conference on Human Factors in Computing Systems</title>
+				<meeting>the 2019 CHI Conference on Human Factors in Computing Systems<address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computing Machinery</publisher>
+			<date type="published" when="2019">2019</date>
+			<biblScope unit="page" from="1" to="14" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b61">
+	<analytic>
+		<title level="a" type="main">What Is Carceral Feminism?</title>
+		<author>
+			<persName><forename type="first">Anna</forename><surname>Terwiel</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Political Theory</title>
+		<imprint>
+			<biblScope unit="volume">48</biblScope>
+			<biblScope unit="issue">4</biblScope>
+			<biblScope unit="page" from="421" to="442" />
+			<date type="published" when="2020-08">Aug. 2020</date>
+			<publisher>SAGE Publications Inc</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b62">
+	<monogr>
+		<ptr target=".//nnedv.org/content/technology-safety/" />
+		<title level="m">Safety Net Project</title>
+				<imprint/>
+		<respStmt>
+			<orgName>National Network to End Domestic Violence</orgName>
+		</respStmt>
+	</monogr>
+	<note>n.d.</note>
+</biblStruct>
+
+<biblStruct xml:id="b63">
+	<analytic>
+		<title level="a" type="main">Sociotechnical Systems of Care</title>
+		<author>
+			<persName><forename type="first">Austin</forename><surname>Toombs</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Laura</forename><surname>Devendorf</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Patrick</forename><surname>Shih</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Elizabeth</forename><surname>Kaziunas</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">David</forename><surname>Nemer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Helena</forename><surname>Mentis</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Laura</forename><surname>Forlano</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Companion of the 2018 ACM Conference on Computer Supported Cooperative Work and Social Computing (CSCW &apos;18)</title>
+				<meeting><address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computing Machinery</publisher>
+			<date type="published" when="2018">2018</date>
+			<biblScope unit="page" from="479" to="485" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b64">
+	<analytic>
+		<title level="a" type="main">The Proper Care and Feeding of Hackerspaces: Care Ethics and Cultures of Making</title>
+		<author>
+			<persName><forename type="first">Austin</forename><forename type="middle">L</forename><surname>Toombs</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Shaowen</forename><surname>Bardzell</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jefrey</forename><surname>Bardzell</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2702123.2702522</idno>
+		<ptr target="https://doi.org/10.1145/2702123.2702522" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings the 33rd Annual ACM Conference on Human in Computing Systems. Association Computing Machinery</title>
+				<meeting>the 33rd Annual ACM Conference on Human in Computing Systems. Association Computing Machinery<address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<date type="published" when="2015">2015</date>
+			<biblScope unit="page" from="629" to="638" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b65">
+	<analytic>
+		<title level="a" type="main">Workshop proposal: Designing for everyday care in communities</title>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">L</forename><surname>Toombs</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Dow</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Vines</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Dennis</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Clarke</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Light</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><forename type="middle">M</forename><surname>Gray</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3197391.3197394</idno>
+		<ptr target="https://doi.org/10.1145/3197391.3197394Publisher" />
+	</analytic>
+	<monogr>
+		<title level="m">DIS 2018 -Companion Publication of the 2018 Designing Interactive Systems Conference</title>
+				<meeting><address><addrLine>Newcastle University</addrLine></address></meeting>
+		<imprint>
+			<date type="published" when="2018">2018. 2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b66">
+	<analytic>
+		<title level="a" type="main">An Ethic of Care</title>
+		<author>
+			<persName><forename type="first">C</forename><surname>Joan</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Tronto</surname></persName>
+		</author>
+		<ptr target="https://www.jstor.org/stable/44875693Publisher" />
+	</analytic>
+	<monogr>
+		<title level="j">Generations: Journal of the American Society on Aging</title>
+		<imprint>
+			<biblScope unit="volume">22</biblScope>
+			<biblScope unit="page" from="15" to="20" />
+			<date type="published" when="1998">1998. 1998</date>
+			<publisher>American Society on Aging</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b67">
+	<analytic>
+		<title level="a" type="main">Creating Caring Institutions: Politics, Plurality, and Purpose</title>
+		<author>
+			<persName><forename type="first">Joan</forename><forename type="middle">C</forename><surname>Tronto</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Ethics and Social Welfare</title>
+		<imprint>
+			<biblScope unit="volume">4</biblScope>
+			<biblScope unit="issue">2</biblScope>
+			<biblScope unit="page" from="158" to="171" />
+			<date type="published" when="2010-07">2010. July 2010</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b68">
+	<monogr>
+		<title/>
+		<idno type="DOI">10.1080/17496535.2010.484259</idno>
+		<ptr target="https://doi.org/10.1080/17496535.2010.484259" />
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b69">
+	<analytic>
+		<title level="a" type="main">Toward a Feminist Theory of Caring</title>
+		<author>
+			<persName><forename type="first">Joan</forename><forename type="middle">C</forename><surname>Tronto</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Berenice</forename><surname>Fisher</surname></persName>
+		</author>
+		<ptr target="https://experts.umn.edu/en/publications/toward-a-feminist-theory-of-caringPublisher" />
+	</analytic>
+	<monogr>
+		<title level="j">Circles of Care</title>
+		<imprint>
+			<biblScope unit="page" from="36" to="54" />
+			<date type="published" when="1990">1990. 1990</date>
+			<publisher>SUNY Press</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b70">
+	<analytic>
+		<title level="a" type="main">The tools and tactics used in intimate partner surveillance: An analysis of online infdelity forums</title>
+		<author>
+			<persName><forename type="first">Emily</forename><surname>Tseng</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Rosanna</forename><surname>Bellini</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Nora</forename><surname>Mcdonald</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Matan</forename><surname>Danos</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Rachel</forename><surname>Greenstadt</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Damon</forename><surname>Mccoy</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Nicola</forename><surname>Dell</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Thomas</forename><surname>Ristenpart</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">29th {USENIX} Security Symposium</title>
+				<imprint>
+			<date type="published" when="2020">2020</date>
+			<biblScope unit="page" from="1893" to="1909" />
+		</imprint>
+	</monogr>
+	<note>{USENIX} Security 20</note>
+</biblStruct>
+
+<biblStruct xml:id="b71">
+	<analytic>
+		<title level="a" type="main">A Digital Safety Dilemma: Analysis of Computer-Mediated Computer Security Interventions for Intimate Partner Violence During COVID-19</title>
+		<author>
+			<persName><forename type="first">Emily</forename><surname>Tseng</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Diana</forename><surname>Freed</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kristen</forename><surname>Engel</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Thomas</forename><surname>Ristenpart</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Nicola</forename><surname>Dell</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings the 2021 CHI Conference on Human Factors in Computing Systems</title>
+				<meeting>the 2021 CHI Conference on Human Factors in Computing Systems</meeting>
+		<imprint>
+			<date type="published" when="2021">2021</date>
+			<biblScope unit="page" from="1" to="17" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b72">
+	<analytic>
+		<title level="a" type="main">The whole place self : refecting on the original working practices of rape crisis</title>
+		<author>
+			<persName><forename type="first">F</forename><surname>Vera-Gray</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Num Pages: 0 Number: 1 Publisher</title>
+				<imprint>
+			<publisher>Policy Press</publisher>
+			<date type="published" when="2020-02">2020. Feb. 2020</date>
+			<biblScope unit="volume">4</biblScope>
+			<biblScope unit="page" from="59" to="72" />
+		</imprint>
+	</monogr>
+	<note>Journal of gender-based violence</note>
+</biblStruct>
+
+<biblStruct xml:id="b73">
+	<analytic>
+		<title level="a" type="main">The Invisible Work of Maintenance in Community Health: Challenges and Opportunities for Digital Health to Support Frontline Health Workers in Karnataka</title>
+		<author>
+			<persName><forename type="first">Nervo</forename><surname>Verdezoto</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Naveen</forename><surname>Bagalkot</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Swati</forename><surname>Syeda Zainab Akbar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Nicola</forename><surname>Sharma</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Deirdre</forename><surname>Mackintosh</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Paula</forename><surname>Harrington</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Grifths</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3449165</idno>
+		<ptr target="https://doi.org/10.1145/3449165" />
+	</analytic>
+	<monogr>
+		<title level="j">South India. Proceedings of the ACM on Human-Computer Interaction</title>
+		<imprint>
+			<biblScope unit="volume">5</biblScope>
+			<biblScope unit="page">31</biblScope>
+			<date type="published" when="2021-04">2021. April 2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b74">
+	<analytic>
+		<title level="a" type="main">The abuse of technology in domestic violence and stalking</title>
+	</analytic>
+	<monogr>
+		<title level="j">Violence against women</title>
+		<imprint>
+			<biblScope unit="volume">23</biblScope>
+			<biblScope unit="page" from="584" to="602" />
+			<date type="published" when="2017">2017. 2017</date>
+		</imprint>
+	</monogr>
+	<note>Delanie</note>
+</biblStruct>
+
+<biblStruct xml:id="b75">
+	<monogr>
+		<title level="m" type="main">The Cure: History of Teletherapy</title>
+		<author>
+			<persName><forename type="first">Hannah</forename><surname>Zeavin</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2021">2021</date>
+			<publisher>MIT Press</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b76">
+	<analytic>
+		<title level="a" type="main">The Role of Computer Security Customer Support in Helping Survivors of Intimate Partner Violence</title>
+		<author>
+			<persName><forename type="first">Yixin</forename><surname>Zou</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Allison</forename><surname>Mcdonald</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Julia</forename><surname>Narakornpichit</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Nicola</forename><surname>Dell</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Thomas</forename><surname>Ristenpart</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kevin</forename><surname>Roundy</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Florian</forename><surname>Schaub</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Acar</forename><surname>Tamersoy</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">30th {USENIX} Security Symposium</title>
+				<imprint>
+			<date type="published" when="2021">2021</date>
+			<biblScope unit="page" from="429" to="446" />
+		</imprint>
+	</monogr>
+	<note>{USENIX} Security 21</note>
+</biblStruct>
+
+				</listBibl>
+			</div>
+		</back>
+	</text>
+</TEI>

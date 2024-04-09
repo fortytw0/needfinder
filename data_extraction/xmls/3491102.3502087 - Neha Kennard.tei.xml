@@ -1,0 +1,1848 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xml:space="preserve" xmlns="http://www.tei-c.org/ns/1.0" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.com/kermitt2/grobid/master/grobid-home/schemas/xsd/Grobid.xsd"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+	<teiHeader xml:lang="en">
+		<fileDesc>
+			<titleStmt>
+				<title level="a" type="main">Promptiverse: Scalable Generation of Scaffolding Prompts Through Human-AI Hybrid Knowledge Graph Annotation</title>
+			</titleStmt>
+			<publicationStmt>
+				<publisher/>
+				<availability status="unknown"><licence/></availability>
+			</publicationStmt>
+			<sourceDesc>
+				<biblStruct>
+					<analytic>
+						<author>
+							<persName><forename type="first">Yoonjoo</forename><surname>Lee</surname></persName>
+							<email>yoonjoo.lee@kaist.ac.kr</email>
+							<affiliation key="aff0">
+								<orgName type="department">School of Computing</orgName>
+								<orgName type="institution">KAIST</orgName>
+								<address>
+									<settlement>Daejeon</settlement>
+									<country key="KR">Republic of Korea</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">John</forename><surname>Joon</surname></persName>
+							<affiliation key="aff1">
+								<orgName type="department">Computer Science &amp; Engineering</orgName>
+								<orgName type="institution">University of Michigan</orgName>
+								<address>
+									<settlement>Ann Arbor</settlement>
+									<country key="US">USA</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Young</forename><surname>Chung</surname></persName>
+							<affiliation key="aff1">
+								<orgName type="department">Computer Science &amp; Engineering</orgName>
+								<orgName type="institution">University of Michigan</orgName>
+								<address>
+									<settlement>Ann Arbor</settlement>
+									<country key="US">USA</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Tae</forename><forename type="middle">Soo</forename><surname>Kim</surname></persName>
+							<email>taesoo.kim@kaist.ac.kr</email>
+							<affiliation key="aff2">
+								<orgName type="department">School of Computing</orgName>
+								<orgName type="institution">KAIST</orgName>
+								<address>
+									<settlement>Daejeon</settlement>
+									<country key="KR">Republic of Korea</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Jean</forename><forename type="middle">Y</forename><surname>Song</surname></persName>
+							<email>jeansong@dgist.ac.kr</email>
+							<affiliation key="aff3">
+								<orgName type="department">Information and Communication Engineering</orgName>
+								<orgName type="institution">DGIST Daegu</orgName>
+								<address>
+									<country key="KR">Republic of Korea</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Juho</forename><surname>Kim</surname></persName>
+							<email>juhokim@kaist.ac.kr</email>
+							<affiliation key="aff4">
+								<orgName type="department">School of Computing</orgName>
+								<orgName type="institution">KAIST</orgName>
+								<address>
+									<settlement>Daejeon</settlement>
+									<country key="KR">Republic of Korea</country>
+								</address>
+							</affiliation>
+						</author>
+						<title level="a" type="main">Promptiverse: Scalable Generation of Scaffolding Prompts Through Human-AI Hybrid Knowledge Graph Annotation</title>
+					</analytic>
+					<monogr>
+						<imprint>
+							<date/>
+						</imprint>
+					</monogr>
+					<idno type="DOI">10.1145/3491102.3502087</idno>
+				</biblStruct>
+			</sourceDesc>
+		</fileDesc>
+		<encodingDesc>
+			<appInfo>
+				<application version="0.7.1" ident="GROBID" when="2022-07-22T05:00+0000">
+					<desc>GROBID - A machine learning software for extracting information from scholarly documents</desc>
+					<ref target="https://github.com/kermitt2/grobid"/>
+				</application>
+			</appInfo>
+		</encodingDesc>
+		<profileDesc>
+			<textClass>
+				<keywords>
+					<term>Scaffolding prompt</term>
+					<term>knowledge graph</term>
+					<term>human-AI hybrid annotation</term>
+				</keywords>
+			</textClass>
+			<abstract>
+<div xmlns="http://www.tei-c.org/ns/1.0"><p>Figure <ref type="figure">1</ref>: With Promptiverse, lecture designers can create a large number of diverse scaffolding prompts by extracting rich knowledge graphs from a video script. These knowledge graphs can be efficiently extracted with the help of Grannotate, a human-AI hybrid graph annotation tool. Promptiverse generates scaffolding prompts by traversing knowledge graphs in a way that is guided by the learning patterns of Ausubel's theory <ref type="bibr" target="#b4">[5]</ref>. Prompts in each round are generated from a triplet (e.g., Deciduous trees-Attribute-Abscission) with a variation over knowledge elements that can be asked or provided. Example conversations under Scaffolding Prompts show how elements in the knowledge graph can be traversed in different ways to create diverse multi-turn prompts.</p></div>
+			</abstract>
+		</profileDesc>
+	</teiHeader>
+	<text xml:lang="en">
+		<body>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="1">INTRODUCTION</head><p>While video learning online has become a widely adopted method for a huge variety of learners, most online video learning environments provide the same lecture video for all learners. With the one-size-fits-all design, learners may struggle with different parts of the lecture content due to their varying prior knowledge. Finding another video that better explains the learner's struggle point might be a solution, but this would require the learner to search for such a video, incurring additional effort. Moreover, as learners are novices, they might not have enough knowledge to discern which video can help overcome their struggles.</p><p>One way to alleviate learners' diverse pain points that arise from one-size-fits-all video designs is to utilize diverse scaffolding prompts, which provide hints and ask learners about learning content. For example, if the video's explanation of a concept was not detailed enough for a learner, then the learner would struggle with understanding the content. With diverse prompts, if learners ask the online learning system for help about the concept, then the system can provide suitable scaffolding prompts that give learners a chance to facilitate their understanding about the concept. The prompt would let learners check their understanding, maintain their engagement, and allow them to relate the concept with other concepts they already know <ref type="bibr" target="#b11">[11,</ref><ref type="bibr" target="#b12">12]</ref>. Ultimately, the understanding of the concept would broaden learners' scheme of organizing and perceiving new information, allowing learners to comprehensively understand the lecture. For such support to be successful, a wide spectrum of scaffolding prompts must be prepared to deal with the diverse pain points of learners. However, due to the high cost of authoring, manually creating diverse scaffolding prompts can be impractical and, without this diversity, prompts will often fail to comprehensively address the various concepts dealt within a lecture.</p><p>In this work, we introduce Promptiverse, a scaffolding prompt generation approach that uses knowledge graphs to create diverse prompts at scale with low authoring cost. With knowledge graphs on the lecture content, Promptiverse traverses through knowledge entities and relations while considering the meaningful learning patterns from Ausubel's theory <ref type="bibr" target="#b3">[4,</ref><ref type="bibr" target="#b5">6]</ref>, which gives insight into designing pedagogically effective prompts. Promptiverse not only generates a large number of prompts out of the traversed paths, but also diversifies prompts' content by varying which knowledge elements are provided as hints and which are elicited from learners. For example, in Figure <ref type="figure">1</ref>, Promptiverse generates two different scaffolding prompts (green boxes) by varying the traversed paths. Prompts of these various contents allow alternative explanations to be provided to learners who may struggle with understanding the explanation of the video.</p><p>Though Promptiverse holds promise for the scalable creation of prompts, constructing the underlying knowledge graph requires lecture designers' manual effort. Therefore, we designed Grannotate, a human-machine hybrid system that assists lecture designers in annotating knowledge entities and relations on lecture transcripts and building hierarchical knowledge graphs. We adopted a mixed-initiative approach that combines human effort and machine recommendations to reduce the human load when constructing knowledge graphs. Based on the lecture designer's first few annotations, the machine recommends candidate knowledge entities, their hierarchical relations, and relation classes, which can then be refined by the lecture designers. Grannotate then allows the lecture designer to inspect how their annotations would impact the generated prompts by showing a preview of the type of prompts that would be generated.</p><p>To evaluate Promptiverse and Grannotate, we recruited experts with domain knowledge and teaching experience to create prompts using four different approaches. The four approaches were (1) manually designing prompts from scratch, and generating prompts with knowledge graphs that were constructed using (2) manual, (3) human-AI (using Grannotate), or (4) fully-automatic methods. We compared the approaches in terms of the quantity, quality, and diversity of prompts, and the self-reported cognitive load of experts. Results show that experts using Promptiverse generated 40 times more prompts with more diversity than those who manually designed the prompts. Between the manual, human-AI, and fully automatic graph construction methods, only graphs made with human-AI method using Grannotate generated prompts that were of comparable quality to the hand-designed prompts. We expect that our approach can diversify the authoring of learning content and lead online learning environments to provide eclectic and adaptive learning experiences to different learners.</p><p>The contributions of this work are as follows:</p><p>• Promptiverse, a novel framework that generates diverse prompts in a scalable manner by traversing knowledge graphs with effective learning patterns. • Grannotate, a system that allows lecture designers to annotate hierarchical knowledge structures for prompt generation, with the help of AI recommendations on entities and relations. • Experimental results showing that Promptiverse and Grannotate could produce a higher number of diverse prompts while maintaining a similar level of quality to hand-designed prompts.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2">RELATED WORK AND BACKGROUND</head><p>As our work introduces a novel framework for generating diverse scaffolding prompts in a large scale with the help of a human-AI hybrid annotation tool, we review research on 1) pedagogical effects of prompting, 2) Ausubel's meaningful learning theory, 3) automatic prompt generation, 4) knowledge representation in learning, and 5) knowledge graph annotation.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.1">Scaffolding Prompts</head><p>In online video learning, one-size-fits-all design of videos provide limited support to learners with varying prior knowledge, and scaffolding prompts can be one of the solutions to facilitate learning. Instructors or learning systems can employ scaffolding prompts to elicit learners' knowledge through questions and explanations <ref type="bibr" target="#b12">[12,</ref><ref type="bibr" target="#b24">24]</ref>. These prompts have generally been found to enhance learning <ref type="bibr" target="#b19">[19,</ref><ref type="bibr" target="#b29">29,</ref><ref type="bibr" target="#b56">56]</ref>. They also stimulate learners' retrieval practice and can help them realize what they did not understand from the lecture <ref type="bibr" target="#b15">[15,</ref><ref type="bibr" target="#b28">28]</ref>. Shin et al. <ref type="bibr" target="#b49">[49]</ref> categorized video prompts according to two dimensions: 1) comprehension-experience orientation, whether the prompt is asking learners' comprehension or asking about the learning experience, and 2) the level of specificity, whether the prompts refer to a specific part of lecture content or not. In Shin et al.'s taxonomy, prompts that focus on experience would not fall in our scaffolding prompts, and we specifically target prompts on specific content. To provide the benefits of scaffolding prompts to learners with diverse prior knowledge, we introduce an approach to diversify the creation of such prompts. These prompts can be used for various learning materials such as in-video quizzes <ref type="bibr" target="#b28">[28]</ref>, interactive tutoring instruction in online learning <ref type="bibr" target="#b11">[11]</ref>, and educational conversational agents <ref type="bibr" target="#b59">[59]</ref>.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.2">Ausubel's Meaningful Learning Theory</head><p>To create diverse scaffolding prompts, Promptiverse adopts Ausubel's theory <ref type="bibr" target="#b2">[3]</ref><ref type="bibr" target="#b3">[4]</ref><ref type="bibr" target="#b4">[5]</ref> on learning patterns. The overarching idea in Ausubel's theory is that knowledge is hierarchically organized. Based on this idea, he proposed that meaningful learning involves understanding the relationships between concepts and identifying new relations. When meaningful learning is done, knowledge is easily retained and applied, whereas rote learning lets learners just memorize all scattered knowledge <ref type="bibr" target="#b3">[4,</ref><ref type="bibr" target="#b38">38]</ref>. Meaningful learning is achieved when the instructional design considers these hierarchical relationships between prior knowledge and new knowledge. Ausubel also described three learning processes by which new knowledge is assimilated into the existing cognitive structure. The first is superordinate learning, where learning of a concept is facilitated by connecting it to many well-acquainted examples. For example, when learning deciduous trees, knowing about instances of deciduous trees, such as maples, oaks, and apple trees, would help understanding the concept of deciduous trees. The second is subordinate learning which occurs when learners subsume new information to the prior knowledge in a hierarchical manner. This type includes two subtypes of subsumptions which are correlative subsumption and derivative subsumption. Correlative subsumption occurs when learners have to alter or extend their previously learned concept to include the possibility of new information. For example, when learners encounter a tree that has red leaves but only know those with green leaves, then they need to extend the concept of trees to include the cases of red leaves. This process enriches the higher-level concept. Derivative subsumption is where new knowledge is an instance or an example of a previously learned concept so learners can leverage existing knowledge to learn the new one. For example, a learner who knows that a tree has a trunk would be able to use that knowledge when learning about a new tree, that the new tree would also have a trunk. The last type is combinatorial learning, where learners relate previously acquired knowledge to learn new information that is neither more inclusive nor more specific than the previously acquired one. For example, to learn something about pollination in plants, a learner might relate it to the previously acquired knowledge of how fish eggs are fertilized. While previous work has designed prompts based on Ausubel's high-level lessons <ref type="bibr" target="#b25">[25]</ref>, to the extent of our knowledge, our work is the first to directly make use of pedagogically effective subsumption patterns to create scaffolding prompts.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.3">Generation of Prompts</head><p>Question-answering (QA) is a conversational activity that takes a similar form to scaffolding prompts. Algorithmic QA generation has been an active area of research in NLP and computational linguistics. To drive research in this area, researchers have constructed large crowdsourced conversational QA datasets (e.g. CoQA <ref type="bibr" target="#b44">[44]</ref>, QuAC <ref type="bibr" target="#b13">[13]</ref>), which collected dialogues between crowd workers asking and answering a sequence of questions about a source document. With collected datasets, researchers investigated approaches to generate questions <ref type="bibr" target="#b42">[42]</ref> or answers <ref type="bibr" target="#b6">[7]</ref> in conversations. These datasets and generated artifacts are close to scaffolding prompts format-wise, but they do not consider educational effects in question answering. On the other hand, QA systems that are designed for pedagogical purposes consider educational effects but are less diverse in terms of concepts dealt with and require a high manual load for QA authoring. These systems were developed as dialogue agents that help students learn programming <ref type="bibr" target="#b59">[59]</ref>, math <ref type="bibr" target="#b8">[9]</ref>, and factual knowledge in science, safety, and English vocabulary <ref type="bibr" target="#b48">[48]</ref>.</p><p>Our approach aims to meet the goal of increasing the diversity of concepts while considering educational effects and reducing authoring load.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.4">Knowledge Representation in Learning Context</head><p>Learning is a process of integrating new information into existing prior knowledge <ref type="bibr" target="#b37">[37]</ref>, and structured knowledge representations, such as concept maps, flow diagrams, knowledge graphs, and tree diagrams have often been used to support the process <ref type="bibr" target="#b0">[1,</ref><ref type="bibr" target="#b46">46]</ref>. Various systems in the HCI domain were also designed to help learners structure knowledge with these representations. For example, ConceptScape <ref type="bibr" target="#b32">[32]</ref> provided learners with concept maps created through crowdsourcing to help their comprehension and navigation. Similarly, Texsketch <ref type="bibr" target="#b53">[53]</ref> supported readers to design diagrams in the process of reading texts to allow them to integrate concepts into a cohesive mental model. In this work, we leverage knowledge representation for another purpose, to generate scaffolding prompts in a scalable manner. To facilitate pedagogical effects of generated prompts, we structure knowledge into knowledge graphs with hierarchical relationships between concepts <ref type="bibr" target="#b39">[39,</ref><ref type="bibr" target="#b40">40]</ref>. Moreover, we facilitate the process of structuring knowledge graphs with a human-AI hybrid annotation tool.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.5">Graph Annotation from Text Data</head><p>We introduce a knowledge graph annotation approach that builds upon previous work on graph annotation tools and human-machine hybrid annotation. Graph annotation tools allow annotators to extract how entities in the source medium (e.g., document) relate to each other. Early tools, such as BRAT <ref type="bibr" target="#b52">[52]</ref>, visualized these annotated relations on the text itself, and they could get visually complex when many relations are annotated. More recent tools accompanied the visualization of graphs to allow sensemaking of annotated relations <ref type="bibr" target="#b54">[54]</ref>. Among tools that support visual representation, some supported the annotation of similar representations such as concept maps or knowledge diagrams <ref type="bibr" target="#b32">[32,</ref><ref type="bibr" target="#b53">53]</ref> and were designed for educational purposes.</p><p>To reduce human effort for annotating complex knowledge structures out of text documents, machine assistance can be a viable solution. In natural language annotation, machine assistance has been leveraged in many tools <ref type="bibr" target="#b17">[17,</ref><ref type="bibr" target="#b51">51]</ref>, some of them providing machine learning-based recommendations <ref type="bibr" target="#b26">[26,</ref><ref type="bibr" target="#b27">27]</ref>. In this work, we extend existing work to Grannotate, a knowledge graph annotation tool that adopts AI to recommend candidate entities, if any of the entities relate to each other, and how those entities relate. Moreover, Grannotate is designed to assist the accurate generation of prompts, by showing annotators how prompts would be generated out of the currently annotated knowledge graph.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3">CHALLENGES IN DESIGNING SCAFFOLDING PROMPTS</head><p>In this work, to support diverse learners in video learning, we aim to design a scalable approach to creating diverse scaffolding prompts. To learn requirements for effective scaffolding prompts and difficulties in creating them, we conducted semi-structured interviews with four instructors from a variety of domains ranging from mathematics to computer science to history. In these interviews, we asked about (1) types of scaffolding prompts they mainly generate and use, (2) how they make prompts for various learners, (3) challenges they face while authoring scaffolding prompts, and (4) types of interventions that can alleviate their effort when authoring prompts. Interviews were conducted remotely, and the audio was recorded. After transcribing the audio, one of the authors conducted iterative coding with inductive analysis. Coded results were reviewed with another author.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.1">Findings</head><p>Instructors prefer creating shallow follow-up prompts <ref type="bibr" target="#b12">[12]</ref>, which focus on knowledge pieces that could be answered by directly referring to a specific sentence given in the lecture content (e.g., what passes through the human heart?). Instructors emphasized that effective shallow prompts enable instructors and learners to interact more actively and motivate learners by letting them answer the question easily. They would avoid using hard questions with deep prompts <ref type="bibr" target="#b12">[12]</ref>, like discussing the student's mental model about the learned content (e.g., how would membrane being permeable to certain substances relate back to capillary walls?). A series of effective shallow prompts let learners relate each single knowledge piece to other pieces and structure them in learners' scheme.</p><p>Instructors mentioned that scaffolding prompts should reveal more and more information with multi-turn in an adaptive fashion, elaborating the learner's answer over time and successively letting them elicit knowledge with a instructor-given guide <ref type="bibr" target="#b12">[12]</ref>. However, as the turn goes on between the instructor and the learner, deciding which knowledge to provide in each turn becomes challenging. They noted that provided information needs to be related to target knowledge and covered in the lecture. Moreover, multi-turn prompts should be dependent on each other. Instructors felt that considering all these factors makes the authoring of multi-turn scaffolding prompts effortful. Sometimes they could not prepare multi-turn prompts in their lecture despite all the benefits because of not enough time.</p><p>Instructors said they usually provide the same prompt to all learners, but they were concerned if the prompt would not be effective to learners with little prior knowledge who might require more guides. To address this issue, P1 sometimes surveys learners' prior knowledge and prepares a few different types of scaffold, with a spectrum of knowledge granularity. However, it is very timeconsuming, so in most cases, to learners who cannot get the right answer, P1 just would give answers instead of alternative prompts.</p><p>Finally, when lectures get longer, instructors often focus on prompting about main concepts and fail to address minor concepts that are difficult to understand without any scaffolds. Instructors said they usually could not be prepared for all those details when the lecture has too much content. They mentioned that they usually realize the need for scaffolding those details only after seeing learners experiencing difficulties.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.2">Design Goals</head><p>Based on the formative study, we present design goals for creating scaffolding prompts.</p><p>• G1. Reduce the required time and effort in creating scaffolding prompts that progressively give information related to the target knowledge in multi-turn. • G2. Create diverse prompts to provide adequate support for learners with varying prior knowledge. • G3. Create prompts that can comprehensively cover the lecture, even for long ones.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4">PROMPTIVERSE: GENERATING PROMPTS WITH KNOWLEDGE GRAPH</head><p>We introduce Promptiverse, a scaffolding prompt authoring approach that uses knowledge graphs to generate quality scaffolding prompts in a scalable manner. Effective prompts should consider relations between knowledge elements <ref type="bibr" target="#b12">[12,</ref><ref type="bibr" target="#b24">24]</ref>, but, as the formative study revealed, creating diverse prompts while considering knowledge relations is challenging. Promptiverse uses knowledge graphs to computationally and scalably design diverse scaffolding prompts while considering knowledge relations. That is, lecture designers can structure lecture content into a knowledge graph, and the Promptiverse uses the graph to generate prompts with pedagogical patterns. Traversability of a knowledge graph is key in achieving our design goals: multiple entities and relations in a knowledge graph can be automatically traversed in multiple ways, which can produce diverse scaffolding prompts (G1, G2). Moreover, once the knowledge graph thoroughly covers the knowledge within a lecture, it would create a comprehensive set of prompts that cover most of the lecture content (G3). Specifically, Promptiverse codifies 1) how a single prompt can be generated, 2) how a dyad of prompts can be generated with single prompts while keeping the coherency in prompt content, and 3) how multi-turn prompts can be formulated with dyads of prompts in pedagogically meaningful ways. As building knowledge graphs involves the lecture designer's effort, in a later section (Section 5), we introduce our knowledge graph annotation system that provides machine learning (ML) recommendations to facilitate the process. Elicited knowledge elements are shaded in dark teal. In provide-all (left), both knowledge entities and the connecting relation are given in the prompt. In elicit-entity (middle), one of the entities is asked while giving the other entity and the relation as hints. Elicit-relation (right) asks about the relation while giving both entities as hints.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.1">Representing Lecture Content into a Knowledge Graph</head><p>As a preliminary, we describe how we represent lecture content into a knowledge graph that consists of entities and relations <ref type="bibr" target="#b40">[40]</ref>.</p><p>Entities are concepts from the lecture, which are considered educationally important by the lecturer. On the other hand, relations explain how those entities are related to each other. With one relation, there would be two connected entities, and these three elements constitute a triplet. By combining multiple triplets, a knowledge graph is formed (knowledge graph in Figure <ref type="figure">1</ref>). Our knowledge graph structure mainly focuses on hierarchical relations between knowledge entities, as leveraging such relations is known to facilitate learning <ref type="bibr" target="#b3">[4]</ref>.</p><p>To formulate our knowledge graph structure around hierarchical relations, we referred to existing knowledge relation taxonomies <ref type="bibr" target="#b18">[18,</ref><ref type="bibr" target="#b20">20,</ref><ref type="bibr" target="#b22">22,</ref><ref type="bibr" target="#b34">34,</ref><ref type="bibr" target="#b36">36,</ref><ref type="bibr" target="#b40">40]</ref>. Considering previous work, we identified seven cross-hierarchy relations and four in-hierarchy relations. Cross-hierarchy relations explain how entities in different hierarchy levels relate, hence one being higher than the other (e.g., "machine learning" (hypernym) and "supervised learning" (hyponym)). Cross-hierarchy relations span over a spectrum, from causal relations (Cause-Effect) to examples (Abstract-Instance), subtypes (Hypernym-Hyponym), features (Object-Attribute), inclusion (Whole-Part), means (Purpose-Used), and substeps (Process-Steps) relations. On the other hand, in-hierarchy relations explain how entities in the same hierarchy level relate to each other (e.g., "supervised learning" is comparable to "unsupervised learning"). For this type, we identified Sequence, Compare/Contrast, Identification, and Coreference. Note that Identification and Coreference are different in that Identification is used when two different entities are considered to have the same meaning in the lecture, while Coreference is used to indicate that two entities are the same thing. We name any relations that fall into cross-or in-hierarchy relations as class relations. For cases where the knowledge relations are not best explained with this taxonomy, we also allow open relation, which is a relation freely definable by the lecture designer. In the next sections, we explain how this knowledge structure is used to generate prompts.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.2">Mechanism for Generating Prompts</head><p>We explain our novel mechanism of generating scaffolding prompts from knowledge graphs on lecture content. Promptiverse focuses on prompts that correspond to shallow questions according to Chi et al. <ref type="bibr" target="#b12">[12]</ref>. Our scope sets a lower participation threshold to elicit more learner participation. Among shallow follow-ups, we more specifically focus on prompts that explain or ask about the relations between knowledge elements.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>4.2.1</head><p>Generating a Single Prompt. The most basic mechanism for generating prompts out of a knowledge graph is to derive a single round of prompts from a triplet. For example, when there is a triplet that consists of the entities of "shape of distribution" and "modality", and a connecting relation of "attribute", we can design a prompt that asks about the relation between the entities, like "How are modality and shape of distribution related?" In a prompting sentence, a knowledge element can serve two functions-1) be provided in the sentence or 2) be a subject to be elicited from learners <ref type="bibr" target="#b24">[24]</ref>. For example, in the previous example statement, "modality" and "shape of distribution" are entities provided and the relation of "attribute" would be elicited from learners. Note that in a prompting sentence, at least two knowledge elements should be provided. For example, if more than two knowledge elements are hidden and are to be elicited from learners, the question would be too challenging as there is little information to derive the answer to be elicited (e.g., Supervised learning has which relation to what?).</p><p>Based on how knowledge elements are elicited or provided, a single triplet can turn into three versions of single prompts (Figure <ref type="figure" target="#fig_0">2</ref>). If the online learning system is aware of the learner's level of understanding, these different prompts can be presented adaptively to learners. For example, if the learner barely understands the lecture content, it would be more effective to provide them with all the information rather than eliciting it.</p><p>Among the three versions (Figure <ref type="figure" target="#fig_0">2</ref>), the first type is provide-all, where all information in a triplet is provided to the learner. The other types all involve elicitation. These types are elicit-entity, and elicit-relation. Elicit-entity provides one entity and a relation, and elicits the other entity in the triplet. Elicit-relation provides both entities and asks students about the relation between those entities.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.2.2">Generating a Dyad of Prompts.</head><p>Prompting can be more effective by combining multiple prompting sentences into one coherent set of multi-turn scaffolding prompts. One basic mechanism for generating such multi-turn prompts is to share an entity between the two prompts (Figure <ref type="figure" target="#fig_1">3a</ref>), as that entity would bridge the context between the prompts. Another basic mechanism is not to elicit already provided or elicited knowledge elements again (Figure <ref type="figure" target="#fig_1">3b</ref>), as asking about the already mentioned information would be pointless in many cases. The only exception is when the learner could not answer a specific entity and the prompt asks for the entity in other ways. In this case, the following prompt would give more Examples that do and do not follow the mechanisms are both shown. a) A dyad of prompts share an entity. In the figure, oak is being shared between two rounds of prompts. However, in the counterexample, the following prompt does not have any entity shared with the preceding one. b) The following prompt should not elicit a knowledge entity from the preceding prompt. In the given example, oak is not elicited, but provided in the second turn. On the other hand, in the counterexample, oak is elicited even though it has been mentioned before, thereby breaking coherence of prompts. information to help learners to answer the entity. With these two mechanisms, we can generate diverse dyads from three entities and two relations, by permutating on whether to elicit or provide in each prompt turn and, if eliciting, on which entity to elicit.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.2.3">Generating Educationally Effective</head><p>Prompts. While dyads of prompts can seem syntactically coherent, it is not clear which series of dyads would be educationally effective. To expand dyads of prompts to educationally meaningful multi-turn prompts, we took Ausubel's theory as inspiration and designed mechanisms for them <ref type="bibr" target="#b2">[3,</ref><ref type="bibr" target="#b4">5]</ref>. Ausubel's theory explains meaningful learning happens when considering how each knowledge would be organized with respect to other related knowledge in cognitive structure. Specifically, Ausubel emphasized the role of hierarchical relations between knowledge entities and the order in which they are introduced to learners. With our mechanism, we adopt these patterns into traversals on a knowledge graph and describe how these traversals can turn into prompts.</p><p>There are four types of multi-turn scaffolding prompting mechanisms inspired by Ausubel's theory: superordinate, correlative, derivative, and combinatorial prompting. First, superordinate learning (Figure <ref type="figure" target="#fig_2">4</ref>) happens when learners first learn subordinate knowledge elements (Hypernym-Hyponym, maple and oak in Figure <ref type="figure" target="#fig_2">4</ref>), and then relate that to one superordinate entity (deciduous tree in Figure <ref type="figure" target="#fig_2">4</ref>). Hence, in superordinate prompting, each subordinate entity is provided gradually first, and then the superordinate entity is provided or elicited, as in the example in Figure <ref type="figure" target="#fig_2">4</ref>. Here, the learning would be more effective if all subordinate entities have the same relation to the superordinate entity, as learners would more easily consider subordinate entities together compared to when relations are all different.</p><p>The second is correlative learning (Figure <ref type="figure" target="#fig_3">5</ref>), where the learner has a model of a superordinate entity (deciduous tree in Figure <ref type="figure" target="#fig_3">5</ref>), and learns new related subordinate knowledge (Hypernym-Hyponym and oak in Figure <ref type="figure" target="#fig_3">5</ref>) related to that superordinate entity. In correlative prompting, this pattern would be realized by consecutively providing or eliciting other subordinate entities and relations to a superordinate entity as in the example of Figure <ref type="figure" target="#fig_3">5</ref>. The subordinate relations do not have to be consistent, as correlative learning is about adding new related knowledge to one superordinate entity.</p><p>In derivative learning (Figure <ref type="figure">6</ref>), there is a superordinate (deciduous tree in Figure <ref type="figure">6</ref>) and a subordinate(maple in Figure <ref type="figure">6</ref>) entity in hierarchical relations of either Abstract-Instance or Hypernym-Hyponym. These entities have relations of the same class (Whole-Part in Figure <ref type="figure">6</ref>) stemming out of them. In derivative prompting, the prompt expects the learners to leverage the hierarchical relationship between the superordinate and subordinate entities when learning the shared knowledge relations. For example, both in Figure 6-1 and 2, the hierarchical relationships are provided or elicited Figure <ref type="figure">6</ref>: Example prompts from a derivative learning pattern. First, a prompt about entities (white) in a hierarchical relation (either in Hypernym-Hyponym or Abstract-Instance) is introduced, followed by a prompt about how one of those entities relates to an entity with a stemming relation (purple). This pattern expects learners to leverage the relation that stems from one of the entities in the hierarchy relation to understand the other stemming relation in the counterpart entity in the hierarchy relation.</p><p>Figure <ref type="figure">7</ref>: Example prompts from a combinatorial learning pattern. First, a prompt (or prompts) about entities in a comparable relation (white) is introduced, followed by a prompt about how one of those entities relates to an entity with a stemming relation (purple). This pattern expects learners to leverage the relation that stems from one of the entities in the comparable relation to understand the other stemming relation in the counterpart entity in the comparable relation.</p><p>first. Then, the relation stemming from either superordinate or subordinate entity (Whole-Part) would be subsequently provided or elicited. Here, the hierarchical relations are restricted to Hypernym-Hyponym and Abstract-Instance, as stemming relations can be shared in these two.</p><p>The last type is combinatorial learning (Figure <ref type="figure">7</ref>). In this, there are comparable knowledge entities (maple and oak in Figure <ref type="figure">7</ref>). These entities have relations of the same class (Whole-Part in Figure <ref type="figure">7</ref>) stemming from them, similar to derivative learning. Comparable entities can share the same superordinate entity (deciduous tree in Figure <ref type="figure">7</ref>), related in Hypernym-Hyponym or Abstract-Instance. It is because one superordinate's hyponyms or instances would be comparable to each other. In combinatorial prompting, the prompt expects the learners to use the comparable relations when learning the knowledge relations that stem out of comparable entities. As in Figure <ref type="figure">7</ref>, first, the comparable relations are prompted, either by directly referring to comparable relation or to the shared superordinate. Then, the relation stemming from one of the comparable entities (Whole-Part) is provided or elicited, expecting the comparable relation would help learn the stemming relation.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5">GRANNOTATE: KNOWLEDGE GRAPH ANNOTATION SYSTEM</head><p>While Promptiverse can create diverse prompts by traversing a knowledge graph, the effort required to build a knowledge graph <ref type="bibr" target="#b1">[2]</ref> can be a bottleneck. To reduce this barrier, we introduce Grannotate, an annotation tool that leverages a visualization of a knowledge graph and AI-powered recommendations. We first investigated challenges in building knowledge graphs with an existing baseline tool. Based on this investigation, we designed our tool.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.1">Challenges in Graph Annotation</head><p>To identify challenges in graph annotation, we conducted a pilot study with an existing tool. We recruited five participants (graduate students). Among the three lecture topics that we prepared (Machine Learning, Chemistry, Data Structure), each participant picked one topic that they were most familiar with. Each study session lasted for 40 minutes. During the session, participants were first given instruction on the annotation guideline. Then, they used BRAT <ref type="bibr" target="#b52">[52]</ref>, which allows users to annotate knowledge entities and their relations on a document. The tool shows annotated triplet relations on the document as two highlighted text snippets with an arrow connecting them. Each participant watched a lecture video on the topic they picked and annotated the lecture transcript on BRAT.</p><p>At the end of the study, participants provided feedback through a semi-structured interview <ref type="bibr" target="#b41">[41]</ref>. The sessions were video recorded for analysis.</p><p>5.1.1 Findings. Videos were coded for different annotation activities, including reading, adding a node, adding a relation, labeling a relation, and editing. One of the authors did iterative coding with inductive analysis, and the resulting codes were reviewed by the other authors. At a high level, we found four critical challenges with the existing graph annotation tool. First, only with the text, it is hard to identify the whole structure of the graph (C1). Participants said that this was because the graph gets more complex as they annotated more entities and relationships. Second, it is hard to verify whether the annotated entities and relations are correct based only on the examples in the guideline (C2). For example, they were not sure if they annotated entities accurately-i.e., with the correct span (e.g., "electronic structure in an atom" vs. "electronic structure"?).</p><p>They also wanted some examples on how to use the relation classes in the guideline with the entities that they annotated. Third, it is hard to assure if all important entities are covered, as there can be many entities (C3). Additionally, participants were sometimes not sure about what entities should be considered important enough to be annotated. For example, P2 said "Did I pick every entity that I should do? I might have missed some of them..." Lastly, it is hard to choose the relation class because they are many and unfamiliar to annotators (C4). Participants needed to refer back to the whole guideline again when annotating a new relation.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.2">Annotation Interface</head><p>Based on the challenges (C1-4) identified from the pilot study, we designed our hybrid human-AI annotation tool. First, our tool addresses the problem of sensemaking about the currently annotated results (C1) by having two representations of an annotated graph: overlaid on the transcript and a graph visualization (Figure <ref type="figure" target="#fig_4">8</ref>). The visualization is designed to remove clutter and help the user more easily perceive the relations between the annotated concepts. The user can use both representations to add and edit entities and relations. On the transcript, the user can add knowledge entities by selecting a portion of the text. Then, the annotated part is highlighted in yellow (Figure <ref type="figure" target="#fig_4">8a</ref>) and the entity is also visualized on the graph-side (Figure <ref type="figure" target="#fig_4">8b-1</ref>). By selecting this entity either on the transcript or the graph, the user can edit the name of the entity or delete that entity (Figure <ref type="figure" target="#fig_4">8a</ref> When selecting a relation class, it can be difficult for the user to understand how the annotated class will be used in prompts (C2). Hence, our tool also shows how prompts would be created out of the annotation (Figure <ref type="figure" target="#fig_6">9e</ref>). For example, if "planning" is annotated to be a hyponym of "human intelligence", the system shows example prompts like "Planning is a type of human intelligence", or "What can be a type of human intelligence?". When they select the "Abstract-Instance" class, annotators can also add the setting of the instance, which explains the specific setting in which the instance appears (e.g., "In the setting of classifying images with a cat, a image set with or without a cat is an example training data. "). Once the user confirms the relation class, the annotated relation is visualized on both the transcript and the graph (Figure <ref type="figure" target="#fig_4">8</ref>). The class of "Coreference" is the only exception, as entities related with this class are shown as a single node on the graph. The user can edit or delete relations by selecting them on the graph-side.</p><p>To alleviate the burden of having many options for entities and relation classes, our tool provides AI-driven recommendations (C3 and C4). There are three types of recommendations: 1) entity recommendation, 2) relation existence recommendation, and 3) relation class recommendation. Entity recommendations and relation existence recommendations highlight potentially important entities and relations among all the possible options. Entity recommendations provided after the user annotates entities. These recommendations are shown as light-green highlights on the transcript-side, that the annotators can click on when they want to add them (Figure <ref type="figure" target="#fig_4">8a-2</ref>). Edge existence recommendations are provided when the user one of the entities. On the transcript these recommendations are shown as light-blue edges (Figure <ref type="figure" target="#fig_4">8a-3</ref>). Finally, the edge recommendations are when the user enters the modal for specifying relation classes, by highlighting the recommended classes recommendations the top three classes predicted an edge classification model we on a large-scale natural model. Details will be presented in Section 5.3.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.3">AI Recommendation Architecture</head><p>We three different pipelines to support of the three recommendations mentioned Section which are entity, relation existence, class recommendations.</p><p>provide entity recommendations, we use the framework supports three information extraction tasks with state-of-the-art performances: named entity recognition, relation extraction, and event extraction. With DYGIE++, we trained a model on the SCIERC dataset <ref type="bibr" target="#b35">[35]</ref>, which is a collection of 500 scientific abstracts annotated with scientific entities, their relations, and coreference clusters. With the trained model, we first extracted entities from the whole script. When the user annotates five initial entities, from extracted entities, our pipeline identifies entities that co-occur with these initial entities in the same sentence. These identified entities are recommended to the user as entity recommendations. As the user annotates more entities, this process is repeated with the newly added entities. For relation existence recommendation, we also extracted relations using the same framework. When the user selects an entity, the pipeline identifies if that entity is included in one of the relations found by the framework. If such a relation is found, the user is recommended to relate the selected entity with the other entity found in that relation.</p><p>Our relation class recommendation is enabled by a Transformerbased classification model which takes two entities as input and predicts the top three classes that best explain the relation between those two entities. Specifically, we adopted p-tuning approach <ref type="bibr" target="#b30">[30,</ref><ref type="bibr" target="#b31">31,</ref><ref type="bibr" target="#b33">33,</ref><ref type="bibr" target="#b50">50]</ref>, which tunes "prompts" that can guide Transformerbased language models to serve the targeted task. GPT-based models could be guided to serve different tasks according to different natural language "prompts". For example, by inputting a natural language prompt "Estimate relational classes between two entities" to the model, the model can be guided to serve the task. Instead of hand-designing these natural language tokens, the p-tuning approach learns the optimal prompt tokens on the continuous embedding space, to replace the natural language prompts. We adopted this approach as it has shown reliable performance even with a small number of training data instances <ref type="bibr" target="#b33">[33]</ref>. We used GPT-Neo with 2.7 billion parameters <ref type="bibr" target="#b7">[8]</ref> as our language model. To train the model that classifies relation, we used 180 samples of data points from lectures on five different domains (Networking, Design and Product, Probability and Statistics, Electrical Engineering, and Machine Learning). Two authors annotated knowledge entities and relations separately and merged individual results through discussion. As our corpus has a low number of instances on Sequence, it was excluded from the recommendation. Moreover, as Coreference is a straightforward relation that indicates the same entity, we assumed that annotators would not struggle with selecting this class and excluded it also from the recommendation. It is partly also because having more classes would lower the performance of the algorithm. We used 70% of the dataset as the training set and In the other three conditions, Promptiverse was used to generate prompts from knowledge graphs. In Auto, knowledge graphs were created only with AI algorithms. In the other two conditions, experts annotated knowledge graphs with our annotation interface in KG collection. In No-HAI, experts did not get AI support while experts in HAI got AI recommendations from Grannotate. KG Collection was designed to be within-subject design, where experts annotated graphs with both No-HAI and HAI conditions. Collected prompts were analyzed in four analyses, which scoped on efficiency, quality, diversity, and cognitive load. In quality analysis, evaluation was done with expert in Quality Evaluation. In cognitive load, Auto was not analyzed as it does not involve any expert. 30% as the test set. For training, we split the training set into a 7 : 3 ratio for training and validation. Training details are explained in the Appendix. Our model had 64% of accuracy on test data, which is (the number of true relation class being included in our top-3 predictions)/(the number of samples in the test set)×100. While the accuracy is not extremely high, it is above the random chance of the true relation being included in the recommendation (33.3%) and hence could give meaningful support to users. Moreover, the model would make annotators not over-rely on the algorithm, because its below-perfect accuracy would require annotators to consider the recommendation.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.4">Interface Implementation</head><p>Our graph annotation interface is implemented as a web application by using HTML, CSS, and JavaScript. We used React and Node.js as our front-end and back-end frameworks, respectively. For storing annotation data, we used MongoDB. We implemented the AI recommendation server separately, as a Flask-based API.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="6">EVALUATION AND RESULTS</head><p>To assess if Promptiverse and Grannotate lead to the scalable generation of diverse scaffolding prompts, we conducted a series of experiments. Specifically, we ask the following two questions:</p><p>• RQ1. How the quantity and quality of prompts from Promptiverse would be different from those created fully manually? Which approach would impose more load doing the • RQ2. How the quality and quantity of prompts from Promptiverse would by levels of automation involved in creating knowledge graphs? Which approach would impose more load in doing the task, if annotators are involved?</p><p>answer these questions, we conducted data collection and analyses considering the following four conditions:</p><p>• Hand: Prompts are manually designed.</p><p>• Auto: Prompts are generated with Promptiverse, and input knowledge graphs are created fully automatically with models used in AI features. • No-HAI : Prompts are generated with Promptiverse, and input knowledge graphs are manually created with the tool that does not have AI recommendation features. • HAI : Prompts are generated with Promptiverse, and input knowledge graphs are created in a hybrid manner using Grannotate.</p><p>Our evaluation design is summarized in Figure <ref type="figure" target="#fig_7">10</ref>.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="6.1">Method</head><p>For video materials from which prompts are created, we used videos from two sub-domains of computer science, AI We these two sub-domains as are topically distant enough that they cover different knowledge entities, hence being to show the generalizability of our approaches.</p><p>To collect and evaluate prompts, we conducted three rounds of data collection (Orange boxes in Figure <ref type="figure" target="#fig_7">10</ref>). The first round focused on collecting manually designed prompts (Hand Collection). The second round focused on collecting knowledge graphs for No-HAI and HAI conditions (KG Collection). The last, third round of data collection evaluated the quality of collected prompts (Quality Evaluation). Note that for three conditions that involve human annotators, we adopted a mix of within and between-subjects design, where No-HAI and HAI are combined as within-subject design while they are combined with Hand as between-subject. While this approach is not conventional, we argue that this approach still allows us to reliably answer our questions. First, our design would give a penalty to our conditions, No-HAI HAI, participants would have felt more fatigue by going through two task conditions. Hence, if our turns to have higher quality and quantity, then it means that our approach shows benefit despite penalties in the study design. Second, as No-HAI and HAI are compared in the same study condition, it would not impact answering our second question.</p><p>6.1.1 Hand Collection. For Hand Collection, we recruited twelve experts (age M = 26.3 and SD = 2.8, 7 females and 5 males, 4 undergraduate students, 4 graduated students, and 4 industry workers) and asked them to create prompts on one lecture video. We recruited them by using word of mouth and posting advertisements in online forums such as Twitter, Facebook, and the online communities of several colleges. Participants had expertise in one of the domains of our target videos. They also had the experience of teaching using teaching materials that they made ranging between 6 months and three years. For example, these experts included TAs who have taught undergraduate students and made learning materials. Since the videos were not created by the participants, we asked them to watch the videos two times before the study. During the study session, we first gave participants instructions on the scope of prompts to be created, which are scaffolding prompts that deal with relations between knowledge entities in the lecture. Then, participants created prompts for 25 minutes. They are then asked to do a NASA-TLX survey on their cognitive load in creating prompts. The session ended with a short interview asking about their experience of doing the task. Participants were paid 20,000 KRW (approximately USD 17) for their participation.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="6.1.2">KG Collection.</head><p>For KG Collection, we recruited another twelve experts (age M = 26.5 and SD = 3.2, 7 females and 5 males, 4 undergraduate students, 6 graduate students, and 2 industry workers) using the same recruiting process. In this collection, with our graph annotation system, participants were asked to annotate two lecture videos we selected. Hence, each participant should have expertise in both domains while having teaching experience in at least one of the domains. Their experiences are ranging from 6 months to 3 years. Similar to Hand collection, participants were asked to watch the subject videos two times before joining the study session. They were first given instructions on the purpose of the study and usage of the graph annotation tool. Then, participants annotated graphs from lecture scripts first with one of No-HAI or HAI condition, assigned randomly, and then with the other condition. For each condition, participants were given 25 minutes to create the knowledge graph. The session ended with a NASA-TLX survey and a short interview on their annotation experience. Knowledge graphs from this collection are fed into Promptiverse and used as prompts for No-HAI and HAI conditions. Participants were given 30,000 KRW (approximately USD 25.5) for their participation.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="6.1.3">Quality Evaluation.</head><p>For Quality Evaluation, we recruited two experts as evaluators. They were asked to evaluate prompts from both domains, and hence, should have expertise in both domains while having teaching experience. For this quality evaluation, we first sampled a subset of prompts from each condition. Prompts collected in Hand Collection were used for Hand, and those generated with knowledge graphs from KG Collection were used for No-HAI and HAI. To collect prompts for Auto, we ran our recommendation algorithms, created knowledge graphs only out of them, and then fed those knowledge graphs into Promptiverse. From each video for each condition, we randomly sampled 10 prompts, hence resulting in 80 prompts in total (10 × 2(video) × 4(conditions)).</p><p>The evaluators are asked to watch the video before joining the session. During the session, they were given sample prompts in a blind condition, and we asked them to score questions according to a provided scoring rubric, which is based on the framework for analyzing scaffolding strategies <ref type="bibr" target="#b55">[55]</ref> and our goal of creating accurate prompts. The rubric had six criteria including Direction maintenance, Cognitive structuring, Reduction of degrees of freedom, Recruitment, Contingency management and frustration control, and Accuracy of knowledge. These criteria evaluate how well these prompts support students' metacognitive activities, cognitive activities, and student affect, while reflecting accurate knowledge conveyed in the video. Details are explained the These rubrics were asked on a 5-point scale isfied to Satisfied). We paid evaluators 30,000 (approximately USD 25.5) for their in 1.5 hours</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="6.2">Results</head><p>To answer our research questions on efficiency, quality, and diversity of generated prompts, we conducted analyses the created prompts. We answer questions about the cognitive load experts and their through NASA-TLX survey and qualitative analysis. For each analysis, we describe our method of analysis, and the results.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="6.2.1">Efficiency Analysis.</head><p>To assess efficiency in creating prompts, we a statistical test on the number of prompts by each expert. Note that does not an expert, hence has one data for each video. To test if a difference exists among conditions, as were few data in normal</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Hand</head><p>Auto No-HAI HAI 0 200 400 600 800 1000 1200</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Count</head><p>Figure <ref type="figure">11:</ref> The number of prompts generated in each condition. For Hand, No-HAI, and HAI, the number of prompts generated from each participant is plotted. Note that each participants' data in Hand are close and overlap with each other in this plot. For Auto, the counts of prompts from two videos are shown. Red connecting lines indicate that the difference between two connected conditions is significant. Auto, No-HAI, and HAI generated significantly more prompts compared to Hand. distributions, we conducted a non-parametric Kruskal-Wallis test. Then, a posthoc analysis, we Dunn's test.</p><p>Result: Participants generate significantly more prompts with Promptiverse than by hand. The four conditions had a significant difference in the number of prompts generated (H = 24.59, p &lt; 5e − 5). In post hoc test, we found that Auto (AV G = 300.00, n = 2), No-HAI (AV G = 316.83, n = 12), and HAI (AV G = 210.00, n = 12) generated significantly more prompts compared to Hand. (AV G = 4.92, n = 12) (p &lt; 0.05).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="6.2.2">Quality Analysis.</head><p>To analyze the quality of generated prompts, we conducted a statistical analysis on quality evaluation results. For each evaluation question of each prompt, we first averaged scores from evaluators. Then, for each evaluation question, we conducted a Kruskal-Wallis test against four conditions, each of which had 20 prompts. We chose a non-parametric test as the data were ordinal. As a posthoc test, we conducted Dunn's test.</p><p>Result: Prompts generated with HAI are not significantly different from those generated by Hand in quality, except for contingency management/frustration control. The result of the quality analysis is presented in Figure <ref type="figure" target="#fig_8">12</ref>. From a Kruskal-Wallis test, we found that four conditions were significantly different in five criteria, Direction maintenance (H = 18.2, p &lt; 5e −3), Reduction of degrees of freedom With pairwise comparisons, we found out that Hand showed higher quality compared to Auto and No-HAI in four criteria (Direction maintenance, Reduction of degrees of freedom, Recruitment, Contingency management/frustration control, p &lt; 0.05). However, when Hand is compared to HAI, except for Contingency management/frustration control (p &lt; 0.05), Hand had no significant difference from HAI (p &gt; 0.05). Moreover, Auto showed significantly low Accuracy of knowledge than all other conditions (p &lt; 0.05). Auto is also outperformed by HAI in Direction maintenance, Reduction of degrees of freedom, and Accuracy of knowledge (p &lt; 0.05).</p><formula xml:id="formula_0">H a n d A u t o N o -H A I H A I L H Direction maintenance H a n d A u t o N o -H A I H A I L H Cognitive structuring H a n d A u t o N o -H A I H A I L H Reduction of degrees of H n d A u t o N o -H A I H A I L H Recruitment H a n d A u t o N o -H A I H A I L H Contingency manage frustration control H a n d A u t o N o -H A I H A I L H</formula></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Accuarcy of knowledge</head></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="6.2.3">Diversity Analysis.</head><p>We analyzed the diversity of generated prompts from each condition by embedding them into the vector space, as it is an effective way to quantify the semantic distance between textual data, or how different they are <ref type="bibr" target="#b9">[10,</ref><ref type="bibr" target="#b45">45]</ref>. We used BERT to embed prompts <ref type="bibr" target="#b16">[16]</ref>. With embedded prompts, we conducted both quantitative and qualitative analyses. For quantitative analysis, we measured the "area" on the vector space that is covered by prompts from each condition. While the "distance" between elements has been widely used as the metric for diversity <ref type="bibr" target="#b9">[10,</ref><ref type="bibr" target="#b45">45]</ref>, it is a metric about "how two elements are different". As we are more curious about "how many elements span over semantic space", we instead measured "area". We calculated the area in the PCA-reduced vector space with the dimension of five, as high dimensionality increases the computation cost. To measure the area, we ran K-means clustering for prompts from each condition with K of 2 to more accurately measure the area. Here, we fixed K for all conditions to have a fair comparison between them. Moreover, we set K to be two as it assured clusters to be distinguishable to each other in most conditions (with high silhouette values <ref type="bibr" target="#b47">[47]</ref>). After that, to get the area metric, we ran a convex hull algorithm on each cluster and summed areas from all clusters. We also conducted a qualitative analysis of the visualization and underlying prompts. To visualize them in two-dimensional space, we took PCA of all vectorized prompts from all conditions (d=2). To analyze the visualization and the underlying prompt, one of the authors first inspected the overall pattern in the visualization, retrieved several prompts (at least 10 samples) from the pattern of interest, and iteratively analyzed them with inductive analysis. The coded result was reviewed with another author. We conducted this analysis on two corpora of texts: one with the full prompts generated from Promptiverse and the other only with a series of triplets from the prompts of the first corpus. We included the second corpus to investigate knowledge-wise diversity without considering linguistic features of prompts. For this analysis, one of the authors manually extracted knowledge entities and relations from handdesigned prompts.</p><p>Result: Promptiverse creates more diverse prompts than handdesigning. From the area analysis (Figure <ref type="figure" target="#fig_1">13</ref>), we could learn that area covered by Hand is smaller than No-HAI and HAI in all videos embedding approaches. It be partly due to small number of prompts from Hand, but also because prompts from Hand could not cover the wide area, which can be notably seen in Figure <ref type="figure" target="#fig_1">13b-d</ref>. In the AI video, Auto showed the area comparable to No-HAI or HAI based on the prompt embedding approach. However, in the IoT video, Auto had a small area, even similar to that of Hand. Comparing No-HAI and HAI, in the AI video, No-HAI occupied a larger space, but the trend was opposite in IoT.</p><p>From the qualitative analysis of visualization and prompts, we found various patterns of how these prompts are distributed in semantic space. At a high level, prompts divide into long and short prompts in all videos and all embedding approaches. When not considering linguistic features in prompts (hence, in Triplets), from the AI video (Figure <ref type="figure" target="#fig_1">13c</ref>), we could observe that Auto prompts are separated from No-HAI and HAI in shorter prompts, which was due to inaccurate prompts generated from machine errors in Auto (e.g., "artificial intelligence" is a type of "AI"). In IoT video (Figure <ref type="figure" target="#fig_1">13d</ref>), due to the low number of Auto prompts, this pattern was not observed. However, in IoT, when did not consider linguistic features, short prompts for HAI and No-HAI were separated, each to the bottom right and center of the visualization, respectively. In these, similar knowledge elements are annotated in different ways between No-HAI and HAI (e.g., 'RFID' has an attribute of 'have a processor inside there' in No-HAI vs. 'RFID tag' uses 'processor' in HAI ). In the AI video, some of the full prompts from Hand (Figure <ref type="figure" target="#fig_1">13a</ref>) were occupied in a space that no other conditions reside, meaning that either knowledge or linguistic features of prompts Hand are far different from those of other conditions. When we looked into triplet visualization (Figure <ref type="figure" target="#fig_1">13c</ref>), most hand-designed prompts resided close to prompts from other conditions, which indicates that diversity of Hand in AI-Full Prompt was due to linguistic features.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="6.2.4">Cognitive load Analysis.</head><p>To analyze how prompt creator's cognitive load differs between conditions, we conducted a statistical test on NASA-TLX survey results. We excluded the question on physical demand as our tool is less about exerting physical tasks. As questions are asked on an ordinal scale, for each asked NASA-TLX question, we conducted a non-parametric Kruskal-Wallis test on three conditions that involved experts (Hand, No-HAI, HAI ). For the posthoc test, we conducted Dunn's test.</p><p>Result: Experts felt less temporal demand when using Promptiverse than hand-designing prompts. The survey result is presented in Figure <ref type="figure" target="#fig_2">14</ref>. From the Kruskal-Wallis test, we found that a significant difference was only found in temporal demand (H = 8.05, p &lt; 0.02). For the rest, significance was not found (p &gt; 0.05). In pairwise comparisons for temporal demand, significance was found between Hand and the other conditions (p &lt; 0.01). 6.2.5 Qualitative Analysis. We qualitatively analyzed video recordings on participants' tool usage and interview data. One of the authors did iterative coding with inductive analysis, and the other authors reviewed the coding result.</p><p>Result: With AI recommendations and samples of possible prompts, participants self-reflect on their annotations to create high-quality prompts. Participants said that AI recommendation helped them initially focus on a smaller number of candidates when classifying relation classes, from eleven (the number of relation classes) to three (the number recommended After they learned what relations mean, their experiences on relation class recommendation depend on the inclusion of participants' initial decision in the recommendation and their confidence in their initial decision. When what participants initially considered is included in the recommendation, they would follow it without hesitation. However, when their initial option is not in the recommendation, their behaviors would differ with their confidence. If they are confident, they would not follow the recommendation without hesitation. However, when they were less confident, they self-reflected on their decisions, went back to the guideline, and checked confusing relations multiple times. P6 said "It takes more time and I should think more when recommendations are different from mine, but it could give a chance to reconsider my choice and remind me of examples and definitions in the guideline. "</p><p>Participants mentioned that entity recommendations capture important entities they missed. Entity recommendations also reduced the load in deciding the span of entities, as participants could simply click the recommended entities. Sample prompts from participant's annotations made them check if they annotated and relations correctly, and if prompts to be generated would be coherent and accurate.</p><p>Result: Participants manually create prompts similarly to how Promptiverse generates To create prompts, many Hand participants chose which entity to elicit first and specified relations between the elicited entity and the answer of the previous prompt. This is similar to how Promptiverse generates a dyad of prompts as described in Section 4.2.2. They also made multiple turns when all subordinate entities have the same relation to the superordinate entity as Promptiverse used correlative learning pattern. However, they had struggles that resonate with the formative study results (Section 3.1): 1) choosing which entity to ask, 2) creating an initial prompt that has the potential to bring more turns, and 3) building a prompt that can be related to answer of previous prompt. This load might have resulted in low efficiency, low diversity, and high temporal demand compared to approaches in Promptiverse.</p><p>6.2.6 Summary. Putting all analysis results together, we answer our RQs.</p><p>For RQ1, HAI generates much more prompts than Hand while showing similar prompt quality except for contingency management. Moreover, experts felt less temporal demand in HAI than in Hand. HAI also generates more diverse prompts including many different entities, relations, and their combinations compared to Hand. Therefore, we conclude that the combination of Promptiverse and Grannotate enables the efficient creation of diverse prompts that are comparable in quality to hand-designed ones.</p><p>For RQ2, comparing HAI against Auto and No-HAI, there is no significant difference in the number of prompts generated. However, in terms of quality, when compared to Hand, only the quality of HAI prompts is not significantly lower than the quality of Hand prompts. Moreover, prompts from Auto showed lower quality in direction maintenance, reduction of the degree of freedom, and accuracy of knowledge compared to HAI. The level of diversity between these conditions depends on the video. While no significant difference was found in cognitive load, HAI had a trend of having higher mental demand than No-HAI, which might be because AI recommendations led participants to self-reflect. However, as reported in quality analysis (Section 6.2.2), self-reflection might have increased the quality of prompts. Overall, HAI guided participants to create higher quality prompts with on-par efficiency compared to Auto and No-HAI.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="7">DISCUSSION</head><p>We discuss human-AI interactions in annotation process, how our approach would enrich prompting systems, the role of knowledge graphs in prompt generation, the generalizability of our approach in other learning domains, and limitations.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="7.1">Human-AI Interaction as Learning Process</head><p>In our study, experts constructed knowledge graphs by annotating lecture transcripts both manually and with AI-support from Grannotate. In relation class annotation, the experts' behavior was different in these two conditions-without AI, they tended to choose between relation classes without much hesitation or learning, but with AI, the experts appeared to learn through the process. Disagreements with the AI recommendations made them cast doubt on recommended classes, re-check the guidelines, and self-reflect, which helped them gain a deeper understanding of the classes and more certainty about their choices.</p><p>Interestingly, this human-AI process parallels how scaffolding prompts help online learners: the experts are learners of a knowledge graph annotation task and the AI recommendations act as scaffolds that help them learn about classes that they find challenging. Based on these observations, one future work direction can be a workflow for an instructor-assistant-AI collaboration that helps assistants follow the instructor's annotation method for prompt generation. In this workflow, the instructor would provide initial annotations to train the AI model and then the assistants would receive HAI support that recommends annotations similar to the instructor's. Then, similar to our study findings, we hypothesize that the machine recommendations would scaffold assistants' learning so that their knowledge graphs would be aligned with the instructor's mental model.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="7.2">Promptiverse-driven Prompting Applications</head><p>We showed Promptiverse with Grannotate generates a greater number and diversity of prompts. Now we suggest how our approach could be used to provide different prompts to learners with varying prior knowledge to alleviate the problem of the one-size-fits-all design of lecture videos. First, as Promptiverse can generate prompts with a different number of turns (e.g., subordinate and correlative prompts), these can be used to gradually provide hints based on how learners answer to the prompts. For example, if a learner could not answer a prompt that asks about the characteristics of "machine learning", the prompting system can provide more questions or hints to facilitate the learner's understanding. Second, with Promptiverse's diverse prompts and a component that recognizes learners' levels of understanding <ref type="bibr" target="#b14">[14,</ref><ref type="bibr" target="#b43">43]</ref>, Promptiverse can adaptively provide scaffolding prompts to elicit each learner's understanding. For example, if the system knows that a learner is struggling with a concept, it can give an explanation about the concept instead of asking questions. Moreover, by considering whether the concepts in prompts are in a higher hierarchy in a lower hierarchy in the knowledge graph, the learning system can give prompts about the details of the lecture to learners who already have a good understanding, and prompts about higher-level concepts to those who are struggling. Third, with a comprehensive set of prompts from Promptiverse, the learning system can provide prompts when a learner knows that they are struggling and requests scaffolding. This would minimize the chance of learner misunderstanding propagating to other lecture content. Fourth, knowledge graphs of multiple lectures can be merged together with the small additional effort of maintaining entity consistency across lectures, and these merged graphs can give further support to learners. For example, crosslecture prompts can allow learners to more comprehensively relate concepts over the course.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="7.3">Role of Knowledge Graphs in Prompt Creation</head><p>Promptiverse's way of creating prompts appeared to simulate the strategies used by lecture designers when hand-designing prompts. For example, they considered the relations between knowledge entities to create a dyad of prompts or correlative prompts in a similar way Promptiverse does. However, hand-designing is limited as lecture designers deciding which entity to proceed to when designing more turns and giving more hints about target entities. On the other hand, Promptiverse allows lecture designers to only focus on structuring knowledge by handling the task of turning them into prompts with meaningful learning patterns. With traversability, many different concepts and relations can be covered in diverse ways to create a spectrum of pedagogically effective prompts. However, Promptiverse currently uses knowledge graphs in a limited way, as it only considers triplets to create a round of prompts. Hence, more complex prompts, like those that involve more than two entities or ask about 'why' and 'how', would be difficult to generate with Promptiverse. To use knowledge graphs more richly, the Promptiverse can be combined with other approaches to allow more flexible traversals that are not limited to triplets. For example, recent approaches that combine knowledge graphs with pre-trained language models <ref type="bibr" target="#b21">[21,</ref><ref type="bibr" target="#b58">58,</ref><ref type="bibr" target="#b60">60]</ref> learn how to turn complex knowledge structures into natural language, and these can potentially be used to generate prompts about complex knowledge incorporated in knowledge graphs. However, future work must first validate the effectiveness and accuracy of these methods in knowledge-guided tasks.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="7.4">Generalizing to Other Learning Domains</head><p>We conducted our study using two videos from different sub-domains in computer science. While our study showed that experts who used Promptiverse and Grannotate generated significantly more prompts than when they did so manually, the two chosen videos might not represent the broad spectrum of topics that can be covered in online lecture videos.</p><p>Still, we believe Promptiverse can be generally used for domains other than the ones evaluated for. For demonstration, one of the authors annotated a lecture video 1 on music. The lecture video explains popular drum patterns, from what they are to what characteristics and effects they have. Figure <ref type="figure" target="#fig_10">15</ref> shows the resulting knowledge graph which has a rich hierarchical knowledge structure based on the video. This example graph can create diverse pedagogically meaningful prompts. For example, by adopting a combinatorial process, the learning system can first inform the learner about the hyponyms of popular drum patterns, and ask what are characterizing attributes of a drum pattern compared to those of other drum patterns (left in Figure <ref type="figure" target="#fig_10">15</ref>). Figure <ref type="figure" target="#fig_10">15</ref> also shows how a superordinate learning could be applied on this graph. Generalization into the music domain also reveals one limitation of Promptiverse: it only considers linguistic content when prompting, not other media. Employing such multimedia content in prompts can be interesting future work.</p><p>To generalize Promptiverse's prompt-generating capabilities, however, Grannotate should also be generalizable. While our version of Grannotate is tuned for STEM fields, we can expand it to other domains by changing the underlying models. For entity and relation existence detection, we can expand it to other domains by using similar pretrained models that have been trained on datasets from a variety of domains, including GENIA (biomedicine), ChemProt (chemistry), WLPC (biology), MECHANIC (general science), ACE05 (newswire, broadcast news, broadcast conversation, weblog, and discussion forums) <ref type="bibr" target="#b23">[23,</ref><ref type="bibr" target="#b57">57]</ref>. While these datasets cover many different domains and text styles, some domains, such as web programming, are not covered with these datasets. However, for domains which these datasets cannot cover, a potential future direction could be to gather a small amount of data and use the P-tuning approach to detect entities and relations in such domains. As our work showed, the same approach can also be used to expand the edge class classification component to other domains with relatively little effort for data collection.</p><p>While the generalizability of our approach seems promising, it is still unclear whether our study findings would also hold for other domains. Future work can conduct studies with lecture videos from various domains to confirm our findings or to identify which domains can or cannot be covered with our approach.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="7.5">Limitations</head><p>Our work has a couple of limitations which we address in this subsection.</p><p>The experience and frequency of using prompting strategies in experts' everyday teaching could affect their speed of creating prompts as well as the prompt quality. While we provided participants' information of teaching experience, it cannot explicitly show how much they used prompting strategies while teaching.</p><p>It is hard to use our approach for generating prompts with complex knowledge that consider more than two entities (hence, more than one relation). Injecting knowledge graphs into pre-trained language models <ref type="bibr" target="#b21">[21,</ref><ref type="bibr" target="#b58">58,</ref><ref type="bibr" target="#b60">60]</ref> can present an opportunity to explore how to handle such complex knowledge.</p><p>1 https://www.youtube.com/watch?v=c7ffMObdxro</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="8">CONCLUSION</head><p>This paper introduces Promptiverse, a framework that generates diverse scaffolding prompts by traversing knowledge graphs on lecture content in pedagogically meaningful patterns. To facilitate the usage of Promptiverse, we support lecturer designers' annotation processes with Grannotate, which provides AI recommendations and samples of possible prompts based on the user's annotations. In our evaluation, participants who used Promptiverse with Grannotate produced 40 times more prompts than those who hand-designed, with on-par quality and higher diversity in prompts. When compared to other graph construction methods with either full automation or full manual effort, only graphs made with Grannotate generated prompts that had comparable quality to the hand-designed prompts. We hope our work can open up more opportunities in supporting a spectrum of learners by creating diverse learning strategies.</p></div><figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_0"><head>Figure 2 :</head><label>2</label><figDesc>Figure 2: Different types of single prompts that vary by which knowledge elements in the triplet are provided or hidden.Elicited knowledge elements are shaded in dark teal. In provide-all (left), both knowledge entities and the connecting relation are given in the prompt. In elicit-entity (middle), one of the entities is asked while giving the other entity and the relation as hints. Elicit-relation (right) asks about the relation while giving both entities as hints.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_1"><head>Figure 3 :</head><label>3</label><figDesc>Figure3: Two mechanisms for generating a dyad of prompts. Examples that do and do not follow the mechanisms are both shown. a) A dyad of prompts share an entity. In the figure, oak is being shared between two rounds of prompts. However, in the counterexample, the following prompt does not have any entity shared with the preceding one. b) The following prompt should not elicit a knowledge entity from the preceding prompt. In the given example, oak is not elicited, but provided in the second turn. On the other hand, in the counterexample, oak is elicited even though it has been mentioned before, thereby breaking coherence of prompts.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_2"><head>Figure 4 :</head><label>4</label><figDesc>Figure 4: Example prompts from a superordinate learning pattern. Subordinate knowledge entities (white) are provided first and then the superordinate knowledge entity (purple) is elicited after. It facilitates the learning of the superordinate entity by connecting it back to many subordinates.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_3"><head>Figure 5 :</head><label>5</label><figDesc>Figure5: Example prompts from a correlative learning pattern. One superordinate entity (white), its subordinate entities (white), and connecting relations are first given as prompts, then a new subordinate entity (purple) is introduced in the next prompt. This learning pattern enriches the knowledge about one superordinate knowledge by adopting the new subordinate.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_4"><head>Figure 8 :</head><label>8</label><figDesc>Figure 8: The interface of Grannotate. On the left, a) transcript is shown with annotations. On the right, b) the color codes for the relation classes are shown, and b-1) annotations are visualized in a graph. On the transcript, the user can select a part of the text to annotate an entity, or select two entities to annotate a relation. The user can also annotate the relation by connecting two entities on the graph. a-1) With an entity or relation selected, the user can also edit or remove them. The tool also provides AI recommendations to lower the load of users. a-2) Based on the currently annotated entities, the tool recommends other candidate entities. a-2) If the annotator selects an entity, the tool recommends a potential candidate entity that the selected one could be related to.</figDesc><graphic url="image-4.png" coords="8,53.80,90.13,504.40,221.42" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_5"><head></head><label></label><figDesc>-1). Edited names are only shown on the graph. The user can also add a relation by either selecting two entities on the transcript or connecting one entity to another on the graph with a dragging motion. When two entities are connected, the modal for specifying the class of relation is shown (Figure9). In the modal, the user can select a class from either the cross-hierarchy classes or the in-hierarchy classes. If the user thinks that no class adequately explains the relation between the selected entities, they can specify the relation as an open relation with free text input (Figure9c-2). If the user wants to switch the order of entities, they can click on the "Switch Order" button.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_6"><head>Figure 9 :</head><label>9</label><figDesc>Figure 9: Modal for selecting a relation class. a) The chosen entities are shown, with a direction from left to right. b) Button for switching the direction of the relation. c) Section where the annotator can decide the relation class. Classes for cross-hierarchy relations and in-hierarchy relations are shown. c1) AI recommended classes are accompanied by a "Recommended" highlight below the button. The chosen class is shown in its color code. c2) When the annotator thinks that none of the classes is adequate, they can come up with a custom open relation. d) When Abstract-Instance is chosen as the class, the annotator can also add a setting to give more context to the prompt that would be generated. e) To help annotators understand how their class selection would impact the prompt generation, an example prompt for annotated class is shown.</figDesc><graphic url="image-5.png" coords="9,23.74,83.69,300.63,340.12" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_7"><head>Figure 10 :</head><label>10</label><figDesc>Figure10: The design of evaluation. We collected prompts from four conditions, which with the involvement of expert participant, AI components, and Promptiverse. In Hand, all annotations are manually created by experts from Hand Collection. In the other three conditions, Promptiverse was used to generate prompts from knowledge graphs. In Auto, knowledge graphs were created only with AI algorithms. In the other two conditions, experts annotated knowledge graphs with our annotation interface in KG collection. In No-HAI, experts did not get AI support while experts in HAI got AI recommendations from Grannotate. KG Collection was designed to be within-subject design, where experts annotated graphs with both No-HAI and HAI conditions. Collected prompts were analyzed in four analyses, which scoped on efficiency, quality, diversity, and cognitive load. In quality analysis, evaluation was done with expert in Quality Evaluation. In cognitive load, Auto was not analyzed as it does not involve any expert.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_8"><head>Figure 12 :</head><label>12</label><figDesc>Figure 12: Quality of prompts measured according to six criteria. Error bars indicate the standard deviation. The red connecting line indicates that the difference between the two conditions is significant. Hand outperformed Auto and No-HAI in direction maintenance, reduction of degrees of freedom, and recruitment, while Hand and HAI were not significantly different in those criteria. The only significant difference between Hand and HAI was observed in contingency management/frustration control.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_9"><head>Figure 13 :Figure 14 :</head><label>1314</label><figDesc>Figure13: prompt embeddings their covered area for each video (AI and IoT) and embedding approach and Triplets). Prompts were embedded with BERT, dimension-reduced with PCA algorithm, and then visualized on 2D planes as scatter plots. Embedding was done either on the raw texts of prompts (Full Prompts) or only the of knowledge used in prompts (Triplets). The area was calculated for each condition, by taking convex hull area of all clusters of K-means algorithm (K=2) when the dimension is reduced to five. HAI and No-HAI has higher diversity compared to Hand, when compared area.</figDesc><graphic url="image-13.png" coords="13,48.05,81.41,510.79,99.76" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_10"><head>Figure 15 :</head><label>15</label><figDesc>Figure15: Knowledge graph created from a music lecture video. With Promptiverse, in the music domain also, hierarchical knowledge be in a graph and diverse scaffolding prompts could also be generated out of it.</figDesc></figure>
+		</body>
+		<back>
+
+			<div type="acknowledgement">
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>ACKNOWLEDGMENTS</head></div>
+			</div>
+
+			<div type="annex">
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>A P-TUNING METHOD</head><p>To recommend relation classes, we trained soft prompts that can guide GPT-Neo model with 2.7 billion parameters <ref type="bibr" target="#b7">[8]</ref>, which is an open-source GPT-based language model. Instead of manually designing natural language prompts to guide this type of models, P-tuning approach <ref type="bibr" target="#b30">[30,</ref><ref type="bibr" target="#b31">31,</ref><ref type="bibr" target="#b33">33,</ref><ref type="bibr" target="#b50">50]</ref> automatically searches for highperforming prompt token embeddings in a continuous space. To employ this technique, we composed prompts as [P 0:1 , C, P 2:5 , E 1 , P 6 , E 2 , R] where P i is the ith prompt token, C is the context sentences that include both knowledge entities, E 1 and E 2 are the knowledge entities, and R is the edge class. When E 1 and E 2 are in different sentences, we concatenate their sentences to form C. P-tuning regards P i as pseudo tokens and the embeddings of these tokens are trained by backpropagating the CrossEntropy loss from the GPT-Neo model.</p><p>On our training dataset (which is 88 data samples), We used the Adam optimizer, the learning rate of 0.001, weight decay of 0.0005, and batch size of 4. We also used an early stopping technique to prevent overfitting on the training set. Our model's prediction result on the test was 64%, which is (the number of true relation class being included in our top-3 predictions)/(the number of samples in the test set)×100.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>B CRITRIA OF RUBRIC FOR QUALITY EVALUATION IN 6.1.3</head><p>To score questions we provided a scoring rubric, which is based on the framework for analyzing scaffolding strategies <ref type="bibr" target="#b55">[55]</ref> and our goal of creating accurate prompts. The rubric had six criteria as follows:</p><p>• Direction maintenance: The lecturer's prompts keep the learning on target and maintain the learner's pursuit of a particular objective. • Cognitive structuring: The lecturer's prompts provide explanatory structures that organize and justify lecture content. • Reduction of degrees of freedom: The lecturer's prompts take over parts of a task that the student is not yet able to perform and thereby simplify the task for the student. • Recruitment: The lecturer's prompts get students interested in the lecture content and help them adhere to it. • Contingency management and frustration control: The lecturer's prompts concern the facilitation of student performance via a system of rewards and punishments as well as keeping students motivated via the prevention or ization frustration. • Accuracy of knowledge: The lecturer's prompts accurately reflect knowledge conveyed in the video.</p></div>			</div>
+			<div type="references">
+
+				<listBibl>
+
+<biblStruct xml:id="b0">
+	<analytic>
+		<title level="a" type="main">DeFT: A conceptual framework for considering learning with multiple representations</title>
+		<author>
+			<persName><forename type="first">Shaaron</forename><surname>Ainsworth</surname></persName>
+		</author>
+		<idno type="DOI">10.1016/j.learninstruc.2006.03.001</idno>
+		<ptr target="https://doi.org/10.1016/j.learninstruc.2006.03.001" />
+	</analytic>
+	<monogr>
+		<title level="j">Learning and Instruction</title>
+		<imprint>
+			<biblScope unit="volume">16</biblScope>
+			<biblScope unit="issue">3</biblScope>
+			<biblScope unit="page" from="183" to="198" />
+			<date type="published" when="2006">2006. 2006</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b1">
+	<analytic>
+		<title level="a" type="main">Towards a Knowledge Graph for Science</title>
+		<author>
+			<persName><forename type="first">Sören</forename><surname>Auer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Viktor</forename><surname>Kovtun</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Manuel</forename><surname>Prinz</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Anna</forename><surname>Kasprzik</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Markus</forename><surname>Stocker</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Maria</forename><forename type="middle">Esther</forename><surname>Vidal</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3227609.3227689</idno>
+		<ptr target="https://doi.org/10.1145/3227609.3227689" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 8th International Conference on Web Intelligence, Mining and Semantics</title>
+				<meeting>the 8th International Conference on Web Intelligence, Mining and Semantics<address><addrLine>Novi Sad, Serbia; New York, NY, USA, Article</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computing Machinery</publisher>
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+	<note>WIMS &apos;18)</note>
+</biblStruct>
+
+<biblStruct xml:id="b2">
+	<monogr>
+		<title level="m" type="main">The Acquisition and Retention of Knowledge: A Cognitive View</title>
+		<author>
+			<persName><forename type="first">D</forename><surname>Ausubel</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2000">2000</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b3">
+	<analytic>
+		<title level="a" type="main">Cognitive Structure and the Facilitation of Meaningful Verbal Learning1</title>
+		<author>
+			<persName><forename type="first">David</forename><forename type="middle">G</forename><surname>Ausubel</surname></persName>
+		</author>
+		<idno type="DOI">10.1177/002248716301400220</idno>
+		<ptr target="https://doi.org/10.1177/002248716301400220" />
+	</analytic>
+	<monogr>
+		<title level="j">Journal of Teacher Education</title>
+		<imprint>
+			<biblScope unit="volume">14</biblScope>
+			<biblScope unit="page" from="217" to="222" />
+			<date type="published" when="1963">1963. 1963</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b4">
+	<analytic>
+		<title level="a" type="main">A Subsumption Theory of Meaningful Verbal Learning and Retention</title>
+		<author>
+			<persName><forename type="first">David</forename><forename type="middle">P</forename><surname>Ausubel</surname></persName>
+		</author>
+		<idno type="DOI">10.1080/00221309.1962.9711837</idno>
+		<idno type="PMID">13863333</idno>
+		<ptr target="https://doi.org/10.1080/00221309.1962.9711837" />
+	</analytic>
+	<monogr>
+		<title level="j">The Journal of General Psychology</title>
+		<imprint>
+			<biblScope unit="volume">66</biblScope>
+			<biblScope unit="page" from="213" to="224" />
+			<date type="published" when="1962">1962. 1962</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b5">
+	<monogr>
+		<title level="m" type="main">The acquisition and retention of knowledge: A cognitive view</title>
+		<author>
+			<persName><forename type="first">David</forename><surname>Paul</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ausubel</forename></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2012">2012</date>
+			<publisher>Springer Science &amp; Business Media</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b6">
+	<analytic>
+		<title level="a" type="main">Fluent Response Generation for Conversational Question Answering</title>
+		<author>
+			<persName><forename type="first">Ashutosh</forename><surname>Baheti</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Alan</forename><surname>Ritter</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kevin</forename><surname>Small</surname></persName>
+		</author>
+		<idno type="DOI">10.18653/v1/2020.acl-main.19</idno>
+		<ptr target="https://doi.org/10.18653/v1/2020.acl-main.19" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 58th Annual Meeting of the Association for Computational Linguistics</title>
+				<meeting>the 58th Annual Meeting of the Association for Computational Linguistics</meeting>
+		<imprint>
+			<publisher>Association for Computational Linguistics</publisher>
+			<date type="published" when="2020">2020</date>
+			<biblScope unit="page" from="191" to="207" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b7">
+	<monogr>
+		<author>
+			<persName><forename type="first">Sid</forename><surname>Black</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Leo</forename><surname>Gao</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Phil</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Connor</forename><surname>Leahy</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Stella</forename><surname>Biderman</surname></persName>
+		</author>
+		<ptr target="http://github.com/eleutherai/gpt-neo" />
+		<title level="m">GPT-Neo: Large Scale Autoregressive Language Modeling with Mesh-Tensorflow</title>
+				<imprint>
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b8">
+	<monogr>
+		<title level="m" type="main">MathBot: A Personalized Conversational Agent for Learning Math</title>
+		<author>
+			<persName><forename type="first">William</forename><surname>Cai</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Hao</forename><surname>Sheng</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sharad</forename><surname>Goel</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b9">
+	<monogr>
+		<title/>
+		<author>
+			<persName><forename type="first">Joel</forename><surname>Chan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Pao</forename><surname>Siangliulue</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ruixue</forename><surname>Denisa Qori Mcdonald</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Reza</forename><surname>Liu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Safa</forename><surname>Moradinezhad</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Erin</forename><forename type="middle">T</forename><surname>Aman</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Solovey</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Z</forename><surname>Krzysztof</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Steven</forename><forename type="middle">P</forename><surname>Gajos</surname></persName>
+		</author>
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b10">
+	<analytic>
+		<title level="a" type="main">Semantically Far Inspirations Considered Harmful? Accounting for Cognitive States in Collaborative Ideation</title>
+		<author>
+			<persName><surname>Dow</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3059454.3059455</idno>
+		<ptr target="https://doi.org/10.1145/3059454.3059455" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2017 ACM SIGCHI Conference on Creativity and Cognition</title>
+				<meeting>the 2017 ACM SIGCHI Conference on Creativity and Cognition<address><addrLine>Singapore, Singapore; New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computing Machinery</publisher>
+			<date type="published" when="2017">2017</date>
+			<biblScope unit="page" from="93" to="105" />
+		</imprint>
+	</monogr>
+	<note>C&amp;C &apos;17)</note>
+</biblStruct>
+
+<biblStruct xml:id="b11">
+	<analytic>
+		<title level="a" type="main">Eliciting self-explanations improves understanding</title>
+		<author>
+			<persName><forename type="first">T</forename><forename type="middle">H</forename><surname>Michelene</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mei-Hung</forename><surname>Nicholas Leeuw</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Christian</forename><surname>Chiu</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Lavancher</surname></persName>
+		</author>
+		<idno type="DOI">10.1016/0364-0213(94)90016-7</idno>
+		<ptr target="https://doi.org/" />
+	</analytic>
+	<monogr>
+		<title level="j">Cognitive Science</title>
+		<imprint>
+			<biblScope unit="volume">18</biblScope>
+			<biblScope unit="page" from="439" to="477" />
+			<date type="published" when="1994">1994. 1994</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b12">
+	<analytic>
+		<title level="a" type="main">Learning from human tutoring</title>
+		<author>
+			<persName><forename type="first">T</forename><surname>Michelene</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Stephanie</forename><forename type="middle">A</forename><surname>Chi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Heisawn</forename><surname>Siler</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Takashi</forename><surname>Jeong</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Robert</forename><forename type="middle">G</forename><surname>Yamauchi</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Hausmann</surname></persName>
+		</author>
+		<idno type="DOI">10.1016/S0364-0213(01)00044-1</idno>
+		<idno>S0364-0213(01)00044-1</idno>
+		<ptr target="https://doi.org/10.1016/" />
+	</analytic>
+	<monogr>
+		<title level="j">Cognitive Science</title>
+		<imprint>
+			<biblScope unit="volume">25</biblScope>
+			<biblScope unit="page" from="471" to="533" />
+			<date type="published" when="2001">2001. 2001</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b13">
+	<analytic>
+		<title level="a" type="main">QuAC: Question Answering in Context</title>
+		<author>
+			<persName><forename type="first">Eunsol</forename><surname>Choi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">He</forename><surname>He</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mohit</forename><surname>Iyyer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mark</forename><surname>Yatskar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Wen-Tau</forename><surname>Yih</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yejin</forename><surname>Choi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Percy</forename><surname>Liang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Luke</forename><surname>Zettlemoyer</surname></persName>
+		</author>
+		<idno type="DOI">10.18653/v1/D18-1241</idno>
+		<ptr target="https://doi.org/10.18653/v1/D18-1241" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2018 Conference on Empirical Methods in Natural Language Processing</title>
+				<meeting>the 2018 Conference on Empirical Methods in Natural Language Processing<address><addrLine>Brussels, Belgium</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computational Linguistics</publisher>
+			<date type="published" when="2018">2018</date>
+			<biblScope unit="page" from="2174" to="2184" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b14">
+	<analytic>
+		<title level="a" type="main">Knowledge Tracing: Modelling the Acquisition of Procedural Knowledge</title>
+		<author>
+			<persName><forename type="first">Albert</forename><forename type="middle">T</forename><surname>Corbett</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">John</forename><forename type="middle">R</forename><surname>Anderson</surname></persName>
+		</author>
+		<ptr target="http://dblp.uni-trier.de/db/journals/umuai/umuai4.html#CorbettA95" />
+	</analytic>
+	<monogr>
+		<title level="j">User Model. User-Adapt. Interact</title>
+		<imprint>
+			<biblScope unit="volume">4</biblScope>
+			<biblScope unit="page" from="253" to="278" />
+			<date type="published" when="1995">1995. 1995</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b15">
+	<analytic>
+		<title level="a" type="main">Investigating Engagement with In-Video Quiz Questions in a Programming Course</title>
+		<author>
+			<persName><forename type="first">Stephen</forename><surname>Cummins</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Alastair</forename><forename type="middle">R</forename><surname>Beresford</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Andrew</forename><surname>Rice</surname></persName>
+		</author>
+		<idno type="DOI">10.1109/TLT.2015.2444374</idno>
+		<ptr target="https://doi.org/10.1109/TLT.2015.2444374" />
+	</analytic>
+	<monogr>
+		<title level="j">IEEE Transactions on Learning Technologies</title>
+		<imprint>
+			<biblScope unit="volume">9</biblScope>
+			<biblScope unit="page" from="57" to="66" />
+			<date type="published" when="2016">2016. 2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b16">
+	<analytic>
+		<title level="a" type="main">BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding</title>
+		<author>
+			<persName><forename type="first">Jacob</forename><surname>Devlin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ming-Wei</forename><surname>Chang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kenton</forename><surname>Lee</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kristina</forename><surname>Toutanova</surname></persName>
+		</author>
+		<idno type="DOI">10.18653/v1/N19-1423</idno>
+		<ptr target="https://doi.org/10.18653/v1/N19-1423" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2019 Conference of North American of Association for Computational Linguistics: Human Language Technologies</title>
+				<meeting>the 2019 Conference of North American of Association for Computational Linguistics: Human Language Technologies<address><addrLine>Minneapolis, Minnesota</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computational Linguistics</publisher>
+			<date type="published" when="2019">2019</date>
+			<biblScope unit="volume">1</biblScope>
+			<biblScope unit="page" from="4171" to="4186" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b17">
+	<analytic>
+		<title level="a" type="main">BoB, a best-of-breed automated text de-identification system for VHA clinical documents</title>
+		<author>
+			<persName><forename type="first">Oscar</forename><surname>Ferrández</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Brett</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Shuying</forename><surname>South</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jeffrey</forename><surname>Shen</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Friedlin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Matthew</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Samore</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Stéphane</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Meystre</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Journal of the American Medical Informatics Association</title>
+		<imprint>
+			<biblScope unit="volume">20</biblScope>
+			<biblScope unit="page" from="77" to="83" />
+			<date type="published" when="2013">2013. 2013</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b18">
+	<analytic>
+		<title level="a" type="main">SemEval-2018 Task 7: Semantic Relation Extraction and Classification in Scientific Papers</title>
+		<author>
+			<persName><forename type="first">Kata</forename><surname>Gábor</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Davide</forename><surname>Buscaldi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Anne-Kathrin</forename><surname>Schumann</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Behrang</forename><surname>Qasemizadeh</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Haïfa</forename><surname>Zargayouna</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Thierry</forename><surname>Charnois</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of International Workshop on Semantic Evaluation (SemEval-2018)</title>
+				<meeting>International Workshop on Semantic Evaluation (SemEval-2018)<address><addrLine>New Orleans, LA, USA</addrLine></address></meeting>
+		<imprint>
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b19">
+	<analytic>
+		<title level="a" type="main">Incorporating active learning with PowerPoint-based lectures using content-based questions</title>
+		<author>
+			<persName><forename type="first">S</forename><surname>Vicki</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">David</forename><forename type="middle">S</forename><surname>Gier</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Kreiner</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Teaching of Psychology</title>
+		<imprint>
+			<biblScope unit="volume">36</biblScope>
+			<biblScope unit="page" from="134" to="139" />
+			<date type="published" when="2009">2009. 2009</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b20">
+	<analytic>
+		<title level="a" type="main">SemEval-2007 Task 04: Classification of Semantic Relations between Nominals</title>
+		<author>
+			<persName><forename type="first">Roxana</forename><surname>Girju</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Preslav</forename><surname>Nakov</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Vivi</forename><surname>Nastase</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Stan</forename><surname>Szpakowicz</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Peter</forename><surname>Turney</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Deniz</forename><surname>Yuret</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 4th International Workshop on Semantic Evaluations</title>
+				<meeting>the 4th International Workshop on Semantic Evaluations<address><addrLine>Prague, Czech Republic; USA</addrLine></address></meeting>
+		<imprint>
+			<date type="published" when="2007">2007</date>
+			<biblScope unit="page" from="13" to="18" />
+		</imprint>
+	</monogr>
+	<note>SemEval &apos;07). Association for Computational Linguistics</note>
+</biblStruct>
+
+<biblStruct xml:id="b21">
+	<analytic>
+		<title level="a" type="main">BERT-MK: Integrating Graph Contextualized Knowledge into Pre-trained Language Models</title>
+		<author>
+			<persName><forename type="first">Bin</forename><surname>He</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Di</forename><surname>Zhou</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jinghui</forename><surname>Xiao</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Xin</forename><surname>Jiang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Qun</forename><surname>Liu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Nicholas</forename><forename type="middle">Jing</forename><surname>Yuan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Tong</forename><surname>Xu</surname></persName>
+		</author>
+		<idno type="DOI">10.18653/v1/2020.findings-emnlp.207</idno>
+		<ptr target="https://doi.org/10.18653/v1/2020.findings-emnlp.207" />
+	</analytic>
+	<monogr>
+		<title level="m">Findings of the Association for Computational Linguistics: EMNLP 2020</title>
+				<imprint>
+			<publisher>Association for Computational Linguistics</publisher>
+			<date type="published" when="2020">2020</date>
+			<biblScope unit="page" from="2281" to="2290" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b22">
+	<analytic>
+		<title level="a" type="main">SemEval-2010 Task 8: Multi-Way Classification of Semantic Relations between Pairs of Nominals</title>
+		<author>
+			<persName><forename type="first">Iris</forename><surname>Hendrickx</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Su</forename><forename type="middle">Nam</forename><surname>Kim</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Zornitsa</forename><surname>Kozareva</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Preslav</forename><surname>Nakov</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ó</forename><surname>Diarmuid</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sebastian</forename><surname>Séaghdha</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Marco</forename><surname>Padó</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Lorenza</forename><surname>Pennacchiotti</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Stan</forename><surname>Romano</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Szpakowicz</surname></persName>
+		</author>
+		<ptr target="https://aclanthology.org/S10-1006" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 5th International Workshop on Semantic Evaluation</title>
+				<meeting>the 5th International Workshop on Semantic Evaluation<address><addrLine>Uppsala, Sweden</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computational Linguistics</publisher>
+			<date type="published" when="2010">2010</date>
+			<biblScope unit="page" from="33" to="38" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b23">
+	<analytic>
+		<title level="a" type="main">Extracting a Knowledge Base of Mechanisms from COVID-19 Papers</title>
+		<author>
+			<persName><forename type="first">Tom</forename><surname>Hope</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Aida</forename><surname>Amini</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">David</forename><surname>Wadden</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Madeleine</forename><surname>Van Zuylen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sravanthi</forename><surname>Parasa</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Eric</forename><surname>Horvitz</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Daniel</forename><surname>Weld</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Roy</forename><surname>Schwartz</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Hannaneh</forename><surname>Hajishirzi</surname></persName>
+		</author>
+		<idno type="DOI">10.18653/v1/2021.naacl-main.355</idno>
+		<ptr target="https://doi.org/10.18653/v1/2021.naacl-main.355" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2021 Conference of the North American Chapter of the Association for Computational Linguistics: Human Language Technologies</title>
+				<meeting>the 2021 Conference of the North American Chapter of the Association for Computational Linguistics: Human Language Technologies</meeting>
+		<imprint>
+			<publisher>Association for Computational Linguistics</publisher>
+			<date type="published" when="2021">2021</date>
+			<biblScope unit="page" from="4489" to="4503" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b24">
+	<analytic>
+		<title level="a" type="main">Hinting as a Tactic in One-on-One Tutoring</title>
+		<author>
+			<persName><forename type="first">Gregory</forename><surname>Hume</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Joel</forename><surname>Michael</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Allen</forename><surname>Rovick</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Martha</forename><surname>Evens</surname></persName>
+		</author>
+		<idno type="DOI">10.1207/s15327809jls0501_2</idno>
+		<ptr target="https://doi.org/10.1207/s15327809jls0501_2" />
+	</analytic>
+	<monogr>
+		<title level="j">Journal of the Learning Sciences</title>
+		<imprint>
+			<biblScope unit="volume">5</biblScope>
+			<biblScope unit="page" from="23" to="47" />
+			<date type="published" when="1996">1996. 1996</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b25">
+	<analytic>
+		<title level="a" type="main">Retrieval-Based Learning: A Perspective for Enhancing Meaningful Learning</title>
+		<author>
+			<persName><forename type="first">Jeffrey</forename><forename type="middle">D</forename><surname>Karpicke</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Phillip</forename><forename type="middle">J</forename><surname>Grimaldi</surname></persName>
+		</author>
+		<ptr target="http://www.jstor.org/stable/43546799" />
+	</analytic>
+	<monogr>
+		<title level="j">Educational Psychology Review</title>
+		<imprint>
+			<biblScope unit="volume">24</biblScope>
+			<biblScope unit="page" from="401" to="418" />
+			<date type="published" when="2012">2012. 2012</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b26">
+	<analytic>
+		<title level="a" type="main">The inception platform: Machine-assisted and knowledge-oriented interactive annotation</title>
+		<author>
+			<persName><forename type="first">Jan-Christoph</forename><surname>Klie</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Michael</forename><surname>Bugert</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Beto</forename><surname>Boullosa</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 27th International Conference on Computational Linguistics: System Demonstrations</title>
+				<meeting>the 27th International Conference on Computational Linguistics: System Demonstrations</meeting>
+		<imprint>
+			<date type="published" when="2018">2018</date>
+			<biblScope unit="page" from="5" to="9" />
+		</imprint>
+	</monogr>
+	<note>Richard Eckart de Castilho, and Iryna Gurevych</note>
+</biblStruct>
+
+<biblStruct xml:id="b27">
+	<analytic>
+		<title level="a" type="main">From zero to hero: Human-in-the-loop entity linking in low resource domains</title>
+		<author>
+			<persName><forename type="first">Jan-Christoph</forename><surname>Klie</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Richard</forename><surname>Eckart De Castilho</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Iryna</forename><surname>Gurevych</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 58th Annual Meeting of the Association for Computational Linguistics</title>
+				<meeting>the 58th Annual Meeting of the Association for Computational Linguistics</meeting>
+		<imprint>
+			<date type="published" when="2020">2020</date>
+			<biblScope unit="page" from="6982" to="6993" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b28">
+	<analytic>
+		<title level="a" type="main">Effects of In-Video Quizzes on MOOC Lecture Viewing</title>
+		<author>
+			<persName><forename type="first">Geza</forename><surname>Kovacs</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2876034.2876041</idno>
+		<ptr target="https://doi.org/10.1145/2876034.2876041" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the Third</title>
+				<meeting>the Third<address><addrLine>Edinburgh, Scotland, UK; New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computing Machinery</publisher>
+			<date type="published" when="2016">2016. 2016</date>
+			<biblScope unit="page" from="31" to="40" />
+		</imprint>
+	</monogr>
+	<note>L@S &apos;16)</note>
+</biblStruct>
+
+<biblStruct xml:id="b29">
+	<analytic>
+		<title level="a" type="main">Guiding questions enhance student learning from educational videos</title>
+		<author>
+			<persName><forename type="first">J</forename><surname>Timothy</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Lawson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>James</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Melissa</forename><forename type="middle">A</forename><surname>Bodle</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Richard</forename><forename type="middle">R</forename><surname>Houlette</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Haubner</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Teaching of Psychology</title>
+		<imprint>
+			<biblScope unit="volume">33</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page" from="31" to="33" />
+			<date type="published" when="2006">2006. 2006</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b30">
+	<monogr>
+		<title level="m" type="main">The Power of Scale for Parameter-Efficient Prompt Tuning</title>
+		<author>
+			<persName><forename type="first">Brian</forename><surname>Lester</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Rami</forename><surname>Al-Rfou</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Noah</forename><surname>Constant</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2104.08691</idno>
+		<imprint>
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+	<note>cs.CL</note>
+</biblStruct>
+
+<biblStruct xml:id="b31">
+	<monogr>
+		<author>
+			<persName><forename type="first">Lisa</forename><surname>Xiang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Percy</forename><surname>Li</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Liang</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2101.00190</idno>
+		<title level="m">Prefix-Tuning: Optimizing Continuous Prompts for Generation</title>
+				<imprint>
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+	<note>cs.CL</note>
+</biblStruct>
+
+<biblStruct xml:id="b32">
+	<monogr>
+		<title level="m" type="main">ConceptScape: Collaborative Concept Mapping for Video Learning</title>
+		<author>
+			<persName><forename type="first">Ching</forename><surname>Liu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Juho</forename><surname>Kim</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Hao-Chuan</forename><surname>Wang</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3173574.3173961</idno>
+		<ptr target="https://doi.org/10.1145/3173574.3173961" />
+		<imprint>
+			<date type="published" when="2018">2018</date>
+			<publisher>Association for Computing Machinery</publisher>
+			<biblScope unit="page" from="1" to="12" />
+			<pubPlace>New York, NY, USA</pubPlace>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b33">
+	<monogr>
+		<author>
+			<persName><forename type="first">Xiao</forename><surname>Liu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yanan</forename><surname>Zheng</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Zhengxiao</forename><surname>Du</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ming</forename><surname>Ding</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yujie</forename><surname>Qian</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2103.10385</idno>
+		<title level="m">Zhilin Yang, and Jie Tang. 2021. GPT Understands, Too</title>
+				<imprint/>
+	</monogr>
+	<note>cs.CL</note>
+</biblStruct>
+
+<biblStruct xml:id="b34">
+	<analytic>
+		<title level="a" type="main">Multi-Task Identification of Entities, Relations, and Coreference for Scientific Knowledge Graph Construction</title>
+		<author>
+			<persName><forename type="first">Yi</forename><surname>Luan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Luheng</forename><surname>He</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mari</forename><surname>Ostendorf</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Hannaneh</forename><surname>Hajishirzi</surname></persName>
+		</author>
+		<idno type="DOI">10.18653/v1/D18-1360</idno>
+		<ptr target="https://doi.org/10.18653/v1/D18-1360" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2018 Conference on Empirical Methods in Natural Language Processing</title>
+				<meeting>the 2018 Conference on Empirical Methods in Natural Language Processing<address><addrLine>Brussels, Belgium</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computational Linguistics</publisher>
+			<date type="published" when="2018">2018</date>
+			<biblScope unit="page" from="3219" to="3232" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b35">
+	<analytic>
+		<title level="a" type="main">Multi-Task Identification of Entities, Relations, and Coreferencefor Scientific Knowledge Graph Construction</title>
+		<author>
+			<persName><forename type="first">Yi</forename><surname>Luan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Luheng</forename><surname>He</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mari</forename><surname>Ostendorf</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Hannaneh</forename><surname>Hajishirzi</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proc. Conf. Empirical Methods Natural Language Process. (EMNLP)</title>
+				<meeting>Conf. Empirical Methods Natural Language ess. (EMNLP)</meeting>
+		<imprint>
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b36">
+	<monogr>
+		<title level="m" type="main">Rhetorical Structure Theory: A Theory of Text Organization</title>
+		<author>
+			<persName><forename type="first">C</forename><surname>William</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sandra</forename><forename type="middle">A</forename><surname>Mann</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Thompson</surname></persName>
+		</author>
+		<idno>ISI/RS-87-190</idno>
+		<imprint>
+			<date type="published" when="1987">1987</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">Technical Report</note>
+	<note>Information Sciences Institute</note>
+</biblStruct>
+
+<biblStruct xml:id="b37">
+	<analytic>
+		<title level="a" type="main">Interactive Multimodal Learning Environments</title>
+		<author>
+			<persName><forename type="first">Roxana</forename><surname>Moreno</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Richard</forename><surname>Mayer</surname></persName>
+		</author>
+		<idno type="DOI">10.1007/s10648-007-9047-2</idno>
+		<ptr target="https://doi.org/10.1007/s10648-007-9047-2" />
+	</analytic>
+	<monogr>
+		<title level="j">Educ Psychol Rev</title>
+		<imprint>
+			<biblScope unit="volume">19</biblScope>
+			<biblScope unit="page" from="309" to="326" />
+			<date type="published" when="2007-09">2007. 09 2007</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b38">
+	<monogr>
+		<title level="m" type="main">Meaningful learning: The essential factor for conceptual change in limited or inappropriate propositional hierarchies leading to empowerment of learners</title>
+		<author>
+			<persName><forename type="first">J</forename><surname>Novak</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2002">2002</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b39">
+	<analytic>
+		<title level="a" type="main">The Theory Underlying Concept Maps and How to Construct and Use Them</title>
+		<author>
+			<persName><forename type="first">Joseph</forename><forename type="middle">D</forename><surname>Novak</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Alberto</forename><forename type="middle">J</forename><surname>Cañas</surname></persName>
+		</author>
+		<idno>2006-01 Rev 2008-01</idno>
+		<ptr target="http://cmap.ihmc.us/Publications/ResearchPapers/TheoryCmaps/TheoryUnderlyingConceptMaps.htm" />
+	</analytic>
+	<monogr>
+		<title level="m">Florida Institute for Human and Machine Cognition</title>
+				<imprint>
+			<date type="published" when="2006">2006</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">research report</note>
+</biblStruct>
+
+<biblStruct xml:id="b40">
+	<analytic>
+		<title level="a" type="main">Knowledge Maps as Scaffolds for Cognitive Processing</title>
+		<author>
+			<persName><forename type="first">Angela</forename><forename type="middle">M</forename><surname>O'donnell</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Donald</forename><forename type="middle">F</forename><surname>Dansereau</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Richard</forename><forename type="middle">H</forename><surname>Hall</surname></persName>
+		</author>
+		<idno type="DOI">10.1023/A:1013132527007</idno>
+		<ptr target="https://doi.org/10.1023/A:1013132527007" />
+	</analytic>
+	<monogr>
+		<title level="j">Educational Psychology Review</title>
+		<imprint>
+			<biblScope unit="volume">14</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page" from="71" to="86" />
+			<date type="published" when="2002-03-01">2002. 01 Mar 2002</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b41">
+	<monogr>
+		<author>
+			<persName><forename type="first">S</forename><surname>Judith</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Wendy</forename><forename type="middle">A</forename><surname>Olson</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Kellogg</surname></persName>
+		</author>
+		<title level="m">Ways of Knowing in HCI</title>
+				<imprint>
+			<publisher>Springer</publisher>
+			<date type="published" when="2014">2014</date>
+			<biblScope unit="volume">2</biblScope>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b42">
+	<analytic>
+		<title level="a" type="main">Reinforced Dynamic Reasoning for Conversational Question Generation</title>
+		<author>
+			<persName><forename type="first">Boyuan</forename><surname>Pan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Hao</forename><surname>Li</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ziyu</forename><surname>Yao</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Deng</forename><surname>Cai</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Huan</forename><surname>Sun</surname></persName>
+		</author>
+		<idno type="DOI">10.18653/v1/P19-1203</idno>
+		<ptr target="https://doi.org/10.18653/v1/P19-1203" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 57th Annual Meeting of the Association for Computational Linguistics</title>
+				<meeting>the 57th Annual Meeting of the Association for Computational Linguistics<address><addrLine>Florence, Italy</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computational Linguistics</publisher>
+			<date type="published" when="2019">2019</date>
+			<biblScope unit="page" from="2114" to="2124" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b43">
+	<analytic>
+		<title level="a" type="main">Deep Knowledge Tracing</title>
+		<author>
+			<persName><forename type="first">Chris</forename><surname>Piech</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jonathan</forename><surname>Bassen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jonathan</forename><surname>Huang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Surya</forename><surname>Ganguli</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mehran</forename><surname>Sahami</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Leonidas</forename><forename type="middle">J</forename><surname>Guibas</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jascha</forename><surname>Sohl-Dickstein</surname></persName>
+		</author>
+		<ptr target="https://proceedings.neurips.cc/paper/2015/file/bac9162b47c56fc8a4d2a519803d51b3-Paper.pdf" />
+	</analytic>
+	<monogr>
+		<title level="m">Advances in Neural Information Processing Systems</title>
+				<editor>
+			<persName><forename type="first">C</forename><surname>Cortes</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">N</forename><surname>Lawrence</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">D</forename><surname>Lee</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">M</forename><surname>Sugiyama</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">R</forename><surname>Garnett</surname></persName>
+		</editor>
+		<imprint>
+			<publisher>Curran Associates, Inc</publisher>
+			<date type="published" when="2015">2015</date>
+			<biblScope unit="volume">28</biblScope>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b44">
+	<analytic>
+		<title level="a" type="main">CoQA: A Conversational Question Answering Challenge</title>
+		<author>
+			<persName><forename type="first">Siva</forename><surname>Reddy</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Danqi</forename><surname>Chen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Christopher</forename><forename type="middle">D</forename><surname>Manning</surname></persName>
+		</author>
+		<idno type="DOI">10.1162/tacl_a_00266</idno>
+		<ptr target="https://doi.org/10.1162/tacl_a_00266" />
+	</analytic>
+	<monogr>
+		<title level="j">Transactions of the Association for Computational Linguistics</title>
+		<imprint>
+			<biblScope unit="volume">7</biblScope>
+			<biblScope unit="page" from="249" to="266" />
+			<date type="published" when="2019-03">2019. March 2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b45">
+	<analytic>
+		<title level="a" type="main">Directed Diversity: Leveraging Embedding Distances for Collective Creativity in Crowd Ideation</title>
+		<author>
+			<persName><forename type="first">Yunlong</forename><surname>Samuel Rhys Cox</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ashraf</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Abdul</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Brian</forename><forename type="middle">Y</forename><surname>Christian Von Der Weth</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Lim</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2021 CHI Conference on Human Factors Computing Systems</title>
+				<meeting>the 2021 CHI Conference on Human Factors Computing Systems<address><addrLine>Yokohama, Japan; New York, NY, USA, Article</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computing Machinery</publisher>
+			<date type="published" when="2021">2021</date>
+			<biblScope unit="volume">393</biblScope>
+			<biblScope unit="page">35</biblScope>
+		</imprint>
+	</monogr>
+	<note>CHI &apos;21)</note>
+</biblStruct>
+
+<biblStruct xml:id="b46">
+	<analytic>
+		<title level="a" type="main">Visual argument: Graphic organizers are superior outlines in improving learning from text</title>
+		<author>
+			<persName><forename type="first">D</forename><surname>Robinson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kenneth</forename><forename type="middle">A</forename></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Journal Educational Psychology</title>
+		<imprint>
+			<biblScope unit="volume">87</biblScope>
+			<biblScope unit="page" from="455" to="467" />
+			<date type="published" when="1995">1995. 1995</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b47">
+	<analytic>
+		<title level="a" type="main">Silhouettes: A graphical aid to the interpretation and validation of cluster analysis</title>
+		<author>
+			<persName><forename type="first">J</forename><surname>Peter</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Rousseeuw</surname></persName>
+		</author>
+		<idno type="DOI">10.1016/0377-0427(87)90125-7</idno>
+		<ptr target="https://doi.org/" />
+	</analytic>
+	<monogr>
+		<title level="j">J. Comput. Appl. Math</title>
+		<imprint>
+			<biblScope unit="volume">20</biblScope>
+			<biblScope unit="page" from="53" to="65" />
+			<date type="published" when="1987">1987. 1987</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b48">
+	<monogr>
+		<title level="m" type="main">QuizBot: A Dialogue-Based Adaptive Learning System for Factual Knowledge</title>
+		<author>
+			<persName><forename type="first">Liwei</forename><surname>Sherry Ruan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Justin</forename><surname>Jiang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Bryce Joe-Kun</forename><surname>Xu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Zhengneng</forename><surname>Tham</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yeshuang</forename><surname>Qiu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Elizabeth</forename><forename type="middle">L</forename><surname>Zhu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Emma</forename><surname>Murnane</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">James</forename><forename type="middle">A</forename><surname>Brunskill</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Landay</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3290605.3300587</idno>
+		<ptr target="https://doi.org/10.1145/3290605.3300587" />
+		<imprint>
+			<date type="published" when="2019">2019</date>
+			<publisher>Association for Computing Machinery</publisher>
+			<biblScope unit="page" from="1" to="13" />
+			<pubPlace>New York, NY, USA</pubPlace>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b49">
+	<monogr>
+		<title level="m" type="main">Understanding the Effect of In-Video Prompting on Learners and Instructors</title>
+		<author>
+			<persName><forename type="first">Hyungyu</forename><surname>Shin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Eun-Young</forename><surname>Ko</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Joseph</forename><forename type="middle">Jay</forename><surname>Williams</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Juho</forename><surname>Kim</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3173574.3173893</idno>
+		<ptr target="https://doi.org/10.1145/3173574.3173893" />
+		<imprint>
+			<date type="published" when="2018">2018</date>
+			<publisher>Association for Computing Machinery</publisher>
+			<biblScope unit="page" from="1" to="12" />
+			<pubPlace>New York, NY, USA</pubPlace>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b50">
+	<analytic>
+		<title level="a" type="main">AutoPrompt: Eliciting Knowledge from Language Models with Automatically Generated Prompts</title>
+		<author>
+			<persName><forename type="first">Taylor</forename><surname>Shin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yasaman</forename><surname>Razeghi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Robert</forename><forename type="middle">L</forename><surname>Logan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">I</forename><forename type="middle">V</forename></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Eric</forename><surname>Wallace</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sameer</forename><surname>Singh</surname></persName>
+		</author>
+		<idno type="DOI">10.18653/v1/2020.emnlp-main.346</idno>
+		<ptr target="https://doi.org/10.18653/v1/2020.emnlp-main.346" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2020 Conference on Empirical Methods in Natural Language Processing (EMNLP)</title>
+				<meeting>the 2020 Conference on Empirical Methods in Natural Language Processing (EMNLP)</meeting>
+		<imprint>
+			<publisher>Association for Computational Linguistics</publisher>
+			<date type="published" when="2020">2020</date>
+			<biblScope unit="page" from="4222" to="4235" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b51">
+	<analytic>
+		<title level="a" type="main">A prototype tool set to support machine-assisted annotation</title>
+		<author>
+			<persName><forename type="first">Brett</forename><surname>South</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Shuying</forename><surname>Shen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jianwei</forename><surname>Leng</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Tyler</forename><surname>Forbush</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Scott</forename><surname>Duvall</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Wendy</forename><surname>Chapman</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">BioNLP: Proceedings of the 2012 Workshop on Biomedical Natural Language Processing</title>
+				<imprint>
+			<date type="published" when="2012">2012</date>
+			<biblScope unit="page" from="130" to="139" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b52">
+	<analytic>
+		<title level="a" type="main">BRAT: a web-based tool for NLP-assisted text annotation</title>
+		<author>
+			<persName><forename type="first">Pontus</forename><surname>Stenetorp</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sampo</forename><surname>Pyysalo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Goran</forename><surname>Topić</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Tomoko</forename><surname>Ohta</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sophia</forename><surname>Ananiadou</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jun'ichi</forename><surname>Tsujii</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the Demonstrations at the 13th Conference of the European Chapter</title>
+				<meeting>the Demonstrations at the 13th Conference of the European Chapter</meeting>
+		<imprint>
+			<publisher>Association for Computational Linguistics</publisher>
+			<date type="published" when="2012">2012</date>
+			<biblScope unit="page" from="102" to="107" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b53">
+	<monogr>
+		<title level="m" type="main">TexSketch: Active Diagramming through Pen-and-Ink Annotations</title>
+		<author>
+			<persName><forename type="first">Hariharan</forename><surname>Subramonyam</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Colleen</forename><surname>Seifert</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Priti</forename><surname>Shah</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Eytan</forename><surname>Adar</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3313831.3376155</idno>
+		<ptr target="https://doi.org/10.1145/3313831.3376155" />
+		<imprint>
+			<date type="published" when="2020">2020</date>
+			<publisher>Association for Computing Machinery</publisher>
+			<biblScope unit="page" from="1" to="13" />
+			<pubPlace>New York, NY, USA</pubPlace>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b54">
+	<analytic>
+		<title level="a" type="main">Sangrahaka: A Tool for Annotating and Querying Knowledge Graphs</title>
+		<author>
+			<persName><forename type="first">Hrishikesh</forename><surname>Terdalkar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Arnab</forename><surname>Bhattacharya</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3468264.3473113</idno>
+		<ptr target="https://doi.org/10.1145/3468264.3473113" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 29th ACM Joint Meeting on European Software Engineering Conference and Symposium on the Foundations of Software Engineering</title>
+				<meeting>the 29th ACM Joint Meeting on European Software Engineering Conference and Symposium on the Foundations of Software Engineering<address><addrLine>Athens, Greece; New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computing Machinery</publisher>
+			<date type="published" when="2021">2021</date>
+			<biblScope unit="page" from="1520" to="1524" />
+		</imprint>
+	</monogr>
+	<note>ESEC/FSE 2021)</note>
+</biblStruct>
+
+<biblStruct xml:id="b55">
+	<analytic>
+		<title level="a" type="main">Scaffolding Student Understanding in Small-Group Work: Students&apos; Uptake of Teacher Support in Subsequent Small-Group Interaction</title>
+		<author>
+			<persName><forename type="first">Neil</forename><surname>Janneke Van De Pol</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Monique</forename><surname>Mercer</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Volman</surname></persName>
+		</author>
+		<idno type="DOI">10.1080/10508406.2018.1522258</idno>
+		<ptr target="https://doi.org/10.1080/10508406.2018.1522258" />
+	</analytic>
+	<monogr>
+		<title level="j">Journal of the Learning Sciences</title>
+		<imprint>
+			<biblScope unit="volume">28</biblScope>
+			<biblScope unit="page" from="206" to="239" />
+			<date type="published" when="2019">2019. 2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b56">
+	<analytic>
+		<title level="a" type="main">The Impact of a Question-Embedded Video-Based Learning Tool on E-Learning</title>
+		<author>
+			<persName><forename type="first">Omer Faruk</forename><surname>Vural</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Theory and Practice</title>
+		<imprint>
+			<biblScope unit="volume">13</biblScope>
+			<biblScope unit="page" from="1315" to="1323" />
+			<date type="published" when="2013">2013. 2013</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b57">
+	<analytic>
+		<title level="a" type="main">Entity, Relation, and Event Extraction with Contextualized Span Representations</title>
+		<author>
+			<persName><forename type="first">David</forename><surname>Wadden</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ulme</forename><surname>Wennberg</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yi</forename><surname>Luan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Hannaneh</forename><surname>Hajishirzi</surname></persName>
+		</author>
+		<idno type="DOI">10.18653/v1/D19-1585</idno>
+		<ptr target="https://doi.org/10.18653/v1/D19-1585" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2019 Conference on Empirical Methods in Natural Language Processing and the 9th International Joint Conference on Natural Language Processing, EMNLP-IJCNLP 2019</title>
+				<editor>
+			<persName><forename type="first">Kentaro</forename><surname>Inui</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">Jing</forename><surname>Jiang</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">Vincent</forename><surname>Ng</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">Xiaojun</forename><surname>Wan</surname></persName>
+		</editor>
+		<meeting>the 2019 Conference on Empirical Methods in Natural Language Processing and the 9th International Joint Conference on Natural Language Processing, EMNLP-IJCNLP 2019<address><addrLine>Hong Kong, China</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computational Linguistics</publisher>
+			<date type="published" when="2019-11-03">2019. November 3-7, 2019</date>
+			<biblScope unit="page" from="5783" to="5788" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b58">
+	<monogr>
+		<title level="m" type="main">Language Models are Open Knowledge Graphs</title>
+		<author>
+			<persName><forename type="first">Chenguang</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Xiao</forename><surname>Liu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Dawn</forename><surname>Song</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2010.11967</idno>
+		<ptr target="https://arxiv.org/abs/2010.11967" />
+		<imprint>
+			<date type="published" when="2020">2020. 2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b59">
+	<monogr>
+		<title level="m" type="main">Sara, the Lecturer: Improving Learning in Online Education with a Scaffolding-Based Conversational Agent</title>
+		<author>
+			<persName><forename type="first">Rainer</forename><surname>Winkler</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sebastian</forename><surname>Hobert</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Antti</forename><surname>Salovaara</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Matthias</forename><surname>Söllner</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jan</forename><forename type="middle">Marco</forename><surname>Leimeister</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3313831.3376781</idno>
+		<ptr target="https://doi.org/10.1145/3313831.3376781" />
+		<imprint>
+			<date type="published" when="2020">2020</date>
+			<publisher>Association for Computing Machinery</publisher>
+			<biblScope unit="page" from="1" to="14" />
+			<pubPlace>New York, NY, USA</pubPlace>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b60">
+	<analytic>
+		<title level="a" type="main">ERNIE: Enhanced Language Representation with Informative Entities</title>
+		<author>
+			<persName><forename type="first">Zhengyan</forename><surname>Zhang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Xu</forename><surname>Han</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Zhiyuan</forename><surname>Liu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Xin</forename><surname>Jiang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Maosong</forename><surname>Sun</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Qun</forename><surname>Liu</surname></persName>
+		</author>
+		<idno type="DOI">10.18653/v1/P19-1139</idno>
+		<ptr target="https://doi.org/10.18653/v1/P19-1139" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 57th Annual Meeting of the Association for Computational Linguistics</title>
+				<meeting>the 57th Annual Meeting of the Association for Computational Linguistics<address><addrLine>Florence, Italy</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computational Linguistics</publisher>
+			<date type="published" when="2019">2019</date>
+			<biblScope unit="page" from="1441" to="1451" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+				</listBibl>
+			</div>
+		</back>
+	</text>
+</TEI>

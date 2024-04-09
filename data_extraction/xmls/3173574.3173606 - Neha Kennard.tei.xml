@@ -1,0 +1,913 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xml:space="preserve" xmlns="http://www.tei-c.org/ns/1.0" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.com/kermitt2/grobid/master/grobid-home/schemas/xsd/Grobid.xsd"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+	<teiHeader xml:lang="en">
+		<fileDesc>
+			<titleStmt>
+				<title level="a" type="main">Exploration and Explanation in Computational Notebooks</title>
+			</titleStmt>
+			<publicationStmt>
+				<publisher/>
+				<availability status="unknown"><licence/></availability>
+			</publicationStmt>
+			<sourceDesc>
+				<biblStruct>
+					<analytic>
+						<author>
+							<persName><forename type="first">Adam</forename><surname>Rule</surname></persName>
+							<email>acrule@ucsd.edu</email>
+							<affiliation key="aff0">
+								<orgName type="laboratory">Design Lab</orgName>
+								<orgName type="institution">UC San Diego La Jolla</orgName>
+								<address>
+									<region>CA</region>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Aurélien</forename><surname>Tabard</surname></persName>
+							<email>aurelien.tabard@univ-lyon1.fr</email>
+							<affiliation key="aff1">
+								<orgName type="institution" key="instit1">Université de Lyon</orgName>
+								<orgName type="institution" key="instit2">CNRS</orgName>
+								<address>
+									<postCode>LIRIS UMR5205</postCode>
+									<settlement>Lyon</settlement>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">James</forename><forename type="middle">D</forename><surname>Hollan</surname></persName>
+							<email>hollan@ucsd.edu</email>
+							<affiliation key="aff2">
+								<orgName type="laboratory">Design Lab</orgName>
+								<orgName type="institution">UC San Diego La Jolla</orgName>
+								<address>
+									<region>CA</region>
+								</address>
+							</affiliation>
+						</author>
+						<title level="a" type="main">Exploration and Explanation in Computational Notebooks</title>
+					</analytic>
+					<monogr>
+						<imprint>
+							<date/>
+						</imprint>
+					</monogr>
+					<idno type="DOI">10.1145/3173574.3173606</idno>
+				</biblStruct>
+			</sourceDesc>
+		</fileDesc>
+		<encodingDesc>
+			<appInfo>
+				<application version="0.7.1" ident="GROBID" when="2022-07-22T05:05+0000">
+					<desc>GROBID - A machine learning software for extracting information from scholarly documents</desc>
+					<ref target="https://github.com/kermitt2/grobid"/>
+				</application>
+			</appInfo>
+		</encodingDesc>
+		<profileDesc>
+			<textClass>
+				<keywords>
+					<term>Computational notebook</term>
+					<term>Jupyter Notebook</term>
+					<term>data science</term>
+					<term>data analysis</term>
+					<term>narrative</term>
+					<term>H.5.3. Information interfaces and presentation: Group and Organization Interfaces -Collaborative computing</term>
+				</keywords>
+			</textClass>
+			<abstract>
+<div xmlns="http://www.tei-c.org/ns/1.0"><p>Computational notebooks combine code, visualizations, and text in a single document. Researchers, data analysts, and even journalists are rapidly adopting this new medium. We present three studies of how they are using notebooks to document and share exploratory data analyses. In the first, we analyzed over 1 million computational notebooks on GitHub, finding that one in four had no explanatory text but consisted entirely of visualizations or code. In a second study, we examined over 200 academic computational notebooks, finding that although the vast majority described methods, only a minority discussed reasoning or results. In a third study, we interviewed 15 academic data analysts, finding that most considered computational notebooks personal, exploratory, and messy. Importantly, they typically used other media to share analyses. These studies demonstrate a tension between exploration and explanation in constructing and sharing computational notebooks. We conclude with opportunities to encourage explanation in computational media without hindering exploration.</p></div>
+			</abstract>
+		</profileDesc>
+	</teiHeader>
+	<text xml:lang="en">
+		<body>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>INTRODUCTION</head><p>Data analysis is an iterative and exploratory process of extracting insights from data <ref type="bibr" target="#b8">[11,</ref><ref type="bibr">17]</ref>. Insights are sensitive to the methods used to produce them; small changes in how data are collected, cleaned, or processed can lead to vastly different results <ref type="bibr">[13]</ref>. For this reason, analysts must document their steps and reasoning if others are to understand, and ultimately trust their work. Yet, the iterative and exploratory nature of data analysis complicates documentation. Analysts struggle to track which of the many versions of their code produced a particular result <ref type="bibr" target="#b8">[11,</ref><ref type="bibr">17]</ref>. Exploration often leads to dead-ends, prompting analysts to view code as being "throw-away" and see little point in annotating it <ref type="bibr">[17]</ref>. Over time analysts produce dozens of similarly named scripts, figures, and files, which can be difficult to navigate <ref type="bibr">[35]</ref>. Together, these factors complicate tracking and sharing of analyses, undermining replication and review.</p><p>Computational notebooks address these problems by combining code, visualizations, and text in a single document (Figure <ref type="figure" target="#fig_0">1</ref>). While they have ties to Knuth's early work on literate programming <ref type="bibr" target="#b18">[20]</ref>, and have been available for decades in software such as Maple and Mathematica, the recent emergence of open-source computational notebooks has enabled rapid adoption by millions of researchers, data analysts, and journalists. Many users adopt computational notebooks with the aim to not only perform, but also document and share their analyses. Indeed, computational notebooks were designed to support construction and sharing of computational narratives <ref type="bibr" target="#b25">[28]</ref>. Are they being used to share compelling narratives, or simply to explore data? This paper presents three studies that document a tension between exploring data and explaining process and how this hinders construction and sharing of computational notebooks. We assess current use of computational notebooks through quantitative analysis of over 1 million notebooks shared online, qualitative analysis of over 200 academic computational notebooks, and interviews with 15 academic data analysis. In place of rich narratives, we find computational notebooks are often loose collections of scripts and notes, or lack explanatory text altogether. We find individual notebooks rarely tell a story by themselves but are routinely combined with other notebooks, emails, slides, and READMEs. We find many analysts see their notebooks as personal, exploratory, and messy artifacts and prefer using other media, or highly cleaned notebooks, to share results.</p><p>Making data and analyses understandable and public is crucial to advancing open science and enabling reproducibility. We believe computational notebooks are an important step towards these ends, but still in an early stage of development.</p><p>Guiding their evolution requires careful examination of how they are being used, especially to better support both analysis and communication. While our results demonstrate a lack of explanation, they also highlight opportunities to foster more explanation in computational media while still encouraging the exploratory process that analysts use to think with data.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>RELATED WORK</head><p>This research builds on three bodies of related work: understanding data analysis, the design of computational notebooks, and computational narrative.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Data Analysis</head><p>In the introduction to his seminal book Exploratory Data Analysis John Tukey memorably described his subject as "looking at data to see what it seems to say" <ref type="bibr" target="#b34">[37]</ref>. The definition is vague, which may have been Tukey's point. He stressed that exploratory analysis and plotting, preferably by hand, should almost always precede more exact statistical tests as hand-guided exploration can identify interesting trends, check assumptions, and inform selection of analytical techniques.</p><p>From large scale user data collected on the Web, to big science initiatives collecting and integrating petabytes of data, the scale of data analyzed today routinely exceeds what can be plotted by hand <ref type="bibr" target="#b20">[22]</ref>. Still, recent accounts of data analysis echo Tukey's description of an iterative and imprecise art. Two interview studies found that data analysis involves cycles of obtaining, cleaning, profiling, analyzing, and interpreting data <ref type="bibr" target="#b8">[11,</ref><ref type="bibr">17]</ref>. In their iterations, analysts try different versions of the same analysis, slowly improve analytical methods, and hit numerous "dead ends" before finding an explanation that "fits" the data.</p><p>These studies demonstrate the sensemaking <ref type="bibr" target="#b27">[30]</ref> involved in data analysis and that the process used to collect, explore, and model data has a significant impact on the sense made. While the goal of this process may be to produce generalizable knowledge, more often than not it may simply be to inform the analyst seeking to make a decision <ref type="bibr">[19]</ref>. This can make it difficult to perform an "objective" analysis, or to precisely document or share results. Moreover, it implies that given the same dataset, two analysts may come to different, though potentially equally valid, conclusions <ref type="bibr">[13]</ref>.</p><p>Data analysis requires professional judgment to collect, clean, analyze, and interpret data, which has additional consequences for the ways analysts document and share their work. While observing analysts at the International Monetary Fund, Harper and Sellen found that the more judgment involved in producing a piece of information, the less suitable it was for sharing over asynchronous electronic media <ref type="bibr" target="#b9">[12]</ref>. Analysts at the Fund routinely interpolated missing data or adjusted figures based on their knowledge of countries' data collection practices. Without knowing how and why these adjustments were made, others could easily misinterpret the data and insights drawn from them. For these and other reasons, analysts require ways of fluidly documenting and communicating their work.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Computational Notebooks</head><p>The amount of judgment and exploration involved in data analysis necessitates clear documentation of analyses if others -or even the original analyst -are to inspect, replicate, or build on them. Leading work on reproducibility suggests that at a minimum, analysts should distribute the code used in their analyses <ref type="bibr">[27]</ref>. Yet, analysts themselves may have difficulty reconstructing the exact process used to generate a result <ref type="bibr" target="#b8">[11]</ref>. Moreover, the analysis may involve combining and reflecting on media from a variety of digital and paper resources that are not easily shared <ref type="bibr">[35]</ref>. Even with all the code and resources in one place there is the additional challenge of making them understandable. As the organizers of the Software Carpentry workshops note, "most researchers are never taught the equivalent of basic lab skills for research computing" <ref type="bibr" target="#b35">[38]</ref>. These include placing explanatory comments at the start of every program, making code dependencies explicit, and separating raw and cleaned data. Much of this organization and annotation is a manual process learned through experience.</p><p>One way to address these challenges is to perform data analyses in computational notebooks. In the tradition of Knuth's literate programming <ref type="bibr" target="#b18">[20]</ref>, computational notebooks enable analysts to mix code with manual annotations in a single document. While computational notebooks have been available in propriety software for decades, recent HCI research has explored mixed methods notebooks. Burrito, for example, instrumented analysts' computers so that analytical steps were automatically recorded and could be mixed with manual annotations <ref type="bibr" target="#b8">[11]</ref>. PRISM enabled computational biologists to mix and reflect on paper and digital media in a hybrid laboratory notebook <ref type="bibr">[35]</ref>.</p><p>In recent years computational notebooks have seen wide adoption thanks to the availability of open source varieties such as RNotebooks and Jupyter Notebook, which have millions of users in fields as diverse as education, finance, and the sciences <ref type="bibr" target="#b7">[10]</ref>. This new generation of notebooks is based on cells, each of which contains rich text or code that can be executed to compute results or generate visualizations (Figure <ref type="figure" target="#fig_0">1</ref>). These cells are linearly arranged, but can be reorganized, reshuffled, and executed in any order. This notebook paradigm is spreading beyond data analysis to other development and visualization environments. At the time of writing, Mike Bostock was creating d3.express, an interactive notebook version of his popular D3 Javascript visualization library <ref type="bibr" target="#b1">[2]</ref>. Distill, an online academic publisher, uses a notebook format to explain complex machine learning research <ref type="bibr">[6]</ref>. Likewise, Codestrates recently demonstrated how the notebook paradigm could be used to blur the line between development and use of an application <ref type="bibr" target="#b26">[29]</ref>. The notebook paradigm is clearly powerful and addresses key challenges of preforming data analysis. But do analysts actually use them to write clear explanations of their work, or simply to support iterative analysis?</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Computational Narrative</head><p>Science "begins as a story about a Possible World-a story which we invent and criticize and modify as we go along, so that it ends by being, as nearly as we can make it, a story about real life." -Sir Peter Medawar, Induction and Intuition in Scientific Thought <ref type="bibr">(1969)</ref> One of the key features of computational notebooks is that they enable analysts to arrange code, visualizations and text in a computational narrative. While computers are good at producing and processing data, humans are much better at understanding stories. We are not experts in narrative, nor can we summarize millennia of innovation in a few para-graphs. However, we highlight a few salient aspects of narrative as it relates to data analysis and visualization.</p><p>At its core, a narrative is a series of ordered and connected events. The Oxford English Dictionary defines narrative as "An account of a series of events, facts, etc., given in order and with the establishing of connections between them; a narration, a story, an account". As such, a series of disjointed events is not a narrative (e.g., a twitter newsfeed), nor is a collection of related events that are not in a particular order (e.g., an affinity diagram or mood board). Narratives occur in a variety of media including audio, text, and video, each of which have their own strategies for engaging the audience and moving the story along. While some techniques, such as the "flashback" can be employed across media, others like split-screen sequences in film, are unique to particular media <ref type="bibr" target="#b27">[30]</ref>.</p><p>Since the early 2000s, there has been increasing focus on narrative and storytelling in information visualization. Gershon and Page highlighted the power of narrative to engage and convey information and suggested that information visualization employ well-established narrative techniques such as continuity editing, filling gaps, and redundancy <ref type="bibr">[9]</ref>. Segel &amp; Heer built on this foundation by developing a design space for what they called "narrative visualizations" (visualizations with a set of ordered and connected views), and identified seven distinct genres including magazine, slideshow, and comic-strip <ref type="bibr">[32]</ref>. Noting the importance of the order in which data views are presented, Hullman et. al conducted multiple studies of how people sequence information visualization events, finding they tend to prefer a consistent, hierarchical structure <ref type="bibr" target="#b11">[14,</ref><ref type="bibr" target="#b12">15]</ref>. More recently, Kosara &amp; Mackinlay highlighted the need to use different storytelling strategies in different situations with different audiences (self-running presentations, live presentations, small-group presentations) <ref type="bibr" target="#b19">[21]</ref>, and Satyanarayan &amp; Heer demonstrated Ellipsis, a tool to support the authoring of narrative visualizations particularly for the web <ref type="bibr" target="#b28">[31]</ref>. This prior research demonstrates the challenge of communicating exploratory data analysis, the promise of computational notebooks, and the characteristics of narrative in information visualization. However, as noted in prior research, narrative affordances and strategies differ across media and audience. It remains to be seen what types of explanation computational notebooks afford and the distinct scenarios in which analysts use them. Moreover, tools such as Ellipsis which support the construction of narratives in interactive information visualizations may not apply when crafting narrative in computational notebooks which need to not only convey insights, but also how they were generated. In the following three studies we assess the current state of narrative in computational notebooks and the challenges analysts face constructing and sharing them.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>STUDY 1: COMPUTATIONAL NOTEBOOKS ON GITHUB</head><p>To examine if computational notebooks make significant use of narrative, we analyzed 1.23 million Jupyter Note-books hosted publicly on GitHub. GitHub is a popular website for hosting, managing, and collaboratively editing software source code. Jupyter Notebook is a popular opensource computational notebook that enables authors to combine code, visualizations, and text in a single document (an .ipynb file) whose underlying structure is JSON. In May 2015, GitHub began to natively render Jupyter Notebooks so that anyone viewing one on the site would see the fully rendered notebook rather than its underlying JSON <ref type="bibr" target="#b30">[33]</ref>, which has made GitHub a popular site for storing and sharing Jupyter Notebooks.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Methods</head><p>In July 2017, we searched GitHub for all publicly available Jupyter Notebooks that had not been forked (i.e., copied) from another repository (i.e., collection of code). For each notebook, we attempted to download the notebook, information about the repository that contained it, and, if present, the repository's README. Of the 1,294,163 notebooks hosted on GitHub at the time, we were able to download notebook and repository data for 1,227,573, roughly 95% of the corpus. Unless otherwise stated, all figures in the following results are relative to this set of 1.23 million notebooks. The majority of notebooks we did not obtain data for were invalid JSON or empty files, though some data were missing because files had been moved, renamed, or deleted during our search. We computed metrics about each notebook's content and structure to facilitate analysis.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Results</head><p>Users: There are 100,503 GitHub users who have publicly shared a notebook. This is about 0.4% of all GitHub users and 1.7% of the estimated 6 million Jupyter Notebook users <ref type="bibr" target="#b7">[10]</ref>. The number of notebooks per user follows an exponential distribution, , with 24.5% of users hosting only one notebook on GitHub, and 27.4% hosting ten or more. The majority of notebooks (81.4%) belong to users who have hosted 10 or more.</p><p>Repositories: There are 191,402 repositories on GitHub containing at least one Jupyter Notebook. The number of notebooks per repository follows an exponential distribution, , with 39.1% of repositories having only one notebook and 14.6% of repositories having ten or more. The majority of notebooks (66.4%) belong to repositories with ten or more notebooks in them.</p><p>Language &amp; Packages: Jupyter Notebook can execute code written in over 40 programming languages and users select a primary language when they create a notebook. Of the 85.1% of notebooks with a language specified, the vast majority were written in Python (96.3%), particularly Python 2.7 (52.5%). Notebooks written in R and Julia each accounted for about 1% of all notebooks. Of notebooks written in Python, R, or Julia, 89.1% imported external packages or modules. The most commonly imported Python packages were Numpy (67.3% of Python notebooks with imports), Matplotlib (52.1%), and Pandas (42.3%), showing a strong emphasis on data science and visualization.</p><p>Notebook Length: Jupyter Notebook cells can be any length and contain either executable code, markdown to be rendered as text, or raw content that should be rendered as is. Most cells were either markdown or code (99.8% of cells) rather than raw content. The number of cells per notebook, as well as the amount of text and the number of lines of code per notebook all followed log-normal distributions, with the exception that a significant number of notebooks (27.6%) had no text in them but consisted entirely of visualizations or code (Figure <ref type="figure" target="#fig_1">2A</ref>). Only 2.2% of notebooks did not have any code but were entirely text. Ignoring notebooks without text, the median notebook had 218 words of text, though the longest, at 55,000 words, was longer than The Great Gatsby. Disregarding notebooks without code, the median notebook had 85 lines of code, though the longest had over 400,000 lines of code, more than NASA's primary space shuttle flight software [7]. Organization: Notebooks are extremely flexible with the main organizational element being cells, which can be linearly arranged. Users can provide additional structure by deciding how to split text or code across cells, using functions, classes, and comments to structure code, and using markdown headers and links to structure text. We found that cells at the beginning of notebooks were more likely to be text, but that the majority of later cells were devoted to code. (Figure <ref type="figure" target="#fig_1">2B</ref>). Most notebooks used headers to organize text, and comments to organize code (Table <ref type="table" target="#tab_0">1</ref>). Execution &amp; Outputs: While convention is to run cells linearly from top to bottom of the notebook, cells can be executed in any order. This can be useful when checking if changes to a prior analytical step impact later computations. Jupyter Notebooks track cell execution order, so we were able to see if notebooks were run linearly or non-linearly. We found that 43.9% of notebooks with computational output had a non-linear execution order. Jupyter supports three types of output: stream (e.g., print statements), executed results (e.g., numerical results), and displayed data (e.g., rich data displays such as graphics and tables). In our corpus, 85.0% of notebooks had output in at least one cell, with 68.5% of notebooks having stream output, 58.1% having an executed result, and 45.5% having displayed data.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Description of Repositories:</head><p>GitHub repositories provide a number of facilities for describing and documenting projects. These include a short description, longer README files that get rendered on the repository's homepage, and GitHub-hosted project websites. While 58.5% of notebook repositories had a description and 73.0% had a README, only 4.5% had a GitHub-hosted project website. Analyzing the descriptions gives a sense for the topics notebooks analyze and discuss. The ten most common words in repository descriptions were learning, project, machine, udacity, course, deep, nanodegree, neural, kaggle, and model, showing an emphasis on machine learning and education.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Discussion</head><p>Our corpus is very diverse, including notebooks containing a single line of code and others that are full interactive textbooks. While some stood alone, others were part of a collection that formed a multi-step analysis. While some were homework submissions, others demonstrated software packages, or documented original research. This diversity discourages generalization, but we highlight a few broad trends in the use of text and narrative.</p><p>First, most notebooks were not narratives but collections of scripts with loose notes. A quarter had no text and, even disregarding these, the median notebook had barely more text than the abstract of this paper (Figure <ref type="figure" target="#fig_1">2A</ref>). The designers of Jupyter Notebooks intended for them to be a "Literate Computing environment, [in which] the author weaves human language with live code and the results of the code, and it is the combination of all that produces a computational narrative" <ref type="bibr" target="#b13">[16]</ref>. It appears many analysts are not using notebooks in this way.</p><p>Second, descriptive text is not evenly distributed across notebooks (Figure <ref type="figure" target="#fig_1">2B</ref>). Text is most likely to occur at the very beginning of the notebook, steadily less prevalent as the notebook progresses, and least likely to occur at the very end. This may reflect the use of introductory text to present the goals and organization of the notebook, but not conclusion text to reiterate goals and interpret results. Alternatively, the declining use of text as the notebook progresses may demonstrate that less explanation is needed once the analysis has been setup, or that analysts tire of annotating the notebook over time.</p><p>Third, notebooks in our corpus rarely stood alone. The vast majority were in repositories containing other notebooks, a README file, or both. A single narrative may flow across multiple notebooks, from one for data cleaning into another for profiling and modeling. Moreover README files may provide additional information about the motivations, background, and findings of the analysis.</p><p>Finally, the exploratory and iterative nature of data analysis is reflected in the fact that nearly half (43.9%) of notebooks were uploaded to GitHub with a non-linear execution order. This means that analysts went back and re-ran earlier cells, rather than just linearly writing and executing code. This figure should be considered as a lower-bound as analysts may have done a clean run of their notebook before sharing it online.</p><p>These results demonstrate that while many notebooks are used for iterative analysis, few contain lengthy explanations of their contents. Are analyses performed in notebooks being explained in other ways? Or might it be that particular uses of notebooks employ more narrative than others? We begin to address these questions by focusing on one particular community of practice: academic data analysis.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>STUDY 2: NARRATIVE IN ACADEMIC NOTEBOOKS</head><p>In this second study, we focused on how notebooks documenting academic data analysis employ narrative. We selected these notebooks because, relative to other communities, the collaborative nature of academic research may favor inclusion of text to explain methods and results so others can understand and build on the work. Transparency and replicability of analytical processes is also of increasing importance in the scientific community <ref type="bibr">[26]</ref>. To give an idea of the richness of some scientific notebooks, one highby the Jupyter <ref type="bibr" target="#b13">[16]</ref> which supplements a Nature article [5] contains 2000 lines of code and 7000 words of text, even as the Nature article itself is half that length at 3500 words. We explore whether this example is an outlier, or if most academic notebooks employ narrative.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Methods</head></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Sampling:</head><p>We sampled academic computational notebooks by searching GitHub for repositories both a notebook and a README linking an academic publication. In a pilot of "interesting" academic notebooks <ref type="bibr" target="#b13">[16]</ref>, we found that many notebooks were in repositories whose README had a URL pointing a journal, conference, or pre-print publication. many of these links lead to journal-specific websites, as nature.com, the most common links pointed to Object Identifiers (DOIs) and arXiv publications (a popular pre-print service). To obtain a sample of academic computational notebooks, searched GitHub for repositories containing Jupyter and a README a DOI or arXiv link. We purposefully sampled the resulting 858 repositories to get 52 from a range of disciplines, looking for keywords "chemistry", and "linguistics" in the READ-MEs. These 52 repositories contained 221 notebooks.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Coding:</head><p>We iteratively coded all 221 notebooks to develop codes describing how academic notebooks employ text. Specifically, we coded each notebook's genre, organization use of text, and the organization and use of code com-2). Two researchers coded 50 notebooks to develop initial codes and refined and reapplied codes they achieved greater than 60% inter-rater reliability (Cohen's Kappa). They then divided and separately coded the remaining notebooks. They a similar proto identify features of the repositories containing academic notebooks, coding for the contents of the repository well as contents of the README.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Results</head></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Content and Readmes:</head><p>In 43 of the repositories, notebooks made up the majority of contents, averaging 81.6% of the repository's total bytes. In nine cases where notebook content was the minority, the majority of repository were program files that the notebook addition to notebooks, the majority of repositocontained source code program files such as .py files Many contained data (24 repositories), figures <ref type="bibr" target="#b12">(15)</ref>, manuscript files <ref type="bibr" target="#b7">(10)</ref> and additional documentation (7). Most README files described what the pository's code did (33 repositories) and the steps required setup or install it <ref type="bibr" target="#b30">(33)</ref>. Many READMEs also the organization of the repository's files and how to execute the code or notebooks configured <ref type="bibr" target="#b15">(18)</ref>. Few discussed analytical reasoning (7) or results <ref type="bibr" target="#b7">(10)</ref>.</p><p>Notebooks: Half of the repositories (26) contained a single notebook,</p><p>. The two repositories with the most notebooks (52 and 26 respectively) were largely repetitive with notebooks that tweaked one or two parameters at the top, and then ran the exact same collection of cells. To prevent these nearly identical notebooks from biasing our data, removed them from further analysis, leaving 50 reposiwith 145 notebooks. These 145 notebooks were longthan the from our GitHub corpus in Study 1 with a median length of cells (compared to 18 Study 1) 102 of code and 329 words (218).</p><p>Organization and Use of Text: notebooks had an introductory text (55%) but none had a concluding text cell (3%). The vast majority used headers (86%), and slightly fewer had text aside from the headers to explain the analysis (77%). Of those notebooks with non-header text, 88% used that text to describe analytical steps, but only 34% to explain reasoning, and just 38% to discuss results.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Organization and Use of Code Comments:</head><p>We found 82% of notebooks had code comments. Of these, almost all used comments to describe what the code was and half (50%) used them to control the program flow by commenting alternative code. Very few notebooks used comments to explain the analysts' reasoning (10%) or results (4%).  Notebook Genre: notebooks documented a full analysis, 50 simply replicated figures, and 41 were tutorials for how to use a particular software package. use of varied across genre (Table <ref type="table" target="#tab_2">2</ref>) with full analysis notebooks more likely than figure replication notebooks to have text outside of headers, to have a textual introduction to the notebook, to use text to describe reasoning. the other hand, figure replication notebooks tended to use text to discuss more than analysis notebooks. that due to our small sample and variance between notebooks, none of these differences were statistically significant.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Analysis Tutorial</head><note type="other">Figure</note></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Discussion</head><p>This closer examination of academic computational notebooks revealed distinct genres. Yet, even in the most verbose genre (full analysis) analytical and results less than half the time. a couple books contained detailed narratives with several words of text, most were simply collections of with occasional notes describing the code. Similarly, most repository README files on what the repository's files did and how they were organized, but not disreasoning or results. This of explanation is not because analyses were straightforward. Even in these publicly shared half used code comments to control program flow, that versions of the tried, evaluated, and in favor of other implementations. Notebooks were used for iterative analyses, but not necessarily for constructing rich narratives. Indeed of the notebooks in our sample had less text than its repository's README. consistent use of headers, text descriptions of steps, and README files describing repository contents demonstrates that analysts are taking time to annotate and explain their analyses. What audience do analysts consider when they annotate their notebooks? And why do they seem to devote more effort to describing steps but not higher-level motivations reasoning? We began to address these questions in our third study.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>3: INTERVIEWS DATA</head><p>second study highlighted that, present, text in computational notebooks was often used to discuss than reasoning or results. Seeking to better understand why notebooks lacked rich narrative structure, we interviewed 15 data analysts who use computational notebooks on a regular basis.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Methods</head><p>Participants: recruited academic data analysts ( <ref type="formula">4</ref>11 Male) from laboratories at San Diego, by attending weekly lab meetings and open science listservs at the university. Participants included six postdocs, five PhD students, three staff researchers, one undergraduate student. Participants researched topics ing from biology pharmacology to asand engineering science. Four laboratories had multiple people using computational notebooks as well as infrastructure for storing, and sharing notebooks. In the other four labs, our participants were the only ones using notebooks. Five of our inauthored least one notebook from our Study 1 corpus, though we did not specifically recruit them for reason. None was the author of a notebook included our Study 2 corpus.</p><p>We conducted semi-structured interthree with pairs of analysts nine with individual analysts. Each interview lasted 30-45 minutes and focused on how each analyst organized, edited, and shared computa-tional notebooks. We grounded each interview by discussing at least one notebook the analyst had been working on recently. Sample questions included:</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Can you show us a notebook have been working on recently?</head><p>• Can you explain the analysis in this notebook? sections cells have you spent the working on?</p><p>• else to this notebook? Do you plan to share it further? • you need to make any changes before sharing it further?</p><p>We transcribed each interview and iteratively generated an affinity diagram to identify themes across participants.</p><p>Notebook Uses: Participants used notebooks for a variety of many of which were educational. Analysts gave lectures in notebooks, assigned homework in notebooks, and used notebooks to train new lab members. While these uses warrant further study, we focused our interviews the use of notebooks in research, where they most commonly described as playgrounds for experimentation participants), when prototypand debugging code. While many used notebooks to pipelines to automate multi-step analyses (five participants), some that notebooks were for small-tomedium sized tasks and preferred language-specific opment environments for larger analyses which would run repeatedly as new data became available (two partici-Two other participants would not run analyses in the notebook but copied code into the notebook as a record of performed elsewhere.</p><p>spoke not only of initial use, but also ongoing reuse. One reason for reuse tracking provenance, that is, the exact steps used to generate a result. This provenance was useful for keeping track of what analhad been tried, even if they led to dead ends, keeping older versions of figures in case an advisor decided they preferred them to the new one, and helping analysts untanexactly how they achieved a result. While analysts can use computational notebooks to track their every step, it does not happen automatically, especially when cells are overwritten and re-run. As one participant mentioned:</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>I wanted Jupyter to be the tool that tracked what I did, and I'm sad that it's not -P6</head><p>A second reuse purpose our participants mentioned was code reuse. analysts might want to reuse snippets of code from prior notebooks, or they might want to copy code for others' notebooks.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>I don't necessarily want to delete that messy version of the notebook because I might not even remember if I something in there that, like I, I might want again. P14</head><p>A third purpose was enabling replication. This meant the code should be clean and annotated enough that analyst could reasonably re-run the notebook on their machine. As one participant noted, there are numerous barriers to notebooks both and machine readable, and preparing notebooks for requires more careful construction than preparing notebooks for code reuse.</p><p>Should just be, look at their code, did that'? Maybe just that. Maybe it's too to go all that way… really hard to make it runnable on else's server -P13</p><p>A fourth purpose for notebooks was results. In these notebooks analysts downplayed the role of code and added text to describe methods and results. In many cases, they even transferred outputs of the analysis to an entirely medium (e.g., slides, word processing document) easier review. In some cases this was for a non-technical audience, so analysts tried to draw attention away from the code and toward the conclusions by copying results to anmedia for sharing. In other cases, the audience was technical and the desired feedback was technical, analysts would focus on refactoring code in the notebook it was easy to and critique.</p><p>While notebooks serve these different purposes, it is diffifor them to serve more than one at a time.</p><p>It's a trade-off between having a very extensive notewhere every step is documented, or only tracking last evolved state of whatever the question is. -P1 I know I need to make a new version of it that I think will be like, "Github ready". I want my notebook to look like the examples of notebooks that I talked about from my lab mate, but those are so clean that they don't represent my normal notebooks. They're like, presentation notebooks. Like this is perfect. This has descripof all the stuff I did and there's no fooling around. P14 Sharing: Analysts shared their notebooks in ways that reflected their on appropriate uses and audiences. For some analysts, notebooks were personal artifacts, best for individual use or select sharing with other technically oriented insiders:</p><p>A notebook is a very personal thing, so even if I would say, "Okay, here [labmate] please look into it", it wouldn't be very helpful because it's very much reflectmy style and for sure would do slightly different of analysis to come to the same P1 I think, that notebook as a medium is sort of useful to, you know, those insiders, the people that will be interand will, you know, some parameters and possibly, you know, the exact same analysis on different data. -P2</p><p>These analysts were skeptical that collaborators wanted to see code instead shared results mediums such as word processing documents, and slides. They would often the full notebook if collaborator wanted to see more details, some felt that reviewing the notebook got in the way of interpreting findings and feedback.</p><p>over time I had to realize that the collaborators… have no computer science background, nor a very microbiome background, I have to report on a very high level… I try to condense what I'm finding one sentence. So, I try to reply to mail with very sentences. I'm attaching the PDF [version of the notebook] should the person be interested in details, but typically no one is really looking into the methodology I'm applying, so they just trust me. I've got all this code and I've got my data but this is really not interesting and, know, my collaborators should not really be worried about that. They should be worried about, what do these figures represent and whether this is something that they are expecting, or is this, is it likely there is something wrong with the way that we are processing their data. -P2 contrast to this for insiders" some analysts that notebooks good for interacting with people who didn't program. However, notebooks for a audience required careful curation to make them easily interpretable. Having programming novices run notebook could present additional challenges.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>I'm trying to explain every detail it's like very</head><p>I wanna have chemistry people be able to read the notebook… if there is a problem, they are going to have to look for a bioinformatician. But I just wanted them to be able to read for now. -P8 Cleaning, Layout &amp; Annotation: Whether for personal or shared use, every analyst felt their notebooks had to be cleaned. Analysts described their notebooks as "messy", containing "ugly code" and "dirty tricks", and need of "cleaning" or "polishing". Notebooks needed cleaning beanalysts were "too lazy" to add annotation, to "at their best" to produce well annotated notebooks, or "ran out of time". When the notebook was to be shared, documentation focused instead on presenting the analysis at a high level, providing background information and interpreting results.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Mine feels like</head><p>thing that I usually end up having to put in that's tedious but it's kind of the whole point, is, you know, okay I generated these beautiful visualizations and then what are the conclusions that I drew from them, because, in our role, we're supposed to be the experts who are saying not just, "This is the visualization", but "If you look at this visualization the conclusion that should draw"… the interpretation, that is not something that can ever be auto generated. -P6 Social Expectations: Several analysts felt that there was not sufficient social expectation or practice to widespread sharing and detailed of notebooks feasible. and Reproducibility: this lack of trainor pressure to share notebooks in some labs, many anaexpressed a desire, even an obligation to document notebooks in such a way as they would be reproducible, that is, that they could be by another analyst on own computer. However our participants expressed to making their notebooks truly reproducible. One was deciding when the was ready for publication. Another was receiving pushback from collaborawhen to publish a publicly.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Does your PI</head><p>to define the point in time when a publication is fiis very complicated. Is it when you first submit? Is it when it's in review? Or when you only have to do some format editing? So there is no hard deadline unto which you have to finalize your notebook, and therefore it's very easy to not do it… it's a lot of additional work, and you also have a todo list of more pressing isso it's easy that this publication or making the public will be missed. -P1</p><p>The couple times I've mentioned it [publishing a notebook] I've gotten people, worried that it like opens them up to more criticism than it's worth for -P7</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Discussion</head><p>These results highlight the effort involved in organizing, annotating, and sharing computational notebooks. In particular, they highlight the tension between exploration, in iterative experimentation tends to produce "messy" and explanation, in which these notebooks are for a particular purpose provenance, reuse, replication, presentation). each of these roles, there is a tension between exploration and explanation. Notebooks that track provenance focus on faithfully tracking the exploratory process of data analysis. However, given the interactivity notebooks, analysts seeking to track provenance need to be careful to not overwrite past actions. Alternatively, notebooks for may obscure althe entire exploratory process of data analysis in an effort to make it easy to review and provide feedback on the Notebooks to be shared publicly online had to meet an even higher standard of cleanliness that one participant removed all the exploratory material.</p><p>Finally, while notebooks enable analysts to wrap computational code and results with explanatory text, they do not necessarily prompt more frequent reflection or annotation. Social practices like presenting at lab meeting and writing papers may still be stronger triggers for these explanatory and sensemaking activities. As P12 noted:</p><p>…it's mostly lab meetings and then actually writing the paper that are the only times, or like the initial planthat are the only times where you have to sit and be like "Why am I doing this? What am I gonna do? What am I finding? What do I think it means?" CONCLUSION Computational notebooks address many fundamental challenges with performing, documenting, and sharing data They support and iterative analyses, users to edit, arrange, and execute small blocks of in order. They enable explanation of thought proby allowing analysts to intersperse code with richly textual explanations. They facilitate sharing by combining code, visualizations, and text in a single document that can be posted online or emailed. Some computational notebooks are truly remarkable in the way they elegantly explain complex analyses <ref type="bibr" target="#b13">[16]</ref>.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Balancing Exploration and Explanation</head><p>Yet, the three studies in this paper demonstrate a tension between exploration and explanation that complicates construction and sharing of computational notebooks. The exploratory of data analysis tends to produce "messy" with code and duplicate cells. These need to be cleaned they can clearly the analysis to a particular audience (e.g., the analyst's future self, a technical colleague, a manager, or the public) for particular purpose (e.g., tracking provenance, supportcode reuse, enabling replication, presenting results). Cleaning notebooks is often tedious, manual work, and it is to craft notebooks that serve more than one puror address more than one audience at a time. Many simply choose to explain and share their analyses using other, more established and provide a link, for the "curious", to the notebook where they performed the in the first place.</p><p>The issues of notebook "cleanliness" and intelligibility resonate with the discussion of refactoring [8, 25] and "technical debt" in software engineering. Technical debt refers to coding strategies that save time or energy in the moment lead to extra costs later on <ref type="bibr" target="#b3">[4]</ref>. Rather than calling for elimination of technical debt, recent work acknowledges its inevitability and suggests better ways to manage it <ref type="bibr" target="#b0">[1,</ref><ref type="bibr" target="#b2">3]</ref>. While some lessons from this literature apply to data analysis, are significant differences in process of iteratively writing scripts to analyze data and writing robust source code for enterprise applications.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Limitations</head><p>We focused on Jupyter Notebook, so our results may not patterns of use typical in other varieties of computanotebook such as RNotebooks or Mathematica. However, Jupyter Notebook currently one of the most widely used platforms and the one with the most explicit support for narrative. Our first study looked at notebooks shared publicly online, some of which may have been placed there for archival purposes, without sharing in mind. Moreover public notebooks may look different from those reserved for personal use or sharing with a small group. Lastly, our two studies focused academic data analysis, revealthree genres of notebooks in that community. Future studies could broaden scope to consider other forms of notebooks in educational or enterprise contexts.</p><p>for Design</p><p>The lack of explanation in notebooks may be discouraging for those who, like us, see them as a tool for promoting open science, reproducibility, and greater with data. However, our findings highlight opportunities for design greater explanation in computational media without hindering exploration. key challenge will be developing tools that augment analysts' to facilitate organization and annotation much additional effort, either piggybacking on user behavior by providing an immediate benefit to users' more active annotation or organization activities.</p><p>Leverage structure. One approach could leverage explicit annotation to aid navigation, debugging, or checking the status variables or processes. For example, one interbegan annotating notebooks more after he installed an extension that would float a of contents over his notebook based on its markdown headers, easing navi-Such structure could also be used to automatically generate or comments <ref type="bibr" target="#b21">[23,</ref><ref type="bibr" target="#b31">34]</ref>.</p><p>Encourage best practices. Notebooks could make it easier to follow computational best practices, such as those taught Data Carpentry workshops, or automatically flag "code smells" <ref type="bibr">[8,</ref><ref type="bibr" target="#b33">36]</ref>. example, a notebook "clean-up" tool could encourage moving imports to the start of the notebook and rewriting reusable code as functions, would maintainability and legibility in the long run.</p><p>Support non-linear narrative. Notebooks' linear structure elegant, but may not fully support analytical process. Automated control or sophisticated "layers" could simplify or enrich notebooks' narrative structure.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>interventions.</head><p>More journals could incentivize publishing well-annotated analysis code alongside results individual could develop new methods and norms of sharing and reviewing preliminary results. As it is, interviewee noted that many of his labmates seemed "put-off" by seeing presentations from a notebook, possibly feeling that the presenter had not taken any time to prepare. the end, it will take a combination of technical and social to encourage clearer explanation of data analyses more structured ways of supporting computational Computational notebooks are a young media compared notebooks, whiteboards, and journal articles, or even programmable media such as apps or web pages. It will require time, experimenand inventiveness to develop tools and practices surnotebooks that facilitate greater explanation and sharing of the iterative, imprecise, and messy art that is data analysis.</p></div><figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_0"><head>Figure 1 :</head><label>1</label><figDesc>Figure 1: The first half of a computational notebook analyzed in our second study, which demonstrates a novel Python package for modeling patterns of online learning activity. The notebook combines code, visualizations, and text into a computational narrative</figDesc><graphic url="image-3.png" coords="2,45.00,66.84,504.00,251.52" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_1"><head>Figure 2 :</head><label>2</label><figDesc>Figure 2: A) Notebook length as measured by cells, lines of code, and words of markdown. While only 2.2% of all notebooks had no code, 27.6% had no text. B) Content type across the average notebook. Cells at the start of the notebook were more likely to be text and cells at the end more likely to be code.</figDesc><graphic url="image-6.png" coords="4,53.88,61.08,504.00,176.88" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_0"><head>Table 1 : Organizational features of notebooks. Most note- books organized text with headers, and code with comments.</head><label>1</label><figDesc></figDesc><table><row><cell></cell><cell>Feature</cell><cell>% of all Notebooks</cell></row><row><cell></cell><cell>Text</cell><cell>72.7</cell></row><row><cell>Text</cell><cell>Headers</cell><cell>60.2</cell></row><row><cell></cell><cell>URLs</cell><cell>31.6</cell></row><row><cell></cell><cell>Code</cell><cell>97.8</cell></row><row><cell>Code</cell><cell>Comments Functions</cell><cell>62.1 37.3</cell></row><row><cell></cell><cell>Classes</cell><cell>12.3</cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_2"><head>Table 2 : Length and content of academic computational by genre. Analysis notebooks employed more text, while Figure notebooks had more code.</head><label>2</label><figDesc></figDesc><table /></figure>
+		</body>
+		<back>
+
+			<div type="acknowledgement">
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>ACKNOWLEDGEMENTS</head><p>We thank Regina Cheng and Nathan Hassanzadeh for their collecting and analyzing data Studies 2 and 3. This research was by NSF grants #1319829 and #1735234 as well as grant #T15LM011271.</p></div>
+			</div>
+
+			<div type="references">
+
+				<listBibl>
+
+<biblStruct xml:id="b0">
+	<monogr>
+		<title level="m" type="main">Managing Technical Debt. Communications of the ACM</title>
+		<author>
+			<persName><forename type="first">Eric</forename><surname>Allman</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2160718.2160733</idno>
+		<ptr target="https://doi.org/10.1145/2160718.2160733" />
+		<imprint>
+			<date type="published" when="2012-05">2012. 5 2012</date>
+			<biblScope unit="volume">55</biblScope>
+			<biblScope unit="page" from="50" to="55" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b1">
+	<monogr>
+		<title level="m" type="main">A Better Way to Code</title>
+		<author>
+			<persName><forename type="first">Mike</forename><surname>Bostock</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2017-04">Apr. 2017. September 11. 2017 from 2b1d2876a3a0</date>
+		</imprint>
+	</monogr>
+	<note>Retrieved</note>
+</biblStruct>
+
+<biblStruct xml:id="b2">
+	<analytic>
+		<title level="a" type="main">Managing technical debt in softwarereliant systems</title>
+		<author>
+			<persName><forename type="first">Ipek</forename><surname>Brown</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Raghvinder</forename><surname>Ozkaya</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Carolyn</forename><surname>Sangwan</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Seaman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Nico</forename><surname>Sullivan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yuanfang</forename><surname>Zazworka</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yuepu</forename><surname>Cai</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Rick</forename><surname>Guo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Miryung</forename><surname>Kazman</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Kim</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Erin</forename><surname>Kruchten</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Lim</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/1882362.1882373</idno>
+		<ptr target="https://doi.org/10.1145/1882362.1882373" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the FSE/SDP workon Future of Software Engineering Research (FoSER &apos;10)</title>
+				<meeting>the FSE/SDP workon Future of Software Engineering Research (FoSER &apos;10)<address><addrLine>New York, NY</addrLine></address></meeting>
+		<imprint>
+			<publisher>Press</publisher>
+			<date type="published" when="2010">2010</date>
+			<biblScope unit="page" from="47" to="52" />
+		</imprint>
+	</monogr>
+	<note>Alan Robert Nord</note>
+</biblStruct>
+
+<biblStruct xml:id="b3">
+	<analytic>
+		<title level="a" type="main">WyCash portfolio management system</title>
+		<author>
+			<persName><forename type="first">Ward</forename><surname>Cunningham</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/157709.157715</idno>
+		<ptr target="https://doi.org/10.1145/157709.157715" />
+	</analytic>
+	<monogr>
+		<title level="m">Addendum to the proceedings on Object-oriented Programming Systems, Languages, Applications (OOPSLA &apos;92)</title>
+				<meeting><address><addrLine>New York, NY</addrLine></address></meeting>
+		<imprint>
+			<publisher>Press</publisher>
+			<biblScope unit="page" from="29" to="30" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b4">
+	<analytic>
+		<title level="a" type="main">Dynamics and associations of microbial community types across the body</title>
+		<author>
+			<persName><forename type="first">Tao</forename><surname>Ding</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Patrick</forename><surname>Schloss</surname></persName>
+		</author>
+		<ptr target="https://www.nasa.gov/mission_pages/shuttle/flyout/flyf" />
+	</analytic>
+	<monogr>
+		<title level="m">Retrieved September 15</title>
+				<imprint>
+			<date type="published" when="2010">2014. 7500 2014. September 11. 2017. June 2010. 2017</date>
+			<biblScope unit="volume">509</biblScope>
+			<biblScope unit="page" from="357" to="360" />
+		</imprint>
+	</monogr>
+	<note>NASA -Computers Navi-Record of Reliability</note>
+</biblStruct>
+
+<biblStruct xml:id="b5">
+	<monogr>
+		<title level="m" type="main">Refactoring: improving the deof existing code</title>
+		<author>
+			<persName><forename type="first">Martin</forename><surname>Fowler</surname></persName>
+		</author>
+		<imprint>
+			<publisher>Addison-Wesley Professional</publisher>
+			<pubPlace>Reading, MA</pubPlace>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b6">
+	<analytic>
+		<title level="a" type="main">What storytellcan do for information visualization</title>
+		<author>
+			<persName><forename type="first">Nahum</forename><surname>Gershon</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ward</forename><surname>Page</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/381641.381653</idno>
+		<ptr target="https://doi.org/10.1145/381641.381653" />
+	</analytic>
+	<monogr>
+		<title level="j">Commun. ACM</title>
+		<imprint>
+			<biblScope unit="volume">44</biblScope>
+			<biblScope unit="page" from="31" to="37" />
+			<date type="published" when="2001-08">2001. 8 2001</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b7">
+	<monogr>
+		<title level="m" type="main">Ju-pyterLab: The next generation jupyter frontend</title>
+		<author>
+			<persName><forename type="first">Brian</forename><surname>Granger</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Chris</forename><surname>Colbert</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ian</forename><surname>Rose</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2017">2017. 2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b8">
+	<analytic>
+		<title level="a" type="main">Burrito: Wrapyour lab notebook in computational infrastructure</title>
+		<author>
+			<persName><forename type="first">Philip</forename><surname>Guo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Margo</forename><surname>Seltzer</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">USENIX Workshop on the Theory and Practice</title>
+		<imprint>
+			<biblScope unit="volume">12</biblScope>
+			<date type="published" when="2012">2012</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b9">
+	<analytic>
+		<title level="a" type="main">Collaboratools and the practicalities of professional work at international monetary fund</title>
+		<author>
+			<persName><forename type="first">Richard</forename><surname>Harper</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Abigail</forename><surname>Sellen</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/223904.223920</idno>
+		<ptr target="https://doi.org/10.1145/223904.223920" />
+	</analytic>
+	<monogr>
+		<title level="m">of the SIGCHI conference on Human Factors in Computing Systems (CHI &apos;95)</title>
+				<meeting><address><addrLine>New York, NY</addrLine></address></meeting>
+		<imprint>
+			<publisher>Press</publisher>
+			<date type="published" when="1995">1995</date>
+			<biblScope unit="page" from="122" to="129" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b10">
+	<analytic>
+		<title level="a" type="main">Does high public debt consistently stifle economic growth? A critique of Reinhart and Rogoff</title>
+		<author>
+			<persName><forename type="first">Thomas</forename><surname>Herndon</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ash</forename></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Robert</forename><surname>Pollin</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">journal of economics</title>
+		<imprint>
+			<biblScope unit="issue">2</biblScope>
+			<date type="published" when="2013">2014. Dec 2013</date>
+			<publisher>DOI</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b11">
+	<analytic>
+		<title level="a" type="main">Visualization rhetoric: Framing effects in narrative visualization</title>
+		<author>
+			<persName><forename type="first">Jessica</forename><surname>Hullman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Nicholas</forename><surname>Diakopoulos</surname></persName>
+		</author>
+		<idno type="DOI">10.1109/tvcg.2011.255</idno>
+		<ptr target="https://doi.org/10.1109/tvcg.2011.255" />
+	</analytic>
+	<monogr>
+		<title level="m">IEEE transactions on visualization and computer graphics</title>
+				<imprint>
+			<date type="published" when="2011">12 2011</date>
+			<biblScope unit="volume">17</biblScope>
+			<biblScope unit="page" from="2231" to="2240" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b12">
+	<monogr>
+		<title level="m" type="main">A deeper understanding of sequence in narrative visuali-IEEE Transactions on visualization and computer graphics</title>
+		<author>
+			<persName><forename type="first">Jessica</forename><surname>Hullman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Steven</forename><surname>Drucker</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Nathalie</forename><surname>Riche</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Bongshin</forename><surname>Lee</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Daniel</forename><surname>Fisher</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Eytan</forename><surname>Adar</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2013-12">2013. 12 2013</date>
+			<publisher>DOI</publisher>
+			<biblScope unit="volume">19</biblScope>
+			<biblScope unit="page" from="2406" to="2415" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b13">
+	<monogr>
+		<title level="m" type="main">A gallery of interesting Jupyter Notebooks</title>
+		<author>
+			<persName><surname>Jupyter</surname></persName>
+		</author>
+		<ptr target="https://github.com/jupyter/jupyter/wiki/A-gallery-of-interesting-Jupyter-Notebooks" />
+		<imprint>
+			<date type="published" when="2017-09-11">September 11. 2017</date>
+		</imprint>
+	</monogr>
+	<note>Retrieved</note>
+</biblStruct>
+
+<biblStruct xml:id="b14">
+	<analytic>
+		<title level="a" type="main">Enterprise data analysis and visual-An interview study</title>
+		<author>
+			<persName><forename type="first">Sean</forename><surname>Kandel</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Andreas</forename><surname>Paepcke</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Joseph</forename><surname>Hellerstein</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jeffrey</forename><surname>Heer</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Transactions on Visualization and Computer Graphics</title>
+		<imprint>
+			<biblScope unit="volume">18</biblScope>
+			<biblScope unit="page" from="2917" to="2926" />
+			<date type="published" when="2012-12">2012. Dec. 2012</date>
+			<publisher>DOI</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b15">
+	<analytic>
+		<title level="a" type="main">Variolite: supporting exploratory programming data scientists</title>
+		<author>
+			<persName><forename type="first">Mary</forename><surname>Beth Kery</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Amber</forename><surname>Horvath</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Brad</forename><surname>Myers</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3025453.3025626</idno>
+		<ptr target="https://doi.org/10.1145/3025453.3025626" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the SIGCHI Conon Human Factors in Computing Systems (CHI &apos;17)</title>
+				<meeting>the SIGCHI Conon Human Factors in Computing Systems (CHI &apos;17)<address><addrLine>New York, NY</addrLine></address></meeting>
+		<imprint>
+			<publisher>ACM Press</publisher>
+			<biblScope unit="page" from="1265" to="1276" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b16">
+	<analytic>
+		<title level="a" type="main">The marks are on the knowledge worker</title>
+		<author>
+			<persName><forename type="first">Alison</forename><surname>Kidd</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the SIGCHI conference on Human Factors in Computing Systems (CHI &apos;94)</title>
+				<meeting>the SIGCHI conference on Human Factors in Computing Systems (CHI &apos;94)</meeting>
+		<imprint>
+			<date type="published" when="1994">1994</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b17">
+	<monogr>
+		<title/>
+		<idno type="DOI">10.1145/191666.191740</idno>
+		<ptr target="https://doi.org/10.1145/191666.191740" />
+		<imprint>
+			<publisher>ACM Press</publisher>
+			<biblScope unit="page" from="186" to="191" />
+			<pubPlace>New York, NY</pubPlace>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b18">
+	<analytic>
+		<title level="a" type="main">Literate programming. The Computer</title>
+		<author>
+			<persName><forename type="first">Donald</forename><surname>Knuth</surname></persName>
+		</author>
+		<idno type="DOI">10.1093/comjnl/27.2.97</idno>
+		<ptr target="https://doi.org/10.1093/comjnl/27.2.97" />
+	</analytic>
+	<monogr>
+		<title level="j">Journal</title>
+		<imprint>
+			<biblScope unit="volume">27</biblScope>
+			<biblScope unit="page" from="97" to="111" />
+			<date type="published" when="1984">1984. 2 1984</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b19">
+	<analytic>
+		<title level="a" type="main">Storytelling: The next step for visualization</title>
+		<author>
+			<persName><forename type="first">Robert</forename><surname>Kosara</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jock</forename><surname>Mackinlay</surname></persName>
+		</author>
+		<idno type="DOI">10.1109/mc.2013.36</idno>
+		<ptr target="https://doi.org/10.1109/mc.2013.36" />
+	</analytic>
+	<monogr>
+		<title level="j">Computer</title>
+		<imprint>
+			<biblScope unit="volume">46</biblScope>
+			<biblScope unit="issue">5</biblScope>
+			<biblScope unit="page" from="44" to="50" />
+			<date type="published" when="2013-05">2013. May 2013</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b20">
+	<monogr>
+		<title level="m" type="main">Deliberate Indi-Change Framework for Understanding Programming Practices in four Oceanography Groups. of Computer Supported Cooperative Work</title>
+		<author>
+			<persName><forename type="first">Kateryna</forename><surname>Kuksenok</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Cecilia</forename><surname>Aragon</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Fogarty</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Gina</forename><surname>Lee</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Neff</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2017-05">2017. May 2017</date>
+			<publisher>DOI</publisher>
+			<biblScope unit="volume">26</biblScope>
+			<biblScope unit="page" from="1" to="29" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b21">
+	<analytic>
+		<title level="a" type="main">Automatic documentation generation via source code summarization of method context</title>
+		<author>
+			<persName><surname>Paul Mcburney Mcmillan</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2597008.2597149</idno>
+		<ptr target="https://doi.org/10.1145/2597008.2597149" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 22nd In-Conference on Program Comprehension &apos;14)</title>
+				<meeting>the 22nd In-Conference on Program Comprehension &apos;14)<address><addrLine>York, NY</addrLine></address></meeting>
+		<imprint>
+			<publisher>Press</publisher>
+			<date type="published" when="2014">2014</date>
+			<biblScope unit="page" from="279" to="290" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b22">
+	<monogr>
+		<title level="m" type="main">Induction and Intuition in Scientific Thought</title>
+		<author>
+			<persName><forename type="first">Peter</forename><surname>Medawar</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2008">2008</date>
+		</imprint>
+	</monogr>
+	<note>Routledge</note>
+</biblStruct>
+
+<biblStruct xml:id="b23">
+	<analytic>
+		<title level="a" type="main">Announcement: Transparency Upgrade Nature Journals</title>
+		<author>
+			<persName><forename type="first">Emerson</forename><surname>Murphy-Hill</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Chris</forename><surname>Parnin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Andrew</forename><surname>Black</surname></persName>
+		</author>
+		<idno type="DOI">10.1038/543288b</idno>
+		<idno>DOI: 26</idno>
+		<ptr target="https://doi.org/10.1038/543288b" />
+	</analytic>
+	<monogr>
+		<title level="j">IEEE Transactions on Software Engineering</title>
+		<imprint>
+			<biblScope unit="volume">534</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page">7645</biblScope>
+			<date type="published" when="2012-01">2012. Jan. 2012. 2017. Mar 2017</date>
+		</imprint>
+	</monogr>
+	<note>Nature</note>
+</biblStruct>
+
+<biblStruct xml:id="b24">
+	<monogr>
+		<title level="m" type="main">Reproducible research in computational science</title>
+		<author>
+			<persName><forename type="first">Roger</forename><surname>Peng</surname></persName>
+		</author>
+		<idno type="DOI">10.1126/science.1213847</idno>
+		<ptr target="https://doi.org/10.1126/science.1213847" />
+		<imprint>
+			<date type="published" when="2011-12">2011. Dec. 2011</date>
+			<biblScope unit="volume">6060</biblScope>
+			<biblScope unit="page" from="1226" to="1227" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b25">
+	<monogr>
+		<title level="m" type="main">Project Jupyter: Narratives as the Engine of Collaborative Data Science</title>
+		<author>
+			<persName><forename type="first">Fernando</forename><surname>Perez</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Brian</forename><surname>Granger</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2015">2015</date>
+		</imprint>
+	</monogr>
+	<note>Retrieved September 207 from jupyter-computational-narratives-as-the-engine-ofcollaborative-data-science</note>
+</biblStruct>
+
+<biblStruct xml:id="b26">
+	<analytic>
+		<title level="a" type="main">Codestrates: Literate Computing with Webstrates</title>
+		<author>
+			<persName><surname>Radle</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the ACM on User and Systems Technology (UIST &apos;17)</title>
+				<meeting>the ACM on User and Systems Technology (UIST &apos;17)<address><addrLine>New York, NY</addrLine></address></meeting>
+		<imprint>
+			<publisher>ACM Press</publisher>
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b27">
+	<analytic>
+		<title level="a" type="main">The cost structure of sensemaking</title>
+		<author>
+			<persName><forename type="first">Dan</forename><surname>Russell</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mark</forename><surname>Stefik</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Peter</forename><surname>Pirolli</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Stuart</forename><surname>Card</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/169059.169209</idno>
+		<ptr target="https://doi.org/10.1145/169059.169209" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the SIGCHI conference on Human Factors in Computing Systems (CHI &apos;93)</title>
+				<meeting>the SIGCHI conference on Human Factors in Computing Systems (CHI &apos;93)<address><addrLine>New York, NY</addrLine></address></meeting>
+		<imprint>
+			<publisher>ACM Press</publisher>
+			<date type="published" when="1993">1993</date>
+			<biblScope unit="page" from="269" to="276" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b28">
+	<analytic>
+		<title level="a" type="main">ing narrative visualizations with ellipsis</title>
+		<author>
+			<persName><forename type="first">Arvind</forename><surname>Satyanarayan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jeffrey</forename><surname>Heer</surname></persName>
+		</author>
+		<idno type="DOI">10.1111/cgf.12392</idno>
+		<ptr target="https://doi.org/10.1111/cgf.12392" />
+	</analytic>
+	<monogr>
+		<title level="j">Computer Graphics Forum</title>
+		<imprint>
+			<biblScope unit="volume">33</biblScope>
+			<biblScope unit="issue">3</biblScope>
+			<biblScope unit="page" from="361" to="370" />
+			<date>Jun</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b29">
+	<monogr>
+		<title level="m" type="main">Narrative visualization: stories with data. transactions on and computer graphics</title>
+		<imprint>
+			<date type="published" when="2010-06">2010. 6 2010</date>
+			<biblScope unit="volume">16</biblScope>
+			<biblScope unit="page" from="1139" to="1148" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b30">
+	<monogr>
+		<author>
+			<persName><forename type="first">Slava</forename><surname>Shirokov</surname></persName>
+		</author>
+		<ptr target="https://github.com/blog/1995-github-jupyter-notebooks-3" />
+		<title level="m">GitHub + Jupyter Notebooks =</title>
+				<imprint>
+			<date type="published" when="2015-05">2015. May 2015. September 15. 2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b31">
+	<analytic>
+		<title level="a" type="main">Towards autogenerating summary comments for java methods</title>
+		<author>
+			<persName><forename type="first">Emily</forename><surname>Sridhara</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Divya</forename><surname>Hill</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Muppaneni</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Pollock</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Vijay-Shanker</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/1858996.1859006</idno>
+		<ptr target="https://doi.org/10.1145/1858996.1859006" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the IEEE/ACM internaconference on Automated software engineering (ASE &apos;10)</title>
+				<meeting>the IEEE/ACM internaconference on Automated software engineering (ASE &apos;10)<address><addrLine>New York, NY</addrLine></address></meeting>
+		<imprint>
+			<publisher>Press</publisher>
+			<date type="published" when="2010">2010</date>
+			<biblScope unit="page" from="43" to="52" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b32">
+	<analytic>
+		<title level="a" type="main">From individual to collaborative: the evolution of prism, a hybrid laboratory notebook</title>
+		<author>
+			<persName><forename type="first">Wendy</forename><surname>Tabard</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Evelyn</forename><surname>Eastmond</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/1460563.1460653</idno>
+		<ptr target="https://doi.org/10.1145/1460563.1460653" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the ACM conference on Computer Supported Cooperative Work</title>
+				<meeting>the ACM conference on Computer Supported Cooperative Work<address><addrLine>New York, NY</addrLine></address></meeting>
+		<imprint>
+			<publisher>CSCW &apos;08). Press</publisher>
+			<date type="published" when="2008-11">2008. November</date>
+			<biblScope unit="page" from="569" to="578" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b33">
+	<analytic>
+		<title level="a" type="main">When and why code starts to smell bad</title>
+		<author>
+			<persName><forename type="first">Michele</forename><surname>Tufano</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Fabio</forename><surname>Palomba</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Gabriele</forename><surname>Bavota</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Rocco</forename><surname>Oliveto</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Massimiliano</forename><surname>Di Penta</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Andrea De Lu-Denys</forename><surname>Poshyvanyk</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 37th International Conference on Software Engineering</title>
+				<meeting>the 37th International Conference on Software Engineering</meeting>
+		<imprint>
+			<publisher>DOI</publisher>
+			<date type="published" when="2015-05">2015. May</date>
+			<biblScope unit="page" from="403" to="414" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b34">
+	<monogr>
+		<title level="m" type="main">Exploratory data analysis</title>
+		<author>
+			<persName><surname>Tukey</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="1977">1977</date>
+			<publisher>Pearson</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b35">
+	<analytic>
+		<title level="a" type="main">Good enough practices in scientific computing</title>
+		<author>
+			<persName><forename type="first">Greg</forename><surname>Wilson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jennifer</forename><surname>Bryan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Karen</forename><surname>Cranston</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Justin</forename><forename type="middle">Lex</forename><surname>Nederbragt</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Tracy</forename><surname>Teal</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">computational biology</title>
+		<imprint>
+			<biblScope unit="volume">13</biblScope>
+			<date type="published" when="2017-06">2017. 6 2017</date>
+			<publisher>DOI</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+				</listBibl>
+			</div>
+		</back>
+	</text>
+</TEI>

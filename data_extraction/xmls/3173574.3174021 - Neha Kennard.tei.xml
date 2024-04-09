@@ -1,0 +1,1534 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xml:space="preserve" xmlns="http://www.tei-c.org/ns/1.0" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.com/kermitt2/grobid/master/grobid-home/schemas/xsd/Grobid.xsd"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+	<teiHeader xml:lang="en">
+		<fileDesc>
+			<titleStmt>
+				<title level="a" type="main">Learning from the Veg Box: Designing Unpredictability in Agency Delegation</title>
+			</titleStmt>
+			<publicationStmt>
+				<publisher/>
+				<availability status="unknown"><licence/></availability>
+			</publicationStmt>
+			<sourceDesc>
+				<biblStruct>
+					<analytic>
+						<author>
+							<affiliation key="aff0">
+								<orgName type="department">Agents, Interaction and Complexity Group Department of Electronics and Computer Science</orgName>
+								<orgName type="institution">University of Southampton Southampton</orgName>
+								<address>
+									<country key="GB">UK</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<affiliation key="aff1">
+								<orgName type="institution">UCL Interaction Centre University College London London</orgName>
+								<address>
+									<country key="GB">UK</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<affiliation key="aff2">
+								<orgName type="institution">^The Mixed Reality Laboratory University of Nottingham Nottingham</orgName>
+								<address>
+									<country key="GB">UK</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<affiliation key="aff3">
+								<orgName type="department">Departments of Computing and Electrical and Electronics Engineering</orgName>
+								<orgName type="institution">Imperial College London London</orgName>
+								<address>
+									<country key="GB">UK</country>
+								</address>
+							</affiliation>
+						</author>
+						<title level="a" type="main">Learning from the Veg Box: Designing Unpredictability in Agency Delegation</title>
+					</analytic>
+					<monogr>
+						<imprint>
+							<date/>
+						</imprint>
+					</monogr>
+					<idno type="DOI">10.1145/3173574.3174021</idno>
+				</biblStruct>
+			</sourceDesc>
+		</fileDesc>
+		<encodingDesc>
+			<appInfo>
+				<application version="0.7.1" ident="GROBID" when="2022-07-22T05:00+0000">
+					<desc>GROBID - A machine learning software for extracting information from scholarly documents</desc>
+					<ref target="https://github.com/kermitt2/grobid"/>
+				</application>
+			</appInfo>
+		</encodingDesc>
+		<profileDesc>
+			<textClass>
+				<keywords>
+					<term>Autonomous Internet of Things (AIoT)</term>
+					<term>agency delegation</term>
+					<term>breaching experiment</term>
+					<term>veg box</term>
+					<term>qualitative study H.5.m. Information Interfaces and Presentation (e.g. HCI): Miscellaneous</term>
+				</keywords>
+			</textClass>
+			<abstract>
+<div xmlns="http://www.tei-c.org/ns/1.0"><p>The Internet of Things (IoT) promises to enable applications that foster a more efficient, sustainable, and healthy way of life. If end-users are to take full advantage of these developments we foresee the need for future IoT systems and services to include an element of autonomy and support the delegation of agency to software processes and connected devices. To inform the design of such future technology, we report on a breaching experiment designed to investigate how people integrate an unpredictable service, through the veg box scheme, in everyday life. Findings from our semi-structured interviews and a twoweek diary study with 11 households reveal that agency delegation must be warranted, that it must be possible to incorporate delegated decisions into everyday activities, and that delegation is subject to constraint. We further discuss design implications on the need to support people's diverse values, and their coordinative and creative practices.</p></div>
+			</abstract>
+		</profileDesc>
+	</teiHeader>
+	<text xml:lang="en">
+		<body>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>INTRODUCTION</head><p>The Internet of Things (IoT) promises to enable applications that foster a more efficient, sustainable, and healthy way of life. To deliver on these promises, future interactive systems and services may need to include elements of automation and autonomy, allowing people to delegate some degree of agency to IoT systems to permit them to act on their behalf. We refer to this subset of the IoT as the Autonomous Internet of Things (AIoT). Such systems may proactively respond to sensed environmental changes, effectively performing tasks on behalf of users. While these systems are expected to work seamlessly, such expectations may not always be met in practice because of incorrect predictions caused by limited data sets, biases in the data, and limitations of computational models. Moreover, conflicting constraints imposed by users as well as different service providers (e.g. delivery) and good suppliers involved in the system have the potential to produce in unexpected results. As such, the design of interaction mechanisms that enable users to work around this unpredictability is an open challenge in HCI <ref type="bibr" target="#b31">[28,</ref><ref type="bibr" target="#b50">45]</ref>.</p><p>Nascent instantiations of the AIoT focus on the domestic environment and include smart thermostats <ref type="bibr" target="#b52">[47,</ref><ref type="bibr" target="#b53">48,</ref><ref type="bibr" target="#b54">49]</ref>, domestic appliances <ref type="bibr" target="#b3">[4,</ref><ref type="bibr" target="#b13">13]</ref>, energy systems <ref type="bibr" target="#b1">[2,</ref><ref type="bibr" target="#b2">3]</ref> and cleaning robots <ref type="bibr" target="#b17">[17,</ref><ref type="bibr" target="#b47">43]</ref>. With a few exceptions, which have studied off-the-shelf products such as the Nest Thermostat <ref type="bibr" target="#b52">[47,</ref><ref type="bibr" target="#b53">48]</ref> and the Roomba <ref type="bibr" target="#b17">[17,</ref><ref type="bibr" target="#b47">43]</ref>, prior studies around autonomous systems in the home have focused on research prototypes. Recent work has also outlined the challenges for designing interactions with smart autonomous products, such as the delegation of control between people and the products, and how to position such products in human activities as partners <ref type="bibr" target="#b9">[10,</ref><ref type="bibr" target="#b42">38]</ref>. Indeed, the partnership between users and systems is essential for successfully designing future autonomous systems <ref type="bibr">[16,</ref><ref type="bibr" target="#b31">28]</ref>. To enable this partnership, it is important to understand agency delegation between users and systems, which we define as the act of transferring the responsibility of performing a task to an agent. Building upon prior work and to inform the ongoing design of future AIoT systems, we present the qualitative study of everyday practices around an established service that exemplifies agency delegation, through the veg box scheme, in an effort to understand the social grounds upon which agency delegation turns.</p><p>In subscribing to the veg box scheme users delegate agency to the service provider as to the particular food Jhim Kiel M. Verame *+ , Enrico Costanza + , Joel Fischer ^, Andy Crabtree ^, Sarvapali D. Ramchurn * , Tom Rodden ^ and Nicholas R. Jennings † items they receive in much the same way as one might delegate agency to an autonomous service, such as a thermostat to which one might delegate the decision to heat or cool a home. However, unlike an autonomous thermostat, which simply decides whether to increase or decrease the temperature, delegating agency to the veg box provider is to relinquish decision-making to an inherently unpredictable system in which one does not know just what decisions will be made beyond the fact that it will result in some unspecified kinds of fruit and veg being delivered.</p><p>It might be argued, following Yang et al. <ref type="bibr" target="#b52">[47]</ref>, that an autonomous thermostat is unpredictable as well, but this is not equivalent to the veg box. Imagine arriving home and your autonomous heating is not behaving as you expect: you just change it up or down as you prefer. Imagine, by contrast, arriving home and -should you have to cookthat you find yourself confronted by a potentially alien and even unpalatable set of ingredients. Add to the mix hungry people who must be catered for in and amongst all the other things that need doing as part of the daily round. The potential unpredictability of the thermostat is not at all of the same order of unpredictability as the veg box. Furthermore, the content delivered to subscribers depends on a potentially complex network of factors: not all the produce delivered is grown on the farm; some of it is acquired from other local or remote farms. How the provider decides what to acquire from where is not necessarily obvious to consumers. We see another similarity, then, between the veg box, and IoT products, given that lack of transparency has sometimes been noted as a limitation of IoT products <ref type="bibr" target="#b52">[47,</ref><ref type="bibr" target="#b55">50]</ref>. Indeed, the unpredictability inherent in the veg box appears to run contrary to a great many aspects of daily life, where the need to tightly manage activities and events is paramount to ensuring their accomplishment. It is not that unpredictable things don't occur in everyday life, they do and in the form of innumerable contingencies, but unpredictability is more often than not an unwelcome guest that household members seek to manage through the construction of routines, which 'glue' everyday life together <ref type="bibr" target="#b49">[44]</ref>.</p><p>The veg box, as mundane as it might be, would appear to breach the routine in rendering the mundane provision of food unpredictable. It thus provides a lens, much as Harold Garfinkel's 'breaching experiments' <ref type="bibr" target="#b25">[23]</ref> provided a lens, to explore the taken for granted grounds upon which everyday phenomenon, including agency delegation, turn. As Crabtree <ref type="bibr" target="#b15">[14]</ref> points out, breaching experiments provoke, in the etymological sense of 'call forth' -but do not necessarily 'disrupt' (a common misreading of breaching experiments) -how the taken for granted orderliness of an obstinately familiar world is accountably provided for by 'members' or users. Construed as such, the veg box may then surface the tacit grounds upon which agency delegation turns in this case and how the unpredictable is woven into everyday life.</p><p>Against this background, we conducted a qualitative study through semi-structured interviews and a two-week diary with 11 households in the UK. We seek to understand how people manage agency delegation and integrate what is essentially an inherently unpredictable service into everyday life. Findings suggest that agency delegation must be warranted, that it must be possible to incorporate delegated decisions into everyday activities, and that delegation is subject to constraint. We consider the potential impact of these social organisational issues on the design of a future AIoT supporting food-based practices in the home, and the challenges of making agency delegation accountable to meal planning, persons' schedules, foodcentred values, adaptation and innovation, and the social division of labour in which computational agency will ultimately be embedded.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Research contributions and goal</head><p>This work contributes to the understanding of 'smart' autonomous systems in the home <ref type="bibr" target="#b1">[2,</ref><ref type="bibr" target="#b2">3,</ref><ref type="bibr" target="#b3">4,</ref><ref type="bibr" target="#b13">13,</ref><ref type="bibr" target="#b52">47,</ref><ref type="bibr" target="#b53">48,</ref><ref type="bibr" target="#b54">49]</ref> through the study of the veg box as a service that has a digital (the Web and email interface) as well as physical component (the actual delivery of goods), and that supports agency delegation. We also make a contribution to food HCI (e.g. <ref type="bibr" target="#b6">[7,</ref><ref type="bibr" target="#b12">12,</ref><ref type="bibr" target="#b32">29]</ref>), and to sustainable HCI (e.g. <ref type="bibr" target="#b11">[11,</ref><ref type="bibr" target="#b20">20,</ref><ref type="bibr" target="#b32">29]</ref>) through the report of food practices around a supply scheme designed to be environmentally and socially sustainable. The goal of studying veg box users is to learn from their practices, to inspire and inform the design of future autonomous IoT technology for the home (rather than to specifically inform the design of interactive technology to support such user group). We are keen to learn how agency delegation is integrated in everyday life, especially when it involves uncertainty. In particular, our work focuses on agency delegation in food-based practices, and we see the veg box scheme as a relatable service that already exists in the market and also has an element of unpredictability.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>RELATED WORK</head><p>Herein we review related work on agency delegation to further ground our framing of the veg box scheme as an instance of such systems. We also review HCI studies that have examined food practices to position our approach in the literature.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Agency delegation</head><p>The mechanism of agency delegation is central to interactive systems that include elements of automation and autonomy. The idea that users delegate control so that the system can "do something" on the user's behalf has for instance been reflected early in Horvitz's development of mixed-initiative interaction <ref type="bibr" target="#b28">[26]</ref>. However, studies of such systems in use in everyday life are still sparse, with some notable exceptions. Alan et al. for example found that 'flexible autonomy', i.e., the ability to assign different levels of autonomy to systems, can be a promising way to engage users over prolonged periods of time with an electricity tariff-switching agent <ref type="bibr" target="#b1">[2]</ref>. Costanza et al., found that people at times struggle to align the rational planning element required to effectively use an agent-based booking system that would save them money with their everyday routines <ref type="bibr" target="#b13">[13]</ref>. Related to this prior work, in this work we are particularly interested in how consumers deal with the autonomous decision-making element in veg box schemes, i.e., the lack of user control over the items included in the box. In particular, we are keen to explore how people integrate this element of unpredictability in their everyday food practices, and where this rubs up against their routines.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Food HCI</head><p>Researchers in HCI and Ubicomp have developed and evaluated technologies to support food-based practices, such as promoting healthy eating <ref type="bibr" target="#b7">[8,</ref><ref type="bibr" target="#b8">9,</ref><ref type="bibr" target="#b39">36]</ref>, helping users execute complicated cooking tasks <ref type="bibr" target="#b27">[25]</ref> and recommending easy-to-prepare meals to users <ref type="bibr" target="#b36">[33]</ref>. In contrast to these works, we focus instead on how users interact with an existing autonomous service. By so doing, not only are we able to observe emerging practices around autonomous services, we are also able to examine established practices around which such services aim to operate.</p><p>Studies have also investigated existing food practices in the home environment. Cha et al. conducted an observational study that focused on understanding users' organisational habits in the kitchen (e.g. unpacking and storing of groceries) to formulate design implications for organisational robots <ref type="bibr" target="#b6">[7]</ref>. Similarly, Comber et al. conducted contextual inquiries with ten households to identify people's general domestic food practices, focusing on food purchasing and consumption <ref type="bibr" target="#b12">[12]</ref>. Kuznetsov et al. conducted an in-situ fieldwork to observe the work of practitioners of at-home food science, which involves practices such as food preservation and fermentation <ref type="bibr" target="#b32">[29]</ref>.</p><p>Their contribution focuses on how technologies can help practitioners to adopt food science as a habitual and everyday practice.</p><p>Other food-related HCI research has focused on sustainability. For instance, Clear et al. conducted a study using various enquiry techniques to capture students' food preparation activities, focusing on their cooking habits and greenhouse gas emissions to develop design interventions for sustainable cooking practices <ref type="bibr" target="#b11">[11]</ref>. In contrast, other studies examined users' experiences of food waste, and its connection to other food practices and reasoning behind them <ref type="bibr" target="#b20">[20,</ref><ref type="bibr" target="#b23">22]</ref>. For example, Ganglbaeur et al. evaluated Foodsharing.de, a community platform that supports food waste reduction by enabling users to collect or offer food items to other users for free <ref type="bibr" target="#b22">[21]</ref>. Our work is similar to these studies as we examined domestic food practices through various qualitative methods. However, our work extends current research in that we focus on how users embed an autonomous food service -a veg box scheme -in their existing food practices.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>BACKGROUND: VEG BOX SCHEMES</head><p>Veg box schemes historically started as a way for consumers to support local farms and get fresh fruit and vegetables directly from them <ref type="bibr" target="#b37">[34]</ref>. Originally consumers would pay upfront for a yearly or half-yearly supply of produce, which they would then get delivered (or be collected) weekly or fortnightly. Nowadays most schemes have taken a more commercial turn, and those who run the scheme may grow only part of the produce that they distribute to customers, with the rest being sourced from other farms that may be local or not.</p><p>In particular, in the UK, where our study took place, fruits in some periods of the year tend to be imported from abroad. Subscriptions are no longer over the long term, but customers can buy boxes on an individual basis, generally just with the constraint of a minimum size order. Some schemes allow customers to select exactly what produce they want to receive or to specify a "blacklist" of items that they never want to receive. Most services advertise the list of items in the weekly box a few days in advance, either on websites or via email, and many also publish recipes as suggestions for how to use the box content.</p><p>It is of note that veg boxes schemes are different from 'recipe box' subscriptions -i.e., a weekly or fortnightly box that contains the exact ingredients for cooking a specific number of predefined recipes. The critical difference is that recipe boxes are self-contained, and do not require integration with customers' existing food practices in the same way that veg boxes do (as the content of the veg box generally needs to be complemented by other items in order to be turned into meals). For this reason, we decided to focus strictly on veg boxes, as we believe they offer a richer opportunity to observe whether and how such a service rubs up against existing everyday practices.</p><p>The motivations and experiences of users of veg box schemes have been investigated through a number of academic studies, typically conducted through surveys <ref type="bibr" target="#b43">[39]</ref>. For example, Brown et al. <ref type="bibr" target="#b5">[6]</ref> conducted surveys in France and England to determine the motivations and barriers for consumers to subscribe to fruit and veg box schemes. Findings from their study suggest that the box's low food travel mileage is the most important motives for English veg box consumers to subscribe (so-called 'altruistic reasoning'). While for French consumers' receiving high quality produce was more important ('hedonistic reasoning'). A preference for out-of-season food was reported as the main barrier for English consumers to commit to a veg box scheme. The next main barrier for English consumers was identified to be the cost of the box, which is also the main barrier for French consumers.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>STUDY</head><p>For the purpose of our study, we worked with a community farm running an organic veg box scheme in Sutton, London, England. The farm helped us to recruit participants from their existing customer base by advertising our study on their marketing email list and through their social media accounts. Five participants were recruited from the existing customer base; we refer to them as the 'subscribed' group. Another six participants were interested in veg boxes but were not subscribed to any at the time. We enrolled these to the 'non-subscribed' group and subscribed them to a veg box scheme from the same farm (for consistency) based on their household size and their preferences, such as whether to include fruits and potatoes. The purpose of the two groups is to enable us to observe both established and emerging food practices around the veg box. One of the participants switched their box size from small to large during the study, following on from her children not being at home during the first week of the study. See Table <ref type="table" target="#tab_0">1</ref> for a detailed overview of participants.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Method</head><p>Data collection was conducted over three discrete phases:</p><p>Entry Interviews. Participants in the subscribed group were asked questions about their motivations for subscribing, how the veg box affects their food practices and also other opinions related to the service. Participants in the non-subscribed group were instead asked about their existing food practices and their knowledge around veg boxes in general. After the interview, they were given instructions regarding the diary study phase. These interviews lasted between 14 and 36 minutes.</p><p>Diary Study. Participants were asked to report for 14 consecutive days when they used or disposed of any veg box content, as well as any non-use, such as eating out or making food that did not involve the veg box. The information was reported through WhatsApp. To send a diary report, participants had to take a photo of the ingredients or the dish they made and annotate the photo, either through text or audio (e.g. Left of Figure <ref type="figure" target="#fig_1">2</ref>). We offered participants to send daily reminders, and 7 of them accepted. The choice of the diary study allowed us to understand something of participants' actual use of the veg box.</p><p>Exit Interviews. These focussed on understanding how our participants went about the decision to prepare the dishes involving the veg box contents. Participants in the nonsubscribed group were also asked about their experience of the veg box and the likeliness of them continuing the subscription. These interviews lasted between 18 and 56 minutes.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Participants</head><p>We recruited 10 females and 1 male participant (Table <ref type="table" target="#tab_0">1</ref>). One participant (Sofia) was subscribed to a different company, but her subscription was similar to the veg box scheme offered by the partner farm. Our participants cover various lifestyles and were mostly located within the vicinity of London. Each of our participants considered themselves as the person mainly responsible for foodrelated tasks in the household.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Reward</head><p>Participants received up to £60, according to a reward scheme based on their group and their level of engagement in the study. Those in the subscribed group were paid £32 for taking part in the study, plus an extra £2 for each day that they report at least once. Such a way of incentivising participants to send reports was inspired by a previous diary study <ref type="bibr" target="#b45">[41]</ref>. Participants in the non-subscribed group were provided with 2 weeks' worth of free veg boxes, roughly costing £20 per veg box. Additionally, they received an  extra £1.50 for each day that they reported. Incentives were handed to the participants during the exit interviews.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Diary reports</head><p>Overall, 7 participants were able to send daily reports for 14 days. The remaining 4 participants missed at least one day of reporting, of these, two told us that they forgot to report, one had to be in hospital, whilst the remaining one (Tanya) cancelled her subscription towards the end of the study as a result of the introduction of a small collection fee. The diary reports were used primarily as prompts for the exit interviews, rather than as primary data. However, Table <ref type="table" target="#tab_1">2</ref> conveys a sense of the variety of information we received, and the level of engagement of our participant with the study and with using the box content.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>The veg box scheme</head><p>The farm offers a number of options for the veg boxes, ranging from small (6-7 items) to large family size (9-10 items) veg boxes (Figure <ref type="figure" target="#fig_0">1</ref>). Each veg box is available in two variants: with or without potatoes. Fruit boxes can be included as part of the veg box or as separate. The farm provides a list of upcoming items 2-3 days before the veg box is delivered via email and on the website. Customers can 'blacklist' produce they dislike, which would then be replaced, however, this option is not publicly advertised, and it is made available only on a case-by-case fashion.</p><p>Although customers can choose the size and type of the box and whether to include or exclude certain produce, its content is still decided by the farm. Users can buy additional items to top up the box, but not to replace the boxes' contents. The farm also provides various options for delivery frequency, ranging from once a week to once a month.</p><p>Participants in the subscribed group learnt about the scheme through local promotional events, word of mouth, or via online searches. Table <ref type="table" target="#tab_0">1</ref> shows the subscription choices of our participants regarding the size of their veg boxes and delivery frequency. Participants in the subscribed group accounted for how they came up with their subscription choices based on two factors: 1) their usual vegetable consumption, and 2) their anticipation of how long produce will stay fresh. We made subscription choices for the nonsubscribed group based on their preferences to include or exclude fruits and potatoes.</p><p>The farm offers two options to receive the boxes: either through home delivery for a small fee or for free from a number of collection points. Collection points include local churches, cafes, shops and the farm itself. As noted above, the farm introduced a small fee during the study (less than the delivery fee) for collecting the veg box from anywhere other than the farm. For convenience and as part of the compensation for their time, we decided that our participants in the non-subscribed group would receive the boxes through home delivery.</p><p>Several members of the non-subscribed group gave additional instructions about receiving the box, such as leaving them with their neighbours or making sure that the box was not left in a completely visible location to avoid theft. It is also worth noting that some of them expressed willingness to collect the boxes from a collection point. In contrast, all but one of the participants in the subscribed group collected their veg boxes. This delivery choice was influenced by monetary cost, although participants reported that collecting the boxes was inconvenient. Produce in the veg box is largely grown at the farm or at other farms in the locality, though some (particularly fruit) comes from further afield and even abroad.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>WHAT'S SEEN IN THE BREACH</head><p>Herein we present the themes that emerged from an inductive thematic analysis of the data <ref type="bibr" target="#b4">[5]</ref>. Two researchers were involved in conducting the interviews. The interviews were audio-recorded, fully transcribed. The transcripts were then open coded and the open codes were grouped in broader categories into key themes that 'make or break' agency delegation in everyday life that are presented in the following.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Exercising some control</head><p>Clearly the opportunity exists for users of the veg box scheme to exercise some control over its inherent unpredictability a) by expressing preferences in the course of box selection, and b) by blacklisting items. For example, Zoe provided an example of how they expressed their preferences in the course of box selection. Zoe: Yes, in general and week by week, so I had quite a lot of potatoes then I'd be like actually I've got potatoes, I don't need any more so don't send me any this week, send me something new. The statement accounts how exercising control over items in the veg box can be occasioned. Here, already having</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Reports</head><p>Freq.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Meals involving items from veg box 143</head><p>Veg box items thrown away 13 Veg box items eaten raw as snack 47 Veg box items difficult to identify 2 Non-use of veg box items (e.g. eating out) 48  items available that might be included in the veg box occasioned explicitly flagging potatoes as undesired in that week. Yet, it is clear that the control is limited to declaring undesired items; the participant orients to the remaining unpredictability in they might instead ("send something new").</p><p>Only one person took advantage of the option to blacklist items. Tanya: They did once give us this, like, really awful green tomato. I'll eat anything that's fresh, but they were awful. I let them know on my account. I was, like, don't give me them ever again, please.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Warranting delegation</head><p>It would thus appear that to participate in a veg box scheme to accept unpredictability as a condition of engagement, it is important to appreciate in doing so agency delegation is warranted on various grounds, i.e., participation in agency delegation is subject to various being met. Here, we orient to these warrants made available in participants' accounts.</p><p>Firstly, our participants warranted agency delegation on grounds of "locality".</p><p>Tanya: quite like the idea of Sutton community farm because it's about, you know, local people growing veg. I like the whole ethical ethos behind it. This concern with the local as a warrant for agency delegation glossed a number of interrelated drivers, such as the motivation to support "local people" and the connected ethos". Relatedly, participants explicitly oriented to a concern with seasonality of the produce.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Daphne: I like the idea of having that seasonal approach of what you've got and you have to make your ... because when you shop at a supermarket all the time everything's available and so you don't shop, you don't cook seasonally, which is a shame. And so I quite like the fact that you're getting stuff that is obviously in season as far as possible, so it gives you an idea of what actually is around (…).</head><p>Daphne here expresses their appreciation of seasonality as a value provided by the veg box distinct from the "everything's always available" value provided by supermarkets. Thus, agency delegation was warranted in terms of buying local produce, and high quality and seasonal local produce at that, was something that therefore supported the local non-profit farm, as well as the local community more broadly.</p><p>Other participants also warranted agency delegation on grounds of enabling a "healthy diet". For example, one of our participants had recently turned vegan, and took advantage of the veg box as an opportunity to enforce her diet:</p><p>Emily: That is kind of part of the reason why I started getting the box, because when I went vegan I wanted to make sure I had a varied diet, and I thought this would like force me to have some vegetables I would never buy because maybe I don't like them that much but I'll still eat them. warranted agency delegation on the more mundane grounds that the veg box scheme provided them with of mind", in ensuring that they always had a supply of fresh fruit and vegetables to hand.</p><p>Agency delegation was also warranted on the grounds of "value for money".</p><p>Ines to matters of financial cost, but includes the other costs implicated in going and getting food for oneself (particularly time and labour). Ines also highlights the taste of locally grown produce, which was a topic that was brought up by others as well.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Andrea: I mean getting to know the boxes over two weeks I could see what I would really like to have and it's like the cucumbers maybe and the marrows and those things</head><p>that grow so well here and they actually taste so much better just being grown right here.</p><p>Not only does Andrea appreciate the taste of the locally they also orient to discovering the things they liked. elements discovery and serendipity frequently came up. Thus, one of the key drivers of agency was the "element of surprise" occasioned by the veg box.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Sofia: The box exposes us to vegetables that otherwise we wouldn't try or think about buying or even have available in the supermarket, like the Swiss chard or the rhubarb or Like I had never tried it before, right, because I'm not from here and the vegetables are different, I would just never end up trying them. So that's kind of good, that you are forced to actually use the things you don't know.</head><p>participants broadly the unpredictability of the veg box and how it enabled the discovery of new foodstuffs.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Liam: I guess it just makes you do things differently than you would do. Yes and I like most vegetables. Just means you have a variety that's different things. You wouldn't necessarily choose to pick up yourself. I sort of like that randomness aspect of it.</head><p>Liam here highlights that he liked the "randomness aspect" of the veg box which occasioned "doing things differently".</p><p>Relatedly, the effect the veg had on participants' routines was valued explicitly:</p><p>Daphne: I might well consider restarting because it was quite, I did quite like the challenge of using up also I had got my milk ... because I stopped getting my being delivered because I'd got into a rut and so I liked, and so I suppose nice to have a sort of jolt out of your rut. And to have to sort of consider more what you're, put a little bit more thought ... because again, I like cooking so it's quite nice to have that sort of challenge.</p><p>Daphne here describes the veg box in that it challenges the usual cooking routine by providing a "jolt out of your rut", which encourages to consideration and thought.</p><p>Thus far, participants' accounts have made the grounds upon which agency delegation turns visible, including valuing the local, seasonal ethos the box brings, which people have associated with a healthy diet, peace of mind, value for money, and taste. In particular, 'the element of and discovery of new items, as well as the challenge this provided for people's routines warranted the uncertainty of agency delegation. The next theme explores how our participants got on with incorporating the veg box in their everyday life.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Incorporating the veg box in everyday life</head><p>It was clearly the case that the unpredictable has to be incorporated into the orderliness of everyday life and the that constitute it. Tanya: During our weekly shop I will have a look at the menu, and the list of vegetables -because they release that, I think, on a Tuesday -I'll just see what we're getting and then what else we need. Dependent on that, we'll buy whatever else I think that we want to have that week.</p><p>The "menu" Tanya speaks is her meal plan for the week ahead. Of course, not everyone makes meals plans, but all our participants routinely complemented the veg box to varying degrees to enable its incorporation into everyday life. Our participants commonly staple items that they did receive in the box to permit a range of recipes, many (like Tanya) bought items to match what received in the veg box to for specific meals.</p><p>The veg box does not stand-alone then, but is planned in to grocery shopping and frequently built in to the delivery of specific meals. The unpredictable is made at home in an orderly world through the intentional weaving of veg box contents with other items to meet prospective need. Thus, agency delegation turns on the ability for the unpredictable to be made accountable to the particular demands and needs of everyday life: e.g., what we want to eat next week, and even what we want to eat on particular days or at particular times.</p><p>It may be the case that the items get delivered are things the participants would routinely buy and that the veg box fits in with participants' usual meals. However, it may be, indeed often was, the case that situations arise where participants have to adapt recipes in order to fit the contents of the with their meals.</p><p>Emily: So whenever there is something that comes in don't like the taste of I just put it in the soup, then you can hide the taste of Figure <ref type="figure" target="#fig_1">2</ref>). routinely adapted and for variety of reasons positive and negative, including people not knowing what to do with particular vegetables, not liking them, getting children to eat them, and using up leftovers.</p><p>The need to adapt in the box to the local order also fosters innovation.</p><p>Daphne: As I say, had the courgettes and my husband's not a massive fan of courgettes until I tried spiralising them. Then he actually he loves those spiralised courgettes and, well, we can now replace spaghetti with courgettes spiralised. So that was great. That was a good discovery to make. "spiraliser" is a kitchen gadget that allows her to cut vegetables into long pasta-like ribbons. Whether spiralising courgettes (Middle of Figure <ref type="figure" target="#fig_1">2</ref>), or turning nasturtium flowers into spicy pakora, or making rich tomato-based vegetable sauces, etc., our participants in order to incorporate the unpredictable into the local order, sometimes (but by no means always) resulting in "good discoveries". describing such "good discoveries" participants at times explicitly oriented to the sensual delight of recipes improved with items from the veg box.</p><p>Liam: I often have pasta just with tomato sauce and tuna, which as now I will throw lots of vegetables into it, which will significantly the amount of vegetables I have in my diet. That was a very easy dish and I was surprised how nice it was to be crunching on vegetables in a pasta dish.</p><p>Liam here describes the surprise and sensual delight they experienced from augmenting a simple dish they routinely cook with veg box items. Thus, incorporating the unpredictable into the local order requires innovation as it seems to us that the unpredictable has to lend itself to "good discoveries" if it is to be sustainable. Simply compelling people to adapt to what they are given -e.g., through "hiding" unloved vegetables in soups -is likely to result in agency delegation being revoked.</p><p>A further theme that emerged from the study speaks to the barriers that encumber incorporating agency delegation in everyday life.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Barriers to agency delegation</head><p>There is a strong sense then in which agency delegation is constrained, not only in that an actions must be accountable to the local order but also in that actions must facilitate the local order, and it is in the latter respect that the veg box becomes problematic particularly amongst the non-subscribed group. These may, then, be seen as barriers to agency delegation or organisational features of it that must be accommodated on the pathway to adoption. Whether they are accepted or rejected turns on their alignment with the grounds that warrant agency delegation in the first instance.</p><p>Andrea: They bulk out with some of the fruit, obviously stuff that they've elsewhere it's -you wouldn't grow bananas and The bananas are from Peru, so same as buying from anywhere really.</p><p>Andrea not the participant who noticed that fruits in the box were often not sourced locally, nor who thought it worth the extra cost and commitment when you can buy such things "anywhere", and for less. Tanya: I don't actually think it's cost effective, particularly sometimes for the of the food that you get and the amount that you waste. Because, you know, the Co-op [a supermarket] does three items every where it charges, like, 69p. So you can get a bag of potatoes for 69p. You can get a courgette, or a broccoli, for 69p. Tomatoes can be 69p. That's nothing for vegetables, and actually the quality's very good. Agency delegation must not only comply with the grounds upon which it is warranted then, be it a concern with value for as financial control is being delegated then agents must also demonstrate they are Tanya makes visible, this goes beyond a concern with money alone. It is in relation to other calculable benefits that matters, e.g., much the same quality can be and waste by shopping at the Co-op.</p><p>The issue of waste was major concern for participants both groups.</p><p>Liam: often in a rush, so I figure I probably have less food waste if I buy pre-made things from Marks and Spencer's [another supermarket] and take the hit on extra packaging than if I was to buy lots of fresh food to cook and then waste what I cook and things. For Liam, the issue of waste comes down to a calculable trade-off between creating food waste or packaging waste.</p><p>of our participants, like Liam, concern about getting more than they might use in a veg box, and when this occurred some took active steps to avoid food waste.</p><p>Zoe: just put them out on the table. [My housemates] helped themselves, whatever wasn't taken then they were put in the compost. of our participants shared or swapped veg box with housemates, neighbours, or family to avoid food waste. Four also composted spoiled or undesirable food items in a bid to recycle them. For the rest, some veg box content inevitably ended up in the bin.</p><p>Sofia: We have situations that's like, what do we do with It's like, I don't know, let's not do them today. So I think they probably -might go to the garbage, just because we are ignorant, or lazy to Google it. is also the case that Liam was not alone in often being "in a rush", and this too is consequential to agency delegation.</p><p>Andrea: It's a nice idea but modern life gets in the way, and that's the key thing with these veg boxes I think. It's a bit of -I kind of want to know what I'm going to get in a Yes, I want to be inspired -these other ideas which my brother's actually subscribed to which is "Hello Fresh", they send you a recipe as well and all the ingredients to make up that meal. So that's the other thing. It's like, yes, you get a random thing, and you want to be inspired to make something new, but then you have to think that you have to go and buy your other things to with it. So that's going to be tricky sometimes. Andrea makes clear, calculation also includes the potential for agency delegation to gear in with her "modern life". Incorporating the veg box into everyday life then, can be burdensome and makes visible how agency delegation be a double-edged sword; it's not always straightforward to innovate or adapt meals around veg box items, it can be associated with additional hassle and cost ("having to go and buy your other things to go with it"). Others voiced a related concern more succinctly in terms of timing.</p><p>Daphne: My only problem with it was is it arrived on a day... it, like, arrived in the... towards the end of the week, and I'd already done my shopping at the beginning of the week, so sometimes I'd end up with... so that... so I think I found it slightly awkward in terms of that.</p><p>The timing between their shopping and the arrival of the has made things "awkward" for Daphne. All of the participants who were not regular subscribers commented how they would find it difficult to commit to a regular subscription because of of veg box delivery timing and their schedule. It is not only a matter of having go and buy other things then, but of having the opportunity.</p><p>Agency delegation thus turns in significant respects on its ability to gear in with people's busy schedules and this latter point speaks to the observable embeddedness of agency delegation within a social division of labour. Thus, agency delegation turns on its coordination with multiple actors and their activities. Whether it be gearing into or shopping opportunities, or just who is doing the cooking today and for which people, or even eating out, our participants made it perspicuous that agency delegation is accountable to and must in with the social division labour in which it is embedded and resides.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>IMPLICATIONS FOR DESIGN</head><p>So what have we learnt about agency delegation from we have seen in the breach? We can see that agency delegation is warranted, i.e., that it turns upon some justification for autonomy and delegating agency to party. also see that it must be possible to delegation into existing everyday activities. And we can see that delegation is subject to constraints that can act as barriers to adoption. The ways in which agency delegation is warranted and incorporated into everyday life are therefore accountable to range of calculable concerns determine its fate.</p><p>We do not, of course, that this all there is to agency delegation. In our study, agency is delegated to another human, not to software. recognise too that our findings are very much tied to agency delegation in relation to food, and much of what we have to say here will be related to this particular domain. We also acknowledge the limitation of our study that direct comparisons between the IoT and veg box schemes cannot easily be made given that, unlike IoT products, veg box schemes are not based on sensor data collected from users. Nonetheless, we take it that the veg box study elaborates salient insights for the design of an Autonomous Internet more generally, insofar as uptake of the AIoT will have to be warranted and incorporated into everyday life by end-users the face of a heterogeneous array of contextually dependent calculable concerns that put hard constraints on adoption.</p><p>Thus, even at a high level, our findings furnish design with researchable topics of broader relevance, which discuss in turn.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Supporting creativity</head><p>While automation is typically driven by values of efficiency and convenience (cf., <ref type="bibr" target="#b13">[13]</ref>), data revealed a set of values benefits could be derived from agency to an external service. Many of our found the "element of surprise" of the of which vegetables made them creative in their cooking. Others valued the discovery of previously unknown were delighted by the sensual of recipes. This suggests that a certain degree of unpredictability in agency delegation can speak to a set of values: delight, discovery, and creativity. This result points to opportunities for autonomous technology to offer users items or actions that they may not expect as a feature. It also suggests that users of systems may be tolerant to unpredictability, at least if its cause is understood and accepted (in the case of veg box, the seasonal availability of items).</p><p>We feel encouraged then to stress that A-IoT design should not only strive towards optimality, accuracy, etc., but also accept that uncertainty can in fact lead to beneficial user experience. This finding chimes with Gaver's work on ambiguity as a resource in design <ref type="bibr" target="#b26">[24]</ref>, as well as Roger's appeal to move Ubicomp applications beyond the agenda of calm computing towards applications that foster creativity <ref type="bibr" target="#b41">[37]</ref>. There is much room then for new agendas in domains typically motivated by convenience and efficiency, such as smart homes and the IoT. Work in this has already begun, for example to explore the can surprise people, and how it might support practice (e.g. <ref type="bibr" target="#b33">[30]</ref>).</p><p>So what can design do? Insofar as unpredictability is into everyday life, then we would also add that the practices of adaptation is an ingredient to to the design mix. will to adapt and innovate to be able to incorporate the unpredictable into their life. Without them, and the serendipitous discoveries that often accompany them, there is no solid ground for agency delegation to stand on and the warrant will inevitably be revoked. After all, people do not just want to make do with what they are given, especially food. And how might we support adaptation and innovation through design? Considering the food domain, creative ideas how to prepare, combine, and cook items could be provided 1 . Aside from recipes, this could include instructions how to adapt existing recipes, how to manage a surplus of items to avoid waste, or how you might 'hide' of undesired items.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Supporting value calculation</head><p>More in general, in a domestic food context, it is clearly the case that the grounds upon which an AIoT might stand are manifold: locality, seasonality, value for money, serendipity, and creativity warrant agency delegation with respect to food. The grounds are not static either, but subject continuously to calculable concerns to do with warrant compliance, and cost with particular respect to quality and waste. It might be said, then, that a array of values motivates and sustains or curtails agency delegation. The array is important. No particular value or combination of values is ubiquitous. It depends on the local order, on just what these people, in this house, value. There is need to cater for all and support people's value calculation practices through design to enable effective agency delegation, where effective means that agency delegation can effectively be incorporated into the local order. than to attempt creating autonomous agents that are assumed to act we advocate for mixed-initiative approaches <ref type="bibr" target="#b1">[2]</ref>, in which agency can be fluidly transferred from the system to the user and vice versa to support the user's own value calculation.</p><p>So how would or could you enable value calculation through design? One approach could involve solutions that allow to express their values, and define how computational agents should respond to them. Technical approaches that have been explored in the literature include value sensitive design in agent design <ref type="bibr" target="#b18">[18,</ref><ref type="bibr" target="#b19">19]</ref>, and preference learning. For example, PlateClick a quiz-based user interface to elicit people's food preferences, which can then be used in an online learning framework An alternative approach is relevant to values and to the device or service easily available to the example, in the case of autonomous systems mediate domestic energy consumption, data about financial savings on the utility bills, about fuel efficiency about the of the energy (e.g. gas, wind, solar) could help users to continuously evaluate the system's performance and hence grant or revoke agency. Such an approach has recently been demonstrated by a small variety of research projects <ref type="bibr" target="#b1">[2,</ref><ref type="bibr" target="#b2">3,</ref><ref type="bibr" target="#b3">4,</ref><ref type="bibr" target="#b54">49]</ref>. Similarly, for autonomous cars, it may be useful to information related to the financial cost of each trip (such in <ref type="bibr" target="#b46">[42]</ref>), fuel efficiency, and how long the trip will take -for all these variables comparison between autonomous operation and manual mode should be shown.</p><p>in general, we see potential for systems to integrate techniques that can track the provenance of goods the of decisions, such as distributed ledgers <ref type="bibr" target="#b0">[1]</ref>. For example, in the case of the veg box, our data suggests that customers question and make assumptions about where the produce comes from 2 <ref type="bibr" target="#b34">[31]</ref>, and why it is included in a Is it local, or does it come from far away? Does it come from an environmental and socially sustainable supplier? A recent project considering this approach is Bitbarista <ref type="bibr" target="#b38">[35]</ref>, which explored the application of crypto-currencies (based on distributed ledgers) to link the users of a coffee machine to remote farmers growing the beans.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Supporting local coordination</head><p>Our findings highlight the of integrating agency delegation into everyday activities. Hence it is not sufficient for a computational agent 'merely' attend to its business: that business must also be made accountable to other mundane matters implicated, in this case, the provisioning and consumption of foodstuffs. Thus, agency delegation the veg box must integrate with household shopping, to ensure that meals can be provided, and even with specific plans as to what just what will be eaten and when. Again, incorporating agency delegation into everyday life is an ongoing matter conducted in response to calculable concerns with and coordination. Thus, integration extends to gearing agency delegation in with the social division of labour.</p><p>There is need, then, for design to support coordination to enable effective agency delegation, where effective here 2 Tracking the provenance of food has also been the aim of several companies, such as Provenance Ltd (https://www.provenance.org/) means that computational agents can demonstrably mesh their actions in with other local actors and (food related)</p><p>Research has demonstrated the design of agents that draw on further digital resources to enrich the grounds upon which agents take action. Resources have included for example people's calendars as a way to coordinate <ref type="bibr" target="#b35">[32]</ref>, and people's location a way to provide services just-in-time <ref type="bibr" target="#b44">[40]</ref>, invoking the trope of "remember the milk" services that remind at just the right time when they are near shop on their way home (along the lines of e.g. <ref type="bibr" target="#b30">[27]</ref>).</p><p>The IoT offers potential to extend this work, taking into account the operation of (Internet domestic and smart jars able to sense and report their own content (e.g. <ref type="bibr" target="#b16">[15]</ref>), as well as harvesting information from social media and shared calendar accounts, and from personal device location. information could then be combined with data about available supply to extend stock control and supply chain optimization through "the last mile" to the not only in terms of incoming goods, but facilitating food sharing and food waste reduction, existing practices <ref type="bibr" target="#b23">[22]</ref>. It should be noted, however, that a system to integrate such heterogeneous sources of information in a timely and manner is a technical challenge. However, the point we wish to make is not that all solutions lie in but to provide enhanced digital resources for people to make their own decisions, provide resources that support people's own coordination practices.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>CONCLUSIONS</head><p>In this paper, we report the findings of a qualitative study, through semi-structured interviews and a two-week diary study 11 households in the UK, which seeks to understand how people manage a veg box scheme as an instance of an inherently unpredictable In particular, we focus on how people manage agency delegation and integrate the veg box into their everyday life. Our findings suggest that agency delegation must be warranted, that it must be possible to incorporate delegated into everyday activities, and that delegation is subject to constraint. We consider the potential impact of these social organisational issues on the design of a future supporting food-based practices in the home, and the challenges of making agency delegation accountable to meal planning, schedules, food-centred values, adaptation and innovation, and the social division of labour in which computational agency will ultimately be embedded.</p></div><figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_0"><head>Figure 1 -</head><label>1</label><figDesc>Figure 1 -A large family size veg box.</figDesc><graphic url="image-1.png" coords="4,333.00,61.00,215.88,117.15" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_1"><head>Figure 2 -</head><label>2</label><figDesc>(Left) Screenshot of a participant's Diary entry (Ella). (Middle) "Courgetti" -The spaghetti noodles were replaced with spiralised courgettes (Daphne). (Right) A photo report of a soup made to hide the taste of some vegetables (Emily).</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_0"><head>Table 1 -Table of participants. Bold indicates who took part in the interviews; italics indicate household members who are not regularly involved in the participant's food practices. One participant, Daphne, had to switch their box size from small to large (because of the kids not being at home in the first week).</head><label>1</label><figDesc></figDesc><table><row><cell></cell><cell cols="3">Household Information</cell><cell>Size</cell><cell>Freq.</cell></row><row><cell></cell><cell>Ella</cell><cell>42</cell><cell>Unemployed</cell><cell>small</cell><cell>weekly</cell></row><row><cell>Subscribed group</cell><cell>Husband Tanya Husband M. child Abby Husband M. child Sofia Husband</cell><cell cols="4">42 35 Health policy specialist small fortnightly In financial services project manager Services 32 Actuary 4 -39 Project manager medium weekly 42 Musician 3 mon. -38 UX Designer medium weekly 49 UX Designer</cell></row><row><cell></cell><cell>F. child 1</cell><cell>1</cell><cell>-</cell><cell></cell></row><row><cell></cell><cell>M. child 2</cell><cell>3</cell><cell>-</cell><cell></cell></row><row><cell></cell><cell>Emily</cell><cell>31</cell><cell cols="3">Marketing coordinator small fortnightly</cell></row><row><cell></cell><cell>Boyfriend</cell><cell>36</cell><cell>Sales manager</cell><cell></cell></row><row><cell></cell><cell>Ines</cell><cell>24</cell><cell>Nanny</cell><cell cols="2">medium weekly</cell></row><row><cell></cell><cell>Boyfriend</cell><cell>24</cell><cell>Software developer</cell><cell></cell></row><row><cell></cell><cell>3 housemates</cell><cell>-</cell><cell>-</cell><cell></cell></row><row><cell></cell><cell>Laura</cell><cell>30</cell><cell cols="2">Unemployed teacher small</cell><cell>weekly</cell></row><row><cell>Non-subscribed group</cell><cell cols="2">Andrea Husband M. child 1 8 mon. 34 37 M. child 2 2 Daphne 47 Husband 45 M. child 1 14 F. child 2 10 M. child 3 10</cell><cell>IT specialist Software developer --Physiotherapist Barrister ---</cell><cell>large large</cell><cell>weekly weekly</cell></row><row><cell></cell><cell>Liam</cell><cell cols="3">48 Freelance photographer small</cell><cell>weekly</cell></row><row><cell></cell><cell>lodger</cell><cell>-</cell><cell>-</cell><cell></cell></row><row><cell></cell><cell>Zoe</cell><cell>23</cell><cell>Editorial assistant</cell><cell>small</cell><cell>weekly</cell></row><row><cell></cell><cell>3 housemates</cell><cell>-</cell><cell>-</cell><cell></cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_1"><head>Table 2 -Summary of diary reports across the entire study.</head><label>2</label><figDesc></figDesc><table /></figure>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="1">An example is https://www.ibmchefwatson.com/</note>
+		</body>
+		<back>
+
+			<div type="acknowledgement">
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>ACKNOWLEDGMENTS</head></div>
+			</div>
+
+			<div type="references">
+
+				<listBibl>
+
+<biblStruct xml:id="b0">
+	<monogr>
+		<title level="m" type="main">Distributed Ledger Technology: Beyond Block Chain</title>
+		<ptr target="https://www.gov.uk/government/uploads/system/uploads/attachment_data/file/492972/gs-16âÄì1-distributed-ledger-technology.pdf" />
+		<imprint>
+			<date type="published" when="2016">2016</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">Technical Report</note>
+	<note>UK Government Office Science</note>
+</biblStruct>
+
+<biblStruct xml:id="b1">
+	<analytic>
+		<title level="a" type="main">Tariff Agent: Interacting with a Future Smart Energy System at Home</title>
+		<author>
+			<persName><forename type="first">T</forename><surname>Alper</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Enrico</forename><surname>Alan</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Costanza</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Sarvapali</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Joel</forename><surname>Ramchurn</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Tom</forename><surname>Fischer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Nicholas</forename><surname>Rodden</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Jennings</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2943770</idno>
+		<ptr target="http://dx.doi.org/10.1145/2943770" />
+	</analytic>
+	<monogr>
+		<title level="j">ACM Trans. Comput.-Hum. Interact</title>
+		<imprint>
+			<biblScope unit="volume">23</biblScope>
+			<date type="published" when="2016-08">2016a. Aug. 2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b2">
+	<analytic>
+		<title level="a" type="main">It is Too Hot: An Study of Three Designs Heating</title>
+		<author>
+			<persName><forename type="first">T</forename><surname>Alper</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mike</forename><surname>Alan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Enrico</forename><surname>Shann</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Costanza</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Sarvapali</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sven</forename><surname>Seuken</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2858036.2858222</idno>
+		<ptr target="http://dx.doi.org/10.1145/2858036.2858222" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2016 CHI on Human Factors in Systems (CHI &apos;16)</title>
+				<meeting>the 2016 CHI on Human Factors in Systems (CHI &apos;16)<address><addrLine>New NY, USA</addrLine></address></meeting>
+		<imprint>
+			<date type="published" when="2016">2016b</date>
+			<biblScope unit="page" from="5262" to="5273" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b3">
+	<analytic>
+		<title level="a" type="main">Conversations with My Washing Machine: An In-the-wild Study of Demand Shifting with Selfgenerated Energy</title>
+		<author>
+			<persName><forename type="first">Janet</forename><surname>Bourgeois</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Gerd</forename><surname>Van Der Linden</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Blaine</forename><forename type="middle">A</forename><surname>Kortuem</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Christopher</forename><surname>Price</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Rimmer</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2014 ACM International Joint Conference on Pervasive and Ubiquitous Computing (UbiComp &apos;14)</title>
+				<meeting>the 2014 ACM International Joint Conference on Pervasive and Ubiquitous Computing (UbiComp &apos;14)<address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>DOI</publisher>
+			<date type="published" when="2014">2014</date>
+			<biblScope unit="page" from="459" to="470" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b4">
+	<analytic>
+		<title level="a" type="main">Using thematic analysis in psychology</title>
+		<author>
+			<persName><forename type="first">Virginia</forename><surname>Braun</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Victoria</forename><surname>Clarke</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Psychology</title>
+		<imprint>
+			<biblScope unit="volume">3</biblScope>
+			<biblScope unit="issue">2</biblScope>
+			<biblScope unit="page" from="77" to="101" />
+			<date type="published" when="2006">2006. 2006</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b5">
+	<analytic>
+		<title level="a" type="main">Motivations of consumers that use local, organic and vegetable box schemes in England and Southern France</title>
+		<author>
+			<persName><forename type="first">Elizabeth</forename><surname>Brown</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sandrine</forename><surname>Dury</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Michelle</forename><surname>Holdsworth</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Appetite</title>
+		<imprint>
+			<biblScope unit="volume">53</biblScope>
+			<biblScope unit="page" from="183" to="188" />
+			<date type="published" when="2009">2009. 2009</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b6">
+	<analytic>
+		<title level="a" type="main">Robots in the Home: Qualitative and Quantitative Insights into Kitchen Organization</title>
+		<author>
+			<persName><forename type="first">Elizabeth</forename><surname>Cha</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jodi</forename><surname>Forlizzi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Siddhartha</forename><forename type="middle">S</forename><surname>Srinivasa</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2696454.2696465</idno>
+		<ptr target="http://dx.doi.org/10.1145/2696454.2696465" />
+	</analytic>
+	<monogr>
+		<title level="m">of the Tenth Annual ACM/IEEE Conference on Human-Robot Interaction (HRI &apos;15)</title>
+				<meeting><address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>ACM</publisher>
+			<date type="published" when="2015">2015</date>
+			<biblScope unit="page" from="319" to="326" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b7">
+	<analytic>
+		<title level="a" type="main">A Kitchen for Nutrition-Aware Cooking</title>
+		<author>
+			<persName><forename type="first">Jen-Hao</forename><surname>Chen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Peggy Pei-Yu</forename><surname>Chi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Hao-Hua</forename><surname>Chu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Cheryl</forename><surname>Chia-Hui Chen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Polly</forename><surname>Huang</surname></persName>
+		</author>
+		<idno type="DOI">10.1109/MPRV.2010.75</idno>
+		<ptr target="http://dx.doi.org/10.1109/MPRV.2010.75" />
+	</analytic>
+	<monogr>
+		<title level="j">IEEE Pervasive Computing</title>
+		<imprint>
+			<biblScope unit="volume">9</biblScope>
+			<biblScope unit="issue">4</biblScope>
+			<biblScope unit="page" from="58" to="65" />
+			<date type="published" when="2010-10">2010. Oct. 2010</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b8">
+	<analytic>
+		<title level="a" type="main">Enabling Calorie-Aware in a Smart Kitchen</title>
+		<author>
+			<persName><forename type="first">Pei-Yu ; Peggy)</forename><surname>Chi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jen-Hao</forename><surname>Chen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Hao-Hua</forename><surname>Chu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jin-Ling</forename><surname>Lo</surname></persName>
+		</author>
+		<idno type="DOI">10.1007/978-3-540-68504-3_11</idno>
+		<ptr target="http://dx.doi.org/10.1007/978-3-540-68504-3_11" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 3rd International Conference on Persuasive Technology (PERSUASIVE &apos;08)</title>
+				<meeting>the 3rd International Conference on Persuasive Technology (PERSUASIVE &apos;08)<address><addrLine>Berlin, Heidelberg</addrLine></address></meeting>
+		<imprint>
+			<publisher>Springer-Verlag</publisher>
+			<date type="published" when="2008">2008</date>
+			<biblScope unit="page" from="116" to="127" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b9">
+	<analytic>
+		<title level="a" type="main">Products as Agents: Metaphors for the Products of the IoT Age</title>
+		<author>
+			<persName><forename type="first">Nazli</forename><surname>Cila</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Iskander</forename><surname>Smit</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Elisa</forename><surname>Giaccardi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ben</forename></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">of the 2017 CHI Conference on Human Factors in Computing Systems (CHI &apos;17)</title>
+				<imprint>
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b10">
+	<monogr>
+		<title/>
+		<idno type="DOI">10.1145/3025453.3025797</idno>
+		<ptr target="https://doi.org/10.1145/3025453.3025797" />
+		<imprint>
+			<publisher>ACM</publisher>
+			<biblScope unit="page" from="448" to="459" />
+			<pubPlace>New York, NY, USA</pubPlace>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b11">
+	<analytic>
+		<title level="a" type="main">Domestic Food and Sustainable Design: A Study of University Student Cooking and Its Impacts</title>
+		<author>
+			<persName><forename type="first">Adrian</forename><forename type="middle">K</forename><surname>Clear</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mike</forename><surname>Hazas</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Janine</forename><surname>Morley</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Adrian</forename></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Oliver</forename><surname>Bates</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2470654.2481339</idno>
+		<ptr target="http://dx.doi.org/10.1145/2470654.2481339" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the Conference on Human Factors in Computing Systems (CHI &apos;13)</title>
+				<meeting>the Conference on Human Factors in Computing Systems (CHI &apos;13)<address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>ACM</publisher>
+			<date type="published" when="2013">2013</date>
+			<biblScope unit="page" from="2447" to="2456" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b12">
+	<analytic>
+		<title level="a" type="main">Food Practices As Situated Action: Exploring and Designing for Everyday Food Practices with Households</title>
+		<author>
+			<persName><forename type="first">Rob</forename><surname>Comber</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jettie</forename><surname>Hoonhout</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Aart</forename><surname>Van Halteren</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Moynihan</forename></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Patrick</forename><surname>Olivier</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2470654.2481340</idno>
+		<ptr target="http://dx.doi.org/10.1145/2470654.2481340" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the SIGCHI Conference on Human Factors in Computing Systems (CHI &apos;13)</title>
+				<meeting>the SIGCHI Conference on Human Factors in Computing Systems (CHI &apos;13)<address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>ACM</publisher>
+			<date type="published" when="2013">2013</date>
+			<biblScope unit="page" from="2457" to="2466" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b13">
+	<analytic>
+		<title level="a" type="main">Doing the Laundry with Agents: A Field Trial of a Future Smart Energy System in the Home</title>
+		<author>
+			<persName><forename type="first">Enrico</forename><surname>Costanza</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Joel</forename><forename type="middle">E</forename><surname>Fischer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">James</forename><forename type="middle">A</forename><surname>Colley</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Tom</forename><surname>Rodden</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Sarvapali</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Nicholas</forename><surname>Ramchurn</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Jennings</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">of the SIGCHI Conference on Human Factors in Computing Systems (CHI &apos;14)</title>
+				<imprint>
+			<date type="published" when="2014">2014</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b14">
+	<monogr>
+		<title/>
+		<idno type="DOI">10.1145/2556288.2557167</idno>
+		<ptr target="http://dx.doi.org/10.1145/2556288.2557167" />
+		<imprint>
+			<publisher>ACM</publisher>
+			<biblScope unit="page" from="813" to="822" />
+			<pubPlace>New York, NY, USA</pubPlace>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b15">
+	<analytic>
+		<title level="a" type="main">Design in the absence of breaching experiments</title>
+		<author>
+			<persName><forename type="first">Andy</forename><surname>Crabtree</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/1013115.1013125</idno>
+		<ptr target="http://dx.doi.org/10.1145/1013115.1013125" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 5th conference on Designing interactive systems: practices, methods, and techniques (DIS &apos;04)</title>
+				<meeting>the 5th conference on Designing interactive systems: practices, methods, and techniques (DIS &apos;04)<address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>ACM</publisher>
+			<date type="published" when="2004">2004</date>
+			<biblScope unit="page" from="59" to="68" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b16">
+	<analytic>
+		<title level="a" type="main">SoQr: Sonically Quantifying the Content Level Inside Containers</title>
+		<author>
+			<persName><forename type="first">Mingming</forename><surname>Fan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Khai</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">;</forename><surname>Truong</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jonathan</forename><surname>Farooq</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Grudin</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3001896</idno>
+		<ptr target="http://dx.doi.org/10.1145/3001896" />
+	</analytic>
+	<monogr>
+		<title level="m">of the 2015 ACM International Joint Conference on Pervasive and Computing (UbiComp &apos;15)</title>
+				<meeting><address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>ACM</publisher>
+			<date type="published" when="2015">2015. 2016. Oct. 2016</date>
+			<biblScope unit="volume">23</biblScope>
+			<biblScope unit="page" from="26" to="32" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b17">
+	<analytic>
+		<title level="a" type="main">Service Robots in the Domestic Environment: A Study of the Vacuum in the Home</title>
+		<author>
+			<persName><forename type="first">Jodi</forename><surname>Forlizzi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Carl</forename><surname>Disalvo</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/1121241.1121286</idno>
+		<ptr target="http://dx.doi.org/10.1145/1121241.1121286" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 1st ACM SIGCHI/SIGART Conference on Humanrobot Interaction (HRI &apos;06)</title>
+				<meeting>the 1st ACM SIGCHI/SIGART Conference on Humanrobot Interaction (HRI &apos;06)<address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>ACM</publisher>
+			<date type="published" when="2006">2006</date>
+			<biblScope unit="page" from="258" to="265" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b18">
+	<analytic>
+		<title level="a" type="main">sensitive design and information systems</title>
+		<author>
+			<persName><forename type="first">Batya</forename><surname>Friedman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Peter</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Alan</forename><surname>Kahn</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Borning</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">The Handbook of Information and Computer Ethics</title>
+		<imprint>
+			<biblScope unit="page" from="69" to="101" />
+			<date type="published" when="2008">2008. 2008</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b19">
+	<analytic>
+		<title level="a" type="main">Agents of value</title>
+		<author>
+			<persName><forename type="first">Batya</forename><surname>Friedman</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2013 International Conference on Autonomous Agents and Multi-agent Systems (AAMAS &apos;13). International Foundation for Autonomous Agents and Multiagent Systems</title>
+				<meeting>the 2013 International Conference on Autonomous Agents and Multi-agent Systems (AAMAS &apos;13). International Foundation for Autonomous Agents and Multiagent Systems<address><addrLine>Richland, SC</addrLine></address></meeting>
+		<imprint>
+			<date type="published" when="2013">2013</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b20">
+	<monogr>
+		<title level="m" type="main">Negotiating Food Waste: Using a Lens to Inform Design</title>
+		<author>
+			<persName><forename type="first">Eva</forename><surname>Ganglbauer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Geraldine</forename><surname>Fitzpatrick</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Rob</forename></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2013">2013</date>
+			<publisher>ACM</publisher>
+			<pubPlace>Trans</pubPlace>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b21">
+	<analytic>
+		<title/>
+		<idno type="DOI">10.1145/2463579.2463582</idno>
+		<ptr target="http://dx.doi.org/10.1145/2463579.2463582" />
+	</analytic>
+	<monogr>
+		<title level="j">Comput.-Hum. Interact</title>
+		<imprint>
+			<biblScope unit="volume">20</biblScope>
+			<date>May 25</date>
+		</imprint>
+	</monogr>
+	<note>Article</note>
+</biblStruct>
+
+<biblStruct xml:id="b22">
+	<analytic>
+		<title level="a" type="main">Why and What Did We Throw out?: Probing on Reflection Through the Food Waste Diary</title>
+		<author>
+			<persName><forename type="first">Geraldine</forename><surname>Ganglbauer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Florian</forename><surname>Fitzpatrick</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Güldenpfennig</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2702123.2702284</idno>
+		<ptr target="http://dx.doi.org/10.1145/2702123.2702284" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 33rd Annual ACM on Human Factors in Computing Systems (CHI &apos;15)</title>
+				<meeting>the 33rd Annual ACM on Human Factors in Computing Systems (CHI &apos;15)<address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>ACM</publisher>
+			<date type="published" when="2015">2015</date>
+			<biblScope unit="page" from="1105" to="1114" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b23">
+	<analytic>
+		<title level="a" type="main">Think Globally, Act Locally: A Study of a Free Food Sharing and Social Networking</title>
+		<author>
+			<persName><forename type="first">Eva</forename><surname>Ganglbauer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Geraldine</forename><surname>Fitzpatrick</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Özge</forename><surname>Subasi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Florian</forename><surname>Güldenpfennig</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 17th ACM Conference on Computer Supported Cooperative Work &amp; Social Computing (CSCW &apos;14)</title>
+				<meeting>the 17th ACM Conference on Computer Supported Cooperative Work &amp; Social Computing (CSCW &apos;14)</meeting>
+		<imprint>
+			<date type="published" when="2014">2014</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b24">
+	<monogr>
+		<title/>
+		<idno type="DOI">10.1145/2531602.2531664</idno>
+		<ptr target="http://dx.doi.org/10.1145/2531602.2531664" />
+		<imprint>
+			<publisher>ACM</publisher>
+			<biblScope unit="page" from="911" to="921" />
+			<pubPlace>New York, NY, USA</pubPlace>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b25">
+	<analytic>
+		<title level="a" type="main">Studies of the routine of everyday activities</title>
+		<author>
+			<persName><forename type="first">Harold</forename><surname>Garfinkel</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Studies in Ethnomethodology</title>
+				<meeting><address><addrLine>Englewood Cliffs, New Jersey</addrLine></address></meeting>
+		<imprint>
+			<publisher>Prentice-Hall</publisher>
+			<date type="published" when="1967">1967</date>
+			<biblScope unit="page" from="35" to="75" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b26">
+	<analytic>
+		<title level="a" type="main">Ambiguity As a Resource for Design</title>
+		<author>
+			<persName><forename type="first">William</forename><forename type="middle">W</forename><surname>Gaver</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jacob</forename><surname>Beaver</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Steve</forename><surname>Benford</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/642611.642653</idno>
+		<ptr target="http://dx.doi.org/10.1145/642611.642653" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the SIGCHI Conference on Human in Computing Systems (CHI &apos;03)</title>
+				<meeting>the SIGCHI Conference on Human in Computing Systems (CHI &apos;03)<address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>ACM</publisher>
+			<date type="published" when="2003">2003</date>
+			<biblScope unit="page" from="233" to="240" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b27">
+	<analytic>
+		<title level="a" type="main">Cooking Navi: Assistant for Daily Cooking in Kitchen</title>
+		<author>
+			<persName><forename type="first">Reiko</forename><surname>Hamada</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jun</forename><surname>Okabe</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ichiro</forename><surname>Ide</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Shin'ichi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Shuichi</forename><surname>Satoh</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Hidehiko</forename><surname>Sakai</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Tanaka</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/1101149.1101228</idno>
+		<ptr target="http://dx.doi.org/10.1145/1101149.1101228" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 13th Annual ACM Conference on Multimedia (MULTIMEDIA &apos;05)</title>
+				<meeting>the 13th Annual ACM Conference on Multimedia (MULTIMEDIA &apos;05)<address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>ACM</publisher>
+			<date type="published" when="2005">2005</date>
+			<biblScope unit="page" from="371" to="374" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b28">
+	<analytic>
+		<title level="a" type="main">Principles of mixed-initiative user interfaces</title>
+		<author>
+			<persName><forename type="first">Eric</forename><surname>Horvitz</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">of the SIGCHI conference Human Factors in Computing Systems (CHI &apos;99)</title>
+				<imprint>
+			<date type="published" when="1999">1999</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b29">
+	<monogr>
+		<title/>
+		<idno type="DOI">10.1145/302979.303030</idno>
+		<ptr target="http://dx.doi.org/10.1145/302979.303030" />
+		<imprint>
+			<publisher>ACM</publisher>
+			<biblScope unit="page" from="159" to="166" />
+			<pubPlace>New York, NY, USA</pubPlace>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b30">
+	<analytic>
+		<title level="a" type="main">Some help on the way: opportunistic routing under uncertainty</title>
+		<author>
+			<persName><forename type="first">Eric</forename><surname>Horvitz</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">John</forename><surname>Krumm</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2370216.2370273</idno>
+		<ptr target="http://dx.doi.org/10.1145/2370216.2370273" />
+	</analytic>
+	<monogr>
+		<title level="m">of the 2012 ACM Conference on Ubiquitous Computing (UbiComp &apos;12)</title>
+				<meeting><address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>ACM</publisher>
+			<date type="published" when="2012">2012</date>
+			<biblScope unit="page" from="371" to="380" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b31">
+	<analytic>
+		<title level="a" type="main">Human-agent collectives</title>
+		<author>
+			<persName><forename type="first">R</forename><surname>Jennings</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Moreau</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Nicholson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Ramchurn</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Roberts</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Rodden</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Rogers</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2629559</idno>
+		<ptr target="https://doi.org/10.1145/2629559" />
+	</analytic>
+	<monogr>
+		<title level="j">Commun. ACM</title>
+		<imprint>
+			<biblScope unit="volume">57</biblScope>
+			<biblScope unit="page" from="80" to="88" />
+			<date type="published" when="2014-11">2014. November 2014</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b32">
+	<analytic>
+		<title level="a" type="main">Everyday Food Science As a Design Space for Community Literacy and Habitual Sustainable Practice</title>
+		<author>
+			<persName><forename type="first">Stacey</forename><surname>Kuznetsov</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Christina</forename><forename type="middle">J</forename><surname>Santana</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Elenore</forename><surname>Long</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2858036.2858363</idno>
+		<ptr target="http://dx.doi.org/10.1145/2858036.2858363" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2016 CHI Conference on Human Factors in Computing Systems (CHI &apos;16)</title>
+				<meeting>the 2016 CHI Conference on Human Factors in Computing Systems (CHI &apos;16)<address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>ACM</publisher>
+			<date type="published" when="2016">2016</date>
+			<biblScope unit="page" from="1786" to="1797" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b33">
+	<analytic>
+		<title level="a" type="main">It&apos;s Like Living with a Friendly Stranger&quot;: Perceptions of Personality Traits in a Smart Home</title>
+		<author>
+			<persName><forename type="first">Sarah</forename><surname>Mennicken</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Oliver</forename><surname>Zihler</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Frida</forename><surname>Juldaschewa</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Veronika</forename><surname>Molnar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">David</forename><surname>Aggeler</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Elaine</forename></persName>
+		</author>
+		<idno type="DOI">10.1145/2971648.2971757</idno>
+		<ptr target="http://dx.doi.org/10.1145/2971648.2971757" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2016 ACM International Joint Conference on Pervasive and Ubiquitous Computing (UbiComp &apos;16)</title>
+				<meeting>the 2016 ACM International Joint Conference on Pervasive and Ubiquitous Computing (UbiComp &apos;16)<address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>ACM</publisher>
+			<date type="published" when="2016">May Huang. 2016</date>
+			<biblScope unit="page" from="120" to="131" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b34">
+	<analytic>
+		<title level="a" type="main">Provenance: An introduction to prov</title>
+		<author>
+			<persName><forename type="first">Luc</forename><surname>Moreau</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Paul</forename><surname>Groth</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Synthesis Lectures on the Web: Theory and Technology</title>
+		<imprint>
+			<biblScope unit="volume">3</biblScope>
+			<biblScope unit="page" from="1" to="129" />
+			<date type="published" when="2013">2013. 2013</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b35">
+	<analytic>
+		<title level="a" type="main">The calendar is crucial: Coordination and awareness through the family calendar</title>
+		<author>
+			<persName><forename type="first">Carman</forename><surname>Neustaedter</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">J</forename><surname>Bernheim Brush</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Saul</forename><surname>Greenberg</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/1502800.1502806</idno>
+		<ptr target="http://dx.doi.org/10.1145/1502800.1502806" />
+	</analytic>
+	<monogr>
+		<title level="j">ACM Trans. Comput.-Hum. Interact</title>
+		<imprint>
+			<biblScope unit="volume">16</biblScope>
+			<biblScope unit="issue">6</biblScope>
+			<date type="published" when="2009-04">2009. April 2009</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b36">
+	<analytic>
+		<title level="a" type="main">SuChef: An In-kitchen Display to Assist with &quot;Everyday&quot; Cooking</title>
+		<author>
+			<persName><forename type="first">Joshua</forename><surname>Palay</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mark</forename><surname>Newman</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/1520340.1520603</idno>
+		<ptr target="http://dx.doi.org/10.1145/1520340.1520603" />
+	</analytic>
+	<monogr>
+		<title level="m">CHI &apos;09 Extended Abstracts on in Computing Systems (CHI EA &apos;09)</title>
+				<meeting><address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>ACM</publisher>
+			<date type="published" when="2009">2009</date>
+			<biblScope unit="page" from="3973" to="3978" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b37">
+	<monogr>
+		<title level="m" type="main">Slow Food Nation: Why Our Food Should be Good, Clean, and Fair</title>
+		<author>
+			<persName><forename type="first">C</forename><surname>Petrini</surname></persName>
+		</author>
+		<ptr target="https://books.google.co.uk/books?id=YMjgAAAAMAAJ" />
+		<imprint>
+			<date type="published" when="2007">2007</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b38">
+	<analytic>
+		<title level="a" type="main">Bitbarista: Exploring Perceptions of Data Transactions in the Internet of</title>
+		<author>
+			<persName><forename type="first">Larissa</forename><surname>Pschetz</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ella</forename><surname>Tallyn</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Rory</forename><surname>Gianni</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Chris</forename><surname>Speed</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3025453.3025878</idno>
+		<ptr target="https://doi.org/10.1145/3025453.3025878" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2017 CHI Conference in Computing Systems (CHI &apos;17)</title>
+				<meeting>the 2017 CHI Conference in Computing Systems (CHI &apos;17)<address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>ACM</publisher>
+			<date type="published" when="2017">2017</date>
+			<biblScope unit="page" from="2964" to="2975" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b39">
+	<analytic>
+		<title level="a" type="main">Nutriflect: Reflecting Collective Shopping Behavior and Nutrition</title>
+		<author>
+			<persName><forename type="first">Wolfgang</forename><forename type="middle">H</forename><surname>Reitberger</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Wolfgang</forename><surname>Spreicer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Geraldine</forename><surname>Fitzpatrick</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 32Nd Annual ACM Conference on Factors in Computing Systems (CHI &apos;14)</title>
+				<meeting>the 32Nd Annual ACM Conference on Factors in Computing Systems (CHI &apos;14)</meeting>
+		<imprint>
+			<date type="published" when="2014">2014</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b40">
+	<monogr>
+		<title/>
+		<idno type="DOI">10.1145/2556288.2557384</idno>
+		<ptr target="http://dx.doi.org/10.1145/2556288.2557384" />
+		<imprint>
+			<publisher>ACM</publisher>
+			<biblScope unit="page" from="3309" to="3318" />
+			<pubPlace>New York, NY, USA</pubPlace>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b41">
+	<analytic>
+		<title level="a" type="main">Moving on from Weiser&apos;s Vision of Calm Computing: Engaging Ubicomp Experiences</title>
+		<author>
+			<persName><forename type="first">Yvonne</forename><surname>Rogers</surname></persName>
+		</author>
+		<idno type="DOI">10.1007/11853565_24</idno>
+		<ptr target="http://dx.doi.org/10.1007/11853565_24" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 8th International Conference on Ubiquitous Computing (UbiComp&apos;06)</title>
+				<meeting>the 8th International Conference on Ubiquitous Computing (UbiComp&apos;06)<address><addrLine>Berlin, Heidelberg</addrLine></address></meeting>
+		<imprint>
+			<publisher>Springer-Verlag</publisher>
+			<date type="published" when="2006">2006</date>
+			<biblScope unit="page" from="404" to="421" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b42">
+	<analytic>
+		<title level="a" type="main">Objects with intent: a new paradigm for interaction design</title>
+		<author>
+			<persName><forename type="first">Marco</forename><surname>Rozendaal</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2911330</idno>
+		<ptr target="https://doi.org/10.1145/2911330" />
+	</analytic>
+	<monogr>
+		<title level="j">Interactions</title>
+		<imprint>
+			<biblScope unit="volume">23</biblScope>
+			<biblScope unit="page" from="62" to="65" />
+			<date type="published" when="2016-04">2016. April 2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b43">
+	<analytic>
+		<title level="a" type="main">Ecological citizenship and sustainable consumption: Examining local organic food networks</title>
+		<author>
+			<persName><forename type="first">Gill</forename><surname>Seyfang</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Journal of Rural Studies</title>
+		<imprint>
+			<biblScope unit="volume">22</biblScope>
+			<biblScope unit="issue">4</biblScope>
+			<biblScope unit="page" from="383" to="395" />
+			<date type="published" when="2006">2006. 2006</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b44">
+	<analytic>
+		<title level="a" type="main">Place-Its: a study of location-based reminders on mobile phones</title>
+		<author>
+			<persName><forename type="first">Timothy</forename><surname>Sohn</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kevin</forename><surname>Li</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ian</forename><surname>Lee</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">James</forename><surname>Smith</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">William</forename><forename type="middle">G</forename><surname>Scott</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Griswold</surname></persName>
+		</author>
+		<idno type="DOI">10.1007/11551201_14</idno>
+		<ptr target="http://dx.doi.org/10.1007/11551201_14" />
+	</analytic>
+	<monogr>
+		<title level="m">of the 7th international conference on Ubiquitous Computing (UbiComp &apos;05)</title>
+				<editor>
+			<persName><forename type="first">Hideyuki</forename><surname>Rekimoto</surname></persName>
+		</editor>
+		<editor>
+			<persName><surname>Tokuda</surname></persName>
+		</editor>
+		<meeting><address><addrLine>Stephen Intille; Berlin, Heidelberg</addrLine></address></meeting>
+		<imprint>
+			<publisher>Springer-Verlag</publisher>
+			<date type="published" when="2005-06">2005. Jun</date>
+			<biblScope unit="page" from="232" to="250" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b45">
+	<analytic>
+		<title level="a" type="main">A Diary Study of Mobile Information Needs</title>
+		<author>
+			<persName><forename type="first">Timothy</forename><surname>Sohn</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kevin</forename><forename type="middle">A</forename><surname>Li</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">William</forename><forename type="middle">G</forename><surname>Griswold</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">James</forename><forename type="middle">D</forename><surname>Hollan</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/1357054.1357125</idno>
+		<ptr target="http://dx.doi.org/10.1145/1357054.1357125" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the SIGCHI on Human Factors in Computing Systems (CHI &apos;08)</title>
+				<meeting>the SIGCHI on Human Factors in Computing Systems (CHI &apos;08)<address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>ACM</publisher>
+			<date type="published" when="2008">2008</date>
+			<biblScope unit="page" from="433" to="442" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b46">
+	<analytic>
+		<title level="a" type="main">Understanding the Cost of Driving Trips</title>
+		<author>
+			<persName><forename type="first">Yunnuo</forename><surname>Southern</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Cheng</forename><surname>Cheng</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Gregory</forename><forename type="middle">D</forename><surname>Zhang</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Abowd</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3025453.3025686</idno>
+		<ptr target="https://doi.org/10.1145/3025453.3025686" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2017 CHI on Human Factors in Computing Systems (CHI &apos;17)</title>
+				<meeting>the 2017 CHI on Human Factors in Computing Systems (CHI &apos;17)<address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>ACM</publisher>
+			<date type="published" when="2017">2017</date>
+			<biblScope unit="page" from="430" to="434" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b47">
+	<analytic>
+		<title level="a" type="main">My Roomba Is Rambo&quot;: Intimate Home Appliances</title>
+		<author>
+			<persName><forename type="first">Ja-Young</forename><surname>Sung</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Lan</forename><surname>Guo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Rebecca</forename><forename type="middle">E</forename><surname>Grinter</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">I</forename><surname>Christensen</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">UbiComp 2007: Ubiquitous Computing</title>
+		<title level="s">Lecture Notes in Computer Science</title>
+		<editor>
+			<persName><forename type="first">John</forename><surname>Krumm</surname></persName>
+		</editor>
+		<editor>
+			<persName><surname>Gregoryd</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">Aruna</forename><surname>Abowd</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">Thomas</forename><surname>Seneviratne</surname></persName>
+		</editor>
+		<editor>
+			<persName><surname>Strang</surname></persName>
+		</editor>
+		<meeting><address><addrLine>Berlin Heidelberg</addrLine></address></meeting>
+		<imprint>
+			<publisher>Springer</publisher>
+			<date type="published" when="2007">2007</date>
+			<biblScope unit="volume">4717</biblScope>
+			<biblScope unit="page" from="145" to="162" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b48">
+	<monogr>
+		<title/>
+		<idno type="DOI">10.1007/978-3-540-74853-3_9</idno>
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b49">
+	<analytic>
+		<title level="a" type="main">Unremarkable computing</title>
+		<author>
+			<persName><forename type="first">Peter</forename><surname>Tolmie</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">James</forename><surname>Pycock</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Tim</forename><surname>Diggins</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Allan</forename><surname>Maclean</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Alain</forename><surname>Karsenty</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/503376.503448</idno>
+		<ptr target="http://dx.doi.org/10.1145/503376.503448" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the SIGCHI on Human Factors in Computing Systems (CHI &apos;02)</title>
+				<meeting>the SIGCHI on Human Factors in Computing Systems (CHI &apos;02)<address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>ACM</publisher>
+			<date type="published" when="2002">2002</date>
+			<biblScope unit="page" from="399" to="406" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b50">
+	<analytic>
+		<title level="a" type="main">The Effect of Displaying System Confidence Information on the Usage of Autonomous Systems for Non-specialist A Lab Study</title>
+		<author>
+			<persName><forename type="first">Jhim</forename><surname>Kiel</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Verame</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Enrico</forename><surname>Costanza</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sarvapali</forename><forename type="middle">D</forename><surname>Ramchurn</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2858036.2858369</idno>
+		<ptr target="https://doi.org/10.1145/2858036.2858369" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the CHI Conference on Human Factors in Computing Systems (CHI &apos;16)</title>
+				<meeting>the CHI Conference on Human Factors in Computing Systems (CHI &apos;16)<address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>ACM</publisher>
+			<date type="published" when="2016">2016</date>
+			<biblScope unit="page" from="4908" to="4920" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b51">
+	<analytic>
+		<title level="a" type="main">PlateClick: Bootstrapping Food Preferences Through Adaptive Visual Interface</title>
+		<author>
+			<persName><forename type="first">Longqi</forename><surname>Yang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yin</forename><surname>Cui</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Fan</forename><surname>Zhang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">John</forename><forename type="middle">P</forename><surname>Pollak</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Belongie</forename></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Deborah</forename><surname>Estrin</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2806416.2806544</idno>
+		<ptr target="http://dx.doi.org/10.1145/2806416.2806544" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the ACM International on Conference on Information and Knowledge Management (CIKM &apos;15)</title>
+				<meeting>the ACM International on Conference on Information and Knowledge Management (CIKM &apos;15)<address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>ACM</publisher>
+			<date type="published" when="2015">2015</date>
+			<biblScope unit="page" from="183" to="192" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b52">
+	<analytic>
+		<title level="a" type="main">Learning from a Learning Thermostat: Lessons for Intelligent Systems for the Home</title>
+		<author>
+			<persName><forename type="first">Rayoung</forename><surname>Yang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mark</forename><forename type="middle">W</forename><surname>Newman</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2493432.2493489</idno>
+		<ptr target="http://dx.doi.org/10.1145/2493432.2493489" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of 2013 ACM International Joint Conference on and Ubiquitous Computing (UbiComp &apos;13)</title>
+				<meeting>2013 ACM International Joint Conference on and Ubiquitous Computing (UbiComp &apos;13)<address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>ACM</publisher>
+			<date type="published" when="2013">2013</date>
+			<biblScope unit="page" from="93" to="102" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b53">
+	<analytic>
+		<title level="a" type="main">Making Sustainability Sustainable: Challenges in the Design of Eco-interaction Technologies</title>
+		<author>
+			<persName><forename type="first">Rayoung</forename><surname>Yang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mark</forename><forename type="middle">W</forename><surname>Newman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jodi</forename><surname>Forlizzi</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2556288.2557380</idno>
+		<ptr target="http://dx.doi.org/10.1145/2556288.2557380" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the SIGCHI Conference on Human in Computing Systems (CHI &apos;14)</title>
+				<meeting>the SIGCHI Conference on Human in Computing Systems (CHI &apos;14)<address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>ACM</publisher>
+			<biblScope unit="page" from="823" to="832" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b54">
+	<analytic>
+		<title level="a" type="main">How Does Eco-coaching Help to Save Energy? Assessing a Recommendation System for Energyefficient Thermostat Scheduling</title>
+		<author>
+			<persName><forename type="first">Rayoung</forename><surname>Yang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Devika</forename><surname>Pisharoty</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Soodeh</forename><surname>Montazeri</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Whitehouse</forename></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mark</forename><forename type="middle">W</forename><surname>Newman</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2971648.2971698</idno>
+		<ptr target="http://dx.doi.org/10.1145/2971648.2971698" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of 2016 ACM International Joint Conference on and Ubiquitous Computing (UbiComp &apos;16)</title>
+				<meeting>2016 ACM International Joint Conference on and Ubiquitous Computing (UbiComp &apos;16)<address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>ACM</publisher>
+			<date type="published" when="2016">2016</date>
+			<biblScope unit="page" from="1176" to="1187" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b55">
+	<analytic>
+		<title level="a" type="main">When fitness trackers don&apos;t &apos;fit&apos;: end-user difficulties in the assessment of personal tracking device accuracy</title>
+		<author>
+			<persName><forename type="first">Rayoung</forename><surname>Yang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Eunice</forename><surname>Shin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mark</forename><forename type="middle">W</forename><surname>Newman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mark</forename><forename type="middle">S</forename><surname>Ackerman</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2750858.2804269</idno>
+		<ptr target="https://doi.org/10.1145/2750858.2804269" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of 2015 ACM International Joint Conference on Pervasive and Ubiquitous Computing (UbiComp &apos;15)</title>
+				<meeting>2015 ACM International Joint Conference on Pervasive and Ubiquitous Computing (UbiComp &apos;15)<address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>ACM</publisher>
+			<date type="published" when="2015">2015</date>
+			<biblScope unit="page" from="623" to="634" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+				</listBibl>
+			</div>
+		</back>
+	</text>
+</TEI>

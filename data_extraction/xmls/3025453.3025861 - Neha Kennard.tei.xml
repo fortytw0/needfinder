@@ -1,0 +1,1617 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xml:space="preserve" xmlns="http://www.tei-c.org/ns/1.0" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.com/kermitt2/grobid/master/grobid-home/schemas/xsd/Grobid.xsd"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+	<teiHeader xml:lang="en">
+		<fileDesc>
+			<titleStmt>
+				<title level="a" type="main">Privacy Considerations when Designing Social Network Systems to Support Successful Ageing</title>
+			</titleStmt>
+			<publicationStmt>
+				<publisher/>
+				<availability status="unknown"><licence/></availability>
+			</publicationStmt>
+			<sourceDesc>
+				<biblStruct>
+					<analytic>
+						<author>
+							<persName><forename type="first">Andrew</forename><forename type="middle">R</forename><surname>Mcneill</surname></persName>
+							<email>andrew.mcneill@northumbria.ac.uk</email>
+							<affiliation key="aff0">
+								<orgName type="institution">Northumbria University Newcastle upon Tyne</orgName>
+								<address>
+									<country key="GB">UK</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Lynne</forename><surname>Coventry</surname></persName>
+							<email>lynne.coventry@northumbria.ac.uk</email>
+							<affiliation key="aff0">
+								<orgName type="institution">Northumbria University Newcastle upon Tyne</orgName>
+								<address>
+									<country key="GB">UK</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Jake</forename><surname>Pywell</surname></persName>
+							<email>jake.pywell@northumbria.ac.uk</email>
+							<affiliation key="aff0">
+								<orgName type="institution">Northumbria University Newcastle upon Tyne</orgName>
+								<address>
+									<country key="GB">UK</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Pam</forename><surname>Briggs</surname></persName>
+							<email>p.briggs@northumbria.ac.uk</email>
+							<affiliation key="aff0">
+								<orgName type="institution">Northumbria University Newcastle upon Tyne</orgName>
+								<address>
+									<country key="GB">UK</country>
+								</address>
+							</affiliation>
+						</author>
+						<title level="a" type="main">Privacy Considerations when Designing Social Network Systems to Support Successful Ageing</title>
+					</analytic>
+					<monogr>
+						<imprint>
+							<date/>
+						</imprint>
+					</monogr>
+					<idno type="DOI">10.1145/3025453.3025861</idno>
+				</biblStruct>
+			</sourceDesc>
+		</fileDesc>
+		<encodingDesc>
+			<appInfo>
+				<application version="0.7.1" ident="GROBID" when="2022-07-22T05:03+0000">
+					<desc>GROBID - A machine learning software for extracting information from scholarly documents</desc>
+					<ref target="https://github.com/kermitt2/grobid"/>
+				</application>
+			</appInfo>
+		</encodingDesc>
+		<profileDesc>
+			<textClass>
+				<keywords>
+					<term>Older adults</term>
+					<term>privacy</term>
+					<term>health</term>
+					<term>trust</term>
+					<term>social networks H.5.m. Information interfaces and presentation (e.g., HCI): Miscellaneous</term>
+					<term>J3 Computer Applications: Life and Medical Sciences: Health. K4.1 Computers in Society: Public Policy Issues: Computer-related health issues and Privacy</term>
+				</keywords>
+			</textClass>
+			<abstract>
+<div xmlns="http://www.tei-c.org/ns/1.0"><p>A number of interventions exist to support older adults in ageing well and these typically involve support for an active and sociable ageing process. We set out to examine the privacy implications of an intervention that would monitor mobility and share lifestyle and health data with a community of trusted others. We took a privacy-by-design approach to the system in the early stages of its development, working with older adults to firstly understand their networks of trust and secondly understand their privacy concerns should information be exchanged across that network. We used a Johari Windows framework in the thematic analysis of our data, concluding that the social sharing of information in later life carried significant risk. Our participants worried about the social signaling associated with data sharing and were cautious about a system that had the potential to disrupt established networks.</p></div>
+			</abstract>
+		</profileDesc>
+	</teiHeader>
+	<text xml:lang="en">
+		<body>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>INTRODUCTION</head><p>Ageing is a significant and growing area of interest for human-computer interaction (HCI) and, for many years, HCI research and design was based upon a 'deficit' model of ageing that placed strong emphasis on a gradual decline in functioning and quality of life after a certain age. However longitudinal research with older people has suggested that this type of year on year loss is not true for many individuals (see <ref type="bibr">[5]</ref>) who can be described as having aged 'successfully' <ref type="bibr">[44]</ref>. In their critical analysis of literature spanning 30 years, <ref type="bibr">Vines et al. [55]</ref> have argued that ageing is too often framed as a 'problem' or loss that can be managed by technology. They propose that a shift in focus to successful ageing is a fruitful space for HCI research and design. In this paper, we describe a project (ACANTO) that explores technological support for successful ageing. In particular, ACANTO recognizes that improvements to mobility and social engagement are likely to promote successful aging <ref type="bibr" target="#b14">[12]</ref>, but recognizes that privacy concerns are likely to be an important design consideration in this space. Ultimately, the success of ACANTO is dependent on whether potential users are receptive to long term monitoring and the consequences of the knowledge gathered via such monitoring. These users are identified as older adults as well as family members and others such as medical practitioners who will receive the information from the monitoring.</p><p>Our longer-term aim is to improve the wellbeing of older adults (classified here as people over 65 years) through the combination of an intelligent walker to improve physical mobility, a social network to develop social contacts, and a recommendation system to generate personalized ideas for activities (combining the physical with the social (e.g. recommendations to go out with a friend). Studies of such systems often assume that the goals of maintaining independence and wellbeing supersede concerns about privacy or security. However, since the system may collect substantial amounts of personal data (e.g. physical activity, health indicators, emotional state, activities, social contacts), privacy concerns are significant and should be understood. Potentially, such a system would feed information to the user, medical professionals or family members who may look for early warning signals of decline in an older adult who, for example, has not left the house for several days. However, the data could also be used to personalize recommendations to the current abilities and interests of the user to optimize uptake of those recommendations. Older adults may not want such data to be shared and therefore their privacy preferences related to the dissemination of such data will need to be made clear.</p><p>In this paper, we take a privacy-by-design perspective <ref type="bibr">[29]</ref>, involving older adults in a participatory design process that will help us understand the ways in which health and mobility data generated by the system might meaningfully be shared with others in their social network. We present two studies. The first with a small (n=6) group of older adults was designed to understand more about what their trusted network might look like. The second, with a larger (n=20) sample, more explicitly addressed older adults' privacy and disclosure preferences towards the individuals in their network. Our contribution is twofold: firstly, we provide a new framework for understanding the social sharing of data in older adulthood, giving particular consideration to the sharing of health information and secondly, we include for the first time, the right for information not to be made known, i.e. not to be revealed even to the self -casting this as a privacy issue, rather than as a medical issue around the sharing of prognostic information <ref type="bibr" target="#b28">[24]</ref>.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>BACKGROUND LITERATURE</head><p>In this section we briefly review the different forms of activity monitoring that have been associated with ageing, but with a particular focus on those technological interventions designed to minimize age-related decline. In particular, we discuss those interventions which promote increased mobility and social engagement -two of the more important correlates of successful ageing. We then describe the privacy implications of such interventions, before introducing our own studies.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Activity monitoring and the deficit model</head><p>A significant research effort has been directed towards designing technologies that can directly monitor the behaviour of older adults -particularly those who experience age-related health decline. Sensor based systems can lead to early detection of a range of diseases or problems associated with ageing. For example, accelerometry and GPS systems that can capture sedentary behaviour or variability in gait have been shown to predict a range of cognitive issues as well as risk of falling <ref type="bibr" target="#b24">[21,</ref><ref type="bibr" target="#b25">22]</ref>. Bed restlessness (as measured by a load sensor or a smart watch) can predict a range of health problems in older adults <ref type="bibr" target="#b4">[4,</ref><ref type="bibr" target="#b39">34]</ref> and is also seen as one of the most reliable forms of embedded health assessment <ref type="bibr" target="#b56">[47]</ref>; and a range of further indicators including speech, mobility and sleep disturbance have been used to predict depression and other forms of mood disorder <ref type="bibr" target="#b13">[11,</ref><ref type="bibr">13,</ref><ref type="bibr">20</ref>].</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Sacco et al. [45] developed a Daily Activity Scenario (DAS) score, based on the Instrumental Activities of Daily</head><p>Living questionnaire (IADL) that included watering plants, using a kettle, preparing a shopping list, using a telephone, watching TV and reading a newspaper. They demonstrated that such a scoring system could be used effectively in a smart home setting equipped with video monitoring to detect early functional impairment (although in their study there was relatively limited automatic recognition of IADL). More recently, Lee and Dey <ref type="bibr" target="#b35">[30]</ref> used a range of ubiquitous sensors ('dwellsense') to collect a set of observations of daily living (ODLs) -objective measures that could more reliably be used for patient care and decision-making but that could also be used to aid patient self-reflection as a first step in a behaviour-change programme. Basically, these systems are designed from the assumption that the user is on a path of decline and the system must protect the user.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Activity monitoring and living well</head><p>In a successful ageing intervention, we might gather similar data, but this time with the intention of promoting those behaviours associated with successful ageing (see <ref type="bibr" target="#b8">[7,</ref><ref type="bibr" target="#b14">12]</ref>). Two factors in particular -mobility and social engagement -are of particular interest here. As people age, they tend to make fewer and shorter journeys and are generally less mobile within the home. Yet older adults who retain good mobility do better across a wide range of health and wellbeing measures <ref type="bibr" target="#b16">[14,</ref><ref type="bibr" target="#b66">57]</ref>. Similarly, those older adults who enjoy good quality social engagement show a number of associated benefits including living longer, enjoying better health, and experiencing less depression <ref type="bibr">[1]</ref><ref type="bibr" target="#b1">[2]</ref><ref type="bibr">[3]</ref><ref type="bibr" target="#b23">8,</ref><ref type="bibr" target="#b61">53]</ref>.</p><p>Technologies exist for both mobility tracking and social network analysis, but most of the deployments in this space are with younger adults. Nonetheless, we are beginning to see behaviour change interventions using activity trackers such as FitBit in the older adult population (e.g. <ref type="bibr" target="#b57">[48]</ref>), with mixed results. For example, one study on the use of FitBits showed an improvement in health awareness in older adults, but no associated improvement in exercise. Another study used pedometer monitoring as part of a larger trial that also involved coaching, resulting in a decrease in sedentary time in older adults <ref type="bibr" target="#b10">[9]</ref>. However, the privacy issues associated with the social sharing of such data were not explored in either study.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Privacy and the disclosure of personal data</head><p>To ensure acceptance of the ACANTO systems, we must ensure that any design has properly accommodated privacy needs, as these systems will collect and distribute different types of personal information. In deciding whether to disclose sensitive data, people make personal assessments of the extent to which they can feel good, but not vulnerable about that disclosure <ref type="bibr" target="#b30">[25,</ref><ref type="bibr" target="#b31">26]</ref>. There are, however, some systematic effects around data disclosure that we should take into account in considering the privacy aspects of our own system. Firstly, people are more willing to disclose information about themselves in a technology-mediated interaction than they are face-to-face. A classic example concerns formfilling, where people will disclose intimate details in a computer-based test while withholding such details face-toface <ref type="bibr" target="#b67">[58]</ref>. This finding is particularly strong when questions are of a sensitive nature (e.g. medical health problems). Of course one reason for this is the relative anonymity with which people can disclose information online, but people can also exercise more control over their online interactions and manage information more effectively <ref type="bibr" target="#b65">[56]</ref>. Essentially, people are pragmatists and make decisions to disclose information with a view to what is on offer <ref type="bibr">[50]</ref>. When benefits are high, privacy concerns can often be relegated <ref type="bibr" target="#b11">[10]</ref>. In the health context, for example, people are often prepared to use social media and other smart forms of data sharing to exchange health-related information across a trusted network that will include healthcare providers, important family members and friends. This is the kind of network that Li et al. <ref type="bibr" target="#b36">[31]</ref> describe as part of the 'Social Internet of Things (SIoT)'where health data can be sensed and intelligently networked with selected parties.</p><p>A trusted social network for health and wellbeing data Consider, for example, the kinds of elective social sharing of health information that takes place on PatientsLikeMe <ref type="bibr" target="#b18">[16]</ref> and imagine that the everyday health devices used to support this information sharing (thermometers, blood pressure monitors, scales) could upload information automatically. Certainly there could be some interesting gains in epidemiology and the large scale assessment of treatment efficacy, but we can see some interesting new challenges emerging around privacy and trust. Li et al. <ref type="bibr" target="#b36">[31]</ref> discuss ways in which trust might be established in such a cyber-physical-social network. The data derived from health and activity monitoring can be used by patients and shared with doctors, family members, friends and other agents <ref type="bibr">[15]</ref>, bringing advantages to healthcare providers in terms of the availability of more accurate and up-to-date health information, but providing challenges in terms of individual consent and privacy protection, particularly in circumstances when the 'distinction between personal data and health care data has begun to blur' <ref type="bibr" target="#b49">[42]</ref>. This is a major concern: if the social and mobility data describing the everyday life of a citizen is no longer owned or even generated by that citizen then this raises critical questions about issues of trust -not only in the data collected but also around the network of 'trusted friends' that might be given privileged access to that data <ref type="bibr" target="#b42">[36]</ref>.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Privacy in older adults</head><p>For many years we believed that young people were profligate in their disclosure of personal data, but that adults were more cautious, although some reports suggested lax privacy behaviours and preferences by both the youngest and the oldest members of society, when compared to middle-aged participants (e.g. <ref type="bibr">[32]</ref>). In recent years, the privacy pendulum has swung so that recent reports tend to show more caution on the part of young people but a growing problem for older people who sometimes struggle to manage their personal data <ref type="bibr" target="#b44">[38]</ref>.</p><p>Successful privacy management requires that we have both the knowledge and the means to achieve a desired degree of access to information by others at a particular time and under particular circumstances <ref type="bibr" target="#b47">[40]</ref>. At present, older adults are not heavy users of social networking systems (SNS) <ref type="bibr" target="#b48">[41]</ref>, in part because they may not have a clear understanding of why they would use them, the risks that are present or the privacy protections available <ref type="bibr" target="#b44">[38,</ref><ref type="bibr">61]</ref>. Those who do use SNSs are not always aware of the privacy settings available nor how to control them <ref type="bibr">[17,</ref><ref type="bibr" target="#b41">35]</ref>. Research suggests that only a small number of users change their initial privacy settings, which often default to maximum visibility <ref type="bibr" target="#b21">[19]</ref>. For these reasons, discussing the potential for privacy features in a new SNS for older adults can be difficult and so, as part of our project, we felt it important to draw upon some of the rich participatory 'privacy by design' methods available in the literature.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Aims</head><p>Our aims were to investigate what privacy functions and modes are desired within a number of specific scenarios developed for the ACANTO system. This system is currently under development as part of a European project and has an overall aim to support older adults in successful ageing by monitoring physical health and general mobility but also by providing them with a social networking system (SNS) that can promote social engagement and shared activities.</p><p>The proposed system includes two core elements: Firstly, an assisted walker that monitors gait, balance and walking speed. If walking ability declines (i.e. if balance becomes decentralised, or walking speed reduces) then the system can notify a health care professional in order to suggest ways this decline can be arrested e.g. through the use of exercise or confidencebuilding activities. The SNS will link older adults with other people who share preferences including similar interests. The network will use sensor and other data to create a user profile that can be used to suggest personalised activities with other users who share interests, location, age, ability etc. The system will suggest things to do together and will suggest places to go. The aim is to design a system that is not only easy to interact with but that is able to persuade people to be more active and socially engaged. The system can also act as a means of safe introduction to new people, before meeting face to face.</p><p>The specific privacy challenges of such a system are many and involve considerations of the kinds of trusted network that would be appropriate for older adults and the kinds of data that might be shared with that network. These two considerations were the subject of our two studies, below. In the first, we used sociograms as probes to learn more about information sharing across the trusted network and in the second, we used a range of scenarios that explained to participants what specific information would be collected and for what purposes in order to understand how potential users would wish their data to be handled.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>STUDY ONE</head><p>In this first study, we mapped the trusted social networks of a small group of our participants, using sociograms to get a sense of the size of their social networks and some of the key players within them. Our goal here was to understand the types of information that older adults will share with different groups of people in their offline social networks.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Participants</head><p>Six participants (5 female, 1 male; mean age = 71.3 years) took part in interviews in which they completed a social network diagram (sociogram) for their offline 'very close' and 'somewhat close' relationships. Partricipants were recruited from the NorthEast Age Database at Northumbria University. Ethical permission was obtained for the study from the ethics board at Northumbria University.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Procedure</head><p>We followed the method of Hogan, Carrasco, &amp; Wellman <ref type="bibr" target="#b27">[23]</ref> in creating social networks. This process had six steps:</p><p>1. Participants were asked to name people who are (a) very close to them and (b) somewhat close. Very close people were defined as those with whom they are in regular contact, and with whom they might discuss important matters. Somewhat close people were defined as those who are more than casual acquaintances but who are not very close. Names were recorded on sticky page markers (using different colours for 'very close' and 'somewhat close'). 2. After free recall, participants were shown a list of categories on a card (e.g. immediate family, neighbours, work colleagues, etc.) and asked if they had forgotten anyone. Each name tag was labelled according to category. 3. A large sheet of paper was provided with four concentric circles with 'Me' at the centre. Participants were asked to place their name tags on the lines of the circles. People who were closest to the participant were placed closer to the centre. People who knew each other were placed close together. 4. Participants drew circles around groups of people that belonged together (already clustered together). 5. Participants drew lines between people who were close to each other. 6. Participants then identified a label or description for each of the circles, with an example of a completed social network diagram is shown below in Figure <ref type="figure" target="#fig_0">1</ref>.</p><p>The diagram was then used as a prompt in a semi-structured interview that addressed the different forms of information sharing that occurred within the social network.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>The Sociograms</head><p>A breakdown of the network features for each participant is given in Table <ref type="table" target="#tab_0">1</ref>. In contrast with other studies which used similar methodologies, the average number of nodes is relatively high in our sample (cf. 23.8 in <ref type="bibr" target="#b27">[23]</ref> for a general population and 14.0 for older adults aged 55-58 in <ref type="bibr" target="#b60">[52]</ref>). This seems to indicate a relatively well-connected group of older adults. While Hogan et al. <ref type="bibr" target="#b27">[23]</ref> found that somewhat close others were slightly more frequent than very close others (12.2 and 11.6 respectively), we found that participants named more very close others than somewhat close others. This may suggest a strong emphasis on closer relationships in older age, although we should also note the  </p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Patterns of Information sharing</head><p>At one end of the spectrum we found "strangers" who should not have access to our participant's data. At the other end were doctors who were generally offered complete access to the social network data in our potential system. Even when some forms of data were seen as particularly problematic (e.g. mood data), sharing this with doctors was seen as acceptable. Generally, however, disclosure preferences were highly individualistic and it would seem a risky assumption to believe that trust could be generalized across groups of friends: This is consistent with other findings [46] that show how, even for one's own children, information sharing may occur with some and not others (e.g. the "worrier" might not be given access to certain information).</p><formula xml:id="formula_0">"</formula></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Location sharing</head><p>Location data, while potentially sensitive, did not seem to cause undue concern, providing that the data was limited to others in the social network. In part this was because "we're all friends" but some said they didn't mind others seeing their location data because, "I got nothing to hide." Her thought seems to be that location data could reveal situations that cause alarm or that would support prying.</p><formula xml:id="formula_1">One</formula><p>From such accounts we can see that social sharing is often based on individual personality characteristics rather than their membership of a specific group.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Exercise sharing</head><p>This was seen as unproblematic by all participants. Reasons for this included the fact that people already knew the general activity levels of the participant:</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>"I think they've all got a good idea of what I'm like (laugh)"</head><p>Only one participant expressed some concern sharing regular physical activity information arguing that it would make her seem 'pretentious' to her pub friends.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Mood sharing</head><p>Most participants were very cautious about sharing mood data. They worried that others may feel obliged to respond, but not always with the most helpful suggestions: The participant makes two references to self-presentation issues. Firstly, there is sometimes a mismatch between the outward expression of emotion and the inner feeling of emotion. Consequently, a system that indicated your emotion might betray more than you want to convey. Secondly, there is sometimes guilt associated with negative moods and the participant does not want those negative moods to be displayed. The negative mood should finish and be forgotten about.</p><formula xml:id="formula_2">"</formula></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Health information sharing</head><p>Surprisingly, perhaps, health information was seen as less sensitive than mood information. Numerous people said they would be happy to share their health information with a wide circle of friends:</p><p>"Actually, all these people in this circle know what I've been through."</p><p>"Well I got cancer, I've had cancer three times, I ovarian cancer and I've had a double mastectomy so I that straight</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>out into the open because I didn't see point in hiding it so I wasn't bothered who knew. You know, I didn't keep any secrets and that was how I coped with it." "Oh I tell everybody …Everybody who wants to know. Like you, I'd never hide the fact that I've had breast cancer"</head><p>When asked why they were so willing to share this information, most participants felt that sharing helped them to cope better and it helped others adjust:</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>it helps people make allowances for me I hope. You I mean, I've just got a deaf aid, well they gave me but I've lost one, which I'm not used to yet. But I don't hide that fact that I've got that. I don't see the point in hiding stuff. Because if you don't tell people how can they make allowances, you know?"</head><p>Only one participant was not happy with sharing health widely believing that it may create some kind mutual obligation:</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>I think it's the same as the mood I think. I'm not sure -I mean I wouldn't have no problem with a professional that information but I wouldn't feel it appropriate share it. Cuz you've got the obverse of it if you're sharing with them, they're sharing it with you and therefore is a requirement on you to do something about -so if it becomes a mutual health, mutual help group I'm not sure that I've, I'm wanting to get involved that number of people on an individual basis."</head><p>An important point to note here is that information has implications; when someone shares information, it place an obligation on those who see the information to respond in some way. This, in turn, has privacy implications as an individual may not wish to take on the associated with particular forms of information sharing across the network. Other research has highlighted similar problems: monitoring older adults can turn ordinary care into care and the availability of information may disrupt ordinary routines of caring for others <ref type="bibr">[54]</ref>. In short, data carry implications for action that disrupt ordinary life.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Sharing at the right time</head><p>Our participants understood that there was an important temporal dimension to the sharing of information -that was a time and a place for information to be shared. participant explained that when he had a heart he delayed telling his family for as long as so that he did not cause them any unnecessary "I had angina, about four, five years ago. [We were] coming from a match, going to get a taxi and I had a huge attack and I actually got in the taxi. And I recovered, I didn't even tell them, didn't even tell my wife. I went to the walk-in centre the next day and my blood pressure was off the scale and he wouldn't even me drive to hospital, I had to, that's when I had to tell we see that the sharing of information brings certain -and the themes of 'not worrying' another or 'not creating an obligation' for them to take were strong.</p><p>In this first study, our focus was on the question, "Who are older adults happy to share specific types of information Our participants were thoughtful in their sharing of personal data and the guiding thoughts behind much of this sharing seemed to be: (1) Will the information used appropriately by the recipients? (2) Will the shared reflect badly on the sharer? And (3), what obligations or actions will be triggered by the act of did not find it easy to map disclosure preferences onto boundaries. Within specific groups there were close, friends and there were more distant acquaintances the nature of these relationships were critical. The severe privacy violations were not linked to strangers given access to information, but were tied to close being told things they were never meant to learn. theme is explored further in study two.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>TWO</head><p>this study, we conducted a series of interviews with older by presenting them with short scenarios of information-disclosure within the proposed system. Asking them to think about the consequences of this disclosure and attitudes to it, enabled us to explore the relationship older adults feel towards their personal information. In one we examined the user's information in relation to groups but in this study, we examined the user's in relation to the self as well as others.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Method</head><p>interviews were conducted with older from who were recruited by email through the North-Age Database. We recruited participants in total F=10; Mean age =72.58, SD=7.33).</p><p>Participants were presented with a sequence of specific usecase scenarios and asked about likely privacy concerns. For example, participants were told that the system would collect their location information and that it needed this information to make recommendations about local events.</p><p>Having been supplied with this information, participants were think about the potential positive negative consequences other people within the system knowing this. This made explicitly weigh the advantages and disadvantages of privacy vs. disclosure. They were then asked how much of this information they would disclose, to whom would they disclose and under what circumstances would they disclose it. For each of these questions, the interviewer asked for the reasons behind these decisions in order to understand functions which privacy was being sought. Each of the lasted Materials scenarios for the interviews were devised from the system requirements so that the questions were specific to the system thus improving the validity of findings. The scenarios are too numerous to reproduce but involved four types of information: general health information, location information and required to recommend activities. An example of each is given below:</p><p>1. General information. The system stores your level. This will be used to recommend that are appropriate to your education level. 2. Health information. The system records walking information (number of steps, distance walked) in to record progress to achieving targets. You be able to review your activity level. If physical activity declines it will inform your Location information. The system will store your home location to provide useful and accurate navigations. Recommendation information. The system will how far you are willing to travel to activities order to make appropriate recommendations. total, there were 36 distinct pieces of information that the system would need. This was divided into three lists of so that each participant was shown 12 pieces of information from each of the four categories. Lists were selected randomly for each participant. Lists 1 and 2 were used for 7 participants, list 3 used for 6 participants. This the time required for the interview to around one and avoided duplication of answers to the questions.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Analysis</head><p>were recorded to allow for transcription and of the data. The Johari Windows technique was then used in a framework analysis to make sense of disclosure preferences. The Johari Window is a four paned "window" that describes personal information in terms of the extent to which it is open to the or to others. The window is split into four quadrants as open (shared freely), hidden (information known to but kept from others), blind (information known by but kept from self), and unknown (information to self or others). The relative size of the four can be used to indicate different self-disclosure types or preferences. This approach was felt to be particularly useful insofar as it a simple dichotomy of privacy disclosure (open hidden) and introduces the idea of potentially important which is unknown to the self. It is thus a useful way of conceptualizing privacy in a network for older adults privacy can be about what the system knows and shares about you without your</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Open</head><p>The "open" quadrant represents things that are open to the and to others. These include certain demographic and details and other subjective attributesand emotional propensities for example. Here we used the 'open' quadrant to reflect the kinds of data that be distributed across the wider SNS network and note our participants were generally inclined to disclose a deal of current information about themselves. when it came to factual or demographic in relation to things like their age and interests were also happy with the idea that location information be shared if it meant facilitating a social interaction or simply making things more convenient. However, people keen to avoid general disclosure of information that not relevant -either because it had happened in the or because it was simply 'none of their business'</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>don't think any of those backgrounds-I mean, I wouldn't interested in what folk had-I wouldn't want to see it put in black and white, you know, "I was a salesman," "I worked in a factory," or, "I worked in a bar." I mean, I've done all these things. It's all in the past. It's just from today on I'm interested in, not what was in the past… I don't think it's anyone's business apart from mine of what I've done. I really don't.</head><p>In addition, there was a strong sense that such information could only be 'open' if there were no adverse social implications. People didn't want to 'rock the boat' by disclosing information to some individuals that had previously been hidden:</p><p>You've got to be careful, a general thing you could put on, but no specifics. It's too much personal information…. If you put too much personal information on it can alter your relationship with friends and never mind the bad guys or anything like that.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>And it's, when you get to my age you don't want to upset anybody, you want to keep your friends, want to have them, you want to have them the they've always been</head><p>If different groups of friends and different that you, then if you had like a clash of things going on, then they would also know that got choices to make, and you didn't choose them… I wouldn't want one friend to know that I was friends with somebody else… and self-disclosure are thus seen in the context of identity and accepting the need to selectively portray different aspects of the self to different people. In other words, some information may be open but not to others, i.e. the information it is not to all without reserve. quadrant represents things known to the self not to others. Here we use the hidden quadrant to both information hidden to all in the social network, because it might cause embarrassment, or shared unevenly across the network and made only to highly trusted individuals. major motivation for keeping things hidden in the social was a respect for confidentiality and an associated fear of causing unnecessary distress in others.</p><p>if you call them friends, you wouldn't like to discuss things behind their back sort of thing, so you want to discuss things that they might not be, want to discuss. So it's like keeping confidentiality you would just say 'ah talking to Bob there and and he wants this, that and the other.' That would be confidential as far as they're concerned so I want them to be the same, with my conversation with It would be a private thing, rather than going to tell Tom, Dick and Harry there was also the risk of sharing something that prove embarrassing or, for some, the fear that a condition or deterioration in health would lead to You wouldn't want to be felt pity and I suppose there is the -some would just feel pity for you. Not all would pity for you but at the same time I think a lot of people, you find with someone with illness, or serious illness the first inclination is 'aw I feel sorry for them' so I like anybody to erh, at this particular time I haven't got any serious illness, to feel pity for me.</p><p>Unsurprisingly, then, people were keen that health be shared with only a small subset of the and with those in the medical profession: becoming a little bit more personal, it's going back to the medication type of things. You would just want to tell who you want to know instead of everyone.</p><p>Perhaps more interesting was the idea that our participants recognized that they had, in the past, kept information hidden from their doctor, recognizing that this was not always the most sensible approach if an accurate diagnosis was to be made, but recognizing this option might be lost to in the new system: mean, it makes sense if you're part of a programme and agreed that and fully understand it and want to do it, if something drops off then it can tell your doctor.</p><p>then the downside is you can't lie to your doctor then about, "I've done it" or lying as a way of managing privacy was mentioned numerous times by participants. It was seen by as a functional way of keeping things hidden, but an that is removed if the system automatically acquires relevant data. Nevertheless, while this might have been concern of participants, users can become remarkably adept at finding how to deceive monitoring systems (as pointed out in "Uninvited Guests" <ref type="bibr" target="#b58">[49]</ref>.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Blind</head><p>The "blind" quadrant represents things unknown to the self known by others. It includes 'blindspots' indicating a of self-knowledge in a particular domain. For an individual may be unaware that they have upset a friend, they may not have been invited to an event they might not realise that a relative is ill. When people 'blind' to their own state or then this can be a blind to certain types of information can be a and is indicative of a lack of self-knowledge. some forms of self-knowledge can actually be to the self, and this is dealt with in the next quadrant.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Unknown</head><p>The quadrant represents things closed to both self and others in the trusted network. In the literature Windows this is often described in terms of where people learned new things, previously to either themselves or others. In a health context, this becomes a very interesting not least because people may wish to exercise a right 'not to know'. For example, our participants were that sensors in the system might pick up the first of an unidentified health problem, but some said they wish to be protected from 'knowing too much' about their own possible health decline.</p><p>well I like games that challenge my memory, like quizzes, but I wouldn't like a game that said ooh you're falling here watch it, you're going downhill.</p><p>wouldn't want to know in case it had the effect it had on my friend when he thought it was going to happen, and it to happen, mind over matter, y'know.</p><p>This 'protecting the self' from knowledge is a new in privacy research and relates to the on patient preferences around health information decisional conflict <ref type="bibr">[28]</ref>, particularly in the face of prognoses, when patients may choose to leave information ambiguous <ref type="bibr" target="#b28">[24]</ref>. This kind of has a direct impact on one's self-concept which in turn, is linked to health and well-being outcomes <ref type="bibr" target="#b59">[51]</ref>.</p><p>which negatively impacts the user's selfmay have negative effects on the wellbeing of the independently of the negative effects of the condition reported to the user.</p><p>striking example of a preference for data to remain 'unknown' was tied to the idea that the system might be to infer intelligence from the activities being recorded. we see a sense that people don't want this information to be known -either to themselves or to others:</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>it's nobody's business but mine. I don't see-I mean, I play Candy Crush. I play Bingo Bash. I play these maybe five, ten minutes a day. If I'm sitting in the evening and I've got nothing, television, I'll play Candy</head><p>But I don't see why-I really don't see any necessity the system to record my memory and attention scores.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>I don't know, I suppose it doesn't matter, really. It's just</head><p>Usually I'm thought of as, "Oh, Connie is clever." But then I'm maybe not.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Discussion</head><p>Using the Johari Windows technique to classify the quadrants into which information-disclosure fell us to show that an individual's relation to their is not simply about the choice between "Open" "Hidden", but also involves the individual's willingness to know information about themselves and to know what people know about them. Privacy is typically in the manner of study one -the self in relation others, which as we have seen involves intricate social But as this second study shows, there is another dimension of privacy the disclosure, to self, information about the self. This is a dimension that has not often been considered in HCI research, but one which may benefit from an understanding of the medical work on conflict and the way information about the self be received or rejected <ref type="bibr">[28]</ref>.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>GENERAL DISCUSSION</head><p>As with previous work our studies highlight that privacy are dynamic, vary with <ref type="bibr" target="#b46">[39]</ref> and over time <ref type="bibr" target="#b43">[37]</ref>. This is due to the changing nature of the information is particularly pronounced with health information, is subject to change, especially for older adults. The studies reported in this paper highlight that active older have a broad social network which they seek to They acknowledge the right to privacy of the other members and seek to act to protect others, a view that is not always shared by younger adults <ref type="bibr" target="#b32">[27]</ref>. Different members of that network are attributed different levels of and trust with information. However, those are not determined solely by the subgroup that they belong to.</p><p>participants sought to protect their family and friends through the hiding of negative moods and health problems, supports the work of Prasad et al., <ref type="bibr">[43]</ref>. While they hide health information from some individuals, they open to others who might help them manage better. They also seek to protect themselves from a negative future by requesting that information about their decline should remain unknown to them. They are willing to share information with potential activity partners to active aging and social encounters.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Design implications</head><p>careful management of relationships via the disclosure of information defines a need for more sensitive privacy for devices that track and collect data. These controls should be flexible and sufficiently expressive and granular to deal with the subtleties and changing nature of relationships. Yet the defaults should be sensible and the of privacy decisions to be made should not the user. In addition, it is important to provide feedback about the flow of information to ensure that user is not blind to potential tensions arising from or to ensure opportunities are not being missed.</p><p>This research is particularly significant because recent developments in sensor-based socio-technical systems that data can be generated and shared seamlessly, necessarily requiring the explicit consent or understanding of the participants. We our system to be able to detect changes in the state of the user relating to health, physical activity and social involvement. However, these changes may not be obvious to the and the about whether to keep them fully informed is a and difficult one. Other research has suggested that while older adults can imagine the benefits of a system about the decline of others, they rarely like the for themselves <ref type="bibr" target="#b70">[60]</ref>. This may be because of the threat a user's self-concept or future identity. An older adult who is told that their memory is failing or that they are not as much may feel older, experience reduced subjective wellbeing <ref type="bibr" target="#b69">[59]</ref>, and subsequently entire a spiral decline. Information which threatens a positive selfcan have damaging effects on a person's wellbeing Clearly this would be counterproductive in a system seeks to improve the wellbeing of its users. A system aims to promote active aging may have to protect the from his or her own decline-related information, similar to the way in which a clinician might encourage a by telling them that they are doing well while they are actually in a period of decline. The encouraging information, while not entirely accurate, may serve to slow further decline or even prompt improvement, but it open up an important ethical challenge.</p><p>Understanding when an individual is best served by encouraging feedback and when they should be given the full facts about a prognosis, can depend upon there is the possibility of improvement and whether information would be deeply threatening to the self-If there is a possibility of improvement, then the should be presented in a context that enhances feelings of self-efficacy so as to encourage remedial action. If, however, change cannot occur, or if the information to an aspect of the user's life that is central to their then the information is likely to be and may cause psychological harm. An alternative solution may be to allow for active information-(a kind of proxy for a sense of self-efficacy) in which the user is able to seek out information relating to themselves, but avoids the problems associated with passively collecting and presenting information relating to user <ref type="bibr">[18]</ref>. Designing privacy for active aging systems therefore, needs to consider the relationship of the user to own information as much as the relationship of the information to others.</p><p>research reported here is based on scenarios describing the ACANTO system and not on actual use. We should care that the final implementation meets the privacy outline in this paper, but also recognize that, while participants expressed a readiness to share, they may their views following actual use. We are mindful of the work of Boise et al. <ref type="bibr">[6]</ref> who report that older adults were increased after a year of using a monitoring technology. Successful implementation will be dependent on monitoring user concerns and adjusting the design to these concerns as they arise.</p><p>work recognizes a future where technology can support ageing, generating data that can be shared across trusted social network. We recommend caution in this as systems of the type we have described come with ability to infer information that the user might prefer to hidden. We would expect any human in the social to be respectful of the needs of their friends and and we should expect no less from the health and machines that come to operate within this space. We be mindful that these systems could create new emotional and/or physical burdens for different members of the social network and that they are capable of causing unintentional hurt.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>This project was funded by the Union's Horizon 2020 research and innovation programme under grant</head><p>No 643644 A CyberphysicAL social NeTwOrk using robot friends).</p></div><figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_0"><head>Figure 1 :</head><label>1</label><figDesc>Figure 1: Anonymised example of a participant-created sociogram relatively large numbers of discrete groups as indicated by number of circles.The different groups identified included (i) familyincluding close relationships with grandchildren; (ii) longterm friendships that had been sustained for many years and were seen as particularly valuable; (iii) neighbours that were sometimes important sources of support (most participants had at least one neighbor they felt close to); (iv) interest groups such as U3A (University of the Third Age), craft clubs, writers' groups, quiz groups, etc. Many in these groups were not particularly close but this might depend on the size and nature of the group; (v) volunteering groups including co-workers in charity shops or hospitals; (vi) physical activity groups including dance groups and walking groups; (vii) ex-work colleagues that were sometimes seen individually or sometimes in organized outings and (viii) online contacts: typically people formerly known face-to-face, but who, because of distance, were now contacted online (usually through email).</figDesc><graphic coords="4,316.80,61.20,240.42,207.66" type="vector_box" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_1"><head>Figure 1 :</head><label>1</label><figDesc>Figure 1: The Johari Window (Luft, 1961)</figDesc><graphic url="image-3.png" coords="7,339.18,170.70,196.50,129.78" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_0"><head>Table 1 : Summary of network features for each participant- created social network diagram Older Adults and Computers CHI 2017, May 6-11, 2017, Denver, CO, USA</head><label>1</label><figDesc></figDesc><table><row><cell>Participant</cell><cell>Nodes</cell><cell>Very close /</cell><cell>Number</cell></row><row><cell></cell><cell></cell><cell>somewhat close</cell><cell>of circles</cell></row><row><cell>1</cell><cell>39</cell><cell>17 / 22</cell><cell>6</cell></row><row><cell>2</cell><cell>64</cell><cell>32 / 32</cell><cell>8</cell></row><row><cell>3</cell><cell>35</cell><cell>26 / 9</cell><cell>16</cell></row><row><cell>4</cell><cell>28</cell><cell>21 / 7</cell><cell>11</cell></row><row><cell>5</cell><cell>56</cell><cell>27 / 19</cell><cell>12</cell></row><row><cell>6</cell><cell>18</cell><cell>18 / 0</cell><cell>7</cell></row><row><cell>Average</cell><cell>40</cell><cell>23.5 / 14.8</cell><cell>10</cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_4"><head>Older Adults and Computers CHI 2017, May 6-11, 2017, Denver, CO, USA</head><label></label><figDesc></figDesc><table /></figure>
+		</body>
+		<back>
+			<div type="references">
+
+				<listBibl>
+
+<biblStruct xml:id="b0">
+	<analytic>
+		<title level="a" type="main">Social relations an of social networks, social support</title>
+		<author>
+			<persName><forename type="first">Toni</forename><forename type="middle">C</forename><surname>Antonucci</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">of the psychology of aging</title>
+				<editor>
+			<persName><forename type="first">James</forename><surname>Birren</surname></persName>
+		</editor>
+		<editor>
+			<persName><surname>Warner Schaie</surname></persName>
+		</editor>
+		<meeting><address><addrLine>London</addrLine></address></meeting>
+		<imprint>
+			<publisher>Academic Press</publisher>
+			<date type="published" when="2001">2001</date>
+			<biblScope unit="page" from="427" to="453" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b1">
+	<analytic>
+		<title level="a" type="main">Social relations and symptomatology in a sample of community-dwelling French older adults</title>
+		<author>
+			<persName><forename type="first">Toni</forename><forename type="middle">C</forename><surname>Antonucci</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Rebecca</forename><surname>Fuhrer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jean-François</forename><surname>Dartigues</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Psychology and Aging</title>
+		<imprint>
+			<biblScope unit="volume">12</biblScope>
+			<biblScope unit="page" from="189" to="195" />
+			<date type="published" when="1997">1997</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b2">
+	<monogr>
+		<title/>
+		<idno type="DOI">10.1037/0882-7974.12.1.189</idno>
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b3">
+	<analytic>
+		<title level="a" type="main">symptoms in relation to physical health and functioning in the elderly</title>
+		<author>
+			<persName><surname>Lf Berkman</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Berkman</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">journal of epidemiology</title>
+		<imprint>
+			<biblScope unit="volume">124</biblScope>
+			<biblScope unit="page" from="372" to="388" />
+			<date type="published" when="1986-09-21">1986. September 21. 2016</date>
+		</imprint>
+	</monogr>
+	<note>Retrieved</note>
+</biblStruct>
+
+<biblStruct xml:id="b4">
+	<analytic>
+		<title level="a" type="main">Sensor requirements for activity recognition on watches</title>
+		<author>
+			<persName><forename type="first">Gerald</forename><surname>Bieber</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Marian</forename><surname>Haescher</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Matthias</forename><surname>Vahl</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 6th International Conference on PErvasive Technologies Related to Assistive Environments -PETRA &apos;13</title>
+				<meeting>the 6th International Conference on PErvasive Technologies Related to Assistive Environments -PETRA &apos;13</meeting>
+		<imprint>
+			<publisher>ACM Press</publisher>
+			<date type="published" when="2013">2013</date>
+			<biblScope unit="page">1</biblScope>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b5">
+	<monogr>
+		<title/>
+		<idno type="DOI">10.1145/2504335.2504407</idno>
+		<ptr target="http://doi.org/10.1145/2504335.2504407" />
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b6">
+	<analytic>
+		<title level="a" type="main">Successful Aging</title>
+		<author>
+			<persName><forename type="first">Dan</forename><forename type="middle">G</forename><surname>Blazer</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">The American Journal of Geriatric Psychiatry</title>
+		<imprint>
+			<biblScope unit="volume">14</biblScope>
+			<biblScope unit="page" from="2" to="5" />
+			<date type="published" when="2006">2006</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b7">
+	<analytic>
+		<title level="a" type="main">Willingness of older adults to share data and privacy concerns after exposure to unobtrusive home monitoring</title>
+		<author>
+			<persName><forename type="first">Linda</forename><surname>Boise</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Katherine</forename><surname>Wild</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mary</forename><surname>Mattek</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Hiroko</forename><forename type="middle">H</forename><surname>Ruhl</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jeffrey</forename><surname>Dodge</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Kaye</surname></persName>
+		</author>
+		<idno type="DOI">10.4017/gt.2013.11.3.001.00</idno>
+		<ptr target="http://doi.org/10.4017/gt.2013.11.3.001.00" />
+	</analytic>
+	<monogr>
+		<title level="j">Gerontechnology</title>
+		<imprint>
+			<biblScope unit="volume">11</biblScope>
+			<biblScope unit="page" from="428" to="435" />
+			<date type="published" when="2013">2013</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b8">
+	<analytic>
+		<title level="a" type="main">What is successful ageing and who should define it?</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Bowling</surname></persName>
+		</author>
+		<idno type="DOI">10.1136/bmj.331.7531.1548</idno>
+		<ptr target="http://doi.org/10.1136/bmj.331.7531.1548" />
+	</analytic>
+	<monogr>
+		<title level="j">BMJ</title>
+		<imprint>
+			<biblScope unit="volume">331</biblScope>
+			<biblScope unit="page" from="1548" to="1551" />
+			<date type="published" when="2005">2005</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b9">
+	<analytic>
+		<title level="a" type="main">The association between networks and mortality in later life</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Bowling</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Grundy</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Reviews in Clinical Gerontology</title>
+		<imprint>
+			<biblScope unit="volume">8</biblScope>
+			<biblScope unit="page" from="353" to="361" />
+			<date type="published" when="1998">1998</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b10">
+	<analytic>
+		<title level="a" type="main">Physical activity and nutrition behavioural outcomes of a home-based intervention program for seniors: randomized controlled trial</title>
+		<author>
+			<persName><forename type="first">Linda</forename><surname>Burke</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Andy</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jonine</forename><surname>Lee</surname></persName>
+		</author>
+		<idno type="DOI">10.1186/1479-5868-10-14</idno>
+		<ptr target="http://doi.org/10.1186/1479-5868-10-14" />
+	</analytic>
+	<monogr>
+		<title level="j">International of Behavioral Nutrition and Activity</title>
+		<imprint>
+			<biblScope unit="volume">10</biblScope>
+			<biblScope unit="page">14</biblScope>
+			<date type="published" when="2013">2013</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b11">
+	<analytic>
+		<title level="a" type="main">Benefits and Privacy Concerns of a Home Equipped with a Visual Sensing System: A Perspective Older Adults</title>
+		<author>
+			<persName><forename type="first">Arthur</forename><surname>Kelly E Caine</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Wendy</forename><forename type="middle">A</forename><surname>Fisk</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Rogers</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the Human Factors and Ergonomics Society Annual Meeting</title>
+				<meeting>the Human Factors and Ergonomics Society Annual Meeting</meeting>
+		<imprint>
+			<biblScope unit="page" from="180" to="184" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b12">
+	<monogr>
+		<title/>
+		<idno type="DOI">10.1177/154193120605000203</idno>
+		<ptr target="http://doi.org/10.1177/154193120605000203" />
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b13">
+	<analytic>
+		<title level="a" type="main">How&apos;s my mood and stress?: an efficient speech analysis library for unobtrusive on phones</title>
+		<author>
+			<persName><forename type="first">Keng-Hao</forename><surname>Chang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Drew</forename><surname>Fisher</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">John</forename><surname>Canny</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Björn</forename><surname>Hartmann</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">of the 6th Conference on Body Area Networks</title>
+				<imprint>
+			<date type="published" when="2011">2011</date>
+		</imprint>
+		<respStmt>
+			<orgName>ICST (Institute for Computer Sciences, Social-Informatics and Telecommunications Engineering</orgName>
+		</respStmt>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b14">
+	<analytic>
+		<title level="a" type="main">Definitions Predictors of Successful Aging: A Comprehensive Review of Larger Quantitative Studies</title>
+		<author>
+			<persName><forename type="first">Colin</forename><forename type="middle">A</forename><surname>Depp</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Dilip</forename><forename type="middle">V</forename><surname>Jeste</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">The American Journal of Geriatric Psychiatry</title>
+		<imprint>
+			<biblScope unit="volume">14</biblScope>
+			<biblScope unit="page" from="6" to="20" />
+			<date type="published" when="2006">2006</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b15">
+	<analytic>
+		<title level="a" type="main">Empath: A continuous remote health monitoring system for depressive illness</title>
+		<author>
+			<persName><forename type="first">Robert</forename><forename type="middle">F</forename><surname>Dickerson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Eugenia</forename><forename type="middle">I</forename><surname>Gorlin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">John</forename><forename type="middle">A</forename></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">of the 2nd Conference on Wireless Health -WH &apos;11</title>
+				<imprint>
+			<publisher>ACM Press</publisher>
+			<date type="published" when="2011">2011</date>
+			<biblScope unit="page">1</biblScope>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b16">
+	<analytic>
+		<title level="a" type="main">Physical Activity in Aging: in Patterns and Their Relationship to Health and Function</title>
+		<author>
+			<persName><forename type="first">L</forename><surname>Dipietro</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Journals of Gerontology Series A: Sciences and Medical Sciences</title>
+		<imprint>
+			<biblScope unit="volume">56</biblScope>
+			<biblScope unit="page" from="13" to="22" />
+			<date type="published" when="2001">2001</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b17">
+	<monogr>
+		<title level="m" type="main">The Internet of Things for Ambient Assisted Living</title>
+		<author>
+			<persName><forename type="first">Angelika</forename><surname>Dohr</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Robert</forename><surname>Modre-Osprian</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mario</forename><surname>Dieter Hayn</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Günter</forename><surname>Schreier</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2010">2010</date>
+			<biblScope unit="volume">10</biblScope>
+			<biblScope unit="page" from="804" to="809" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b18">
+	<analytic>
+		<title level="a" type="main">Social uses of personal health information within an online patient community: what can happen when patients have access to one another&apos;s data</title>
+		<author>
+			<persName><forename type="first">H</forename><surname>Jeana</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Frost</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Michael</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Massagli</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Journal of medical Internet research</title>
+		<imprint>
+			<biblScope unit="volume">10</biblScope>
+			<biblScope unit="issue">3</biblScope>
+			<biblScope unit="page">e15</biblScope>
+			<date type="published" when="2008">2008</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b19">
+	<analytic>
+		<title level="a" type="main">Designing Social Networking Sites for Older Adults</title>
+		<author>
+			<persName><forename type="first">Lorna</forename><surname>Gibson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Wendy</forename><surname>Moncur</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Paula</forename><surname>Forbes</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">John</forename></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Christopher</forename><surname>Martin</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 24th BCS Interaction Specialist Conference</title>
+				<meeting>the 24th BCS Interaction Specialist Conference</meeting>
+		<imprint>
+			<publisher>British Computer Society</publisher>
+			<date type="published" when="2010">2010</date>
+			<biblScope unit="page" from="186" to="194" />
+		</imprint>
+	</monogr>
+	<note>Retrieved from CS_HCI2010.pdf</note>
+</biblStruct>
+
+<biblStruct xml:id="b20">
+	<analytic>
+		<title level="a" type="main">Beyond Understanding Non-functional of Home-based Healthcare Technology</title>
+		<author>
+			<persName><forename type="first">Erik</forename><surname>Grönvall</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Nervo</forename><surname>Verdezoto</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the ACM International Joint on Pervasive and Ubiquitous Computing (UbiComp&apos;13)</title>
+				<meeting>the ACM International Joint on Pervasive and Ubiquitous Computing (UbiComp&apos;13)</meeting>
+		<imprint>
+			<date type="published" when="2013">2013</date>
+			<biblScope unit="page" from="587" to="596" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b21">
+	<analytic>
+		<title level="a" type="main">Information revelation and privacy in online networks</title>
+		<author>
+			<persName><forename type="first">Ralph</forename><surname>Gross</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Alessandro</forename><surname>Acquisti</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H. John</forename><surname>Heinz</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2005 ACM workshop on Privacy in the electronic society -WPES &apos;05</title>
+				<meeting>the 2005 ACM workshop on Privacy in the electronic society -WPES &apos;05</meeting>
+		<imprint>
+			<publisher>ACM Press</publisher>
+			<date type="published" when="2005">2005</date>
+			<biblScope unit="page">71</biblScope>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b22">
+	<analytic>
+		<title level="a" type="main">Using smart phone mobility traces for the diagnosis of depressive and manic episodes in bipolar patients</title>
+		<author>
+			<persName><forename type="first">Agnes</forename><surname>Gruenerbl</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Venet</forename><surname>Osmani</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Gernot</forename><surname>Bahle</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 5th Augmented Human International Conference on -AH &apos;14</title>
+				<meeting>the 5th Augmented Human International Conference on -AH &apos;14</meeting>
+		<imprint>
+			<publisher>ACM Press</publisher>
+			<date type="published" when="2014">2014</date>
+			<biblScope unit="page">1</biblScope>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b23">
+	<monogr>
+		<title/>
+		<idno type="DOI">10.1145/2582051.2582089</idno>
+		<ptr target="http://doi.org/10.1145/2582051.2582089" />
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b24">
+	<monogr>
+		<title level="m" type="main">Assessment of physical activity in people with and without cognitive impairment</title>
+		<author>
+			<persName><forename type="first">Klaus</forename><surname>Hauer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Stephen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ulrich</forename><surname>Lord</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Lindemann</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kamiar</forename><surname>Lamb</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Michael</forename><surname>Aminian</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Schwenk</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2011">2011</date>
+			<biblScope unit="volume">19</biblScope>
+			<biblScope unit="page" from="347" to="372" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b25">
+	<analytic>
+		<title level="a" type="main">approach for deriving continuous health indicators from in-home sensor data</title>
+		<author>
+			<persName><forename type="first">Tamara</forename><surname>Hayes</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Misha</forename><surname>Pavel</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jeffrey</forename><surname>Kaye</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Technology and Aging: Selected Papers from the 2007 Conference on Technology and Aging</title>
+				<editor>
+			<persName><forename type="first">Jennifer</forename><surname>Mihailidis</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">Henry</forename><surname>Boger</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">Normie</forename><surname>Kautz</surname></persName>
+		</editor>
+		<meeting><address><addrLine>Amsterdam</addrLine></address></meeting>
+		<imprint>
+			<publisher>IOS Press</publisher>
+			<date type="published" when="2008">2008</date>
+			<biblScope unit="page" from="130" to="137" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b26">
+	<monogr>
+		<title level="m">Older Adults and Computers CHI 2017</title>
+				<meeting><address><addrLine>Denver, CO, USA</addrLine></address></meeting>
+		<imprint>
+			<date type="published" when="2017">May 6-11, 2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b27">
+	<analytic>
+		<title level="a" type="main">Visualizing Personal Networks: Working with Participant-aided Sociograms</title>
+		<author>
+			<persName><forename type="first">B</forename><surname>Hogan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">A</forename><surname>Carrasco</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Wellman</surname></persName>
+		</author>
+		<idno type="DOI">10.1177/1525822X06298589</idno>
+		<ptr target="http://doi.org/10.1177/1525822X06298589" />
+	</analytic>
+	<monogr>
+		<title level="j">Methods</title>
+		<imprint>
+			<biblScope unit="volume">19</biblScope>
+			<biblScope unit="page" from="116" to="144" />
+			<date type="published" when="2007">2007</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b28">
+	<analytic>
+		<title level="a" type="main">Advanced cancer patients&apos; information preferences: a review</title>
+		<author>
+			<persName><forename type="first">S</forename><surname>Innes</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Payne</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Medicine</title>
+		<imprint>
+			<biblScope unit="volume">23</biblScope>
+			<biblScope unit="page" from="29" to="39" />
+			<date type="published" when="2008">2008</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b29">
+	<monogr>
+		<title/>
+		<idno type="DOI">10.1177/0269216308098799</idno>
+		<ptr target="http://doi.org/10.1177/0269216308098799" />
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b30">
+	<analytic>
+		<title/>
+		<idno type="DOI">10.1111/1467-8721.00025</idno>
+		<ptr target="http://doi.org/10.1111/1467-8721.00025" />
+	</analytic>
+	<monogr>
+		<title level="j">Anita E. Personal Secrets. Current Directions in Science</title>
+		<imprint>
+			<biblScope unit="volume">8</biblScope>
+			<biblScope unit="page" from="105" to="109" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b31">
+	<analytic>
+		<title level="a" type="main">Consequences of revealing personal secrets</title>
+		<author>
+			<persName><forename type="first">Anita</forename><forename type="middle">E</forename><surname>Kelly</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kevin</forename><forename type="middle">J</forename><surname>Mckillop</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Psychological Bulletin</title>
+		<imprint>
+			<biblScope unit="volume">120</biblScope>
+			<biblScope unit="page" from="450" to="465" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b32">
+	<analytic>
+		<title level="a" type="main">Zeynep Cemalcilar, and Lemi in privacy literacy and privacy management on</title>
+		<author>
+			<persName><forename type="first">Murat</forename><surname>Kezer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Barış</forename><surname>Sevi</surname></persName>
+		</author>
+		<idno type="DOI">10.5817/CP2016-1-2</idno>
+		<ptr target="http://doi.org/10.5817/CP2016-1-2" />
+	</analytic>
+	<monogr>
+		<title level="j">Journal of Psychosocial Research on Cyberspace</title>
+		<imprint>
+			<biblScope unit="volume">10</biblScope>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b33">
+	<analytic>
+		<title level="a" type="main">It&apos;s My Body&apos;&apos;: Does Patient Involvement in Decision Making Reduce Decisional Conflict?</title>
+		<author>
+			<persName><forename type="first">H</forename><surname>Kremer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Ironson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Schneiderman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Medical Decision Making</title>
+		<imprint>
+			<biblScope unit="volume">27</biblScope>
+			<biblScope unit="page" from="522" to="532" />
+			<date type="published" when="2007">2007</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b34">
+	<analytic>
+		<title level="a" type="main">Privacy by Designof Privacy-Aware Ubiquitous Systems</title>
+		<author>
+			<persName><forename type="first">Marc</forename><surname>Langheinrich</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">2001: Ubiquitous Computing</title>
+				<meeting><address><addrLine>Gregory D</addrLine></address></meeting>
+		<imprint>
+			<date type="published" when="2001">2001</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b35">
+	<analytic>
+		<title level="a" type="main">Sensorbased observations of daily living for aging in place</title>
+		<author>
+			<persName><forename type="first">L</forename><surname>Matthew</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Anind</forename><forename type="middle">K</forename><surname>Lee</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Dey</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Personal and Ubiquitous Computing</title>
+		<imprint>
+			<biblScope unit="volume">19</biblScope>
+			<biblScope unit="page" from="27" to="43" />
+			<date type="published" when="2015">2015</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b36">
+	<analytic>
+		<title level="a" type="main">internet of things: a survey</title>
+		<author>
+			<persName><forename type="first">Shancang</forename><surname>Li</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Li</forename><forename type="middle">Da</forename><surname>Xu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Shanshan</forename><surname>Zhao</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Information Systems Frontiers</title>
+		<imprint>
+			<biblScope unit="volume">17</biblScope>
+			<biblScope unit="page" from="243" to="259" />
+			<date type="published" when="2015">2015</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b37">
+	<analytic>
+		<title level="a" type="main">knows about me?: an analysis of age-related disclosure preferences</title>
+		<author>
+			<persName><forename type="first">Linda</forename><surname>Little</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Pam</forename><surname>Briggs</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Lynne</forename><surname>Coventry</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">BCS-HCI &apos;11 Proceedings of the 25th BCS Conference on Human-Computer Interaction</title>
+				<imprint>
+			<date type="published" when="2011">2011</date>
+			<biblScope unit="page" from="84" to="87" />
+		</imprint>
+	</monogr>
+	<note>Retrieved from</note>
+</biblStruct>
+
+<biblStruct xml:id="b38">
+	<analytic>
+		<title level="a" type="main">The Johari a graphic model of awareness in interpersonal relations</title>
+		<author>
+			<persName><forename type="first">Joseph</forename><surname>Luft</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Ingham</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">relations training news</title>
+		<imprint>
+			<biblScope unit="volume">5</biblScope>
+			<biblScope unit="page" from="6" to="7" />
+			<date type="published" when="1961">1961</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b39">
+	<analytic>
+		<title level="a" type="main">Continuous Activity Monitoring and Intelligent Prompting to Improve Medication Adherence</title>
+		<author>
+			<persName><forename type="first">Jay</forename><surname>Lundell</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Tamara</forename><forename type="middle">L</forename><surname>Hayes</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sengul</forename><surname>Vurgun</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">29th Annual International Conference of the IEEE Engineering in Medicine and Biology Society</title>
+				<imprint>
+			<publisher>IEEE</publisher>
+			<date type="published" when="2007">2007</date>
+			<biblScope unit="page" from="6286" to="6289" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b40">
+	<monogr>
+		<title/>
+		<idno type="DOI">10.1109/IEMBS.2007.4353792</idno>
+		<ptr target="http://doi.org/10.1109/IEMBS.2007.4353792" />
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b41">
+	<monogr>
+		<title level="m" type="main">Privacy management on social media sites</title>
+		<author>
+			<persName><forename type="first">Mary</forename><surname>Madden</surname></persName>
+		</author>
+		<ptr target="http://www.pewinternet.org/Reports/2012/Privacy-management-on-social-media.aspx" />
+		<imprint>
+			<date type="published" when="2012">2012</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b42">
+	<monogr>
+		<title level="m" type="main">Examining Forgiveness and Regret as Computational In Computing with Social Trust</title>
+		<author>
+			<persName><forename type="first">Stephen</forename><surname>Marsh</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Pamela</forename><surname>Briggs</surname></persName>
+		</author>
+		<idno type="DOI">10.1007/978-1-84800-356-9_2</idno>
+		<ptr target="http://doi.org/10.1007/978-1-84800-356-9_2" />
+		<imprint>
+			<date type="published" when="2009">2009</date>
+			<publisher>Springer</publisher>
+			<biblScope unit="page" from="9" to="43" />
+			<pubPlace>London</pubPlace>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b43">
+	<analytic>
+		<title level="a" type="main">Exploring reactive access control</title>
+		<author>
+			<persName><forename type="first">Michelle</forename><forename type="middle">L</forename><surname>Mazurek</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Peter</forename><forename type="middle">F</forename><surname>Klemperer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Richard</forename><forename type="middle">Hassan</forename><surname>Takabi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Lujo</forename><surname>Bauer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Lorrie</forename></persName>
+		</author>
+		<idno type="DOI">10.1145/1978942.1979245</idno>
+		<ptr target="http://doi.org/10.1145/1978942.1979245" />
+	</analytic>
+	<monogr>
+		<title level="m">of the 2011 annual conference on Human in computing systems -CHI &apos;11</title>
+				<imprint>
+			<publisher>ACM Press</publisher>
+			<date type="published" when="2011">Faith 2011</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b44">
+	<analytic>
+		<title level="a" type="main">Social networking sites and older -a systematic review</title>
+		<author>
+			<persName><forename type="first">Tobias</forename><surname>Nef</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Raluca</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Ganea</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>René</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Urs P</forename><surname>Müri</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Mosimann</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">International psychogeriatrics</title>
+		<imprint>
+			<biblScope unit="volume">25</biblScope>
+			<biblScope unit="page" from="1041" to="1053" />
+			<date type="published" when="2013">2013</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b45">
+	<monogr>
+		<title/>
+		<idno type="DOI">10.1017/S1041610213000355</idno>
+		<ptr target="http://doi.org/10.1017/S1041610213000355" />
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b46">
+	<monogr>
+		<author>
+			<persName><forename type="first">Helen</forename><surname>Nissenbaum</surname></persName>
+		</author>
+		<title level="m">context: policy, and the integrity of social life</title>
+				<imprint>
+			<date type="published" when="2009">2009</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b47">
+	<analytic>
+		<title level="a" type="main">Psychological functions of</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Darhl</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Pedersen</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Journal of Environmental Psychology</title>
+		<imprint>
+			<biblScope unit="volume">2</biblScope>
+			<biblScope unit="page" from="147" to="156" />
+			<date type="published" when="1997">1997</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b48">
+	<monogr>
+		<author>
+			<persName><forename type="first">Andrew</forename><surname>Perrin</surname></persName>
+		</author>
+		<ptr target="http://www.pewinternet.org/2015/10/08/social-" />
+		<title level="m">Social Media Usage: 2005-Pew Research Center</title>
+				<imprint>
+			<date type="published" when="2015">2015</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b49">
+	<monogr>
+		<title level="m" type="main">Big Data: Seizing Opportunities, Preserving Values</title>
+		<author>
+			<persName><forename type="first">J</forename><surname>Podesta</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Pritzker</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><forename type="middle">J</forename><surname>Moniz</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Holdren</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Zients</surname></persName>
+		</author>
+		<ptr target="https://www.whitehouse.gov/sites/default/files/docs/bi" />
+		<imprint>
+			<date type="published" when="2014">2014</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b50">
+	<analytic>
+		<title level="a" type="main">Understanding sharing preferences and behavior for mHealth devices</title>
+		<author>
+			<persName><forename type="first">Aarathi</forename><surname>Prasad</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jacob</forename><surname>Sorber</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Timothy</forename><surname>Stablein</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Anthony</forename></persName>
+		</author>
+		<author>
+			<persName><forename type="first">David</forename><surname>Kotz</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2012 ACM workshop on Privacy in the electronic society -WPES &apos;12</title>
+				<meeting>the 2012 ACM workshop on Privacy in the electronic society -WPES &apos;12</meeting>
+		<imprint>
+			<publisher>ACM Press</publisher>
+			<date type="published" when="2012">2012</date>
+			<biblScope unit="page">117</biblScope>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b51">
+	<analytic>
+		<title/>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">W</forename><surname>Rowe</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><forename type="middle">L</forename><surname>Kahn</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Successful Aging. The Gerontologist</title>
+		<imprint>
+			<biblScope unit="volume">37</biblScope>
+			<biblScope unit="page" from="433" to="440" />
+			<date type="published" when="1997">1997</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b52">
+	<monogr>
+		<title/>
+		<idno type="DOI">10.1093/geront/37.4.433</idno>
+		<ptr target="http://doi.org/10.1093/geront/37.4.433" />
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b53">
+	<monogr>
+		<title level="m" type="main">Older Adults and Computers</title>
+		<imprint>
+			<date type="published" when="2017">May 6-11, 2017</date>
+			<pubPlace>Denver, CO, USA</pubPlace>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b54">
+	<analytic>
+		<title level="a" type="main">Detection of activities of daily living in Alzheimer&apos;s disease and mild cognitive using information and communication technology</title>
+		<author>
+			<persName><forename type="first">Guillaume</forename><surname>Sacco</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Véronique</forename><surname>Joumier</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Nelly</forename><surname>Darmon</surname></persName>
+		</author>
+		<idno type="DOI">10.2147/CIA.S36297</idno>
+		<ptr target="http://doi.org/10.2147/CIA.S36297" />
+	</analytic>
+	<monogr>
+		<title level="j">Clinical interventions in aging</title>
+		<imprint>
+			<biblScope unit="page" from="539" to="549" />
+			<date type="published" when="2012">2012</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b55">
+	<analytic>
+		<title level="a" type="main">Aging, Privacy, and Home-Based Developing a Design Framework</title>
+		<author>
+			<persName><forename type="first">Kalpana</forename><surname>Shankar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jean</forename><surname>Camp</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kay</forename><surname>Connelly</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Huber</forename></persName>
+		</author>
+		<idno type="DOI">10.1109/MPRV.2011.19</idno>
+		<ptr target="http://doi.org/10.1109/MPRV.2011.19" />
+	</analytic>
+	<monogr>
+		<title level="j">Pervasive Computing</title>
+		<imprint>
+			<biblScope unit="volume">11</biblScope>
+			<biblScope unit="page" from="46" to="54" />
+			<date type="published" when="2012">2012</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b56">
+	<monogr>
+		<title level="m" type="main">Testing Classifiers for Embedded Health In Analysis of Solutions for Disease Prevention and Management</title>
+		<author>
+			<persName><forename type="first">Rainer</forename><forename type="middle">Dane</forename><surname>Skubic</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Marilyn</forename><surname>Guevara</surname></persName>
+		</author>
+		<idno type="DOI">10.1007/978-3-642-</idno>
+		<ptr target="http://doi.org/10.1007/978-3-642-" />
+		<editor>Donnelly, Cristiano Paggetti, Chris Nugent and Mounir Mokhtari</editor>
+		<imprint>
+			<date type="published" when="2012">2012</date>
+			<publisher>Springer</publisher>
+			<biblScope unit="page" from="198" to="205" />
+			<pubPlace>Berlin Heidelberg</pubPlace>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b57">
+	<monogr>
+		<title level="m" type="main">Intergenerational activity tracker program: Impact with health related outcomes on older adults. Long Island Systems, Applications and IEEE</title>
+		<author>
+			<persName><forename type="first">Laura</forename><surname>Sookhai</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jean</forename><forename type="middle">F</forename><surname>Coppola</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Chris</forename><surname>Gaur</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2015">2015</date>
+			<biblScope unit="page" from="1" to="7" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b58">
+	<monogr>
+		<title level="m" type="main">Most People Are &quot;Privacy Who, While Concerned about Privacy, Will Sometimes Trade It Off for Other Benefits</title>
+		<author>
+			<persName><surname>Superflux</surname></persName>
+		</author>
+		<ptr target="http://www.prnewswire.com/news-releases/most-people-are-privacy-pragmatists-who-it-off-for-other-benefits-says-harris-interactive-survey" />
+		<imprint>
+			<date type="published" when="2003">2015. 2003</date>
+		</imprint>
+	</monogr>
+	<note>Uninvited Guests</note>
+</biblStruct>
+
+<biblStruct xml:id="b59">
+	<analytic>
+		<title level="a" type="main">Illusion and wellbeing: a social psychological perspective on mental</title>
+		<author>
+			<persName><forename type="first">S E</forename><surname>Taylor</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J D</forename><surname>Brown</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Psychological bulletin</title>
+		<imprint>
+			<biblScope unit="volume">103</biblScope>
+			<biblScope unit="page" from="193" to="210" />
+			<date type="published" when="1988">1988</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b60">
+	<analytic>
+		<title level="a" type="main">Losing and Gaining in Old Age: Changes in Personal Network Size and Social Support in a Four-Year Longitudinal Study</title>
+		<author>
+			<persName><forename type="first">T</forename><surname>Van Tilburg</surname></persName>
+		</author>
+		<idno type="DOI">10.1093/geronb/53B.6.S313</idno>
+		<ptr target="http://doi.org/10.1093/geronb/53B.6.S313" />
+	</analytic>
+	<monogr>
+		<title level="j">The Journals of Gerontology Series B: Psychological Sciences and Social Sciences</title>
+		<imprint>
+			<biblScope unit="volume">53</biblScope>
+			<biblScope unit="page" from="S313" to="S323" />
+			<date type="published" when="1998">1998</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b61">
+	<analytic>
+		<title level="a" type="main">Are social supports in late midlife a or a result of successful physical ageing</title>
+		<author>
+			<persName><forename type="first">George</forename><forename type="middle">E</forename><surname>Vaillant</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">E</forename><surname>Meyer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Mukamal</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Soldz</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Psychological Medicine</title>
+		<imprint>
+			<biblScope unit="volume">28</biblScope>
+			<biblScope unit="page" from="1159" to="1168" />
+			<date type="published" when="1998">1998</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b62">
+	<analytic>
+		<title level="a" type="main">Making Family Care Work : Dependence , Privacy and Remote Home Monitoring Telecare Systems</title>
+		<author>
+			<persName><forename type="first">John</forename><surname>Vines</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Stephen</forename><surname>Lindsay</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">W</forename><surname>Gary</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Pritchard</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the ACM International Joint on Pervasive and Ubiquitous Computing (UbiComp&apos;13)</title>
+				<meeting>the ACM International Joint on Pervasive and Ubiquitous Computing (UbiComp&apos;13)</meeting>
+		<imprint>
+			<date type="published" when="2013">2013</date>
+			<biblScope unit="page" from="607" to="616" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b63">
+	<analytic>
+		<title/>
+		<author>
+			<persName><forename type="first">John</forename><surname>Vines</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Gary</forename><surname>Pritchard</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Peter</forename><surname>Wright</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Patrick</forename></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Katie</forename><surname>Brittain</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">An Age-Old Transactions on Computer-Human</title>
+		<imprint>
+			<biblScope unit="volume">22</biblScope>
+			<biblScope unit="page" from="1" to="27" />
+			<date type="published" when="2015">2015</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b64">
+	<monogr>
+		<title/>
+		<idno type="DOI">10.1145/2696867</idno>
+		<ptr target="http://doi.org/10.1145/2696867" />
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b65">
+	<analytic>
+		<title level="a" type="main">Attraction to computer-mediated social support</title>
+		<author>
+			<persName><forename type="first">Joseph</forename><forename type="middle">B</forename><surname>Walther</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Shawn</forename><surname>Boyd</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Communication technology and society: Audience adoption and uses</title>
+				<editor>
+			<persName><forename type="first">C</forename><forename type="middle">A</forename><surname>Lin</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">D</forename><surname>Atkin</surname></persName>
+		</editor>
+		<imprint>
+			<date type="published" when="2002">2002</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b66">
+	<analytic>
+		<title level="a" type="main">Mobility in Older Adults: A Framework</title>
+		<author>
+			<persName><forename type="first">Sandra</forename><forename type="middle">C</forename><surname>Webber</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Michelle</forename><forename type="middle">M</forename><surname>Porter</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Verena</forename><forename type="middle">H</forename><surname>Menec</surname></persName>
+		</author>
+		<idno type="DOI">10.1093/geront/gnq013</idno>
+		<ptr target="http://doi.org/10.1093/geront/gnq013" />
+	</analytic>
+	<monogr>
+		<title level="j">The Gerontologist</title>
+		<imprint>
+			<biblScope unit="volume">50</biblScope>
+			<date type="published" when="2010">2010</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b67">
+	<monogr>
+		<author>
+			<persName><forename type="first">Suzanne</forename><surname>Weisband</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sara</forename><surname>Kiesler</surname></persName>
+		</author>
+		<title level="m">Self disclosure on computer forms. of the conference on Human factors in computing common ground -CHI &apos;96</title>
+				<imprint>
+			<publisher>ACM Press</publisher>
+			<date type="published" when="1996">1996</date>
+			<biblScope unit="page" from="3" to="10" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b68">
+	<monogr>
+		<title/>
+		<idno type="DOI">10.1145/238386.238387</idno>
+		<ptr target="http://doi.org/10.1145/238386.238387" />
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b69">
+	<analytic>
+		<title level="a" type="main">Age Identity and Subjective Well-Being: A Comparison of the States and Germany</title>
+		<author>
+			<persName><forename type="first">G J Westerhof</forename></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A E</forename><surname>Barrett</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">The Journals of Series B: Psychological Sciences and Sciences</title>
+		<imprint>
+			<biblScope unit="volume">60</biblScope>
+			<biblScope unit="page" from="S129" to="S136" />
+			<date type="published" when="2005">2005</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b70">
+	<analytic>
+		<title level="a" type="main">In-Home Monitoring of Cognitive and Physical Health: Reactions and Perceptions of Older Adults</title>
+		<author>
+			<persName><forename type="first">K</forename><surname>Wild</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Boise</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Lundell</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Foucek</surname></persName>
+		</author>
+		<idno type="DOI">10.1177/0733464807311435</idno>
+		<ptr target="http://doi.org/10.1177/0733464807311435" />
+	</analytic>
+	<monogr>
+		<title level="j">Applied Gerontology</title>
+		<imprint>
+			<biblScope unit="volume">27</biblScope>
+			<biblScope unit="page">181</biblScope>
+			<date type="published" when="2008">2008</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b71">
+	<analytic>
+		<title level="a" type="main">Understanding and Changing Older Adults&apos; and Learning of Social Media</title>
+		<author>
+			<persName><forename type="first">Bo</forename><surname>Xie</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ivan</forename><surname>Watkins</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jen</forename><surname>Golbeck</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Man</forename><surname>Huang</surname></persName>
+		</author>
+		<idno type="DOI">10.1080/03601277.2010.544580</idno>
+		<ptr target="http://doi.org/10.1080/03601277.2010.544580" />
+	</analytic>
+	<monogr>
+		<title level="j">Educational Gerontology</title>
+		<imprint>
+			<biblScope unit="volume">38</biblScope>
+			<biblScope unit="page" from="282" to="296" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+				</listBibl>
+			</div>
+		</back>
+	</text>
+</TEI>

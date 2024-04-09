@@ -1,0 +1,1258 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xml:space="preserve" xmlns="http://www.tei-c.org/ns/1.0" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.com/kermitt2/grobid/master/grobid-home/schemas/xsd/Grobid.xsd"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+	<teiHeader xml:lang="en">
+		<fileDesc>
+			<titleStmt>
+				<title level="a" type="main">Passenger Trip Planning using Ride-Sharing Services</title>
+			</titleStmt>
+			<publicationStmt>
+				<publisher/>
+				<availability status="unknown"><licence/></availability>
+			</publicationStmt>
+			<sourceDesc>
+				<biblStruct>
+					<analytic>
+						<author>
+							<persName><forename type="first">Michael</forename><forename type="middle">K</forename><surname>Svangren</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="department">Department of Computer Science</orgName>
+								<orgName type="institution">Aalborg University</orgName>
+								<address>
+									<country key="DK">Denmark</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Mikael</forename><forename type="middle">B</forename><surname>Skov</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="department">Department of Computer Science</orgName>
+								<orgName type="institution">Aalborg University</orgName>
+								<address>
+									<country key="DK">Denmark</country>
+								</address>
+							</affiliation>
+						</author>
+						<author role="corresp">
+							<persName><forename type="first">Jesper</forename><surname>Kjeldskov</surname></persName>
+							<email>jesper@cs.aau.dk</email>
+							<affiliation key="aff0">
+								<orgName type="department">Department of Computer Science</orgName>
+								<orgName type="institution">Aalborg University</orgName>
+								<address>
+									<country key="DK">Denmark</country>
+								</address>
+							</affiliation>
+						</author>
+						<title level="a" type="main">Passenger Trip Planning using Ride-Sharing Services</title>
+					</analytic>
+					<monogr>
+						<imprint>
+							<date/>
+						</imprint>
+					</monogr>
+					<idno type="DOI">10.1145/3173574.3174054</idno>
+				</biblStruct>
+			</sourceDesc>
+		</fileDesc>
+		<encodingDesc>
+			<appInfo>
+				<application version="0.7.1" ident="GROBID" when="2022-07-22T04:59+0000">
+					<desc>GROBID - A machine learning software for extracting information from scholarly documents</desc>
+					<ref target="https://github.com/kermitt2/grobid"/>
+				</application>
+			</appInfo>
+		</encodingDesc>
+		<profileDesc>
+			<textClass>
+				<keywords>
+					<term>Ride-sharing</term>
+					<term>transportation</term>
+					<term>mobility</term>
+					<term>H.5.m. Information interfaces and presentation (e.g., HCI): Miscellaneous</term>
+				</keywords>
+			</textClass>
+			<abstract>
+<div xmlns="http://www.tei-c.org/ns/1.0"><p>Ride-sharing can potentially address transportation challenges such as traffic congestion and air pollution by letting drivers share their cars unused capacity with a number of passengers. However, even though multiple ride-sharing services exist and HCI research has investigated various aspects of their use, we still have limited knowledge on how passengers use ride-sharing services to plan their trips. In this paper, we study how passengers use existing services to support the activity of planning a trip. We report from a qualitative study where we participated in 5 rides and conducted interviews with 19 passengers about their use and opinions towards ride-sharing services. We found that planning a ride involves comparing individual preferences across a number of services which enabled participants to support finding a trip and handle challenges such as privacy and trust. Further, we discuss these findings and their implications for future HCI research in ride-sharing.</p></div>
+			</abstract>
+		</profileDesc>
+	</teiHeader>
+	<text xml:lang="en">
+		<body>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>INTRODUCTION</head><p>Ride-sharing is often suggested as an immediate minimal cost solution to address challenges such as increased air pollution or traffic congestion by tapping into the significant amount of unused capacity in transportation networks <ref type="bibr">[5,</ref><ref type="bibr">17,</ref><ref type="bibr" target="#b51">44]</ref>. From a personal perspective, ride-sharing provides passengers and drivers with the opportunity to split travel costs such as gas, toll, or parking fees <ref type="bibr" target="#b19">[15]</ref>, but despite such benefits, ride-sharers still face a number of challenges. For passengers, one of these challenges is planning rides, especially if ride-sharing is only part of their full trip and other types of transportation has to be considered <ref type="bibr" target="#b19">[15]</ref>.</p><p>Several online services have emerged over the last years supporting trip planning and ride-sharing, for example, UberPool <ref type="bibr">[42]</ref>, GoMore <ref type="bibr">[16]</ref>, and BlaBlaCar <ref type="bibr">[2]</ref>. These services provide new opportunities such as ride-matching through the use of platforms such as the web, smart phone applications, and social networking, thus making it more accessible and attractive for individual travelers.</p><p>HCI research has studied different aspects of ride-sharing, such as, technical solutions supporting efficient ride matching or passenger-transfer algorithms (e.g., <ref type="bibr">[9,</ref><ref type="bibr" target="#b13">10]</ref>), but also studies that investigate the value ride-sharing bring to different groups of people such as the elderly <ref type="bibr" target="#b33">[30,</ref><ref type="bibr" target="#b45">39]</ref> or low resource populations <ref type="bibr" target="#b18">[14]</ref>. Also, research into subjective meanings and use have exposed reasons why people do not use ride-sharing such as data privacy problems and lack of trust between drivers and passengers (e.g., <ref type="bibr" target="#b7">[7,</ref><ref type="bibr" target="#b14">11,</ref><ref type="bibr" target="#b26">23]</ref>). However, even though several services exist and HCI research has provided valuable insights into how and why people ride-share through them, we still have a limited understanding how ride-sharing services are used, with respect to, how passengers exactly plan rides, which rides they consider using, if efficiency is important, and if other services and devices support ride-share planning.</p><p>In this paper, we extend previous work with an empirical understanding of how passengers use existing ride-sharing services and technologies to support planning of their trips. We are studying the use of existing services (e.g., social platforms and dedicated ride-sharing services) and why and how they use them. We present our results from a mixed methods study, where we participated in 5 rides and interviewed a total of 19 passengers. One of our primary findings of this study was that participants did not only use ride-sharing services to plan their rides. Surprisingly, they planned their rides across a number of services (e.g., multiple ride-sharing and transportation services) which enabled them to handle some of the challenges mentioned in the literature such as ride coordination, trust, and privacy. We present our findings in six themes that describe passengers' considerations towards planning a ride and the use of services to support it. Furthermore, we discuss these findings under three headings of facilitating partial and detour ridesharing, passenger trust and privacy, and finally, facilitating interaction with multiple services. We discuss the implications of our research and how we can use them to inform and inspire HCI research and design of systems and services that support ride-sharing.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>RELATED WORK</head><p>In the following sub-sections, we will unfold literature focusing on ride-sharing with cars. First, we explain the overall concept of ride-sharing and secondly, we describe HCI literature with ride-sharing focusing on passenger planning of trips.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Ride-Sharing History and Characteristics</head><p>As part of the growing "sharing-economy", ride-sharing refer to a mode of transportation in which individual travelers share a vehicle for a trip and split travel costs such as gas, toll, and parking fees with each other <ref type="bibr" target="#b19">[15]</ref>. While several terms or concepts exist for this sharing of rides, such as carpooling, hitchhiking, or peer-to-peer shared rides, we will in this paper use ride-sharing as concept to describe this. We will also like to emphasize that ride-sharing services are different from taxi-like services, such as Uber or Lyft, that likewise offer to transport people for a fee <ref type="bibr">[9]</ref>. Despite this difference, we found that the word ride-sharing is often used for systems that have a more taxi-like nature.</p><p>Ride-sharing can be categorized in terms of two organizing strategies namely unorganized and organized ride-sharing <ref type="bibr" target="#b19">[15]</ref>. Unorganized ride-sharing is ad-hoc (e.g., hitchhiking) and does often not scale well <ref type="bibr" target="#b19">[15]</ref>. Organized ride-sharing, on the other hand, relies on agencies that provide ridematching opportunities for participants. While unorganized ride-sharing has existed for many years, the more organized forms of ride-sharing were introduced by the U.S. government with the purpose to conserve fuel during WWII. However, ride-sharing became quite popular in the 70's <ref type="bibr" target="#b31">[28]</ref>, where people organized rides through communities using slip-boxes and bill-boards to exchange offers or requests <ref type="bibr" target="#b19">[15,</ref><ref type="bibr" target="#b21">18]</ref>. However, for many years, ride-sharing was static in the sense that is, rides had to be arranged some time in advance beforehand, which wasn't very flexible or easy compared to private car usage <ref type="bibr" target="#b0">[1]</ref>.</p><p>Furuhata et al. <ref type="bibr" target="#b19">[15]</ref> identified four types of ride-sharing patterns; i) identical (driver and passenger origin and destination is the same), ii) inclusive (passenger origin and destination is on the drivers route), iii) partial (the offered ride is only part of the passengers trip), and iv) detour (the driver has to take a detour in order to pick up the passenger). However, as Furuhata et al. further argue that many existing ride-sharing services fail to take into account that these ridepatterns exist and thus, matching drivers as if they are identical.</p><p>A key characteristic of contemporary organized ride-sharing is the widespread utilization of Internet-based digital services and platforms that allows ad-hoc planning and booking of rides <ref type="bibr" target="#b0">[1,</ref><ref type="bibr" target="#b19">15]</ref>. With the latest breakthroughs in digital technology, we are seeing more and more services, that allows for a more dynamic way of organizing rides with very short notice or en-route, through common mobile technologies such as smart phones <ref type="bibr" target="#b0">[1]</ref>. Several commercial examples of ride-sharing applications or services exist. For example, the services UBERPool [42], LyftCarpool <ref type="bibr" target="#b29">[26]</ref> and BlaBlaCar <ref type="bibr">[2]</ref>.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Ride-Matching Optimization</head><p>Arguing that effective and efficient technology optimization is needed for people to adopt ride-sharing, a substantial amount of research addresses how to improve planning of ride-sharing from a technical perspective. Here we find several suggestions for algorithms that attempt to provide real-time sharing of rides. There have been suggestions for algorithms and systems where passengers can be matched with short notice or even en route (e.g., <ref type="bibr">[9,</ref><ref type="bibr" target="#b13">10,</ref><ref type="bibr" target="#b50">43,</ref><ref type="bibr" target="#b51">44,</ref><ref type="bibr" target="#b53">46]</ref>). For example, Zhang et al. <ref type="bibr" target="#b53">[46]</ref> present their service coRide, based on an algorithm which intends to reduce total mileage and gas consumption by matching passengers en-route and <ref type="bibr">Cici et al. [9]</ref> presents a scalable online ride-sharing system for short notice booking. Further, Coltlin et al. <ref type="bibr" target="#b13">[10]</ref> proposed a multi-hop heuristics that allows passengers plan transfers to match several rides in order to cover their full trip.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Ride-Sharing Experiences and Attitudes</head><p>Several papers argue that subjective meanings are important in mobility, e.g. Kaizer <ref type="bibr" target="#b23">[20]</ref>, or Steg <ref type="bibr" target="#b42">[38]</ref>, or Ziegler et al. <ref type="bibr" target="#b54">[47]</ref>. As a result, HCI research has also focused on challenges and opportunities when creating future ridesharing services. A number of HCI studies has investigated how various groups of people use ride-sharing services and the associated benefits and challenges <ref type="bibr" target="#b18">[14,</ref><ref type="bibr" target="#b30">27,</ref><ref type="bibr" target="#b32">29,</ref><ref type="bibr" target="#b33">30,</ref><ref type="bibr" target="#b36">33,</ref><ref type="bibr" target="#b45">39]</ref>.</p><p>Research shows that ride-sharing especially can benefit disadvantaged populations such as unemployed people, low resource people, or people from low socioeconomic status neighborhoods <ref type="bibr">[13]</ref>. As examples, Dillahunt et al. <ref type="bibr" target="#b18">[14]</ref> investigated how people with low income living in transportation scarce environments could benefit from using ride-sharing. They found that people with low income benefited from rich social interaction with drivers and other passengers. Likewise, Meurer et al. explored ride-sharing opportunities and obstacles for elderly and found that for this particular group of people, independence of mobility and decisional autonomy was considered important <ref type="bibr" target="#b32">[29]</ref>.</p><p>As technology has become an integrated part of ride-sharing and people use it to support arranging their rides, several studies have found challenges towards the adoption of it. For example, several studies indicate that trust in the driver and fellow passengers are important in the ride-sharing process but can be obscured through technology (e.g., <ref type="bibr" target="#b4">[4,</ref><ref type="bibr" target="#b7">7,</ref><ref type="bibr" target="#b14">11,</ref><ref type="bibr" target="#b35">32,</ref><ref type="bibr" target="#b47">41]</ref>). For example, Morse et al. found that users were reluctant towards carpooling involving unknown drivers or passengers. They suggest a CarLoop interface that matches passengers and drivers that lives close together <ref type="bibr" target="#b35">[32]</ref>. Other challenges towards ride-sharing that has been highlighted is sufficient users <ref type="bibr" target="#b27">[24,</ref><ref type="bibr" target="#b37">34]</ref>, monetary transaction concerns <ref type="bibr">[13,</ref><ref type="bibr" target="#b24">21]</ref>, privacy protection <ref type="bibr" target="#b26">[23,</ref><ref type="bibr" target="#b46">40]</ref>, and safety <ref type="bibr">[8,</ref><ref type="bibr" target="#b47">41]</ref>. As an example, Dillahunt and Malone [13] found that even though there are social and monetary benefits for the users, the use of technology to achieve it (e.g., using mobile phones to pay) make people reluctant due to the fear of misuse of their personal information.</p><p>Even though several challenges exist towards ride-sharing, some research points in the direction of the opportunity to overcome them by integrating systems, such as social platforms, together with ride-sharing (e.g., <ref type="bibr" target="#b4">[4,</ref><ref type="bibr" target="#b6">6,</ref><ref type="bibr" target="#b38">35]</ref>). As an example, Brereton et al. <ref type="bibr" target="#b6">[6]</ref> suggests that integrating social platforms could also have a positive impact on trust between drivers and passengers along with the ability to support more agile ride-sharing.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>STUDY</head><p>HCI studies on ride-sharing have revealed challenges that make passengers hesitate to ride with others such as trust and privacy. Despite these challenges, we know that ride-sharing services are being used by people to support planning of trips. However, we lack empirical studies that reveal how passengers are using these existing services to plan their trips and how it relates to the challenges and opportunities mentioned in the literature.</p><p>We have investigated the activity of planning trips through a mixed-methods study consisting of three phases. In the first phase, we participated in 5 rides and informally interviewed passengers about their experiences and use of ride-sharing services. In the second phase, we observed and conducted explorative in-situ interviews with 5 participants centered around planning a ride. In the last phase, we conducted semistructured interviews with 10 passengers where we asked participants specific questions informed about the prior two parts.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Phase 1: Ride Participation and Interviews</head><p>We initiated our study with participation in five rides to get a feeling of the planning and booking but also to get an understanding of the ride itself -both seen from driver and passenger perspectives. The lead researcher of this paper participated in these rides.</p><p>We booked the rides through two popular services used in Denmark; GoMore <ref type="bibr">[16]</ref> and Facebook. GoMore provides a fully integrated service <ref type="bibr" target="#b19">[15]</ref> that allows users to manage rides (e.g., searching, different preferences for rides, and ratings) along with handling payments that are paid up front before a ride begins. The service is available as a web page and as a smartphone app (iOS and Android). GoMore charges a percentage (12,5%) of the passenger price to facilitate the service. Facebook is a social network with millions of users and several FB groups deals with ride-sharing and actively advertises ride opportunities. Facebook as a ride-sharing service is community driven <ref type="bibr" target="#b19">[15]</ref> and organized through different groups where users post available rides. No ride management is offered and payment is negotiated individually, and usually handled after the ride is completed.</p><p>The lead researcher of this paper participated in all five rides where three were organized through the ride-sharing service GoMore and two rides through Facebook (see Table <ref type="table" target="#tab_0">1</ref>). We booked rides of one to three hours duration where the ride would have at least one other passenger (besides the lead researcher) and one driver. The driver and passengers were notified of the purpose of our participation beforehand for ethical reasons, but also practical reasons such as, avoiding that they would refuse participation. During the rides, the researcher engaged in conversation with the other passengers (and occasionally the driver) about ride-sharing, how they found this particular ride, how often they would ride-share etc. The rides and interviews were exploratory by nature and no specific interview guide was used. Rides were documented through researcher notes. In order to achieve an in-depth and direct understanding of the ride-sharing planning and booking process, we asked each of the passengers from the previous ride participation if it would be possible for us to observe and interview them the next time they booked a shared ride. Five of them, R1:F(32), R2:(M32), R3:(F30), R4:(F18), and R4:(F19), agreed to participate. Each of them contacted us by email a number of days before they were to book their next shared ride, and we arranged for us to come and observe this booking. These observations were held at the homes of the five participants, and the observations and interviews took between 30 minutes to 1 hour and were arranged as informal conversational technology tours <ref type="bibr" target="#b2">[3]</ref> for two reasons. Firstly, we wanted the participants to speak and reflect more openly on how they planned their trips and thereby also revealing any tacit knowledge. Secondly, we wanted to be able to get a richer and concrete understanding of which considerations they had when planning a shared ride and we observed the actual planning and booking and asked questions during this process. We audio recorded the conversations and interviews and also took notes for later analysis.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Phase 3: Semi-structured Interviews with Passengers</head><p>As a final approach to collect data and knowledge about the planning of ride-sharing, we recruited ten participants (six females) independent of the two prior parts for elaborating semi-structured interviews <ref type="bibr" target="#b25">[22]</ref>. We selected participants from the following inclusion criteria: 1) gender, 2) ride frequency, and 3) occupation. Participants were recruited by contacting them directly on Facebook groups on ride-sharing and from GoMore communities. An overview of the participants can be found in Table <ref type="table" target="#tab_2">2</ref>.</p><p>We constructed an interview-guide based on the knowledge that we gained from the first two interviews of this study.</p><p>Because we wanted to investigate ride-sharing in its real-life context, we based our interview guides on Yins <ref type="bibr" target="#b52">[45]</ref> question forms (how, what, where, why). As an example, we included questions about "what" services were used, and "how" and "where" they were used. Additionally, we added questions about "why" a specific service was used for a purpose. Six interviews were held at the participants' homes or at their workplaces, while the rest of them were conducted through Skype as a video call <ref type="bibr" target="#b34">[31]</ref>. The interviews lasted between 30 minutes and 1.5 hours.  </p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>ID</head></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Data Collection and Analysis</head><p>Data collection during the three phases was done using an approach where one phase would inform the next. In the first phase, the participating researcher took notes. The second and third phase was recorded on audio and documented through researcher notes. In the three phases, a total of fourteen hours of audio and several researcher notes was collected and further transcribed and coded separately for thematic analysis by two of the authors.</p><p>The data from the three phases were transcribed and processed in a similar manner. Firstly, we familiarized ourselves with the data by reading the transcriptions several times and identifying suggestions for codes (e.g., "driver negotiation"). Secondly, we added specific codes to interview quotes (e.g., the code "driver negotiation" for this quote "I usually ask the driver if he can drive me to or close to my destination"). Thirdly, we created themes using affinity diagramming <ref type="bibr">[5]</ref>, where quotes were put on a large whiteboard and organized into themes over several iterations. After analyzing the data from the first phase, an initial set of themes emerged which served as a point of reference for the second phase. The analysis of the second phase resulted in a set of six themes (similar to those in our findings section) describing how ride-sharing services are part of passenger's trip planning. Finally, the outcome of the third phase was a richer understanding, however, it didn't raise new themes.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>FINDINGS</head><p>In the following sections, we will describe passengers' considerations towards planning a ride. We present our findings in 6 themes: i) finding rides based on price, time, and place, ii) ride pick-up and drop-off negotiation, iii) using public transportation to reduce uncertainty, iv) Ad-hoc</p><p>Handling of the Unforeseen, v) using social media to plan conversation topics, and vi) driver reliability and privacy. All date presented have been anonymized. We distinguish between quotes belonging to the participation in rides and planning sessions (R) and semi-structured interviews (P). We further refer to them by index, for example, P1 means the semi-structured interview with passenger 1. Occasionally, we refer to the number of participants or observations, for example, (3/10) refers to three of ten interviews and (2/5) refers to two of five rides.</p><p>Finding Rides Based on Price, Time, and Place</p><p>All participants planned shared rides based on preferences on price, time, and place, and in fact in that particular order of importance. Most important during the planning of a future shared ride was the price. Some participants were university students and inexpensive rides were highly important to them as argued by one participant "I'm a student and I don't have a lot of money, so finding an inexpensive ride is important to me" (P3). Other participants perceived alternative public transportation (particularly train rides) as unnecessarily expensive, but also complicated in terms of economical cost "I never travel by train, I hate it. You can never figure out how much your trip will cost" (P4).</p><p>But planning a shared ride for our participants was a rather complicated process and involved using different and sometimes more digital online services. Several of them (8/10) liked the type of administration free service that Facebook provided. When booking through Facebook, they often found that prices would be cheaper, e.g. due to the fact that no administration fee would be charged as when booking a ride with GoMore. One participant expressed that even though the administration fee was negligible (12.5% of the total price), she would still use Facebook: "I usually choose a ride on Facebook because it's cheaper due to the extra fee on GoMore. I know it's not a lot cheaper but the more you save the more you earn" (P3). Others didn't express a clear preference, and they did not mind the administration fee on GoMore, as it provided them with extra benefits such as advanced search functionality that would make them find a specific ride faster: "Facebook might be cheaper at first glance. However, it might be easier to find a ride on GoMore, because the service saves me time and you know, time is money" (P6).</p><p>During our participation in the ride planning sessions, we observed an interesting degree of internalization of price knowledge. We found two approaches to judging fair prices. Firstly, we found an element of routine price judgment. A few participants (4/10) had an expertise from frequent ridesharing and had over time learned the prices of familiar rides and they would use this knowledge in the planning process and in the selection of a ride. Several times, we had to ask them to clarify, why they exactly chose one ride over the other. This was clearer with the regular users of the ridesharing services: "I know roughly, usually within US $1, how much the price of the ride will cost, I've learned that on GoMore, so if I see an overly expensive ride in either service I'm not going to take that" (P2). Secondly, we found an approach where participants would compare prices across services every time (6/10). For most, comparing price was interesting and finding the cheapest price was a game. However, in one case (P6) we found that difference in trips would impact price judgement. P6 compared prices every time she planned a ride because she would often take rides to different parts of the country: "I don't travel to a lot of different places and therefore it makes sense to me to compare prices on both ride-sharing and public transportation. For example, if I'm going to somewhere far away, it might be cheaper to take ride-sharing, but if I'm just going to the airport, with available public transportation it's sometimes cheaper to take the bus. However, you never know, because it'll also depend on the time of the day and the number of people traveling" (P6).</p><p>Price was not the only factor when planning a shared ride and choosing a particular ride. Unsurprisingly, it was quite clear that finding rides that fitted with their point of origin and their destination was crucial: "Planning a ride is always connected with some effort because I have to compare each individual ride to my actual start and end point" (P10). As a consequence, we found that price was being perceived in different ways. For example, while everyone could talk about price as money, some of our participants also mentioned that the time and place for a ride also would have an impact on the total cost of the trip, especially when considering further transportation. Most participants (7/10) said that leveraging time and place against price was an important consideration to them for the total cost of their trip: "Time and place is definitely important to me, if I can see that I can get closer to my destination on a ride that's a little more expensive, I'll choose it, that's a no-brainer, then I don't have to use public transportation for getting there" (P2).</p><p>Occasionally our participants were unable to find a suitable candidate for a shared trip, e.g. because it was too expensive or no trips for a particular destination, and to compensate for missing rides on one service, we found that participants would combine more services. But perhaps more significant, participants did not see the individual online services as distinct, because rides would occasionally be shared across several services. Interestingly, we noticed that one of our participants as a deliberate strategy, would combine the services and use the search functionality on GoMore to find a ride and then book it through Facebook avoiding the fee: "I don't see it as two services. I combine them. I check for a ride on GoMore because it has better search functionality. Then I go book it on Facebook if it is available there also" (P7). However, we found that occasionally participants would be forced to compromise on the price, time or place of the ride if none were available: "Sometimes a cheap ride just isn't available on a particular service, that sucks, then I have the choice of waiting for the right one to come up or to choose a more expensive, I usually end up taking the latter, but I don't like it" (P4).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Ride Pick-Up and Drop-Off Negotiation</head><p>Surprisingly, some participants (7/10) was using the ridesharing services to negotiate with drivers about taking detours. As the ride-sharing services would sometimes lack available rides in certain areas (e.g., rural areas or suburbs). We found two strategies for coping with this which involved drivers to take detours; passenger ride requests and ridenegotiations.</p><p>As the first approach, we found that in contrast to drivers posting available rides online, for our participants, a strategy was to take the initiative and use the community features of Facebook to request rides. One participant explained: "If no rides can be found, you can also put in a request for a ride on Facebook, like 'Hi, I'm seeking a ride for Aarhus on Friday, can anyone pick me up at a specific place'. Sometimes it works but you cannot count on it." (P4). This strategy would sometimes have a positive effect and drivers would contact them with available rides.</p><p>A second approach was to negotiate pick-up and drop-off locations with drivers when a ride was booked. Even though we did not see it during the observations, interestingly, in the interviews, we found that as another strategy to get around the lack of rides, some participants would actively try to negotiate with the driver to take a detour after booking a ride: "Usually you cannot get to the suburbs of a city or to rural areas unless you're extremely lucky. However, sometimes you can negotiate it with the driver" (P8) and "I usually ask the driver if he can drive me to or close to my destination. I'm paying for it, why shouldn't I try to make it a little easier for myself" (P1).</p><p>To support negotiating with the driver, participants (6/10) explained that they preferred to use Facebook rather than GoMore for negotiating detours. To them, Facebook was perceived as an easier service to convince the driver to drop off or pick up participants at certain locations due to its messaging system. One participant had experiences trying to negotiate through GoMore:</p><p>"Sometimes I use the Facebook messaging system to negotiate with drivers about where I can get dropped off, I think it is way easier and faster than GoMore. I have tried writing to a driver on GoMore once about another drop-off point, but I never received an answer. When I got in the car with him, he told me that he didn't want to drop me off there.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>That was a complete waste of time. (P10)</head><p>Interestingly, some of the negotiating participants (3/10) avoided GoMore for negotiating the ride even though the service implements a messaging system. We found that it was perceived as being less attractive because it was perceived as a stricter or more official service: "I don't negotiate with the driver through GoMore, it is not because you cannot do it, it has a messenger system, but I don't know if they are recording the conversation or anything, then I prefer Facebook, just writing them or sending an SMS" (P4).</p><p>It wasn't all participants who wanted to negotiate detours (3/10). Even though some of the participants would use Facebook for negotiating about drop off-points we also found that three of our interviewed participants perceived negotiating as a violation against traditional ride-sharing practices: "I don't feel comfortable asking the driver to drive me somewhere, it's his car and after all he is doing me a of providing me a ride" (P9). However, all of the interviewed participants had experienced the driver asking them during the ride if they wanted to be dropped off somewhere specific which was perceived as alright, instance: "I have been asked several times about if I wanted to be driven home. The drivers are usually really sweet, but depends on the situation and the number of passengers. It is really nice if it is night time to be dropped off somewhere safe rather than walking or taking the bus" (P2). We also experienced being asked if we wanted to get dropped off by of the drivers in the rides that we participated in.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Using Public Transportation to Reduce Uncertainty</head><p>To most participants a ride was only a partial amount of their trip and was sometimes connected with some uncertainty. During the ride participations, we asked where they were heading. In all participations, we were heading to the same town, however with different destinations. We asked how they would get there when they were dropped off. Some were picked up by relatives, some walked, but the majority would use public transportation to continue their This also seemed to agree with our following interviews almost all participants (9/10) agreed that unless they could get a detour, they would normally use public transportation as a mean to cover the last distance of their trip. We noticed that planning the full trip (both ride and additional transportation) was a task, that required taking into account different services, ride options and preferences:</p><p>"Planning a ride is always connected with some effort, because I have to compare my preferences to the different ride opportunities" (P10)</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>"It can be difficult to plan a ride. So yeah, you have to compare the different transportation services. You have to leverage the different rides to your own preferences and if the ride doesn't cover the full ride you also have to find a bus or another ride without waiting ages" (R4)</head><p>Some participants (6/10) expressed that planning a full trip was connected with some uncertainty because of the availability of rides. However, this wasn't concerned with one-way rides, but rather return rides that couldn't be booked because there weren't any available: "Normally I take a ride with the same driver (to work), then I know that I can return home. However, sometimes when going on a longer trip I have to wait with booking a return ride rides are usually not available before the last minute" (P3). While some would wait and book at the last minute (2/10), others preferred to have a plan (4/10), handled this by using public transportation services to complement the ride-sharing when booking the complete trip instead of only one way:</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>"Sometimes, while I'm booking a GoMore ride, I book a bus home right away through the public transportation portal, because then I don't have to go through the hassle of finding last-minute ride later"</head><p>In contrast to longer trips, we found shorter common trips such as commuting was easier to plan. One participant used for commuting every week (P3), she said that she used the same driver and that was easy to plan because work is usually within a fixed time frame (e.g., 8 hours a day). However, in some cases we found some shorter trips were still a problem, especially when the time frame was unknown. We found that participants would be reluctant towards planning a ride in the last minute because they were uncertain if rides were available: "Normally on shorter trips book a ride home right away, but it depends on the purpose of the trip. For example, if I'm going to a concert that I don't know when will end, it's difficult to plan a ride Then I'll just take a bus with frequent departures.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>I don't want to book a ride in the last minute because you never know if something is available your area" (P7).</head><p>To solve this uncertainty one participant argued that sharing services should have a proactive recommendation "Last week we visited this small theatre just outside of town.</p><p>ended</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>up taking a bus back home because we want to go through the overhead of booking a ride. It annoys me I could see a lot of cars outside the theatre and I thought to myself, my smartphone can remind me to do things and know where I am and what I am up to through Googles services. Why can't GoMore then match me up with a driver automatically. I mean, I can't be that hard to figure out that I'm about to go home" (P9).</head></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Ad-hoc Handling of the Unforeseen</head><p>All participants (10/10) preferred to plan a trip beforehand, however, we found that some planning was better handled ad-hoc as ride-sharing sometimes had unforeseen elements. Most planning could and was preferred to be done beforehand (e.g., booking a ride, choosing public transportation): "I'm the kind of person that needs to exactly how I will get there. It just makes me feel more (P5). However, we also found that ad-hoc arrangements had to be considered, especially because ridesharing isn't scheduled like with public transportation (e.g., no scheduled arrival This meant that if participants needed to take a bus when their ride was over, finding an exact departure time was done ad-hoc (i.e., finding departure by using their mobile phones:</p><p>"I always plan my trip from home, and I know which bus to take when I arrive. However, I can't decide on a specific departure because you never know how long the ride will be. For example, you can be stuck in a traffic jam or the driver needs to go to a gas station. Therefore, I always plan a time-buffer and check public transportation services as the last thing before I get out of the car" (P8)</p><p>We found that participants had different devices to support them using the ride-sharing or public transportation services. We observed that passengers would often bring their mobile phone the rides and we could see that some of them browsed available rides for their way home, while others would use their computer for booking rides, likewise some would use different apps for checking available rides or public transportation. Using different devices for planning a ride was more a matter of context to users. For example, to an overview and comparing different ride options participants would often use their laptop: "I booked on the computer. I'm very conscious about it because I think it gives a better overview on a browser with more tabs open when you need to compare public transportation to GoMore and perhaps also Google Maps" (R3). On the other hand, smartphones were often used in an ad-hoc manner for last minute bookings outside or when in need of a ride: "Often, I end up using the mobile phone (the GoMore application) to know how to get home while I'm on the way to my destination or for last minute bookings when public transportation isn't an option. The app is more convenient for me, it doesn't give me the same overview and I cannot compare prices as easily, but normally I am just interested in finding a further ride quickly" (P2)</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Using Social Media to Plan Conversation Topics</head><p>All participants liked to engage in conversation during the and some (6/10) tried to support this by planning conversation topics beforehand. the rides we participated in, we found it interesting that most of the people in the were engaged in conversation and it seemed like they had spent time prior to the ride finding new topics to talk about. We followed up on these observations in the following interviews and interviewed participants agreed that having a conversation in the car was more pleasant than silence: "I think conversation is important when you rideshare, it makes the whole situation of you getting into a stranger's car a little more pleasant" (P4). While GoMore gave passengers the opportunity to choose a silent ride, people not talking or working was perceived as unnatural and more appropriate on a bus or train where there was a more natural atmosphere: "I have experienced that people get into the car and put on headphones which effectively excludes them from all conversation. If it was me, I would just take public transportation. That is just not natural to me. You wouldn't get into your friends' car and do that. You have the option to select it on GoMore and that's fine, then I can use it to avoid (P6).</p><p>While participants agreed that conversation in the car felt we also found that conversations could become shallow: "It's mostly questions such as 'where are you heading?' or 'what do you do for a living?', you know, the same questions, sometimes they be a little shallow" (R4).</p><p>To support conversation, some of our fellow passengers admitted that they sometimes used the available on Facebook as conversation starters. This was also the case for the participants that we interviewed: "I've experienced several times, that people use social platforms to find conversation starters before they participate in a ride, for instance, this one time during a ride, a girl that had prepared questions from looking me up on Facebook. She asked me about my job as a furniture designer I had told her about it, which was made the conversation more interesting" (P6)</p><p>Complementing ride-sharing services could benefit both passengers and drivers. In some cases, drivers had a hard time knowing which passengers to pick up and vice versa because pick-ups would often happen in crowded places. We found the solution to be quite simple. would cluster before a pick-up and sometimes drivers would have some prior knowledge about the passengers how they</p><p>In our ride participation, we experienced that fellow passengers would approach us before a ride and know our identity. We found that this information was obtained on Facebook as an addition to what GoMore could provide them "I sometimes experience that other passengers approach me while waiting on a lift. They have checked out my profile picture on Facebook even though I have booked through GoMore. That sort of nice because I feel that by clustering we are doing the driver a favor" In a similar manner, some drivers would check out how the passengers so they would know who to pick up: "Sometimes the have checked out our pictures on because the one on GoMore isn't really useful. It's practical, then he have to drive around public places looking for (P6). We also found this to be true through our observations even though we didn't interview any drivers. We noted that in two of the rides that we participated in the drivers had information such as how we looked and our occupancy.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Reliability and Privacy</head><p>We found that most (8/10) of the participants had trust issues towards drivers which were materialized as concerns about reliability and privacy. In the interviews, the participants initially expressed that they had no challenges towards both drivers and passengers: "I have no problem with riding with strangers, I assume they are here for the same reason as I am" (P2). However, our observations indicated that they would use some time looking at driver profiles and ratings. When confronted with these observations our participants were able to articulate the reason for them interestingly, it turned out that our participants had learned to use the ride-sharing services as a mean to help them make this choice: "I actually end up using a lot of time looking at profiles matching the different options. creates a feeling of trust. Things like number of passengers in the car and ratings of the driver is important to me" One thing we found very important to our participants was that they wanted to have a prior knowledge about who the driver and the car before choosing a This was to ensure that the driver could be trusted (e.g., if the driver was actually the person on the profile pictures). Several of them mentioned that this was especially important to them because they had prior negative experiences. We that Facebook and GoMore was used for knowledge about the driver. We found that GoMore to be the preferred service for choosing ride respect to the driver and car. GoMore would be used to get information about driver ratings, car type and the number of additional passengers, which was important to our participants especially if they needed to book a long ride. To one participant, booking a ride in a large car was especially important, because she had experienced several times that the car would be filled with people: "I need to know the car type and the number of other passengers. I've been in a small, filled car several times, that's fine if you are going on trips, however, I frequently go on longer rides and a fully car is just not comfortable enough and there's no room for luggage" (P5).</p><p>Even though ride-sharing was considered as a mean for social interaction to many of our participants we found that were certain data or information that was perceived private. Somewhat more interested in keeping the arrangements of fixed destination because they wanted to keep some privacy. However, it seemed that this was mainly matter of judging the situation and the driver's intentions: "Some time ago I was riding with this male driver. After he dropped off the other passengers he started asking me all of these creepy questions. When he asked me where I wanted to be dropped off I just found a place. I didn't want him to know where I lived. He even texted me afterwards, but it is easy to decline someone over the phone, it's more real if they know where you live" (P7).</p><p>To our participants, there was a clear distinction between driver information on Facebook and GoMore. We found that verifying the driver was real could be a challenge on Facebook: "You only know the driver from his profile picture(s). You don't know which car he drives in. You don't have the extra security that the GoMore service offers you" (P9). GoMore, on the other hand, had detailed information such as driver reviews, car, and passenger information. Interestingly we found that some participants (7/10) were using multiple services together to complement each other. For example, sometimes rides offered on Gomore were shared on Facebook. One participant said that when she found a ride on Facebook, checking it would always involve GoMore: "I very much like the fact that you can see information about people on GoMore., You can find their profile. It gives me a sense of safety. I can see that they are 'real' people and I can kind of see who they are by looking their Facebook pictures" (P6).</p><p>We found that options or statistics such as driver reviews, type of car, number of passengers was considered when choosing a ride. For instance, if the driver looked suspicious, a ride that had more than one passenger would make feel safer: "This is going to sound discriminating, but besides looking at ratings I usually look at a person's profile picture. If there are no other passengers and if the guy looks creepy, he's out!" (P1). To some of the participants (7/10) the choice of a reliable driver was important. We found that they had actually tried to book a ride through Facebook and then have the driver cancel the last minute. It turned out that Facebook was perceived less reliable when choosing a ride because of the lack of information about driver statistics information about the car. Especially the lack of ratings Facebook was experienced as a problem: "You don't have the same security on Facebook that you have on GoMore, because they don't offer any ratings. in the end, you don't know if the driver will actually show up"</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>DISCUSSION</head><p>Our study indicated many of the same challenges found in the literature (e.g., price <ref type="bibr" target="#b18">[14]</ref> and trust <ref type="bibr" target="#b35">[32]</ref>). However, see any particular signs of reluctance for engaging in ride-sharing. A significant finding towards this, was the fact that participants wasn't confined to single services or devices, but used many of them interchangeable or to complement each other, which indicate a interesting synergy. We believe that the findings from our study constitute a to HCI. However, in extension, we will in the following sub-sections outline considerations that might inform and inspire further HCI research on ride-sharing.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Facilitating Detour and Partial Rides</head><p>Our findings indicated that ride-sharing services had support for planning rides. However, our observations and interviews also indicated that a ride often cannot be seen in isolation.</p><p>all participants, identical ride-sharing was the most uncommon type of ride-sharing. Instead we found two other types of ride-sharing; partial (the passenger must arrange additional transportation before or/and after the ride) and detour (the driver has to take a detour to pick up the passenger). As a consequence, we found an additional complexity where the participants used resources to support their full ride. For example, some used resources on finding additional transportation or by negotiating with This is also backed up by Furuhata et al. who argues that most services today only support identical ridesharing.</p><p>Previous work on ride-sharing has had a strong focus on the creation of new and more efficient systems. An obvious question is which type of ride-sharing service is better in supporting the users. We argue that both services that we studied have their values. Facebook groups were valuable for informal ride-sharing with no fees and for negotiating with drivers. In contrast, GoMore more advanced search features supports quickly finding rides that matches passenger preferences such as driver and car type, which was perceived as contributing to a greater feeling of trust. In the case of both services, we also found drawbacks and reasons to not using them. However, even though there are arguments for and against each system, the real value to our participants could be found in the combination of them to support the activity of planning. It seems like supporting the users in different types of ride-sharing can be a valuable addition to most services and further, to get more people to ride-share.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Supporting Passenger Trust and Privacy</head><p>Research on technology use in ride-sharing have found that the passenger's trust becomes an issue when they don't know the driver or passengers beforehand (e.g., <ref type="bibr" target="#b18">[14,</ref><ref type="bibr" target="#b46">40]</ref>). We also found that our participants were reluctant to give too much information about themselves while participating in rides, but on the other hand, they liked to have some prior knowledge about the other passengers and drivers. In a study by Tahmasseby et al. <ref type="bibr" target="#b46">[40]</ref> where they implemented and studied a carpooling service, they found reluctance to participate in ride-sharing from drivers that didn't want to share too much information about themselves to find Interestingly, we found the opposite thing, did not want to share information about themselves with drivers which compared to our findings seems like a paradox. However, research have suggested that the use of social media could overcome this barrier and ensure trust amongst ride-sharers <ref type="bibr" target="#b4">[4]</ref>. We partially agree as we found that social media alone wasn't enough to ensure trust (e.g., is the driver profile fake). We therefore suggest that social media could be used to complement existing ridesharing services with driver verification.</p><p>As we found, our participants often had concerns about the reliability of the ride-sharing services, such as availability of rides and if drivers would show up. Reliability of ridesharing and ensuring that rides are available is also indicated an issue in a number of papers (e.g., <ref type="bibr" target="#b0">[1,</ref><ref type="bibr" target="#b19">15]</ref>). However, even though at first glance, this might seem as a challenge related to the users of the services (e.g., that there are not enough drivers), we found that our participants solved these issues by looking at the availability of rides across services (not only ride-sharing but also public transportation). Further, our findings indicated that it wasn't just providers of rides that could announce rides, but passengers could actively request rides or negotiate with drivers. Considering this, is seems that reliable ride-sharing could be considered in a larger context where planning a ride relies on passenger initiatives along with the use of several different types of services, complementing each other.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Interaction with Multiple Services</head><p>Studies have indicated a positive impact of combining multiple services in ride-sharing (e.g. social platforms <ref type="bibr" target="#b4">[4,</ref><ref type="bibr" target="#b6">6]</ref>). Our study similarly indicated that social platforms such as Facebook can complement dedicated ride-sharing services and vice versa. However, our study also revealed that booking a ride was seen by participants as rather complex because it involved interaction with multiple different services and different contexts. For example, some used several services (e.g. social platforms, and public transportation) to complement each other for cost matching and others moved between the service and device that fitted a particular context best, such as the laptop running home for better overview and a smart phone while on the road. We believe that multi-device interaction is an important opportunity for the propagation of ride-sharing services and should be approached with the focus on users and contexts rather than specific applications, which is also discussed by Dearman and Pierce Moreover, we believe that such interactions can be approached from a designers' perspective by, for example, exploring different possibilities for interaction with an outset in the literature multi-device interaction literature. Multi-device interaction in HCI is an area that has seen a lot of interest in recent years. For example, Lucero et al.</p><p>show how multiple mobile phones can be used in collaboration, and Nielsen et al. <ref type="bibr" target="#b36">[33]</ref> shows how the screens of smart phones and tablets can be stitched together to make up a larger screen. We think that such examples can be used to explore new interaction possibilities. We have also seen suggestions for frameworks that explains different types of interaction. Such research can provide an opportunity to systematically explore how different types of interaction can support ride-sharing (e.g. <ref type="bibr" target="#b22">[19,</ref><ref type="bibr" target="#b39">36]</ref>). For example, the "4C framework" <ref type="bibr" target="#b41">[37]</ref> that illustrates 4 types of interaction with multiple devices. Using the 4C framework to explain our work, we have already seen examples of continuous interaction (where users move from one system or device to another). However, more importantly, we can also use the framework in future research to explain and explore new opportunities such as complementary or collaborative interaction. In a ride-sharing context, it becomes especially relevant when we do not only ride-sharing services but also the integration with public transportation services distributed over several services, devices, and contexts.</p><p>In this paper, we presented an empirical study of 19 of ride-sharing and their use of ride-sharing services to plan their trips. Through analysis of a mixedmethods study with 5 ride participations, 5 planning observations and 10 semi-structured interviews we identified six themes that describe how ride-sharing passengers are planning their trips and which preferences they have for a specific ride. Our findings describe how participants didn't only use individual services to plan their rides. Surprisingly, they planned their rides across a number of ride-sharing services which enabled them to handle some of challenges had in planning their rides such as finding a ride with the right price and with a driver. To inspire further research in HCI with ride-sharing, we have discussed findings under three headings of facilitating detour and partial rides, supporting passenger trust and privacy, and interaction with multiple services. We have discussed the implications of our findings and suggested that HCI research consider multi-device interaction as an important addition to ride-sharing services.</p></div><figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_0"><head>Table 1 : Ride participation overview Phase 2: Ride Planning Sessions</head><label>1</label><figDesc></figDesc><table><row><cell>ID</cell><cell>Ride duration</cell><cell>Service</cell><cell>Passengers Gender (age)</cell><cell>Driver Gender (age)</cell></row><row><cell>R1</cell><cell>1h</cell><cell>GoMore</cell><cell>F (32)</cell><cell>M (39)</cell></row><row><cell>R2</cell><cell>2h30m</cell><cell>GoMore</cell><cell>F (28), M (32)</cell><cell>M (28)</cell></row><row><cell>R3</cell><cell>1h30m</cell><cell>Facebook</cell><cell>F (30), M (29)</cell><cell>M (35)</cell></row><row><cell>R4</cell><cell>1h</cell><cell cols="2">Facebook F (18), F (19), M (27)</cell><cell>M (42)</cell></row><row><cell>R5</cell><cell>3h</cell><cell>GoMore</cell><cell>F (24)</cell><cell>F (31)</cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_2"><head>Table 2 : Overview of interview participants</head><label>2</label><figDesc></figDesc><table /></figure>
+		</body>
+		<back>
+			<div type="annex">
+<div xmlns="http://www.tei-c.org/ns/1.0"><p>While we believe that our study provides insights into how passengers use ride-sharing platforms, we also acknowledge that driver experiences would be valuable to provide different perspectives on topics such as multi-device interaction. We therefore suggest further work investigating dynamics, for example, how drivers and passengers engage in collaborative ride-sharing.</p></div>			</div>
+			<div type="references">
+
+				<listBibl>
+
+<biblStruct xml:id="b0">
+	<analytic>
+		<title level="a" type="main">Optimization for dynamic ride-sharing: A review</title>
+		<author>
+			<persName><forename type="first">Niels</forename><surname>Agatz</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Alan</forename><surname>Erera</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Martin</forename><surname>Savelsbergh</surname></persName>
+		</author>
+		<idno type="DOI">10.1016/j.ejor.2012.05.028</idno>
+		<ptr target="https://doi.org/10.1016/j.ejor.2012.05.028" />
+	</analytic>
+	<monogr>
+		<title level="j">European Journal of Operational Research</title>
+		<imprint>
+			<biblScope unit="volume">223</biblScope>
+			<biblScope unit="page" from="295" to="303" />
+			<date type="published" when="2012">2012</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b1">
+	<monogr>
+		<title level="m" type="main">BlaBlaCar Trusted carpooling</title>
+		<author>
+			<persName><surname>Blablacar</surname></persName>
+		</author>
+		<ptr target="https://www.blablacar.com/" />
+		<imprint>
+			<date type="published" when="2017-09-12">September 12. 2017</date>
+		</imprint>
+	</monogr>
+	<note>Retrieved</note>
+</biblStruct>
+
+<biblStruct xml:id="b2">
+	<monogr>
+		<author>
+			<persName><forename type="first">Mark</forename><surname>Blythe</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Andrew</forename><surname>Monk</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jisoo</forename><surname>Park</surname></persName>
+		</author>
+		<title level="m">Proceedings of CHI &apos;02</title>
+				<meeting>CHI &apos;02</meeting>
+		<imprint>
+			<date type="published" when="2002">2002</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">Technology biogarphies</note>
+</biblStruct>
+
+<biblStruct xml:id="b3">
+	<monogr>
+		<idno type="DOI">10.1145/506443.506532</idno>
+		<ptr target="https://doi.org/10.1145/506443.506532" />
+		<title level="m">Extended Abstracts on Human Factors in Computing Systems (CHI EA &apos;02)</title>
+				<imprint>
+			<biblScope unit="page">658</biblScope>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b4">
+	<analytic>
+		<title level="a" type="main">Facebook ride connect</title>
+		<author>
+			<persName><forename type="first">John</forename><forename type="middle">M</forename><surname>Booher</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Balakrishna</forename><surname>Chennupati</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Nina</forename><forename type="middle">S</forename><surname>Onesti</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">David</forename><forename type="middle">P</forename><surname>Royer</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/1240866.1240947</idno>
+		<ptr target="https://doi.org/10.1145/1240866.1240947" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of CHI &apos;07 Extended Abstracts on Human Factors in Computing Systems (CHI EA &apos;07)</title>
+				<meeting>CHI &apos;07 Extended Abstracts on Human Factors in Computing Systems (CHI EA &apos;07)</meeting>
+		<imprint>
+			<date type="published" when="2007">2007</date>
+			<biblScope unit="page">2043</biblScope>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b5">
+	<monogr>
+		<title level="m" type="main">What&apos;s mine is yours: How Collaborative Consumption is changing the we live</title>
+		<author>
+			<persName><forename type="first">Rachel</forename><surname>Botsman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Roo</forename><surname>Rogers</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2010">2010</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b6">
+	<analytic>
+		<title level="a" type="main">Designing participation in agile ridesharing with mobile social software</title>
+		<author>
+			<persName><forename type="first">Margot</forename><surname>Brereton</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Paul</forename><surname>Roe</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Marcus</forename><surname>Foth</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jonathan</forename><forename type="middle">M</forename><surname>Bunker</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Laurie</forename><surname>Buys</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/1738826.1738868</idno>
+		<ptr target="https://doi.org/10.1145/1738826.1738868" />
+	</analytic>
+	<monogr>
+		<title level="m">proceedings of the 21st Annual Conference of the Computer-Human Interaction Special Group on Design: Open 24/7 &apos;09)</title>
+				<meeting>the 21st Annual Conference of the Computer-Human Interaction Special Group on Design: Open 24/7 &apos;09)</meeting>
+		<imprint>
+			<date type="published" when="2009">2009</date>
+			<biblScope unit="page">257</biblScope>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b7">
+	<analytic>
+		<title level="a" type="main">Leveraging Social Networks to Embed Trust in Rideshare Programs</title>
+		<author>
+			<persName><forename type="first">Andrea</forename><forename type="middle">L</forename><surname>Vineeta Chaube</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Manuel</forename><forename type="middle">A</forename><surname>Kavanaugh</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 43rd Hawaii International Conference on System (HICSS &apos;10</title>
+				<meeting>the 43rd Hawaii International Conference on System (HICSS &apos;10</meeting>
+		<imprint>
+			<date type="published" when="2010">2010</date>
+			<biblScope unit="page" from="1" to="8" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b8">
+	<monogr>
+		<title/>
+		<idno type="DOI">10.1109/HICSS.2010.255</idno>
+		<ptr target="https://doi.org/10.1109/HICSS.2010.255" />
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b9">
+	<monogr>
+		<title/>
+		<author>
+			<persName><forename type="first">Blerim</forename><surname>Cici</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Athina</forename><surname>Markopoulou</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Enrique</forename><surname>Frias</surname></persName>
+		</author>
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b10">
+	<analytic>
+		<title level="a" type="main">Assessing the of ride-sharing using mobile and social data</title>
+		<author>
+			<persName><forename type="first">Nikolaos</forename><surname>Martinez</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Laoutaris</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2014 ACM International Joint Conference on Pervasive and Ubiquitous Computing (UbiComp &apos;14 Adjunct</title>
+				<meeting>the 2014 ACM International Joint Conference on Pervasive and Ubiquitous Computing (UbiComp &apos;14 Adjunct</meeting>
+		<imprint>
+			<date type="published" when="2014">2014</date>
+			<biblScope unit="page" from="201" to="211" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b11">
+	<monogr>
+		<title/>
+		<idno type="DOI">10.1145/2632048.2632055</idno>
+		<ptr target="https://doi.org/10.1145/2632048.2632055" />
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b12">
+	<analytic>
+		<title level="a" type="main">SORS</title>
+		<author>
+			<persName><forename type="first">Blerim</forename><surname>Cici</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Athina</forename><surname>Markopoulou</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Nikolaos</forename><surname>Laoutaris</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3003965.3003971</idno>
+		<ptr target="https://doi.org/10.1145/3003965.3003971" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 9th ACM SIGSPATIAL International Workshop on Computational Transportation Science &apos;16)</title>
+				<meeting>the 9th ACM SIGSPATIAL International Workshop on Computational Transportation Science &apos;16)</meeting>
+		<imprint>
+			<date type="published" when="2016">2016</date>
+			<biblScope unit="page" from="13" to="18" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b13">
+	<analytic>
+		<title level="a" type="main">Towards Ridesharing with Passenger Transfers</title>
+		<author>
+			<persName><forename type="first">Brian</forename><surname>Coltin</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2013 international conference on Autonomous agents and multi-agent systems (AAMAS &apos;13)</title>
+				<meeting>the 2013 international conference on Autonomous agents and multi-agent systems (AAMAS &apos;13)</meeting>
+		<imprint>
+			<date type="published" when="2013">2013</date>
+			<biblScope unit="page" from="1299" to="1300" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b14">
+	<analytic>
+		<title level="a" type="main">Chronicles of Lived Experiences for studying the process of trust in carpooling</title>
+		<author>
+			<persName><forename type="first">Lisa</forename><surname>Créno</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Béatrice</forename><surname>Cahour</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the</title>
+				<meeting>the</meeting>
+		<imprint>
+			<date type="published" when="2014">2014. 2014</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b15">
+	<monogr>
+		<idno type="DOI">10.1145/2637248.2637255</idno>
+		<ptr target="https://doi.org/10.1145/2637248.2637255" />
+		<title level="m">European Conference on Cognitive Ergonomics</title>
+				<imprint>
+			<biblScope unit="page" from="1" to="8" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b16">
+	<analytic>
+		<title level="a" type="main">It&apos;s on my computer</title>
+		<author>
+			<persName><forename type="first">David</forename><surname>Dearman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jeffery</forename><forename type="middle">S</forename><surname>Pierce</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/1357054.1357177</idno>
+		<ptr target="https://doi.org/10.1145/1357054.1357177" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceeding of the SIGCHI Conference on Human Factors in Computing Systems (CHI &apos;08)</title>
+				<meeting>eeding of the SIGCHI Conference on Human Factors in Computing Systems (CHI &apos;08)</meeting>
+		<imprint>
+			<date type="published" when="2008">2008</date>
+			<biblScope unit="page">767</biblScope>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b17">
+	<analytic>
+		<title level="a" type="main">The Promise of the Sharing Economy among Disadvantaged Communities</title>
+		<author>
+			<persName><forename type="first">Tawanna</forename><forename type="middle">R</forename><surname>Dillahunt</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Amelia</forename><forename type="middle">R</forename><surname>Malone</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2702123.2702189</idno>
+		<ptr target="https://doi.org/10.1145/2702123.2702189" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 33rd Annual ACM Conference on Human Factors in Computing Systems (CHI &apos;15)</title>
+				<meeting>the 33rd Annual ACM Conference on Human Factors in Computing Systems (CHI &apos;15)</meeting>
+		<imprint>
+			<date type="published" when="2015">2015</date>
+			<biblScope unit="page" from="2285" to="2294" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b18">
+	<analytic>
+		<title level="a" type="main">Uncovering the Values and Constraints of Real-time Ridesharing for Lowresource Populations</title>
+		<author>
+			<persName><forename type="first">Vaishnav</forename><surname>Tawanna R Dillahunt</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Linfeng</forename><surname>Kameswaran</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Tanya</forename><surname>Li</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Rosenblat</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3025453.3025470</idno>
+		<ptr target="https://doi.org/10.1145/3025453.3025470" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2017 CHI Conference on Human Factors in Computing Systems (CHI &apos;17)</title>
+				<meeting>the 2017 CHI Conference on Human Factors in Computing Systems (CHI &apos;17)</meeting>
+		<imprint>
+			<date type="published" when="2017">2017</date>
+			<biblScope unit="page" from="2757" to="2769" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b19">
+	<analytic>
+		<title level="a" type="main">Ridesharing: The state-of-the-art and future directions</title>
+		<author>
+			<persName><forename type="first">Masabumi</forename><surname>Furuhata</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Maged</forename><surname>Dessouky</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Fernando</forename><surname>Ordóñez</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Marc</forename><forename type="middle">Etienne</forename><surname>Brunet</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Xiaoqing</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sven</forename><surname>Koenig</surname></persName>
+		</author>
+		<idno type="DOI">10.1016/j.trb.2013.08.012</idno>
+		<ptr target="https://doi.org/10.1016/j.trb.2013.08.012" />
+	</analytic>
+	<monogr>
+		<title level="j">Transportation Research Part B: Methodological</title>
+		<imprint>
+			<biblScope unit="volume">57</biblScope>
+			<biblScope unit="page" from="28" to="46" />
+			<date type="published" when="2013">2013</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b20">
+	<monogr>
+		<title level="m" type="main">The mesh -why the future of business is sharing</title>
+		<idno type="DOI">10.1007/s13398-014-0173-7.2</idno>
+		<ptr target="https://doi.org/10.1007/s13398-014-0173-7.2" />
+		<imprint>
+			<date type="published" when="2014">September 17. 2017. 2014</date>
+		</imprint>
+	</monogr>
+	<note>from Lisa Gransky</note>
+</biblStruct>
+
+<biblStruct xml:id="b21">
+	<monogr>
+		<title level="m" type="main">Ridesharing: New Opportunities and Service Concepts for Sustainable Mobility</title>
+		<author>
+			<persName><forename type="first">Volker</forename><surname>Handke</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Helga</forename><surname>Jonuschat</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2012">2012</date>
+			<publisher>Springer Science &amp; Business Media</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b22">
+	<analytic>
+		<title level="a" type="main">Toward a framework for ecologies of artifacts</title>
+		<author>
+			<persName><forename type="first">Heekyoung</forename><surname>Jung</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Erik</forename><surname>Stolterman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Will</forename><surname>Ryan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Tonya</forename><surname>Thompson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Marty</forename><surname>Siegel</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/1463160.1463182</idno>
+		<ptr target="https://doi.org/10.1145/1463160.1463182" />
+	</analytic>
+	<monogr>
+		<title level="m">of the 5th Nordic conference on Human-computer interaction building bridges NordiCHI &apos;08</title>
+				<imprint>
+			<date type="published" when="0201">2008. 201</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b23">
+	<analytic>
+		<title level="a" type="main">Mobility in Old Age: Beyond the Transportation Perspective</title>
+		<author>
+			<persName><forename type="first">H</forename><forename type="middle">J</forename><surname>Kaiser</surname></persName>
+		</author>
+		<idno type="DOI">10.1177/0733464808329121</idno>
+		<ptr target="https://doi.org/10.1177/0733464808329121" />
+	</analytic>
+	<monogr>
+		<title level="j">of Applied Gerontology</title>
+		<imprint>
+			<biblScope unit="volume">28</biblScope>
+			<biblScope unit="page" from="411" to="418" />
+			<date type="published" when="2009">2009</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b24">
+	<monogr>
+		<title level="m" type="main">Trust and technology in collaborative consumption. Why it is not just you and me. Bridging distances in technology and regulation</title>
+		<author>
+			<persName><forename type="first">Esther</forename><surname>Keymolen</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2013">2013</date>
+			<biblScope unit="page" from="135" to="150" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b25">
+	<monogr>
+		<title level="m" type="main">InterViews: An to qualitative research interviewing</title>
+		<author>
+			<persName><forename type="first">Steinar</forename><surname>Kvale</surname></persName>
+		</author>
+		<idno type="DOI">10.1016/S0149-7189</idno>
+		<ptr target="https://doi.org/10.1016/S0149-7189" />
+		<imprint>
+			<date type="published" when="1996">1996</date>
+			<publisher>Sage Publications</publisher>
+			<biblScope unit="page" from="89858" to="89858" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b26">
+	<monogr>
+		<title level="m" type="main">Challenges to in the sharing economy: The Case of Local Online Peer-to-Peer Exchange in a Single Parents&apos; Network. Interaction Design and Architecture(s) special issue on peer-to-peer exchange and the economy</title>
+		<author>
+			<persName><forename type="first">Kai</forename><surname>Lampinen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Coye</forename><surname>Huotari</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Cheshire</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2015">2015</date>
+			<biblScope unit="volume">24</biblScope>
+			<biblScope unit="page" from="16" to="32" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b27">
+	<analytic>
+		<title level="a" type="main">Dynamic a role dedicated drivers?</title>
+		<author>
+			<persName><forename type="first">Alan</forename><surname>Lee</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Martin</forename><surname>Savelsbergh</surname></persName>
+		</author>
+		<idno type="DOI">10.1016/j.trb.2015.02.013</idno>
+		<ptr target="https://doi.org/10.1016/j.trb.2015.02.013" />
+	</analytic>
+	<monogr>
+		<title level="j">Transportation Research Part B: Methodological</title>
+		<imprint>
+			<biblScope unit="volume">81</biblScope>
+			<biblScope unit="page" from="483" to="497" />
+			<date type="published" when="2015">2015</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b28">
+	<analytic>
+		<title level="a" type="main">Pass-them-around</title>
+		<author>
+			<persName><forename type="first">Andrés</forename><surname>Lucero</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jussi</forename><surname>Holopainen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Tero</forename><surname>Jokela</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/1978942.1979201</idno>
+		<ptr target="https://doi.org/10.1145/1978942.1979201" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2011 annual conference on Human factors in computing systems (CHI &apos;11)</title>
+				<meeting>the 2011 annual conference on Human factors in computing systems (CHI &apos;11)</meeting>
+		<imprint>
+			<date type="published" when="2011">2011</date>
+			<biblScope unit="page">1787</biblScope>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b29">
+	<monogr>
+		<title level="m" type="main">A ride whenever you need one</title>
+		<author>
+			<persName><surname>Lyft</surname></persName>
+		</author>
+		<ptr target="https://www.lyft.com/" />
+		<imprint>
+			<date type="published" when="2017-09-12">September 12. 2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b30">
+	<analytic>
+		<title level="a" type="main">Designing Mobility Eco-Feedback for Elderly Users</title>
+		<author>
+			<persName><forename type="first">Johanna</forename><surname>Meurer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Dennis</forename><surname>Lawo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Lukas</forename><surname>Janßen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Volker</forename><surname>Wulf</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2851581.2851599</idno>
+		<ptr target="https://doi.org/10.1145/2851581.2851599" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2016 CHI Conference Extended Abstracts on Human Factors in Computing Systems (CHI EA &apos;16)</title>
+				<meeting>the 2016 CHI Conference Extended Abstracts on Human Factors in Computing Systems (CHI EA &apos;16)</meeting>
+		<imprint>
+			<date type="published" when="2016">2016</date>
+			<biblScope unit="page" from="921" to="926" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b31">
+	<analytic>
+		<title level="a" type="main">Social dependency and mobile autonomy</title>
+		<author>
+			<persName><forename type="first">Johanna</forename><surname>Meurer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Martin</forename><surname>Stein</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">David</forename><surname>Randall</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Markus</forename><surname>Rohde</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Volker</forename><surname>Wulf</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2556288.2557300</idno>
+		<ptr target="https://doi.org/10.1145/2556288.2557300" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 32nd annual ACM conference on Human factors in computing systems (CHI &apos;14)</title>
+				<meeting>the 32nd annual ACM conference on Human factors in computing systems (CHI &apos;14)</meeting>
+		<imprint>
+			<date type="published" when="2014">2014</date>
+			<biblScope unit="page" from="1923" to="1932" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b32">
+	<analytic>
+		<title level="a" type="main">Social dependency and mobile autonomy</title>
+		<author>
+			<persName><forename type="first">Johanna</forename><surname>Meurer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Martin</forename><surname>Stein</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">David</forename><surname>Randall</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Markus</forename><surname>Rohde</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Volker</forename><surname>Wulf</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2556288.2557300</idno>
+		<ptr target="https://doi.org/10.1145/2556288.2557300" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 32nd annual ACM conference on Human factors in computing systems (CHI &apos;14)</title>
+				<meeting>the 32nd annual ACM conference on Human factors in computing systems (CHI &apos;14)</meeting>
+		<imprint>
+			<date type="published" when="2014">2014</date>
+			<biblScope unit="page" from="1923" to="1932" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b33">
+	<analytic>
+		<title level="a" type="main">Designing Cooperation for Sustainable Mobility: Mobile Methods in Ridesharing Contexts</title>
+		<author>
+			<persName><forename type="first">Johanna</forename><surname>Meurer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Martin</forename><surname>Stein</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Volker</forename><surname>Wulf</surname></persName>
+		</author>
+		<idno type="DOI">10.1007/978-3-319-06498-7_21</idno>
+		<ptr target="https://doi.org/10.1007/978-3-319-06498-7_21" />
+	</analytic>
+	<monogr>
+		<title level="m">of the 11th International Conference on the Design of Cooperative Systems (COOP &apos;14)</title>
+				<meeting><address><addrLine>Nice (France; Cham</addrLine></address></meeting>
+		<imprint>
+			<publisher>Springer International Publishing</publisher>
+			<date type="published" when="2014-05-30">2014. 27-30 May 2014</date>
+			<biblScope unit="page" from="345" to="359" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b34">
+	<monogr>
+		<title/>
+		<author>
+			<persName><surname>Microsoft Inc</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Skype</surname></persName>
+		</author>
+		<ptr target="https://www.skype.com/da/" />
+		<imprint>
+			<date type="published" when="2017-09-15">September 15. 2017</date>
+		</imprint>
+	</monogr>
+	<note>Retrieved</note>
+</biblStruct>
+
+<biblStruct xml:id="b35">
+	<monogr>
+		<author>
+			<persName><forename type="first">Joshua</forename><surname>Morse</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Joshua</forename><surname>Palay</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yarun</forename><surname>Luon</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Satyendra</forename><surname>Nainwal</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/1240866.1240952</idno>
+		<ptr target="https://doi.org/10.1145/1240866.1240952" />
+		<title level="m">Proceedings of CHI &apos;07 Extended Abstracts on Human Factors in Computing Systems (CHI EA &apos;07)</title>
+				<meeting>CHI &apos;07 Extended Abstracts on Human Factors in Computing Systems (CHI EA &apos;07)</meeting>
+		<imprint>
+			<date type="published" when="2007">2007</date>
+			<biblScope unit="page">2073</biblScope>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b36">
+	<analytic>
+		<title level="a" type="main">Senior buddies</title>
+		<author>
+			<persName><forename type="first">Will</forename><surname>Odom</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Scott</forename><surname>Jensen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Meng</forename><surname>Li</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/1240866.1240953</idno>
+		<ptr target="https://doi.org/10.1145/1240866.1240953" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of CHI &apos;07 Extended Abstracts on Human Factors in Computing Systems EA &apos;07)</title>
+				<meeting>CHI &apos;07 Extended Abstracts on Human Factors in Computing Systems EA &apos;07)</meeting>
+		<imprint>
+			<date type="published" when="2007">2007</date>
+			<biblScope unit="page">2079</biblScope>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b37">
+	<analytic>
+		<title level="a" type="main">Approaches to Successful Entry of the Service for Startups</title>
+		<author>
+			<persName><forename type="first">Sungkyu</forename><surname>Park</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jaram</forename><surname>Park</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Suyeon</forename></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jaeyeon</forename><surname>Won</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3027063.3053340</idno>
+		<ptr target="https://doi.org/10.1145/3027063.3053340" />
+	</analytic>
+	<monogr>
+		<title level="m">of the 2017 CHI Conference Extended Abstracts on Human Factors in Computing Systems (CHI EA &apos;17)</title>
+				<imprint>
+			<date type="published" when="2017">2017</date>
+			<biblScope unit="page" from="1161" to="1169" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b38">
+	<analytic>
+		<title level="a" type="main">Tensions in Developing a Secure Collective Information -The Case of Agile Ridesharing</title>
+		<author>
+			<persName><forename type="first">Kenneth</forename><surname>Radke</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Margot</forename><surname>Brereton</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Seyed</forename><surname>Mirisaee</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sunil</forename><surname>Ghelawat</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Colin</forename><surname>Boyd</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Juan Gonzalez</forename><surname>Nieto</surname></persName>
+		</author>
+		<idno type="DOI">10.1007/978-3-642-23771-3_39</idno>
+		<ptr target="https://doi.org/10.1007/978-3-642-23771-3_39" />
+	</analytic>
+	<monogr>
+		<title level="m">Interact&apos;11</title>
+				<imprint>
+			<date type="published" when="2011">2011</date>
+			<biblScope unit="page" from="524" to="532" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b39">
+	<monogr>
+		<title level="m" type="main">The 4C Framework The 4C Framework: Principles of Interaction in Digital</title>
+		<author>
+			<persName><forename type="first">Henrik</forename><surname>Sørensen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Dimitrios</forename><surname>Raptis</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jesper</forename><surname>Kjeldskov</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mikael</forename><surname>Skov</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2014">2014</date>
+			<biblScope unit="page" from="87" to="97" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b40">
+	<monogr>
+		<title/>
+		<idno type="DOI">10.1145/2632048.2636089</idno>
+		<ptr target="https://doi.org/10.1145/2632048.2636089" />
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b41">
+	<analytic>
+		<title level="a" type="main">The 4C framework</title>
+		<author>
+			<persName><forename type="first">Henrik</forename><surname>Sørensen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Dimitrios</forename><surname>Raptis</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jesper</forename><surname>Kjeldskov</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mikael</forename><forename type="middle">B</forename><surname>Skov</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2632048.2636089</idno>
+		<ptr target="https://doi.org/10.1145/2632048.2636089" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2014 ACM International Joint Conference on Pervasive and Ubiquitous Computing (UbiComp &apos;14</title>
+				<meeting>the 2014 ACM International Joint Conference on Pervasive and Ubiquitous Computing (UbiComp &apos;14</meeting>
+		<imprint>
+			<date type="published" when="2014">2014</date>
+			<biblScope unit="page" from="87" to="97" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b42">
+	<monogr>
+		<title level="m" type="main">Car use: Lust and must. Instrumental, and affective motives for car use</title>
+		<author>
+			<persName><forename type="first">Linda</forename><surname>Steg</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2005">2005</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b43">
+	<monogr>
+		<title level="m" type="main">Transportation Research Part A: Policy and Practice 2-3 SPEC. ISS</title>
+		<imprint>
+			<biblScope unit="page" from="147" to="162" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b44">
+	<monogr>
+		<title/>
+		<idno type="DOI">10.1016/j.tra.2004.07.001</idno>
+		<ptr target="https://doi.org/10.1016/j.tra.2004.07.001" />
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b45">
+	<analytic>
+		<title level="a" type="main">Mobility in Later Life</title>
+		<author>
+			<persName><forename type="first">Martin</forename><surname>Stein</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Johanna</forename><surname>Meurer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Alexander</forename><surname>Boden</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Volker</forename><surname>Wulf</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3025453.3025672</idno>
+		<ptr target="https://doi.org/10.1145/3025453.3025672" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2017 CHI Conference on Human Factors in Computing Systems (CHI &apos;17)</title>
+				<meeting>the 2017 CHI Conference on Human Factors in Computing Systems (CHI &apos;17)</meeting>
+		<imprint>
+			<date type="published" when="2017">2017</date>
+			<biblScope unit="page" from="5716" to="5729" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b46">
+	<analytic>
+		<title level="a" type="main">Propensity to participate in a peer-to-peer socialnetwork-based carpooling system</title>
+		<author>
+			<persName><forename type="first">Shahram</forename><surname>Tahmasseby</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Lina</forename><surname>Kattan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Brian</forename><surname>Barbour</surname></persName>
+		</author>
+		<idno type="DOI">10.1002/atr.1326</idno>
+		<ptr target="https://doi.org/10.1002/atr.1326" />
+	</analytic>
+	<monogr>
+		<title level="j">Journal of Advanced Transportation</title>
+		<imprint>
+			<biblScope unit="volume">50</biblScope>
+			<biblScope unit="page" from="240" to="254" />
+			<date type="published" when="2016">2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b47">
+	<analytic>
+		<title level="a" type="main">Drivers and of peer-to-peer accommodation stay -an exploratory study with American and Finnish travellers</title>
+		<author>
+			<persName><forename type="first">P</forename><surname>Iis</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Juho</forename><surname>Tussyadiah</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Pesonen</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Current Issues in Tourism</title>
+		<imprint>
+			<biblScope unit="page" from="1" to="18" />
+			<date type="published" when="2016">2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b48">
+	<monogr>
+		<title/>
+		<idno type="DOI">10.1080/13683500.2016.1141180</idno>
+		<ptr target="https://doi.org/10.1080/13683500.2016.1141180" />
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b49">
+	<monogr>
+		<title/>
+		<author>
+			<persName><surname>Uber</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Ubercommute</surname></persName>
+		</author>
+		<ptr target="https://www.uber.com/info/commute/" />
+		<imprint>
+			<date type="published" when="2017-09-12">September 12. 2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b50">
+	<analytic>
+		<title level="a" type="main">SMIZE: A spontaneous ride-sharing system for individual urban transit</title>
+		<author>
+			<persName><forename type="first">Xin</forename><surname>Xing</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Tobias</forename><surname>Warden</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Tom</forename><surname>Nicolai</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Otthein</forename><surname>Herzog</surname></persName>
+		</author>
+		<idno type="DOI">10.1007/978-3-642-04143-3_15</idno>
+		<ptr target="https://doi.org/10.1007/978-3-642-04143-3_15" />
+	</analytic>
+	<monogr>
+		<title level="m">Lecture Notes in Computer Science</title>
+				<imprint>
+			<date type="published" when="2009">2009</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b51">
+	<analytic>
+		<title level="a" type="main">A traffic assignment model for a ridesharing transportation market</title>
+		<author>
+			<persName><forename type="first">Huayu</forename><surname>Xu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Fernando</forename><surname>Ordóñez</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Maged</forename><surname>Dessouky</surname></persName>
+		</author>
+		<idno type="DOI">10.1002/atr.1300</idno>
+		<ptr target="https://doi.org/10.1002/atr.1300" />
+	</analytic>
+	<monogr>
+		<title level="j">Journal of Advanced Transportation</title>
+		<imprint>
+			<biblScope unit="volume">49</biblScope>
+			<biblScope unit="page" from="793" to="816" />
+			<date type="published" when="2015">2015</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b52">
+	<monogr>
+		<title level="m" type="main">Case study research: design and methods</title>
+		<author>
+			<persName><forename type="first">K (robert</forename><surname>Robert</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Kuo-Zuir) Yin</surname></persName>
+		</author>
+		<idno type="DOI">10.1080/09500790.2011.582317</idno>
+		<ptr target="https://doi.org/10.1080/09500790.2011.582317" />
+		<imprint>
+			<date type="published" when="2014">2014</date>
+		</imprint>
+	</monogr>
+	<note>5th ed. Sage publications</note>
+</biblStruct>
+
+<biblStruct xml:id="b53">
+	<monogr>
+		<title level="m" type="main">Service for Large-Scale Taxicab Networks</title>
+		<author>
+			<persName><forename type="first">Desheng</forename><surname>Zhang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Tian</forename><surname>He</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F A N</forename><surname>Zhang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mingming</forename><surname>Lu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yunhuai</forename><surname>Liu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Haengju</forename><surname>Lee</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sang</forename><forename type="middle">H</forename><surname>Son</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2897517</idno>
+		<ptr target="https://doi.org/10.1145/2897517" />
+		<imprint>
+			<date type="published" when="2016">2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b54">
+	<analytic>
+		<title level="a" type="main">I like to out to be energised by different people&quot;: an exploratory analysis of mobility and wellbeing in later life</title>
+		<author>
+			<persName><forename type="first">Friederike</forename><surname>Ziegler</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Tim</forename><surname>Schwanen</surname></persName>
+		</author>
+		<idno type="DOI">10.1017/S0144686X10000498</idno>
+		<ptr target="https://doi.org/10.1017/S0144686X10000498" />
+	</analytic>
+	<monogr>
+		<title level="j">Ageing and Society</title>
+		<imprint>
+			<biblScope unit="volume">31</biblScope>
+			<biblScope unit="page" from="758" to="781" />
+			<date type="published" when="2011">2011</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+				</listBibl>
+			</div>
+		</back>
+	</text>
+</TEI>

@@ -1,0 +1,2413 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xml:space="preserve" xmlns="http://www.tei-c.org/ns/1.0" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.com/kermitt2/grobid/master/grobid-home/schemas/xsd/Grobid.xsd"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+	<teiHeader xml:lang="en">
+		<fileDesc>
+			<titleStmt>
+				<title level="a" type="main">Gamification for Self-Tracking: From World of Warcraft to the Design of Personal Informatics Systems</title>
+			</titleStmt>
+			<publicationStmt>
+				<publisher/>
+				<availability status="unknown"><licence/></availability>
+			</publicationStmt>
+			<sourceDesc>
+				<biblStruct>
+					<analytic>
+						<author role="corresp">
+							<persName><forename type="first">Amon</forename><surname>Rapp</surname></persName>
+							<email>amon.rapp@gmail.com</email>
+							<affiliation key="aff0">
+								<orgName type="institution">University of Torino Torino</orgName>
+								<address>
+									<country key="IT">Italy</country>
+								</address>
+							</affiliation>
+						</author>
+						<title level="a" type="main">Gamification for Self-Tracking: From World of Warcraft to the Design of Personal Informatics Systems</title>
+					</analytic>
+					<monogr>
+						<imprint>
+							<date/>
+						</imprint>
+					</monogr>
+					<idno type="DOI">10.1145/3173574.3173654</idno>
+				</biblStruct>
+			</sourceDesc>
+		</fileDesc>
+		<encodingDesc>
+			<appInfo>
+				<application version="0.7.1" ident="GROBID" when="2022-07-22T04:58+0000">
+					<desc>GROBID - A machine learning software for extracting information from scholarly documents</desc>
+					<ref target="https://github.com/kermitt2/grobid"/>
+				</application>
+			</appInfo>
+		</encodingDesc>
+		<profileDesc>
+			<textClass>
+				<keywords>
+					<term>Gamification</term>
+					<term>World of Warcraft</term>
+					<term>Personal Informatics</term>
+					<term>Quantified Self</term>
+					<term>self-tracking H.5.m. Information interfaces and presentation (e.g., HCI): Miscellaneous</term>
+				</keywords>
+			</textClass>
+			<abstract>
+<div xmlns="http://www.tei-c.org/ns/1.0"><p>World of Warcraft (WoW) may be a source of inspiration to enrich the Personal Informatics systems user's experience and, at the same time, improve gamification design. Through the findings of a four-year reflexive ethnography in WoW, I outline how its game design elements support players in making sense of their own data, emphasizing how "game numbers" are turned into meanings. On the basis of the study results, I propose a series of design considerations to be used in the design of self-tracking systems, which recommend to embody data into digital entities, provide different analytical tools depending on the users' expertise through a flexible model, and foster the formation of "communities of practice" in order to support learning processes.</p></div>
+			</abstract>
+		</profileDesc>
+	</teiHeader>
+	<text xml:lang="en">
+		<body>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>INTRODUCTION</head><p>In recent years, we are witnessing games overflowing the boundaries in which they were traditionally circumscribed. Not only serious games <ref type="bibr" target="#b61">[56]</ref>, entertainment environments with training purposes, and pervasive games <ref type="bibr">[57]</ref>, taking place in the daily living activities, but also novel design techniques are making visible the strict connection tying the ludic and the "real" world. Gamification is precisely the use of "game design elements in non-game contexts" <ref type="bibr" target="#b20">[20]</ref>, and is part of this cultural transformation where games increasingly seep into other areas than just video games. Gamification has been used to motivate and engage users in diverse contexts, such as health <ref type="bibr" target="#b44">[41]</ref>, crowdsourcing <ref type="bibr" target="#b64">[59]</ref>, and system evaluations <ref type="bibr" target="#b79">[74]</ref>. Despite its effectiveness in impacting on users' behavior <ref type="bibr" target="#b35">[33]</ref>, gamification has been criticized on a variety of accounts: for instance, it has been noted that it may reduce, rather than enhance, the user's engagement <ref type="bibr" target="#b74">[69]</ref>, actually leading to the pointsification of the experience <ref type="bibr" target="#b83">[78]</ref>. This critique highlights one of the weakest point of the current gamification practices, namely the scarce variety of game elements used in the design process. Despite the many suggestions for going beyond the most common gamified interventions, for example by embedding values <ref type="bibr">[85]</ref>, exploiting altruism <ref type="bibr" target="#b73">[68]</ref>, and supporting intrinsic motivations <ref type="bibr" target="#b76">[71]</ref>, designers are still employing a limited set of designs, having also a weak understanding of how they affect the user's experience <ref type="bibr" target="#b92">[88]</ref>.</p><p>Curiously, gamification has mostly ignored the design practices coming from full-fledged video games, as well as the players' subjective experiences, i.e. how they "live" and understand the games they play. What I want to emphasize here, then, is the need of investigating how video games are capable of creating engaging and enjoyable experiences in their players, and how such experiences can be exploited when we aim at designing novel and more effective gamified applications. Video games incorporate a profound understanding of how game elements have to be designed, and it is paramount to exploit such understanding for creating "gameful" systems. I also argue that we should focus on how players interpret and "feel" the game worlds in which they are inserted, looking at play "from the inside". This may be called a "phenomenological" approach, since it values the players' subjectivity (e.g. how they construct meaning) rather than their external behavior. More precisely, I claim that this approach can be usefully employed to draw inspiration from games in order to design novel gamified Personal Informatics (PI) systems. PI systems are "those that help people collect personally relevant information for the purpose of self-reflection and gaining self-knowledge" <ref type="bibr" target="#b55">[50]</ref>. They are growing in popularity due to the recent advancements in both ubiquitous and wearable technologies <ref type="bibr" target="#b77">[72]</ref>, so that it has been forecasted that wearable self-tracking technologies will eclipse US $70 billion by 2024 <ref type="bibr" target="#b43">[40]</ref>, making a huge quantity of personal data available soon <ref type="bibr" target="#b45">[42]</ref>. Nevertheless, there is also an increasing skepticism with reference to the capabilities of these tools in giving users visible benefits <ref type="bibr">[38]</ref>, and research emphasized that one third of the Americans that purchased a PI device abandoned it after six months of use <ref type="bibr" target="#b47">[44]</ref>. On this vein, Rapp &amp; Cena <ref type="bibr" target="#b78">[73]</ref> highlighted how users with no self-tracking experiences find tracking their own data burdensome and scarcely engaging. Although gamification has been actually employed in PI systems [e.g. 101], such technique has been addressed more at provoking a change in users' behavior <ref type="bibr" target="#b82">[77]</ref> rather than improving their engagement, or increasing their self-knowledge. I think that we should look at the world of videogames to understand how players account for and "live" their "game data" and how such data might help them enhance their self-knowledge and self-awareness as players, using this understanding to improve PI design.</p><p>In this paper, I will describe how World of Warcraft (WoW) can represent a source of inspiration to enrich the user experience of PI systems. Massively Multi Player Online Role-Playing Games (MMORPGs) might be an optimal object of study for this purpose, since they require their players to manage a large amount of information, in the form of quantitative data and stats (i.e., stats of players' performances), in order to maximize their characters and face the hardest game challenges. My contribution to HCI, gamification and PI research will be twofold. First, I will explore how WoW's game design elements support players in making sense of their own data through a reflexive ethnography, emphasizing how numbers are turned into meanings from a phenomenological perspective. Second, on the basis of these findings I will propose a series of design recommendations to be used in the design of PI systems.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>RELATED WORK</head><p>PI systems have origins in lifelogging research <ref type="bibr" target="#b34">[32]</ref>, even if they can be dated to the spreading of the private use of weight scales at the start of the 20 th century <ref type="bibr" target="#b16">[17]</ref>. They aim at collecting personal data, which may be physiological, psychological or behavioral, and feed them back to users, to increase their self-awareness <ref type="bibr" target="#b77">[72]</ref>. Over the last ten years, PI systems have been developed mainly by HCI researchers for therapeutic or behavior change goals, exploiting the reactive effects of self-monitoring, i.e. the phenomenon in which the process of recording behavior causes the behavior to change <ref type="bibr" target="#b71">[66]</ref>: from physical activity <ref type="bibr" target="#b13">[14,</ref><ref type="bibr" target="#b31">30]</ref> and wellbeing <ref type="bibr" target="#b1">[2]</ref>, to mental health <ref type="bibr" target="#b60">[55]</ref>, personal data have been used to promote healthy lifestyle and support patients with chronic diseases. Outside the research domain, selftracking has been a common practice among the quantified selfers for years, a sort of "extreme" user group that tracks for self-experimentation and self-knowledge <ref type="bibr" target="#b59">[54]</ref>.</p><p>However, recently, a plethora of self-tracking tools have been developed for commercial purposes. As a result, the practice of tracking personal data has also spread outside the circle of quantified selfers, reaching a broader user base. It has been noted, nonetheless, that such instruments require a considerable effort from their users, in terms of time, compliance, and long-term engagement, so that most of the "newbies" self-trackers find their use too burdensome, quickly abandoning them <ref type="bibr">[47,</ref><ref type="bibr" target="#b78">73]</ref>. To increase users' engagement and enjoyment in using PI instruments, HCI researchers widely employed gamification techniques. Zhao et al. <ref type="bibr" target="#b105">[100]</ref> reviewed how gamification can be utilized in conjunction with wearable devices for activity tracking, whereas Morschheuser et al. <ref type="bibr" target="#b63">[58]</ref> showed that gamification has a positive effect on the motivation to use PI applications. Leaderboards <ref type="bibr" target="#b106">[101]</ref>, points [8], and competitive dynamics <ref type="bibr" target="#b10">[11]</ref> have been experimented to increase users' engagement with PI tools, also taking into account personality types <ref type="bibr" target="#b48">[45]</ref> and developing tailor-made games directly connected with personal data <ref type="bibr" target="#b65">[60]</ref>. Despite gamification's supposed effectiveness in PI domain, designers employed a limited variety of game elements (points, badges, and leaderboards, the so-called PBL triad <ref type="bibr" target="#b102">[98]</ref>) until now, actually being addressed to change behavior, rather than supporting self-awareness and self-knowledge. By and large, this is a trend in PI research, which oriented its efforts more toward behavior change goals, than toward sense-making of quantitative data <ref type="bibr" target="#b82">[77]</ref>. Criticizing this trend, Epstein et al. <ref type="bibr" target="#b23">[23]</ref> shifted the attention from behavior change to how tracking tools are experienced by people in their everyday lives. Whereas, Rapp &amp; Tirassa <ref type="bibr" target="#b82">[77]</ref> explicitly claimed that PI research needs to go back to its initial ambition by enhancing individuals' selfknowledge through a phenomenological approach.</p><p>Building on top of these insights, I argue for the need to expand the catalogue of game elements employed in PI designs by drawing inspiration from how full-fledged games involve their players: this would turn into "new tools" to be used in PI systems, not only for modifying behavior, but for supporting sense-making and selfknowledge. In doing so, I suggest that we can better exploit gamification potentialities, if we start looking at "game elements" from "a first person point of view", actually adopting a phenomenological perspective that values the individuals' subjective experiences, i.e. how they perceive and understand the "game elements" they interact with. This would allow, on the one hand, to account for how players ascribe meaning to their game data, and, on the other hand, to help designers reproduce such "best practices" in other domains. A phenomenological approach <ref type="bibr" target="#b36">[34,</ref><ref type="bibr" target="#b42">39]</ref> precisely focuses on the construction of meanings and on how data are made accountable and actionable from the "internal" point of view of the subject, rather than from the "external" one of behavior. To this aim, I argue that a reflexive ethnography of WoW, which precisely values the ethnographer's subjectivity, may provide insights for PI.</p><p>In WoW, players progress through 110 levels of play, exploring a fantasy world called Azeroth, where they can gain weapons, face missions, and kill enemies. Even if WoW does not have a "final" objective, players aim to improve their characters to accomplish the most difficult challenges of the game. They might personalize their avatar by choosing its "race" (e.g. Dwarf) and class (e.g. Paladin), which will impact on its abilities and play opportunities: for example, mages can cast spells from distance, whereas warriors can engage only in hand-to-hand melees. Moreover, players are differentiated in damage per second (dps), with the main objective of slaying monsters, tank, taking damage for the other members of the group, and healer, who heals companions during battles. These asymmetrical skills support collaboration among players, who gather in temporary (pick-up groups) or structured groups (guilds) to complete instances (5-player dungeons) and raids (from-10-to-30-player dungeons). WoW entered "the offline culture's everyday speech to a greater extent than have most other computer games" <ref type="bibr" target="#b14">[15]</ref>, setting the MMORPGs "genre standards" <ref type="bibr" target="#b18">[19]</ref>, and representing the most typical case of MMORPGs <ref type="bibr" target="#b84">[79]</ref>. Since the typicality of the case under study is paramount to generalize the results of an ethnographic research <ref type="bibr" target="#b29">[29]</ref>, I selected WoW as the object of my fieldwork, in order to better ground the recommendations for design I aimed at drawing from my research findings, giving them a more general validity.</p><p>Over the years, HCI research explored WoW's players under a variety of accounts, like guilds' combat styles <ref type="bibr" target="#b18">[19]</ref> and characters' value <ref type="bibr" target="#b57">[52]</ref>. In particular, several works used ethnography to understand the characteristics of WoW's culture and society. <ref type="bibr">Nardi &amp; Harris [64]</ref>, for instance, explored forms of collaborative play, whereas Nardi et al. <ref type="bibr" target="#b70">[65]</ref> investigated processes of learning through chat conversations with peers. Other works focused on real-life friends and their impact on in-game challenges [90], conflicted dynamics within guilds <ref type="bibr" target="#b9">[10]</ref>, as well as between players and Blizzard [28], or norms and governance styles shaping the game experience <ref type="bibr" target="#b93">[89]</ref>. Similarly to this research, my work is inscribed in the virtual ethnography tradition <ref type="bibr" target="#b39">[36]</ref>, which has anthropologically investigated social and cultural dynamics within virtual worlds <ref type="bibr">[5]</ref>. In this work, however, I pointed to how specific design elements engage players in "analytical" activities, as well as help them make sense of their "numbers". This may narrow the ethnographer's perspective if compared with previous virtual ethnographic research aimed at understanding the embedded culture of a specific digital world. However, it also allows the fieldworker to focus on specific game elements suitable to be translated, with opportune adjustments, to other contexts.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>METHOD</head><p>Fieldwork was composed of participant observation, document analysis and semi-structured interviews, conducted in three different phases: in the first one, from October 2012 to March 2014, I explored how WoW engages its players <ref type="bibr" target="#b76">[71]</ref>; in the second one, from June 2014 to May 2015, I studied how it drives their behavior <ref type="bibr" target="#b75">[70,</ref><ref type="bibr">76]</ref>; and in the last phase, from October 2015 to September 2016 I focused on how it makes players reflect on their personal identity. Each new phase entailed a revision of the previous collected data in the light of the new ones. My ethnographic work embraced the reflexive approach in which the fieldworker's experience is observed together with that of other "natives", and her theoretical and methodological choices are constantly accounted through the reflexive description <ref type="bibr" target="#b8">[9,</ref><ref type="bibr" target="#b87">82,</ref><ref type="bibr" target="#b100">96]</ref>. Differently from the more common, at least within HCI ethnographies, 'realist teller', reflexivity paints the reality under investigation from the fieldworker's subjective point of view <ref type="bibr" target="#b100">[96]</ref>. Reflexivity has been then often paired with autoethnography, which reports the ethnographer's personal experiences in the ethnographic recounting <ref type="bibr" target="#b99">[95]</ref>. By inserting myself in the reflexive tradition, which had only a marginal voice until now within HCI <ref type="bibr" target="#b87">[82]</ref>, I not only adopted a first-person narration, but also gathered, analyzed and considered relevant the data coming from my personal experience of play in WoW. I played two expansions of WoW, Mists of Pandaria and Warlords of Dreaenor, and their patches, achieving the level cap with my main character, enrolling in a variety of guilds, and playing almost all the dungeons present in the game. Moreover, I perfected my character, learnt professions, farmed (collecting resources) and crafted (creating objects from raw materials) a variety of items. This allowed me to understand the players' experiences "from the inside", constantly comparing their reports about their sense-making activities with my own personal histories.</p><p>My knowledge about PI usage, instead, has been developed through a review of the current literature and interviews to both inexperienced and expert trackers (part of this research can be found here <ref type="bibr" target="#b78">[73]</ref>). It allowed me to hypothesize and then identify similarities between WoW players and PI users. As we will see in the Results Section, inexperienced PI users and WoW novices find the same difficulties in managing their personal data. Whereas quantified selfers and WoW hardcore gamers enact similar strategies to make sense of their data. These players relate to power gamers described by Taylor, gamers that play in ways we typically do not associate with notions of fun: they adhere to a causeand-effect model of game involvement, and facilitate their play style through a variety of social activities <ref type="bibr" target="#b97">[93,</ref><ref type="bibr" target="#b98">94]</ref>.</p><p>During the fieldwork, I collected different materials. First, I analyzed an ample variety of WoW related documents, from forum posts of the guilds I participated, to the articles posted in fandom websites such as Wowpedia and WoWWiki. Then, I observed and participated to more than 1200 hours of game play, recording most of the informal interactions I had with other players through the WoW's chat log, and taking notes about players' behaviors and dynamics. I also wrote down my own experiences of play and reflections on them in the form of a diary. This material has been reviewed on a daily basis, immediately after ending a game session. Observation has been conducted mainly in an Italian PvE server (Player vs. Environment), in which players cannot fight each other with the exception of certain areas. However, to also account for the game dynamics of the PvP servers (Player vs. Player), where players can fight each other everywhere, I played for 150 hours in an Italian PvP server. I have to highlight that the geographical localization of the servers in which I conducted the fieldwork might have affected the findings I gathered, since players located in other parts of the world (especially in Asia) might experience the game differently due to cultural differences. Moreover, my ethnographic research was conducted in two precise expansions of WoW. Although I retraced experiences with the previous versions of the game from some of my participants' descriptions, the results described here may not find confirmation if referred to previous or subsequent versions of WoW.</p><p>Besides all the recorded informal conversations, I also formally interviewed 36 players, 16 in the first phase of the ethnographic work, 12 in the second, and 8 in the last one. Participants were interviewed both in the game world <ref type="bibr" target="#b17">(18)</ref> and in the "real world <ref type="bibr" target="#b17">(18)</ref>. The sample was differentiated on the basis of: i) gaming experience; ii) frequency of play; iii) social centrality, i.e. importance and reputation in the player's social network (e.g. officers or masters of a guild were considered as having a high social centrality). The final sample can be divided into: hardcore gamers <ref type="bibr" target="#b15">(16)</ref>, with a character at the level cap, more than 2 years of playing experience in WoW, and a frequency of play of more than 20 hours per week; normal players <ref type="bibr" target="#b8">(9)</ref>, having a character at level 80-90 (Pandaria) or 90-100 (Draenor), with more than 6 months of experience and a frequency of play of 10-20 hours per week; novices (9), who have a character at level 30-80 (Pandaria) or 40-90 (Draenor) at the moment of the interview, with less than 6 months of experience, playing less than 10 hours per week. Two players, who quit playing WoW before the interview, were added as outliers, in order to take into account processes of disengagement. Participants were recruited mainly in a PvE server (26 out of 36), leveraging my in-game social networks (23 out of 36), or randomly enrolled in a pick-up group (13 out of 36) after a brief screening interview.</p><p>Interviews lasted around three hours each and explored the players' personal histories within the game and their relations with WoW's design elements. The questions were defined on the basis of my personal experience in the game, as well as the informal conversations I had during the ethnographic work. Questions were focused on exploring how the game impacted on players' behavior, how it supported them in developing a better knowledge of themselves as players, and how it favored their social interactions (e.g., "Recount your personal history in WoW from the beginning"; "Describe the game features that you value more: why are they so important? What kind of effects they have on you as a player?"; "Describe your social life in WoW. What features helped you connect with others?"; "Describe how you perceive yourself in the game and your "relation" with your character. Are there game elements supporting you in managing and developing it?"). Participants were free to talk of the game elements they considered important and to explore themes not foreseen in the initial list of questions. I decided to stop interviewing, settling for 36 participants, when I realized that additional data would not have produced substantial new findings for the goals of my research, following a data saturation criterion <ref type="bibr">[6]</ref>. Interviews were registered using an audio recorder, and then transcribed verbatim, or the WoW's chat log. Interviewees were not compensated for their participation. Players' names have been changed due to privacy reasons.</p><p>Data were analyzed through a thematic analysis, using open and axial coding techniques <ref type="bibr" target="#b96">[92]</ref>, in order to discover relevant categories and relationships among data. I generated initial open codes by individuating data features that I considered relevant. Then, I broke data down by taking apart sentences and by labeling them. Resulting codes were then categorized together in themes, also using affinity diagrams. Finally, I reviewed and named the themes. In the following, I want to focus on the analysis of the players' practices for making their data accountable and actionable. In WoW, players manage a huge amount of quantitative information, spending days in tracking and bettering their in-game performances on the basis of a thorough data analysis. How does WoW help players manage all these "numbers"? How do players turn this quantitative knowledge into meanings? Are there design elements that could be successfully applied to PI to support users in understanding their personal data? To answer these questions, I reviewed the data collected during the four years of my fieldwork. The analysis allowed me to revise my previous findings, rethinking, deepening and systematizing them on the basis of the new data collected during the last phase of my research.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>FINDINGS</head><p>In the following, I will describe the three most relevant themes emerged during the analysis. Data embodiment refers to WoW designs that incorporate numeric values giving them a concrete representation, in the form of items or equipment. Self-experimentation, instead, points to WoW players' practices of data management, where they engage with hypothesis formulation, field test and data analysis. Finally, communities of practices highlights how social relationships allow WoW players to learn interpretative strategies in order to make sense of their own data.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Data embodiment</head><p>Notes of the 21th of February, 2016. I recently changed my spec turning my mage from Arcane into Fire. [...] Practically, I had to modify all my character's values and priorities to return to an acceptable level of power. [...] I have to seek a new equipment, rebalance all my talents, this will take a lot of time. It is strange how at the beginning of my experience in WoW all these data were confusing, quite meaningless for me. I perceived them as "cold" numbers [...]. In the first phases of the game I tried to make sense of those data, but that was nothing more than an exploratory joke. Now, I learnt to connect all these numbers with my "virtual self" in the game: they represent aspects of me, testify how much I am good at playing my role. Numbers are also materialized in the gear I wear. Somehow, I learnt to see them in the objects I owe: the items acquired after a raid or a quest are more than mere data, or means to increase stats; they are tied to the in-game experiences in which they were found.</p><p>Characters and their equipment represent a sort of "physical" materialization of the quantitative knowledge that players have to master to succeed in the game. Each ingame avatar is characterized by a series of numeric values that symbolize how much "powerful" it is, what kind of abilities it has, and how it will perform during battles. These data, however, are not abstract numbers, but are embodied in virtual bodies and objects that give them a "shape" and a value. Although playing at the maximum level requires a deep understanding of the game's underlying numeric mechanisms, as we will see in the next sub-section, players pursue this goal without the impression of manipulating mere quantities. Instead, they both perceive their "quantitative self" into a "living" character, and manage numbers through "virtual entities", to which they ascribe a variety of meanings.</p><p>Enea emphasizes that "My character has been the same for years. It represents what I am, I can say that I grow up with it... Every time it gets more power, I feel to be enhanced as well, it's like if I were in there". Almost all the hardcore gamers interviewed (13 out of 16) express this kind of projection into their main characters, emphasizing how working on their development implies a work on their "self" within the game. For players, increasing the character's stats, rebalancing its weights among diverse skills, and experimenting different combinations of items that modify its "numbers" are ways for acting upon their digital self beyond the screen. The character makes visible on its surface all the modifications happened in its "inside", it is a sort of living entity that shows its inner changes: new gear and items not only increase its power and rebalance its abilities, but also modify its appearance, so that players can immediately recognize a variation in its "data". This visibility of the avatar's evolution help individuals reflect on themselves as players, and think of their digital identity. Pyros explains: "Look at my warrior, now it exactly looks like how I perceive myself as a player here in WoW. It's severe, inflexible, but not frightening. It makes me think of how much I'm inclined to help others when needed, but also how I can't bear someone that tries to cheat me".</p><p>It is worth noting, that players are not passive spectators of their characters' growth, but actively take care of them, by carefully selecting those items that might enhance their skills. Ludos, a novice just entered in WoW, says "At the beginning you want only to reach the level cap as soon as possible to start raiding. You acquire and discharge a lot of items, but you don't know how to choose them, the character grows somehow automatically". This opinion is shared by the majority of novices (8 out of 9) and normal players (7 out of 9). Characters quickly evolve along a linear path, by gaining experience points, and initially the equipment is mainly seen as a way to beautify them. Digital objects, like gear and items, in fact, embody not only numeric values, but also interpretations, episodes, and emotions. Each piece of equipment, for example, is linked to the battle in which it has been gained; it is tied to a thread of memories made up of struggles, failures, collective endeavors and successes; it symbolizes a place and a time; and it can be preserved, collected, used as a commodity, or donated. Niren is a player who dedicated years to perfect his warrior. Although now he is a lone wolf, preferring to wonder alone in the lands of Azeroth, in the past he was the officer of one of the most renowned guilds of his server. From that period he maintains some important memories, embodied in the equipment he preserved: "This battleplate [...] It is important for me because it was the first item that improved so much my stamina in one shot… but, you know, in WoW obtaining a piece is often only a step for obtaining the next one… But I preserved this, along with many other pieces, because it makes me remember a lot of things of that time…. Other rare objects, well, I sold them, because I wanted to forget the moments they were connected with".</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Self-experimentation</head><p>Players learn to deal with numbers through trials and errors. To excel in the game and become extremely powerful they need to master a "quantitative knowledge" made up of stats, formulas, and macros. WoW reinforces the acquisition of such knowledge by rewarding its players with visible results: the "right numbers" entail an immediate increase in the damage provoked, or in the capability of healing and generating aggro (i.e., the interests of a monster). This turns into higher performances in raids and, in the long term, a greater reputation among the party members, as well as an increased respect from novices.</p><p>We have to note that the game's features provide a strong support in making users develop such knowledge. Over the years, WoW allowed the spread of a variety of add-ons and third-party applications that help players expand their "knowledge through numbers". Although they have not been developed by Blizzard, but are often the outcome of the players' hard work, WoW permits their interconnection with the game and its interface. For instance, some mods (i.e. another name for add-ons in the game jargon) make visible the party members' performance in a raid, like the damages provoked by the dps, allowing for a comparative evaluation of the character's setting within the group. This enables players to immediately assess not only the absolute "value" of their avatar, but also its relative power, fostering the formulation of new hypotheses about its weaknesses and strengths. Enea highlights that "when I change something relevant in my warrior, the first thing that I do is to test it on the field. Commonly, I prefer to test it with strangers, in a pick-up group, hoping to find another powerful warrior. At the end of the dungeon I look at the final stats, to see whether I am in the first position Besides those add-ons that favor the performance evaluation on the field, players have at their disposal a large amount of tools directly aimed at facilitating the experimentation of novel combinations of items: such tools are tailored to the players' level of expertise, so that everyone might find an aid addressed to her needs. Kaershan, for example, a normal player with a middle level of experience, told me that "You definitely have to try out askmrrobots. I use it every time I gain a new piece of gear… For example, you had a 630 blue cloak but now you are wearing a 655 heroic cloak that you gained in a raid last week. [...] But yesterday you won a new ring by defeating a boss raid. Then, you go to askmrrobots and you see that your old 630 cloak is now better itemized than the 655 one, since your stat weights changed to take advantage of this new ring". Instruments like askmrrobots, therefore, can quickly recommend the optimal gear to wear, representing a valuable aid to make players' numbers meaningful without requiring strong efforts from them. However, other, more expert, players may opt for more focused and customizable tools, like the Pawn add-on, which can help them select the best gear choices among those available, after carefully setting up the character's stat weights: these kinds of instruments require a previous knowledge about the optimal weights to be distributed among the character's skills, so that they cannot be used by inexperienced players, as the majority of them emphasizes (8 out of 9 normal players).</p><p>As the players' expertise increases, nonetheless, other needs appear to emerge. Abraxas is a real hardcore gamer: he is in Azeroth since its beta-version, and he developed in ten years of play more than thirty characters at the maximum level. He is exclusively oriented toward performance, and his most beloved character is a death knight. When I met him for the first time in a pick-up group during a raid, I was impressed by his strength. We sat apart after the battle and we started talking about how he became so powerful.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Abraxas clearly explains that "My dk [death knight] doesn't follow the game's standards, I mean according to the guides it had to be developed in a certain way. Instead, I found, by studying it, another way to evolve it that now allows me to practically never die. But to reach this goal you have to study hours and hours, and experiment hundreds of combinations on the field… I took a lot of notes to figure out the algorithm behind my character… I also developed a script to speed up the calculations I need".</head><p>Players extremely oriented toward perfection like Abraxas (10 out of 16 hardcore players in the sample) often use tools like SimCraft, an instrument that shows how much damage can be done in optimal conditions and with perfect timing rotations. Then, they try to reach and surpass those results, by systematically experimenting different gear combinations, stat weights, and rotations on the battleground. To this aim, they use notes, formulas, selfmade scripts and everything that may help them analyze their characters' stats in deep. Such users represent a minor quota of players but they are the most motivated to play. In this perspective, they show an attitude toward numbers that resembles the quantified selfers' practices, who build their own tools to overcome the barriers they encounter in managing their data <ref type="bibr" target="#b12">[12]</ref>.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Communities of practice</head><p>Notes of the 10th of April, 2016. There are a variety of guilds, each one with its own rules. However, despite all these differences, I may say that each guild is a sort of "apprenticeship laboratory": Lave called this kind of groups communities of practice. [.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>..] I started understanding what those numbers really mean only when I participated to the life of a guild. I remember that the first real advancement in my knowledge is dated to when I became a "regular mage" in the Emperors. Acquiring a stable position, as a dps, in raids, having a common goal, "working" together with others, gave me the opportunity of learning by observation and inquiry. I could ask others for every doubts I had and be corrected in the course of action.</head><p>[...] The most interesting part, here, was the need of learning a series of "rules of thumbs", traditions that were handed down, which taught tactics to maximize characters, and "secrets" for crafting more effective items. Mastering WoW's knowledge is anything but a simple task, as it requires time, hard study, and endless trials and errors. However, a lot of support comes from other players, specifically from guilds' companions. The guild's life is regulated by a series of norms, hierarchies, and habits. Players continuously share their experience and knowledge by having a common objective, enhancing their skills and fostering learning. Jaiss explains that "Even when you do a mistake, you always find someone that try to understand with you what got wrong. For example, yesterday, I could not figure out why my new coat reduced my power of healing. [...] I reviewed my gear with the other druids of my guild, we made some attempts, we tried new sets in a dungeon, and then we understood the reason... The fact is that we have a common goal, so it's natural to learn together". A shared aim strengthens cooperation among participants to perfect their play, also as a function of competition with other guilds. Halo emphasizes that "We want to maximize our performance mainly because we strive for becoming the first guild of our server [...] this is a matter of prestige".</p><p>Moreover, guilds transmit their tacit knowledge through a series of routines and "traditions" that players have to incorporate during their process of "socialization". Such routines not only give the pace of the daily living, by setting, for example, the hours of play and the tasks to be accomplished, but also allow players to acquire an expertise that would be impossible to be developed only by themselves. Pyros, for instance, describes the typical wrapup after a raid: "After the raid, instead, we always have a wrap-up. We carefully review together all the stats of the raid, the individual performances. We analyze everything and discuss what it happened during the raid, why some rotations didn't work, why healers didn't heal at their maximum level and so on.". In this perspective, players learn to make sense of their data by simply participating to the activities of their guild, as the majority of participants highlighted (22 out of 36).</p><p>However, in guilds, knowledge is not only transmitted and developed through "learning by doing" and by interiorizing routines and traditions, as we have seen above. During my research in WoW, I often relied on the suggestions of a "guide" to find the best solutions for my mage. My penultimate guild, in particular, was organized along a series of guides representing the most experienced players within the group: the guide for the mages, Mytral, had an astonishing encyclopedic knowledge of all the different items, gear, enchants and talents pertaining to a mage. When I decided to turn my spec from frost to arcane, I invited him to take a bottle of wine in the Stormwind's tavern and then we started to talk: "your stats priority should be intellect, mastery, haste and crit, keeping your mana as high as possible through potions or evocations". Since then and for a long time after, he was my reference point for all my doubts, helping me balance my skills and collect those items that I needed to achieve such goal. This openness to others can be found in many players. On the one hand, most of the hardcore gamers that spend months acquiring knowledge about their character become a guide in the guild where they belong to influencing other players that seek suggestions (10 out of 16). Besides gaining social centrality by being respected by others and recognized for their competence, as Eloin emphasizes, it is precisely through teaching to others that players can further develop their own knowledge. Kairo explains "I would have never known my character so well, in all its stats, combinations, possibilities, if I had not become a guide in my guild. Listen to others to solve their problems push you to deepen your understanding, to study more [...] it's like a challenge, and you have to go into those particular numbers to face it". On the other hand, most guild members seek guides and friendships, since such relationships help them grow their in-game abilities and develop their identities as players: guides are willing to listen to the players' problems and offer extremely tailored recommendations unlikely achievable otherwise.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>CONSIDERATIONS FOR DESIGN</head><p>I will now present a series of design considerations for based on my study findings. Although my research tried to go beyond the traditional separation between ethnography and design <ref type="bibr" target="#b16">[17]</ref>, such considerations are outlined in a separate section for the commodity of the reader.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Transform data into dynamic digital objects.</head><p>This consideration suggests making PI data more "concrete", by inserting them into graphical entities evolving with the user.</p><p>shows to PI research that data can be inscribed visible "virtual objects", each one with its own meanings. Players find value in such objects, as previous research pointed out, because they are useful, enjoyable, and sharable, allowing for remembering and self-expression [99]. Musabirov et al. <ref type="bibr" target="#b66">[61]</ref> found that digital objects in games have status-and aesthetic-related value dimensions. Livingston et al. <ref type="bibr" target="#b57">[52]</ref> listed ten different values that players to their characters, from self-expression to sociability and memory. My study corroborates these findings, emphasizing that WoW items depict an impressionistic representation of the context in which they were collected, enriching the value of the information they symbolize. Each piece of gear remains inextricably connected with the place and the moment in which it was gained: its appearance, its name and its provenance are all elements that provide contextual information in a glance. Moreover, such "data" are autonomous and circumscribed entities which can be exchanged, sold, destroyed.</p><p>In PI domain, the importance of the context has been noted by a variety of research. Rapp &amp; Cena <ref type="bibr" target="#b78">[73]</ref> found that inexperienced self-trackers seek contextual information to remember episodes connected with certain collected data. To satisfy this need, Li et al. <ref type="bibr" target="#b56">[51]</ref> and Bentley et al. <ref type="bibr" target="#b1">[2]</ref> designed systems that display contextual information along with PI data. Recently, Elsden et al. <ref type="bibr" target="#b27">[27]</ref> proposed to design for producing evocative or emotional engagements with personal data and for recollecting specific moments.</p><p>WoW suggests that both numbers and context can be into intuitive graphical representations, small packages of data uniquely characterized by names, images and properties, which can be preserved, collected, used, discharged and exchanged. In this perspective, data may not only be clustered around significant life events, but also acquire an autonomous "identity": each data-package would have a peculiar form, immediately recognizable, inspiring a variety of connected thoughts and memories. Remembering how and why certain data were gathered could enrich their interpretation increasing the user's self-knowledge. This goes together with the idea that PI does not have to pursue the goal of a total recall of the past, as it happens in lifelogging research. Rather, it should embrace a design that allows for forgetting <ref type="bibr" target="#b89">[84]</ref>, in which past data, connected with negative life moments can be "destroyed" by the user: data-packages could be discharged, sold, or simply concealed for a certain period of time. In this perspective, data sharing acquires a novel meaning as well: it becomes a way to exchange intimate experiences and memories in the of "data-gifts", rather than to expose performances. Moreover, WoW shows that players recognize themselves in a digital representation: such recognition might support a process of self-awareness, as it happens when we look into a mirror <ref type="bibr" target="#b101">[97]</ref>. What is important, here, is the mutability of the avatar, its capability of reflecting its "internal" changes, namely the changes in data, on its surface, and the sense of agency that players perceive in driving such modifications. PI research is striving to find new modalities to visualize personal data: Nafus et al. <ref type="bibr" target="#b67">[62]</ref> and Epstein et al. <ref type="bibr" target="#b24">[24]</ref> proposed to support multiple, simultaneous takes on data. However, they remained focused on abstract and static visualizations. Ubifit garden <ref type="bibr" target="#b13">[14]</ref> and BeuPo <ref type="bibr" target="#b40">[37]</ref>, instead, used metaphoric visualizations of the user's data. Nevertheless, these attempts were oriented toward changing behavior, rather than increasing her self-reflection.</p><p>WoW suggests that PI could adopt intuitive and concrete representations of the collected data, instead of analytic and abstract ones. These representations could be customizable by the user, and be addressed to support the projection into and the development of an emotional connection with the data, instead of being aimed at promoting behavior change dynamics. Visualizations that grow and evolve with the user, symbolizing different data aspects in diverse particulars of their "surface" would transmit a variety of information in a glance, without requiring a numeric literacy. This would also increase the opportunities for selfreflection, namely a reflection on the "self", and not merely on the data, since moving toward "concrete" forms of visualization would value the evocation of meanings, sensations and memories connected with data, rather than their rational examination.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Provide users with multiple analysis tools tailored to their</head><p>This consideration recommends focusing on the user's level of experience in manipulating her data, providing personalized instruments accordingly.</p><p>Lazar et al. <ref type="bibr" target="#b45">[42]</ref> emphasized that novices in using wearable technologies often cannot find any kind of utility in the data they collect, being overwhelmed by a plethora of useless numbers. Similarly, Rapp &amp; Cena <ref type="bibr" target="#b78">[73]</ref> highlighted how inexperienced PI users find their data meaningless because they cannot figure out how to make them actionable: for this, after an initial use, such tools are quickly abandoned. In the initial phases of WoW, players find similar difficulties in accounting for their data, as my notes emphasized. They cannot understand how to extract value from them. However, soon characters' data become valuable because players have the opportunity to immediately assess their effects on the field, also comparing their stats with others. This suggests that PI research should work on exploring design features highlighting how data can be made immediately actionable: currently, there is a lack of PI instruments specifically addressed to novices in self-tracking <ref type="bibr" target="#b78">[73,</ref><ref type="bibr">75]</ref>. For example, PI systems could provide to forecast how slightly variations in user's data could impact on her everyday activities in the future through simulation. Users could then their own data, e.g. by purposely varying activity levels, experimenting how they would likely affect other parameters. Moreover, PI systems could provide clear terms of comparison, to enable an assessment of users' situation: they could be invited to confront their current data with those of individuals with similar features and experience as well as collecting the same information.</p><p>WoW further promotes the idea that players at different levels of experience in managing their data might have different "numeric" needs. On the one hand, it provides users in search for quick answers to "big problems" with one-click tools that do not require any strong effort to be On the other hand, it suggests that PI instruments could make available more complex functionalities as the user's experience in interacting with her data increases, offering more specific and tailored recommendations as her capabilities of formulating precise research questions develop. WoW's most expert players are engaged in optimizing practices that require highly specialized tools. This phenomenon has been investigated in previous research, being defined as theorycrafting, i.e., the art and science of investigating game mechanics that cannot be discovered through ordinary play <ref type="bibr">[13,</ref><ref type="bibr" target="#b95">91]</ref>. <ref type="bibr">Nardi [63]</ref> discovered that WoW theorycrafters conduct analyses in which they coordinate multiple results, use theory pragmatically, and reason through uncertainty. This practice has been found in other videogames as well, e.g. among Starcraft <ref type="bibr" target="#b3">[4]</ref> players, who analyze professional matches presented in formats allowable by media technologies <ref type="bibr" target="#b46">[43]</ref>.</p><p>Although detailed metric-tracking for WoW has mostly been discussed negatively, e.g., by highlighting that it focused players on performance rather than experience <ref type="bibr" target="#b72">[67]</ref>, my research points to its benefits, since it sense-making. There are similarities between such practices and PI data interpretation processes, highlighting that we can learn from to understand how "expert" users can successfully make sense their own through formulation of hypotheses, self-experimentation, and thorough analyses. It also suggests that expert users, both gamers and trackers, have diverse information needs and value different analyzing tools with respect to "novices". Applications like that designed by <ref type="bibr">Karkar et al. [46]</ref>, which gives aids to formulate hypotheses to be tested in order to support self-experimentation, may then represent a valuable solution if addressed to expert PI users; however, they could be confounding for those that do not have welldefined goals. For such inexperienced trackers, PI systems could also recommend objectives to be reached and propose interpretations of their data (e.g. based on what other similar users do and understand).</p><p>WoW exemplifies a development model that could be for PI, whereby diverse analyzing tools can be easily connected with a flexible platform, offering supplementary possibilities of action and visualization on the same data, depending on the user's level of Whereas common PI tools are not designed to address users at different levels of expertise simultaneously, this model supports the proliferation of instruments aimed at satisfying idiosyncratic needs, which can be plugged and unplugged depending on the user's characteristics. Features could be also automatically adapted to the user's expertise, changing as her experience with data increases. This would provide a more flexible mechanism than creating an ultimate capable of meeting all the users' expectations.</p><p>Design PI "guilds" as small communities of practice. This consideration proposes to design "gamified groups" where users can learn each other and cooperate for a common aim.</p><p>WoW provides its players with a series of flexible social structures, i.e. the guilds, that support them in turning data into meanings. Mastering the numeric knowledge needed obtain the most important game achievements becomes a collective endeavor, whereby players in different roles are all devoted to understand how to better their characters and their dynamics of play. Such social structures can be described as communities of practice, where individuals meet to exchange common interests and objectives, with the aim of developing knowledge and themselves <ref type="bibr" target="#b52">[48,</ref><ref type="bibr" target="#b54">49]</ref>. In these communities, mastery is acquired by doing with others, by learning through observation and participation, and by absorbing social practices, routines and traditions. Social structures like WoW's guilds can be imagined in the PI context as well, by designing closed small groups with a common goal, where people learn to know each other, and participate to activities of sense-making. What is important here is that these "communities of practice" can be a perfect environment to develop knowledge in managing numbers, through mutual help and knowledge transfer. This does not happen in common PI communities, since they are mostly focused on exposing achievements or behavior change <ref type="bibr" target="#b82">[77]</ref>.</p><p>Previous research showed that PI users may be reluctant in exposing their data on public for privacy reasons, for example on general Social Network Sites <ref type="bibr" target="#b33">[31,</ref><ref type="bibr">80]</ref>, where audience may also not be interested in receiving updates about collected data <ref type="bibr" target="#b25">[25]</ref>. But other works emphasized that users do not avoid the data exchange when they have a precise goal <ref type="bibr" target="#b10">[11,</ref><ref type="bibr" target="#b13">14,</ref><ref type="bibr">81]</ref>. These studies show that users could willingly share their data if they can gain a positive outcome. Opportunities for obtaining useful and tailored recommendations may motivate PI users to exchange data with others; while a limited exposition of their personal information to personally known, trusted, and expert figures could reassure them that their privacy will not be violated. Such small groups could be gamified with gameful tasks to be collectively accomplished (e.g. totalizing a certain amount of steps), or problems to be solved, in order to foster the collaboration among members (e.g. by pushing users to expose their questions through a sort of "pitch" in front of the other members).</p><p>This might also counterbalance drawbacks of systems where individuals focus on self-improvement and individual achievement, which might result from metrictracking. <ref type="bibr">Braithwaite [7]</ref> emphasized that WoW has, over the course of its lifetime, trended away from collaborative effort in favor of measures of individual achievement, supporting solo battles that reiterate the importance of characters' optimization. The introduction of pick-up groups, instrumentally oriented to empower characters, also reduced the opportunity of socialization <ref type="bibr" target="#b26">[26]</ref>. Crenshaw et al. <ref type="bibr" target="#b17">[18]</ref> stressed that a hyper-quantified way of approaching WoW has become prevalent today, jeopardizing social relations. Designing small PI communities of practices, therefore, might prevent this negative tendency: the closeness of the participants becomes a fundamental element to create a sense of intimacy that might support the development of a mutual understanding and cooperation.</p><p>Gamified designs could also make the groups compete each other. This would motivate to "learn" both users that enjoy a competitive rewarding structure, and those that prefer a collaborative rewarding structure, who will work mainly for the sake of the group they belong to <ref type="bibr" target="#b0">[1]</ref>. Moreover, design could grant flexibility to the social structure of these groups, so that users could set their own hierarchies and rules. This could turn into a set of "routines" to be learnt for becoming part of the group itself, through which "interpretative habits" and rules of thumb for managing data could be transmitted. Finally, another design solution could be to create a virtuous circle where the more expert players are fostered to guide less experienced ones because they can gain visibility and reputation, by showing their competence and attracting social relationships. At the same time, by becoming a guide, players will have the opportunity of perfecting their knowledge, by facing problems that they would have not encountered otherwise.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>DISCUSSION</head><p>My findings pointed to design solutions that aim at going beyond the common gamification techniques currently employed in PI systems, increasing their potentialities to engage, enjoy, and support users in their sense-making activities. Suggestions for embodying data into digital entities make numeric data more "concrete", which otherwise would risk of leading to an excessive "quantification", and consequently rationalization, of visceral phenomena, as many PI tracked parameters are, such as emotions and body symptoms, somehow misleading the person's self-knowledge [87]. Here, instead, we can imagine instruments empowering the natural way through which we appraise our internal experiences (i.e. by ascribing meanings to them), instead of pushing ourselves toward modalities of analysis closer to how machines "think". Moreover, providing diversified tools depending on the user's level of expertise can overcome the one-sizefits-all approach that has been strongly criticized even in the gamification domain <ref type="bibr" target="#b48">[45,</ref><ref type="bibr" target="#b24">24]</ref>. This would balance the level of "challenge" in managing PI data on the basis of the individual's competence, turning this practice in sort of an engaging game, whereby the "hardest" sense-making tasks would be accomplished by the more expert users by using sophisticated tools, and the inexperienced ones would be guided step-by-step by the system. Finally, structuring PI communities in small sense-making gamified groups may actually foster users' enjoyment rather than performances, by creating a sense of closeness among the group members, which, in turn, would support the willingness of having fun together in collectively exploring PI data, rather than the individual competition to "win" a challenge, as used in most of the gamified app for behavior change <ref type="bibr" target="#b73">[68]</ref>.</p><p>These suggestions, then, partially divert from the common trend in PI design where gamification is employed more to change behavior rather than increasing self-knowledge. In a behavior modification frame, games have been identified as possible sources for "deceptive" behavior changes.</p><p>Exploring the changing technological configuration of gambling activities in Las Vegas, Schüll <ref type="bibr" target="#b91">[86]</ref> emphasized how certain game designs may be deliberately created for engendering an extreme involvement in their users, so that to support the development of states of addiction: game mechanics in this context are used to induce a "machine life", whereby the user's body is pushed to continuously respond to the rhythms of the system, reducing its agency and producing an hypnotic state. This is also the case of many entertainment games, such as the MMORPGs that I investigated in my fieldwork, which have been reported to be the leading culprit of video game addiction <ref type="bibr" target="#b15">[16]</ref>.</p><p>If the employment of such design techniques may be ethically questionable even in their original contexts, where players deliberately choose to and actually search for being deeply engaged, they may raise much more moral concerns when they are applied in other situations, like PI, where they could strengthen and give more evidence to underlying tendencies already present. For example, it has been noted that PI designs might support a sort of "feedback loop for behavior change", "where people are approached as computer-like information processors, 'autocorrelating servomechanisms'" <ref type="bibr" target="#b88">[83]</ref>, and behavior is steered through automatic reactions: despite the illusory perception of making users agent of change through a renewed selfawareness, these devices would elicit a stimulus-response circle, where the user regulates her behavior on the basis of new data almost automatically, until she achieves the desired result <ref type="bibr">[87]</ref>. In this perspective, gamified elements risk to reinforce forms of automated behavior. For this, I tried to favor design suggestions supporting sense-making and knowledge development rather than elicitation of behavior. By and large, it is worthy noting that by transferring design elements from one environment to another, we cannot avoid asking ourselves whether the employment of certain design elements may be licit and ethically justifiable in the target context.</p><p>Another point important to be highlighted is related to the hypotheses that guided this research. I assumed that "game data" and PI systems' "personal data" were similar in their underlying mechanisms: in other words, I hypothesized that WoW's players and PI users would encounter more or less the same issues in interpreting their numbers and would attempt to enact comparable procedures to account for them. Fieldwork confirmed this similarity, pointing that hardcore gamers' strategies for managing data are close to those of the quantified selfers, and that novice players find the same difficulties that inexperienced selftrackers encounter in their tracking practices. On the basis of this "bridge", I suggested some design considerations that, drawing inspiration from WoW's best practices, aim at supporting data sense-making and learning through numbers. I also hypothesized that a game can be broken down in singular parts and that such parts would maintain their effects after being transplanted in other contexts. Here, again, the fieldwork appears to suggest that WoW's mechanics might work even when considered alone. Some players, for instance, reported to have problem in managing "self-experiments" alone and recounted how they learnt to "play" by only relying on the help of others. However, they that this was the same learning modality they employed in other "complex games I played, such as EVE Online" as said by Feilyn. This may support the assumption that such game mechanics maintain their impact, even if only for specific kinds of individuals, independently from game frame where they are inscribed.</p><p>A final point is related to the incremental structure of Add-ons, for example, changed over the years, whereby new tools have been developed, and others were discharged. As reported by our participants, nonetheless, new tools did not affect the whole structure of the game, but only some specific aspects, suggesting that some game elements may have a delimited effect. However, I cannot guarantee that the elements recounted here would work exactly in the same way when used in other domains, since the game as a whole, e.g. its narratives and overarching goals, could influence how such mechanics are interpreted by individuals. For this, I suggest to frame the considerations outlined above as "design hypotheses" <ref type="bibr" target="#b37">[35]</ref>, who will need further validation tests to prove their effectiveness. This said, the main objective of gamification is not to exactly replicate the "lived experience" of games, which would be impossible, but only to get as close as as possible to their enjoyable experience, and to exploit their "best practices" to support users in their tasks.</p><p>In this work, I made two main contributions. First, I described how players learn to manage the quantitative information needed to play the game at best, how they ascribe meaning to numbers, and how they turn them into action. Second I provided a series of design considerations to transfer WoW's best practices in supporting players making sense of their data to PI domain.</p></div><figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_0"><head></head><label></label><figDesc>[w.r.t. the damages made]. If not, I try to understand what kind of items the other has, and where I can better myself".</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_0"><head></head><label></label><figDesc>However, as the players' experience raises "You become aware that those objects are not all the same. That you need a strategy to develop your character, and well, you start paying attention to what abilities should be improved, what kind of stats do you need, you start studying a lot... [...] but it's not boring at all. You're not only increasing some values, but you're searching for objects, facing battles for them", Mytral says, an hardcore gamer.</figDesc><table /></figure>
+		</body>
+		<back>
+			<div type="references">
+
+				<listBibl>
+
+<biblStruct xml:id="b0">
+	<analytic>
+		<title level="a" type="main">Cooperation, competition, and team performance: Towards a contingency approach</title>
+		<author>
+			<persName><forename type="first">Bianca</forename><surname>Beersma</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">John</forename><forename type="middle">H</forename><surname>Hollenbeck</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Humphrey</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Henry</forename><surname>Moon</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Donald</forename><forename type="middle">E</forename><surname>Conlon</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Daniel</forename><forename type="middle">R</forename><surname>Ilgen</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Academy of Management Journal</title>
+		<imprint>
+			<biblScope unit="volume">46</biblScope>
+			<biblScope unit="issue">5</biblScope>
+			<biblScope unit="page" from="572" to="590" />
+			<date type="published" when="2003">2003</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b1">
+	<analytic>
+		<title level="a" type="main">Health Mashups: Presenting Statistical between Wellbeing Data and Context in Natural Language to Promote Behavior Change</title>
+		<author>
+			<persName><forename type="first">Frank</forename><surname>Bentley</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Konrad</forename><surname>Tollmar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Peter</forename><surname>Stephenson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Laura</forename><surname>Levy</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Brian</forename><surname>Jones</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Scott</forename><surname>Robertson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ed</forename><surname>Price</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Richard</forename><surname>Catrambone</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jeff</forename><surname>Wilson</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">ACM Trans. Comput.-Hum. Interact</title>
+		<imprint>
+			<biblScope unit="volume">20</biblScope>
+			<biblScope unit="page">5</biblScope>
+			<date type="published" when="2013">2013</date>
+		</imprint>
+	</monogr>
+	<note>Article 30</note>
+</biblStruct>
+
+<biblStruct xml:id="b2">
+	<analytic>
+		<title level="a" type="main">World of Warcraft. Game [Microsoft Windows, macOs</title>
+	</analytic>
+	<monogr>
+		<title level="m">Blizzard Entertainment</title>
+				<meeting><address><addrLine>Irvine, California</addrLine></address></meeting>
+		<imprint>
+			<date type="published" when="2004-09">2004. 23 November 2004. September 2016</date>
+		</imprint>
+	</monogr>
+	<note>Blizzard Entertainment</note>
+</biblStruct>
+
+<biblStruct xml:id="b3">
+	<analytic>
+	</analytic>
+	<monogr>
+		<title level="m">Blizzard Entertainment</title>
+		<title level="s">Blizzard Entertainment. 1998. StarCraft. Game</title>
+		<meeting><address><addrLine>Irvine, California</addrLine></address></meeting>
+		<imprint>
+			<date type="published" when="1998-03-31">31 March 1998</date>
+		</imprint>
+	</monogr>
+	<note>Microsoft Windows, macOs</note>
+</biblStruct>
+
+<biblStruct xml:id="b4">
+	<monogr>
+		<title level="m" type="main">Coming of age in second life: An anthropologist explores the virtual human</title>
+		<author>
+			<persName><forename type="first">Tom</forename><surname>Boellstorff</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2008">2008</date>
+			<publisher>Princeton University Press</publisher>
+			<pubPlace>Princeton, NJ</pubPlace>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b5">
+	<analytic>
+		<title level="a" type="main">Naturalistic inquiry and the saturation concept: A research note</title>
+		<author>
+			<persName><forename type="first">Glenn</forename><forename type="middle">A</forename><surname>Bowen</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Qualitative Research</title>
+		<imprint>
+			<biblScope unit="volume">8</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page" from="137" to="152" />
+			<date type="published" when="2008">2008</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b6">
+	<monogr>
+		<title level="m" type="main">WoWing Alone: The Evolution of &apos;&apos;Multiplayer&apos;&apos; in World of Warcraft</title>
+		<author>
+			<persName><forename type="first">Andrea</forename><surname>Braithwaite</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2015">2015</date>
+		</imprint>
+	</monogr>
+	<note>and Culture</note>
+</biblStruct>
+
+<biblStruct xml:id="b7">
+	<analytic>
+		<title level="a" type="main">Design of an mHealth app for the selfmanagement of adolescent type 1 diabetes: a pilot</title>
+		<author>
+			<persName><forename type="first">Joseph</forename><forename type="middle">A</forename><surname>Cafazzo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mark</forename><surname>Casselman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Nathaniel</forename><surname>Hamming</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Debra</forename><forename type="middle">K</forename><surname>Katzman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mark</forename><forename type="middle">R</forename><surname>Palmert</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Journal of medical Internet research</title>
+		<imprint>
+			<biblScope unit="volume">14</biblScope>
+			<biblScope unit="issue">3</biblScope>
+			<biblScope unit="page">e70</biblScope>
+			<date type="published" when="2012">2012</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b8">
+	<analytic>
+		<title/>
+		<author>
+			<persName><forename type="first">Mario</forename><surname>Cardano</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Ethnography And Reflexivity. Notes on the Construction of Objectivity. Ethnographic Research</title>
+		<imprint>
+			<date type="published" when="2009-01">2009. 1/2009</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b9">
+	<monogr>
+		<title level="m" type="main">Leet noobs: The life and death of an expert player group in World of Warcraft</title>
+		<author>
+			<persName><forename type="first">G</forename><surname>Mark</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Chen</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2012">2012</date>
+			<publisher>Peter Lang</publisher>
+			<pubPlace>New York, NY</pubPlace>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b10">
+	<analytic>
+		<title level="a" type="main">HealthyTogether: exploring social incentives for mobile fitness applications</title>
+		<author>
+			<persName><forename type="first">Yu</forename><surname>Chen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Pearl</forename><surname>Pu</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the Second International Symposium of Chinese CHI (Chinese CHI &apos;14)</title>
+				<meeting>the Second International Symposium of Chinese CHI (Chinese CHI &apos;14)</meeting>
+		<imprint>
+			<date type="published" when="2014">2014</date>
+			<biblScope unit="page" from="25" to="34" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b11">
+	<monogr>
+		<title/>
+		<idno type="DOI">10.1145/2592235.2592240</idno>
+		<ptr target="http://doi.acm.org/10.1145/2592235.2592240" />
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b12">
+	<analytic>
+		<title level="a" type="main">Understanding quantified-selfers&apos; practices in collecting and exploring personal data</title>
+		<author>
+			<persName><forename type="first">Eun</forename><surname>Kyoung Choe</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Nicole</forename><forename type="middle">B</forename><surname>Lee</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Bongshin</forename><surname>Lee</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Wanda</forename><surname>Pratt</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Julie</forename><forename type="middle">A</forename><surname>Kientz</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2556288.2557372</idno>
+		<ptr target="http://doi.acm.org/10.1145/2556288.255737213" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 32nd annual ACM conference on Human factors in computing systems (CHI &apos;14)</title>
+				<editor>
+			<persName><forename type="first">Constance</forename><surname>Steinkuehler</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">Kurt</forename><surname>Squire</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">Sasha</forename><surname>Barab</surname></persName>
+		</editor>
+		<meeting>the 32nd annual ACM conference on Human factors in computing systems (CHI &apos;14)<address><addrLine>Cambridge, UK</addrLine></address></meeting>
+		<imprint>
+			<publisher>University Press</publisher>
+			<date type="published" when="2012">2014. 2012</date>
+			<biblScope unit="page" from="185" to="209" />
+		</imprint>
+	</monogr>
+	<note>Games, learning, and society: Learning and meaning in the digital age</note>
+</biblStruct>
+
+<biblStruct xml:id="b13">
+	<analytic>
+		<title level="a" type="main">Activity sensing in the wild: a field trial of ubifit garden</title>
+		<author>
+			<persName><forename type="first">Sunny</forename><surname>Consolvo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">David</forename><forename type="middle">W</forename><surname>Mcdonald</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Tammy</forename><surname>Toscos</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mike</forename><forename type="middle">Y</forename><surname>Chen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jon</forename><surname>Froehlich</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Beverly</forename><surname>Harrison</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Predrag</forename><surname>Klasnja</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/1357054.1357335</idno>
+		<ptr target="https://doi.org/10.1145/1357054.1357335" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the SIGCHI Conference on Human Factors in Computing Systems (CHI &apos;08)</title>
+				<meeting>the SIGCHI Conference on Human Factors in Computing Systems (CHI &apos;08)</meeting>
+		<imprint>
+			<date type="published" when="2008">2008</date>
+			<biblScope unit="page" from="1797" to="1806" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b14">
+	<analytic>
+		<title/>
+		<author>
+			<persName><forename type="first">Hilde</forename><surname>Corneliussen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Walker</forename><surname>Rettberg</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Digital Culture, Play and Identity: A World of Warcraft. Reader</title>
+		<imprint>
+			<date type="published" when="2011">2011</date>
+			<publisher>MIT Press</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b15">
+	<monogr>
+		<title level="m" type="main">Emotional and behavioral effects, including addictive potential, of video games</title>
+		<ptr target="http://psychcentral.com/blog/images/csaph12a07.pdf" />
+		<imprint>
+			<date type="published" when="2007-08-22">2007. August 22. 2017</date>
+		</imprint>
+		<respStmt>
+			<orgName>Council on Science and Public Health</orgName>
+		</respStmt>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b16">
+	<analytic>
+		<title level="a" type="main">Our Metrics, Ourselves: A Hundred Years of Self-Tracking from the Weight Scale to the Wrist Wearable Device</title>
+		<author>
+			<persName><forename type="first">Kate</forename><surname>Crawford</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jessa</forename><surname>Lingel</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Tero</forename><surname>Karppi</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">European Journal of Cultural Studies</title>
+		<imprint>
+			<biblScope unit="volume">18</biblScope>
+			<biblScope unit="issue">4-5</biblScope>
+			<biblScope unit="page" from="479" to="496" />
+			<date type="published" when="2015">2015</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b17">
+	<analytic>
+		<title level="a" type="main">Something We Loved That Was Taken Away&quot;: Community and Neoliberalism in World of Warcraft</title>
+		<author>
+			<persName><forename type="first">Nicole</forename><surname>Crenshaw</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jaclyn</forename><surname>Lamorte</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Bonnie</forename><surname>Nardi</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 50th Hawaii International on System Sciences</title>
+				<meeting>the 50th Hawaii International on System Sciences</meeting>
+		<imprint>
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b18">
+	<analytic>
+		<title level="a" type="main">If you build it they might stay: retention mechanisms in World of Warcraft</title>
+		<author>
+			<persName><forename type="first">Thomas</forename><surname>Debeauvais</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Bonnie</forename><surname>Nardi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Diane</forename><forename type="middle">J</forename><surname>Schiano</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Nicolas</forename><surname>Ducheneaut</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Nicholas</forename><surname>Yee</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 6th International Conference on Foundations of Digital (FDG &apos;11)</title>
+				<meeting>the 6th International Conference on Foundations of Digital (FDG &apos;11)</meeting>
+		<imprint>
+			<date type="published" when="2011">2011</date>
+			<biblScope unit="page" from="180" to="187" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b19">
+	<monogr>
+		<title/>
+		<idno type="DOI">10.1145/2159365.2159390</idno>
+		<ptr target="http://dx.doi.org/10.1145/2159365.2159390" />
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b20">
+	<analytic>
+		<title level="a" type="main">From game design elements to gamefulness: defining &quot;gamification</title>
+		<author>
+			<persName><forename type="first">Sebastian</forename><surname>Deterding</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Dan</forename><surname>Dixon</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Rilla</forename><surname>Khaled</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Nacke</forename></persName>
+		</author>
+		<idno type="DOI">10.1145/2181037.2181040</idno>
+		<ptr target="https://doi.org/10.1145/2181037.2181040" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 15th International Academic MindTrek Conference: Envisioning Future Media Environments (MindTrek &apos;11)</title>
+				<meeting>the 15th International Academic MindTrek Conference: Envisioning Future Media Environments (MindTrek &apos;11)<address><addrLine>New York</addrLine></address></meeting>
+		<imprint>
+			<publisher>ACM</publisher>
+			<date type="published" when="2011">2011</date>
+			<biblScope unit="page" from="9" to="15" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b21">
+	<analytic>
+		<title level="a" type="main">The life and death of online gaming communities: a look at guilds in world of warcraft</title>
+		<author>
+			<persName><forename type="first">Nicolas</forename><surname>Ducheneaut</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Nicholas</forename><surname>Yee</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Eric</forename><surname>Nickell</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Robert</forename><forename type="middle">J</forename><surname>Moore</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/1240624.1240750</idno>
+		<ptr target="https://doi.org/10.1145/1240624.1240750" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the SIGCHI Conference on Human Factors in Computing Systems (CHI &apos;07)</title>
+				<meeting>the SIGCHI Conference on Human Factors in Computing Systems (CHI &apos;07)</meeting>
+		<imprint>
+			<date type="published" when="2007">2007</date>
+			<biblScope unit="page" from="839" to="848" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b22">
+	<analytic>
+		<title level="a" type="main">Implications for design</title>
+		<author>
+			<persName><forename type="first">Paul</forename><surname>Dourish</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/1124772.1124855</idno>
+		<ptr target="http://dx.doi.org/10.1145/1124772.1124855" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the SIGCHI Conference on Human Factors in Computing Systems &apos;06)</title>
+				<meeting>the SIGCHI Conference on Human Factors in Computing Systems &apos;06)</meeting>
+		<imprint>
+			<date type="published" when="2006">2006</date>
+			<biblScope unit="page" from="541" to="550" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b23">
+	<analytic>
+		<title level="a" type="main">A lived informatics model of personal informatics</title>
+		<author>
+			<persName><forename type="first">Daniel</forename><forename type="middle">A</forename><surname>Epstein</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">An</forename><forename type="middle">James</forename><surname>Fogarty</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sean</forename><forename type="middle">A</forename><surname>Munson</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2750858.2804250</idno>
+		<ptr target="https://doi.org/10.1145/2750858.2804250" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2015 ACM International Joint Conference on Pervasive and Ubiquitous Computing (UbiComp &apos;15)</title>
+				<meeting>the 2015 ACM International Joint Conference on Pervasive and Ubiquitous Computing (UbiComp &apos;15)</meeting>
+		<imprint>
+			<date type="published" when="2015">2015</date>
+			<biblScope unit="page" from="731" to="742" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b24">
+	<analytic>
+		<title level="a" type="main">Taming data complexity in lifelogs: exploring visual cuts of personal informatics data</title>
+		<author>
+			<persName><forename type="first">Daniel</forename><surname>Epstein</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Felicia</forename><surname>Cordeiro</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Elizabeth</forename><surname>Bales</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">James</forename><surname>Fogarty</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sean</forename><surname>Munson</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2598510.2598558</idno>
+		<ptr target="https://doi.org/10.1145/2598510.2598558" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2014 conference on Designing interactive systems (DIS &apos;14)</title>
+				<meeting>the 2014 conference on Designing interactive systems (DIS &apos;14)</meeting>
+		<imprint>
+			<date type="published" when="2014">2014</date>
+			<biblScope unit="page" from="667" to="676" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b25">
+	<analytic>
+		<title level="a" type="main">From &quot;nobody cares&quot; to &quot;way to go!&quot;: A Design Framework for Social Sharing in Personal Informatics</title>
+		<author>
+			<persName><forename type="first">Daniel</forename><forename type="middle">A</forename><surname>Epstein</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Bradley</forename><forename type="middle">H</forename><surname>Jacobson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Elizabeth</forename><surname>Bales</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">David</forename><forename type="middle">W</forename><surname>Mcdonald</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sean</forename><forename type="middle">A</forename><surname>Munson</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2675133.2675135</idno>
+		<ptr target="http://dx.doi.org/10.1145/2675133.2675135" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 18th ACM Conference on Computer Supported Cooperative &amp; Social Computing (CSCW &apos;15)</title>
+				<meeting>the 18th ACM Conference on Computer Supported Cooperative &amp; Social Computing (CSCW &apos;15)</meeting>
+		<imprint>
+			<date type="published" when="2015">2015</date>
+			<biblScope unit="page" from="1622" to="1636" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b26">
+	<analytic>
+		<title level="a" type="main">Played and designed sociality in a massive multiplayer online game</title>
+		<author>
+			<persName><forename type="first">Lina</forename><surname>Eklund</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Magnus</forename><surname>Johansson</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Eludamos</title>
+		<imprint>
+			<biblScope unit="volume">7</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page" from="35" to="54" />
+			<date type="published" when="2013">2013</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b27">
+	<analytic>
+		<title level="a" type="main">A Quantified Past: Toward Design for Remembering With Personal Informatics</title>
+		<author>
+			<persName><forename type="first">Chris</forename><surname>Elsden</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">David</forename><forename type="middle">S</forename><surname>Kirk</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Abigail</forename><forename type="middle">C</forename><surname>Durrant</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Hum.-Comput. Interact</title>
+		<imprint>
+			<biblScope unit="volume">31</biblScope>
+			<biblScope unit="issue">6</biblScope>
+			<biblScope unit="page" from="518" to="557" />
+			<date type="published" when="2016-11">2016. November 2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b28">
+	<monogr>
+		<title level="m" type="main">Battlefields of negotiation: Control, agency, and ownership in World of Warcraft</title>
+		<author>
+			<persName><forename type="first">René</forename><surname>Glas</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2013">2013</date>
+			<publisher>Amsterdam University Press</publisher>
+			<pubPlace>Amsterdam, The Netherlands</pubPlace>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b29">
+	<analytic>
+		<title level="a" type="main">Re-Conceptualizing Generalization. Old Issues in a New Frame</title>
+		<author>
+			<persName><forename type="first">Giampietro</forename><surname>Gobo</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">The SAGE Handbook of Social Research Methods Alasuutari</title>
+				<editor>
+			<persName><forename type="first">Julia</forename><surname>Brannen</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">Leonard</forename><surname>Bickman</surname></persName>
+		</editor>
+		<imprint>
+			<date type="published" when="2008">2008</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b30">
+	<analytic>
+		<title/>
+	</analytic>
+	<monogr>
+		<title level="j">Sage</title>
+		<imprint>
+			<biblScope unit="page" from="193" to="213" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b31">
+	<analytic>
+		<title level="a" type="main">How do we engage with activity trackers?: a longitudinal study of Habito</title>
+		<author>
+			<persName><forename type="first">Rúben</forename><surname>Gouveia</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Evangelos</forename><surname>Karapanos</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Marc</forename><surname>Hassenzahl</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2015 ACM International Joint Conference on Pervasive and Ubiquitous Computing &apos;15)</title>
+				<meeting>the 2015 ACM International Joint Conference on Pervasive and Ubiquitous Computing &apos;15)</meeting>
+		<imprint>
+			<date type="published" when="2015">2015</date>
+			<biblScope unit="page" from="1305" to="1316" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b32">
+	<monogr>
+		<title/>
+		<idno type="DOI">10.1145/2750858.2804290</idno>
+		<ptr target="https://doi.org/10.1145/2750858.2804290" />
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b33">
+	<analytic>
+		<title level="a" type="main">Persuasive technology in the real world: a study of long-term use of activity sensing devices for fitness</title>
+		<author>
+			<persName><forename type="first">Thomas</forename><surname>Fritz</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Elaine</forename><forename type="middle">M</forename><surname>Huang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Gail</forename><forename type="middle">C</forename><surname>Murphy</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Thomas</forename><surname>Zimmermann</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2556288.2557383</idno>
+		<ptr target="https://doi.org/10.1145/2556288.2557383" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the SIGCHI Conference on Human Factors in Computing Systems (CHI &apos;14)</title>
+				<meeting>the SIGCHI Conference on Human Factors in Computing Systems (CHI &apos;14)</meeting>
+		<imprint>
+			<date type="published" when="2014">2014</date>
+			<biblScope unit="page" from="487" to="496" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b34">
+	<monogr>
+		<title level="m" type="main">Lifelogging: Personal big data. Foundations and Trends in Information Retrieval</title>
+		<author>
+			<persName><forename type="first">Cathal</forename><surname>Gurrin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Alan</forename><forename type="middle">F</forename><surname>Smeaton</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Aiden</forename><forename type="middle">R</forename><surname>Doherty</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2014">2014</date>
+			<biblScope unit="volume">8</biblScope>
+			<biblScope unit="page" from="1" to="125" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b35">
+	<analytic>
+		<title level="a" type="main">Does gamification work? A literature review of empirical studies on gamification</title>
+		<author>
+			<persName><forename type="first">Juho</forename><surname>Hamari</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jonna</forename><surname>Koivisto</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Harri</forename><surname>Sarsa</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the Hawaii International Conference on System Sciences (HICSS &apos;14</title>
+				<meeting>the Hawaii International Conference on System Sciences (HICSS &apos;14</meeting>
+		<imprint>
+			<date type="published" when="2014">2014</date>
+			<biblScope unit="page" from="3025" to="3034" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b36">
+	<monogr>
+		<title level="m" type="main">The basic problems of phenomenology</title>
+		<author>
+			<persName><forename type="first">Martin</forename><surname>Heidegger</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="1982">1982</date>
+			<publisher>Indiana University Press</publisher>
+			<pubPlace>Bloomington, IN</pubPlace>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b37">
+	<analytic>
+		<title level="a" type="main">Mind the theoretical gap: interpreting, using, and developing behavioral theory in research</title>
+		<author>
+			<persName><forename type="first">Eric</forename><forename type="middle">B</forename><surname>Hekler</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Predrag</forename><surname>Klasnja</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jon</forename><forename type="middle">E</forename><surname>Froehlich</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Matthew</forename><forename type="middle">P</forename><surname>Buman</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the SIGCHI Conference on Human Factors in Computing Systems (CHI &apos;13)</title>
+				<meeting>the SIGCHI Conference on Human Factors in Computing Systems (CHI &apos;13)</meeting>
+		<imprint>
+			<date type="published" when="2013">2013</date>
+			<biblScope unit="page" from="3307" to="3316" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b38">
+	<monogr>
+		<title/>
+		<idno type="DOI">10.1145/2470654.2466452</idno>
+		<ptr target="https://doi.org/10.1145/2470654.2466452" />
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b39">
+	<monogr>
+		<title level="m" type="main">Virtual ethnography</title>
+		<author>
+			<persName><forename type="first">C</forename><surname>Hine</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2000">2000</date>
+			<publisher>Sage Publications Ltd</publisher>
+			<pubPlace>Thousand Oaks, California</pubPlace>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b40">
+	<analytic>
+		<title level="a" type="main">BeuPo: a digital plant that you can raise and customize with your current posture</title>
+		<author>
+			<persName><forename type="first">Jeong-Ki</forename><surname>Hong</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Bon-Chang</forename><surname>Koo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">So-Ryang</forename><surname>Ban</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jun-Dong</forename><surname>Cho</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Andrea</forename><surname>Bianchi</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2800835.2800953</idno>
+		<ptr target="https://doi.org/10.1145/2800835.2800953" />
+	</analytic>
+	<monogr>
+		<title level="m">Adjunct Proceedings of UbiComp/ISWC&apos;15</title>
+				<imprint>
+			<date type="published" when="2015">2015</date>
+			<biblScope unit="page" from="1015" to="1020" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b41">
+	<analytic>
+		<title level="a" type="main">Are wearables over?</title>
+		<author>
+			<persName><forename type="first">Leah</forename><surname>Hunter</surname></persName>
+		</author>
+		<ptr target="http://www.fastcompany.com/3028879/most-innovative-companies/are-wearables-over" />
+	</analytic>
+	<monogr>
+		<title level="j">Fast Company Inc</title>
+		<imprint>
+			<date type="published" when="2014-03">2014. April 2014. March</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b42">
+	<monogr>
+		<title level="m" type="main">Phenomenological psychology: Lectures from the summer semester, 1925. Martinus Nijhoff</title>
+		<author>
+			<persName><forename type="first">Edmund</forename><surname>Husserl</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="1962">1962</date>
+			<pubPlace>The Hague, The Netherlands</pubPlace>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b43">
+	<monogr>
+		<title level="m" type="main">Wearable technology 2014-2024: Technologies, markets, forecasts e-textiles, wearable electronics, medical diagnostics, smart glasses, smart wristbands and more</title>
+		<author>
+			<persName><surname>Idtechex</surname></persName>
+		</author>
+		<ptr target="http://www.idtechex.com/research/reports/wearable-technology-2014-2024-technologies\-markets-forecasts-000379.asp" />
+		<imprint>
+			<date type="published" when="2014-03">2014. July 2014. March</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b44">
+	<analytic>
+		<title level="a" type="main">Gamification for health and wellbeing: A systematic review of the literature</title>
+		<author>
+			<persName><forename type="first">Daniel</forename><surname>Johnson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sebastian</forename><surname>Deterding</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kerri-Ann</forename><surname>Kuhn</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Aleksandra</forename><surname>Staneva</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Stoyan</forename><surname>Stoyanov</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Leanne</forename><surname>Hides</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Internet Interventions</title>
+		<imprint>
+			<biblScope unit="volume">6</biblScope>
+			<biblScope unit="page" from="89" to="106" />
+			<date type="published" when="2016">2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b45">
+	<analytic>
+		<title level="a" type="main">Healthcare in the pocket: Mapping the space of mobile-phone health interventions</title>
+		<author>
+			<persName><forename type="first">Predrag</forename><surname>Klasnja</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Wanda</forename><surname>Pratt</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Journal of Biomedical Informatics</title>
+		<imprint>
+			<biblScope unit="volume">45</biblScope>
+			<biblScope unit="page" from="184" to="198" />
+			<date type="published" when="2012">2012. 2012</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b46">
+	<analytic>
+		<title level="a" type="main">Media technologies and learning in the starcraft esport</title>
+		<author>
+			<persName><forename type="first">Yong</forename></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ming</forename><surname>Kow</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Timothy</forename><surname>Young</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2441776.2441821</idno>
+		<ptr target="https://doi.org/10.1145/2441776.2441821" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2013 conference on Computer supported cooperative work (CSCW &apos;13)</title>
+				<meeting>the 2013 conference on Computer supported cooperative work (CSCW &apos;13)</meeting>
+		<imprint>
+			<date type="published" when="2013">2013</date>
+			<biblScope unit="page" from="387" to="398" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b47">
+	<analytic>
+		<title level="a" type="main">Inside How the science of human behavior change offers the to long-term engagement</title>
+		<author>
+			<persName><forename type="first">Dan</forename><surname>Ledger</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Daniel</forename><surname>Mccaffrey</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Endeavour Partners LLC</title>
+		<imprint>
+			<biblScope unit="volume">93</biblScope>
+			<biblScope unit="page" from="36" to="45" />
+			<date type="published" when="2014">2014. 2014</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b48">
+	<analytic>
+		<title level="a" type="main">Motivational affordances and personality types in personal informatics</title>
+		<author>
+			<persName><forename type="first">Yamini</forename><surname>Karanam</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Leslie</forename><surname>Filko</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Lindsay</forename><surname>Kaser</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Hanan</forename><surname>Alotaibi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Elham</forename><surname>Makhsoom</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Stephen</forename><surname>Voida</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2638728.2638800</idno>
+		<ptr target="https://doi.org/10.1145/2638728.2638800" />
+	</analytic>
+	<monogr>
+		<title level="m">Adjunct Proceedings of the 2014 ACM International Joint Conference on Pervasive and Ubiquitous Computing</title>
+				<imprint>
+			<date type="published" when="2014">2014</date>
+			<biblScope unit="page" from="79" to="82" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b49">
+	<analytic>
+		<title level="a" type="main">Opportunities and challenges for self-experimentation in self-tracking</title>
+		<author>
+			<persName><forename type="first">Ravi</forename><surname>Karkar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">James</forename><surname>Fogarty</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Julie</forename><forename type="middle">A</forename><surname>Kientz</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sean</forename><forename type="middle">A</forename><surname>Munson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Roger</forename><surname>Vilardaga</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jasmine</forename><surname>Zia</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Adjunct Proceedings of UbiComp/ISWC&apos;15</title>
+				<imprint>
+			<date type="published" when="2015">2015</date>
+			<biblScope unit="page" from="991" to="996" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b50">
+	<monogr>
+		<title/>
+		<idno type="DOI">10.1145/2800835.2800949</idno>
+		<ptr target="https://doi.org/10.1145/2800835.2800949" />
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b51">
+	<analytic>
+		<title level="a" type="main">Why we use and abandon smart devices</title>
+		<author>
+			<persName><forename type="first">Amanda</forename><surname>Lazar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Christian</forename><surname>Koehler</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Joshua</forename><surname>Tanenbaum</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">David</forename><forename type="middle">H</forename><surname>Nguyen</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2750858.2804288</idno>
+		<ptr target="https://doi.org/10.1145/2750858.2804288" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2015 ACM International Joint Conference on Pervasive and Ubiquitous Computing (UbiComp &apos;15)</title>
+				<meeting>the 2015 ACM International Joint Conference on Pervasive and Ubiquitous Computing (UbiComp &apos;15)</meeting>
+		<imprint>
+			<date type="published" when="2015">2015</date>
+			<biblScope unit="page" from="635" to="646" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b52">
+	<monogr>
+		<title level="m" type="main">Situating learning in communities of In Perspectives on socially Shared Cognition</title>
+		<author>
+			<persName><forename type="first">Jean</forename><surname>Lave</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">;</forename><surname>Lauren</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Resnick</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Stephanie</forename><forename type="middle">D</forename><surname>Teasley</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>John</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="1991">1991</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b53">
+	<monogr>
+		<title/>
+		<author>
+			<persName><surname>Levine</surname></persName>
+		</author>
+		<imprint>
+			<publisher>American Psychological Association</publisher>
+			<biblScope unit="page" from="63" to="84" />
+			<pubPlace>Washington, D.C</pubPlace>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b54">
+	<monogr>
+		<title level="m" type="main">Situated learning: Legitimate peripheral participation</title>
+		<author>
+			<persName><forename type="first">Jean</forename><surname>Lave</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Etienne</forename><surname>Wenger</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="1991">1991</date>
+			<publisher>Cambridge University Press</publisher>
+			<pubPlace>Cambridge, UK</pubPlace>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b55">
+	<analytic>
+		<title level="a" type="main">A stagebased model of personal informatics systems</title>
+		<author>
+			<persName><forename type="first">Ian</forename><surname>Li</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Anind</forename><surname>Dey</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jodi</forename><surname>Forlizzi</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/1753326.1753409</idno>
+		<ptr target="http://dx.doi.org/10.1145/1753326.1753409" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the SIGCHI Conference on Human Factors in Computing Systems (CHI &apos;10)</title>
+				<meeting>the SIGCHI Conference on Human Factors in Computing Systems (CHI &apos;10)</meeting>
+		<imprint>
+			<date type="published" when="2010">2010</date>
+			<biblScope unit="page" from="557" to="566" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b56">
+	<analytic>
+		<title level="a" type="main">Using context to reveal factors that affect physical activity</title>
+		<author>
+			<persName><forename type="first">Ian</forename><surname>Li</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Anind</forename><forename type="middle">K</forename><surname>Dey</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jodi</forename><surname>Forlizzi</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">ACM Trans. Comput.-Hum. Interact</title>
+		<imprint>
+			<biblScope unit="volume">19</biblScope>
+			<biblScope unit="issue">7</biblScope>
+			<date type="published" when="2012-05">2012. May 2012</date>
+		</imprint>
+	</monogr>
+	<note>21 pages</note>
+</biblStruct>
+
+<biblStruct xml:id="b57">
+	<analytic>
+		<title level="a" type="main">How players value their characters in world of warcraft</title>
+		<author>
+			<persName><forename type="first">Ian</forename><forename type="middle">J</forename><surname>Livingston</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Carl</forename><surname>Gutwin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Regan</forename><forename type="middle">L</forename><surname>Mandryk</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Max</forename><surname>Birk</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2531602.2531661</idno>
+		<ptr target="http://dx.doi.org/10.1145/2531602.2531661" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the ACM conference on Computer supported cooperative work &amp; social computing (CSCW &apos;14)</title>
+				<meeting>the ACM conference on Computer supported cooperative work &amp; social computing (CSCW &apos;14)</meeting>
+		<imprint>
+			<date type="published" when="2014">2014</date>
+			<biblScope unit="page" from="1333" to="1343" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b58">
+	<monogr>
+		<title level="m" type="main">Wearables have a dirty little secret: 50% of users lose interest</title>
+		<author>
+			<persName><forename type="first">Teena</forename><surname>Maddox</surname></persName>
+		</author>
+		<ptr target="http://www.techrepublic.com/article/wearables-have-a-dirty-little-secret-most-people-lose-interest/" />
+		<imprint>
+			<date type="published" when="2014-02">2014. February 2014. March</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">Tech Republic Inc.</note>
+</biblStruct>
+
+<biblStruct xml:id="b59">
+	<analytic>
+		<title level="a" type="main">Visualization of Human Behavior data: the Quantified Self</title>
+		<author>
+			<persName><forename type="first">Alessandro</forename><surname>Marcengo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Amon</forename><surname>Rapp</surname></persName>
+		</author>
+		<idno type="DOI">10.4018/978-1-4666-4309-3.ch012</idno>
+	</analytic>
+	<monogr>
+		<title level="m">Innovative Approaches of Data Visualization and Visual Analytics</title>
+				<editor>
+			<persName><forename type="first">Weidong</forename><surname>Mao Lin Huang</surname></persName>
+		</editor>
+		<editor>
+			<persName><surname>Huang</surname></persName>
+		</editor>
+		<meeting><address><addrLine>Hershey, PA</addrLine></address></meeting>
+		<imprint>
+			<publisher>IGI Global</publisher>
+			<date type="published" when="2014">2014</date>
+			<biblScope unit="page" from="236" to="265" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b60">
+	<analytic>
+		<title level="a" type="main">In the mood: engaging teenagers in psychotherapy using mobile phones</title>
+		<author>
+			<persName><forename type="first">Mark</forename><surname>Matthews</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Gavin</forename><surname>Doherty</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/1978942.1979379</idno>
+		<ptr target="https://doi.org/10.1145/1978942.1979379" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the SIGCHI Conference on Human Factors in Computing Systems (CHI &apos;11)</title>
+				<meeting>the SIGCHI Conference on Human Factors in Computing Systems (CHI &apos;11)</meeting>
+		<imprint>
+			<date type="published" when="2011">2011</date>
+			<biblScope unit="page" from="2947" to="2956" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b61">
+	<monogr>
+		<author>
+			<persName><forename type="first">Davide</forename><surname>Michael</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sande</forename><surname>Chen</surname></persName>
+		</author>
+		<title level="m">Serious Games: Games That Educate, Train, and Inform. Thomson Course Technology</title>
+				<meeting><address><addrLine>Boston, MA</addrLine></address></meeting>
+		<imprint>
+			<date type="published" when="2005">2005</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b62">
+	<analytic>
+		<title level="a" type="main">Applying Game Achievement Systems to Enhance User Experience in a Photo Sharing Service</title>
+		<author>
+			<persName><forename type="first">Markus</forename><surname>Montola</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Timo</forename><surname>Nummenmaa</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Andrés</forename><surname>Lucero</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Marion</forename><surname>Boberg</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Hannu</forename><surname>Korhonen</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 13th International MindTrek Conference (Mindtrek &apos;09)</title>
+				<meeting>the 13th International MindTrek Conference (Mindtrek &apos;09)</meeting>
+		<imprint>
+			<date type="published" when="2009">2009</date>
+			<biblScope unit="page" from="94" to="97" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b63">
+	<analytic>
+		<title level="a" type="main">Interaction and reflection with quantified self and gamification: an experimental study</title>
+		<author>
+			<persName><forename type="first">Benedikt</forename><surname>Morschheuser</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Verónica</forename><surname>Rivera-Pelayo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Athanasios</forename><surname>Mazarakis</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Valentin</forename><surname>Zacharias</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Technology</title>
+		<imprint>
+			<biblScope unit="volume">15</biblScope>
+			<biblScope unit="issue">2</biblScope>
+			<date type="published" when="2014">2014</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b64">
+	<analytic>
+		<title level="a" type="main">Gamified Crowdsourcing: Conceptualization, literature review, and future Agenda</title>
+		<author>
+			<persName><forename type="first">Benedikt</forename><surname>Morschheuser</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Juho</forename><surname>Hamari</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jonna</forename><surname>Koivisto</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Alexander</forename><surname>Maedche</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">International Journal of Human-Computer Studies</title>
+		<imprint>
+			<biblScope unit="volume">106</biblScope>
+			<biblScope unit="page" from="26" to="43" />
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b65">
+	<analytic>
+		<title level="a" type="main">Playing with your data: towards personal informatics driven games</title>
+		<author>
+			<persName><forename type="first">Elizabeth</forename><surname>Murnane</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mark</forename><surname>Matthews</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Geri</forename><surname>Gay</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Dan</forename><surname>Cosley</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2968219.2968322</idno>
+		<ptr target="https://doi.org/10.1145/2968219.2968322" />
+	</analytic>
+	<monogr>
+		<title level="m">of the 2016 ACM International Joint Conference on Pervasive and Ubiquitous Computing: Adjunct (UbiComp &apos;16)</title>
+				<imprint>
+			<date type="published" when="2016">2016</date>
+			<biblScope unit="page" from="565" to="569" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b66">
+	<analytic>
+		<title level="a" type="main">Deconstructing Cosmetic Virtual Goods Experiences in Dota 2</title>
+		<author>
+			<persName><forename type="first">Ilya</forename><surname>Musabirov</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Denis</forename><surname>Bulygin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Paul</forename><surname>Okopny</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Alexander</forename><surname>Sirotkin</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3025453.3025893</idno>
+		<ptr target="https://doi.org/10.1145/3025453.3025893" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2017 CHI Conference on Factors in Computing Systems (CHI &apos;17)</title>
+				<meeting>the 2017 CHI Conference on Factors in Computing Systems (CHI &apos;17)</meeting>
+		<imprint>
+			<date type="published" when="2017">2017</date>
+			<biblScope unit="page" from="2054" to="2058" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b67">
+	<analytic>
+		<title level="a" type="main">As Simple as Possible but No Simpler: Creating Flexibility in Personal Informatics</title>
+		<author>
+			<persName><forename type="first">Dawn</forename><surname>Nafus</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Pete</forename><surname>Denman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Omar</forename><surname>Durham</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Lama</forename><surname>Florez</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Saurav</forename><surname>Nachman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Evan</forename><surname>Sahay</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sangita</forename><surname>Savage</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Devon</forename><surname>Sharma</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Rita</forename><forename type="middle">H</forename><surname>Strawn</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Wouhaybi</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2851581.2892541</idno>
+		<ptr target="https://doi.org/10.1145/2851581.2892541" />
+	</analytic>
+	<monogr>
+		<title level="m">CHI Extended Abstracts &apos;16</title>
+				<imprint>
+			<date type="published" when="2016">2016</date>
+			<biblScope unit="page" from="1445" to="1452" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b68">
+	<monogr>
+		<title level="m" type="main">My Life as a Night Elf Priest: An Anthropological Account of World of Warcraft</title>
+		<author>
+			<persName><forename type="first">Bonnie</forename><surname>Nardi</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2010">2010</date>
+			<publisher>University of Michigan Press</publisher>
+			<pubPlace>Ann Arbor, MI</pubPlace>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b69">
+	<analytic>
+		<title level="a" type="main">Strangers and friends: collaborative play in world of warcraft</title>
+		<author>
+			<persName><forename type="first">Bonnie</forename><surname>Nardi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Justin</forename><surname>Harris</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/1180875.1180898</idno>
+		<ptr target="http://dx.doi.org/10.1145/1180875.1180898" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2006 20th anniversary conference Computer supported cooperative work (CSCW &apos;06)</title>
+				<meeting>the 2006 20th anniversary conference Computer supported cooperative work (CSCW &apos;06)</meeting>
+		<imprint>
+			<date type="published" when="2006">2006</date>
+			<biblScope unit="page" from="149" to="158" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b70">
+	<analytic>
+		<title level="a" type="main">Learning conversations in World of Warcraft</title>
+		<author>
+			<persName><forename type="first">Bonnie</forename><forename type="middle">A</forename><surname>Nardi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Stella</forename><surname>Ly</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Justin</forename><surname>Harris</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the Hawaii International Conference on System Sciences (HICSS &apos;07)</title>
+				<meeting>the Hawaii International Conference on System Sciences (HICSS &apos;07)</meeting>
+		<imprint>
+			<date type="published" when="2007">2007</date>
+			<biblScope unit="page">79</biblScope>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b71">
+	<analytic>
+		<title level="a" type="main">Theoretical explanations for reactivity in selfmonitoring</title>
+		<author>
+			<persName><forename type="first">O</forename><surname>Rosemery</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Steven</forename><forename type="middle">C</forename><surname>Nelson</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Hayes</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Behav. Modif</title>
+		<imprint>
+			<biblScope unit="volume">5</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page" from="3" to="14" />
+			<date type="published" when="1981">1981</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b72">
+	<monogr>
+		<title level="m" type="main">Optimizing Play: How Theorycraft Changes Gameplay and Design. Game Game studies</title>
+		<author>
+			<persName><forename type="first">Cristopher</forename><forename type="middle">A</forename><surname>Paul</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2011">2011</date>
+			<biblScope unit="volume">11</biblScope>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b73">
+	<monogr>
+		<title level="m" type="main">Challenges of Implementing Gamification for Behavior Change: Lessons Learned from the Design of Blues Buddies. Presented at CHI 2013 Workshops</title>
+		<author>
+			<persName><forename type="first">Valentina</forename><surname>Rao</surname></persName>
+		</author>
+		<ptr target="http://content/uploads/2013/03/Rao.pdf" />
+		<imprint>
+			<date type="published" when="2013">2013</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b74">
+	<analytic>
+		<title level="a" type="main">A Qualitative Investigation of Gamification: Motivational Factors in Online Gamified Services and Applications</title>
+		<author>
+			<persName><forename type="first">Amon</forename><surname>Rapp</surname></persName>
+		</author>
+		<idno type="DOI">10.4018/ijthi.2015010105</idno>
+	</analytic>
+	<monogr>
+		<title level="j">International Journal of Technology and Human Interaction</title>
+		<imprint>
+			<biblScope unit="volume">11</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page" from="67" to="82" />
+			<date type="published" when="2015">2015</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b75">
+	<analytic>
+		<title level="a" type="main">From games to gamification: A classification of rewards in World of Warcraft for the design of gamified systems</title>
+		<author>
+			<persName><forename type="first">Amon</forename><surname>Rapp</surname></persName>
+		</author>
+		<idno type="DOI">10.1177/1046878117697147</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Simulation &amp; Gaming</title>
+		<imprint>
+			<biblScope unit="volume">48</biblScope>
+			<biblScope unit="issue">3</biblScope>
+			<biblScope unit="page" from="381" to="401" />
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b76">
+	<analytic>
+		<title level="a" type="main">Designing interactive systems through game An ethnographic approach</title>
+		<author>
+			<persName><forename type="first">Amon</forename><surname>Rapp</surname></persName>
+		</author>
+		<idno type="DOI">10.1016/j.chb.2015.02.048</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Computers in behavior</title>
+		<imprint>
+			<biblScope unit="volume">71</biblScope>
+			<biblScope unit="page" from="455" to="468" />
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b77">
+	<analytic>
+		<title level="a" type="main">Self-monitoring and Technology: Challenges and Open Issues in Personal Informatics</title>
+		<author>
+			<persName><forename type="first">Amon</forename><surname>Rapp</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Federica</forename><surname>Cena</surname></persName>
+		</author>
+		<idno type="DOI">10.1007/978-3-319-07509-9_58</idno>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the HCI International Conference. for All and Accessibility Practice</title>
+		<title level="s">Lecture Notes Computer Science</title>
+		<meeting>the HCI International Conference. for All and Accessibility Practice</meeting>
+		<imprint>
+			<publisher>Springer</publisher>
+			<date type="published" when="2014">2014. 2014</date>
+			<biblScope unit="volume">8516</biblScope>
+			<biblScope unit="page" from="613" to="622" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b78">
+	<analytic>
+		<title level="a" type="main">Personal Informatics for everyday life: How users without prior self-tracking experience engage with personal data</title>
+		<author>
+			<persName><forename type="first">Amon</forename><surname>Rapp</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Federica</forename><surname>Cena</surname></persName>
+		</author>
+		<idno type="DOI">10.1016/j.ijhcs.2016.05.006</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Journal of Human-Computer Studies</title>
+		<imprint>
+			<biblScope unit="volume">94</biblScope>
+			<biblScope unit="page" from="1" to="17" />
+			<date type="published" when="2016">2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b79">
+	<analytic>
+		<title level="a" type="main">Using game mechanics for field evaluation of prototype social applications: a novel methodology</title>
+		<author>
+			<persName><forename type="first">Amon</forename><surname>Rapp</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Federica</forename><surname>Cena</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Cristina</forename><surname>Gena</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Alessandro</forename><surname>Marcengo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Luca</forename><surname>Console</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Behaviour &amp; Information Technology</title>
+		<imprint>
+			<biblScope unit="volume">35</biblScope>
+			<biblScope unit="issue">3</biblScope>
+			<biblScope unit="page" from="184" to="195" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b80">
+	<analytic>
+		<title level="a" type="main">New frontiers of quantified self 2: going beyond numbers</title>
+		<author>
+			<persName><forename type="first">Amon</forename><surname>Rapp</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Federica</forename><surname>Cena</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Judy</forename><surname>Kay</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Bob</forename><surname>Kummerfeld</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Frank</forename><surname>Hopfgartner</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Till</forename><surname>Plumbaum</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jakob</forename><forename type="middle">Eg</forename><surname>Larsen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Daniel</forename><forename type="middle">A</forename><surname>Epstein</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Rúben</forename><surname>Gouveia</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2968219.2968331</idno>
+		<ptr target="https://doi.org/10.1145/2968219.2968331" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2016 ACM International Joint Conference on Pervasive and Ubiquitous Computing: Adjunct (UbiComp &apos;16)</title>
+				<meeting>the 2016 ACM International Joint Conference on Pervasive and Ubiquitous Computing: Adjunct (UbiComp &apos;16)</meeting>
+		<imprint>
+			<date type="published" when="2016">2016</date>
+			<biblScope unit="page" from="506" to="509" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b81">
+	<analytic>
+		<title level="a" type="main">Drawing Inspiration from World of Gamification Design Elements for Behavior Change Technologies</title>
+		<author>
+			<persName><forename type="first">Amon</forename><surname>Rapp</surname></persName>
+		</author>
+		<idno type="DOI">10.1093/iwc/iwx001</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Interacting with computers</title>
+		<imprint>
+			<biblScope unit="volume">29</biblScope>
+			<biblScope unit="issue">5</biblScope>
+			<biblScope unit="page" from="648" to="678" />
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b82">
+	<analytic>
+		<title level="a" type="main">Know Thyself: A theory of the self for Personal Informatics</title>
+		<author>
+			<persName><forename type="first">Amon</forename><surname>Rapp</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Maurizio</forename><surname>Tirassa</surname></persName>
+		</author>
+		<idno type="DOI">10.1080/07370024.2017.1285704</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Interaction</title>
+		<imprint>
+			<biblScope unit="volume">32</biblScope>
+			<biblScope unit="issue">5-6</biblScope>
+			<biblScope unit="page" from="335" to="380" />
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b83">
+	<monogr>
+		<title level="m" type="main">Can&apos;t play, won&apos;t play</title>
+		<author>
+			<persName><forename type="first">Margaret</forename><surname>Robertson</surname></persName>
+		</author>
+		<ptr target="http://kotaku.com/5686393/cantplay-wont-play/" />
+		<imprint>
+			<date type="published" when="2010-08-22">2010. August 22. 2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b84">
+	<monogr>
+		<title level="m" type="main">Glued to Games: How Video Games Draw Us In and Hold Us Spellbound</title>
+		<author>
+			<persName><forename type="first">Scott</forename><surname>Rigby</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Richard</forename><surname>Ryan</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2011">2011</date>
+			<publisher>Praeger</publisher>
+			<pubPlace>Santa Barbara, CA</pubPlace>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b85">
+	<analytic>
+		<title level="a" type="main">Personal tracking as lived informatics</title>
+		<author>
+			<persName><forename type="first">John</forename><surname>Rooksby</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mattias</forename><surname>Rost</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Alistair</forename><surname>Morrison</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Matthew</forename><forename type="middle">Chalmers</forename><surname>Chalmers</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2556288.2557039</idno>
+		<ptr target="http://doi.acm.org/10.1145/2556288.2557039" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 32nd annual ACM conference on Human factors in computing systems (CHI &apos;14)</title>
+				<meeting>the 32nd annual ACM conference on Human factors in computing systems (CHI &apos;14)</meeting>
+		<imprint>
+			<date type="published" when="2014">2014</date>
+			<biblScope unit="page" from="1163" to="1172" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b86">
+	<analytic>
+		<title level="a" type="main">Pass the Ball: Enforced Turn-Taking in Activity Tracking</title>
+		<author>
+			<persName><forename type="first">John</forename><surname>Rooksby</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mattias</forename><surname>Rost</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Alistair</forename><surname>Morrison</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Matthew</forename><surname>Chalmers</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2702123.2702577</idno>
+		<ptr target="https://doi.org/10.1145/2702123.2702577" />
+	</analytic>
+	<monogr>
+		<title level="m">of the 33rd Annual ACM Conference on Human Factors in Computing Systems (CHI &apos;15)</title>
+				<imprint>
+			<date type="published" when="2015">2015</date>
+			<biblScope unit="page" from="2417" to="2426" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b87">
+	<analytic>
+		<title level="a" type="main">Reflexivity in digital anthropology</title>
+		<author>
+			<persName><forename type="first">Jennifer</forename><forename type="middle">A</forename><surname>Rode</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/1978942.1978961</idno>
+		<ptr target="https://doi.org/10.1145/1978942.1978961" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the SIGCHI Conference on Human Factors in Computing Systems (CHI &apos;11)</title>
+				<meeting>the SIGCHI Conference on Human Factors in Computing Systems (CHI &apos;11)</meeting>
+		<imprint>
+			<date type="published" when="2011">2011</date>
+			<biblScope unit="page" from="123" to="132" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b88">
+	<monogr>
+		<title level="m" type="main">Beyond the Quantified Self: exploration of a dataistic paradigm. new media &amp; society</title>
+		<author>
+			<persName><forename type="first">Minna</forename><surname>Ruckenstein</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mika</forename><surname>Pantzar</surname></persName>
+		</author>
+		<idno type="DOI">10.1177/1461444815609081</idno>
+		<ptr target="http://dx.doi.org/10.1177/1461444815609081" />
+		<imprint>
+			<date type="published" when="2017">2017</date>
+			<biblScope unit="volume">19</biblScope>
+			<biblScope unit="page" from="401" to="418" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b89">
+	<analytic>
+		<title level="a" type="main">Design for forgetting: disposing of digital possessions after a breakup</title>
+		<author>
+			<persName><forename type="first">Corina</forename><surname>Sas</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Steve</forename><surname>Whittaker</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2470654.2466241</idno>
+		<ptr target="https://doi.org/10.1145/2470654.2466241" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the SIGCHI Conference on Human Factors in Computing Systems (CHI &apos;13)</title>
+				<meeting>the SIGCHI Conference on Human Factors in Computing Systems (CHI &apos;13)</meeting>
+		<imprint>
+			<date type="published" when="2013">2013</date>
+			<biblScope unit="page" from="1823" to="1832" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b90">
+	<analytic>
+		<title level="a" type="main">Value-based design for gamifying daily activities</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Sakamoto</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Nakajima</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Alexandrova</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the International Conference on Entertainment Computing</title>
+				<meeting>the International Conference on Entertainment Computing</meeting>
+		<imprint>
+			<date type="published" when="2012">2012</date>
+			<biblScope unit="page" from="421" to="424" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b91">
+	<analytic>
+		<title level="a" type="main">Data for life: Wearable technology and the design of self-care</title>
+		<author>
+			<persName><forename type="first">Natasha</forename><forename type="middle">D</forename><surname>Schüll</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">BioSocieties</title>
+		<imprint>
+			<biblScope unit="volume">11</biblScope>
+			<biblScope unit="issue">3</biblScope>
+			<biblScope unit="page" from="317" to="333" />
+			<date type="published" when="2014">2014. 2016</date>
+			<publisher>Princeton University Press</publisher>
+		</imprint>
+	</monogr>
+	<note>Addiction by design: Machine gambling in Las Vegas</note>
+</biblStruct>
+
+<biblStruct xml:id="b92">
+	<analytic>
+		<title level="a" type="main">Gamification theory and action</title>
+		<author>
+			<persName><forename type="first">Katie</forename><surname>Seaborn</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Deborah</forename><forename type="middle">I</forename><surname>Fels</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">International Journal of Human-Computer Studies</title>
+		<imprint>
+			<biblScope unit="volume">74</biblScope>
+			<biblScope unit="page" from="14" to="31" />
+			<date type="published" when="2015-02">2015. February 2015</date>
+		</imprint>
+	</monogr>
+	<note>C</note>
+</biblStruct>
+
+<biblStruct xml:id="b93">
+	<analytic>
+		<title level="a" type="main">A guild culture of &apos;casual raiding&apos; enhances its members&apos; online gaming experiences: A cognitive anthropological and ethnographic approach to World of Warcraft</title>
+		<author>
+			<persName><forename type="first">Jeffrey</forename><forename type="middle">G</forename><surname>Snodgrass</surname></persName>
+		</author>
+		<idno type="DOI">10.1177/1461444816644804</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Media &amp; society</title>
+		<imprint>
+			<biblScope unit="volume">19</biblScope>
+			<biblScope unit="issue">12</biblScope>
+			<biblScope unit="page" from="1927" to="1944" />
+			<date type="published" when="2016">2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b94">
+	<analytic>
+		<title level="a" type="main">Enhancing one life rather than living two: Playing MMOs with offline</title>
+		<author>
+			<persName><forename type="first">Jeffrey</forename><forename type="middle">G</forename><surname>Snodgrass</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Michael</forename><forename type="middle">G</forename><surname>Lacy</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Francois</forename><surname>Dengah</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jesse</forename><surname>Fagan</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Computers in human behavior</title>
+		<imprint>
+			<biblScope unit="volume">27</biblScope>
+			<biblScope unit="issue">3</biblScope>
+			<biblScope unit="page" from="1211" to="1222" />
+			<date type="published" when="2011">2011</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b95">
+	<monogr>
+		<title level="m">2012. Games, learning, and society: Learning and meaning in the digital age</title>
+				<editor>
+			<persName><forename type="first">Constance</forename><surname>Steinkuehler</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">Kurt</forename><surname>Squire</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">Sasha</forename><surname>Barab</surname></persName>
+		</editor>
+		<meeting><address><addrLine>Cambridge, UK</addrLine></address></meeting>
+		<imprint>
+			<publisher>University Press</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b96">
+	<analytic>
+		<title level="a" type="main">Grounded theory research: Procedures, canons, and evaluative criteria</title>
+		<author>
+			<persName><forename type="first">Anselm</forename><forename type="middle">L</forename><surname>Strauss</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Juliet</forename><forename type="middle">M</forename><surname>Corbin</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Qualitative Sociology</title>
+		<imprint>
+			<biblScope unit="volume">13</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page" from="3" to="21" />
+			<date type="published" when="1990">1990</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b97">
+	<analytic>
+		<title level="a" type="main">Power gamers just want to have fun?: Instrumental play in a MMOG</title>
+		<author>
+			<persName><forename type="first">T</forename><forename type="middle">L</forename><surname>Taylor</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 1st Digra conference: Level Up. The University of</title>
+				<meeting>the 1st Digra conference: Level Up. The University of<address><addrLine>Utrecht, The Netherlands</addrLine></address></meeting>
+		<imprint>
+			<date type="published" when="2003">2003</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b98">
+	<monogr>
+		<title level="m" type="main">Play Between Worlds: Exploring Online Game Culture</title>
+		<author>
+			<persName><forename type="first">T</forename><forename type="middle">L</forename><surname>Taylor</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2006">2006</date>
+			<publisher>MIT Press</publisher>
+			<pubPlace>Cambridge, MA</pubPlace>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b99">
+	<analytic>
+		<title level="a" type="main">From participant observation to the observation of participation: The emergence of narrative ethnography</title>
+		<author>
+			<persName><forename type="first">Barbara</forename><surname>Tedlock</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Journal of Anthropological Research</title>
+		<imprint>
+			<biblScope unit="volume">47</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page" from="69" to="94" />
+			<date type="published" when="1991">1991</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b100">
+	<monogr>
+		<title level="m" type="main">On writing ethnography (2nd</title>
+		<author>
+			<persName><forename type="first">John</forename><surname>Van Maanen</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2011">2011</date>
+			<publisher>Chicago Press</publisher>
+			<pubPlace>Chicago, IL</pubPlace>
+		</imprint>
+	</monogr>
+	<note>The University of</note>
+</biblStruct>
+
+<biblStruct xml:id="b101">
+	<analytic>
+		<title level="a" type="main">Constructing my online self: avatars that increase self-focused attention</title>
+		<author>
+			<persName><forename type="first">Asimina</forename><surname>Vasalou</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Adam</forename><forename type="middle">N</forename><surname>Joinson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jeremy</forename><surname>Pitt</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/1240624.1240696</idno>
+		<ptr target="https://doi.org/10.1145/1240624.1240696" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the SIGCHI Conference on Human Factors in Computing Systems (CHI &apos;07)</title>
+				<meeting>the SIGCHI Conference on Human Factors in Computing Systems (CHI &apos;07)</meeting>
+		<imprint>
+			<date type="published" when="2007">2007</date>
+			<biblScope unit="page" from="445" to="448" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b102">
+	<monogr>
+		<title level="m" type="main">2012. the win: How game thinking can revolutionize your business</title>
+		<author>
+			<persName><forename type="first">Kevin</forename><surname>Werbach</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Dan</forename><surname>Hunter</surname></persName>
+		</author>
+		<imprint>
+			<publisher>Wharton Digital Press</publisher>
+			<pubPlace>Philadelphia, PA</pubPlace>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b103">
+	<monogr>
+		<title/>
+		<author>
+			<persName><forename type="first">Zachary</forename><forename type="middle">O</forename><surname>Toups</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Nicole</forename><forename type="middle">K</forename><surname>Crenshaw</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Rina</forename><forename type="middle">R</forename></persName>
+		</author>
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b104">
+	<analytic>
+		<title level="a" type="main">The Collecting Itself Feels Good&quot;: Towards Collection Interfaces for Digital Game Objects</title>
+		<author>
+			<persName><forename type="first">Gustavo</forename><forename type="middle">F</forename><surname>Wehbe</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Lennart</forename><forename type="middle">E</forename><surname>Tondello</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Nacke</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2967934.2968088</idno>
+		<ptr target="https://doi.org/10.1145/2967934.2968088" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2016 Annual Symposium on Computer-Human Interaction in Play (CHI PLAY &apos;16)</title>
+				<meeting>the 2016 Annual Symposium on Computer-Human Interaction in Play (CHI PLAY &apos;16)</meeting>
+		<imprint>
+			<date type="published" when="2016">2016</date>
+			<biblScope unit="page" from="276" to="290" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b105">
+	<analytic>
+		<title level="a" type="main">Gamification of Exercise and Fitness using Wearable Activity Trackers</title>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">Ali</forename><surname>Zhao Zhao</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ali</forename><surname>Etemad</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Arya</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 10th International Symposium on Computer Science in Sports (ISCSS)</title>
+				<meeting>the 10th International Symposium on Computer Science in Sports (ISCSS)</meeting>
+		<imprint>
+			<date type="published" when="2017">2017</date>
+			<biblScope unit="page" from="233" to="240" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b106">
+	<analytic>
+		<title level="a" type="main">Deconstructing gamification: evaluating the effectiveness of continuous measurement, virtual rewards, and social comparison for promoting physical activity</title>
+		<author>
+			<persName><forename type="first">Oren</forename><surname>Zuckerman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ayelet</forename><surname>Gal-Oz</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Personal Ubiquitous Comput</title>
+		<imprint>
+			<biblScope unit="volume">18</biblScope>
+			<biblScope unit="issue">7</biblScope>
+			<biblScope unit="page">1705</biblScope>
+			<date type="published" when="2014">2014</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+				</listBibl>
+			</div>
+		</back>
+	</text>
+</TEI>

@@ -1,0 +1,2829 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xml:space="preserve" xmlns="http://www.tei-c.org/ns/1.0" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.com/kermitt2/grobid/master/grobid-home/schemas/xsd/Grobid.xsd"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+	<teiHeader xml:lang="en">
+		<fileDesc>
+			<titleStmt>
+				<title level="a" type="main">Adaptive Empathy Learning Support in Peer Review Scenarios</title>
+			</titleStmt>
+			<publicationStmt>
+				<publisher/>
+				<availability status="unknown"><licence/></availability>
+			</publicationStmt>
+			<sourceDesc>
+				<biblStruct>
+					<analytic>
+						<author>
+							<persName><forename type="first">Thiemo</forename><surname>Wambsganss</surname></persName>
+							<email>thiemo.wambsganss@unisg.ch</email>
+						</author>
+						<author>
+							<persName><forename type="first">Matthias</forename><surname>Söllner</surname></persName>
+							<email>soellner@uni-kassel.de</email>
+						</author>
+						<author>
+							<persName><forename type="first">Jan</forename><forename type="middle">Marco</forename><surname>Leimeister</surname></persName>
+							<email>janmarco.leimeister@unisg.ch</email>
+						</author>
+						<author>
+							<persName><forename type="first">Kenneth</forename><surname>Koedinger</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Jan</forename><surname>Marco</surname></persName>
+						</author>
+						<author>
+							<affiliation key="aff0">
+								<orgName type="institution">University of St.Gallen St</orgName>
+								<address>
+									<settlement>Gallen</settlement>
+									<country key="CH">Switzerland</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<affiliation key="aff1">
+								<orgName type="institution">Carnegie Mellon University Pittsburgh</orgName>
+								<address>
+									<country key="US">United States</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<affiliation key="aff2">
+								<orgName type="institution">University of Kassel Kassel</orgName>
+								<address>
+									<country>Germany Kenneth Koedinger</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<affiliation key="aff3">
+								<orgName type="institution">Carnegie Mellon University Pittsburgh</orgName>
+								<address>
+									<country key="US">United States</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<affiliation key="aff4">
+								<orgName type="institution">University of St.Gallen St.Gallen</orgName>
+								<address>
+									<country key="CH">Switzerland</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<affiliation key="aff5">
+								<orgName type="institution">University of Kassel</orgName>
+								<address>
+									<settlement>Kassel</settlement>
+									<country key="DE">Germany</country>
+								</address>
+							</affiliation>
+						</author>
+						<title level="a" type="main">Adaptive Empathy Learning Support in Peer Review Scenarios</title>
+					</analytic>
+					<monogr>
+						<imprint>
+							<date/>
+						</imprint>
+					</monogr>
+					<idno type="DOI">10.1145/3491102.3517740</idno>
+				</biblStruct>
+			</sourceDesc>
+		</fileDesc>
+		<encodingDesc>
+			<appInfo>
+				<application version="0.7.1" ident="GROBID" when="2022-07-22T05:04+0000">
+					<desc>GROBID - A machine learning software for extracting information from scholarly documents</desc>
+					<ref target="https://github.com/kermitt2/grobid"/>
+				</application>
+			</appInfo>
+		</encodingDesc>
+		<profileDesc>
+			<textClass>
+				<keywords>
+					<term>Educational Applications</term>
+					<term>Writing Support Systems</term>
+					<term>Automated Feedback</term>
+					<term>Empathy Learning</term>
+				</keywords>
+			</textClass>
+			<abstract>
+<div xmlns="http://www.tei-c.org/ns/1.0"><p>Figure <ref type="figure">1</ref>: Screenshot of our adaptive empathy learning support system: a user receives feedback on the cognitive and emotional empathy level of her text in a peer review exercise.</p></div>
+			</abstract>
+		</profileDesc>
+	</teiHeader>
+	<text xml:lang="en">
+		<body>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="1">INTRODUCTION</head><p>"The biggest deficit we have in our society, and in the world right now, is an empathy deficit. We are in great need of people being able to stand in somebody else's shoes and see the world through their eyes. " (Barack Obama in 2009, talking to Students in Istanbul)</p><p>As Barack Obama, former president of the United States, stated, empathy is not only an elementary skill for our society, civil discourse, and daily interaction but also for professional communication as well as successful teamwork, and thus elementary for educational curricula (i.e., OECD Learning Framework 2030 <ref type="bibr" target="#b61">[57]</ref>). It is the "ability to simply understand the other person's perspective [. . . ] and to react to the observed experiences of another" ( <ref type="bibr" target="#b25">[24]</ref>, p.1). Empathy skills not only pave the foundation for successful interaction in digital companies, e.g., in agile work environments <ref type="bibr" target="#b50">[48]</ref>, but they are also one of the key abilities in the future that distinguish human work force and artificial intelligence agents from one another <ref type="bibr" target="#b71">[67]</ref>. However, besides the growing importance of empathy, research has shown that empathy skills of US college students have decreased from 1979 to 2009 by more than thirty percent and even more rapidly from 2000 to 2009 <ref type="bibr">[40]</ref>. On these grounds, the Organization for Economic Cooperation and Development (OECD) claims that training empathy skills should receive a more prominent role in today's higher education <ref type="bibr" target="#b61">[57]</ref>. To train empathy, institutions, for instance, universities, traditionally rely on experiential learning scenarios, such as shadowing, communication skills training or role-playing, e.g., in medical education <ref type="bibr" target="#b49">[47]</ref>. Individual empathy training is therefore only available for a limited number of students, since individual support through a student's learning journey is often hindered due to traditional large-scale lectures or the growing field of distance learning scenarios such as Massive Open Online Classes (MOOCs) <ref type="bibr" target="#b85">[80]</ref>. However, to develop skills such as empathy, it is of great importance for the individual student to receive continuous feedback throughout their learning journey <ref type="bibr" target="#b35">[34,</ref><ref type="bibr" target="#b100">94]</ref>. In fact, educational institutions are limited in providing these individual learning conditions especially for empathy skill training.</p><p>Due to the interdisciplinary research interest, the term empathy is defined from multiple perspectives in terms of its dimensions or components <ref type="bibr" target="#b27">[26]</ref>. Being aware that there are multiple perspectives on empathy, in this paper, we focus on the cognitive and emotional components of empathy as defined by Davis <ref type="bibr" target="#b25">[24]</ref> and Lawrence et al. <ref type="bibr" target="#b45">[44]</ref>. Therefore, we follow the "Toronto Empathy Scale" <ref type="bibr" target="#b91">[86]</ref> as a synthesis of instruments for measuring and validating empathy. Empathy refers to the "ability to simply understand the other person's perspective [. . . ] and to react to the observed experiences of another" ( <ref type="bibr" target="#b25">[24]</ref>, p.1), and it consists of both emotional and cognitive components <ref type="bibr" target="#b91">[86]</ref>. While emotional empathy lets us perceive what other people feel, cognitive empathy is the human ability to recognize and understand other individuals <ref type="bibr" target="#b45">[44]</ref>.</p><p>One avenue to model these empathy constructs in natural language (e.g., to provide adaptive feedback) is offered by recent advances in Natural Language Processing (NLP) and Machine Learning (ML) <ref type="bibr" target="#b78">[74]</ref>. Empathy detection is a growing research approach to model empathetic structures and phrases of a given text <ref type="bibr" target="#b18">[17,</ref><ref type="bibr" target="#b19">18]</ref>. This information can be leveraged to score the quality of a text and provide students with individual feedback on their empathy level, e.g., in peer reviews <ref type="bibr" target="#b17">[16,</ref><ref type="bibr" target="#b29">28]</ref>. Researchers especially from the field of educational technology have designed pedagogical scenarios to train the empathy skills of students, such as through virtual reality role-playing for social work education <ref type="bibr" target="#b31">[30]</ref>, virtual agents to simulate patient treatments for nurses (e.g., <ref type="bibr" target="#b49">[47]</ref>) or empathy text feedback on computer-mediated communication platforms to foster empathy for employee-customer relationships <ref type="bibr" target="#b81">[77]</ref>. Despite the large number of studies, the existing literature lacks an approach with findings on how to design an adaptive and intelligent learning tool to assist students in developing the ability to simply comprehend another person's point of view and react to their observed experience with intelligent feedback on natural language <ref type="bibr" target="#b73">[69]</ref>.</p><p>Given this potential for leveraging empathy detection to enhance learning, we designed and built ELEA (short for Empathy Learning Application), an adaptive learning tool that provides students with feedback on their cognitive and emotional empathy level during their peer review writing process. Being aware that empathy modeling is always biased and wrongly predicted labels (as well as biased correct predicted ones) might harm certain user groups, our aim with this paper was to provide a proof-of-concept study by investigating the hypothesis that individual feedback on certain students' empathy level in their peer review writing process will help them to write more empathic reviews. Hence, we followed two different development approaches to build a user-centered design of ELEA for the "average" learner in a particular learning scenario at our university. First, we used a rigorous theory-driven approach, where we systematically analyzed literature in the field of educational technology and pedagogical theories based on <ref type="bibr" target="#b98">[93]</ref> to derive requirements and principles for a first design of ELEA. Second, we followed a user-centered design approach, where we interviewed 28 students from our university to derive user stories and needs for a design of an adaptive empathy learning tool. In this vein, we could ensure and control for specific needs, potential harm, and unintended consequences of a tool that provides students with feedback on their empathic writing skills. To build an individual and adaptive feedback tool, we built on the empathy annotated peer-review corpus of <ref type="bibr" target="#b105">[98]</ref>, since the data contains 500 student-written texts annotated for their cognitive and emotional empathy level based on a rigorous annotation guideline following <ref type="bibr" target="#b25">[24,</ref><ref type="bibr" target="#b91">86]</ref>. The corpus represents a balanced and representative sample of student peer reviews in German, and thus enables us to train a model which comes with satisfying accuracy not only on the train and test data, but is also able to model the differences and nuances of student-written text in the particular scenario we embedded it into robustly <ref type="bibr">[82]</ref>. We trained and tuned a state-of-the-art transfer learning model to detect the cognitive and emotional empathy level of student peer reviews following <ref type="bibr" target="#b28">[27,</ref><ref type="bibr" target="#b44">43]</ref>. This model now serves as the underlying feedback algorithm of ELEA.</p><p>To determine the impact of ELEA on students' empathy skills, we evaluated our learning tool in a peer learning scenario in comparison with a proven approach for supporting empathetic writing in technology-mediated communication <ref type="bibr" target="#b81">[77]</ref>. In a study with 119 students, we observed that participants who used ELEA wrote more empathic peer reviews with a higher level of emotional empathy compared to the ones using the alternative approach. Moreover, we measured the perceived empathy skill learning <ref type="bibr" target="#b91">[86]</ref>, the technology acceptance and the perceived level of enjoyment of both tools using key constructs <ref type="bibr" target="#b95">[90,</ref><ref type="bibr" target="#b96">91]</ref>. We found that the perceived empathy skill learning, the perceived usefulness, the intention to use, and the level of enjoyment of ELEA provide promising results. They indicate that ELEA might help students learn how to react to other students' perspectives and motivate them to reflect on their empathetic text writing in peer review scenarios.</p><p>Besides the novel contributions, our research comes with several limitations. With ELEA we present the first adaptive learning tool for empathy skills. This is especially novel, since recent advances in NLP and ML have, to the best of our knowledge, not been leveraged to provide adaptive empathy feedback. Past research has mostly built empathy learning tools based on syntactical analysis (e.g., <ref type="bibr" target="#b81">[77]</ref>) or embedded emotional modeling in other contexts than education (e.g., <ref type="bibr" target="#b64">[60,</ref><ref type="bibr" target="#b92">87]</ref>). However, our design is only based on learners and on empirical evaluation in the pedagogical scenario of peer reviews in German language. Other languages, domains or pedagogical scenarios might require certain design adaptations (e.g., through a different understanding of empathy due to culture, domain, and user group). Second, we show the effectiveness and usefulness of ELEA by comparing it to the current state of text-based learning tools for empathy skills in an experimental peer learning scenario. The results demonstrate the benefits of leveraging NLP and ML for intelligent feedback on empathy skills on a student's learning journey <ref type="bibr" target="#b78">[74]</ref>, e.g., in other collaborative learning settings <ref type="bibr" target="#b38">[37,</ref><ref type="bibr" target="#b70">66]</ref>. However, the design of our tool as well as the feedback algorithm is biased by a Western European team of researchers. It also comes with the limitations that the tool is designed for the "average" student, with the drawbacks of possibly excluding certain user groups other than from our research design (e.g., individuals on the autism spectrum). Future research is needed to investigate the effects of our design such as possible harms or bias against these minorities.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2">RELATED WORK AND CONCEPTUAL BACKGROUND</head><p>Our work is inspired by previous studies on the concept of empathy, technology-based learning systems for empathy, studies about empathy detection algorithms, and self-regulated learning theory, which serves as an underlying theory for our main hypothesis.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.1">The Concept of Empathy</head><p>Empathy plays an essential role in daily life in many practical situations, such as client communication, leadership, or agile teamwork <ref type="bibr" target="#b61">[57]</ref>. Therefore, especially business schools today are increasingly trying to focus on fostering empathy skills (e.g., <ref type="bibr" target="#b67">[63]</ref>) to provide students with the right skill set to meet future job profiles (i.e., <ref type="bibr" target="#b61">[57,</ref><ref type="bibr" target="#b97">92]</ref>). Since Titchener's German word "Einfühlung" <ref type="bibr" target="#b93">[88,</ref><ref type="bibr" target="#b112">105]</ref> was related with the term empathy, the construct of empathy has been considered a fundamental component of social cognition that contributes to the human ability to understand and respond adaptively to other people's emotions <ref type="bibr" target="#b91">[86]</ref>. Empathy has numerous definitions from various fields corresponding to the different research lenses and perspectives. It was originally translated and understood as "feeling into" <ref type="bibr" target="#b26">[25,</ref><ref type="bibr" target="#b27">26]</ref>. According to several scholars, there is no clear, universal definition of empathy <ref type="bibr" target="#b24">[23,</ref><ref type="bibr" target="#b59">55]</ref>.  <ref type="bibr" target="#b91">[86]</ref> "The drive or ability to attribute mental states to another person/animal, and entails an appropriate affective response in the observer to the other person's mental state. "</p><p>Baron-Cohen and Wheel-wright (2004) <ref type="bibr" target="#b9">[9]</ref> "The ability to experience and understand what others feel without confusion between oneself and others. " <ref type="bibr" target="#b27">Decety and Jackson (2004)</ref>  <ref type="bibr" target="#b27">[26]</ref> "An affective response that stems from the apprehension or comprehension of another's emotional state or condition, and which is similar to what the other person is feeling or would be expected to feel in the given situation. "</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Eisenberg (2000)</head><p>[29] "An other-oriented emotional response congruent with the other's perceived welfare. " Batsom et al. 1997 <ref type="bibr" target="#b10">[10]</ref> "The ability to put oneself into the mental shoes of another person to understand his or her emotions and feelings. " <ref type="bibr">Goldman 1993 [32]</ref> "Reactions of one individual to the observed experiences of another [...] and simply understanding the other person's perspective. "</p><p>Davis 1983 <ref type="bibr" target="#b25">[24]</ref> Table <ref type="table" target="#tab_0">1</ref>: Non-exhaustive overview on various definitions of the term empathy ordered by the year of publication.</p><p>Aside from defining what empathy is, several studies focus on how to quantify the construct. To measure empathy, most researchers apply questionnaires with self-report measures, although alternative methods exist including neuroscientific or behavioral measurements. Behavioral measurements include the Kids Empathetic Development Scale <ref type="bibr" target="#b72">[68]</ref> and neuroscientific measures are, for example, Magnetic Resonance Imaging (e.g., <ref type="bibr" target="#b14">[13]</ref>). In our literature review, we found dozens of established empathy scales, ranging from the "hogan empathy scale" <ref type="bibr" target="#b37">[36]</ref> including 64-items capturing four different dimensions (social self-confidence, eventemperedness, sensitivity, and nonconformity) or the "Toronto empathy questionnaire" by <ref type="bibr" target="#b91">[86]</ref> consisting of 16 items.</p><p>In our research, we follow the Toronto empathy scale, since <ref type="bibr" target="#b91">[86]</ref> created the scale by investigating the various existing empathy instruments in literature and determining what they have in common. Furthermore, the resulting empathy questionnaire is well cited and based on a measure that represents "the broadest, most general definition of empathy.", where empathy consists of both emotional and cognitive components <ref type="bibr" target="#b91">[86]</ref>. In the context of student peer reviews, cognitive empathy (perspective taking) is the writer's ability to use cognitive processes such as role-taking, perspectivetaking, or "decentering" while evaluating the peers' submitted tasks. The student sets aside her own perspective and recognizes the perspective of the peer. Cognitive empathy can happen purely cognitively in that there is no reference to any affective state <ref type="bibr" target="#b9">[9]</ref> but mostly includes understanding the other's emotional state as well. Emotional empathy (emphatic concern) is the writer's emotional response to the peers' affective state. The students can either show the same emotions as read in the peer review or simply state an appropriate feeling towards the peer. Typical examples include sharing excitement with the peer about the content submitted or showing concern over the peer's opinion. The following example depicts high emotional empathy: "I think your idea is brilliant!".</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.2">Technology-Based Learning Systems for Empathy</head><p>Besides the importance of empathy in daily life, studies have shown that empathy skills of US college students have decreased from 1979 to 2009 by more than thirty percent and even more rapidly in the last period from 2000 to 2009 <ref type="bibr">[40]</ref>. A possible explanation is the growing amount of digital communication in our society <ref type="bibr">[40]</ref>. Scientists, therefore, urge that training empathy skills should receive a more prominent role in today's higher education (e.g., <ref type="bibr" target="#b31">[30,</ref><ref type="bibr" target="#b61">57]</ref>). In fact, individual support of empathy learning is missing in most learning scenarios. In some domains, training programs are designed to increase empathy skills through role plays, films, literature or video games (e.g., <ref type="bibr" target="#b11">[11]</ref>). Since social professions, in particular, are characterized by interactions, similar training programs that promote empathy or empathetic forms of expression have so far also been successfully implemented for social workers <ref type="bibr" target="#b36">[35]</ref>, doctors and nurses <ref type="bibr" target="#b6">[6]</ref>. In business education, empathy is usually trained through communication scenarios, classroom exercises, role plays or experiential learning (e.g., <ref type="bibr" target="#b67">[63]</ref>). In fact, empathy is often regarded as a subcomponent of social competence <ref type="bibr" target="#b109">[102]</ref>. Corresponding support measures often take place in extensive programs to promote social development. However, in order to train particular skills such as empathy, it is essential for the individual student to receive continuous feedback, also called formative feedback, throughout the learning process <ref type="bibr" target="#b35">[34,</ref><ref type="bibr" target="#b100">94,</ref><ref type="bibr" target="#b101">95]</ref>.</p><p>According to <ref type="bibr" target="#b80">[76]</ref>, the result of feedback is specific information about the learning task or process that fills a gap between what is understood and what should be understood. Even in areas where empathy is part of the curriculum, such as health or social work, the ability of a teacher to provide tutoring is naturally limited by time and availability constraints.</p><p>Especially in more frequent large-scale lectures and distance learning scenarios, the ability to individually support a student's empathy ability is hampered because it always was and still is difficult for educators to provide continuous and individual feedback to a single student. Many scholars, particularly in the field of educational technology, have looked into how technology-based solutions might help students gain empathy and close the gap. When compared to human teachers, the use of information technology in education has several advantages, including consistency, scalability, perceived fairness, widespread use, and better availability. As a result, technology-enhanced empathy learning systems can help relieve some of the burdens on teachers by supporting learners with adaptive empathy feedback. Scientists have mainly used three approaches from educational technology to foster empathy skills of students <ref type="bibr" target="#b42">[41]</ref>:</p><p>• Computer-assisted instruction (CAI) is often embedded in the form of virtual reality (VR) learning tools in pedagogical scenarios to enable students to directly dive into the perspective of a peer, e.g., a client or patient (e.g., <ref type="bibr" target="#b6">[6]</ref>). • Intelligent tutoring systems (ITS) are often used in the form of virtual agents built into online tools, e.g., to enable interaction with emotional avatars (e.g., <ref type="bibr">[42]</ref>). • Computer-supported collaborative learning (CSCL) tools are, for instance, implemented to enhance empathy in the text communication of learners <ref type="bibr" target="#b81">[77]</ref>. In their approach, <ref type="bibr" target="#b81">[77]</ref> use a simple library of messengers based on neurolinguistics, psychometrics, and text mining techniques to promote empathy among students' interaction, based on identification and text matching suggestions.</p><p>Our approach combines two perspectives: ITS and CSCL. The combination of ITS and CSCL to design adaptive empathy learning tools is scarcely investigated in literature. <ref type="bibr" target="#b92">[87]</ref>, for example, developed ClientBot, a text-based conversational agent, trained on a library of 2354 psychotherapy transcripts, which provided explicit feedback on the usage of basic interviewing and counseling skills. The results showed that participants using ClientBot used more reflections during practicing feedback. Similarly, our aim is to provide pedagogical feedback on a learner's actions and solutions, hints, and recommendations to encourage and guide future activities in the writing processes or automated evaluation to indicate whether a student's reaction to another person's perspective is emotionally appropriate. We rely on NLP and ML to analyze the given text and provide adaptive feedback in students' peer writing process. <ref type="bibr" target="#b64">[60]</ref> investigated that their writing support tool MepsBot, which provides assessment and recommendations about emotional support to users when writing comments to peers in online mental health communities, improves user satisfaction with and confidence in their comments. Building on these literature streams, we hypothesise, that individual feedback on students' empathy levels when writing peer reviews will help them to write more empathic texts. We evaluate our hypothesis by comparing our tool against a CSCL approach, since it is widespread and has been empirically proven to support students' empathy skills <ref type="bibr" target="#b81">[77]</ref>.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.3">Empathy Detection in Natural Language</head><p>The detection of empathy in texts is a growing research field in NLP and ML. Empathy detection aims to identify and model empathetic structures of a given text <ref type="bibr" target="#b18">[17,</ref><ref type="bibr" target="#b19">18]</ref>. The task is usually regarded as a subset of emotion detection, which in turn is often referred to as being part of sentiment analysis. The detection of emotions in texts has made major progress, with sentiment analysis being one of the most prominent areas in recent years <ref type="bibr" target="#b48">[46]</ref>. However, most scientific studies have been focusing on the prediction of the polarity of words for assessing negative and positive notions. This has been done for various domains such as online forums <ref type="bibr" target="#b0">[1]</ref> or twitter postings <ref type="bibr" target="#b79">[75]</ref>. Most existing work for empathy detection focuses on spoken dialogue, addressing conversational agents, psychological interventions, or call center applications (e.g., <ref type="bibr" target="#b51">[49]</ref>, <ref type="bibr" target="#b66">[62]</ref>, <ref type="bibr" target="#b4">[4]</ref>, or [81]). Several studies address the detection and prediction of empathy in natural texts <ref type="bibr" target="#b39">[38,</ref><ref type="bibr">106]</ref>, e.g., for empathy modelling based on news story reactions <ref type="bibr" target="#b18">[17]</ref>. Nevertheless, the potential of empathy detection has been investigated in different domains but barely leveraged for individual feedback in a student's learning progress (i.e., such as <ref type="bibr" target="#b18">[17]</ref>). Recently, <ref type="bibr" target="#b105">[98]</ref> have annotated a novel corpus to model empathy skills in student-written peer reviews. The annotation scheme is based on constructs in psychological literature <ref type="bibr" target="#b25">[24,</ref><ref type="bibr" target="#b45">44]</ref> and evaluated through a rigorous annotation study. Moreover, the corpus represents a balanced and representative sample of student peer reviews ob business models in German, and thus enables us to train a model which not only comes with a satisfying accuracy on the train and test data, but is also able to model the differences and nuances of student written text in the particular scenario we aim to embed it into <ref type="bibr">[82]</ref>. Therefore, we aim to build on that potential to enhance current empathy learning scenarios by providing students with adaptive writing support in a collaborative peer review writing exercise. In fact, the positive impact of NLP and ML algorithms for adaptive skill learning has been demonstrated before <ref type="bibr" target="#b102">[96]</ref>. For example, <ref type="bibr" target="#b101">[95]</ref> have leveraged a corpus on student-written argumentative peer reviews <ref type="bibr" target="#b103">[97]</ref> to provide students adaptive argumentation tutoring in a persuasive writing exercise. However, to the best of our knowledge, no study exists that investigates and evaluates the design of a user-centered empathy learning tool in peer review scenarios based on recent advantages in NLP and ML.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.4">Individual Differences of User Groups in the Context of Empathy</head><p>Literature has highlighted a number of individual differences of user groups in the context of empathy. Even though we aim to "design for the average", we want to outline some prominent individual differences that should be kept in mind to avoid potential undesired negative effects of certain design decisions. First, we focus on gender differences. <ref type="bibr" target="#b20">[19]</ref> provide a compelling overview of gender-based empathy differences. For example, studies conducted by <ref type="bibr" target="#b53">[51,</ref><ref type="bibr" target="#b60">56]</ref> show that gender differences related to empathy already manifest very early in life and can be observed throughout the lifespan, with females typically showing higher levels of empathy compared to males. Further studies even report that the differences appears to grow with age -meaning that the gap between empathy levels of females and males increases <ref type="bibr" target="#b53">[51,</ref><ref type="bibr" target="#b94">89]</ref>.</p><p>Second, literature has also highlighted certain cultural differences in the context of empathy. For example, a study comparing members of an independent (US) and an interdependent society (Iran) found that participants with interdependent cultural norms (Iran) reported higher empathy than participants with independent cultural norms (US) <ref type="bibr" target="#b114">[107]</ref>. A second study shows significant differences in empathy levels comparing Australien caucasian, and mainland Chinese university students <ref type="bibr" target="#b115">[108]</ref>. Interestingly, the study combines cultural differences with gender differences. The authors only observed the significant differences among female study participants, but not when comparing male participants. This shows that different forms of individual differences -in this case, gender and culture -can interact with each other to strengthen or weaken the effect of such differences on empathy.</p><p>Third, besides gender and cultural differences, literature has also discussed empathy towards different groups of minorities. <ref type="bibr" target="#b54">[52,</ref><ref type="bibr" target="#b56">53]</ref>, e.g., observed that perceptions of threat towards a specific group of people (e.g., foreigners) -also called out-group members -impacts the level of empathy towards members of this group. These perceptions can then be mitigated using different mechanisms, such as socialization, which result in higher levels of empathy towards out group members. Another example for out-group members can be neurodiverse people, such as individuals on the autism spectrum <ref type="bibr">[72]</ref>. Here, prior research has shown that communication styles that are typically preferred by neurotypical people, such as transformative leadership styles among employees, are less suited for neurodiverse employees, since they prefer a more direct communication that leaves less space for interpretations <ref type="bibr" target="#b62">[58]</ref>. When it comes to empathy in specific, a recent study showed that individuals on the autism spectrum showed comparable levels of empathy towards other species compared to the control group <ref type="bibr" target="#b58">[54]</ref>. One remarkable outlier in this study, however, was the level of empathy shown towards other human beings. Here, individuals on the autism spectrum showed lower levels than the control group.</p><p>To summarize, these individual differences need to be kept in mind when designing systems that relate to the concept of empathy. We want to emphasize that the normative conception of emotional and empathetic language might be understood differently in various contexts from different user groups (e.g., gender, cultural and other minorities). The appropriate design of an empathy learning tool based on empathy detection algorithms from NLP and ML is therefore always biased from a certain perspective. As a result, different recommendations and prompts based on these algorithms need to be always adopted for the specific scenario and user group. In our research, our main goal was to design a tool for the specific context we could control and investigate: the construction of student peer reviews in German language from "average" German master students at a Western European university. As stated, the concept of empathy is very controversial and, thus, scripted as well as predefined support might be confusing or even harm certain user groups from other contexts. In our case, this could be students from other cultural backgrounds, normative conceptions, or neurominorities, such as individuals on the autism spectrum.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.5">Self-Regulated Learning Theory to Foster Individual Learning</head><p>We believe that self-regulated learning theory supports our underlying hypothesis that individual and personal feedback on a student's ability to react to other people's perspectives in a peer review scenario will support her learning activity and engage the student to train her abilities to write more empathic peer reviews. Selfregulated learning theory reflects that students learn better with formative feedback and goal setting <ref type="bibr" target="#b8">[8]</ref>. Especially for students in a learning process, critical reflection through self-monitoring and selfevaluation is an important component for effective learning <ref type="bibr" target="#b117">[110]</ref>, also reflected in literature on transformation learning (e.g., <ref type="bibr" target="#b52">[50]</ref>). It can be an initial trigger for a student's learning process and thus the creation of new knowledge structures <ref type="bibr" target="#b68">[64]</ref>. However, the right portion of self-monitoring and self-reflection in combination with a learning goal is important for students to learn effectively <ref type="bibr" target="#b8">[8,</ref><ref type="bibr" target="#b117">110]</ref>. Feedback should specify goals, track progress toward those goals, and identify actions that will help the learner achieve those goals in order to be effective <ref type="bibr" target="#b35">[34]</ref>. The level of feedback adaptivity, on the other hand, can vary greatly. As a result, it's critical to consider the impact of different adaptive feedback granularity levels to ensure that our feedback actually aids them in learning. <ref type="bibr" target="#b15">[14]</ref> claim that accurate self-evaluation and feedback of one's learning progress are key components for effective self-regulation of learning, in the vein of social cognition theory and self-regulated learning <ref type="bibr" target="#b7">[7]</ref>. Humans, on the other hand, have a difficult time monitoring and evaluating their learning and comprehension of complicated content <ref type="bibr" target="#b15">[14]</ref>. As a result, the creation of appropriate evaluation and feedback aspects for certain skills may aid learners in learning more successfully over time (i.e., <ref type="bibr" target="#b77">[73,</ref><ref type="bibr" target="#b117">110]</ref>). Combining skill monitoring with formative assessment and performance feedback is one technique to support successful learning monitoring and evolution <ref type="bibr" target="#b16">[15,</ref><ref type="bibr" target="#b35">34]</ref>. Repeated feedback on students' abilities can lead to better results in a certain pedagogical task in short-term and, thus, can increase the overall metacognition skill learning in a long-term intervention <ref type="bibr" target="#b35">[34,</ref><ref type="bibr" target="#b77">73,</ref><ref type="bibr" target="#b100">94]</ref>. Therefore, we believe that the right level of feedback on a students' skill, such as empathy, could lead to more self-efficacy and thus to motivation to learn how to react to other people's perspectives in an appropriate manner. We test our hypothesis in a short-term intervention scenario to investigate if adaptive user-centered feedback on students' written peer reviews helps them to write more empathetic texts. This lays the foundation to investigate further impacts of adaptive empathy feedback on students' metacognitive empathy skills in longitudinal studies.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3">DESIGN OF LEARNING SYSTEM</head><p>ELEA is composed of two main components: an adaptive user interface and an intelligent empathy feedback algorithm in the back end. The basic user interaction concept of ELEA is illustrated in Figure <ref type="figure" target="#fig_0">2</ref>. A user conducts a peer writing exercise and receives adaptive feedback on the cognitive and emotional empathy level. The design process is based on self-regulated learning theory as a kernel theory <ref type="bibr" target="#b7">[7,</ref><ref type="bibr" target="#b117">110]</ref>. The feedback mechanism of ELEA is designed with the objective to provide students with self-monitoring and self-evaluation independent of an instructor, time, and location. As stated before, our aim is to provide a proof-of-concept study by investigating the hypothesis that individual feedback on certain students' empathy level in their peer review writing process will help them to take the perspective of the recipient of their review, and thus, to write more empathic reviews. Hence, we designed a learning tool for the "average" students of the specific pedagogical scenario of peer reviews on business models in German language.</p><p>In this vein, we are aware that the use of our tool in other domains or circumstances, such as, in other cultures might not yield the same results due to bias in the design and different contexts.  </p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.1">User Interface of ELEA</head><p>3.1.1 Deriving Requirements from Literature and Users. In order to build a novel learning tool, we followed two different approaches: a rigorous theory-driven approach and an agile user-centered approach following the build-measure-learn paradigm <ref type="bibr" target="#b74">[70]</ref>. For the rigorous theory-driven approach, we followed the approaches of <ref type="bibr" target="#b23">[22]</ref> and <ref type="bibr" target="#b98">[93]</ref> to conduct a systematic literature review with the aim to derive a set of theory requirements for the design of an empathy learning system. We focused our research on studies that display the successful implementation of learning tools for empathy skills. Therefore, we identified two research areas to derive requirements: educational technology and learning theories. We first focused on these literature streams since developing a learning tool for empathy skills is a complex endeavor that is studied by psychologists, pedagogues, and computer scientists using various methodologies. Only publications dealing with or contributing to a type of learning instrument in the subject of empathy learning, such as an established learning theory, were included. On this basis, we chose 110 papers for further examination. We grouped related problems in these contributions into five clusters as literary issues, which served as theory criteria for the learning tool for empathy skills. The five clusters were based on the literature streams of 1) formative feedback <ref type="bibr" target="#b16">[15,</ref><ref type="bibr" target="#b35">34]</ref>, 2) learner-centered design [85], 3) technology-mediated learning <ref type="bibr" target="#b34">[33]</ref>, 4) emotional and cognitive empathy support <ref type="bibr" target="#b25">[24,</ref><ref type="bibr" target="#b91">86]</ref>, and 5) learner control <ref type="bibr" target="#b83">[78]</ref>.</p><p>Besides the rigorous theory-driven approach, we followed a usercentered design approach at the same time. First, we conducted 28 semi-structured interviews with students to receive an initial understanding of the needs and requirements of learners for a learning tool for empathy skills <ref type="bibr" target="#b32">[31]</ref>. Each interview lasted an average of 40.91 minutes (SD = 15.9 minutes) and consisted of 30 questions. The interviewers were a subset of our university's students who may all benefit from an empathy learning tool. The following issues were discussed with the participants: prior experience with technology-based learning systems, the importance of skills in university education, system needs for learning metacognition skills (e.g., functionality, design), and system requirements for learning empathy (e.g., functionalities, design). Only master's students were selected for the interviews in order to obtain impressions based on many years of learning experience and to ensure that the interviewees had experiences in collaborative learning scenarios. The students interviewed were 24.82 years old on average (SD = 1.98) and all studied economics, law, or psychology; 15 were male and 13 were female. The interviews were examined using a qualitative content analysis after a more precise transcription. The interviews were coded, and abstract categories were created based on the results. During the examination, open coding was used to provide a consistent coding system <ref type="bibr" target="#b32">[31]</ref>. We derived user stories and aggregated the most common ones following <ref type="bibr" target="#b22">[21]</ref>. The aim of the interviews was to follow a design thinking process to get an understanding of the users' needs and perspectives. The user stories have been derived by one research who conducted the interviews and have been discussed based on the transcriptions with two senior researchers in three workshops to ensure the validity of the findings. The findings provided with an overview of the needs and requirements of users for an adaptive empathy learning system. The results are in line with other design investigations for empathy learning tools such as <ref type="bibr" target="#b106">[99]</ref>.</p><p>Based on those insights, we designed low-fidelity prototypes of ELEA to test different design hypotheses with end-users to learn more about the human-computer interaction of an adaptive learning tool for empathy skills-For example, we hypothesized that students would like to receive a specific numerical empathy score on their different text paragraphs. Therefore, we designed two paper prototypes: one providing text feedback based on three categorical variables "non-empathic", "neutral" and "empathic", and one prototype providing feedback based on five numerical variables one to five (1: low, 5 high). The empathy feedback algorithm was simulated by a human. The hypothesis was validated with 12 users. However, we learned, that the majority of students rather like the categorical empathy feedback. Therefore, the final version of ELEA contributes to these findings by providing the users with feedback based on three categorical variables. In total, we conducted three cycles testing several design hypotheses with a total of 65 users (cycle 1: 12 users, cycle 2: 25 users, cycle 3: 28 users). These users were different from the ones recruited for the semi-structured interviews but also students from our university with a similar age and gender distribution. Based on both approaches, we finally came up with several design principles on how to build an adaptive learning system for empathy skills (see Table <ref type="table">2</ref>). For example, design principle three described that an effective empathy learning tool should be employed in a theory-based learning scenario in which students can apply and train their empathy skills (e.g., in a peer learning setting) to allow students to receive formative feedback on their skill level or design principle four described that students should receive theory-based explanations and recommendations on different granularity levels for certain empathy feedback categories to allow students to transparently understand and use the feedback to foster their skills. The design principles were followed in the instantiation of our current version of ELEA.</p><p>Design Principles 1) To design effective learning tools for students to improve their empathy skills, employ a web-based application with a responsive lean and intuitive UX, which includes motivational learning elements (e.g., learning progress indicator) to allow students to use the tool intuitively and stay motivated to learn. 2) To design effective learning tools for students to improve their empathy skills, employ an individual empathy feedback mechanism that provides instant and individual feedback on different granularity levels based on the learning content to allow students to receive and choose the right amount of needed input. 3) To design effective learning tools for students to improve their empathy skills, employ a theory-based learning scenario in which students can apply and train their empathy skills (e.g., in a peer learning setting) to allow students to receive formative feedback on their skill level. 4) To design effective learning tools for students to improve their empathy skills, employ theory-based explanations and recommendations for certain empathy feedback categories to allow students to transparently understand and use the feedback to foster their skills. Table <ref type="table">2</ref>: Derived design principles on how to build an empathy learning tool, which we followed in our design instantiation of ELEA.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.1.2">User Interaction of ELEA.</head><p>Based on design principle one, we built ELEA as a responsive web-based application that can be used on all kinds of devices. A screenshot of ELEA and its different functionalities (e.g., F1 -F7) can be seen in Figure <ref type="figure">1</ref>. ELEA provides the user with a rather simple text input field (F1) in which they can write or copy a text. In the current version, we embedded ELEA in a peer learning scenario, where students write a business model review to a peer by elaborating on strengths, weaknesses, and improvement suggestions (F2). Below the input field, users can click on the analyze button (F3) to receive individual feedback on the empathy level of their text through a personal learning dashboard (F4, F5, F6, F7). As required in design principle two, the dashboard provides different granularity levels of feedback, which enables the user to control the amount of needed feedback information <ref type="bibr" target="#b83">[78]</ref>. A total empathy score and an adaptive recommendation message provide an initial overview of the quality of the text (F7). The individual recommendation is based on the empathy feedback level and provides a combination of motivating elements and solution suggestions to improve the individual skill level according to <ref type="bibr" target="#b35">[34]</ref>. Moreover, the users can receive detailed feedback on their business model review based on the written strengths, weaknesses, or improvement suggestions. For each review component, the emotional and cognitive empathy level is scored for the variables "non-empathic", "neutral" and "empathic" (F5, F6). Moreover, ELEA provides the user with clear steps on how to improve the respective cognitive and emotional empathy level of the specific business model peer review part. These action steps provide the user with orientation and context to improve their writing quality <ref type="bibr" target="#b35">[34,</ref><ref type="bibr">85]</ref>. Users can implement ELEA's feedback in the text input and analyze the improved peer again. ELEA then adapt the empathy dashboard with a new overall empathy score, which allows the students to detect their progress easily. Moreover, as found in design principles four, best practices and about cognitive and emotional theory are provided by clicking on the explanation button. A pop-up window displays a transparent explanation of how ELEA works and provides a theory-based definition of cognitive and emotional empathy structures (see figure <ref type="figure" target="#fig_1">3</ref>). </p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.2">Algorithm of ELEA</head><p>In order to fulfill the users' requirements to give instant feedback on their texts, we built on the empathy annotated student-written text corpora of <ref type="bibr" target="#b105">[98]</ref>. The corpus serves as the underlying data set to train and tune a state-of-the-art transfer learning model to design and build an adaptive empathy feedback tool. A requirement for developing NLP methods that are able to identify empathetic structures in written texts is the availability of annotated corpora.</p><p>the literature for a corpus that fulfilled the following criteria: 1) the corpus contains annotated empathic essays, 2) it has a sufficient corpus size to be able to use the trained model in a real-world scenario that fulfills the user requirements, and 3) the annotations are based on a rigorous annotation guideline for guiding the annotators towards a moderate agreement. The cognitive and emotional empathy annotated student peer reviews published in <ref type="bibr" target="#b105">[98]</ref> fulfilled all these requirements. The corpus consists of 500 student-generated peer reviews written in German which are annotated for the cognitive and emotional empathy levels a 1-5 Likert scale (1: low, 5: high). More information on the text domain, the annotation guidelines, the annotation study as well as on the corpus statistics can be found in <ref type="bibr" target="#b105">[98]</ref>.</p><p>To provide students with feedback on the empathy quality of their texts, we implemented an approach for detecting the cognitive and emotional empathy levels in them <ref type="bibr" target="#b44">[43]</ref>. The empathy detection task is considered a paragraph-based multiclass classification task, where each paragraph is either considered to be a weakness or improvement suggestion and has a "non-empathic", "neutral" or "empathic" cognitive and emotional empathy level. For the current version of ELEA our main objective was to assess the cognitive and emotional empathy level of the specific paragraphs since students enter strengths, weaknesses, and improvement suggestions Therefore, a classification of review components is curnot necessary. Hence, we trained a predictive model on the corpus of <ref type="bibr" target="#b105">[98]</ref> following the architecture of Bidirectional Encoder Representations from Transformers (BERT) proposed by <ref type="bibr" target="#b28">[27]</ref>. We classified text paragraphs into the cognitive and emotional empathy level based on three labels "non-empathic", "neutral", and "empathic". We used the BERT model from deepset 1 , since it is available for and provides a deep pre-trained model that was unsupervised while training on domain-agnostic German corpora (e.g., the Wikipedia). The novelty of this architecture is the ability to capture semantic information from pre-trained texts, which can be used for other downstream tasks without the need for retraining, e.g., for identifying the empathy level of text components. We split the data into 70 % training, 20 % validation, and 10 % test For applying the model, the corpus texts were split into word to fulfill the preparation requirements for BERT. The special preprocessing for BERT was conducted by utilizing the tokenizer processor provided by deepset. The goal of our model is to provide accurate predictions to identify and classify the empathy level review paragraphs that can be used for accessing the skill level of students and thus provide adaptive guidance and feedback on how improve their empathetic writing. We tested the model with different parameters. The best performing combination incorporated a dropout probability of 10%, a learning rate of 3e and the number epochs were 3 <ref type="bibr" target="#b28">[27]</ref>. Each combination was evaluated using the f1 metric. After several iterations, we reached a micro f1 score of 74.96% for the detection of emotional empathy and 69.98% for the of the cognitive empathy level of a text paragraph. To enthe validity of our BERT model, we benchmarked against bidirectional Long-Short-Term-Memory-Conditional-Random-Fields (BiLSTM-CRF). In combination with the corresponding embeddings vocabulary (GloVe) <ref type="bibr" target="#b65">[61]</ref> our LSTM reached an unsatisfying f1 score of 61% for detecting the emotional empathy level 51% for detecting the cognitive empathy level. Therefore, we our BERT model in the back end of ELEA to provide students with adaptive recommendations based on their empathy level in their peer review writing process.</p><p>based on user requirements, we provide students a empathy score as an initial overview of the empathy level in their texts (F7). The total empathy score is calculated by summing all the scores received throughout the detailed feedback, divided by the maximum score possible, and multiplied by 100 to obtain a score. The higher the score value, the more empathetic the text of the user. A score of 70 to 80 % is considered good but not perfect, since the user already wrote a neutral or an empathic but did not use full empathic language. Based on the overall the overall empathy recommendation is adopted. In total, we pre-scripted 23 recommendation messages for adaptive empathy in the domain of student-written peer reviews on business at a Western European university. The scripts are designed for the "average" student in the pedagogical scenario of German peer reviews on business models. In our three design cycles a total of 65 users (see section 3.1.1), we also tested different versions and formulations of the recommendation messages. In this way, we could control for harm, misunderstandings, or unintended consequences of our empathy recommendations by qualitatively the students about their perception after they received cerscripts. No objections were reported. However, we still want to note that the empathy constructs modeled with our algorithm as as the scripts only valid for the context in which we derived and tested them. The formulation of the recommendations as well the annotations -and, thus, the model -is biased from Western perspective. The predictions might be confusing or even harmful for other contexts (see subsection 2.4). Hence, different scenarios, user groups, or languages might require other empathy</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4">EXPERIMENTAL SETUP</head><p>Our goal was to evaluate the hypothesis that individual feedback on empathy levels in a peer review exercise will foster their skill level in the written texts. To evaluate our hypothesis, designed an experiment in which participants were asked to a peer review based on a provided business model essay, as this is a common large-scale teaching scenario to foster the skill learning of students across different business domains (e.g.,</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.1">Participants</head><p>We recruited 119 students from our university to take part in our experiment. The experiment was conducted as web experiment facilitated by the behavioral lab of our university, and thus, designed and reviewed according to the guidelines of the lab and the university. After randomization, we counted 58 valid results in the treatment and 61 in the control group. Participants of the treatment had an average age of 23.89 (SD= 3.07), 30 were male, 28 female. In the control group, participants' average age was (SD= 3.11), 35 were male, 26 were female. All participants were compensated with an equivalent of about 12 USD for a 25 to 30 minutes experiment.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.2">Experimental Design</head><p>The treatment group used ELEA to do the writing exercise 2 , while participants in the control group used an alternative collaborative learning application based on <ref type="bibr" target="#b81">[77]</ref> (Figure <ref type="figure">4</ref>). To control for the differences and similarities in the design between the alternative tool and ELEA, we implemented our own alternative collaborative learning approach. For the design, we followed the approach of Neu-roMessenger by <ref type="bibr" target="#b81">[77]</ref>, since it is a recent theory-based approach and empirically proven to foster the empathy skills of users through text recommendations. The learning tool supports the writing process of users with dictionary-based text recommendations (see Figure <ref type="figure" target="#fig_0">F1 and F2</ref>). Users can use the recommendations and improvesuggestions to correct their texts. In our approach, we derived a German dictionary list for cognitive and emotional empathetic in business model peer reviews based on the 14-page annotation guideline of the corpus of <ref type="bibr" target="#b105">[98]</ref> with inspiration by <ref type="bibr" target="#b81">[77]</ref>. To ELEA and the alternative learning approach consistent with other, there are many functions that are shared between them, the introduction text and the scripted text input fields (i.e., for strengths, weaknesses, suggestions) are the same across both apps. The explanation buttons and the user interaction correspond respectively to the same ones in ELEA.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.3">Experimental Procedure</head><p>experiment consisted of three main parts: 1) pre-test, 2) peer writing exercise, and 3) post-test. The pre-test and post-test phases were consistent for all participants. In the writing phase, the treatgroup used ELEA to write a business model peer review, whereas participants of the control group used the alternative tool.</p><p>Pre-test: The experiment started with a pre-survey of eight questions. Here, we tested two different constructs to assess whether the randomization was successful. First, we asked four items to test the personal innovativeness of the participants in the domain of information technology following <ref type="bibr" target="#b2">[3]</ref>. The were "I like to experiment with technologies", "If I heard about a new information technology, I would look to experiment with it, ", "In general, I am hesitant to try out new information and "Among my peers, I am usually the first to try out new information technologies". Second, we tested the construct feedback-seeking of individuals following <ref type="bibr" target="#b5">[5]</ref>. Items are: "It is for me to receive feedback on my performance.", "I find feedback on my performance useful.", "I would like to get more feedback on what behaviors would help me to conduct a task better.", "It is important to me to receive feedback on my progress potential for skill learning." Both constructs were measured with a 1-to 7-point scale (1: totally disagree to 7: totally agree, with 4 being a neutral statement).</p><p>Peer review exercise: In the peer writing phase of the exparticipants were asked to read an essay about a business of a peer student. Afterwards, they were asked to write a model review for the peer by elaborating on the strengths, weaknesses, and improvement suggestions of the particular business model. The participants were told to spend at least 15 minutes this review. A countdown indicated the remaining time. They were only able to continue the experiment after the countwas finished. The treatment group used ELEA to write the the control group used the reference tool. We did not provide any introduction to any of the tools. The students using ELEA individual and adaptive feedback based on our feedback algorithms. Participants using the reference tool retrieved help by dictionary-based recommendations during the writing process.</p><p>Post-test: the post-survey, we measured perceived usefulness, intention to use, and ease of use, following the technology acceptance model of <ref type="bibr" target="#b95">[90,</ref><ref type="bibr" target="#b96">91]</ref>. Example items for the three constructs "Imagine the tool was available in your next course, would you use it?", "The use of the empathy tool enables me to write more empatexts.", or "I would find the tool to be flexible to interact with".</p><p>we measured the perceived level of enjoyment of the students by asking the following items: "The interaction with the learning tool was exciting" and "It is fun to interact with the learning tool" <ref type="bibr" target="#b40">[39]</ref>. Also, we asked the participants to judge their perceived empathy skill learning (PESL) by asking two items that cover cognitive and emotional empathy skills based on <ref type="bibr" target="#b25">[24,</ref><ref type="bibr" target="#b91">86]</ref>: "I assume the tool would help me improve my ability to give appropriate emotional feedback. " and "I assume that the tool would help me immy ability to empathize with others when writing reviews."</p><p>Figure <ref type="figure">4</ref>: Overview of the experimental setup of our study: participants of the control group (CG) receive dictionary-based feedback based on the approach of <ref type="bibr" target="#b81">[77]</ref>. Students in the treatment group (TG) receive adaptive empathy feedback their peer review writing process with our tool we surveyed the perceived feedback accuracy (PFA) <ref type="bibr" target="#b69">[65]</ref> of both learning tools by asking three items: "The feedback I received my true performance.", "The tool accurately evaluated my performance. " and feedback I received from the tool was an acevaluation of my performance". All constructs were measured with a 1-to 7-point Likert scale (1: totally disagree to 7: totally with 4 being a neutral statement). Further, we were asking three qualitative questions: "What did you particularly like about the use of the tool?", "What else could be improved?", and "Do you have any other ideas? and captured the demographics. In total, we 24 questions.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.4">Behavioral Measurements</head><p>is a vivid discussion in prior research about the value of using perception-based measures to grasp perceived learning outcomes 83]. Therefore, we decided to enrich the perception-based measurement of empathy skill learning with a more objective approach.</p><p>is in line with the argumentation by <ref type="bibr" target="#b89">[84]</ref> that it is most desirwhen perceived as well as objective learning outcomes can be Thus, besides measuring the perceived constructs in our post-test, we also had two judges measuring the empathy levels of written texts from both groups to evaluate our main hypothesis. Therefore, we measured two variables: 1) the emotional empathy writing level and 2) the cognitive empathy writing level <ref type="bibr" target="#b45">[44,</ref><ref type="bibr" target="#b91">86]</ref>. To do so, we applied the annotation scheme of <ref type="bibr" target="#b105">[98]</ref> based on their 14-pages guideline to judge the emotional empathy writing level well as the cognitive empathy writing level of the received texts the peer writing exercise on a document-level. We used these guidelines since an annotator agreement was already conducted during the corpus collection process for the same kind of texts in same domain (student peer reviews). We relied on two annotators, who independently judge the empathic writing levels of the with document-level scores. The objective was to judge how empathic the given text is according to the defined emotional and cognitive empathy dimensions on a Likert scale from 1 to 5 points low, 5: high). Finally, we took the mean of both annotators as a final variable for the cognitive and emotional empathy level of the</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5">EVALUATION AND RESULTS</head><p>To evaluate our hypothesis that adaptive feedback on students' empathy will help them to foster their empathy skills, our objective was to answer two research questions (RQ):</p><p>How effective is ELEA at helping users to foster their empathy skills peer writing exercises compared to the traditional approach?</p><p>RQ2: Do students perceive ELEA to be useful, enjoyable, and easy to use, and would they continue to use it in the future?</p><p>evaluate our first research question, we compared the perceived empathy skill learning between the treatment and the control group. Moreover, we compared the cognitive and emotional empathy writing levels between the written text of the treatment and the control group. Therefore, we applied of variance (ANOVA) to evaluate whether the differences between the groups are statistically significant. We checked their assumptions visually with a test for normality and a test for homoscedasticity: all assumptions were met. Moreover, we calculated d to measure the size between the means of the perceived constructs <ref type="bibr" target="#b21">[20]</ref>. Furwe controlled for differences in the perceived feedback accuracy between both tools to investigate adaptive empathy has a significant effect on the user perception of feedback quality.</p><p>second research question will be answered by comparing the of perceived usefulness, intention to use, ease of use, and level of enjoyment for participants using ELEA compared to participants using alternative tool. Again, we performed an ANOVA to assess whether differences between both groups are statistically significant and calculated the d to measure the effect sizes. Moreover, we will the results of ELEA to the midpoints scale to validate a general positive technology acceptance done in <ref type="bibr" target="#b102">[96]</ref>. Finally, to ensure that the resulted in groups and to control for potential effects of interfering variables with our small sample size, we compared the differences in the means of the two constructs included in the pre-test. both constructs, we received p values larger than 0.05 between the and the control group (for personal innovativeness p = 0.8676, TG mean= 4.30, SD= 0.57, CG mean= 4.29, SD= 0.59; for feedback-seeking of individuals p = 0.6702, TG mean= 6.13, SD= CG mean= 6.10, SD= 0.63). 3: Overview of results of the cognitive and emotional level of students using ELEA and students using the reference tool.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.1">Cognitive and Emotional Empathy Level of Written Texts</head><p>We found that students who used ELEA wrote their text with a significantly higher level of emotional empathy compared to participants who used the reference tool (mean value ELEA = 2.75, mean value reference tool = 2.20, p = 0.0027, p&lt;0.01) The calculated d of 0.5699 indicates a medium effect size. Cohen suggested d = 0.2 be considered a 'small' effect size, 0.5 represents a effect size and 0.8 a 'large' effect size. This means that if groups' means don't differ by 0. 4: Overview of results of the perceived constructs of using ELEA and students using the reference tool.</p><p>the difference is trivial, even if it is statistically significant <ref type="bibr" target="#b21">[20]</ref>. we did not find any difference in the cognitive empathy between the texts of both groups (mean value ELEA = 3.24, value reference tool = 3.25, p = 0.9299). The results indicate that adaptive feedback on students' empathy level helps them to emotionally more empathic texts. The results show that students' using ELEA wrote texts with a higher level of emotional compared to the ones using the reference tool. However, adaptive cognitive empathy feedback seems to have no significant influence on students' cognitive empathy writing levels compared to non-adaptive cognitive empathy feedback. Participants using ELEA judged their empathy skill learning with a mean of 5.03 (SD= 1.05). Participants using the alternative tool judged their empathy skill learning with a mean of 3.93 (SD= (see Figure <ref type="figure" target="#fig_2">5</ref> and Table <ref type="table">3</ref>). An ANOVA confirmed that the group their empathy skill learning to be signifhigher compared to the control group (p&lt;0.001). Moreover, we calculated a Cohen's d 0.8410 indicating a large effect size <ref type="bibr" target="#b21">[20]</ref>. This proves our hypothesis that individual feedback on students' empathy levels helps them foster their empathy skills. The results show that students using ELEA judged their empathy skill learning to be significantly higher compared to the ones using the tradiapproach. Moreover, we compared the results for perceived accuracy (PFA) between both learning tools. Participants using ELEA rated the PFA with a mean of 4.93 (SD= 0.94), whereas from the control group rated the PFA with a mean of 3.69 (SD= 1.36). The difference is statistically significant (p&lt;0.001, cohen's d = 1.0470), indicating that the adaptive feedback approach has a significant impact on students' perception of the feedback accuracy compared to the dictionary-based feedback approach.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.2">Perceived Empathy Skill Learning of</head></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.3">Technology Acceptance</head><p>the technology acceptance, we calculated the average of every</p><p>The answers were provided on a 1-to 7-point Likert (1: totally disagree, 7: totally agree). First, we compared the of ELEA with the results of the alternative tool. The perceived usefulness of ELEA was rated with a mean value of 5.05 0.58) and the average perceived level of enjoyment of ELEA was 5.31 (SD= 1.10). The mean value of intention to use of participants using ELEA as a writing support tool was 5.14 (SD= 1.14) Table <ref type="table">4</ref>). These values are significantly better than the results the alternative approach. For perceived usefulness, we observed mean value of 3.77 (SD= 1.41, p&lt;0.001), and for a perceived level of enjoyment the value was 4.35 (SD= 1.61, p&lt;0.001) for participants from the control group. The mean value for the intention to use was 3.77 (SD= 1.41, p&lt;0.001). The results clearly show that the participants of our experiment rated the technology acceptance ELEA as an adaptive feedback tool positively compared to the usage of the alternative application. Moreover, the mean values of ELEA are also very promising when comparing the results to the midpoints. All results are better than the neutral value of 4. Especially the perceived usefulness for writing better empathetic texts and the intention to use ELEA as a writing support tool in learning scenarios show promising results. Also, the high level of enjoyment for ELEA as a learning tool provides promising results since enjoyment during a learning process has a major influence on adoption of IT tools <ref type="bibr" target="#b47">[45]</ref> and on the learning success of students <ref type="bibr" target="#b63">[59]</ref>. A positive technology acceptance is especially important for learning tools to ensure students are perceiving the usage of the tool as helpful, useful, and easy to interact with. This will foster motivation and engagement to use the learning application. The usefulness and intention to use provides promising results to use this tool as a feedback application in different learning we calculate a mean value of 5.72 (SD= 0.92) for the ease of use of ELEA and a mean of 5.61 (SD= 1.23) for from the control group. Both values are very high and promising for future usage. In fact, we did not expect a in the perceived ease of use between both tools, since look and feel of the user interaction were purposely designed the same.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.4">Analysis of Gender Differences</head><p>explained before, past literature has investigated differences in context of empathy between certain populations. Even though our objective was to design an empathy learning tool for the average of the particular scenario of peer reviews at our university, we want to investigate if significant differences in the perception and learning through empathy feedback exists. One of the prominent literature streams discussed in past studies is gender differences cornering empathy (e.g., <ref type="bibr" target="#b20">[19,</ref><ref type="bibr" target="#b53">51,</ref><ref type="bibr" target="#b60">56]</ref>). Since we also captured the gender of students (65 male, 54 female, 0 non-disclosure), we investigated the differences of our measured constructs between males and females for both empathy learning tools.</p><p>We found two significant differences between male and female users. Females rated the intention to use of an empathy learning tool significantly higher than males (mean females = 4.53, SD = 0.048; males 4.34, SD = 4.34, p = 0.048). Moreover, females rated the perceived usefulness of an empathy learning tool significantly better than male participants across both treatments (mean female = SD = 1.03; mean male = 4.29 SD = 1.10, p = 0.01248). For all other constructs, we received p-values &gt; 0.05 between male and users (perceived ease of use p = 0.2743, level of enjoyment p = 0.8978, perceived empathy skill learning p = 0.116 -female mean = 4.52; SD = 1.13, male mean 4.399, SD = 1.15). For the behavioral variables, we also found no significant effects between female and male participants (emotional empathy p = 0.8296. cognitive empathy = 0.8253).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.5">Qualitative User Feedback</head><p>also asked open questions in our survey to receive the participants' opinions about the tool they used. The general attitude ELEA was very positive. Participants positively mentioned the simple and easy interaction with ELEA, the distinction between cognitive and emotional empathy feedback, and the overall empathy score together with the adaptive feedback message several However, participants also said that ELEA should provide more detailed feedback based on more categories and provide text examples on how to improve their empathy score. translated the responses from German and clustered the most responses in Table <ref type="table">5</ref>. To further control for potential problems, harm, or unintended consequences of our empathy feedback and scripts, we separately conducted an analysis of all qualitative user comments. While no particular cluster of answers could be derived, two male users mentioned potential limitations and risks of empathy feedback, such as "I'm a bit worried that an algorithm will tell me if I'm empathic or not, I don't think real empathy can be put into 0's and 1's ;-)" "Danger with the "machine" that you can seem empathetic just by inserting personal pronouns some adjectives/adverbs. "</p><p>Cluster Feature empathy feedback reaction "In my case, I was empathetic on a level but not on an emotional one. This is also consistent with from my everyday life. I am empathetic but basically more interested in objective-rational solutions. I think that this could help me not only to put myself in the position of a person in terms of content and make suggestions but also to communicate to them better" On the feedback for skill learning empathy feedback was clear and could be easily implemented. I had the feeling I learned something. " On the user interaction "The tool was very easy to use and the feedback was Simple handling. " On the speed of the tool evaluation and fast feedback. Would use it On cognitive and emotional empathy was helpful that a distinction was made between the categories of empathy. This again clearly showed me that I do not show emotional empathy enough. It was also useful that the tool said how to show emotional empathy (feelings when reading the business idea etc.). " On the percentage score and progress indication also liked how the tool immediately showed me how my text became more empathetic based on the percentscore. "</p><p>Improvements on feedback granularity would be better if the feedback was more selective or with detailed categories about empathy. "</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Improvements on feedback recommendations</head><p>"Even more detailed information on how I can improve my empathy writing would be helpful, e.g., with review "</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>5:</head><p>Representative examples of qualitative user refor ELEA.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="6">DISCUSSION 6.1 Theoretical and Practical Contributions</head><p>Individual support and feedback for students to learn effectively is still an ongoing challenge (e.g., <ref type="bibr" target="#b111">[104]</ref>). Advances in NLP and MLbased algorithms might be able to provide individualization at scale in many distance learning scenarios (such as Massive Open Online Courses) or at larg-scale university lectures, in which individual interaction between students and instructors might be naturally Our research provides insight into the potential of NLP and ML to foster students' learning outcomes in specific pedagogical scenarios independent of an educator, time, and location. By designing a particular adaptive learning system for empathy skills in German reviews on business models, we found that students receiving adaptive empathy writing support based on ML and NLP wrote their peer reviews with significantly higher emotional empathy compared to the ones receiving dictionary-based feedback. the students judged their empathy skill learning to be higher. We believe that self-regulated learning theory a suitable basis to explain this effect. The tailored feedback on a student's skills, such as empathetic writing skills, seems to foster the "ability to simply understand the other person's perspective and to react to the observed experiences of another" p.1). This is reflected in the feedback accuracy of our tool, which is peras very high. Users judged the adaptive feedback of ELEA very accurate, which is a necessary pre-condition for them to foster learning according to self-monitoring and self-evaluation <ref type="bibr" target="#b8">[8,</ref><ref type="bibr" target="#b117">110]</ref>. The high degree of enjoyment and perceived usefulness of ELEA as an adaptive empathy learning tool reflects the promise of our adaptive empathy feedback technology. This, combined with the high perceived usefulness, indicates that our learning tool has potential to be successful in a real-world scenario. Positive technology acceptance is crucial for students to perceive the tool's use as beneficial, practical, and simple to interact with. This will increase motivation, engagement, and long-term use of the learning</p><p>We that positive perceptions of skill development and technology acceptance in a possible continuous use case will lead to user self-efficacy and inspire them to learn and improve their <ref type="bibr" target="#b8">[8]</ref>. Self-regulated learning theory supports our underlying hypothesis that individual and personal feedback on a student's level motivates the student to improve their skill level <ref type="bibr" target="#b15">[14,</ref><ref type="bibr" target="#b35">34]</ref>. Furthermore, the results of our analysis of gender differences provide support for what has been observed in prior literature. Females participants showed increased perceptions of usefulness as as intentions to use such a tool in the future. This mirrors the findings that female users value empathy or empathy skills more than male users <ref type="bibr" target="#b20">[19]</ref>. However, we could not observe performance comparing female and male participants. The reasons these observations could be manifold, making it an interesting area of future research.</p><p>our work makes several contributions to current research in human-computer interaction and computer-supported collaborative learning. To the best of our knowledge, this study is one of the first to present evaluated design knowledge on how to build a learning tool to train cognitive and emotional empathy based on adaptive and intelligent feedback <ref type="bibr" target="#b78">[74]</ref>. Past research has mostly built empathy learning tools based on syntactical analysis <ref type="bibr" target="#b81">[77]</ref>) or leveraged emotional modeling in other contexts education (e.g., <ref type="bibr" target="#b64">[60,</ref><ref type="bibr" target="#b92">87]</ref>). Our research provides a basis for researchers who also aim to develop learning tools to train metacognition skills to compare their solutions with ours. Educators can now use our design evaluation to create their own learning tools for providing and intelligent support of empathy skills in their large-scale or distance-learning scenarios. We believe, findings could not only be applied in peer review scenarios, also in collaborative teamwork, online discussions, or other collaborative learning settings where empathy might be important.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="6.2">Limitations and Future Work</head><p>Nevertheless, our work faces several limitations. First, the design findings and the empirical evaluation of the impact of our adaptive learning tool are limited to the very specific pedagogical scenario of student peer reviews on business models in German language. As stated, the entire design, such as the formulation of as well as the predictive model is biased from a Western perspective. The predictions might be confusing or even harmful for other contexts such as other user groups, pedagogical or cultures. More research is needed to investigate the design, the empathy nuances and replicate the empirical findings on the effect of these educational systems' in other pedagogical domains, and in different languages (for example, English, French, or Chinese). Moreover, future work should especially investigate different user groups and how different perceptions empathy affect their learning experience, such as individuals from the autism spectrum. Although we tried to pay special attention to potential harm or unintended consequence in the application of our tool (e.g., by analyzing the user comments), further research is needed, to investigate how "average" learning tools influence general empathy nuances of people, for example, at a certain workplace, gender or minorities. the effect on more nuanced constructs and dimensions of students' perception of an AI-based learning tool during the learning process, such as trust and reliance, as well as the implications of erroneous learning advice <ref type="bibr" target="#b84">[79]</ref>, should be regarded in future research. Concerning the transferability of our model, corpora and annotation schemes are needed in other languages and domains to transfer and test our findings in differlanguages. The study of <ref type="bibr" target="#b105">[98]</ref> might help scholars as a start to investigate how to model cognitive and emotional empathy skills different domains and languages. Second, our research is limited when it comes to the long-term impact on the empathy abilities of students. In our experiment, we investigated the short-term influence of ELEA on the perceived skill learning and the emotional empathy skills of students. In future work, longitudinal studies will be critical in determining the longinfluence of empathy learning on learning outcomes. Third, another limitation of our results evolves from the measurements of the empathy learning outcomes. Since metacognition are complex pedagogical constructs, we relied on a proven method to measure metacognition skills in textual data (e.g., done for argumentation skills in <ref type="bibr" target="#b1">[2,</ref><ref type="bibr" target="#b102">96,</ref><ref type="bibr" target="#b108">101]</ref> or for problem-solving skills in <ref type="bibr" target="#b110">[103]</ref>). The expert assessment of metacognition skills has been used, however, is limited when it comes to capturing more dimensions of metacognition skill learning in differdomains. More refined empathy skill assessments are required to more precisely examine the influence of individual empathy feedback and self-evaluation on students' skill levels. These assessments should be able to capture students' empathic writing competencies in various pedagogical domains (e.g., business, ethics, and education) before and after a specific treatment on various empathy skill dimensions to represent students' empathy skills with a higher level of granularity. Future research is needed to build, validate, assess such test measurements in order to more precisely measure impact of various pedagogical learning method designs on skill learning outcomes. Fourth, we did not investigate any significant effect of adaptive empathy feedback on students' cognitive empathy writing level in reviews. A possible reason for this might lie in the complex structures of perspective talking. While it could be comparably easy to support students in writing emotionally more empathic becoming better in cognitive empathy might require more training with stricter guidance. A possible human-computer could be to increase social presence, e.g, by embedding a conversational agent as an empathy learning tool. Past research <ref type="bibr" target="#b107">[100,</ref><ref type="bibr" target="#b116">109]</ref> has shown that conversational agents in pedagogical are able to increase social prescience. Future research could investigate this potential by embedding adaptive empathy writing support in a conversational learning tool and comparing it against our non-conversational approach.</p><p>Finally, although all interviews of the design requirement colprocess were recorded, transcribed and abstract categories were formatted in the form of user stores, one limitation arises by fact that this process has only been conducted by one researcher. the derived requirements in the form of user stories based on the transcriptions have been discussed with two senior in three workshops to ensure the validity of the design findings. The main improvement suggestion from users in the qualitative feedback was that the feedback of ELEA could encompass even more empathy dimensions and concrete examples on how to improve empathetic writing in a certain domain. We call for future work to enrich current corpora on student-written texts for precise empathy feedback. Moreover, we aim to embed more feedback recommendations with more accurate and transaction steps on how to achieve a higher rating and examples on how to improve empathy writing in a certain domain. Besides, we want to ensure that the empathy feedback stays transparent and understandable for the users. Therefore, we will guarantee that theory is even better explained with multimedia elements such as illustrations and videos.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="7">CONCLUSION</head><p>this research project, we designed, built, and evaluated ELEA, adaptive IT tool that provides students with feedback on the and emotional empathy level of a text by leveraging the advances of NLP and ML algorithms. We compared ELEA to proven empathy writing support approach in a rigorous use study with 119 participants. We found students using ELEA wrote more empathic texts with a higher level emotional empathy compared to the ones using the alternative approach. The high perceived empathy skill learning, the technology acceptance, and the level of enjoyment for ELEA provide promising results to use this tool as a feedback application in traditional learning settings. Our results also offer design suggestions to further improve educational feedback applications based on intelligent algorithms. With NLP and ML more powerful, we hope our work will attract other researchers to design and build more intelligent tutoring systems for other learning scenarios or metacognition skills.</p></div><figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_0"><head>Figure 2 :</head><label>2</label><figDesc>Figure 2: Basic user interaction concept of ELEA: a student receives adaptive empathy feedback on the cognitive and emotional empathy level in a peer writing exercise.</figDesc><graphic url="image-3.png" coords="6,408.09,187.71,73.20,87.39" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_1"><head>Figure 3 :</head><label>3</label><figDesc>Figure 3: Screenshot of exemplary explanations and details of ELEA.</figDesc><graphic url="image-7.png" coords="8,53.80,194.03,240.24,77.80" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_2"><head>5 :</head><label>5</label><figDesc>Results of empathy feedback accuracy (left) and empathy skill learning (right) between both tools.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0"><head></head><label></label><figDesc></figDesc><graphic url="image-1.png" coords="1,53.80,279.15,504.41,222.67" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0"><head></head><label></label><figDesc></figDesc><graphic url="image-8.png" coords="10,79.02,83.69,453.96,257.88" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_0"><head>Table 1</head><label>1</label><figDesc></figDesc><table><row><cell>lists a non-exhaustive</cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_1"><head>Student Feedback on cognitive &amp; emotional empathy level Machine Learning algorithm for cognitive and emotional empathy detection Text Text Editor</head><label></label><figDesc></figDesc><table><row><cell>Home</cell><cell>Write</cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_3"><head></head><label></label><figDesc>2 standard deviations or more,</figDesc><table><row><cell>Group</cell><cell>Intention</cell><cell>Perceived</cell><cell>Perceived</cell><cell>Level</cell><cell>of</cell></row><row><cell></cell><cell>to use (on a</cell><cell>usefulness</cell><cell>ease of use</cell><cell cols="2">enjoyment</cell></row><row><cell></cell><cell>1-to-7 Likert</cell><cell>(on a 1-to-7</cell><cell>(on a 1-to-7</cell><cell cols="2">(on a 1-to-7</cell></row><row><cell></cell><cell>Scale)</cell><cell>Likert Scale)</cell><cell>Likert Scale)</cell><cell cols="2">Likert Scale)</cell></row><row><cell>Mean</cell><cell>5.14</cell><cell>5.05</cell><cell>5.72</cell><cell>5.31</cell><cell></cell></row><row><cell>ELEA</cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell></row><row><cell>Mean</cell><cell>3.77</cell><cell>3.95</cell><cell>5.61</cell><cell>4.35</cell><cell></cell></row><row><cell>refer-</cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell></row><row><cell>ence</cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell></row><row><cell>tool</cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell></row><row><cell>SD</cell><cell>1.14</cell><cell>0.58</cell><cell>0.92</cell><cell>1.10</cell><cell></cell></row><row><cell>ELEA</cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell></row><row><cell>SD ref-</cell><cell>1.41</cell><cell>1.44</cell><cell>1.23</cell><cell>1.61</cell><cell></cell></row><row><cell>erence</cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell></row><row><cell>tool</cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell></row><row><cell>p value</cell><cell>&lt;0.001</cell><cell>&lt;0.001</cell><cell>0.5588</cell><cell>&lt;0.001</cell><cell></cell></row><row><cell>effect</cell><cell>1.0654 (large</cell><cell>0.8108 (large</cell><cell>0.1075</cell><cell>0.6953</cell><cell></cell></row><row><cell>size</cell><cell>effect)</cell><cell>effect)</cell><cell>(negligible</cell><cell>(medium</cell><cell></cell></row><row><cell>(cohen's</cell><cell></cell><cell></cell><cell>effect)</cell><cell>effect)</cell><cell></cell></row><row><cell>d)</cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell></row><row><cell>degrees</cell><cell>117</cell><cell>117</cell><cell>117</cell><cell>117</cell><cell></cell></row><row><cell>of free-</cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell></row><row><cell>dom</cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell></row></table></figure>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="1">https://github.com/deepset-ai/FARM</note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="2">was designed in German to provide German students with feedback on German However, for ease of understanding in this paper, we translated parts of our user into English (e.g., see Figure1).</note>
+		</body>
+		<back>
+
+			<div type="acknowledgement">
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>ACKNOWLEDGMENTS</head><p>We thank the Swiss National Science Foundation for supporting this research collaboration (grant 200207). We further thank the German Federal Ministry of Education and Research for supporting this research through the project Komp-HI (grant 16DHBKI073). Last but not least, we thank Corinne Ruckstuhl for supporting the tool development with her thesis.</p></div>
+			</div>
+
+			<div type="references">
+
+				<listBibl>
+
+<biblStruct xml:id="b0">
+	<analytic>
+		<title level="a" type="main">Sentiment analysis in multiple languages: Feature selection for opinion classification in Web forums</title>
+		<author>
+			<persName><forename type="first">Ahmed</forename><surname>Abbasi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Hsinchun</forename><surname>Chen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Arab</forename><surname>Salem</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/1361684.1361685</idno>
+		<ptr target="https://doi.org/10.1145/1361684.1361685" />
+	</analytic>
+	<monogr>
+		<title level="j">ACM Transactions on Information Systems</title>
+		<imprint>
+			<biblScope unit="volume">26</biblScope>
+			<biblScope unit="issue">3</biblScope>
+			<biblScope unit="page" from="1" to="34" />
+			<date type="published" when="2008-06">2008. 6 2008</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b1">
+	<analytic>
+		<title level="a" type="main">Effective Interfaces for Student-Driven Revision Sessions for Argumentative Writing</title>
+		<author>
+			<persName><forename type="first">Omid</forename><surname>Afrin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Christopher</forename><surname>Kashefi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Diane</forename><surname>Olshefski</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Rebecca</forename><surname>Litman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Amanda</forename><surname>Hwa</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Godley</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2021 CHI Conference on Human Factors in Computing Systems</title>
+				<meeting>the 2021 CHI Conference on Human Factors in Computing Systems<address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>ACM</publisher>
+			<date type="published" when="2021">2021</date>
+			<biblScope unit="page" from="1" to="13" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b2">
+	<monogr>
+		<author>
+			<persName><forename type="first">Elena</forename><surname>Agarwal</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Karahanna</surname></persName>
+		</author>
+		<title level="m">Time Flies When You&apos;re Having Fun: Cognitive Absorption and Beliefs about Information Technology Usage</title>
+				<imprint>
+			<date type="published" when="2000">2000</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b3">
+	<analytic>
+		<title/>
+		<idno type="DOI">10.2307/3250951</idno>
+		<ptr target="https://doi.org/10.2307/3250951" />
+	</analytic>
+	<monogr>
+		<title level="j">Quarterly</title>
+		<imprint>
+			<biblScope unit="volume">24</biblScope>
+			<biblScope unit="issue">4</biblScope>
+			<biblScope unit="page">665</biblScope>
+			<date type="published" when="2000">12 2000</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b4">
+	<analytic>
+		<title level="a" type="main">Annotating and modeling empathy in spoken conversations</title>
+		<author>
+			<persName><forename type="first">Firoj</forename><surname>Alam</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Morena</forename><surname>Danieli</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Giuseppe</forename><surname>Riccardi</surname></persName>
+		</author>
+		<idno type="DOI">10.1016/j.csl.2017.12.003</idno>
+		<ptr target="https://doi.org/10.1016/j.csl.2017.12.003" />
+	</analytic>
+	<monogr>
+		<title level="j">Computer Speech and Language</title>
+		<imprint>
+			<biblScope unit="volume">50</biblScope>
+			<biblScope unit="page" from="40" to="61" />
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b5">
+	<analytic>
+		<title level="a" type="main">Feedback-Seeking in Individual Adaptation : A Resource Perspective</title>
+		<author>
+			<persName><forename type="first">J</forename><surname>Ashford</surname></persName>
+		</author>
+		<idno type="DOI">10.2307/256219</idno>
+		<ptr target="https://doi.org/10.2307/256219" />
+	</analytic>
+	<monogr>
+		<title level="j">Academy of Management</title>
+		<imprint>
+			<biblScope unit="volume">29</biblScope>
+			<biblScope unit="page" from="465" to="487" />
+			<date type="published" when="1986-09">1986. 9 1986</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b6">
+	<monogr>
+		<title level="m" type="main">The use of immersive virtual reality in the learning sciences: Digital transformations of teachers, students, and social context</title>
+		<author>
+			<persName><forename type="first">N</forename><surname>Bailenson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Nick</forename><surname>Yee</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jim</forename><surname>Blascovich</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Andrew</forename><forename type="middle">C</forename><surname>Beall</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Nicole</forename><surname>Lundblad</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Michael</forename><surname>Jin</surname></persName>
+		</author>
+		<idno type="DOI">10.1080/10508400701793141</idno>
+		<ptr target="https://doi.org/10.1080/10508400701793141" />
+		<imprint>
+			<date type="published" when="2008">2008</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b7">
+	<analytic>
+		<title level="a" type="main">Self-efficacy: Toward a unifying theory of behavioral change</title>
+		<author>
+			<persName><surname>Bandura</surname></persName>
+		</author>
+		<idno type="DOI">10.1037/0033-295X.84.2.191</idno>
+		<ptr target="https://doi.org/10.1037/0033-295X.84.2.191" />
+	</analytic>
+	<monogr>
+		<title level="j">Psychological Review</title>
+		<imprint>
+			<biblScope unit="volume">84</biblScope>
+			<biblScope unit="page" from="191" to="215" />
+			<date type="published" when="1977">1977. 3 1977</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b8">
+	<analytic>
+		<title level="a" type="main">Social cognitive theory of self-regulation</title>
+		<author>
+			<persName><forename type="first">Albert</forename><surname>Bandura</surname></persName>
+		</author>
+		<idno type="DOI">10.1016/0749-5978(91)90022-L</idno>
+		<ptr target="https://doi.org/10.1016/0749-5978(91)90022-L" />
+	</analytic>
+	<monogr>
+		<title level="j">Organizational Behavior and Human Decision Processes</title>
+		<imprint>
+			<biblScope unit="volume">50</biblScope>
+			<biblScope unit="issue">2</biblScope>
+			<biblScope unit="page" from="248" to="287" />
+			<date type="published" when="1991-12">1991. 12 1991</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b9">
+	<monogr>
+		<title level="m" type="main">The Empathy Quotient: An of Adults with Asperger Syndrome or High Functioning Autism, and Normal Sex Differences</title>
+		<author>
+			<persName><forename type="first">Simon</forename><surname>Baron-Cohen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sally</forename><surname>Wheelwright</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2004">2004</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">Technical Report 2</note>
+</biblStruct>
+
+<biblStruct xml:id="b10">
+	<analytic>
+		<title level="a" type="main">Distress and Empathy: Two Distinct Vicarious with Different Motivational Consequences</title>
+		<author>
+			<persName><forename type="first">C</forename></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Daniel</forename><surname>Batson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jim</forename><surname>Fultz</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Patricia</forename><forename type="middle">A</forename><surname>Schoenrade</surname></persName>
+		</author>
+		<idno type="DOI">10.1111/j.1467-6494.1987.tb00426.x</idno>
+		<ptr target="https://doi.org/10.1111/j.1467-6494.1987.tb00426.x" />
+	</analytic>
+	<monogr>
+		<title level="j">Journal of Personality</title>
+		<imprint>
+			<biblScope unit="volume">55</biblScope>
+			<biblScope unit="page" from="19" to="39" />
+			<date type="published" when="1987">1987. 3 1987</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b11">
+	<analytic>
+		<title level="a" type="main">Creative Interventions for Teaching Empathy in the Counseling Classroom</title>
+		<author>
+			<persName><forename type="first">Hope</forename><surname>Bell</surname></persName>
+		</author>
+		<idno type="DOI">10.1080/15401383.2017.1328295</idno>
+		<ptr target="https://doi.org/10.1080/15401383.2017.1328295" />
+	</analytic>
+	<monogr>
+		<title level="j">Journal of Creativity in Mental Health</title>
+		<imprint>
+			<biblScope unit="volume">13</biblScope>
+			<biblScope unit="page" from="106" to="120" />
+			<date type="published" when="2018-01">2018. 1 2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b12">
+	<monogr>
+		<author>
+			<persName><forename type="first">Raquel</forename><surname>Benbunan-Fich</surname></persName>
+		</author>
+		<title level="m">Is Learning a Proxy Metfor Learning? Perspectives From the Information Literature</title>
+				<imprint>
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b13">
+	<monogr>
+		<title/>
+		<idno type="DOI">10.5465/AMLE.9.2.ZQR321</idno>
+		<ptr target="https://doi.org/10.5465/AMLE.9.2.ZQR321" />
+		<imprint>
+			<date type="published" when="2017">11 2017</date>
+			<biblScope unit="volume">9</biblScope>
+			<biblScope unit="page" from="321" to="328" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b14">
+	<monogr>
+		<title level="m" type="main">Exploring psychotherapist empathic attunement from a psychoneurobiological perspective: Is empathy enhanced by yoga and meditation</title>
+		<author>
+			<persName><forename type="first">Eric</forename><surname>Bergemann</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2009">2009</date>
+		</imprint>
+	</monogr>
+	<note>Ph.D. Dissertation</note>
+</biblStruct>
+
+<biblStruct xml:id="b15">
+	<analytic>
+		<title level="a" type="main">Self-regulated learning: Beliefs, techniques, and illusions</title>
+		<author>
+			<persName><forename type="first">Robert</forename><forename type="middle">A</forename><surname>Bjork</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">John</forename><surname>Dunlosky</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Nate</forename><surname>Kornell</surname></persName>
+		</author>
+		<idno type="DOI">10.1146/annurev-psych-113011-143823</idno>
+		<ptr target="https://doi.org/10.1146/annurev-psych-113011-143823" />
+	</analytic>
+	<monogr>
+		<title level="j">Annual Review of Psychology</title>
+		<imprint>
+			<biblScope unit="volume">64</biblScope>
+			<biblScope unit="page" from="417" to="444" />
+			<date type="published" when="2012">2013. November 2012. 2013</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b16">
+	<analytic>
+		<title level="a" type="main">Developing the theory of formative assessment</title>
+		<author>
+			<persName><forename type="first">Paul</forename><surname>Black</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Dylan</forename><surname>Wiliam</surname></persName>
+		</author>
+		<idno type="DOI">10.1007/s11092-008-9068-5</idno>
+		<ptr target="https://doi.org/10.1007/s11092-008-9068-5" />
+	</analytic>
+	<monogr>
+		<title level="j">Educational Assessment, Evaluation and Accountability</title>
+		<imprint>
+			<biblScope unit="volume">21</biblScope>
+			<biblScope unit="page" from="5" to="31" />
+			<date type="published" when="2009">2009. 2009</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b17">
+	<analytic>
+		<title level="a" type="main">Learning to and regulate collective thinking processes</title>
+		<author>
+			<persName><forename type="first">Marcela</forename><surname>Borge</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yann</forename><surname>Shiou Ong</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Carolyn</forename><forename type="middle">Penstein</forename><surname>Rosé</surname></persName>
+		</author>
+		<idno type="DOI">10.1007/s11412-018-9270-5</idno>
+		<ptr target="https://doi.org/10.1007/s11412-018-9270-5" />
+	</analytic>
+	<monogr>
+		<title level="j">International Journal of Computer-Supported Collaborative Learning</title>
+		<imprint>
+			<biblScope unit="volume">13</biblScope>
+			<biblScope unit="page" from="61" to="92" />
+			<date type="published" when="2018-03">2018. 3 2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b18">
+	<analytic>
+		<title level="a" type="main">Modeling empathy and distress in reaction to stories</title>
+		<author>
+			<persName><forename type="first">Sven</forename><surname>Buechel</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Anneke</forename><surname>Buffone</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Barry</forename><surname>Slaff</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Lyle</forename><surname>Ungar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">João</forename><surname>Sedoc</surname></persName>
+		</author>
+		<idno type="DOI">10.18653/v1/d18-1507</idno>
+		<ptr target="https://doi.org/10.18653/v1/d18-1507" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2018 Conference on Empirical Methods in Natural Language Processing</title>
+				<meeting>the 2018 Conference on Empirical Methods in Natural Language Processing</meeting>
+		<imprint>
+			<date type="published" when="2018">2018. 2018</date>
+			<biblScope unit="volume">2018</biblScope>
+			<biblScope unit="page" from="4758" to="4765" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b19">
+	<monogr>
+		<title level="m" type="main">Emotion Representation Mapping for Automatic Lexicon Construction (Mostly) Performs Human</title>
+		<author>
+			<persName><forename type="first">Sven</forename><surname>Buechel</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Udo</forename><surname>Hahn</surname></persName>
+		</author>
+		<ptr target="http://www.julielab.dehttp://arxiv.org/abs/1806.08890" />
+		<imprint>
+			<date type="published" when="2018">2018. 2018</date>
+			<biblScope unit="page" from="2892" to="2904" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b20">
+	<analytic>
+		<title level="a" type="main">Empathy: Gender effects in brain and behavior</title>
+		<author>
+			<persName><forename type="first">Leonardo</forename><surname>Christov-Moore</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Elizabeth</forename><forename type="middle">A</forename><surname>Simpson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Gino</forename><surname>Coudé</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kristina</forename><surname>Grigaityte</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Marco</forename><surname>Iacoboni</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Pier</forename><forename type="middle">Francesco</forename><surname>Ferrari</surname></persName>
+		</author>
+		<idno type="DOI">10.1016/J.NEUBIOREV.2014.09.001</idno>
+		<ptr target="https://doi.org/10.1016/J.NEUBIOREV.2014.09.001" />
+	</analytic>
+	<monogr>
+		<title level="j">Neuroscience and reviews</title>
+		<imprint>
+			<biblScope unit="volume">46</biblScope>
+			<biblScope unit="page">604</biblScope>
+			<date type="published" when="2014-10">2014. 10 2014</date>
+		</imprint>
+	</monogr>
+	<note>Pt</note>
+</biblStruct>
+
+<biblStruct xml:id="b21">
+	<monogr>
+		<title level="m" type="main">Statistical Power Analysis for the Behavioral Sciences</title>
+		<author>
+			<persName><forename type="first">Jacob</forename><surname>Cohen</surname></persName>
+		</author>
+		<idno type="DOI">10.4324/9780203771587</idno>
+		<ptr target="https://doi.org/10.4324/9780203771587" />
+		<imprint>
+			<date type="published" when="1988">1988</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b22">
+	<monogr>
+		<title level="m" type="main">User Stories Applied For Agile Development</title>
+		<author>
+			<persName><forename type="first">Mike</forename><surname>Cohn</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2004">2004</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">Technical Report</note>
+</biblStruct>
+
+<biblStruct xml:id="b23">
+	<analytic>
+		<title level="a" type="main">Organizing knowledge syntheses: A taxonomy of literature reviews</title>
+		<author>
+			<persName><forename type="first">Harris</forename><forename type="middle">M</forename><surname>Cooper</surname></persName>
+		</author>
+		<idno type="DOI">10.1007/BF03177550</idno>
+		<ptr target="https://doi.org/10.1007/BF03177550" />
+	</analytic>
+	<monogr>
+		<title level="j">Knowledge in Society</title>
+		<imprint>
+			<biblScope unit="volume">1</biblScope>
+			<biblScope unit="page" from="104" to="126" />
+			<date type="published" when="1988">1988. 1988</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b24">
+	<monogr>
+		<title level="m" type="main">Empathy: A review of the concept</title>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">P</forename><surname>Benjamin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sarah</forename><forename type="middle">J</forename><surname>Cuff</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Laura</forename><surname>Brown</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Douglas</forename><forename type="middle">J</forename><surname>Taylor</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Howat</surname></persName>
+		</author>
+		<idno type="DOI">10.1177/1754073914558466</idno>
+		<ptr target="https://doi.org/10.1177/" />
+		<imprint>
+			<date type="published" when="2016">2016</date>
+			<biblScope unit="page" from="144" to="153" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b25">
+	<analytic>
+		<title level="a" type="main">Measuring individual differences in empathy: Evidence for a multidimensional approach</title>
+		<author>
+			<persName><forename type="first">H</forename><surname>Mark</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Davis</surname></persName>
+		</author>
+		<idno type="DOI">10.1037//0022-3514.44.1.113</idno>
+		<ptr target="https://doi.org/10.1037//0022-3514.44.1.113" />
+	</analytic>
+	<monogr>
+		<title level="j">Journal of Personality and Social Psychology</title>
+		<imprint>
+			<biblScope unit="volume">44</biblScope>
+			<biblScope unit="page" from="113" to="126" />
+			<date type="published" when="1983">1983. 1983</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b26">
+	<analytic>
+		<title level="a" type="main">The empathic brain: how, when and why?</title>
+		<author>
+			<persName><forename type="first">Tania</forename><surname>De Vignemont</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Singer</surname></persName>
+		</author>
+		<idno type="DOI">10.1016/j.tics.2006.08.008</idno>
+		<ptr target="https://doi.org/10.1016/j.tics.2006.08.008" />
+	</analytic>
+	<monogr>
+		<title level="j">Trends in Cognitive Sciences</title>
+		<imprint>
+			<biblScope unit="volume">10</biblScope>
+			<biblScope unit="issue">10</biblScope>
+			<biblScope unit="page" from="435" to="441" />
+			<date type="published" when="2006-10">2006. 10 2006</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b27">
+	<monogr>
+		<title level="m" type="main">The functional architecture of human empathy</title>
+		<author>
+			<persName><forename type="first">Philip</forename><forename type="middle">L</forename><surname>Decety</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Jackson</surname></persName>
+		</author>
+		<idno type="DOI">10.1177/1534582304267187</idno>
+		<ptr target="https://doi.org/10.1177/1534582304267187" />
+		<imprint>
+			<date type="published" when="2004">2004</date>
+			<biblScope unit="page" from="71" to="100" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b28">
+	<monogr>
+		<title level="m" type="main">BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding</title>
+		<author>
+			<persName><forename type="first">Ming-Wei</forename><surname>Devlin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kenton</forename><surname>Chang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kristina</forename><surname>Lee</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Toutanova</surname></persName>
+		</author>
+		<ptr target="http://arxiv.org/abs/1810.04805" />
+		<imprint>
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b29">
+	<analytic>
+		<title level="a" type="main">The Evolution of Research on Computer-Supported Collaborative Learning</title>
+		<author>
+			<persName><forename type="first">Pierre</forename><surname>Dillenbourg</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sanna</forename><surname>Järvelä</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Frank</forename><surname>Fischer</surname></persName>
+		</author>
+		<idno type="DOI">10.1007/978-1-4020-9827-7_1</idno>
+		<ptr target="https://doi.org/10.1007/978-1-4020-9827-7_1" />
+	</analytic>
+	<monogr>
+		<title level="m">Enhanced Learning: Principles and Products</title>
+				<editor>
+			<persName><forename type="first">Nicolas</forename><surname>Balacheff</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">Sten</forename><surname>Ludvigsen</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">Ard</forename><surname>Ton De Jong</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">Sally</forename><surname>Lazonder</surname></persName>
+		</editor>
+		<editor>
+			<persName><surname>Barnes</surname></persName>
+		</editor>
+		<meeting><address><addrLine>Netherlands, Dordrecht</addrLine></address></meeting>
+		<imprint>
+			<publisher>Springer</publisher>
+			<date type="published" when="2009">2009</date>
+			<biblScope unit="page" from="3" to="19" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b30">
+	<analytic>
+		<title level="a" type="main">Emotion, regulation, and moral development</title>
+		<author>
+			<persName><forename type="first">Nancy</forename><forename type="middle">Eisenberg</forename></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">review of psychology</title>
+		<imprint>
+			<biblScope unit="volume">51</biblScope>
+			<biblScope unit="page" from="665" to="697" />
+			<date type="published" when="2000">2000. 2000</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b31">
+	<analytic>
+		<title level="a" type="main">Teaching empathy: A framework rooted in social cognitive neuroscience social justice</title>
+		<author>
+			<persName><forename type="first">E</forename><surname>Gerdes</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Elizabeth</forename><forename type="middle">A</forename><surname>Segal</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kelly</forename><forename type="middle">F</forename><surname>Jackson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jennifer</forename><forename type="middle">L</forename><surname>Mullins</surname></persName>
+		</author>
+		<idno type="DOI">10.5175/JSWE.2011.200900085</idno>
+		<ptr target="https://doi.org/10.5175/JSWE.2011.200900085" />
+	</analytic>
+	<monogr>
+		<title level="j">Journal of Social Work Education</title>
+		<imprint>
+			<biblScope unit="volume">47</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page" from="109" to="131" />
+			<date type="published" when="2011">12 2011</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b32">
+	<monogr>
+		<title level="m" type="main">Experteninterviews und qualitative Inhaltsanalyse : als Instrumente rekonstruierender Untersuchungen</title>
+		<author>
+			<persName><surname>Jochen</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Glaeser</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Grit</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Laudel</surname></persName>
+		</author>
+		<ptr target="http://www.springer.com/de/book/9783531172385" />
+		<imprint>
+			<date type="published" when="2010">2010</date>
+			<publisher>VS Verlag Sozialwiss</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b33">
+	<monogr>
+		<title level="m" type="main">Ethics and Cognitive Science</title>
+		<author>
+			<persName><surname>Goldman</surname></persName>
+		</author>
+		<ptr target="http://www.jstor.org/stable/2381527" />
+		<imprint>
+			<date type="published" when="1993">1993. 1993</date>
+			<biblScope unit="volume">103</biblScope>
+			<biblScope unit="page" from="337" to="360" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b34">
+	<analytic>
+		<title level="a" type="main">Technology-Mediated learning: comprehensive theoretical model</title>
+		<author>
+			<persName><forename type="first">Saurabh</forename><surname>Gupta</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Robert</forename><forename type="middle">P</forename><surname>Bostrom</surname></persName>
+		</author>
+		<idno type="DOI">10.17705/1jais.00207</idno>
+		<ptr target="https://doi.org/10.17705/1jais.00207" />
+	</analytic>
+	<monogr>
+		<title level="j">of the Association for Information Systems</title>
+		<imprint>
+			<biblScope unit="volume">10</biblScope>
+			<biblScope unit="page" from="686" to="714" />
+			<date type="published" when="2009">2009. 2009</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b35">
+	<monogr>
+		<title level="m" type="main">The power of feedback</title>
+		<author>
+			<persName><forename type="first">Hattie</forename></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Helen</forename><surname>Timperley</surname></persName>
+		</author>
+		<idno type="DOI">10.3102/003465430298487</idno>
+		<ptr target="https://doi.org/10.3102/003465430298487" />
+		<imprint>
+			<date type="published" when="2007">2007</date>
+			<biblScope unit="page" from="81" to="112" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b36">
+	<analytic>
+		<title level="a" type="main">Emotional competencies in the education of mental health professionals</title>
+		<author>
+			<persName><forename type="first">Meirav</forename><surname>Hen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Marina</forename><surname>Goroshit</surname></persName>
+		</author>
+		<idno type="DOI">10.1080/02615479.2010.515680</idno>
+		<ptr target="https://doi.org/10.1080/02615479.2010.515680" />
+	</analytic>
+	<monogr>
+		<title level="j">Work Education</title>
+		<imprint>
+			<biblScope unit="volume">30</biblScope>
+			<biblScope unit="page" from="811" to="829" />
+			<date type="published" when="2011-10">2011. 10 2011</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b37">
+	<analytic>
+		<title level="a" type="main">Development of an empathy scale</title>
+		<author>
+			<persName><forename type="first">Robert</forename><surname>Hogan</surname></persName>
+		</author>
+		<idno type="DOI">10.1037/H0027580</idno>
+		<ptr target="https://doi.org/10.1037/H0027580" />
+	</analytic>
+	<monogr>
+		<title level="j">Clinical Psychology</title>
+		<imprint>
+			<biblScope unit="volume">33</biblScope>
+			<biblScope unit="page" from="307" to="316" />
+			<date type="published" when="1969-06">1969. 6 1969</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b38">
+	<monogr>
+		<title level="m" type="main">Learning technologies: Affective and social issues in computer-supported collaborative learning</title>
+		<author>
+			<persName><forename type="first">Ann</forename><surname>Jones</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kim</forename><surname>Issroff</surname></persName>
+		</author>
+		<idno type="DOI">10.1016/j.compedu.2004.04.004</idno>
+		<ptr target="https://doi.org/" />
+		<imprint/>
+	</monogr>
+	<note>n.d.</note>
+</biblStruct>
+
+<biblStruct xml:id="b39">
+	<monogr>
+		<title level="m" type="main">Empathetic Messages in Online Health Communities</title>
+		<author>
+			<persName><forename type="first">Hamed</forename><surname>Khanpour</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Cornelia</forename><surname>Caragea</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Prakhar</forename><surname>Biyani</surname></persName>
+		</author>
+		<ptr target="https://csn.cancer.org" />
+		<imprint>
+			<date type="published" when="2017">2017</date>
+			<biblScope unit="page" from="246" to="251" />
+		</imprint>
+	</monogr>
+	<note type="report_type">Technical Report</note>
+</biblStruct>
+
+<biblStruct xml:id="b40">
+	<analytic>
+		<title level="a" type="main">Comparing data chatbot and web surveys effects of platform and conversational style on survey response quality</title>
+		<author>
+			<persName><forename type="first">Soomin</forename><surname>Kim</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Joonhwan</forename><surname>Lee</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Gahgene</forename><surname>Gweon</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3290605.3300316</idno>
+		<ptr target="https://doi.org/10.1145/3290605.3300316" />
+	</analytic>
+	<monogr>
+		<title level="m">on Human Factors in Computing Systems -Proceedings</title>
+				<imprint>
+			<date type="published" when="2019">2019. 2019</date>
+			<biblScope unit="page" from="1" to="12" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b41">
+	<monogr>
+		<title level="m" type="main">Changes in dispositional empathy in American college students over time: A and 15</title>
+		<author>
+			<persName><forename type="first">Sara</forename><forename type="middle">H</forename><surname>Konrath</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Edward</forename><forename type="middle">H</forename><surname>O'brien</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Courtney</forename><surname>Hsing</surname></persName>
+		</author>
+		<idno type="DOI">10.1177/1088868310377395</idno>
+		<ptr target="https://doi.org/10.1177/1088868310377395" />
+		<imprint>
+			<date type="published" when="2011">2011. 2011</date>
+			<biblScope unit="page" from="180" to="198" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b42">
+	<monogr>
+		<title level="m" type="main">Paradigm Shifts and Instructional Technology</title>
+		<author>
+			<persName><forename type="first">Timothy</forename><surname>Koschmann</surname></persName>
+		</author>
+		<ptr target="http://opensiuc.lib.siu.edu/meded_books/4" />
+		<imprint>
+			<date type="published" when="1996">1996</date>
+			<biblScope unit="page" from="1" to="23" />
+		</imprint>
+	</monogr>
+	<note type="report_type">Technical Report</note>
+</biblStruct>
+
+<biblStruct xml:id="b43">
+	<analytic>
+		<title level="a" type="main">Inside empathy and social-emotional skills</title>
+		<author>
+			<persName><forename type="first">Dana</forename><surname>Kralicek</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Lisa</forename><forename type="middle">Von</forename><surname>Rabenau</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Swati</forename><surname>Shelar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Paulo</forename><surname>Blikstein</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3202185.3213525</idno>
+		<ptr target="https://doi.org/10" />
+	</analytic>
+	<monogr>
+		<title level="m">IDC 2018 -Proceedings of the 2018 ACM Conference Interaction Design and Children</title>
+				<meeting><address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>for Machinery, Inc</publisher>
+			<date type="published" when="2018">2018</date>
+			<biblScope unit="page" from="525" to="528" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b44">
+	<analytic>
+		<title level="a" type="main">A taxonomy for deep learning in natural language processing</title>
+		<author>
+			<persName><forename type="first">Thiemo</forename><surname>Severin Landolt</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Matthias</forename><surname>Wambsganß</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Söllner</surname></persName>
+		</author>
+		<idno type="DOI">10.24251/hicss.2021.129</idno>
+		<ptr target="https://doi.org/10.24251/hicss.2021.129" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the Annual Hawaii International Conference on System Sciences</title>
+				<meeting>the Annual Hawaii International Conference on System Sciences</meeting>
+		<imprint>
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b45">
+	<monogr>
+		<author>
+			<persName><forename type="first">J</forename><surname>Lawrence</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Shaw</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Baker</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Baron-Cohen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Anthony</forename><forename type="middle">S</forename><surname>David</surname></persName>
+		</author>
+		<title level="m">empathy: Reliability and validity of the Empathy Quotient</title>
+				<imprint>
+			<date type="published" when="2004">2004</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b46">
+	<analytic>
+		<title/>
+		<idno type="DOI">10.1017/S0033291703001624</idno>
+		<ptr target="https://doi.org/10.1017/S0033291703001624" />
+	</analytic>
+	<monogr>
+		<title level="j">Medicine</title>
+		<imprint>
+			<biblScope unit="volume">34</biblScope>
+			<biblScope unit="issue">5</biblScope>
+			<biblScope unit="page" from="911" to="919" />
+			<date type="published" when="2004">7 2004</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b47">
+	<analytic>
+		<title level="a" type="main">Acceptance of Internet-based learning medium: The role of extrinsic and intrinsic motivation</title>
+		<author>
+			<persName><forename type="first">K O</forename><surname>Lee</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M K</forename><surname>Christy</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Zhaohui</forename><surname>Cheung</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Chen</surname></persName>
+		</author>
+		<idno type="DOI">10.1016/j.im.2003.10.007</idno>
+		<ptr target="https://doi.org/10.1016/j.im.2003.10.007" />
+	</analytic>
+	<monogr>
+		<title level="j">Information and Management</title>
+		<imprint>
+			<biblScope unit="volume">42</biblScope>
+			<biblScope unit="page" from="1095" to="1104" />
+			<date type="published" when="2005">2005. 2005</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b48">
+	<monogr>
+		<title level="m" type="main">Sentiment analysis: Mining opinions, sentiments, and emotions</title>
+		<author>
+			<persName><forename type="first">Bing</forename><surname>Liu</surname></persName>
+		</author>
+		<idno type="DOI">10.1017/CBO9781139084789</idno>
+		<ptr target="https://doi.org/10.1017/CBO9781139084789" />
+		<imprint>
+			<date type="published" when="2015">2015</date>
+			<publisher>Cambridge University Press</publisher>
+			<biblScope unit="page" from="1" to="367" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b49">
+	<monogr>
+		<title level="m" type="main">Can Virtual Humans Teach Empathy? Teaching Empathy in Healthcare</title>
+		<author>
+			<persName><forename type="first">Benjamin</forename><surname>Lok</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Adriana</forename><forename type="middle">E</forename><surname>Foster</surname></persName>
+		</author>
+		<idno type="DOI">10.1007/978-3-030-29876-0_9</idno>
+		<ptr target="https://doi.org/10.1007/978-3-030-29876-0_9" />
+		<imprint>
+			<date type="published" when="2019">2019</date>
+			<publisher>Springer International Publishing</publisher>
+			<biblScope unit="page" from="143" to="163" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b50">
+	<analytic>
+		<title level="a" type="main">Does Emotional Intelligence Affect Suc-Teamwork?</title>
+		<author>
+			<persName><forename type="first">Joseph</forename><surname>Luca</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Pina</forename><surname>Tarricone</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 18th Annual Conference of the Australasian Society for Computers in Learning in Tertiary Education</title>
+				<meeting>the 18th Annual Conference of the Australasian Society for Computers in Learning in Tertiary Education</meeting>
+		<imprint>
+			<date type="published" when="2001">2001. 2001. 2001</date>
+			<biblScope unit="page" from="367" to="376" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b51">
+	<analytic>
+		<title level="a" type="main">Modeling and evaluating empain embodied companion agents</title>
+		<author>
+			<persName><forename type="first">W</forename><surname>Scott</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">James</forename><forename type="middle">C</forename><surname>Mcquiggan</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Lester</surname></persName>
+		</author>
+		<idno type="DOI">10.1016/j.ijhcs.2006.11.015</idno>
+		<ptr target="https://doi.org/10.1016/j.ijhcs.2006.11.015" />
+	</analytic>
+	<monogr>
+		<title level="j">Journal of Human Computer Studies</title>
+		<imprint>
+			<biblScope unit="volume">65</biblScope>
+			<biblScope unit="page" from="348" to="360" />
+			<date type="published" when="2007-04">2007. 4 2007</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b52">
+	<monogr>
+		<title level="m" type="main">Transformative dimensions of adult learning</title>
+		<author>
+			<persName><forename type="first">Jack</forename><surname>Mezirow</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="1991">1991</date>
+			<publisher>Jossey-Bass</publisher>
+			<biblScope unit="page" from="94104" to="91310" />
+			<pubPlace>San Francisco, CA</pubPlace>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b53">
+	<analytic>
+		<title level="a" type="main">Age-related differences in explicit measures of empathy do not predict brain responses across childhood and adolescence</title>
+		<author>
+			<persName><forename type="first">J</forename><surname>Michalska</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Katherine</forename><forename type="middle">D</forename><surname>Kinzler</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jean</forename><surname>Decety</surname></persName>
+		</author>
+		<idno type="DOI">10.1016/J.DCN.2012.08.001</idno>
+		<ptr target="https://doi.org/10.1016/J.DCN.2012.08.001" />
+	</analytic>
+	<monogr>
+		<title level="j">Developmental Cognitive Neuroscience</title>
+		<imprint>
+			<biblScope unit="volume">3</biblScope>
+			<biblScope unit="page" from="22" to="32" />
+			<date type="published" when="2013-01">2013. 1 2013</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b54">
+	<analytic>
+		<title level="a" type="main">Attachment theory and intergroup bias: Evidence that priming the secure base schema attenuates negative reactions out-groups</title>
+		<author>
+			<persName><forename type="first">Phillip</forename><forename type="middle">R</forename><surname>Mikulincer</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Shaver</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Journal of Personality and Social Psychology</title>
+		<imprint>
+			<biblScope unit="volume">81</biblScope>
+			<biblScope unit="page" from="97" to="115" />
+			<date type="published" when="2001">2001. 2001</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b55">
+	<monogr>
+		<title/>
+		<idno type="DOI">10.1037/0022-3514.81.1.97</idno>
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b56">
+	<monogr>
+		<title level="m" type="main">Boosting attachment security to mental health, prosocial values, and inter-group tolerance</title>
+		<author>
+			<persName><forename type="first">Mario</forename><surname>Mikulincer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Phillip</forename><forename type="middle">R</forename></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2007">2007</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b57">
+	<analytic>
+		<title/>
+		<idno type="DOI">10.1080/10478400701512646</idno>
+		<ptr target="https://doi.org/10.1080/10478400701512646" />
+	</analytic>
+	<monogr>
+		<title level="j">cal Inquiry</title>
+		<imprint>
+			<biblScope unit="volume">18</biblScope>
+			<biblScope unit="page" from="139" to="156" />
+			<date type="published" when="2007">2007</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b58">
+	<monogr>
+		<title level="m" type="main">Exploring through biodiversity: Empathy of people autism towards living beings mostly differs for a single species, ours</title>
+		<author>
+			<persName><forename type="first">Aurelien</forename><surname>Miralles</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Marine</forename><surname>Grandgeorge</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Michel</forename><surname>Raymond</surname></persName>
+		</author>
+		<idno type="DOI">10.31234/OSF.IO/49QXJ</idno>
+		<ptr target="https://doi.org/10.31234/OSF.IO/49QXJ" />
+		<imprint>
+			<date type="published" when="2021">2021. 2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b59">
+	<monogr>
+		<author>
+			<persName><forename type="first">L</forename><surname>Neumann</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><forename type="middle">K</forename><surname>Raymond</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Gregory</forename><forename type="middle">J</forename><surname>Chan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yi</forename><surname>Boyle</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><forename type="middle">Rae</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Westbury</surname></persName>
+		</author>
+		<idno type="DOI">10.1016/B978-0-12-386915-9.00010-3</idno>
+		<idno>B978-0-12-386915-9.00010-3</idno>
+		<ptr target="https://doi.org/10.1016/" />
+		<title level="m">Measures of Empathy: Self-Report, Behavioral, and Neuroscientific Approaches. Measures of Personality and Social Psychological Constructs</title>
+				<imprint>
+			<date type="published" when="2015">2015. 2015</date>
+			<biblScope unit="page" from="257" to="289" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b60">
+	<analytic>
+		<title level="a" type="main">Concern and Perspective Taking: Linear and Quadratic Effects of Age Across the Adult Life Span</title>
+		<author>
+			<persName><forename type="first">O'</forename><surname>Ed</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sara</forename><forename type="middle">H</forename><surname>Brien</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Daniel</forename><surname>Konrath</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Anna</forename><forename type="middle">Linda</forename><surname>Grühn</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Hagen</surname></persName>
+		</author>
+		<idno type="DOI">10.1093/GERONB/GBS055</idno>
+		<ptr target="https://doi.org/10.1093/GERONB/GBS055" />
+	</analytic>
+	<monogr>
+		<title level="j">The Journals of Gerontology: Series B</title>
+		<imprint>
+			<biblScope unit="volume">68</biblScope>
+			<biblScope unit="page" from="168" to="175" />
+			<date type="published" when="2013-03">2013. 3 2013</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b61">
+	<monogr>
+		<title level="m" type="main">The Future of Education and Skills -Education</title>
+		<ptr target="https" />
+		<imprint>
+			<date type="published" when="2018">2018. 2030</date>
+		</imprint>
+		<respStmt>
+			<orgName>OECD</orgName>
+		</respStmt>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b62">
+	<analytic>
+		<title level="a" type="main">Questioning universal applicability of transformational leadership: Examining employees with autism spectrum disorder</title>
+		<author>
+			<persName><forename type="first">Alissa</forename><forename type="middle">D</forename><surname>Parr</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Samuel</forename><forename type="middle">T</forename><surname>Hunter</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Gina</forename><forename type="middle">Scott</forename><surname>Ligon</surname></persName>
+		</author>
+		<idno type="DOI">10.1016/J.LEAQUA.2013.04.003</idno>
+		<ptr target="https://doi.org/10.1016/J.LEAQUA.2013.04.003" />
+	</analytic>
+	<monogr>
+		<title level="j">The Leadership Quarterly</title>
+		<imprint>
+			<biblScope unit="volume">24</biblScope>
+			<biblScope unit="issue">4</biblScope>
+			<biblScope unit="page" from="608" to="622" />
+			<date type="published" when="2013-08">2013. 8 2013</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b63">
+	<monogr>
+		<title level="m" type="main">Individual differences and cultural and contextual factors</title>
+		<author>
+			<persName><forename type="first">Reinhard</forename><surname>Pekrun</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Elizabeth</forename><forename type="middle">J</forename><surname>Stephens</surname></persName>
+		</author>
+		<idno type="DOI">10.1037/13274-001</idno>
+		<ptr target="https://doi.org/10.1037/13274-001" />
+		<imprint>
+			<date type="published" when="2012-10">2012. 10 2012</date>
+			<biblScope unit="volume">2</biblScope>
+			<biblScope unit="page" from="3" to="31" />
+		</imprint>
+	</monogr>
+	<note>Academic emotions. educational psychology handbook</note>
+</biblStruct>
+
+<biblStruct xml:id="b64">
+	<analytic>
+		<title level="a" type="main">Exploring Effects of Technological Writing Assistance for Support Providers in Online Mental Health Community</title>
+		<author>
+			<persName><forename type="first">Zhenhui</forename><surname>Peng</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Qingyu</forename><surname>Guo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ka</forename><forename type="middle">Wing</forename><surname>Tsang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Xiaojuan</forename><surname>Ma</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3313831.3376695</idno>
+		<ptr target="https://doi.org/10.1145/3313831.3376695" />
+	</analytic>
+	<monogr>
+		<title level="m">Conference on Human Factors in Computing Systems -Proceedings</title>
+				<imprint>
+			<date type="published" when="2020-04">2020. 4 2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b65">
+	<analytic>
+		<title level="a" type="main">GloVe: Global vectors for word representation</title>
+		<author>
+			<persName><forename type="first">Richard</forename><surname>Pennington</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Christopher</forename><forename type="middle">D</forename><surname>Socher</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Manning</surname></persName>
+		</author>
+		<idno type="DOI">10.3115/v1/d14-1162</idno>
+		<ptr target="https://doi.org/" />
+	</analytic>
+	<monogr>
+		<title level="m">EMNLP 2014 -2014 Conference on Methods in Natural Language Processing, Proceedings of the Conference. Association for Computational Linguistics (ACL)</title>
+				<imprint>
+			<date type="published" when="2014">2014</date>
+			<biblScope unit="page" from="1532" to="1543" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b66">
+	<analytic>
+		<title level="a" type="main">Understanding and predicting empathic behavior in countherapy</title>
+		<author>
+			<persName><forename type="first">Verónica</forename><surname>Pérez-Rosas</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Rada</forename><surname>Mihalcea</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kenneth</forename><surname>Resnicow</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Satinder</forename><surname>Singh</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Lawrence</forename><surname>An</surname></persName>
+		</author>
+		<idno type="DOI">10.18653/v1/P17-1131</idno>
+		<ptr target="https://doi.org/10.18653/v1/P17-1131" />
+	</analytic>
+	<monogr>
+		<title level="m">ACL 2017 -55th Annual Meeting of the Association for Computational Linguistics, Proceedings of the Conference</title>
+				<imprint>
+			<publisher>Long Papers</publisher>
+			<date type="published" when="2017">2017. 2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b67">
+	<analytic>
+		<title level="a" type="main">The convergence of mirroring and Communications training in business-to-business personal selling persuasion efforts</title>
+		<author>
+			<persName><forename type="first">Robin</forename><forename type="middle">T</forename><surname>Peterson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yam</forename><surname>Limbu</surname></persName>
+		</author>
+		<idno type="DOI">10.1080/10517120802484551</idno>
+		<ptr target="https://doi.org/10.1080/10517120802484551" />
+	</analytic>
+	<monogr>
+		<title level="j">Journal of Business-to-Business Marketing</title>
+		<imprint>
+			<biblScope unit="volume">16</biblScope>
+			<biblScope unit="issue">3</biblScope>
+			<biblScope unit="page" from="193" to="219" />
+			<date type="published" when="2009-07">2009. 7 2009</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b68">
+	<analytic>
+		<title level="a" type="main">The Equilibration of Cognitive Structures: The Central Problem of Intellectual Development</title>
+		<author>
+			<persName><forename type="first">Terrance</forename><surname>Piaget</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kishore Julian</forename><surname>Brown</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Thampy</surname></persName>
+		</author>
+		<idno type="DOI">10.1086/443876</idno>
+		<ptr target="https://doi.org/10.1086/443876" />
+	</analytic>
+	<monogr>
+		<title level="j">American Journal of Education</title>
+		<imprint>
+			<biblScope unit="volume">94</biblScope>
+			<biblScope unit="issue">4</biblScope>
+			<biblScope unit="page" from="574" to="577" />
+			<date type="published" when="1986-08">1986. 8 1986</date>
+			<publisher>Jean Piaget</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b69">
+	<analytic>
+		<title level="a" type="main">Effects of feedback sign and on goal setting and task performance</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Podsakoff</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jiing</forename><surname>Lih Farh</surname></persName>
+		</author>
+		<idno type="DOI">10.1016/0749-5978(89)90034-4</idno>
+		<ptr target="https://doi.org/10.1016/0749-5978" />
+	</analytic>
+	<monogr>
+		<title level="m">Behavior and Human Decision Processes</title>
+				<imprint>
+			<date type="published" when="1989-08">1989. 8 1989</date>
+			<biblScope unit="volume">44</biblScope>
+			<biblScope unit="page" from="90034" to="90034" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b70">
+	<analytic>
+		<title level="a" type="main">Group emotions: the social and cognitive functions of emotions in argumentation</title>
+		<author>
+			<persName><forename type="first">Kristine</forename><surname>Polo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Christian</forename><surname>Lund</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Gerald</forename><forename type="middle">P</forename><surname>Plantin</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Niccolai</surname></persName>
+		</author>
+		<idno type="DOI">10.1007/s11412-016-9232-8</idno>
+		<ptr target="https://doi.org/10.1007/s11412-016-9232-8" />
+	</analytic>
+	<monogr>
+		<title level="j">International Journal of Computer-Supported Collaborative Learning</title>
+		<imprint>
+			<biblScope unit="volume">11</biblScope>
+			<biblScope unit="page" from="123" to="156" />
+			<date type="published" when="2016">2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b71">
+	<analytic>
+		<title level="a" type="main">Hybrid Teamwork: Consideration of Teamwork Concepts to Reach Naturalistic Interaction between Humans and Conversational Agents</title>
+		<author>
+			<persName><forename type="first">Mathis</forename><surname>Poser</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">C</forename><surname>Eva</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Bittner</surname></persName>
+		</author>
+		<idno type="DOI">10.30844/wi_2020_a6-poser</idno>
+		<ptr target="https://doi.org/10.30844/wi_2020_a6-poser" />
+	</analytic>
+	<monogr>
+		<title level="m">GITO Verlag</title>
+				<imprint>
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b72">
+	<analytic>
+		<title level="a" type="main">The Kids&apos; Empathic Development Scale (KEDS): a multi-dimensional measure of empathy in primary school-aged children</title>
+		<author>
+			<persName><forename type="first">Helen</forename><surname>Reid</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Chiara</forename><surname>Davis</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mike</forename><surname>Horlin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Natalie</forename><surname>Anderson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Catherine</forename><surname>Baughman</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Campbell</surname></persName>
+		</author>
+		<idno type="DOI">10.1111/BJDP.12002</idno>
+		<ptr target="https://doi.org/10.1111/BJDP.12002" />
+	</analytic>
+	<monogr>
+		<title level="j">British journal of developmental psychology</title>
+		<imprint>
+			<biblScope unit="volume">31</biblScope>
+			<biblScope unit="page" from="231" to="256" />
+			<date type="published" when="2013-06">2013. 6 2013</date>
+		</imprint>
+	</monogr>
+	<note>Pt</note>
+</biblStruct>
+
+<biblStruct xml:id="b73">
+	<analytic>
+		<title level="a" type="main">Affective states in computer-supported collaborative learning: Studying the past to drive the future</title>
+		<author>
+			<persName><forename type="first">Seiji</forename><surname>Carlos Duque Reis</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Carla</forename><forename type="middle">Lopes</forename><surname>Isotani</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Rodriguez</surname></persName>
+		</author>
+		<idno type="DOI">10.1016/j.compedu.2018.01.015</idno>
+		<ptr target="https://doi.org/10.1016/j.compedu.2018.01.015" />
+	</analytic>
+	<monogr>
+		<title level="j">Computers and Education</title>
+		<imprint>
+			<biblScope unit="volume">120</biblScope>
+			<biblScope unit="page" from="29" to="50" />
+			<date type="published" when="2018">2018. 2018</date>
+		</imprint>
+	</monogr>
+	<note>Kamila Takayama Patrícia Augustin Jaques, and Ig Bittencourt</note>
+</biblStruct>
+
+<biblStruct xml:id="b74">
+	<monogr>
+		<title level="m" type="main">The Lean Startup: How Today&apos;s Entrepreneurs Use Continuous to Create Radically Successful Businesses</title>
+		<author>
+			<persName><forename type="first">Eric</forename><surname>Ries</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2011">2011</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b75">
+	<analytic>
+		<title level="a" type="main">Insights into Using IT-Based Peer Feedback to Practice the Students Providing Feedback Skill</title>
+		<author>
+			<persName><forename type="first">Roman</forename><surname>Rietsche</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Matthias</forename><surname>Söllner</surname></persName>
+		</author>
+		<idno type="DOI">10.24251/hicss.2019.009</idno>
+		<ptr target="https://doi.org/10.24251/hicss.2019.009" />
+	</analytic>
+	<monogr>
+		<title level="m">of the 52nd Hawaii International Conference on System Sciences</title>
+				<imprint>
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b76">
+	<analytic>
+		<title level="a" type="main">Temporal dynamics of MOOC learning trajectories</title>
+		<author>
+			<persName><forename type="first">Saman</forename><surname>Rizvi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Bart</forename><surname>Rienties</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jekaterina</forename><surname>Rogaten</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3279996.3280035</idno>
+		<ptr target="https://doi.org/10.1145/3279996.3280035" />
+	</analytic>
+	<monogr>
+		<title level="m">ACM International Conference Proceeding for Computing Machinery</title>
+				<meeting><address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<date type="published" when="2018">2018</date>
+			<biblScope unit="page" from="1" to="6" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b77">
+	<monogr>
+		<title level="m" type="main">Learning Taking Memory Tests Improves Long-Term Retention</title>
+		<author>
+			<persName><forename type="first">L</forename><surname>Henry</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jeffrey</forename><forename type="middle">D</forename><surname>Roediger</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Karpicke</surname></persName>
+		</author>
+		<ptr target="http://learninglab.psych.purdue.edu/downloads/2006_Roediger_" />
+		<imprint>
+			<date type="published" when="2006">2006</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">Report</note>
+</biblStruct>
+
+<biblStruct xml:id="b78">
+	<analytic>
+		<title level="a" type="main">Analyzing collaborative learning processes Exploiting the advances of computational linguistics in computersupported collaborative learning</title>
+		<author>
+			<persName><forename type="first">Yi</forename><forename type="middle">Chia</forename><surname>Rosé</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yue</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jaime</forename><surname>Cui</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Karsten</forename><surname>Arguello</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Armin</forename><surname>Stegmann</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Frank</forename><surname>Fischer</surname></persName>
+		</author>
+		<idno type="DOI">10.1007/s11412-007-9034-0</idno>
+		<ptr target="https://doi.org/10.1007/s11412-007-9034-0" />
+	</analytic>
+	<monogr>
+		<title level="j">International Journal of Computer-Supported Collaborative Learning</title>
+		<imprint>
+			<biblScope unit="volume">3</biblScope>
+			<biblScope unit="page" from="237" to="271" />
+			<date type="published" when="2008">2008. 2008</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b79">
+	<analytic>
+		<author>
+			<persName><forename type="first">Sara</forename><surname>Rosenthal</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Noura</forename><surname>Farra</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Preslav</forename><surname>Nakov</surname></persName>
+		</author>
+		<idno type="DOI">10.18653/v1/s17-2088</idno>
+		<ptr target="https://doi.org/10.18653/v1/s17-" />
+	</analytic>
+	<monogr>
+		<title level="m">SemEval-2017 Task</title>
+				<imprint>
+			<date type="published" when="2018">2018. 2018</date>
+			<biblScope unit="volume">4</biblScope>
+			<biblScope unit="page" from="502" to="518" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b80">
+	<analytic>
+		<title level="a" type="main">Formative assessment and the design of instructional systems</title>
+		<author>
+			<persName><forename type="first">Royce</forename><surname>Sadler</surname></persName>
+		</author>
+		<idno type="DOI">10.1007/BF00117714</idno>
+		<ptr target="https://doi.org/10.1007/BF00117714" />
+	</analytic>
+	<monogr>
+		<title level="j">Instructional Science</title>
+		<imprint>
+			<biblScope unit="volume">18</biblScope>
+			<biblScope unit="page" from="119" to="144" />
+			<date type="published" when="1989">1989. 1989</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b81">
+	<analytic>
+		<title level="a" type="main">An Experimental Evaluation of the NeuroMessenger: A Collaborative Tool to Improve the Empathy of Text Interactions</title>
+		<author>
+			<persName><forename type="first">Methanias</forename><surname>Breno Santana Santos</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Janisson Gois De</forename><surname>Colaqo Junior</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Souza</surname></persName>
+		</author>
+		<idno type="DOI">10.1109/ISCC.2018.8538442</idno>
+		<ptr target="https://doi.org/10" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings -IEEE Symposium on and Communications</title>
+				<meeting>-IEEE Symposium on and Communications</meeting>
+		<imprint>
+			<date type="published" when="2018-06">2018. 2018-June (2018</date>
+			<biblScope unit="page" from="573" to="579" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b82">
+	<monogr>
+		<title/>
+		<author>
+			<persName><forename type="first">/</forename><surname>Iscc</surname></persName>
+		</author>
+		<idno type="DOI">10.1109/ISCC.2018.8538442</idno>
+		<imprint>
+			<date type="published" when="2018">2018</date>
+			<biblScope unit="page">8538442</biblScope>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b83">
+	<analytic>
+		<title level="a" type="main">Learner control in hypermedia</title>
+		<author>
+			<persName><forename type="first">Katharina</forename><surname>Scheiter</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Peter</forename><surname>Gerjets</surname></persName>
+		</author>
+		<idno type="DOI">10.1007/s10648-007-9046-3</idno>
+		<ptr target="https://doi.org/10.1007/s10648-007-9046-3" />
+	</analytic>
+	<monogr>
+		<title level="j">Educational Psychology Review</title>
+		<imprint>
+			<biblScope unit="volume">19</biblScope>
+			<biblScope unit="page" from="285" to="307" />
+			<date type="published" when="2007">2007. 2007</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b84">
+	<analytic>
+		<title level="a" type="main">Towards a Trust Reliance Paradox ? Exploring the Gap Between Perceived Trust in and Reliance on Algorithmic Advice</title>
+		<author>
+			<persName><forename type="first">Anuschka</forename><surname>Schmitt</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Thiemo</forename><surname>Wambsganss</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Andreas</forename><surname>Janson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Matthias</forename><surname>Söllner</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">International Conference on Information Systems</title>
+				<meeting><address><addrLine>Austin, Texas</addrLine></address></meeting>
+		<imprint>
+			<biblScope unit="page" from="1" to="17" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b85">
+	<monogr>
+		<title level="m" type="main">Higher Education Reports -Babson Survey Research Group</title>
+		<author>
+			<persName><forename type="first">E</forename><surname>Seaman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">I</forename><forename type="middle">E</forename><surname>Allen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jeff</forename><surname>Seaman</surname></persName>
+		</author>
+		<ptr target="http://www.onlinelearningsurvey.com/highered.htmlhttps://www.onlinelearningsurvey.com/highered.html" />
+		<imprint>
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">Technical Report</note>
+</biblStruct>
+
+<biblStruct xml:id="b86">
+	<monogr>
+		<title level="m" type="main">A Computational Approach to Understanding Empathy Expressed in Text-Based Mental Health Support</title>
+		<author>
+			<persName><forename type="first">Ashish</forename><surname>Sharma</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Adam</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Miner</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>David</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Tim</forename><surname>Atkins</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Althoff</surname></persName>
+		</author>
+		<ptr target="http://arxiv.org/abs/2009.08441" />
+		<imprint>
+			<date type="published" when="2020">2020. 2020</date>
+			<biblScope unit="page" from="5263" to="5276" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b87">
+	<monogr>
+		<title level="m" type="main">Developing Linguistic Corpora: a Guide to Good Practice</title>
+		<author>
+			<persName><surname>Sinclair</surname></persName>
+		</author>
+		<ptr target="http://www.ahds.ac.uk/creating/guides/linguistic-corpora/index.htm" />
+		<imprint>
+			<date type="published" when="2005">2005</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b88">
+	<monogr>
+		<author>
+			<persName><forename type="first">Katherine</forename><surname>Sitzmann</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kenneth</forename><forename type="middle">G</forename><surname>Ely</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kristina</forename><forename type="middle">N</forename><surname>Brown</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Bauer</surname></persName>
+		</author>
+		<idno type="DOI">10.5465/AMLE.9.2.ZQR169</idno>
+		<ptr target="https://doi.org/10.5465/AMLE.9.2.ZQR169" />
+		<title level="m">of Knowledge: A Cognitive Learning or Affective Measure</title>
+				<imprint>
+			<date type="published" when="2017-11">2017. 11 2017</date>
+			<biblScope unit="volume">9</biblScope>
+			<biblScope unit="page" from="169" to="191" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b89">
+	<analytic>
+		<title level="a" type="main">Process is King: Evaluating the Performance of Technology-mediated Learning in Vocational Software Training</title>
+		<author>
+			<persName><forename type="first">Philipp</forename><surname>Söllner</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Andreas</forename><surname>Bitzer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jan</forename><forename type="middle">Marco</forename><surname>Janson</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Leimeister</surname></persName>
+		</author>
+		<idno type="DOI">10.1057/s41265-017-0046-6</idno>
+		<ptr target="https://doi.org/10.1057/s41265-017-0046-6" />
+	</analytic>
+	<monogr>
+		<title level="j">of Information Technology</title>
+		<imprint>
+			<biblScope unit="volume">33</biblScope>
+			<biblScope unit="page" from="233" to="253" />
+			<date type="published" when="2018-09">2018. 9 2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b90">
+	<monogr>
+		<title level="m" type="main">Learner-Centered Design The Challenge For WC1 In The Xst Century</title>
+		<author>
+			<persName><forename type="first">Elliot</forename><surname>Soloway</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mark</forename><surname>Guzdial</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kenneth</forename><forename type="middle">E</forename><surname>Hay</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="1994">1994. 1994</date>
+			<biblScope unit="page" from="36" to="48" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b91">
+	<analytic>
+		<title level="a" type="main">The Toronto empathy questionnaire: Scale development and initial validation of a factor-analytic solution to multiple empathy measures</title>
+		<author>
+			<persName><forename type="first">Nathan</forename><surname>Spreng</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Margaret</forename><forename type="middle">C</forename><surname>Mckinnon</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Raymond</forename><forename type="middle">A</forename><surname>Mar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Brian</forename><surname>Levine</surname></persName>
+		</author>
+		<idno type="DOI">10.1080/00223890802484381</idno>
+		<ptr target="https://doi.org/10.1080/00223890802484381" />
+	</analytic>
+	<monogr>
+		<title level="j">nal of Personality Assessment</title>
+		<imprint>
+			<biblScope unit="volume">91</biblScope>
+			<biblScope unit="page" from="62" to="71" />
+			<date type="published" when="2009">2009. 2009</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b92">
+	<analytic>
+		<title level="a" type="main">Development and Evaluation of ClientBot: Patient-Like Conversational Agent to Train Basic Counseling Skills</title>
+		<author>
+			<persName><forename type="first">Michael</forename><forename type="middle">J</forename><surname>Tanana</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Christina</forename><forename type="middle">S</forename><surname>Soma</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Vivek</forename><surname>Srikumar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">David</forename><forename type="middle">C</forename><surname>Atkins</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Zac</forename><forename type="middle">E</forename><surname>Imel</surname></persName>
+		</author>
+		<idno type="DOI">10.2196/12529</idno>
+		<ptr target="https://doi.org/10.2196/12529" />
+	</analytic>
+	<monogr>
+		<title level="j">of medical Internet research</title>
+		<imprint>
+			<biblScope unit="volume">21</biblScope>
+			<biblScope unit="issue">7</biblScope>
+			<date type="published" when="2019">2019. 2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b93">
+	<monogr>
+		<title level="m" type="main">Lectures on the experimental psychology of the thought-Macmillan</title>
+		<author>
+			<persName><forename type="first">Edward</forename><surname>Titchener</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="1909">1909</date>
+			<pubPlace>New York</pubPlace>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b94">
+	<analytic>
+		<title level="a" type="main">Crying during adolescence: The role of gender, menarche, and empathy</title>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">L</forename><surname>Miranda</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Marielle</forename><forename type="middle">L</forename><surname>Van Tilburg</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Unterberg</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">J M</forename><surname>Ad</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Vingerhoets</surname></persName>
+		</author>
+		<idno type="DOI">10.1348/026151002166334</idno>
+		<ptr target="https://doi.org/10.1348/026151002166334" />
+	</analytic>
+	<monogr>
+		<title level="j">Journal of Developmental Psychology</title>
+		<imprint>
+			<biblScope unit="volume">20</biblScope>
+			<biblScope unit="page" from="77" to="87" />
+			<date type="published" when="2002-03">2002. 3 2002</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b95">
+	<analytic>
+		<title level="a" type="main">Technology acceptance model 3 and a research agenda on interventions</title>
+		<author>
+			<persName><forename type="first">Viswanath</forename><surname>Venkatesh</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Hillol</forename><surname>Bala</surname></persName>
+		</author>
+		<idno type="DOI">10.1111/j.1540-5915.2008.00192.x</idno>
+		<ptr target="https://doi.org/10.1111/j.1540-5915.2008.00192.x" />
+	</analytic>
+	<monogr>
+		<title level="j">Sciences</title>
+		<imprint>
+			<biblScope unit="volume">39</biblScope>
+			<biblScope unit="issue">2</biblScope>
+			<biblScope unit="page" from="273" to="315" />
+			<date type="published" when="2008-05">2008. 5 2008</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b96">
+	<analytic>
+		<title level="a" type="main">User Acceptance of Information Technology: Toward a Unified View</title>
+		<author>
+			<persName><forename type="first">Viswanath</forename><surname>Venkatesh</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Michael</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Gordon</forename><forename type="middle">B</forename><surname>Morris</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Fred</forename><forename type="middle">D</forename><surname>Davis</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Davis</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">MIS Quarterly</title>
+		<imprint>
+			<biblScope unit="volume">27</biblScope>
+			<biblScope unit="page" from="425" to="478" />
+			<date type="published" when="2003">2003</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b97">
+	<analytic>
+		<title level="a" type="main">Future Work and Enterprise Systems</title>
+		<author>
+			<persName><forename type="first">Wolfgang</forename><surname>Vom Brocke</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Peter</forename><surname>Maaß</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Alexander</forename><surname>Buxmann</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jan</forename><forename type="middle">Marco</forename><surname>Maedche</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Günter</forename><surname>Leimeister</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Pecht</surname></persName>
+		</author>
+		<idno type="DOI">10.1007/s12599-018-0544-2</idno>
+		<ptr target="https://doi.org/10.1007/s12599-018-0544-2" />
+	</analytic>
+	<monogr>
+		<title level="j">Business and Information Systems Engineering</title>
+		<imprint>
+			<biblScope unit="volume">60</biblScope>
+			<biblScope unit="page" from="357" to="366" />
+			<date type="published" when="2018">2018. 2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b98">
+	<analytic>
+		<title level="a" type="main">Standing on the shoulders of giants: Challenges and recommendations of literature search in information systems research. of the Association for</title>
+		<author>
+			<persName><forename type="first">Alexander</forename><surname>Vom Brocke</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kai</forename><surname>Simons</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Bjoern</forename><surname>Riemer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ralf</forename><surname>Niehaves</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Anne</forename><surname>Plattfaut</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Cleven</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Information Systems</title>
+		<imprint>
+			<biblScope unit="volume">37</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page" from="205" to="224" />
+			<date type="published" when="2015-08">2015. 8 2015</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b99">
+	<monogr>
+		<title/>
+		<idno type="DOI">10.17705/1cais.03709</idno>
+		<ptr target="https://doi.org/10.17705/1cais.03709" />
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b100">
+	<monogr>
+		<title level="m" type="main">Mind in society: The development of higher psychological processes</title>
+		<author>
+			<persName><forename type="first">Lev Semenovich</forename><surname>Vygotsky</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="1980">1980</date>
+			<publisher>Harvard press</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b101">
+	<analytic>
+		<title level="a" type="main">ArgueTutor: An Adaptive Dialog-Based Learning System for Argumentation Skills</title>
+		<author>
+			<persName><forename type="first">Thiemo</forename><surname>Wambsganss</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Tobias</forename><surname>Kueng</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Matthias</forename><surname>Soellner</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3411764.3445781</idno>
+		<ptr target="https://doi.org/10.1145/3411764.3445781" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2021 CHI Conference on Human Factors Computing Systems</title>
+				<meeting>the 2021 CHI Conference on Human Factors Computing Systems<address><addrLine>New NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computing Machinery</publisher>
+			<date type="published" when="2021-01">Jan Marco Leimeister. 2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b102">
+	<analytic>
+		<title level="a" type="main">AL : An Adaptive Learning Support System for Argumentation Skills</title>
+		<author>
+			<persName><forename type="first">Thiemo</forename><surname>Wambsganss</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Christina</forename><surname>Niklaus</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Matthias</forename><surname>Cetto</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Matthias</forename><surname>Söllner</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2020 CHI Conference on Human Factors in Computing Systems. Association for Computing</title>
+				<meeting>the 2020 CHI Conference on Human Factors in Computing Systems. Association for Computing<address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<date type="published" when="2020-01">Jan Marco Leimeister, and Siegfried Handschuh. 2020</date>
+			<biblScope unit="page" from="1" to="14" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b103">
+	<monogr>
+		<author>
+			<persName><forename type="first">Thiemo</forename><surname>Wambsganss</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Christina</forename><surname>Niklaus</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Matthias</forename><surname>Söllner</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Siegfried</forename><surname>Handschuh</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jan</forename><forename type="middle">Marco</forename><surname>Leimeister</surname></persName>
+		</author>
+		<title level="m">A Corpus for Argumentative Writing in In International Conference on Computational (Coling)</title>
+				<imprint>
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b104">
+	<monogr>
+		<title/>
+		<author>
+			<persName><forename type="first">Spain</forename><surname>Barcelona</surname></persName>
+		</author>
+		<idno type="DOI">10.18653/v1/2020.coling-main.74</idno>
+		<ptr target="https://doi.org/10.18653/v1/2020.coling-main.74" />
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b105">
+	<analytic>
+		<title level="a" type="main">Supporting Cognitive and Emotional Empathic Writing of Students</title>
+		<author>
+			<persName><forename type="first">Thiemo</forename><surname>Wambsganss</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Christina</forename><surname>Niklaus</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Matthias</forename><surname>Söllner</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Siegfried</forename><surname>Handschuh</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jan</forename><forename type="middle">Marco</forename><surname>Leimeister</surname></persName>
+		</author>
+		<idno type="DOI">10.18653/v1/2021.acl-long.314</idno>
+		<ptr target="https://doi.org/10.18653/v1/2021.acl-long.314" />
+	</analytic>
+	<monogr>
+		<title level="m">59th Annual Meeting of the Association for Computational and the 11th International Joint Conference on Natural Language Processing</title>
+				<imprint>
+			<date type="published" when="2021">2021</date>
+			<biblScope unit="page" from="4063" to="4077" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b106">
+	<analytic>
+		<title level="a" type="main">Design and Evaluation of an Adaptive Empathy Learning Tool</title>
+		<author>
+			<persName><forename type="first">Thiemo</forename><surname>Weber</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Matthias</forename><surname>Söllner</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Hawaii International Conference on System Sciences</title>
+				<imprint>
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b107">
+	<analytic>
+		<title level="a" type="main">Dominic and Matthias Söll-2021. Pedagogical Agents for Interactive Lernaing : A Taxonomy of Conversational Agents in Education</title>
+		<author>
+			<persName><forename type="first">Florian</forename><surname>Weber</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Thiemo</forename><surname>Wambsganss</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Forty-Second International Conference on Information Systems</title>
+				<meeting><address><addrLine>Austin, Texas</addrLine></address></meeting>
+		<imprint>
+			<biblScope unit="page" from="1" to="17" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b108">
+	<analytic>
+		<title level="a" type="main">A framework to analyze argumentative knowledge construction in computer-supported collaborative learning</title>
+		<author>
+			<persName><forename type="first">Frank</forename><surname>Weinberger</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Fischer</surname></persName>
+		</author>
+		<idno type="DOI">10.1016/j.compedu.2005.04.003</idno>
+		<ptr target="https://doi.org/10.1016/j.compedu.2005.04.003" />
+	</analytic>
+	<monogr>
+		<title level="j">Computers and Education</title>
+		<imprint>
+			<biblScope unit="volume">46</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page" from="71" to="95" />
+			<date type="published" when="2006">2006. 2006</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b109">
+	<analytic>
+		<title level="a" type="main">Social Intelligence-A Review and CriticalDiscussion of Measurement Concepts</title>
+		<author>
+			<persName><forename type="first">Susanne</forename><surname>Weis</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Heinz-Martin</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Emotional intelligence.An international handbook</title>
+				<editor>
+			<persName><forename type="first">Ralf</forename><surname>Schulze</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">Richard D</forename><surname>Roberts</surname></persName>
+		</editor>
+		<imprint>
+			<publisher>Hogrefe</publisher>
+			<date type="published" when="2005">2005</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b110">
+	<analytic>
+		<title level="a" type="main">2020. Sara, the Lecturer: Improving Learning in Online Education with a Scaffolding-Based Conversational Agent</title>
+		<author>
+			<persName><forename type="first">Rainer</forename><surname>Winkler</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sebastian</forename><surname>Hobert</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Antti</forename><surname>Salovaara</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Matthias</forename><surname>Söllner</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Marco</forename><surname>Leimeister</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3313831.3376781</idno>
+		<ptr target="https://doi.org/10.1145/3313831.3376781" />
+	</analytic>
+	<monogr>
+		<title level="m">Conference on Human Factors in Computing Systems -Proceedings</title>
+				<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b111">
+	<monogr>
+		<title level="m" type="main">Enhancing problem-solving skills with smart personal assistant technology</title>
+		<author>
+			<persName><forename type="first">Rainer</forename><surname>Winkler</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Matthias</forename><surname>Söllner</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jan</forename><forename type="middle">Marco</forename><surname>Leimeister</surname></persName>
+		</author>
+		<idno type="DOI">10.1016/j.compedu.2021.104148</idno>
+		<ptr target="https://doi.org/10.1016/j.compedu.2021.104148" />
+		<imprint>
+			<date type="published" when="2021">2021. 2021</date>
+			<biblScope unit="page">165</biblScope>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b112">
+	<analytic>
+		<title level="a" type="main">History of the concept of empathy</title>
+		<author>
+			<persName><forename type="first">Lauren</forename><surname>Wispé</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">and its development</title>
+				<meeting><address><addrLine>New York, NY, US</addrLine></address></meeting>
+		<imprint>
+			<publisher>Cambridge University Press</publisher>
+			<date type="published" when="1987">1987</date>
+			<biblScope unit="page" from="17" to="37" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b113">
+	<analytic>
+		<title level="a" type="main">Asia-Pacific. Asia-Pacific Signal and Information Processing Association Annual Summit and Conference</title>
+		<author>
+			<persName><forename type="first">Bo</forename><surname>Xiao</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Dogan</forename><surname>Can</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Panayiotis</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">David</forename><surname>Georgiou</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Atkins</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">;</forename><surname>Narayanan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">.</forename></persName>
+		</author>
+		<ptr target="http://www.ncbi.nlm.nih.gov/pubmed/27602411http://www.pubmedcentral.nih.gov/articlerender.fcgi?artid=PMC5010859" />
+	</analytic>
+	<monogr>
+		<title level="m">Signal and Information Processing Annual Summit and Conference (APSIPA)</title>
+				<imprint>
+			<date type="published" when="2012">2012. 2012</date>
+			<biblScope unit="page">2012</biblScope>
+		</imprint>
+	</monogr>
+	<note>Analyzing the Language of Therapist Empathy in Moti-Interview based Psychotherapy</note>
+</biblStruct>
+
+<biblStruct xml:id="b114">
+	<monogr>
+		<title level="m" type="main">An investigation of the divergences and convergences of trait empathy across two cultures</title>
+		<author>
+			<persName><forename type="first">Jami</forename><surname>Parvaneh Yaghoubi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Behzad</forename><surname>Mansouri</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Stephen</forename><forename type="middle">J</forename><surname>Thoma</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Hyemin</forename><surname>Han</surname></persName>
+		</author>
+		<idno type="DOI">10.1080/03057240.2018.1482531</idno>
+		<ptr target="https://doi.org/10.1080/03057240.2018.1482531" />
+		<imprint>
+			<date type="published" when="2018-04">2018. 4 2018</date>
+			<biblScope unit="volume">48</biblScope>
+			<biblScope unit="page" from="214" to="229" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b115">
+	<analytic>
+		<title level="a" type="main">Culture-sex interaction and the self-report empathy in Australians and mainland Chinese</title>
+		<author>
+			<persName><forename type="first">Qing</forename><surname>Zhao</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">David</forename><forename type="middle">L</forename><surname>Neumann</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yuan</forename><surname>Cao</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Simon</forename><surname>Baron-Cohen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Chao</forename><surname>Yan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><forename type="middle">K</forename><surname>Raymond</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">David</forename><forename type="middle">H K</forename><surname>Chan</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Shum</surname></persName>
+		</author>
+		<idno type="DOI">10.3389/FPSYG.2019.00396/BIBTEX</idno>
+		<ptr target="https://doi.org/10.3389/FPSYG.2019.00396/BIBTEX" />
+	</analytic>
+	<monogr>
+		<title level="j">Psychology</title>
+		<imprint>
+			<biblScope unit="volume">10</biblScope>
+			<biblScope unit="page">396</biblScope>
+			<date type="published" when="2019">2019. 2019</date>
+		</imprint>
+	</monogr>
+	<note>MAR</note>
+</biblStruct>
+
+<biblStruct xml:id="b116">
+	<analytic>
+		<title level="a" type="main">The Anatomy of User Experience with Conversational Agents : A Taxonomy and Propositions of Service Clues</title>
+		<author>
+			<persName><forename type="first">N</forename><surname>Zierau</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Andreas</forename><surname>Wambsganss</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Janson</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Conference on Information Systems (ICIS)</title>
+				<meeting><address><addrLine>Sofia Schöbel</addrLine></address></meeting>
+		<imprint>
+			<date type="published" when="2020-01">Jan Marco Leimeister. 2020</date>
+			<biblScope unit="page" from="1" to="17" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b117">
+	<monogr>
+		<title level="m" type="main">Self-regulated learning and academic achievement: Theoretical perspectives</title>
+		<author>
+			<persName><forename type="first">J</forename><surname>Zimmerman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Dale</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Schunk</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2001">2001</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+				</listBibl>
+			</div>
+		</back>
+	</text>
+</TEI>

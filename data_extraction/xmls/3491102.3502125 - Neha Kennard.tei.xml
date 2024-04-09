@@ -1,0 +1,1107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xml:space="preserve" xmlns="http://www.tei-c.org/ns/1.0" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.com/kermitt2/grobid/master/grobid-home/schemas/xsd/Grobid.xsd"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+	<teiHeader xml:lang="en">
+		<fileDesc>
+			<titleStmt>
+				<title level="a" type="main">&quot;I&apos;m Surprised So Much Is Connected&quot; A Study on Users&apos; Online Accounts</title>
+			</titleStmt>
+			<publicationStmt>
+				<publisher/>
+				<availability status="unknown"><licence/></availability>
+			</publicationStmt>
+			<sourceDesc>
+				<biblStruct>
+					<analytic>
+						<author>
+							<persName><forename type="first">Sven</forename><surname>Hammann</surname></persName>
+							<email>sven.hammann.90@gmail.com</email>
+						</author>
+						<author>
+							<persName><forename type="first">Michael</forename><surname>Crabb</surname></persName>
+							<email>m.z.crabb@dundee.ac.uk</email>
+						</author>
+						<author>
+							<persName><forename type="first">Sasa</forename><surname>Radomirovic</surname></persName>
+							<email>sasa.radomirovic@hw.ac.uk</email>
+						</author>
+						<author>
+							<persName><forename type="first">Ralf</forename><surname>Sasse</surname></persName>
+							<email>ralf.sasse@inf.ethz.ch</email>
+						</author>
+						<author>
+							<persName><forename type="first">David</forename><surname>Basin</surname></persName>
+							<email>basin@inf.ethz.ch</email>
+						</author>
+						<author>
+							<affiliation key="aff0">
+								<orgName type="institution">ETH Zurich Zurich</orgName>
+								<address>
+									<country key="CH">Switzerland</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<affiliation key="aff1">
+								<orgName type="institution">University of Dundee Dundee</orgName>
+								<address>
+									<country key="GB">Scotland</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<affiliation key="aff2">
+								<orgName type="institution">Heriot-Watt University Edinburgh</orgName>
+								<address>
+									<country key="GB">Scotland</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<affiliation key="aff3">
+								<orgName type="institution">ETH Zurich Zurich</orgName>
+								<address>
+									<country key="CH">Switzerland</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<affiliation key="aff4">
+								<orgName type="institution">ETH Zurich Zurich</orgName>
+								<address>
+									<country key="CH">Switzerland</country>
+								</address>
+							</affiliation>
+						</author>
+						<title level="a" type="main">&quot;I&apos;m Surprised So Much Is Connected&quot; A Study on Users&apos; Online Accounts</title>
+					</analytic>
+					<monogr>
+						<imprint>
+							<date/>
+						</imprint>
+					</monogr>
+					<idno type="DOI">10.1145/3491102.3502125</idno>
+				</biblStruct>
+			</sourceDesc>
+		</fileDesc>
+		<encodingDesc>
+			<appInfo>
+				<application version="0.7.1" ident="GROBID" when="2022-07-22T05:02+0000">
+					<desc>GROBID - A machine learning software for extracting information from scholarly documents</desc>
+					<ref target="https://github.com/kermitt2/grobid"/>
+				</application>
+			</appInfo>
+		</encodingDesc>
+		<profileDesc>
+			<textClass>
+				<keywords>
+					<term>Account Graph</term>
+					<term>security setup</term>
+					<term>user interviews</term>
+				</keywords>
+			</textClass>
+			<abstract>
+<div xmlns="http://www.tei-c.org/ns/1.0"><p>A person's online security setup is tied to the security of their individual accounts. Some accounts are particularly critical as they provide access to additional online services. For example, an email account can be used for external account recovery or to assist with single-sign-on. The connections between accounts are specific to each user's setup and create unique security problems that are difficult to remedy by following generic security advice. In this paper, we develop a method to gather and analyse users' online accounts systematically. We demonstrate this in a user study with 20 participants and obtain detailed insights on how users' personal setup choices and behaviours affect their overall account security. We discuss concrete usability and privacy concerns that prevented our participants from improving their account security. Based on our findings, we provide recommendations for service providers and security experts to help increase the adoption of security best practices.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>CCS CONCEPTS</head><p>• Security and privacy → Social aspects of security and privacy; • Human-centered computing → User studies.</p></div>
+			</abstract>
+		</profileDesc>
+	</teiHeader>
+	<text xml:lang="en">
+		<body>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="1">INTRODUCTION</head><p>When accessing services online, people regularly use a large number of internet-based accounts and other access mechanisms such as smart phones and further access tokens. The resultant connections in a user's account setup are complex. For example, an account recovery email may create a link between an email account and a social network site; two-factor authentication can create a link between a physical device and a work email account. Users are also commonly logged into accounts on their personal devices, making additional connections between digital accounts and physical objects. Moreover, user accounts are connected to other aspects of the physical world; for example, people can write passwords down, and the real-world location of devices and their closeness to other objects can be used to unlock accounts. The connections between accounts, devices, and credentials are different for each user's account setup. Understanding the security risks that arise from these connections is a highly personal task that requires analyzing the setup of a given person individually.</p><p>The high degree of personalization of users' account setups also means that security advice must be personalized: Different advice is relevant for different users. For example, enabling twofactor authentication for a Google account would be important and recommended for a user who uses the associated GMail as her primary email account or makes extensive use of Google Sign-In, but it is much less relevant for a user who only uses her Google account to watch YouTube videos. These differences are disregarded when studying users' willingness to follow security advice.</p><p>Account access graphs <ref type="bibr" target="#b21">[22]</ref> are a formalism to model the connections in a user's account setup and analyze their security implications. In this work, we employ this formalism to obtain a novel methodology for performing qualitative user studies and apply it in a user study with twenty participants. We obtain their account access graphs and leverage them to interview each participant about their account setup in semi-structured interviews. We use these interviews to understand the challenges that our participants face in creating secure setups, and the impact that decision made within one area of their security ecosystem have on their setup as a whole.</p><p>We expand upon previous work examining users' account setups in the following ways. Firstly, we develop a methodology to systematically elicit a user's account setup and subsequently provide actionable security advice. Secondly, we discover and highlight the structural features of users' account setups, e.g., account access patterns, cycles, and compartmentalization. These observations allow us to show that participants themselves are unaware of their account setup and underestimate the importance of critical accounts and devices. Previous work in this area focused on broad security challenges that are applied to large population groups. To our knowledge, this is the first study that attempts to understand the granularity of online account security on an individual user level. This leads us to advocate further research into personalized security advice and investigations into automating this process to support more extensive studies.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2">RELATED WORK AND RESEARCH QUESTIONS</head><p>Studies related to ours generally fall into one of two categories. The first kind more broadly aims to understand users' motivations to follow security best practices, their security-related mental models, and their risk awareness. The second kind more narrowly focuses on specific aspects of account security, such as passwords and twofactor authentication. This work bridges a gap between the motivation to follow security practices, and specific methods used to improve account security. While we combine different aspects, all are directly related to users' account security. We are not aware of previous studies focusing specifically on the connections between users' accounts and devices, such as those arising from recovery methods.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.1">Account Security Methods</head><p>2.1.1 Passwords. The topic of user passwords and related risks and solutions has been studied extensively. For a literature review on the topic up to 2014, we refer the reader to Taneski et al. <ref type="bibr" target="#b39">[39]</ref>. We next discuss some work that closely relates to the aspects we focused on in our study, in particular on password reuse.</p><p>Gaw and Felten <ref type="bibr" target="#b18">[19]</ref> studied users' password management strategies, with a focus on password reuse. They found that participants used unique passwords for more important accounts and discussed users' perceived threat models, but with respect to attackers trying to compromise passwords specifically. <ref type="bibr">Das et al. [12]</ref> investigated partial password reuse and how an attacker can leverage a known password for guessing other passwords of the same user. They describe in detail the transformation rules users employ to generate new passwords from existing ones, a topic that is also mentioned by our participants.</p><p>Pearman et al. <ref type="bibr" target="#b29">[29]</ref> conducted a large-scale in situ study of users' password behaviors, obtaining detailed data about password reuse in particular. They did not find a correlation between using password managers and password reuse, suggesting that their participants did not use randomly generated passwords. They found correlations between website categories and password reuse, with decreased reuse on government websites and increased reuse on shopping and job search websites. They conjectured that the difference was due to perceived account importance, and noted that it was somewhat surprising considering that shopping website passwords may protect sensitive credit card data and that job-and work-related sites may contain [...] payroll and employment information. <ref type="bibr" target="#b29">[29]</ref> This is another indicator that users may not accurately assess the importance of their accounts.</p><p>Lyastani et al. <ref type="bibr" target="#b26">[26]</ref> explicitly studied the relationship between using password managers and password reuse in a study with both qualitative and quantitative elements. They pose the question why people that use password managers still reuse passwords. Our study provides some insight into this: some participants felt uncomfortable only using randomized passwords, and others used password managers as a digital notebook on a separate device rather than having their passwords synchronized across all their devices.</p><p>Pearman et al. <ref type="bibr" target="#b30">[30]</ref> conducted an interview study on the use of password managers, finding that users reuse passwords, despite using a browser-based password storage feature.</p><p>2.1.2 Two-factor authentication. We next discuss work related to the usability of two-factor authentication and how its adoption could be increased, a topic on which we provide recommendations.</p><p>Redmiles et al. <ref type="bibr" target="#b32">[32]</ref> conducted a study on messages asking users to enable two-factor authentication. Their participants both critiqued existing messages and designed new ones. They preferred simple and clear messages, including information about the required time investment for setup. Participants also mentioned they were more likely to use two-factor authentication only for their more important accounts.</p><p>Albayram et al. <ref type="bibr" target="#b3">[4]</ref> investigated how video tutorials on two-factor authentication can increase users' willingness to adopt the technology. Interestingly, one of their participants gave the following reason for not enabling two-factor authentication after watching the video: "I do not want [...] sites I use to have my cell phone number, as I don't feel like I can trust them with it." <ref type="bibr" target="#b3">[4]</ref> That is, their participant was unaware of solutions that do not require the phone number, similar to our participants. The work by Redmiles et al. <ref type="bibr" target="#b33">[33]</ref> mentioned previously also shows that privacy concerns can be a barrier for the adoption of two-factor authentication.</p><p>De Cristofaro et al. <ref type="bibr" target="#b13">[14]</ref> performed a comparative usability study of three two-factor authentication solutions: codes generated by security tokens, received via email or SMS, or generated by smartphone apps. Their participants were already two-factor authentication users. They found that two-factor authentication was overall perceived as usable by their participants. Their participants mentioned troubles with SMS-based authentication when abroad, similar to what we observed.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.2">Motivation to Follow Security Advice</head><p>Despite long-running efforts by the security community, challenges still exist in getting people to follow security advice. It is common for users to see themselves as low-risk targets for accounts to be compromised <ref type="bibr" target="#b12">[13]</ref>. Additionally, users struggle to see the benefits of following security advice when it is given at a broad level <ref type="bibr" target="#b15">[16]</ref>. Participation in generic security training does not necessarily lead to the adoption of more secure behaviour <ref type="bibr" target="#b7">[8]</ref>. Questions still exist on how to engage people best to see the need to adopt reasonable security practices.</p><p>A common reason for not adopting security advice is the perceived cost/benefit ratio that following advice creates. Taking proactive security action is seen as having too high a cost by users <ref type="bibr" target="#b42">[42]</ref>, with generic advice regularly ignored due to the unknown individual cost-benefit <ref type="bibr" target="#b14">[15]</ref>. Users' decision to focus on usability over security is not unfounded, with the simple act of unlocking a phone taking, on average 2.9% of all time that a person may interact with a smartphone <ref type="bibr" target="#b23">[23]</ref>. For users of security tools such as password managers, convenience rather than improved security is seen as the primary reason for continued usage <ref type="bibr" target="#b14">[15]</ref>. Methods to identify the explicit challenges within a single security setup may be a potential method to alter individual users' perceived cost/benefit.</p><p>The generic one-size-fits all approach to providing security advice is not appropriate <ref type="bibr" target="#b34">[34]</ref>. Providing guidance at a very broad level has even created challenges in consensus within the security community as to the best advice that users can follow to stay safe online <ref type="bibr" target="#b35">[35]</ref>. Giving security advice at this level also creates challenges due to factors such as an individuals socioeconomic status and how this may alter their willingness to follow advice <ref type="bibr" target="#b31">[31]</ref>.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.3">Security on an Individual User Level</head><p>Security advice is commonly offered at a broad level for large population groups. This creates challenges in an individual's willingness to follow the advice <ref type="bibr" target="#b7">[8]</ref> and does not account for the wide range of factors that individuals will consider <ref type="bibr" target="#b31">[31]</ref>. Presenting users with the ability to see real benefits from changing their own practice may have potential <ref type="bibr" target="#b15">[16]</ref> as an alternative method of providing security advice. For security advice to be given at a per-person granularity, an understanding of the security of a given person must first be achieved. We use this to motivate our initial research question in this work where we ask RQ1: What does a typical user account setup look like and what potential weaknesses exist in it?</p><p>Security advice is generally given within compartmentalised areas (e.g. password strength, two-factor authentication) <ref type="bibr" target="#b2">[3,</ref><ref type="bibr" target="#b36">36]</ref>. Whilst this type of advice is beneficial and can provide guidance for people on how to improve the general security of their account setups, it is incapable of protecting against security threats that exist due to the connections between elements in a particular account setup. As current security advice may be unable to provide guidance at this level of granularity, we ask RQ2: What awareness do users have towards the weaknesses in their account setup and what are the individual barriers that exist in solving these challenges?</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3">ACCOUNT ACCESS GRAPHS</head><p>The theoretical foundation of this work is the model of Account Access Graphs by Hammann et al. <ref type="bibr" target="#b21">[22]</ref>. This formalism models users' account setups as graphs, with vertices representing accounts, devices, and credentials. Edges (with color) model dependencies for granting account access, where same edge color is used for conjunction (all necessary) and different edge color for disjunction (alternative), see Example 1 for more. Account access graphs also enable automated security analysis of users' account setups. We present the definitions this work relies on. Definition 1 <ref type="bibr">([22]</ref>). Example 1. Figure <ref type="figure">1</ref> shows an account access graph that features an email account, a phone, text messaging (SMS), a password, a fingerprint device locking mechanism, and a PIN code with correspondingly named vertices. The vertices are shaded in different colors depending on their type. Accounts are blue, credentials are red, devices are yellow, and biometrics are green. We distinguish between access to the locked phone and access to the unlocked phone. We decorate a locked device vertex with a rectangular outline and diagonal chords in each corner. The graph indicates that there are two ways to access the services of the unlocked phone, indicated by two different edge colors. To access the unlocked phone, the locked phone is necessary and either a fingerprint (Finger) or a PIN code (PIN Phone).</p><p>The locked phone provides access to incoming text messages (SMS), that is, the phone's lock screen displays the full text message. The dashed edge from SMS to Mail indicates that access to the email account can be recovered with a text message. Standard access to the email account is obtained with a password (pwd).</p><p>The unlocked phone provides access to an open session of the email account. We denote this by Mail basic since some security-critical features, such as changing the password, may be unavailable from an open session. Accessing such features explicitly requires entering credentials to access the Mail vertex.</p><p>A black edge indicates a single credential or account that is sufficient for access. For example, access to Mail basic can be obtained either through Mail or through Phone.</p><p>We use account access graphs to model the account setups of our participants, and as a basis for automated analysis. To this end, we have developed a front-end tool (available at <ref type="bibr" target="#b1">[2]</ref>) in preparation for this study to complement the existing back-end <ref type="bibr" target="#b21">[22]</ref>. This tool facilitates entering users' account setup data to then visualize and automatically analyze the resulting account access graphs.</p><p>We have performed both manual and automated analysis to discover security weaknesses in our participants' account access graphs. The manual analysis focused on standard notions, such as password reuse <ref type="bibr">[12,</ref><ref type="bibr" target="#b18">19,</ref><ref type="bibr" target="#b26">26,</ref><ref type="bibr" target="#b29">29]</ref> and lack of two-factor authentication <ref type="bibr" target="#b3">[4,</ref><ref type="bibr" target="#b13">14,</ref><ref type="bibr" target="#b32">32]</ref>. The automated analysis focused on the discovery of backdoors, a notion introduced in <ref type="bibr" target="#b21">[22]</ref>, which we explain next.</p><p>An account has a backdoor if it can be accessed more easily by means of a recovery method than by primary authentication methods. A backdoor arises in scenarios where an attacker with specific capabilities can exploit one or more recovery methods, but no primary authentication method, to compromise an account. Thus backdoors are defined relative to an attacker model. This notion is transitive; for example, a backdoor for a single sign-on account also constitutes a backdoor for the connected accounts.</p><p>We only give an informal definition of backdoors. The formal definition in <ref type="bibr" target="#b21">[22]</ref> makes use of additional concepts such as scoring schemes, which are not directly relevant to this work. Definition 2. An account has a backdoor with respect to an attacker 𝐴 if 𝐴 can compromise the account using at least one recovery method, either directly or provided by a connected account, but not using only primary authentication methods.</p><p>We next explain the different attacker models that we used to define backdoors. Our automated analysis marks an account vertex if at least one such backdoor is present.</p><p>• A text message attacker can compromise text messages directly (without access to the phone). A text message attacker models, for example, an attacker who can perform SIM swap attacks <ref type="bibr" target="#b4">[5,</ref><ref type="bibr" target="#b25">25]</ref>. In such an attack, the attacker obtains access to the victim's phone number by impersonating the victim to their mobile phone provider, obtaining a new SIM card for the victim's phone number. • A password attacker can compromise passwords. A backdoor with respect to a password attacker could for example mean that two-factor authentication can be circumvented using only a password. • A weak-secrets attacker can compromise credentials labeled as weak secrets. In our model, weak secrets include in particular security questions as well as patterns that must be drawn to unlock a device (e.g., a smartphone). • A device-theft attacker can compromise (steal) physical devices, but cannot compromise any secrets. A backdoor with respect to a device-theft attacker means that an attacker who has obtained one of the user's devices can access the account without knowing its password, e.g., through password reset using an open email account session on a phone without a locking mechanism. A backdoor thus means that its recovery method(s), or those of connected accounts, makes the account vulnerable to a wider range of attack vectors than its primary authentication method.</p><p>Example 2. In Figure <ref type="figure">1</ref>, the Mail account requires a password as its primary authentication method and a text message (SMS) as its recovery method. Thus, it has a backdoor with respect to a text message attacker. Moreover, the SMS recovery method is also a backdoor with respect to a device-theft attacker, as text messages are accessible from the locked phone. Thus, the account is vulnerable to SIM swap attacks and theft in addition to the primary authentication method's vulnerability to password compromise.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4">METHODOLOGY</head><p>We carried out semi-structured interview sessions to understand typical user account setups and their users' potential weaknesses.</p><p>We also used these interviews to discover users' awareness of these weaknesses and the barriers that exist in solving associated challenges. Our interviews were structured into two stages. First we obtained information about account graph information. Afterwards, we conducted a discussion with participants that was structured around an analysis of their account graph information.</p><p>This work was approved by our institution's IRB. Participants' names were never included in their data. At the start of each study session, participants were informed of their rights and responsibilities, including that they may withdraw from the study at any time.</p><p>Participants were asked whether they agree to an audio recording of the second part of the interview to assist in data analysis. They were informed that the recording stays on an off-line device, and that the transcript is stored off-line on the interviewer's computer as well as on the secured server of our research institute. 18 out of 20 participants agreed to the recording. At the end of the interview, participants were given a supermarket voucher in local currency (roughly $20 USD) as a thank you for taking part.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.1">Obtaining Account Graph Information</head><p>In the first part of the interview, participants were asked about their accounts and connections. This part of the interview relied on self-reported information only that participants reported. Account and connection information was entered into the tool described in Section 3. We now describe the approach in more detail.</p><p>Device Information: Participants were asked which devices they use to connect to the internet, such as computers, smartphones, or tablets. For each device the participant uses, we asked how that device can be unlocked, i.e., whether it requires a password, a PIN, or biometrics such as a fingerprint or FaceID.</p><p>Global Account Management: Participants were then asked about their password management strategy. Participants were asked if they used a password manager, or what alternative methods they used to store their passwords, e.g., in a browser. Participants were then asked about their email accounts, since these are often connected to many other accounts. Participants were not required to disclose which service providers they use for email, but were asked to give each email account an identifier during the interview.</p><p>Individual Account Access: For each account, participants were asked whether login requires a password and/or a second factor. Participants were also asked how they could reset the password if they forgot it. If the participant was unsure how the recovery process for one of their accounts works, the interviewer asked them if they can obtain this information by looking at their account settings on their own devices. The interviewer did not tell participants that they had to attempt password resets, but they could do so voluntarily. In some cases, the participant provided additional information in the second interview part, leading to slight adjustments in their account access graph.</p><p>Primary Access Accounts: Participants were asked if they have accounts that they use to log in to other services, explicitly asking if they use their Google or Facebook accounts for this purpose. Participants that did use this technique were asked about the accounts that they use to assist with single sign-on. The Google account was already covered in the email section if the participant used GMail. If they mentioned GMail in this part but did not explicitly mention that one of their used email accounts is the GMail account, the interviewer added this information. This ensured that the Google account was modelled properly as both a GMail account and an account used for single sign-on. Participants who were uncertain about whether they used single sign-on were asked to look this up by checking connected applications on their accounts.</p><p>Persistent Account Logins: For all accounts with at least one outgoing connection, the interviewer also asked whether the participant is usually logged in, i.e., has an open session on any of their devices. In some cases, the participants noted that this varies over time and the device was modelled to be connected to the account even if the participant was not always logged in.</p><p>'Leaf Vertices' Accounts: Participants were then asked about additional accounts that are more likely to be leaf vertices in the graph, i.e., that are not used to recover or log in to another account. For these kinds of accounts, the goal was not to gather information about every single account the participant owns. This would not have been feasible within a reasonable time frame. We aimed to estimate which of the participant's accounts and devices provide access to many other accounts, but the exact numbers were not important. To this end, participants were asked whether they have accounts in categories such as social media, web shops, and banking.</p><p>Account Setup Behavior: When participants had multiple email addresses, they were asked which one of them they are most likely to register as a recovery method when they set up a new account at a service. When the participant mentioned that they use single sign-on, the interviewer asked them for example services for which they use this option. They were also asked which option they are most likely to use, e.g., if a service provider offered single sign-on with different providers or offered both single sign-on and the option of registering a separate account. The interviewer then included generic vertices in the account access graph, such as a Default vertex to capture the participant's behavior they described as most likely when registering at a new service. Note that this default behavior was entirely self-reported, unlike the connections between participants' actual accounts. Thus, we did not overly emphasize default vertices in our results.</p><p>Additional Information: Before finishing the first part, the interviewer asked the participant whether there was an account they considered important and that they had not talked about, or whether they can think of more accounts with unusual setups for authentication or recovery. If the participant mentioned any accounts at this stage, the interviewer also asked about how these accounts can be accessed and recovered. Between the first and second parts of the interview, the interviewer ran an automated analysis on the obtained account access graph to detect backdoors with respect to the specific attacker models described in Section 3.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.2">Discussion on Account Graph Analysis</head><p>In the second part of the interview, participants were asked to reflect on the overall analysis of their account access graph. This section of the interview was audio recorded for each participant that explicitly agreed to this. The goal in this part of the study was to discuss individual weaknesses in each participant's graph. Even though no rules were formalized in our process for the second part, the interviewer informally followed the guidelines described next.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Explanation of the Account Graph:</head><p>The second part of the interview started with the interviewer showing individual participants a visualisation of their account access graph. Any accounts with backdoors that were discovered by the automated analysis were marked red and highlighted to participants. While these provided an entry point into the discussion, the interviewer also discussed potential weaknesses that were noticed by manually inspecting the graph. The interviewer had the required expertise on account security to perform such a manual analysis. The combined automated and manual analysis aimed to discover a wide range of potential security weaknesses, but was not designed to exhaustively discover every single weakness.</p><p>Password Protected Accounts: The interviewer pointed out when an account with many outgoing edges, such as an email account, was only protected with a password. In these cases, the interviewer asked whether this password was used for other accounts. If the participant did reuse the password for such an account, the interviewer steered the conversation to the risk arising from password reuse. In particular, the interviewer asked whether the participant has seen haveibeenpwned.com, or a similar website or tool that can be used to determine whether a password has been exposed in a password database breach. Participants were also asked if they were aware that password reuse had an associated risk. If participants were aware, they were asked why they follow this practice, and they were advised to use unique passwords at least for their accounts with many outgoing edges. If participants were unaware of the risks, the risk of credential stuffing attacks using password database breaches was explained.</p><p>Two Factor Authentication: When a connected account belonged to a service that offers two-factor authentication, participants were asked if they were aware of this option and why they chose to use or not use this service. The purpose of this discussion was to understand the participant's barriers in using two-factor authentication given the additional context of an important account. If the participant was unaware of two-factor authentication options, the interviewer explained them, in particular text messages and authenticator apps such as Google Authenticator. If the participant was aware of the option using text messages, but not authenticator apps, the interviewer explained the differences.</p><p>Additional Security Topics: Each participant's account graph is unique and we intentionally did not constrain the topics covered in the interview's second part. This allowed the interviewer to touch on the different unique circumstances encountered in each participant's account access graph. In particular, some participants made interesting comments in the first part with respect to their thought process on how they have setup their accounts. The interviewer followed up on these comments in the second part to discuss them in the recorded part of the interview.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.3">Interview Analysis Method</head><p>Our results were analysed using open coding <ref type="bibr" target="#b41">[41]</ref>. Coder training and briefing sessions were carried out to familiarise coders with the methodology that was used. We detail this below.</p><p>(1) Generating Interview Transcripts: Audio recordings from the second stage of our interviews were transcribed by the lead author. As we had a mixture of sessions that were conducted in English and German, transcripts were created in the language the interviews were created in. Final quotes are all shown in English with translations made by the interviewer. Original language transcripts are provided <ref type="bibr" target="#b1">[2]</ref> in line with existing style guidance <ref type="bibr" target="#b19">[20]</ref>. (2) Developing the Initial Code Book: A subset of 5 transcripts were coded by the primary author and 3 different transcripts were coded by the second author. This was carried out as a first round of coding. Both authors used an inductive coding technique <ref type="bibr" target="#b40">[40]</ref> with themes then generated as emergent categories <ref type="bibr" target="#b20">[21]</ref>. Authors then carried out a virtual discussion regarding their different approaches to coding, noting similarities in the generated codes and themes and discussed differences. Discussion continued until agreement was achieved, and a preliminary code book was created consisting of 34 codes and 9 themes. A second phase of discussion was then carried out to refine our codebook further, creating a final book of 20 codes and 4 themes. As part of this discussion we found that code saturation had been reached after analyzing a subset of transcripts, and creating a codebook with our whole corpus was not needed <ref type="bibr" target="#b16">[17]</ref>. (3) Corpus Analysis: The entire corpus was then analyzed within a second round of coding. This included transcripts that had been analyzed in the previous stage. All authors took part in this activity and first became familiar with the initial code book. Each transcript was analyzed, separately, by two authors. Individual transcript coding was compared between authors and agreement sought for individual codes. Any disagreements between coders were discussed in detail until a resolution could be found. All authors then discussed analysis with the aim of condensing the overall number of codes in areas where similarity was present <ref type="bibr" target="#b38">[38]</ref>. As the generation of codes was part of the overall evaluation process and not the end product, ICR is not recommended in this situation <ref type="bibr" target="#b27">[27]</ref>. However, to aid in analysis quality we used multiple coders <ref type="bibr" target="#b9">[10,</ref><ref type="bibr" target="#b20">21]</ref>. 2 participants (from 20) declined to be recorded for Part 2, but were included in analysis for Part 1.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5">RESULTS</head></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.1">Participants</head><p>Participants were recruited to take part in this work through an online research platform 1 and through posters that were placed within two university campuses. Our recruitment method stated that we were carrying out a study on security risks in user accounts and that participants should:</p><p>• Actively use internet services, such as web shops, social media, and online banking • Be fluent in English or German • Own at least one portable device with internet connection, such as a laptop or smartphone (which should be brought to the study) Twenty participants took part in the study. 12 were female and 8 were male. Their ages ranged from 19 to 40, with a mean of <ref type="bibr">25.5. 4</ref> reported to study computer science. 12 reported to be interested in information security topics, but not professionally or in their studies, and 2 reported interest in IT topics, but not security specifically. One participant reported no particular interest in IT topics, and another participant reported to be between the last two options (no particular interest, and interest in IT, but not security specifically). Interviews lasted between 60-90 minutes and were carried out in February and March 2020 after obtaining approval of our institutional review board (IRB). Each participant received a supermarket voucher for their participation. Each interview was conducted by the same interviewer to ensure consistency in the process. We refer to our participants as P1, . . . , P20. Note that P3 and P19 did not agree to the recording and thus were not quoted.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.2">Account Graph Details</head><p>We give here a brief overview over all participants' account graph features. All interviewed participants use smartphones in addition to a laptop or desktop computer. Table <ref type="table" target="#tab_1">1</ref> summarizes the data we discuss and elaborate on in the following.</p><p>The Vertices column indicates the number of vertices in each participant's account access graph that were elicited during the interview. As discussed in Section 6.1, the actual number of vertices is likely to be higher, since the interview did not aim for completeness.</p><p>Several participants had cycles in their account access graph. The Elements in Cycles column shows the size of each cycle. 0 indicates that there is no cycle, while more than one number indicates that there is more than one cycle. As seen in Table <ref type="table" target="#tab_1">1</ref>, five participants have one cycle in their account setup and two participants have two cycles. Five of these cycles provide sufficient access to each vertex in the cycle, that is, each vertex in the cycle is sufficient to access the next vertex without any other authentication factors. In three of these cases, this is the consequence of two email providers being used as recovery email addresses for each other. In the other two cases, a password manager provides access to a cloud service, which in turn provides access to the password manager.</p><p>The Components column indicates the number of connected components in the graph. Many participants' graphs consist of a single connected component. The reasons for several components may be lack of detail provided or an intentional separation.</p><p>A few participants do not use any kind of password manager, indicated by 𝑛𝑜 in the Password Manager column. However, many make only 𝑝𝑎𝑟𝑡𝑖𝑎𝑙 use of it, as they still access some accounts with passwords not stored in the password manager. Our definition of password managers is broad and includes any tool that allows the user to store and retrieve the password without memorizing it.</p><p>The Open Sessions column indicates the number of accounts that one of the participant's devices has an open session with. However, we only elicited this information for accounts that could potentially be used to access other accounts, such as email accounts or accounts used for single sign-on.</p><p>As can be seen from the next three columns in Table <ref type="table" target="#tab_1">1</ref>, all but two participants use text messages (SMS) as a second authentication factor or a recovery factor for at least one account. Almost half of the participants allow SMS previews to be displayed on the lock screens. For participants whose account access graphs did not contain SMS at all, SMS-related entries are indicated by "n/a". last column, Central Vertices, indicates the types of vertices that are most critical for providing access to other vertices in a participant's graph as determined by a centrality score 2 . More precisely, they show the types of vertices with a score that is within 5% of the graph's highest score. Note that we do not distinguish between locked and unlocked devices in this column.</p><p>For fourteen out of the twenty setups, a device (phone, laptop, tablet, or computer) is the most central vertex, the phone being the most central in eight of these. In three of the remaining six setups, the central password vertex is a source vertex that provides access to an email or service provider vertex with many outgoing edges. In P18's setup, shown in Figure <ref type="figure" target="#fig_3">3</ref>, the central vertex is a fingerprint that provides access to all of the participant's devices (phone, tablet, and laptop). P6, shown in Figure <ref type="figure" target="#fig_2">2</ref> on page 10, P9, and P19 each have a central vertex that provides access to a large cycle (of 5 or 6 vertices). Moreover, P19's setup is special in that there are two overlapping cycles. In P19's setup , all highly ranked vertices directly or indirectly provide access to at least one of the two cycles. All vertices in the cycles also received comparatively high centrality scores.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.3">Interview Results</head><p>Our final code book contained 20 codes across 4 themes. We present our themes below. We provide quotes that provide a representative overview of participants perspectives on account security.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.3.1">Account graph structure.</head><p>Participants discussed items that relate to the structure of their online security setup.</p><p>Separation and Sharing: 5 participants mentioned that they consciously separate their accounts, e.g., into work-related and not work-related. This affected on which devices they were logged in to 2 The centrality score of a vertex is its share of all the possible ways to provide access to vertices in the access graph. See Section 6.1 for a formal definition and examples.</p><p>those accounts, commonly with the goal of reducing spam and notification load. P8 justified this approach, stating that "if something is important, I would connect it to [one email address], something that just needs an email to log in, I would connect to [another email address]. " P6 followed a similar process, having an email account for things that were described as "important, " a second email account for things that were "related to university" and a final account for things that were "more creative, I would say, social media and stuff. "</p><p>Routines and Preferences: 5 participants discussed their routine relating to their accounts and which devices they are logged in on. For example, P11 described that "usually I just use my laptop and my phone [...] using the university's computer, which is not that common, [...] I always make sure that I'm logged out, " and P15 mentioned being "always logged in" to their email account. P10 explained that they used their tablet only rarely and thus consciously were not logged in on many accounts there, concluding "my configuration follows my routine, basically. "</p><p>Digital Management: 5 participants discussed digital security management techniques and tools they currently employ. P7 used two-factor authentication "if I'm logging in to a new device, not on my devices, but if I'm logging in on a separate computer. " P15 applied a mixed password generation strategy; their password for their email account "was suggested by the Phone, by the App [...] it's really long, and diverse, so I will not remember it, " while their password for a social media account was "not randomly generated, but different from the other ones. "</p><p>Non-digital Management: 12 participants discussed non-digital security management techniques. P4 described that they were selectively "writing [passwords] down with pen and pencil, usually I know where I need to log in to, like if I go traveling, " P1 "didn't want to write them down <ref type="bibr">[GER]</ref>. " With respect to choosing passwords, P20 explained that they have "a very complex basis, and then a specific one [for each website] [GER]. " P10 similarly described that they had a "structure [...] numerical and alphabetical, and in the end, maybe just a slight change of the symbol or something [...] I wouldn't say like, algorithm. "</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.3.2">Awareness and understanding of security problems and</head><p>solutions. Participants discussed different aspects relating to their awareness of security problems, such as password reuse risk, and solutions, two-factor authentication, and password managers.</p><p>Lockout Risks: 6 participants made statements related to the risk of locking themselves out of their devices or accounts. With respect to usernames and passwords, P5 mentioned "that one could forget the email address, that could be more likely [GER], while P11 described that they do not use randomly generated passwords because they "wouldn't feel comfortable in not having this power over my accounts. " Two-factor authentication leading to lockout over a longer time was discussed by P8, who had moved between countries, "I lost my [...] country's phone number, and when I entered my email [...] I need to have the SMS, and I couldn't receive the SMS, so I was locked out for 30 days on both my emails, " and P20 noted: "I had an authenticator for a while, for example for [a gaming platform], and it took two months until I could enter again because I changed my mobile phone [.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>..] [GER]. "</head><p>Security Risks: 10 participants made statements related to security risks arising from password reuse, weak passwords, or security questions. P4 was aware that reused passwords were "not so secure, " and P7 used one password "for almost everything else,"wanting "something different" for their most important email account. Participants understood that some security questions could be bruteforced, with P2 describing that one such question related to "the color of the first car that we owned [...] but of course it's another thing that there's not a lot of colors." P11 thought that it was "so easy to find such information" related to security questions.</p><p>Security Mechanisms: 9 participants mentioned whether they are aware of some security mechanism or tool. P12 discussed the "option to use, for example, TOTP, " referring to the time-based onetime passwords used by many two-factor authentication apps. P4 described physical security keys as "devices that can just like plug in to your computer. "</p><p>Influence of Others: 5 participants mentioned that other people, most commonly family members, made them aware of a particular security problem or solution. P2 discussed a reliance on their sister for information: "she's a computer scientist, she also helped me with how to [set up two-factor authentication]." P15 followed a similar process regarding passwords, saying that they are "[...] randomly generated, because my brother told me to [...] it was something because it was good to do, but also he insisted on this thing. "</p><p>Security Mental Models: 10 participants expressed security beliefs or ways they think about their account security. Participants had different opinions about the security of certain practices. P11 described that "thought that [writing down a password] wouldn't be that safe, anyway, so it's always better to just trust your mind and the security system each platform has, " while P12 believed that "the physical copy is actually the safest of my password managers. "</p><p>Risk Implications of Connections: 13 participants discussed how they believe the connections between their accounts and devices are associated with risks. P8 expressed surprise at their access graph, saying that "everything is almost accessible if they have your phone." P15 expanded on this, saying that "that there are so many connections" but they were "not aware of the risks. " P16 thought of one of their email accounts "as more of a risk, since there one has the app on the mobile phone where one does not have to log in <ref type="bibr">[GER]</ref>. "</p><p>identified that "when the mobile phone is turned on, and the person knows how the pattern works, then this is a big security risk for me <ref type="bibr">[GER]</ref>. "</p><p>Misconceptions and Inefficient Use of Tools: 8 participants made comments that showed a misconception they had about a security concept, or described using a tool in an inefficient or ineffective manner. P4 "thought you would have to use [two-factor authentication] every time [you log in], or something, and then it's annoying." P6 had trouble shifting their own viewpoint to an attacker's, asking about two-factor authentication, "if I'm logged in all the time, what's really the difference?"</p><p>Noticing or Recovering from an Account Breach: 3 participants described how they would notice or recover from an account breach. P7 noted that "these days" if someone else were to login to their bank account, "the bank will instantly notify you, and your money is kind of protected." P16 described a similar belief, saying that they have "never had the problem that someone debited or transferred money off my account, and I would notice it within a day, so that's not such a great risk [GER]. "</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.3.3">Improving Account Security.</head><p>Participants discussed various aspects relating to their overall account security and the challenges with improving this. Account Importance: 8 participants discussed the importance that they attach to specific accounts. P7 described that they "wouldn't really worry about somebody logging in to" their account at a hotel booking service, but "what I would worry about is my bank." P8 described reusing passwords for "the stuff that I don't care about," while "the things that are important to me have different passwords. "</p><p>similarly said "I do reuse passwords, I just make sure that the [accounts] that I know are connected to a lot of different things are unique. " Participants explained how much they would care about account breaches, such as P7, "I of course don't want anyone to access my email, but I feel like, worse comes to worst, somebody does actually [access it], there's nothing that I'm afraid they might read, I don't have anything like that, " or P14, who "wouldn't really care" if their shopping or social media accounts got hacked.</p><p>Usability and convenience: 13 participants mentioned either concrete usability concerns or more generic convenience concerns with respect to security mechanisms. In particular, participants discussed usability of two-factor authentication with P2 describing that "if you change your number, maybe you have to go back and change your number in the account." P4 described that they have been "moving a lot, so I got different phone numbers from different countries [...] if I'm in a different country I won't receive the [twoauthentication] message. ". P14 reused a single password for all their accounts despite having heard of the risks, explaining "one just doesn't get around to doing it, because convenience wins out <ref type="bibr">[GER]</ref>. " defaults: 5 participants expressed that they prefer default configurations, whether they are secure or not. P7 described that they "feel like all of my accounts are protected [...] there's nothing that's gone wrong with any of my accounts, so it's just an extra hassle if I have to do [set up 2FA]," but later also mentioned an account for which two-factor authentication was "by default set up," for which they did not disable it. Similarly, P20 explained "if an app or platform asks me upon installation if I want to use two factors, I usually say yes, but if it does not ask explicitly, I don't [GER]. " 5.3.4 Attacker models. Participants mentioned both concrete attack personas, which we labeled with the first two codes that follow, and more general attack vectors, labeled with latter codes.</p><p>Service and application providers: 9 participants discussed concerns in sharing their personal data with a cloud service provider or web applications. P6 described that they "don't really like to have all my data in the cloud, " and switched from one browser to another because "you can control more" with respect to data sharing. In contrast, P17 had "no concerns with respect to this" when using social login, explaining "it's good that I can pay with my data [...] then I get ads that actually interest me <ref type="bibr">[GER]</ref>. "</p><p>Friends and family: 4 participants mentioned how they feel about friends or family members potentially accessing their accounts. P1 mentioned they don't like to write down recovery codes: "If they're just lying around, family members can access them, too [...] I don't have the feeling that they're trying to hack me, but the thought that the codes are just lying around makes me uncomfortable.</p><p>[GER]. " P7 shared some accounts with colleagues, but made sure to use a different password for their personal account: "I'm definite they wouldn't misuse it, but I don't want to take any chance. "</p><p>Physical device security: 6 participants discussed whether they were concerned about others physically accessing their devices. P11 mentioned not saving too many passwords on their laptop because they "don't want to let things too easy for someone else". P1 had an additional security PIN required for accessing apps on their phone because "it is unlocked on occasion, and then one cannot simply enter [the apps] [GER]. "</p><p>Targeted attacks: 5 participants mentioned reasons why they would consider a targeted attack on their accounts likely or unlikely. P5 wondered if they "might be too paranoid," because they were "not politician who has important things <ref type="bibr">[GER]</ref>." P9 said that they "don't have that much wealth to make people want to hack my account. " P20 had been targeted before: "the reason why my [social media account] got hacked, I won tickets [for an event] and that was announced on the radio <ref type="bibr">[GER]</ref>. "</p><p>Attacker capabilities: 5 participants expressed beliefs on what an attacker might be able to do. P2 doubted the effectiveness of even a strong password against a dedicated attacker, "I just increased the degree of difficulty [...] for the password, but of course if there is a hacker he could find other ways to go into that. " P2 also thought about what an attacker might know when answering security questions: "I didn't write the name of my best friend, I just wrote the name of the first friend I ever had, which also not a lot of people know." P11 expressed doubts about the effectiveness of their computer's PIN: "if someone steals [my computer], this person probably knows how to access things, I don't know how safe this PIN really is. " We modeled our participants' account setups as account access graphs as a basis for answering this research question. The 20 account access graphs elicited by interviewing our participants have between 30 and 59 vertices. However, as we were more interested in structural features rather than exact numbers we did not require participants to mention all of their accounts.</p><p>Figures <ref type="figure" target="#fig_3">2 and 3</ref> are simplified versions of P6's and P18's account access graphs, whose structural features we describe next. These graphs combine most of the structural features we have observed in the elicited graphs. The semantics of different kinds of vertex and edge styles is as in Example 1.</p><p>Account Setup Structure. The first structural features we examined were how our participants' accounts are generally accessed and recovered. In particular, we examined what common patterns exist, where many different accounts are accessed in a similar manner.</p><p>We consider two kinds of patterns: Those reported by our participants directly, and those we identified in the graphs ourselves. An example of the first kind of pattern is the blue 3D-box-shaped</p><p>Default in Figure <ref type="figure" target="#fig_3">3</ref>. The participant did not name specific accounts for this vertex, but indicated the use of accounts that only had a password but no recovery method. Similarly, using the Mail account for single sign-on was identified by the participant as a pattern for Serious accounts.</p><p>We identified patterns ourselves by considering different vertex types: Passwords, email accounts, other accounts, and devices. We consider three or more credentials or accounts to have the same access pattern if they are of equal type and are accessed by equal (non-empty) combinations of types of credentials. A typical such pattern is the use of some kind of password manager to store passwords. This pattern can be seen in the red 3D-box-shaped pwds vertices in Figures <ref type="figure" target="#fig_3">2 and 3</ref>. We bundle accounts, devices, and any other credentials that are accessible with the same pattern as follows. We contract the vertices that have the same access pattern and indicate in the resulting 3D-box-shaped vertex the number of contracted vertices. Figure <ref type="figure" target="#fig_2">2</ref> shows 3 different access patterns that we identified for P6. P6 reported on 16 passwords, contracted into vertex pwds, all of which are accessed using a password manager. P6 mentioned 7 different accounts, each of which is accessed with a password and recoverable using an email account, and 3 email accounts that are accessed and recoverable in the same way.</p><p>vertices. The next structural feature we analyzed was which vertices are the most central in our participants' graphs in terms of providing access to other vertices. The centrality scoring method we used is based on access sets defined in <ref type="bibr" target="#b21">[22]</ref>. An access set for a vertex 𝑣 is a minimal set of vertices that is sufficient to (transitively) obtain access to 𝑣.</p><p>Example 3. In Figure <ref type="figure" target="#fig_3">3</ref>, one (of many) access sets for the vertex 2 is the singleton set {Social 1}, because access to Social 1 suffices to gain access to Social 1 basic, whence access is obtained to Social 2. Every access set for the vertex in the same graph includes the vertex PIN B, since access to Bank is only possible through the phone and with that PIN. As there is no vertex providing access to B, this vertex must occur in every access set for One such access set is the set of vertices {PIN B, Finger, Phone locked}.  We define the centrality score of a vertex by counting the number of times a vertex occurs in the access set of another vertex. The vertex' occurrence is weighted inversely proportional to the number of vertices occurring in the access set. Thus every vertex has a score of at least 1 as it constitutes its own access set.</p><p>Example 4. The centrality score of vertex Social 1 in Figure <ref type="figure" target="#fig_3">3</ref> is 3, since it occurs in the access set for itself, for Social 1 basic, and for Social 2. The score for PIN B is 2 1  6 , because it provides access to itself (1), and occurs in three access sets for Bank, once with Phone, weighted 1/2, and twice with two other vertices, each weighted 1/3.</p><p>Vertices that receive high centrality scores indicate critical parts of the user's setup. If these vertices were protected poorly, this would result in a weakness in the setup.</p><p>Passwords are used as an authentication factor for most accounts, so password managers or vertices providing access to them are central vertices. For example, in Figure <ref type="figure" target="#fig_2">2</ref>, the vertex pwd has the highest centrality score. This is a decryption password for an Encrypted File stored in the Cloud storage. We discuss the reason for pwd's high score in the context of cycles below.</p><p>While we found that most participants stored some of their passwords in a password manager, several participants did not store all of them. For example, in P18's setup (Figure <ref type="figure" target="#fig_3">3</ref>), the password pwd M for the Mail account is not stored in the pwdManager. This is consistent with previous studies showing that users do not necessarily take full advantage of password managers <ref type="bibr" target="#b26">[26,</ref><ref type="bibr" target="#b30">30]</ref>.</p><p>In many participants' setups, a device is the most central vertex according to our centrality scores. Our participants' devices commonly provide access to many accounts by means of open sessions or through passwords saved on the device. Most participants' devices were protected with a locking mechanism. The most common locking mechanisms were PINs and fingerprints. The Finger vertex of the graph in Figure <ref type="figure" target="#fig_3">3</ref> is the most central vertex, because it unlocks any of the three devices. The next most central vertices in this graph are Computer and Tablet. In comparison with these, the Phone is not as central, because it does not provide access to the password manager.</p><p>Cycles. A structural feature closely related to central vertices are cycles. Cycles occur, for example, when multiple accounts can be used directly or indirectly to recover each other. Vertices that are contained in a cycle or provide access into a cycle can have comparatively high centrality scores, particularly when access to one of its elements provides access to the whole cycle. The reason is that such a cycle with several incoming and outgoing links acts like a hub connecting all incoming paths to all outgoing paths. If the cycle includes or provides access to a critical vertex such as a password manager, then all vertices that are part of the cycle or provide access into the cycle obtain high centrality scores. The accounts that are part of such a cycle must therefore all be wellprotected. Cycles can, primarily, reveal the weakest points for all accounts within an account ecosystem, but also have the potential to reveal multiple connected accounts as a result of users consciously separating work and personal life <ref type="bibr" target="#b5">[6,</ref><ref type="bibr" target="#b8">9]</ref>.</p><p>Several participants' account access graphs contained cycles, for example due to email accounts recovering each other or passwords saved in cloud storage. P6's graph in Figure <ref type="figure" target="#fig_2">2</ref> contains two cycles: Mail S basic → Mail P → Mail P basic → Mail S basic, and pwd Manager → pwds → Cloud → Cloud Basic → Encrypted File → pwd Manager. All vertices in these cycles are sufficient to provide access to the next vertex in the cycle, except for the access provided to the password manager, which, in to Encrypted File, requires pwd. This explains why pwd, the password for password manager, has by far the highest centrality score: Most of access paths and accounts in this graph are contingent on pwd. In contrast, Encrypted File, unlike the password, is accessible through multiple devices that have open sessions to the Cloud storage, denoted by Cloud basic.</p><p>Compartmentalization. Several participants' account graphs consist of multiple connected components. the second part of the interview, we learned that some participants consciously separated their accounts with the goal of reducing spam and notification load, e.g., into work-related and other. In particular, they were logged in to different accounts on different devices, and connected accounts to different email accounts. For example, P8 stated that "if something is important, I would connect it to [one email address], something that just needs an email to log in, I would connect to [another email address]." P6 followed a similar process, describing their use of the three email accounts shown in Figure <ref type="figure" target="#fig_2">2</ref> as follows: One email account is for things that were described as "important, " a second email account for things that were "related to university" and a final account for things that were "more creative, I would say, social media and stuff. " P10 explained that they used their tablet only rarely and thus consciously was not logged in on many accounts there, concluding "my configuration follows my routine. "</p><p>While multiple connected components in an account access graph indicate compartmentalization or missing information, we can see that they are insufficient to detect the quoted participants' compartmentalization strategies. This is because their strategies do not aim for a clean separation across the account setup, but only for a separation of particular items meeting their individual criteria.</p><p>Weaknesses in users' account setups. We briefly outline the most common weaknesses that we discovered by automatically and manually analyzing our participants' account access graphs, as described in Sections 4.1 and 4.2. Our automated analysis discovered backdoors with respect to text message attackers, as many participants used text-message-based account recovery, leaving them vulnerable to SIM Swap attacks <ref type="bibr" target="#b4">[5,</ref><ref type="bibr" target="#b25">25]</ref>. Furthermore, it discovered backdoors with respect to device-theft attackers, as some participants who used such a recovery method either did not have a locking mechanism on their phone at all, or enabled text message preview on the locked phone. That is, anyone with physical access to the phone would have direct access to the recovery codes sent to the phone. We did not find backdoors with respect to weak secret attackers; while security questions were used as recovery methods in a few participants' setups, they often served only as a single step in a multi-step recovery process.</p><p>Our manual analysis showed that participants did not use twofactor authentication unless it was mandatory, as is the case for many online banking accounts. While using only a single authentication factor might not directly constitute a critical weakness, it does become critical when this factor is a reused or weak password. Therefore, using two-factor authentication is security advice commonly given by experts <ref type="bibr" target="#b6">[7,</ref><ref type="bibr" target="#b15">16,</ref><ref type="bibr" target="#b24">24]</ref>. In particular, some participants had email accounts that were central to their setup, and with email providers that offered two-factor authentication, but the participants did not have it enabled.</p><p>During the interviews, we also found that our participants fully or partially reused passwords, exposing themselves to risk from password database breaches <ref type="bibr" target="#b28">[28]</ref>. Some participants even reused their password for accounts that provide access to many others, such as their email accounts. Note that we elicited password reuse in the second part of the interview only, so the graphs do not differentiate between unique and reused passwords.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="6.2">Awareness of Account Weaknesses</head><p>RQ2: What awareness do users have towards the weaknesses in their account setup and what are the individual barriers that exist in solving these challenges?</p><p>Our analysis of participants' individual account graphs illustrated features (e.g., compartmentalization, cycles) that create a uniqueness within an individual's own setup. there are also commonalities that exist within the setups of our participants. In this section we provide security recommendations that are based on our analysis of participants' account setups and our subsequent discussions with on challenges that they face in managing the security of their setups.</p><p>Recommendation 1: Users may have an incomplete view of their online account setup and personalised security advice could be used to overcome this. Participants had an incomplete view of their account setup. Thus, they underestimated the importance of their central accounts, such as their email accounts, and devices. When asked what they found surprising about the study, P15 replied "I'm surprised that so much is connected, especially to my [email account] [GER]," with P8 adding that "everything is almost accessible if they have your phone physically. " This misunderstanding leads to participants insufficiently securing important accounts, as we show in the next section.</p><p>It has been pointed out before that not every piece of security advice is equally relevant to every user, e.g., by Reeder et al. <ref type="bibr" target="#b36">[36]</ref>.</p><p>Our results suggest that we should go even further, and that security experts should seek out opportunities for personalized security counseling rather than trying to craft advice for the general population. While our process of users may not scale to a larger population, we believe that large parts of our could be automated, especially if the main goal is advice rather than to interview data. Such automated tools could then provide personal security advice at scale.</p><p>During our interview sessions, we were able to give participants security advice that was tailored to their specific setup and experience, unlike generic advice that is commonly given. In particular, we could single out accounts that were central to each participant's setup, providing access to many other accounts. When these accounts were protected weakly, such as with a reused or weak password, we gave advice on how to better protect this account specifically. Future work should focus on the ability to automate the collection of the data required to determine a users online account setup, and in methods to then give advice to users based on any weaknesses that are determined.</p><p>Note that tools currently offered by service providers, such as Google Security Checkup <ref type="bibr" target="#b0">[1]</ref>, only consider the part of a user's account setup that is connected to that service provider. Therefore, such tools cannot give personalized security advice that considers the user's entire setup. Bespoke tools that offer broader security advice based on a users full account infrastucture (e.g. <ref type="bibr" target="#b10">[11]</ref>) should be prioritised as a future method to improve security guidance that is given to end users.</p><p>Recommendation 2: Users struggle to see the links created between accounts due to password reuse and work is required to highlight password database breaches to assist in mitigating this problem. Multiple participants reused passwords only for accounts they considered relatively unimportant. P8 described reusing passwords for "the stuff that I don't care about, " while "the things that are important to me have different passwords. " P18 similarly said "I do reuse passwords, I just make sure that the [accounts] that I know are connected to a lot of different things are unique. " It has been observed that password reuse is acceptable for lower-valued accounts <ref type="bibr" target="#b17">[18,</ref><ref type="bibr" target="#b37">37]</ref>. However, our participants' perceptions of their accounts' importance were not always accurate. Some participants consciously favored convenience over security, considering their accounts insufficiently important to warrant extra effort. P14 reused a single password for all their accounts dehaving heard of the risk, explaining "one just doesn't get around to doing it [setting up unique passwords], because convenience wins out." Participants that reused passwords were not too concerned with attacks because they believed that they had to be targeted, thinking of an attacker as someone who had decided in advance to hack them specifically. Our participants were also largely unaware of password database breaches <ref type="bibr" target="#b28">[28]</ref>. The interviewer showed haveibeenpwned.com to participants who reused passwords, and the vast majority were unaware of the site or any similar tools. This suggests that security experts should increase awareness of password database breaches and resulting password reuse risk. They should also explain the untargeted nature of credential stuffing attacks, emphasizing that an attacker does not have to consciously pick a user as their target.</p><p>Recommendation 3: Users are likely to adopt default security advice as long as it does not greatly impact their current mental model of accessing systems. Enabling methods such as 2FA on accounts likely to be central within users' account graphs would be beneficial. In our study, participants mentioned concrete obstacles, in particular respect to adopting two-factor authentication. Multiple participants had usability or privacy concerns about using their phone number for text-message-based twofactor authentication. P8, who had moved between countries, described resulting usability problems as follows: "I lost my [...] country's phone number, and when I entered my email [...] I need to have the SMS, and I receive the SMS, so I was locked out for 30 days on both my emails. "</p><p>Participants expressed a higher willingness to keep a default configuration than to actively switch to another. P7 explained "I feel like all of my accounts are protected [...] there's nothing that's gone wrong with any of my accounts, so it's just an extra hassle if I have to [set up two-factor authentication]," but later also mentioned an account for which two-factor authentication was "by default set up, " for which they did not disable it. P20 explained "if an app or platform asks me upon installation if I want to use two factors, I usually say yes, but if it does not ask explicitly, I don't <ref type="bibr">[GER]</ref>. ". Participants were happy to use two-factor authentication as a secure default that is set up at registration, while they would not go through the steps to set it up afterwards.</p><p>Service providers should should should offer two-factor authentication as the default option during registration and inform users clearly that they can configure trusted devices for which the second factor is not required.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="6.3">Limitations</head><p>Our study was advertised as a User Study on Security Risks in Accounts for Internet Services. As with every study with voluntary participation, there is a self-selection bias that may lead to participants that have an above average interest in the discussed topic. This is likely the reason for the high number of participants who reported an interest in information security. Participants were required to actively use internet services and own at least one portable device with an Internet connection. The study was also advertised in places, both online and physical, that are to a large part, but not exclusively, frequented by university students from our local area. Thus, even though we did not specifically ask about this, we assume that a large fraction of our participants are students from this population group. However, we know from statements during the interviews that some participants were not students.</p><p>Despite these limitations, our study provides valuable insights into users' thought processes with respect to their online account setups. In fact, our participants' interest in the topic was likely a reason for the wide range of topics covered in our data, and was conducive to obtaining accurate account access graphs. Due to the qualitative nature of our study, we do not claim that our results are generalizable over a larger population, and thus consider the limited demographic spread among our participants acceptable. Note that only one fifth of our participants studied computer science, none of them with a focus in information security. Thus, our participant sample is meaningful for studying the behavior of interested, yet non-expert, users.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="7">CONCLUSION</head><p>We developed a novel methodology, leveraging user account graphs, for systematically eliciting a user's online account setup. We used our methodology in a study with 20 participants and obtained for the first time insights into the complexity of users' unique account setups. We observed structural features within account setups, like account access patterns and cycles, and used these to demonstrate the importance of central accounts and devices within the individual users' online security ecosystem.</p><p>Our interviews provided not only an understanding of the structure of our participants' account setups; the graphical representation of the participants' elicited account setups shown to them facilitated a discussion that additionally provided insights into their beliefs, opinions, and mental models regarding these setups. This allowed us to relate our findings to previous work across diverse topics including password best practices, adoption of two-factor authentication, users' attacker models, and security advice.</p><p>Our findings suggest that personalised security analysis and advice holds much potential. However, to achieve it at scale, our process requires more automation support and we must further improve our understanding of users' account setups through largerscale studies using quantitative metrics. In particular, we seek to learn how account setups compare between different demographics, what the prevalent account security management strategies are, and how they manifest themselves in an account setup.</p></div><figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_0"><head>6 DISCUSSION 6 . 1</head><label>661</label><figDesc>User Account Structure RQ1: What does a typical user account setup look like and what potential weaknesses exist in it?</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_2"><head>Figure 2 :</head><label>2</label><figDesc>Figure 2: Simplified Access Graph of participant P6. Some accounts have been removed. 3D-box-shaped vertices are contractions of vertices with the same access pattern.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_3"><head>Figure 3 :</head><label>3</label><figDesc>Figure 3: Simplified Access Graph of participant P18. Some accounts have been removed. 3D-box-shaped vertices are contractions of vertices with the same access pattern.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_0"><head></head><label></label><figDesc>An account access graph is a directed graph 𝐺 = (𝑉 𝐺 , 𝐸 𝐺 , 𝐶 𝐺 ), where 𝑉 𝐺 are vertices, 𝐶 𝐺 are colors, and 𝐸 𝐺 ⊆ 𝑉 𝐺 × 𝑉 𝐺 × 𝐶 𝐺 are directed colored edges.</figDesc><table><row><cell></cell><cell>Mail</cell><cell>Mail basic</cell></row><row><cell>SMS</cell><cell>pwd</cell><cell>Phone</cell></row><row><cell></cell><cell>Finger</cell><cell>Phone locked</cell><cell>PIN Phone</cell></row><row><cell cols="4">Figure 1: An access graph with four different types of ver-</cell></row><row><cell cols="4">tices. A black edge denotes a sufficient condition for access.</cell></row><row><cell cols="4">For other edge colors, same colors denote conjunction (all</cell></row><row><cell cols="4">necessary for access) and different colors denote disjunction</cell></row><row><cell cols="4">(alternative). Dashed edges indicate recovery methods.</cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_1"><head>Table 1 :</head><label>1</label><figDesc>Summary of participants' account graph features. * : the cycles are overlapping.</figDesc><table><row><cell cols="2">Participant Vertices</cell><cell>Elements in Cycles</cell><cell></cell><cell>Use of Manager</cell><cell>Open Sessions</cell><cell>Lockscreen Preview prevents SMS</cell><cell>SMS for 2FA</cell><cell>SMS for recovery</cell><cell>Central Vertices</cell></row><row><cell>1</cell><cell>50</cell><cell>4</cell><cell>1</cell><cell>yes</cell><cell>2</cell><cell>yes</cell><cell>no</cell><cell>yes</cell><cell>Computer</cell></row><row><cell>2</cell><cell>45</cell><cell>0</cell><cell>2</cell><cell>no</cell><cell>4</cell><cell>no</cell><cell>no</cell><cell>yes</cell><cell>Phone</cell></row><row><cell>3</cell><cell>32</cell><cell>0</cell><cell>4</cell><cell>no</cell><cell>1</cell><cell>no</cell><cell>yes</cell><cell>yes</cell><cell>Password</cell></row><row><cell>4</cell><cell>44</cell><cell>0</cell><cell>1</cell><cell>partial</cell><cell>4</cell><cell>n/a</cell><cell>n/a</cell><cell>n/a</cell><cell>Computer</cell></row><row><cell>5</cell><cell>33</cell><cell>0</cell><cell>3</cell><cell>no</cell><cell>1</cell><cell>no</cell><cell>yes</cell><cell>no</cell><cell>Password, Old Password</cell></row><row><cell>6</cell><cell>58</cell><cell>3;5</cell><cell>1</cell><cell>yes</cell><cell>5</cell><cell>n/a</cell><cell>n/a</cell><cell>n/a</cell><cell>Password for PwdManager</cell></row><row><cell>7</cell><cell>59</cell><cell>0</cell><cell>1</cell><cell>yes</cell><cell>4</cell><cell>yes</cell><cell>yes</cell><cell>yes</cell><cell>Computer</cell></row><row><cell>8</cell><cell>37</cell><cell>4</cell><cell>1</cell><cell>yes</cell><cell>3</cell><cell>no</cell><cell>no</cell><cell>yes</cell><cell>Phone</cell></row><row><cell>9</cell><cell>43</cell><cell>6</cell><cell>1</cell><cell>partial</cell><cell>4</cell><cell>yes</cell><cell>yes</cell><cell>yes</cell><cell>Password</cell></row><row><cell>10</cell><cell>53</cell><cell>0</cell><cell>3</cell><cell>yes</cell><cell>4</cell><cell>yes</cell><cell>yes</cell><cell>yes</cell><cell>Computer</cell></row><row><cell>11</cell><cell>41</cell><cell>0</cell><cell>1</cell><cell>partial</cell><cell>4</cell><cell>yes</cell><cell>no</cell><cell>yes</cell><cell>Computer</cell></row><row><cell>12</cell><cell>49</cell><cell>0</cell><cell>2</cell><cell>partial</cell><cell>6</cell><cell>yes</cell><cell>yes</cell><cell>yes</cell><cell>Phone</cell></row><row><cell>13</cell><cell>30</cell><cell>0</cell><cell>2</cell><cell>yes</cell><cell>4</cell><cell>no</cell><cell>yes</cell><cell>no</cell><cell>Phone, PwdManager</cell></row><row><cell>14</cell><cell>42</cell><cell>0</cell><cell>3</cell><cell>yes</cell><cell>3</cell><cell>yes</cell><cell>yes</cell><cell>yes</cell><cell>Phone</cell></row><row><cell>15</cell><cell>44</cell><cell>0</cell><cell>1</cell><cell>yes</cell><cell>3</cell><cell>yes</cell><cell>yes</cell><cell>yes</cell><cell>Phone</cell></row><row><cell>16</cell><cell>35</cell><cell>2</cell><cell>2</cell><cell>partial</cell><cell>2</cell><cell>no</cell><cell>yes</cell><cell>yes</cell><cell>Computer</cell></row><row><cell>17</cell><cell>33</cell><cell>0</cell><cell>2</cell><cell>partial</cell><cell>2</cell><cell>no</cell><cell>yes</cell><cell>no</cell><cell>Phone</cell></row><row><cell>18</cell><cell>35</cell><cell>0</cell><cell>1</cell><cell>partial</cell><cell>2</cell><cell>no</cell><cell>no</cell><cell>yes</cell><cell>Finger, Tablet, Computer</cell></row><row><cell>19</cell><cell>52</cell><cell>4; 6  *</cell><cell>1</cell><cell>yes</cell><cell>6</cell><cell>yes</cell><cell>no</cell><cell>yes</cell><cell>All Devices, Account</cell></row><row><cell>20</cell><cell>51</cell><cell>3</cell><cell>1</cell><cell>partial</cell><cell>2</cell><cell>yes</cell><cell>yes</cell><cell>yes</cell><cell>Old Password</cell></row></table></figure>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="1">https://marktplatz.uzhalumni.ch/</note>
+		</body>
+		<back>
+			<div type="references">
+
+				<listBibl>
+
+<biblStruct xml:id="b0">
+	<monogr>
+		<title level="m" type="main">Make your account more secure</title>
+		<ptr target="https://support.google.com/accounts/answer/46526" />
+		<imprint>
+			<date type="published" when="2021">2021</date>
+			<biblScope unit="page" from="2021" to="2029" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b1">
+	<monogr>
+		<title level="m" type="main">Supplementary material: graphs, coded transcripts, and front-end tool</title>
+		<ptr target="https://tinyurl.com/ycykrwa5" />
+		<imprint>
+			<date type="published" when="2021">2021</date>
+			<biblScope unit="page" from="2021" to="2029" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b2">
+	<analytic>
+		<title level="a" type="main">Developers Need Support, Too: A Survey of Security Advice for Software Developers</title>
+		<author>
+			<persName><forename type="first">Yasemin</forename><surname>Acar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Christian</forename><surname>Stransky</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Dominik</forename><surname>Wermke</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Charles</forename><surname>Weir</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Michelle</forename><forename type="middle">L</forename><surname>Mazurek</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sascha</forename><surname>Fahl</surname></persName>
+		</author>
+		<idno type="DOI">10.1109/SecDev.2017.17</idno>
+		<ptr target="https://doi.org/10.1109/SecDev.2017.17" />
+	</analytic>
+	<monogr>
+		<title level="j">IEEE Cybersecurity Development (SecDev)</title>
+		<imprint>
+			<biblScope unit="page" from="22" to="26" />
+			<date type="published" when="2017">2017. 2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b3">
+	<analytic>
+		<title level="a" type="main">A Study on Designing Video Tutorials for Promoting Security Features: A Case Study in the Context of Two-Factor Authentication (2FA)</title>
+		<author>
+			<persName><forename type="first">Yusuf</forename><surname>Albayram</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mohammad</forename><surname>Maifi Hasan Khan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Michael</forename><surname>Fagan</surname></persName>
+		</author>
+		<idno type="DOI">10.1080/10447318.2017.1306765</idno>
+		<ptr target="https://doi.org/10.1080/10447318.2017.1306765" />
+	</analytic>
+	<monogr>
+		<title level="j">International Journal of Human-Computer Interaction</title>
+		<imprint>
+			<biblScope unit="volume">33</biblScope>
+			<biblScope unit="page" from="927" to="942" />
+			<date type="published" when="2017">2017. 2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b4">
+	<analytic>
+		<title level="a" type="main">Can I Get Your Digits: Illegal Acquisition of Wireless Phone Numbers for Sim-Swap Attacks and Wireless Provider Liability</title>
+		<author>
+			<persName><forename type="first">Nathanael</forename><surname>Andrews</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Nw. J. Tech. &amp; Intell. Prop</title>
+		<imprint>
+			<biblScope unit="volume">16</biblScope>
+			<biblScope unit="page">79</biblScope>
+			<date type="published" when="2018">2018. 2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b5">
+	<analytic>
+		<title level="a" type="main">Understanding User Tradeoffs for Search in Encrypted Communication</title>
+		<author>
+			<persName><forename type="first">Wei</forename><surname>Bai</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ciara</forename><surname>Lynton</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Charalampos</forename><surname>Papamanthou</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Michelle</forename><forename type="middle">L</forename><surname>Mazurek</surname></persName>
+		</author>
+		<idno type="DOI">10.1109/EuroSP.2018.00026</idno>
+		<ptr target="https://doi.org/10.1109/EuroSP.2018.00026" />
+	</analytic>
+	<monogr>
+		<title level="m">2018 IEEE European Symposium on Security and Privacy</title>
+				<imprint>
+			<date type="published" when="2018">2018</date>
+			<biblScope unit="page" from="258" to="272" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b6">
+	<analytic>
+		<title level="a" type="main">Replication: no one can hack my mind revisiting a study on expert and non-expert security practices and</title>
+		<author>
+			<persName><forename type="first">Karoline</forename><surname>Busse</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Julia</forename><surname>Schäfer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Matthew</forename><surname>Smith</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Fifteenth Symposium on Usable Privacy and Security</title>
+				<imprint>
+			<date type="published" when="2019">2019. 2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b7">
+	<analytic>
+		<title level="a" type="main">An exploratory study of cyber hygiene behaviors and knowledge</title>
+		<author>
+			<persName><forename type="first">Ashley</forename><forename type="middle">A</forename><surname>Cain</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Morgan</forename><forename type="middle">E</forename><surname>Edwards</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jeremiah</forename><forename type="middle">D</forename><surname>Still</surname></persName>
+		</author>
+		<idno type="DOI">10.1016/j.jisa.2018.08.002</idno>
+		<ptr target="https://doi.org/10.1016/j.jisa.2018.08.002" />
+	</analytic>
+	<monogr>
+		<title level="j">Journal of Information Security and Applications</title>
+		<imprint>
+			<biblScope unit="volume">42</biblScope>
+			<biblScope unit="page" from="36" to="45" />
+			<date type="published" when="2018">2018. 2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b8">
+	<analytic>
+		<title level="a" type="main">Finding Email in a Multi-Account, Multi-Device World</title>
+		<author>
+			<persName><forename type="first">Marta</forename><forename type="middle">E</forename><surname>Cecchinato</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Abigail</forename><surname>Sellen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Milad</forename><surname>Shokouhi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Gavin</forename><surname>Smyth</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2858036.2858473</idno>
+		<ptr target="https://doi.org/10.1145/2858036.2858473" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2016 CHI Conference on Human Factors in Computing Systems</title>
+				<meeting>the 2016 CHI Conference on Human Factors in Computing Systems<address><addrLine>San Jose, California, USA; New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computing Machinery</publisher>
+			<date type="published" when="2016">2016</date>
+		</imprint>
+	</monogr>
+	<note>CHI &apos;16)</note>
+</biblStruct>
+
+<biblStruct xml:id="b9">
+	<analytic>
+		<title level="a" type="main">Benefits to qualitative data quality with multiple coders: Two case studies in multi-coder data analysis</title>
+		<author>
+			<persName><forename type="first">P</forename><surname>Sarah</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Michael</forename><surname>Church</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Linda</forename><forename type="middle">S</forename><surname>Dunn</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Prokopy</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Rural Social Sciences</title>
+		<imprint>
+			<biblScope unit="volume">34</biblScope>
+			<biblScope unit="page">2</biblScope>
+			<date type="published" when="2019">2019. 2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b10">
+	<analytic>
+		<title level="a" type="main">Understanding Technology Literate Older Adults&apos; Account Management Strategies</title>
+		<author>
+			<persName><forename type="first">Michael</forename><surname>Crabb</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Melvin</forename><surname>Abraham</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Saša</forename><surname>Radomirović</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">11th International Workshop in Socio-Technical Aspects in Security Trust. 11th International Workshop on Socio-Technical Aspects in Security</title>
+				<imprint>
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+	<note>I&apos;m Doing the Best I Can</note>
+</biblStruct>
+
+<biblStruct xml:id="b11">
+	<analytic>
+		<title level="a" type="main">The tangled web of password reuse</title>
+		<author>
+			<persName><forename type="first">Anupam</forename><surname>Das</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Joseph</forename><surname>Bonneau</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Matthew</forename><surname>Caesar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Nikita</forename><surname>Borisov</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Xiaofeng</forename><surname>Wang</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">NDSS</title>
+				<imprint>
+			<date type="published" when="2014">2014</date>
+			<biblScope unit="volume">14</biblScope>
+			<biblScope unit="page" from="23" to="26" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b12">
+	<analytic>
+		<title level="a" type="main">Why Johnny doesn&apos;t use two factor a two-phase usability study of the FIDO U2F security key</title>
+		<author>
+			<persName><forename type="first">Sanchari</forename><surname>Das</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Andrew</forename><surname>Dingman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L Jean</forename><surname>Camp</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">International Conference on Financial Cryptography</title>
+				<imprint>
+			<publisher>Springer</publisher>
+			<date type="published" when="2018">2018</date>
+			<biblScope unit="page" from="160" to="179" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b13">
+	<analytic>
+		<title level="a" type="main">A Comparative Usability Study of Two-Factor Authentication</title>
+		<author>
+			<persName><forename type="first">Honglu</forename><surname>Emiliano De Cristofaro</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Julien</forename><surname>Du</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Greg</forename><surname>Freudiger</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Norcie</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">NDSS Workshop on Usable Security</title>
+		<imprint>
+			<date type="published" when="2014">2014. 2014. 2014</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b14">
+	<analytic>
+		<title level="a" type="main">An investigation into users&apos; considerations towards using password managers</title>
+		<author>
+			<persName><forename type="first">Michael</forename><surname>Fagan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yusuf</forename><surname>Albayram</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mohammad</forename><surname>Maifi Hasan Khan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ross</forename><surname>Buck</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Human-centric Computing and Information Sciences</title>
+		<imprint>
+			<biblScope unit="volume">7</biblScope>
+			<biblScope unit="page" from="1" to="20" />
+			<date type="published" when="2017">2017. 2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b15">
+	<analytic>
+		<title level="a" type="main">Why do they do what they do?: A study of what motivates users to (not) follow computer security</title>
+		<author>
+			<persName><forename type="first">Michael</forename><surname>Fagan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mohammad Maifi Hasan</forename><surname>Khan</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Twelfth Symposium on Usable Privacy and Security</title>
+				<imprint>
+			<date type="published" when="2016">2016. 2016</date>
+			<biblScope unit="page" from="59" to="75" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b16">
+	<monogr>
+		<title level="m" type="main">The SAGE handbook of qualitative data analysis</title>
+		<imprint>
+			<date type="published" when="2013">2013</date>
+			<pubPlace>Sage</pubPlace>
+		</imprint>
+	</monogr>
+	<note>Uwe Flick</note>
+</biblStruct>
+
+<biblStruct xml:id="b17">
+	<analytic>
+		<title level="a" type="main">Password portfolios and the finite-effort user: Sustainably managing large numbers of accounts</title>
+		<author>
+			<persName><forename type="first">Dinei</forename><surname>Florêncio</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Cormac</forename><surname>Herley</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Paul C Van</forename><surname>Oorschot</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">23rd USENIX Security Symposium (USENIX Security 14</title>
+				<imprint>
+			<date type="published" when="2014">2014</date>
+			<biblScope unit="page" from="575" to="590" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b18">
+	<analytic>
+		<title level="a" type="main">Password management strategies for online accounts</title>
+		<author>
+			<persName><forename type="first">Shirley</forename><surname>Gaw</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Edward W Felten</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the second symposium on Usable privacy and security</title>
+				<meeting>the second symposium on Usable privacy and security</meeting>
+		<imprint>
+			<date type="published" when="2006">2006</date>
+			<biblScope unit="page" from="44" to="55" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b19">
+	<monogr>
+		<title level="m" type="main">MLA handbook for writers of research papers</title>
+		<author>
+			<persName><forename type="first">Joseph</forename><surname>Gibaldi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Walter</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Modern Language Association Of</forename><surname>Achtert</surname></persName>
+		</author>
+		<author>
+			<persName><surname>America</surname></persName>
+		</author>
+		<imprint>
+			<publisher>Modern Language Association of America</publisher>
+			<pubPlace>New York</pubPlace>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b20">
+	<analytic>
+		<title level="a" type="main">Analyzing qualitative data</title>
+		<author>
+			<persName><surname>Graham R Gibbs</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="s">Sage</title>
+		<imprint>
+			<biblScope unit="volume">6</biblScope>
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b21">
+	<analytic>
+		<title level="a" type="main">User Account Access Graphs</title>
+		<author>
+			<persName><forename type="first">Sven</forename><surname>Hammann</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Saša</forename><surname>Radomirović</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ralf</forename><surname>Sasse</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">David</forename><surname>Basin</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2019 ACM SIGSAC Conference on Computer and Communications Security</title>
+				<meeting>the 2019 ACM SIGSAC Conference on Computer and Communications Security<address><addrLine>London, United Kingdom</addrLine></address></meeting>
+		<imprint>
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+	<note>CCS &apos;19)</note>
+</biblStruct>
+
+<biblStruct xml:id="b22">
+	<monogr>
+		<title/>
+		<idno type="DOI">10.1145/3319535.3354193</idno>
+		<ptr target="https://doi.org/10.1145/3319535.3354193" />
+		<imprint>
+			<publisher>ACM</publisher>
+			<biblScope unit="page" from="1405" to="1422" />
+			<pubPlace>New York, NY, USA</pubPlace>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b23">
+	<analytic>
+		<title level="a" type="main">It&apos;s a hard lock life: A field study of smartphone (un) behavior and risk perception</title>
+		<author>
+			<persName><forename type="first">Marian</forename><surname>Harbach</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Emanuel</forename><forename type="middle">Von</forename><surname>Zezschwitz</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Andreas</forename><surname>Fichtner</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Alexander</forename><surname>De Luca</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Matthew</forename><surname>Smith</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">10th Symposium On Usable Privacy and Security</title>
+				<imprint>
+			<date type="published" when="2014">2014. 2014</date>
+			<biblScope unit="page" from="213" to="230" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b24">
+	<analytic>
+		<title level="a" type="main">no one can hack my mind&quot;: Comparing Expert and Non-Expert Security Practices</title>
+		<author>
+			<persName><forename type="first">Rob</forename><surname>Iulia Ion</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sunny</forename><surname>Reeder</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Consolvo</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Eleventh Symposium On Usable Privacy and Security</title>
+				<imprint>
+			<date type="published" when="2015">2015. 2015</date>
+			<biblScope unit="page" from="327" to="346" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b25">
+	<monogr>
+		<title level="m" type="main">An Empirical Study of Wireless Carrier Authentication for SIM Swaps</title>
+		<author>
+			<persName><forename type="first">Kevin</forename><surname>Lee</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ben</forename><surname>Kaiser</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jonathan</forename><surname>Mayer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Arvind</forename><surname>Narayanan</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b26">
+	<analytic>
+		<title level="a" type="main">Better managed than memorized? Studying the Impact of Managers on Password Strength and Reuse</title>
+		<author>
+			<persName><forename type="first">Michael</forename><surname>Sanam Ghorbani Lyastani</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sascha</forename><surname>Schilling</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Michael</forename><surname>Fahl</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sven</forename><surname>Backes</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Bugiel</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">27th USENIX Security Symposium</title>
+				<imprint>
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b27">
+	<analytic>
+		<title level="a" type="main">Reliability and Inter-Rater Reliability in Qualitative Research: Norms and Guidelines for CSCW and HCI Practice</title>
+		<author>
+			<persName><forename type="first">Nora</forename><surname>Mcdonald</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sarita</forename><surname>Schoenebeck</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Andrea</forename><surname>Forte</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3359174</idno>
+		<ptr target="https://doi.org/10.1145/3359174" />
+	</analytic>
+	<monogr>
+		<title level="j">Proc. ACM Hum.-Comput</title>
+		<imprint>
+			<biblScope unit="volume">23</biblScope>
+			<date type="published" when="2019-11">2019. Nov. 2019</date>
+		</imprint>
+	</monogr>
+	<note>Interact. 3, CSCW, Article 72</note>
+</biblStruct>
+
+<biblStruct xml:id="b28">
+	<monogr>
+		<title level="m" type="main">Understanding password database compromises</title>
+		<author>
+			<persName><forename type="first">Dennis</forename><surname>Mirante</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Justin</forename><surname>Cappos</surname></persName>
+		</author>
+		<idno>TR-CSE-2013-02</idno>
+		<imprint>
+			<date type="published" when="2013">2013. 2013</date>
+		</imprint>
+		<respStmt>
+			<orgName>Dept. of Computer Science and Engineering Polytechnic Inst. of NYU</orgName>
+		</respStmt>
+	</monogr>
+	<note type="report_type">Tech. Rep.</note>
+</biblStruct>
+
+<biblStruct xml:id="b29">
+	<analytic>
+		<title level="a" type="main">Let&apos;s go in for a closer look: Observing passwords in their natural habitat</title>
+		<author>
+			<persName><forename type="first">Sarah</forename><surname>Pearman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jeremy</forename><surname>Thomas</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Pardis</forename><surname>Emami Naeini</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Hana</forename><surname>Habib</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Lujo</forename><surname>Bauer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Nicolas</forename><surname>Christin</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2017 ACM SIGSAC Conference on Computer and Communications Security</title>
+				<meeting>the 2017 ACM SIGSAC Conference on Computer and Communications Security</meeting>
+		<imprint>
+			<date type="published" when="2017">2017</date>
+			<biblScope unit="page" from="295" to="310" />
+		</imprint>
+	</monogr>
+	<note>Lorrie Faith Cranor, Serge Egelman, and Alain Forget</note>
+</biblStruct>
+
+<biblStruct xml:id="b30">
+	<analytic>
+		<title level="a" type="main">Why people (don&apos;t) use password managers effectively</title>
+		<author>
+			<persName><forename type="first">Sarah</forename><surname>Pearman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Lujo</forename><surname>Shikun Aerin Zhang</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Bauer</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Fifteenth Symposium On Usable Privacy and Security</title>
+				<imprint>
+			<date type="published" when="2019">2019. 2019</date>
+			<biblScope unit="page" from="319" to="338" />
+		</imprint>
+	</monogr>
+	<note>Nicolas Christin, and Lorrie Faith Cranor</note>
+</biblStruct>
+
+<biblStruct xml:id="b31">
+	<analytic>
+		<title level="a" type="main">How I Learned to Be Secure: A Census-Representative Survey of Security Advice Sources and Behavior</title>
+		<author>
+			<persName><forename type="first">Elissa</forename><forename type="middle">M</forename><surname>Redmiles</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sean</forename><surname>Kross</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Michelle</forename><forename type="middle">L</forename><surname>Mazurek</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2976749.2978307</idno>
+		<ptr target="https://doi.org/10.1145/2976749.2978307" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2016 ACM SIGSAC Conference on Computer and Com-Security</title>
+				<meeting>the 2016 ACM SIGSAC Conference on Computer and Com-Security<address><addrLine>Vienna, Austria; New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<date type="published" when="2016">2016</date>
+			<biblScope unit="page" from="666" to="677" />
+		</imprint>
+	</monogr>
+	<note>CCS &apos;16). Association for Computing Machinery</note>
+</biblStruct>
+
+<biblStruct xml:id="b32">
+	<analytic>
+		<title level="a" type="main">You Want Me To Do What? A Design Study of Two-Factor Authentication Messages</title>
+		<author>
+			<persName><forename type="first">Everest</forename><surname>Elissa M Redmiles</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Michelle</forename><forename type="middle">L</forename><surname>Liu</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Mazurek</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Symposium On Usable Privacy and Security</title>
+				<imprint>
+			<date type="published" when="2017">2017. 2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b33">
+	<analytic>
+		<title level="a" type="main">I think they&apos;re trying to tell me something: Advice sources and selection for digital In</title>
+		<author>
+			<persName><forename type="first">Amelia</forename><forename type="middle">R</forename><surname>Elissa M Redmiles</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Michelle</forename><forename type="middle">L</forename><surname>Malone</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Mazurek</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">2016 IEEE Symposium on Security and Privacy (SP)</title>
+				<imprint>
+			<publisher>IEEE</publisher>
+			<date type="published" when="2016">2016</date>
+			<biblScope unit="page" from="272" to="288" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b34">
+	<analytic>
+		<title level="a" type="main">Dancing Pigs or Externalities? Measuring the Rationality of Security Decisions</title>
+		<author>
+			<persName><forename type="first">Elissa</forename><forename type="middle">M</forename><surname>Redmiles</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Michelle</forename><forename type="middle">L</forename><surname>Mazurek</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">John</forename><forename type="middle">P</forename><surname>Dickerson</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3219166.3219185</idno>
+		<ptr target="https://doi.org/10.1145/3219166.3219185" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the</title>
+				<meeting>the<address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computing Machinery</publisher>
+			<date type="published" when="2018">2018. 2018</date>
+			<biblScope unit="page" from="215" to="232" />
+		</imprint>
+	</monogr>
+	<note>USA) (EC &apos;18)</note>
+</biblStruct>
+
+<biblStruct xml:id="b35">
+	<analytic>
+		<title level="a" type="main">152 Simple Steps to Stay Safe Online: Security Advice for Non-Tech-Savvy Users</title>
+		<author>
+			<persName><forename type="first">Robert</forename><forename type="middle">W</forename><surname>Reeder</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ion</forename></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sunny</forename><surname>Consolvo</surname></persName>
+		</author>
+		<idno type="DOI">10.1109/MSP.2017.3681050</idno>
+		<ptr target="https://doi.org/10.1109/MSP.2017.3681050" />
+	</analytic>
+	<monogr>
+		<title level="j">IEEE Security Privacy</title>
+		<imprint>
+			<biblScope unit="volume">15</biblScope>
+			<biblScope unit="page" from="55" to="64" />
+			<date type="published" when="2017">2017. 2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b36">
+	<analytic>
+		<title level="a" type="main">152 simple steps to stay safe online: security advice for non-tech-savvy users</title>
+		<author>
+			<persName><forename type="first">W</forename><surname>Robert</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Reeder</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Iulia Ion, and Sunny Consolvo</title>
+				<imprint>
+			<date type="published" when="2017">2017. 2017</date>
+			<biblScope unit="volume">15</biblScope>
+			<biblScope unit="page" from="55" to="64" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b37">
+	<analytic>
+		<title level="a" type="main">The password life cycle: user behaviour in managing passwords</title>
+		<author>
+			<persName><forename type="first">Elizabeth</forename><surname>Stobert</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Robert</forename><surname>Biddle</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">10th Symposium On Usable Privacy and Security</title>
+				<imprint>
+			<date type="published" when="2014">2014. 2014</date>
+			<biblScope unit="page" from="243" to="255" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b38">
+	<analytic>
+		<title level="a" type="main">The second step in data analysis: Coding qualitative data</title>
+		<author>
+			<persName><forename type="first">L</forename><surname>Heather</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Stuckey</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Journal of Social Health and Diabetes</title>
+		<imprint>
+			<biblScope unit="volume">3</biblScope>
+			<biblScope unit="page" from="7" to="010" />
+			<date type="published" when="2015">2015. 2015</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b39">
+	<analytic>
+		<title level="a" type="main">Password security-No change in 35 years</title>
+		<author>
+			<persName><forename type="first">Viktor</forename><surname>Taneski</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Marjan</forename><surname>Heričko</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Boštjan</forename><surname>Brumen</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">37th International Convention on Information and Communication Technology, Electronics and Microelectronics</title>
+				<imprint>
+			<publisher>IEEE</publisher>
+			<date type="published" when="2014">2014</date>
+			<biblScope unit="page" from="1360" to="1365" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b40">
+	<monogr>
+		<title level="m" type="main">An inductive approach for qualitative analysis</title>
+		<author>
+			<persName><forename type="first">David</forename><surname>Thomas</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2003">2003. 2003</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b41">
+	<monogr>
+		<title level="m" type="main">Qualitative research methods: Collecting evidence, crafting analysis, communicating impact</title>
+		<author>
+			<persName><forename type="first">J</forename><surname>Sarah</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Tracy</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2019">2019</date>
+			<publisher>John Wiley &amp; Sons</publisher>
+			<pubPlace>Oxford, UK</pubPlace>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b42">
+	<analytic>
+		<title level="a" type="main">I&apos;ve Got Nothing to Lose&quot;: Consumers&apos; Risk Perceptions and Protective Actions after the Equifax Data Breach</title>
+		<author>
+			<persName><forename type="first">Yixin</forename><surname>Zou</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Abraham</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Austin</forename><surname>Mhaidli</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Florian</forename><surname>Mccall</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Schaub</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Fourteenth Symposium on Usable Privacy and Security</title>
+				<imprint>
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+				</listBibl>
+			</div>
+		</back>
+	</text>
+</TEI>

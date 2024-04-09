@@ -1,0 +1,1465 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xml:space="preserve" xmlns="http://www.tei-c.org/ns/1.0" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.com/kermitt2/grobid/master/grobid-home/schemas/xsd/Grobid.xsd"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+	<teiHeader xml:lang="en">
+		<fileDesc>
+			<titleStmt>
+				<title level="a" type="main">CatchLive: Real-time Summarization of Live Streams with Stream Content and Interaction Data</title>
+			</titleStmt>
+			<publicationStmt>
+				<publisher/>
+				<availability status="unknown"><licence/></availability>
+			</publicationStmt>
+			<sourceDesc>
+				<biblStruct>
+					<analytic>
+						<author>
+							<persName><forename type="first">Saelyne</forename><surname>Yang</surname></persName>
+							<email>saelyne@kaist.ac.kr</email>
+						</author>
+						<author>
+							<persName><forename type="first">Jisu</forename><surname>Yim</surname></persName>
+							<email>yimjisu99@kaist.ac.kr</email>
+						</author>
+						<author>
+							<persName><roleName>Hijung</roleName><forename type="first">Juho</forename><surname>Kim</surname></persName>
+							<email>juhokim@kaist.ac.kr</email>
+						</author>
+						<author>
+							<persName><forename type="first">Valentina</forename><surname>Shin</surname></persName>
+							<email>vshin@adobe.com</email>
+						</author>
+						<author>
+							<affiliation key="aff0">
+								<orgName type="department">School of Computing</orgName>
+								<orgName type="institution">KAIST</orgName>
+								<address>
+									<settlement>Daejeon</settlement>
+									<country>Republic of Korea Juho Kim</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<affiliation key="aff1">
+								<orgName type="department">School of Computing</orgName>
+								<orgName type="institution">KAIST</orgName>
+								<address>
+									<settlement>Daejeon</settlement>
+									<country>Republic of Korea Jisu Yim</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<affiliation key="aff2">
+								<orgName type="department">School of Computing</orgName>
+								<orgName type="institution">KAIST</orgName>
+								<address>
+									<settlement>Daejeon</settlement>
+									<country key="KR">Republic of Korea</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<affiliation key="aff3">
+								<orgName type="institution">Hijung Valentina Shin</orgName>
+							</affiliation>
+						</author>
+						<author>
+							<affiliation key="aff4">
+								<orgName type="institution">Adobe Research</orgName>
+								<address>
+									<settlement>Cambridge</settlement>
+									<region>MA</region>
+									<country>USA, USA</country>
+								</address>
+							</affiliation>
+						</author>
+						<title level="a" type="main">CatchLive: Real-time Summarization of Live Streams with Stream Content and Interaction Data</title>
+					</analytic>
+					<monogr>
+						<imprint>
+							<date/>
+						</imprint>
+					</monogr>
+					<idno type="DOI">10.1145/3491102.3517461</idno>
+				</biblStruct>
+			</sourceDesc>
+		</fileDesc>
+		<encodingDesc>
+			<appInfo>
+				<application version="0.7.1" ident="GROBID" when="2022-07-22T05:04+0000">
+					<desc>GROBID - A machine learning software for extracting information from scholarly documents</desc>
+					<ref target="https://github.com/kermitt2/grobid"/>
+				</application>
+			</appInfo>
+		</encodingDesc>
+		<profileDesc>
+			<textClass>
+				<keywords>
+					<term>live streaming</term>
+					<term>live summarization</term>
+					<term>video summarization</term>
+					<term>user interaction data</term>
+				</keywords>
+			</textClass>
+			<abstract>
+<div xmlns="http://www.tei-c.org/ns/1.0"><p>keeping up with the ongoing stream. We present CatchLive, a system that provides a real-time summary of ongoing live streams by utilizing both the stream content and user interaction data. Catch-Live provides viewers with an overview of the stream along with summaries of highlight moments with multiple levels of detail in a readable format. Results from deployments of three streams with 67 viewers show that CatchLive helps viewers grasp the overview of the stream, identify important moments, and stay engaged. Our fndings provide insights into designing summarizations of live streams refecting their characteristics.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>CCS CONCEPTS</head><p>• Human-centered computing → Interactive systems and tools.</p></div>
+			</abstract>
+		</profileDesc>
+	</teiHeader>
+	<text xml:lang="en">
+		<body>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>ABSTRACT</head><p>Live streams usually last several hours with many viewers joining in the middle. Viewers who join in the middle often want to understand what has happened in the stream. However, catching up with the earlier parts is challenging because it is difcult to know which parts are important in the long, unedited stream while also</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="1">INTRODUCTION</head><p>Live streams attract viewers with their synchronous and interactive watching experience. The real-time interaction between the streamer and the viewers allows efective communication and creates a sense of connection <ref type="bibr">[10]</ref>. Due to such unique benefts, more and more types of content-such as gaming, drawing, programming, and language learning <ref type="bibr" target="#b6">[7,</ref><ref type="bibr">10,</ref><ref type="bibr" target="#b9">12,</ref><ref type="bibr">15,</ref><ref type="bibr" target="#b13">16,</ref><ref type="bibr">24,</ref><ref type="bibr" target="#b31">36,</ref><ref type="bibr" target="#b36">41,</ref><ref type="bibr" target="#b40">46]</ref>-are being live streamed. Compared to pre-recorded and edited videos, live streams tend to be longer, lasting several hours <ref type="bibr" target="#b6">[7,</ref><ref type="bibr">10,</ref><ref type="bibr">15,</ref><ref type="bibr" target="#b31">36]</ref>. The long and real-time nature of live streams means that many viewers join in the middle of the streams.</p><p>Viewers who join in the middle of an ongoing stream may get lost <ref type="bibr" target="#b2">[3,</ref><ref type="bibr" target="#b24">28]</ref>. Since they have little context about the previous content, they may fail to understand what the streamer is talking about: for instance, they might not realize which step of the recipe the cooking stream is showing or which mission the gamer is currently playing in a game-playing stream. Viewers may also feel disengaged when they are unable to understand the chat messages from other viewers.</p><p>Catching up with the previous parts of the stream is challenging because it is difcult to navigate through long, unedited videos <ref type="bibr" target="#b7">[9,</ref><ref type="bibr" target="#b24">28]</ref>. Watching the previous parts is even more challenging when viewers are trying to keep up with the ongoing stream at the same time. To identify the current practices and challenges of catching up in live streams, we conducted a series of interviews with viewers and observed them joining ongoing live streams of various domains. Although there are diferences in needs depending on the live stream genre, we identifed three common high-level needs across them: First, viewers want to get a high-level overview of the previously covered content, a guide to what was covered when. Second, viewers want diferent levels of detail about the previous parts depending on the topics or what is being covered currently. Some viewers want more detail on certain topics, while others want to see an entire history of the live stream in full detail when the current stream gets less intense. Lastly, viewers want to absorb all this information with minimal interruption to the current stream.</p><p>To address these challenges, we present CatchLive, a system that provides a real-time summarization of an ongoing live stream (Figure <ref type="figure" target="#fig_0">1</ref>). CatchLive provides two types of summaries: <ref type="bibr" target="#b0">(1)</ref> an overview of the stream that segments the stream into multiple high-level sections, and (2) a summary of highlights for each section. The highlights are presented in multiple levels of detail, and presented in a familiar chat format that is easy to read with minimal interruption.</p><p>We developed two core algorithms for the two types of summaries. First, we propose a real-time, online segmentation algorithm that partitions the stream into meaningful sections as the stream progresses. Second, we identify highlight moments for each of the sections by adopting an existing peak-detection algorithm <ref type="bibr" target="#b0">[1]</ref>. These algorithms leverage both the stream content and the user interaction data. From the stream content, we extract visual changes in the screen, transitional cues, keywords, and breaks from the transcript. From user interaction data, we utilize the chat dynamics, keywords from the chat, "likes" on chat messages, and sharing of the stream content through snapshots (similar to Snapstream <ref type="bibr" target="#b45">[51]</ref>). These user interactions serve dual purposes: <ref type="bibr" target="#b0">(1)</ref> to increase viewer engagement through active participation, and (2) to provide an estimate of viewer engagement as a useful signal for summarizations.</p><p>We evaluated our online segmentation algorithm with seven streams from diferent genres. Results show that our algorithm can produce comparable results to ground-truth segmentations provided by either the streamer or the viewers, but diferent genres of streams require diferent weights on each type of stream or interaction data, depending on the characteristics of the stream.</p><p>We deployed CatchLive in three diferent genres of live streams: information sharing, cooking, and gaming streams. We observed that CatchLive helped participants grasp the overview of the stream, identify important moments, and stay engaged. We also learned that participants use summarizations in diferent ways for diferent genres of streams. These observations provided insights into how to design live stream summarizations that refect each stream's characteristics.</p><p>Finally, we evaluated CatchLive in more detail with the gaming stream through a comparative study with a baseline interface, and observed that viewers using CatchLive could engage more actively in the stream, compared to viewers who did not use CatchLive.</p><p>The primary contributions of this paper are:</p><p>• Insights into the unique challenges that viewers face when they join ongoing live streams. • A system that provides an overview summary and highlights of a live stream in real-time for viewers who join in the middle. • Results from live deployments that show how viewers use and beneft from live stream summarizations. • Design implications on live stream summarizations that refect the stream's characteristics.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2">RELATED WORK</head><p>Our paper presents an interactive system that summarizes various types of live streaming. We build upon three areas of research: video summarization and highlight generation, live stream summarization, and live streaming interaction.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.1">Video Summarization and Highlight Generation Techniques</head><p>Video summarization has been a subject of rich prior work. Many approaches use machine learning techniques to create highlights and summaries from videos by utilizing the content itself, such as visual or audio elements of the videos <ref type="bibr" target="#b3">[4,</ref><ref type="bibr" target="#b4">5,</ref><ref type="bibr" target="#b11">14,</ref><ref type="bibr" target="#b34">39]</ref>, or their metadata, such as the length and the title of the video <ref type="bibr" target="#b38">[43,</ref><ref type="bibr" target="#b44">50]</ref>. For example, Xiong et al. <ref type="bibr" target="#b44">[50]</ref> presented a technique that learns to detect highlights in videos by training on shorter, user-generated video segments. Similarly, TVSum <ref type="bibr" target="#b38">[43]</ref> fnds visually important moments in videos by selecting shots that are most relevant to the video title. A diferent approach is to apply crowdsourcing techniques to generate summaries. Several learnersourcing approaches are proposed to elicit learners' natural motivations and interactions to provide meaningful content of the video. Lecturescape <ref type="bibr" target="#b19">[22]</ref> identifes points of importance and confusion in lecture videos from user interaction data. ToolScape <ref type="bibr" target="#b20">[23]</ref> suggests a crowdsourcing workfow to produce step-by-step information in how-to videos. Similarly, ConceptScape <ref type="bibr" target="#b22">[26]</ref> allows viewers to collaboratively create a concept map of lecture videos. Other systems employ a mixed-initiative approach. For example, VideoDigests <ref type="bibr" target="#b29">[34]</ref> combines algorithmic segmentation with crowdsourced section summaries <ref type="bibr" target="#b29">[34]</ref>, and ElasticPlay <ref type="bibr" target="#b18">[21]</ref> allows users to interactively control the length of summarized videos. We use an algorithmic approach that leverages user interaction data to segment the video and extract highlights in real-time as the live stream is happening.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.2">Live Stream Summarization Techniques</head><p>Live streams are unedited displays of ongoing events. A number of techniques have been proposed to summarize live events by analyzing messages posted on microblogging services <ref type="bibr" target="#b16">[19,</ref><ref type="bibr" target="#b26">30,</ref><ref type="bibr" target="#b33">38]</ref>. In the context of live streaming a video, several methods focused on summarizing live streams after the fact by creating a table of contents by temporally segmenting the video <ref type="bibr" target="#b7">[9]</ref>, or generating highlights of the video by leveraging user chat messages <ref type="bibr" target="#b8">[11,</ref><ref type="bibr" target="#b15">18]</ref> or audio-visual analysis <ref type="bibr">[32]</ref>.</p><p>A line of research has investigated generating summaries of live streams in real-time. Miller et al. <ref type="bibr" target="#b28">[33]</ref> proposed a chat design that allows users to see important messages among the food of chat messages. It controls the messages shown to users by grouping viewers and selecting salient messages through upvoting. Targeting more specifc genres of streams, Helpstone <ref type="bibr" target="#b21">[25]</ref> allows viewers to check previous game-playing information such as actions done or cards used in live streams of the game Hearthstone. The most similar work to ours is StreamWiki <ref type="bibr" target="#b24">[28]</ref>, which allows viewers and moderators to generate a summary document of knowledgesharing live streams in real-time by writing summaries, adding comments, and voting on useful comments.</p><p>Similar to previous approaches, our work also leverages voting on chat messages not only to identify important messages but also to identify highlight moments of the stream. In addition to identifying highlights, our system provides an overview of the stream. While previous work focused on specifc genres of live streams (e.g., game <ref type="bibr" target="#b21">[25]</ref> or knowledge-sharing <ref type="bibr" target="#b24">[28]</ref>) to provide an overview, we propose a general-purpose system that can be adapted to diferent genres of live streams. To do so, we propose an automatic algorithm that leverages viewers' natural interactions to generate the summary in real-time.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.3">Improving Live Streaming Interaction</head><p>A key aspect of live streams is the direct and synchronous interaction between viewers and streamers, which opens up vast possibilities for diverse forms of interaction. In their early work, Isaac et al. <ref type="bibr" target="#b17">[20]</ref> studied the challenges of audience interaction in live broadcast presentations. More recently, Pfeil et al. <ref type="bibr" target="#b32">[37]</ref> surveyed research articles about live-streaming telepresence and argued that it is important to understand the dynamics of the relationship between all parties involved. Several systems have been proposed to facilitate interaction between the streamer and viewers in various genres of live streams such as visual art <ref type="bibr" target="#b25">[29,</ref><ref type="bibr" target="#b45">51]</ref>, video games <ref type="bibr" target="#b9">[12,</ref><ref type="bibr">24,</ref><ref type="bibr" target="#b21">25]</ref> and online learning [2, <ref type="bibr" target="#b6">7,</ref><ref type="bibr">15,</ref><ref type="bibr" target="#b14">17]</ref>. These systems introduced multi-modal tools to improve live stream interaction such as sharing snapshots for visual arts <ref type="bibr" target="#b45">[51]</ref> or text, audio, video, image, and stickers for language learning [2]. In the context of live streamed audience participation games (APGs), viewers can decide how scenes should proceed by voting <ref type="bibr">[24]</ref> or suggesting hints to streamers by drawing on the video stream <ref type="bibr" target="#b21">[25]</ref>. Since understanding the context is important for viewers to participate in APGs, a game tutorial is provided in the audience participation interface <ref type="bibr" target="#b9">[12]</ref> or game-playing information such as actions performed or cards used is shown to late-joining viewers, allowing them to get an overview of the current match <ref type="bibr" target="#b21">[25]</ref>. Similarly, our work aims to help viewers understand the content of the ongoing stream so that they can actively participate in the stream.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3">FORMATIVE STUDY</head><p>We conducted a series of semi-structured interviews to learn about what viewers do and what challenges they encounter when they join a live stream in the middle. We recruited 10 viewers from our academic institution, who watch live streams regularly at least once a week (Table <ref type="table">1</ref>). We asked about their previous experiences of joining a stream in the middle and trying to catch up. Additionally, we conducted a think-aloud study with four of the participants (P 1 -P 4 ), where they watched two diferent genres of live streams (instructional and entertainment) after joining in the middle. We observed their behaviors and recorded their thought processes. Below we summarize our key fndings.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.1">Current Practices and Challenges of Catching up in Live Streams</head><p>People join ongoing live streams for various reasons. For instance, they join an interesting stream that they come across, without knowing exactly when the stream started. P 2 mentioned that she follows a star on Instagram but she does not always get a notifcation when the live talks start. So, she usually discovers them later and joins in the middle. For scheduled live streams such as online classes or sports events, viewers often miss the earlier parts because of schedule conficts (P 3 , P 4 ). We observed three main ways that viewers try to catch up with an ongoing live stream:</p><p>(1) Reading chat messages: Upon joining the stream, all of the think-aloud study participants immediately scanned through the chat messages. Chat messages can be a helpful source of information for instructional live streams. P 4 said that when she joins an instructional live stream, she usually checks the chat frst to see if there are any important announcements or notes she missed. However, chat messages are less helpful in entertainment streams (P 3 , P 4 ). P 4 mentioned that chats are not as informative because there are too many emotional reactions, which make it difcult to identify informational messages relevant to the content <ref type="bibr" target="#b24">[28,</ref><ref type="bibr" target="#b40">46]</ref>.  <ref type="table">1</ref>: The types of live stream each participant watches, how frequently they watch live streams, and the streams they joined for the think-aloud study.</p><p>Similarly, P 3 mentioned that there are simply too many chat messages and that they are hard to understand, especially when they contain slang words from a particular community.</p><p>(2) Asking others in the chat: Some viewers ask in the chat when there is something they do not understand. P 5 mentioned that in such cases, she can grasp the context easily because other viewers summarize what had happened before. However, none of the thinkaloud study participants asked in the chat. P 1 , P 3−4 were hesitant to ask for help in the chat because they were afraid to interrupt the current stream, similar to previous fndings <ref type="bibr" target="#b24">[28]</ref>. Sometimes viewers ask a question, but the question is left unanswered, or it gets buried in other messages.</p><p>(3) Rewinding the video: Perhaps surprisingly, only one (P 4 ) out of four think-aloud study participants rewound the video, which however did not provide any useful information that helped in understanding the ongoing stream. When participants were asked why they did not rewind the video, they said they do not want to miss the current parts and that it is hard to locate the important or interesting parts, especially in long streams (P 1 , P 2 , P 3 ). However, P 2 mentioned that in instructional streams, if the goal is to only complete the tutorial content, she would rewind the video and follow the stream asynchronously at the expense of missing out on real-time interaction.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.2">Needs for Catching up in Live Streams</head><p>We asked participants what information they would fnd useful when joining a live stream in the middle. From the analysis of the interviews and observations, we identifed emerging themes of needs across two types of live streams: Instructional and Entertaining live streams. Although there were subtle diferences between the two types, the high-level needs were shared.</p><p>(1) Overview of the stream: The frst thing that viewers look for is an overview of the stream, such as what was covered when. For live streams that deliver instructional content, viewers want to know a step-by-step, sequential overview of the stream. P8 said she would like to get the step information in yoga live streams so that she can know whether the step she wants to see has already been covered. P4 said that she wants to know which topic has been covered in an educational live stream so that she can better understand the current part.</p><p>Similarly, viewers of entertainment live streams such as games also want to know the overall fow of the stream (P8, P9, P10). However, they are more concerned about the list of subtopics covered in the stream than the sequence or structure of those content. Unlike instructional streams, entertaining streams are unplanned or deviate from the original plan. P3 said, for this reason, a title or description provided is not sufcient to understand the overall stream. Knowing which subtopics were actually covered in the stream can help viewers better engage with the stream.</p><p>(2) Diferent levels of detail depending on the content and the current context: Once viewers get the overview of the stream, they seek detailed information about parts they are interested in. In instructional streams, viewers look for moments where an important concept or terminology is introduced (P2, P4). The amount of detail viewers want difers depending on the content. P1 mentioned that, in a lecture stream, she wants to watch in detail the beginning section, where the instructor makes announcements, but not the other parts. P2 also said that she prefers to skip the parts that are not important.</p><p>For entertaining live streams, viewers like to see highlight moments that other viewers enjoyed, to share the same experience and to be engaged with the community (P2, P5, P6, P8, P9). P5 mentioned that she would like to see highlights of the previous parts not only as soon as she joins but also when the stream gets boring or less intense. This implies that the amount of detail needed difers depending on what is being covered in the current moment as well.</p><p>(3) Catching up with minimal interruption to the current stream: As real-time interaction is an important factor in live streams, many viewers value watching the current moment of the stream; catching up with the previous parts could distract them from the current stream. P 3 commented that when watching sports games, he tries to catch up through an online community frst before joining the stream so that he can fully enjoy the real-time stream and not miss out on key events. P 4 mentioned that she does not like to rewind the stream unless it is necessary because it makes her miss the current content. Minimizing interruption to the current stream is an important factor when providing summaries in real-time. </p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.3">Design Goals</head><p>We aimed to design a system that supports the high-level needs applicable to general genres of streams. We wanted to frst understand how such a system could facilitate the viewing experience for diferent stream genres, and then further identify detailed needs per genre. Based on the observations, we formed the following three design goals for our system.</p><p>• G1: Provide an overall structure of the stream so that viewers can understand the current content with the overall context in mind. • G2: Provide summaries with multiple levels of detail so that viewers can choose how much detail they want to see depending on their needs. • G3: Help viewers catch up on previous parts with minimal interruption to the current stream.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4">CATCHLIVE INTERFACE</head><p>Based on the three design goals, we designed CatchLive, a system that provides real-time summarization of live streams to help viewers who join in the middle catch up on content they missed (Figure <ref type="figure" target="#fig_0">1</ref>). CatchLive presents an overall structure of the stream by segmenting the live stream into high-level sections (G1) (Figure <ref type="figure" target="#fig_10">1a-b</ref>). For each section, it also provides a summary of highlight moments (Figure <ref type="figure" target="#fig_10">1c-f</ref>). The highlights are accessible on-demand, such that viewers can see more or less detail depending on their needs (G2). We present the highlights in a readable chat format so that users can skim them with minimal interruption to the current stream (G3). This section describes the CatchLive interface in detail, while the next section explains the algorithms behind it.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.1">Timeline Information of the Stream</head><p>When viewers join an ongoing stream in CatchLive, they see a timeline that segments the stream into high-level sections up to the current point. For example, in Figure <ref type="figure" target="#fig_10">1a</ref>, the timeline shows seven diferent sections. Each section represents a coherent segment of the stream such as a single step in a tutorial or a subtopic that was covered in a talk. Hovering over a section in the timeline reveals a representative snapshot and several keywords from the section, with time information (Figure <ref type="figure" target="#fig_10">1b</ref>). By skimming over the sections in the timeline, users can quickly grasp the overall structure of the previous content in the stream. Users can see the same section information at once in a vertical view in the Highlights tab, which we describe in the next section (Figure <ref type="figure" target="#fig_1">2a</ref>).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.2">Section Highlights with Multiple Levels of Detail</head><p>Each section in the timeline contains several highlights, color-coded in light purple (Figure <ref type="figure" target="#fig_10">1c</ref>). If a user is interested in fnding out more about those moments, they can view more detail in the Highlights tab (Figure <ref type="figure" target="#fig_10">1d</ref>). Initially, the Highlights tab is identical to the horizontal timeline but in the vertical form: it shows a segmented Users can also see other viewers' chat messages of the highlight moments by clicking on the chat icon (Figure <ref type="figure" target="#fig_1">2g</ref>). More Highlights reveals the next most important highlight moments from the section. We visualized the highlights like chat messages between the streamer (snapshots and transcripts) and viewers (chats) based on our observation that people rely on chat messages as a quick way to review previous material with minimal disruption.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.3">Annotating and Sharing Moments from the Stream</head><p>In addition to conventional chat messaging, CatchLive enables two more ways for users to annotate and share interesting content in the stream. First, similar to Snapstream <ref type="bibr" target="#b45">[51]</ref>, users can take a snapshot of the stream and share it in the chat. When the user takes a snapshot by clicking on the camera button, a screenshot of the moment and the most recent sentence from the transcript is captured (Figure <ref type="figure" target="#fig_2">3</ref>-left). Users can edit the transcript or add their own message. Second, users can "like" other viewers' or streamers' messages (Figure <ref type="figure" target="#fig_2">3</ref>-right).</p><p>We expect that while such interactions can help users better engage with the stream <ref type="bibr" target="#b45">[51]</ref>, they also provide meaningful signals for summarization. For example, a burst of shared snapshots or transcript sentences may indicate an important or interesting moment in the stream. A chat message with multiple likes may imply that the message accurately describes the current stream or efectively captures viewer sentiment at that moment. Section 5 describes in detail how we leverage these user interaction data in the segmentation and highlight detection algorithms.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.4">Implementation</head><p>We implemented CatchLive using React.js, HTML, and CSS for the front-end web interface, and Node.js and Firebase for the backend server. CatchLive embeds the streams of YouTube Live videos through its API <ref type="bibr" target="#b47">[53]</ref>. To enable sharing the stream content in the chat, we retrieve the video manifest URL using the youtube-dl library [54] and take a screenshot using FFmpeg <ref type="bibr">[8]</ref>. We use the MDN Web Speech API [31] for real-time transcription of streams. The client and the server communicate with each other using socket.io <ref type="bibr" target="#b37">[42]</ref> to transmit data such as timeline and highlights information. </p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5">ALGORITHMS</head><p>We develop two core algorithms for CatchLive: (1) a real-time, online segmentation algorithm that partitions the stream into meaningful sections as the stream progresses, and (2) a highlights detection algorithm that extracts important moments from each section.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.1">Online Segmentation Algorithm</head><p>We propose an online segmentation algorithm that segments a stream into sections that cover similar topics in real-time. Our algorithm frst identifes all section boundary candidates within a time frame, scores how probable each candidate is to be a section boundary, and selects the highest score boundary. The process iterates once the current portion (i.e., from the last identifed boundary to the current point) exceeds a certain length.</p><p>We set the minimum and maximum length of one segment as 5 and 20 minutes because segments that are either too short or too long can be less useful. The length of a segment also refects the distribution of segment lengths of real live streams used in the preliminary evaluation (Table <ref type="table" target="#tab_5">7</ref>, average: 14.3 min) and creative streams (average: 10.5 min) <ref type="bibr" target="#b7">[9]</ref>. Then, we consider the portion of the stream within the time frame of {last identifed boundary + minimum length of a segment} to {last identifed boundary + maximum length of a segment}. Within this range, we identify transcript regions, which are composed of one or more sentences that Google Speech-to-Text API <ref type="bibr" target="#b10">[13]</ref> identifes as one unit of speech. Then, each interval between the end of a transcript region and the start of the next transcript region is identifed as a candidate boundary region (Figure <ref type="figure" target="#fig_3">4</ref>). We only consider breaks between transcript regions since cutting in between the streamer's sentence would be unnatural. We compute a score for each candidate boundary region, and the endpoint of the interval with the highest score is selected as the fnal boundary. The above process iterates once the maximum length of a segment (i.e., 20 minutes) has passed after the last identifed boundary.</p><p>Our method is similar to Fraser et al. 's method, which segments archives of creative live streams <ref type="bibr" target="#b7">[9]</ref>. While Fraser et al. segments an entire live stream after-the-fact, taking boundary candidates from the entire stream, our algorithm works in real-time as the stream is happening by considering boundary candidates from a certain time frame and scoring only the breaks between transcript regions or two adjacent transcript regions of a break. Also, while Fraser et al. take into account software application-specifc factors in the scoring function, we incorporate generic factors including user interaction data.</p><p>For each candidate boundary region, we calculate a score with the following fve factors:</p><p>(1) Visual diference of scenes: A dramatic visual change might indicate that a new topic was introduced: for example, an ending scene after a round of game ends, or a topic slide in slidebased videos. We convert the snapshots taken from two adjacent transcript regions (if any) to grayscale and compute the Structural Similarity Index (SSIM) <ref type="bibr" target="#b43">[49]</ref> between the two frames. Then, we give higher scores if there are more visual diferences between two adjacent transcript regions. The visual diference score between two adjacent transcript regions A and B is calculated as</p><formula xml:id="formula_0">= 1 − average ∀a ∈A,∀b ∈B SSIM(a, b)<label>(1) S Visual</label></formula><p>(2) Keywords from the transcript and the chat: When the topic changes, the streamer might talk about diferent content, which will result in diferent keyword distributions in transcripts. Viewers' reactions in the chat might have shifted as well. To extract the keywords from the transcript and the chat messages, we frst exclude stopwords and then take out the 10 most frequent words. We extract the keywords for two adjacent transcript regions. We give higher scores if there are more diferences in the keyword distribution. For keyword sets P and Q, the keyword score is calculated as</p><formula xml:id="formula_1">S Keyword = 1 − n(P ∩ Q)/n(P ∪ Q)<label>(2)</label></formula><p>(3) Transitional cues: Transitional cues spoken by a streamer often indicate the start of a new topic. We favor ending cues such as "that's all", "done", and "therefore" to be close to the end of a sentence and starting cues such as "start" and "next" to be close to the start of a sentence. We use eight cue words in total, derived from previous work that leverages cue words to identify transitions <ref type="bibr" target="#b7">[9,</ref><ref type="bibr" target="#b29">34]</ref>. Let two adjacent transcript regions be A and B (i.e., prior-transcript region to the candidate boundary region: A, posttranscript region to the candidate boundary region: B). We give more scores if ending cues are close to the end of a sentence in A and if starting cues are close to the start of a sentence in B. The transition score of the candidate is calculated as </p><formula xml:id="formula_2">Õ S Transition = indexOf(w, A)/|A| w ∈ending cues Õ (3) + 1 − indexOf(w,</formula><formula xml:id="formula_3">= (e − s)/max(d 1 , d 2 , ...d n ) (5) S Duration</formula><p>The fnal score of a candidate boundary region is defned as the weighted sum of each score:</p><formula xml:id="formula_4">S Final = C Visual × S Visual + C Keyword × S Keyword +C Transition × S Transition + C Chat × S Chat + C Duration × S Duration (6)</formula><p>We report the optimal weights of each factor analyzed by stream types in Section 6.2. The endpoint of a boundary with the highest score among all candidate boundary regions is identifed as the next boundary of a section. We identify a snapshot with the most likes (or the frst one to break ties) as a representative snapshot, and six keywords extracted from the transcripts and chat messages (three each) as representative keywords of a section.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.2">Highlights Detection Algorithm</head><p>The highlights detection algorithm detects peak moments within each section using viewers' interaction data: chat messaging, likes, and sharing of stream content through snapshots. We assume that such interaction data is a good indicator of highlight moments. For example, chat messages can rapidly increase when something interesting happens in the stream. Viewers can also express interest in a particular moment by sharing snapshots or liking others' messages. To account for cases where user interaction is sparse, we implemented a bot that automatically shares snapshots when none were shared for a certain period (a minute in our implementation). Since the snapshots shared by the bot may not always be important (e.g., there may not be any highlights happening for a long period of time), our algorithm only considers snapshots that were liked by at least one human user (Section 5.2). To detect highlights, we divide a section into one-minute intervals and calculate a score for each interval. We chose one minute to account for possible lags in live streams and to ensure enough time for users to identify a moment while keeping it short to only contain important moments in a 5 to 20-minute-long section. The score is calculated as follows:</p><p>(1) We give higher scores when there are more chat messages, including snapshots. (2) Snapshots are weighed three times as much as a plain chat message, as they directly indicate interesting moments of the stream. For snapshots that the bot shared, only the ones that are liked by at least one human user are considered. (3) The number of likes gives weights to the message, as it represents the viewers' level of interest.</p><p>(4) The number of viewers in live streams may fuctuate during the stream. To ensure highlights are detected robustly even when there is a low number of viewers, we divide the overall score with the log of the number of viewers at each interval. This is to make sure that highlights are distributed more evenly.</p><p>The score for each chat message is computed as</p><formula xml:id="formula_5">(a + N /M)/logM (<label>7</label></formula><formula xml:id="formula_6">)</formula><p>where a is the weight of the message (a=1 if the message is a plain message and a=3 if it is a snapshot; the values are empirically determined.), N is the number of likes on the message, and M is the number of viewers. The total score of an interval is the sum of the chat scores within the interval.</p><p>Once the scores for each interval are computed, we determine the peak using the peak detection algorithm <ref type="bibr" target="#b0">[1]</ref>. If there are consecutive peak intervals, we merge them into one highlight moment. The top 10 peaks are computed as highlights in every section. For the last section where the end time is not yet defned, highlights are updated every fve minutes.</p><p>To create an expandable summary (G2), we frst show two top highlight moments for each section. We show a representative snapshot, transcript, and chat message for each highlight moment, selected by the number of likes. If a user requests to see more highlights, we show the next top highlight moment. If a user requests to see all details of a certain highlight, we show at most fve snapshots, transcripts, and chat messages, respectively, within the moment in chronological order.</p><p>We did not evaluate the performance of the highlights detection algorithm against ground truth because typical live streams only contain chat messages and no additional interactions that our algorithm takes into account. Instead, we report some of the outcomes of the algorithm from the user studies in Section 7.2.1.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="6">PRELIMINARY EVALUATION OF THE ONLINE SEGMENTATION ALGORITHM</head><p>We evaluated the accuracy of our online segmentation through comparison with the ground truth segmentation data and identifed optimal weights of the fve data factors (section 5.1) for diferent genres of streams. Table 2 lists the seven live streams that we used for the test.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="6.1">Method</head><p>We collected data from seven publicly available live streams, which had ground truth segment information that was either posted by the streamer (in the video description section) or by a viewer (in the comment section). We downloaded the video using Streamlink [44] and transcribed it using the Google Speech-to-Text API <ref type="bibr" target="#b10">[13]</ref>. We also crawled the chat data using the Pytchat library <ref type="bibr" target="#b39">[45]</ref> for videos from YouTube and the Twitch API <ref type="bibr" target="#b41">[47]</ref> for videos from Twitch. To simulate the default system behavior where snapshots are only taken by the bot, we took a snapshot at every 1-minute interval using FFmpeg <ref type="bibr">[8]</ref>. The snapshots taken were used in the algorithm for visual comparisons (Section 5.1).</p><p>Although we used the data from the entire stream, the data is processed sequentially online, such that the output of the algorithm 1 youtu.be/49_7wGYE0pM 2 youtu.be/UPb9YbKyHuc 3 youtu.be/eXDDrNdLZAc 4 youtu.be/H89hKw06iWs 5 youtu.be/TEEvVDfJw8A 6 youtu.be/XczTiRf6_XU 7 youtu.be/1OK9GWRHL7w</p><p>Table 2: Characteristics of the seven live streams used in the preliminary evaluation of the online segmentation algorithm.</p><p>The audio percentage is computed by summing up the length of transcript regions divided by the total length of a video.</p><p>Figure <ref type="figure" target="#fig_5">5</ref>: Visualization of the method used to calculate the F1 scores. With the video time as the x-axis, we considered a predicted boundary as a true positive if it is within the threshold distance from a ground truth boundary.</p><p>is the same as when applied in real-time with partial data. We evaluated the accuracy of the algorithm's output by calculating the F1 score with the ground truth segment information. Since even ground truth segment boundaries can refect approximate times, and small time diferences are less important for the overall segmentation quality, we used a threshold to determine whether a predicted boundary is correct. A predicted boundary was considered as a true positive if it was within a threshold distance from a ground truth boundary. We tested with two threshold values (details below). Also, since some segments may lie outside the 5-and 20-minute boundary range, we tested the algorithm with the actual minimum and maximum lengths for each stream in addition to the 5-and 20-minute boundaries. Lastly, we measured the accuracy with both uniform weights and optimal weights for the fve factors the algorithm uses. The optimal weight is the weight with the highest accuracy. This was computed with an exhaustive search with each weight ranging from 1 to 5, excluding overlapping ratios.</p><p>To summarize, we report the accuracy of the algorithm for the following conditions: </p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="6.2">Results</head><p>With the optimal weight distribution, the average accuracy reached 67.6% (low-threshold) and 75.9% (high-threshold) with 5 and 20 minutes as the minimum and maximum lengths of a segment (standard). With the minimum and maximum length set as that of ground truths (minmax), the average accuracy increased to 78.6% (low-threshold) and 87.2% (high-threshold). In particular, the accuracy for the Minu video doubled (50% → 100%) since the average length of its segments is about 40 minutes. We report the F1 scores of the results in 8 (=2*2*2) diferent conditions in Appendix A.2. The algorithm with optimal weights (optimal-coeff) yielded much higher accuracy than the baseline (base-coeff), by increasing 25 percentage points on average. For example, the accuracy on the Google video increased from 52.2% to 81.8% in standard &amp; low-threshold, and the Archade video reached 92.9% from 66.7% in standard &amp; high-threshold. This implies that assigning proper weights to each of the fve factors by considering the type and characteristics of the stream is crucial. We report the optimal weight distribution for each stream in Appendix A.3. Table <ref type="table">4</ref>: The number of viewers that participated in the study. The time is in minutes (e.g., 0:20 means 20 minutes). We conducted an additional comparative study for the Game stream (Section 8).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Stock</head></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="7">USER EVALUATION 1 -CATCHLIVE FOR DIFFERENT GENRES OF STREAMS</head><p>Since CatchLive's main features are designed for live stream viewers, we evaluated our system with viewers only. We conducted two separate user studies. The frst study examined how participants use CatchLive to watch diferent genres of live streams. The second study compared CatchLive with a baseline interface for participants watching a gaming stream. This section describes the frst study, and the following section describes the comparative study.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="7.1">Methodology</head><p>Stream Information: We used three live streams: (1) Stock: podcast-style information sharing about the stock market, (2) Cooking: sharing the cooking process of a pasta dish, and (3) Game: playing a game called Animal Crossing (Table <ref type="table" target="#tab_3">3</ref>) for user studies. The Stock stream is about two stocks experts talking and sharing news about stocks. The information is delivered verbally with minimal visual changes to the scene. The Cooking stream shows a professional chef teaching how to cook a pasta dish. Information is delivered both verbally and visually with substantial changes in the scene at each step. The Game stream is about a streamer playing Animal Crossing. It does not cover informational content but is more for entertainment, with frequent visual changes.</p><p>We chose these three streams to see how our approach can be generalized against streams with diferent characteristics. The streams difer in the following major attributes: content type, content format, and stream pace. (1) Content type is procedural if the stream contains procedural knowledge, and unstructured if the stream covers relatively less coherent sub-topics. (2) Content format is visual if the information is mostly delivered visually, and audial if there are fewer visual and the information is mostly delivered verbally. (3) Stream pace is slow if the stream has many moments, and fast if the information is being delivered at a fast pace (either visually or verbally). We streams that have diferent characteristics for each attribute and topics that people might be interested in. While the three streams are not meant to be representative of all genres of streams, we believe they capture diverse combinations of the three major attributes introduced above (Table <ref type="table" target="#tab_3">3</ref>). We obtained the streamers' permission to use the streams in the study. To recreate the live stream experience, we re-streamed the recorded video and loaded the existing chat data in real-time. We confgured optimal weights for the online segmentation algorithm according to stream type by referring to Table 10. All the sections and highlights information were computed in real-time during the replay. Participants: We recruited participants with a prior interest in the stream topic through postings on online community websites of universities. We recruited 16 (11 male, 5 female, mean age 29.7), 18 (8 male, 10 female, mean age 24), and 16 (9 male, 7 female, mean age 23.8) participants for the Stock, Cooking, and Game streams, respectively. of the participants had watched the particular stream before. We divided the participants of each stream into two groups. One group joined the stream after one-third of the stream had played, and the other after two-thirds of the stream. We distributed the number of participants equally for each group except for the Stock stream (Table <ref type="table">4</ref>). We put more participants in the second group for the Stock stream because the frst 20 minutes of We can see that it identifed meaningful sections such as greeting, ingredient introduction, cooking, and tasting. Although it does not provide labels for each section, the representative snapshots and keywords allowed participants to topic of the stream. *Description was not provided to participants.</p><p>the stream covered relatively little content. We refer to participants as Vn-{stream name} (e.g., V16-stock).</p><p>Procedure: We frst gave a tutorial of CatchLive to the participants via video conferencing. Then, viewers were asked to join the stream in the middle using CatchLive. They were asked to watch the stream for 20 (Stock) or (Cooking, Game) minutes. This meant there was no between the two groups of participants. Participants were informed that they were watching a recorded live stream, such that they may not get responses from recorded messages or the streamer. After the viewers watched the stream, we conducted an online survey about their experience. The survey was composed of 5-point Likert scale questions and open-ended questions, regarding the understanding and engagement with the stream and the usefulness of the summary features. Viewers were compensated $10 for their participation in a 50-minute-long study.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="7.2">Findings</head><p>We frst discuss how participants used CatchLive's summary features in general. Then, we analyze how catching up behavior was diferent for each stream's characteristics.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>How participants use CatchLive's summary features.</head><p>Overall, the participants could understand the stream well with the help of the timeline and highlights. They were also engaged with the stream. Below, we describe how each feature in CatchLive helped participants and how participants used them.</p><p>The timeline helped viewers grasp the overview the stream: Table <ref type="table">5</ref> shows example timeline information shown to the users. The timeline segments a whole stream into several sections and provides a representative snapshot, keywords, time information of each section. When asked about in what way the timeline was helpful (if it were), 24 out of 50 participants said that they were able to get brief information on previous parts quickly before they started watching the stream. V14-stock said "I was able to know what specifc topics in stocks the stream is covering by looking at the keywords provided in the timeline, such as 'healthcare' and stock names." V14-cooking said "I was able to understand how the dish was being cooked, in what order. " Knowing the overview of the stream helped participants during the stream as well. Seven participants mentioned that the timeline information helped them decide which parts to watch to get the information they wanted while watching the stream. V7-game said "I could jump back to certain sections by looking at snapshots on the timeline when there was something I couldn't understand. " V12-cooking said "It was easier to go back through the timeline when I could understand the story and empathize with others only if I knew the story covered earlier. " For a 5-point Likert scale question of how much they could understand the overview the stream, the average point was 3.84 (SD=0.98) (Figure <ref type="figure" target="#fig_6">6a</ref>). Highlights helped viewers identify important moments, understand more about the stream, and fll the void in live streams: Each highlight moment is provided with representative snapshots, transcripts, and chat messages. When asked about in what way the highlights were helpful (if it 17 out of 50 participants said they could identify the important moments in the long stream, and 14 participants said they were able to understand more about what had happened. V16-game said "I was able to enjoy the stream by looking at the parts that people were mainly interested in." V15-cooking said "It was nice to see useful chat messages being organized without unrelated ones and keep them like memos." Highlights further helped participants understand more about the unseen parts. V12-game said "I could understand the fow of the game well because it made the order of previous events clear for me. " Moreover, fve participants mentioned that Highlights flled the void of live streams. V16-cooking said "Typical live streams are unedited, so it's easy to get bored when it gets loose. However, the summary feature made me enjoy the stream especially when the streamer was not speaking or something that I'm not interested in was being played. " For a 5-point scale question of how much they could recognize the important parts of the stream, the average point was 3.84 (SD=0.98) (Figure <ref type="figure" target="#fig_6">6b</ref>). We present example highlight moments shown to the participants in Appendix B. The timeline and Highlights allowed viewers to catch up with less interruption compared to rewinding: Participants reported that they could catch up with the previous parts with less interruption using the timeline and highlights when compared to rewinding the video. For a 5-point scale question asking about how less distracting it was to the current stream, the average point was 2.58 (SD=1.5) for rewinding while it was 3.58 (SD=1.28) and 3.54 (SD=1.29) for timeline and highlights, respectively (Mann-Whitney Test, p&lt;0.01, z=2.7 for the timeline and p&lt;0.01, z=2.81 for highlights). More information is needed to fully understand the previcontext: However, participants were asked how much they could understand what had happened prior to joining the stream, the average score was 3.16/5 (SD=1.02), which shows that the information shown to users might have been not enough to fully understand the previous parts (Figure <ref type="figure" target="#fig_6">6f</ref>). Although the timeline and highlights provide useful information as described above, seven participants said that they wish to further rewind the video to get the full details. V18-cooking said "Based on snapshots and keywords, was able to roughly understand when ingredients were introduced and when and what ingredients were added. However, was difcult to grasp the exact contents with the highlight feature alone, such as how it was cooked." Moreover, three participants pointed out that incomplete keywords or transcripts hindered them from grasping the main points. V15-stock said "The system let me know roughly what happened before, but some keywords were too general so it was hard to know what happened exactly. " V10-stock said "The transcript was awkwardly transcribed so it was hard to understand the content. " These fndings suggest how live stream summarizations can be improved, which we elaborate in Section 9.1.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="7.2.2">How catching up behavior difers across the stream characteristics.</head><p>With three diferent stream genres, we could identify that the perceived usefulness of the system difers across stream genres. We describe how characteristic of streams afects users' experiences below. Participants used the timeline in diferent ways: The timeline was used in diferent ways depending on the stream genre. When asked how the timeline was helpful it were), out of 16 participants with the Stock stream answered that it was used to understand what topics were covered in the previous parts. On the other hand, 4 out of 18 participants with the Cooking stream specifcally mentioned how understanding previous parts led to understanding the current topic. V3-cooking said "I could understand how previous parts were connected to the current topic. I could see that the ingredient preparation part was already done and thus cooking was in progress. " This might be because the Cooking stream contains procedural knowledge where each step is connected to adjacent steps. Understanding previous steps and how they are connected would help viewers understand what the current step covers in a big landscape. The highlights were most useful in stream with visual content: The highlights were most useful in the Game stream (3.88/5) while they were least useful in the Stock stream (2.56/5) (Figure In Game stream, 9 out of 16 participants mentioned that the highlights helped them understand the overall storyline of the game and three mentioned that it helped them enjoy the stream by watching previous interesting moments. However, the Stock stream, 4 out of 16 viewers mentioned that the highlights did not provide much useful V13-stock said "the screenshots in highlights almost the same so they didn't provide much useful information. " V10-stock said "I needed to rely on the transcripts but it wasn't perfect. " Since snapshots in the highlights play an important role and allow users to quickly grasp what had happened streams with visual content would beneft more from the highlights in CatchLive. The summary features were distracting in streams with slow pace: While viewers felt less interruption the current stream with our summary features compared to rewinding the stream for all three types of streams, there was a diference in the degree of reported interruption across stream types. Among the three groups, viewers of the Cooking stream reported the least interruption (3.87/5 for not distracting) while viewers of the Game stream felt the most interruption (3.25/5) (Figure <ref type="figure" target="#fig_7">7</ref>). This could be explained by the pace of the streams. The percentage of voice in the audio for each stream was 92.1%, 61.7%, 75.3% for Stock, Cooking, and Game, respectively. Viewers might feel least distracted in the Cooking stream because there was less verbal information shared by the streamer, and the cooking process was shared at a relatively slow pace, as it involved various preparation steps and wait times. On the other hand, viewers might feel most distracted in the Game stream because the visuals changing at a relatively fast pace.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="8">USER EVALUATION 2 -COMPARATIVE STUDY USING THE GAME STREAM</head><p>We conducted a comparative study to evaluate the summary features of the system in more depth, with the Game stream as our target domain. We chose the Game stream as our target domain for the comparative study because the summary features (i.e., the timeline and the highlights) were most useful in the Game stream when averaging the two scores (Figure <ref type="figure" target="#fig_7">7</ref>). We hypothesized that viewers with CatchLive will better understand and engage with the stream. Specifcally:</p><p>• H1: Viewers with CatchLive will have a better understanding of the stream than viewers without it. • H2: Viewers with CatchLive will be more engaged with the stream than viewers without it.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="8.1">Methodology</head><p>Stream Information: We used the same gaming stream from the frst user study.</p><p>Participants: We recruited additional 17 participants as the baseline group (9 male, 8 female, mean age 23.1). The CatchLive group was from the previous user study with 16 participants (9 male, 7 female, mean age 23.8). Note that we used the same results from Section 7 for the CatchLive group and we only added the baseline group. We refer to participants of the baseline group as Vn-gamebase.</p><p>Procedure: study used a between-subject (baseline and CatchLive). The CatchLive group used the full-featured version of CatchLive, while the baseline group used CatchLive without the summary features (i.e., only the chat, "like" and snapshot interactions described in Section 4.3 were enabled). While snapshot capturing and sharing or liking others' chat messages is not currently supported by most existing platforms, we allowed the baseline group to use such interactions to clearly evaluate the efects of summary features. After giving a tutorial on how to use the system, participants joined the stream with the assigned interface. were asked to watch the stream for about 25 minutes using the assigned interface. After the viewers watched the stream, we conducted an online survey with them. The survey was composed of 5-point Likert scale questions and open-ended questions, regarding the understanding and engagement with the stream and the overall experience. For the understanding and engagement-related questions, the same questions used in the frst study were used. We asked seven and three 5-point Likert scale questions regarding understanding and engagement respectively, evaluate the selfreported responses thoroughly from diverse aspects. The survey also included factual recall questions asking about the content of the stream to measure the understanding more accurately. We used the number of chat messages as a measure of engagement in addition to the survey responses. Viewers were compensated with $10 for their participation in a 50-minute-long study.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="8.2">Findings</head><p>We frst asked about the participant's prior knowledge about the topic covered the stream since it could afect their overall understanding of the stream. For a 5-point Likert-scale question, the  mean self-reported knowledge levels were higher in the baseline group (Figure <ref type="figure" target="#fig_8">8a</ref>, 3.31 (SD=1.14) and 4.00 (SD=1.12) for CatchLive and the baseline group, respectively.) the diference was not signifcant (Mann-Whitney test, p=0.101, z=1.639), it should be noted that this might afect the understanding and the overall experience of the stream when comparing two groups.</p><p>8.2.1 H1: Viewers with CatchLive will have a beter understanding of the stream. The average understanding score was higher in the Catch-Live group but there was no signifcant diference between the two groups. We asked seven 5-point Likert-scale questions (1-strongly disagree, 5-strongly agree) regarding the understanding of the stream (Figure <ref type="figure" target="#fig_8">8b-h</ref>). The average score of the questions was higher in the CatchLive group (3.84, SD=0.99) than the baseline (3.69, SD=0.85), but there were no signifcant diferences for all questions (Mann-Whitney Test, p=0.12, z=1.16). Among the questions, the question asking how much they could understand what had happened prior to joining (Figure <ref type="figure" target="#fig_8">8g</ref>) showed the biggest diference between the two groups. The CatchLive group indicated they could understand the previous parts better (3.19, SD=0.49) than the baseline (2.53, SD=0.51) group, although the diference was not statistically signifcant (Mann-Whitney Test, p=0.09, z=1.68). We also asked factual questions regarding the stream content, to accurately estimate viewers' level of understanding. We asked specifc questions about the stream content: (Q1) List the animals that the streamer met. (Q2) List the tools and what the streamer did with the tool. (Q3) List the keywords were covered in the stream other than animals and tools. While the score was higher in the CatchLive group for all the questions, the average number of answers to these questions showed no signifcant diference (Mann-Whitney Test, p=0.44, z=0.16) (Figure <ref type="figure" target="#fig_9">9</ref>-left).</p><p>To summarize, there was no signifcant diference between Catch-Live and the baseline group regarding the level of understanding, for both self-reported measures and recall questions. We believe there are three possible reasons: 1) As people do not try to remember things from games, in the survey which was done after result might not have shown a big diference.</p><p>2) The higher prior knowledge in the baseline group could have also afected the result. 3) The baseline also contained additional features as snapshots and bookmarking messages, which provided them with the opportunity to review the previous content (V2, 14, 15, 17-game-base). V15-game-base said "It was easy to remember the important moments by sharing snapshots, and fltering liked items allowed me to review the previous content. " 8.2.2 H2: Viewers with CatchLive will be more engaged with the stream.</p><p>CatchLive group was more in the stream than the baseline group: We compared the number of chat messages and snapshots the viewers made, assuming that more engaged viewers would leave more messages in the stream. The CatchLive group wrote signifcantly more messages <ref type="bibr">(11.13,</ref><ref type="bibr">SD=8.43)</ref> than the baseline group (1.53, SD=1.31) (Mann-Whitney Test, p&lt;0.01, z=3.20). Also, the CatchLive group shared more snapshots (2.75, SD=0.74) than the baseline group (1.18, SD=0.97) (Mann-Whitney Test, p&lt;0.01, z=2.72) (Figure <ref type="figure" target="#fig_9">9</ref>). also asked three 5-point Likert-scale questions (1-strongly disagree, 5-strongly agree) regarding the engagement the (Figure <ref type="figure" target="#fig_8">8i-k</ref>). The average score of the questions was higher in the CatchLive group (3.94, SD=1.08) than the baseline (3.82, SD=0.84), but there were no signifcant diferences for all questions (Mann-Whitney Test, p=0.34, z=0.96).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="9">DISCUSSION</head><p>In this paper, we CatchLive, a system that summarizes ongoing live streams with stream content and user interaction data. With two user studies, we evaluate CatchLive's efectiveness in terms of understanding and engagement. From the evaluation study with three diferent genres of streams (Section 7), we could see that CatchLive helped participants understand the stream and stay engaged with the stream. From the comparative study with the Game stream (Section 8), we could see that participants with CatchLive were more engaged with the stream than the baseline group, but there was no signifcant diference in their level of understanding. We discussed that the nature of gaming streams could be one of the possible reasons to this. Extending the analysis of the results, we frst discuss how the characteristics of streams should be refected in designing real-time summarizations of live streams. Then, we discuss how we can leverage user interaction in live streams. Finally, we discuss the unique challenges and opportunities in designing real-time summarizations.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="9.1">Refecting Stream Characteristics in Summarization</head><p>9.1.1 Content type. From our studies, we could see that participants perceived usefulness of the timeline diferently depending on the content type. For procedural content such as the Cooking stream, participants found the timeline useful in identifying step information, and understanding the current step in relation to previous steps. When such a timeline, accurate labels of each step beyond the keywords be helpful in order to present the goal of each step more clearly. Also, all steps should be fully covered with proper granularity. V11-cooking said, "It was good to see what was happening overall in the stream, but I felt some information I needed was missing." The step information will be meaningful when all the steps are presented. On the other hand, streams with unstructured content such as the Stock stream might have less clear boundaries when dividing the timeline into multiple sections. Although participants still found the keywords presented in the timeline useful for understanding which concepts had been covered, concrete keywords distinguish a section from others would be helpful.</p><p>9.1.2 Content format. Among the three types of sources through which the highlights are represented (i.e., snapshots, transcripts, and chat messages), snapshots provide information that can be recognized at a glance. Streams with a high portion of visual elements beneft the most from snapshots, allowing users to get a quick overview highlights. Thus, capturing meaningful snapshots that represent certain highlights would be important. Providing short clips of highlights could add more details to a highlight moment. On the other hand, viewers of streams with little visual change throughout the stream had no choice but to heavily on textual information, which requires a lot of user attention. Moreover, ill-transcribed transcripts may exacerbate the problem. Thus, when summarizing less visual or text-heavy streams, the textual information should be provided more accurately and summarized efectively. Predefned keywords, text shortening techniques <ref type="bibr" target="#b30">[35]</ref>, or keywords could be used.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="9.1.3">Stream Pace.</head><p>From our studies, we could see that the pace of the stream afects the participants' perceived degree of interruption from CatchLive's summarization features. Viewers of slow-paced streams such as the Cooking stream felt that they were less distracting, suggesting that more levels of detail could be further provided to fll the idle moments. CatchLive supports multiple levels of detail but it could be extended to the fullest degree (i.e., showing all the transcripts and chat messages) or even providing short clips of the stream. On the other hand, streams with a fast pace such as the Game stream need better ways of providing summarizations in a less distracting way. For this, shorter highlight moments combining multiple sources (visuals, transcripts, and viewers' reactions) into one could be designed.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="9.2">Leveraging User Interaction Data</head><p>Our approach showed the feasibility of leveraging user interaction data for generating summaries of live stream content. User interaction data enhanced the stream by indicating a noticeable moment, which the stream content by itself alone would not have been to capture. They could also capture the stream content that was not explicitly spoken about by the streamer from what users say about the stream in the chat. To leverage the user interaction data to a degree that is helpful for generating a summary, securing large enough and good quality user interaction data is necessary. CatchLive tried to motivate users by introducing interactions they could enjoy such as snapshots and likes. With such features, users could naturally interact with the streamer and other viewers, while providing explicit data that points to salient moments of the stream. Motivating user interaction led users to contribute to generating a summary, which However, user interaction data might contain noise. There could be a case where the chat of-topic comments. Since our approach relies not only on chat messages but also on explicit interactions (e.g., snapshots, likes) and stream content (e.g., keywords in the transcript), we expect undesirable efects could be mitigated. Quality control be introduced such as removing certain words from computation to ensure high quality.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="9.3">Making Use of Active Inputs</head><p>While CatchLive users' natural interactions, live stream summarizations could beneft from users' active input as well. For example, the streamer can designate important terminologies or concepts that will be covered prior to starting a stream, which the system can then use to detect moments when the keywords are introduced and treat them as highlights. For certain genres with a clear structure of what the streamer is going to do such as cooking or lectures, they can set up the timeline information prior to starting a stream, which can be shown in the interface in real-time when the streamer denotes it. Integrating such pre-planned information make the summaries more reliable. Viewers can also give more active inputs. They can identify useful tips by voting on chat or questions and answers that future viewers might fnd useful.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="9.4">Generating Summaries in Real-time</head><p>In providing a summary of live streams in real-time, we faced several constraints when designing the algorithms. For example, the algorithm has to work fast, work with data being collected in realtime while not altering the previous results to maintain consistency. This led us to design the online segmentation algorithm that considers only the two adjacent regions of a break or the break itself, rather than entire blocks of transcripts as in Fraser et al. 's work <ref type="bibr" target="#b7">[9]</ref>. There might be a trade-of between the accuracy and the speed of summary generation. Moreover, there is a delay in live streams when viewers watch the content from the stream source <ref type="bibr" target="#b6">[7,</ref><ref type="bibr" target="#b48">55]</ref>.</p><p>The delay should be taken into account when considering stream content and user interaction together, to secure synchronized data. Although we did not implement further adjustments as our system processed all data sources from a viewer's point of view, it should be carefully considered when designing live stream systems.</p><p>When the time and resources allow it, the live setting has a unique beneft where it can provide real-time feedback to the algorithm and keep improving the quality of the summary. For example, an adaptive segmentation algorithm could be proposed where the algorithm adjusts the weight of the fve factors (i.e., Visual differences, Keywords, Transitional cues, Chat frequency, Duration of a break) by refecting the streamers' corrections. Future techniques could further improve the performance by understanding the challenges and benefts that the live setting brings.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="9.5">Beyond Summarizing Live Streams</head><p>CatchLive aims to generate real-time summaries of live streams so that any viewer who joins in the middle of the stream could beneft from the summaries. Although our work focused on generating summaries in real-time, it can be applied to recorded videos of the streams by using the video content and interaction data. Streamers can also actively edit the outcomes of the algorithms to make the summaries more accurate. Not only the recorded live streams but also general videos can beneft from a similar approach. Timestamped comments can provide additional signals of where the viewers' interests are at <ref type="bibr" target="#b46">[52]</ref> and can be used for generating summaries. The chat-based representation of the summaries can allow users to read the video without having to watch it.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="10">LIMITATIONS AND FUTURE WORK</head><p>Our study mainly focused on exploring how users would use and get help from real-time summarizations in live streams. The study had several limitations. First, we recreated experiences of live streams by streaming the recorded video and loading the existing chat data in real-time. Participants might have felt the absence of the streamers and other viewers, especially when they did not get any feedback on their reactions. Although there was a certain number of real-time users, it might not have been enough to encourage the participants to actively engage in chat messaging. Future work can the proposed techniques in a real live stream context. While CatchLive supports YouTube Live streams, it can be extended to support live streams of other platforms as long as we can the manifest fles that contain the video content. For example, for Twitch videos, we can use twitch-m3u8 <ref type="bibr" target="#b5">[6]</ref> to retrieve the video content. The proposed solution can be also integrated into current live stream platforms by creating extensions such as Twitch extensions <ref type="bibr" target="#b42">[48]</ref> or web browser extensions (e.g., 'Better YouTube Live <ref type="bibr" target="#b23">[27]</ref>', 'YouTube Live Chat Enhancement [40]').</p><p>Second, the summaries in the study were generated only with a group of more than 100 users. Since our system largely relies on user interaction data, securing enough user interaction data would be critical, and it would be worthwhile to investigate how it would work with a smaller number of viewers. Although CatchLive has a bot taking snapshots to secure a substantial amount of interaction data, the quality of the summary could deteriorate in streams with a smaller number of viewers. The dynamics of viewer groups could also afect the summary quality. If the viewer community has developed over multiple sessions and thus evolved be tightly connected, a new viewer would fnd it difcult to catch up through summaries since there might be community-specifc jargon or content. Here, a series of summaries of previous streams generated by CatchLive could be helpful. New catch-up features such as keyword search could be introduced in future systems, to help users understand when and how such a term was introduced. Analyzing how CatchLive works in diferent numbers and dynamics of viewers could lead to more useful insights.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="11">CONCLUSION</head><p>This paper explores providing a real-time summary of live streams, to help viewers who join in the middle of the stream catch up on the previous content. We built CatchLive, a tool that leverages both the stream content and user interaction data to provide a summary of live streams with the timeline and highlights. Our user study demonstrates that CatchLive helps viewers grasp the overview of the stream, identify important moments, and stay engaged. We identify diferent behaviors of using the summary across stream characteristics, providing insights into designing real-time summarizations of live streams. We hope that our work opens up new opportunities for producing and consuming live media content in an engaging and efective way.  <ref type="table">9</ref>: F1 score of the results with the optimal weight of the fve factors (optimal-coeff). We could see that the optimal weight distributions highly related to the characteristics of the stream. In the Suka video which shares information with visuals and verbal explanations, the optimal weights of 'visual change' and 'keywords' were equally high. For the Google video which shares a step-by-step tutorial, the optimal 'duration' and 'transition' weights were high, implying that there were substantial</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>A PRELIMINARY EVALUATION OF THE ONLINE SEGMENTATION ALGORITHM</head></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>A.3 Optimal Weight Distribution for Each Stream</head></div><figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_0"><head>Figure 1 :</head><label>1</label><figDesc>Figure 1: Overview of CatchLive: (a) The timeline is segmented into high-level sections. (b) Hovering over a certain section shows brief information about the section. (c) Highlight moments within each section are color-coded in the timeline. Upon clicking, the moment is scrolled into view in the Highlights tab. (d) Users can see highlight moments with snapshots and transcripts. (e) Users can also see chat messages near the highlight moment by clicking on the chat icon. (f) The indicator shows where the highlight is relative to the entire stream.</figDesc><graphic url="image-1.png" coords="1,79.02,247.33,453.95,207.95" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_1"><head>Figure 2 :</head><label>2</label><figDesc>Figure 2: (left) The initial view of the Highlights tab. (a) It shows the timeline information in a vertical view, with a representative screenshot and keywords for each section. Once a user is interested in a certain section, (b) they can see highlights of the section by clicking on the See Highlights button. (middle) Once a user clicks to see the highlights of a section, (c) the top two highlight moments are revealed with a representative snapshot and a sentence of the transcript. Users can either choose to see (d) more details about a particular highlight or (e) other highlights from that section. (f) Collapse Highlights brings the user back to the initial view (left). Once a user clicks to see more details about a particular highlight, (right) the rest of the snapshots and transcripts are shown to users. Users can also see other viewers' chat messages of the moment by (g) clicking on the chat icon.</figDesc><graphic url="image-2.png" coords="5,53.80,83.69,504.39,212.87" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_2"><head>Figure 3 :</head><label>3</label><figDesc>Figure 3: (a) Users can click on the camera button to capture the current content in the stream. Then, (b) a screenshot of the moment and the most recent sentence from the transcript are captured. (c) Users can edit the transcript and/or (d) add their own message, and (e) share it in the chat. (f) Users can "like" others' messages or snapshots and (g) flter the liked items.</figDesc><graphic url="image-3.png" coords="6,104.24,83.69,403.53,277.63" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_3"><head>Figure 4 :</head><label>4</label><figDesc>Figure 4: We consider an interval between two adjacent transcript regions as a candidate boundary region. Once selected, we take the endpoint of the region as the fnal boundary.</figDesc><graphic url="image-4.png" coords="7,104.24,83.69,403.52,68.64" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_4"><head>( 1 )</head><label>1</label><figDesc>Threshold (a) minimum between 3 minutes and 3% of the length of the entire stream (low-threshold) (b) minimum between 5 minutes and 5% of the length of the entire stream (high-threshold) (2) Minimum and maximum lengths of a segment (a) 5 min and 20 min (standard) (b) minimum and maximum length of the ground truth segments (minmax) (3) Weight of the fve factors (a) uniform weight (base-coeff) (b) optimal weight with the highest accuracy (optimal-coeff)</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_5"><head>Table 5 :</head><label>5</label><figDesc>, Put, Later Pre-cooking, In advance, Pasta, Made it Curious, Looks good, Made it, Pasta Time 36:07-46:30 46:30-1:05:30 1:05:30-1:13:45 *Description Cooking on the pan Cooking while talking about the concept of pre-cooking Tasting Example results of the online segmentation algorithm on the Cooking stream. The algorithm segmented a 75 minlong stream into six sections.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_6"><head>Figure 6 :</head><label>6</label><figDesc>Figure 6: Survey responses regarding (a)-(g) understanding of the stream, and (h)-(j) engagement in the stream with CatchLive (N=50 (16, 18, 16 for the Stock, Cooking, and Game, respectively)).</figDesc><graphic url="image-15.png" coords="12,53.80,83.68,504.41,154.01" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_7"><head>Figure 7 :</head><label>7</label><figDesc>Figure 7: Perceived usefulness of CatchLive's features for each stream.</figDesc><graphic url="image-16.png" coords="13,129.46,83.68,353.08,133.87" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_8"><head>Figure 8 :</head><label>8</label><figDesc>Figure 8: responses regarding (a) the prior knowledge about the topic, (b)-(h) understanding of the stream, and (i)-(k) engagement in the stream of CatchLive (N=16) and the baseline group (N=17).</figDesc><graphic url="image-17.png" coords="14,53.80,83.69,504.38,185.47" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_9"><head>Figure 9 :</head><label>9</label><figDesc>Figure 9: (left) The number of correct answers to questions regarding understanding in the game Q1: List the animals that the streamer met. Q2: List the tools and what the streamer did with the tool. Q3: List the keywords were covered in the stream other than animals and tools. There was signifcant diference between the groups. (right) The number of chat messages and snapshots shared in the chat, as a means of engagement. The diference was statistically signifcant (p&lt;0.01).</figDesc><graphic url="image-18.png" coords="14,53.80,314.98,504.41,119.24" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_10"><head>Weight with highest accuracy (weight ∈ 1</head><label>1</label><figDesc>Optimal weights of the fve factors for each stream.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_1"><head></head><label></label><figDesc>We avoid segmenting in the middle of active chat sessions as it could indicate that a topic is still being discussed. A boundary interval has a higher score if there are fewer chat messages in it. For a set of chats C in a candidate boundary region [s, e] where s is the starting time and e is the ending time of the boundary, the chat frequency score is calculated as Duration of a break: A short break between transcript regions might indicate a shift to the next sentence, while a long break might indicate a shift to other topics. Let e and s be the ending time and starting time of a candidate boundary region and d i be a duration of a candidate boundary region i. The duration score is calculated as</figDesc><table><row><cell>S Chat</cell><cell>= (e − s)/n(C)</cell><cell>(4)</cell></row><row><cell>(5)</cell><cell></cell><cell></cell></row></table><note>B)/|B| w ∈starting cues (4) Chat frequency:</note></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_3"><head>Table 3 :</head><label>3</label><figDesc>Stream information used in our study. Characteristics spanning both sides are indicated as '-'.</figDesc><table><row><cell>Cooking</cell><cell>Game</cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_4"><head>Table 6 :</head><label>6</label><figDesc>Summary of the fndings and implications on designing live stream summarizations with respect to stream characteristics. The fndings are from Section 7.2.2. again led to additional user interactions with higher engagement. CatchLive seeks to establish this virtuous feedback cycle in live streams.</figDesc><table><row><cell cols="2">Characteristics</cell><cell>Findings</cell><cell>Design implications</cell></row><row><cell>type</cell><cell>Procedural</cell><cell>The timeline gave step information.</cell><cell>Accurate of each step • A full coverage of all steps</cell></row><row><cell></cell><cell cols="2">Unstructured keywords the timeline</cell><cell>• Concrete keywords distinguish</cell></row><row><cell></cell><cell></cell><cell>were helpful in checking previous topics.</cell><cell>a section from others</cell></row><row><cell>format</cell><cell>Visual</cell><cell>Snapshots gave a quick overview highlights.</cell><cell>• Representative snapshots • Short clips of a highlight</cell></row><row><cell></cell><cell>Audial</cell><cell>Relying on transcripts to catch up</cell><cell>• Accurate transcription</cell></row><row><cell></cell><cell></cell><cell>required time and efort.</cell><cell>• Text summarization techniques</cell></row><row><cell>Stream pace</cell><cell>Slow</cell><cell>The summary features were not much of a distraction.</cell><cell>• More levels of detail of highlights • Short clips of a highlight</cell></row><row><cell></cell><cell>Fast</cell><cell cols="2">The summary features could be distracting. • Shorter highlight moments</cell></row><row><cell></cell><cell></cell><cell></cell><cell>• Combining multiple sources into one</cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_5"><head>Table 7 :</head><label>7</label><figDesc>A.1 Segmentation Information of the Streams Used Ground truth segmentation information of the seven live streams.A.2 Results of the Online Segmentation Algorithm</figDesc><table><row><cell>Name</cell><cell cols="4">Segment # Average segment length (sec)</cell><cell></cell><cell></cell><cell>examples</cell><cell></cell></row><row><cell>Archade</cell><cell>14</cell><cell>35</cell><cell></cell><cell></cell><cell></cell><cell cols="3">7:55 World, 11:30 Magyechon</cell></row><row><cell>Suka</cell><cell>6</cell><cell>1144</cell><cell></cell><cell></cell><cell cols="5">47:43 Video call app, 1:19:41 Coupang, 1:39:10 Bitcoin</cell></row><row><cell>Minu</cell><cell>4</cell><cell>2562</cell><cell></cell><cell></cell><cell cols="5">00:00 Opening, 01:32:53 How did I start YouTube</cell></row><row><cell>Google</cell><cell>10</cell><cell>1075</cell><cell></cell><cell></cell><cell cols="5">00:30 Day Opener, 27:58 What's New in Speed Tooling</cell></row><row><cell>Photoshop</cell><cell>5</cell><cell>1384</cell><cell></cell><cell></cell><cell cols="5">00:00 Setting and chat, 05:56 solution to the 1st problem</cell></row><row><cell>Amongus</cell><cell>21</cell><cell>651</cell><cell></cell><cell></cell><cell></cell><cell cols="4">11:22 Crewmate, 46:15 Impostor with Koji</cell></row><row><cell>Drawing</cell><cell>3</cell><cell>433</cell><cell></cell><cell></cell><cell cols="5">6:00 Draw by Swimming (Warm-up), 29:20 Shadow Shapes</cell></row><row><cell></cell><cell>Condition</cell><cell cols="8">Archade Minu Google Photoshop Amongus Drawing Avg.</cell></row><row><cell cols="2">standard &amp; low-threshold</cell><cell>28.6</cell><cell>58.8</cell><cell>11.8</cell><cell>52.2</cell><cell>42.9</cell><cell>55.6</cell><cell>80</cell><cell>47.1</cell></row><row><cell cols="2">standard &amp; high-threshold</cell><cell>66.7</cell><cell>58.8</cell><cell>23.5</cell><cell>69.6</cell><cell>42.9</cell><cell>66.7</cell><cell>80</cell><cell>58.3</cell></row><row><cell cols="2">minmax &amp; low-threshold</cell><cell>41.7</cell><cell>25</cell><cell>50</cell><cell>37.5</cell><cell>44.4</cell><cell>46.2</cell><cell>66.7</cell><cell>44.5</cell></row><row><cell cols="2">minmax &amp; high-threshold</cell><cell>66.7</cell><cell>25</cell><cell>75</cell><cell>37.5</cell><cell>44.4</cell><cell>66.7</cell><cell>100</cell><cell>59.3</cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_6"><head>Table 8 :</head><label>8</label><figDesc>F1 score of the results with a uniform weight of the fve factors (base-coeff).</figDesc><table><row><cell>Condition</cell><cell cols="8">Archade Suka Minu Google Photoshop Amongus Drawing Avg.</cell></row><row><cell>standard &amp; low-threshold</cell><cell>64.3</cell><cell>60</cell><cell>50</cell><cell>81.8</cell><cell>62.5</cell><cell>75</cell><cell>80</cell><cell>67.6</cell></row><row><cell>standard &amp; high-threshold</cell><cell>92.9</cell><cell>70.6</cell><cell>50</cell><cell>81.8</cell><cell></cell><cell>85</cell><cell>80</cell><cell>75.9</cell></row><row><cell>minmax &amp; low-threshold</cell><cell>78.6</cell><cell>66.7</cell><cell>100</cell><cell>70.6</cell><cell>80</cell><cell>87.8</cell><cell>66.7</cell><cell>78.6</cell></row><row><cell>minmax &amp; high-threshold</cell><cell>80</cell><cell>71.4</cell><cell>100</cell><cell>70.6</cell><cell>100</cell><cell>88.4</cell><cell>100</cell><cell>87.2</cell></row><row><cell>Table</cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell></row></table></figure>
+		</body>
+		<back>
+
+			<div type="acknowledgement">
+<div xmlns="http://www.tei-c.org/ns/1.0" />
+			</div>
+
+			<div type="annex">
+<div xmlns="http://www.tei-c.org/ns/1.0"><p>amounts of transitional keywords in the tutorial as well as breaks between steps. For both of the game-playing streams Archade and Amongus, the optimal 'keywords' weight was zero, which implies that keywords carry less meaning in game-playing streams. For Amongus, the optimal weight of 'visual change' was higher than other factors due to the screen change after each round of the game (each round was considered as a segment for this video).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>B EXAMPLE HIGHLIGHT MOMENTS FROM THE USER STUDY Transcript</head><p>Stock (a) 03:57</p><p>The interest in stocks is decreasing but there also seems to be some sectors that will rise. (b) <ref type="bibr" target="#b13">16</ref> Oh it's raining a bit right now. A T-shirt, some outdoor trousers, or maybe a red pair of shorts would help. Ok, let's buy this red one.</p><p>Table <ref type="table">11</ref>: Example highlight moments from user studies. In the Stock stream, we could see that the highlight detection algorithm captures moments that might attract users' attention such as "I met one customer yesterday who's a millionaire" (c). They also capture some key topics covered in the stream such as game and construction industry (b, d). In the Cooking stream, the algorithm captures the moment the dish was introduced and fnished (e, h), and interesting parts such as where the cooking method is unusual (f) or talking about the concept of Flambé (g). In the Game stream, the algorithm captured suspenseful or urgent moments (i, j, l), or unusual behavior (k).</p></div>			</div>
+			<div type="references">
+
+				<listBibl>
+
+<biblStruct xml:id="b0">
+	<monogr>
+		<title level="m" type="main">Robust peak detection algorithm using z-scores (Stack Overfow)</title>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">P G</forename><surname>Van Brakel</surname></persName>
+		</author>
+		<ptr target="in-realtime-timeseries-data/22640362#22640362" />
+		<imprint>
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b1">
+	<monogr>
+		<title level="m" type="main">Integrating Multimedia Tools to Enrich Interactions in Live Streaming for Language Learning</title>
+		<author>
+			<persName><forename type="first">Dustin</forename><surname>Di (laura) Chen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ravin</forename><surname>Freeman</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Balakrishnan</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3290605.3300668</idno>
+		<ptr target="https://doi.org/10.1145/3290605.3300668" />
+		<imprint>
+			<date type="published" when="2019">2019</date>
+			<publisher>Association for Computing Machinery</publisher>
+			<biblScope unit="page" from="1" to="14" />
+			<pubPlace>New York, NY, USA</pubPlace>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b2">
+	<analytic>
+		<title level="a" type="main">I Was Afraid, but Now I Enjoy Being a Streamer!&quot;: Understanding the Challenges and Prospects of Using Live Streaming for Online Education</title>
+		<author>
+			<persName><forename type="first">Xinyue</forename><surname>Chen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Si</forename><surname>Chen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Xu</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yun</forename><surname>Huang</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3432936</idno>
+		<ptr target="https://doi.org/10.1145/3432936" />
+	</analytic>
+	<monogr>
+		<title level="j">Proceedings the ACM on Human-Computer Interaction</title>
+		<imprint>
+			<biblScope unit="volume">4</biblScope>
+			<date type="published" when="2021-01">2021. jan 2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b3">
+	<analytic>
+		<title level="a" type="main">Video Co-summarization: Video Summarization by Visual Co-occurrence</title>
+		<author>
+			<persName><forename type="first">Wen-Sheng</forename><surname>Chu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yale</forename><surname>Song</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Alejandro</forename><surname>Jaimes</surname></persName>
+		</author>
+		<idno type="DOI">10.1109/CVPR.2015.7298981</idno>
+		<ptr target="https://doi.org/10.1109/CVPR.2015.7298981" />
+	</analytic>
+	<monogr>
+		<title level="m">2015 IEEE Conference on Computer Vision and Pattern Recognition (CVPR)</title>
+				<imprint>
+			<date type="published" when="2015">2015</date>
+			<biblScope unit="page" from="3584" to="3592" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b4">
+	<analytic>
+		<title level="a" type="main">Whiteboard Video Summarization via Spatio-Temporal Confict Minimization</title>
+		<author>
+			<persName><forename type="first">Kenny</forename><surname>Davila</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Richard</forename><surname>Zanibbi</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">14th IAPR International Conference on Document Analysis and Recognition (ICDAR)</title>
+				<imprint>
+			<publisher>IEEE</publisher>
+			<date type="published" when="2017">2017. 2017</date>
+			<biblScope unit="volume">1</biblScope>
+			<biblScope unit="page" from="355" to="362" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b5">
+	<monogr>
+		<author>
+			<persName><surname>Samuel</surname></persName>
+		</author>
+		<idno>Dudik. 2022</idno>
+		<ptr target="https://www.npmjs.com/package/twitch-m3u8/" />
+		<title level="m">twitch-m3u8</title>
+				<imprint>
+			<date type="published" when="2022-01-08">accessed Jan 8, 2022</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b6">
+	<analytic>
+		<title level="a" type="main">Watch Me Code: Programming Mentorship Communities on Twitch</title>
+		<author>
+			<persName><forename type="first">Travis</forename><surname>Faas</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Lynn</forename><surname>Dombrowski</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Alyson</forename><surname>Young</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Andrew</forename><forename type="middle">D</forename><surname>Miller</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3274319</idno>
+		<ptr target="https://doi.org/10.1145/3274319" />
+	</analytic>
+	<monogr>
+		<title level="j">Tv. Proceedings of the ACM on Human-Computer Interaction</title>
+		<imprint>
+			<biblScope unit="volume">2</biblScope>
+			<date type="published" when="2018-11">2018. nov 2018</date>
+			<publisher>CSCW</publisher>
+		</imprint>
+	</monogr>
+	<note>Article</note>
+</biblStruct>
+
+<biblStruct xml:id="b7">
+	<analytic>
+		<title level="a" type="main">Sharing the Studio: How Creative Livestreaming Inspire, Educate, and Engage</title>
+		<author>
+			<persName><forename type="first">C</forename></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ailie</forename><surname>Fraser</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Joy</forename><forename type="middle">O</forename><surname>Kim</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Valentina</forename><surname>Hijung</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Joel</forename><surname>Shin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mira</forename><surname>Brandt</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Dontcheva</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3325480.3325485</idno>
+		<ptr target="https://doi.org/10.1145/3325480.3325485" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2020 CHI Conference on Human Factors in Computing Systems</title>
+				<editor>
+			<persName><forename type="first">C</forename></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">Ailie</forename><surname>Fraser</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">Joy</forename><forename type="middle">O</forename><surname>Kim</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">Alison</forename><surname>Thornsberry</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">Scott</forename><surname>Klemmer</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">Mira</forename><surname>Dontcheva</surname></persName>
+		</editor>
+		<meeting>the 2020 CHI Conference on Human Factors in Computing Systems<address><addrLine>New York, NY, USA; San Diego, CA, USA; New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computing Machinery</publisher>
+			<date type="published" when="2019">2020. 2019. 19</date>
+			<biblScope unit="page" from="144" to="155" />
+		</imprint>
+	</monogr>
+	<note>Proceedings the 2019 on Creativity and Cognition</note>
+</biblStruct>
+
+<biblStruct xml:id="b8">
+	<analytic>
+		<title level="a" type="main">Video Highlight Prediction Using Audience Chat Reactions</title>
+		<author>
+			<persName><forename type="first">Cheng-Yang</forename><surname>Fu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Joon</forename><surname>Lee</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mohit</forename><surname>Bansal</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Alex</forename><forename type="middle">C</forename><surname>Berg</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings the 2017 Conference on Empirical Methods in Natural Language Processing. Association for Computational Linguistics</title>
+				<meeting>the 2017 Conference on Empirical Methods in Natural Language Processing. Association for Computational Linguistics</meeting>
+		<imprint>
+			<date type="published" when="2017">2017</date>
+			<biblScope unit="page" from="972" to="978" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b9">
+	<analytic>
+		<title level="a" type="main">Design Challenges for Livestreamed Audience Participation Games</title>
+		<author>
+			<persName><forename type="first">Seth</forename><surname>Glickman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Nathan</forename><surname>Mckenzie</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Joseph</forename><surname>Seering</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Rachel</forename><surname>Moeller</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jessica</forename><surname>Hammer</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3242671.3242708</idno>
+		<ptr target="https://doi.org/10.1145/3242671.3242708" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings the 2018 Annual Symposium on Computer-Human Interaction in Play</title>
+				<meeting>the 2018 Annual Symposium on Computer-Human Interaction in Play<address><addrLine>Melbourne, VIC, Australia; New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computing Machinery</publisher>
+			<date type="published" when="2018">2018</date>
+			<biblScope unit="page" from="187" to="199" />
+		</imprint>
+	</monogr>
+	<note>CHI PLAY &apos;18)</note>
+</biblStruct>
+
+<biblStruct xml:id="b10">
+	<monogr>
+		<title level="m" type="main">Google Cloud Speech-to-Text</title>
+		<idno>Google. 2022</idno>
+		<ptr target="https://cloud.google.com/speech-to-text" />
+		<imprint>
+			<date type="published" when="2022-01-08">accessed Jan 8, 2022</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b11">
+	<analytic>
+		<title level="a" type="main">Real-time automated video highlight generation with dual-stream hierarchical growing self-organizing maps</title>
+		<author>
+			<persName><forename type="first">Pawara</forename><surname>Gunawardena</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Oshada</forename><surname>Amila</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Heshan</forename><surname>Sudarshana</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Rashmika</forename><surname>Nawaratne</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ashish</forename><surname>Luhach</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Damminda</forename><surname>Alahakoon</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Charith</forename><surname>Perera</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Naveen</forename><surname>Chitraranjan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Daswin</forename><surname>Chilamkurti</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Silva</surname></persName>
+		</author>
+		<idno type="DOI">10.1007/s11554-020-00957-0</idno>
+		<ptr target="https://doi.org/10.1007/s11554-020-00957-0" />
+	</analytic>
+	<monogr>
+		<title level="j">Journal of Real-Time Image Processing</title>
+		<imprint>
+			<biblScope unit="volume">18</biblScope>
+			<date type="published" when="2021-10">2021. 10 2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b12">
+	<analytic>
+		<title level="a" type="main">Programming as a Performance: Live-Streaming and Its Implications for Computer Science Education</title>
+		<author>
+			<persName><forename type="first">Lassi</forename><surname>Haaranen</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings the 2017 ACM Conference on Innovation and Technology in Computer Science Education</title>
+				<meeting>the 2017 ACM Conference on Innovation and Technology in Computer Science Education<address><addrLine>Bologna, Italy; New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computing Machinery</publisher>
+			<date type="published" when="2017">2017</date>
+			<biblScope unit="page" from="353" to="358" />
+		</imprint>
+	</monogr>
+	<note>ITiCSE &apos;17)</note>
+</biblStruct>
+
+<biblStruct xml:id="b13">
+	<monogr>
+		<author>
+			<persName><forename type="first">William</forename><forename type="middle">A</forename><surname>Hamilton</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Oliver</forename><surname>Garretson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Andruid</forename><surname>Kerne</surname></persName>
+		</author>
+		<title level="m">Streaming on Twitch: Fostering Participatory Communities of Play within Live Mixed Media (CHI &apos;14)</title>
+				<meeting><address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computing Machinery</publisher>
+			<date type="published" when="2014">2014</date>
+			<biblScope unit="page" from="1315" to="1324" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b14">
+	<analytic>
+		<title level="a" type="main">Collaborative Live Media Curation: Shared Context for Participation in Online Learning</title>
+		<author>
+			<persName><forename type="first">William</forename><forename type="middle">A</forename><surname>Hamilton</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Nic</forename><surname>Lupfer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Nicolas</forename><surname>Botello</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Tyler</forename><surname>Tesch</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Alex</forename><surname>Stacy</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jeremy</forename><surname>Merrill</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Blake</forename><surname>Williford</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Frank</forename><forename type="middle">R</forename><surname>Bentley</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Andruid</forename><surname>Kerne</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3173574.3174129</idno>
+		<ptr target="https://doi.org/10.1145/3173574.3174129" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings the 2018 CHI Conference on Human Factors in Computing Systems</title>
+				<meeting>the 2018 CHI Conference on Human Factors in Computing Systems<address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computing Machinery</publisher>
+			<date type="published" when="2018">2018</date>
+			<biblScope unit="page" from="1" to="14" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b15">
+	<analytic>
+		<title level="a" type="main">A Deep Learning Model for Extracting Live Streaming Video Highlights Using Audience Messages</title>
+		<author>
+			<persName><forename type="first">Hung-Kuang</forename><surname>Han</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yu-Chen</forename><surname>Huang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Chien Chin</forename><surname>Chen</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings the 2019 2nd Artifcial Intelligence and Cloud Computing Conference</title>
+				<meeting>the 2019 2nd Artifcial Intelligence and Cloud Computing Conference<address><addrLine>Kobe, Japan; New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computing Machinery</publisher>
+			<date type="published" when="2019">2019. 2019</date>
+			<biblScope unit="page" from="75" to="81" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b16">
+	<analytic>
+		<title level="a" type="main">Live Semantic Sport Highlight Detection Based on Analyzing Tweets of Twitter</title>
+		<author>
+			<persName><forename type="first">Liang-Chi</forename><surname>Hsieh</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ching-Wei</forename><surname>Lee</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Tzu-Hsuan</forename><surname>Chiu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Winston</forename><surname>Hsu</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">2012 IEEE International Conference on Multimedia and Expo</title>
+				<imprint>
+			<publisher>IEEE</publisher>
+			<date type="published" when="2012">2012</date>
+			<biblScope unit="page" from="949" to="954" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b17">
+	<analytic>
+		<title level="a" type="main">A Forum for Supporting Interactive Presentations to Distributed Audiences</title>
+		<author>
+			<persName><forename type="first">Ellen</forename><forename type="middle">A</forename><surname>Isaacs</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Trevor</forename></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Thomas</forename><forename type="middle">K</forename><surname>Rodriguez</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/192844.193060</idno>
+		<ptr target="https://doi.org/10.1145/192844.193060" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings the 1994 ACM Conference on Computer Supported Cooperative Work</title>
+				<meeting>the 1994 ACM Conference on Computer Supported Cooperative Work<address><addrLine>Chapel Hill, North Carolina, USA; New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computing Machinery</publisher>
+			<date type="published" when="1994">1994</date>
+			<biblScope unit="page" from="405" to="416" />
+		</imprint>
+	</monogr>
+	<note>CSCW &apos;94)</note>
+</biblStruct>
+
+<biblStruct xml:id="b18">
+	<analytic>
+		<title level="a" type="main">ElasticPlay: Video Summarization with Dynamic Time Budgets</title>
+		<author>
+			<persName><forename type="first">Haojian</forename><surname>Jin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yale</forename><surname>Song</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Koji</forename><surname>Yatani</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3123266.3123393</idno>
+		<ptr target="https://doi.org/10.1145/3123266.3123393" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 25th ACM International Conference on Multimedia</title>
+				<meeting>the 25th ACM International Conference on Multimedia<address><addrLine>Mountain View, California, USA; New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computing Machinery</publisher>
+			<date type="published" when="2017">2017</date>
+			<biblScope unit="page" from="1164" to="1172" />
+		</imprint>
+	</monogr>
+	<note>MM &apos;17)</note>
+</biblStruct>
+
+<biblStruct xml:id="b19">
+	<analytic>
+		<title level="a" type="main">Data-Driven Interaction Techniques for Improving Navigation of Educational Videos</title>
+		<author>
+			<persName><forename type="first">Juho</forename><surname>Kim</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Guo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Carrie</forename><forename type="middle">J</forename><surname>Cai</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">;</forename><surname>Shang-Wen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">)</forename><surname>Daniel</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Krzysztof</forename><forename type="middle">Z</forename><surname>Li</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Robert</forename><forename type="middle">C</forename><surname>Gajos</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Miller</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings the 27th Annual ACM Symposium on User Interface Software and Technology</title>
+				<meeting>the 27th Annual ACM Symposium on User Interface Software and Technology<address><addrLine>Honolulu, Hawaii, USA; New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computing Machinery</publisher>
+			<date type="published" when="2014">2014</date>
+			<biblScope unit="page" from="563" to="572" />
+		</imprint>
+	</monogr>
+	<note>UIST &apos;14)</note>
+</biblStruct>
+
+<biblStruct xml:id="b20">
+	<analytic>
+		<title level="a" type="main">Let&apos;s Play My Way: Investigating Audience Infuence in User-Generated Gaming Live-Streams</title>
+		<author>
+			<persName><forename type="first">Juho</forename><surname>Kim</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sarah</forename><surname>Phu Tran Nguyen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Philip</forename><forename type="middle">J</forename><surname>Weir</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Robert</forename><forename type="middle">C</forename><surname>Guo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Krzysztof</forename><forename type="middle">Z</forename><surname>Miller</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Gajos</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3077548.3077556</idno>
+		<ptr target="https://doi.org/10.1145/3077548.3077556" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings the 2017 ACM International Conference on Interactive Experiences for TV and Online Video</title>
+				<editor>
+			<persName><forename type="first">Pascal</forename><surname>Lessel</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">Michael</forename><surname>Mauderer</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">Christian</forename><surname>Wolf</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">Antonio</forename><surname>Krüger</surname></persName>
+		</editor>
+		<meeting>the 2017 ACM International Conference on Interactive Experiences for TV and Online Video<address><addrLine>Toronto, Ontario, Canada; New York, NY, USA; Hilversum, The Netherlands; New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computing Machinery</publisher>
+			<date type="published" when="2014">2014. 2017</date>
+			<biblScope unit="page" from="51" to="63" />
+		</imprint>
+	</monogr>
+	<note>TVX &apos;17)</note>
+</biblStruct>
+
+<biblStruct xml:id="b21">
+	<analytic>
+		<title level="a" type="main">Expanding Video Game Live-Streams with Enhanced Communication Channels: A Case Study</title>
+		<author>
+			<persName><forename type="first">Alexander</forename><surname>Lessel</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Antonio</forename><surname>Vielhauer</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Krüger</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings the 2017 CHI Conference on Human Factors in Computing Systems</title>
+				<meeting>the 2017 CHI Conference on Human Factors in Computing Systems<address><addrLine>Denver, Colorado, USA; New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computing Machinery</publisher>
+			<date type="published" when="2017">2017</date>
+			<biblScope unit="page" from="1571" to="1576" />
+		</imprint>
+	</monogr>
+	<note>CHI &apos;17)</note>
+</biblStruct>
+
+<biblStruct xml:id="b22">
+	<analytic>
+		<title level="a" type="main">ConceptScape: Collaborative Concept Mapping for Video Learning</title>
+		<author>
+			<persName><forename type="first">Ching</forename><surname>Liu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Juho</forename><surname>Kim</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Hao-Chuan</forename><surname>Wang</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings the 2018 CHI Conference on Human Factors in Computing Systems</title>
+				<meeting>the 2018 CHI Conference on Human Factors in Computing Systems<address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computing Machinery</publisher>
+			<date type="published" when="2018">2018</date>
+			<biblScope unit="page" from="1" to="12" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b23">
+	<monogr>
+		<idno>Better YouTube Live. 2022</idno>
+		<ptr target="https://www.betteryoutube.live/" />
+		<title level="m">Better YouTube Live</title>
+				<imprint>
+			<date type="published" when="2022-01-08">accessed Jan 8, 2022</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b24">
+	<analytic>
+		<title level="a" type="main">StreamWiki: Enabling Viewers of Knowledge Sharing Live Streams to Collaboratively Generate Archival Documentation for Efective In-Stream and Post Hoc Learning</title>
+		<author>
+			<persName><forename type="first">Zhicong</forename><surname>Lu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Seongkook</forename><surname>Heo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Daniel</forename><forename type="middle">J</forename><surname>Wigdor</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3274381</idno>
+		<ptr target="https://doi.org/10.1145/3274381" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings the ACM on Human-Computer Interaction CSCW</title>
+				<meeting>the ACM on Human-Computer Interaction CSCW</meeting>
+		<imprint>
+			<date type="published" when="2018">2018</date>
+			<biblScope unit="volume">112</biblScope>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b25">
+	<analytic>
+		<title level="a" type="main">StreamSketch: Exploring Multi-Modal Interactions in Creative Live Streams</title>
+		<author>
+			<persName><forename type="first">Zhicong</forename><surname>Lu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Rubaiat</forename><surname>Habib Kazi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Li-Yi</forename><surname>Wei</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mira</forename><surname>Dontcheva</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Karrie</forename><surname>Karahalios</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3449132</idno>
+		<ptr target="https://doi.org/10.1145/3449132" />
+	</analytic>
+	<monogr>
+		<title level="j">Proceedings of the ACM on Human-Computer Interaction</title>
+		<imprint>
+			<biblScope unit="volume">5</biblScope>
+			<date type="published" when="2021">2021. 58 2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b26">
+	<analytic>
+		<title level="a" type="main">Twitinfo: Aggregating and Visualizing Microblogs for Event Exploration</title>
+		<author>
+			<persName><forename type="first">Adam</forename><surname>Marcus</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Michael</forename><forename type="middle">S</forename><surname>Bernstein</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Osama</forename><surname>Badar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">David</forename><forename type="middle">R</forename><surname>Karger</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Samuel</forename><surname>Madden</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Robert</forename><forename type="middle">C</forename><surname>Miller</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/1978942.1978975</idno>
+		<idno>https: MDN. 2022</idno>
+		<ptr target="https://developer.mozilla.org/en-US/docs/Web/API/SpeechRecognition" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the SIGCHI Conference on Human Factors in Computing Systems</title>
+				<meeting>the SIGCHI Conference on Human Factors in Computing Systems<address><addrLine>Vancouver, BC, Canada; New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<date type="published" when="2011-01-08">2011. accessed Jan 8, 2022</date>
+			<biblScope unit="page" from="227" to="236" />
+		</imprint>
+	</monogr>
+	<note>CHI &apos;11). Association for Computing Machinery</note>
+</biblStruct>
+
+<biblStruct xml:id="b27">
+	<analytic>
+		<title level="a" type="main">Automatic Curation of Sports Highlights Using Multimodal Excitement Features</title>
+		<author>
+			<persName><forename type="first">Michele</forename><surname>Merler</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Khoi-Nguyen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Dhiraj</forename><surname>Mac</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Quoc-Bao</forename><surname>Joshi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Stephen</forename><surname>Nguyen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">John</forename><surname>Hammer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jinjun</forename><surname>Kent</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Minh</forename><forename type="middle">N</forename><surname>Xiong</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">John</forename><forename type="middle">R</forename><surname>Do</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Rogerio</forename><surname>Smith</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Schmidt Feris</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">IEEE Transactions on Multimedia</title>
+		<imprint>
+			<biblScope unit="page" from="1147" to="1160" />
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b28">
+	<analytic>
+		<title level="a" type="main">Conversational Chat Circles: Being All Here Without Having to Hear It All</title>
+		<author>
+			<persName><forename type="first">Matthew</forename><forename type="middle">K</forename><surname>Miller</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">John</forename><forename type="middle">C</forename><surname>Tang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Gina</forename><surname>Venolia</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Gerard</forename><surname>Wilkinson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kori</forename><surname>Inkpen</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3025453.3025621</idno>
+		<ptr target="https://doi.org/10.1145/3025453.3025621" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2017 CHI Conference on Human Factors in Computing Systems</title>
+				<meeting>the 2017 CHI Conference on Human Factors in Computing Systems<address><addrLine>Denver, Colorado, USA; New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computing Machinery</publisher>
+			<date type="published" when="2017">2017</date>
+			<biblScope unit="page" from="2394" to="2404" />
+		</imprint>
+	</monogr>
+	<note>CHI &apos;17)</note>
+</biblStruct>
+
+<biblStruct xml:id="b29">
+	<analytic>
+		<title level="a" type="main">Video Digests: A Browsable, Skimmable Format for Informational Lecture Videos</title>
+		<author>
+			<persName><forename type="first">Amy</forename><surname>Pavel</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Colorado</forename><surname>Reed</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Björn</forename><surname>Hartmann</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Maneesh</forename><surname>Agrawala</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2642918.2647400</idno>
+		<ptr target="https://doi.org/10.1145/2642918.2647400" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 27th Annual ACM Symposium on User Interface Software and Technology</title>
+				<meeting>the 27th Annual ACM Symposium on User Interface Software and Technology<address><addrLine>Honolulu, Hawaii, USA; New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<date type="published" when="2014">2014</date>
+			<biblScope unit="page" from="573" to="582" />
+		</imprint>
+	</monogr>
+	<note>UIST &apos;14). Association for Computing Machinery</note>
+</biblStruct>
+
+<biblStruct xml:id="b30">
+	<analytic>
+		<title level="a" type="main">Rescribe: Authoring and Automatically Editing Audio Descriptions</title>
+		<author>
+			<persName><forename type="first">Amy</forename><surname>Pavel</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Gabriel</forename><surname>Reyes</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jefrey</forename><forename type="middle">P</forename><surname>Bigham</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3379337.3415864</idno>
+		<ptr target="https://doi.org/10.1145/3379337.3415864" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 33rd Annual ACM Symposium on User Interface Software and Technology</title>
+				<meeting>the 33rd Annual ACM Symposium on User Interface Software and Technology<address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computing Machinery</publisher>
+			<date type="published" when="2020">2020</date>
+			<biblScope unit="page" from="747" to="759" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b31">
+	<analytic>
+		<title level="a" type="main">The Game of Performing Play: Understanding Streaming as Cultural Production</title>
+		<author>
+			<persName><forename type="first">J</forename><surname>Anthony</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Pellicone</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3025453.3025854</idno>
+		<ptr target="https://doi.org/10.1145/3025453.3025854" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings the 2017 CHI Conference on Human Factors in Computing Systems</title>
+				<meeting>the 2017 CHI Conference on Human Factors in Computing Systems<address><addrLine>Denver, Colorado, USA; New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computing Machinery</publisher>
+			<date type="published" when="2017">June Ahn. 2017</date>
+			<biblScope unit="page" from="4863" to="4874" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b32">
+	<analytic>
+		<title level="a" type="main">2021. the Socio-Technical Gaps in Body-Worn Interpersonal Live-Streaming Telepresence through a Critical Review of the Literature</title>
+		<author>
+			<persName><forename type="first">Kevin</forename><forename type="middle">P</forename><surname>Pfeil</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Neeraj</forename><surname>Chatlani</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Joseph</forename><forename type="middle">J</forename><surname>Laviola</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Pamela</forename><surname>Wisniewski</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Proceedings of the ACM on Human-Computer Interaction</title>
+		<imprint>
+			<biblScope unit="volume">5</biblScope>
+			<biblScope unit="page">39</biblScope>
+		</imprint>
+	</monogr>
+	<note>Article</note>
+</biblStruct>
+
+<biblStruct xml:id="b33">
+	<monogr>
+		<title level="m" type="main">Tweetgeist: Can the Twitter Timeline Reveal the Structure of Broadcast Events?</title>
+		<author>
+			<persName><forename type="first">David</forename><surname>Shamma</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Lyndon</forename><surname>Kennedy</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Elizabeth</forename><surname>Churchill</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2010">2010. 2010</date>
+			<publisher>CSCW Horizons</publisher>
+			<biblScope unit="page">26</biblScope>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b34">
+	<analytic>
+		<title level="a" type="main">Automatic Cricket Highlight Generation Using Event-Driven and Excitement-Based Features</title>
+		<author>
+			<persName><forename type="first">Pushkar</forename><surname>Shukla</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Hemant</forename><surname>Sadana</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Apaar</forename><surname>Bansal</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Deepak</forename><surname>Verma</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Carlos</forename><surname>Elmadjian</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Balasubramanian</forename><surname>Raman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Matthew</forename><surname>Turk</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">IEEE/CVF Conference on Computer Vision and Pattern Recognition Workshops</title>
+				<imprint>
+			<publisher>CVPRW</publisher>
+			<date type="published" when="2018">2018. 2018</date>
+			<biblScope unit="page" from="1881" to="18818" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b35">
+	<monogr>
+		<title level="m" type="main">YouTube Live Chat Enhancement</title>
+		<ptr target="https://chrome.google.com/webstore/detail/youtube-live-chat-enhance/akikhgecfhfbdmiccfbgdmcjjbaiohbi" />
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b36">
+	<analytic>
+		<title level="a" type="main">Why do people watch others play video games? An empirical study on the motivations of Twitch users</title>
+		<author>
+			<persName><forename type="first">Max</forename><surname>Sjöblom</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Juho</forename><surname>Hamari</surname></persName>
+		</author>
+		<idno type="DOI">10.1016/j.chb.2016.10.019</idno>
+		<ptr target="https://doi.org/10.1016/j.chb.2016.10.019" />
+	</analytic>
+	<monogr>
+		<title level="j">Computers in Human Behavior</title>
+		<imprint>
+			<biblScope unit="volume">75</biblScope>
+			<biblScope unit="page" from="985" to="996" />
+			<date type="published" when="2017">2017. 2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b37">
+	<analytic>
+		<title/>
+		<idno>Socket.io. 2022</idno>
+		<ptr target="https://socket.io/" />
+	</analytic>
+	<monogr>
+		<title level="j">Socket.io</title>
+		<imprint>
+			<date type="published" when="2022-01-08">accessed Jan 8, 2022</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b38">
+	<analytic>
+		<title level="a" type="main">TVSum: Summarizing web videos using titles</title>
+		<author>
+			<persName><forename type="first">Yale</forename><surname>Song</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jordi</forename><surname>Vallmitjana</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Amanda</forename><surname>Stent</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Alejandro</forename><surname>Jaimes</surname></persName>
+		</author>
+		<idno type="DOI">10.1109/CVPR.2015.7299154</idno>
+		<ptr target="https://doi.org/10.1109/CVPR.2015" />
+	</analytic>
+	<monogr>
+		<title level="m">IEEE Conference on Computer Vision Pattern Recognition (CVPR)</title>
+				<imprint>
+			<date type="published" when="2015">2015. 2015</date>
+			<biblScope unit="page" from="5179" to="5187" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b39">
+	<monogr>
+		<title/>
+		<author>
+			<persName><surname>Taizan</surname></persName>
+		</author>
+		<idno>hokuto. 2022</idno>
+		<ptr target="https://pypi.org/project/pytchat/" />
+		<imprint>
+			<date type="published" when="2022-01-08">accessed Jan 8, 2022</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b40">
+	<analytic>
+		<title level="a" type="main">Meerkat and Periscope: I Stream, You Stream, Apps Stream for Live Streams</title>
+		<author>
+			<persName><forename type="first">John</forename><forename type="middle">C</forename><surname>Tang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Gina</forename><surname>Venolia</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kori</forename><forename type="middle">M</forename><surname>Inkpen</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2858036.2858374</idno>
+		<ptr target="https://doi.org/10.1145/2858036.2858374" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings the 2016 CHI Conference on Human Factors in Computing Systems</title>
+				<meeting>the 2016 CHI Conference on Human Factors in Computing Systems<address><addrLine>San Jose, California, USA; New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computing Machinery</publisher>
+			<date type="published" when="2016">2016</date>
+			<biblScope unit="page" from="4770" to="4780" />
+		</imprint>
+	</monogr>
+	<note>CHI &apos;16)</note>
+</biblStruct>
+
+<biblStruct xml:id="b41">
+	<monogr>
+		<idno>Twitch. 2022</idno>
+		<ptr target="https://dev.twitch.tv/docs/api" />
+		<title level="m">Twitch API</title>
+				<imprint>
+			<date type="published" when="2022-01-08">accessed Jan 8, 2022</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b42">
+	<monogr>
+		<title level="m" type="main">Twitch Extensions</title>
+		<idno>Twitch. 2022</idno>
+		<ptr target="https://dev.twitch.tv/extensions" />
+		<imprint>
+			<date type="published" when="2022-01-08">accessed Jan 8, 2022</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b43">
+	<analytic>
+		<title level="a" type="main">Image Quality Assessment: From Error Visibility to Structural Similarity</title>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">C</forename><surname>Zhou Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><forename type="middle">R</forename><surname>Bovik</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><forename type="middle">P</forename><surname>Sheikh</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Simoncelli</surname></persName>
+		</author>
+		<idno type="DOI">10.1109/TIP.2003.819861</idno>
+		<ptr target="https://doi.org/10.1109/TIP.2003.819861" />
+	</analytic>
+	<monogr>
+		<title level="j">IEEE Transactions on Image Processing</title>
+		<imprint>
+			<biblScope unit="volume">13</biblScope>
+			<biblScope unit="page" from="600" to="612" />
+			<date type="published" when="2004">2004. 2004</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b44">
+	<analytic>
+		<title level="a" type="main">Less Is More: Learning Highlight Detection From Video Duration</title>
+		<author>
+			<persName><forename type="first">Bo</forename><surname>Xiong</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yannis</forename><surname>Kalantidis</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Deepti</forename><surname>Ghadiyaram</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kristen</forename><surname>Grauman</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedof the IEEE Conference on Computer Vision and Pattern Recognition</title>
+				<meeting>eedof the IEEE Conference on Computer Vision and Pattern Recognition</meeting>
+		<imprint>
+			<date type="published" when="2019">2019</date>
+			<biblScope unit="page" from="1258" to="1267" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b45">
+	<analytic>
+		<title level="a" type="main">Snapstream: Snapshot-Based Interaction in Live Streaming for Visual Art</title>
+		<author>
+			<persName><forename type="first">Saelyne</forename><surname>Yang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Changyoon</forename><surname>Lee</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Valentina</forename><surname>Hijung</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Juho</forename><surname>Shin</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Kim</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3313831.3376390</idno>
+		<ptr target="https://doi.org/10.1145/3313831.3376390" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings the 2020 CHI Conference on Human Factors in Computing Systems</title>
+				<meeting>the 2020 CHI Conference on Human Factors in Computing Systems<address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computing Machinery</publisher>
+			<date type="published" when="2020">2020</date>
+			<biblScope unit="page" from="1" to="12" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b46">
+	<analytic>
+		<title level="a" type="main">Can You Believe [1:21]?!&quot;: Content and Time-Based Reference Patterns in Video Comments</title>
+		<author>
+			<persName><forename type="first">Matin</forename><surname>Yarmand</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Dongwook</forename><surname>Yoon</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Samuel</forename><surname>Dodson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ido</forename><surname>Roll</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sidney</forename><forename type="middle">S</forename><surname>Fels</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3290605.3300719</idno>
+		<ptr target="https://doi.org/10.1145/3290605.3300719" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2019 CHI Conference on Human Factors in Computing Systems</title>
+				<meeting>the 2019 CHI Conference on Human Factors in Computing Systems<address><addrLine>Glasgow, Scotland Uk; New York, NY, USA, Article</addrLine></address></meeting>
+		<imprint>
+			<publisher>ACM</publisher>
+			<date type="published" when="2019">2019</date>
+			<biblScope unit="volume">489</biblScope>
+		</imprint>
+	</monogr>
+	<note>CHI &apos;19)</note>
+</biblStruct>
+
+<biblStruct xml:id="b47">
+	<monogr>
+		<title level="m" type="main">YouTube Data API</title>
+		<idno>YouTube. 2022</idno>
+		<ptr target="https://developers.google.com/youtube/v3/docs/videos" />
+		<imprint>
+			<date type="published" when="2022-01-08">accessed Jan 8, 2022</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b48">
+	<analytic>
+		<title level="a" type="main">On Crowdsourced Interactive Live Streaming: A Twitch.Tv-Based Measurement Study</title>
+		<author>
+			<persName><forename type="first">Cong</forename><surname>Zhang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jiangchuan</forename><surname>Liu</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2736084.2736091</idno>
+		<ptr target="https://doi.org/10.1145/2736084.2736091" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 25th ACM Workshop on Network and Operating Systems Support for Digital Audio and Video</title>
+				<meeting>the 25th ACM Workshop on Network and Operating Systems Support for Digital Audio and Video<address><addrLine>Portland, Oregon; New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computing Machinery</publisher>
+			<date type="published" when="2015">2015</date>
+			<biblScope unit="page" from="55" to="60" />
+		</imprint>
+	</monogr>
+	<note>NOSSDAV &apos;15)</note>
+</biblStruct>
+
+				</listBibl>
+			</div>
+		</back>
+	</text>
+</TEI>

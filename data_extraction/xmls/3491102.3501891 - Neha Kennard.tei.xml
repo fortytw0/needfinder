@@ -1,0 +1,1489 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xml:space="preserve" xmlns="http://www.tei-c.org/ns/1.0" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.com/kermitt2/grobid/master/grobid-home/schemas/xsd/Grobid.xsd"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+	<teiHeader xml:lang="en">
+		<fileDesc>
+			<titleStmt>
+				<title level="a" type="main">Recommendations for Visualization Recommendations: Exploring Preferences and Priorities in Public Health</title>
+			</titleStmt>
+			<publicationStmt>
+				<publisher/>
+				<availability status="unknown"><licence/></availability>
+			</publicationStmt>
+			<sourceDesc>
+				<biblStruct>
+					<analytic>
+						<author>
+							<persName><forename type="first">Calvin</forename><surname>Bao</surname></persName>
+							<email>csbao@umd.edu</email>
+						</author>
+						<author>
+							<persName><forename type="first">Leilani</forename><forename type="middle">2022</forename><surname>Battle</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Siyao</forename><surname>Li</surname></persName>
+							<email>siyaoli@terpmail.umd.edu</email>
+						</author>
+						<author>
+							<persName><forename type="first">Sarah</forename><surname>Flores</surname></persName>
+							<email>sflores3@terpmail.umd.edu</email>
+						</author>
+						<author>
+							<persName><forename type="first">Michael</forename><surname>Correll</surname></persName>
+							<email>mcorrell@tableau.com</email>
+						</author>
+						<author>
+							<affiliation key="aff0">
+								<orgName type="institution">University of Maryland College Park</orgName>
+								<address>
+									<region>MD</region>
+									<country key="US">United States</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<affiliation key="aff1">
+								<orgName type="institution">Siyao Li</orgName>
+							</affiliation>
+						</author>
+						<author>
+							<affiliation key="aff2">
+								<orgName type="institution">University of Maryland College Park</orgName>
+								<address>
+									<settlement>Sarah Flores</settlement>
+									<region>MD</region>
+									<country key="US">USA</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<affiliation key="aff3">
+								<orgName type="institution">University of Maryland College Park</orgName>
+								<address>
+									<region>MD</region>
+									<country key="US">USA</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<affiliation key="aff4">
+								<orgName type="institution">Michael Correll</orgName>
+							</affiliation>
+						</author>
+						<author>
+							<affiliation key="aff5">
+								<orgName type="institution">Tableau Research Seattle</orgName>
+								<address>
+									<region>WA</region>
+									<country key="US">USA</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<affiliation key="aff6">
+								<orgName type="institution">University of Washington Seattle</orgName>
+								<address>
+									<region>WA</region>
+									<country key="US">USA</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<affiliation key="aff7">
+								<orgName type="institution">National Health and Nutrition Examination Study</orgName>
+								<address>
+									<postCode>2013-2014</postCode>
+									<settlement>[3]</settlement>
+								</address>
+							</affiliation>
+						</author>
+						<title level="a" type="main">Recommendations for Visualization Recommendations: Exploring Preferences and Priorities in Public Health</title>
+					</analytic>
+					<monogr>
+						<imprint>
+							<date/>
+						</imprint>
+					</monogr>
+					<idno type="DOI">10.1145/3491102.3501891</idno>
+				</biblStruct>
+			</sourceDesc>
+		</fileDesc>
+		<encodingDesc>
+			<appInfo>
+				<application version="0.7.1" ident="GROBID" when="2022-07-22T04:58+0000">
+					<desc>GROBID - A machine learning software for extracting information from scholarly documents</desc>
+					<ref target="https://github.com/kermitt2/grobid"/>
+				</application>
+			</appInfo>
+		</encodingDesc>
+		<profileDesc>
+			<textClass>
+				<keywords>
+					<term>Visualization recommendation systems</term>
+					<term>algorithmic trust</term>
+					<term>automation</term>
+					<term>recommendation source</term>
+				</keywords>
+			</textClass>
+			<abstract>
+<div xmlns="http://www.tei-c.org/ns/1.0"><p>The promise of visualization recommendation systems is that analysts will be automatically provided with relevant and high-quality visualizations that will reduce the work of manual exploration or chart creation. However, little research to date has focused on what analysts value in the design of visualization recommendations. We interviewed 18 analysts in the public health sector and explored how they made sense of a popular in-domain dataset 1 in service of generating visualizations to recommend to others. We also explored how they interacted with a corpus of both automaticallyand manually-generated visualization recommendations, with the goal of uncovering how the design values of these analysts are reflected in current visualization recommendation systems. We find that analysts champion simple charts with clear takeaways that are nonetheless connected with existing semantic information or domain hypotheses. We conclude by recommending that visualization recommendation designers explore ways of integrating context and expectation into their systems.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>CCS CONCEPTS</head><p>• Human-centered computing → Visualization design and evaluation methods; Visualization systems and tools; User studies.</p></div>
+			</abstract>
+		</profileDesc>
+	</teiHeader>
+	<text xml:lang="en">
+		<body>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="1">INTRODUCTION</head><p>Data analytics, and especially the creation of informative and useful visualizations of large datasets, can be a time-consuming and complex process. As part of a larger design goal of "augmenting" analytics to offload effort to algorithmic systems <ref type="bibr" target="#b12">[14]</ref>, there is a growing number of systems that automatically generate and recommend visualizations <ref type="bibr" target="#b46">[49,</ref><ref type="bibr" target="#b50">52]</ref>. Systems such as Voder <ref type="bibr" target="#b37">[40]</ref>, Dziban <ref type="bibr" target="#b27">[29]</ref>, and Tableau Show Me <ref type="bibr" target="#b29">[31]</ref> can generate visualizations to both surface potentially insightful features of a dataset as well as provide guidance for "novice investigators" to generate their own visualizations <ref type="bibr" target="#b20">[22]</ref>.</p><p>The designers of recommendation systems have explicit or implicit design values about what charts they surface: for instance, recommenders that purport to automatically surface "insights" <ref type="bibr" target="#b2">[4]</ref> might place value on particular statistical patterns like outlying values or correlated fields <ref type="bibr" target="#b7">[9,</ref><ref type="bibr" target="#b30">32]</ref>. However, despite the proliferation of visualization systems in the literature <ref type="bibr" target="#b46">[49,</ref><ref type="bibr" target="#b50">52]</ref>, there has been little work on interrogating these design values, and observing matches and mismatches between the values of recommendation system designers and consumers. Our work is therefore focused on a central question: what sort of visualizations do people want to see, and how well do these preferences actually align with the sorts of visualizations that algorithmic recommendation systems currently provide?</p><p>Prior work considers how people react to different recommendation sources <ref type="bibr" target="#b33">[36,</ref><ref type="bibr" target="#b45">48]</ref>, but does not consider the priorities and expectations analysts have when creating their own recommendations for other analysts. Without a deeper understanding of how analysts themselves think about the visualization recommendation process, new recommendation engines may barely help <ref type="bibr" target="#b46">[49]</ref>, and possibly even hinder <ref type="bibr" target="#b3">[5]</ref>, an analyst's ability to explore their data, creating a "double-edged sword" <ref type="bibr" target="#b26">[28]</ref> of potentially "opaque, inflexible, brittle, and domineering" <ref type="bibr" target="#b30">[32]</ref> analysis.</p><p>In this paper, we present the results of a pre-registered 2 qualitative study designed to interrogate and elicit design values around generating and evaluating visualization recommendations. Our study, conducted with public health researchers supplied with a sample dataset of U.S. self-reported health data, consists of two components:</p><p>(1) an ideation task where participants, with the help of an experienced visualization designer working with Tableau, sketched and then realized their own visualization recommendations for an imagined client seeking to influence public policy, and (2) a selection and ranking task where participants explored a gallery of recommendations (some generated automatically by systems, and some by human curators) and selected the ones they felt were most valuable for their client. We chose these tasks and this participant pool to examine points of friction between the values of recommendation systems and analysts. I.e., we wanted to contrast the (often) domain-agnostic assumptions of visualization recommendation systems with the specific domain expertise and context of our participants, and contrast the (frequent) focus on narrowly defined statistical findings in recommendation systems with the unconstrained and diverse rhetorical and persuasive goals of our participants.</p><p>Of the design values we encountered in our exploration, the three most prominent that our participants valued in recommended visualizations were:</p><p>(1) simplicity-participants, often with an assumed audience in mind, valued simple visualization designs over more complex ones, and visualizations with one clear takeaway over more nuanced or complex data stories. Titles and labels, filtering, and aggregation were common strategies to reduce the complexity of data. (2) relevance-in addition to a preference for the removal of extraneous data from recommendations, participants also made efforts to tailor their charts to their domain of interest. E.g., a preference for bivariate visualizations with anticipated casual relationships (e.g. that one variable would "drive" another, or produce a clear "trend"). (3) interestingness-participants were reluctant to provide visualizations that failed to show clear trends, group differences, or other strong signals. Participants wanted recommended charts to provide direct evidence for or against particular hypotheses, or to promote specific follow-up actions. These design values suggest both opportunities and dangers for designers of future visualization systems. On the one hand, they suggest benefits for incorporating additional data semantics or explicit user intent into recommendation systems to better meet the goals of analysts. On the other hand, they suggest that care should be taken to communicate complex or ambiguous trends in the data that might arise in the recommendation process, and that the desire to surface strong signals promotes a form of exploratory data analysis that lends itself to false positives or other dangers <ref type="bibr" target="#b34">[37,</ref><ref type="bibr" target="#b48">50]</ref> to the reliability or robustness of findings.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2">RELATED WORK</head><p>Our research questions and experimental design are informed by assumptions and goals behind the design of existing visualization recommendation systems, as well as by prior studies that involve participants expressing their preferences amongst visualizations from heterogeneous sources or creating novel and heterogeneous visualizations themselves. We therefore highlight three topics of related research: visualization recommendation systems, assessment of those systems (and visualizations in general), and visualization construction for novice users.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.1">Visualization Recommendations</head><p>Visualization recommendation systems aim to ease the process of visualization authoring or exploratory data analysis for different user groups <ref type="bibr" target="#b15">[17,</ref><ref type="bibr" target="#b50">52]</ref>. Each system has its own set of metrics and structures to represent what users find valuable to visualize in a dataset <ref type="bibr" target="#b46">[49]</ref>. For example, some recommendation systems prioritize perceptually effective encoding channels for a given set of data attributes (e.g., <ref type="bibr" target="#b27">[29]</ref><ref type="bibr" target="#b28">[30]</ref><ref type="bibr" target="#b29">[31]</ref>), popular visualization designs that other users have created in the past (e.g., <ref type="bibr" target="#b13">[15]</ref>), or specific types of data trends such as pairwise correlations between attributes <ref type="bibr" target="#b7">[9]</ref> or significant differences among sub-populations in the dataset <ref type="bibr" target="#b40">[43]</ref>. However, these priorities are often set in a way that is agnostic to either the domain of interest or the particular analytical goals of the user. When the system's and user's priorities are misaligned, the system may generate distracting and ineffective recommendations <ref type="bibr" target="#b46">[49]</ref>. In this paper, we seek to clarify what analysts prioritize when designing their own recommendations in the context of public health, and to understand how analysts' priorities compare with those of existing systems.</p><p>We divide existing visualization recommendation systems into three categories: Auto-Insight, Encoding, and Q&amp;A, although we note that these categories are not necessarily mutually exclusive, and that recommendation systems can and do incorporate design values or patterns from multiple modalities.</p><p>2.1.1 Auto-Insight. Auto-insight systems automatically detect and visualize meaningful attributes, trends, or other statistical properties within a provided dataset <ref type="bibr" target="#b26">[28]</ref>, removing some of the labor or luck involved in manual exploratory data analysis <ref type="bibr" target="#b12">[14]</ref>. These data insights can be given in the form of text describing statistical patterns in the data or through visualizations <ref type="bibr" target="#b23">[25]</ref>. Example systems include Voder <ref type="bibr" target="#b37">[40]</ref>, which focuses on textual facts and insights, as well as PowerBI Quick Insights <ref type="bibr" target="#b32">[34]</ref>, Foresight <ref type="bibr" target="#b7">[9]</ref>, and Amazon QuickSight <ref type="bibr" target="#b0">[1]</ref>, which focus on insights presented as visualizations. Voder creates textual "data facts" based on the dataset's attributes to assist users in interpreting generated data visualizations and communicating findings <ref type="bibr" target="#b37">[40]</ref>. PowerBI's Quick Insight <ref type="bibr" target="#b32">[34]</ref> panel searches through different subsets of a dataset and detects particular classes of statistical features (e.g., outliers, variance, correlation, categories with a strong majority) to generate insights during data exploration. Similarly, Foresight <ref type="bibr" target="#b7">[9]</ref> ranks visualizations based on statistical properties present in the data. Lastly, Amazon Quick-Sight <ref type="bibr" target="#b0">[1]</ref>, within the broader Amazon Web Services ecosystem, also creates data summaries using in-house algorithms, allowing users to upload and integrate their own models.</p><p>Although each of these systems provides a different means of exploring data and communicating insights, they generally lack explicit explanations for how insights are generated, leading some users to distrust the results <ref type="bibr" target="#b46">[49]</ref>. Furthermore, users do not necessarily know whether these recommendations cover everything that could or should be learned from the given dataset <ref type="bibr" target="#b23">[25]</ref>. This lack of transparency and consideration of user context (i.e., user preferences and intended recommendation goals) may result in bias, unreliability, and disruption of the exploratory data analysis process <ref type="bibr" target="#b26">[28,</ref><ref type="bibr" target="#b45">48]</ref>. Another worry is that, by exhaustively searching for potentially interesting patterns, auto-insight systems can function as "p-hacking machines" <ref type="bibr" target="#b3">[5,</ref><ref type="bibr" target="#b34">37]</ref>, surfacing "insights" that are ultimately spurious or misleading.</p><p>Our experimental design is most closely aligned with the goals and values of auto-insight recommenders, in that our participants were asked to generate meaningful visualizations for their clients without constraints on fields or designs of interest, although we note overlaps with other forms of recommenders below.</p><p>2.1.2 Encoding. We define encoding recommendation systems as those that suggest designs of individual visualizations given userspecified data attributes. These recommendation(s) are often based on the characteristics of the data and expert knowledge on the expressiveness and effectiveness of different encoding channels or chart designs <ref type="bibr" target="#b28">[30]</ref>.</p><p>These systems employ a variety of approaches in how they encode expert knowledge. Draco <ref type="bibr">[35]</ref> uses a set of constraints to assist users in visualization design and prioritize visual exploration, promoting effective encodings, and predicting the best visualization through a ranking system. Dziban <ref type="bibr" target="#b27">[29]</ref> builds upon the Draco knowledge base while incorporating chart similarity logic to create a balance between "automated suggestions and user intent. " Show Me <ref type="bibr" target="#b29">[31]</ref> either suggests (and automatically generates) particular chart designs given the data types of selected data attributes, or allows the user to progressively construct a chart by adding attributes one at a time, automatically suggesting new encodings or chart designs. Graphscape <ref type="bibr" target="#b17">[19]</ref> uses a directed graph model in which nodes represent chart specifications and edges represent transitions between charts. This model enables Graphscape to recommend alternative designs by minimizing the perceptual distance between new recommendations and visualizations previously seen. Table2Charts <ref type="bibr" target="#b49">[51]</ref> takes table-chart pairs and learns patterns that assist in generating recommendations. Several systems also focus on multi-dataset exploration. For example, GEViTRec [7] recommends visualizations across multiple datasets by looking for linking fields or domain-centric constraints. Lastly, Data2Vis <ref type="bibr" target="#b8">[10]</ref> uses neural networks to translate a given dataset into a resulting visualization specification, based on a training set of presumably well-designed Vega-Lite <ref type="bibr" target="#b35">[38]</ref> specifications. VizML <ref type="bibr" target="#b13">[15]</ref> applies a similar learning approach to Plotly visualizations.</p><p>While our experimental framing was less aligned with the design values of these systems, as our participants had free choice over which variables to include, the ability of our participants to create and select their own designs, and to iteratively alter the default designs generated over the course of the experiment, allowed us to see if existing assumptions around expressiveness and effectiveness matched the preferences and priorities of our participants (who, while embedded in their domain of interest, had varying levels of expertise in visualization design).</p><p>2.1.3 Q&amp;A systems. We consider Q&amp;A recommenders to be systems where the recommendation engine and the user can engage in one or more rounds of communication for the generation and refinement of recommendations. A prototypical Q&amp;A system might take as input textual questions, suggestions, and/or attributes ("questions") and produce as output an appropriate visualization (an "answer"). Amazon QuickSight and Tableau Ask Data are examples of systems that provide this feature. QuickSight <ref type="bibr" target="#b0">[1]</ref>, for instance, features a search bar wherein users can enter natural language questions about their data. The user's intent is then inferred from the questions, and the system returns an answer in the form of a number, visualization, or table. Tableau's Ask Data [46], a system for performing ad-hoc exploration and analysis, also incorporates natural language interaction features: users type in natural statements or questions into an input bar and the system produces a chart <ref type="bibr" target="#b38">[41]</ref>.</p><p>Although the user can explicitly tell these Q&amp;A systems what they are interested in, the extent to which systems are truly cognizant of or reactive to the intent of the user is often unclear <ref type="bibr" target="#b38">[41]</ref>. For example, a user may have a chart in mind when asking a question (or selecting attributes) but receive an entirely different chart as output, deviating from their expectations. How should systems respond to ambiguous questions from the user? <ref type="bibr" target="#b11">[13]</ref> In our study, we are interested in understanding what users generally value in the design and construction of visualizations, which can inform general purpose guidelines for creating intentfocused Q&amp;A systems, and other visualization recommendation systems. Our study protocol also allowed participants to iterate with us to refine their recommendations, affording an analysis of what sorts of refinement or repair operations are common in visualization recommendation with human partners, that could similarly be of use for designers of automated Q&amp;A systems.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.2">Visualization Recommendation Assessment</head><p>While a full consideration of all of the ways visualizations can and have been assessed is out of the scope of this work (see Lam et al. <ref type="bibr" target="#b21">[23]</ref> for a typology), we focus on studies dealing with eliciting preferences from sets of unfamiliar visualizations that have been presented to participants, especially in the context of recommendation. Peck et al. <ref type="bibr" target="#b33">[36]</ref> performed a qualitative study where participants were asked to assess their attitudes towards an array of infographics, highlighting how different beliefs and stances can influence the perceived quality, utility, and trustworthiness of a visualization. Lee et al. <ref type="bibr" target="#b25">[27]</ref> explored the process of making sense of unfamiliar visualizations through a think-aloud procedure similar to the one we adopt, with an emphasis on investigating what factors influence the interpretability of a visualization. In our study, we look to these works as a model for exploring attitudes towards existing visualizations, but we also include a visualization authoring step in order to assess specific design characteristics our participants valued when creating their own recommendations. Another paper we use as a model is Zehrung and Singhal et al. <ref type="bibr" target="#b45">[48]</ref>, where participants were given sets of recommendations from an unseen visualization recommender, with the specific goal of evaluating how the stated provenance of the recommender (human or algorithmic) impacted perceived quality and trust. While we similarly intermix human and algorithmic recommendations in our study with the goal of investigating any systematic differences between the two sources, our work moves away from questions of trust and provenance and towards broader issues of perceived utility and impact. Lastly, Zeng et al. <ref type="bibr" target="#b46">[49]</ref> propose a framework for specifying multiple visualization recommendation algorithms within the same semantic space to enable quantitative comparison and evaluation. While our mixture of qualitative and quantitative methods complicate this process, our study findings could be incorporated into the Zeng et al. framework to improve evaluation of end-user preferences and expectations for recommended visualizations.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.3">Barriers and Methods for Eliciting Visualizations</head><p>As we intended for our participants to both evaluate existing visualization recommendations and generate their own, we explored potential processes and pitfalls for eliciting visualizations from diverse audiences, especially audiences who may lack experience with existing visualization design tools. Several visualization construction barriers exist for visualization users (especially novices) -Grammel et al. <ref type="bibr" target="#b9">[11]</ref> finds that novices struggle with navigating and mapping the relationships between visualization concepts: exploratory questions, data attributes, and visualizations during the construction process. Other barriers include several reported by Kwon et al. <ref type="bibr" target="#b20">[22]</ref>: a failure to interpret visualizations properly and a failure to match expectations and functionality of the visualization. These barriers often caused frustrations among novice visualizers. This presents an underlying "gulf of execution" between the types of visualizations that users want versus what visualization recommendation systems actually generate. For this work, we are particularly interested in how more advanced analytics users approach this gulf.</p><p>To help reduce the barriers to effective visualization construction, free-form sketching can serve as an expressive medium of converting internal thought to external representations <ref type="bibr" target="#b19">[21,</ref><ref type="bibr" target="#b42">45]</ref>. Moreover, work by Tversky highlights the power of the sketching process to reveal the designer's underlying ideas and reflect core aspects of one's prioritization <ref type="bibr" target="#b39">[42]</ref>, a power that is used by systems such as SketchStory <ref type="bibr">[26]</ref> for fluid and flexible visualization authoring. A tangential effect of free-form sketching is that it provides direct interaction. Studies on whiteboard usage showed how whiteboard sketching enables people to immediately externalize ideas without being interrupted by or having to translate their ideas to another medium or system <ref type="bibr" target="#b41">[44]</ref>. We incorporated free-form sketching into our study to reduce the construction complexity for our participants and to better observe expectations for the visualizations they create.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.4">Summary</head><p>Our analysis of prior work points to a wide space of visualization recommendation systems that nevertheless prioritize specific statistical features, low-level analysis tasks, and visualization design rules, all of which have advantages in particular scenarios, but may or may not capture the specific priorities and mental models of analysts more broadly. Prior work also suggests relevant strategies for working with audiences across levels of data expertise or engagement to develop rich frameworks around understanding, values, and priorities in visualization. Our study seeks to integrate these two perspectives by performing a human-centric assessment of the priorities and values of visualization recommendations, the results of which can guide the designers of future visualization recommendation systems.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3">MOTIVATION</head><p>Our study is motivated by a potential gap in design values: between the values of designers of visualization recommendation systems (who might prioritize highlighting a particular subset of statistical patterns, data facts, or "insights") and those of human analysts (who might have more semantically rich or teleological expectations of their visualizations). With a deeper understanding of what analysts prioritize as they create and rank visualizations for later recommendation, we can compare our observations with how visualization recommendation systems are currently designed, and provide concrete feedback for how current and future systems can be refined to more closely align with the goals and values of their end-users.</p><p>We break our broader research question (what do analysts value in the design of visualization recommendations, and are these design values reflected in current visualization recommendation systems?) down into three sub-questions to investigate through our study:</p><p>• RQ1: What characteristics of a visualization design do analysts prioritize when recommending them to colleagues? • RQ2: What do analysts prioritize when evaluating visualization recommendations from other sources? • RQ3: How do the recommendations made by analysts align with those created from other sources in terms of visual form or analytical purpose? While recommendation systems are often agnostic or insensitive to data domain or analytic intent, our belief is that the perceived usefulness of a visualization is often task-and domain-dependent <ref type="bibr" target="#b36">[39]</ref>. For these reasons, we focus on a single domain in this work in order to specifically elicit any potential tensions between the domain insensitivity of many automatic recommenders and the domain knowledge and intents of our participant pool. Specifically, we investigate how researchers and professional analysts working in the public health sector create and evaluate visualization recommendations for a goal of presenting information to shape public policy.</p><p>Our questions are ones of exploring or enumerating alignment in design values rather than evaluating predictions or building models. As such, we do not enumerate hypotheses for testing, but focus more on descriptive quantitative reports of our findings augmented with qualitative data.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4">EXPERIMENT DESIGN</head><p>We designed a pre-registered 3 experiment to better understand what visual or data characteristics analysts prioritize when creating visualizations for other analysts, and what analysts purport to value when presented with a gallery of human-curated and algorithmically-generated recommendations.</p><p>To accommodate a wider range of participants as well as to abide by COVID-19 pandemic protocols, the study was conducted online using the video conferencing platform Zoom. Participants shared their screen with the experimenters, and completed the study using Google Jamboard, an online sketching and whiteboard tool. In the following subsections, we describe our participant pool, pilot study, and visualization artifacts used for the experiment, and then walk through the entirety of an interview, describing each phase and how the participant was to interact with the interviewing team.</p><p>Additional study details, including transcripts, sketches, generated analyzes, data tables, and analyses are available at https: //osf.io/xeub3/.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.1">Participants</head><p>After approval by our institutional IRB, we recruited 18 participants through a combination of university mailing lists, snowball sampling through research collaborators, and advertising on social media. We employed different methods of sampling to broaden population groups of participants to minimize the selection bias in our recruitment process.</p><p>We present demographic information about our participants in Table <ref type="table" target="#tab_0">1</ref>. Our participants ranged between 18-64 years old, with two being between 19-24, ten being between 25-34 years old, three being 35-44 years old, and three being 45+ years old. In terms of domain expertise, at the time of study, four participants were current graduate students and the remaining fourteen participants were working as public health professionals in various capacities, ranging in roles from project director, health program administrator, faculty member, and research scientist. Regarding frequency of creating data visualizations, nine participants reported creating visualizations at least once a month, five reported creating visualizations at least once a week, and three reported creating visualizations daily. The remaining participant reported creating visualizations rarely (less than once a month). To qualify for participation, participants had to have at least two years of industry analyst or research experience in public health. We compensated participants with a $25 Amazon gift card for completing the study.</p><p>By the end of the study, we collected a set of 53 visualization sketches (all participants but one sketched out three, while the one sketched only two) and 18 rankings of the visualizations in a gallery of recommendations from our participants.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.2">Experimental Dataset</head><p>To ensure that we selected and presented data that aligned with the interests of our target participants, we solicited feedback from experts in public health at our primary authors' home institution. These experts provided guidance on relevant datasets, attributes that would be of particular interest to a public health audience, and which groups and departments to target for recruitment. Based on this feedback, we selected a vertical subset of the National Health and Nutrition Examination Survey (NHANES) from 2013-2014 for use in our study <ref type="bibr" target="#b1">[3]</ref>. Twenty attributes were extracted from the NHANES dataset, covering the Demographics, Examinations, Dietary, and Questionnaire response categories. We randomized the ordering of attributes for each participant to mitigate order effects. A sample table of 6 records was provided to participants, so they could see the available attributes and their data types. Participants were also given the option to view the dataset in its entirety through an online link to a spreadsheet.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.3">Pilot Study</head><p>We conducted an initial pilot experiment with five participants. We also presented our experimental protocol to two faculty members at our institution's School of Public Health for additional feedback.</p><p>Initially, we asked pilot participants to hypothesize about which attributes would be important for visualization. This helped us to narrow down our list of data attributes that we believed to be valuable and relevant to in-domain analysts. We specifically extracted only these data attributes from the broader dataset. We presented this subset to each pilot participant and asked them to sketch five visualizations they would recommend to other analysts that would explore the same dataset. We found that asking for five sketches prohibitively extended the length of the study, as they reported that it was difficult to create five sufficiently distinct and interesting visualizations in the allotted time. We decreased the number to three, resulting in a final approximate study length of 60 minutes. We validated this updated study design with an additional pilot participant. An additional modification as a result of this piloting was to allow both solicitation of sketches via Jamboard (which some participants found limiting or difficult to use) as well as via hand-drawn sketches emailed directly to the experimenters.</p><p>We also used the pilot study to seed the gallery of visualizations that we ultimately used for our selection/ranking task in the final experiment. Our gallery was created via a mixture of the visualizations created by our pilot participants as a result of their ideation task (5 visualizations) and the visualizations favored by our pilot participants from a gallery of visualizations generated by recommendations systems Dziban <ref type="bibr" target="#b27">[29]</ref>, Voyager <ref type="bibr" target="#b44">[47]</ref>, PowerBI <ref type="bibr" target="#b32">[34]</ref>, Tableau ShowMe <ref type="bibr" target="#b29">[31]</ref>, and Amazon QuickSight <ref type="bibr" target="#b0">[1]</ref>. We selected five of the algorithmically-recommended visualizations with the most votes from our pilot participants to add to our finalized gallery of recommendations: the resulting favorite visualizations came from Dziban (3 visualizations) and Voyager (2 visualizations).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.4">Experiment Flow</head><p>Our study consisted of four phases:</p><p>• Phase 1. Tutorial The participant receives a brief tutorial on how we use Jamboard to conduct the virtual experiment.</p><p>The participant was then introduced to the task for Phases 2 and 3, and given an opportunity to review the dataset. • Phase 2. Visualization Ideation with Mediator and Wizard The participant sketches 3 visualizations based on the given dataset and task in conversation with a mediator. A "wizard" then translates these sketches into final visualizations using Tableau Desktop. • Phase 3. Visualization Selection and Ranking The participant selects and ranks 5 visualizations from a set of 10 visualizations (5 human-generated and 5 system-generated). • Phase 4. Post-survey Participants complete a short survey to provide closing comments and demographic information.</p><p>4.4.1 Tutorial. We explained the features available on Jamboard (e.g., pencil, eraser, drawing shapes) Participants spent five minutes familiarizing themselves with Jamboard's features. They then were given the task, which is as follows: "You have been paired with an analyst to develop slides to present to a client. The client is developing public policy to improve health They were then given an opportunity to explore and review the dataset, with minimal input from the interviewers.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.4.2">Visualization Ideation with</head><p>Mediator and Wizard. Participants were then asked to select and rank a short list of attributes of interest to them, to better ground them within the task. They then were asked to sketch visualizations while following a think-aloud manner. The participant shared with the mediator their sketches and any further necessary visualization specifications, while discussing the ideas, goals, and motivations behind the visualization. Then, the wizard re-created the participants' sketch with visualization software, Tableau Desktop, similarly to the process used by Grammel et al. <ref type="bibr" target="#b10">[12]</ref> in their study. During this sub-phase, the mediator guided the participant by explaining set tasks, and organizing the jamboard. Concurrently, the wizard would share their Tableau visualizations with the participant, receiving feedback and then updating the visualizations based on this feedback to ensure that the final designs matches the participant's sketched intentions.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.4.3">Visualization Selection and</head><p>Ranking. Afterward, participants were presented with a gallery of 10 visualizations (Figure <ref type="figure" target="#fig_0">1</ref>, a mixture of human-recommended and algorithmically recommended visualizations (see subsection 4.3)). We did not specify the provenance of these visualizations. The display order of visualizations was randomized for each participant to account for order effects. Participants were asked by the mediator to select and rank the top 5 visualizations within this set that they favored and would recommend to others in relation to the prompt given in 4.4.2.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>4.4.4</head><p>Post-survey. The last step of the experiment was for participants to fill out a short post-interview survey about their visualization experience, data analysis experience, age, and work experience, e.g., their highest level of education, years of experience, prior statistical experience, current job title, and also the frequency for performing data analysis.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.4.5">Data Collection.</head><p>Participants' survey responses were collected using online forms and stored as CSV files. Participants' sketches (uploaded images and Jamboard designs), gallery selections and survey responses were also collected. The sketches were translated into corresponding Vega-Lite specifications <ref type="bibr" target="#b35">[38]</ref>. The gallery selections and rankings were also stored as CSV file. Participants shared their screen during the experiment and screen capture was recorded, providing video and audio recording of each interview session. Each session was transcribed. Experimenters also took notes during the experiment. To preserve participant privacy we do not share these audio or video records directly, but only the transcripts, notes, and codes, and after a manual process of redacting identifying information. We share this collected data as a public resource on OSF: https://osf.io/xeub3/.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.5">Experiment Design Limitations &amp; Trade-offs</head><p>We considered multiple trade-offs in the design of our study, which we discuss here.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.5.1">Limitations in Data</head><p>Collection. In our experiment, we chose to reduce the number of attributes presented to participants for two reasons related to participant accommodation. First, we found in our pilot study that having access to the entire NHANES dataset was overwhelming for participants, and they reported encountering "analysis paralysis" when deciding what attributes to select and what visualizations to sketch. Second, with the original number of attributes to choose from, thousands of attribute combinations were possible for creating visualizations, which could have led to participants having little or no overlap in their attribute and The gallery of visualization recommendations provided to our study participants. While we did not share the origin of these visualizations with our participants, for illustration in this paper we have labelled the chart provenance: those marked "H" were generated by pilot participants as part of their ideation sessions, those labelled "V" were recommended by Voyager <ref type="bibr" target="#b44">[47]</ref>, and those labelled "D" were recommended by Dziban <ref type="bibr" target="#b27">[29]</ref>. We also include the overall rank of the recommendation, according to our participants. Overall rank is determined by summing reverse ranking data grouped by the visualization ID, then sorting in descending order.</p><p>visualization preferences. Though this observation could hint at the need to implement scope-reduction (in terms of attributes) within visualization recommendation systems, for logistical purposes, we decided to present just a subset that was approved by our pilot participants.</p><p>We also reduced the number of sketches we asked participants to create in the Visualization Ideation Phase of the study. We made this decision based on study length as observed through our pilot (see subsection 4.3).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.5.2">Limitations of our Participant</head><p>Pool. Though visualization recommendation systems are of broad interest for analysts across many domains, we recruited participants specifically with experience in analyzing public health data, resulting in a relatively specified participant pool. Our findings may not necessarily translate to other domains. However, given the importance of visualization in communicating public health information, and the richness of our selected dataset (NHANES), we believe our experiment still provides meaningful insights for the visualization community. We also believe that our decision to focus on participants with particular domain expertise would serve to highlight discrepancies in their design values compared to the relatively domain-agnostic priorities of algorithmic visualization recommendation systems.</p><p>We focused on participants with domain expertise who all expressed at least some familiarity with the sort of survey data that we used in our experiment. We expect that entirely different design challenges and trade-offs would result among participant pools with varying levels of familiarity with the source data.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.5.3">Limitations of a Remote Study.</head><p>Due to limitations imposed by the COVID-19 pandemic, we conducted all interviews remotely, with telecommunication software (Zoom) and an online sketching tool (Google Jamboard). Given that participants can vary widely in their experience with online tools, this mode of administering the experiment likely impacts our findings. That being said, our participants were able to successfully complete the study, and share meaningful visualization recommendations. When studies can be safely conducted in-person again, an in-person study would enable us to administer the study without the limitations imposed by our software.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.5.4">Limitations of the Mediation Approach.</head><p>As observed in prior studies <ref type="bibr" target="#b9">[11,</ref><ref type="bibr" target="#b38">41]</ref>, the human mediation (or "Wizard-of-Oz") process can sometimes lead to confusion on the part of participants, given the interplay between a participant's intent, communication of this intent to the "wizard," and what can be feasibly designed by the participant using real data. Many times, participants were surprised to see the result of the visualization after their initial sketch. We observed that most of these surprises were due to a mismatch in expectations between the user's understanding of the data, and what the data actually supported.</p><p>Furthermore, we acknowledge that since participant's intent is being interpreted by the mediator, our recreations of participants' sketches may not perfectly match their expectations. The creation of visualization recommendations under longer time frames, with deeper analyses of the data, and with additional rounds of feedback we suspect would generate categorically different sorts of visualization recommendations, but this remains an area of future</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5">ANALYSIS</head><p>To reiterate, the main question driving our research is: do analysts value in visualization recommendations, and are these values reflected in the design of current visualization recommendation</p><p>To answer this question, we collected study data regarding participants' design values and preferences as they created their own visualization recommendations and ranked visualizations from pre-defined gallery of recommendations. First, we describe how we qualitatively and quantitatively analyzed this data to shed light on the perspectives and design values of analysts from the public health sector when recommending visualizations. Then, we present our analysis results, organized around the research questions listed section 3. All of our analysis code and results are shared in our open-source repository on OSF: https://osf.io/xeub3/.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.1">Qualitative Analysis Methods</head><p>adoped a grounded theory-inspired approach for qualitatively analyzing our study data. Given our collected data (transcriptions, experimenter notes, participant sketches, and participant rankings), we used emergent coding to identify common themes in how participants design and rank visualization recommendations. In this way, we could avoid making assumptions a priori about our participants and thereby maximize our ability to observe a broad array of preferences. As part of our coding process, we explored themes regarding the visual forms of the visualizations (e.g., what encodings or visualization types our participants seas well as each participant's analytical intent (e.g., the types of statistical patterns our participants wanted to observe) and semantic context (e.g., the domain knowledge applied to value one over another). As a starting point, four members of the team independently went through differing subsets of at least 6 participants of interview and created a set of themes and codes based off their assigned participants. Assignments included overlapping subsets, to not only improve saturation but also to validate that synthesized ideas were consistent for the same participant. After all sets of notes, themes, codes were completed, one member of the team compiled an codebook based off the themes derived from each set. Similar themes were merged, grouping together notable quotes from participants, while broader themes were split into additional themes.</p><p>example, themes that only appeared in one set were often grouped under a broader theme. We included a brief explanation for what each code represented. We then reviewed and revised this to ensure that they consistently captured a useful of ideas and experiences expressed by our participants.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.2">Quantitative Analysis Methods</head><p>Our general approach to quantitatively analyzing our study data was to programmatically extract the attribute selection, data transformation, and encoding selection choices made by participants using the Vega-Lite specifications derived from each visualization in our interviews. Given these extracted parameters, we counted observations of each choice, such as the total participants that created visualization recommendations that use bars as the mark type or the total participants that include color encodings in their created visualizations. Here, we describe how various parameters were extracted from our study data for analysis.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.2.1">Analyzing Recommendations Created By Participants.</head><p>translated each visualization recommendation created by participants into a corresponding visualization specification in Vega-Lite <ref type="bibr" target="#b35">[38]</ref>. We created a series of Python scripts to analyze these specifications to extract different features, such as which attributes were selected from the dataset, what data transformations applied (e.g., binning and aggregation), and what mark types and encoding channels were chosen to visualize these attributes. We supplemented this automatic information with manual assessments of certain properties of the designs (e.g., which variable in a bivariate chart was the independent variable and which was the variable).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.2.2">Analyzing</head><p>Participants' Rankings of Existing Recommendations. rankings of visualizations from the pre-defined gallery were stored as a single relational table that which 5 visualizations were selected from the gallery and each participant's ordering of their top five recommendations. Each visualization from the gallery was also translated into a corresponding Vega-Lite specification, with a note capturing recommendation source (human-generated, or auto-generated by Voyager or Dziban). We used the Vega-Lite specifications and the rankings table as inputs to scripts that extract the attributes, statistical patterns, visualization types, and encodings participants preferred from the</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.3">What do Participants Prioritize When</head><p>Creating Their Own Visualizations?</p><p>this section, we address question RQ1 from section 3: What of a visualization design do analysts prioritize when recommending them to colleagues? 5.3.1 Participants created simple visualizations with a small set of intended takeaways or messages. In terms of the total attributes involved in each sketch, the vast majority of sketches include only two attributes from NHANES (37 out of 53). A small subset includes three attributes (15 out of 53), and only one example incorporated five attributes. Most recommendations appear to favor bivariate relationships between data attributes, though multiple calculations were sometimes applied to individual attributes, producing more than one encoding for this attribute within a single visualization did not name Tableau as the system used in our interview protocl, nor did we train or inform our participants on the specific capabilities of Tableau. Our participants were not given any restrictions on the visualizations they could request. Nevertheless, eschewed "xenographics" <ref type="bibr" target="#b22">[24]</ref> and stuck to common forms like bar charts, line charts, pie charts, and scatterplots (see Figure <ref type="figure" target="#fig_2">4</ref>). We did not encounter any visualizations that could not be converted to the intentionally limited Vega-Lite <ref type="bibr" target="#b35">[38]</ref> specification language. While participants were often aware of more complex ways of showing the data, ease of interpretation was a frequent motivator for keeping things simple. For example, said "a lot of my clients aren't really data-savvy. So I use a lot of bar because they are pretty easy for them to understand... if you get too crazy or too fancy, then I lose them."</p><p>To further simplify their visualizations, participants generally applied aggregation to a dependent variable in their sketches to highlight distributions, trends, or patterns in the data. Examples include a boxplot visualization sketched by to show the distribution of alcohol consumption on the x-axis (dependent variable) by whether respondents felt down or depressed on the yaxis (independent variable), or a bar chart sketched by P15 showing the percentage of respondents with diabetes on the y-axis (dependent variable) grouped by defined income classes on the x-axis (independent variable). Participants would further streamline the of their visualizations by hiding or removing ambiguous For example, at least 9 participants wanted de-clutter their visualizations by filtering out values such as "Don't Know", to answer", and nulls. P12 tells the visualization mediator, "Let's filter those out and just put it in a note. Yeah, I think three [categories] in a dataset this large might be distracting to include in graph." also wanted clear take-aways or other action items for the intended audience, and would express disappointment when visualization they sketched did not produce the expected clear trend. For example, when discussing all of their generated plots, was concerned that "I don't think they're very actionable right Similarly, when discussing a potential chart of BMI, said "I wouldn't send this to anybody because it looks the same across education levels, so that clearly doesn't matter much."</p><p>Finally, participants would use annotations or other design tweaks to highlight the intended message. P11, looking over a messy scatterplot, said "I ... added a trendline to indicate some kind of trend so easier for the audience, especially a policymaker, to see the key message." When deciding whether or not to aggregate their data, remarked "If there's a clear trend, then that, to me, is more meaningful than on a scatter plot. That [scatter plot] doesn't really show P8 also used titles to indicate intended messages (e.g. "No trend between Diabetes status and Daily Alcohol intake" and "Higher Frequency of Toothaches is Associated with Higher Daily</p><p>Intakes"), a design choice also undertaken by who remarked "I also tend to put in some kind of interpretive title or subtitle, I tell them what they're seeing. So they don't have to guess."</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.3.2">Participants focused on the visual appeal and legibility of their</head><p>Participants would often perform several rounds of iterawith the wizard in the ideation task in order to improve the aesthetics and legibility of the final charts. P8 mentions of their bar chart: "I like putting outlines around the bars, so they stand out a little bit more... I also usually take off the lines going across , because you have the numbers on top of the bars, then you don't need the lines going across like that."). Some participants, like P18, conflated mark types with aesthetic adjustments, mentioning: "I keep picking at these... for a long time to keep refining them and refining them... And sometimes, I'll make a figure as a bar chart, then I'll just do a stacked bar... And then I'll try it as a pie chart. And I'll look at them side by side and decide," an indication that iteration on visualization designs (including tweaks such as encoding channels, mark types and even miscellaneous adjustment) serves an important part in gaining fuller confidence in their presented visualization recommendations. The lack of ability to iterate on or control the design aspects of visualization designs may have contributed towards participant's reluctance to rank exterior recommendations more highly than their own creations (see subsection 5.5).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>5.3.3</head><p>Participants focused on data attributes connected with existing contexts and shared expectations. Figure <ref type="figure">3</ref> lists all of the attributes that participants used in their visualization sketches from 4 Referring to the default background gridlines produced by Tableau Desktop the ideation section of our study (see subsection 4.4). 19 out of 20 attributes were used. The only attribute that participants did use in their sketches was Used_Marijuana_Or_Hashish. For the attributes used in multiple sketches, we found that and Education_Level were the only attributes used exclusively as independent variables across all sketches. Similarly, the only attribute to be used exclusively as a dependent variable. Otherwise, attributes appeared both as independent and dependent variables within visualizations. For example, a participant might perform a breakdown of two demographic variables in either order</p><p>Have_Diabetes by Age, or Age by Have_Diabetes), placing the variable in a dependent or independent role depending on their analytic context (e.g. "Are older people more likely to have or "Are people with diabetes more likely to be elderly"). That being said, most demographic measures were consistently as independent variables in participants' sketches, such as Annual_Family_Income as the independent variable in 12 of 16 sketches including the attribute), Gender (13 of 14), Age (11 of 11), and Education_Level of 4). Most health measures were generally treated as dependent variables, such as Body_Mass_Index (8 of 14 sketches including the attribute), Have_Diabetes (7 of 11), Total_Sugars (8 of 8), or Diastolic_Blood_Pressure (5 of 7). Most sketches involved one demographic measure and one health measure, or two health measures. The assignment of causal roles for these variables was not arbitrary. From the rationales provided by participants over the course of the ideation exercise, participants mentioned the need to identify "drivers" and "trends" (P1) connected to health or health outcomes. As per "I thought about more social determinants of health, and what would be affecting it" P13 remarks: "I'm looking for things that relate more to getting to outcomes, whereas some of these seem more like physiological relationships or demographic relationships." Figure <ref type="figure">5</ref>: Counts for all possible pairs of attributes, binned by estimated mutual information value (similar to correlation) <ref type="bibr" target="#b4">[6]</ref>. A higher mutual information estimate indicates a stronger correlation for the given pair of attributes. The pairings that were used in participants' sketches are colored orange.</p><p>The pairing of independent and dependent variables typically made advance of seeing the rendered results, suggesting participants utilized prior knowledge and/or to hypotheses potential and causal relationships. That is, rather than looking for highly correlated fields and surfacing them to users, participants selected fields where the was perceived as relevant or important, regardless of the resulting statistical correlation or (lack of) visible trend. For P8, upon seeing the results of a bar chart showing alcohol consumption broken down by diabetes status, remarked "It show me anything, should I change it? But I mean, that's sometimes to know to see that there isn't really a trend between two things." To confirm the disconnect between statistical correlations and the trends our participants chose to surface, we estimated a mutual information value for all possible pairs of attributes in our dataset (similar to a correlation score) <ref type="bibr" target="#b4">[6]</ref>. Then, we identified which pairings were actually observed in participants' sketches, are colored orange in Figure <ref type="figure">5</ref>. A higher correlation between the values in the selected attributes translates to a higher mutual information estimate. We observed a slight preference for higher pairs, however, pairings span the full spectrum of observed mutual information scores.</p><p>Providing recommendations that were linked thematically or otherwise mutually supportive was also an important factor for participants, who preferred to keep a common theme among their genervisualizations. For example, P11 (interest in Diastolic_Blood-_Pressure the y-axis for all three plots), (interest in Have-_or_Had_Heart_Attack in all three plots), P13 (interest in _Diabetes for all three plots), and P3 (interest in Total_Sugars and Total_Energy in two plots) all preferred similar data attributes and/or plot types when sketching their three recommendations in order to create a synergistic, mutually supportive dashboard.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.4">What do Participants Prioritize When</head><p>Ranking Pre-Defined Visualizations?</p><p>In this section, we address question RQ2: What do analysts prioritize when evaluating visualization recommendations from other sources?</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.4.1">Participants preferred simplicity over information overload.</head><p>When presented with ten visualizations, participants vastly preferred simple graphs that could be interpreted easily. While ranking visualizations, P1 mentions "I think some of the graphs had a little more information than what might have been easily digestible."</p><p>similarly P3 ranked the visualizations "mostly by simplicity: which ones were quickest and easiest to follow?." Participants also commented on the ambiguous data present in various visualizations in the gallery, also discussed in subsubsection 5.3.3. mentions "Like some of the things just confuse your data a little bit. Like we still nulls here. We have 'Don't Knows', we have 'Refused', so like I'd take those out if I was doing this." with the ideation task (subsubsection 5.3.3), desire for simplicity was also reflected in a preference for visualizations with clear P4 reports "trying to prioritize one set... where the trends out a little bit more and were easier to look at to get what trying to tell you at face value. That was the number one thing." When presented with a visualization without a "clear trend, " argues "If it does not have a lot of variation (in the graph), then why do we do it this way?" These sentiments echo participants' preferences from the ideation task, where many participants would scrap an idea if it did not lead to a visualization with positive results.</p><p>Our participants valued simplicity (and avoided complexity) in their recommendations for a variety of reasons:</p><p>(1) The participant was not able to understand a few of the relatively complex visualizations and would not recommend them to others. For example, P5 had difficulty interpreting one graph and said "like this, I find really hard to understand.</p><p>To me, you have to look at too many things and then make sense of what it's telling you." (2) The participant determined that the complexity of a visualization would hinder its effectiveness for communicating the story to the target audience (policymakers). P15 explains "And, some of these I think are just so complicated for people that understand what they so I'm not choosing them. I'm also just trying to think about what would be easy for my client to show and what people would get." Referring to the same visualization (Visualization ID A), P6 liked it because "...it be a little less fancy or something like that, but it communicates the information pretty easily, which is always good."</p><p>Our quantitative reinforced here. In of encoding count, we found that participants recommendations representing bi-variate relationships over more complex visualizations: 48.9% of participants' selected gallery visualizations contained exactly two attributes, 41.1% of participants' selected gallery visualizations contained three attributes, sharply dropping off to 6.7% for gallery visualizations containing attributes.</p><p>5.4.2 Recommendations were often considered inspiration for later exploration but not necessarily a final product. ranking the pre-defined gallery of recommendations, participants discussed the things they liked and disliked for each visualization. Several considered the visualizations interesting which helped spark ideas that they had not come up with while generating their own visual-P5 was inspired by one area chart, and wanted to explore further. "I it could be super cool. But as an area chart, I guess I'd have to play around with the data to see." noted that they'd like to dive into the recommended visualizations to look at subsets the graph: "I think I would like take cuts, like look at a subset of who are feeling down and depressed, and then really analyze findings suggest that the visualization recommendation should be treated as a dynamic, evolving dialogue between the user and the system, where recommendations can spur new ideas but not necessarily substitute for the user's own visualization work.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.5">How Do Participant Recommendations</head><p>With Those From Other Sources?</p><p>this section, we address question How do the recommendamade by analysts align with those created from other sources in terms of visual form or analytical purpose? 5.5.1 Participants preferred their own creations to recommendations from others. Only 6 out of 18 participants picked gallery visualizations to replace their own created visualizations. Our observations suggest several potential reasons that together point to a participants' perceived difficulty parsing the visualization, including: aesthetics &amp; visual formatting ("This one is sort of hard to read since the x-axis isn't labeled and that just sort of hard figuring out what it's saying." -P12), and simplicity or clarity ("I rarely make a visual for a audience, and so I look at these charts and I'm like, my client wouldn't understand this." -P5). These factors occasionally valued over even analytic utility or accuracy, e.g., "Some of graphs, like A or D, might actually be describing dataset better than the ones selected. But because it's so much harder to read... that's not something I would show a client. That's why I didn't even go further than an initial look." (P19). Together, these findings suggest that analysts are consistent in their recommendation preferences-in this case, prioritizing clear and simple narratives-regardless of whether they are creating new recommendations or ranking existing ones. 5.5.2 Participants exhibited no strong preferences for recommendations generated by other humans versus those generated by recommender systems. In terms of recommendation sources (e.g., human versus algorithm), we found that when selecting from the gallery, had a slight preference for human-curated recommendations (48 selections) over those generated using Voyager and Dziban and 18 selections, respectively -42 total). However, that process in a way, already pre-filtered algorithmically generated recommendations (see subsection <ref type="bibr">4.3)</ref> on interest. We are therefore hesitant to use our quantitative to point to a strong pattern of preference for a particular of recommendation, beyond pointing out that there was no bias towards one source of recommendations or another.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.6">Reflections from the Interviewers</head><p>Our original preregistration focused on determining how our participants perceived the recommendation design process, but did consider the perspective of the interviewers (the mediator and wizard). In this section, the interviewers in the experiment on their experiences and observations from the interview transcripts. We deviate from our original preregistration to include perspectives as we believe they provide richer nuance surrounding opportunities and challenges within the visualization recommendation process.</p><p>We highlight notable misalignments in expectations that we obthroughout our study, clustered according to three recurring themes: uncertainties about the data from the user's perspective, about user intent from the wizard's perspective, and the inability to generate the visualization according to the original user intent. These misalignments led to interesting compromises in the end-visualization, as detailed below.</p><p>5.6.1 Assumptions and Uncertainties about Data. On several occasions, the wizard interfered with the participant's design process reminding them of characteristics of the data. However, on one occasion, this interruption spun into the participant selecting a radically different choice in data attributes.</p><p>Wizard: For the second line plot where you had income by BMI... One thing to keep in mind is that income isn't actually a continuous variable; it's discrete with a size of 5k. P6: Thanks for pointing that out, I did not notice Let's do something else then... Let's just ask question. Instead of the BMI and salary, let's do caffeine, by age and by gender. in some instances (such as the above) this new awareness or clarification about the data caused the participant to change plans entirely, in the vast majority of scenarios, the wizard and the participant worked to derive meaningful compromise on the data attributes once the data was clarified. For example, this snippet from P18 transcript shows an incremental back-and-forth which fleshed out a visualization design, as gaps and uncertainties in of the dataset were between the wizard and the participant:</p><p>Wizard: Just a quick note that for the first graph you sketched, "Could Not Afford Food" actually can contain three different values. P18: Thank you for pointing that out... I shouldn't have assumed it was [boolean].. Can you do it as like a stacked bar [instead of a standard bar chart]?</p><p>In addition to highlighting the value of mutual communication and iteration when creating visualizations, these interactions also suggest the utility in presenting users with useful summaries or alerts about the data available to them in order to orient them to data. Given the shape and size of our chosen dataset, generating many standard visualizations required an explicit choice of aggregation. Our own participants often did not explicitly qualify an aggregation method or took it for granted that the system would use their intended default. This likely extends to when they interact with drag-and-drop interfaces such as Tableau. In the experiment, the wizard had to thus frequently prompt for explicit aggregation such as in the P16 transcript:</p><p>Wizard [referring to bars, after P16 finished sketching]: So would it be like... the average sugar intake? P16: Mmm.. Yeah! You could do that [averaging] for any of the health outcomes and see your relationship with annual family income. ... Wizard to a second sketch]: For the yaxis, did you want to zero in on one attribute in BMI-sugar-caffeine? Should we just pick one? P16. Sure. BMI, although that seems like probably well-established already in a policy. Okay, so for now, I'll do BMI. Do you have an aggregation measure you'd like to pick? What would you like to do? I'd like to remind you that in the first graph, we decided to average the total intake. P16: Again, to average the amount. uncertainty around aggregation type has been observed not just in creators but also readers of visualizations <ref type="bibr" target="#b16">[18]</ref> and suggests that choosing the wrong "default" could produce or even misleading recommendations.</p><p>Lastly, the participants often asked questions that required deep of the domain or the source data. As the wizard and the mediator were not public health experts themselves, these questions led to acknowledgments of uncertainty: the diabetes question, how was that question worded? Mediator: the exact question, I can't recall off the top of my mind, but the user can answer either "Yes", "No", and "Borderline".</p><p>Okay, so the question didn't mention anything about diagnosis? Mediator: I'm not 100% sure. Some of these details about the dataset matter and affect how a participant would generate a visualization. We did not always have the answers to some of these questions. In a similar way, many visualization systems do not have all of the semantic details about a dataset it might visualize for a user, though would streamline the design process by improving the user's literacy on the dataset improving their to find appropriate visualization forms their data.</p><p>5.6.2 Uncertainties About User Intent. Analogously to the participant's uncertainties about the data, there were sometimes uncertainties on the wizard's perspective about user intent. This sometimes led to scenarios that even after a couple clarifying questions, we unable to 100% follow what a user expected. This was often compounded when the participant would provide vague visuals. So I don't know how doable this is, I would to, and there may not be time for this for like what you have planned for today... So I'm thinking if we had more time, it would be cool to group education level differently. Right. So like, anyway, so like, less than ninth grade, and ninth to 11th grade could be grouped as one, but obviously, we don't need to do all that grouping now. But like that grouping would just have two dots on its line. Right, it would show the x axis which would be spectrum of no to every day, like no over at the zero, what up to essentially, the education grouping have two dots on its line, as opposed to right now it has 10 you see what I'm saying? Yeah, it's far more simple. Or we can move on to the other Wizard: Okay, let's keep this for now. And then if we have time, we can go back and do these adjust-There was also at least one case in which the wizard was unable to meet the participant's needs with an alternative visualization Wizard: Oh, yeah, that um, that is up to you if you have a different way that you want to visualize it. Since the table is a little bit tricky.</p><p>So I think then we can go for line graph also.</p><p>Okay. Yeah, so I think for for this one, we have a line graph, it can't be done since the there are categories for the body, since it's because of the different categories. So let me show you. Like we can have this bar chart with the annual family income versus each of the different types of different types of BMI. Yeah, so is this an alternate solution?</p><p>Okay. This is still not quite what I am looking Interviewer: I guess, if that's the case, we can still mark that you still want the table? Because realized we're like overtime a little bit... Yeah, we can definitely take notes on that and maybe mark that down in our notes.</p><p>These moments ultimately affected the wizard's ability to address or tweak user intent in the design. While having a in the loop was in some sense detrimental for full expressiveness (since wizard may have had imperfect knowledge of the system), it also afforded us fuller transparency in communicating both system and wizard limitations to users, as well as on the part of the participants of potential designs that required significant time or effort to "get right. " That being said, it is presently difficult provide the same expressiveness a user might have with penand-paper to a visualization system, especially when factors such as data, domain, and technical know-how exist. Compromises must occur, which is why we detail these moments in our interviews 5.6.3 Constraints: System and Wizard Ability. While the wizard tried to maintain the original user intent as intact as possible, this wasn't always possible due to constraints on the system (Tableau) or the wizard's ability to use the system to create a visualization isomorphic to the participant's initial design, in the time allotted.</p><p>while we always recorded the original sketch and design intention of the participant, on several occasions, the wizard and user were forced to produce a compromised design, or abandon potential design ideas, sometimes due to the request for more analytical queries.</p><p>Wizard: let me try to understand what you were looking for. So you're looking for a proportion per income level, where the number essentially represented is the numerator [family income] divided by the total number of respondents across all family incomes? P9: No. So like, let's say there are 100 respondents in the 5k category. 100 males and 100 females. I want to see of those 100 males, what proportion reported feeling down or depressed? Maybe it's only 10%? And then among females, what proportion reported feeling down or depressed? we tried to limit drastic interference (e.g. "here's a radically different visualization design idea you could consider"), sometimes compromises due to technical skill with the visualization system had to be made.    <ref type="figure" target="#fig_6">6a</ref>) and the wizard's interpretation of the design (Figure <ref type="figure" target="#fig_6">6b</ref>). These visualizations have slight differences, including filtered values axes, as well as more structural differences such the data grid inherent Figure <ref type="figure" target="#fig_6">6b</ref>. For this sketch, the wizard was unclear on the design intent of P5, specifically regarding the mark types, which ultimately led to their inability to specify this in Tableau.</p><p>males and the females. Do you have any sugges-Wizard: we could just separate the axes and make one axis female and one male. P9: Okay, yeah I like that. So female versus male.</p><p>The examples in this section highlight that the wizard was not a real-time translator of a participant's visualization idea into a final design, but had to navigate their own technical skill with Tableau, along with the uncertainties and ambiguities regarding user intent and data. For all sketches, the wizard was able to generate a design compromise that the participant accepted for the sake of "movon." However, the scenario demonstrated in the snippet with P9 may not translate to a real-world scenario where certain analytic functions are necessarily to be expressed in the visualization. Sometimes, the request of advanced technical functions on data attributes led to more creative, bespoke visualizations in which the wizard, though decently familiar with Tableau functions, was technically prepared to reconstruct during the interview, hampering the participant's visualizations. Although we were mostly able to come to a compromise with the participant's visualization design, it becomes more difficult to manage their expectations for visualizations involving complex transforms, which may not be replaceable with a simpler one, when they are requested.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="6">DISCUSSION</head><p>While there were many themes and potential vignettes related to data, we focus our discussion on three recurring themes encountered in our analysis. These themes represent values or priorities that recurred across participants and across our expertasks: simplicity, relevance, and interest. We use this to explicate these design values, with a focus on how these values might inform current or future designers of visualization recommendation systems. We reiterate that our choice of participants methods results in knowledge that is positional, and exists in the context of our pool of public health researchers and analysts. What counts as "simple, relevant, and interesting" for them may not necessarily hold true for other domains or target audiences.</p><p>Visualizations Should Be Simple discussed in section 5, participants repeatedly preferred simple with minimal attributes both when creating and ranking visualizations. This notion of simplicity extends to both visual design of the visualizations as well as the messages of these visualizations. In terms of design, this simplicity is associated with a preference for familiar visualization designs (bar charts, line charts, and scatterplots) encoding only one or two variables at a time. In terms of messages, this simplicity was reflected in a preference for clear or otherwise unambiguous statistical patterns (such expected trends or relationships between two variables), with filtering and aggregating used to remove extraneous information a chart. Our participants provided several rationales for preferring simbut two of the most relevant for designers of recommendation systems were the desire to present clear takeways for an audience with variable experience interpreting complex or unfamiliar charts, and the sense that visualization recommendations should serve as a starting point for future analyses, rather than an ending point. From these design values, we propose two guidelines for designers of recommendation systems. Namely, recommendation should:</p><p>(1) produce charts from common genres with bounded vicomplexity. A visualization recommendation system, especially one for the purpose of orienting or familiarizing The wizard's interpretation of P9 sketch 7: Participant P9's initial design idea (Figure <ref type="figure">7a</ref>) and the wizard's interpretation of the design (Figure <ref type="figure">7b</ref>). Despite the simplicity of Figure <ref type="figure">7a</ref>, P9 paired it with more advanced analytic functions that too technically challenging for the wizard to implement in the time allotted. The design compromise is shown in Figure <ref type="figure">7b</ref>.</p><p>a user with a dataset, is not the place to try esoteric or unfamiliar charts. Similarly, rather than attempting to include potential relevant dimension in one design, the recommendation system should value and present potentially greater sets of univariate or bivariate charts.</p><p>(2) opportunities for refinement and extension. Esin the context of our suggestion above, a single "simple" visualization may not be sufficient to meet the analytical goals of all users. Rather than increase the complexity of the chart to cover all potential goals, systems should allow users to modify or recommendations within more traditional exploratory data analysis workflows. Rather than an "automatic insight, " a recommendation might be better thought of as an interesting question or hypothesis to verify in more detail or with more nuance after the fact.</p><p>Note that a person's perception of simplicity can also be influenced by their prior experiences with certain encoding channels, which is dictated in part by their discipline. For example, domain experts may prefer to use established encoding conventions [2] from within their discipline, even though these encodings may technically be more complex or less legible <ref type="bibr" target="#b6">[8]</ref>. Additional studies could prove beneficial in distinguishing domain-specific guidelines from design principles that could apply to any type of visualization system.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="6.2">Visualizations Should Be Relevant</head><p>As mentioned in section 2, many visualization recommendation systems are built to be agnostic to the data domain, providing recommendations purely based on design guidelines, statistical features, or the syntactic structure of the data. Our participants, however, were more motivated by the anticipated needs of their audience and their own structural and semantic understanding of data. As with simplicity above, we acknowledge that relevance is similarly polysemic and nuanced as a concept.</p><p>For instance, participants often zeroed in on specific variables priori, excluding variables they felt to be irrelevant to their likely audience or unrelated to another pre-selected variable of interest. These choices represent implicit or explicit about the relations in the data, as well as implicit or explicit modeling of how one factor might influence another. Providing evidence for or against these implicit hypotheses resulted in a common recipe for bivariate visualizations: a demographic factor cast as an independent variable, with a health outcome measure cast as a variable. The centrality of domain relevance leads us to make the following recommendations for designers of visualization recommendation systems. Namely, systems should:</p><p>(1) domain contexts and field relationships.</p><p>This could be as simple as giving common fields like or Gender fixed roles (say, as independent variables) in recommended charts, or as complex as attempting to infer or solicit causal graphs, functional dependencies, or other field in particular datasets. This recommendation also suggests that the promise of a universal "auto-insight" system is potentially misguided, or at least a lofty dream, and systems seeking to present relevant data may need to be tailored to specific domains or users. allow users to specify intent or their analytical goals.</p><p>exact same visualization may be alternatively useful or irrelevant across different users depending on their interests or prior assumptions. Allowing users to specify particular fields of interest or even their hypotheses and assumptions below) would allow systems to be more adaptable and retain relevancy across users or analytics sessions. While Q&amp;A systems (see subsubsection 2.1.3) have begun to incorporate models of intent into their design, we believe that this sort of contextual or ancillary semantic information is critical across all sorts of recommendation systems.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="6.3">Visualizations Should Be Interesting</head><p>The last design value we examine in the context of our findings is of preferring interesting visualizations over visualizations that gave the viewer (or the audience) no new and useful information. This need for a visualization to show something (a trend, a skew, or just the more notion of a "takeaway") has potentially troubling implications for system designers. A common pattern was for participants to abandon (in our ideation task) or downweight (in our selection task) visualizations without definitive patterns and trends. This includes visualizations showing negative or null results with respect to an assumed trend or difference between or among groups. P8's verbal quandary (see subsubsection 5.3.1) over whether to change a visualization that "doesn't me anything" was an exception in this respect. In other words, critiques of auto-insight systems (see subsubsection 2.1.1) based on their potential to highlight dramatic but spurious effects may be similarly applied to human recommenders. While we therefore could suggest that recommendation systems only the most salient of positive results, as an alternative we present the following suggestions. Namely, that systems should: allow users to specify explicit hypotheses or assump-A chart showing absolutely no correlations or clear might still be of to a viewer with a strong expectation or assumption about a relationship in the data. To afford these sorts of interesting findings, recommendation systems (especially auto-insight systems) should embrace what <ref type="bibr">Hullman &amp; Gelman [16]</ref> refer to as "theories of graphical inference" such that visualizations can provide direct evidence for or against inferences about the data. <ref type="bibr">Kim et [20]</ref> in particular suggest externalizing expectations and predictions prior to looking at the data as an alternative to data presentation. (2) provide additional guidance to users on the robustness or importance of the visual pattern in a particular recprevent users from being misled by pospurious patterns in sets of visualizations (such as those encountered and reported by the participants observed Zgraggen et al. <ref type="bibr" target="#b48">[50]</ref>), recommendation systems may need to provide additional information on the reliability of findings (either through existing or novel metrics of reliability, or through alerts or warnings of potential threats to valid-</p><p>[33]).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="7">CONCLUSION</head><p>This work explored the preferences and priorities of in-domain analysts when creating and evaluating visualization recommendations for their target audience. We base our findings off semi-structured with 18 analysts in the public health sector, observing behaviors, attitudes, and perceptions they had for various components throughout the visualizations in the experiment. Our findings highlight that these users overwhelmingly value simplicity, relevancy, and analytic interest when creating their own visualization designs and when evaluating other visualization recommendations. Participants either demonstrated an understanding of a visualizaand the potential story or insight stemming from it, or were able to formulate targeted questions to any uncertainties with the attributes in the visualization. Furthermore, certain data attributes (demographic and health outcomes) were frequently paired in visudesigns, indicating natural priors and biases in semantic knowledge in the dataset. Lastly, we find that participants more engage with visualizations showing seemingly "positive" results with perceptively clearer patterns or trends. Based on our findings, we suggest various design possibilities for visualization recommendation designers that could better aid in data exploration</p></div><figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_0"><head>Figure 1 :</head><label>1</label><figDesc>Figure1: The gallery of visualization recommendations provided to our study participants. While we did not share the origin of these visualizations with our participants, for illustration in this paper we have labelled the chart provenance: those marked "H" were generated by pilot participants as part of their ideation sessions, those labelled "V" were recommended by Voyager<ref type="bibr" target="#b44">[47]</ref>, and those labelled "D" were recommended by Dziban<ref type="bibr" target="#b27">[29]</ref>. We also include the overall rank of the recommendation, according to our participants. Overall rank is determined by summing reverse ranking data grouped by the visualization ID, then sorting in descending order.</figDesc><graphic url="image-1.png" coords="7,66.41,83.68,479.19,269.58" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_1"><head>Figure 2 :Figure 3 :</head><label>23</label><figDesc>Figure 2: A gallery of recommendations sketched by participants.</figDesc><graphic url="image-2.png" coords="9,79.02,83.69,453.96,255.39" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_2"><head>Figure 4 :</head><label>4</label><figDesc>Figure 4: Visualization Ideation: Mark Representations</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_4"><head></head><label></label><figDesc>P9: I'm just trying to imagine what that could look like, besides doing like side-by-side bars for the</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_5"><head></head><label></label><figDesc>(a) sketch. P5 notes that nodes are colored according to the dataset's gender attribute. (b) Wizard's interpretation of P5 sketch</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_6"><head>Figure 6 :</head><label>6</label><figDesc>Figure 6: P5's initial design idea (Figure6a) and the wizard's interpretation of the design (Figure6b). These visualizations have slight differences, including filtered values axes, as well as more structural differences such the data grid inherent Figure6b. For this sketch, the wizard was unclear on the design intent of P5, specifically regarding the mark types, which ultimately led to their inability to specify this in Tableau.</figDesc><graphic url="image-4.png" coords="14,366.00,83.69,192.19,178.58" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_0"><head>Table 1 :</head><label>1</label><figDesc>Demographic information about each study participant, labeled by participant ID (PID).</figDesc><table><row><cell cols="4">PID Age Group Gender Job Title</cell><cell cols="2">Perform Data Analysis Create Visualizations</cell></row><row><cell>1</cell><cell>19 -24</cell><cell>Female</cell><cell>Consultant</cell><cell>Weekly</cell><cell>At least once/month</cell></row><row><cell>2</cell><cell>25 -34</cell><cell>Female</cell><cell>Research Coordinator</cell><cell>Weekly</cell><cell>At least once/week</cell></row><row><cell>3</cell><cell>25 -34</cell><cell>Female</cell><cell>Graduate Student</cell><cell>&lt;Once/month</cell><cell>At least once/month</cell></row><row><cell>4</cell><cell>25 -34</cell><cell>Female</cell><cell>Project Coordinator</cell><cell>&lt;Once/month</cell><cell>At least once/month</cell></row><row><cell>5</cell><cell>35 -44</cell><cell>Female</cell><cell>Consultant</cell><cell>Weekly</cell><cell>At least once/week</cell></row><row><cell>6</cell><cell>25 -34</cell><cell>Male</cell><cell>Research Coordinator</cell><cell>&lt;Once/week</cell><cell>At least once/week</cell></row><row><cell>8</cell><cell>19 -24</cell><cell>Female</cell><cell>Health Program Administrator</cell><cell>&lt;Once/month</cell><cell>At least once/month</cell></row><row><cell>9</cell><cell>45 -54</cell><cell>Female</cell><cell>Assistant Professor</cell><cell>Weekly</cell><cell>At least once/month</cell></row><row><cell>11</cell><cell>25 -34</cell><cell>Female</cell><cell>Graduate Student</cell><cell>&lt;Once/week</cell><cell>At least once/month</cell></row><row><cell>12</cell><cell>25 -34</cell><cell>Female</cell><cell>Research Scientist</cell><cell>Daily</cell><cell>Daily</cell></row><row><cell>13</cell><cell>55 -64</cell><cell>Female</cell><cell>Lecturer</cell><cell>&lt;Once/week</cell><cell>At least once/month</cell></row><row><cell>14</cell><cell>35 -44</cell><cell>Female</cell><cell>Faculty</cell><cell>Weekly</cell><cell>At least once/month</cell></row><row><cell>15</cell><cell>45 -54</cell><cell>Female</cell><cell>Project Director</cell><cell>&lt;Once/week</cell><cell>At least once/month</cell></row><row><cell>16</cell><cell>25 -34</cell><cell>Female</cell><cell>Research Scientist</cell><cell>Daily</cell><cell>Daily</cell></row><row><cell>17</cell><cell>35 -44</cell><cell>Male</cell><cell>Project Coordinator</cell><cell>&lt;Once/week</cell><cell>At least once/week</cell></row><row><cell>18</cell><cell>25 -34</cell><cell>Female</cell><cell>Faculty Specialist</cell><cell>Weekly</cell><cell>At least once/week</cell></row><row><cell>19</cell><cell>25 -34</cell><cell>Female</cell><cell>Graduate Student</cell><cell>&lt;Once/month</cell><cell>At least once/month</cell></row><row><cell>20</cell><cell>25 -34</cell><cell>Male</cell><cell cols="2">Database Administrator &lt;Once/month</cell><cell>Daily</cell></row></table><note>outcomes in the US. Create a set of 3 visualizations (a.k.a. charts and graphs) that you would recommend to this client."</note></figure>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="2">https://aspredicted.org/AEI_GBA</note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="3">https://aspredicted.org/7d7gd.pdf</note>
+		</body>
+		<back>
+
+			<div type="acknowledgement">
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>ACKNOWLEDGMENTS</head><p>We thank all the reviewers, study participants, and members of both the Human-Computer Interaction Lab and the Battle Data Lab their valuable feedback.</p></div>
+			</div>
+
+			<div type="references">
+
+				<listBibl>
+
+<biblStruct xml:id="b0">
+	<analytic>
+		<author>
+			<persName><forename type="first">Jocelyn</forename><surname>Ng</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kevin</forename><surname>Tate</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Tamara</forename><surname>Munzner</surname></persName>
+		</author>
+		<idno type="DOI">10.1109/TVCG.2015.2466971</idno>
+		<ptr target="https://doi.org/10.1109/TVCG.2015.2466971" />
+	</analytic>
+	<monogr>
+		<title level="m">Matches, Mismatches, and Methods: Multiple-View Workflows for Energy Portfolio Anal-IEEE Transactions on Visualization and Computer Graphics</title>
+		<title level="s">Inc. Amazon Web Services. 2021. Amazon QuickSight -Business Intelligence Service -Amazon Web Services</title>
+		<imprint>
+			<date type="published" when="2016">2016. 2016</date>
+			<biblScope unit="volume">22</biblScope>
+			<biblScope unit="page" from="449" to="458" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b1">
+	<analytic>
+		<title level="a" type="main">National Center for Health Statistics (NCHS). 2013. National Health and Nutrition Examination Survey Data</title>
+		<ptr target="https://www.cdc.gov/nchs/nhanes/index.htm" />
+	</analytic>
+	<monogr>
+		<title level="m">for Disease Control and Prevention (CDC)</title>
+				<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b2">
+	<analytic>
+		<title level="a" type="main">Defining Insight for Visual Analytics</title>
+		<author>
+			<persName><forename type="first">Caroline</forename><surname>Chang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Tera</forename><forename type="middle">Marie</forename><surname>Ziemkiewicz</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">William</forename><surname>Green</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Ribarsky</surname></persName>
+		</author>
+		<idno type="DOI">10.1109/MCG.2009.22</idno>
+		<ptr target="https://doi.org/10.1109/MCG.2009.22" />
+	</analytic>
+	<monogr>
+		<title level="j">IEEE Computer Graphics and Applications</title>
+		<imprint>
+			<biblScope unit="volume">29</biblScope>
+			<biblScope unit="page" from="14" to="17" />
+			<date type="published" when="2009">2009. 2009</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b3">
+	<monogr>
+		<title level="m" type="main">Ethical Dimensions of Visualization Research</title>
+		<author>
+			<persName><forename type="first">Michael</forename><surname>Correll</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3290605.3300418</idno>
+		<ptr target="https://doi.org/10.1145/" />
+		<imprint>
+			<date type="published" when="2019">2019</date>
+			<publisher>Association for Computing Machinery</publisher>
+			<biblScope unit="page" from="1" to="13" />
+			<pubPlace>New York, NY, USA</pubPlace>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b4">
+	<monogr>
+		<title level="m" type="main">Elements of Information Theory</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Thomas</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Joy A</forename><surname>Cover</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Thomas</surname></persName>
+		</author>
+		<idno type="DOI">10.1002/047174882X</idno>
+		<ptr target="https://doi.org/10.1002/047174882X" />
+		<imprint>
+			<date type="published" when="2012">2012</date>
+			<publisher>John Wiley &amp; Sons</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b5">
+	<analytic>
+		<title level="a" type="main">GEViTRec: Data Reconnaissance Through Recommendation Using a Domain-Specific Visualization Prevalence Design Space</title>
+		<author>
+			<persName><forename type="first">S</forename><surname>Crisan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">L</forename><surname>Fisher</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Gardy</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Munzner</surname></persName>
+		</author>
+		<idno type="DOI">10.1109/TVCG.2021.3107749</idno>
+		<ptr target="https://doi.org/10.1109/TVCG.2021.3107749" />
+	</analytic>
+	<monogr>
+		<title level="j">IEEE Transactions on Visualization &amp; Computer Graphics</title>
+		<imprint>
+			<biblScope unit="volume">5555</biblScope>
+			<biblScope unit="page" from="1" to="1" />
+			<date>aug 5555</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b6">
+	<analytic>
+		<title level="a" type="main">The Effect of Color Scales on Climate Scientists&apos; Objective and Subjective Performance in Spatial Data Analysis Tasks</title>
+		<author>
+			<persName><forename type="first">Aritra</forename><surname>Dasgupta</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jorge</forename><forename type="middle">Bernice</forename><surname>Rogowitz</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kyungsik</forename><surname>Han</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Enrico</forename><surname>Bertini</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Cláudio</forename><forename type="middle">T</forename><surname>Silva</surname></persName>
+		</author>
+		<idno type="DOI">10.1109/TVCG.2018.2876539</idno>
+		<ptr target="https://doi.org/10.1109/TVCG.2018.2876539" />
+	</analytic>
+	<monogr>
+		<title level="j">IEEE Transactions on Visualization and Computer Graphics</title>
+		<imprint>
+			<biblScope unit="volume">26</biblScope>
+			<biblScope unit="page" from="1577" to="1591" />
+			<date type="published" when="2020">2020. 2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b7">
+	<analytic>
+		<title level="a" type="main">Foresight: Recommending Visual Insights</title>
+		<author>
+			<persName><forename type="first">Çağatay</forename><surname>Demiralp</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Peter</forename><forename type="middle">J</forename><surname>Haas</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Srinivasan</forename><surname>Parthasarathy</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Tejaswini</forename><surname>Pedapati</surname></persName>
+		</author>
+		<idno type="DOI">10.14778/3137765.3137813</idno>
+		<ptr target="https://doi.org/10.14778/3137765.3137813" />
+	</analytic>
+	<monogr>
+		<title level="m">Proc. VLDB Endow</title>
+				<meeting>VLDB Endow</meeting>
+		<imprint>
+			<date type="published" when="2017-08">2017. aug 2017</date>
+			<biblScope unit="volume">10</biblScope>
+			<biblScope unit="page" from="1937" to="1940" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b8">
+	<analytic>
+		<title level="a" type="main">Data2Vis: Automatic Generation of Data Visualizations Using Sequence-to-Sequence Recurrent Neural Networks</title>
+		<author>
+			<persName><forename type="first">Victor</forename><surname>Dibia</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Çağatay</forename><surname>Demiralp</surname></persName>
+		</author>
+		<idno type="DOI">10.1109/MCG.2019.2924636</idno>
+		<ptr target="https://doi.org/10.1109/MCG.2019.2924636" />
+	</analytic>
+	<monogr>
+		<title level="j">IEEE Computer Graphics and Applications</title>
+		<imprint>
+			<biblScope unit="volume">39</biblScope>
+			<biblScope unit="page" from="33" to="46" />
+			<date type="published" when="2019">2019. 2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b9">
+	<analytic>
+		<title level="a" type="main">How Information Visualization Novices Construct Visualizations</title>
+		<author>
+			<persName><forename type="first">Melanie</forename><surname>Grammel</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Margaret-Anne</forename><surname>Tory</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Storey</surname></persName>
+		</author>
+		<idno type="DOI">10.1109/TVCG.2010.164</idno>
+		<ptr target="https://doi.org/10.1109/TVCG.2010" />
+	</analytic>
+	<monogr>
+		<title level="j">IEEE Transactions on Visualization and Computer Graphics</title>
+		<imprint>
+			<biblScope unit="volume">16</biblScope>
+			<biblScope unit="page" from="943" to="952" />
+			<date type="published" when="2010">2010. 2010</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b10">
+	<analytic>
+		<title level="a" type="main">How Information Visualization Novices Construct Visualizations</title>
+		<author>
+			<persName><forename type="first">Melanie</forename><surname>Grammel</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Margaret-Anne</forename><surname>Tory</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Storey</surname></persName>
+		</author>
+		<idno type="DOI">10.1109/TVCG.2010.164</idno>
+		<ptr target="https://doi.org/10.1109/TVCG.2010" />
+	</analytic>
+	<monogr>
+		<title level="j">IEEE Transactions on Visualization and Computer Graphics</title>
+		<imprint>
+			<biblScope unit="volume">16</biblScope>
+			<biblScope unit="page" from="943" to="952" />
+			<date type="published" when="2010">2010</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b11">
+	<analytic>
+		<title level="a" type="main">Toward Interface Defaults for Vague Modifiers in Natural Language Interfaces for Visual Analysis</title>
+		<author>
+			<persName><forename type="first">Melanie</forename><surname>Hearst</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Vidya</forename><surname>Tory</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Setlur</surname></persName>
+		</author>
+		<idno type="DOI">10.1109/VISUAL.2019.8933569</idno>
+		<ptr target="https://doi.org/10.1109/VISUAL.2019.8933569" />
+	</analytic>
+	<monogr>
+		<title level="m">IEEE Visualization Conference (VIS). 21-25</title>
+				<imprint>
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b12">
+	<analytic>
+		<title level="a" type="main">Agency plus automation: Designing artificial intelligence into interactive systems</title>
+		<author>
+			<persName><forename type="first">Jeffrey</forename><surname>Heer</surname></persName>
+		</author>
+		<idno type="DOI">10.1073/pnas.1807184115</idno>
+		<ptr target="https://www.pnas.org/content/116/6/1844.full.pdf" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the National Academy</title>
+				<meeting>the National Academy</meeting>
+		<imprint>
+			<date type="published" when="2019">2019. 2019</date>
+			<biblScope unit="volume">116</biblScope>
+			<biblScope unit="page" from="1844" to="1850" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b13">
+	<monogr>
+		<title level="m" type="main">VizML: A Machine Learning Approach to Visualization Recommendafor Computing Machinery</title>
+		<author>
+			<persName><forename type="first">Kevin</forename><surname>Hu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Michiel</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Stephen</forename><surname>Bakker</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Tim</forename><surname>Li</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">César</forename><surname>Kraska</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Hidalgo</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3290605.3300358</idno>
+		<ptr target="https://doi.org/10.1145/3290605.3300358" />
+		<imprint>
+			<biblScope unit="page" from="1" to="12" />
+			<pubPlace>New York, NY, USA</pubPlace>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b14">
+	<monogr>
+		<title level="m" type="main">Designing for Interactive Exploratory Data Analysis Requires Theories of Graphical Inference. Harvard Data Science Review</title>
+		<author>
+			<persName><forename type="first">Jessica</forename><surname>Hullman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Andrew</forename><surname>Gelman</surname></persName>
+		</author>
+		<idno type="DOI">10.1162/99608f92.3ab8a587</idno>
+		<ptr target="https://doi.org/10.1162/99608f92.3ab8a587https://hdsr.mitpress.mit.edu/pub/w075glo6" />
+		<imprint>
+			<date type="published" when="0307">2021. 30 7 2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b15">
+	<analytic>
+		<title/>
+		<author>
+			<persName><forename type="first">Michael</forename><surname>Kaur</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Owonibi</surname></persName>
+		</author>
+		<idno type="DOI">10.5220/0006175002660273</idno>
+		<ptr target="https://doi.org/10.5220/0006175002660273" />
+	</analytic>
+	<monogr>
+		<title level="j">A Review on Visualization Rec-Strategies</title>
+		<imprint>
+			<biblScope unit="volume">4</biblScope>
+			<biblScope unit="page" from="266" to="273" />
+			<date type="published" when="2017">2017</date>
+			<publisher>SCITEPRESS</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b16">
+	<analytic>
+		<title level="a" type="main">Designing Anito Convey Aggregate Operations. Graphics Forum</title>
+		<author>
+			<persName><forename type="first">Younghoon</forename><surname>Kim</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Michael</forename><surname>Correll</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jeffrey</forename><surname>Heer</surname></persName>
+		</author>
+		<ptr target="http://idl.cs.washington.edu/papers/animated-aggregate-operations" />
+	</analytic>
+	<monogr>
+		<title level="m">Proc. EuroVis)</title>
+				<meeting>EuroVis)</meeting>
+		<imprint>
+			<date type="published" when="2019">2019. 2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b17">
+	<analytic>
+		<title level="a" type="main">GraphScape: A Model for Automated Reasoning about Visualization Similarity and Sequencing</title>
+		<author>
+			<persName><forename type="first">Younghoon</forename><surname>Kim</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kanit</forename><surname>Wongsuphasawat</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jessica</forename><surname>Hullman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jeffrey</forename><surname>Heer</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3025453.3025866</idno>
+		<ptr target="https://doi.org/10.1145/3025453.3025866" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2017 CHI Conference on Human Factors in Computing Systems</title>
+				<meeting>the 2017 CHI Conference on Human Factors in Computing Systems<address><addrLine>Denver, Colorado, USA; New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computing Machinery</publisher>
+			<date type="published" when="2017">2017</date>
+			<biblScope unit="page" from="2628" to="2638" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b18">
+	<analytic>
+		<title level="a" type="main">Explaining the Gap: Visualizing One&apos;s Predictions Improves Recall and Comprehension of Data</title>
+		<author>
+			<persName><forename type="first">Yea-Seul</forename><surname>Kim</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Reinecke</forename></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jessica</forename><surname>Hullman</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3025453.3025592</idno>
+		<ptr target="https://doi.org/10.1145/3025453.3025592" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2017 CHI Conference on Human Factors in Systems</title>
+				<meeting>the 2017 CHI Conference on Human Factors in Systems<address><addrLine>Denver, Colorado, USA; New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computing Machinery</publisher>
+			<date type="published" when="2017">2017</date>
+			<biblScope unit="page" from="1375" to="1386" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b19">
+	<analytic>
+		<title level="a" type="main">Thinking with external representations</title>
+		<author>
+			<persName><surname>Kirsh</surname></persName>
+		</author>
+		<idno type="DOI">10.1007/s00146-010-0272-8</idno>
+		<ptr target="https://doi.org/10.1007/s00146-010-0272-8" />
+	</analytic>
+	<monogr>
+		<title level="j">&amp; SOCIETY</title>
+		<imprint>
+			<biblScope unit="volume">25</biblScope>
+			<biblScope unit="page" from="441" to="454" />
+			<date type="published" when="2010-04">2010. 4 2010</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b20">
+	<analytic>
+		<title level="a" type="main">Visual analytic roadblocks for novice investigators</title>
+		<author>
+			<persName><forename type="first">Brian</forename><surname>Chul Kwon</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ji</forename><forename type="middle">Soo</forename><surname>Fisher</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Yi</surname></persName>
+		</author>
+		<idno type="DOI">10.1109/VAST.2011.6102435</idno>
+		<ptr target="https://doi.org/10.1109/VAST.2011.6102435" />
+	</analytic>
+	<monogr>
+		<title level="m">2011 IEEE Conference on Visual Analytics Science and Technology (VAST)</title>
+				<imprint>
+			<date type="published" when="2011">2011</date>
+			<biblScope unit="page" from="3" to="11" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b21">
+	<monogr>
+		<author>
+			<persName><forename type="first">Heidi</forename><surname>Lam</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Enrico</forename><surname>Bertini</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Petra</forename><surname>Isenberg</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Catherine</forename><surname>Plaisant</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sheelagh</forename><surname>Carpendale</surname></persName>
+		</author>
+		<idno type="DOI">10.1109/TVCG.2011.279</idno>
+		<ptr target="https://doi.org/10.1109/TVCG.2011.279" />
+		<title level="m">Empirical Studies in Information Visualization: Seven Sce-IEEE Transactions on Visualization and Computer Graphics</title>
+				<imprint>
+			<date type="published" when="2012">2012. 2012</date>
+			<biblScope unit="volume">18</biblScope>
+			<biblScope unit="page" from="1520" to="1536" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b22">
+	<monogr>
+		<title/>
+		<author>
+			<persName><forename type="first">Maarten</forename><surname>Lambrechts</surname></persName>
+		</author>
+		<ptr target="https://xeno.graphics/about/" />
+		<imprint>
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b23">
+	<analytic>
+		<title level="a" type="main">Characterizing Automated Data Insights</title>
+		<author>
+			<persName><forename type="first">Po-Ming</forename><surname>Law</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Alex</forename><surname>Endert</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">John</forename><surname>Stasko</surname></persName>
+		</author>
+		<idno type="DOI">10.1109/VIS47514.2020.00041</idno>
+		<ptr target="https://doi.org/10.1109/VIS47514.2020.00041" />
+	</analytic>
+	<monogr>
+		<title level="m">2020 IEEE Visualization Conference (VIS)</title>
+				<imprint>
+			<date type="published" when="2020">2020</date>
+			<biblScope unit="page" from="171" to="175" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b24">
+	<analytic>
+		<title level="a" type="main">SketchStory: Telling Engaging Stories with Data through Freeform Sketching</title>
+		<author>
+			<persName><forename type="first">Habib</forename><surname>Lee</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Greg</forename><surname>Kazi</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Smith</surname></persName>
+		</author>
+		<idno type="DOI">10.1109/TVCG.2013.191</idno>
+		<ptr target="https://doi.org/10.1109/TVCG.2013.191" />
+	</analytic>
+	<monogr>
+		<title level="j">Transactions on Visualization and Computer Graphics</title>
+		<imprint>
+			<biblScope unit="volume">19</biblScope>
+			<biblScope unit="page" from="2416" to="2425" />
+			<date type="published" when="2013">2013. 2013</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b25">
+	<analytic>
+		<title level="a" type="main">How do People Make Sense of Unfamiliar Visualizations?: A Grounded Model of Novice&apos;s Information Visualization Sensemaking</title>
+		<author>
+			<persName><forename type="first">Sung-Hee</forename><surname>Lee</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ya-Hsin</forename><surname>Kim</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Heidi</forename><surname>Hung</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Youn-Ah</forename><surname>Lam</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ji</forename><forename type="middle">Soo</forename><surname>Kang</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Yi</surname></persName>
+		</author>
+		<idno type="DOI">10.1109/TVCG.2015.2467195</idno>
+		<ptr target="https://doi.org/10.1109/TVCG.2015.2467195" />
+	</analytic>
+	<monogr>
+		<title level="j">Transactions on Visualization and Computer Graphics</title>
+		<imprint>
+			<biblScope unit="volume">22</biblScope>
+			<biblScope unit="page" from="499" to="508" />
+			<date type="published" when="2016">2016. 2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b26">
+	<analytic>
+		<title level="a" type="main">Exploring the &quot;Double-Edged Sword&quot; Effect of Auto-Insight Recommendation in Exploratory Data Analysis</title>
+		<author>
+			<persName><forename type="first">Quan</forename><surname>Li</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Huanbin</forename><surname>Lin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Chunfeng</forename><surname>Tang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Xiguang</forename><surname>Wei</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Zhenhui</forename><surname>Peng</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Xiaojuan</forename><surname>Ma</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Tianjian</forename><surname>Chen</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Workshop Proceedings</title>
+				<imprint>
+			<date type="published" when="2021">2021</date>
+			<biblScope unit="page">2903</biblScope>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b27">
+	<analytic>
+		<title level="a" type="main">Dziban: Balancing Agency &amp;; Automation in Visualization Design via Anchored Recommendations</title>
+		<author>
+			<persName><forename type="first">Halden</forename><surname>Lin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Dominik</forename><surname>Moritz</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jeffrey</forename><surname>Heer</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3313831.3376880</idno>
+		<ptr target="https://doi.org/10.1145/3313831.3376880" />
+	</analytic>
+	<monogr>
+		<title level="m">of the 2020 CHI Conference on Human Factors in Computing Systems</title>
+				<meeting><address><addrLine>Honolulu, HI, USA; New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computing Machinery</publisher>
+			<date type="published" when="2020">2020</date>
+			<biblScope unit="page" from="1" to="12" />
+		</imprint>
+	</monogr>
+	<note>CHI &apos;20)</note>
+</biblStruct>
+
+<biblStruct xml:id="b28">
+	<analytic>
+		<title level="a" type="main">Automating the Design of Graphical Presentations of Information</title>
+		<author>
+			<persName><forename type="first">Jock</forename><surname>Mackinlay</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/22949.22950</idno>
+		<ptr target="https://doi.org/10.1145/22949.22950" />
+	</analytic>
+	<monogr>
+		<title level="j">ACM Trans. Graph</title>
+		<imprint>
+			<biblScope unit="volume">5</biblScope>
+			<biblScope unit="page" from="110" to="141" />
+			<date type="published" when="1986-04">1986. apr 1986</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b29">
+	<analytic>
+		<title level="a" type="main">Show Me: Automatic for Visual Analysis</title>
+		<author>
+			<persName><forename type="first">Jock</forename><surname>Mackinlay</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Pat</forename><surname>Hanrahan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Chris</forename><surname>Stolte</surname></persName>
+		</author>
+		<idno type="DOI">10.1109/TVCG.2007.70594</idno>
+		<ptr target="https://doi.org/10.1109/TVCG.2007.70594" />
+	</analytic>
+	<monogr>
+		<title level="j">IEEE Transactions on Visualization and Computer Graphics</title>
+		<imprint>
+			<biblScope unit="volume">13</biblScope>
+			<biblScope unit="page" from="1137" to="1144" />
+			<date type="published" when="2007">2007. 2007</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b30">
+	<analytic>
+		<title level="a" type="main">Divining Insights: Visual Analytics Through Cartomancy</title>
+		<author>
+			<persName><forename type="first">Andrew</forename><surname>Mcnutt</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Anamaria</forename><surname>Crisan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Michael</forename><surname>Correll</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3334480.3381814</idno>
+		<ptr target="https://doi.org/10.1145/3334480.3381814" />
+	</analytic>
+	<monogr>
+		<title level="m">Extended Abstracts CHI Conference on Human Factors in Computing Systems</title>
+				<meeting><address><addrLine>Honolulu, HI, USA; New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<date type="published" when="2020">2020</date>
+			<biblScope unit="page" from="1" to="16" />
+		</imprint>
+	</monogr>
+	<note>CHI EA &apos;20). for Computing Machinery</note>
+</biblStruct>
+
+<biblStruct xml:id="b31">
+	<analytic>
+		<title level="a" type="main">Surfacing Mirages</title>
+		<author>
+			<persName><forename type="first">Andrew</forename><surname>Mcnutt</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Gordon</forename><surname>Kindlmann</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Michael</forename><surname>Correll</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3313831.3376420</idno>
+		<ptr target="https://doi.org/10.1145/3313831.3376420" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2020 CHI Conference on Human Factors Computing Systems</title>
+				<meeting>the 2020 CHI Conference on Human Factors Computing Systems<address><addrLine>Honolulu, HI, USA; New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computing Machinery</publisher>
+			<date type="published" when="2020">2020</date>
+			<biblScope unit="page" from="1" to="16" />
+		</imprint>
+	</monogr>
+	<note>CHI &apos;20)</note>
+</biblStruct>
+
+<biblStruct xml:id="b32">
+	<analytic>
+		<title level="a" type="main">Formalizing Visualization Design Knowledge as Constraints: Actionable and Extensible Models in Draco</title>
+		<author>
+			<persName><forename type="first">Chenglong</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Greg</forename><forename type="middle">L</forename><surname>Nelson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Halden</forename><surname>Lin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Adam</forename><forename type="middle">M</forename><surname>Smith</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jeffrey</forename><surname>Howe</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Heer</surname></persName>
+		</author>
+		<idno type="DOI">10.1109/TVCG.2018.2865240</idno>
+		<ptr target="https://doi.org/10.1109/TVCG.2018.2865240" />
+	</analytic>
+	<monogr>
+		<title level="m">Types of supported by Power BI -Power BI</title>
+				<imprint>
+			<date type="published" when="2019">2019. 2019</date>
+			<biblScope unit="volume">25</biblScope>
+			<biblScope unit="page" from="438" to="448" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b33">
+	<monogr>
+		<title level="m" type="main">is Personal: Attitudes and Perceptions of Data Visualization in Rural Pennsylvania</title>
+		<author>
+			<persName><forename type="first">Evan</forename><forename type="middle">M</forename><surname>Peck</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sofia</forename><forename type="middle">E</forename><surname>Ayuso</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Omar</forename><surname>El-Etr</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3290605.3300474</idno>
+		<ptr target="https://doi.org/10.1145/" />
+		<imprint>
+			<date type="published" when="2019">2019</date>
+			<publisher>Association for Computing Machinery</publisher>
+			<biblScope unit="page" from="1" to="12" />
+			<pubPlace>New York, NY, USA</pubPlace>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b34">
+	<analytic>
+		<title level="a" type="main">The Garden of Forking Paths in Visualization: A Design Space for Reliable Exploratory Visual Analytics : Position Paper</title>
+		<author>
+			<persName><forename type="first">Matthew</forename><surname>Pu</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Kay</surname></persName>
+		</author>
+		<idno type="DOI">10.1109/BELIV.2018.8634103</idno>
+		<ptr target="https://doi.org/10.1109/BELIV.2018.8634103" />
+	</analytic>
+	<monogr>
+		<title level="m">2018 IEEE Evaluation and Beyond -Methodological Approaches for Visualization (BELIV)</title>
+				<imprint>
+			<date type="published" when="2018">2018</date>
+			<biblScope unit="page" from="37" to="45" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b35">
+	<analytic>
+		<title level="a" type="main">Vega-Lite: A Grammar of Interactive Graphics</title>
+		<author>
+			<persName><forename type="first">Arvind</forename><surname>Satyanarayan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Dominik</forename><surname>Moritz</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kanit</forename><surname>Wongsuphasawat</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jeffrey</forename><surname>Heer</surname></persName>
+		</author>
+		<idno type="DOI">10.1109/TVCG.2016.2599030</idno>
+		<ptr target="https://doi.org/10.1109/TVCG.2016.2599030" />
+	</analytic>
+	<monogr>
+		<title level="j">Transactions on Visualization and Computer Graphics</title>
+		<imprint>
+			<biblScope unit="volume">23</biblScope>
+			<biblScope unit="page" from="341" to="350" />
+			<date type="published" when="2017">2017. 2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b36">
+	<analytic>
+		<title level="a" type="main">Design Study Methodology: Reflections from the Trenches and the Stacks</title>
+		<author>
+			<persName><forename type="first">Michael</forename><surname>Sedlmair</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Miriah</forename><surname>Meyer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Tamara</forename><surname>Munzner</surname></persName>
+		</author>
+		<idno type="DOI">10.1109/TVCG.2012.213</idno>
+		<ptr target="https://doi.org/10.1109/TVCG.2012.213" />
+	</analytic>
+	<monogr>
+		<title level="j">IEEE Transactions on Visualization and Computer Graphics</title>
+		<imprint>
+			<biblScope unit="volume">12</biblScope>
+			<biblScope unit="page" from="2431" to="2440" />
+			<date type="published" when="2012">2012. 2012</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b37">
+	<analytic>
+		<title level="a" type="main">Augmenting Visualizations with Interactive Data Facts to Facilitate Interpretation and Communication</title>
+		<author>
+			<persName><forename type="first">Steven</forename><forename type="middle">M</forename><surname>Srinivasan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Alex</forename><surname>Drucker</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">John</forename><surname>Endert</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Stasko</surname></persName>
+		</author>
+		<idno type="DOI">10.1109/TVCG.2018.2865145</idno>
+		<ptr target="https://doi.org/10.1109/TVCG.2018.2865145" />
+	</analytic>
+	<monogr>
+		<title level="j">IEEE Transactions on Visualization and Computer Graphics</title>
+		<imprint>
+			<biblScope unit="volume">25</biblScope>
+			<biblScope unit="page" from="672" to="681" />
+			<date type="published" when="2019">2019. 2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b38">
+	<analytic>
+		<title level="a" type="main">Do What I Mean, Not What I Say! Design Considerations for Supporting Intent and Context in Analytical Conversation</title>
+		<author>
+			<persName><forename type="first">Tory</forename></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Vidya</forename><surname>Setlur</surname></persName>
+		</author>
+		<idno type="DOI">10.1109/VAST47406.2019.8986918</idno>
+		<ptr target="https://doi.org/10.1109/VAST47406.2019.8986918" />
+	</analytic>
+	<monogr>
+		<title level="m">2019 IEEE Conference on Visual Analytics Science and Technology</title>
+				<imprint>
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b39">
+	<analytic>
+		<title level="a" type="main">Making Thought Visible</title>
+		<author>
+			<persName><surname>Tversky</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the International Workshop on Studying Design Creativity</title>
+				<meeting>the International Workshop on Studying Design Creativity<address><addrLine>The Netherlands</addrLine></address></meeting>
+		<imprint>
+			<publisher>Springer</publisher>
+			<date type="published" when="2008">2008</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b40">
+	<analytic>
+		<title level="a" type="main">Aditya Parameswaran, and Neoklis Polyzotis</title>
+		<author>
+			<persName><forename type="first">Manasi</forename><surname>Vartak</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sajjadur</forename><surname>Rahman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Samuel</forename><surname>Madden</surname></persName>
+		</author>
+		<idno type="DOI">10.14778/2831360.2831371</idno>
+		<ptr target="https://doi.org/10.14778/2831360.2831371" />
+	</analytic>
+	<monogr>
+		<title level="m">S&lt;span class=&quot;smallcaps SmallerCapital&quot;&gt;ee&lt;/span&gt;DB: Efficient Data-Driven Visualization Recommendations to Support Visual Ana-Proc. VLDB Endow</title>
+				<imprint>
+			<date type="published" when="2015-09">2015. sep 2015</date>
+			<biblScope unit="volume">8</biblScope>
+			<biblScope unit="page" from="2182" to="2193" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b41">
+	<analytic>
+		<title level="a" type="main">Visual Thinking In Action: Visualizations As Used On Whiteboards</title>
+		<author>
+			<persName><forename type="first">Sheelagh</forename><surname>Walny</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Nathalie</forename><surname>Carpendale</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Gina</forename><surname>Henry Riche</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Philip</forename><surname>Venolia</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Fawcett</surname></persName>
+		</author>
+		<idno type="DOI">10.1109/TVCG.2011.251</idno>
+		<ptr target="https://doi.org/10.1109/TVCG.2011.251" />
+	</analytic>
+	<monogr>
+		<title level="j">IEEE Transactions on Visualization and Computer Graphics</title>
+		<imprint>
+			<biblScope unit="volume">17</biblScope>
+			<biblScope unit="page" from="2508" to="2517" />
+			<date type="published" when="2011">2011. 2011</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b42">
+	<analytic>
+		<title level="a" type="main">An exploratory of data sketching for visual representation</title>
+		<author>
+			<persName><forename type="first">Samuel</forename><surname>Walny</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sheelagh</forename><surname>Huron</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Carpendale</surname></persName>
+		</author>
+		<idno type="DOI">10.1111/cgf.12635</idno>
+		<ptr target="https://doi.org/10.1111/cgf.12635" />
+	</analytic>
+	<monogr>
+		<title level="j">Computer Graphics Forum</title>
+		<imprint>
+			<biblScope unit="volume">34</biblScope>
+			<biblScope unit="page" from="231" to="240" />
+			<date type="published" when="2015">2015. 2015</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b43">
+	<analytic>
+		<title level="a" type="main">An Analytic Data Engine for Visualization in Tableau</title>
+		<author>
+			<persName><forename type="first">Matthew</forename><surname>Wesley</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Pawel</forename><forename type="middle">T</forename><surname>Eldridge</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Terlecki</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2011 ACM SIGMOD International Conference on Management of Data</title>
+				<meeting>the 2011 ACM SIGMOD International Conference on Management of Data<address><addrLine>Athens, Greece; New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<date type="published" when="2011">2011</date>
+			<biblScope unit="page" from="1185" to="1194" />
+		</imprint>
+	</monogr>
+	<note>SIGMOD &apos;11). for Computing Machinery</note>
+</biblStruct>
+
+<biblStruct xml:id="b44">
+	<analytic>
+		<title level="a" type="main">Voyager 2: Augmenting Visual Analysis with Partial View Specifications</title>
+		<author>
+			<persName><forename type="first">Kanit</forename><surname>Wongsuphasawat</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Zening</forename><surname>Qu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Dominik</forename><surname>Moritz</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Riley</forename><surname>Chang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Felix</forename><surname>Ouk</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jock</forename><surname>Anand</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Bill</forename><surname>Mackinlay</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jeffrey</forename><surname>Howe</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Heer</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3025453.3025768</idno>
+		<ptr target="https://doi.org/10.1145/3025453.3025768" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2017 CHI Conference on Human Factors in Computing Systems Colorado, USA) (CHI &apos;17). for Computing Machinery</title>
+				<meeting>the 2017 CHI Conference on Human Factors in Computing Systems Colorado, USA) (CHI &apos;17). for Computing Machinery<address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<date type="published" when="2017">2017</date>
+			<biblScope unit="page" from="2648" to="2659" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b45">
+	<monogr>
+		<title level="m" type="main">Vis Ex Machina: An Analysis of Trust in Human versus Algorithmically Generated Visualization Recommendations</title>
+		<author>
+			<persName><forename type="first">Rachael</forename><surname>Zehrung</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Astha</forename><surname>Singhal</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Michael</forename><surname>Correll</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Leilani</forename><surname>Battle</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3411764.3445195</idno>
+		<ptr target="https://doi.org/10.1145/3411764.3445195" />
+		<imprint>
+			<date type="published" when="2021">2021</date>
+			<publisher>Association for Computing Machinery</publisher>
+			<pubPlace>New NY, USA</pubPlace>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b46">
+	<monogr>
+		<title level="m" type="main">An Evaluation-Focused Framework for</title>
+		<author>
+			<persName><forename type="first">Phoebe</forename><surname>Zeng</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Fan</forename><surname>Moh</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jane</forename><surname>Du</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Hoffswell</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sana</forename><surname>Tak Yeon Lee</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Koh</forename><surname>Malik</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Leilani</forename><surname>Battle</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b47">
+	<monogr>
+		<title level="m">Visualization. IEEE Transactions on Visualization and Computer Graphics</title>
+				<imprint>
+			<date type="published" when="2021">2021</date>
+			<biblScope unit="page">11</biblScope>
+		</imprint>
+	</monogr>
+	<note>to appear</note>
+</biblStruct>
+
+<biblStruct xml:id="b48">
+	<monogr>
+		<title level="m" type="main">Investigating the Effect of the Multiple Comparisons Problem in Visual Analysis. for Computing Machinery</title>
+		<author>
+			<persName><forename type="first">Emanuel</forename><surname>Zgraggen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Zheguang</forename><surname>Zhao</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Robert</forename><surname>Zeleznik</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Tim</forename><surname>Kraska</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3173574.3174053</idno>
+		<ptr target="https://doi.org/10.1145/3173574.3174053" />
+		<imprint>
+			<date type="published" when="2018">2018</date>
+			<biblScope unit="page" from="1" to="12" />
+			<pubPlace>New York, NY, USA</pubPlace>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b49">
+	<analytic>
+		<title level="a" type="main">Table2Charts: Recommending Charts by Learning Shared Table Representations</title>
+		<author>
+			<persName><forename type="first">Qingtao</forename><surname>Zhou</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Xinyi</forename><surname>Li</surname></persName>
+		</author>
+		<author>
+			<persName><surname>He</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yibo</forename><surname>Yuejiang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Wei</forename><surname>Liu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Shi</forename><surname>Ji</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yining</forename><surname>Han</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Daxin</forename><surname>Chen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Dongmei</forename><surname>Jiang</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Zhang</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3447548.3467279</idno>
+		<ptr target="https://doi.org/10.1145/3447548.3467279" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 27th ACM SIGKDD Conference on Knowledge Discovery &amp;; Data Mining Event, Singapore) (KDD &apos;21)</title>
+				<meeting>the 27th ACM SIGKDD Conference on Knowledge Discovery &amp;; Data Mining Event, Singapore) (KDD &apos;21)<address><addrLine>New York, NY</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computing Machinery</publisher>
+			<date type="published" when="2021">2021</date>
+			<biblScope unit="page" from="2389" to="2399" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b50">
+	<analytic>
+		<title level="a" type="main">A survey on automatic infographics and visualization recommendations</title>
+		<author>
+			<persName><forename type="first">Guodao</forename><surname>Zhu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Qi</forename><surname>Sun</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Meng</forename><surname>Jiang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ronghua</forename><surname>Zha</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Liang</surname></persName>
+		</author>
+		<idno type="DOI">10.1016/j.visinf.2020.07.002</idno>
+		<ptr target="https://doi.org/10.1016/j.visinf.2020.07.002" />
+	</analytic>
+	<monogr>
+		<title level="j">Informatics</title>
+		<imprint>
+			<biblScope unit="volume">4</biblScope>
+			<biblScope unit="page" from="24" to="40" />
+			<date type="published" when="2020">2020. 2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+				</listBibl>
+			</div>
+		</back>
+	</text>
+</TEI>

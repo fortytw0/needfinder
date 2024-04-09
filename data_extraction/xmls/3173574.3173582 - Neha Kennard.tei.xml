@@ -1,0 +1,1132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xml:space="preserve" xmlns="http://www.tei-c.org/ns/1.0" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.com/kermitt2/grobid/master/grobid-home/schemas/xsd/Grobid.xsd"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+	<teiHeader xml:lang="en">
+		<fileDesc>
+			<titleStmt>
+				<title level="a" type="main">Gender Recognition or Gender Reductionism? The Social Implications of Automatic Gender Recognition Systems</title>
+			</titleStmt>
+			<publicationStmt>
+				<publisher/>
+				<availability status="unknown"><licence/></availability>
+			</publicationStmt>
+			<sourceDesc>
+				<biblStruct>
+					<analytic>
+						<author>
+							<persName><forename type="first">Foad</forename><surname>Hamidi</surname></persName>
+							<email>foadhamidi@umbc.edu</email>
+						</author>
+						<author>
+							<persName><forename type="first">Morgan</forename><surname>Klaus</surname></persName>
+							<email>morgan.klaus@umbc.edu</email>
+						</author>
+						<author>
+							<persName><forename type="first">Scheuerman</forename><surname>Stacy</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">M</forename><surname>Branham</surname></persName>
+							<email>sbranham@umbc.edu</email>
+						</author>
+						<author>
+							<affiliation key="aff0">
+								<orgName type="institution">University of Maryland</orgName>
+							</affiliation>
+						</author>
+						<author>
+							<affiliation key="aff1">
+								<orgName type="institution">University of Maryland</orgName>
+							</affiliation>
+						</author>
+						<author>
+							<affiliation key="aff2">
+								<orgName type="institution">University of Maryland</orgName>
+							</affiliation>
+						</author>
+						<author>
+							<affiliation key="aff3">
+								<orgName type="institution">Baltimore County (UMBC) Baltimore County (UMBC) Baltimore County (UMBC) Baltimore</orgName>
+								<address>
+									<settlement>Baltimore, Baltimore</settlement>
+									<region>MD, MD, MD</region>
+									<country>USA, USA, USA</country>
+								</address>
+							</affiliation>
+						</author>
+						<title level="a" type="main">Gender Recognition or Gender Reductionism? The Social Implications of Automatic Gender Recognition Systems</title>
+					</analytic>
+					<monogr>
+						<imprint>
+							<date/>
+						</imprint>
+					</monogr>
+					<idno type="DOI">10.1145/3173574.3173582</idno>
+				</biblStruct>
+			</sourceDesc>
+		</fileDesc>
+		<encodingDesc>
+			<appInfo>
+				<application version="0.7.1" ident="GROBID" when="2022-07-22T05:05+0000">
+					<desc>GROBID - A machine learning software for extracting information from scholarly documents</desc>
+					<ref target="https://github.com/kermitt2/grobid"/>
+				</application>
+			</appInfo>
+		</encodingDesc>
+		<profileDesc>
+			<textClass>
+				<keywords>
+					<term>Automatic gender recognition</term>
+					<term>gender identity</term>
+					<term>transgender</term>
+					<term>autonomy</term>
+					<term>user-centered design H.5.3. Information interfaces and presentation (e.g., HCI)</term>
+				</keywords>
+			</textClass>
+			<abstract>
+<div xmlns="http://www.tei-c.org/ns/1.0"><p>Automatic Gender Recognition (AGR) refers to various computational methods that aim to identify an individual's gender by extracting and analyzing features from images, video, and/or audio. Applications of AGR are increasingly being explored in domains such as security, marketing, and social robotics. However, little is known about stakeholders' perceptions and attitudes towards AGR and how this technology might disproportionately affect vulnerable communities. To begin to address these gaps, we interviewed 13 transgender individuals, including three transgender technology designers, about their perceptions and attitudes towards AGR. We found that transgender individuals have overwhelmingly negative attitudes towards AGR and fundamentally question whether it can accurately recognize such a subjective aspect of their identity. They raised concerns about privacy and potential harms that can result from being incorrectly gendered, or misgendered, by technology. We present a series of recommendations on how to accommodate gender diversity when designing new digital systems.</p></div>
+			</abstract>
+		</profileDesc>
+	</teiHeader>
+	<text xml:lang="en">
+		<body>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>INTRODUCTION</head><p>Gender is a significant social construct in human cultures; it permeates both our offline, physical worlds, and increasingly our online, virtual spaces and digital devices <ref type="bibr" target="#b3">[5,</ref><ref type="bibr" target="#b39">40]</ref>. Whether it be through social networks or video games, users increasingly encounter embedded gender representations in technology. For example, social networks such as Facebook use information about users' gender for targeted marketing, a practice that potentially impacts millions of users worldwide <ref type="bibr">[2]</ref>.</p><p>Another outgrowth of this trend is the development of automatic gender recognition (AGR), a class of algorithms that use various techniques, including facial recognition <ref type="bibr">[27,</ref><ref type="bibr" target="#b30">32]</ref> and body recognition <ref type="bibr" target="#b4">[6,</ref><ref type="bibr" target="#b44">45]</ref>, to classify an individual's gender. While AGR technology is still in its infancy, the recent integration of facial recognition into already pervasive technologies suggest it could impact large numbers of people in the near future. As technologists continue to develop AGR applications, it is important to understand the social and ethical implications of widespread adoption. However, there has been little research into the perceptions and attitudes of end users about this emerging technology.</p><p>Gender is a complex concept with important roles both as a cultural construct and a core aspect of an individual's identity <ref type="bibr" target="#b3">[5,</ref><ref type="bibr" target="#b39">40,</ref><ref type="bibr" target="#b41">42]</ref>. Research into gender is increasingly revealing its multifaceted internal aspects, which exhibit much more diversity and fluidity than thought before <ref type="bibr" target="#b3">[5,</ref><ref type="bibr" target="#b39">40]</ref>. For example, currently an estimated 0.06% of Americans (or 1.4 million people) identify as transgender (including gender non-binary) <ref type="bibr">[8]</ref>. Transgender or trans denotes when an individual's gender identity differs from the one they were assigned at birth based on sex <ref type="bibr">[47]</ref> (as opposed to cisgender or cis, a person who does identify with the sex they were assigned at birth). Sensitivity to one's gender identity is crucially important, as the act of misgendering--whereby one's gender is incorrectly identified, leading to the use of incorrect gendered words--is a form of "structural violence" that can have a significant negative impact on trans individuals <ref type="bibr">[21,</ref><ref type="bibr" target="#b29">31,</ref><ref type="bibr" target="#b33">35]</ref>.</p><p>The complexity of gender constructs motivates the current exploration, which aims to complement and problematize the technical work that is going into implementing AGR. By looking at AGR from the perspective of transgender individuals, we seek to study the impact of technologies that make assumptions about what can or should be automatically inferred without consultation with human agents. Given the multiple aspects of gender and its subjective dimension, can it be detected accurately based on external features? What happens when the system misgenders an individual, either by mistaking their gender or by failing to include their non-conforming gender in the model? What would be the cost of these failures? Finally, as AGR is frequently enacted upon an individual without consent, what are the ethical implications regarding one's autonomy and privacy?</p><p>To address these questions, we conducted qualitative interviews with transgender-identifying individuals, including transgender technologists (developers and researchers). We asked participant to share their general impressions of AGR and to respond to scenarios where AGR makes mistakes or misclassifies gender, leading to misgendering. We found that our participants had overwhelmingly negative impressions of AGR and had serious concerns about how it would impact their autonomy and privacy. Based on our findings, we offer insights into the development of AGR moving forward.</p><p>The contributions of this paper are three-fold. First, it provides insight into the potentially harmful impact of an emerging technology on an understudied and vulnerable population (i.e., transgender individuals), as well as the wider population. Second, it offers recommendations into how gender and other complex human characteristics can be mindfully incorporated into technology. Finally, it tackles some of the sociotechnical issues that arise when notions of identity, autonomy, and diversity intersect in relation to technology design.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>RELATED WORK Automatic Gender Recognition (AGR) and its Applications</head><p>Automatic Gender Recognition (AGR) (also known as gender classification) refers to algorithmic methods, including automatic facial recognition <ref type="bibr">[27,</ref><ref type="bibr" target="#b30">32]</ref> and body recognition <ref type="bibr" target="#b4">[6,</ref><ref type="bibr" target="#b44">45]</ref> technologies, that extract features from images, video, or audio of one or more individuals in order to identify their gender. AGR often leverages computer vision algorithms and/or voice recognition modules. A common method is to extract features (e.g., facial hair) from an individual's visual and/or audio data (e.g., a video showing their face) and compare them with ground-truth samples (e.g., videos of faces for which the gender is known) in an existing database. If the input features are found to be similar to those in the database, a match is declared.</p><p>AGR has been developed since at least the early 1990's <ref type="bibr" target="#b10">[12]</ref>. Prior research has explored the technical capabilities of AGR and its applications, including gendered marketing, human-robot interaction, and security surveillance <ref type="bibr" target="#b30">[32]</ref>. There are several motivations for using AGR: it is believed to improve user experience by providing a digital system with more information about the user, such that it can better adapt to them <ref type="bibr" target="#b30">[32,</ref><ref type="bibr" target="#b37">39,</ref><ref type="bibr" target="#b44">45]</ref>; it is also believed to have the ability to enhance surveillance or marketing research by analyzing user data and providing results to marketers <ref type="bibr" target="#b31">[33]</ref> or authorities (i.e., police) <ref type="bibr" target="#b16">[18,</ref><ref type="bibr" target="#b40">41]</ref>.</p><p>Researchers have focused on several methods for implementing AGR and improving its accuracy, including: voice recognition using fundamental frequency and MFCC coefficients <ref type="bibr" target="#b45">[46]</ref>, facial recognition using image texture extraction [27] and face alignment <ref type="bibr" target="#b28">[30]</ref>, body recognition using a part-based gender recognition algorithm <ref type="bibr" target="#b4">[6]</ref>, analysis of breast shape <ref type="bibr" target="#b44">[45]</ref>, and gait-based gender recognition using the gait energy image (GEI) <ref type="bibr" target="#b48">[49]</ref>. Researchers have also studied the effects of racial facial features on gender recognition accuracy <ref type="bibr">[37]</ref>. In a 2013 paper, Kosinski et al. presented a method to analyze digital records of online behavior (e.g., Facebook Likes) to predict user gender, as well as other attributes including sexual orientation, ethnicity and age <ref type="bibr" target="#b23">[24]</ref>.</p><p>Recently, there has been an increasing corpus of research discussing AGR and transgender individuals <ref type="bibr" target="#b26">[26,</ref><ref type="bibr" target="#b28">30,</ref><ref type="bibr" target="#b47">48]</ref>. This work is focused primarily on the accuracy challenges, which transgender faces present to AGR algorithms. Mahalingam and Ricanek created the first transgender dataset for facial recognition technology usage <ref type="bibr" target="#b27">[28]</ref>. This dataset is used in biometric research examining transgender facial recognition <ref type="bibr" target="#b26">[26,</ref><ref type="bibr">29]</ref>. The authors also claim hormone replacement therapy (HRT) could be used for the purpose of "biometric obfuscation" or disguise <ref type="bibr">[29,</ref><ref type="bibr" target="#b47">48]</ref>. This work which positions transgender faces as problematic to facial recognition accuracy, also raised ethical issues related to user privacy as the data for the database was scraped from transgender individuals' videos without their consent or knowledge <ref type="bibr">[20]</ref>. To our knowledge, there is a lack of research on AGR that seeks consultation from members of the transgender community.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Algorithmic Fairness, Human Autonomy and Automatic Recognition Systems</head><p>Previous research has identified the possibility of unintentionally replicating human biases in automatic systems <ref type="bibr">[23,</ref><ref type="bibr" target="#b34">36]</ref>. For example, Kannabiran and Petersen discussed the interaction between power and the politics of ingrained biases in user interfaces [23], while O'Neil explains that algorithms and big data increase inequality by "masquerading as neutral technology" <ref type="bibr" target="#b34">[36]</ref>. Researchers have further called into question the concept of "fairness" in machine learning, calling for frameworks for inclusion of vulnerable communities <ref type="bibr" target="#b43">[44]</ref>. Activist organizations and projects have formed to protest algorithmic bias <ref type="bibr" target="#b0">[1]</ref>, with some efforts specifically targeting facial recognition technology <ref type="bibr" target="#b2">[4]</ref>. While some research has discussed the interaction between gender, race and encoded biases <ref type="bibr">[2,</ref><ref type="bibr" target="#b15">17]</ref>, there is still a need to understand how gendered bias can be encoded in AGR and the possible implications of such encoding on vulnerable gender minorities.</p><p>In automatic recognition systems, issues regarding bias are compounded by concerns for human autonomy. Human autonomy can be defined as the ability "to be one's own person, to be directed by considerations, desires, conditions, and characteristics that are not simply imposed externally upon one, but are part of what can somehow be considered one's authentic self" <ref type="bibr" target="#b5">[7]</ref>. Previous research in HCI has long identified the need to support human autonomy as a central ethical value <ref type="bibr">[9,</ref><ref type="bibr">10]</ref>. While some of the researchers developing AGR systems have briefly discussed concerns of privacy for their users (e.g., <ref type="bibr" target="#b37">[39]</ref>), most of the previous research in this area has focused on addressing technical issues of the algorithms themselves and how to improve their accuracy. Additionally, recent news stories have reported the use of AGR-capable facial recognition systems for advertising in public spaces without user knowledge or consent; systems whose use became only apparent to passersby after a billboard screen malfunction <ref type="bibr" target="#b32">[34]</ref>. In the face of these stories and concerns about the possibility for algorithmic bias and threats to user autonomy posed by automatic recognition systems, it is important to study and better understand the ethical and social implications of these systems.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Technology Design and Transgender Individuals</head><p>A recent survey of the last thirty-five years of CHI proceedings found only three papers that included input from trans technology users <ref type="bibr" target="#b42">[43]</ref>. However, there is a growing interest in understanding this community, and previous research has found that failing to include the perspectives of this population in technology design can have harmful and adverse impacts on them [2, <ref type="bibr" target="#b13">15,</ref><ref type="bibr" target="#b14">16]</ref>.</p><p>Using survey results from 283 trans Facebook users, Haimson et al. found that trans individuals use different strategies, including editing self-representational data from prior identifies and conducting detailed access management for their profiles, to deal with gender transitioning while on the social network <ref type="bibr" target="#b14">[16]</ref>. They found that these strategies were time-consuming and sometimes emotionally painful and could potentially be facilitated by better user experience design. In another study, Bivens and Haimson analyzed the gender options on member sign up pages, profile pages, and advertising portals of the 10 most popular social networks and found that most of the sites embedded gender binaries in their underlying categorization mechanisms, an approach that might lead to the implicit or explicit misgendering of users <ref type="bibr">[2]</ref>. In this study, we focus on the expereince of being misgendered by technology from the transgender individuals' perspective.</p><p>As mentioned in the introduction, misgendering refers to the experience of being incorrectly gendered by others. Transgender individuals often experience misgendering by other individuals in their daily lives. Previous research has shown that being misgendered can have a significant negative impact on an individual's mental health, including feelings of stigmatization <ref type="bibr" target="#b29">[31]</ref>, social exclusion <ref type="bibr" target="#b12">[14]</ref>, and oppression <ref type="bibr" target="#b21">[22]</ref>. Findings from the National Transgender Discrimination Survey conducted in 2014 found that 41% of respondents attempted suicide compared to the 4.6% of the average U.S. population <ref type="bibr">[8]</ref>. Of those who were regularly misgendered in their workplace, 56% had attempted suicide. These data suggest that misgendering may have severe implications for the mental and physical health of trans individuals <ref type="bibr" target="#b11">[13]</ref>. It is therefore important to investigate how being misgendered by technologies like AGR may impact trans people.</p><p>In summary, there is a small but growing body of research in the HCI community that focuses on digital technology design for transgender individuals [2, <ref type="bibr" target="#b1">3,</ref><ref type="bibr" target="#b13">15,</ref><ref type="bibr" target="#b14">16]</ref>. This paper builds on this research by investigating gender representation within AGR systems and offering design recommendations that are inclusive of trans voices.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>METHODS</head></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Participants</head><p>In this study, we focused on understanding the perspective of individuals who identify as transgender (i.e., a different gender identity than the one assigned at birth) <ref type="bibr">[47]</ref>. In addition to binary-identifying transgender individuals, we have included people with non-binary and gender nonconforming trans identities, which we also refer to as "transgender" and "trans" throughout this paper. We recruited 13 trans-identifying participants, three of whom were technologists, or professionals working in a field related to digital technology, such as software engineering. We chose to seek out trans technologists to allow that individuals with technical expertise may have different attitudes towards technological innovation. We denote technologist participants by using a T as their Participant ID (e.g., T1) and denote non-technologist participants by adding a T to their ID (e.g., P1). Please see Table <ref type="table" target="#tab_0">1</ref> on the next page for the participants' demographic information.</p><p>Participants were recruited using an online survey distributed using Facebook Groups. To identify trans technologists, authors asked personal contacts to distribute the online survey in their professional circles. Finally, in an effort to include a more racially and socioeconomically diverse participant pool, physical fliers with the link to the survey and contact information were posted in transoriented community centers in the authors' city.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Study Protocol</head><p>We conducted semi-structured interviews with the participants over the phone. We developed and refined the interview protocols by conducting pilots with two representatives of our population. We used different protocols for technologists and non-technologists. Both protocols included questions about the participants' perceptions and attitudes towards AGR and their previous experience with similar automatic recognition technology, such as facial recognition software. Additionally, we presented participants with a variety of possible AGR use scenarios based on existing examples from literature and news (i.e., for marketing, security, and human-robot interaction). We chose examples that were not overtly positive or negative. If participants offered examples of their own, we would ask them to elaborate on these scenarios rather than our examples. We also asked participants to imagine future scenarios in which they may encounter AGR, including scenarios where they might be gendered correctly or incorrectly. For the technologists, we also asked questions about their professional experience with technology design, especially the design of recognition systems that use automatic training.</p><p>Interviews took on average approximately 85 minutes, ranging from 36 to 91 minutes. We transcribed all the interviews and conducted an iterative thematic analysis to identify and synthesize themes within the data. We identified seven themes and eight subthemes.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>FINDINGS Previous Experiences of Misgendering: "The Base Alienation that Comes with Transphobia"</head></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Misgendering in Physical Spaces</head><p>Participants discussed the negative impact of misgendering on their mental and emotional wellbeing. Some (P1, P2, P3, P4, P7, T2) reported being more often misgendered offline. Participants who identified as non-binary (P5, P8, P10) reported never being gendered correctly by strangers. Others (P2, P6) who said they usually "pass" (i.e., are correctly gendered by others) in person, reported instances where they were misgendered on the phone or through voice chat where people cannot see them.</p><p>Participants (P1, P2, P7) described feelings of frustration and emotional exhaustion that come with trying to avoid being misgendered by others: The frustration stems not only from being misgendered, but also from an awareness that others simply do not know their gender identity exists: "It's annoying that [people] don't think that, 'Oh! Non-binary is a thing" (P5).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Misgendering in Virtual Spaces</head><p>Participants (P1, P2, P3, P4, P7) said that technology and especially online spaces presented them with more control over how others see their identities and interact with them. P3 said he can control his avatar or image online, but he "can't control everything in real life." P7 said he would actively manage his gender presentation online with "things like the angle of [his] jaw when [he] would take a picture" to "masculinize" his facial features. These mechanisms were particularly valued by people who did not pass as their preferred gender in face-to-face situations. Further, ease of gender presentation online supported more fluid, day-to-day expression along a gender spectrum (P4).</p><p>However, participants (P7, P10) also noted that online systems could reinforce problematic gender expectations they usually faced offline. P10 said online surveys that forced them to pick male or female are "terrible" and that the lack of pronoun options on some sites is "frustrating."</p><p>"When I see the language of male and female … as the only two options, … that's an indicator that they haven't done one of the most basic things to accommodate trans people, so I don't know if I can trust the rest of the experience." -P7</p><p>While online profiles support more control over gender presentation and thus reduce misgendering by other users, the system itself can misgender users by embedding inflexible binary gender categories.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Can AGR Really Work?: "I Would Show Up as a Blip or an Error"</head><p>When asked about their impression of AGR, all 13 participants had serious concerns about the assumptions these systems make about gender and how they might reflect on the trans community.</p><p>Some participants (P2, P8, T2, P10, T3) disagreed with the assumption AGR systems make about the nature of gender as something that can be classified using external features; they stated that gender is an internal identity not necessarily tied to physical features: Other concerns about accuracy were related to fluctuating gender presentations (P7, P9, T3) achieved with makeup, hormone replacement therapy (HRT), and/or gender affirmation surgery. On the flip side, lack of access to these options as well as realistic limitations of changing one's physical body to match their identity also raised concerns:</p><p>"Whose gonna change their wrists? Or whose gonna change … their bone structure to the point where they're either going to look male or look female? Are you going to change your rib cage, are you going to change your hips?" -P9</p><p>Here, P9 explains how AGR algorithms based on physical form might make it difficult to accurately identify one's gender while simultaneously placing unrealistic expectations on transgender bodies to conform. This quote captures the stress that can result when sociallyconstructed standards are materialized and imposed on users through technology implementation.</p><p>Finally, P7 noted that trans people are often mistakenly accused of "catfishing," or luring others into relationships using false and constructed online personas. He was therefore worried that AGR systems might flag transgender individuals, lumping them in with ill-intentioned people trying to commit fraud or deception.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Impact of Being Misgendered by AGR</head><p>All participants acknowledged the potential negative impact of being misgendered by AGR. They differed on their reading of the severity of misgendering perpetrated by an algorithm as compared to a human being.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Worse than a Human: "It's the Worst Social Exclusion"</head><p>Most of the participants (P1, P7, P8, T1, P9, P10, T3) considered misgendering by AGR worse than being misgendered by another human being. This stemmed in part from the fact that AGR simply introduced another potential source of invalidation. P7, T1, P10, and T3 were concerned that it would add to the regular exhaustion and impact of being misgendered that they already experience. Participants also foresaw that increased misgendering would lead to an increase in its negative effects:</p><p>"That would just increase trans people's dysphoria [i.e., the distress or discomfort some transgender people experience when their physical body does not match their gender identity], as well as increase the amount that they're getting misgendered, which is terrible." -P10</p><p>For others, the distinction between human and computer mistakes was significant. One set of concerns was rooted in the belief that AGR systems might not allow users to perceive and therefore correct gender classification errors. P9 and T3 expressed being more tolerant of human mistakes, because "people you can correct" (T3). In the long-term, it would be "really demoralizing" to consistently be seen as "something that you're not" (T1).</p><p>Other participants (P1, P4, P7, P8) expressed that being misgendered by a computer was worse due to the perceived objectivity of computer systems: In contrast, P8 was aware that computers carry the biases of their human developers. But, as a result, he interpreted being misgendered by a computer as a more severe act committed by many people as opposed to just one:</p><p>"It would probably feel shittier if this million-dollar piece of software developed by however many people decides that I'm this thing that I'm not." -P8</p><p>Finally, both P1 and P7 thought being misgendered by AGR technology would reinforce gendered standards that transgender individuals would then internalize and hold themselves to. We saw that the perception of computers as somehow being more "objective" or as a synthesis of general human standards led participants to a sort of insultto-injury mindset because they interpreted the gender label assigned by the computer as more definitive and exacting.</p><p>The Same as a Human: "A Misunderstanding of Gender"</p><p>Other participants (P3, P5, P6) said the impact of being misgendered by AGR would be the same as being misgendered by a human being because, like humans, machines are "subjective". P3 also attributed AGR misgendering them to its designers having a "misunderstanding of gender as a whole." However, they thought the impact of misgendering was "basically the same, because a person would be responsible ultimately for making and designing <ref type="bibr">[AGR]</ref>." (P3).</p><p>than a Human: "Oh, this Machine is Stupid" P2, P4, and T2 being misgendered by AGR would better being misgendered by a human being. P2 and T2 both said they would view the mistake as a flaw in technology, for which they would judge the designers:</p><p>"I'd be like, 'Oh, this machine is stupid,' you know? It would me something about the assumptions of gender that were being put into the design." P4, however, was more focused on the sophistication of versus machine classifiers. He suggested that being misgendered by AGR would be less concerning because would be less perceptivity and intentionality behind the mistake:</p><p>"A human being misgendering a person can be a lot more and it can mean a lot more or less depending on the it's coming from … Robots misgendering me is kind of a fake objective 'you look like a man,' but there is no look of masculinity." -P4</p><p>Regardless of where participants stood on the spectrum of being worse, better, or the same as human beings them, none of them expressed that AGR their gender wrong would be viewed positively.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>AGR's Necessity: "What Benefit Would Provide to Society?"</head><p>were skeptical of useful or necessary applications of AGR and they all questioned whether implementing it would offer any benefit to end users. Most of the participants were familiar with other automatic recognition technologies: nine out of 13 participants had used automatic facial recognition technology before. However, of the 10 trans non-technologists and 3 trans none of them could imagine any benefit that AGR would offer its users. Put bluntly by P9:</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>"It has no social redeeming value … I either would totally ignore the [AGR] robot, [or] if it were possible, kick the robot in the balls and knock it over and get out of my way." -P9</head><p>P2, P3, P4, P7, and P10 were against the development of AGR due to its potential negative impact.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>"I know if [AGR] would intersect well with transness … It like it could be bio-essentialist reducing gender information to biological characteristics]." -P3</head><p>Several participants related their concerns about the similarity of AGR to facial recognition software. described how she was "wary" of facial recognition because of how it could be used for "gendered marketing". P10 described the face tagging functionality of as "creepy." P4, P5, T1, and P9 all stated that automatically gendering others on sight was undesirable.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>"Why in the first 30 seconds that you meet someone, whether it's a robot or human, [would you need to know their gender]?</head><p>The only reason we have to establish gender really is so we can use the right pronouns." -T1 P6, P7, and P8 questioned what the benefit would be, both in the context of society and to developers.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>"Particularly with the range expression of gender now, I just wonder … if that's actually valuable information."</head><p>P9 the most optimistic of the participants. Although she was concerned that the potential outweigh the positives," she also expressed hope that if designers adjust for the negatives AGR could have potential. Nonetheless, both and P10 did not feel it would work in the current cultural and political context.</p><p>"Right now, I don't see programmers having the ability to screen out or prevent the negative use, the hostile use…. I don't think we're progressive enough as humanity to successfully the use of that kind of a program for only good."</p><p>three technologists (T1, T2, T3) also disliked the concept of AGR. and T2 used facial recognition software in lab contexts before and were familiar with technology (e.g., Microsoft's Face API) that has features to detect age, gender, emotion, pose, smile, and facial hair on had experience researching facial recognition, stated that they had encountered it in airports before.</p><p>T2 said that technology that could serve cisgender people may be unable to serve transgender people, because in technology design the "treatment of identity [is] poor."</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>"[These] algorithms … they're looking for certain things. looking for masculine or feminine whatever … it's not how stuff is made. making decisions? That's binarist as fuck." -T2</head><p>Technologist participants expressed a sense of their lack of agency in designing AGR:</p><p>"The work that they're doing has no provable meaningful It does have provable meaningful harm … think (trans people) should absolutely be concerned … Yeah, this is bad technology, and yeah this doesn't work, but ... there will always be willing to deploy it." -T3</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>AGR as a Tool for Oppression: "It's Just Going to Exacerbate what's Already There"</head><p>expressed fear that AGR could used, intentionally or not, as a tool for renewing oppressive structures that already affect the trans Specifically, they were concerned that would reinforce gender binaries, override user autonomy, impose surveillance undermines privacy and safety. P4 articulated the experience oppression that trans individuals already face and how AGR would intensify it: already many eyes on every trans person navigating through world and we all feel those eyes … It's just going to exacerbate what's already there."</p><p>AGR Reinforces Gender Binarism (P1, P4, P8, T1, T2, T3) viewed current AGR implementations, which classify targets into male or female categories, as reinforcing a binary system. Adopting a binary male/female scheme excludes, invalidates, and assures the misgendering of non-binary identities. Further, as T2 pointed out, binary AGR systems would likely give transgender people who "pass" as their gender identity by conforming to binary categories of gender expression.</p><p>Participants (P4, P8, T1) noted the pairing of futuristic AGR technology with old-fashioned gender and its value to society: this perspective, AGR in its current implementations a opportunity" for progress (T1). Consequently, AGR is a missed opportunity for including trans community:</p><formula xml:id="formula_0">don't</formula><p>"We're excluded from the direction of the future … that's sorta it feels like." -P7</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Undermines User Autonomy</head><p>Concerns about violations of user autonomy in relation to and a lack of trust that emerged as an important topic in interviews. Specifically, several P4, P7, T3) AGR non-consensual: <ref type="bibr" target="#b0">(1)</ref> completely unnecessary, (2) undesired by many people who would be interacting with the software without their consent." P2 an incident in which an "electronic billboard that crashed and revealed the program running beneath it" being used without user consent to the age and gender of people for targeted advertisements.</p><formula xml:id="formula_1">"[AGR] is</formula><p>In addition to general disapproval of being gendered by a machine, and T3 worried about whether their personal data would be stored and potentially sold to third AGR is a Tool for Participants (P2, P4, P7, P9, T3) were fearful that and would be used as a tool for surveillance. Lack of privacy was a common misgiving among participants, for whom AGR was as and invasive: </p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>lot has been illuminated in recent years about abuses of power and what can happen when people who have whatever bias are in control of certain surveillance technologies … I'm also very aware of histories of surveillance being used against communities or communities of people of color."</head></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>AGR Threatens Safety</head><p>Participants identified several ways in which gender binarism, lack of autonomy, and surveillance imposed by AGR systems might present threats to and physical wellbeing (P1, T1, P9) and civil liberties (all participants) trans individuals. From the unrelenting toll of daily microaggressions, to losing your job, or to being physically attacked, a future with AGR was as highly consequential:</p><p>"It's easier for a cis person to be like, "Oh, that's wrong." But more of a daily fight for a lot of trans folks, so I could see that being … harmful. And also, it could be a safety issue ... Like fear of being outed … That could have job consequences or safety consequences." -T1</p><p>All raised about the possibility of AGR misused perpetrate discriminatory acts. P4 and P7 expressed fear the system would be used in "malicious" (P7) ways target trans people, especially those whose physical features do not conform to of the AGR system:</p><p>"People who don't fit promptly into the gender binary would be brutalized." imagined such a system preventing people from entering bathrooms that match their gender: P9 explained AGR technology is situated in a cultural and historical context that augment the uses and impacts of technology adoption. While AGR might someday be acceptable, in the current time it is a proposition for the trans community:</p><formula xml:id="formula_2">in the future [</formula></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>possibilities for misuse become] less, but at this point in time [AGR is] dangerous, because I think it can be misused much more than it can be used appropriately." -P9</head><p>Most participants (P1, P4, P7, T2, P10, T3) were concerned that AGR will perpetuate and potentially amplify systems of oppression for transgender people.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Impact Beyond the Transgender Community</head><p>While participants' concerns were primarily about how AGR could negatively impact the trans community, they also expressed impacts to society at is just a trans issue, it is] misogyny and patriarchy issue because we've created these narrow boxes around policing and policing female." -T1 P1, P4, and T1 brought up the possible harm that cis people might cause.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>people's gender wrong [is] very bad … People would react badly to that … You could equally misread my wife for her using that facial technology." -P6</head><p>participants (P2, P4, also described how in their opinion biases in software design are not limited to gender and extend to other issues, such as race. P4 mentioned disliking Snapchat because its filters are "racist" and the filters "always give you blue eyes" and "change your face to be more European."</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>"[AGR] may have trouble with the way that … different races different facial patterns." -P2</head><p>P4 and T2 both blamed this on limited representation in design. They attributed bias to limiting datasets to data about white people, insinuating this could impact gender is predicted.</p><p>on… the proportion of people [tech companies] hire being trans or not, being women or not, the fact that tech is still majority white and male … What kinda people are the bases for predictions of 'what gender are you?'"-T2</p><p>Incorporating Gender into Technology participants did not have a positive view of AGR, they expressed positive views of other forms of technology in general. Several participants had suggestions on how could adopt more inclusive practices to gender into technology.</p><p>T1 and P9 suggested giving people over the way are gendered by technology. T1 suggested that technology should "just ask" people for their pronouns, while P9 said to avoid pronouns all together and choose to names given by users. P7, and T1 recommended allowing users explicitly and confirm their own identities, supporting their choice in the interaction.</p><p>"I would definitely recommend having an option … for the person to be able to confirm their identity or have an option … for people to address that before it affects them." -P7 T1 conveyed hope that, technology designers implemented AGR well, it could be "empowering:" "If technology were more inclusive, it could normalize a lot of for the trans community, and other folks, especially because it's so ubiquitous." P7, P8, T1, T2, and T3 for including diverse voices in technology design. T1 suggested designers should stop "making assumptions about wanting to help majority." P8 thought it was important to have "amateurs meddling" in the creation of new technology. Finally, P4 and suggested the effort put into be used to create something more positive instead.</p><p>"Instead of investing energy into inventing a technology that people … You could use that software to understand gender exists in world."</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>DISCUSSION: ENGAGING GENDER DIVERSITY IN HCI</head><p>Results from our study show that transgender individuals serious concerns about possible negative impact of AGR and similar technologies that incorporate gender.</p><p>technologist and non-technologist participants doubts about whether AGR could ever be successfully implemented and about the negative consequences of its inaccuracy both on transgender community and society as a whole. Further, participants were concerned that AGR is used and non-consensual of individuals, it could result in and oppression. These findings augment research on transgender stigmatization <ref type="bibr" target="#b17">[19,</ref><ref type="bibr" target="#b25">25]</ref> and impact of misgendering <ref type="bibr" target="#b29">[31]</ref> in non-technical contexts and paint a of transgender individuals' perceptions, and concerns, towards emerging technologies.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Gender Can Do Harm</head><p>One of the most prominent themes arising in interviews was that AGR incorporates flawed representations of that are consequential. gender is not something that can be accurately read through physical features (face, body, or voice) by either humans or digital algorithms. This concern was present regardless of whether the participants were technology professionals or not.</p><p>Much of the current research on AGR is geared towards improving the accuracy of gender recognition as a function of physical presumed connote gender <ref type="bibr" target="#b26">[26,</ref><ref type="bibr">29,</ref><ref type="bibr" target="#b47">48]</ref>. However, is a large of research that participants' view that gender identity is primarily subjective and internal (e.g., <ref type="bibr" target="#b3">[5,</ref><ref type="bibr" target="#b39">40]</ref>). This fact poses significant challenges the notion that gender can recognized automatically, at least with strategies <ref type="bibr" target="#b26">[26,</ref><ref type="bibr">29,</ref><ref type="bibr" target="#b47">48]</ref>. Even if AGR designers allow that systems will mistakes only as often as any other human might, the concern remains that perpetrated by a machine distinct. Our findings show that, for many individuals, misgendering is perceived to be more harmful being misgendered by another person.</p><p>There is no apparent evidence that the internal and aspects of gender identity are discussed when AGR algorithms (see, e.g., <ref type="bibr" target="#b26">[26,</ref><ref type="bibr">29,</ref><ref type="bibr" target="#b47">48]</ref>). We believe this is an unfortunate omission that leads to the rematerializing of misconceptions about gender in technical systems and scientific reports. For example, AGR designers that understand trans users' concerns regarding "catfishing" might avoid describing the gender transition process as "face disguise" (i.e., deceptive modification of features) their scientific publications <ref type="bibr">[29,</ref><ref type="bibr" target="#b47">48]</ref>.</p><p>Intersecting with gender, participants expressed unease AGR's implications for racial bias. Previous work has identified embedded bias in algorithms that result in, for example, face recognition algorithms failing to detect dark skin or Asian eyes <ref type="bibr" target="#b15">[17]</ref>. algorithmic bias has documented for over a decade <ref type="bibr" target="#b9">[11]</ref>, the present study is the first to explore gender representation whereby conceptualizations of gender are embedded in recognition systems.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Threats to Autonomy and Privacy</head><p>Another central concern of our participants was the possibility that the deployment of AGR technology would their autonomy and compromise their privacy. Ethical questions about the deployment of technologies can be used for surveillance are an increasingly prominent concern in HCI research <ref type="bibr">[23]</ref> especially in relation to emerging ubiquitous systems and the Internet of Things <ref type="bibr">[21,</ref><ref type="bibr" target="#b36">38]</ref>. Our participants' concerns echo arguments for protecting human autonomy and user choice when with digital systems [9,10]. In this context, participants were worried that AGR technology could be and used on them without their explicit consent knowledge, evoking the idea that users might be used by and not vice versa.</p><p>These concerns often translated to a lack of trust towards systems that are not transparent about their functionality. The participants did not expect to know everything about a system functions but to have enough information to that it does not compromise their autonomy and This sense of mistrust can be a barrier technology adoption and needs to be addressed to support user experiences. This might signal a design opportunity to explore ways to create more trust in users by incorporating mechanisms and cues that assure them that the system will not undermine its users' autonomy.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Supporting Gender Diversity: Towards a Trans Inclusive</head><p>Our results underline a need to support gender diversity when designing digital systems. Our participants were concerned about AGR algorithms materializing and dominant gender binaries that are harmful not only the trans community, but to people of all gender They were concerned that limited gender (i.e., excluding transgender identities from datasets) could impact system functionality and reinforce stereotypical expectations of "male" and "female" in society. Participants noted that their concerns would not be by "adding more categories," but rather by supporting user flexibility and autonomy. The participants' concerns extended to cisgender people who might look or act differently from the majority: of different races, cisgender individuals who present androgynously individuals with unique facial structures.</p><p>many participants questioned why more input from their has not been included in the design and development of systems that interpret gender. This question is reminiscent of the concerns of other minorities who are historically left out of conversations large scale technology deployment, including ethnic and people with These observations align with current recommendations for avoiding gender and ethnocentrism in psychology and medical clinical research practice <ref type="bibr" target="#b12">[14]</ref>.</p><p>The CHI community has long recognized the importance gender in various contexts, including education, gaming culture and online virtual among others; it is time that this recognition is extended to the study of the experiences of diverse gender identities, a space for trans HCI "TransCHI."</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>DESIGN RECOMMENDATIONS</head><p>In this section, we present a series of recommendations on our participants' input on possible ways to gender in digital systems in an inclusive and manner. We present these recommendations not as end-all-be-all solutions but rather as a starting set of that need to be applied after careful examination each specific context and to avoid harming users in any way.</p><p>users if how they might be gendered and let opt out. Our first recommendation is that designers carefully consider potentially harmful impact of incorporating gender their designs and avoid including it unnecessary. they decide to include it, we recommend that systems explicitly inform users if they are going to be and provide them with an option to decline. Beyond letting users know if they are going to be gendered, systems provide transparency on users will be gendered. can be implemented by allowing users to access (and edit) their personal data that is used to make gendering decisions. should also let users know if gender information will be stored or used beyond each current application. example, Facebook currently collects binary gender information when users for accounts, then allows users to customize identity visible in their profile. only original binary distinction is to serve Applying our recommendation, should be informed their response to the gender prompt will be used to adapt site content, that they can edit in the future, and that it is optional for using the service.</p><p>Let users define their own gender identity. Since it is difficult (if not impossible) to automatically recognize gender accurately for all and the consequences of are significant, we recommend that designers want to incorproate gender provide for users to define their own gender identity. This choice should go beyond limited categories and allow users to define their gender according to their own experiences <ref type="bibr" target="#b41">[42]</ref>. Additionally, to support gender transition and fluidity, as well as the dynamicity of language gender identities, we recommend that systems users to and update their gender information opt out) over time. One benefit of this approach is to reduce the occurrence of misgendering supporting self-expression and autonomy. leveraging diverse gender information, as opposed to reducing to a binary, can allow digital to provide better to more customers (e.g., by providing approporiate ads to transgender individuals).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Incorporate gender when designing systems.</head><p>developing new systems with modules that enable gendering (e.g., AGR systems), we recommend that attention be given to how they are implemented and whether the underlying databases representative of the user population. While inclusivity is important, it is critical that it is not gained at the expense of the autonomy and of historically marginalized groups (e.g., by scraping images of trans people without consent <ref type="bibr">[20,</ref><ref type="bibr">29]</ref>).</p><p>we recommend the perspectives of with a variety of gender identities in the process, working with diverse teammembers adopting participatory design approaches.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>LIMITATIONS AND FUTURE WORK</head><p>In this study, participants did not actually experience being by AGR; their perspectives were based on future scenarios. We our participants to transgender individuals. In the we would like to cisgender individuals cisgender compare and contrast responses. We also would like to explore participatory processes and design outcomes that include transgender participants and values.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>CONCLUSION</head><p>With emerging technologies attempting to incorporate human attributes, such as gender, it is important to take into account the perspectives of diverse populations who might be directly or indirectly impacted. We studied the perceptions and attitudes of transgender individuals automatic gender recognition (AGR), a technology that aims to classify a person's gender based on their physical characteristics. We found that participants overwhelmingly negative attitudes towards and questioned if it can offer any beneficial applications to end They also expressed doubt about whether can identify gender and described the harm of misgendered by Finally, expressed serious about threats that it pose to their autonomy and privacy. presented several recommendations for incorporating in system design, including informing users if their gender information would be used, giving them the option opt out and allowing them to communicate their own identity to systems. With respect to AGR, we necessarily arguing for the of gender recognition from technology, but a careful consideration of implications of incorporating it. In totality, these recommendations point towards approach to gender that is more inclusive, collaborative and sensitive to human autonomy and choice.</p></div><figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_0"><head>Table 1 . Participant information. Participant IDs beginning with 'T' represent a technology developer or researcher.</head><label>1</label><figDesc></figDesc><table><row><cell>Participant ID</cell><cell>Gender Identity</cell><cell>Pronouns</cell><cell>Racial Identity</cell></row><row><cell>P1</cell><cell>Non-binary trans masculine</cell><cell>He/him</cell><cell>Black</cell></row><row><cell>P2</cell><cell>Non-binary trans woman</cell><cell>She/her and they/them</cell><cell>White</cell></row><row><cell>P3</cell><cell>Non-binary male</cell><cell>He/him or they/them</cell><cell>Black</cell></row><row><cell>P4</cell><cell>Trans feminine</cell><cell>She/her and they/them</cell><cell>Black/mix</cell></row><row><cell>P5</cell><cell>Genderqueer</cell><cell>They/them</cell><cell>Black Jamaican</cell></row><row><cell>P6</cell><cell>(Trans) woman</cell><cell>She/her</cell><cell>White</cell></row><row><cell>P7</cell><cell>Trans male</cell><cell>He/him</cell><cell>White</cell></row><row><cell>P8</cell><cell>Non-binary</cell><cell>He/him</cell><cell>White/Latine</cell></row><row><cell>P9</cell><cell>(Trans) female</cell><cell>She/her</cell><cell>White</cell></row><row><cell>P10</cell><cell>Bigender</cell><cell>Ey/em or they/them</cell><cell>Japanese/White</cell></row><row><cell>T1</cell><cell>Trans/gender non-conforming</cell><cell>They/them or she/her</cell><cell>White</cell></row><row><cell>T2</cell><cell>Trans woman</cell><cell>She/her</cell><cell>Middle Eastern/South Asian</cell></row><row><cell>T3</cell><cell>Non-binary</cell><cell>They/them</cell><cell>White</cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_3"><head></head><label></label><figDesc>"I get misgendered enough by ... human beings, why on Earth would I want a robot to help in that? … Programmatic misgendering, it sort of just adds to the ocean we all swim in of constant small comments …[Misgendering]  is death by a thousand paper cuts." -T3</figDesc><table /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_7"><head></head><label></label><figDesc>People think] 'God forbid, trans folks win and consolidate and have full authority over what gets made and what done', think that [for anti-trans people, would be the worst. Being able to out any trans person, being able to track trans people."</figDesc><table><row><cell>the legislation that directly affects them, including</cell></row><row><cell>and bathroom laws:</cell></row><row><cell>P9 expressed her fears about the current</cell></row><row><cell>administration in the United States using AGR in</cell></row><row><cell>conjunction with tracking or a registry to exclude trans</cell></row><row><cell>individuals government employment:</cell></row><row><cell>"If you think about it politically now, if Hitler had had that</cell></row><row><cell>there would be a lot of dead people. If Trump has that</cell></row><row><cell>ability, there's a way to exclude trans individuals from</cell></row><row><cell>from employment." -P9</cell></row><row><cell>"You could see in some state, like if North Carolina's still</cell></row><row><cell>insistent on passing bathroom laws, detectors that try and gauge</cell></row><row><cell>gender based on your face every time you want to enter a</cell></row><row><cell>Similarly, P2, P4, T2, and P9 expressed concern that AGR</cell></row><row><cell>could stand in the way of trans people gaining traction in</cell></row></table><note>"[</note></figure>
+		</body>
+		<back>
+
+			<div type="acknowledgement">
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>ACKNOWLEDGMENTS</head><p>We would like to thank our participants for sharing their experiences, insights, and opinions with us. More broadly, would like thank transgender community, and the strength, and wisdom of individuals within it.</p></div>
+			</div>
+
+			<div type="references">
+
+				<listBibl>
+
+<biblStruct xml:id="b0">
+	<analytic>
+		<title level="a" type="main">Baking Gender Into Social Media Design: How Platforms Shape Categories for Users Advertisers</title>
+		<author>
+			<persName><forename type="first">Ajl -Algorithmic Justice</forename><surname>League</surname></persName>
+		</author>
+		<ptr target="https://www.ajlunited.org/" />
+	</analytic>
+	<monogr>
+		<title level="j">Social Media + Society</title>
+		<editor>Rena Bivens and Oliver L. Haimson</editor>
+		<imprint>
+			<biblScope unit="volume">4</biblScope>
+			<biblScope unit="page" from="1" to="12" />
+			<date type="published" when="2016">2016</date>
+		</imprint>
+	</monogr>
+	<note>Retrieved September</note>
+</biblStruct>
+
+<biblStruct xml:id="b1">
+	<monogr>
+		<author>
+			<persName><forename type="first">Lindsay</forename><surname>Blackwell</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jean</forename><surname>Hardy</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Tawfiq</forename><surname>Ammari</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Tiffany</forename><surname>Veinot</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Cliff</forename><surname>Lampe</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sarita</forename><surname>Schoenebeck</surname></persName>
+		</author>
+		<title level="m">LGBT Parents and Social Media: Advocacy, and Disclosure During Shifting Social In of the 2016 CHI on Human Factors in Computing Systems (CHI &apos;16)</title>
+				<imprint>
+			<biblScope unit="page" from="610" to="622" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b2">
+	<monogr>
+		<title level="m" type="main">Facial Weaponization Suite | zach Zac Blas</title>
+		<author>
+			<persName><forename type="first">Zach</forename><surname>Blas</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2011">2011</date>
+		</imprint>
+	</monogr>
+	<note>Retrieved September 7, 2017 from suite</note>
+</biblStruct>
+
+<biblStruct xml:id="b3">
+	<analytic>
+		<title level="a" type="main">Performative Acts and Gender An Essay in Phenomenology and Feminist Theory</title>
+		<author>
+			<persName><forename type="first">Judith</forename><surname>Butler</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Theatre Journal</title>
+		<imprint>
+			<biblScope unit="volume">4</biblScope>
+			<biblScope unit="page">519</biblScope>
+			<date type="published" when="1988">1988</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b4">
+	<analytic>
+		<title level="a" type="main">Gender Recognition from Body</title>
+		<author>
+			<persName><forename type="first">Liangliang</forename><surname>Cao</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mert</forename><surname>Dikmen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yun</forename><surname>Fu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Thomas</forename><forename type="middle">S</forename><surname>Huang</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceeding of the 16th ACM International Conference Multimedia (MM &apos;08)</title>
+				<meeting>eeding of the 16th ACM International Conference Multimedia (MM &apos;08)</meeting>
+		<imprint>
+			<date type="published" when="2008">2008</date>
+			<biblScope unit="page" from="725" to="728" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b5">
+	<monogr>
+		<title level="m" type="main">Autonomy in Moral and Philosophy</title>
+		<author>
+			<persName><surname>Christman</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2015">2015</date>
+		</imprint>
+		<respStmt>
+			<orgName>Stanford Encyclopedia of</orgName>
+		</respStmt>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b6">
+	<monogr>
+		<title level="m" type="main">Many Adults Identify As Transgender in the United States?</title>
+		<author>
+			<persName><forename type="first">Andrew</forename><forename type="middle">R</forename><surname>Flores</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jody</forename><forename type="middle">L</forename><surname>Herman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Gary</forename><forename type="middle">J</forename><surname>Gates</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><forename type="middle">T</forename><surname>Brown</surname></persName>
+		</author>
+		<ptr target="https://williamsinstitute.law.ucla.edu/wp-Transgender-in-the-United-States.pdf" />
+		<imprint>
+			<date type="published" when="2016">2016</date>
+			<pubPlace>Angeles, CA</pubPlace>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b7">
+	<monogr>
+		<title level="m" type="main">Human values, ethics, and design</title>
+		<author>
+			<persName><forename type="first">Batya</forename><surname>Friedman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Peter</forename><forename type="middle">H</forename><surname>Kahn</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2008">2008</date>
+			<publisher>Lawrence Erlbaum Associates</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b8">
+	<analytic>
+		<title level="a" type="main">Value-sensitive design</title>
+		<author>
+			<persName><forename type="first">Batya</forename><surname>Friedman</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Interactions</title>
+		<imprint>
+			<biblScope unit="volume">6</biblScope>
+			<biblScope unit="page" from="16" to="23" />
+			<date type="published" when="1996">1996</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b9">
+	<analytic>
+		<title level="a" type="main">Minimizing bias in computer</title>
+		<author>
+			<persName><forename type="first">Batya</forename><surname>Friedman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Eric</forename><surname>Brok</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Susan</forename><forename type="middle">King</forename><surname>Roth</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Thomas</forename></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">ACM SIGCHI Bulletin</title>
+		<imprint>
+			<biblScope unit="volume">1</biblScope>
+			<biblScope unit="page" from="48" to="51" />
+			<date type="published" when="1996">1996</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b10">
+	<analytic>
+		<title level="a" type="main">Sexnet: A Neural Network Identifies from Human Faces</title>
+		<author>
+			<persName><forename type="first">Beatrice</forename><forename type="middle">A</forename><surname>Golomb</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">David</forename><surname>Lawrence</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Terrence</forename><forename type="middle">J</forename><surname>Sejnowski</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Advances in Neural Information Processing Systems</title>
+		<imprint>
+			<biblScope unit="volume">3</biblScope>
+			<biblScope unit="page" from="572" to="577" />
+			<date type="published" when="1990">1990</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b11">
+	<monogr>
+		<title level="m" type="main">at Every Turn: A Report of the National Transgender Discrimination Survey</title>
+		<author>
+			<persName><forename type="first">Jaime</forename><forename type="middle">M</forename><surname>Grant</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Lisa</forename><forename type="middle">A</forename><surname>Mottet</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Justin</forename><surname>Tanis</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jody</forename><forename type="middle">L</forename><surname>Jack</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mara</forename><surname>Herman</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Keisling</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2011">2011</date>
+		</imprint>
+		<respStmt>
+			<orgName>National Center for Transgender Equality and National and Lesbian Task Force</orgName>
+		</respStmt>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b12">
+	<analytic>
+		<title level="a" type="main">Methodologies of misgendering: Recommendations for reducing cisgenderism in psychological research</title>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Ansara</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Peter</forename><surname>Gavriel</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Hegarty</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Feminism &amp; Psychology</title>
+		<imprint>
+			<biblScope unit="volume">24</biblScope>
+			<biblScope unit="page" from="259" to="270" />
+			<date type="published" when="2014">2014</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b13">
+	<analytic>
+		<title level="a" type="main">Disclosure, Stress, Support During Gender Transition on Facebook</title>
+		<author>
+			<persName><forename type="first">L</forename><surname>Oliver</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jed</forename><forename type="middle">R</forename><surname>Haimson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Gillian</forename><surname>Lynn Dombrowski</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Hayes</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings the 18th ACM Conference on Computer Supported Cooperative Work &amp; Social Computing (CSCW &apos;15)</title>
+				<meeting>the 18th ACM Conference on Computer Supported Cooperative Work &amp; Social Computing (CSCW &apos;15)</meeting>
+		<imprint>
+			<date type="published" when="2015">2015</date>
+			<biblScope unit="page" from="1176" to="1190" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b14">
+	<analytic>
+		<title level="a" type="main">Digital and Changing Networks During Online Identity Transitions</title>
+		<author>
+			<persName><forename type="first">L</forename><surname>Oliver</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jed</forename><forename type="middle">R</forename><surname>Haimson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Lynn</forename><surname>Brubaker</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Gillian</forename><forename type="middle">R</forename><surname>Dombrowski</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Hayes</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">of the 2016 CHI Conference on Human Factors in Computing Systems (CHI &apos;16)</title>
+				<imprint>
+			<date type="published" when="2016">2016</date>
+			<biblScope unit="page" from="2895" to="2907" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b15">
+	<monogr>
+		<author>
+			<persName><forename type="first">David</forename><surname>Hankerson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Andrea</forename><forename type="middle">R</forename><surname>Marshall</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jennifer Houda El</forename><surname>Mimouni</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Imani</forename><surname>Walker</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Rode</surname></persName>
+		</author>
+		<title level="m">Does Technology Have Race? Proceedings of the 2016 CHI Conference Extended Abstracts on Human Factors in Computing Systems (CHI EA &apos;16</title>
+				<imprint>
+			<date type="published" when="2016">2016</date>
+			<biblScope unit="page" from="473" to="486" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b16">
+	<analytic>
+		<title level="a" type="main">Picturing Surveillance: Politics of Facial Recognition Systems</title>
+		<author>
+			<persName><forename type="first">D</forename><surname>Lucas</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">David</forename><surname>Introna</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Wood</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">&amp; Society</title>
+		<imprint>
+			<biblScope unit="volume">2</biblScope>
+			<biblScope unit="page" from="177" to="198" />
+			<date type="published" when="2004">2004</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b17">
+	<monogr>
+		<title level="m" type="main">The of the</title>
+		<author>
+			<persName><forename type="first">E</forename><surname>James</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jody</forename><forename type="middle">L</forename><surname>Herman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Susan</forename><surname>Rankin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mara</forename><surname>Keisling</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Lisa</forename><surname>Mottet</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ma'ayan</forename><surname>Anafi</surname></persName>
+		</author>
+		<ptr target="http://www.transequality.org/sites/default/files/docs/usReportFINAL1.6.17.pdf" />
+		<imprint>
+			<date type="published" when="2015-08-22">2016. 2015. August 22. 2017</date>
+			<pubPlace>U.S. Survey</pubPlace>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b18">
+	<monogr>
+		<title level="m" type="main">Transgender YouTubers had their videos grabbed to train facial recognition software. The Verge</title>
+		<author>
+			<persName><forename type="first">James</forename><surname>Vincent</surname></persName>
+		</author>
+		<ptr target="https://www.theverge.com/2017/8/22/16180080/transgender-youtubers-ai-facial-recognition-dataset" />
+		<imprint>
+			<date type="published" when="2017-08-28">2017. August 28. 2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b19">
+	<monogr>
+		<title level="m" type="main">Balancing Human Agency Object Agency: An End-User Interview Study of Internet of Things</title>
+		<author>
+			<persName><forename type="first">Haiyan</forename><surname>Jia</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mu</forename><surname>Wu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Eunhwa</forename><surname>Jung</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Alice</forename><surname>Shapiro</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Shyam</forename><surname>Sundar</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2012">2012</date>
+			<biblScope unit="page">2012</biblScope>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b20">
+	<analytic>
+		<title/>
+	</analytic>
+	<monogr>
+		<title level="j">ACM Conference on Ubiquitous Computing &apos;</title>
+		<imprint>
+			<biblScope unit="volume">12</biblScope>
+			<biblScope unit="page" from="1185" to="1188" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b21">
+	<monogr>
+		<title level="m" type="main">Misgendering and Its Moral Contestability</title>
+		<author>
+			<persName><forename type="first">Stephanie</forename><forename type="middle">Julia</forename><surname>Kapusta</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2016">2016</date>
+			<biblScope unit="page" from="502" to="519" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b22">
+	<analytic>
+		<title level="a" type="main">Politics A Foucauldian Analysis</title>
+		<author>
+			<persName><forename type="first">Gopinaath</forename><surname>Kannabiran</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Marianne</forename><forename type="middle">Graves</forename><surname>Petersen</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 6th Nordic Conference on Interaction: Extending Boundaries (NordiCHI &apos;10)</title>
+				<meeting>the 6th Nordic Conference on Interaction: Extending Boundaries (NordiCHI &apos;10)</meeting>
+		<imprint>
+			<date type="published" when="2010">2010</date>
+			<biblScope unit="page" from="695" to="698" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b23">
+	<monogr>
+		<title level="m" type="main">Private traits and attributes are predictable from digital records of human behavior</title>
+		<author>
+			<persName><forename type="first">Michal</forename><surname>Kosinski</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">David</forename><surname>Stillwell</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Thore</forename><surname>Graepel</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2013">2013</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b24">
+	<analytic>
+		<title/>
+	</analytic>
+	<monogr>
+		<title level="j">the National Academy of Sciences of the United States of America</title>
+		<imprint>
+			<biblScope unit="volume">15</biblScope>
+			<biblScope unit="page" from="5802" to="5805" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b25">
+	<monogr>
+		<title level="m" type="main">The Impact of Stigma on Transgender and Non-Binary In Counseling Transgender and Non-Binary Youth: The Essential Guide</title>
+		<author>
+			<persName><surname>Krieger</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2017">2017</date>
+			<publisher>Jessica Kingsley Publisher</publisher>
+			<biblScope unit="page" from="46" to="47" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b26">
+	<analytic>
+		<title level="a" type="main">Robust transgender recognition: Approach based appearance and therapy factors</title>
+		<author>
+			<persName><forename type="first">Vijay</forename><surname>Kumar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Raghavendra</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Namboodiri</forename></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Christoph</forename><surname>Busch</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">IEEE Conference on Identity, Security Behavior Analysis (ISBA 2016), 27. Chien-Cheng Chung-Shun Wei. 2013. Gender Recognition Based On Combining and Hair of International Conference Advances in Mobile Computing &amp; Multimedia (MoMM &apos;13)</title>
+				<imprint>
+			<date type="published" when="2016">2016</date>
+			<biblScope unit="page" from="537" to="540" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b27">
+	<analytic>
+		<title level="a" type="main">Is the eye region more reliable than the face? A preliminary study of face-based recognition on a transgender dataset</title>
+		<author>
+			<persName><forename type="first">Karl</forename><forename type="middle">Ricanek</forename><surname>Mahalingam</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Dataset</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">IEEE Conference on Biometrics: Theory, Applications Systems</title>
+				<imprint>
+			<date type="published" when="2013">August 23. 2017 from 29. 2013</date>
+		</imprint>
+	</monogr>
+	<note>Mahalingam and Karl Ricanek</note>
+</biblStruct>
+
+<biblStruct xml:id="b28">
+	<analytic>
+		<title level="a" type="main">Evaluation of gender methods with automatically and aligned faces</title>
+		<author>
+			<persName><forename type="first">Roope</forename><surname>Makinen</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Raisamo</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">IEEE Transactions on Analysis and Machine Intelligence</title>
+		<imprint>
+			<biblScope unit="volume">30</biblScope>
+			<biblScope unit="page" from="541" to="547" />
+			<date type="published" when="2008">2008</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b29">
+	<analytic>
+		<title level="a" type="main">Experiences with Identity Misclassification of</title>
+		<author>
+			<persName><forename type="first">Kevin</forename><forename type="middle">A</forename><surname>Mclemore</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Transgender Spectrum Individuals. and Identity</title>
+		<imprint>
+			<biblScope unit="volume">1</biblScope>
+			<biblScope unit="page" from="51" to="74" />
+			<date type="published" when="2015">2015</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b30">
+	<analytic>
+		<title level="a" type="main">A review of facial gender recognition</title>
+		<author>
+			<persName><surname>Choon Boon</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yong</forename><forename type="middle">Haur</forename><surname>Ng</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Bok</forename><forename type="middle">Min</forename><surname>Tay</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Goi</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Pattern and Applications</title>
+		<imprint>
+			<biblScope unit="volume">18</biblScope>
+			<biblScope unit="page" from="739" to="755" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b31">
+	<monogr>
+		<title level="m" type="main">Face Recognition Vendor Test (FRVT) -Performance of Automated Gender Classification Algorithms</title>
+		<author>
+			<persName><forename type="first">Mei</forename><surname>Ngan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Patrick</forename><surname>Grother</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2015">2015</date>
+			<biblScope unit="page">8052</biblScope>
+		</imprint>
+	</monogr>
+	<note type="report_type">NIST Report</note>
+</biblStruct>
+
+<biblStruct xml:id="b32">
+	<monogr>
+		<title level="m" type="main">Glitch in digital pizza advert viral, shows disturbing future of facial tech</title>
+		<ptr target="http://www.news.com.au/technology/innovation/design/glitch-in-digital-pizza-advert-goes-viral-shows-disturbing-future-of-facial-recognition-tech/news-story/3b43904b6dd5444a279fd3cd6f8551db" />
+		<imprint>
+			<date type="published" when="2017-09-18">2017. September 18. 2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b33">
+	<analytic>
+		<title level="a" type="main">Cisgenderism in medical settings: How collaborative partnerships can challenge structural violence</title>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Ansara</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">of the Ordinary: LGBT Lives</title>
+				<meeting><address><addrLine>Cambridge</addrLine></address></meeting>
+		<imprint>
+			<publisher>Cambridge Scholars Publishing</publisher>
+			<biblScope unit="page" from="102" to="122" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b34">
+	<monogr>
+		<title level="m" type="main">of Math Destruction: Big Data Increases Inequality and Threatens Democracy</title>
+		<author>
+			<persName><forename type="first">O'</forename><surname>Cathy</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Neil</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2016">2016</date>
+		</imprint>
+	</monogr>
+	<note>Random House</note>
+</biblStruct>
+
+<biblStruct xml:id="b35">
+	<analytic>
+		<title level="a" type="main">Effects of the Facial and Racial on Gender Classification</title>
+		<author>
+			<persName><forename type="first">Özlem</forename><surname>Özbudak</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mürvet</forename><surname>Kirci</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yüksel</forename><surname>Çakir</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ece Olcay</forename><surname>Güneş</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the Mediterranean Electrotechnical Conference (MELECON)</title>
+				<meeting>the Mediterranean Electrotechnical Conference (MELECON)</meeting>
+		<imprint>
+			<date type="published" when="2010">2010</date>
+			<biblScope unit="page" from="26" to="29" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b36">
+	<analytic>
+		<title level="a" type="main">Agency in Assistive Adoption: Visual Impairment and Use in Bangalore</title>
+		<author>
+			<persName><forename type="first">Joyojeet</forename><surname>Pal</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Anandhi</forename><surname>Viswanathan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Priyank</forename><surname>Chandra</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Vaishnav</forename><surname>Nazareth</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Hariharan</forename><surname>Kameswaran</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Aditya</forename><surname>Subramonyam</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mark</forename><forename type="middle">S</forename><surname>Johri</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sile O'</forename><surname>Ackerman</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Modhrain</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">of the CHI Conference on Human Factors in Computing Systems (CHI &apos;17)</title>
+				<imprint>
+			<date type="published" when="2017">2017</date>
+			<biblScope unit="page" from="5929" to="5940" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b37">
+	<monogr>
+		<title level="m" type="main">Gender Recognition by a Social Robot Privacy Concerns</title>
+		<author>
+			<persName><forename type="first">Arnaud</forename><surname>Ramey</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Miguel</forename><forename type="middle">A</forename><surname>Salichs</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2014">2014. 2014</date>
+		</imprint>
+	</monogr>
+	<note>of the</note>
+</biblStruct>
+
+<biblStruct xml:id="b38">
+	<monogr>
+		<title level="m">ACM/IEEE Iternational conference on Human-Robot (HRI &apos;14</title>
+				<imprint>
+			<biblScope unit="page" from="272" to="273" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b39">
+	<monogr>
+		<title level="m" type="main">The Biopolitics of Gender</title>
+		<author>
+			<persName><forename type="first">Jemima</forename><surname>Repo</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2017">2017</date>
+			<publisher>University Press</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b40">
+	<monogr>
+		<title level="m" type="main">Google: The Endemic Threat Privacy. of High Technology Law</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Bridget</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Sarpu</surname></persName>
+		</author>
+		<ptr target="https://sites.suffolk.edu/jhtl/files/2014/12/Sarpu-Google-The-Endemic-Threat-to-Privacy.pdf" />
+		<imprint>
+			<date type="published" when="2012-09">2015. April 2012. September</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b41">
+	<monogr>
+		<title level="m" type="main">Women are people too: The of for gender</title>
+		<author>
+			<persName><forename type="first">Christine</forename><surname>Satchell</surname></persName>
+		</author>
+		<ptr target="https://www.cl.cam.ac.uk/events/experiencingcriticalth" />
+		<imprint>
+			<date type="published" when="2010">2010</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b42">
+	<analytic>
+		<title level="a" type="main">Intersectional HCI: Engaging Identity Gender, Race, and Class</title>
+		<author>
+			<persName><forename type="first">Ari</forename><surname>Schlesinger</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">W</forename><forename type="middle">Keith</forename><surname>Edwards</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Rebecca</forename><forename type="middle">E</forename><surname>Grinter</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">of the 2017 CHI Conference on Human Factors in Computing Systems &apos;17)</title>
+				<imprint>
+			<date type="published" when="2017">2017</date>
+			<biblScope unit="page" from="5412" to="5427" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b43">
+	<analytic>
+		<title level="a" type="main">The Authority of &quot;Fair</title>
+		<author>
+			<persName><forename type="first">Micha</forename><surname>Skirpan</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Gorelick</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Machine Learning. Retrieved 7</title>
+				<imprint>
+			<date type="published" when="2017">2017. 2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b44">
+	<analytic>
+		<title level="a" type="main">Gender recognition using 3-D body shapes</title>
+		<author>
+			<persName><forename type="first">Jinshan</forename><surname>Tang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Xiaoming</forename><surname>Liu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Huaining</forename><surname>Cheng</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Robinette</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Transactions on Systems, Man and Cybernetics Part C: Applications Reviews</title>
+		<imprint>
+			<biblScope unit="volume">41</biblScope>
+			<biblScope unit="page" from="898" to="908" />
+			<date type="published" when="2011">2011</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b45">
+	<analytic>
+		<title level="a" type="main">Independent Voice-Based Gender System</title>
+		<author>
+			<persName><forename type="first">C</forename><surname>Jisha</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Thankappan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Sumam</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Idicula</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">of the 1st</title>
+				<imprint>
+			<date type="published" when="2010">2010</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b46">
+	<monogr>
+		<idno>1996: 1-6. 47</idno>
+		<ptr target="https://www.merriam-webster.com/dictionary/transgender" />
+		<title level="m">Amrita ACM-W Celebration on Women in Computing India &apos;10)</title>
+				<imprint>
+			<date type="published" when="1974">1974</date>
+		</imprint>
+	</monogr>
+	<note>Dictionary. Retrieved September</note>
+</biblStruct>
+
+<biblStruct xml:id="b47">
+	<analytic>
+		<title level="a" type="main">Face Across Gender Transformation Using SVM Classifier</title>
+		<author>
+			<persName><forename type="first">Archana</forename><surname>Vijayan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Shyma</forename><surname>Kareem</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jubilant</forename><forename type="middle">J</forename><surname>Kizhakkethottam</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Procedia Technology</title>
+		<imprint>
+			<biblScope unit="volume">24</biblScope>
+			<biblScope unit="page" from="1366" to="1373" />
+			<date type="published" when="2016">2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b48">
+	<analytic>
+		<title/>
+		<author>
+			<persName><forename type="first">Tieniu</forename><surname>Yu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kaiqi</forename><surname>Tan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kui</forename><surname>Huang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Xinyu</forename><surname>Jia</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">A Study on Gait-Based Gender Classification. Transactions on Image Processing</title>
+		<imprint>
+			<biblScope unit="volume">18</biblScope>
+			<biblScope unit="page" from="1905" to="1910" />
+			<date type="published" when="2009">2009</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+				</listBibl>
+			</div>
+		</back>
+	</text>
+</TEI>

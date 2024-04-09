@@ -1,0 +1,1591 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xml:space="preserve" xmlns="http://www.tei-c.org/ns/1.0" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.com/kermitt2/grobid/master/grobid-home/schemas/xsd/Grobid.xsd"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+	<teiHeader xml:lang="en">
+		<fileDesc>
+			<titleStmt>
+				<title level="a" type="main">Designing for Relational Maintenance: New Directions for AAC Research</title>
+			</titleStmt>
+			<publicationStmt>
+				<publisher/>
+				<availability status="unknown"><licence/></availability>
+			</publicationStmt>
+			<sourceDesc>
+				<biblStruct>
+					<analytic>
+						<author>
+							<persName><forename type="first">Jiamin</forename><surname>Dai</surname></persName>
+							<email>jiamin.dai@mail.mcgill.ca</email>
+						</author>
+						<author>
+							<persName><forename type="first">Karyn</forename><surname>Moffatt</surname></persName>
+							<email>karyn.moffatt@mcgill.ca</email>
+						</author>
+						<author>
+							<persName><forename type="first">Jinglan</forename><surname>Lin</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Khai</forename><forename type="middle">N 2022</forename><surname>Truong</surname></persName>
+						</author>
+						<author>
+							<persName><surname>Designing</surname></persName>
+						</author>
+						<author>
+							<affiliation key="aff0">
+								<orgName type="department">School of Information Studies</orgName>
+								<orgName type="institution">McGill University</orgName>
+							</affiliation>
+						</author>
+						<author>
+							<affiliation key="aff1">
+								<orgName type="department">School of Information Studies</orgName>
+								<orgName type="institution">McGill University Montreal</orgName>
+								<address>
+									<settlement>Montreal</settlement>
+									<country>Canada, Canada</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<affiliation key="aff2">
+								<orgName type="department">Department of Computer Science</orgName>
+								<orgName type="institution">University of Toronto</orgName>
+							</affiliation>
+						</author>
+						<author>
+							<affiliation key="aff3">
+								<orgName type="department">Department of Computer Science</orgName>
+								<orgName type="institution">University of Toronto Toronto</orgName>
+								<address>
+									<settlement>Toronto</settlement>
+									<country>Canada, Canada</country>
+								</address>
+							</affiliation>
+						</author>
+						<title level="a" type="main">Designing for Relational Maintenance: New Directions for AAC Research</title>
+					</analytic>
+					<monogr>
+						<imprint>
+							<date/>
+						</imprint>
+					</monogr>
+					<idno type="DOI">10.1145/3491102.3502011</idno>
+				</biblStruct>
+			</sourceDesc>
+		</fileDesc>
+		<encodingDesc>
+			<appInfo>
+				<application version="0.7.1" ident="GROBID" when="2022-07-22T05:01+0000">
+					<desc>GROBID - A machine learning software for extracting information from scholarly documents</desc>
+					<ref target="https://github.com/kermitt2/grobid"/>
+				</application>
+			</appInfo>
+		</encodingDesc>
+		<profileDesc>
+			<textClass>
+				<keywords>
+					<term>Augmentative and alternative communication (AAC)</term>
+					<term>relationship maintenance</term>
+					<term>ALS</term>
+					<term>cerebral palsy</term>
+					<term>assistive technology</term>
+					<term>accessibility</term>
+				</keywords>
+			</textClass>
+			<abstract>
+<div xmlns="http://www.tei-c.org/ns/1.0"><p>AAC research has traditionally focused on input speed, leaving higher-level communication goals such as relational maintenance under-explored. Through semi-structured interviews with AAC users with motor and speech impairments and their primary family caregivers, we offer a nuanced understanding of AAC's roles in maintaining close relationships. Our inductive analysis reveals emerging themes including how AAC users and their partners share the physical and mental workload to overcome communication barriers in complex situations. Our deductive application of the Relational Maintenance Strategies framework exposes the efforts made and the challenges encountered in managing social engagements, providing mutual support, and decoding implicit expressions. From these insights, we propose novel research directions for better supporting maintenance strategies and social purposes of communication, including notably mediating relational tensions, leveraging empowerment and identity, and supporting interactions for social closeness and etiquette, which we hope will motivate discussion in HCI communities on expanding AAC research space.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>CCS CONCEPTS</head><p>• Human-centered computing → Empirical studies in collaborative and social computing; Empirical studies in accessibility.</p></div>
+			</abstract>
+		</profileDesc>
+	</teiHeader>
+	<text xml:lang="en">
+		<body>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="1">INTRODUCTION</head><p>Language supports varied roles of communication including information transfer and social connection. People with progressive or acquired motor and speech-language impairments experience communication and lifestyle challenges, especially to their social relationships. Such conditions inevitably place family members in the role of informal caregivers, further complicating relationships. Given the universal need for social interaction <ref type="bibr" target="#b43">[42]</ref>, people living with motor and speech-language impairments and their families require effective tools and strategies to maintain their relationships and quality of life.</p><p>Various forms of assistive technology help increase, maintain, or improve functional capabilities, such as mobility devices (e.g., wheelchairs and porch lifts) and augmentative and alternative communication (AAC) systems. AAC encompasses a broad set of techniques and tools that supplement or compensate for impairments in speech-language production and comprehension <ref type="bibr" target="#b0">[1]</ref>. It can range from simple props to specialized hardware. While computerized AAC systems are often standard in interventions for progressive neuromuscular diseases <ref type="bibr" target="#b1">[2]</ref>, current commercial offerings have numerous limitations that restrict expressivity. Novel interfaces and interaction methods have improved the user experience and input speed of orthographic-based AAC devices, but even fast eye-typing systems are still a magnitude slower than human speech and half as slow as average keyboard typing speed <ref type="bibr" target="#b39">[39,</ref><ref type="bibr" target="#b46">45,</ref><ref type="bibr" target="#b48">47]</ref>. Such slow speed inhibits social participation as it significantly affects expression, frustrating AAC users whose cognitive functions are not impaired. Slow responses hinder conversational flow; slow input rates force users to focus on typing, reducing their ability to attend to new discussions; the rate of input also strains users' working memoryas users focus on putting what they want to say on the screen, they may lose track of additional ideas they wanted to convey. How such complex barriers hinder expression and engagement in AAC-mediated communication remains under-studied.</p><p>Different forms of communication are important in creating and maintaining relationships. Recent HCI research has touched upon relational implications of online social interaction among friends (e.g., <ref type="bibr" target="#b53">[52,</ref><ref type="bibr" target="#b60">58]</ref>) but has not yet specifically examined the extent to which AAC can accomplish higher-level communication goals, such as relationship building and maintenance. To fill this gap, our exploratory qualitative study involves people with amyotrophic lateral sclerosis (ALS) or cerebral palsy (CP) 1 and their primary family caregivers to investigate the roles of AAC in close relationships (e.g., spouses, parent-child, and siblings). A comprehensive typology has identified ten 2 relational maintenance strategies such as openness, assurances, and avoidance <ref type="bibr" target="#b8">[9]</ref>, which we use as a framework to examine current communication practices and inspire new design avenues. Through a relational lens that illuminates the roles of AAC among users and caregivers, our work finds exemplars of positive and negative ways in which assistive technologies support people in communicating with their loved ones. We propose a set of novel AAC research directions towards maintenance strategies and social purposes of communication, identifying potential design opportunities as starting points for expanding AAC design space. We conclude with methodological reflections to inspire future discussion among HCI communities to better support both AAC users and their caregivers in relational maintenance and social engagement.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2">RELATED WORK 2.1 Roles of Communication in AAC contexts</head><p>Communicative competence has been examined from a social perspective to help AAC users remain productive members of society. Notably, Light's work has synthesized four social purposes of interactions: expression of needs and wants, information transfer, social closeness, and social etiquette <ref type="bibr" target="#b34">[34]</ref>. To meet each purpose, the characteristics of interaction (e.g., goal, focus, duration, content, scope, and predictability) have been found to play varied roles. Communication competence for AAC users has been further investigated from knowledge, judgment, and skills in integrating four competencies: linguistic, operational, social, and strategic <ref type="bibr" target="#b35">[35]</ref>. With the advancement of everyday technology and AAC research in recent decades, the ways to achieve communication goals have been changing, increasingly demanding social participation of people with complex communication needs <ref type="bibr" target="#b36">[36]</ref>. First-hand perspectives from AAC users have further highlighted the need for building connections and leadership skills <ref type="bibr" target="#b32">[32]</ref>, collectively developing holistic research agendas and person-centered approaches <ref type="bibr" target="#b42">[41]</ref>.</p><p>AAC researchers have started to explore the social purposes of communication, ranging from raising message transmission rates and accuracy to creating enjoyable experiences in a broader social dynamic. Recent works on creative activities for people with communication impairments have highlighted the ability to experience and express, beyond a mere exchange of information. For example, creativity has been supported through automated redaction of digital texts to enable creative writing <ref type="bibr" target="#b44">[43]</ref>; accessible creativity and humour have been explored through visual formats such as 1 Amyotrophic lateral sclerosis (ALS), a progressive neurological disease that attacks the nerve cells responsible for controlling voluntary muscles [NIH National Institute of Neurological Disorders and Stroke]. Cerebral palsy (CP) is a group of disorders caused by abnormal brain development or damage and affect a person's ability to move and maintain balance and posture <ref type="bibr">[CDC]</ref>. 2 This paper adopts the definition of relational maintenance as "to keep a relationship in a satisfactory condition" <ref type="bibr" target="#b15">[16]</ref>. We acknowledge the difference between the two terms "relational maintenance" and "relationship maintenance, " but such subtle distinction and discussion are beyond the scope of this paper. comics <ref type="bibr" target="#b55">[54]</ref>; and music improvisation has been explored through novel gestural interfaces <ref type="bibr" target="#b27">[27]</ref>.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.2">Social Implications of AAC</head><p>The acceptance and use of AAC have been shown to improve quality of life over non-adoption <ref type="bibr" target="#b24">[25]</ref> but also result in changes to communication styles, decision making, and lifestyle <ref type="bibr" target="#b40">[40]</ref>. Social changes resulting from AAC use have been a focus in recent works, which have sought, for example, to detail the impacts of AAC on communication style and personal expression <ref type="bibr" target="#b30">[30]</ref> and to explore how technology might be designed to provide a nonverbal channel of communication support <ref type="bibr" target="#b57">[56]</ref>. Researchers have explored systems meant to improve the communication experience, such as AACrobat, a tool that allows communication partners to actively participate in the speech composition process while maintaining the AAC user's autonomy <ref type="bibr" target="#b17">[18]</ref>.</p><p>To compensate for the slow input rates associated with AAC, people with ALS sometimes adopt more asynchronous modes of communication, such as social media, to meet their needs for social interaction and participation <ref type="bibr" target="#b9">[10]</ref>. Similarly, adults with CP have reported actively learning to use social media, a perceived beneficial and important form of communication <ref type="bibr" target="#b10">[11]</ref>. The perspectives and experiences of adult AAC users on making and keeping friends have highlighted peers' acceptance of and strategic competence in using AAC, as well as environmental accessibility <ref type="bibr" target="#b56">[55]</ref>. AAC systems for restaurant dining scenarios for people with aphasia are among the most recent efforts to facilitate social participation in leisure activities <ref type="bibr" target="#b45">[44]</ref>.</p><p>More broadly regarding the social implications of using assistive technology, "social accessibility" has been recognized as equal in importance to "functional accessibility" [50]. Social factors have been incorporated into accessible design processes, with the development of method cards to facilitate the inclusion of stakeholders with and without disabilities in discussing complex social and functional considerations <ref type="bibr" target="#b50">[49,</ref><ref type="bibr" target="#b52">51]</ref>.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.3">Disability and Relationship Maintenance</head><p>Other fields such as psychology and rehabilitation have investigated the effects of disability on relationships. For example, the severe physical limitations caused by spinal cord injury (SCI) affect both partners in a marital relationship, necessitating new role allocations <ref type="bibr">[13]</ref>. Several common concerns about marriage maintenance arise: persons with SCI worried about their functional ability, role changes, and health changes, while spouses mainly considered their loved one's emotional response to their injury and the caregiver burnout resulting from overdependence. Relationship problems have been shown to correlate with the functional independence level of the person with SCI <ref type="bibr" target="#b11">[12]</ref>. Among the predictors of marital longevity after SCI, social integration and health perception have been found the most influential, while the level of injury, function, mobility, and independence might not be as significant as expected <ref type="bibr" target="#b31">[31]</ref>. Each partner is an integral component in the SCI rehabilitation process, and each couple sustains autonomy and intimacy in different ways <ref type="bibr" target="#b19">[20]</ref>.</p><p>The mutual contributions to resilience and maintenance, including self-sacrifice and adjustment, have been found in couples dealing with acquired physical disabilities <ref type="bibr" target="#b49">[48]</ref>. Individuals with acquired neuromuscular diseases like ALS face speech impairment in addition to mobility loss. A longitudinal study showed no correlation between speech deterioration and couples' perceptions of marital communication, establishing the importance of AAC strategies (including both low-and high-tech supports) in the process of maintaining intimate and rewarding relationships <ref type="bibr" target="#b28">[28]</ref>. Clinical interventions have investigated ambiguous loss from chronic illness, highlighting how fluctuating capabilities and uncertainty regarding the prognosis can lead to relationship tensions <ref type="bibr" target="#b6">[7]</ref>. Furthermore, the positive impact of family members' empowering attitudes towards disability and resistance to ableism underscore the need to reduce explicit and implicit stigmas against disabilities <ref type="bibr">[21]</ref>.</p><p>As accessibility research advances along with disability studies, interdependence has been proposed as a frame for assistive technology design, emphasizing the need for collaborative access and recognition of the contributions of people with disabilities <ref type="bibr" target="#b4">[5]</ref>. Self-reflections from accessibility and disability researchers have drawn attention to ableism, oversimplification of disability, and relationships around disability, calling for engaging diversified populations and broader types of relationships in research <ref type="bibr" target="#b22">[23]</ref>. Building upon these promising recent developments, further research can open new AAC design space. In particular, more work is needed to support social roles of communication and deepen the understanding of AAC's social implications, with a focus on maintenance strategies and an expansion to various types of close relationships.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3">METHODS</head><p>Through semi-structured one-on-one interviews with AAC users with motor and speech impairments and their primary family caregivers, we investigated two research questions:</p><p>(1) How does the use of AAC enable and hinder the relational maintenance process for users and caregivers? (2) How are interactions changed, improved, gained, lost, prevented, or avoided by the use of AAC, and why?</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.1">Study Design and Procedure</head><p>We adopted a semi-structure interview approach as it allowed for a consistent set of data, as well as flexibility for a deeper understanding of participants' varied perspectives. The one-on-one format further made space for each participant to share their experiences and concerns related to communication and relationship maintenance, as well as providing AAC users ample time to communicate for themselves without risking being overshadowed by caregivers due to communication ease. The interviews mainly focused on openended questions related to how AAC impacted the participants' relationships.</p><p>To start, each participant was invited to complete a pre-interview questionnaire online (via SurveyMonkey) about their background and experiences with assistive technologies. The questionnaire probed the use of assistive technologies with respect to relationship maintenance with their primary informal caregiver or the AAC user and also asked participants for detailed examples of their AAC use (see supplemental material for questionnaire details). Rather than extracting a standardized dataset, each participant's own responses were used to develop individualized interview guides to tailor and streamline the focus of the interviews. AAC users were interviewed through a form of instant messaging of their choice so that they were not rushed or pressured to answer. By request of the participant, the video function was turned on for a couple of interviews so that nonverbal cues could be noted to supplement the message log (video was not recorded). Caregivers were interviewed via telephone or other voice communication channel, audio recorded, and then fully transcribed.</p><p>This study was reviewed and approved by our institutional research ethics board, and participation was voluntary and confidential. We recruited participants with similar assistive needs through a speech clinic at a local hospital. Over the course of a month, the clinicians helped to identify and recruit 15 dyads (where the patient had both motor and speech impairments) for the study. Of those, six dyads were interested and enrolled in the study. Recruitment stayed open for another two months, but no additional participants were identified or enrolled in our study. 3 The speech clinic supported patients from the ALS clinic at the hospital; it also supported patients with CP, who were to receive the same therapy and assistive technology training and support. ALS leads to speech problems when it attacks bulbar neurons. These are the nerve cells responsible for bringing messages from the lower parts of the brain (bulbar region) to the muscles that move the lips, tongue, soft palate (back of roof of mouth), jaw, and vocal folds (voice box). CP can affect a person's ability to finely coordinate the muscles around the mouth and tongue that are needed for speech.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.2">Data Collection and Analysis</head><p>Though we initially enrolled six dyads, a planned participant with ALS withdrew because his condition deteriorated before the interview. As such, we interviewed five dyads and one caregiver (Table <ref type="table" target="#tab_0">1</ref>, all names are pseudonyms). All participants were adults, and AAC users' conditions included ALS and CP. All AAC users had adopted assistive technologies to supplement or replace some lost function (e.g., speech, mobility, vision, sensory skills, and motor skills). All caregivers had no previous experience with assistive technologies and were not professional caregivers. Each interview with participants with ALS or CP took 1-3.5 hours due to the slow input speed, while each caregiver interview took 0.5-1.5 hours. Each participant received a $25 honorarium.</p><p>Within each dyad, each party completed the questionnaire and the interview separately. To ensure participants' privacy and promote open discussion, we did not collect extensive personal information from participants. All participants signed the consent form which stated that all the data collected would be kept confidential (such that no one, including communication partners, would have direct access to their responses) and that only anonymized versions of the data would be included in public dissemination of the research.</p><p>During all interviews, care was taken to ensure that the participants were not emotionally overwhelmed by personal or sensitive topics; the interviewers especially checked in with AAC users if they were tired and needed a break. Due to the challenging recruitment context, varied individual conditions, and the diverse relationships between AAC users and their primary caregivers, we did not reach data saturation, nor did we expect to. Our goal was not to narrow in on a definitive set of AAC experiences, but rather to invoke and inspire novel research avenues from a breadth of new insights. In addition, we encouraged participants to share their thoughts and experiences on general assistive technologies, expanding to a broader understanding of where technology created frictions or opportunities.</p><p>We conducted a thematic analysis <ref type="bibr" target="#b7">[8]</ref> on the interview transcripts within MAXQDA2020. We performed two separate but complementary analyses, starting with the inductive and followed by the deductive.</p><p>(1) Inductive open coding, guided by our research questions. The open codes were iteratively developed into themes and subthemes through axial coding, followed by selective coding. The authors met regularly and discussed the inductive codes as they emerged and evolved, until we reached agreement on the themes and their interpretation. (2) Deductive application of the Relational Maintenance Strategies framework <ref type="bibr" target="#b8">[9]</ref>. This process involved interpreting the framework and comparing and contrasting participants' accounts to identify and illustrate the adopted strategies. The authors reached a consensus on categorizing and contextualizing AAC-specific scenarios and nuances in reference to the predefined strategies in the framework.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4">INDUCTIVE FINDINGS</head><p>Our inductive analysis identified three themes. (1) "Interrelated factors" highlighted how expected AAC usability issues intertwined with complicated and evolving situations. (2) "Shared workload" illustrated the joint efforts from AAC users and their partners to empower communication and contribution. (3) "Communication barriers" demonstrated how both parties adapted their approaches to different expressions and topics. These themes delved deep into the positive and negative impacts of AAC in interpersonal exchanges and close relationships to answer our research questions.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.1">Interrelated Factors</head><p>Participants confirmed the positive roles AAC play in maintaining quality of life, including their support for completing daily tasks, participating in leisure activities, and communicating with others. They encountered expected barriers to access, adoption, setup, and learning curve, and detailed how these were further exacerbated by the disease's unpredictable progression. Caregivers contrasted the slow timeline for getting a device relative to the rapid decline caused by ALS (as Carl remarked below), highlighting a range of factors, including the search for a suitable device, initial adoption hesitance, complicated procedure and paperwork to acquire a device, followed by onboarding process and learning curve.</p><p>Carl: [Getting a device] shouldn't have to take three months. . . she said 'yes' [in spring, but we waited till] the end of August. . . she had lost so much strength in her hands that she couldn't use it.</p><p>Cate touched on the lack of technical support and the high cost of upgrading and repairing. Other hurdles could be as trivial as the charging of devices: Alice underused speech assist "because [her] phone usually [was] not charged!" Electric wheelchair accessibility issues prevented participants from enjoying more activities together. Cate had to take Andy's manual chair for outings as the electric one could not handle wet conditions or stairs; Ann hesitated to go shopping with family as she had to be pushed around in an uncomfortable regular chair.</p><p>AAC users detailed various compatibility issues. Andy could only pair his ECO2 with an old flip-phone, instead of a more useful smartphone. Ann's device did not support Spanish so she could not easily communicate with her non-English-speaking parents. She had to give up writing because her device was "not compatible with Word. " Al hoped for "a stable platform" and "more user-accessible functions. " These issues exacerbated existing challenges to learning and adoption by forcing individuals to improvise a patchwork of tools to meet their full needs or abandon valued interactions and activities.</p><p>Participants commented on the value of portability, e.g., smaller and lighter devices would have worked better with hospital beds (Cathy). More positively, Clive deemed Boogie boards 4 of various sizes portable and flexible enough to be carried outside and placed throughout the house so one is available in each room. However, calling for better situational flexibility of AAC devices, Clive pointed out the limitations of the Boogie board screen (e.g., low brightness and contrast), impeding readability and his wife's communication with others. Consequently, they faced the tradeoff between portability and functionality, e.g., a separate unit with a bigger speaker and a larger keyboard than a cellphone: Clive: It's not terribly bright, it produces. . . a kind of a green, fluorescent writing on a black screen. . . be it in a room or outside, it's difficult to read. . . [like in] a restaurant with friends. . . she isn't able to communicate sometimes. . . [Later] [She refused] another device [with] its own unit. . . a real keyboard [and a] bigger speaker. . . on your phone you can only get it so loud. So, if you are in any kind of restaurant situation or a crowd you can't hear it. . . The repeated process of matching supports to changing circumstances was largely bothersome for caregivers and AAC users, though a few upshots were also identified. Carol was frustrated by the lack of means to plan for such changes: "I don't know if there is a way to plan. I wish there was. " However, she also noted more positively that although Al deteriorated from "being semi-independent" to completely unable to "support his own weight" within two days, the "cycle" of getting devices and making modifications has kept him engaged:</p><p>Carol: [Whenever] we had to make a modification to something. . . we had a scooter, [then] the wheelchair, [then] the Dynavox. . . in advance of him losing his speech. . . it would give him another project to work on. That's sort of been the cycle. . . I don't know what he would do with his time if he didn't have the device. Carl highlighted the need for more proactivity, urging for voice banking-a process of recording common phrases and words for later use-to "be given as an option right away" because the progression of ALS was often fast and unpredictable. This uncertainty and helplessness around deterioration were echoed in Clive's concerns about Alice being unable to continue using current devices for much longer:</p><p>Clive: [The] Boogie board has been indispensable. . . She likes using it. Fortunately, her handwriting [is] exceptionally good still. . . it'll affect her hand[s] soon enough, and we'll have problems. . . Ultimately, all these complicating factors inevitably intertwined, causing complex, evolving scenarios and uncertainty in planning, especially in terms of incorporating new devices into their houses and daily routines as ALS progressed.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.2">Shared Workload</head><p>AAC users faced a tiring workload, as they needed "to make use of the technology" (Clive). Alice reported that "the Boogie takes time and energy"; Ann found the extreme workload of typing with Tobii to be tiring. Cathy explained the "cumbersome and exhausting" nature of her father using eye tracking in hospital settings: AAC users and their communication partners shared the enormous physical and mental workload, requiring time and patience from both parties. Ann appreciated that "patience and compassion help. " Cate learned to have patience and "make time and allowance for" Andy. Below, Al and Carol separately highlighted the patience and adaptation from both parties: Al: I find that I have adapted to [Dynavox] usage exponentially faster than others. I can discuss any topic in as much depth as the person has patience. The difficulty in having in-depth convos is more about the level of patience and tolerance of the other than my ability to compose. After 6 years with this disease, I have developed monumental patience.</p><formula xml:id="formula_0">Cathy: It wasn't</formula><p>Carol: [T]hat's what it entails, a lot of the time. . . my patience and his.</p><p>Participants tried to develop alternative means of communication. Al mentioned driving his chair in circles to tell Carol that his hands needed adjusting for the micro button, as well as parking in the same spot beside the lift to indicate being ready for bed. Ann would look long and hard at Carl, "usually a signal [for being] thirsty" (Carl).</p><p>Caregivers learned to interpret nonverbal cues and notice the patterns. Chris tried to read his brother's expressions and body language: "he'll just light up, smile, " "when he gets excited, he. . . shakes a little," and "he gets a really concerned look." Chris appreciated AAC for making the "guessing game" faster and easier: Chris: Now [with assistive devices] it just seems to be really sped up. . . It's a much smaller guessing game. . . the more you know him, the easier it is. . . when he's getting mad, he kinda tightens up a little. And when you get it, he just loosens up and big ol' smile on his face.</p><p>AAC users and their caregivers worked together to overcome barriers and achieve empowerment. For example, Al managed to put his engineering skills to work, as Carol appreciated, "We have the Hoyer lift, and [Al will] construct ways in his head of trying to make everything work out. He is the engineer. "</p><p>Caregivers took on an active role in ensuring that the AAC users had the support they needed to act independently and make their own decisions and contributions. Chris stressed that a powerchair provided a "real sense of independence" for Adam and tried to "build on that and make him feel like [he was] contributing. " Cate educated Andy to adapt and communicate as much as possible, and she was proud of Andy being able to look after himself and help others in emergencies. Cathy described how critical her father's empowerment and independence meant to both care recipients and caregivers:</p><p>Cathy: [When] he has a little bit of independence, [you] feel like you can do something to make his life a little bit better. . . he had a low-force switch [on his wheelchair], so he could still maneuver and navigate. . . he was essentially controlling and navigating on his own. Big difference. . . I can stand beside him, I can see the space, and I can chat with him. . . he had felt very empowered because he could go anywhere he wanted with this switch.</p><p>The loss of identity is a major barrier that AAC users and their caregivers had to overcome. As relayed by Carol below, Al used the following metaphor to describe how his decreased means for expression altered his sense of self:</p><p>Carol: [His] brain is active. . . like helium in a balloon. His ability to express himself is a pinhole in that balloon. . . So, how do you take all of that helium. . . compress [it] out of that little hole in any amount of time? [Later] the hardest part. . . isn't necessarily. . . about his body changing [but] the changes in the person who he was and the person he is. . . because. . . so many things have been taken away.</p><p>Although each pair described a unique experience and varied approaches to navigating the intense workload encountered, a common thread was the ways in which this workload was shared, enabling each party to contribute based on their strengths. back and forth. . . tends not to happen, " and pointed out they were yet to find shortcuts: "My wife is not a shortcut person. . . [she's not] shortening words that are obvious"; Alice preferred conversing with fewer people: "I participate more in smaller groups. . . it works very well." Similarly, Al arranged small groups of visitors and tended to write in paragraphs, requiring partners to stop and wait for him:</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.3">Communication Barriers</head><p>Carol: [Al] thinks he needs to write in this entire paragraph out, instead of maybe just one sentence at a time (laughing). . . we've had to tell him many times. . . 'You need to actually have a button on there that says, please wait while I type this message.' [People] will carry on a conversation, not realizing he's not part of it. . . AAC users often faced interruptions and missed opportunities. Ann mentioned that she mostly had to listen: "I don't get to talk because the communication moves fast. . . " Cathy called for more awareness to allow AAC users ample time and opportunities to stay in the conversation and complete their sentences:</p><p>Cathy: You're sorta standing there waiting. . . he's like navigating, trying to formulate a sentence and then say that sentence. And it takes a while. . . you need to be more aware of giving him enough time. . . if you're not thinking about it. . . The conversation will just continue, and the person won't get a chance to interact. They. . . get left out of the conversation. . .</p><p>Particularly, AAC users might miss out on conversations when focusing on their device. Chris reported that Adam would not pay as much attention to his surroundings when he got "into that zone. . . looking that keyboard trying to find those words. " Carol raised same issue, as a single point would sometimes distract Al from following the larger discussion:</p><p>Carol: If we're in a with more than one person and he gets distracted by one point. . . , he will not remember any of the rest of the conversation. . . he would become fixated on that one item and he would start typing and not realize everyone else was still carrying on with the conversation. He would be locked in that one place trying to finish that sentence. . . And it's like having to freeze that point in time for him. . .</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.3.2">Approaches to different topics.</head><p>Communication barriers influenced participants' approaches to the various subjects they discussed. Conversations around daily needs and preferences were as straightforward and easier to approach. For example, mentioned, "[Al is] very good at sending emails and text messages out, which is to-do lists (laughing). " In contrast, caregiving took more thought and time to discuss: "The decisions about healthcare are the most difficult topics. . . [We need to] clearly communicate our feelings about his caregiving" (Carol).</p><p>AAC users might be unintentionally excluded from some family decision-making: "The rapid decision[s] don't wait for me to be in of Tobii. I have to complain" (Ann). However, caregivers approached sensitive matters and arrangements more cautiously, enthat AAC users convey their wishes clearly. Cathy required repeated confirmation of her father's medical care and decisions: For lower-stake topics like news and leisure, participants might make extra effort to have extended conversations. For example, Adam tended to give up and let things go, except in important circumstances. Family and parenting mattered more, e.g., Ann needed to voice her opinions on "everything. . . to do with [her] kids. " Clive similar situations in which they would save prolonged conversations for family matters:</p><formula xml:id="formula_1">I</formula><p>Clive: [If] we wanted to talk about the [news], it be a. . . prolonged chore [rather] than. . . something interesting. . . it wouldn't be a typical converthat we would have. . . because she'd have to write it all down. . . as she's so slow. . . neither of us kind of want to go that far. [Later] Occasionally when it's a family matter. . . we're gonna do that. But, in most other things. . . we've lost that part of it.</p><p>Despite diversity in their details, a common thread through the communication barriers detailed in Sections 4.3.1 and 4.3.2 above was how they highlighted the importance of awareness among conversational partners and the need for support in structuring the flow. Often the barrier was routed in a lack of knowledge of what the other was doing or needed. For example, AAC were unaware of what happened while they were attending to their communication device, while non-users were unaware of the AAC user needed more time to compose a message.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5">DEDUCTIVE FINDINGS: MAINTENANCE STRATEGIES</head><p>Our deductive analysis identified ten maintenance strategies in We only excluded one original strategy, "Cards, letters, and calls, " because it was defined as the use of mediated communication, which is not a distinguishing factor in AAC contexts and was not discussed by the participants. We adapted the strategy definitions and expanded the example behaviours and quotes to AAC-specific scenarios (described in detail in Table <ref type="table" target="#tab_4">2</ref>, pp. 8-9). For the last Miscellaneous category (which <ref type="bibr" target="#b8">[9]</ref> used for behaviours that did not fit into any of the others), we identified two example behaviours: 1) efforts and supports for exercising and retaining motor functions (Alice and Clive) and 2) parental encouragement to use AAC in her son's education process (Cate). Expanding on the descriptive summaries in Table <ref type="table" target="#tab_4">2</ref>, the following three subsections group the nine major strategies and contextualize the cross-cutting behaviours, further highlighting AAC roles and the changed, improved, gained, prevented, or avoided interactions in our research questions. The example behaviours were not evenly spread across all stratewith more examples identified in the first group and fewer mentions of strategies in the last subsections. This imbalance may not necessarily indicate the priority and importance among strategies; more likely it simply reflects what was easier to describe or more readily came to participants' minds.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.1">Social Networks, Sharing Tasks, and Joint Activities</head><p>Relying on AAC-mediated communication changed participants' social activities, family roles, and leisure time together. We found an underlying emphasis on AAC users contributing to, rather than merely relying on, their social networks. For example, Ann kept close contact with her friends and former colleagues via frequent emails and visits, enjoying meaningful conversations and offering her support. Carl agreed that these connections kept Ann engaged and motivated:</p><p>Ann: All my one-on-one conversations are deep and meaningful. This morning my friend was sad, and I was able to say something.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>She [answers] a ton of emails every day.</head><p>[A] lot of friends and former co-workers. . . keep in touch with her. . . She's keeping herself engaged. [Later] one of them has a daughter that is very ill, and they keep talking. . . She has a sense of purpose. . . She has visitors at least three times a week. . . Friday nights,   . . the assistive devices are making it possible for me to. . . take over in that respect. I feel that our relationship is enriched if I know what I'm supposed to do with the upbringing of our children. She's still very much the alpha parent. . . She's the one that they go to for permission. . . and I feel technology continues to enrich that. . . [A] clinical psychologist by training. . . she is very clinical in nature in her approach to parenting. . . with the emotion kinda being taken out, I find that things are a little smoother to some respect. This Tobii is not emotional. . . a flat female voice. But I find that, especially with my children, if she says you got to do this, they don't challenge her. above, Carl found that the removal of emotions facilitated the parenting process, and he continued to uncover more aspects of improved interactions, e.g., more frequent instant messaging with Ann, which he found less ambiguous than their previous communication style:</p><p>Carl: There's very little room for misunderstanding.</p><p>[Ann] talks like [a] politician; she likes to question what you're saying. She did that before; she can't do that as much anymore. . . she may find that frustrating, I don't know. Communication is much, much better now.</p><p>Other participants reported gaining or improving interactions in the process of shaping new ways of sharing their time. Carol recounted that they enjoyed watching flowers and birds in their garden and that Al shared his observations via text messages (e.g., "I just saw a hummingbird"). Al began to teach Carol about gardening while Carol created peaceful time together without involving activities:</p><p>Al: We love being outside together and working on our garden, I was the one with the green thumb, and I have been able to continue teaching my wife about how to do bonsai, repot plants, and enjoy birds, dogs, butterfl[ies], lizards, chipmunks, and bees. I feel as if I am living vicariously through my with the aid of my device.</p><p>Carol: You to find that you can do together, peacefully. That require. . either one of you to necessarily speak or. . . do something just be to sit there and look and listen.</p><p>Cathy and her brother spent valuable time with their reading him or watching "We spend a lot time with him than we otherwise would have. . . a lot of quiet We could just hang together. . . we'll listen to the radio or watch TV together and that's just fine with him. . . the same thing did when we were kids at home. . . " Cathy went on to recount she selected reading materials that appealed to both of them, especially drawing from her father's cultural background so that he could clarify regionally specific words and ideas: Cathy: Sometimes I would read [magazines] partially in Italian and partially in English <ref type="bibr">[and]</ref> Italian fables Italo Calvin. . . from our region of Italy. . . to draw something from his past and his background. . . it's hard to find things that are both entertaining and appropriate to do with a parent. . . that's interesting for you both. . . when I first started doing it, he could somewhat speak. . . [There were] words that I didn't understand, some of them dialects and some of them proper Italian. So, I would ask him to explain ideas. . . expressions or concepts that are very local to that region. . .</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Avoidance, Anti-social, and Humour</head><p>Avoidance of topics or persons was harder to negotiate when deep communications relied on AAC, sometimes resulting in lost interac-For example, Carol reported that Al's avoidance of his device limited their ability to have important discussions of an intimate serious nature:</p><p>Carol: I find it difficult. . . to have these types of conversations. Like when we have the time or the space to have some intimacy, which would be. . . preparing for bed and stuff. . . he won't use the device or chooses not to. . . [Later] when there is something important talk about. . . and he has tried to avoid me (laughing). . . I will have to tell him: 'We need to talk about this. You need to use your machine and discuss this. ' Anti-social behaviours might lead to prevented or avoided inwhere AAC might not offer positive or easy mitigation. For example, Carol admitted that Al would take his anger out on her, the person he cared about the most, sometimes without even it. However, caring for someone with ALS entailed more nuanced pressures such as survivor's Carol: When we get into an actual fight. . . where he's verbally accosting me. . . I understand. . . his frustration. . . But I get very upset, because it's painful to someone say the things to you. So, I will. . . leave room or step out of the situation. . . I will lock him his chair, so he can't move. Because he has tried. . . more than one time to cause damage to something just because he was mad (laughing). . . I leave him there to stew and. . . I have to calm down. . . sometimes it takes me a long time. . . [I] turn the page and move on. . . The next time I walk into the room. It didn't happen. . . nothing caused it. . . Because there is no purpose in dwelling on it or discussing it. . . There are times. . . when I want to pull my hair out. . . sometimes he doesn't realize what he's doing or how harsh he's being. . . I'm dealing with the guilt issue, 'Oh my gosh! My husband's dying from this terrible disease. I'm not dying. I'll survive. ' Humour helped participants support each other in overcoming daily life hurdles, as Cate lightheartedly recalled several accidents (e.g., "We laugh about it now"). A keen sense of humour, communicated through AAC, facilitated the couple's changed interactions, which resulted from Al's deterioration and Carol's caregiver burnout: Al: I have been able to maintain the sense of humor with the aid of my [Dyanvox], I have not lost a step in my ability to make her smile, but on another tangent, she has caregiver burnout. . . The sarcasm has to be wielded deftly. Presently, she is in a fractured state mentally, her capacity to tell the difference between sarcasm truth has more so in the past year. [Her injury, her daughter, and her work are] overwhelmingly demanding. . . And that's including my continued degeneration and needs for care. . all of that in has caused a battle of attrition resulting in her sense of humor and good nature to be quite dismal; therefore, sarcasm is not recognized as it is offered and must be glaringly obvious to be perceived as such.</p><p>These three strategies showed participants' efforts, sometimes unspoken, to navigate hardships and mitigate conflicts. We noted that it was hard to fully tease apart the consequences of AAC use from relationship dynamics. Nonetheless, these accounts reflected frustrations and misaligned perspectives, as well as optimism when AAC facilitated the continued expressions of jokes and AAC's roles might be subtle in these processes but can poopen avenues for addressing the lost, prevented, avoided, or changed interactions between care recipients and caregivers.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.3">Positivity, Openness, and Assurances</head><p>Participants tried to remain upbeat and understand each other despite the helplessness and heaviness of living with ALS or CP, as described: "We try to survive. . . keep going. . . suddenly you're facing a situation where you can't understand your own wife, so becomes really difficult." AAC was appreciated for improving relationships and enabling AAC users to initiate discussions, exemplified in the unique sibling experiences, in which Adam was born with CP but only started using assistive devices later in life: As siblings. . . we had developed our own ways of communicating and having fun with each other . . [Assistive devices] even bettered our [to some] extent. . . [Later] before it was [or] less I brought something up to him. . . now, he can actually initiate a conversation.</p><p>Likewise, empathy and respect were evident in participants' accounts. AAC users appreciated caregivers' difficulties in handling physical and relational losses: "It has taken a long, bi[t]ter period of adjustment for her to come to terms with my speech loss and inability to communicate. . . [which has] caused her great frustration and pain. . . " (Al). Caregivers understandingly waited for their loved ones to formulate long sentences: "I don't tell her 'Make that shorter, ' no, no, that'd be rude" (Carl). Participants appreciated assistive devices enabling expression and optimism, as Al and Carol separately described below: Al: The relationship between us has been far harder for her to reconcile. I may be a little off track, but her behavior, more precisely her acceptance of my degeneration has been figuratively and literally more depressing than she has <ref type="bibr">[been]</ref> and is able to cope I have maintained a positive attitude. . . and have had some of the best times of <ref type="bibr">[my]</ref>  Notably, the concrete efforts to achieve and project positivity, openness, and assurances were less explicit and discussed less directly than other strategies and behaviours. These topics might harder to approach between the partners, especially with evhaving their own process to adapt and reconcile. As the above quotes pointed out, positivity, openness, and assurances were mostly behaviours that AAC users and their caregiving partners adopted themselves. Thus, the technology must allow for them to engage in these behaviours in their own ways.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="6">DISCUSSION</head><p>Our inductive and deductive findings reveal insights and ideas to improve and expand AAC's roles in relational maintenance and open up design space. AAC users and their caregivers are navigating complex, intertwined, and ever-changing barriers in tireless efforts to reach mutual support and share quality time. Their collaborative workload and social encompass a broader space than traditional AAC research areas such as text and target selection. Exploring opportunities to address these higher-level goals, propose the following set of research directions (D1-D5) that arise in our inquiry of maintenance strategies and social purposes of communication. Under each direction, we highlight potential design opportunities with how-to questions to provoke further thoughts. These proposed directions and opportunities can constitute an AAC ecosystem to inspire holistic approaches to future and design.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="6.1">Opening Research Space for Relational and Social Goals</head><p>This group of (D1-D3) aims to expand AAC research space through relational and social lenses. We suggest that researchers start efforts to mediate tensions, leverage empowerment, and support social closeness.</p><p>D1 Mediate relational tensions and reinforce expressions:</p><p>• How to diversify the ways to communicate subtle feelings?</p><p>• How to actively help project implicit expressions such as and supportiveness?</p><p>Our findings show notable tensions between remaining positive, open, and supportive and projecting these mindsets in relationships, as well as missed opportunities for AAC in negotiating avoidance anti-social behaviours. Participants' efforts in these areas are not as apparent and forthcoming as in other strategies. More design work is needed to mediate tensions, bring forward subtle relational behaviours, and address their implications. Recent AAC has started to investigate enhancing expressivity, such as voicesetting interfaces for authoring speech properties and inserting emojis into texts <ref type="bibr" target="#b18">[19]</ref>. Building upon these exploratory platforms extending expressive AAC, further work can expand on avenues such as customizing specific expressive nature of user text input to aid in communicating subtle or implicit feelings.</p><p>HCI literature can help expand the scope from leveraging linguistic capabilities to exploring diverse expressions. For example, in supporting accessible creativity in aphasia, humour was visualized and shared in graphics to foster solidarity and togetherness <ref type="bibr" target="#b55">[54]</ref>. In hospice settings, jokes became a way of regulating information and emotion to create comfort for loved ones <ref type="bibr" target="#b16">[17]</ref>. Through a mobile social tool, mapping emotions to time, locations, and activities offered additional insights for better awareness of users' emotional statuses among partners and communities <ref type="bibr" target="#b23">[24]</ref>. Inspiring prototypes from related areas include wearable ambient displays for communicating emotions remotely between couples implicit communication systems such as paired activity trackers with vibrotactile patterns <ref type="bibr" target="#b5">[6]</ref>, and shadows of everyday objects as ambient displays for information visualization and notification <ref type="bibr" target="#b47">[46]</ref>. Future work can draw from these varied avenues and indetools to collectively address relational and expressive gaps AAC settings. D2 Leverage empowerment and identity in social engagements:</p><p>• to enable active roles of AAC users in providing support for their partners rather than merely receiving care? • How to aid AAC users and their families in sharing enjoyable activities?</p><p>The empowerment and identity concerns emerging from our inductive findings align with prominent strategies of contributing to shared activities, close social networks, and broader communities, where AAC can potentially play a more active role. Participants' rich accounts of contributing to social networks, shared tasks, and joint activities demonstrate the relational needs in networks, echoing recent work in accessibility and social computing, notably designing both individuals and relationships to facilitate nectedness <ref type="bibr" target="#b53">[52]</ref>. Our participants reported enjoyable activities focused on sharing valuable time instead of exchanging information, resonates with creative comics and poetry for people with aphasia <ref type="bibr" target="#b44">[43,</ref><ref type="bibr" target="#b55">54]</ref>. A similar emphasis on more open-ended structures of social sharing has been noticed in dementia settings, where activities are not necessarily designed for concrete objectives or end products but for the experience in the process [14].</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>D3 Support interactions for social closeness and etiquette:</head><p>How to help make conversations more enjoyable around lower-stakes topics? • How to account for importance, sensitivity, and risk factors in already complicated conversational processes?</p><p>How to support topics that differ dramatically in gravity and consequences with varied social emphases?</p><p>This direction is grounded in Light's model of communication purposes <ref type="bibr" target="#b34">[34]</ref>. Using communication patterns and approaches that from this study, we propose to expand research goals from facilitating the expression of needs and wants and the transfer of information to supporting social closeness and conveying social</p><p>To extend the role of AAC strategies in this direction, further inquires can build upon prior work on expression through creative arts and writing (e.g., <ref type="bibr" target="#b27">[27,</ref><ref type="bibr" target="#b44">43,</ref><ref type="bibr" target="#b55">54]</ref>). Participants approached topics differently according to the importance and stakes of the communication. Even with conversations about needs and wants typically well supported by AAC, higher-risk issues about care and medical decisions prompted the caregiver to check repeatedly with loved one to make sure they understood each other. As a counfewer efforts were reported for lower-risk topics like news leisure, where small misunderstandings might be perceived as acceptable, or at least less damaging. This direction has yet to be explored in AAC communities, and future inquiries can build upon other emerging HCI work on helping people broach and engage with sensitive topics, e.g., through public art installations to prompt discussions <ref type="bibr" target="#b38">[38]</ref>.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="6.2">Probing Specialized Avenues to Deconstruct Complex Problems</head><p>pair of directions (D4 and D5) focuses on more concrete issues to deconstruct the complex challenges faced by AAC users and their caregivers. We propose attending to interrelated barriers in fluid circumstances and adopting a collaborative, multi-stakeholder approach.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>D4 Overcome interrelated barriers in fluid circumstances:</head><p>How to build an ecosystem of assistive technology to address intertwined or conflicting factors? How to facilitate adoption processes and adjustments for evolving scenarios and disease progression?</p><p>Our findings reveal the need for and challenges to tackling interrelated barriers in different contexts and fluid situations. For example, long-term AAC proficiency and extended periods of stability are rare in conditions like ALS, and the time and cost investments to learn and adopt sophisticated systems seem overwhelming and of uncertain value. The positive use case of multiple Boogie boards reported in our study shows a counterpoint to expensive, feature-rich systems. Instead of all-in-one equipment, these portable and affordable devices are easy to access and can function as intercomponents of a comprehensive toolbox. More circumscribed, narrow-purpose tools might bring additional benefits of flat learning curves and quick onboarding, allowing for easier adoption disease progression. Moreover, we propose flexibility in AAC design to support users in exercising remaining capabilities in tandem with adjusting for changes and deterioration as needed. Future research can take inspiration from past gaming research on tuning complexity and support to better match players with different skill levels (e.g., <ref type="bibr" target="#b2">[3]</ref>) to adapt to an evolving AAC use context. Notably, player balancing in an exergame for youths with CP has shown positive impacts on motivation and enjoyment <ref type="bibr" target="#b25">[26]</ref>. Researchers can draw more inspiration for accommodating changing needs from recent developments of an AI augmented writing tool, which supports people who stutter through active learning and an evolving classifier <ref type="bibr" target="#b21">[22]</ref>.</p><p>All of the above potential avenues require careful examination and thought in adapting to AAC users as their capabilities and circumstances change. In addition, comprehensive guides on available devices and their features will help AAC users and their families make decisions and timely adjustments. Accessibility researchers and healthcare services formed partnerships and made collaborative efforts to tackle access and adoption problems, e.g., building a web-based consumer guideline for commercial locator for people at risk of wandering <ref type="bibr" target="#b37">[37]</ref>, but such initiatives face the challenge of sustainable maintenance and updates.</p><p>D5 Address the shared workload through a collaborative, multistakeholder lens: • to support alternative ways of communication?</p><p>How to attend to the way AAC users manage divided attention and communicate their need for a pause to partners? How to create awareness and support partners in selfmonitoring and pacing their speech? • How to aid caregivers in transitioning paces and mindsets between conversations with and without AAC?</p><p>More opportunities arise in targeting the workload shared among AAC users and caregivers from collaborative, multi-stakeholder perspectives, aligning with the interdependence framing as an orientation to design practice <ref type="bibr" target="#b4">[5]</ref>. Our findings uncover AAC users' alternative ways of communication, including their nonverbal cues and their operating and positioning of the wheelchair. Future systems can capture and solidify these movements into meaningful and accessible daily communication, such as recently developed physical expressive objects for aiding nonverbal communication <ref type="bibr">[57]</ref>.</p><p>For example, AAC users can customize a wheelchair gesture system with their caregivers, leveraging easy-to-perform gestures and wheelchair movements, attributing meaning to them, and communicating through automatic text messages to caregivers. Additional could be explored to help ease specific parts of the tiring workload, e.g., machine learning techniques for voice banking and Developing or integrating specialized tools to better communicate statuses and paces between AAC users and partners could help build the patience and compassion valued by our participants. Attending to the anxiety level of AAC users through bio-monitoring heart rate) may provide additional sources of feedback while requiring minimal effort from the AAC user. Extra care is needed to approach bio-data devices, as their simplicity can belie notable priand security concerns. However, with careful design this data could provide conversation partners with immediate visual feedto help adjust the pace and the coverage of their speech. HCI communities have taken the first steps in developing AAC awareness technology displays through cues for conversational flow and emotion, offering a taxonomy of dimensions covering input and output features, practicality, scenarios, and user perceptions <ref type="bibr">[53]</ref>. The challenges and mitigation strategies found in experiences with emerging sensing systems for people with physical disabilities can provide guidance <ref type="bibr" target="#b29">[29]</ref>.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="6.3">Reflections, Limitations, and Future Work</head><p>Looking back, we successfully collected rich accounts from three pairs of spouses, one pair of brothers, one pair of adopted mother son, and one caregiver of her father. Overall, AAC users apprethe interview format, not requiring breaks when we checked with them. The slow pace of asynchronous messaging allowed ample time for thoughtful responses. However, the length and the heaviness of the discussions were for both interviewees and interviewers, especially challenging the interviewers to prioritize follow-up directions and mitigate topical stress. One AAC user was so overwhelmed by their heavy loss since the diagnosis that they started to cry, ending the interview early. This underscores the extra care and empathy needed from researchers working in this space, echoing similar concerns documented in previous studies in sensitive settings (e.g., <ref type="bibr" target="#b16">[17]</ref>). Other setbacks included the aforementioned withdrawal of a participant with ALS due to a sudden deterioration in health.</p><p>recruitment was low (as expected), we were still able to collect and analyze a rich and dense dataset. Performing inductive and deductive analyses allowed us to examine the dataset iteratively bottom-up and top-down, extracting insights from multiple As an exploratory step in expanding AAC research space, this study covered a wide range of relational topics with the hope of discovering design opportunities. Next, a more focused lens might offer deeper insights into specific strategies such as openness and assurances, which were less apparent in our data. Building on holistic views from generic maintenance strategies, future work can expand on our nuanced understanding of AAC's roles to develop specialized relational frameworks for assistive technology contexts.</p><p>This study adopted interviewing as the primary data collection method, and future research can consider diversified instruments to generate additional insights. Diaries or design probes can be particularly useful in approaching sensitive topics or uncovering implicit thoughts. For HCI fieldwork involving people with complex communication needs, prolonged community involvement been found beneficial and effective (e.g., investigating social for people with dementia [15]). Outside of communityprograms, home visits can be an alternative way to observe and extend engagement with participants. This approach has been exemplified in over 10-month nonparticipant observations of families coping with amnesia (2-3 days and 4-7 hours per day at each family), enabling a considerable number of fieldnotes and photos collected and significant interactions uncovered <ref type="bibr" target="#b61">[59]</ref>. As suggested a recent methodological review and reflection, flexible research will better accommodate participants and yield richer data in qualitative work involving AAC users <ref type="bibr" target="#b3">[4]</ref>.</p><p>This study is also limited by the socioeconomic characteristics of the affluent, predominately white, and highly educated North American urban community in which it is situated. Some findings might not be readily applicable to other communities. Future work across diverse communities and stakeholders can initiate conversations in different contexts and from varied viewpoints. This exploratory study aims to expand AAC research space from its traditional focus on input speed to higher-level goals such as relational maintenance and social purposes of communication. Through interviews with AAC users with motor and speech impairments and their caregivers, we gain rich, nuanced accounts of assistive technology experiences across parental, and sibling relationships. Integrating the inductive findings from emerging themes and the deductive from identifying and interpreting relational maintenance strategies, we delve deep into the roles of AAC in enabling and hindering interactions in close relationships. Subsequently, we identify a set of research directions and a subset of design opportunities as starting points for exploring new avenues from relational and social perspectives and deconstructing complex problems. We propose to mediate relational tensions and expressions, leverage empowerment and identity in social engagements, and support interactions for social closeness and eti-We probe innovative ways to overcome interrelated barriers in fluid circumstances and address the shared workload through a collaborative, multi-stakeholder lens. We hope this work will initiate conversations from diversified angles among HCI communities towards an enriched, holistic AAC ecosystem.</p></div><figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_0"><head></head><label></label><figDesc>Dai, et al.    their sharing household tasks and parenting responsibilities improved their relationship with the help of assistive technology:Carl: [Ann] has always been at the forefront of[child]   </figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_0"><head>Table 1 :</head><label>1</label><figDesc>Participant background (Names starting with an A -AAC user; with a C -Caregiver)</figDesc><table><row><cell cols="3">Name (Gender) Relationship Condition</cell><cell>Assistive Technology Use</cell></row><row><cell></cell><cell></cell><cell>(Years of Onset)</cell><cell></cell></row><row><cell>Al (M) &amp;</cell><cell>Spouses</cell><cell>ALS (6 years)</cell><cell>Quickie QM-710 power chair; Dynavox Vmax 5100</cell></row><row><cell>Carol (F)</cell><cell></cell><cell></cell><cell>speech device with headmouse &amp; micro button</cell></row><row><cell>Andy (M) &amp;</cell><cell>Mother and</cell><cell cols="2">CP (Since childhood) Electric wheelchair; Communication Device ECO2;</cell></row><row><cell>Cate (F)</cell><cell>adopted son</cell><cell></cell><cell>Single head switch row/column scan</cell></row><row><cell>Adam (M) &amp;</cell><cell>Brothers</cell><cell>CP (Since birth)</cell><cell>Permobile electric wheelchair with lift, tilt, &amp; leg lift;</cell></row><row><cell>Chris (M)</cell><cell></cell><cell></cell><cell>Ceiling lifts; Eco II Speech Device</cell></row><row><cell>Alice (F) &amp;</cell><cell>Spouses</cell><cell>ALS (2 years)</cell><cell>Boogie Board; Speech Assist</cell></row><row><cell>Clive (M)</cell><cell></cell><cell></cell><cell></cell></row><row><cell>Ann (F) &amp;</cell><cell>Spouses</cell><cell>ALS (2 years)</cell><cell>Motorized wheelchair; Roller Walker</cell></row><row><cell>Carl (M)</cell><cell></cell><cell></cell><cell>Tobii Eye tracking Communication Device</cell></row><row><cell>Cathy (F)</cell><cell>Daughter</cell><cell>Her father:</cell><cell>Full-power wheelchair; Low-pressure button;</cell></row><row><cell></cell><cell></cell><cell>ALS (12 years)</cell><cell>Eye tracking communication device</cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_1"><head></head><label></label><figDesc>practical in that environment for a constant communication and further exacerbated [because] it was exhausting to do eye tracking just to communicate. . . 'please change me' or 'roll me over'. . . it just got cumbersome and exhausting. . . We found that AAC users exerted considerable effort in preprogramming, adding another component to their workload. Adam programmed and updated frequently used phrases with the help of caregivers and another AAC user. Al preprogrammed "funny little responses and things. . . that he would normally use" (Carol). Andy programmed sentences like "Please charge my device" and "This device lets me speak like anyone else. Please let me know if you don't understand my voice. " More work was required for AAC users to try voice banking, a time-consuming trial-and-error process. Carl explained why they were "too late to start" to bank Ann's voice: Carl: She had 1,000 [sentences to utter into a microphone]; she only did 300. [Later] that's not something to be done overnight. It takes a long time, and if you're [busy] sometimes you've got to do it in the evening, and you can maybe do 10 sentences because if it doesn't come out right it gets rejected by the program.</figDesc><table /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_2"><head></head><label></label><figDesc>4.3.1 Communication patterns and expressions. AAC users were often limited to slow, static, and impersonal expressions when trying to make their voices heard. Ann commented on how slow responses hindered conversational flow: "Frustrating. . . By the time I type, the topic is not relevant any longer. People expect immediate responses." Even when Al positively viewed the slow speed as allowing deeper conversations, he admitted that AAC failed to convey moods and feelings:Al: The speed of conversation allowed deeper and more topics available to discuss. It allowed us to be intimate, to alter tone, and volume, as well as to whisper. Al] is very eloquent writer and has a very large vocabulary. . . he can make it come across exactly the way he wants it to. . . the device itself doesn't provide the emotion. But the words he chooses to use [do]. Carol's above counterpoint showed that her understanding of emotional expression relied more on choices of words. Comparing the communication before and after using AAC, Ann contrasted dynamic speaking to static typing without nonverbal cues or spontaneous expressions while Carl missed the characteristics of Ann's real voice and the satisfaction of their conversations:Ann: Speaking is dynamic. You adjust what you are saying according to the non-verbal cues. . . While I type, the communication is static, and I have to wait until they hear it to make necessary adjustments. . . Participants tried to adjust to this changed rhythm of communication. Clive admitted to fewer conversational exchanges: "[Going]   </figDesc><table><row><cell>My voice was [an] indicator of mood, and could con-</cell></row><row><cell>vey anger, appreciation, empathy, and sorrow [which</cell></row><row><cell>cannot] be replicated by my [Dynavox]. [Later] . . . a</cell></row><row><cell>perfect platform [should] make voice inflection, tone,</cell></row><row><cell>and pronunciations easily accessible [and] more vari-</cell></row><row><cell>ety in voices.</cell></row><row><cell>Carol: [</cell></row></table><note>[Later] I am very expressive. [But I] no longer get to spontaneously express my love. Carl: [Our conversations now are] just not as fulfilling. My wife has [a] lovely voice. It's with a Spanish accent, and I miss that; now I'm speaking to basically a machine.</note></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_3"><head></head><label></label><figDesc>really need to be sure. . . what his wishes are. . . if he wanted. . . stronger [medication]. I had to. . . ask him over and over again. I'm sure he got frustrated. But you want to [be] very, very sure, 'cause they are so delicate. . . you're having to have conversations about. . . DNR orders [etc.] so that he could respond for his own care.</figDesc><table /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_4"><head>Table 2 :</head><label>2</label><figDesc>Identified maintenance strategies, adapted from<ref type="bibr" target="#b8">[9]</ref>.</figDesc><table><row><cell cols="3">Maintenance Strategies Example Behaviours Example Quotes</cell></row><row><cell>Social networks:</cell><cell>Keep socially active</cell><cell>"[Al] would send emails to his friends and [they] respond. . .</cell></row><row><cell>Engaging with friends,</cell><cell></cell><cell>'It is just like having sit right here in front of me. '" (Carol)</cell></row><row><cell>family, and community.</cell><cell>Broaden social circle</cell><cell>"[Assistive technology] has really broadened his</cell></row><row><cell></cell><cell></cell><cell>communication horizons greatly. " (Chris)</cell></row><row><cell></cell><cell>Offer support</cell><cell>"This morning my friend was sad, and I was able to say</cell></row><row><cell></cell><cell></cell><cell>something. " (Ann)</cell></row><row><cell></cell><cell>Community impact</cell><cell>"I go around and give speeches. . . to give back to the community. " (Andy)</cell></row><row><cell>Sharing tasks:</cell><cell>Daily tasks</cell><cell>likes his routine because it makes him feel comfortable.</cell></row><row><cell>Performing routine</cell><cell></cell><cell>He has a sense of control. " (Carol)</cell></row><row><cell>tasks and chores</cell><cell>Changed roles</cell><cell>"I am not longer participating in anything. " (Ann)</cell></row><row><cell>in a relationship.</cell><cell>Changed perspectives</cell><cell>"[We are] caregivers. . . The way that you deal with family</cell></row><row><cell></cell><cell></cell><cell>traditions [and] holidays change. The that you. . . handle</cell></row><row><cell></cell><cell></cell><cell>money, handle emotional issues. . . The things that were. . .</cell></row><row><cell></cell><cell></cell><cell>significant before aren't significant (Carol)</cell></row><row><cell></cell><cell>contribution</cell><cell>"He was very active in. . . the modifications to the house to. . .</cell></row><row><cell></cell><cell></cell><cell>accommodate the wheelchair... He was the one</cell></row><row><cell></cell><cell></cell><cell>[communicating with] all of the contractors. " (Carol)</cell></row><row><cell>Joint activities:</cell><cell>Share time together</cell><cell>could just hang together. Sometimes I'll just sit there,</cell></row><row><cell>Spending time with</cell><cell></cell><cell>listen to the radio or watch TV together.</cell></row><row><cell>one another.</cell><cell>events/places</cell><cell></cell></row><row><cell></cell><cell></cell><cell>has</cell></row><row><cell></cell><cell></cell><cell>skied. I try to keep him active outside. " (Cate)</cell></row><row><cell>Avoidance:</cell><cell>avoidance</cell><cell>"Because I'm not big into politics, I figured he needed to share his</cell></row><row><cell>Evasion of partner</cell><cell></cell><cell>with people that knew. . . about it other than me. " (Cate)</cell></row><row><cell>or issues.</cell><cell>avoidance</cell><cell>"[When] I know that we have a disagreement, and he has tried</cell></row><row><cell></cell><cell></cell><cell>avoid me... I will have to tell him, 'We need to talk about this.</cell></row><row><cell></cell><cell></cell><cell>need to use your machine and discuss this. '" (Carol)</cell></row><row><cell></cell><cell cols="2">associations "[Al] doesn't necessarily use it to communicate with me as much</cell></row><row><cell></cell><cell></cell><cell>as he reaches out to communicate to other people. Like other</cell></row><row><cell></cell><cell></cell><cell>friends and family through email and text messaging. . . " (Carol)</cell></row><row><cell></cell><cell>autonomy</cell><cell>"Like when we have the time or the space to have some intimacy,</cell></row><row><cell></cell><cell></cell><cell>would be. . . when preparing for bed and stuff. . . he won't</cell></row><row><cell></cell><cell></cell><cell>the device or chooses not to use the device. . . " (Carol)</cell></row><row><cell>Anti-social:</cell><cell>Indirect</cell><cell>"I want to pull my hair out... sometimes he doesn't realize</cell></row><row><cell>Behaviours which</cell><cell></cell><cell>what he's doing or how harsh he's being. " (Carol)</cell></row><row><cell>seem unfriendly</cell><cell>Direct</cell><cell>he's very, very upset, he's basically yelling... and kicking his</cell></row><row><cell>or coercive.</cell><cell></cell><cell>legs; his devices don't help him because he can't calm down</cell></row><row><cell></cell><cell></cell><cell>enough to use them. " (Cate)</cell></row><row><cell></cell><cell>Positive</cell><cell>have been able to maintain the same sense of humor. . . I</cell></row><row><cell>Jokes and sarcasm.</cell><cell></cell><cell>not lost a step in my ability to make her smile. " (Al)</cell></row><row><cell></cell><cell>Negative</cell><cell>teasing [Andy], calling him the 'dog bed killer. '" (Cate)</cell></row><row><cell>Positivity:</cell><cell>Optimistic and</cell><cell>"I have maintained a positive attitude. . . " (Al)</cell></row><row><cell>Approaching inter-</cell><cell>cheerful</cell><cell>"I try to be extremely upbeat. . . the way we need to be. " (Clive)</cell></row><row><cell>actions with optimism.</cell><cell>Appreciation of AAC</cell><cell>. . the tools that he has... are enough to allow us to. . . still</cell></row><row><cell></cell><cell></cell><cell>a relationship. Period. " (Carol)</cell></row><row><cell></cell><cell>Cherish the present</cell><cell></cell></row></table><note>"When [it] is the right temperature. . . we sit outside. . . watch bloom. . . birds raise families, and pollination. " (Carol) Talk time I put him to bed at night, I usually schedule about an or so, because I know he'll want to talk. " (Cate) visits/trips "He is a hermit. We literally have to drag him out. . . He's he's hiked, he's biked, he has snow skied, he . . you are more cognizant. . . try to hold on to those little things . . special moments. . . Today was a great day. Maybe tomorrow be another one. And that's about as far as I can go. " (Carol)</note></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_5"><head>Table 2 :</head><label>2</label><figDesc>Continued. We found lost and gained interactions to co-exist in household as two sides of the story. Referring to what she missed the most about her family role, Ann said, "I am [no] longer participating in anything. " On the other hand, Carl elaborated on how the shift</figDesc><table><row><cell cols="4">Maintenance Strategies Example Behaviours Example Quotes</cell></row><row><cell>Openness:</cell><cell>Self-disclosure</cell><cell cols="2">"I'm super glad that we're on the same page. That we know</cell></row><row><cell>Direct discussions</cell><cell></cell><cell></cell><cell>we're going in for. "</cell></row><row><cell>and to</cell><cell>Meta-relational</cell><cell cols="2">". . . there is not a way to achieve that level of intimacy that</cell></row><row><cell>one another.</cell><cell>communication</cell><cell cols="2">you may have had prior to this disease. " (Carol)</cell></row><row><cell></cell><cell></cell><cell cols="2">". . . he became more reflective, and he wanted to be more active</cell></row><row><cell></cell><cell></cell><cell cols="2">. . passing on the business and stuff us, but also in leaving us</cell></row><row><cell></cell><cell></cell><cell cols="2">with some sort of guidance just in case he wasn't around. " (Cathy)</cell></row><row><cell></cell><cell>Conflict engagement</cell><cell cols="2">"My favourite thing that he does is text[ing] me. . . at work. . .</cell></row><row><cell></cell><cell></cell><cell cols="2">'I'm mad at you. ' And I'll text him back, 'I know you are. '"</cell></row><row><cell></cell><cell>behaviour</cell><cell cols="2">"Because of the disease, he obviously has no control over</cell></row><row><cell></cell><cell></cell><cell cols="2">emotional aspect of it. . . you have to him the space the</cell></row><row><cell></cell><cell></cell><cell></cell><cell>to calm " (Carol)</cell></row><row><cell></cell><cell>Respectful behaviour</cell><cell cols="2">"50% of the . . I can off her sentence, but generally</cell></row><row><cell></cell><cell></cell><cell cols="2">it's not very polite to do that. " (Carl)</cell></row><row><cell></cell><cell>Supportiveness</cell><cell></cell><cell>husband knows I'm not going anywhere. I'm not leaving</cell></row><row><cell>Covertly and overtly</cell><cell></cell><cell cols="2">him alone. I'm not gonna disappear on him and vanish. If he</cell></row><row><cell>assuring each other of</cell><cell></cell><cell></cell><cell>his anger out on me, I'm still going to be here. " (Carol)</cell></row><row><cell>the importance of</cell><cell>Comfort and</cell><cell></cell><cell>asked me. . . 'Would you like me to be normal?' I said, 'No. You</cell></row><row><cell>the relationship.</cell><cell>confidence</cell><cell></cell><cell>be [Andy]. ' I can't imagine him any other way. " (Cate)</cell></row><row><cell></cell><cell>Need satisfaction</cell><cell cols="2">. . as a partner, I want to know that she's getting exactly</cell></row><row><cell></cell><cell></cell><cell cols="2">what she needs. " (Carl)</cell></row><row><cell></cell><cell>Overt expression</cell><cell cols="2">try to let her know how much I appreciate her. . . I would not</cell></row><row><cell></cell><cell></cell><cell cols="2">where I am today. " (Andy)</cell></row><row><cell></cell><cell>Exercise the</cell><cell cols="2">"She will, which I encourage her to do. . . always attempt to</cell></row><row><cell></cell><cell>remaining functions</cell><cell cols="2">talk before going to the Boogie board. " (Clive)</cell></row><row><cell></cell><cell>Educational</cell><cell cols="2">"I don't let him get lazy. I make him speak in full sentences,</cell></row><row><cell></cell><cell>encouragement</cell><cell cols="2">whether he likes it or not. " (Cate)</cell></row><row><cell cols="2">there's usually three or four girls that come [to] party</cell><cell></cell><cell>wouldn't know people. . . our friends have been</cell></row><row><cell>with her.</cell><cell></cell><cell></cell><cell>wonderful. But new people don't know what's going</cell></row><row><cell cols="3">Chris appreciated that assistive technology "made a huge differ-and "opened the world" to Adam so he could interact with a group beyond a close circle. With Cate's strong encourage-ment, Andy began engaging with the community through public which helped him break out of self-isolation (or as Cate described, "hermit station"): Andy: [I'm] the official spokesperson for [an adult] . . I go around and give speeches. . . [Giv-ing] back to the community. . . means more than any-thing. . . I have the drive to make an impact on the world. . . I want to give people encouragement to keep on with their lives. On the other hand, Clive described lost opportunities for interac-in the case of Alice, "a social person" who stopped answering calls from unknown numbers and missed new social engagements:</cell><cell>on; they don't understand. Participants experienced changed interactions in family pastimes as Al's project of restoring vintage street bikes with his son. Al was limited to research roles such as finding "manuals, procedures, [and] schematic diagrams" and found losing "physical ability to be very difficult in coming to terms with. " Caregivers transitioned to for their loved ones, which required an alternation between work and family spaces. Carol offered a rich description of hardship managing the two mindsets: Carol: [You] can't forget that as [Al]'s health declines, your mind is going to be more focused on taking care [him]. . . I still work full time. So, the problem is I'm torn between two different worlds. One which moves very fast and. . . one in which I have [to take] the time . . . decompress. . . I have to take a half hour to calm from work to go to talk to [Al]. Because. . . it's</cell></row><row><cell cols="2">Clive: [We] have caller display; [she will answer] if she knows the person. . . But if she doesn't recognize</cell><cell></cell><cell>a change in the speed of what you are doing. . . [and] in your mindset.</cell></row><row><cell cols="2">number, she won't answer because she said people</cell><cell></cell></row><row><cell cols="2">hang up on her. . . she can't talk to people she doesn't</cell><cell></cell></row><row><cell cols="2">. . From a social perspective, unless I'm with</cell><cell></cell></row><row><cell cols="2">her, she won't pursue that social engagement where</cell><cell></cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_6"><head></head><label></label><figDesc>not perfect. . . but. . . the tools that he has. . . enough to allow us to. . . still have a relationship. Period. . . . when [considering] technology. . . it's important to. . . not just. . . make sure the individual has a certain level of comfort, [but also] that they have the ability to. . . express themselves. . . writing, blogging, . . Whatever expression. . . that fulfills them. . . they need to be able to keep [that] ability. . .</figDesc><table><row><cell>life since the diag-</cell></row><row><cell>. .</cell></row><row><cell>Carol: I don't think that our relationship would be</cell></row><row><cell>the same [without assistive technology] . . . [Later]</cell></row><row><cell>it's</cell></row></table></figure>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="3">This is likely in part due to vacation closures of the clinic as well as a low rate of new patient intake in the clinic over the period of recruitment.</note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="4">Boogie board, myboogie.com, is a low-power reusable writing tablet that using liquid crystal technology to provide an easy to use and erase writing surface.</note>
+		</body>
+		<back>
+
+			<div type="acknowledgement">
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>ACKNOWLEDGMENTS</head><p>We thank our participants and the Assistive Technology Clinic at the Sunnybrook Health Sciences Centre in Toronto, Canada. We also thank Yana Yunusova and Madhura Kulkarni for their support. </p></div>
+			</div>
+
+			<div type="references">
+
+				<listBibl>
+
+<biblStruct xml:id="b0">
+	<monogr>
+		<ptr target="https://www.asha.org/practice-portal/professional-issues/augmentative-" />
+		<title level="m">Speech-Language-Hearing Association. 2021. and Alternative Communication. Retrieved December</title>
+				<imprint>
+			<biblScope unit="volume">6</biblScope>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b1">
+	<analytic>
+		<title level="a" type="main">Augmentative and alternative communication for people with progressive neuromuscular disease</title>
+		<author>
+			<persName><forename type="first">Laura</forename><forename type="middle">J</forename><surname>Ball</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Susan</forename><surname>Fager</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Melanie</forename><surname>Fried-Oken</surname></persName>
+		</author>
+		<idno type="DOI">10.1016/j.pmr.2012.06.003</idno>
+		<ptr target="https://doi.org/10.1016/j.pmr.2012.06.003" />
+	</analytic>
+	<monogr>
+		<title level="j">Physical Medicine and Rehabilitation Clinics of North America</title>
+		<imprint>
+			<biblScope unit="page" from="689" to="699" />
+			<date type="published" when="2012-08">2012. 8 2012</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b2">
+	<monogr>
+		<author>
+			<persName><forename type="first">Scott</forename><surname>Bateman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Regan</forename><forename type="middle">L</forename><surname>Mandryk</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Tadeusz</forename><surname>Stach</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Carl</forename><surname>Gutwin</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/1978942.1979287</idno>
+		<ptr target="https://doi.org/10.1145/1978942.1979287" />
+		<title level="m">Target Assistance for Subtly Balancing Competitive Play. of the SIGCHI Conference on Human Factors in Computing Systems</title>
+				<imprint>
+			<date type="published" when="2011">2011</date>
+			<biblScope unit="page" from="2355" to="2364" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b3">
+	<monogr>
+		<author>
+			<persName><surname>Beneteau</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3313831.3376883</idno>
+		<ptr target="https://doi.org/10.1145/3313831.3376883" />
+		<title level="m">Who Are You Asking?: Qualitative Methods for Involving AAC Users as Primary Research Participants. Proceedings of the 2020 CHI Conference on Human Factors in Computing Systems</title>
+				<imprint>
+			<date type="published" when="2020">2020</date>
+			<biblScope unit="page" from="1" to="13" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b4">
+	<analytic>
+		<title level="a" type="main">Interdependence as a frame for assistive technology research and design</title>
+		<author>
+			<persName><forename type="first">Cynthia</forename><forename type="middle">L</forename><surname>Bennett</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Erin</forename><surname>Brady</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Stacy</forename><forename type="middle">M</forename><surname>Branham</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3234695.3236348</idno>
+		<ptr target="https://doi.org/10.1145/3234695.3236348" />
+	</analytic>
+	<monogr>
+		<title level="m">20th International ACM SIGACCESS Conference on Computers and Accessibility</title>
+				<imprint>
+			<date type="published" when="2018">2018. 2018</date>
+			<biblScope unit="volume">173</biblScope>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b5">
+	<analytic>
+		<title level="a" type="main">Expressing Human State via Haptic Feedback for Mobile Remote Implicit Communication</title>
+		<author>
+			<persName><forename type="first">R</forename><surname>Blum</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jeremy</forename><forename type="middle">R</forename><surname>Cooperstock</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2875194.2875225</idno>
+		<ptr target="https://doi.org/10.1145/2875194.2875225" />
+	</analytic>
+	<monogr>
+		<title level="m">7th Augmented Human International Conference</title>
+				<imprint>
+			<date type="published" when="2016">2016. 2016</date>
+			<biblScope unit="page" from="1" to="2" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b6">
+	<analytic>
+		<title level="a" type="main">Ambiguous loss from chronic physical illness: Clinical interventions with individuals, couples, and families</title>
+		<author>
+			<persName><forename type="first">Pauline</forename><surname>Boss</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Barbara A Couden</surname></persName>
+		</author>
+		<idno type="DOI">10.1002/jclp.10083</idno>
+		<ptr target="https://doi.org/10.1002/jclp.10083" />
+	</analytic>
+	<monogr>
+		<title level="j">of clinical psychology</title>
+		<imprint>
+			<biblScope unit="volume">58</biblScope>
+			<biblScope unit="page" from="1351" to="1360" />
+			<date type="published" when="2002">2002. 2002</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b7">
+	<analytic>
+		<title level="a" type="main">Using thematic analysis in psychology</title>
+		<author>
+			<persName><forename type="first">Virginia</forename><surname>Braun</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Victoria</forename><surname>Clarke</surname></persName>
+		</author>
+		<idno type="DOI">10.1191/1478088706qp063oa</idno>
+		<ptr target="https://doi.org/10" />
+	</analytic>
+	<monogr>
+		<title level="j">Qualitative Research in Psychology</title>
+		<imprint>
+			<biblScope unit="volume">3</biblScope>
+			<biblScope unit="page" from="77" to="101" />
+			<date type="published" when="2006-01">2006. 1 2006</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b8">
+	<analytic>
+		<title level="a" type="main">An Analysis of Relational Maintenance Strategies: Comparisons Among Lovers, Relatives, Friends, and Others</title>
+		<author>
+			<persName><forename type="first">J</forename><surname>Canary</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Laura</forename><surname>Stafford</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kimberley</forename><forename type="middle">S</forename><surname>Hause</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Lisa</forename><forename type="middle">A</forename><surname>Wallace</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Communication Research Reports</title>
+		<imprint>
+			<biblScope unit="volume">10</biblScope>
+			<biblScope unit="page" from="5" to="14" />
+			<date type="published" when="1993">1993. 1993</date>
+		</imprint>
+	</monogr>
+	<note>Issue 1</note>
+</biblStruct>
+
+<biblStruct xml:id="b9">
+	<analytic>
+		<title level="a" type="main">My world has expanded even though I&apos;m stuck at home&quot;: Experiences of individuals with amyotrophic lateral sclerosis who use augmentative and alternative communication and social media</title>
+		<author>
+			<persName><forename type="first">Caron</forename></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Janice</forename><surname>Light</surname></persName>
+		</author>
+		<idno type="DOI">10.1044/2015_AJSLP-15-0010</idno>
+		<ptr target="https://doi.org/10.1044/2015_AJSLP-15-0010" />
+	</analytic>
+	<monogr>
+		<title level="j">American Journal of Speech-Language Pathology</title>
+		<imprint>
+			<biblScope unit="volume">24</biblScope>
+			<biblScope unit="page" from="680" to="695" />
+			<date type="published" when="2015-11">2015. 11 2015</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b10">
+	<analytic>
+		<title level="a" type="main">Social Media has Opened a World of Open communication</title>
+		<author>
+			<persName><forename type="first">Caron</forename></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Janice</forename><surname>Light</surname></persName>
+		</author>
+		<idno type="DOI">10.3109/07434618.2015.1052887</idno>
+		<ptr target="https://doi.org/10.3109/07434618.2015.1052887" />
+	</analytic>
+	<monogr>
+		<title level="m">Experiences of Adults with Cerebral Palsy who use Augmentative and Alternative Communication and Social Media. Augmentative and Alternative Communication</title>
+				<imprint>
+			<date type="published" when="2016-01">2016. 1 2016</date>
+			<biblScope unit="volume">32</biblScope>
+			<biblScope unit="page" from="25" to="40" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b11">
+	<monogr>
+		<title level="m" type="main">How does spinal cord injury affect marital relationship? A story from both sides of the couple. and Rehabilitation</title>
+		<author>
+			<persName><forename type="first">C</forename><forename type="middle">K</forename><surname>Chan</surname></persName>
+		</author>
+		<idno type="DOI">10.1080/09638280050200269</idno>
+		<ptr target="https://doi.org/10.1080/09638280050200269" />
+		<imprint>
+			<date type="published" when="2000">2000. 2000</date>
+			<biblScope unit="volume">22</biblScope>
+			<biblScope unit="page" from="764" to="775" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b12">
+	<analytic>
+		<title level="a" type="main">Coping with spinal cord injury: personal and marital adjustment in the Hong Kong Chinese setting</title>
+		<author>
+			<persName><forename type="first">C</forename><forename type="middle">K</forename><surname>Chan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Lee</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Lieh-Mak</surname></persName>
+		</author>
+		<idno type="DOI">10.1038/sj.sc.3101085</idno>
+		<ptr target="https://doi.org/10.1038/sj.sc.3101085" />
+	</analytic>
+	<monogr>
+		<title level="j">Cord</title>
+		<imprint>
+			<biblScope unit="volume">38</biblScope>
+			<biblScope unit="page" from="687" to="696" />
+			<date type="published" when="2000">2000. 2000</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b13">
+	<analytic>
+		<title level="a" type="main">Making Space for Social Sharing: Insights from a Community-Based Social Group for People with Dementia</title>
+		<author>
+			<persName><forename type="first">Jiamin</forename><surname>Dai</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Karyn</forename><surname>Moffatt</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3313831.3376133</idno>
+		<ptr target="https://doi.org/10.1145/3313831.3376133" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2020 CHI Conference on Human Factors in Computing Systems</title>
+				<meeting>the 2020 CHI Conference on Human Factors in Computing Systems</meeting>
+		<imprint>
+			<date type="published" when="2020">2020</date>
+			<biblScope unit="page" from="1" to="13" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b14">
+	<analytic>
+		<title level="a" type="main">Surfacing the Voices of People with Dementia: Strategies for Effective Inclusion of Proxy Stakeholders in Qualitative Research</title>
+		<author>
+			<persName><forename type="first">Jiamin</forename><surname>Dai</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Karyn</forename><surname>Moffatt</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3411764.3445756</idno>
+		<ptr target="https://doi.org/10.1145/3411764.3445756" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2021 CHI Conference on Human Factors in Computing Systems</title>
+				<meeting>the 2021 CHI Conference on Human Factors in Computing Systems</meeting>
+		<imprint>
+			<date type="published" when="2021">2021</date>
+			<biblScope unit="page" from="1" to="13" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b15">
+	<monogr>
+		<title level="m" type="main">Definitions and Perspectives on Relational Maintenance In Maintaining relationships through communication: Relational, contextual, and cultural variations. 1-28</title>
+		<author>
+			<persName><forename type="first">Kathryn</forename><surname>Dindia</surname></persName>
+		</author>
+		<idno type="DOI">10.4324/9781410606990-1</idno>
+		<ptr target="https://doi.org/10.4324/9781410606990-1" />
+		<imprint>
+			<date type="published" when="2002">2002</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b16">
+	<analytic>
+		<title level="a" type="main">Craving, Creating, and Constructing Comfort: Insights and Opportunities for Technology in Hospice</title>
+		<author>
+			<persName><forename type="first">Robert</forename><surname>Douglas Ferguson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Michael</forename><surname>Massimi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Emily</forename><forename type="middle">Anne</forename><surname>Crist</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Karyn</forename><forename type="middle">Anne</forename><surname>Moffatt</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2531602.2531631</idno>
+		<ptr target="https://doi.org/10.1145/2531602.2531631" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 17th ACM Conference on Computer Supported Cooperative Work &amp; Social Computing</title>
+				<meeting>the 17th ACM Conference on Computer Supported Cooperative Work &amp; Social Computing</meeting>
+		<imprint>
+			<date type="published" when="2014">2014</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b17">
+	<analytic>
+		<title level="a" type="main">AACrobat: Using mobile devices to lower communication barriers and provide autonomy with Gaze-based AAC</title>
+		<author>
+			<persName><forename type="first">Alexander</forename><surname>Fiannaca</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ann</forename><surname>Paradiso</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mira</forename><surname>Shah</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Meredith Ringel</forename><surname>Morris</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2998181.2998215</idno>
+		<ptr target="https://doi.org/10.1145/2998181.2998215" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the ACM Conference on Computer Supported Cooperative Work</title>
+				<meeting>the ACM Conference on Computer Supported Cooperative Work</meeting>
+		<imprint>
+			<publisher>CSCW</publisher>
+			<date type="published" when="2017">2017</date>
+			<biblScope unit="page" from="683" to="695" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b18">
+	<analytic>
+		<title level="a" type="main">Voicesetting: Voice authoring UIs for improved expressivity in augmentative communication</title>
+		<author>
+			<persName><forename type="first">Alexander</forename><forename type="middle">J</forename><surname>Fiannaca</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ann</forename><surname>Paradiso</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jon</forename><surname>Campbell</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Meredith Ringel</forename><surname>Morris</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3173574.3173857</idno>
+		<ptr target="https://doi.org/10.1145/3173574.3173857" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2018 CHI Conference on Human Factors in Systems</title>
+				<meeting>the 2018 CHI Conference on Human Factors in Systems</meeting>
+		<imprint>
+			<biblScope unit="page" from="1" to="12" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b19">
+	<analytic>
+		<title level="a" type="main">Couple&apos;s experiences of relationship maintenance and intimacy in acute spinal cord injury rehabilitation: an interpretative phenomenological analysis</title>
+		<author>
+			<persName><forename type="first">Claire</forename><surname>Freeman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Bernadette</forename><surname>Cassidy</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Jean</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Hay-Smith</surname></persName>
+		</author>
+		<idno type="DOI">10.1007/s11195-017-9496-6</idno>
+		<ptr target="https://doi.org/10.1007/s11195-017-9496-6" />
+	</analytic>
+	<monogr>
+		<title level="j">Sexuality and Disability</title>
+		<imprint>
+			<biblScope unit="volume">35</biblScope>
+			<biblScope unit="page" from="433" to="444" />
+			<date type="published" when="2017">2017. 2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b20">
+	<analytic>
+		<title level="a" type="main">Family members of people with disabilities&apos; explicit and disability attitudes</title>
+		<author>
+			<persName><forename type="first">Carli</forename><surname>Friedman</surname></persName>
+		</author>
+		<idno type="DOI">10.1037/rep0000265</idno>
+		<ptr target="https://doi.org/10.1037/rep0000265" />
+	</analytic>
+	<monogr>
+		<title level="j">Rehabilitation psychology</title>
+		<imprint>
+			<biblScope unit="volume">64</biblScope>
+			<biblScope unit="page" from="203" to="211" />
+			<date type="published" when="2019">2019. 2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b21">
+	<analytic>
+		<title level="a" type="main">Fluent: An AI Augmented Writing Tool for People who Stutter</title>
+		<author>
+			<persName><forename type="first">Klaus</forename><surname>Ghai</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Mueller</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3441852.3471211</idno>
+		<ptr target="https://doi.org/10.1145/3441852.3471211" />
+	</analytic>
+	<monogr>
+		<title level="m">ASSETS 2021 -23rd International ACM SIGACCESS Conference Computers and Accessibility</title>
+				<imprint>
+			<date type="published" when="2021">2021</date>
+			<biblScope unit="page" from="1" to="8" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b22">
+	<monogr>
+		<author>
+			<persName><forename type="first">Megan</forename><surname>Hofmann</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Devva</forename><surname>Kasnitz</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jennifer</forename><surname>Mankoff</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Cynthia</forename><forename type="middle">L</forename><surname>Bennett</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3373625.3416996</idno>
+		<ptr target="https://doi.org/10.1145/3373625.3416996" />
+		<title level="m">Living Disability Theory: Reflections on Access, Research, and Design. ASSETS 2020 -22nd International ACM SIGACCESS Conference on Computers and Accessibility</title>
+				<imprint>
+			<date type="published" when="2020">2020</date>
+			<biblScope unit="page" from="1" to="13" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b23">
+	<analytic>
+		<title level="a" type="main">Emotion Map: A Location-Based Mobile Social System for Improving Emotion Awareness and Regulation</title>
+		<author>
+			<persName><forename type="first">Ying</forename><surname>Huang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yang</forename><surname>Tang</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Wang</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2675133.2675173</idno>
+		<ptr target="https://doi.org/10.1145/2675133.2675173" />
+	</analytic>
+	<monogr>
+		<title level="m">Proof the 18th ACM Conference on Computer Supported Cooperative Work &amp; Social Computing</title>
+				<imprint>
+			<date type="published" when="2015">2015</date>
+			<biblScope unit="page" from="130" to="142" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b24">
+	<analytic>
+		<title level="a" type="main">An eye-tracking assistive device improves the quality of life for ALS patients and reduces the caregivers&apos; burden</title>
+		<author>
+			<persName><forename type="first">Chi-Shin</forename><surname>Hwang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ho-Hsiu</forename><surname>Weng</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Li-Fen</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Chon-Haw</forename><surname>Tsai</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Hao-Teng</surname></persName>
+		</author>
+		<idno type="DOI">10.1080/00222895.2014.891970</idno>
+		<ptr target="https://doi.org/10.1080/00222895.2014.891970" />
+	</analytic>
+	<monogr>
+		<title level="j">Journal of motor behavior</title>
+		<imprint>
+			<biblScope unit="volume">46</biblScope>
+			<biblScope unit="page" from="233" to="238" />
+			<date type="published" when="2014">2014. 2014</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b25">
+	<monogr>
+		<title level="m" type="main">How Game Affects Play: Player Adaptation in an Exergame for Children with</title>
+		<author>
+			<persName><forename type="first">Susan</forename><surname>Hwang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Adrian</forename><forename type="middle">L Jessup</forename><surname>Schneider</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Daniel</forename><surname>Clarke</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Alexander</forename><surname>Macintosh</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Darcy</forename><surname>Switzer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><forename type="middle">C</forename><surname>Fehlings</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Nicholas Graham</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b26">
+	<monogr>
+		<author>
+			<persName><forename type="first">Cerebral</forename><surname>Palsy</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3064663.3064664</idno>
+		<ptr target="https://doi.org/10.1145/3064663.3064664" />
+		<title level="m">Proceedings of the 2017 Conference on Designing Interactive Systems</title>
+				<meeting>the 2017 Conference on Designing Interactive Systems</meeting>
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b27">
+	<analytic>
+		<title level="a" type="main">Inclusive Improvisation through Sound and Movement Mapping: From DMI to ADMI</title>
+		<author>
+			<persName><forename type="first">Alon</forename><surname>Ilsar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Gail</forename><surname>Kenning</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3373625.3416988</idno>
+		<ptr target="https://doi.org/10.1145/3373625.3416988" />
+	</analytic>
+	<monogr>
+		<title level="m">ASSETS 2020 -22nd International ACM SIGACCESS Conference on Computers and Accessibility</title>
+				<imprint>
+			<date type="published" when="2020">2020</date>
+			<biblScope unit="page" from="1" to="8" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b28">
+	<analytic>
+		<title level="a" type="main">Motor neuron disease: The impact of decreased speech intelligibility marital communication</title>
+		<author>
+			<persName><forename type="first">Karin</forename><surname>Joubert</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Bornman</surname></persName>
+		</author>
+		<idno type="DOI">10.1080/20786204.2012.10874245</idno>
+		<ptr target="https://doi.org/10.1080/20786204.2012.10874245" />
+	</analytic>
+	<monogr>
+		<title level="j">South African Family Practice</title>
+		<imprint>
+			<biblScope unit="volume">54</biblScope>
+			<biblScope unit="page" from="332" to="338" />
+			<date type="published" when="2012">2012. 2012</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b29">
+	<monogr>
+		<author>
+			<persName><forename type="first">Shaun</forename><forename type="middle">K</forename><surname>Kane</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Anhong</forename><surname>Guo</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3373625.3416990</idno>
+		<ptr target="https://doi.org/10.1145/3373625.3416990" />
+		<title level="m">Meredith Ringel Morris. 2020. Sense and Accessibility. ASSETS 2020 -International ACM SIGACCESS Conference on Computers and Accessibility</title>
+				<imprint>
+			<biblScope unit="page" from="1" to="14" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b30">
+	<analytic>
+		<title level="a" type="main">At times avuncular and cantankerous, with the reflexes of a mongoose&quot;: Underself-expression through augmentative and alternative communication devices</title>
+		<author>
+			<persName><forename type="first">Shaun</forename><forename type="middle">K</forename><surname>Kane</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Meredith</forename><forename type="middle">Ringel</forename><surname>Morris</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ann</forename><surname>Paradiso</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jon</forename><surname>Campbell</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2998181.2998284</idno>
+		<ptr target="https://doi.org/10.1145/2998181.2998284" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the ACM Conference on Computer Supported Cooperative Work</title>
+				<meeting>the ACM Conference on Computer Supported Cooperative Work</meeting>
+		<imprint>
+			<publisher>CSCW</publisher>
+			<date type="published" when="2017">2017</date>
+			<biblScope unit="page" from="1166" to="1179" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b31">
+	<analytic>
+		<title level="a" type="main">Predictors of marital longevity after new spinal cord injury</title>
+		<author>
+			<persName><forename type="first">D</forename><surname>Karana-Zebari</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">B</forename><surname>De Leon</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><forename type="middle">Z</forename><surname>Kalpakjian</surname></persName>
+		</author>
+		<idno type="DOI">10.1038/sc.2010.63</idno>
+		<ptr target="https://doi.org/10.1038/sc.2010.63" />
+	</analytic>
+	<monogr>
+		<title level="j">Spinal Cord</title>
+		<imprint>
+			<biblScope unit="volume">49</biblScope>
+			<biblScope unit="page" from="120" to="124" />
+			<date type="published" when="2011-01">2011. 1 2011</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b32">
+	<analytic>
+		<title level="a" type="main">Communication and developing relationships for people who use augmentative and alternative communication</title>
+		<author>
+			<persName><forename type="first">Chris</forename><surname>Klein</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Assistive Technology Outcomes &amp; Benefits</title>
+		<imprint>
+			<biblScope unit="volume">11</biblScope>
+			<biblScope unit="page" from="58" to="65" />
+			<date type="published" when="2017">2017. 2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b33">
+	<analytic>
+		<title level="a" type="main">Emotional Communication between Remote Couples: Exploring the Design of Wearable Ambient Displays</title>
+		<author>
+			<persName><forename type="first">Pradthana</forename><surname>Li</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Heiko</forename><surname>Jarusriboonchai</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Emmi</forename><surname>Müller</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jonna</forename><surname>Harjuniemi</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Häkkilä</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 11th Nordic Conference on Interaction: Shaping Experiences, Shaping Society</title>
+				<meeting>the 11th Nordic Conference on Interaction: Shaping Experiences, Shaping Society</meeting>
+		<imprint>
+			<date type="published" when="2020">2020</date>
+			<biblScope unit="page" from="1" to="5" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b34">
+	<analytic>
+		<title level="a" type="main">Interaction Involving Individuals using Augmentative and Alternative Communication Systems: State of the Art and Future Directions</title>
+		<author>
+			<persName><forename type="first">Janice</forename><surname>Light</surname></persName>
+		</author>
+		<idno type="DOI">10.1080/07434618812331274657</idno>
+		<ptr target="https://doi.org/10.1080/07434618812331274657" />
+	</analytic>
+	<monogr>
+		<title level="j">Augmentative and Alternative Communication</title>
+		<imprint>
+			<biblScope unit="volume">4</biblScope>
+			<biblScope unit="page" from="66" to="82" />
+			<date type="published" when="1988">1988. 1988</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b35">
+	<monogr>
+		<title level="m" type="main">Toward a Definition of Communicative Competence for Individuals Using Augmentative and Alternative Communication Systems. Augmentative and Communication</title>
+		<author>
+			<persName><forename type="first">Janice</forename><surname>Light</surname></persName>
+		</author>
+		<idno type="DOI">10.1080/07434618912331275126</idno>
+		<ptr target="https://doi.org/10.1080/07434618912331275126" />
+		<imprint>
+			<date type="published" when="1989">1989. 1989</date>
+			<biblScope unit="volume">5</biblScope>
+			<biblScope unit="page" from="137" to="144" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b36">
+	<monogr>
+		<title level="m" type="main">Communicative competence for individuals who require augmentative and alternative communication: A new definition for a era of communication? AAC: Augmentative and Alternative Communication</title>
+		<author>
+			<persName><forename type="first">Janice</forename><surname>Light</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">David</forename><surname>Mcnaughton</surname></persName>
+		</author>
+		<idno type="DOI">10.3109/07434618.2014.885080</idno>
+		<ptr target="https://doi.org/10.3109/07434618.2014.885080" />
+		<imprint>
+			<date type="published" when="2014-03">2014. 3 2014</date>
+			<biblScope unit="volume">30</biblScope>
+			<biblScope unit="page" from="1" to="18" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b37">
+	<analytic>
+		<title level="a" type="main">Technology acceptance, adoption, and usability: Arriving at consistent terminologies and measurement approaches</title>
+		<author>
+			<persName><forename type="first">Lili</forename><surname>Liu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Antonio</forename><forename type="middle">Miguel</forename><surname>Cruz</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Adriana Maria Rios</forename><surname>Rincon</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Everyday Technologies in Healthcare</title>
+				<imprint>
+			<publisher>CRC Press</publisher>
+			<date type="published" when="2019">2019</date>
+			<biblScope unit="page" from="319" to="338" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b38">
+	<monogr>
+		<author>
+			<persName><forename type="first">Emma</forename><surname>Macgregor</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Matthew</forename><surname>Beaubien</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kate</forename><surname>Sellen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kowoon</forename><surname>Jang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Molly</forename><surname>Mc-Govern</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Chieng</forename><surname>Luphuyong</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mariam</forename><surname>Albess</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Victoria</forename><surname>Weng</surname></persName>
+		</author>
+		<title level="m">Ethical Considerations for HCI Research on End of Life: Time Moving. Workshop, HCI at End of Life &amp; Beyond</title>
+				<imprint>
+			<date type="published" when="2020">2020</date>
+			<biblScope unit="page" from="65" to="70" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b39">
+	<analytic>
+		<title level="a" type="main">Fast gaze typing with an adjustable dwell time</title>
+		<author>
+			<persName><forename type="first">Päivi</forename><surname>Majaranta</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ulla-Kaija</forename><surname>Ahola</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Oleg</forename><surname>Špakov</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/1518701.1518758</idno>
+		<ptr target="https://doi.org/10.1145/1518701.1518758" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the SIGCHI Conference on Human Factors in Computing Systems</title>
+				<meeting>the SIGCHI Conference on Human Factors in Computing Systems</meeting>
+		<imprint>
+			<date type="published" when="2009">2009</date>
+			<biblScope unit="page" from="357" to="360" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b40">
+	<analytic>
+		<title level="a" type="main">Communication styles of persons with ALS as recounted by surviving AAC</title>
+		<author>
+			<persName><forename type="first">Miechelle</forename><surname>Mckelvey</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">David</forename><forename type="middle">L</forename><surname>Evans</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Norimune</forename><surname>Kawai</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">David</forename><surname>Beukelman</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Augmentative and Alternative Communication</title>
+		<imprint>
+			<biblScope unit="volume">28</biblScope>
+			<biblScope unit="page">232</biblScope>
+			<date type="published" when="2012-12">2012. 12 2012</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b41">
+	<monogr>
+		<title/>
+		<idno type="DOI">10.3109/07434618.2012.737023</idno>
+		<ptr target="https://doi.org/10.3109/07434618.2012.737023" />
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b42">
+	<analytic>
+		<title level="a" type="main">Building capacity in AAC: A person-centred approach to supporting participation by people with complex communicaneeds</title>
+		<author>
+			<persName><forename type="first">David</forename><surname>Mcnaughton</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Janice</forename><surname>Light</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Chris</forename><surname>David R Beukelman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Dana</forename><surname>Klein</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Godfrey</forename><surname>Nieder</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Nazareth</surname></persName>
+		</author>
+		<idno type="DOI">10.1080/07434618.2018.1556731</idno>
+		<ptr target="https://doi.org/10.1080/07434618.2018.1556731" />
+	</analytic>
+	<monogr>
+		<title level="j">Augmentative and Alternative Communication</title>
+		<imprint>
+			<biblScope unit="volume">35</biblScope>
+			<biblScope unit="page" from="56" to="68" />
+			<date type="published" when="2019">2019. 2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b43">
+	<monogr>
+		<title level="m" type="main">Close relationships and quality of life. Well-being: Foundations of hedonic psychology</title>
+		<author>
+			<persName><forename type="first">C</forename><surname>David</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Myers</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2003">2003. 2003</date>
+			<biblScope unit="page" from="374" to="391" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b44">
+	<analytic>
+		<title level="a" type="main">Empowering expression for users with aphasia through constrained creativity</title>
+		<author>
+			<persName><forename type="first">Timothy</forename><surname>Neate</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Abi</forename><surname>Roper</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Stephanie</forename><surname>Wilson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jane</forename><surname>Marshall</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3290605.3300615</idno>
+		<ptr target="https://doi.org/10.1145/3290605.3300615" />
+	</analytic>
+	<monogr>
+		<title level="m">ings of the 2019 CHI Conference on Human Factors in Computing Systems</title>
+				<imprint>
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b45">
+	<analytic>
+		<title level="a" type="main">Designing AACs for people with aphasia dining in restaurants</title>
+		<author>
+			<persName><forename type="first">Mmachi</forename><surname>God'sglory Obiorah</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Anne</forename><forename type="middle">Marie</forename><surname>Piper</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Michael</forename><surname>Horn</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3411764.3445280</idno>
+		<ptr target="https://doi.org/10.1145/3411764.3445280" />
+	</analytic>
+	<monogr>
+		<title level="m">2021 CHI Conference on Human Factors in Computing Systems</title>
+				<imprint>
+			<date type="published" when="2021">2021</date>
+			<biblScope unit="page" from="1" to="14" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b46">
+	<analytic>
+		<title level="a" type="main">Filteryedping: Design challenges and user performance of dwell-free eye typing</title>
+		<author>
+			<persName><forename type="first">Diogo</forename><surname>Pedrosa</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Maria</forename><surname>Da Graça</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Amy</forename><surname>Pimentel</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Khai</forename><forename type="middle">N</forename><surname>Wright</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Truong</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2724728</idno>
+		<ptr target="https://doi.org/10.1145/2724728" />
+	</analytic>
+	<monogr>
+		<title level="j">ACM Transactions on Accessible Computing</title>
+		<imprint>
+			<biblScope unit="volume">6</biblScope>
+			<biblScope unit="page" from="1" to="37" />
+			<date type="published" when="2015">3 2015</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b47">
+	<analytic>
+		<title level="a" type="main">Shad-owSparrow: An Ambient Display for Information Visualization and Notification</title>
+		<author>
+			<persName><forename type="first">Özge</forename><surname>Raudanjoki</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Çağlar</forename><surname>Genç</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kuisma</forename><surname>Hurtig</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jonna</forename><surname>Häkkilä</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3428361.3431197</idno>
+		<ptr target="https://doi.org/10.1145/3428361.3431197" />
+	</analytic>
+	<monogr>
+		<title level="m">19th International Conference on Mobile and Ubiquitous Multimedia</title>
+				<imprint>
+			<date type="published" when="2020">2020</date>
+			<biblScope unit="page" from="351" to="353" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b48">
+	<analytic>
+		<title level="a" type="main">An Exploratory Study of Eye Typing Time, Text Entry Rate, Errors, and Workload</title>
+		<author>
+			<persName><forename type="first">Saila</forename><surname>Räihä</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Ovaska</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2207676.2208711</idno>
+		<ptr target="https://doi.org/10.1145/2207676.2208711" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the SIGCHI Conference on Human Factors in Computing Systems</title>
+				<meeting>the SIGCHI Conference on Human Factors in Computing Systems</meeting>
+		<imprint>
+			<date type="published" when="2012">2012</date>
+			<biblScope unit="page" from="3001" to="3010" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b49">
+	<analytic>
+		<title level="a" type="main">The couple relationship when the female partner has an acquired physical disability</title>
+		<author>
+			<persName><forename type="first">Elaine</forename><surname>Schembri</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Lia</forename></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Angela</forename><surname>Abela</surname></persName>
+		</author>
+		<idno type="DOI">10.1080/1081602X.2019.1663549</idno>
+		<ptr target="https://doi.org/10.1080/1081602X.2019.1663549" />
+	</analytic>
+	<monogr>
+		<title level="j">The History of the Family</title>
+		<imprint>
+			<biblScope unit="volume">25</biblScope>
+			<biblScope unit="page" from="265" to="286" />
+			<date type="published" when="2020">2020. 2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b50">
+	<analytic>
+		<title level="a" type="main">Design for social accessibility method cards: Engaging users and reflecting on scenarios for accessible design</title>
+		<author>
+			<persName><forename type="first">Nayeri</forename><surname>Shinohara</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Wanda</forename><surname>Jacobo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jacob</forename><forename type="middle">O</forename><surname>Pratt</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Wobbrock</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3369903</idno>
+		<ptr target="https://doi.org/10.1145/3369903" />
+	</analytic>
+	<monogr>
+		<title level="j">ACM Transactions on Accessible Computing</title>
+		<imprint>
+			<biblScope unit="volume">12</biblScope>
+			<biblScope unit="page" from="1" to="33" />
+			<date type="published" when="2020-01">2020. 1 2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b51">
+	<analytic>
+		<title level="a" type="main">Self-conscious or self-confident? A diary study conceptualizing the social accessibility of assistive technology</title>
+		<author>
+			<persName><forename type="first">Kristen</forename><surname>Shinohara</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jacob</forename><forename type="middle">O</forename><surname>Wobbrock</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2827857</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Transactions on Accessible Computing</title>
+		<imprint>
+			<biblScope unit="volume">8</biblScope>
+			<biblScope unit="page" from="1" to="31" />
+			<date type="published" when="2016-01">2016. 1 2016</date>
+		</imprint>
+	</monogr>
+	<note>Issue 2. https</note>
+</biblStruct>
+
+<biblStruct xml:id="b52">
+	<analytic>
+		<title level="a" type="main">Incorporating factors in accessible design</title>
+		<author>
+			<persName><forename type="first">Kristen</forename><surname>Shinohara</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jacob</forename><forename type="middle">O</forename><surname>Wobbrock</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Wanda</forename><surname>Pratt</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3234695.3236346</idno>
+		<ptr target="https://doi.org/10.1145/3234695.3236346" />
+	</analytic>
+	<monogr>
+		<title level="m">20th International ACM SIGAC-CESS Conference on Computers and Accessibility</title>
+				<imprint>
+			<date type="published" when="2018">2018. 2018</date>
+			<biblScope unit="page" from="149" to="160" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b53">
+	<analytic>
+		<title level="a" type="main">Friendship maintenance in the digital age: Applying a relational lens to online interaction</title>
+		<author>
+			<persName><forename type="first">Louise</forename><surname>Shklovski</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Nis</forename><surname>Barkhuus</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Joseph Jofish</forename><surname>Bornoe</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Kaye</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2675133.2675294</idno>
+		<ptr target="https://doi.org/10.1145/2675133.2675294" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2015 ACM International Conference on Computer-Supported Cooperative Work and Social Computing</title>
+				<meeting>the 2015 ACM International Conference on Computer-Supported Cooperative Work and Social Computing</meeting>
+		<imprint>
+			<date type="published" when="2015">2015</date>
+			<biblScope unit="page" from="1477" to="1487" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b54">
+	<analytic>
+		<title level="a" type="main">Exploring the design space of awareness displays</title>
+		<author>
+			<persName><forename type="first">Kiley</forename><surname>Sobel</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Alexander</forename><surname>Fiannaca</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jon</forename><surname>Campbell</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Harish</forename><surname>Kulkarni</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ann</forename><surname>Paradiso</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Edward</forename><surname>Cutrell</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Meredith Ringel</forename><surname>Morris</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3025453.3025610</idno>
+		<ptr target="https://doi.org/10.1145/3025453.3025610" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2017 CHI Conference on Human Factors in Computing Systems</title>
+				<meeting>the 2017 CHI Conference on Human Factors in Computing Systems</meeting>
+		<imprint>
+			<date type="published" when="2017">2017</date>
+			<biblScope unit="page" from="2890" to="2903" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b55">
+	<analytic>
+		<title level="a" type="main">Accessible Creativity with a Comic Spin</title>
+		<author>
+			<persName><forename type="first">Timothy</forename><surname>Tamburro</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Abi</forename><surname>Neate</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Stephanie</forename><surname>Roper</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Wilson</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3373625.3417012</idno>
+		<ptr target="https://doi.org/10.1145/3373625.3417012" />
+	</analytic>
+	<monogr>
+		<title level="m">ASSETS 2020 -22nd International ACM SIGACCESS Conference on Computers and Accessibility</title>
+				<imprint>
+			<date type="published" when="2020">2020</date>
+			<biblScope unit="page" from="1" to="11" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b56">
+	<analytic>
+		<title level="a" type="main">Perspectives and experiences of adults who use AAC on making and keeping friends</title>
+		<author>
+			<persName><forename type="first">C</forename><forename type="middle">S</forename><surname>Therrien</surname></persName>
+		</author>
+		<idno type="DOI">10.1080/07434618.2019.1599065</idno>
+		<ptr target="https://doi.org/10.1080/07434618.2019.1599065" />
+	</analytic>
+	<monogr>
+		<title level="j">AAC: Augmentative and Alternative Communication</title>
+		<imprint>
+			<biblScope unit="volume">35</biblScope>
+			<biblScope unit="page" from="205" to="216" />
+			<date type="published" when="2019">2019. 2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b57">
+	<monogr>
+		<title level="m" type="main">Co-designing socially assistive sidekicks for motion-based AAC</title>
+		<author>
+			<persName><forename type="first">Stephanie</forename><surname>Valencia</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Michal</forename><surname>Luria</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Amy</forename><surname>Pavel</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jefrey</forename><forename type="middle">P</forename><surname>Bigham</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Henny</forename><surname>Admoni</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b58">
+	<monogr>
+		<idno type="DOI">10.1145/3434073.3444646</idno>
+		<ptr target="https://doi.org/10.1145/3434073.3444646" />
+		<title level="m">ACM/IEEE International Conference on Human-Robot Interaction</title>
+				<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b59">
+	<analytic>
+		<title level="a" type="main">Aided Nonverbal Communication through Physical Expressive Objects</title>
+		<author>
+			<persName><forename type="first">Stephanie</forename><surname>Valencia</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mark</forename><surname>Steidl</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Michael</forename><surname>Rivera</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Cynthia</forename><surname>Bennett</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jeffrey</forename><surname>Bigham</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Henny</forename><surname>Admoni</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3441852.3471228</idno>
+		<ptr target="https://doi.org/10.1145/3441852.3471228" />
+	</analytic>
+	<monogr>
+		<title level="m">ASSETS 2021 -23rd International ACM SIGACCESS Conference on Computers and Accessibility</title>
+				<imprint>
+			<date type="published" when="2021">2021</date>
+			<biblScope unit="page" from="1" to="11" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b60">
+	<monogr>
+		<title level="m" type="main">Facebook makes the heart grow fonder: Relationship maintenance strategies among geographically dispersed and communication-restricted of the ACM Conference on Computer Supported Cooperative Work</title>
+		<author>
+			<persName><forename type="first">Jessica</forename><surname>Vitak</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2531602.2531726</idno>
+		<ptr target="https://doi.org/10.1145/2531602.2531726" />
+		<imprint>
+			<date type="published" when="2014">2014</date>
+			<publisher>CSCW</publisher>
+			<biblScope unit="page" from="842" to="853" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b61">
+	<analytic>
+		<title level="a" type="main">Collaborating to Remember: A Distributed Cognition Account of Families Coping with Memory Impairments</title>
+		<author>
+			<persName><forename type="first">Mike</forename><surname>Wu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jeremy</forename><surname>Birnholtz</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Brian</forename><surname>Richards</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ronald</forename><surname>Baecker</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mike</forename><surname>Massimi</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/1357054.1357186</idno>
+		<ptr target="https://doi.org/10.1145/1357054.1357186" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2008 CHI Conference on Human Factors in Computing Systems</title>
+				<meeting>the 2008 CHI Conference on Human Factors in Computing Systems</meeting>
+		<imprint>
+			<date type="published" when="2008">2008</date>
+			<biblScope unit="page" from="825" to="834" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+				</listBibl>
+			</div>
+		</back>
+	</text>
+</TEI>

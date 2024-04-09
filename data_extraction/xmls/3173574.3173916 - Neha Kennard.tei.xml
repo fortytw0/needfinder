@@ -1,0 +1,1387 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xml:space="preserve" xmlns="http://www.tei-c.org/ns/1.0" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.com/kermitt2/grobid/master/grobid-home/schemas/xsd/Grobid.xsd"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+	<teiHeader xml:lang="en">
+		<fileDesc>
+			<titleStmt>
+				<title level="a" type="main">Support for Social and Cultural Capital Development in Real-time Ridesharing Services</title>
+			</titleStmt>
+			<publicationStmt>
+				<publisher/>
+				<availability status="unknown"><licence/></availability>
+			</publicationStmt>
+			<sourceDesc>
+				<biblStruct>
+					<analytic>
+						<author>
+							<persName><forename type="first">Vaishnav</forename><surname>Kameswaran</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="department">School of Information</orgName>
+								<orgName type="institution">University of Michigan Ann Arbor</orgName>
+								<address>
+									<region>MI</region>
+									<country key="US">USA</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Lindsey</forename><surname>Cameron</surname></persName>
+							<affiliation key="aff1">
+								<orgName type="institution">Ross School of Business University of Michigan Ann Arbor</orgName>
+								<address>
+									<region>MI</region>
+									<country key="US">USA</country>
+								</address>
+							</affiliation>
+						</author>
+						<author role="corresp">
+							<persName><forename type="first">Tawanna</forename><forename type="middle">R</forename><surname>Dillahunt</surname></persName>
+							<email>tdillahu@umich.edu</email>
+							<affiliation key="aff2">
+								<orgName type="department">School of Information</orgName>
+								<orgName type="institution">University of Michigan Ann Arbor</orgName>
+								<address>
+									<region>MI</region>
+									<country key="US">USA</country>
+								</address>
+							</affiliation>
+						</author>
+						<title level="a" type="main">Support for Social and Cultural Capital Development in Real-time Ridesharing Services</title>
+					</analytic>
+					<monogr>
+						<imprint>
+							<date/>
+						</imprint>
+					</monogr>
+					<idno type="DOI">10.1145/3173574.3173916</idno>
+				</biblStruct>
+			</sourceDesc>
+		</fileDesc>
+		<encodingDesc>
+			<appInfo>
+				<application version="0.7.1" ident="GROBID" when="2022-07-22T05:04+0000">
+					<desc>GROBID - A machine learning software for extracting information from scholarly documents</desc>
+					<ref target="https://github.com/kermitt2/grobid"/>
+				</application>
+			</appInfo>
+		</encodingDesc>
+		<profileDesc>
+			<textClass>
+				<keywords>
+					<term>H.5.m. Information Interfaces and Presentation: Misc Social Capital</term>
+					<term>Cultural Capital</term>
+					<term>Real-time ridesharing</term>
+					<term>Labor</term>
+				</keywords>
+			</textClass>
+			<abstract>
+<div xmlns="http://www.tei-c.org/ns/1.0"><p>Today's transportation systems and technologies have the potential to transform the ways individuals acquire resources from their social networks and environments. However, it is unclear what types of resources can be acquired and how technology could support these efforts. We address this gap by investigating these questions in the domain of real-time ridesharing systems. We present insights from two qualitative studies: (1) a set of semi-structured interviews with 13 Uber drivers and (2) a set of semi-structured interviews with 13 Uber riders. Our results show that both drivers and riders acquired and benefited from informational, emotional and instrumental resources, as well as cultural exchanges via interactions with each other and with online platforms. We argue that these interactions could support the development of social and cultural capital. We discuss our findings in the context of labor and contribute design implications for in-car social and cultural experiences and for the ways technologies such as GPS and location-based services can support the additional emotional, social, and cultural labor that drivers provide to their riders.</p></div>
+			</abstract>
+		</profileDesc>
+	</teiHeader>
+	<text xml:lang="en">
+		<body>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>INTRODUCTION</head><p>Breakthroughs such as the integration of smartphones, global positioning systems (GPS), and electronic payments in autonomous and non-autonomous vehicles contribute to a larger smarter cities vision <ref type="bibr" target="#b50">[46]</ref>, and these breakthroughs enable realtime ridesharing services like Uber and Lyft to exist. Real-time ridesharing services help to reduce road traffic <ref type="bibr" target="#b10">[8]</ref> and emissions <ref type="bibr" target="#b9">[7]</ref> by making use of underused private cars. Despite these benefits, there has been limited input from stakeholders <ref type="bibr" target="#b38">[34]</ref>. Several past works in the transportation domain aim to fill this gap. For example, past work has explored ways to improve stakeholders' transportation experiences <ref type="bibr" target="#b14">[12,</ref><ref type="bibr" target="#b51">47]</ref> and methods to create more equitable workspaces for drivers to exercise control over ridesharing platforms <ref type="bibr" target="#b0">[1,</ref><ref type="bibr" target="#b18">16,</ref><ref type="bibr" target="#b29">27]</ref>. Studies that contribute insights from stakeholders such as drivers and passengers find that driver benefits include flexible work schedules and the opportunity "to be their own boss" <ref type="bibr" target="#b42">[38]</ref>, and that passengers benefit from the immediate access to reliable transportation and accurate estimates of arrival times <ref type="bibr" target="#b14">[12]</ref>. These studies report on conversations between drivers and riders but stop short of discussing the potential value of these interactions <ref type="bibr" target="#b14">[12]</ref>.</p><p>Social capital, which refers to the benefits people can draw from their social network <ref type="bibr" target="#b39">[35]</ref> (for instance, financial help or useful information) has been previously studied in the context of transportation. Putnam argues that one of the main reasons for the reduction of social capital in the United States is the increasing commute times, over two-thirds of which involve people commuting to locations alone <ref type="bibr" target="#b39">[35]</ref>. On the other hand, cultural capital, which refers to assets like knowledge and skills <ref type="bibr" target="#b2">[3]</ref>, is less well understood in the context of transportation. In this paper, we draw from an in-depth examination of two studies exploring the experiences of drivers and riders using the real-time ridesharing system Uber to examine how the ridesharing ecosystem affords opportunities to support the development of both social and cultural capital. Further, we contribute ways in which technology can leverage and consequently enhance interactions between riders and drivers. We asked the following research questions:</p><p>• RQ1: Do interactions between drivers and riders lend themselves to the development of social capital? If so, how? What is the nature of the benefits that result from these interactions? • RQ2: Do the same interactions lend themselves to the development of cultural capital? If so, how? • RQ3: How can HCI-related technologies enhance interactions between riders and drivers in the context of real-time ridesharing systems?</p><p>To answer these research questions, specifically RQ1 and RQ2, we conducted 13 semi-structured interviews of Uber drivers who drove in the metro-Detroit area. We complemented these data with data from 13 semi-structured interviews and a diary study of individuals living in transportation-scarce areas of Detroit. We analyzed the data using Ferlander's classification of social resources <ref type="bibr" target="#b16">[14]</ref> to understand the opportunities that exist for the growth of social capital. This was a relevant theoretical frame because Ferlander argues that the extent of availability of social resources is a reliable representation of one's social capital. In addition, we analyzed cultural exchanges to determine the potential of ridesharing as a venue for the acquisition of cultural capital. Indeed, we found that ridesharing affords opportunities to riders and drivers to grow both forms of capital, although in different ways. We found that drivers networked with other drivers via Facebook groups to seek information about their job and to receive and provide social support. Further, they interacted with multiple riders who were often information leads. Drivers learned about new places as a result of driving to multiple locations. On the other hand, riders benefited from their interactions with the drivers, which resulted in riders acquiring information about local spots like restaurants and receiving emotional help. We argue that the acquisition of information and emotional support, two types of social resources, makes ridesharing a venue for the potential development of social capital. Finally, we also found that both drivers and riders found value in cultural exchanges (for instance, about the history of the city and changing neighborhoods), which we argue could contribute to the development of cultural capital.</p><p>We contribute the following:</p><p>• An analysis of interactions between drivers and riders and an explanation of how the resulting benefits from these interactions could support the development of social and cultural capital for both parties. • Ways in which HCI and Ubicomp technologies can enhance interactions between drivers and riders and contribute to the growth of their social and cultural capital. We contribute design implications for future user-facing technologies (RQ3), specifically for real-time ridesharing systems to take advantage of the social space created within these rides. • Additional labor that drivers inherently provide, and suggestions for how such service platforms can acknowledge this work so that it transforms to offline contexts. • An extension of research examining the benefits of public transportation which includes the opportunities it affords to develop social capital-we confirm this research in the space of real-time ridesharing systems.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>FORMS OF CAPITAL AND THEIR ACQUISITION</head><p>In addition to gaining economic capital, prior work suggests that the benefits individuals draw from their social network (social capital) and their awareness and skill of culturally prescribed social rules (cultural capital) factor into upward mobility <ref type="bibr" target="#b2">[3,</ref><ref type="bibr" target="#b35">32]</ref>. Further, social and cultural capital are associated with other tangible and intangible benefits <ref type="bibr" target="#b2">[3,</ref><ref type="bibr" target="#b13">11,</ref><ref type="bibr" target="#b39">35]</ref>. We describe each form of capital in detail in the next two sections.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Social Capital</head><p>Putnam defines social capital as the "specific benefits that flow from the trust, reciprocity, and cooperation associated with social networks" <ref type="bibr" target="#b39">[35]</ref>. While tangible benefits such as access to information channels <ref type="bibr" target="#b11">[9]</ref> and social support <ref type="bibr" target="#b41">[37]</ref> can lead to economic capital, intangible benefits under certain conditions can be converted to economic capital, as well. For instance, research has shown that people obtain information about job opportunities from their social networks <ref type="bibr" target="#b19">[17]</ref>. Traditional sources of social capital include but are not limited to membership in friend groups, family, work, and churches.</p><p>Ferlander argues that the benefits of social capital can be viewed as resources that can be classified as informational, instrumental, emotional, and companionship. Informational resources refers to the provision of useful information or suggestions <ref type="bibr" target="#b49">[45]</ref>, often to the effect of problem-solving <ref type="bibr" target="#b28">[26]</ref>. For example, having access to a mechanic as a friend or resource would enable an individual to receive details and advice about car care. Having a mechanic as a friend could also provide instrumental resources. Instrumental resources are tangible, direct ways in which people assist others <ref type="bibr" target="#b28">[26]</ref>, which includes people giving others a helping hand, providing financial assistance, and exchanging material goods or services <ref type="bibr" target="#b21">[19]</ref>. If a driver's car malfunctions, his or her friend who is a mechanic could help to fix the car, which is instrumental support. Emotional resources involve offering concern, empathy, love, care, or encouragement <ref type="bibr" target="#b28">[26]</ref>. Family members and friends often offer words of hope, support, and encouragement. Finally, companionship involves social time spent with other people that gives them a sense of belonging. This extends to people engaging in shared social activities. For instance, a group of mechanics involves people with similar interests coming together to discuss cars and express their opinions <ref type="bibr" target="#b28">[26]</ref>. For our study, we use Ferlander's classification of social resources as a frame to view the benefits of the interactions between drivers and riders. Specifically, we attempt to understand how riders and drivers acquire informational, instrumental, and emotional resources, as well as companionship, in the case of ridesharing, which we argue could result in the growth of social capital. Further, we suggest ways in which technology can leverage and enhance these interactions to create additional opportunities to further support its growth.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Cultural Capital</head><p>Cultural capital refers to inherent qualities and skills of an individual, academic qualifications, and knowledge that result in an understanding of cultural meaning and references <ref type="bibr" target="#b2">[3]</ref>. Cultural capital takes three forms: embodied, institutionalized and objectified. Cultural capital in its embodied form refers to properties of oneself that are acquired over time <ref type="bibr" target="#b2">[3]</ref>. In this form, capital can be acquired both consciously and passively. The acquisition of this form of capital is determined by one's social environment, i.e. it is often the product of socialization with one's family and immediate social circles. For instance, one acquires fluency in a dialect, a form of embodied cultural capital through a process of socialization with family members over time. Although we do not expect to uncover the two final forms of cultural capital in our study, these include objectified, which refers to the capital derived from an understanding of the cultural meaning and significance of possessions like artwork <ref type="bibr" target="#b2">[3]</ref>, and institutionalized, which refers to academic credentials and qualifications <ref type="bibr" target="#b2">[3]</ref>. Like social capital, all forms of cultural capital can also be transformed into economic capital under certain conditions.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>RELATED WORK</head><p>We capture work at the intersection of transportation and social capital that analyzes the relationship between different modes of transportation and social capital. In addition, we examine evidence of existing technologies fostering social and cultural capital and how certain features allow for the development of both forms of capital. Finally, we summarize the current state of research at the intersections of HCI, Ubicomp, and ridesharing to determine gaps and explore opportunities to improve ridesharing experiences for both riders and drivers.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Transportation as a source of social capital</head><p>Putnam argues that the increasing frequency and duration of commutes, over two-thirds of which involve people driving alone, leave little time for community engagement <ref type="bibr" target="#b39">[35]</ref>. These solitary drives also contribute to the reduction of social capital. On the other hand, studies point to the value of public transportation in promoting engagement, enhancing social capital and subsequently contributing to longer-term benefits like social inclusion. For instance, Currie et al. argue that the social space within public transportation could benefit socially excluded populations by affording interactions with passengers and drivers <ref type="bibr" target="#b12">[10]</ref>. Cass et al. examined the notion of access and emphasized the importance of public transportation in helping people grow their networks by allowing access to informal networks of work and leisure <ref type="bibr" target="#b8">[6]</ref>. While these studies primarily focused on public transportation, we attempt to understand whether these benefits extend to ridesharing services. Moreover, while social capital is discussed in transportation literature, the relationship between transportation as a mechanism for creating opportunities for growing cultural capital remains unexplored, a gap we aim to fill.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Technology that fosters social and cultural capital</head><p>Research has examined how shared physical spaces mediated by some form of technology can have positive benefits and help foster social capital. For instance, Dillahunt and Mankoff in the context of a social-energy monitoring application found that shared spaces are a necessity to increase social interactions among community members <ref type="bibr" target="#b13">[11]</ref>. This study investigated whether services such as Foursquare could be used to facilitate meetings in physical spaces among people in different socioeconomic groups <ref type="bibr" target="#b13">[11]</ref>. The ridesharing technology that connects riders to drivers inherently creates a shared space (the car), affording interactions between riders and drivers during a trip. In our current work, we investigated what benefits are already present in the shared space of ridesharing, and what role technologies could play in supporting and enhancing these benefits.</p><p>Additional studies suggest that technologies such as People-Nearby Applications (PNAs) and Massive Open Online Courses (MOOCs) and MOOC camps play an explicit role in fostering social and cultural capital. Hsiao and Dillahunt <ref type="bibr" target="#b23">[21]</ref> found that people use chat features in PNAs to develop trust before engaging in offline interactions. These offline interactions often involve conversations between strangers. Strangers discuss cultural elements (social norms, music, and food) and exchange relevant information that they argue contributes to the growth of both forms of capital. MOOCs and MOOC camps are sources for learners to acquire cultural capital including language (participants were found to pick up English skills because it was the primary mode of instruction) <ref type="bibr" target="#b30">[28]</ref>. These learners acquired social capital online with learners on social media websites and forums and through face-to-face interactions. Similarly, here we explored opportunities for riders and drivers, another set of strangers, to develop social and cultural capital at the intersection of both offline and online mediums, and in the context of real-time ridesharing systems.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Ridesharing in the context of HCI and Ubicomp</head><p>To contribute to the design of better real-time ridesharing services, HCI studies focusing on rider perspectives have elucidated the need to accommodate personal preferences <ref type="bibr" target="#b36">[33]</ref>, maintain privacy and safety <ref type="bibr" target="#b4">[4]</ref>, foster trust <ref type="bibr" target="#b14">[12]</ref>, and consider social networks among the elderly <ref type="bibr" target="#b32">[30]</ref>. On the other hand, studies of drivers have indicated the need for designs to facilitate the creation of equitable workplaces <ref type="bibr" target="#b0">[1,</ref><ref type="bibr" target="#b18">16,</ref><ref type="bibr" target="#b29">27]</ref>. For example, designs should enable drivers to exercise control <ref type="bibr" target="#b0">[1]</ref> by empowering them with relevant information (like rider preferences and needs) to help them make better decisions <ref type="bibr" target="#b18">[16,</ref><ref type="bibr" target="#b29">27]</ref>. Ahmed et al. suggested making rider locations accessible to drivers so that drivers can determine whether the commute time to pick up the rider is worth it <ref type="bibr" target="#b0">[1]</ref>. Both Ahmed et al.</p><p>[1] and Glöss et al. <ref type="bibr" target="#b18">[16]</ref> suggested ways in which technologies can enhance driver-rider interactions, including ways in which riders can make their needs visible to the drivers. Our study extends this work by taking into consideration both riders and drivers and investigating the role for technology to enhance rider experiences. Moreover, we studied how HCI and Ubicomp-related technologies can support drivers' efforts to be better at their jobs.</p><p>Ubicomp-related transportation technologies have been used primarily to detect transportation modes <ref type="bibr" target="#b22">[20,</ref><ref type="bibr" target="#b46">42]</ref> and to improve environmental sustainability <ref type="bibr" target="#b17">[15,</ref><ref type="bibr" target="#b26">24,</ref><ref type="bibr" target="#b48">44]</ref>. Although there has been work to understand how Ubicomp technologies can improve ridesharing by making it more reliable <ref type="bibr" target="#b43">[39]</ref> and contribute to traffic reduction <ref type="bibr" target="#b10">[8]</ref>, their potential in the context of improving driver and rider experiences is less clear. Therefore, we explored opportunities for Ubicomp technologies to improve driver and rider social experiences.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>DRIVER PERSPECTIVES</head></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Method</head><p>We recruited drivers (Table <ref type="table" target="#tab_0">1</ref>) through a combination of offline and online sources. The majority of participants (N=9) were recruited offline during rides by the second author while the remaining (N=4) were recruited via Facebook groups. Individuals who expressed interest in participating in the study and were driving for Uber on a regular basis (more than 4 hours/month 1 ) were contacted for phone interviews. In total, we interviewed 13 drivers with a range of driving experience from 2 weeks to over 2 years. Of the 13 drivers who were interviewed, five worked part-time, using Uber to support their main source of income, and eight worked full time. The semistructured interviews lasted 45-80 minutes and participants During the interview, participants were asked about their general work experience at Uber including their motivations, daily routines, and the benefits and challenges of their work. All drivers lived and worked in the metro-Detroit area. In this case, we attempted to answer RQ1 and RQ2 via interviews, where questions about interactions with riders (most memorable and difficult interactions), aspects about the job they liked and problem-solving methods helped us understand the opportunities that existed for drivers to grow their social and cultural capital.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Analysis</head><p>All interviews were audio recorded and transcribed. We developed a codebook using a hybrid process of provisional coding <ref type="bibr" target="#b44">[40]</ref> and open coding <ref type="bibr" target="#b44">[40]</ref>. We developed provisional codes to represent four kinds of social resources: informational, instrumental, emotional, and companionship. We also included the three forms of cultural capital in our provisional codes: embodied, objectified, and institutionalized. The interview scripts and journal entries were coded by two coders over multiple phases. The coders met at the end of each phase to resolve coding conflicts and to discuss new codes, which on agreement were added to the codebook. In total, there were 10 codes: seven provisional codes and three new codes that were added to the codebook as a result of the open-coding process. An inter-rater reliability analysis using the Kappa statistic was performed to determine consistency among raters and was found to be Kappa = 0.751 (p&lt;0.001; 95% confidence interval [CI] = 0.572, 0.93), which represents substantial agreement.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Aspects of Social Resources</head><p>Drivers reported liking certain aspects of their job including meeting new people, conversing with them, and traveling to new locations as part of their job. To further understand the nature of these interactions, we categorized these benefits into the four social resources: informational, instrumental, emotional, and companionship. Overall, drivers described receiving informational resources via Facebook groups and instrumental resources from riders. Drivers largely provided emotional resources to their riders and also benefited from cultural exchanges with riders and their drives to new locations.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Informational resources</head><p>The four Uber drivers recruited via Facebook groups reported sharing and receiving information about surge pricing (Sharon), safe times to travel (Rogelio), locations prone to ticketing (Krista), and Uber rules and regulations (Ryan) on these groups. Further, Bradford created a small network of Uber drivers through the referral program and used the network regularly to swap information (locations prone to tickets, surging locations) and engage in collective problem-solving.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Instrumental resources</head><p>Rogelio was involved in a transaction where he sold his dash camera (installed as a safety device) to a passenger who paid him $215 in cash, which was $95 more than what he had paid for it. There were two other instances of drivers giving riders their contact information to create more permanent relationships that were no longer mediated by the Uber application. In these cases, drivers were paid cash, which provided opportunities for passengers to tip drivers, a function not afforded by the Uber application at the time. Rex recalled how he spent time in a coffee shop with a rider after he learned that she had been domestically abused. This is a clear example of a driver going beyond his role as a driver and providing emotional support for his passenger. Along the same line, Nathaniel and Sharon reported being "psychologists" and offering "Dr. Phil cures" during their rides. These two drivers highlighted the emotional state of riders during their rides and the subsequent support they provided.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Harvey</head></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Companionship</head><p>Like the riders, the drivers received companionship as a result of spending time with the riders during the ride. However, there were also instances of the riders and drivers keeping in touch after an Uber ride and spending time with each other. Both Marlon and Rex reported developing friendships -Mar-lon with a rider who he helped with his luggage and Rex with two police officers he had driven around.</p><p>I've also had like a good ride in terms of like I met an energy consultant and like we're still-And I dropped him off, so we became pretty good friends, and I hang out with him or whatever, and you know, he's helping me like grow like personally...-So you know, that was like a really good ride. -Marlon (Interview)</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Cultural Exchanges</head><p>Drivers benefited from the cultural exchanges through interactions with multiple riders and traveling to new locations. For example, Marlon had a conversation where a rider spoke to him about how the refugee crisis was affecting Germany and Turkey. Ryan had a conversation with a rider from Germany who told him about areas he should tour if he visited the country. Bradford spoke in general about the benefits of conversing with people from other regions and cultures.</p><p>However, it was more apparent that the drivers enjoyed driving to new locations to pick up and drop off passengers, clearly indicating that this was an aspect that they liked about their jobs. For instance:</p><p>Seeing new places in the city that I haven't seen. Let's say, metro Detroit all together, or going to places that I haven't been in a long time and seeing the changes. It's kind of fun. It's relaxing, even between rides, it's just relaxing just to be on the road. -Krista (Interview)</p><p>Bradford tried new restaurants in new locations; Taylor enjoyed taking riders to fancy neighborhoods in the city, and both Ryan and Rex learned and became more familiar with parts of the city as a result of driving with Uber.</p><p>Drivers reported using riders' location and names, and their inherent knowledge of certain cultures, to decide which passengers to pick up and who to avoid. Two drivers, Rogelio and Rex, were wary about certain neighborhoods in the metro-Detroit area given their propensity for drunken riders. The two subsequently relied on this knowledge to avoid these areas.</p><p>There are three things that I take into account by screening out problem passengers. One is the location that you're picking from, alright. Because there are some areas that are -Yeah, you know, different socioeconomic status. Two, the name. You know, and unfortunately people with -And it's not necessarily -Yeah, people with more Anglicized names -and no, it's not necessarily Anglicized names. How do I put this? You can tell someone from a lower socioeconomic background by the name, because they tend to name their children things that are spelled uniquely, and those people tend to be more problematic on average, and then too, you can also tell a lot by their name, like where they're from, or you know, sometimes you can tell the ethnicity by the name and stuff like that. You know, like some -(sighs) Some Indian people are extremely, extremely difficult to deal with, alright? I've lived with Indian people before and stuff like that, and like a lot of them are nice, but some of them are extremely difficult to deal with be-cause of the culture. There's a cultural aspect of it. So if I see like an Indian name... -Marlon (Interview)</p><p>Here, Marlon profiled riders by locality. He also formed his own stereotypes based on his prior experiences working with this demographic.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>RIDER PERSPECTIVES</head></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Method</head><p>We recruited riders, many of whom had not used ridesharing services previously (n=10; Table <ref type="table" target="#tab_3">2</ref>), through a combination of offline and online sources, and via snowball sampling. Offline sources included putting up flyers in public locations like barber shops, churches, and bus stops while online sources included popular social media sites such as Facebook. People who expressed interest were screened for three criteria: they had to be 18 years or older, own a smartphone to use the Uber application, and have limited or no access to transportation. We evaluated transportation access using walk scores based on our riders' ZIP codes and based on whether individuals had access to their own vehicles. After screening ineligible participants (for instance, people who owned a car that they used regularly or those who lived in neighborhoods with relatively high walk scores), we onboarded 13 riders onto Uber. We used Uber for Business, which allowed us the flexibility to onboard riders as employees and subsequently track and handle costs for trips. We gave riders $75 in Uber credits. To answer RQ1 and RQ2 we used a combination of interviews and a diary study. Riders were instructed to maintain the diary for the duration of the study in which they were asked to capture details pertaining to the driver, conversations they had with drivers and anything else they found interesting. They were asked to capture these details at the end of each ride and send them to the research team (via a text message or a photo if they wrote down the details). Once riders depleted their monetary allocation, they participated in an interview for which they were compensated with $25 in cash. The interviews were semi-structured and lasted 45-60 minutes. During the interview, we asked the riders about their experience using Uber and used the diary entries as probes to understand in detail the nature of their interactions with the drivers.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Analysis</head><p>All interviews were audio-recorded and transcribed. We used the same provisional codes that were developed to analyze the driver interviews. Two coders then coded the interviews in multiple phases. After each phase, the coders met to discuss conflicts and new codes, which on agreement were added to the codebook. In total, nine codes, seven provisional codes and two new codes were added to the codebook as a result of the open-coding process. Again, an inter-rater reliability analysis using the Kappa statistic was performed to determine consistency among coders and was found to be Kappa = 0.763 (p&lt;0.001; 95% CI = 0.611, 0.915).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Aspects of Social Resources</head><p>The interviews and diary entries indicated that riders engaged in rich interactions with the drivers. These conversations often resulted in the acquisition of new information. As with drivers, </p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Informational resources</head><p>Informational resources were the most commonly acquired resources by riders during the Uber rides, with 10 riders involved in at least one interaction that resulted in them learning something new. Most common were instances of drivers giving riders information about local spots and details about being (and becoming) an Uber driver.</p><p>Local knowledge: There were of drivers who were well-versed about the target site location, sharing details of neighborhoods and popular spots with the riders. For example:</p><p>Upon entry, I informed Ahjai [the driver] that I would be going to Marcus Market in Midtown. She smelled good so I commented on what I thought was lavender oil. She let me know that it was patchouli and gave me the name of the shop that she purchased it from. Ironically, the shop was a place that I had intended to visit earlier in the day, so I asked that we take a detour to that space prior to going to Midtown. -P3 (Diary Entry)</p><p>Local knowledge also extended to suggestions about popular hangout spots like restaurants, local stores, and theatres.</p><p>On the route, we approached Louisiana Creole, a southern soul food joint that Ahjai told me had some of the best greens, catfish, and mac and cheese in town. I told her that I was slightly picky about Northern soul food joints being that I am from Mississippi. She then told me that she is from Mississippi as well... During the ride she also mentioned a few other places in the area (stores, clubs, etc...) so that I could be aware of some cool spots if I had not yet heard of them. -P3 (Diary Entry) From P3's diary entry, it is evident that her interaction with her driver resulted in her acquiring information about a restaurant that was previously unknown to her. She also learned about other places in the area. Four other riders (P1, P11, P2, P6) described such interactions, which resulted in them learning more about the city and popular locations there. The city of Detroit was a common theme in rider-driver interactions, where they discussed the city's: history, decline, transformation, and future. P6's brief diary entry describes one such interaction with her driver:</p><p>We kind of talked about the area and how it has declined. He [the driver] lives in Oakland County. He said he was a retired engineer but now builds guitars. Thought that was funny but interesting. -P6 (Diary Entry)</p><p>Employment with Uber: Riders and drivers also engaged in conversations about Uber, specifically about the requirements to be an Uber driver and what the job entailed. Drivers were reported as being satisfied with their jobs and with the flexible schedule. Good financial returns were also cited as reasons why drivers were satisfied with their jobs. P2 described a conversation with Archie, an Uber driver who taught her about car financing options, handling license plates, and insurance details, which helped her get a better sense of what she needed to do to get started as an Uber driver:</p><p>I learned that there are different companies that's willing to help you get a car in order to do Uber. I didn't know that. I thought you had to come in with a car. But there are places that work with you, and then you can make that like your job is to do Uber. ...the only reason why I couldn't do it [become an Uber driver] is because it's my dad's insurance that's on the car. However, even though I pay for everything and I'm on his policy, he's the main person. So that was one thing that I learned is if I can get my own insurance, then I can kind of get started with Uber. -P2 (Interview)</p><p>P2 was able to understand several aspects of being an Uber driver from a single conversation with Archie. Others received details about car financing (P11), the effectiveness of cashless transactions for the drivers (P6), and other intangible benefits like "meeting new people" (P1). Two riders (P6, P7) indicated that at least one of the drivers encouraged them to be an Uber driver by telling them about these intangible benefits. These informational resources about "being employed with Uber" could have longer-term benefits for riders looking for employment opportunities and secondary sources of income.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Instrumental resources</head><p>As mentioned, instrumental resources extend to people giving others a helping hand. In our study, two riders, P4 and P6, had physical disabilities and needed help with tasks like folding up their walkers and moving groceries. P6 recalled an interaction with a former police officer and described how the officer made the interaction memorable by helping her with her groceries:</p><p>Helped us with our groceries. He was a retired police officer from our area. We talked about the area he patrolled...I loved that he helped with our packages. -P6 (Diary Entry)</p><p>Both P6 and P7 were appreciative of drivers who provided tangible assistance while being critical of unhelpful drivers. Both of them compared their Uber experience to cabs that were made available to them as part of Medicaid (medical insurance) benefits, whose drivers they described as unhelpful. Instrumental resources also extended to riders acquiring information that could directly translate to potential long-term economic benefits. For instance, P12, an active job seeker, found value in job leads he received from one of his drivers, who he subsequently named as the one driver who stood out the most.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Emotional Resources</head><p>There were instances of drivers showing care and concern for the riders, which resulted in riders' positive perceptions about the customer service that Uber provided. P11 described an emotional experience when he took a ride on his birthday with his cousins.</p><p>They P11 mentioned the Uber driver wishing him happy birthday at multiple junctures during the interview. It made him feel that the driver cared for him as a person, which meant a lot to him. In another instance, P1 recalled telling his driver Kurt about his business idea of opening a food truck and Kurt encouraging him in this endeavor. Evidence of emotional support for riders was a consistent theme in the interviews with Uber drivers as well. Drivers described the often vulnerable state in which they found riders and the value riders found in the support they received. We discuss this in detail in the section pertaining to driver findings.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Companionship</head><p>As mentioned, companionship involves social time spent with other people <ref type="bibr" target="#b28">[26]</ref>. All riders reported interacting with at least one of their drivers and at some point, all received social via these social interactions.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Cultural Exchanges</head><p>Like the drivers, riders too reported on exchanges concerning race and cultural elements like food and music. For instance, P9 spoke about an interaction he had with his driver concerning the Black Lives Matter movement. Similarly, P1's conversation with his standout driver Gregory concerned the African-American youth in the city They discussed how the youth had changed over the years and how today's youth seem to be arrogant and have less direction in life. P7 reported on a conversation where she and her driver discussed the changes in music over the years and the music of Prince and Michael Jackson, who had died recently, and how their music still touched people's lives. P11 spoke about an instance where he and his driver conversed about the cultures of different countries, knowledge they acquired as a result of their travel experiences. While driver interactions were the major source of cultural exchanges, riders also reported learning about cultural elements from their surroundings. For instance, P1 enjoyed and learned about a genre of music he had not listened to previously.</p><p>Well it was different, like different kind of music. I didn't know what it was at first, and I was just sitting there. That's why I happened to just peek around, look at the radio station, it said classical. It relaxed me in the morning because you know, I'm not used to listening to that kind of music. Because I thought that classical was somewhat like jazz, and jazz puts me straight to sleep. But this music actually just put me in a good mood, so I liked it. -P1 (Interview)</p><p>These findings show that the Uber rides offer opportunities for exchanges between the riders and drivers, which the riders reported benefiting from and enjoying. Further, these conversations often impacted how riders rated and reviewed drivers at the end of the ride. Drivers who engaged with the riders were described as "polite" (P9, P5), "good people" (P13), "outgoing" (P2), and "conversational" (P7) while drivers who engaged in little or no conversation were described as "dismissive" (P2) and "not very pleasant" (Renee).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>DISCUSSION</head><p>First, we discuss our main findings and address our research questions. Given the value of the interactions between drivers and riders, we discuss design implications and opportunities for HCI and Ubicomp-related technologies to support drivers and riders to enhance these interactions and create further opportunities for the development of both forms of capital via real-time ridesharing services.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Opportunities to grow social capital</head><p>To summarize, we found that drivers gained informational resources (route changes, surge localities) and emotional support (moral support) primarily from other Uber drivers through social media. Riders, on the other hand, acquired informational resources (details about becoming an Uber driver, insights about the city of Detroit), emotional support (comfort, encouragement) and on occasion instrumental support (job leads, helping hand with groceries) from drivers. This is not to say that drivers did not benefit from their interactions with riders. There were instances of drivers acquiring vital resources (informational and instrumental) from riders, as well. Both parties benefited from each other's company during the rides, and drivers formed friendships with riders, that resulted in shared social activities. Given these benefits, i.e. the nature of the exchange of information, emotional, and instrumental resources between drivers and riders (and other drivers through online means), our results indicate that real-time ridesharing services present opportunities to grow social capital.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Opportunities to grow cultural capital</head><p>There were also multiple instances of cultural exchanges between drivers and riders, which we argue could contribute to the growth of embodied cultural capital. Our interview results show cultural exchanges about race, music, and food that resulted in riders understanding cultural aspects that they were not aware of previously. In the case of the drivers, this is the nature of their job, which involves traveling to new locations and interacting with multiple riders. However, as anticipated, there were no indications of objectified or institutionalized forms of cultural capital. As mentioned, objectified cultural capital is the result of the acquisition of an object and its associated cultural meaning. While we noted the sell and exchange of material objects such as a dashboard camera and business cards, it is evident that these objects (unlike art) have no inherent cultural meaning and do not result in the acquisition of cultural capital. Also, while there were instances of drivers and passengers disclosing academic and professional qualifications and certain knowledge resulting from these qualifications to each other (sharing rides with a retired police officer and principal), there was no evidence suggesting the acquisition of an institutionalized form of cultural capital. Again, we stop short of suggesting that riders or drivers gained cultural capital as a result of using ridesharing services. However, there is enough evidence to suggest that riders and drivers valued the shared space and the mutual cultural exchanges. This socialization, an important requisite for the growth of embodied cultural capital, provides some evidence that opportunities exist for the growth of cultural capital in ridesharing.</p><p>Our study provides detailed insights into the nature of interactions between drivers and riders and thus extends past research on ridesharing, emphasizing the need to understand and enhance rider-driver relationships <ref type="bibr" target="#b0">[1,</ref><ref type="bibr" target="#b18">16]</ref>. While these findings are similar to past findings of public transportation <ref type="bibr" target="#b8">[6,</ref><ref type="bibr" target="#b12">10]</ref>, real-time ridesharing is a new context. In addition, we found that ridesharing affords opportunities for the potential growth of cultural capital, which to our knowledge has not been discussed in transportation, HCI, or Ubicomp literature.</p><p>We believe that HCI and Ubicomp technologies can increase these interactions, which involve drivers and riders providing each other with different social resources (e.g., informational, instrumental, emotional support, and companionship). We provide design implications in the following section. We also suggest opportunities for pervasive technologies to better support drivers, to strengthen knowledge of localities (cultural capital) and to provide additional social support (informational, instrumental, and emotional).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Design Implications</head><p>In this section, we discuss opportunities for HCI and Ubicomp technologies-specifically location-based services -to foster informational, instrumental, and emotional support (three forms of social capital) and cultural capital among drivers and passengers in real-time ridesharing environments. We also discuss our findings in the context of work and contribute opportunities for digital platforms and passengers to support the additional emotional, social and cultural benefits they acquired from the drivers.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Location-based services</head><p>Developers of location-aware applications could collect and reason about route options to support drivers. Incorporating knowledge of past routes to influence future routes could enhance passengers' (and drivers') access to informational resources. In fact, the opportunity to develop systems to enhance these conversations about locations has been discussed by <ref type="bibr" target="#b31">[29]</ref>, who reported the design of an in-car system to capture conversations along with GPS locations for the purpose of sharing with other nearby cars. In our case, both drivers and passengers acquired informational resources and insights about the city.</p><p>To better support the acquisition of informational resources, location-aware applications could suggest routes to elicit this type of information based on prior routes. For example, an out-of-town passenger being picked up from an airport might appreciate taking a more scenic route to get to know and learn about a new city, which could enhance a person's access to cultural capital. Building on suggestions from Jung et al. <ref type="bibr" target="#b25">[23]</ref>, future systems could incorporate location-based inferences to infer that a passenger who is being picked up from an employment or job-training facility could benefit from learning about job opportunities, and could suggest ways in which the drivers can provide instrumental support to their passenger(s). Our findings suggest that riders appreciated ridesharing services and drivers who provided them with instrumental resources (e.g., helping with groceries and packages). Location-based services could also be used to infer context and make suggestions for when drivers may wish to prepare for picking up their passengers. For example, pickups from grocery stores and malls might be an indication that riders may need assistance.</p><p>Our findings also suggest that drivers used their online activity from Facebook groups to aid in their offline work. Drivers acquired informational resources such as surge pricing <ref type="bibr" target="#b29">[27]</ref>, safe times to travel, locations prone to ticketing, and Uber rules and regulations. Ubicomp technologies, another source for this information, could help drivers connect with other drivers based on their current location and by using other contextual factors such as local traffic patterns, accidents, and weather. These factors, along with others, could influence supply and demand, which could factor into surge pricing. Some of this context could be used to provide drivers with an indication of safe times to travel, and the integration and analysis of crowd-based platform data (e.g., Google Waze) could be used to suggest locations prone to ticketing. While real-time ridesharing companies may not wish for drivers to connect with other drivers in this way, having this level of support could improve driver work conditions <ref type="bibr" target="#b0">[1,</ref><ref type="bibr" target="#b18">16]</ref>.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Design of in-car social and cultural experiences</head><p>Past research on in-car interfaces for drivers primarily focuses on enhancing support for driving tasks such as helping drivers make better navigational decisions <ref type="bibr" target="#b6">[5,</ref><ref type="bibr" target="#b34">31]</ref> and improving their safety by reducing distractions <ref type="bibr" target="#b24">[22]</ref>. In the case ridesharing, while driving people safely to destinations constitutes the most important part of drivers' job, our research suggests that drivers often seek and acquire resources from other drivers to help complete their job successfully. For instance, drivers reported getting information about which locations to avoid and which neighborhoods were surging and receiving encouragement from one another to reach their milestones.</p><p>Given that many people who drive for ridesharing services do so full-time, opportunities exist for designers to understand how these spaces can be used to improve drivers' and riders' social and cultural experiences. Gridling et al. found that drivers and riders often engage in collaborative activities that help both of them get through the journey <ref type="bibr" target="#b20">[18]</ref>. For instance, while the driver might occasionally seek navigational help from the rider, riders ask for assistance with groceries <ref type="bibr" target="#b20">[18]</ref>. In our study, we found that both drivers and riders found support that extended beyond the ride. For instance, one rider received job leads from the driver during a ride. Providing opportunities to disclose these needs to each other could result in enhanced interactions and increased social capital.</p><p>We argue that the future design of automotive interfaces, specifically for ridesharing, should take into account these additional interactions to support drivers. Can in-car interfaces allow drivers to connect with one another and seek information on a need-to-know basis and seek support when necessary? Apart from immediate benefits, this would create opportunities to enhance one's social capital. Moreover, it has been argued that as autonomous vehicles become more ubiquitous, drivers will have more time, and in this case, cars can be viewed as places of productivity <ref type="bibr" target="#b27">[25]</ref>.</p><p>Informational, Instrumental, Emotional, and Cultural Support and Additional Labor</p><p>According to Currie and Stanley, the duration of a cab ride might be too little for a meaningful relationship to develop between the rider and driver <ref type="bibr" target="#b12">[10]</ref>; however, our results suggest that drivers and riders engage in rich social interactions, which we argue are opportunities for the development of social and cultural capital. In fact, it was evident that drivers often went beyond the scope of their job of driving passengers to specified locations to provide informational, emotional, and cultural resources to the riders. Similar to previous researchers, we argue that this counts as additional labor for which drivers should be recognized. Although real-time ridesharing systems inherently support a rating system that allows riders to recognize driver efforts (and vice-versa), there are problems with the rating system. As Raval and Dourish pointed out, the most significant challenge is that the riders more often than not do not understand the implications of the ratings <ref type="bibr" target="#b40">[36]</ref>.</p><p>We then ask the questions: Are there ways to support the drivers for this additional labor? How can such platforms be re-designed to acknowledge and accommodate the extra work provided? The answers to these questions suggest additional policy implications for HCI as indicated by Dillahunt et al. <ref type="bibr" target="#b15">[13]</ref>. Many drivers in this study worked part-time via the platform while others worked full time. Perhaps the part-time drivers would value acknowledgments that could be transferred in an offline context (e.g., a badge or certificate to be printed or that could be shared with a potential employer).</p><p>Those who work as full-time drivers may appreciate additional incentives or rewards via the platform. We believe that recognition and rewards to drivers for these resources would be a small step toward creating more equitable workspaces.</p><p>It is unclear whether the drivers in this study provided this type of support for higher ratings; this was not supported by our findings. However, this type of work supports past literature that identifies the work as emotional labor <ref type="bibr" target="#b40">[36]</ref>, which was highly valued by passengers from our study. These drivers clearly exceeded expectations to drive passengers to their locations and these drivers should be rewarded and acknowledged for this additional work. While our findings do not reveal whether passengers understood the way ratings impact their drivers' ability to work for the platform, platforms should be designed to identify whether and how passengers benefited.</p><p>Along the same lines, drivers receiving support from passengers should also be able to acknowledge them as well. For example, did passengers/drivers learn anything new from the ride? Did passengers/drivers receive any additional support from their drivers/passengers?</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>LIMITATIONS</head><p>Our study was highly localized in that it was limited to a single U.S. city and our results are based on interviews with a small sample of drivers and riders. Specifically, Detroit is steeped in issues of inequality <ref type="bibr" target="#b1">[2,</ref><ref type="bibr" target="#b47">43]</ref> and the shared experience of riders and drivers in this setting is a possible explanation for some of the conversations that we observed (for instance, the conversation on racial inequality and the Black Lives movement). Moreover, the riders were demographically similar because they were from low-income, transportation-scarce localities and many of them were unemployed. Further, most of the riders were first time Uber users. Although we use data describing drivers' experiences to help counter this limitation, we also acknowledge that the driver sample is constrained by geographical context and the nature of this context and other factors (e.g., racial inequality) might have influenced driverrider interactions. Surveying a larger and wider demographic of riders and drivers across multiple real-time ridesharing services and geographical regions is a viable next step. To confirm our findings, we could explore ways to implement and evaluate the effectiveness of tools that help to infer context to better support the social and cultural capital exchange between drivers and riders and to evaluate whether this enhances their overall experiences.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>FUTURE RESEARCH DIRECTIONS AND CONCLUSION</head><p>We took a user-centered approach to identify opportunities for technology to incorporate support for and enhance driver-rider interaction. We contribute results from two qualitative studies of drivers and riders to understand opportunities for technology to foster the development of social and cultural capital in the context of real-time ridesharing systems. Our findings show that both drivers and riders gained informational, emotional, and instrumental resources, and companionship by being part of the real-time ridesharing ecosystem. Our contributions suggest future research opportunities to explore. For example, there are open opportunities to facilitate drivers' support of other drivers. Moreover, both riders and drivers valued and mutually benefited from the cultural exchanges, suggesting that there are opportunities to grow cultural capital within the ridesharing ecosystem.</p><p>While we conclude based on the interactions that there are opportunities for the growth of social and cultural capital in the case of ridesharing, the acquisition of social and cultural capital is itself contingent on several individual and community characteristics. Ethnicity, socio-economic backgrounds, and educational attainment <ref type="bibr" target="#b45">[41]</ref> are some factors that determine whether individuals can take advantage of and benefit from these opportunities. Examining how these factors played into the opportunities created and whether and how they were turned into something beneficial by drivers and riders is a potential next step for our research. Our results also suggest opportunities for future research to explore ways to acknowledge drivers' additional labor. Are there ways in which systems could acknowledge drivers' additional labor to extend in offline contexts? Could on-demand platforms be integrated with OpenBadges 2 to show the skills drivers demonstrated?</p><p>While facilitating support for drivers is crucial to enhancing real-time ridesharing systems, it is important to consider the future of the ecosystem. For example, autonomous vehicles equipped with driver assistance will change the nature of driver roles and their function within ridesharing services. The potential loss of this stakeholder in the ecosystem must also be taken into consideration. Drivers are central to the opportunities that exist for riders' acquisition of social and cultural capital. How might this loss affect the modified driver roles?</p></div><figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_0"><head>Table 1 .</head><label>1</label><figDesc>Driver Information</figDesc><table><row><cell></cell><cell cols="3">List of Drivers</cell><cell></cell></row><row><cell cols="3">Nickname Gender Age</cell><cell>Driving For</cell><cell>Full/ Part Time</cell></row><row><cell>Rogelio</cell><cell>Male</cell><cell cols="2">45-49 18 months</cell><cell>PT</cell></row><row><cell>Marlon</cell><cell>Male</cell><cell cols="2">21-24 24 months</cell><cell>FT</cell></row><row><cell>Bradford</cell><cell>Male</cell><cell cols="2">35-39 18 months</cell><cell>FT</cell></row><row><cell>Krista</cell><cell cols="2">Female 59</cell><cell>18 months</cell><cell>FT</cell></row><row><cell cols="2">Nathaniel Male</cell><cell cols="2">44-45 3 months</cell><cell>PT</cell></row><row><cell>Harvey</cell><cell>Male</cell><cell>64</cell><cell>3 years</cell><cell>PT</cell></row><row><cell>Taylor</cell><cell>Male</cell><cell cols="2">44-45 9 months</cell><cell>FT</cell></row><row><cell>Sharon</cell><cell cols="2">Female 49</cell><cell>15 months</cell><cell>FT</cell></row><row><cell>Anita</cell><cell cols="2">Female 40</cell><cell>4 months</cell><cell>PT</cell></row><row><cell>Ryan</cell><cell>Male</cell><cell cols="2">44-45 &gt; 2 years</cell><cell>FT</cell></row><row><cell>Gerald</cell><cell>Male</cell><cell cols="2">45-49 1.25 years</cell><cell>FT</cell></row><row><cell>Rex</cell><cell>Male</cell><cell>43</cell><cell>&lt; 1 year</cell><cell>FT</cell></row><row><cell>Benni</cell><cell>Male</cell><cell cols="2">54-55 2.5 years</cell><cell>PT</cell></row><row><cell cols="2">were compensated $35.</cell><cell></cell><cell></cell><cell></cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_1"><head></head><label></label><figDesc>In an interview, Rogelio shared the latest posts in his Facebook group:</figDesc><table><row><cell>Well, I opened up the page so that I could see what groups</cell></row><row><cell>I'm in. Let's see, a woman is asking, 'Just wondering do</cell></row><row><cell>anyone drive in the inner city of Detroit? If so, what</cell></row><row><cell>time of day? I'm trying to figure out all most safe times.</cell></row><row><cell>Thanks in advance...' Here's a warning from a couple</cell></row><row><cell>of hours ago. 'Anybody in the 696 and Mound area,</cell></row><row><cell>there's a rollover accident eastbound side 696. Avoid the</cell></row><row><cell>area.' -Rogelio (Interview)</cell></row></table><note>The importance of online groups for drivers has been studied previously byLee et al., who reported on its use for "sensemaking" of Uber algorithms<ref type="bibr" target="#b29">[27]</ref>. While the Facebook groups were central to driver-driver interactions, we noted three instances of drivers communicating with others through other channels and subsequently obtaining relevant information from them. Rogelio, for example, got the contact information of a car cleaner from another Uber driver.Rogelio: I got a number for a guy at the [workplace removed for anonymity], that's what he does at the [workplace]. He stole a bunch of cleaning supplies. If you get $150 for somebody throwing up in your back seat from Uber, he wants 100 of that. If you get 60, he wants 40. It's basically a 2/3. Yeah, he's got the gloves and the mask and all that stuff. You call him, you get your car cleaned up real fast. Interviewer: How did you find out about him? Rogelio: I got him from another Uber driver.</note></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_2"><head></head><label></label><figDesc>No...once they know me and I know them, they do not go through Uber, they give me a call direct.Like Harvey, Rex also explained how he gave out contact information to riders who called him directly with ride requests.Emotional resources for the drivers often took the form of motivation, which they acquired from other drivers via offline and online channels. Bradford, who created a small network of Uber drivers through the referral program, spoke on the need to keep others encouraged, while Rogelio and Sharon indicated that Facebook groups provide moral support.I pretty much just try to keep drivers encouraged. Like I got my brother driving and he quit his job because he thought it was a great thing but now he's kind of fallen off. Because, like, once you don't drive one day, and then, oh, you get up late the next day, and then you didn't make that much money, and now you're starting to, and you're starting to say this ain't what you want to do...</figDesc><table><row><cell>Emotional Resources</cell></row></table><note>: Yeah. But each of my customers call me directly, I give them a ride too. Sometimes my customers call me, say, "Hey, can you give me a ride to Up North? It's four, five hours from here."... Interviewer: Okay. Do they pay you through the Uber app? Or do they give you cash?Harvey: I'm trying to just keep them encouraged and keep the carrot in front of them, you know? And to help them get to a certain point where they muscles are built up and they're used to it. -Bradford (Interview) However, it was evident from the interviews that riders often received emotional support from drivers. Riders often benefited from words of care and encouragement the drivers had to offer. Rogelio spoke about consoling a passenger "who came out of the closet for the first time." One of the things that's always stood out to me was I had a young lady who got in the back of the car. She started crying. I thought maybe somebody had hurt her. I stopped. I pulled out a flashlight. I'm checking to make sure she's not physically injured. She was crying because she was a lesbian and had never told anybody and was afraid that if her sorority sisters found out, they'd kick her out. Her parents didn't know. Her friends didn't know... She came out to me. I don't have any experience with that. I'm like, Uh. There, there. It will be okay. I don't know what to do. I pulled over on Trull, and I sat there with her for like 15 minutes so she could get kind of calmed down. -Rogelio (Interview)</note></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_3"><head>Table 2 .</head><label>2</label><figDesc>Rider Information</figDesc><table><row><cell></cell><cell></cell><cell cols="2">List of Riders</cell><cell></cell></row><row><cell cols="3">Nickname Gender Age</cell><cell>Profession</cell><cell>Used Uber Previously?</cell></row><row><cell>P1</cell><cell>M</cell><cell>20</cell><cell>Office Assistant</cell><cell>N</cell></row><row><cell>P2</cell><cell>F</cell><cell>22</cell><cell>Student</cell><cell>Y</cell></row><row><cell>P3</cell><cell>F</cell><cell cols="2">20-25 NA</cell><cell>N</cell></row><row><cell>P4</cell><cell>F</cell><cell>52</cell><cell>Self-employed</cell><cell>Y</cell></row><row><cell>P5</cell><cell>M</cell><cell cols="2">30-40 Unemployed</cell><cell>N</cell></row><row><cell>P6</cell><cell>F</cell><cell>50</cell><cell>Unemployed</cell><cell>Y</cell></row><row><cell>P7</cell><cell>F</cell><cell>53</cell><cell>Unemployed</cell><cell>N</cell></row><row><cell>*P8</cell><cell>M</cell><cell cols="2">25-30 NA</cell><cell>N</cell></row><row><cell>P9</cell><cell>M</cell><cell>26</cell><cell>Dry Cleaning</cell><cell>N</cell></row><row><cell>P10</cell><cell>M</cell><cell>30</cell><cell cols="2">Medical Assistant N</cell></row><row><cell>P11</cell><cell>M</cell><cell>37</cell><cell>Automotive</cell><cell>N</cell></row><row><cell>P12</cell><cell>M</cell><cell>39</cell><cell>Unemployed</cell><cell>N</cell></row><row><cell>P13</cell><cell>M</cell><cell>21</cell><cell>Unemployed</cell><cell>N</cell></row><row><cell></cell><cell cols="3">Note: Names redacted for anonymous review.</cell><cell></cell></row><row><cell></cell><cell cols="3">*Unable to participate due to personal reasons</cell><cell></cell></row><row><cell cols="5">to understand the nature of these interactions, we categorized</cell></row><row><cell cols="5">these benefits into informational, instrumental, emotional, and</cell></row><row><cell cols="2">companionship.</cell><cell></cell><cell></cell><cell></cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_4"><head></head><label></label><figDesc>[Uber drivers] gave me a birthday gift. They let me get around in style. Not only did they make me feel comfortable, they made my people feel comfortable, and I appreciate that...I appreciate that guy for making me feel real important on my birthday. That meant a lot to me. -P11 (Interview)</figDesc><table /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_5"><head></head><label></label><figDesc>Now, you have a lot of people that's a part of the Black Lives Matter movement, but then you have black people that feel like the movement itself is kind of like contradictive [sic] or more like one-sided. Not just black lives matter, all lives matter. He was more of the not like the black people that stick with the movement, he was more like let's forget the Black Lives Matter, how about everybody matters. That's the kind of conversation me and him was having and...I actually got into the car with a different outlook on what I believed in and he kind of helped me look at things different. He [the driver] just gets deep off into it, so when I got out his car, I had a whole different outlook on what I knew before I got into the car. It's not really necessarily I learned something. I looked at stuff different[ly] by talking to this guy. -P9 (Interview) This exchange about the Black Lives Matter movement resulted in P9 adopting a different viewpoint by the end of the Uber ride.</figDesc><table /></figure>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="2">https://openbadges.org/</note>
+		</body>
+		<back>
+
+			<div type="acknowledgement">
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>ACKNOWLEDGMENTS</head><p>We would like to acknowledge David Cui, Akin Oladele, and René Morris, who helped in our recruiting efforts. We also thank Yingwen (Eva) Li for helping us with our coding. We are grateful to the Detroit Center, FII.org, and the Guidance Center for their support in this work, and to our riders and drivers for their participation in this research. Finally, we want to acknowledge Neha Kumar, Earnest Wheeler and our anonymous reviewers for their constructive feedback.</p></div>
+			</div>
+
+			<div type="references">
+
+				<listBibl>
+
+<biblStruct xml:id="b0">
+	<analytic>
+		<title level="a" type="main">Peer-to-peer in the Workplace: A View from the Road</title>
+		<author>
+			<persName><forename type="first">Nicola</forename><forename type="middle">J</forename><surname>Syed Ishtiaque Ahmed</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Himanshu</forename><surname>Bidwell</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Zade</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Srihari</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Anupama</forename><surname>Muralidhar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Baneen</forename><surname>Dhareshwar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Cedrick</forename><forename type="middle">N</forename><surname>Karachiwala</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jacki O'</forename><surname>Tandong</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Neill</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2858036.2858393</idno>
+		<ptr target="http://dx.doi.org/10.1145/2858036.2858393" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2016 CHI Conference on Human Factors in Computing Systems (CHI &apos;16)</title>
+				<meeting>the 2016 CHI Conference on Human Factors in Computing Systems (CHI &apos;16)<address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>ACM</publisher>
+			<date type="published" when="2016">2016</date>
+			<biblScope unit="page" from="5063" to="5075" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b1">
+	<analytic>
+		<title level="a" type="main">Multi-City Study of Urban Inequality</title>
+		<author>
+			<persName><forename type="first">Lawrence</forename><surname>Bobo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">James</forename><surname>Johnson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Melvin</forename><surname>Oliver</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Reynolds</forename><surname>Farley</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Barry</forename><surname>Bluestone</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Irene</forename><surname>Browne</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sheldon</forename><surname>Danziger</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Gary</forename><surname>Green</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Harry</forename><surname>Holzer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Maria</forename><surname>Krysan</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Atlanta</title>
+		<imprint>
+			<date type="published" when="1992">2000. 1992-1994</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b2">
+	<analytic>
+		<title level="a" type="main">The Forms of Capital</title>
+		<author>
+			<persName><forename type="first">Pierre</forename><surname>Bourdieu</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Handbook of Theory and Research for the Sociology of Education</title>
+				<imprint>
+			<date type="published" when="1986">1986</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b3">
+	<monogr>
+		<title/>
+		<author>
+			<persName><surname>Greenwood</surname></persName>
+		</author>
+		<imprint>
+			<biblScope unit="page" from="241" to="258" />
+			<pubPlace>Santa Barbara, CA</pubPlace>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b4">
+	<analytic>
+		<title level="a" type="main">Designing for Participation in Local Social Ridesharing Networks: Grass Roots Prototyping of IT Systems</title>
+		<author>
+			<persName><forename type="first">Margot</forename><surname>Brereton</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sunil</forename><surname>Ghelawat</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 11th</title>
+				<meeting>the 11th</meeting>
+		<imprint>
+			<date type="published" when="2010">2010</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b5">
+	<monogr>
+		<idno type="DOI">10.1145/1900441.1900478</idno>
+		<ptr target="http://dx.doi.org/10.1145/1900441.1900478" />
+		<title level="m">Biennial Participatory Design Conference (PDC &apos;10)</title>
+				<meeting><address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>ACM</publisher>
+			<biblScope unit="page" from="199" to="202" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b6">
+	<analytic>
+		<title level="a" type="main">The Normal Natural Troubles of Driving with GPS</title>
+		<author>
+			<persName><forename type="first">Barry</forename><surname>Brown</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Eric</forename><surname>Laurier</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the SIGCHI Conference on Human Factors in Computing Systems (CHI &apos;12)</title>
+				<meeting>the SIGCHI Conference on Human Factors in Computing Systems (CHI &apos;12)</meeting>
+		<imprint>
+			<date type="published" when="2012">2012</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b7">
+	<monogr>
+		<title/>
+		<idno type="DOI">10.1145/2207676.2208285</idno>
+		<ptr target="http://dx.doi.org/10.1145/2207676.2208285" />
+		<imprint>
+			<publisher>ACM</publisher>
+			<biblScope unit="page" from="1621" to="1630" />
+			<pubPlace>New York, NY, USA</pubPlace>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b8">
+	<analytic>
+		<title level="a" type="main">Social exclusion, mobility and access</title>
+		<author>
+			<persName><forename type="first">Noel</forename><surname>Cass</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Elizabeth</forename><surname>Shove</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">John</forename><surname>Urry</surname></persName>
+		</author>
+		<idno type="DOI">10.1111/j.1467-954X.2005.00565.x</idno>
+		<ptr target="http://dx.doi.org/10.1111/j.1467-954X.2005.00565.x" />
+	</analytic>
+	<monogr>
+		<title level="j">Sociological Review</title>
+		<imprint>
+			<biblScope unit="volume">53</biblScope>
+			<biblScope unit="page" from="539" to="555" />
+			<date type="published" when="2005">2005. 2005</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b9">
+	<analytic>
+		<title level="a" type="main">Estimating the environmental benefits of ride-sharing: A case study of Dublin</title>
+		<author>
+			<persName><forename type="first">Brian</forename><surname>Caulfield</surname></persName>
+		</author>
+		<idno type="DOI">10.1016/j.trd.2009.07.008</idno>
+		<ptr target="http://dx.doi.org/10.1016/j.trd.2009.07.008" />
+	</analytic>
+	<monogr>
+		<title level="j">Transportation Research Part D: Transport Environment</title>
+		<imprint>
+			<biblScope unit="volume">14</biblScope>
+			<biblScope unit="page" from="527" to="531" />
+			<date type="published" when="2009">2009. 2009</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b10">
+	<analytic>
+		<title level="a" type="main">Assessing the Potential of Ride-sharing Using Mobile and Social Data: A Tale of Four Cities</title>
+		<author>
+			<persName><forename type="first">Blerim</forename><surname>Cici</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Athina</forename><surname>Markopoulou</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Enrique</forename><surname>Frias-Martinez</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Nikolaos</forename><surname>Laoutaris</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2632048.2632055</idno>
+		<ptr target="http://dx.doi.org/10.1145/2632048.2632055" />
+	</analytic>
+	<monogr>
+		<title level="m">ACM International Conference on Ubiquitous Computing</title>
+				<imprint>
+			<date type="published" when="2014">2014. 2014</date>
+			<biblScope unit="page" from="201" to="211" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b11">
+	<analytic>
+		<title level="a" type="main">Social capital in the creation of human capital</title>
+		<author>
+			<persName><forename type="first">James</forename><forename type="middle">S</forename><surname>Coleman</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Amer. J. Sociology</title>
+		<imprint>
+			<biblScope unit="volume">94</biblScope>
+			<biblScope unit="page" from="S95" to="S120" />
+			<date type="published" when="1988">1988. 1988</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b12">
+	<analytic>
+		<title level="a" type="main">Investigating Links between Social Capital and Public Transport</title>
+		<author>
+			<persName><forename type="first">Graham</forename><surname>Currie</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Janet</forename><surname>Stanley</surname></persName>
+		</author>
+		<idno type="DOI">10.1080/01441640701817197</idno>
+		<ptr target="http://dx.doi.org/10.1080/01441640701817197" />
+	</analytic>
+	<monogr>
+		<title level="j">Transport Reviews</title>
+		<imprint>
+			<biblScope unit="volume">28</biblScope>
+			<biblScope unit="page" from="529" to="547" />
+			<date type="published" when="2008">2008. 2008</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b13">
+	<analytic>
+		<title level="a" type="main">Fostering Social Capital in Economically Distressed Communities</title>
+		<author>
+			<persName><forename type="first">Tawanna</forename><forename type="middle">R</forename><surname>Dillahunt</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2556288.2557123</idno>
+		<ptr target="http://dx.doi.org/10.1145/2556288.2557123" />
+	</analytic>
+	<monogr>
+		<title level="m">CHI 2014. Proceedings of the 32nd Annual ACM Conference on Human Factors in Computing Systems. 531-540</title>
+				<imprint>
+			<date type="published" when="2014">2014</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b14">
+	<analytic>
+		<title level="a" type="main">Uncovering the Values and Constraints of Real-time Ridesharing for Low-resource Populations</title>
+		<author>
+			<persName><forename type="first">Tawanna</forename><forename type="middle">R</forename><surname>Dillahunt</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Vaishnav</forename><surname>Kameswaran</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Linfeng</forename><surname>Li</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Tanya</forename><surname>Rosenblat</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3025453.3025470</idno>
+		<ptr target="http://dx.doi.org/10.1145/3025453.3025470" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2017 CHI Conference on Human Factors in Computing Systems (CHI &apos;17)</title>
+				<meeting>the 2017 CHI Conference on Human Factors in Computing Systems (CHI &apos;17)<address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>ACM</publisher>
+			<date type="published" when="2017">2017a</date>
+			<biblScope unit="page" from="2757" to="2769" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b15">
+	<analytic>
+		<title level="a" type="main">The Sharing Economy in Computing: A Systematic Literature Review</title>
+		<author>
+			<persName><forename type="first">Tawanna</forename><forename type="middle">R</forename><surname>Dillahunt</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Xinyi</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Earnest</forename><surname>Wheeler</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Hao Fei</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Brent</forename><surname>Cheng</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Haiyi</forename><surname>Hecht</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Zhu</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3134673</idno>
+		<ptr target="http://dx.doi.org/10.1145/3134673" />
+	</analytic>
+	<monogr>
+		<title level="j">Proc. ACM Hum.-Comput. Interact. 1, CSCW, Article</title>
+		<imprint>
+			<biblScope unit="volume">38</biblScope>
+			<date type="published" when="2017-12">2017b. Dec. 2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b16">
+	<analytic>
+		<title level="a" type="main">The Importance of Different Forms of Social Capital for Health</title>
+		<author>
+			<persName><forename type="first">Sara</forename><surname>Ferlander</surname></persName>
+		</author>
+		<idno type="DOI">10.1177/0001699307077654</idno>
+		<ptr target="http://dx.doi.org/10.1177/0001699307077654" />
+	</analytic>
+	<monogr>
+		<title level="j">Acta Sociologica</title>
+		<imprint>
+			<biblScope unit="volume">50</biblScope>
+			<biblScope unit="page" from="115" to="128" />
+			<date type="published" when="2007">2007. 2007</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b17">
+	<analytic>
+		<title level="a" type="main">UbiGreen: Investigating a Mobile Tool for Tracking and Supporting Green Transportation Habits</title>
+		<author>
+			<persName><forename type="first">Jon</forename><surname>Froehlich</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Tawanna</forename><surname>Dillahunt</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Predrag</forename><surname>Klasnja</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jennifer</forename><surname>Mankoff</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sunny</forename><surname>Consolvo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Beverly</forename><surname>Harrison</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">James</forename><forename type="middle">A</forename><surname>Landay</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/1518701.1518861</idno>
+		<ptr target="http://dx.doi.org/10.1145/1518701.1518861" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the SIGCHI Conference on Human Factors in Computing Systems (CHI &apos;09)</title>
+				<meeting>the SIGCHI Conference on Human Factors in Computing Systems (CHI &apos;09)<address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>ACM</publisher>
+			<date type="published" when="2009">2009</date>
+			<biblScope unit="page" from="1043" to="1052" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b18">
+	<analytic>
+		<title level="a" type="main">Designing for Labour: Uber and the On-Demand Mobile Workforce</title>
+		<author>
+			<persName><forename type="first">Mareike</forename><surname>Glöss</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Moira</forename><surname>Mcgregor</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Barry</forename><surname>Brown</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2858036.2858476</idno>
+		<ptr target="http://dx.doi.org/10.1145/2858036.2858476" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2016 CHI Conference on Human Factors in Computing Systems (CHI &apos;16)</title>
+				<meeting>the 2016 CHI Conference on Human Factors in Computing Systems (CHI &apos;16)<address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>ACM</publisher>
+			<date type="published" when="2016">2016</date>
+			<biblScope unit="page" from="1632" to="1643" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b19">
+	<analytic>
+		<title level="a" type="main">The Strength of Weak Ties</title>
+		<author>
+			<persName><forename type="first">S</forename><surname>Mark</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Granovetter</surname></persName>
+		</author>
+		<idno type="DOI">10.1086/225469</idno>
+		<ptr target="http://dx.doi.org/10.1086/225469" />
+	</analytic>
+	<monogr>
+		<title level="j">The American Journal of Sociology</title>
+		<imprint>
+			<biblScope unit="volume">78</biblScope>
+			<biblScope unit="page" from="1360" to="1380" />
+			<date type="published" when="1973">1973. 1973</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b20">
+	<analytic>
+		<title level="a" type="main">2012. I Need Help!: Exploring Collaboration in the Car</title>
+		<author>
+			<persName><forename type="first">Nicole</forename><surname>Gridling</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Alexander</forename><surname>Meschtscherjakov</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Manfred</forename><surname>Tscheligi</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2141512.2141549</idno>
+		<ptr target="http://dx.doi.org/10.1145/2141512.2141549" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the ACM 2012 Conference on Computer Supported Cooperative Work Companion (CSCW &apos;12)</title>
+				<meeting>the ACM 2012 Conference on Computer Supported Cooperative Work Companion (CSCW &apos;12)<address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>ACM</publisher>
+			<biblScope unit="page" from="87" to="90" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b21">
+	<analytic>
+		<title level="a" type="main">Social networks and social support. Health Behavior and Health Education: Theory</title>
+		<author>
+			<persName><forename type="first">Catherine</forename><forename type="middle">A</forename><surname>Heaney</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Barbara</forename><forename type="middle">A</forename><surname>Israel</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Research, and Practice</title>
+		<imprint>
+			<biblScope unit="volume">4</biblScope>
+			<biblScope unit="page" from="189" to="210" />
+			<date type="published" when="2008">2008. 2008</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b22">
+	<analytic>
+		<title level="a" type="main">Accelerometer-based Transportation Mode Detection on Smartphones</title>
+		<author>
+			<persName><forename type="first">Samuli</forename><surname>Hemminki</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Petteri</forename><surname>Nurmi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sasu</forename><surname>Tarkoma</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 11th ACM Conference on Embedded Networked Sensor Systems</title>
+				<meeting>the 11th ACM Conference on Embedded Networked Sensor Systems<address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>ACM</publisher>
+			<date type="published" when="2013">2013</date>
+			<biblScope unit="page">13</biblScope>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b23">
+	<analytic>
+		<title level="a" type="main">People-Nearby Applications: How Newcomers Move Their Relationships Offline and Develop Social and Cultural Capital</title>
+		<author>
+			<persName><forename type="first">Joey</forename><surname>Chiao-Yin Hsiao</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Tawanna</forename><forename type="middle">R</forename><surname>Dillahunt</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2998181.2998280</idno>
+		<ptr target="http://dx.doi.org/10.1145/2998181.2998280" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the ACM 2017 Conference on Computer Supported Cooperative Work (CSCW &apos;17</title>
+				<meeting>the ACM 2017 Conference on Computer Supported Cooperative Work (CSCW &apos;17</meeting>
+		<imprint>
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b24">
+	<analytic>
+		<title level="a" type="main">Don&apos;t Blame Me I Am Only the Driver: Impact of Blame Attribution on Attitudes and Attention to Driving Task</title>
+		<author>
+			<persName><forename type="first">Clifford</forename><surname>Ing-Marie Jonsson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jack</forename><surname>Nass</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ben</forename><surname>Endo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Helen</forename><surname>Reaves</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Janice</forename><forename type="middle">Le</forename><surname>Harris</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Nicholas</forename><surname>Ta</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sean</forename><surname>Chan</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Knapp</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/985921.986028</idno>
+		<ptr target="http://dx.doi.org/10.1145/985921.986028" />
+	</analytic>
+	<monogr>
+		<title level="m">CHI &apos;04 Extended Abstracts on Human Factors in Computing Systems (CHI EA &apos;04)</title>
+				<meeting><address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>ACM</publisher>
+			<date type="published" when="2004">2004</date>
+			<biblScope unit="page" from="1219" to="1222" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b25">
+	<analytic>
+		<title level="a" type="main">MASTerful&apos; Matchmaking in Service Transactions: Inferred Abilities, Needs and Interests Versus Activity Histories</title>
+		<author>
+			<persName><forename type="first">Hyunggu</forename><surname>Jung</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Victoria</forename><surname>Bellotti</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Afsaneh</forename><surname>Doryab</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Dean</forename><surname>Leitersdorf</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jiawei</forename><surname>Chen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Benjamin</forename><forename type="middle">V</forename><surname>Hanrahan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sooyeon</forename><surname>Lee</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Dan</forename><surname>Turner</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Anind</forename><forename type="middle">K</forename><surname>Dey</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">John</forename><forename type="middle">M</forename><surname>Carroll</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2858036.2858263</idno>
+		<ptr target="http://dx.doi.org/10.1145/2858036.2858263" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2016 CHI Conference on Human Factors in Computing Systems (CHI &apos;16)</title>
+				<meeting>the 2016 CHI Conference on Human Factors in Computing Systems (CHI &apos;16)<address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>ACM</publisher>
+			<biblScope unit="page" from="1644" to="1655" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b26">
+	<analytic>
+		<title level="a" type="main">MatkaHupi: A Persuasive Mobile Application for Sustainable Mobility</title>
+		<author>
+			<persName><forename type="first">Antti</forename><surname>Jylhä</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Petteri</forename><surname>Nurmi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Miika</forename><surname>Sirén</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Samuli</forename><surname>Hemminki</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Giulio</forename><surname>Jacucci</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2494091.2494164</idno>
+		<ptr target="http://dx.doi.org/10.1145/2494091.2494164" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2013 ACM Conference on Pervasive and Ubiquitous Computing Adjunct Publication (UbiComp &apos;13 Adjunct)</title>
+				<meeting>the 2013 ACM Conference on Pervasive and Ubiquitous Computing Adjunct Publication (UbiComp &apos;13 Adjunct)<address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>ACM</publisher>
+			<date type="published" when="2013">2013</date>
+			<biblScope unit="page" from="227" to="230" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b27">
+	<analytic>
+		<title level="a" type="main">Shifting Gears: User Interfaces in the Age of Autonomous Driving</title>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">L</forename><surname>Kun</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Boll</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Schmidt</surname></persName>
+		</author>
+		<idno type="DOI">10.1109/MPRV.2016.14</idno>
+		<ptr target="http://dx.doi.org/10.1109/MPRV.2016.14" />
+	</analytic>
+	<monogr>
+		<title level="j">IEEE Pervasive Computing</title>
+		<imprint>
+			<biblScope unit="volume">15</biblScope>
+			<biblScope unit="page" from="32" to="38" />
+			<date type="published" when="2016-01">2016. Jan.-Mar. 2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b28">
+	<analytic>
+		<title level="a" type="main">Social support: a conceptual analysis</title>
+		<author>
+			<persName><forename type="first">Catherine</forename><surname>Penny Hinson Langford</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Juanita</forename><surname>Bowsher</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Joseph</forename><forename type="middle">P</forename><surname>Maloney</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Patricia</forename><forename type="middle">P</forename><surname>Lillis</surname></persName>
+		</author>
+		<idno type="DOI">10.1046/j.1365-2648.1997.1997025095</idno>
+		<ptr target="http://dx.doi.org/10.1046/j.1365-2648.1997.1997025095" />
+	</analytic>
+	<monogr>
+		<title level="j">Journal of Advanced Nursing</title>
+		<imprint>
+			<biblScope unit="volume">25</biblScope>
+			<biblScope unit="page" from="95" to="100" />
+			<date type="published" when="1997">1997. 1997</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b29">
+	<analytic>
+		<title level="a" type="main">Working with Machines: The Impact of Algorithmic and Data-Driven Management on Human Workers</title>
+		<author>
+			<persName><forename type="first">Min</forename><forename type="middle">Kyung</forename><surname>Lee</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Daniel</forename><surname>Kusbit</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Evan</forename><surname>Metsky</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Laura</forename><surname>Dabbish</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2702123.2702548</idno>
+		<ptr target="http://dx.doi.org/10.1145/2702123.2702548" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 33rd Annual ACM Conference on Human Factors in Computing Systems (CHI &apos;15)</title>
+				<meeting>the 33rd Annual ACM Conference on Human Factors in Computing Systems (CHI &apos;15)<address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>ACM</publisher>
+			<date type="published" when="2015">2015</date>
+			<biblScope unit="page" from="1603" to="1612" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b30">
+	<analytic>
+		<title level="a" type="main">The Creation of Capital through an ICT-based Learning Program: A Case Study of MOOC Camp</title>
+		<author>
+			<persName><forename type="first">Carleen</forename><surname>Maitland</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Eric</forename><surname>Obeysekare</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2737856.2738024</idno>
+		<ptr target="http://dx.doi.org/10.1145/2737856.2738024" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the Seventh International Conference on Information Communication Technologies and Development (ICTD &apos;15)</title>
+				<meeting>the Seventh International Conference on Information Communication Technologies and Development (ICTD &apos;15)<address><addrLine>New York, NY, USA, Article 1</addrLine></address></meeting>
+		<imprint>
+			<publisher>ACM</publisher>
+			<date type="published" when="2015">2015</date>
+			<biblScope unit="volume">10</biblScope>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b31">
+	<analytic>
+		<title level="a" type="main">What Are You Talking About While Driving?: An Analysis of In-car Conversations Aimed at Conversation Sharing</title>
+		<author>
+			<persName><forename type="first">Kohei</forename><surname>Matsumura</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yasuyuki</forename><surname>Sumi</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2667317.2667417</idno>
+		<ptr target="http://dx.doi.org/10.1145/2667317.2667417" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 6th International Conference on Automotive User Interfaces and Interactive Vehicular Applications (AutomotiveUI &apos;14)</title>
+				<meeting>the 6th International Conference on Automotive User Interfaces and Interactive Vehicular Applications (AutomotiveUI &apos;14)<address><addrLine>New York, NY, USA, Article</addrLine></address></meeting>
+		<imprint>
+			<publisher>ACM</publisher>
+			<date type="published" when="2014">2014</date>
+			<biblScope unit="volume">34</biblScope>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b32">
+	<analytic>
+		<title level="a" type="main">Social Dependency and Mobile Autonomy: Supporting Older Adults&apos; Mobility with Ridesharing Ict</title>
+		<author>
+			<persName><forename type="first">Johanna</forename><surname>Meurer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Martin</forename><surname>Stein</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">David</forename><surname>Randall</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Markus</forename><surname>Rohde</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Volker</forename><surname>Wulf</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 32Nd Annual ACM Conference on Human Factors in Computing Systems (CHI &apos;14)</title>
+				<meeting>the 32Nd Annual ACM Conference on Human Factors in Computing Systems (CHI &apos;14)</meeting>
+		<imprint>
+			<date type="published" when="2014">2014</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b33">
+	<monogr>
+		<title/>
+		<idno type="DOI">10.1145/2556288.2557300</idno>
+		<ptr target="http://dx.doi.org/10.1145/2556288.2557300" />
+		<imprint>
+			<publisher>ACM</publisher>
+			<biblScope unit="page" from="1923" to="1932" />
+			<pubPlace>New York, NY, USA</pubPlace>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b34">
+	<analytic>
+		<title level="a" type="main">Improving Navigation Support by Taking Care of Drivers&apos; Situational Needs</title>
+		<author>
+			<persName><forename type="first">Daniel</forename><surname>Münter</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Anna</forename><surname>Kötteritzsch</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Tobias</forename><surname>Islinger</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Thorsten</forename><surname>Köhler</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Christian</forename><surname>Wolff</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jürgen</forename><surname>Ziegler</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2390256.2390278</idno>
+		<ptr target="http://dx.doi.org/10.1145/2390256.2390278" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 4th International Conference on Automotive User Interfaces and Interactive Vehicular Applications (AutomotiveUI &apos;12)</title>
+				<meeting>the 4th International Conference on Automotive User Interfaces and Interactive Vehicular Applications (AutomotiveUI &apos;12)<address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>ACM</publisher>
+			<date type="published" when="2012">2012</date>
+			<biblScope unit="page" from="131" to="138" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b35">
+	<monogr>
+		<title level="m" type="main">Factors influencing social mobility. Department for Work and Pensions</title>
+		<author>
+			<persName><forename type="first">Alex</forename><surname>Nunn</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Steve</forename><surname>Johnson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Surya</forename><surname>Monro</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Tim</forename><surname>Bickerstaffe</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sarah</forename><surname>Kelsey</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2007">2007</date>
+			<biblScope unit="volume">450</biblScope>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b36">
+	<analytic>
+		<title level="a" type="main">Adapt-a-ride: Understanding the Dynamics of Commuting Preferences Through an Experience Design Framework</title>
+		<author>
+			<persName><forename type="first">Lorrie</forename><forename type="middle">F</forename><surname>Fatih Kursat Ozenc</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">James</forename><forename type="middle">H</forename><surname>Cranor</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Morris</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2011 Conference on Designing Pleasurable Products and Interfaces (DPPI &apos;11)</title>
+				<meeting>the 2011 Conference on Designing Pleasurable Products and Interfaces (DPPI &apos;11)</meeting>
+		<imprint>
+			<date type="published" when="2011">2011</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b37">
+	<monogr>
+		<title/>
+		<idno type="DOI">10.1145/2347504.2347571</idno>
+		<ptr target="http://dx.doi.org/10.1145/2347504.2347571" />
+		<imprint>
+			<publisher>ACM</publisher>
+			<biblScope unit="volume">8</biblScope>
+			<biblScope unit="page">61</biblScope>
+			<pubPlace>New York, NY, USA</pubPlace>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b38">
+	<monogr>
+		<title level="m" type="main">The truth about smart cities: &apos;In the end, they will destroy democracy</title>
+		<author>
+			<persName><forename type="first">Steven</forename><surname>Poole</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2014">2014. 2014</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b39">
+	<monogr>
+		<title level="m" type="main">Bowling Alone. Simon and Schuster</title>
+		<author>
+			<persName><forename type="first">D</forename><surname>Robert</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Putnam</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2000">2000</date>
+			<pubPlace>New York, NY</pubPlace>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b40">
+	<analytic>
+		<title level="a" type="main">Standing Out from the Crowd: Emotional Labor, Body Labor, and Temporal Labor in Ridesharing</title>
+		<author>
+			<persName><forename type="first">Noopur</forename><surname>Raval</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Paul</forename><surname>Dourish</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2818048.2820026</idno>
+		<ptr target="http://dx.doi.org/10.1145/2818048.2820026" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 19th ACM Conference on Computer-Supported Cooperative Work &amp; Social Computing (CSCW &apos;16)</title>
+				<meeting>the 19th ACM Conference on Computer-Supported Cooperative Work &amp; Social Computing (CSCW &apos;16)<address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>ACM</publisher>
+			<date type="published" when="2016">2016</date>
+			<biblScope unit="page" from="97" to="107" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b41">
+	<analytic>
+		<title level="a" type="main">Social capital, satisfaction and quality of life in the workplace</title>
+		<author>
+			<persName><forename type="first">Felix</forename><surname>Requena</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Social Indicators Research</title>
+		<imprint>
+			<biblScope unit="volume">3</biblScope>
+			<biblScope unit="page" from="331" to="360" />
+			<date type="published" when="2003">2003. 2003</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b42">
+	<analytic>
+		<title level="a" type="main">Regional Diversity in Autonomy and Work: A Case Study from Uber and Lyft Drivers</title>
+		<author>
+			<persName><forename type="first">Alex</forename><surname>Rosenblat</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Tim</forename><surname>Hwang</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Intelligence and Autonomy</title>
+		<imprint>
+			<biblScope unit="page" from="1" to="15" />
+			<date type="published" when="2016">2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b43">
+	<analytic>
+		<title level="a" type="main">WEtransport: A Context-based Ride Sharing Platform</title>
+		<author>
+			<persName><forename type="first">Alireza</forename><surname>Sahami Shirazi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Thomas</forename><surname>Kubitza</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Florian</forename><surname>Alt</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Bastian</forename><surname>Pfleging</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Albrecht</forename><surname>Schmidt</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/1864431.1864469</idno>
+		<ptr target="http://dx.doi.org/10.1145/1864431.1864469" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 12th ACM International Conference Adjunct Papers on Ubiquitous Computing -Adjunct (UbiComp &apos;10 Adjunct)</title>
+				<meeting>the 12th ACM International Conference Adjunct Papers on Ubiquitous Computing -Adjunct (UbiComp &apos;10 Adjunct)<address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>ACM</publisher>
+			<date type="published" when="2010">2010</date>
+			<biblScope unit="page" from="425" to="426" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b44">
+	<monogr>
+		<title level="m" type="main">The Coding Manual for Qualitative Researchers</title>
+		<author>
+			<persName><forename type="first">Johnny</forename><surname>Saldana</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2009">2009</date>
+			<pubPlace>Sage, Thousand Oaks, CA</pubPlace>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b45">
+	<monogr>
+		<title level="m" type="main">Individual social captial: an analysis of factors influencing investment</title>
+		<author>
+			<persName><forename type="first">David</forename><forename type="middle">W</forename><surname>Shideler</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2005">2005</date>
+		</imprint>
+		<respStmt>
+			<orgName>The Ohio State University</orgName>
+		</respStmt>
+	</monogr>
+	<note type="report_type">Ph.D. Dissertation.</note>
+</biblStruct>
+
+<biblStruct xml:id="b46">
+	<analytic>
+		<title level="a" type="main">Transportation Mode Detection Using Mobile Phones and GIS Information</title>
+		<author>
+			<persName><forename type="first">Leon</forename><surname>Stenneth</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ouri</forename><surname>Wolfson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Philip</forename><forename type="middle">S</forename><surname>Yu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Bo</forename><surname>Xu</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2093973.2093982</idno>
+		<ptr target="http://dx.doi.org/10.1145/2093973.2093982" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 19th ACM SIGSPATIAL International Conference on in Geographic Information Systems (GIS &apos;11)</title>
+				<meeting>the 19th ACM SIGSPATIAL International Conference on in Geographic Information Systems (GIS &apos;11)<address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>ACM</publisher>
+			<date type="published" when="2011">2011</date>
+			<biblScope unit="page" from="54" to="63" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b47">
+	<monogr>
+		<title level="m" type="main">The origins of the urban crisis: Race and inequality in postwar Detroit</title>
+		<author>
+			<persName><forename type="first">Thomas</forename><forename type="middle">J</forename><surname>Sugrue</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2014">2014</date>
+			<publisher>Princeton University Press</publisher>
+			<pubPlace>Princeton, NJ</pubPlace>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b48">
+	<analytic>
+		<title level="a" type="main">Providing Eco-driving Feedback to Corporate Car Drivers: What Impact Does a Smartphone Application Have on Their Fuel Efficiency</title>
+		<author>
+			<persName><forename type="first">Johannes</forename><surname>Tulusan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Thorsten</forename><surname>Staake</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Elgar</forename><surname>Fleisch</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2370216.2370250</idno>
+		<ptr target="http://dx.doi.org/10.1145/2370216.2370250" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2012 ACM Conference on Ubiquitous Computing (UbiComp &apos;12)</title>
+				<meeting>the 2012 ACM Conference on Ubiquitous Computing (UbiComp &apos;12)<address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>ACM</publisher>
+			<date type="published" when="2012">2012</date>
+			<biblScope unit="page" from="212" to="215" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b49">
+	<analytic>
+		<title level="a" type="main">Social support and interpersonal relationships</title>
+		<author>
+			<persName><forename type="first">Thomas</forename><forename type="middle">Ashby</forename><surname>Wills</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Review of Personality and Social Psychology</title>
+		<editor>M.S. Clark</editor>
+		<imprint>
+			<biblScope unit="volume">12</biblScope>
+			<biblScope unit="page" from="265" to="289" />
+			<date type="published" when="1991">1991</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b50">
+	<analytic>
+		<title level="a" type="main">A smart and ubiquitous urban future? Contrasting large-scale agendas and street-level dreams</title>
+		<author>
+			<persName><forename type="first">Johanna</forename><surname>Ylipulli</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Observatorio (OBS*)</title>
+		<imprint>
+			<biblScope unit="volume">9</biblScope>
+			<biblScope unit="page" from="85" to="110" />
+			<date type="published" when="2015">2015. 2015</date>
+		</imprint>
+	</monogr>
+	<note>ESPECIAL</note>
+</biblStruct>
+
+<biblStruct xml:id="b51">
+	<analytic>
+		<title level="a" type="main">Field trial of tiramisu: Crowd-sourcing bus arrival times to spur co-design</title>
+		<author>
+			<persName><forename type="first">John</forename><surname>Zimmerman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Anthony</forename><surname>Tomasic</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Charles</forename><surname>Garrod</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Daisy</forename><surname>Yoo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Chaya</forename><surname>Hiruncharoenvate</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Rafae</forename><surname>Aziz</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ravi</forename><surname>Thiruvengadam</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yun</forename><surname>Huang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Aaron</forename><surname>Steinfeld</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/1978942.1979187</idno>
+		<ptr target="http://dx.doi.org/10.1145/1978942.1979187" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the SIGCHI Conference on Human Factors in Computing Systems (CHI &apos;11)</title>
+				<meeting>the SIGCHI Conference on Human Factors in Computing Systems (CHI &apos;11)<address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>ACM</publisher>
+			<date type="published" when="2011">2011</date>
+			<biblScope unit="page" from="1677" to="1686" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+				</listBibl>
+			</div>
+		</back>
+	</text>
+</TEI>

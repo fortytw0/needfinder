@@ -1,0 +1,1668 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xml:space="preserve" xmlns="http://www.tei-c.org/ns/1.0" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.com/kermitt2/grobid/master/grobid-home/schemas/xsd/Grobid.xsd"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+	<teiHeader xml:lang="en">
+		<fileDesc>
+			<titleStmt>
+				<title level="a" type="main">Common Barriers to the Use of Patient-Generated Data Across Clinical Settings</title>
+			</titleStmt>
+			<publicationStmt>
+				<publisher/>
+				<availability status="unknown"><licence/></availability>
+			</publicationStmt>
+			<sourceDesc>
+				<biblStruct>
+					<analytic>
+						<author>
+							<persName><forename type="first">Peter</forename><surname>West</surname></persName>
+							<email>p.west@soton.ac.ukmax.van.kleek@cs.ox.ac.uk</email>
+							<affiliation key="aff0">
+								<orgName type="department">Faculty of Health Sciences</orgName>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Max</forename><surname>Van Kleek</surname></persName>
+							<affiliation key="aff1">
+								<orgName type="department">Dept. of Computer Science</orgName>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Richard</forename><surname>Giordano</surname></persName>
+							<email>r.giordano@soton.ac.uk</email>
+							<affiliation key="aff0">
+								<orgName type="department">Faculty of Health Sciences</orgName>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Mark</forename><forename type="middle">J</forename><surname>Weal</surname></persName>
+							<affiliation key="aff2">
+								<orgName type="department">Web and Internet Science</orgName>
+								<orgName type="institution">University of Southampton</orgName>
+								<address>
+									<country key="GB">UK</country>
+								</address>
+							</affiliation>
+							<affiliation key="aff3">
+								<orgName type="institution">University of Oxford</orgName>
+								<address>
+									<country key="GB">UK</country>
+								</address>
+							</affiliation>
+							<affiliation key="aff4">
+								<orgName type="institution">University of Southampton</orgName>
+								<address>
+									<country key="GB">UK</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Nigel</forename><surname>Shadbolt</surname></persName>
+							<email>nigel.shadbolt@cs.ox.ac.uk</email>
+							<affiliation key="aff1">
+								<orgName type="department">Dept. of Computer Science</orgName>
+							</affiliation>
+						</author>
+						<title level="a" type="main">Common Barriers to the Use of Patient-Generated Data Across Clinical Settings</title>
+					</analytic>
+					<monogr>
+						<imprint>
+							<date/>
+						</imprint>
+					</monogr>
+					<idno type="DOI">10.1145/3173574.3174058</idno>
+				</biblStruct>
+			</sourceDesc>
+		</fileDesc>
+		<encodingDesc>
+			<appInfo>
+				<application version="0.7.1" ident="GROBID" when="2022-07-22T05:05+0000">
+					<desc>GROBID - A machine learning software for extracting information from scholarly documents</desc>
+					<ref target="https://github.com/kermitt2/grobid"/>
+				</application>
+			</appInfo>
+		</encodingDesc>
+		<profileDesc>
+			<textClass>
+				<keywords>
+					<term>H.5.2 Information interfaces and presentation (e.g., HCI): Usercentered design.</term>
+					<term>J.3 Life and medical sciences: Health Patient-generated data</term>
+					<term>personalized medicine</term>
+					<term>self-tracking</term>
+					<term>workflows</term>
+					<term>clinical decision making</term>
+					<term>mHealth</term>
+					<term>quantified self</term>
+				</keywords>
+			</textClass>
+			<abstract>
+<div xmlns="http://www.tei-c.org/ns/1.0"><p>Patient-generated data, such as data from wearable fitness trackers and smartphone apps, are viewed as a valuable information source towards personalised healthcare. However, studies in specific clinical settings have revealed diverse barriers to their effective use. In this paper, we address the following question: are there barriers prevalent across distinct workflows in clinical settings to using patient-generated data? We conducted a twopart investigation: a literature review of studies identifying such barriers; and interviews with clinical specialists across multiple roles, including emergency care, cardiology, mental health, and general practice. We identify common barriers in a six-stage workflow model of aligning patient and clinician objectives, judging data quality, evaluating data utility, rearranging data into a clinical format, interpreting data, and deciding on a plan or action. This workflow establishes common ground for HCI practitioners and researchers to explore solutions to improving the use of patient-generated data in clinical practices.</p></div>
+			</abstract>
+		</profileDesc>
+	</teiHeader>
+	<text xml:lang="en">
+		<body>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>INTRODUCTION</head><p>The widespread adoption of health and wellbeing self-tracking practices has made the resulting wealth of patient-generated data come to be seen as essential to the delivery of personalised medicine <ref type="bibr" target="#b43">[38]</ref>. The rise in self-tracking practices, enabled by new wearable sensors (such as smartwatches and Fitbits), connected home measurement devices (such as scales, blood pressure cuffs, and sleep monitors), and easy-to-use smartphone apps, have already motivated many individuals to bring patient-generated data with them to clinical consultations <ref type="bibr" target="#b36">[32]</ref>. These new data are seen to hold significant potential for improving healthcare in at least two ways. First, by capturing details of the patient's life outside the doctor's office, such as Permission to make digital or hard copies of part or all of this work for personal or classroom use is granted without fee provided that copies are not made or distributed for profit or commercial advantage and that copies bear this notice and the full citation on the first page. Copyrights for third-party components of this work must be honored. For all other uses, contact the owner/author(s). routine activities and symptomatic burden, these data are seen to 'bridge the gap' between consultations <ref type="bibr" target="#b43">[38]</ref>. Second, they are seen as key to empowering patients to better improve their health and wellbeing, via improved understanding and instrumented interventions <ref type="bibr" target="#b47">[41]</ref>. For these reasons, many initiatives have been launched towards more integrated use of patientgenerated data in clinical practice. In the United Kingdom, the recent Personalised Health and Care 2020 policy envisions that, as a result of patients contributing patient-generated data to health records, the quality of care will improve, healthcare costs will decrease, and patients will become more empowered <ref type="bibr">[37]</ref>. In the United States, several patient portals of healthcare providers already allow patients to upload data from their personal digital devices prior to patient consultations <ref type="bibr" target="#b16">[16]</ref>.</p><p>Despite these developments, studies within specific clinical settings have documented a wide range of barriers towards establishing the routine use of patient-generated data at various stages in clinical workflows <ref type="bibr">[18]</ref>. For example, within the management of irritable bowel syndrome, one study identified that lack of standardisation within patient-generated data makes it difficult for clinicians to interpret the data <ref type="bibr" target="#b12">[13]</ref>.</p><p>Another study, which focused on using consumer apps for managing diet, found that clinicians were concerned that data from these apps were unreliable <ref type="bibr">[27]</ref>. While these studies yield insights about the needs of particular clinical settings, identifying barriers common across such clinical settings promises to advance designs to improve the use of patient-generated data across clinical contexts. If the unmet nascent needs of such data across clinical settings could be identified, then HCI researchers or UX designers could identify how such barriers might be prioritised and addressed. This paper therefore investigates the following research question: are there barriers to using patient-generated data across distinct workflows in clinical settings? While recent studies provide important insights of patients' use of patient-generated data <ref type="bibr" target="#b13">[14,</ref><ref type="bibr" target="#b36">32]</ref>, there is a gap in HCI research on clinicians' perspectives of such data. Understanding clinicians' perspectives could reveal barriers within different clinical settings, and therefore forms the grounding for our work. Through a literature review and interviews with clinicians across diverse clinical settings in the United Kingdom, this study provides a new understanding of the common barriers and workflows for using patient-generated data across different clinical settings, with implications for the design of self-tracking tools and clinical practice.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>BACKGROUND Patient-Generated Data within Clinical Settings</head><p>Wearable fitness trackers and smartphone health apps that produce personal health-related data, such as heart rate, physical activity, and mood, have become increasingly popular consumer items, with over half of smartphone users reported to have installed a health app <ref type="bibr" target="#b30">[28]</ref>. Many studies have focused on both the challenges and benefits of self-tracking apps and wearables from the patient's perspective. These devices have been shown to shorten post-surgical recovery times, improve mobility and wellbeing among the elderly, and significantly improve the conditions of diabetes patients <ref type="bibr" target="#b9">[10]</ref>. Self-tracking apps can enable patients undergoing multi-stage treatments to monitor changes in their health as they progress through each phase, improving overall patient experience and providing a form of education and feedback <ref type="bibr">[22]</ref>. Patient-generated data can provide detailed and precise information about irritable bowel syndrome patients' routines and enable personalisation of treatment plans <ref type="bibr" target="#b12">[13]</ref>. Because of such encouraging findings on the patient side, the integration of patient-generated data into care could allow tailored treatment to individuals, more informed clinical decisions, and a shift from treatment towards prevention <ref type="bibr" target="#b2">[4]</ref>. However, comparatively few studies have examined the use of patient-generated data from clinical specialists' perspectives. In one such study, clinicians, nurses, and specialists were skeptical about the benefits of patient-generated data, and time constraints and lack of standardised formats led to difficulties in their use <ref type="bibr" target="#b12">[13]</ref>. Clinicians may lack confidence when using patient-generated data because they are seen as emotional judgements motivated by a patient's obsession with their health [3], or an indicator of underlying distress or a psychiatric disorder <ref type="bibr" target="#b64">[54]</ref>. Moreover, clinicians may lack trust in patients' ability to collect reliable and objective data <ref type="bibr" target="#b61">[51]</ref>. As a consequence of these factors, patient-generated data may be perceived to be inadequate evidence for use in clinical decisions, thereby leading clinicians to base such decisions in data that they can trust, namely their own clinical measurements and lab tests <ref type="bibr" target="#b61">[51]</ref>. We aim to identify how these barriers manifest across different clinical settings so that they may be addressed and overcome, in turn enabling patient-generated data in the service of personalised and data-driven healthcare.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Workflows for Using Patient-Generated Data</head><p>Analysing patterns of clinicians' use of health information, or their workflows, could help uncover common barriers to using patient-generated data. Despite the diverse and distinct tasks undertaken in different clinical settings <ref type="bibr" target="#b55">[47]</ref>, clinicians across settings share common goals, such as mitigating risk and harm, and engaging patients in their care <ref type="bibr">[8]</ref>. In our prior work, we observed that, when deriving a diagnosis using patient-generated data, clinicians across different roles followed a workflow comprising steps of information discovery, evaluation, generating hypotheses, and then systematically ruling-out hypothetical causes of the patient's condition <ref type="bibr" target="#b61">[51]</ref>. Related prior work has uncovered barriers in such workflows that create challenges for using electronic medical records, including time constraints, disruption to current practice, and legal consequences <ref type="bibr">[7]</ref>.</p><p>A few studies in prior CHI work have identified workflows for using patient-generated data in clinical settings. In a study evaluating an interface for viewing step-count data from Fitbit in clinical settings, a workflow was followed by a clinician comprising three phases <ref type="bibr">[26]</ref>. First, data were 'skimmed,' in which the clinician viewed the provided information and interpreted them with respect to prior known information about the patient. Second, the clinician asked questions about the data, such as what the patient was doing during data collection, and goals were set for the patient. Third, the clinician would wait until the end of the consultation to enter the goals into the interface. The three phases involved conversing with the patient, which suggests that successful workflows for using patient-generated data will encompass collaboration.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Mentis et al. observed doctors using</head><p>Fitbit data recorded by patients, also revealing that use of patient-generated data is a collaborative process, in which doctors and patients work towards a mutual understanding of the data <ref type="bibr" target="#b36">[32]</ref>. <ref type="bibr">Chung et al.</ref> propose that such data act as a boundary artefact, where collaboration around shared information requires knowledge and expertise from both clinicians and patients <ref type="bibr" target="#b13">[14]</ref>. However, prior work has demonstrated that clinical settings can be challenging environments for sharing information, with patients' separation from information artefacts impeding their ability to interact with information, in turn preventing collaboration with clinicians <ref type="bibr" target="#b57">[49]</ref>. Drawing on the work of Mentis et al. <ref type="bibr" target="#b36">[32]</ref>, we consider the workflow of using patient-generated data to be a collaborative process between clinician and patient. We frame our investigation in the shared characteristics across work settings through eliciting the experiences of clinicians to understand their perspectives of patient-generated data, and to identify common barriers.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>METHODS</head></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Literature Review</head><p>The aim of the literature review was to understand how barriers found in prior work may exist across different clinical settings. We adapted our method from our prior work <ref type="bibr" target="#b62">[52]</ref>: we searched seven databases (ACM DL, EBSCOHost, Web of Science, SCOPUS, JSTOR, Cochrane, and PubMed) for empirical studies of the use of patient-generated data in clinical settings. The databases were queried using search terms formed from permutations of "patient", "clinician" (and related terms, such as "doctor"), and "self-tracked data" (and related terms, such as "quantified self"), resulting in 1218 results. The inclusion criteria were: (i) the article needed to represent primary research, i.e., summarising one or more empirical studies, and (ii) involved some aspect of clinicians' lived experiences and use of patient-generated data. The breadth of search terms returned many papers identified as ineligible based on viewing the title alone. Of the remaining papers, 148 abstracts were read, to reach a final set of 22 papers (a PRISMA flowchart of this process is included as supplementary material available via the ACM DL). We read each manuscript in full to identify challenges and difficulties in the use of patient-generated data. These were then noted and collated across studies, grouped by similarity, and then categorised by workflow stage. ical settings. By interviewing clinicians directly, we could discern their lived experiences, which are crucial to understanding how patient-generated data would be used in real clinical settings <ref type="bibr" target="#b35">[31]</ref>. Our recruitment method and procedure, which are described below, were approved by our institutional review board.</p><p>To recruit clinicians from diverse clinical roles, snowball sampling <ref type="bibr" target="#b3">[5]</ref> was used, in which an initial sample of five seed participants from a prior study helped to recruit further participants. We drew inspiration from the snowball sampling technique used in a similar interview study about self-tracking in chronic illness management <ref type="bibr" target="#b33">[30]</ref>. Participants were recruited according to the following inclusion criteria: (i) they were certified clinicians, and (ii) they regularly worked with patients. A final sample of thirteen clinicians (listed in Table <ref type="table" target="#tab_0">1</ref>) were interviewed. While most prior studies of patient-generated data use focus on healthcare within the United States <ref type="bibr" target="#b62">[52]</ref>, clinicians interviewed in this study all practised within the United Kingdom. The clinical contexts of the participants spanned cardiology, oncology, mental health, surgery, emergency care, general practice, and audiology. Within this paper, the word 'clinician' is used to collectively describe members of these roles, who are all physicians who specifically work with and treat patients <ref type="bibr">[46]</ref>. Semi-structured interviews were then carried out either face-to-face, by video conference, or by phone. Our aim was to elicit perspectives on patient-generated data, so we asked questions pertaining to their clinical background and prior experience with patient-generated data, how they would evaluate and use such data, and their perspectives on how such data could affect their practice. Using semi-structured interviews allowed discussions of concepts which we had not been anticipated.</p><p>Interviews were audio recorded, transcribed, and then analysed in four parts. First, we applied iterative open-coding to categorise quotes from transcripts into themes around how patientgenerated data gets used, which were then consolidated with themes from the literature review. It emerged that participants expressed using patient-generated data as part of several distinct stages. Second, we ordered these stages chronologically to construct a generalised workflow for using patient-generated data in clinical settings. We chose to construct a new, original common workflow model rather than adapting existing workflow models, which largely pertained to specific clinical settings and types of data <ref type="bibr" target="#b36">[32,</ref><ref type="bibr" target="#b13">14]</ref>. Using the Workflow Elements Model <ref type="bibr" target="#b56">[48]</ref>, we considered the actors performing actions (i.e., clinician and patient), the artefacts used (e.g. patient-generated data), the actions taken, the characteristics of these actions, and the outcomes of these actions. Third, we thematically analysed each quote within each workflow stage, and inductively categorised each quote into salient themes regarding clinician's difficulties in using patient-generated data. We refined and compared these themes to reach a final set of barriers for each workflow stage. Finally, we compared how each barrier manifested in each clinical setting to identify generalisable challenges and workflows for using patient-generated data in clinical settings.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>RESULTS</head></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Literature Review</head><p>The literature search resulted in 22 studies which covered a broad range of clinical contexts for using patient-generated data, such as for identifying triggers of irritable bowel syndrome (IBS) <ref type="bibr" target="#b12">[13,</ref><ref type="bibr" target="#b13">14]</ref>, for managing multiple chronic conditions (MCC) <ref type="bibr" target="#b0">[2,</ref><ref type="bibr">3]</ref>, for monitoring itching conditions <ref type="bibr" target="#b31">[29]</ref>, for managing Parkinson's <ref type="bibr" target="#b36">[32]</ref>, for promoting healthy sleeping <ref type="bibr">[44,</ref><ref type="bibr" target="#b59">50]</ref>, and for diagnostics <ref type="bibr" target="#b61">[51]</ref>. We identified 12 distinct barriers, listed in Table <ref type="table">2</ref> with respect to the clinical settings they were identified in. These themes exhibit similarities with themes we identified in prior work <ref type="bibr" target="#b61">[51,</ref><ref type="bibr" target="#b62">52]</ref>, namely in identifying challenges pertaining to information quality. However, in this review we looked more broadly at the barriers to patient-generated data beyond just information quality, including characteristics of work settings, such as time constraints and information overload, and clinical practice, such as doctor-patient relationship and expertise.</p><p>Within clinical contexts, barriers can arise because of characteristics of patient-generated data. For example, the structure and reliability of such data are typically unfamiliar to clinicians, who are accustomed to working with data conforming to clinical standards. Moreover, the data can be incomplete, possibly because the patient forgets to take measurements, or because they fail to disclose certain information. Contextual information, such as what the patient was doing at the time of measurement, is also seldom available, making it difficult to validate the data.</p><p>Studies suggested that self-tracking may be an indication of a patient's obsession with their health or other psychiatric disorder. Barriers also related to time and skill constraints: interpreting patient-generated data can take too much time, require expertise which the clinician does not have, and lead to too much information to effectively make a decision. Finally, several studies identified potential disruption to workflows, including how patient-generated data could affect the doctor-patient relationship in unknown ways, and that healthcare IT systems are typically not interoperable with patient-generated data.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Semi-Structured Interviews</head><p>The interviews revealed diverse working patterns to how patient-generated data are evaluated and used. With such a diversity of clinicians, interview digressions explored the kinds of data patients may collect, the willingness to engage patients in their care, and the technical capacities of patients (such as a patient's ability to use self-tracking tools). For example, three cardiologists spoke about the use of a specific app for tracking atrial fibrillation, a common disease which causes irregular heart rhythm <ref type="bibr" target="#b20">[21]</ref>. It became clear that their treatment options are influenced by a variety of factors (including caffeine, diet, and alcohol use <ref type="bibr">[35]</ref>), and self-management can greatly benefit outcomes, such as by reducing stroke risk <ref type="bibr" target="#b63">[53]</ref>. These factors</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Barrier Description</head><p>General <ref type="bibr">[23,</ref><ref type="bibr">26,</ref><ref type="bibr" target="#b64">54]</ref> Irritable bowel syndrome <ref type="bibr" target="#b12">[13,</ref><ref type="bibr" target="#b13">14]</ref> Sleep <ref type="bibr">[44,</ref><ref type="bibr" target="#b59">50]</ref> Chronic illness <ref type="bibr" target="#b33">[30]</ref> Diagnosis <ref type="bibr" target="#b61">[51]</ref> Multiple chronic conditions <ref type="bibr" target="#b0">[2,</ref><ref type="bibr">3]</ref> Weight loss <ref type="bibr" target="#b10">[11]</ref> Itching <ref type="bibr" target="#b31">[29]</ref> Hospitalisation <ref type="bibr" target="#b38">[33]</ref> Parkinson's <ref type="bibr" target="#b36">[32]</ref> Diabetes <ref type="bibr" target="#b44">[39,</ref><ref type="bibr">42]</ref> Breast cancer <ref type="bibr">[24,</ref><ref type="bibr">40]</ref> Disease prevention <ref type="bibr" target="#b15">[15,</ref><ref type="bibr">26]</ref> Mental health <ref type="bibr" target="#b24">[25]</ref> Structure Data structure is unfamiliar or inconsistent. </p><formula xml:id="formula_0">G G G G G G G G</formula></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Completeness</head><formula xml:id="formula_1">G G G G G G G Impact to workflow Negative impact to doctor-patient relationship. G G G G G</formula><p>Table <ref type="table">2</ref>. Barriers to using patient-generated data identified within the literature review, listed with the clinical contexts in which they were observed.</p><p>contribute to determining a treatment plan for a patient, so asked about how specific types of information recorded using the app, such as symptoms and life events, might form part of the clinician's workflow. The cardiologists stressed the importance of collaborating with the patient to understand their health and decide between treatment options.</p><p>During interviews it was helpful to ask questions about specific forms of patient-generated data to understand their nature and use cases, and drill down on specific barriers to their use within different clinical settings. For example, a cardiologist, P2, was more interested than a surgeon, P8, in a patient's everyday life experiences. This difference was, in part, explained by the pertinence of barriers to those contexts; the surgeon perceived patient-generated data as too subjective, while the cardiologist specifically wanted subjective data to understand the burden of symptoms. Moreover, these clinicians described different approaches to working with patients; the cardiologist favoured collaboration with the patient while the surgeon described a more paternal role over the patient. The differences in the challenges for using patient-generated data reflect the diverse workflows used in specific clinical settings, but the overlap of barriers across settings suggests that these barriers may be common to clinical practice generally.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>COMMON WORKFLOWS AND BARRIERS</head><p>The barriers identified within the literature and interviews generally appeared within six chronological stages (illustrated in Figure <ref type="figure" target="#fig_1">1</ref>), which comprised a common clinical workflow for using patient-generated data. Below, each workflow stage is described with regard to the barriers within them. While participants tended to perceive a patient's motivations to self-track as a willingness to engage in their health, some worried that patients may obsess over aspects of their health or have hidden motivations for presenting the data (B1.1: patient motivation is not always obvious). A prior study in the context of multiple chronic condition management similarly found that "patients who tracked data very diligently (e.g., detailed exercise logs, which clinicians saw as having little clinical relevance) were sometimes referred to as obsessive and compulsive or fastidious" [3]. Likewise, a heart failure nurse, P11, said that "some patients can go a little bit over the top and collect everything." An emergency doctor said that such obsession can be a hindrance:</p><p>You do get patients who fixate on it a bit too much. That can be a hindrance, because they say look at all this effort I've put in, and then you glance at it, and say "actually that's not that relevant to what brought you in today." -P7</p><p>Patients may be motivated to mislead clinicians, possibly to force a diagnosis <ref type="bibr" target="#b61">[51]</ref> or avoid increased insurance premiums <ref type="bibr" target="#b0">[2]</ref>. A mental health specialist was concerned that patients may have motivations to lie about their health: If you ask about their data, you do start spotting body language changes when you say, "you said this, is that the case?" You see a certain shiftiness or a quick response which is maybe tinged with a bit of irritation or anger, tell-tale signs that something isn't stacking up. -P5</p><formula xml:id="formula_2">CHI</formula><p>Conversely, a mental health nurse said that her patients are unlikely to lie about their health, suggesting that barriers to using patient-generated data depend on the context of the situation, rather than just the clinical role:</p><p>There is a certain complex mental health problem where people might want to manipulate it a bit, but I don't get that impression from people generally with what we do. -P6</p><p>Where a patient is obsessed or misleading about certain aspects of their health, participants reflected that the clinician and patient had different objectives for the consultation (B1.2: misaligned objectives). To overcome this barrier, participants described a process of "managing the patient's expectations" (P2, a cardiologist) to provide a way for the clinician and patient to agree on the objectives of the consultation and inform the patient of what can reasonably be expected given the patient's condition. For example, they may discuss self-tracking habits with the patient to improve the patient's understanding and expectations of their health. This was the first indication that use of patient-generated data is an inherently collaborative process and that the patient is an important actor within the workflow towards aligning objectives. Having aligned objectives is critical for building a relationship of trust between the clinician and patient, and setting up the conditions necessary for using patient-generated data.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Stage 2: Evaluating Data Quality</head><p>A second workflow stage common across clinical settings was judging whether data were of sufficient quality to be admitted as clinical evidence. Quality entailed several properties of the data, including their accuracy and reliability. In this stage, an immediate barrier for participants was the difficulty in determining the accuracy and reliability of patient-generated data (B2.1: unclear accuracy and reliability). For example, a junior surgeon questioned the patients' technique for tracking blood pressure:</p><p>There is a question about how precise their equipment The completeness of data was also considered by participants to be an important quality of patient-generated data. Incomplete data was sometimes a significant barrier (B2.2: data is often incomplete), where missing data creates ambiguity around the patient's condition during those times. Regarding missing heart rate measurements, a cardiologist said:</p><p>Is it because they were unwell and therefore didn't make the reading, because they were in bed at home? Or is it because they were out partying and having so much fun that they didn't bother to make the reading? -P4</p><p>Other participants were more confident about the meaning of gaps in the data. In the context of a patient with a heart condition who records their general wellbeing on a scale of one to five, a cardiologist said that a gap in data collection indicates the patient was well enough that they didn't feel the need to collect data at that time:</p><p>Gaps would make me think that they can't be highly symptomatic because they aren't so bothered as to record it. It's an act of omission, and omission means they're fine. -P1</p><p>This reflects an important difference between clinical settings; although completeness was a commonly-raised quality issue of patient-generated data, its importance depended on the clinical setting. In some settings, incomplete data were not a significant concern, but instead seen as an indicator either of wellness or that patients experienced only transient or mild symptoms that did not concern them. Patients would be likely to keep track of things when they were of most concern to them. In other settings, missing data was more troubling, provoking questions about the patient's wellbeing during those times.</p><p>Relating information quality, participants needed to understand what the patient was doing during the time of collection (B2.3: data often lacks context). Knowledge such context is crucial for establishing the reliability of patient-generated data. For example, in the context of blood pressure measurements, an emergency doctor, said that high blood pressure may not indicate a medical problem, but can instead mean that "you were excited, you're angry, or there was something that was bringing your blood pressure up." Similarly, one study of irritable bowel syndrome management documents clinicians' difficulties in using patient diaries because clinicians needed "to know more about the context of the data in order to trust it, citing possible confounds including emotional and physical health, hydration, and exercise" <ref type="bibr">[45]</ref>.</p><p>Prior work has described clinicians' concerns with the quality of patient-generated data. In one study, which focused on therapy, a caregiver faked their daughter's blood glucose level to postpone insulin therapy [3]. This study also described clinicians as having little confidence in patient-generated due to "perceived lack of diligence, moral valence of the data (with patients unwilling to 'admit' undesirable and fear of consequences" [3]. Despite concerns that patient-generated data could be unreliable, especially where measurements were deemed to be incomplete or subjective, we found that some clinicians proposed that such deficiencies may reflect the patient's situation and how concerned they are with their condition. For example, one cardiologist said: People who are anxious often exaggerate a situation, but they're describing their perception of what's happening to their body so it's difficult to say their data are wrong. -Moreover, many participants viewed patient-generated data as reliable where relevant data are otherwise unavailable. A P1, described such data as 'the only way we have of judging the success of a procedure.' Participants described several kinds of information which not currently available through clinical means but could be made available through self-tracking: quality of life (e.g., the burden of symptoms on the patient's general wellbeing), symptom frequency and severity (e.g., palpitations or chest pain), and major life events death of a family member).</p><p>Stage 3: Judging Data Utility third stage of using patient-generated data comprised deciding whether data could or should be used in the current context. In a prior study, general practitioners described limited time to analyse patient-generated data between <ref type="bibr" target="#b12">[13]</ref>, and within these limitations is unrealistic or impossible to use patient-generated data insufficient time). Participants across all clinical roles described similar barriers to how data were in their settings. As described by one general practitioner, clinicians are often working under tighter timetables with an increasing workload from managing patients with long-term This is compounded by clinicians needing to take the time to judge whether patient-generated data is relevant to the current clinical setting (B3.2: data can be irrelevant). One emergency doctor explained that patient-generated data are not always relevant to the problem needing immediate attention: This data is not necessarily relevant to what's brought in today. It is of some use, but in the acute setting it's difficult because you want to deal with the problem that got there and then. Why they've been brought in, rather than looking at their general health. -An oncology nurse said that the relevance of patient-generated data depends on the patient and their circumstances: is different. It's all about them and it's what they need and every patient is going to need something different, so the relevance of the data would really depend. -Understanding what data is relevant is important, because patient-generated data can be distracting (B3.3: data can be distracting). A heart failure nurse raised concern that additional data could be distracting, but the evidence is still to have to hand:</p><p>The more information you have, sometimes it might detract away from analysing the root cause of the problem. But I always think if you've got the evidence there then it would be quite useful to have it to support your clinical judgement or your reasoning for doing something. -P11</p><p>A related barrier to data utility was the lack of interoperability with healthcare information systems, which limits the clinical usefulness of patient-generated data (B3.4: poor interoperability). A general practitioner found this particularly hindering:</p><p>It's a case of finding devices that interface with the IT system. Otherwise, they're extremely limited. If they integrate with the IT systems so that the data can be summarised in smart quick-to-see formats, then it's a useful tool.this stage comprised participants determining how data were by evaluating the relevance of the data the clinical context, the time it would take to utilise the data, the data could be distracting, and the feasibility of using the data with existing information systems.</p><p>Stage 4: Rearranging the Data described patients bringing in data in forms that were not standard in their clinical settings, such as hand written diaries or data from a Fitbit. In prior studies, clinicians expressed difficulties in using such data because of their atypical and unfamiliar structure <ref type="bibr" target="#b61">[51,</ref><ref type="bibr" target="#b12">13]</ref>. Similarly, our findings revealed that clinicians perceived the unfamiliar structure as a significant barrier to using patient-generated (B4.1: unfamiliar structure). For example, a nurse who manages patients with heart failure, P11, explained that she receives data about weight, blood pressure, and heart rate, but that the format of these data varies considerably. When participants were asked about how they would expect to see data presented, answers varied between structures which were familiar to the clinician, and structures which were familiar to the patient. 'Tech savvy' patients are likely to present data on a device or as paper charts, whereas elderly patients are likely to present information jotted down on pen and paper. mental health specialist emphasised the importance of the patient choosing a format which was suitable for themselves: They have produced this themselves, which means it's usable to them, rather than me, a clinician, telling them how to record their daily thoughts and feelings. -P5 Conversely, other clinicians described wanting to rearrange information into a form that they were familiar with.</p><p>for this is to ensure trends correlations in the data are made clear. Identifying trends or correlations has previously been described an important aspect of investigating a patient's condition: "if their goal is to identify specific triggers for symptoms, they look for correlations between factors, whereas if providers are monitoring a symptom or outcome, they try to identify trends and outliers in the data" <ref type="bibr" target="#b12">[13]</ref>. In the context of a patient who provided heart rate measurements time, an oncology nurse, P12, described wanting to draw a line graph to identify in their heart rate. A general practitioner said he would enter data into the patient's record: I will get them to leave me a hard copy and then I enter data into their notes. It's useful within the scope of the system, because it aggregates with the data we record and you can see if there's obvious differences between data and clinical data. -</p><p>A second reason for rearranging information was to ensure the efficient use of time. As described by an audiologist:</p><p>It would have to be very simply displayed, not overbearing, or too much information, but so you can see what's going and go from there, just in terms of time efficiency. -P13</p><p>A cardiologist described the importance of reducing large quantities of data (B4.2: unhelpful structure) down to visual or numerical information:</p><p>I wouldn't want reams of paper to then have to make own mind up as to what it is. I want some objective and that could just be visually displayed, graphically displayed, or numerically displayed. -A third reason for restructuring data is to form a patient history, a chronological story of medical details that has led up to the patient's current condition. This is a familiar format to forming the basis of medical records [36], and clinicians a view of significant dates in the past <ref type="bibr">[23]</ref>. An oncology nurse described filtering down the data to find just most significant parts for contributing to a patient history:</p><p>You read through the data when they get admitted. Anything of concern you write down for future reference. You wouldn't use it after that because you've written everything that you are concerned about. -P12</p><p>The process of forming a patient history often involves asking patient about that took place at certain times. For example, in the context of dementia, a mental health specialist described collaborating with the patient to form a medical history of their life prior to the onset of dementia: would do some life history work with them, to unmore about them as individual people prior to becoming mentally unwell. I wouldn't have a baseline of what that person was like before having a diagnosis, so having a written record, or some sort of information about that person's life history, really assists me. -This stage was important for data-use because it involved arranging unfamiliar data into usable and interpretable structures, such as standard clinical representations or a patient history.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>5: Interpreting the Data</head><p>The penultimate stage of the workflow involved participants reading and making sense of patient-generated data. The most prominent barrier we observed in this stage was that ambiguity exists in the meaning of patients' subjective data (B5.1: ambiguin subjective data). For example, when discussing a diary of a patient's wellbeing over time, encoded as numbers between one (feeling terrible) and five (feeling great), a mental health specialist wanted to know how the patient perceived these values: What is the patient's definition of 'terrible'? Because if one is 'terrible', and five is 'great', what exactly does two mean? What is three? What is the difference between two three? -P5</p><p>Despite the ambiguous meaning of such values, the subjective nature of patient-generated data was, in some cases, considered to be important. For example, a cardiologist, described subjectivity as important for understanding the patient's perception of quality of life, general wellbeing, and burden of symptoms, because these vary "between and within patients at different times". Understanding the subjective meaning of the data is particularly crucial for managing chronic illnesses, where interventions may be taken to improve the comfort of the patient. In the context of atrial fibrillation, a chronic heart one cardiologist said:</p><p>procedures we do for atrial fibrillation are for symptomatic gain, so the patient's perception of symptoms is more important than what they're objectively getting. -A related challenge was understanding what happened during times where there were missing data. As described in Stage 2, some participants found missing data to be ambiguous, either as a reflection that the patient was well enough to not warrant recording a measurement, or that they were so ill that they were unable to record a measurement. During interpretation of data, it is possible that the ambiguity of missing data could present a danger where incorrect assumptions are made about meaning of missing measurements (B5.2: unclear meaning missing data). Many participants described the importance of talking with patients to find out what happened in those gaps. For example, one cardiologist said:</p><p>There are conditions where people die, so it's important to if they're at risk. You can show them how few diary entries they've made and say "you haven't been filling in the diary. Is that because you feel okay?"mental health nurse described engaging in conversation with patients to understand more about what has been recorded: You can't get people to write absolutely everything down, but you might notice that at certain times of the day things are worse. You go through it with them and you see if they notice any patterns, and then I might pick up on something that they haven't picked upon.reason participants described conversing with patients was to understand more about what the patient was doing during measurements. For example, one cardiologist said: It's important to talk to the patient, because can say: "I see your blood pressure was this last Thursday, can you remember what you were doing? Had you just been exercising? Did you feel faint?"relied patient's recalling memories of past events to in the blanks, but, as another cardiologist explained, recall can be unreliable (B5.3: reliance on patient recall):</p><p>Brains aren't wired to precisely relate what we were doing at specific A patient may remember going to a football game on Saturday, and had bad palpitations during it, because they can link it to an event. -Throughout this workflow stage, the patient's role is crucial for co-interpreting, recalling and, contextualising their data.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Stage 6: Deciding on a Plan or Action</head><p>The final stage of the workflow involved participants taking an action as a result of using the patient-generated data. The types of actions that participants were prepared to take based on patient-generated data varied by clinical context and reflected their distinct clinical training. Some participants spoke specifically about using the data to justify an immediate intervention. In particular, when working with patients with long-term conditions, such as diabetes, participants tended to propose using data as a basis for treatment planning and interventions. For example, if a diabetic patient were to provide data showing consistent low blood sugar, an emergency doctor, said he would immediately change their insulin dose. cardiologists, P1, P2, and P3, described using such data to justify surgical interventions for long-term heart conditions. However, a hospital doctor, suggested that patientgenerated data alone is not normally sufficient to deliver an intervention, rather it helps decide whether to pursue further investigation, such as medical tests, examination, and consultations with other clinical specialists (B6.1: patient-generated data not considered concrete evidence). This may ultimately have resulted from earlier barriers, such as limited knowledge about the accuracy of the data, thereby affecting the final actions that could be taken based on them. Our prior research on the use patient-generated data within acute settings found that such data can act as evidence towards creating, supporting, and eliminating hypotheses for diagnoses, but the quality of the data is often unknown so clinicians often seek to gather additional forms of clinical information <ref type="bibr" target="#b61">[51]</ref>. This process of additional data gathering is standard medical practice towards choosing the right tests to pursue and ensuring patient safety <ref type="bibr" target="#b17">[17]</ref>.</p><p>The difference types of actions taken based on patientgenerated data could be explained by different work patterns across these clinical contexts. For example, in acute contexts, where decisions must be made quickly, practice may reflect a paternalistic model of medicine, where the clinician in charge and is primarily responsible for making decisions about the health, including the collection of <ref type="bibr" target="#b7">[9]</ref>.</p><p>is in contrast to the more collaborative nature of managing long-term conditions, where clinicians aim to engage patients in their healthcare decision making. Here, patients form a crucial part of the workflow by working together with clinicians in co-constructing treatment plans. The potential for patientgenerated data may be thus be limited by the routines and work of the clinical context (B6.2: data use limited by pracor training). This is not necessarily something which should be changed, rather it helps us orient patient-generated data towards applicable clinical scenarios. However, one hospital doctor proposed that practices will change over time, adopting patient-generated data in the pursual of patient empowerment:</p><p>We're moving away from a paternalistic model of medicine, where the doctor tells the patient what to do, towards a partnership approach of empowering the patient to be more responsible for their condition. Involving data and trying to get patients to understand it will help them understand and minimise risks with their condition. -Moreover, the rising demand on health services and the increasingly automated consumption of patient-generated data may make use of such data a more typical and necessary part of a clinical workflow. One cardiologist said:</p><p>We'll see more automated care based on data the patients capture delivered by algorithms and decision support tools. It's an essential for the future of the health service. Without it, the health service is not sustainable because don't have enough clinicians to keep a safe eye on all patients with complex long term conditions. -</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>DISCUSSION</head><p>The barriers have implications for how self-tracking tools may be designed and integrated into clinical care. In this section, we suggest implications in three areas: data collection, data and interpretation, and clinical practice. For each of these, we suggest design needs for overcoming the barriers, as shown Table <ref type="table" target="#tab_3">3</ref>.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Implications for Design: Data Collection</head><p>There are several potential solutions to barriers during data collection. First, the barrier relating to completeness (B2.2: data often incomplete) could be addressed by automating the of information. Such automation could be by collecting data continuously and passively by, for example, wearing sensor devices. A mental health specialist raised the possibility that such automatic data collection could mitigate problems arising from a patient forgetting to take measurements: has consistency from start to finish, without the gaps in recording that there are in the other charts because the forgets. For a Fitbit, why would there be gaps? -P5</p><p>While automatic data collection could improve data completeness, such automation will not completely solve the problem and could introduce new challenges. For example, consumer will naturally have limits to the extent to which they will be able to capture data; data from a Fitbit will have gaps where the person was not wearing it, or where the battery is drained. Furthermore, relying on automatic data capture introduces design challenges; patients would inherently be less in control over how and when their data were captured, which could translate into a loss of privacy, loss of meaning and interpretability, or simply a lack of useful subjectivity.</p><p>Another barrier which exists due to data collection techniques is the limited knowledge about what the patient was doing at the time of the measurements and events close to that time data often lacks context). While clinicians did rely on patient recall to gather this information, they acknowledged that recall can be flawed and yield inaccurate information reliance on patient recall). As a solution to these barriers, future self-tracking technologies may be able to record certain information automatically, such as the device used, how the patient took the measurement, and what they had been doing. These data could document the provenance of the data, that is, history of the data artefact for use as "a guide to authenticity or quality" <ref type="bibr">[1]</ref>. Contemporary literature has applied provenance to data collection and processing, where the authenticity or quality of data is documented and stored <ref type="bibr">[34]</ref>. Provenance documentation could thus provide a basis for evaluating data quality based on information not prone to recall bias. Moreover, this could document the device's accuracy and (B2.1: unclear accuracy and reliability).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Implications for Design: Data Use &amp; Interpretation</head><p>address barriers of data use and interpretation, a first obvious approach may be for self-tracking tools to support clinical standards of information structure and representation, effectively addressing the problem of structure unfamiliarity and interpretability under time constraints (B4.1: unfamiliar structure, B4.2: unhelpful structure, and B3.1: insufficient time). Prior studies have observed that summarised forms of information, such as tables and are most appropriate when decisions need to be made quickly, such as in acute settings <ref type="bibr">[27,</ref><ref type="bibr">45]</ref>. The interview findings reflect this; participants preferred was presented in a familiar summarised structure. For example, an emergency doctor explained that if a patient were to present data about their blood sugar, they would expect a standard representation: I expect to see a graph with a line delineating their blood sugar level, a red line for four, a line for seven, and amber, like a traffic light as the values go up. -P7 This description of an 'ideal presentation' of draws from the doctor's expertise in working with diabetic patients. The normal and dangerous values are familiar, and the coloursgreen, amber, and red -are routinely used in emergency clinical practice <ref type="bibr" target="#b11">[12]</ref>. Indeed, advice by a diabetes clinic <ref type="bibr" target="#b19">[20]</ref> includes a table with similar qualities to those described by P7: the normal, high, and very high values align to what described, and the colours green, amber, and red are used to illustrate this. Doctors in acute settings draw heavily on their expertise to interpret glance' in a amount of time, and so work most effectively when the data presented to them are familiar.</p><p>How do we best this design need? One option would be have tools simply to adopt clinical measurements, representations and forms. However, this would require patients to learn how to read, capture and interact with such data, which may be challenging or simply infeasible. Another possibility is to support multiple styles of information displays to represent data in forms most convenient to those using them, such as the patient, the doctor, and the triage nurse. A challenge of doing this is that it assumes that representations are perfectly equivalent and reversible and that transforms exist that can reliably used to convert between them without loss or distortion. Another drawback of the multiple representations idea is that a lack of a shared views means a loss of common ground between patient and clinician, thereby complicating shared sense-making.</p><p>A second set of opportunities may pertain to supporting more effective data filtering and navigation. The potentially large volume of patient-generated data (e.g. high resolution time series observations), combined with the diversity of information forms, means that being able to effectively focus on subsets, and summarise and identify trends, may facilitate sense-making whilst reducing distraction. Approaches such as multidimensional faceted filtering and selection, focus-plus-context and multi-resolution time series reduction, may address barriers relating to irrelevant data being shown (B3.2: data can be irrelevant and data can be distracting) <ref type="bibr" target="#b49">[43]</ref>.</p><p>Finally, a third approach is to work with healthcare systems to ensure interoperability, which can be a barrier when using patient-generated data (B3.4: poor interoperability). Parallels can be drawn with the integration of electronic medical records with health IT systems, for which there have been significant barriers to their introduction, including cost, training of clinicians, and poor support for third-party systems <ref type="bibr">[7]</ref>. Drawing from approaches for integrating electronic medical records could reveal solutions for overcoming such difficulties. Once again, various design challenges pertaining to preserving patient privacy and control would need to be addressed.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Implications for Clinical Practice</head><p>Some barriers may be less addressable through alone. For example, some were concerned about a move from a paternalistic care model towards a participatory one, which reflects a need to change practice rather than a design (B6.2: data use limited by practice or training). Prior work at CHI has argued that traditional clinical practice must be revised to a more participatory healthcare to address the problems they identify in doctor-patient use of IT systems <ref type="bibr" target="#b57">[49,</ref><ref type="bibr" target="#b4">6]</ref>. Indeed, encouraging collaboration within clinical consultations could mitigate several barriers to using patient-generated data. Conversation can overcome differences in the clinician's and objectives (B1.1: patient motivation is not always and B1.2: misaligned objectives). Prior work in the specific domain of management of irritable bowel syndrome has demonstrated that patient-generated data can foster this conversation by acting as a boundary artefact, engendering a mutual understanding between the doctor and patient and negotiating shared expectations <ref type="bibr" target="#b13">[14]</ref>. We suggest that such collaboration could benefit patient-generated data use across a broad range of clinical settings. As described by a hospital doctor: If a patient can understand their condition better then they understand how to manage their condition better, and then you're more likely to empower them to take responsibility their condition. It's a joint effort. You have to work in partnership with the patient to achieve that. -Moreover, such collaboration through use of a boundary artefact forms a basis for understanding a patient's experiences, potentially mitigating barriers relating to ambiguity in patient-generated data (B5.1: ambiguity in subjective data and unclear meaning of missing data).</p><p>final barrier relating practice that patientgenerated data may not be considered by clinicians to be sufficient as medical evidence (B6.1: patient-generated data not considered concrete evidence). This is primarily caused by the of scientific validation of self-tracking tools and practices, highlighting that further research into these tools is critical for patient-generated data to be trusted in clinical contexts.</p><p>There are several limitations of this study which have shaped our findings. First, we did not interview patients, so findings around patients' perspectives of workflows and barriers were derived only from the analysis of existing literature. This was intentionally done because much of the earlier work focused on patients' use of self-tracking tools, and because we wanted to identify aspects of patient-generated data use in clinical (rather than in patient workflows). However, we acknowledge that patients' perspectives are extremely valuable in designing solutions to these problems, as many inevitably involve trade-offs. Second, although we sought to interview a diverse range of clinicians, the sheer number and diversity of roles in modern healthcare meant that we only were able cover a small subset of common roles. Even among these roles that we covered, since we were only able to interview 1-4 members of each, we could only get a sample of the perspectives of each. Finally, all of our interviews were with healthcare professionals working within the United Kingdom, thus findings may be affected by the standardised practices and workflows of the National Health Service <ref type="bibr">[19]</ref>. There might considerable variation in practices and workflows between our findings, and those of very differently structured healthcare systems, such as the multi-payer healthcare systems of the United States. It is our intention in the face of these limitations follow up this work with work that will expand interviews to those in other roles and countries, as well as to start to assess the feasibility of particular solutions through input from patients.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>CONCLUSION</head><p>This paper contributes an understanding of barriers to the use of patient-generated data in clinical settings, derived from a synthesis of existing literature and interviews conducted with thirteen healthcare professionals from several common clinical roles. Our findings suggest that, while the specific challenges pertaining to the use of patient-generated data vary considerably across clinical settings, these barriers occur along stages a common workflow. We thus proposed a six-stage workflow model of patient-generated data use, which includes stages to data capture, quality, utility, structure, interpretation, and finally application in a of action. Based on this model, we discussed ways that these barriers might be addressed through the design of tools for improved data capture (to support later clinical use), improved interpretability by clinicians, and support for joint sense-making with patients. Finally, discussed the role of the increased use of patient-generated data in the shift towards participatory care, in particular the need consider in clinical workflows IT systems.</p><p>An outcome of the use of patient-generated data in clinical settings is the increased collaboration between doctor and patient in managing care. This has the twin benefits of patient dependence on the clinician, thereby empowering the patient to improve their health and wellbeing. We do not claim that our findings are sufficient for understanding workflows in individual clinical settings, but the broad range of clinical settings does afford an understanding of the broader use of patient-generated data. By providing future research with to address these barriers, our findings can improved collaboration between patient and clinician in decision-making, as well as improved clinical outcomes.</p></div><figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_0"><head></head><label></label><figDesc>Missing measurements or poor patient adherence. G G G G Reliability Inaccuracies in data, or self-tracking practice not clinically validated. G G G G G G G G Context What the patient was doing at the time of measurement is unknown. G G G Relevance Data are irrelevant to the current clinical context. Underlying condition Self-tracking behaviour may indicate obsession or psychiatric disorder. G Insufficient time Clinicians do not have sufficient time to interpret and analyse data. Insufficient expertise Clinicians have not received training for using such data. G G G G G Information overload Too much information for the clinician to work with. G G Poor interoperability Data difficult to integrate into clinical systems, can go missing.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_1"><head>Stage 1 :</head><label>1</label><figDesc>Aligning Patient and Clinician ObjectivesThe first stage of the workflow involves crafting mutual objectives for the consultation. When a patient presents patient-generated data to a clinician, one of the first questions the clinician might ask themselves is why the patient engaged in self-tracking. Investigating this question gives clinicians an understanding of what the patient hopes to achieve and what they expect from the consultation, and their underlying reasons for self-tracking. Having aligned motivations was seen to facilitate the ability for clinicians and patients to collaborate on the management of a patient's condition, and to engender mutual trust. As described by a cardiologist:Trust of the data would be determined by what the patient's expectations were and drivers for using self-tracking. -P1</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_0"><head>Table 1 .</head><label>1</label><figDesc>Participants of interviews by clinical role, and years in practice.</figDesc><table><row><cell>Clinical role</cell><cell>Participants</cell><cell>Years in practice</cell></row><row><cell>Cardiologist</cell><cell>P1, P2, P3, P4</cell><cell>All 20+ years</cell></row><row><cell>Mental health specialist</cell><cell>P5, P6</cell><cell>10 years, 5 years</cell></row><row><cell>Emergency doctor</cell><cell>P7</cell><cell>5 years</cell></row><row><cell>Junior surgeon</cell><cell>P8</cell><cell>5 years</cell></row><row><cell>Hospital doctor</cell><cell>P9</cell><cell>4 years</cell></row><row><cell>General practitioner</cell><cell>P10</cell><cell>20+ years</cell></row><row><cell>Heart failure nurse</cell><cell>P11</cell><cell>20+ years</cell></row><row><cell>Oncology nurse</cell><cell>P12</cell><cell>2 years</cell></row><row><cell>Audiologist</cell><cell>P13</cell><cell>3 years</cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_1"><head>2018 Paper CHI 2018, April 21-26, 2018, Montréal, QC, Canada Paper 484 1 Align patient and clinician objectives</head><label></label><figDesc>Data use limited by practice or training Figure 1. The six-stage workflow for using patient-generated data. Stages take place chronologically, within each several barriers commonly arise.</figDesc><table><row><cell></cell><cell>Evaluate data quality</cell><cell>Judge data utility</cell></row><row><cell></cell><cell>2</cell><cell>3</cell></row><row><cell>B1.1: Patient motivation is not always</cell><cell>B2.1: Unclear accuracy and reliability</cell><cell>B3.1: Insufficient time</cell></row><row><cell>obvious</cell><cell>B2.2: Data is often incomplete</cell><cell>B3.2: Data can be irrelevant</cell></row><row><cell>B1.2: Misaligned objectives</cell><cell>B2.3: Data often lacks context</cell><cell>B3.3: Data can be distracting</cell></row><row><cell></cell><cell></cell><cell>B3.4: Poor interoperability</cell></row><row><cell>Decide on a plan or action</cell><cell>Interpret the data</cell><cell>Rearrange the data</cell></row><row><cell>6</cell><cell>5</cell><cell>4</cell></row><row><cell>B6.1: Patient-generated data not considered</cell><cell>B5.1: Ambiguity in subjective data</cell><cell>B4.1: Unfamiliar structure</cell></row><row><cell>concrete evidence</cell><cell>B5.2: Unclear meaning of missing data</cell><cell>B4.2: Unhelpful structure</cell></row><row><cell>B6.2:</cell><cell>B5.3: Reliance on patient recall</cell><cell></cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_2"><head></head><label></label><figDesc>is and if they are doing it right. But if they bring in the equipment and show you it, you can see that it's fairly accurate. But I don't often take things at face value. -P8 Similarly, a general practitioner described a consequence of not knowing the reliability of data as a lack of objectivity:</figDesc><table /><note>It's not gone through some objective or analysis of assessment. It won't stand up to that kind of scientific approach. It would be more a commentary, it assists the subjective kind of discussion, the subjective embellishment of what they are feeling. I couldn't use it in any objective way. -P10</note></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_3"><head>Table 3 .</head><label>3</label><figDesc>Barriers to using patient-generated data, cause contexts, and potential solutions</figDesc><table><row><cell>Problem space</cell><cell>Barriers</cell><cell>Potential solutions</cell></row><row><cell>Design of data col-lection tools and practices</cell><cell>B2.1: Unclear accuracy and reliability B2.2: Data is often incomplete B2.3: Data often lacks B5.3: Reliance on patient recall</cell><cell>• Automate collection to improve completeness, reducing need for • context and device reliability provenance. Validate self-tracking tools to ensure reliability.</cell></row><row><cell></cell><cell>B3.1: Insufficient time</cell><cell></cell></row><row><cell>Design of tools for data use and interpretation</cell><cell>B3.2: Data can be irrelevant B3.3: Data can be distracting B3.4: Poor interoperability B4.1: Unfamiliar structure</cell><cell>• Draw on clinical standards for displaying information. data to only show relevant information. • with healthcare systems to ensure interoperability.</cell></row><row><cell></cell><cell>B4.2: Unhelpful structure</cell><cell></cell></row><row><cell></cell><cell>B1.1: Patient motivation is not always obvious</cell><cell></cell></row><row><cell></cell><cell>B1.2: Misaligned objectives</cell><cell>Increase collaboration with patient so they understand reasons for</cell></row><row><cell>Clinical practice and</cell><cell>B5.1: Ambiguity in subjective data</cell><cell>self-tracking, addressing problems of misaligned objectives, ambiguity</cell></row><row><cell>training</cell><cell>B5.2: Unclear meaning of missing data</cell><cell>in the data, and improving patients' awareness of what to track.</cell></row><row><cell></cell><cell>Patient-generated data not considered concrete evidence</cell><cell>Clinically validate self-tracking tools and practices.</cell></row><row><cell></cell><cell>B6.2: Data use limited by practice or training</cell><cell></cell></row></table></figure>
+		</body>
+		<back>
+
+			<div type="acknowledgement">
+<div xmlns="http://www.tei-c.org/ns/1.0"><p>We thank those who took time to participate in the interviews. This work was supported by the University of Southampton Web Science Doctoral Training Centre and the SOCIAM Project, under Engineering and Physical Sciences Research Council grants EP/G036926/1 and EP/J017728/2.</p></div>
+			</div>
+
+			<div type="references">
+
+				<listBibl>
+
+<biblStruct xml:id="b0">
+	<analytic>
+		<title level="a" type="main">The invisible work of personal health information management among people with multiple chronic conditions: qualitative interview among patients and providers</title>
+		<author>
+			<persName><forename type="first">S</forename><surname>Jessica</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Ancker</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Baria</forename><surname>Holly O Witteman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Thierry</forename><surname>Hafeez</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mary</forename><surname>Provencher</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Esther</forename><surname>Van De Graaf</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Wei</surname></persName>
+		</author>
+		<idno type="DOI">10.2196/jmir.4381</idno>
+		<ptr target="http://dx.doi.org/10.2196/jmir.4381" />
+	</analytic>
+	<monogr>
+		<title level="j">Journal of Medical Internet Research</title>
+		<imprint>
+			<biblScope unit="volume">17</biblScope>
+			<biblScope unit="issue">6</biblScope>
+			<date type="published" when="2015">2015a. 2015</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b1">
+	<analytic>
+		<title level="a" type="main">You Get Reminded You&apos;re a Sick Person&quot;: personal Data Tracking and Patients With Multiple Conditions</title>
+		<author>
+			<persName><forename type="first">S</forename><surname>Jessica</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Ancker</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Baria</forename><surname>Holly O Witteman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Thierry</forename><surname>Hafeez</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mary</forename><surname>Provencher</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Esther</forename><surname>Van De Graaf</surname></persName>
+		</author>
+		<idno type="DOI">10.2196/jmir.4209</idno>
+		<ptr target="http://dx.doi.org/10.2196/jmir.4209" />
+	</analytic>
+	<monogr>
+		<title level="j">Journal of Medical Internet Research</title>
+		<imprint>
+			<biblScope unit="volume">17</biblScope>
+			<biblScope unit="page">e202</biblScope>
+			<date type="published" when="2015">2015b. 2015</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b2">
+	<analytic>
+		<title level="a" type="main">The quantified patient: a patient participatory culture</title>
+		<author>
+			<persName><forename type="first">Geoff</forename><surname>Appelboom</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Melissa</forename><surname>Lopresti</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jean-Yves</forename><surname>Reginster</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><forename type="middle">Sander</forename><surname>Connolly</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Emmanuel</forename><forename type="middle">P L</forename><surname>Dumont</surname></persName>
+		</author>
+		<idno type="DOI">10.1185/03007995.2014.954032</idno>
+		<ptr target="http://dx.doi.org/10.1185/03007995.2014.954032" />
+	</analytic>
+	<monogr>
+		<title level="j">Current Medical Research and Opinion</title>
+		<imprint>
+			<biblScope unit="volume">30</biblScope>
+			<biblScope unit="page" from="2585" to="2587" />
+			<date type="published" when="2014">2014. 2014</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b3">
+	<monogr>
+		<author>
+			<persName><forename type="first">R</forename><surname>Earl</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Babbie</surname></persName>
+		</author>
+		<title level="m">The Practice of Social Research</title>
+				<meeting><address><addrLine>Boston</addrLine></address></meeting>
+		<imprint>
+			<date type="published" when="2012">2012</date>
+		</imprint>
+	</monogr>
+	<note>Cengage Learning</note>
+</biblStruct>
+
+<biblStruct xml:id="b4">
+	<analytic>
+		<title level="a" type="main">Healthcare in Everyday Life: Designing Healthcare Services for Daily Life</title>
+		<author>
+			<persName><surname>Stinne Aaløkke</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Thomas</forename><forename type="middle">Riisgaard</forename><surname>Ballegaard</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Morten</forename><surname>Hansen</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Kyng</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/1357054.1357336</idno>
+		<ptr target="http://dx.doi.org/10.1145/1357054.1357336" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2008 Conference on Human Factors in Systems (CHI &apos;08)</title>
+				<meeting>the 2008 Conference on Human Factors in Systems (CHI &apos;08)<address><addrLine>New York</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computing Machinery</publisher>
+			<date type="published" when="2008">2008</date>
+			<biblScope unit="page" from="1807" to="1816" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b5">
+	<analytic>
+		<title level="a" type="main">Barriers to the acceptance of electronic medical records by physicians from systematic review to taxonomy and interventions</title>
+		<author>
+			<persName><forename type="first">Albert</forename><surname>Boonstra</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Manda</forename><surname>Broekhuis</surname></persName>
+		</author>
+		<idno type="DOI">10.1186/1472-6963-10-231</idno>
+		<ptr target="http://dx.doi.org/10.1186/1472-6963-10-231" />
+	</analytic>
+	<monogr>
+		<title level="j">BioMed Central: Health Services Research</title>
+		<imprint>
+			<biblScope unit="volume">10</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page">231</biblScope>
+			<date type="published" when="2010">2010. 2010</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b6">
+	<analytic>
+		<title level="a" type="main">Health Information Technology: Integration of Workflow into Meaningful Use of Electronic Health Records</title>
+		<author>
+			<persName><forename type="first">Felicia</forename><forename type="middle">M</forename><surname>Bowens</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Patricia</forename><forename type="middle">A</forename><surname>Frye</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Warren</forename><forename type="middle">A</forename><surname>Jones</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Perspectives in Health Information</title>
+		<imprint>
+			<biblScope unit="volume">7</biblScope>
+			<biblScope unit="page">1</biblScope>
+			<date type="published" when="2010">2010. 2010</date>
+		</imprint>
+	</monogr>
+	<note>Fall</note>
+</biblStruct>
+
+<biblStruct xml:id="b7">
+	<monogr>
+		<title level="m" type="main">Shared decision-making in the medical encounter: what does it mean?</title>
+		<author>
+			<persName><forename type="first">Cathy</forename><surname>Charles</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Amiram</forename><surname>Gafni</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Tim</forename><surname>Whelan</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="1997">1997</date>
+		</imprint>
+	</monogr>
+	<note>Or it takes at least two to tango</note>
+</biblStruct>
+
+<biblStruct xml:id="b8">
+	<analytic>
+		<title/>
+		<idno type="DOI">10.1016/S0277-9536(96)00221-3</idno>
+		<idno>S0277-9536(96)00221-3</idno>
+		<ptr target="http://dx.doi.org/10.1016/" />
+	</analytic>
+	<monogr>
+		<title level="j">Science &amp; Medicine</title>
+		<imprint>
+			<biblScope unit="volume">44</biblScope>
+			<biblScope unit="page" from="681" to="692" />
+			<date type="published" when="1997">1997</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b9">
+	<analytic>
+		<title level="a" type="main">Patient-centered activity monitoring in the self-management of chronic health conditions</title>
+		<author>
+			<persName><forename type="first">Emil</forename><surname>Chiauzzi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Carlos</forename><surname>Rodarte</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Pronabesh</forename><surname>Dasmahapatra</surname></persName>
+		</author>
+		<idno type="DOI">10.1186/s12916-015-0319-2</idno>
+		<ptr target="http://dx.doi.org/10.1186/s12916-015-0319-2" />
+	</analytic>
+	<monogr>
+		<title level="j">BioMed Central: Medicine</title>
+		<imprint>
+			<biblScope unit="volume">13</biblScope>
+			<biblScope unit="page">1</biblScope>
+			<date type="published" when="2015">2015. 2015</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b10">
+	<analytic>
+		<title level="a" type="main">of a weight loss mobile app linked with an accelerometer for use in the clinic: usability, acceptability, and early testing of its impact on the patient-doctor relationship</title>
+		<author>
+			<persName><forename type="first">Seryung</forename><surname>Choo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ju Young Se Young</forename><surname>Jung</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sarah</forename><surname>Kim</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jeong</forename><forename type="middle">Eun</forename><surname>Kim</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jong</forename><forename type="middle">Soo</forename><surname>Han</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sohye</forename><surname>Kim</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jeong</forename><forename type="middle">Hyun</forename><surname>Kim</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yongseok Dongouk</forename><surname>Kim</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Steve</forename><surname>Kim</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Steinhubl</surname></persName>
+		</author>
+		<idno type="DOI">10.2196/mhealth.4546</idno>
+		<ptr target="http://dx.doi.org/10.2196/mhealth.4546" />
+	</analytic>
+	<monogr>
+		<title level="j">Journal of Medical Internet Research: mHealth and uHealth</title>
+		<imprint>
+			<biblScope unit="volume">1</biblScope>
+			<biblScope unit="page">e24</biblScope>
+			<date type="published" when="2016">2016. 2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b11">
+	<analytic>
+		<title level="a" type="main">Modern Triage in the Emergency Department</title>
+		<author>
+			<persName><forename type="first">Michael</forename><surname>Christ</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Florian</forename><surname>Grossmann</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Daniela</forename><surname>Winter</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Roland</forename><surname>Bingisser</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Elke</forename><surname>Platz</surname></persName>
+		</author>
+		<idno type="DOI">10.3238/arztebl.2010.0892</idno>
+		<ptr target="http://dx.doi.org/10.3238/arztebl.2010.0892" />
+	</analytic>
+	<monogr>
+		<title level="j">Deutsches Ärzteblatt International</title>
+		<imprint>
+			<biblScope unit="volume">107</biblScope>
+			<biblScope unit="page" from="892" to="898" />
+			<date type="published" when="2010">2010. 2010</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b12">
+	<analytic>
+		<title level="a" type="main">More than telemonitoring: health provider use and nonuse of life-log data in irritable bowel syndrome and weight management</title>
+		<author>
+			<persName><forename type="first">Chia-Fang</forename><surname>Chung</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jonathan</forename><surname>Cook</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Elizabeth</forename><surname>Bales</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jasmine</forename><surname>Zia</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sean</forename><forename type="middle">A</forename><surname>Munson</surname></persName>
+		</author>
+		<idno type="DOI">10.2196/jmir.4364</idno>
+		<ptr target="http://dx.doi.org/10.2196/jmir.4364" />
+	</analytic>
+	<monogr>
+		<title level="j">Journal Medical Internet Research</title>
+		<imprint>
+			<biblScope unit="volume">17</biblScope>
+			<biblScope unit="page">e203</biblScope>
+			<date type="published" when="2015">2015. 2015</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b13">
+	<analytic>
+		<title level="a" type="main">artifacts in personal patient-provider collaboration with patient-generated data</title>
+		<author>
+			<persName><forename type="first">Chia-Fang</forename><surname>Chung</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kristin</forename><surname>Dew</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Allison</forename><surname>Cole</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Zia</forename></persName>
+		</author>
+		<author>
+			<persName><forename type="first">James</forename><surname>Fogarty</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Julie</forename><forename type="middle">A</forename><surname>Kientz</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sean</forename><forename type="middle">A</forename><surname>Munson</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2016 Conference on Computer-Supported Cooperative Work &amp; Social Computing (CSCW &apos;16)</title>
+				<meeting>the 2016 Conference on Computer-Supported Cooperative Work &amp; Social Computing (CSCW &apos;16)<address><addrLine>New York</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computing Machinery</publisher>
+			<biblScope unit="page" from="770" to="786" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b14">
+	<monogr>
+		<title/>
+		<idno type="DOI">10.1145/2818048.2819926</idno>
+		<ptr target="http://dx.doi.org/10.1145/2818048.2819926" />
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b15">
+	<analytic>
+		<title level="a" type="main">Integrating patient-generated health data into clinical care settings or clinical decision-making: lessons learned from</title>
+		<author>
+			<persName><forename type="first">J</forename><surname>Deborah</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sara</forename><forename type="middle">R</forename><surname>Cohen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Gillian</forename><forename type="middle">R</forename><surname>Keller</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">David</forename><forename type="middle">A</forename><surname>Hayes</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Joan</forename><forename type="middle">S</forename><surname>Dorr</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Ash</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Dean</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Sittig</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Project Journal of Medical Internet Research</title>
+		<imprint>
+			<biblScope unit="volume">3</biblScope>
+			<biblScope unit="page" from="e26" to="e26" />
+			<date type="published" when="2016">2016</date>
+		</imprint>
+	</monogr>
+	<note>Human Factors</note>
+</biblStruct>
+
+<biblStruct xml:id="b16">
+	<monogr>
+		<title level="m" type="main">Cerner taps Validic to bring patient-generated data into portal</title>
+		<author>
+			<persName><forename type="first">Jonah</forename><surname>Comstock</surname></persName>
+		</author>
+		<ptr target="http://www.mobihealthnews.com/41269/" />
+		<imprint>
+			<date type="published" when="2015">2015</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b17">
+	<analytic>
+		<title level="a" type="main">Achieving Quality in Clinical Decision Making</title>
+		<author>
+			<persName><forename type="first">Pat</forename><surname>Croskerry</surname></persName>
+		</author>
+		<idno type="DOI">10.1197/aemj.9.11.1184</idno>
+		<ptr target="http://dx.doi.org/10.1197/aemj.9.11.1184" />
+	</analytic>
+	<monogr>
+		<title level="j">Cognitive Strategies and Detection of Academic Emergency Medicine</title>
+		<imprint>
+			<biblScope unit="volume">9</biblScope>
+			<biblScope unit="page" from="1184" to="1204" />
+			<date type="published" when="2002">2002. 2002</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b18">
+	<monogr>
+		<title level="m" type="main">Office of the National Coordinator for Health Information Technology</title>
+		<author>
+			<persName><forename type="first">Mary Jo</forename><surname>Deering</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Erin</forename><surname>Siminerio</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Scott</forename><surname>Weinstein</surname></persName>
+		</author>
+		<imprint>
+			<pubPlace>DC, USA</pubPlace>
+		</imprint>
+	</monogr>
+	<note type="report_type">Technical Report</note>
+	<note>Issue brief: patient-generated health data and IT</note>
+</biblStruct>
+
+<biblStruct xml:id="b19">
+	<analytic>
+		<title/>
+		<author>
+			<persName><surname>Edinburgh Centre Diabetes</surname></persName>
+		</author>
+		<ptr target="http://www.edinburghdiabetes.com/information-faqs" />
+	</analytic>
+	<monogr>
+		<title level="j">Diabetes Information &amp; Common</title>
+		<imprint>
+			<biblScope unit="volume">28</biblScope>
+			<date type="published" when="2016-07">2016. Jul</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b20">
+	<analytic>
+		<title level="a" type="main">Prevalence of diagnosed atrial fibrillation in adults: national implications for rhythm management and stroke prevention: the anticoagulation and risk factors in atrial (atria</title>
+		<author>
+			<persName><forename type="first">Alan</forename><forename type="middle">S</forename><surname>Go</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Elaine</forename><forename type="middle">M</forename><surname>Hylek</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kathleen</forename><forename type="middle">A</forename><surname>Phillips</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yuchiao</forename><surname>Chang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Lori</forename><forename type="middle">E</forename><surname>Henault</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Daniel</forename><forename type="middle">E</forename><surname>Selby</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Singer</surname></persName>
+		</author>
+		<idno type="DOI">10.1001/jama.285.18.2370</idno>
+		<ptr target="http://dx.doi.org/10.1001/jama.285.18.2370" />
+	</analytic>
+	<monogr>
+		<title level="j">Journal of the American Medical Association</title>
+		<imprint>
+			<biblScope unit="volume">285</biblScope>
+			<biblScope unit="page" from="2370" to="2375" />
+			<date type="published" when="2001">2001. 2001</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b21">
+	<analytic>
+		<title level="a" type="main">Care partnerships: toward technology to support teens&apos; participation in their health care</title>
+		<author>
+			<persName><forename type="first">Matthew</forename><forename type="middle">K</forename><surname>Hong</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Lauren</forename><surname>Wilcox</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Daniel</forename><surname>Machado</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Olson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Stephen</forename><forename type="middle">F</forename><surname>Simoneaux</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2858036.2858508</idno>
+		<ptr target="http://dx.doi.org/10.1145/2858036.2858508" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the Conference on Human Factors in Computing (CHI &apos;16)</title>
+				<meeting>the Conference on Human Factors in Computing (CHI &apos;16)<address><addrLine>New York</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computing Machinery</publisher>
+			<date type="published" when="2016">2016</date>
+			<biblScope unit="page" from="5337" to="5349" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b22">
+	<analytic>
+		<title level="a" type="main">Designing patient-centered personal health records: health care professionals&apos; perspective on patient-generated data</title>
+		<author>
+			<persName><forename type="first">Nicholas</forename><surname>Huba</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yan</forename><surname>Zhang</surname></persName>
+		</author>
+		<idno type="DOI">10.1007/s10916-012-9861-z</idno>
+		<ptr target="http://dx.doi.org/10.1007/s10916-012-9861-zL" />
+	</analytic>
+	<monogr>
+		<title level="j">Journal of Medical Systems</title>
+		<imprint>
+			<biblScope unit="volume">36</biblScope>
+			<biblScope unit="page" from="3893" to="3905" />
+			<date type="published" when="2012">2012. 2012</date>
+		</imprint>
+	</monogr>
+	<note>and Elizabeth D. Mynatt</note>
+</biblStruct>
+
+<biblStruct xml:id="b23">
+	<analytic>
+		<title level="a" type="main">My Journey Compass: a preliminary investigation of a mobile tool for cancer patients</title>
+		<idno type="DOI">10.1145/2556288.2557194</idno>
+		<ptr target="http://dx.doi.org/10.1145/2556288.2557194" />
+	</analytic>
+	<monogr>
+		<title level="m">of the Conference on Human Factors in Computing (CHI &apos;14)</title>
+				<meeting><address><addrLine>New York</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computing Machinery</publisher>
+			<biblScope unit="page" from="663" to="672" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b24">
+	<analytic>
+		<title level="a" type="main">Self-tracking for mental wellness: understanding expert perspectives and student experiences</title>
+		<author>
+			<persName><forename type="first">Christina</forename><surname>Kelley</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Bongshin</forename><surname>Lee</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Lauren</forename><surname>Wilcox</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3025453.3025750</idno>
+		<ptr target="http://dx.doi.org/10.1145/3025453.3025750" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2017 Conference on Human Factors in Computing (CHI &apos;17)</title>
+				<meeting>the 2017 Conference on Human Factors in Computing (CHI &apos;17)<address><addrLine>New York</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computing Machinery</publisher>
+			<date type="published" when="2017">2017</date>
+			<biblScope unit="page" from="629" to="641" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b25">
+	<analytic>
+		<title level="a" type="main">Prescribing 10,000 Steps Like Aspirin: Designing a Novel Interface for Data-Driven Consultations</title>
+		<author>
+			<persName><forename type="first">Yoojung</forename><surname>Kim</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Eunyoung</forename><surname>Heo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Hyunjeong</forename><surname>Lee</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sookyoung</forename><surname>Ji</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jueun</forename><surname>Choi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jeong-Whun</forename><surname>Kim</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Joongseek</forename></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sooyoung</forename><surname>Yoo</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2017</title>
+				<meeting>the 2017</meeting>
+		<imprint>
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b26">
+	<monogr>
+		<title level="m">Conference on Human Factors in Computing Systems &apos;17)</title>
+				<imprint>
+			<publisher>DOI</publisher>
+			<biblScope unit="page" from="5787" to="5799" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b27">
+	<monogr>
+		<title/>
+		<idno type="DOI">10.1145/3025453.3025570</idno>
+		<ptr target="http://dx.doi.org/10.1145/3025453.3025570" />
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b28">
+	<monogr>
+		<title/>
+		<author>
+			<persName><forename type="first">Yoojung</forename><surname>Kim</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sookyoung</forename><surname>Ji</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Hyunjeong</forename><surname>Lee</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sooyoung</forename><surname>Kim</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Joongseek</forename><surname>Yoo</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Lee</surname></persName>
+		</author>
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b29">
+	<analytic>
+		<title level="a" type="main">My doctor is keeping an eye on me!&quot;: exploring the clinical applicability of a mobile food logger</title>
+		<idno type="DOI">10.1145/2858036.2858145</idno>
+		<ptr target="http://dx.doi.org/10.1145/2858036.2858145" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2016 Conference on Human Factors in Systems (CHI &apos;16)</title>
+				<meeting>the 2016 Conference on Human Factors in Systems (CHI &apos;16)<address><addrLine>New York</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computing Machinery</publisher>
+			<biblScope unit="page" from="5620" to="5631" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b30">
+	<analytic>
+		<title level="a" type="main">Health App Use Among US Mobile Phone Owners: A National Survey</title>
+		<author>
+			<persName><forename type="first">Paul</forename><surname>Krebs</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T. Dustin</forename><surname>Duncan</surname></persName>
+		</author>
+		<idno type="DOI">10.2196/mhealth.4924</idno>
+		<ptr target="http://dx.doi.org/10.2196/mhealth.4924" />
+	</analytic>
+	<monogr>
+		<title level="j">mHealth uHealth</title>
+		<imprint>
+			<biblScope unit="volume">3</biblScope>
+			<biblScope unit="page">e101</biblScope>
+			<date type="published" when="2015">2015. 2015</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b31">
+	<analytic>
+		<title level="a" type="main">Itchtector: A Wearable-based Mobile System for Managing Itching Conditions</title>
+		<author>
+			<persName><forename type="first">Daeki</forename><surname>Lee</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Junhong</forename><surname>Cho</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Eunji</forename><surname>Kim</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jinyeong</forename><surname>Im</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kyung</forename><surname>Bak</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kwan</forename><surname>Ho Lee</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">John</forename><surname>Hong Lee</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Kim</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2017 Conference on Human Factors in Computing Systems &apos;17)</title>
+				<meeting>the 2017 Conference on Human Factors in Computing Systems &apos;17)</meeting>
+		<imprint>
+			<publisher>DOI</publisher>
+			<date type="published" when="2017">2017</date>
+			<biblScope unit="page" from="893" to="905" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b32">
+	<monogr>
+		<title/>
+		<idno type="DOI">10.1145/3025453.3025569</idno>
+		<ptr target="http://dx.doi.org/10.1145/3025453.3025569" />
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b33">
+	<monogr>
+		<title level="m" type="main">Personal informatics in chronic illness management</title>
+		<author>
+			<persName><forename type="first">Anthony</forename><surname>Macleod</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sheelagh</forename><surname>Tang</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Carpendale</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2013">2013</date>
+		</imprint>
+	</monogr>
+	<note>of Graphics Interface 2013 (GI &apos;13</note>
+</biblStruct>
+
+<biblStruct xml:id="b34">
+	<analytic>
+		<title/>
+		<ptr target="http://dl.acm.org/citation.cfm?id=2532129.2532155" />
+	</analytic>
+	<monogr>
+		<title level="j">Canadian Information Processing Society</title>
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b35">
+	<monogr>
+		<title level="m" type="main">Researching Lived Experience: Human Science for an Action Sensitive Pedagogy ed</title>
+		<author>
+			<persName><forename type="first">Max</forename><surname>Van Manen</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="1990">1990</date>
+			<pubPlace>Albany, USA</pubPlace>
+		</imprint>
+		<respStmt>
+			<orgName>State University of New York Press</orgName>
+		</respStmt>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b36">
+	<analytic>
+		<title level="a" type="main">Crafting a View of Self-Tracking Data in the Clinical Visit</title>
+		<author>
+			<persName><forename type="first">Helena</forename><forename type="middle">M</forename><surname>Mentis</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Anita</forename><surname>Komlodi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Katrina</forename><surname>Schrader</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ann</forename><surname>Phipps</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Karen</forename><surname>Gruber-Baldini</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Lisa</forename><surname>Yarbrough</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Shulman</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2017 Conference on Human Factors in Computing Systems &apos;17)</title>
+				<meeting>the 2017 Conference on Human Factors in Computing Systems &apos;17)</meeting>
+		<imprint>
+			<publisher>DOI</publisher>
+			<date type="published" when="2017">2017</date>
+			<biblScope unit="page" from="5800" to="5812" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b37">
+	<monogr>
+		<title/>
+		<idno type="DOI">10.1145/3025453.3025589</idno>
+		<ptr target="http://dx.doi.org/10.1145/3025453.3025589" />
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b38">
+	<analytic>
+		<title level="a" type="main">Not just a receiver&quot;: understanding patient behavior in the hospital environment</title>
+		<author>
+			<persName><forename type="first">R</forename><surname>Sonali</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Shefali</forename><surname>Mishra</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ari</forename><forename type="middle">H</forename><surname>Haldar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Logan</forename><surname>Pollack</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Andrew</forename><forename type="middle">D</forename><surname>Kendall</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Maher</forename><surname>Miller</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Wanda</forename><surname>Khelifi</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Pratt</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2858036.2858167</idno>
+		<ptr target="http://dx.doi.org/10.1145/2858036.2858167" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2016 Conference on Human Factors in Computing (CHI &apos;16)</title>
+				<meeting>the 2016 Conference on Human Factors in Computing (CHI &apos;16)<address><addrLine>New York</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computing Machinery</publisher>
+			<date type="published" when="2016">2016</date>
+			<biblScope unit="page" from="3103" to="3114" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b39">
+	<analytic>
+		<title level="a" type="main">The provenance of electronic data</title>
+		<author>
+			<persName><forename type="first">Luc</forename><surname>Moreau</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Paul</forename><surname>Groth</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Simon</forename><surname>Miles</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Javier</forename><forename type="middle">John</forename><surname>Ibbotson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sheng</forename><surname>Jiang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Steve</forename><forename type="middle">Omer</forename><surname>Rana</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Andreas</forename><surname>Schreiber</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Victor</forename><surname>Tan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Laszlo</forename><surname>Varga</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/1330311.1330323</idno>
+		<ptr target="http://dx.doi.org/10.1145/1330311.1330323" />
+	</analytic>
+	<monogr>
+		<title level="j">Communications of the Association for Computing Machinery</title>
+		<imprint>
+			<biblScope unit="volume">51</biblScope>
+			<biblScope unit="page" from="52" to="58" />
+			<date type="published" when="2008">2008. 2008</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b40">
+	<monogr>
+		<title level="m" type="main">Causes of Atrial fibrillation</title>
+		<ptr target="http://www.nhs.uk/Conditions/Atrial-fibrillation/Pages/Causes.aspx" />
+		<imprint>
+			<date type="published" when="2015-07-28">2015. 28 Jul. 2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b41">
+	<monogr>
+		<title level="m" type="main">Health and care records</title>
+		<ptr target="http://www.nhs.uk/NHSEngland/thenhs/records/healthrecords/Pages/overview.aspx" />
+		<imprint>
+			<date type="published" when="2016-07-28">2016. 28 Jul. 2017</date>
+		</imprint>
+		<respStmt>
+			<orgName>36. National Health Service England</orgName>
+		</respStmt>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b42">
+	<monogr>
+		<title level="m" type="main">Personalised health and care 2020: using data and technology to transform outcomes for patients citizens. Department of Health</title>
+		<ptr target="https://www.gov.uk/government/publications/personalised-health-and-care-2020" />
+		<imprint>
+			<date type="published" when="2015-01-18">18 Jan. 2015</date>
+			<pubPlace>London, UK.</pubPlace>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b43">
+	<monogr>
+		<title level="m" type="main">The Self-Tracking</title>
+		<author>
+			<persName><forename type="first">Gina</forename><surname>Neff</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Dawn</forename><surname>Nafus</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2016">2016</date>
+			<publisher>MIT Press</publisher>
+			<pubPlace>Cambridge, USA</pubPlace>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b44">
+	<analytic>
+		<title level="a" type="main">Using patient-generated health data from mobile technologies for diabetes self-management support: provider perspectives from an academic medical center</title>
+		<author>
+			<persName><forename type="first">Shantanu</forename><surname>Nundy</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Monica</forename><forename type="middle">E</forename><surname>Chen-Yuan E Patrick Anjuli Mishra</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Peek</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Journal of Diabetes Science And Technology</title>
+		<imprint>
+			<biblScope unit="volume">8</biblScope>
+			<biblScope unit="page" from="74" to="82" />
+			<date type="published" when="2014">2014. 2014</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b45">
+	<monogr>
+		<title/>
+		<idno type="DOI">10.1177/1932296813511727</idno>
+		<ptr target="http://dx.doi.org/10.1177/1932296813511727" />
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b46">
+	<analytic>
+		<title level="a" type="main">Probing the benefits of real-time tracking during cancer care</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Rupa</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Predrag</forename><surname>Patel</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Andrea</forename><surname>Klasnja</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kenton</forename><forename type="middle">T</forename><surname>Hartzler</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Wanda</forename><surname>Unruh</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Pratt</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">American Medical Informatics Association Annual Symposium Proceedings (AMIA &apos;12)</title>
+				<imprint>
+			<date type="published" when="2012">2012</date>
+			<biblScope unit="volume">2012</biblScope>
+			<biblScope unit="page" from="1340" to="1349" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b47">
+	<analytic>
+		<title level="a" type="main">Self-tracking, social media and personal health records for patient empowered self-care</title>
+		<author>
+			<persName><forename type="first">Chris</forename><surname>Paton</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Margaret</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Annie Ys</forename><surname>Fernandez-Luque</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Lau</surname></persName>
+		</author>
+		<ptr target="http://www.schattauer.de/t3page/1214.html?manuscript=17937&amp;L=1" />
+	</analytic>
+	<monogr>
+		<title level="j">International Medical Informatics Association Yearbook</title>
+		<imprint>
+			<biblScope unit="page" from="16" to="24" />
+			<date type="published" when="2012">2012. 2012</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b48">
+	<analytic>
+		<title level="a" type="main">Clinical self-tracking and monitoring technologies: negotiations in the ICT-mediated patient-provider relationship</title>
+		<author>
+			<persName><forename type="first">Enrico</forename><forename type="middle">Maria</forename><surname>Piras</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Francesco</forename><surname>Miele</surname></persName>
+		</author>
+		<idno type="DOI">10.1080/14461242.2016.1212316</idno>
+		<ptr target="http://dx.doi.org/10.1080/14461242.2016.1212316" />
+	</analytic>
+	<monogr>
+		<title level="j">Sociology Review</title>
+		<imprint>
+			<biblScope unit="volume">26</biblScope>
+			<biblScope unit="page" from="38" to="53" />
+			<date type="published" when="2017">2017. 2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b49">
+	<analytic>
+		<title level="a" type="main">LifeLines: Visualizing Histories</title>
+		<author>
+			<persName><forename type="first">Brett</forename><surname>Plaisant</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Anne</forename><surname>Milash</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Seth</forename><surname>Rose</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ben</forename><surname>Widoff</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Shneiderman</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the SIGCHI on Human Factors in Computing Systems &apos;96)</title>
+				<meeting>the SIGCHI on Human Factors in Computing Systems &apos;96)<address><addrLine>New York</addrLine></address></meeting>
+		<imprint>
+			<publisher>ACM</publisher>
+			<date type="published" when="1996">1996</date>
+			<biblScope unit="page" from="221" to="227" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b50">
+	<monogr>
+		<title/>
+		<idno type="DOI">10.1145/238386.238493</idno>
+		<ptr target="http://dx.doi.org/10.1145/238386.238493" />
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b51">
+	<analytic>
+		<title level="a" type="main">Making Sense of Sleep Sensors: How Sleep Sensing Technologies Support and Undermine Sleep Health</title>
+		<author>
+			<persName><forename type="first">Ruth</forename><surname>Ravichandran</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sang-Wha</forename><surname>Sien</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Shwetak</forename><forename type="middle">N</forename><surname>Patel</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Julie</forename><forename type="middle">A</forename><surname>Kientz</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Laura</forename><forename type="middle">R</forename><surname>Pina</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2017 Conference on Human Factors in Computing Systems &apos;17)</title>
+				<meeting>the 2017 Conference on Human Factors in Computing Systems &apos;17)<address><addrLine>New York</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computing Machinery</publisher>
+			<date type="published" when="2017">2017</date>
+			<biblScope unit="page" from="6864" to="6875" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b52">
+	<monogr>
+		<title/>
+		<idno type="DOI">10.1145/3025453.3025557</idno>
+		<ptr target="http://dx.doi.org/10.1145/3025453.3025557" />
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b53">
+	<analytic>
+		<title level="a" type="main">Supporting patient-provider collaboration to identify triggers using food and symptom journals</title>
+		<author>
+			<persName><forename type="first">Jessica</forename><surname>Schroeder</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jane</forename><surname>Hoffswell</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Chia-Fang</forename><surname>Chung</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">James</forename><surname>Fogarty</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sean</forename><surname>Munson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jasmine</forename><surname>Zia</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2998181.2998276</idno>
+		<ptr target="http://dx.doi.org/10.1145/2998181.2998276" />
+	</analytic>
+	<monogr>
+		<title level="m">of the 2017 Conference on Computer Supported Cooperative Work and Social Computing &apos;17)</title>
+				<imprint>
+			<publisher>Association for Computing Machinery</publisher>
+			<date type="published" when="2017">2017</date>
+			<biblScope unit="page" from="1726" to="1739" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b54">
+	<analytic>
+		<title level="a" type="main">What Is a Clinician and What He Do?</title>
+		<author>
+			<persName><forename type="first">Philip</forename><forename type="middle">A</forename><surname>Tumulty</surname></persName>
+		</author>
+		<idno type="DOI">10.1056/NEJM197007022830105</idno>
+		<ptr target="http://dx.doi.org/10.1056/NEJM197007022830105" />
+	</analytic>
+	<monogr>
+		<title level="j">New England Journal of Medicine</title>
+		<imprint>
+			<biblScope unit="volume">283</biblScope>
+			<biblScope unit="page" from="20" to="24" />
+			<date type="published" when="1970">1970. 1970</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b55">
+	<analytic>
+		<title level="a" type="main">Health information exchange technology on the front lines of healthcare: workflow factors and patterns of</title>
+		<author>
+			<persName><forename type="first">Kevin</forename><forename type="middle">B</forename><surname>Kim M Unertl</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Nancy</forename><forename type="middle">M</forename><surname>Johnson</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Lorenzi</surname></persName>
+		</author>
+		<idno type="DOI">10.1136/amiajnl-2011-000432</idno>
+		<ptr target="http://dx.doi.org/10.1136/amiajnl-2011-000432" />
+	</analytic>
+	<monogr>
+		<title level="j">Journal of the American Medical Informatics</title>
+		<imprint>
+			<biblScope unit="volume">19</biblScope>
+			<biblScope unit="page" from="392" to="400" />
+			<date type="published" when="2012">2012. 2012</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b56">
+	<analytic>
+		<title level="a" type="main">Traversing the many paths of workflow research: developing a conceptual framework of terminology through a systematic literature</title>
+		<author>
+			<persName><forename type="first">Laurie</forename><forename type="middle">L</forename><surname>Kim M Unertl</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kevin</forename><forename type="middle">B</forename><surname>Novak</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Nancy</forename><forename type="middle">M</forename><surname>Johnson</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Lorenzi</surname></persName>
+		</author>
+		<idno type="DOI">10.1136/jamia.2010.004333</idno>
+		<ptr target="http://dx.doi.org/10.1136/jamia.2010.004333" />
+	</analytic>
+	<monogr>
+		<title level="j">Journal of the American Medical Informatics Association</title>
+		<imprint>
+			<biblScope unit="volume">17</biblScope>
+			<biblScope unit="page" from="265" to="273" />
+			<date type="published" when="2010">2010. 2010</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b57">
+	<analytic>
+		<title level="a" type="main">Transforming Clinic into Information Workspaces for Patients</title>
+		<author>
+			<persName><forename type="first">Kenton</forename><forename type="middle">T</forename><surname>Unruh</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Meredith</forename><surname>Skeels</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Andrea</forename><surname>Civan-Hartzler</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Wanda</forename><surname>Pratt</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2008 Conference on Human Factors in Computing Systems (CHI &apos;10)</title>
+				<meeting>the 2008 Conference on Human Factors in Computing Systems (CHI &apos;10)<address><addrLine>New York</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computing Machinery</publisher>
+			<date type="published" when="2010">2010</date>
+			<biblScope unit="page" from="183" to="192" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b58">
+	<monogr>
+		<title/>
+		<idno type="DOI">10.1145/1753326.1753354</idno>
+		<ptr target="http://dx.doi.org/10.1145/1753326.1753354" />
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b59">
+	<analytic>
+		<title level="a" type="main">Sleep Tools at Home and in the Hospital: Bridging Quantified Self and Clinical Sleep Research</title>
+		<author>
+			<persName><forename type="first">Bert</forename><surname>Vandenberghe</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">David</forename><surname>Geerts</surname></persName>
+		</author>
+		<idno type="DOI">10.4108/icst.pervasivehealth.2015.259267</idno>
+		<idno>DOI:http:</idno>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 9th International Conference on Pervasive Computing Technologies for Healthcare (PervasiveHealth &apos;15). Institute for Computer Sciences, Social-Informatics and Telecommunications Engineering</title>
+				<meeting>the 9th International Conference on Pervasive Computing Technologies for Healthcare (PervasiveHealth &apos;15). Institute for Computer Sciences, Social-Informatics and Telecommunications Engineering<address><addrLine>Brussels, Belgium</addrLine></address></meeting>
+		<imprint>
+			<publisher>ICST</publisher>
+			<date type="published" when="2015">2015</date>
+			<biblScope unit="page" from="153" to="160" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b60">
+	<monogr>
+		<title/>
+		<idno type="DOI">10.4108/icst.pervasivehealth.2015.259267</idno>
+		<ptr target="//dx.doi.org/10.4108/icst.pervasivehealth.2015.259267" />
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b61">
+	<analytic>
+		<title level="a" type="main">The Quantified Patient in the Doctor&apos;s Office: Challenges &amp; Opportunities</title>
+		<author>
+			<persName><forename type="first">Peter</forename><surname>West</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Richard</forename><surname>Giordano</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Max</forename><surname>Van Kleek</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Nigel</forename><surname>Shadbolt</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2858036.2858445</idno>
+		<ptr target="http://dx.doi.org/10.1145/2858036.2858445" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2016 Conference on Human Factors in Computing (CHI &apos;16)</title>
+				<meeting>the 2016 Conference on Human Factors in Computing (CHI &apos;16)<address><addrLine>New York</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computing Machinery</publisher>
+			<date type="published" when="2016">2016</date>
+			<biblScope unit="page" from="3066" to="3078" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b62">
+	<analytic>
+		<title level="a" type="main">Information Quality Challenges of Patient-Generated Data in Clinical Practice</title>
+		<author>
+			<persName><forename type="first">Peter</forename><surname>West</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Max</forename><surname>Van Kleek</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Richard</forename><surname>Giordano</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mark</forename><surname>Weal</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Nigel</forename><surname>Shadbolt</surname></persName>
+		</author>
+		<idno type="DOI">10.3389/fpubh.2017.00284</idno>
+		<ptr target="http://dx.doi.org/10.3389/fpubh.2017.00284" />
+	</analytic>
+	<monogr>
+		<title level="j">Frontiers Public Health</title>
+		<imprint>
+			<biblScope unit="volume">5</biblScope>
+			<biblScope unit="page">284</biblScope>
+			<date type="published" when="2017">2017. 2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b63">
+	<analytic>
+		<title level="a" type="main">Atrial fibrillation as an independent risk factor for stroke: the Framingham Study</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Philip</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Wolf</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Robert</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">William B</forename><surname>Abbott</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Kannel</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Stroke</title>
+		<imprint>
+			<biblScope unit="volume">22</biblScope>
+			<biblScope unit="page" from="983" to="988" />
+			<date type="published" when="1991">1991. 1991</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b64">
+	<analytic>
+		<title level="a" type="main">Sharing patient-generated data in clinical practices: an interview study</title>
+		<author>
+			<persName><forename type="first">H</forename><surname>Zhu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Colgan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Reddy</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><forename type="middle">K</forename><surname>Choe</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">American Medical Informatics Association Annual Symposium Proceedings (AMIA &apos;16)</title>
+				<imprint>
+			<date type="published" when="2016">2016</date>
+			<biblScope unit="volume">2016</biblScope>
+			<biblScope unit="page" from="1303" to="1312" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+				</listBibl>
+			</div>
+		</back>
+	</text>
+</TEI>

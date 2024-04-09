@@ -1,0 +1,2408 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xml:space="preserve" xmlns="http://www.tei-c.org/ns/1.0" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.com/kermitt2/grobid/master/grobid-home/schemas/xsd/Grobid.xsd"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+	<teiHeader xml:lang="en">
+		<fileDesc>
+			<titleStmt>
+				<title level="a" type="main">Compete, Collaborate, Investigate: Exploring the Social Structures of Open Source Intelligence Investigations</title>
+			</titleStmt>
+			<publicationStmt>
+				<publisher/>
+				<availability status="unknown"><licence/></availability>
+			</publicationStmt>
+			<sourceDesc>
+				<biblStruct>
+					<analytic>
+						<author>
+							<persName><forename type="first">Yasmine</forename><surname>Belghith</surname></persName>
+							<email>byasmine@gatech.edu</email>
+						</author>
+						<author>
+							<persName><forename type="first">Kurt</forename><surname>Luther</surname></persName>
+							<email>kluther@vt.edu</email>
+						</author>
+						<author>
+							<affiliation key="aff0">
+								<orgName type="department">School of Interactive Computing</orgName>
+								<orgName type="institution">Georgia Institute of Technology Atlanta</orgName>
+								<address>
+									<region>GA</region>
+									<country key="US">USA</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<affiliation key="aff1">
+								<orgName type="institution">Virginia Tech Arlington</orgName>
+								<address>
+									<region>VA</region>
+									<country key="US">USA</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<affiliation key="aff2">
+								<orgName type="institution">Virginia Tech Arlington</orgName>
+								<address>
+									<region>VA</region>
+									<country key="US">USA</country>
+								</address>
+							</affiliation>
+						</author>
+						<title level="a" type="main">Compete, Collaborate, Investigate: Exploring the Social Structures of Open Source Intelligence Investigations</title>
+					</analytic>
+					<monogr>
+						<imprint>
+							<date/>
+						</imprint>
+					</monogr>
+					<idno type="DOI">10.1145/3491102.3517526</idno>
+				</biblStruct>
+			</sourceDesc>
+		</fileDesc>
+		<encodingDesc>
+			<appInfo>
+				<application version="0.7.1" ident="GROBID" when="2022-07-22T05:00+0000">
+					<desc>GROBID - A machine learning software for extracting information from scholarly documents</desc>
+					<ref target="https://github.com/kermitt2/grobid"/>
+				</application>
+			</appInfo>
+		</encodingDesc>
+		<profileDesc>
+			<textClass>
+				<keywords>
+					<term>investigation</term>
+					<term>open source intelligence</term>
+					<term>OSINT</term>
+					<term>competition</term>
+					<term>collaboration</term>
+					<term>experts</term>
+					<term>crowdsourcing</term>
+				</keywords>
+			</textClass>
+			<abstract>
+<div xmlns="http://www.tei-c.org/ns/1.0"><p>Online investigations are increasingly conducted by individuals with diverse skill levels and experiences, with mixed results. Novice investigations often result in vigilantism or doxxing, while expert investigations have greater success rates and fewer mishaps. Many of these experts are involved in a community of practice known as Open Source Intelligence (OSINT), with an ethos and set of techniques for conducting investigations using only publicly available data. Through semi-structured interviews with 14 expert OSINT investigators from nine diferent organizations, we examine the social dynamics of this community, including the collaboration and competition patterns that underlie their investigations. We also describe investigators' use of and challenges with existing OSINT tools, and implications for the design of social computing systems to better support crowdsourced investigations.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>CCS CONCEPTS</head><p>• Human-centered computing → Collaborative and social computing.</p></div>
+			</abstract>
+		</profileDesc>
+	</teiHeader>
+	<text xml:lang="en">
+		<body>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="1">INTRODUCTION</head><p>Online investigations are increasingly conducted by individuals of diverse skill levels and experience, with varying success rates. Novice investigators can be successful in uncovering crimes, fnding perpetrators, and helping to deliver justice <ref type="bibr" target="#b27">[29,</ref><ref type="bibr" target="#b88">88]</ref>. They have also supported crisis response eforts <ref type="bibr" target="#b17">[20,</ref><ref type="bibr" target="#b49">51]</ref>. However, there have also been several well-known incidents involving online and inperson vigilantism <ref type="bibr" target="#b66">[67,</ref><ref type="bibr" target="#b91">91]</ref>. This includes "naming and shaming," disclosure of highly personal details (i.e., doxing), and misidentifcation of individuals, most notably in the 2013 Boston Marathon bombing <ref type="bibr" target="#b66">[67]</ref> and the storming of the U.S. Capitol in 2021 <ref type="bibr">[49]</ref>.</p><p>Compared to novices, expert investigators have been more successful both in the court of public opinion and the court of law <ref type="bibr" target="#b49">[51,</ref><ref type="bibr" target="#b101">100]</ref>. One reason for expert investigators' comparatively greater successes and fewer mishaps may be their active participation in the community of practice known as Open Source Intelligence (OS-INT) <ref type="bibr" target="#b16">[19,</ref><ref type="bibr" target="#b28">30,</ref><ref type="bibr" target="#b57">58,</ref><ref type="bibr" target="#b63">64]</ref>. OSINT refers to data that can be gathered from publicly and legally available sources <ref type="bibr" target="#b61">[62]</ref>. The OSINT community has its own rules and techniques for collecting, verifying, and analyzing open source information to derive intelligence and fulfll a goal (e.g., identifying a suspect, fnding a missing person, proving or disproving a statement) <ref type="bibr" target="#b98">[97]</ref>. It has numerous applications, ranging from employee vetting <ref type="bibr" target="#b9">[12,</ref><ref type="bibr" target="#b76">77]</ref> to counter-terrorism and human rights advocacy <ref type="bibr" target="#b20">[22,</ref><ref type="bibr" target="#b46">47]</ref>.</p><p>In this work, OSINT experts refers to investigators who actively participate in the OSINT community, are well-versed in its techniques, and abide by its values and ethos. These include prioritizing transparency, avoiding the use of subterfuge, and limiting investigations to passive reconnaissance. OSINT experts often come together as part of larger organizations or events, giving rise to a rapidly growing community. Novices are newcomers to the feld of OSINT and often join experts' organizations to conduct investigations in a variety of domains. We consider novices as peripheral members of the community, training towards becoming experts. Experts who direct OSINT organizations or events and coordinate the investigations are referred to as organizers. Novices and other OSINT experts who are assisting the organizer in their investigation are considered contributors.</p><p>Throughout their investigations, organizers and contributors leverage two diferent forms of social interaction: competition and collaboration. We refer to both tactics as social OSINT. While prior work has focused on OSINT tools and techniques <ref type="bibr" target="#b59">[60,</ref><ref type="bibr" target="#b98">97]</ref>, our work here focuses on the social aspects of OSINT. Prior work in HCI has also shown that the social, human infrastructure of an organization can be just as important as the technological infrastructure <ref type="bibr" target="#b21">[23,</ref><ref type="bibr" target="#b51">53,</ref><ref type="bibr" target="#b92">92]</ref>. Our work seeks to inform future OSINT investigations, and crowdsourced investigations in general -conducted by novices and experts alike.</p><p>With this motivation, we address the following research questions in this paper:</p><p>(1) RQ1: What are organizers' and contributors' motivations, experiences, and attitudes towards social OSINT investigations? How do they defne success? (2) RQ2: How do organizers plan and structure the OSINT investigations? What challenges do they face, and how do they manage them? To address these questions, we recruited OSINT investigators from organizations and events across the social structure spectrum, ranging from purely competitive to purely collaborative social structures. Through semi-structured interviews with 14 expert OSINT investigators from nine diferent organizations, we describe their backgrounds, motivations, and the commonalities and diferences between their social dynamics. We also describe the factors that enable their success, such as their emphasis on transparency, and solid foundation in ethics and security, and the challenges that they face, such as the unreliability of certain tools and the difculty in gathering and verifying digital content. Upon a closer look at the social dynamics within the organizations and events, we fnd that there is no clear delineation between collaborative and competitive structures. Instead, we observe diferent social OSINT tactics at play -a blend of competitive strategies within overarching collaborative structures and vice versa. Each tactic carries diferent implications, such as collaboration enabling investigators to broadly share their expertise with other, while competition helping them refocus their eforts. We also fnd that these social structures are infuenced by power dynamics outside of the organizations. For instance, the organizations that they work within dictate access to contributors and resources.</p><p>Our paper makes the following contributions: <ref type="bibr" target="#b0">(1)</ref> We enrich the current literature on investigations within HCI by providing an in-depth description of the OSINT investigative community as a community of practice. We present its social dynamics, practices, and key elements: a culture of transparency, the presence of an adversarial mindset, and collaboration among individuals with diverse motivations and backgrounds. <ref type="bibr" target="#b1">(2)</ref> We defne and characterize social OSINT tactics as a combination of competitive and collaborative strategies used in structuring OSINT investigations, and their implications.</p><p>Our fndings also add more nuance to related work on competitions. <ref type="bibr" target="#b2">(3)</ref> We suggest tool design recommendations to better support OSINT, and more generally crowdsourced, investigations.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2">BACKGROUND AND RELATED WORK 2.1 Open Source Intelligence Investigations</head><p>Open source intelligence (OSINT) investigations involve the collection and analysis of publicly available data to generate intelligence that addresses a specifc need <ref type="bibr" target="#b98">[97]</ref>. More recently, the rise of social media and increasingly digitally-mediated social interaction has democratized access to large amounts of personal information, and powerful tools for analyzing it <ref type="bibr" target="#b35">[37]</ref>. OSINT investigations of digital traces and social media are regularly conducted in domains such as journalism <ref type="bibr" target="#b39">[41]</ref>, business [e.g., <ref type="bibr" target="#b12">15,</ref><ref type="bibr" target="#b74">75,</ref><ref type="bibr" target="#b76">77,</ref><ref type="bibr" target="#b104">103]</ref>, counter-terrorism <ref type="bibr" target="#b68">[69]</ref>, cybersecurity <ref type="bibr" target="#b26">[28]</ref>, and human rights advocacy <ref type="bibr" target="#b20">[22,</ref><ref type="bibr" target="#b46">47]</ref>.</p><p>Traditionally, the OSINT cycle consists of: content discovery, verifcation, preservation, and publication <ref type="bibr" target="#b98">[97]</ref>. McKeown et al. <ref type="bibr" target="#b57">[58]</ref> argue that the target of an OSINT investigation will generally shape the type of investigation that will be carried out, the type of data that will be gathered and analyzed, the levels of detail that will go into the investigation, the tools used, the investigators' behaviors and attitudes, and the various outcomes of that investigation (e.g., reports, forecasts, news articles, criminal proceedings).</p><p>Conducting OSINT investigations involves more than just the type of data or techniques used. According to practitioners, OSINT also comes with its own ethos <ref type="bibr" target="#b38">[40,</ref><ref type="bibr" target="#b98">97]</ref>. The OSINT ethos prioritizes transparency and accountability, frowns upon the use of subterfuge, and limits investigations to passive reconnaissance [e.g., <ref type="bibr" target="#b20">22,</ref><ref type="bibr" target="#b48">50]</ref>. This ethos may be the reason for expert OSINT investigators' successes and reduced rate of ethical mishaps. Directly contacting law enforcement coupled with only engaging in passive reconnaissance greatly lowers the possibility of vigilantism -especially doxxing and misidentifcation. For example, while both novices and experts sought to use OSINT to investigate the storming of the U.S. Capitol in 2021, some novices publicly misidentifed individuals <ref type="bibr">[49]</ref>. On the other hand, John Scott-Railton, an OSINT expert, shared his fndings directly with the FBI <ref type="bibr" target="#b29">[31]</ref> and encouraged his collaborators and followers not to publicly tweet unconfrmed names. Scott-Railton's work directly led to two arrests <ref type="bibr" target="#b64">[65]</ref>.</p><p>The access to increasing amounts of open source data, along with the OSINT ethos, has led many OSINT experts from diverse backgrounds to form organizations in order to increase their investigations' impact. For example, OSINT experts of Amnesty International founded a Citizen Evidence Lab and Digital Verifcation Corps which involves crowdsourced volunteers collaborating from all over the world <ref type="bibr">[7]</ref>. They published a report detailing their methodology, analysis and fndings of their investigation into online abuse against women which resulted in better protections for women on Twitter <ref type="bibr" target="#b5">[6]</ref>. Other organizations use competitive models. For example, Hackatoria is an organization that simulates OSINT investigations in the form of Capture The Flag (CTF) competitions using fabricated data <ref type="bibr" target="#b37">[39]</ref>. Their mission is to expose individuals to the OSINT feld and community by helping them to learn OSINT skills, resources, and values in a controlled and playful environment <ref type="bibr" target="#b37">[39]</ref>. Due to the need for individuals with diverse domain expertise in the feld, both collaborative and competitive organizations play an important role in building the OSINT community <ref type="bibr" target="#b65">[66,</ref><ref type="bibr">95]</ref>.</p><p>Along with the advantages of OSINT investigations, there are also challenges <ref type="bibr" target="#b22">[24,</ref><ref type="bibr" target="#b41">43,</ref><ref type="bibr" target="#b57">58]</ref>. During an investigation, issues can arise from the ephemerality of open source information online <ref type="bibr" target="#b20">[22]</ref> or because deep fakes, dis-, and mis-information are harder to verify <ref type="bibr" target="#b20">[22,</ref><ref type="bibr" target="#b41">43]</ref>. Another challenge is the possible exposure to sensitive materials, especially when investigating violence of any kind, that can result in secondary trauma <ref type="bibr" target="#b7">[9]</ref>. Regardless of resources, Gill <ref type="bibr" target="#b34">[36]</ref> states that the success of an OSINT investigations depends on its social structure: its members, their roles, and their training. Our work here contributes a deeper understanding of the social dynamics and practices within OSINT organizations. We also highlight OSINT experts' varied backgrounds and motivations, as well as the social and technological challenges that they face during the course of their investigations.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.2">Investigations in CSCW</head><p>Prior CSCW research has focused on top-down [e.g., <ref type="bibr" target="#b2">3,</ref><ref type="bibr" target="#b71">72]</ref>, bottomup [e.g., <ref type="bibr" target="#b24">26,</ref><ref type="bibr" target="#b40">42,</ref><ref type="bibr" target="#b44">45]</ref>, or hybrid investigations <ref type="bibr" target="#b92">[92]</ref>. All three investigation types include similar stages, such as collecting and analyzing information towards a specifc goal (e.g., the opening of a criminal case, the identifcation of a suspect), and have often been described as a sensemaking process [e.g., <ref type="bibr" target="#b3">4,</ref><ref type="bibr" target="#b18">21,</ref><ref type="bibr" target="#b93">93]</ref>. Generally, top-down, law enforcement-led investigations are more commonly studied within CSCW. Here, access to information is limited by law enforcement. Prior work has focused on the design of tools to support collaboration and coordination between law enforcement agents <ref type="bibr" target="#b2">[3,</ref><ref type="bibr" target="#b71">72]</ref>. For example, Alharthi et al. <ref type="bibr" target="#b3">[4]</ref> examined Search and Rescue responders' investigations as a collaborative sensemaking activity to generate design recommendations for collaboration systems. Sometimes, these top-down investigations beneft from members of the community or neighborhood residents passively providing information <ref type="bibr" target="#b17">[20]</ref>. For example, Lewis and Lewis <ref type="bibr" target="#b54">[55]</ref> examined a community's use of CLEARPath, a website that enables residents to "serve as an information sharing vehicle" between the police and the community, and found that residents used the forum to strengthen their social ties and discuss collective action. Brush et al. <ref type="bibr" target="#b10">[13]</ref> proposed augmenting the potential for crime prevention through a digital neighborhood watch. Additional research surfaced the importance of civic engagement and communication, online and ofine, between the police and communities in crime prevention <ref type="bibr" target="#b24">[26,</ref><ref type="bibr" target="#b44">45,</ref><ref type="bibr">78]</ref>.</p><p>On the other hand, bottom-up, novice-led investigations are typically self-organized by crowds, usually online, who coordinate their eforts and combine their diverse knowledge to conduct the diferent stages of an investigation. We defne these bottom-up investigations as crowdsourced investigations. CSCW researchers have examined these crowd mobilizations on social media. Crowds take on varied roles, such as information difusion during crises [e.g., 8, 84, 99], or conducting data analysis and validation in citizen science projects <ref type="bibr" target="#b89">[89,</ref><ref type="bibr" target="#b97">96]</ref>. Daily and Starbird <ref type="bibr" target="#b18">[21]</ref> studied emergent crowd work on social media during crises as collective sensemaking throughout which online crowds interpreted complex and uncertain data. Huang et al. <ref type="bibr" target="#b40">[42]</ref> examined how crowds of online volunteers analyzed photos related to the 2013 Boston Marathon Bombings in the efort of identifying the perpetrators; however, this efort resulted in the infamous misidentifcation of a suspect. More recently, <ref type="bibr">Arif et al. [8]</ref> studied mechanisms used by crowds to correct online information on social media about crisis events such as a rumored fight hijacking and the 2015 Paris Attacks, showing that, while crowds do share rumors, they undertake diferent strategies and attempts to correct them.</p><p>Additional prior work also demonstrated that coordinated and directed crowds can augment an investigation's potential [e.g., <ref type="bibr" target="#b55">56,</ref><ref type="bibr" target="#b56">57,</ref><ref type="bibr" target="#b92">92,</ref><ref type="bibr" target="#b94">94]</ref>. For instance, Venkatagiri et al. <ref type="bibr" target="#b94">[94]</ref> introduced GroundTruth, a system that enables experts and novice crowds to perform image geolocation, a complex sensemaking task often needed during OSINT investigations. Another example includes Agapie et al.'s <ref type="bibr" target="#b1">[2]</ref> case study of crowdworkers tasked to collaboratively report on news events and engage in local information collection assignments.</p><p>Our work here contributes to the growing body of literature within CSCW focused on understanding and supporting investigations. While prior work has focused on studying top-down investigations led by experts, or crowdsourced investigations led by novices, we focus on crowdsourced investigations led by expert OSINT investigators at the core of the OSINT community of practice, and their perceptions of novices at the periphery. Additionally, prior work has focused on how investigators leverage collaboration to scale up their investigations. We extend this work to study how OSINT experts leverage both collaborative and competitive eforts to conduct their investigations. We also draw on prior work at the intersection of investigations and sensemaking to suggest design recommendations for OSINT investigations.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.3">Competitions and the Adversarial Mindset</head><p>Hutter et al. note that there is a rich history of using contests, a form of competition, to "reach a broad audience of people with various backgrounds, skills, and expertise" <ref type="bibr" target="#b43">[44]</ref>. Such competitions have played a major role in the development of innovations such as digital televisions and the frst manned mission to Mars, and are proposed by corporations, governments, and even non-proft organizations <ref type="bibr" target="#b43">[44]</ref>.</p><p>While the role of competition in OSINT investigations has seen little research attention, prior work has looked at the use of social technologies to support various forms of competition, ranging from innovation contests and hackathons <ref type="bibr" target="#b72">[73,</ref><ref type="bibr" target="#b87">87]</ref>, and games and gamifcation <ref type="bibr" target="#b53">[54,</ref><ref type="bibr">63,</ref><ref type="bibr" target="#b73">74]</ref>, to self-competition <ref type="bibr" target="#b60">[61]</ref>. Researchers observe an increased level of immersion and motivation when competition is present <ref type="bibr">[70,</ref><ref type="bibr" target="#b102">101]</ref>. For example, gamifcation is commonly used as an efective and purposeful incentive mechanism for users of CSCW systems; such design examples have been used in crowdsourcing [63], innovation communities <ref type="bibr" target="#b87">[87]</ref> and other platforms. Yu et al. <ref type="bibr" target="#b103">[102]</ref> combined intrinsic incentives, generally associated with collaboration, and extrinsic incentives, usually associated with competition, in several experiments on a crowdsourcing platform and found that both were important in motivating participants; however, some incentives could potentially undermine others.</p><p>Similarly, Tausczik and Wang <ref type="bibr" target="#b87">[87]</ref> examined open innovation contests on Kaggle, and found that only a small percentage of participants, mainly ones doing moderately well in the contest, shared code. They found that sharing code only improved individual, and not collective, performance. They recommend careful consideration when combining these approaches, which can lead to greater benefts than using either alone.</p><p>Another example from Hutter et al.'s work <ref type="bibr" target="#b43">[44]</ref> focuses on the simultaneous combination of collaboration and competition in community-based design contests where contestants are encouraged to communicate with their competitors. They found that communititors (i.e., people who collaborated and competed) won the design contest and earned the most awards.</p><p>Because of the strength of online community ties, extrinsic incentives, such as winning a prize, are not the only motives for participating in competitive organizations and events. There are additional intrinsic incentives related to community building, which, in turn, increase participation and enhance the quality of work submitted. Hutter et al. name this phenomenon "communitition" based on a similar concept in business named "co-opetition." <ref type="bibr" target="#b43">[44]</ref> A more recent example comes from Morschheuser et al.'s work on the concept of cooperative gamifcation, a structure requiring positive goal interdependence between players, which they suggest could be a promising approach for crowdsourcing and other CSCW systems <ref type="bibr">[63]</ref>.</p><p>Another relevant aspect of competition is the adversarial nature of investigations, where two opposing sides exist <ref type="bibr" target="#b80">[82,</ref><ref type="bibr" target="#b81">83]</ref>. Prior research has shown that intelligence analysts <ref type="bibr" target="#b13">[16]</ref>, investigative journalists <ref type="bibr" target="#b0">[1]</ref>, and Information Security (InfoSec) and cybersecurity professionals <ref type="bibr" target="#b11">[14,</ref><ref type="bibr" target="#b67">68]</ref>, many of whom join the OSINT community, all foster and employ an adversarial mindset in their training, analyses, and investigations. This mindset inherently lends itself to competition. A prime example is their reliance on competitions as forms of training, such as Capture The Flag (CTF) competitions <ref type="bibr" target="#b11">[14]</ref>, hackathons <ref type="bibr" target="#b75">[76]</ref>, or case exercises against enemy actors <ref type="bibr" target="#b30">[32]</ref>. Votipka et al. found that hacking exercises can support learning and establishing a helpful online community, but organizers need to carefully consider their structure as to not let the adversarial mindset of competition to get in the way of community participation and education [95]. Chin et al. note that the adversarial mindset in intelligence analysts also leads to a distrust in their peers' analyses unless the data source is shared. They propose that intelligence analysts should forego their historically competitive culture and environment for a more collaborative setting to avoid major threats, such as the 9/11 terrorist attacks <ref type="bibr" target="#b13">[16]</ref>.</p><p>In relation to prior work focused on competition and/or collaboration, we study how the OSINT organizations' members' diverse motivations, their ethos, and the adversarial nature of investigations lead to diverse social dynamics, including diferent combinations of competition and collaboration. In particular, we focus on their background and motivations, investigative processes and roles and responsibilities, comparing and contrasting their training practices and regimens, and their division of labor.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3">METHODS</head></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.1">Recruitment and Participants</head><p>When recruiting participants, we aimed for a breadth of domain applications and basic social structures of the investigations. We identifed a number of organizations and events that carry out OS-INT investigations in various domains (e.g., international crime, environmental issues, national security and public safety, human rights violations, theoretical investigations) and social structures (i.e., competitive or collaborative) (see Table <ref type="table" target="#tab_0">1</ref>). Some of the organizations conduct real-world investigations while others create simulated ones. Real-world investigations provide intelligence that has the potential to afect or augment an ongoing investigation (e.g., by law enforcement, intelligence agencies, NGOs, companies) or to focus attention on world events with potential impacts on the investigation's clients or the public (e.g., lawsuit, employee termination, news article, NGO report). They can either be collaborative (e.g., O2, O3, O4) or competitive (e.g., O7) and they are often conducted in partnership with another entity (e.g., law enforcement, media, NGOs, governments). On the other hand, simulated investigations do not serve a real investigative purpose or have impacts on the investigations' subjects. They are, however, a common activity among this community of practice, allowing novices to join the community and provide them with minimal-risk training. Similar to real-world investigations, they can either be collaborative (e.g., O11, O12) or competitive (e.g., O1, O6, O8) in the form of Capture The Flag (CTF) contests or competitive quizzes, and use either fabricated data or real public information. While we initially divided organization based on either competitive or collaborative social frameworks, our understanding evolves during interviews, revealing a more complex intertwining between collaborative and competitive approaches.</p><p>We sought to recruit, through purposive and snowball sampling <ref type="bibr" target="#b78">[80,</ref><ref type="bibr" target="#b90">90]</ref>, at least two participants with diferent roles (i.e., organizer or contributor) from each organization and/or event. We began recruitment with purposive sampling, through direct email invitations of multiple organizers and/or participants who publicly mentioned belonging to one of the selected organizations or events, and continued with snowball sampling to include other organizers and/or contributors within their organization or event. Participants were compensated ($50 Amazon gift card) for taking part in our study.</p><p>In total, we interviewed 14 participants (P1-P14). We consider all recruited participants to be OSINT experts. Some solely held organizer roles (n=8), some solely held contributor roles (n=2), and others held both roles either across diferent organizations or diferent investigations (n=4). The participants represented 14 diferent organizations and events (O1-O14). Our fndings mainly focus on the participants' experiences in nine organizations for which we recruited at least two participants (O1-O9).</p><p>The participants' locations included Asia (n=1), Europe (n=4), and North America (n=9). The participants identifed mostly as men (n=9, n=5 women, n=0 nonbinary), and their ages ranged from 26 to 55 years, with a majority (n=6) falling in the 46 to 55 age range.</p><p>While all participants self-identify as open source investigators or having ties with OSINT investigations (see Table <ref type="table" target="#tab_1">2</ref>), their backgrounds range from security consultants (n=5) to journalists (n=5), including investigative journalists (n=2), to intelligence analysts (n=2), to a geospatial analyst (n=1) and graphic designer (n=1).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.2">Data Collection</head><p>Participants completed a consent form and a demographics presurvey, with Institutional Review Board (IRB) approval. We conducted semi-structured interviews between October 2020 and January 2021. Each interview was conducted remotely over Zoom and lasted a maximum of 60 minutes. During the interview, we asked the participant's about their professional background, their relation to OSINT, their motivations and defnition of success when conducting OSINT investigations, and their investigative process, including their strategies for collecting, verifying, analyzing, and when applicable, preserving and disseminating, the information. Following that, we inquired about their investigations' social structures; we asked about the coordination of individuals during the process, their roles and responsibilities, and their typical tasks, as well as their technology usage and needs. While the main focus of our study is the social structure of these OSINT investigations, we believe that asking participants about their entire investigative process helps us understand the broader view of how diferent stages of the investigation are conducted and how diferent aspects of the investigation come into play which ameliorates our understanding of the social dynamics in action <ref type="bibr" target="#b77">[79]</ref>. Participants P6 and P7 were interviewed simultaneously; all other participants were interviewed separately. All interviews were audio and video recorded with participants' consent. Automated transcripts were generated by Zoom and manually corrected line-by-line. Throughout all interviews, we also maintained typed notes. All participant and organization names have been anonymized.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.3">Data Analysis</head><p>We used a theoretical thematic approach to analyze the interview data <ref type="bibr">[11]</ref>. Given that we are mainly interested in the social aspects of OSINT investigations, Braun and Clarke's qualitative methodology allows us to provide a more detailed and nuanced analysis of such themes within the data <ref type="bibr">[11]</ref>. We used the Dedoose software to carry our qualitative analysis, creating a code tree based on themes extracted from our research questions and previous discussions between authors. Some initial codes included "defnitions of success", "collaborative / competitive division of labor", "power dynamics within the organization", and "organizer's support for contributors". As the analysis progressed, all authors periodically discussed observations about the data and iterated through the codes to capture interesting nuances and themes. Some of the later codes added included "power dynamics outside of the organization", "community ties", and "contributors' support for other contributors".</p><p>As prescribed by Braun and Clarke's methods <ref type="bibr">[11]</ref>, we refned and iterated on the codes, resulting in a fnal code tree of 44 codes. The tree consisted of 7 main codes (organization's mission; background, motivations, and success; investigative process and division of labor; novice support from experts / organizers; skills training, contributors' support from contributors; and standout quotes), and the rest being child codes. We highlighted and annotated each interview transcript with one or more appropriate codes, resulting in a total of 1207 excerpts and 3652 code applications.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.4">Limitations</head><p>The feld of OSINT and its domain applications are vast. While we attempted to capture some of that breadth through our recruitment techniques, we were unable to capture the totality of domain applications or investigative social structures in the organizations we sampled. Despite striving for a gender balance across our participants, we were unable to recruit more female participants, refecting the broader lack of gender diversity in the OSINT community <ref type="bibr" target="#b8">[10]</ref>. We also recognize an imbalance in the roles of participants recruited, having more organizers, as their association with their organization is generally made public.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4">FINDINGS 4.1 OSINT Organizations as Communities of Practice</head><p>In the following sections, we analyze OSINT organizations as communities of practice. First, we detail participants' motivations and defnitions of success as members of the community. We then describe how experts support newcomers joining their organizations and progressing to full membership by providing them with collaborative and/or competitive training strategies and instilling certain principles in them, such as ethical foundations, transparency, resilience, and safety. Next, we convey how the experts, often working closely with novices and once novices themselves, perceive the novices' progression in the community. We describe how newcomers learn the roles of technology, i.e., communication and information sharing, as well as experts' tool recommendations for supporting the community. Finally, we identify key tensions within the OSINT community and their attempted remedies through social OSINT tactics.  the thrill of solving a case. As P8 said, while a specifc OSINT investigation can yield either positive, negative, or inconclusive results, success and motivation stem from the "reason why we're doing it"supporting the broader cause or purpose of the investigation. Some participants (n=4) are motivated by the desire of "giving back" to various communities by volunteering their time and skills to support vulnerable people, e.g., help victims escape their abusers, fnd missing people, and rescue trafcked children. More broadly, some, more experienced participants (n=3) mentioned policy and social change as driving their endeavors: "once upon a time, I thought success would be 'you found the bad guys', now I think it's about getting people to work together on new issues, [...] something that could last two or three years and end up in policy" (P4). Many participants (n=8) are motivated by promoting OSINT education and awareness, and many experts make their income from a combination of practice and training. Some want to help educate the public on topics about which they are passionate, specifcally cybersecurity and digital privacy and security awareness, as P6 and P7 mentioned: "It was a fun way of trying to educate people about types of information that were out there [...] so that they have a greater awareness of what they're sharing, what their friends and family are sharing. " Others are motivated to educate fellow investigators. For example, P3 seeks to increase investigators' awareness about their physical and psychological safety when conducting investigations, and teach them to consider the ethical implications of their work; "success to us [is] that students have all the tools, including how to take care of themselves psychologically, physically, and do it ethically". Some participants want to teach others how to develop their analytical and research skills. As P2 stated: "It is always exciting to know that you're doing something that's having a contribution to national security and public safety; more exciting than that was helping these analysts develop their skills [...] as long as they develop strong analytical and research skills and come out of the program knowing how to efectively leverage social media, then I consider that to be a success. " As another example, P12 who is an administrator of a Discord server where OSINT community members conduct small investigations said: "we'll do kind of a live walkthrough [of an investigation] so new people can see how to do it and how people who have been in OSINT a while think, and we kind of guide them along. It's almost like you're teamed up with [...] a mentor. "</p><p>Finally some participants (n=4) are excited by the dynamic nature of OSINT, per se, and the thrill of solving their investigations. P11 said "it's like a game, sort of trying to follow [...] that chain of evidence and you get addicted to it. It's almost like a drug addiction in a way. That rush of adrenaline you get when you fnd something, you want to do that again. " 4.1.2 Legitimate Peripheral Participation. Strengthening the case for OSINT as a community of practice, we found participants shared many examples of behavior consistent with Legitimate Peripheral Participation <ref type="bibr" target="#b50">[52]</ref> (LPP). Drawing on their own past experiences as novices and recent interactions with novices joining their organizations, our participants shared that newcomers start with low-risk tasks and slowly gain a level of mastery. As their tenure in an organization and knowledge of OSINT grows, they have greater opportunities to become experts in the community. "We all started out as participants in there," said P9 when talking about the organizers in O8.</p><p>Throughout the investigations, experts support novice contributors by providing them with exercises designed to guide them through the investigative process and allow them to build not only the skills and mindset needed, but also the confdence to do OSINT work on their own. P11 recounted training others through case studies and "showing them the thread of evidence, [...] how they can go step by step, both about fnding the story, but also investigating it. That's really helpful because it builds confdence. " P5 shared his past experience as a novice contributor in O2, cultivating his project step-by-step and graduating to become a subject matter expert. P2 and P8 also mentioned that it is motivating for contributors to include their personal interests in those exercises and projects, a kind of constructionism <ref type="bibr" target="#b4">[5]</ref>.</p><p>We observe through participants' experiences that learning happens in both collaborative and competitive models. Five of our participants mention either learning or teaching the basic skills and techniques through formal courses that provide collaborative hands-on training. P3 explained that "we did live election monitoring and we had 60 students and a lot of students in our class came [...] and kind of got their feet wet doing that. " Others encourage learning by participating in more competitive organizations that provide simulated investigative contests such as O6 or O8, or real-world investigative contests, such as O7, as P12 suggests, "competing in the [O7] events [...] is good for just learning how to think outside of the box. "</p><p>Because of the wide range of OSINT-related skills and applications, all participants expressed that OSINT experts tend to be generalists. As P8 put, "It's like mastering, you know, all of the languages in the world, there are some people that get really good at a lot of them, but most of us, you know, we pick what we need to work on and we master those as much as we can, but there's always stuf outside of our area of expertise. " To address this challenge and broaden their knowledge bases, participants reported that learning from and with others is a common training regimen. For example, P8 remembered a co-investigator sharing that a sea has a higher level on the horizon than an ocean and "his experience helped me get better at validating and verifying [image geolocations]. " The community's culture of transparency carries into competitions during which participants still share their diverse skill sets and methodologies with other competitors. As an example, P6 spoke excitedly about a competition she and P7 organized where "the people who were competing are standing around asking each other, 'well, how did you get that answer?'[...] They're explaining and sharing the diferent open source sites that they found that other people didn't know anything about." P10 also heavily encourages people who participate in O8's quizzes to share their various approaches to fnding the answer, emphasizing "learning from others and working together with others" as much as winning.</p><p>4.1.3 OSINT Community Foundations. Open source work can be time-consuming, frustrating, and even physically or mentally taxing. All participants emphasized several important foundations for doing OSINT work: 1) understanding the ethical and legal implications of their work, and 2) stressing transparency, resilience, and safety. These foundational principles are valued by the community, and experts attempt to instill these concepts in novices throughout their learning process. P2 recommended to train all team members in the appropriate legal guidelines, such as 28 CFR Part 23, the federal law regulating the collection of information on U.S. persons when working with law enforcement, as well as OPSEC, i.e., "some basic operational security procedures that are meant to protect themselves as well as the work they're doing [like] crash courses on VPNs, virtual machines and the dark web. " In the case of O9's investigations into child trafcking and exploitation, P13 shared that all investigative work has to be done on their proprietary VDI (Virtual Desktop Infrastructure) software, as it is set up to safeguard the volunteers "from getting any illegal material by mistake on their computer. " During his interview, P9 described ethical questions he wrestles with, such as: "'Should I try to reset someone's password to fnd out if he's registered at this platform?"' Organizers emphasize the importance of safety and mental and emotional resilience through teaching patience, rotating personnel on projects, fostering strong bonds within the organization, mandating therapy sessions, or even blacklisting certain areas of the internet. While working on an investigation related to the COVID-19 pandemic, P2 said that one "team was so busy, we started rotating people through it every week [...] it was such an intense work environment, we didn't want people in that for too long. " P3 added that "user generated content can be dramatic and traumatic in ways just as traumatic as coming into contact with trauma frsthand in some ways because it's so intimate." In order to reduce the exposure to such content, P4 advised to "watch it on a phone, watch it in black and white, turn of the sound, don't get immersed into this. "</p><p>Beyond the supportive infrastructure established by the organizers, contributors of all experience levels support each other by building strong community ties and maintaining friendly relationships. P14 excitedly recounted that "students do quite a bit of, like, getting to know each other, and when we were in person they'd go out salsa dancing. " P3 elaborated on the benefts of community building, citing it as a resiliency method that also helps foster shared ethics and norms, "[making] everyone feel, you know, part of this team and connected and don't leave anyone behind. " P12 mentioned that the community and other contributors have been very supportive of her learning and growing as an open source investigator, and that she "will always fnd somebody to bother" for help.</p><p>4.1.4 Social OSINT Tools. Our participants suggest that many novices, when frst joining the community, are attracted to the technological aspects of the OSINT feld. However, according to these participants, heavily focusing on tools can prevent newcomers from fostering more essential and portable skills, such as critical and analytical thinking. At least eight of our participants shared that newcomers seemed overly focused on tools, an attitude the experts try to refocus. P12 said, "I see these new people coming in, and they want to know all the tools, 'what are all the tools?', 'what tools should I use?', 'what do I need to know?' and they don't learn the tradecraft behind it". P3 added that students join O3 thinking, "Oh, this is a tech-heavy thing' but it's really not. It's about fact-fnding [...] that part of it has to be really emphasized. " While the usage of tools is still necessary, this distancing is partially due to the dynamic nature of the OSINT feld and the constant changes in capabilities, restrictions, and even layouts of diferent online tools and platforms. For instance, P13 shared that "APIs change so often,[...] I found tools to be less useful than doing it manually so that presents a problem cause a lot of OSINTers [...] rely on tools, which means that they get faulty or bad data. "</p><p>Despite these cautionary tales, participants also told us that as novices gain mastery, they learn that tools still have two important roles in supporting the community's social structure: 1) communication and 2) information sharing. We observe that all participants successfully employ general-purpose, usually open-source, tools that are easy to adapt to their investigative needs. Participants, including P11, P12, and P13, cited Slack, Discord, and Signal as valuable communication tools. P12 explained that it can be a benefcial way to receive quick feedback on fndings, or bounce of ideas, and that she "thrive[s] in that kind of situation. " Further, P6 and P7 shared that their CTF contestants sometimes prefer text chat over voice conversations during time-sensitive contests, as it may allow them to stay focused: "We had this one team of three people, [...] and they were just staring for three or four hours, all three, and I don't think they ever talked to each other... Yeah, they were really intense" yet highly successful.</p><p>For information sharing, participants described using SharePoint, Google Drive folders, and spreadsheets. P11 described his collaboration: "we rely quite a bit on spreadsheets ourselves. 'I use a mind map.' There's all these diferent ways of documenting and yet none of them is great for sharing. " Facing these challenges, P10 described building her own tool: "I developed [a collaborative platform for the analysis and verifcation of digital content] with my team, and also other organizations use it. So we can also collaborate on this together. "</p><p>Asked about their"wish list" of tools that would support or improve OSINT investigations, some participants gave examples that streamlined collaboration or building on the prior work of other investigators. P8 eagerly shared his need and vision for an opensource "case management software dedicated to open source intelligence" helping lead investigators manage their teams. He elaborated that "there are so many people [who wonder] 'how do I do OSINT in a team, in a group?' because... 'How do I decrease the redundancy?' [...] It's that last piece of managing the entire case that's really, really missing. " Another example is P4's idea for preserving and sharing collaborative OSINT work that has already been generated by experts. P4 described "[a tool that would] scrape the entire Twitter for Google Maps mentions and put them on a map. [...] So that all the history of geolocation work that I've done on Twitter over the past fve years could be then plotted on a map in collaboration with every other open-source investigator". 4.1.5 Challenges and Remedial Strategies. During the preinvestigation stage, all organizers try to formulate an investigation plan based on the OSINT cycle which consists of content discovery, verifcation, preservation, and publication. This stage defnes the involvement of diferent contributors and outside entities (e.g., partners or clients), the division of labor, and the rules and training investigators have to abide by. As P3 recounts:</p><p>[The investigation plan] involves aspects of, kind of, 'what is our objective? What are, you know, some of the risks involved with this cybersecurity-wise or resiliencywise? [...] What's the expectation of the partner? What will the deliverables be?' And then 'What are the steps along the way to get there? What's the capacity of our team? Do we have the right language skills for this? Do we have the tech skills?' We observe that greater challenges arise from the content discovery and verifcation stages, as they often require parsing through massive amounts of data and using various tools and techniques to verify and synthesize it into actionable intelligence. As OSINT is accessible to everyone, organizations (e.g., O4, O5, and O7) try to remedy those challenges by soliciting the assistance and/or domain expertise of additional community members for these stages through avenues that attract large crowds; i.e., crowdsourcing and time-constrained competitive events. As P11 shared, for one of the investigations conducted by O4, "we ended up bringing in 15 people all together, working, but most of them, it wasn't full time... it was quite intense but then once the fndings were made, then they don't have to work on it <ref type="bibr">[anymore]</ref>." As a contributor, P12 shared her experience in O7's CTF: "you don't get a rundown of what everyone has found afterwards, how they found it, because they just give it to law enforcement and a lot of it never gets [shared back with the contestants]. "</p><p>Bringing together contributors from diverse backgrounds creates tensions. From a broader perspective, our interviews highlight that diferent participants valued ethical implications, interdisciplinarity in OSINT, and online recognition on diferent levels. Two of the participants explicitly attributed certain values, such as the desire for online recognition, to the "tech bro" (P3), or more specifcally, "BrOSINT" (P14) culture. P11 described some of the tensions that can stem from these diferent values colliding: "There was like an interesting tension when we were working on [investigation title] between open-source investigators who wanted to publish [the fndings] straight away [on their Twitter accounts], and obviously my boss was like, 'no, no, we can make a video about it <ref type="bibr">[instead]</ref>."' To remedy these tensions, some organizers, such as P2, P3, and P14, attempt to frame their investigations in diferent ways to attract contributors with more similar values. P3 elaborated, "we found when we have classes where we get more men, and we have classes about human rights, where we get all women, so. . . but it's like framing is important, like, how are you framing this: is it a tech bro thing or is it a human rights thing?"</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.2">Primarily Collaborative OSINT Organizations</head><p>The need for contributors from diverse backgrounds results in varying social structures; some more collaborative, some more competitive, and some with unique blendings of collaborative and competitive strategies (i.e., social OSINT tactics), as shown in Figure <ref type="figure" target="#fig_2">1</ref>. As the overarching social structure of an organization, collaboration tends to be more prevalent than competition, especially in organizations that conduct real-life investigations, as we can see in O2, O3, O4, O5, O9, O10, O13, and O14. However, this social structure is also adopted by organizations that conduct simulated investigations, such as O11 and O12. Explaining the reasoning behind O2's more collaborative structure, P2 pointed to authenticity as well as diverse perspectives: "part of it is a recognition that almost all the work done in the U.S. intelligence community now, analytic work, is done in a team-based environment, so we want [the students] to be familiar with working in a team-based environment and develop these team-working skills, but it's also just a sound analytic practice, that if you have multiple perspectives, it helps eliminate or at least counteract cognitive bias." P3 elaborated on collaboration as a cultural aspect of OSINT: "[the] open source community generally is super collaborative and that's what I love about it and I think anything Compared to competitive OSINT, this collaborative social model is characterized by a more defned structure and hierarchy in the roles and responsibilities of the members, less explicit rules for tasks, and an emphasis on transparency, communication, and strong bonds between members.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>4.2.1</head><p>More Structure and Hierarchy. Our interviews found that organizations using a more collaborative structure overall tend also to employ a more rigid structure and hierarchy in their roles and responsibilities, such as having formal titles for staf positions, and team members reporting to a team leader. For example, O2, O3, O4, and O9 feature organizer positions with specifc titles such as "Lab Director", "Team Coordinator", and "Executive Producer." Participants also perceived considerable need for coordination between investigators, mainly to reduce the redundancy in efort and advance the investigation more efciently. P14 explained that "it usually works best when there's a professional staf member with a [graduate student] or with an undergrad to defne the team and to help structure the tasks, and to make decisions about what the parameters would be. " We speculate that these organizations defne a clear structure and hierarchy in order to manage and scale up the large number of individuals usually involved in their investigations. Bigger groups are often modularized into smaller teams; as P4 noted, "When you're getting together a room of 30 people trying to document every airstrike in [country], sometimes you need to break them down in teams of fve. "</p><p>While high structure is common for collaborative OSINT, it is not universal or without its drawbacks. P4 also pointed out that occasionally investigations can happen spontaneously, without much structure and/or coordination discussed: "it's been that investigators from Twitter, that just had a mutual drive and a mutual passion and say, 'oh my god, let's get these people', there's no roles discussed there's no hierarchy or team leaders, it really is just a group of people that want to do good in the world." P2 also warned that having defned hierarchical roles can sometimes create delegation challenges, such as "a team lead who is all the work themselves or isn't providing sufcient direction or is not allowing people to participate as much as they should. " 4.2.2 Less Explicit Rules. On the other hand, collaborative organizations tend to feature less explicit or strict rules about how to carry out specifc tasks, which tools or techniques to use, or which sources of information to explore, and rely more heavily on the expertise and creativity of the contributors. As P3 recounted: "we were empowering the students to [be] the experts and to be the innovators and that [...] was a great, great model because the students didn't go look to us and go okay, 'help fgure this out. "' P14 elaborates on some of the benefts of empowering contributors to be creative: "we like that atmosphere that everyone feels like it's a little bit more free [...] by seeing what's possible they then start to realize that [the information] they're sitting on is really valuable. "</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.2.3">Emphasis on Transparency and Communication.</head><p>In more collaborative settings, good communication is a requirement to enable individuals to work together efectively for lengthy investigations, especially when those individuals do not have the same domain expertise or background. In keeping with that, some participants mention that they attribute more efort to the process over the product. For example, P9 attributed more importance to contributors sharing their methods in solving the quiz than the correct answer. P3 elaborated that the importance is in showing "these are the steps that I went through, and this is what we can show, and this is what I know and this is what I don't know. [...] That transparency is critical to the open source process. " When working with other investigators, the methodology needs to be transparent, with detailed and structured documentation in order for all investigators to be of the mind and communicate more precisely. For example, P5 explained that his target profles are very robust and thorough when working in a team environment, but very minimal and only comprised of "little he is working alone.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.2.4">Strong Bonds.</head><p>Along with robust communication, many participants value strong bonds between investigators. There is a push for individuals investigating together to foster a friendly relationship which improves the quality of their communication, of their resilience and in turn of their work and their sense of community. P4 mentioned building those strong bonds as the "perfect way" to work on investigations. Similarly, P5 recalled structuring the tasks of one of O2's investigations based on his teammates' preferences, strengths and weaknesses: "I think it takes a amount of knowledge on the people that you work with [to do that]. " P9, P10 and P12 added that contributors who communicate with others will slowly build "some sort of relationship" (P9) and slowly become "part of the family" (P10). Some participants, including P4 and P11, mentioned that breaking down bigger groups into smaller teams aids in the creation of such bonds, and in keeping communication lines open between people. P11 shared that during of O4's big investigations, as more contributors were added to the Slack channel, public conversations in the main chat were decreasing, while private messages were increasing. As a solution, he split this "big collaboration" into smaller groups so "people are then more comfortable to talk and express." P4 also explained his preference for smaller teams: "you build a bond with people as well which is important, rather than just 'you do this', 'you do that',[...] it's more 'hey, we're out to do well in the world and we have a small group of dedicated people that can work together."' P8 adds that smaller teams can also be benefcial in harnessing the power of sole performers or lone analysts in a collaborative setting by having "teams of one" encompassed in a workfow with bigger teams.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.3">Primarily Competitive OSINT Organizations</head><p>As an alternative social structure, competition is mainly present in organizations that ofer simulated investigations, such as O1 and O6's CTF competitions and O8's quizzes. As a notable exception, it has also been implemented as a CTF contest for real-world investigations into missing persons by O7. In simulated investigations, this structure aims to assist novices in learning critical skills within a low-risk environment. On the other hand, in real-life investigations, these contests can harness the advantages of competition, including motivation, speed, diversity, and gamifcation. At least eight of our participants identifed competition as a powerful motivator, keeping contributors engaged in the investigation and focused on the task at hand, and creating a sense of urgency. Using competitive strategies can also limit groupthink, and in some cases, reduce the feelings of immersion in distressing user-generated content. It is important to note that while recognizing the benefts of competitive a smaller number (n=2) of participants prefer the social interactions enabled by more collaborative models. P8, while playing in O7's CTF, shared that "from the competitor point of view, it was... it was pretty darn isolating, [...] as I already mentioned, I'm a very collaborative person, " P10 also agreed that she is happier when collaborating with others than competing alone.</p><p>In OSINT organizations, this competitive model is characterized by a less defned structure and hierarchy in the roles and responsibilities of the members, more explicit rules about tasks, the use of gamifcation, and the presence of an adversarial mindset.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>4.3.1</head><p>Less Structure and Hierarchy. In contrast to organizations that support a more collaborative structure, we fnd that those that implement a more competitive model overall tend to feature a less defned structure and hierarchy in roles and responsibilities within teams conducting investigations. For example, O1, O6 and O8 do not feature ofcial position titles other than "organizer" and "participants" (also called "players" or "contestants"). O7 features a "judge" who verifes contributors' submissions in addition to these two roles. While organizers have defned roles and responsibilities, team members often do not have an ofcial team leader; each team usually has a team name displayed on the scoreboard and decides on their own structure or lack thereof. P6, P7, and P12 all shared that players "get to choose who's on their team" (P6 and P7) and "it's organized as far as the specifc teams feel like they want to organize it" (P12).</p><p>As team members gain experience with one another, they may adopt informal, fexible roles that change within and between events. P12, recalling her own progression as a player, elaborated, saying that "the more seasoned teams [in CTFs] have a structure set up where maybe one person is digging deeper into all of the missing people and someone is just doing surface level submissions for points and I think when people have done these competitions a few times, they start to fgure out that you have to have a system like that to get the big points." We speculate that this division of labor partly results from the smaller sizes of teams, ranging from two to four individuals, participating in shorter, more time-constrained, investigations. While sometimes teams of are allowed in competitive events, according to P1, P6 and P8, they are rare. 4.3.2 More Explicit Rules. On the other hand, we observe in competitive OSINT events more explicit and strict rules about which sources of information are acceptable, which tools and techniques are allowed, how information be submitted and how points are awarded. Rules related to acceptable sources and submission steps aim to keep the competitors focused on contributing useful information during the time-constraint, while other rules related to the point system and tools allowed to maintain a level playing feld contestants. For example, P8 mentioned that for O7's CTFs, "the teams need to submit the URL and why they think it's important, [...] their reasoning or analysis behind it. " P6 and P7 also said that players "could only have two tries" for O6's challenges. P1, P6, P7 and P12 explain that maintaining a level playing feld is important. Sometimes players will "start, you know, just breaking the rules a little bit" (P1) or "hacking the game and making it unfair the rest of the participants" (P6). P12 adds that O7's judges may accept submissions diferently if the rules are not standardized, which can create some tension during the competition.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.3.3">Gamification.</head><p>Mainly in simulated but also real-world investigations, a beneft of gamifcation is motivating people to learn OSINT skills who might not otherwise be interested. P6 and P7, for example, implemented competition in the form of a CTF and "sort of gamifed the education process." P8 added that this sort of structure is "getting a huge number of people introduced to [the] OSINT world, it's getting a lot of people interested in investigation, it's getting them into the process. " P1 also mentioned that sometimes companies or other organizations encourage their employees to participate in CTFs and acquire new skills that way. However, number of participants, including P4, P8, and P11, were quick to warn that this kind of playful motivation does not necessarily correlate with better investigative results, and there are some things to keep in mind in order to successfully implement competitive strategies in the investigative process. For example, P1 shared that the prize of the CTF plays a role in extrinsically motivating people to participate, suggesting that some players may be more interested in the prize than the quality of the investigation, tempting them to cheat their way to the prize.</p><p>Participants, such as P1, P6 and P7, who organize investigations as simulations also encountered challenges when trying to emulate real-world investigations and techniques in a CTF-style competitive event. While P1 tries to create challenges that hone in on real-world OSINT tactics, the gamifed format of competitive events often rewards a diferent set of strategies. P8 said that "if [people] take that same methodology that they use to win the CTF, and they try to apply that within a business setting in a real OSINT environment they're going to absolutely fail" because for many CTFs the winning goal is "to submit as many fags as possible, which is diferent than doing an open source intelligence investigation. " 4.3.4 An Adversarial Mindset. The adversarial mindset and nature of competitive OSINT also creates a sense of urgency that might encourage contributors to work more efciently. P11 believes that "a healthy dose of competition can help, defnitely, people move faster and. . . refocus at times because, also again, the open source investigation, you can go down so many rabbit holes. . . <ref type="bibr">[competition]</ref> defnitely push you. . . As soon as you switch on the competitive mindset, you might be more focused and because you've got the time pressure." efciency can be critical for time-sensitive investigations, such as breaking news events, missing persons cases, and criminal manhunts. However, competitive mindset should not hinder communication. While competition is "a wonder for projects", as P4 shared, "the idea of independent competition is not so great because that's what happens in intelligence agencies, they silo information and they don't reach out to each other. " This lack of communication is sometimes used during CTFs, in order to mislead other competitors on a certain team's progress. For example, P6 and P7 mentioned that "we've had people hold on to fags and drop them at the last minute to drive some of the other competitors crazy. " Some teams also employ "smack talk" (P7) in an attempt to demoralize other teams.</p><p>The adversarial nature of investigations also leads to another, more subtle, form of competition we observe in our participants' experiences: competing for attention or recognition. For instance, some contributors or organizers have the desire to be the frst to publish the fndings of their investigation, with journalists not wanting to "get scooped" (P11), or want to showcase the results of their investigations and the skills they employed,"natural[ly] wanting to show outputs that diferent teams have [like stories, reports, or legal memos]" (P14). This motivation, according to P10 and P11, is sometimes linked to the "ego of the individual" (P11), and whether they care for public recognition of their achievements, or can also be a personal challenge.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.4">Social OSINT: Blending Collaboration and Competition</head><p>As previously mentioned, OSINT investigations are often challenging. They require the involvement of investigators from diverse backgrounds and with various domain expertise who are motivated to parse through massive amounts of data to extract well-grounded intelligence. Eight of the organizations we studied blend collaborative and competitive approaches within their structures to address these challenges, as shown in Figure <ref type="figure" target="#fig_2">1</ref>. Within organizations that feature a competitive structure overall, O1, O6, and O7 implement team-based competitions where team members collaborate, stress the need for robust communication, and are often transparent about their fndings and techniques with other competitors. O8, which ofers competitive daily quizzes, has members who collaborate on solving them through private chats and are heavily encouraged to share their methodologies publicly. On the other hand, O3, O4, and O5 which feature more collaborative structures, encourage an adversarial mindset to create a sense of urgency within competitors and avoid groupthink. In fact, O4 also uses red-teaming, encouraging investigators to "attack" the analysis of their peers. Additionally, O4 and O12 also set up smaller CTF contests to gamify some stages of the investigation.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.4.1">Collaboration in Primarily Competitive Organizations.</head><p>We found that in a number of organizations, collaborative strategies appeared at a smaller scale within a more competitive structure. Especially in team-based competitions, as implemented by O6, O7 and sometimes O12, members of the same team have free access to each other's skills and domain expertise, and emphasize strong and constant communication because of the contests' time constraints. For example, P12 recalled that during O7's CTF, "they give you like seven people that you're looking into, so each one of us, [in the team], will pick one person and we'll work on them for like an hour and then, if we hit a dead end we'll switch people just to kind of keep it going." Her team also sets up a Slack or Discord channel for each target and each teammate "will post in all [the target] details, what they're fnding and other people will kind of comment on it. So it is a collaborative environment... "</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.4.2">Competition in Primarily Collaborative Organizations.</head><p>We also found that some organizations valued competition when incorporated into real-world investigations, and more collaborative settings, as long as communication lines between "opposing" teams remain open and people continuously share their and skills with others. Beyond the motivational benefts, competition can help create sounder investigative arguments by having an "opponent" poke holes in the analysis of another investigator, known as "red teaming." P11 explained that, while O4 conducts investigations collaboratively, once the investigation is complete "we'll bring another open investigator who wasn't working on the story and that person will go through the story with the idea: 'I need to break that story. I need to fnd a hole in that story. I need to fnd a mistake."' It can also, perhaps surprisingly, help investigators cope with emotionally distressing work facilitating their progress. For example, P4's organization conducts human rights investigations using OSINT methods, and "to keep that fun we set up little challenges like capture the fag, [...] which is terrible to think of because you're doing human rights cases and you're looking at bombings, but at the same time, if you can gamify that competition, you can get better results. "</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.5">Outside the Organizations</head><p>Having examined the social dynamics within the diferent organizations our participants belong to, we now turn to certain power dynamics that afect the OSINT investigations from outside the organization. First, we present our observation about organizations they work within, with and/or for and how these entities infuence the investigative process and provide the OSINT community with a way for their fndings to have a concrete impact, then we present certain ties with communities that receive the results of the investigation, or even in some cases with the targets of the investigations, as shown in Figure <ref type="figure" target="#fig_2">1</ref>.</p><p>4.5.1 Organizations Within Organizations. Some participants mentioned that their organizations are hosted within an overarching institution or event. As a result, these institutions' or events' rules, regulations and structures impact the organizations' investigations and structure or sometimes dictate the resources they have access to or the contributors allowed to join (cf. <ref type="bibr">Fig 1)</ref>. For example, O2 and O3 are part of two diferent universities, O8 is hosted on Twitter, while O1, O6 and O7 are hosted by a number of diferent conferences. P2, P3, P5 and P14 pointed out that all staf members or organizers of O2 and O3 are employees or faculty members of their respective universities, while the contributors are recruited from a pool of qualifed students (e.g., students from a specifc major or students who have completed pre-requisite classes). P3 stated that, while O2 is open to students from various disciplines, it is based in a department of the university, encouraging a larger number of that department to join O2. One of the challenges surfaced by the participants is "a lot of also quality control, because students [who join], they become great at it and then they graduate" (P3). P11 indicated a diference in access to resources between O4 and O5, with O4 having stricter rules when it comes to crowdsourcing help of the broader OSINT community and sharing investigative information on social media. P1, P6, and P7 all mentioned that they need to coordinate O1 and O6's events with the conference organizers and that participation is usually restricted to the conference attendees.</p><p>4.5.2 Organizations They Work For. As mentioned in a previous section, some organizations tend to conduct their investigations with or for other institutions (e.g., law enforcement, media, NGOs, government agencies). We observe a diference in relationship between entities the organizations work with, and entities they work for. In the latter case, those entities tend to be perceived "customers" (P2) or clients for whom the organization is providing a product or service. These institutions may provide direction or baseline information during the pre-investigation stage; however, they are less involved in the diferent components, tasks, and intricacies of the investigative process. P2 shared his perspective working for such entities:</p><p>In "they have four -which I thought was quite a lot -four diferent people independently review the geolocation, which I think is good, so the pressure isn't on the students and they've got other professionals and contractors." Through their work with partners, members of O3 are able to witness the results of their investigations being used in NGO reports and even legal proceedings. Even when organizations are not necessarily working on a certain investigation with another entity, are community ties between contributors belonging to both institutions which encourage them to share information or provide assistance. P4 and P10, among other participants, said that they follow many other members of diferent organizations conducting OSINT investigations, which allows them to share or receive leads, ask for help, or even "have quizzes during lockdown and stuf like that together" (P4). 4.5.4 Subjects of the Investigation. In another attempt to remain transparent, participants shared that, in some cases, the subjects of the investigation are aware that an investigation is being conducted on and provide their consent, such as in the case of O6 that recruits volunteer targets for their CTF, or O13 that is tasked to assist "domestic violence victims" (P12) by restricting their information online. P6 and P7 prepare their "voluntargets" by trying to put them at ease and explain the process in detail, while also connecting them to previous volunteers who act as references. P12 provides the victims with regular updates about the investigation, and involves them the verifcation process. However, sometimes OSINT investigators cannot be transparent with their subjects in order to protect their identities, and avoid compromising the integrity of their investigations. P5, for example, pointed out that he uses alias accounts on social media to be granted access to certain Facebook groups, in which case, subjects of the investigation are not made aware that an investigation is happening. In P13's corporate investigations, while the company is aware that an investigation is being conducted on their employees, employees themselves are not to avoid them concealing information.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>4.5.5</head><p>The Public. Once the investigation is complete, a number of organizations (such as O3, O4, and O5), share their fndings publicly (e.g., by publishing a news story or producing a documentary).</p><p>There are a number of potential consequences, including individuals or policy makers being infuenced by the fndings, subjects of the investigation being placed in the limelight, other OSINT analysts trying to poke holes in the fndings, or even retaliation by outside actors. P4 elaborated on some of the reasons for meticulously reviewing every step of the investigation: "it's going to be digested by the wizards on Twitter that say, 'well, your geolocation's wrong here, your open source's wrong and your evidence is wrong. ' And people in <ref type="bibr">[country]</ref> have patriotic open source analysts, happens about [another country] too, [...] that will look at this stuf and say, 'I'm going to take this thing apart. "' In an attempt to prevent negative consequences, OSINT investigators strive to present their fndings in a transparent manner, allowing the public to trace the provenance of their data and results, and employ competitive strategies such as red-teaming, as mentioned in a previous section, to ensure the robustness of their analyses.</p><p>P4 added that another social aspect to consider is the invisible infuence from outside actors that afects what we see and what is being investigated; when speaking about receiving a lead into an investigation, he said: "it may have been sent to you for a reason of trying to stir the pot... to infuence something that's actually already ongoing, and I think that's very dangerous because it's something that's very hard to verify with proof. "</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5">DISCUSSION</head><p>Above, we described the personal, interpersonal, and organizational factors that shaped our participants' investigative process. In the following sections, we discuss the three elements that uniquely characterize the OSINT community and how many OSINT organizations blended both competition and collaboration to achieve their goals. We also discuss implications for the design of tools and ways to improve social dynamics within OSINT investigations, as well as investigations within CSCW and HCI more broadly.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.1">Refections on Success in the OSINT Community</head><p>In our fndings, participants presented a variety of ways in which they defne success and motivation for themselves when participating in the OSINT community, related to education, giving back to the community, policy and social change, combating criminal activity, and the thrill of solving a case. Sometimes the participants' defnitions of success are adapted for simulated investigations that have educational or charitable purposes. However, their eforts may not directly impact or solve real investigations, suggesting that participants' defnitions of success may ofer limited reward in the real world. Participants also mention facing social and technical challenges, including parsing through and verifying large quantities of diverse data sets, tensions sometimes arising between individuals from various backgrounds and domains, and difculties balancing the adversarial mindset with the collaboration needed to conduct investigations. For example, while O7 conducts real investigations, P8 mentioned how their CTF may duplicate efort by having competitors submitting the same information. Further, P12 was disappointed that competitors' eforts were not rewarded any follow-up with law enforcement after the contest to know if their work has resulted in the case being solved. Our fndings showed that organizers and contributors can successfully support and expand their OSINT communities through such eforts. However, they may not have the same motivations as professionals in the OSINT feld who conduct real-world investigations with the predominant goal of "solving the case. " This highlights a gap between some of the OSINT communities of practice that we identifed in our study and OSINT as a profession. To close this gap, social OSINT organizers should seek to align their defnitions of success for an organization or event with its collaborative or competitive social structure. Primarily collaborative organizations tend to support more authentic investigations, extensive communication, and strong relationship formation, but can be prone to groupthink. Primarily competitive organizations using gamifed participation models can boost participation and speed up contributions, but may be less authentic and prone to challenges such as redundancy, cheating, and confict between teams. As we discuss below, blending the two models may ofer the best success potential, allowing organizations to tailor the social dynamics to meet their unique needs.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.2">Refections on The Three Elements of the OSINT Community</head><p>We surfaced three elements that characterize the OSINT community: 1) the culture of transparency in their work, 2) the presence of an adversarial mindset when conducting investigations, and 3) the collaboration among individuals with diverse motivations and backgrounds.</p><p>The OSINT community emphasizes transparency in its work: all participants emphasized only using open source or publicly available data, documenting all sources of data, as well as sharing the detailed methods and analysis techniques used to verify the information and reach their conclusions. Expert members incentivize novices to ensure their documentation of the gathered data, and their verifcation techniques are transparent through various processes such as recording URL sources, archiving data, and preserving its metadata in order to maintain the authenticity of the evidence. For example, we found that in O9 all investigative work is logged and tracked on proprietary machines and accessible to all investigators assigned to the case. This culture of transparency also extends outside of their organizations: OSINT investigators share their detailed reports with their partners, clients, and the public. Their use of exclusively publicly available data makes it easier for them to be transparent about every step, and perhaps even necessitates that they do -because anyone can theoretically verify or debunk their claims. This rigorous and transparent documentation allows everyone to see the chain of custody when gathering information, and can lead to more trust in their reports and fndings by the public, law enforcement, and courts of law <ref type="bibr" target="#b20">[22]</ref>.</p><p>As mentioned by previous research <ref type="bibr" target="#b0">[1,</ref><ref type="bibr" target="#b67">68,</ref><ref type="bibr" target="#b67">68,</ref><ref type="bibr" target="#b80">82]</ref>, investigations often have an adversarial nature. For instance, in cybersecurity <ref type="bibr" target="#b11">[14]</ref>, there is a concept of an "attacker" and a "defender. " This leads many OSINT investigators with cybersecurity backgrounds to foster an adversarial mindset which inherently lends itself to competitive strategies being employed. We observed these strategies through their use of CTFs, red teaming, and gamifcation of repetitive or tedious tasks. This mindset can also be present in OSINT investigators with a journalism background, as a product of the meritocratic system underpinning their profession <ref type="bibr" target="#b65">[66]</ref>. However, unlike in Chin et al.'s study <ref type="bibr" target="#b13">[16]</ref> where intelligence analysts tended to doubt their peers' analyses, we found that OSINT investigators seem to be more confdent in their community members' work due to the transparency of data source and techniques employed, even when competitive strategies were used. This fnding agrees with Müller and Wiik's fndings where OSINT investigators were enablers of collaboration and transparency within the feld of investigative journalism <ref type="bibr" target="#b65">[66]</ref>.</p><p>Despite this adversarial mindset, we found that the sheer amount of digital information available required OSINT investigators to collaborate with each other to parse through, verify, and document their investigation in a timely manner. In addition, the wide range of OSINT skills and applications needed to conduct investigations, as mentioned by the participants, also results in a collaborative setting involving individuals with varied backgrounds and skill sets, such as cybersecurity experts, graphic designers, or journalists, and with varied motivations. Such openly collaborative investigations are seemingly made possible because of the OSINT community's culture of transparency. Considering prior research (e.g., <ref type="bibr" target="#b99">[98]</ref>) and our fndings, we suggest that increasing diversity in both demographics and domain expertise has the potential to generate more robust results for OSINT investigations. However, prior research has found team diversity can be detrimental if individuals are not able to achieve common ground <ref type="bibr" target="#b15">[18,</ref><ref type="bibr" target="#b79">81]</ref>. Similarly, our fndings show that tensions can arise from having individuals who hold diferent values and mindsets in the same organization, such as between members of the so-called "brOSINT" culture and other investigators otherwise driven by social justice. Successful collaborations require carefully negotiating these tensions, such as through Friedman's value sensitive design framework <ref type="bibr" target="#b32">[34]</ref> or Tatar's design tensions framework <ref type="bibr">[85]</ref>.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.3">Refections on Social OSINT: Combining Collaboration and Competition</head><p>As mentioned in our related work, combining collaboration and competition can motivate individuals to participate in innovation contests and crowdsourcing as well as enhance the quality of work submitted <ref type="bibr" target="#b43">[44,</ref><ref type="bibr" target="#b87">87]</ref>. Our fndings show that OSINT organizations also employ both concepts, but in diferent combinations.</p><p>Even in more competitive settings, we found that participants had a desire to give back to the community, or to learn from other members, motives that align with Hutter et al.'s study of collaboration in design contests <ref type="bibr" target="#b43">[44]</ref>. However, previous research also demonstrates that competition, and some extrinsic incentives, can sometimes inhibit collaboration, but the degree to which collaboration is inhibited depends on the contest's design <ref type="bibr" target="#b87">[87]</ref>. These studies recommend attributing an extrinsic incentive to collaboration in competitive settings, by rewarding competitors who exhibit collaborative behavior throughout the contest <ref type="bibr" target="#b43">[44,</ref><ref type="bibr" target="#b86">86]</ref>, or by designing positive goal interdependence in the game, making the success of one player positively correlated with the success of another <ref type="bibr">[63]</ref>.</p><p>We propose that these approaches may also beneft the CTF style designs of more competitive OSINT organizations we examined, such as O1, O6, or O7, reducing the amount of duplicated efort by diferent teams, and incentivizing contestants to share some of their expertise and fndings with other teams, increasing communication and transparency. We also suggest that fully or partially sharing the answer to a fag with the rest of the competitors after it has been found by a team can reduce the efort in deduplicating the competitors' submissions after the CTF, and discourages teams from siloing useful information -a common challenge in collaborative sensemaking <ref type="bibr" target="#b56">[57]</ref>. Correspondingly, we propose that competitive strategies can beneft more collaborative OSINT organizations, as we observe in O2, O3 or O4, by limiting groupthink and inaccuracy blindness, reducing feelings of immersion in traumatic content, and encapsulating certain investigative tasks. Kane et al. <ref type="bibr" target="#b45">[46]</ref> posit that prompting collaborators to "exert discriminatory thinking and analysis" towards their teammates' work could help them detect inaccurate information. For example, we found that adopting a competitor's mindset helped members of O4 generate well-grounded investigative arguments and avoid retaliation by outside actors once their investigations' results were made public.</p><p>Finally, we suggest that more crowdsourced investigations in general can beneft from establishing social ties and leveraging gamifcation. In the organizations we studied, We found that encouraging the establishment of strong social ties, more specifcally friendships, between investigators can provide advantages beyond sensemaking and productivity by strengthening the available support systems and building resilience into investigative teams. Kessler et al. <ref type="bibr" target="#b47">[48]</ref> posit that careful conversation with a sympathetic peer can help cope with stress, which is also a secondary trauma mitigation technique employed by other OSINT investigators who focus on human rights violations <ref type="bibr" target="#b20">[22]</ref>. Growing a strong social support network between investigators, and even including members who are versed in therapeutic techniques, can assist in shielding members from secondary trauma. Gamifying certain stages of the investigation can also reduce feelings of immersion in user-generated content, especially when it is such as in human tions. While gamifcation could help mitigate secondary trauma among participants exposed to upsetting content, such decontextualization risks adverse consequences, trivializing or misconstruing its meaning.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.4">Social OSINT Tool Design Implications</head><p>Our fndings present participants' attitudes towards and technology, emphasizing a measured wariness when approaching specialized tools but embracing their especially during the more challenging stages of the OSINT cycle. However, we also report on participants' successful use and adaptation of more general-purpose, typically open-source, tools to coordinate their social OSINT eforts. Participants also expressed a need for tools that support or improve the current social structures of their organizations and events, such as a multi-user case management platform. We present a number of recommendations based on our fndings.</p><p>OSINT investigations are a complex and creative sensemaking process, requiring the adaptability of a multitude of tools at various stages of the investigation. Given this requirement, we highlight the concept of appropriation in design and relate it to the domain of OSINT investigations. Gonzales et al. <ref type="bibr" target="#b36">[38]</ref> surface the importance of designing appropriable tools that can accommodate changing workfows and adjust well with other tools being used. In addition, tools such as shared workspaces and collaborative sensemaking systems have been shown to increase awareness of others' activities and progress, benefting analytical tasks <ref type="bibr" target="#b14">[17,</ref><ref type="bibr" target="#b70">71]</ref>. Taking these prior works into account, we propose that tools supporting social OSINT investigations should allow users to defne their own investigative process without centralizing all tasks in one platform.</p><p>Our frst recommendation is a tool that would act as a dashboard encompassing all stages of the investigation, allowing users to visualize the current activities being completed, and check their progress, and acting as a meeting point where investigators can upload their data from diferent tools for others to download. We also recognize that, in some cases, investigators may not want to share the information they have, as in the case of journalists concerned about "getting scooped. " Therefore, we recommend that tools promote social translucence <ref type="bibr" target="#b25">[27]</ref> into the investigative process without inhibiting the potential for competitive strategies to be implemented by the users. For example, a user would be able to see the investigative stages a competitor has completed and a summary of their fndings without having access to the details of the activity they are currently working on or the exact data they have gathered. Platforms such as CrossCheck by First Draft News <ref type="bibr" target="#b31">[33]</ref>, or Check by <ref type="bibr">Meedan [59]</ref> which enable journalists to collaborate on the verifcation of information, demonstrate that journalists can be encouraged to collaborate, especially on open source information.</p><p>Despite cautionary tales about tool obsolescence, OSINT investigators still fnd benefts in diferent specialized analysis tools dependent on the data they collect, especially during the alreadychallenging content discovery and verifcation stages. To alleviate the burden of sharing their data across tools, we suggest an open source standard for tool interoperability at diferent levels of abstraction <ref type="bibr" target="#b23">[25,</ref><ref type="bibr" target="#b33">35]</ref>, facilitating the importing and exporting of data from one tool to another. For example, we propose allowing GPS coordinates to be exported from mapping tools and geotagged social media posts, then to import them into a fight tracking software to automatically track fights within the vicinity of those coordinates.</p><p>Our fndings demonstrate that OSINT investigators rely on crowdsourcing content discovery and verifcation tasks when they face obstacles and they do so by recruiting outside analysts on social media platform, notably Twitter. However, social media content can be ephemeral and eclipsed by newer content, as mentioned by P4. Inspired by this fnding, we suggest providing investigators with a crowdsourcing that would directly link them to a community of experts on Twitter, for example, while preserving and categorizing their work which would alleviate the burden of registering on a diferent platform and take advantage of an already thriving social network of experts.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="6">CONCLUSION</head><p>In this paper, we presented a qualitative study with 14 open source intelligence (OSINT) experts to explore how they conduct and socially structure their investigations, and their attitudes towards the current social dynamics in place. We enriched the existing literature on investigations by providing an in-depth analysis of the OSINT community as a community of practice from an expert perspective, detailing the various personal, interpersonal, and organizational factors that shaped their investigations. We also defned and characterized social OSINT as combinations of competitive and collaborative strategies that support OSINT investigations. Finally, we drew implications for social computing systems and social structures that can empower OSINT investigators in their various motivations and domain applications, ranging from uncovering human rights violations to fghting child trafcking and exploitation.</p></div><figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_0"><head>4. 1 . 1</head><label>11</label><figDesc>Motivations and Definitions of Success. Participants' motivations and defnitions of success as members of the OSINT community, while encompassing diverse felds and investigations, share common themes including education, giving back to the community, policy and social change, combating criminal activity, and</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_1"><head></head><label></label><figDesc>[...] For each investigation, [co-investigator] does what we call '[name] epic spreadsheet', because it's a huge spreadsheet with [...] every video of an incident [and its location, chronolocation]..." However, cross-platform sharing, especially if investigators have to use specialized tools for data analyses, can become somewhat unmanageable. P8 explained, "I can't tell you the number of students [...] that tell me 'hey, I have to use One Note and it sucks,' 'I have to use Microsoft Ofce and it sucks,' 'I use Etherpad,' 'I use a Google Docs,' 'I use a spreadsheet,'</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_2"><head>Figure 1 :</head><label>1</label><figDesc>Figure 1: Diagram depicting the social dynamics within and outside the organizations conducting OSINT investigations. These organizations sit in the of the diagram, in an interplay between collaboration, competition, and social OSINT tactics.We present organizations and/or individuals they work within which provide institutional support (orange). We also present organization they with (right), or for (left) and the diferent interactions/dynamics between them. We overlay the boundaries of the OSINT community, which encompass the entirety of the organization we study but only include a portion of the organizations they work within, with, and for. (Dashed arrows denote possible, but not certain, interactions.)</figDesc><graphic url="image-1.png" coords="9,53.80,83.69,504.40,275.44" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_0"><head>Table 1 :</head><label>1</label><figDesc>Organization Codes and Descriptions *we present the overarching social framework based on our initial observations during the organizations' selection for recruitment, our understanding changes during the interviews, showing more complex frameworks, with collaborative organizations employing competitive concepts and vice versa.</figDesc><table><row><cell cols="3">Organization Social Framework* Investigation Type</cell><cell>Domain Application</cell></row><row><cell>O1</cell><cell>Competitive</cell><cell>Simulated with fabricated data</cell><cell>CTF contest with changing themes</cell></row><row><cell>O2</cell><cell>Collaborative</cell><cell>Real world</cell><cell>National security and public safety investigations</cell></row><row><cell>O3</cell><cell>Collaborative</cell><cell>Real world</cell><cell>Human rights violations investigations</cell></row><row><cell>O4</cell><cell>Collaborative</cell><cell>Real world</cell><cell>Injustices and crime investigations in Africa</cell></row><row><cell>O5</cell><cell>Collaborative</cell><cell>Real world</cell><cell>War zones, human rights violations, and criminal investigations</cell></row><row><cell>O6</cell><cell>Competitive</cell><cell>Simulated with real data</cell><cell>CTF contest investigating the lives of real volunteers</cell></row><row><cell>O7</cell><cell>Competitive</cell><cell>Real world</cell><cell>CTF contest investigating missing person cases</cell></row><row><cell>O8</cell><cell>Competitive</cell><cell>Simulated with real data</cell><cell>Daily Geo-location quizzes on Twitter</cell></row><row><cell>O9</cell><cell>Collaborative</cell><cell>Real world</cell><cell>Child trafcking and exploitation investigations</cell></row><row><cell>O10</cell><cell>Collaborative</cell><cell>Real world</cell><cell>Economic and cyber crime investigations</cell></row><row><cell>O11</cell><cell>Collaborative</cell><cell cols="2">Simulated with real and fabricated data OSINT news and trainings</cell></row><row><cell>O12</cell><cell>Collaborative</cell><cell cols="2">Simulated with real and fabricated data Cybersecurity and OSINT training</cell></row><row><cell>O13</cell><cell>Collaborative</cell><cell>Real world</cell><cell>Investigations for domestic violence victims</cell></row><row><cell>O14</cell><cell>Collaborative</cell><cell>Real world</cell><cell>Corporate social engineering investigations</cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_1"><head>Table 2 :</head><label>2</label><figDesc>Participant Demographics.*We used an open-ended question to ask participants what gender they identifed as; we received two response types: "man" (M) and "woman" (W). **O/C denotes participants who assumed both the role of an organizer and the role of a contributor, either in diferent organizations or across diferent investigations in the same organization.</figDesc><table><row><cell cols="4">Participant Gender* Age Range Location</cell><cell>Role(s)**</cell><cell cols="2">Organization(s) Occupation</cell></row><row><cell>P1</cell><cell>M</cell><cell>26-35</cell><cell>Asia</cell><cell>Organizer</cell><cell>O1</cell><cell>Security Consultant</cell></row><row><cell>P2</cell><cell>M</cell><cell>46-55</cell><cell cols="2">North America Organizer</cell><cell>O2</cell><cell>Intelligence Analyst</cell></row><row><cell>P3</cell><cell>W</cell><cell>46-55</cell><cell cols="2">North America Organizer</cell><cell>O3</cell><cell>Journalist</cell></row><row><cell>P4</cell><cell>M</cell><cell>-</cell><cell>Europe</cell><cell>O/C</cell><cell>O4/O5</cell><cell>Investigative Journalist</cell></row><row><cell>P5</cell><cell>M</cell><cell>26-35</cell><cell cols="3">North America Contributor O2/O10</cell><cell>Intelligence Analyst</cell></row><row><cell>P6</cell><cell>W</cell><cell>46-55</cell><cell cols="2">North America Organizer</cell><cell>O6</cell><cell>Security Consultant</cell></row><row><cell>P7</cell><cell>M</cell><cell>46-55</cell><cell cols="2">North America Organizer</cell><cell>O6</cell><cell>Security Consultant</cell></row><row><cell>P8</cell><cell>M</cell><cell>46-55</cell><cell cols="2">North America O/C</cell><cell>O7/O11/O12</cell><cell>Security Consultant</cell></row><row><cell>P9</cell><cell>M</cell><cell>36-45</cell><cell>Europe</cell><cell>O/C</cell><cell>O8</cell><cell>Journalist</cell></row><row><cell>P10</cell><cell>W</cell><cell>36-45</cell><cell>Europe</cell><cell>Organizer</cell><cell>O8</cell><cell>Journalist</cell></row><row><cell>P11</cell><cell>M</cell><cell>26-35</cell><cell>Europe</cell><cell>O/C</cell><cell>O4/O5</cell><cell>Investigative Journalist</cell></row><row><cell>P12</cell><cell>W</cell><cell>36-45</cell><cell cols="4">North America Contributor O7/O8/O9/O13 Graphic Designer</cell></row><row><cell>P13</cell><cell>M</cell><cell>46-55</cell><cell cols="2">North America Organizer</cell><cell>O9/O14</cell><cell>Security Consultant</cell></row><row><cell>P14</cell><cell>W</cell><cell>26-35</cell><cell cols="2">North America Organizer</cell><cell>O3</cell><cell>Geospatial Analyst</cell></row></table></figure>
+		</body>
+		<back>
+
+			<div type="acknowledgement">
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>ACKNOWLEDGMENTS</head><p>First, we would like to thank our expert participants for their valuable time and insight into the OSINT community. We would also like to thank our anonymous reviewers their thoughtful feedback and detailed comments. This research was supported by NSF award IIS-1651969.</p></div>
+			</div>
+
+			<div type="references">
+
+				<listBibl>
+
+<biblStruct xml:id="b0">
+	<monogr>
+		<author>
+			<persName><forename type="first">Jesse</forename><surname>Abdenour</surname></persName>
+		</author>
+		<idno type="DOI">10.1177/1077699017733438Publisher</idno>
+		<ptr target="https://doi.org/10.1177/1077699017733438Publisher" />
+		<title level="m">Inspecting the Investigators: An Analysis of Television Investigative Journalism and Factors Leading to Its Production. Journalism &amp; Mass Communication Quarterly</title>
+				<imprint>
+			<publisher>SAGE Publications Inc</publisher>
+			<date type="published" when="2018-12">2018. Dec. 2018</date>
+			<biblScope unit="volume">95</biblScope>
+			<biblScope unit="page" from="1058" to="1078" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b1">
+	<analytic>
+		<title level="a" type="main">sourcing in the Field: A Case Study Using Local Crowds for Event Reporting</title>
+		<author>
+			<persName><forename type="first">Elena</forename><surname>Agapie</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jaime</forename><surname>Teevan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Monroy-Hernández</forename></persName>
+		</author>
+		<ptr target="https://www.microsoft.com/en-us/research/publication/crowdsourcing-in-the-feld-a-case-study-using-local-crowds-for-event-reporting/" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the Third AAAI Conference on Human Computation and Crowdsourcing (HCOMP-15)</title>
+				<meeting>the Third AAAI Conference on Human Computation and Crowdsourcing (HCOMP-15)</meeting>
+		<imprint>
+			<date type="published" when="2015">2015</date>
+			<biblScope unit="volume">11</biblScope>
+		</imprint>
+	</monogr>
+	<note>Association the Advancement of Artifcial Intelligence</note>
+</biblStruct>
+
+<biblStruct xml:id="b2">
+	<analytic>
+		<title level="a" type="main">Mobile Collaboration for Human and Canine Police Explosive Detection Teams</title>
+		<author>
+			<persName><forename type="first">Joelle</forename><surname>Alcaidinho</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Larry</forename><surname>Freil</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Taylor</forename><surname>Kelly</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kayla</forename><surname>Marland</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Chunhui</forename><surname>Wu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Bradley</forename><surname>Wittenbrook</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Giancarlo</forename><surname>Valentin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Melody</forename><surname>Jackson</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2998181.2998271</idno>
+		<ptr target="https://doi.org/10.1145/2998181.2998271" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2017 ACM Conference on Computer Supported Cooperative Work and Social Computing (CSCW &apos;17)</title>
+				<meeting>the 2017 ACM Conference on Computer Supported Cooperative Work and Social Computing (CSCW &apos;17)<address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computing Machinery</publisher>
+			<date type="published" when="2017">2017</date>
+			<biblScope unit="page" from="925" to="933" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b3">
+	<analytic>
+		<title level="a" type="main">An Activity Theory Analysis of Search and; Rescue Collective Sensemaking and Planning Practices</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Sultan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Nicolas</forename><forename type="middle">James</forename><surname>Alharthi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Nidhi</forename><surname>Lalone</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Igor</forename><surname>Sharma</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Z</forename><forename type="middle">O</forename><surname>Dolgov</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Toups</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3411764.3445272</idno>
+		<ptr target="https://doi.org/10.1145/3411764.3445272" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2021 CHI Conference on Human Factors in Computing Systems</title>
+				<meeting>the 2021 CHI Conference on Human Factors in Computing Systems<address><addrLine>Yokohama, Japan; New York, NY, USA, Article</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computing Machinery</publisher>
+			<date type="published" when="2021">2021</date>
+			<biblScope unit="volume">146</biblScope>
+		</imprint>
+	</monogr>
+	<note>CHI &apos;21)</note>
+</biblStruct>
+
+<biblStruct xml:id="b4">
+	<analytic>
+		<title level="a" type="main">Hackers, Computers, and Cooperation: A Critical History of Logo and Constructionist Learning</title>
+		<author>
+			<persName><forename type="first">Morgan</forename><forename type="middle">G</forename><surname>Ames</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3274287</idno>
+		<ptr target="https://doi.org/10.1145/3274287" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the ACM on Human-Computer Interaction CSCW</title>
+				<meeting>the ACM on Human-Computer Interaction CSCW</meeting>
+		<imprint>
+			<date type="published" when="2018-11">2018. Nov. 2018</date>
+			<biblScope unit="page" from="1" to="19" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b5">
+	<analytic>
+		<title level="a" type="main">Large-scale Investigations Powered by Thousands of Digital Volunteers Worldwide</title>
+		<ptr target="https://citizenevidence.org/2019/12/11/large-scale-investigations-powered-by-thousands-of-digital-volunteers-Section:Crowd-sourcing" />
+	</analytic>
+	<monogr>
+		<title level="j">Troll Patrol Findings</title>
+		<imprint>
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+	<note>Amnesty International</note>
+</biblStruct>
+
+<biblStruct xml:id="b6">
+	<analytic>
+		<title level="a" type="main">A Closer Look at the Self-Correcting Crowd: Examining Corrections in Online Rumors</title>
+		<author>
+			<persName><forename type="first">Ahmer</forename><surname>Arif</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">John</forename><forename type="middle">J</forename><surname>Robinson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Stephanie</forename><forename type="middle">A</forename><surname>Stanek</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Elodie</forename><forename type="middle">S</forename><surname>Fichet</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Paul</forename><surname>Townsend</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Zena</forename><surname>Worku</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kate</forename><surname>Starbird</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings the 2017 ACM Conference on Computer Supported Cooperative Work and Social Computing (CSCW &apos;17)</title>
+				<meeting>the 2017 ACM Conference on Computer Supported Cooperative Work and Social Computing (CSCW &apos;17)<address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computing Machinery</publisher>
+			<date type="published" when="2017">2017</date>
+			<biblScope unit="page" from="155" to="168" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b7">
+	<analytic>
+		<title level="a" type="main">Safer Viewing</title>
+		<author>
+			<persName><forename type="first">Elise</forename><surname>Baker</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Eric</forename><surname>Stover</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Rohini</forename><surname>Haar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Andrea</forename><surname>Lampros</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Alexa</forename><surname>Koenig</surname></persName>
+		</author>
+		<ptr target="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7348432/" />
+	</analytic>
+	<monogr>
+		<title level="j">Health Hum Rights</title>
+		<imprint>
+			<biblScope unit="volume">22</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page" from="293" to="304" />
+			<date type="published" when="2020-06">2020. June 2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b8">
+	<analytic>
+		<title level="a" type="main">Using thematic analysis in psychology</title>
+		<idno type="DOI">10.1191/1478088706qp063oa</idno>
+		<ptr target="https://www.tandfonline.com/doi/pdf/10.1191/1478088706qp063oa" />
+	</analytic>
+	<monogr>
+		<title level="m">Bellingcat Investigation Team. 2015. Diversifying OSINT: Women Experts</title>
+				<editor>
+			<persName><forename type="first">Virginia</forename><surname>Braun</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">Victoria</forename><surname>Clarke</surname></persName>
+		</editor>
+		<imprint>
+			<date type="published" when="2006-01">2006. Jan. 2006</date>
+			<biblScope unit="volume">3</biblScope>
+			<biblScope unit="page" from="77" to="101" />
+		</imprint>
+	</monogr>
+	<note>Publisher: Routledge _eprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b9">
+	<analytic>
+		<title level="a" type="main">The use of social media in the recruitment process</title>
+		<author>
+			<persName><forename type="first">Andrea</forename><surname>Broughton</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Beth</forename><surname>Foley</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Stefanie</forename><surname>Ledermaier</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Annette</forename><surname>Cox</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Institute for Employment Studies</title>
+		<imprint>
+			<biblScope unit="volume">3</biblScope>
+			<biblScope unit="page">81</biblScope>
+			<date type="published" when="2014">2014. 2014</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b10">
+	<analytic>
+		<title level="a" type="main">Digital neighborhood watch: investigating the sharing of camera data amongst neighbors</title>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">J</forename><surname>Bernheim Brush</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jaeyeon</forename><surname>Jung</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ratul</forename><surname>Mahajan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Frank</forename><surname>Martinez</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings the 2013 conference on Computer supported cooperative work (CSCW &apos;13)</title>
+				<meeting>the 2013 conference on Computer supported cooperative work (CSCW &apos;13)<address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computing Machinery</publisher>
+			<date type="published" when="2013">2013</date>
+			<biblScope unit="page" from="693" to="700" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b11">
+	<analytic>
+		<title level="a" type="main">Analysis and Exercises for Engaging Beginners in Online CTF Competitions for Security Education</title>
+		<author>
+			<persName><forename type="first">J</forename><surname>Tanner</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Burns</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Samuel</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Thomas</forename><forename type="middle">K</forename><surname>Rios</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Qijun</forename><surname>Jordan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Trevor</forename><surname>Gu</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Derwood</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">USENIX Workshop on Advances in Security Education (ASE</title>
+		<imprint>
+			<biblScope unit="volume">17</biblScope>
+			<biblScope unit="page">9</biblScope>
+			<date type="published" when="2017">2017. 2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b12">
+	<analytic>
+		<title level="a" type="main">Competitive intelligence: A practitioner, academic and inter-disciplinary perspective</title>
+		<author>
+			<persName><forename type="first">Jonathan</forename><forename type="middle">L</forename><surname>Calof</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sheila</forename><surname>Wright</surname></persName>
+		</author>
+		<idno type="DOI">10.1108/03090560810877114</idno>
+		<ptr target="https://doi.org/10.1108/03090560810877114Publisher" />
+	</analytic>
+	<monogr>
+		<title level="j">European Journal of Marketing</title>
+		<imprint>
+			<biblScope unit="volume">42</biblScope>
+			<biblScope unit="issue">8</biblScope>
+			<biblScope unit="page" from="717" to="730" />
+			<date type="published" when="2008-01">2008. Jan. 2008</date>
+			<publisher>Emerald Group Publishing Limited</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b13">
+	<analytic>
+		<title level="a" type="main">Exploring the analytical processes of intelligence analysts</title>
+		<author>
+			<persName><forename type="first">George</forename><surname>Chin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Olga</forename><forename type="middle">A</forename><surname>Kuchar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Katherine</forename><forename type="middle">E</forename><surname>Wolf</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings the SIGCHI Conference on Human Factors in Computing Systems</title>
+				<meeting>the SIGCHI Conference on Human Factors in Computing Systems<address><addrLine>Boston MA USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>ACM</publisher>
+			<date type="published" when="2009">2009</date>
+			<biblScope unit="page" from="11" to="20" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b14">
+	<analytic>
+		<title level="a" type="main">Supporting content and process common ground in computer-supported teamwork</title>
+		<author>
+			<persName><forename type="first">Gregorio</forename><surname>Convertino</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Helena</forename><forename type="middle">M</forename><surname>Mentis</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mary</forename><forename type="middle">Beth</forename><surname>Rosson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Aleksandra</forename><surname>Slavkovic</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">John</forename><forename type="middle">M</forename><surname>Carroll</surname></persName>
+		</author>
+		<ptr target="https://doi.org/10" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings the SIGCHI Conference on Human Factors in Computing Systems (CHI &apos;09)</title>
+				<meeting>the SIGCHI Conference on Human Factors in Computing Systems (CHI &apos;09)<address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computing Machinery</publisher>
+			<date type="published" when="2009">2009</date>
+			<biblScope unit="page" from="2339" to="2348" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b15">
+	<analytic>
+		<title level="a" type="main">An Embedded Model of Cultural Adaptation in Global Teams</title>
+		<author>
+			<persName><forename type="first">Catherine</forename><surname>Durnell Cramton</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Pamela</forename><forename type="middle">J</forename><surname>Hinds</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Organization Science</title>
+		<imprint>
+			<biblScope unit="volume">25</biblScope>
+			<biblScope unit="page" from="1056" to="1081" />
+			<date type="published" when="2014-01">2014. Jan. 2014</date>
+			<publisher>Publisher: INFORMS</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b16">
+	<monogr>
+		<title level="m" type="main">OSINT for good | Cyber Week</title>
+		<author>
+			<persName><forename type="first">Cyber</forename><surname>Week</surname></persName>
+		</author>
+		<ptr target="https://www.cyberweek2021.austcyber.com/event/osint-good" />
+		<imprint>
+			<date type="published" when="2021">2021. 2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b17">
+	<analytic>
+		<title level="a" type="main">Journalists as Crowdsourcerers: sponding to Crisis by Reporting with a Crowd</title>
+		<author>
+			<persName><forename type="first">Dharma</forename><surname>Dailey</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kate</forename><surname>Starbird</surname></persName>
+		</author>
+		<idno type="DOI">10.1007/s10606-014</idno>
+		<ptr target="https://doi.org/10.1007/s10606-014-9208-z" />
+	</analytic>
+	<monogr>
+		<title level="j">Computer Supported Cooperative Work (CSCW)</title>
+		<imprint>
+			<biblScope unit="volume">23</biblScope>
+			<biblScope unit="page" from="445" to="481" />
+			<date type="published" when="2014-12-01">2014. 01 Dec 2014</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b18">
+	<analytic>
+		<title level="a" type="main">It&apos;s Raining Dispersants&quot;: Collective Sensemaking of Complex Information in Crisis Contexts</title>
+		<author>
+			<persName><forename type="first">Dharma</forename><surname>Dailey</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kate</forename><surname>Starbird</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings the 18th ACM Conference Companion on Computer Supported Cooperative Work and</title>
+				<meeting>the 18th ACM Conference Companion on Computer Supported Cooperative Work and</meeting>
+		<imprint>
+			<date type="published" when="2015">2015</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b19">
+	<analytic>
+		<title level="a" type="main">CSCW&apos;15 Companion)</title>
+		<idno type="DOI">10.1145/2685553.2698995</idno>
+		<ptr target="https://doi.org/10.1145/2685553.2698995" />
+	</analytic>
+	<monogr>
+		<title level="m">Social Computing</title>
+				<meeting><address><addrLine>Vancouver, BC, Canada; New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computing Machinery</publisher>
+			<biblScope unit="page" from="155" to="158" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b20">
+	<monogr>
+		<title level="m">2020. Digital Witness: Using Open Source Information for Human Rights Investigation, Documentation, and Accountability</title>
+				<editor>
+			<persName><forename type="first">Sam</forename><surname>Dubberley</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">Alexa</forename></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">Daragh</forename><surname>Murray</surname></persName>
+		</editor>
+		<meeting><address><addrLine>Oxford, New York</addrLine></address></meeting>
+		<imprint>
+			<publisher>Oxford University Press</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b21">
+	<monogr>
+		<title level="m" type="main">El Paquete Semanal: The Week&apos;s Internet in Havana. Association for Computing Machinery</title>
+		<author>
+			<persName><forename type="first">Michaelanne</forename><surname>Dye</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">David</forename><surname>Nemer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Josiah</forename><surname>Mangiameli</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Amy</forename><forename type="middle">S</forename><surname>Bruckman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Neha</forename><surname>Kumar</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3173574.3174213</idno>
+		<ptr target="https://doi.org/10.1145/3173574.3174213" />
+		<imprint>
+			<date type="published" when="2018">2018</date>
+			<biblScope unit="page" from="1" to="12" />
+			<pubPlace>New York, NY, USA</pubPlace>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b22">
+	<monogr>
+		<title level="m" type="main">What would a feminist open source investigation look like? Digi War 1</title>
+		<author>
+			<persName><forename type="first">Sophie</forename><surname>Dyer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Gabriela</forename><surname>Ivens</surname></persName>
+		</author>
+		<idno type="DOI">10.1057/s42984-020-00008-9</idno>
+		<ptr target="https://doi.org/10.1057/s42984-020-00008-9" />
+		<imprint>
+			<date type="published" when="2020-04">2020. April 2020</date>
+			<biblScope unit="page" from="5" to="17" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b23">
+	<analytic>
+		<title level="a" type="main">Knowledge-domain interoperability and an open hyperdocument system</title>
+		<author>
+			<persName><forename type="first">Douglas</forename><forename type="middle">C</forename><surname>Engelbart</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings the 1990 ACM conference on Computersupported cooperative work (CSCW &apos;90)</title>
+				<meeting>the 1990 ACM conference on Computersupported cooperative work (CSCW &apos;90)<address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computing Machinery</publisher>
+			<date type="published" when="1990">1990</date>
+			<biblScope unit="page" from="143" to="156" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b24">
+	<analytic>
+		<title level="a" type="main">Engaging Around Neighborhood Issues: How Online Communication Afects Ofine Behavior</title>
+		<author>
+			<persName><forename type="first">Sheena</forename><forename type="middle">L</forename><surname>Erete</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2675133.2675182</idno>
+		<ptr target="https://doi.org/10.1145/2675133.2675182" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings the 18th ACM Conference on Computer Supported Cooperative Work &amp; Social Computing (CSCW &apos;15)</title>
+				<meeting>the 18th ACM Conference on Computer Supported Cooperative Work &amp; Social Computing (CSCW &apos;15)<address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computing Machinery</publisher>
+			<date type="published" when="2015">2015</date>
+			<biblScope unit="page" from="1590" to="1601" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b25">
+	<analytic>
+		<title level="a" type="main">Social translucence: an approach to designing systems that support social processes</title>
+		<author>
+			<persName><forename type="first">Thomas</forename><surname>Erickson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Wendy</forename><forename type="middle">A</forename><surname>Kellogg</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">ACM transactions on computer-human interaction (TOCHI)</title>
+		<imprint>
+			<biblScope unit="volume">7</biblScope>
+			<biblScope unit="page" from="59" to="83" />
+			<date type="published" when="2000">2000. 2000</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b26">
+	<monogr>
+		<title level="m" type="main">SecurityTrails | OSINT Framework: The Perfect Cybersecurity Intel Gathering Tool</title>
+		<author>
+			<persName><forename type="first">Esteban</forename><surname>Borges</surname></persName>
+		</author>
+		<ptr target="https://securitytrails.com/blog/osint-framework" />
+		<imprint>
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b27">
+	<monogr>
+		<title level="m" type="main">Stop Child Abuse -Trace an Object</title>
+		<author>
+			<persName><surname>Europol</surname></persName>
+		</author>
+		<ptr target="https://www.europol.europa.eu/stopchildabuse" />
+		<imprint>
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b28">
+	<monogr>
+		<title level="m" type="main">Stop Child Abuse -Trace an Object</title>
+		<author>
+			<persName><surname>Europol</surname></persName>
+		</author>
+		<ptr target="https://www.europol.europa.eu/stopchildabuse" />
+		<imprint>
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b29">
+	<monogr>
+		<title level="m" type="main">An Air Force Combat Veteran Breached the Senate</title>
+		<author>
+			<persName><forename type="first">Ronan</forename><surname>Farrow</surname></persName>
+		</author>
+		<ptr target="https://www.newyorker.com/news/news-desk/an-air-force-combat-veteran-breached-the-senate" />
+		<imprint>
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b30">
+	<monogr>
+		<author>
+			<persName><surname>Fbi</surname></persName>
+		</author>
+		<ptr target="https://www.fbi.gov/services/training-academy/new-agent-training" />
+		<title level="m">New Agent Training. Federal Bureau of Investigation</title>
+				<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b31">
+	<monogr>
+		<title level="m" type="main">CrossCheck: Our Collaborative Online Verifcation Newsroom</title>
+		<ptr target="https://frstdraftnews.org:443/about/crosscheck-newsroom/" />
+		<imprint>
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b32">
+	<monogr>
+		<title level="m" type="main">Value-sensitive design</title>
+		<author>
+			<persName><forename type="first">Batya</forename><surname>Friedman</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="1996">1996. 1996</date>
+			<biblScope unit="volume">3</biblScope>
+			<biblScope unit="page" from="16" to="23" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b33">
+	<analytic>
+		<title level="a" type="main">Software interoperability of telemedicine systems: a CSCW perspective</title>
+		<author>
+			<persName><forename type="first">P</forename><surname>Ganguly</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Ray</surname></persName>
+		</author>
+		<idno type="DOI">10.1109/ICPADS.2000.857717ISSN</idno>
+		<ptr target="https://doi.org/10.1109/ICPADS.2000.857717ISSN" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings Seventh International Conference on Parallel and Distributed Systems (Cat. No.PR00568). IEEE</title>
+				<meeting>Seventh International Conference on Parallel and Distributed Systems (Cat. No.PR00568). IEEE</meeting>
+		<imprint>
+			<date type="published" when="2000">2000</date>
+			<biblScope unit="page" from="1521" to="9097" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b34">
+	<analytic>
+		<title level="a" type="main">The way ahead in explaining intelligence organization and process</title>
+		<author>
+			<persName><forename type="first">Peter</forename><surname>Gill</surname></persName>
+		</author>
+		<idno type="DOI">10.1080/02684527.2018.1452566</idno>
+		<ptr target="https://doi.org/10.1080/02684527.2018.1452566" />
+	</analytic>
+	<monogr>
+		<title level="j">Intelligence and National Security</title>
+		<imprint>
+			<biblScope unit="volume">33</biblScope>
+			<biblScope unit="page" from="574" to="586" />
+			<date type="published" when="2018">2018. 2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b35">
+	<analytic>
+		<title level="a" type="main">Intelligence in the internet age: The emergence and evolution of Open Source Intelligence (OSINT)</title>
+		<author>
+			<persName><forename type="first">Michael</forename><surname>Glassman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Min</forename><forename type="middle">Ju</forename><surname>Kang</surname></persName>
+		</author>
+		<idno type="DOI">10.1016/j.chb</idno>
+		<ptr target="https://doi.org/10.1016/j.chb.2011.11.014" />
+	</analytic>
+	<monogr>
+		<title level="j">Computers in Human Behavior</title>
+		<imprint>
+			<biblScope unit="volume">28</biblScope>
+			<biblScope unit="issue">2</biblScope>
+			<biblScope unit="page" from="673" to="682" />
+			<date type="published" when="2012-03">2012. March 2012</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b36">
+	<analytic>
+		<title level="a" type="main">Towards an Appropriable CSCW Tool Ecology: Lessons from the Greatest International Scavenger the World Has Ever Seen</title>
+		<author>
+			<persName><forename type="first">Joseph</forename><forename type="middle">A</forename><surname>Gonzales</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Casey</forename><surname>Fiesler</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Amy</forename><surname>Bruckman</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings the 18th ACM Conference on Computer Supported Cooperative Work and; Social Computing</title>
+				<meeting>the 18th ACM Conference on Computer Supported Cooperative Work and; Social Computing<address><addrLine>Vancouver, BC, Canada; New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computing Machinery</publisher>
+			<date type="published" when="2015">2015</date>
+			<biblScope unit="page" from="946" to="957" />
+		</imprint>
+	</monogr>
+	<note>CSCW &apos;15)</note>
+</biblStruct>
+
+<biblStruct xml:id="b37">
+	<monogr>
+		<title level="m" type="main">Hacktoria -Story Based OSINT Capture The Flag Challenges</title>
+		<author>
+			<persName><surname>Hacktoria</surname></persName>
+		</author>
+		<ptr target="https://hacktoria.com/" />
+		<imprint>
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b38">
+	<monogr>
+		<title level="m" type="main">Ethics in the Age of OSINT Innocence</title>
+		<author>
+			<persName><forename type="first">Melissa</forename><surname>Hanham</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jaewoo</forename><surname>Shin</surname></persName>
+		</author>
+		<ptr target="https://stanleycenter.org/publications/ethics-osint-innocence/" />
+		<imprint>
+			<date type="published" when="2020-05">2020. May 2020</date>
+		</imprint>
+		<respStmt>
+			<orgName>Stanley Center for Peace and Security</orgName>
+		</respStmt>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b39">
+	<monogr>
+		<title level="m" type="main">We Are Bellingcat : An Intelligence Agency for the People</title>
+		<author>
+			<persName><forename type="first">Eliot</forename><surname>Higgins</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2021">2021</date>
+			<publisher>Bloomsbury Publishing</publisher>
+			<pubPlace>London</pubPlace>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b40">
+	<analytic>
+		<title level="a" type="main">Connected Through Crisis: Emotional Proximity and the Spread of Misinformation Online</title>
+		<author>
+			<persName><forename type="first">Y</forename><forename type="middle">Linlin</forename><surname>Huang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kate</forename><surname>Starbird</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mania</forename><surname>Orand</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Stephanie</forename><forename type="middle">A</forename><surname>Stanek</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Heather</forename><forename type="middle">T</forename><surname>Pedersen</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings the 18th ACM Conference on Computer Supported Cooperative Work &amp; Social Computing (CSCW &apos;15)</title>
+				<meeting>the 18th ACM Conference on Computer Supported Cooperative Work &amp; Social Computing (CSCW &apos;15)<address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computing Machinery</publisher>
+			<date type="published" when="2015">2015</date>
+			<biblScope unit="page" from="969" to="980" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b41">
+	<analytic>
+		<title level="a" type="main">The Downside of Open Source Intelligence</title>
+		<author>
+			<persName><forename type="first">Arthur</forename><forename type="middle">S</forename><surname>Hulnick</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">International Journal of Intelligence and CounterIntelligence</title>
+		<imprint>
+			<biblScope unit="volume">15</biblScope>
+			<biblScope unit="page" from="565" to="579" />
+			<date type="published" when="2002-11">2002. Nov. 2002</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b42">
+	<monogr>
+		<title/>
+		<idno type="DOI">10.1080/08850600290101767</idno>
+		<ptr target="https://doi.org/10.1080/08850600290101767" />
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b43">
+	<analytic>
+		<title level="a" type="main">Communitition: The Tension between Competition and Collaboration in Community-Based Design Contests</title>
+		<author>
+			<persName><forename type="first">Katja</forename><surname>Hutter</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Julia</forename><surname>Hautz</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Johann</forename><surname>Füller</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Julia</forename><surname>Mueller</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kurt</forename><surname>Matzler</surname></persName>
+		</author>
+		<idno type="DOI">10.1111/j.1467-8691.2011.00589.x</idno>
+		<ptr target="https://onlinelibrary.wiley.com/doi/pdf/10.1111/j.1467-8691.2011.00589.x" />
+	</analytic>
+	<monogr>
+		<title level="j">Creativity and Innovation</title>
+		<imprint>
+			<biblScope unit="volume">20</biblScope>
+			<biblScope unit="page" from="3" to="21" />
+			<date type="published" when="2011">2011. 2011</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b44">
+	<analytic>
+		<title level="a" type="main">Snitches, Trolls, and Social Norms: Unpacking of Social Media Use for Crime Prevention</title>
+		<author>
+			<persName><forename type="first">Aarti</forename><surname>Israni</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sheena</forename><surname>Erete</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Che</forename><forename type="middle">L</forename><surname>Smith</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings the 2017 ACM Conference on Computer Supported Cooperative Work and Social Computing (CSCW &apos;17)</title>
+				<meeting>the 2017 ACM Conference on Computer Supported Cooperative Work and Social Computing (CSCW &apos;17)<address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computing Machinery</publisher>
+			<date type="published" when="2017">2017</date>
+			<biblScope unit="page" from="1193" to="1209" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b45">
+	<monogr>
+		<title level="m" type="main">Inaccuracy Blindness in Collaboration Persists</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Aimée</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sara</forename><surname>Kane</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ruogu</forename><surname>Kiesler</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Kang</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2018">2018</date>
+			<publisher>Association for Computing Machinery</publisher>
+			<pubPlace>New York, NY, USA, 9</pubPlace>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b46">
+	<monogr>
+		<title level="m" type="main">Objects of violence: synthetic data for practical ML in human rights investigations</title>
+		<author>
+			<persName><forename type="first">Lachlan</forename><surname>Kermode</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jan</forename><surname>Freyberg</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Alican</forename><surname>Akturk</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Robert</forename><surname>Traford</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Denis</forename><surname>Kochetkov</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Rafael</forename><surname>Pardinas</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Eyal</forename><surname>Weizman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Julien</forename><surname>Cornebise</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2004.01030</idno>
+		<idno>arXiv: 2004.01030</idno>
+		<ptr target="http://arxiv.org/abs/2004.01030" />
+		<imprint>
+			<date type="published" when="2020-04">2020. April 2020</date>
+			<biblScope unit="page">12</biblScope>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b47">
+	<analytic>
+		<title level="a" type="main">The wrong ID: Retired frefghter, comedian and Chuck Norris falsely accused of being Capitol rioters</title>
+		<author>
+			<persName><forename type="first">R C</forename><surname>Kessler</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R H</forename><surname>Price</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C B</forename><surname>Wortman</surname></persName>
+		</author>
+		<idno type="DOI">10.1146/annurev.ps.36.020185.002531</idno>
+		<ptr target="https://www.washingtonpost.com/technology/2021/01/16/sleuths-falsely-identify-rioters/" />
+	</analytic>
+	<monogr>
+		<title level="m">Social Factors in Psychopathology: Stress, Social Support, and Coping Processes</title>
+				<imprint>
+			<date type="published" when="1985">1985. 1985. Meryl 2021</date>
+			<biblScope unit="volume">36</biblScope>
+			<biblScope unit="page" from="531" to="572" />
+		</imprint>
+	</monogr>
+	<note>Washington Post</note>
+</biblStruct>
+
+<biblStruct xml:id="b48">
+	<monogr>
+		<ptr target="https://www.tracelabs.org/about/search-party-rules" />
+		<title level="m">Search Party Rules</title>
+				<imprint/>
+		<respStmt>
+			<orgName>Trace Labs</orgName>
+		</respStmt>
+	</monogr>
+	<note>n.d.</note>
+</biblStruct>
+
+<biblStruct xml:id="b49">
+	<monogr>
+		<title level="m" type="main">The Symbiotic Relationship of Crisis Response Professionals and Enthusiasts as Demonstrated by Reddit&apos;s User-Interface Over Time</title>
+		<author>
+			<persName><forename type="first">J</forename><surname>Nicolas</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jess</forename><surname>Lalone</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Andrea</forename><forename type="middle">H</forename><surname>Kropczynski</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Tapia</surname></persName>
+		</author>
+		<idno>ISCRAM. 13</idno>
+		<imprint>
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b50">
+	<monogr>
+		<title level="m" type="main">Situated Learning: Legitimate Peripheral Participation</title>
+		<author>
+			<persName><forename type="first">Jean</forename><surname>Lave</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Etienne</forename><surname>Wenger</surname></persName>
+		</author>
+		<idno>ID: CAVIOrW3vYAC</idno>
+		<imprint>
+			<date type="published" when="1991">1991</date>
+			<publisher>Cambridge University Press</publisher>
+			<pubPlace>Cambridge, UK. Google-Books</pubPlace>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b51">
+	<analytic>
+		<title level="a" type="main">The Human Infrastructure of Cyberinfrastructure</title>
+		<author>
+			<persName><forename type="first">Charlotte</forename><forename type="middle">P</forename><surname>Lee</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Paul</forename><surname>Dourish</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Gloria</forename></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2006 20th Anniversary Conference on Computer Supported Cooperative Work</title>
+				<meeting>the 2006 20th Anniversary Conference on Computer Supported Cooperative Work<address><addrLine>Banf, Alberta, Canada</addrLine></address></meeting>
+		<imprint>
+			<date type="published" when="2006">2006</date>
+		</imprint>
+	</monogr>
+	<note>06)</note>
+</biblStruct>
+
+<biblStruct xml:id="b52">
+	<monogr>
+		<title/>
+		<idno type="DOI">10.1145/1180875.1180950</idno>
+		<ptr target="https://doi.org/10.1145/1180875.1180950" />
+		<imprint>
+			<publisher>Association for Computing Machinery</publisher>
+			<biblScope unit="page" from="483" to="492" />
+			<pubPlace>New York, NY, USA</pubPlace>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b53">
+	<analytic>
+		<title level="a" type="main">Efect of competition and collaboration in network game on intimacy players</title>
+		<author>
+			<persName><forename type="first">Sunwha</forename><surname>Lee</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sungho</forename><surname>Lee</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yoojin</forename><surname>Lee</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sanghoo</forename><surname>Park</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jinwoo</forename><surname>Kim</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of HCI Korea (HCIK &apos;15)</title>
+				<meeting>HCI Korea (HCIK &apos;15)<address><addrLine>Seoul, KOR</addrLine></address></meeting>
+		<imprint>
+			<publisher>Hanbit Media, Inc</publisher>
+			<date type="published" when="2014">2014</date>
+			<biblScope unit="page" from="425" to="433" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b54">
+	<analytic>
+		<title level="a" type="main">Examining technology that supports community</title>
+		<author>
+			<persName><forename type="first">Sheena</forename><surname>Lewis</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Dan</forename><forename type="middle">A</forename><surname>Lewis</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2012 annual conference on Factors in Computing Systems -CHI &apos;12</title>
+				<meeting>the 2012 annual conference on Factors in Computing Systems -CHI &apos;12<address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<date type="published" when="2012">2012</date>
+			<biblScope unit="page">10</biblScope>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b55">
+	<analytic>
+		<title level="a" type="main">CrowdTrace: Visualizing Provenance in Distributed Sensemaking</title>
+		<author>
+			<persName><forename type="first">Tianyi</forename><surname>Li</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yasmine</forename><surname>Belghith</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Chris</forename><surname>North</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kurt</forename><surname>Luther</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">2020 IEEE Visualization Conference (VIS)</title>
+				<imprint>
+			<publisher>IEEE</publisher>
+			<date type="published" when="2020">2020</date>
+			<biblScope unit="page">5</biblScope>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b56">
+	<analytic>
+		<title level="a" type="main">CrowdIA: Solving Mysteries with Crowdsourced Sensemaking</title>
+		<author>
+			<persName><forename type="first">Tianyi</forename><surname>Li</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kurt</forename><surname>Luther</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Chris</forename><surname>North</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3274374</idno>
+		<ptr target="https://doi.org/10.1145/3274374" />
+	</analytic>
+	<monogr>
+		<title level="j">Proc. ACM Hum.-Comput</title>
+		<imprint>
+			<biblScope unit="volume">2</biblScope>
+			<biblScope unit="page">29</biblScope>
+			<date type="published" when="2018-11">2018. Nov. 2018</date>
+			<publisher>CSCW</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b57">
+	<analytic>
+		<title level="a" type="main">Investigating people: a qualitative analysis of the search behaviours of open-source intelligence analysts</title>
+		<author>
+			<persName><forename type="first">Sean</forename><surname>Mckeown</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">David</forename><surname>Maxwell</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Leif</forename><surname>Azzopardi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">William</forename><surname>Bradley Glisson</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings the 5th Information Interaction in Context Symposium (IIiX &apos;14)</title>
+				<meeting>the 5th Information Interaction in Context Symposium (IIiX &apos;14)<address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computing Machinery</publisher>
+			<date type="published" when="2014">2014</date>
+			<biblScope unit="page" from="175" to="184" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b58">
+	<monogr>
+		<title/>
+		<author>
+			<persName><surname>Meedan</surname></persName>
+		</author>
+		<ptr target="https://meedan.com/check" />
+		<imprint/>
+	</monogr>
+	<note>n.d.</note>
+</biblStruct>
+
+<biblStruct xml:id="b59">
+	<monogr>
+		<title level="m" type="main">Sailing the sea of OSINT in the information age</title>
+		<author>
+			<persName><forename type="first">C</forename><surname>Stephen</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Mercado</surname></persName>
+		</author>
+		<idno type="DOI">10.1037/e741272011-005type:dataset</idno>
+		<ptr target="https://doi.org/10.1037/e741272011-005type:dataset" />
+		<imprint>
+			<date type="published" when="2004">2004</date>
+			<publisher>American Psychological Association</publisher>
+		</imprint>
+	</monogr>
+	<note type="report_type">Technical Report</note>
+</biblStruct>
+
+<biblStruct xml:id="b60">
+	<analytic>
+		<title level="a" type="main">Race Yourselves: A Longitudinal Exploration of Self-Competition Between Past, Present, and Future Performances in a VR Exergame</title>
+		<author>
+			<persName><forename type="first">Alexander</forename><surname>Michael</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Christof</forename><surname>Lutteroth</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings the 2020 CHI Conference on Human Factors in Computing Systems (CHI &apos;20)</title>
+				<meeting>the 2020 CHI Conference on Human Factors in Computing Systems (CHI &apos;20)<address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computing Machinery</publisher>
+			<date type="published" when="2020">2020</date>
+			<biblScope unit="page" from="1" to="17" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b61">
+	<monogr>
+		<title level="m" type="main">Using open source intelligence software for cybersecurity intelligence</title>
+		<author>
+			<persName><forename type="first">Michael</forename><forename type="middle">W</forename><surname>Mclaughlin</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2012">2012</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b62">
+	<analytic>
+		<title level="a" type="main">Designing Cooperative Gamifcation: Conceptualization and Prototypical Implementation</title>
+		<author>
+			<persName><forename type="first">Benedikt</forename><surname>Morschheuser</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Alexander</forename><surname>Maedche</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Dominic</forename><surname>Walter</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2998181.2998272</idno>
+		<ptr target="https://doi.org/10.1145/2998181.2998272" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings the 2017 ACM Conference on Computer Supported Cooperative Work and Social Computing (CSCW &apos;17)</title>
+				<meeting>the 2017 ACM Conference on Computer Supported Cooperative Work and Social Computing (CSCW &apos;17)<address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<date type="published" when="2017">2017</date>
+			<biblScope unit="page" from="2410" to="2421" />
+		</imprint>
+	</monogr>
+	<note>Association for Computing Machinery</note>
+</biblStruct>
+
+<biblStruct xml:id="b63">
+	<monogr>
+		<title level="m" type="main">Unravelling the Norton Scam</title>
+		<author>
+			<persName><surname>Mwosint</surname></persName>
+		</author>
+		<ptr target="https://keyfndings.blog/2019/08/28/unravelling-the-norton-scam/" />
+		<imprint>
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b64">
+	<monogr>
+		<title level="m" type="main">How Online Sleuths Identifed Rioters At The Capitol</title>
+		<author>
+			<persName><forename type="first">Greg</forename><surname>Myre</surname></persName>
+		</author>
+		<ptr target="https://www.npr.org/2021/01/11/955513539/how-online-sleuths-identifed" />
+		<imprint>
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b65">
+	<analytic>
+		<title level="a" type="main">From Gatekeeper to Gate-opener: Open-Source Spaces in Investigative Journalism</title>
+		<author>
+			<persName><forename type="first">Nina</forename><forename type="middle">C</forename><surname>Müller</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jenny</forename><surname>Wiik</surname></persName>
+		</author>
+		<idno type="DOI">10.1080/17512786.2021.1919543</idno>
+		<ptr target="https://doi.org/10.1080/17512786.2021.1919543" />
+	</analytic>
+	<monogr>
+		<title level="m">Publisher: Routledge _eprint</title>
+				<imprint>
+			<date type="published" when="2021-05">2021. May 2021</date>
+			<biblScope unit="volume">0</biblScope>
+			<biblScope unit="page" from="1" to="20" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b66">
+	<analytic>
+		<title level="a" type="main">Digilantism: An analysis of crowdsourcing the Boston marathon bombings</title>
+		<author>
+			<persName><forename type="first">Johnny</forename><surname>Nhan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Laura</forename><surname>Huey</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ryan</forename><surname>Broll</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">The British journal of criminology</title>
+		<imprint>
+			<biblScope unit="volume">57</biblScope>
+			<biblScope unit="page" from="341" to="361" />
+			<date type="published" when="2017">2017. 2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b67">
+	<analytic>
+		<title level="a" type="main">Teaching a Hands-On Mobile and Wireless Cybersecurity Course</title>
+		<author>
+			<persName><forename type="first">Tj</forename><surname>Oconnor</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Christopher</forename><surname>Stricklan</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings the 26th ACM Conference on Innovation and Technology</title>
+				<meeting>the 26th ACM Conference on Innovation and Technology</meeting>
+		<imprint>
+			<date type="published" when="2021">2021</date>
+			<biblScope unit="page" from="296" to="302" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b68">
+	<monogr>
+		<title level="m" type="main">U//FOUO//LES) DHS Terrorist Use of Social Networking Facebook Case Study | Public Intelligence</title>
+		<ptr target="https://publicintelligence.net/ufouoles-dhs-terrorist-use-of-social" />
+		<imprint>
+			<date type="published" when="2010">2010</date>
+		</imprint>
+		<respStmt>
+			<orgName>Department of Homeland Security</orgName>
+		</respStmt>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b69">
+	<analytic>
+		<title level="a" type="main">Analysis of the Efect of Competition on Player Immersion and Engagement in a Mobile Game</title>
+		<author>
+			<persName><forename type="first">Juhong</forename><surname>Park</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Alice</forename><surname>Oh</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Suin</forename><surname>Kim</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings the 2017 CHI Conference Extended Abstracts on Human Factors in Computing Systems</title>
+				<meeting>the 2017 CHI Conference Extended Abstracts on Human Factors in Computing Systems<address><addrLine>New York, NY, USA, 6</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computing Machinery</publisher>
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b70">
+	<analytic>
+		<title level="a" type="main">POLESTAR: collaborative knowledge management and sensemaking tools for intelligence analysts</title>
+		<author>
+			<persName><forename type="first">J</forename><surname>Nicholas</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">John</forename><forename type="middle">O</forename><surname>Pioch</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Everett</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings the 15th ACM international conference on Information and knowledge management (CIKM &apos;06)</title>
+				<meeting>the 15th ACM international conference on Information and knowledge management (CIKM &apos;06)<address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computing Machinery</publisher>
+			<date type="published" when="2006">2006</date>
+			<biblScope unit="page" from="513" to="521" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b71">
+	<analytic>
+		<title level="a" type="main">As if being there: mediated reality for crime scene investigation</title>
+		<author>
+			<persName><forename type="first">Ronald</forename><surname>Poelman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Oytun</forename><surname>Akman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Stephan</forename><surname>Lukosch</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Pieter</forename><surname>Jonker</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings the ACM 2012 conference on Computer Supported Cooperative Work (CSCW &apos;12)</title>
+				<meeting>the ACM 2012 conference on Computer Supported Cooperative Work (CSCW &apos;12)<address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computing Machinery</publisher>
+			<date type="published" when="2012">2012</date>
+			<biblScope unit="page" from="1267" to="1276" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b72">
+	<analytic>
+		<title level="a" type="main">Reappropriating Hackathons: The Production Work of the CHI4Good Day of Service</title>
+		<author>
+			<persName><forename type="first">Emily</forename><surname>Porter</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Chris</forename><surname>Bopp</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Elizabeth</forename><surname>Gerber</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Amy</forename><surname>Voida</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings the 2017 CHI Conference on Human Factors in Computing Systems</title>
+				<meeting>the 2017 CHI Conference on Human Factors in Computing Systems<address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computing Machinery</publisher>
+			<date type="published" when="2017">2017</date>
+			<biblScope unit="page">5</biblScope>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b73">
+	<analytic>
+		<title level="a" type="main">Cooperating to Compete: the Mutuality of Cooperation and Competition in Boardgame Play</title>
+		<author>
+			<persName><forename type="first">Melissa</forename><forename type="middle">J</forename><surname>Rogerson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Martin</forename><forename type="middle">R</forename><surname>Gibbs</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Wally</forename><surname>Smith</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings the 2018 CHI Conference on Human Factors in Computing Systems (CHI &apos;18)</title>
+				<meeting>the 2018 CHI Conference on Human Factors in Computing Systems (CHI &apos;18)<address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computing Machinery</publisher>
+			<date type="published" when="2018">2018</date>
+			<biblScope unit="page" from="1" to="13" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b74">
+	<analytic>
+		<title level="a" type="main">Competitive Intelligence Adds Value:: Five Intelligence Attitudes</title>
+		<author>
+			<persName><forename type="first">Daniel</forename><surname>Rouach</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Patrice</forename><surname>Santi</surname></persName>
+		</author>
+		<idno type="DOI">10.1016/S0263-2373(01)00069-X</idno>
+		<idno>S0263-2373(01)00069-X</idno>
+		<ptr target="https://doi.org/10.1016/" />
+	</analytic>
+	<monogr>
+		<title level="j">European Management Journal</title>
+		<imprint>
+			<biblScope unit="volume">19</biblScope>
+			<biblScope unit="page" from="552" to="559" />
+			<date type="published" when="2001-10">2001. Oct. 2001</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b75">
+	<analytic>
+		<title level="a" type="main">Hackathons for Workforce Development: A Case Study</title>
+		<author>
+			<persName><forename type="first">Amy</forename><surname>Ru</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Foaad</forename><surname>Khosmood</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">International Conference on Game Jams, Hackathons and Game Creation Events 2020 (ICGJ20)</title>
+				<meeting><address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computing Machinery</publisher>
+			<date type="published" when="2020">2020</date>
+			<biblScope unit="page" from="30" to="33" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b76">
+	<analytic>
+		<title level="a" type="main">Thirty-Seven Percent of Companies Use Social Networks to Research Potential Job Candidates, According to New CareerBuilder Survey</title>
+		<author>
+			<persName><forename type="first">Ryan</forename><surname>Hunt</surname></persName>
+		</author>
+		<ptr target="http://press.careerbuilder.com/2012-04" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings the 2017 ACM Conference on Computer Supported Cooperative Work and Social Computing (CSCW &apos;17)</title>
+		<title level="s">18-Thirty-Seven-Percent-Niharika Sachdeva and Ponnurangam Kumaraguru</title>
+		<meeting>the 2017 ACM Conference on Computer Supported Cooperative Work and Social Computing (CSCW &apos;17)<address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computing Machinery</publisher>
+			<date type="published" when="2012-04-18">2012. Apr 18, 2012. 2017</date>
+			<biblScope unit="page" from="336" to="352" />
+		</imprint>
+	</monogr>
+	<note>Call for Service: Characterizing and Modeling Police Response to Serviceable Requests on Facebook</note>
+</biblStruct>
+
+<biblStruct xml:id="b77">
+	<analytic>
+		<title level="a" type="main">Web-Based Experiments for the Study of Collective Social Dynamics in Cultural Markets</title>
+		<author>
+			<persName><forename type="first">J</forename><surname>Matthew</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Duncan</forename><forename type="middle">J</forename><surname>Salganik</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Watts</surname></persName>
+		</author>
+		<idno type="DOI">10.1111/j.1756-8765.2009.01030</idno>
+		<ptr target="https://doi.org/10.1111/j.1756-8765.2009.01030.x" />
+	</analytic>
+	<monogr>
+		<title level="j">Topics in Cognitive Science</title>
+		<imprint>
+			<biblScope unit="volume">1</biblScope>
+			<biblScope unit="issue">3</biblScope>
+			<biblScope unit="page" from="439" to="468" />
+			<date type="published" when="2009-07">2009. July 2009</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b78">
+	<monogr>
+		<title level="m" type="main">Interviewing as Qualitative Research: A Guide for Researchers in Education and the Social Sciences</title>
+		<author>
+			<persName><forename type="first">Irving</forename><surname>Seidman</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2006">2006</date>
+			<publisher>Teachers College Press</publisher>
+			<pubPlace>New York, NY, USA</pubPlace>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b79">
+	<analytic>
+		<title level="a" type="main">Cultural diversity and information and communication technology impacts on global virtual teams: An exploratory study</title>
+		<author>
+			<persName><forename type="first">Pnina</forename><surname>Shachaf</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Information &amp; Management</title>
+		<imprint>
+			<biblScope unit="volume">45</biblScope>
+			<biblScope unit="issue">2</biblScope>
+			<biblScope unit="page" from="131" to="142" />
+			<date type="published" when="2008-03">2008. March 2008</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b80">
+	<analytic>
+		<title level="a" type="main">The adversarial mindset</title>
+		<author>
+			<persName><forename type="first">Dan</forename><surname>Simon</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Minwoo</forename><surname>Ahn</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Douglas</forename><forename type="middle">M</forename><surname>Stenstrom</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Stephen</forename><forename type="middle">J</forename><surname>Read</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Psychology, Public Policy, and Law</title>
+		<imprint>
+			<biblScope unit="volume">26</biblScope>
+			<biblScope unit="page" from="353" to="377" />
+			<date type="published" when="2020-08">2020. Aug. 2020</date>
+			<publisher>American Psychological Association</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b81">
+	<analytic>
+		<title level="a" type="main">Adversarial and Non-Adversarial Investigations: An Experiment</title>
+		<author>
+			<persName><forename type="first">Dan</forename><surname>Simon</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Doug</forename><surname>Stenstrom</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Stephen</forename><forename type="middle">J</forename><surname>Read</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">SSRN Electronic Journal</title>
+		<imprint>
+			<biblScope unit="page">23</biblScope>
+			<date type="published" when="2009">2009. 2009</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b82">
+	<analytic>
+		<title level="a" type="main">How) will the revolution be retweeted? difusion and the 2011 Egyptian uprising</title>
+		<author>
+			<persName><forename type="first">Kate</forename><surname>Starbird</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Leysia</forename><surname>Palen</surname></persName>
+		</author>
+		<ptr target="https://doi" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings the ACM 2012 conference on Computer Supported Cooperative Work (CSCW &apos;12)</title>
+				<meeting>the ACM 2012 conference on Computer Supported Cooperative Work (CSCW &apos;12)<address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computing Machinery</publisher>
+			<date type="published" when="2012">2012</date>
+			<biblScope unit="page" from="7" to="16" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b83">
+	<monogr>
+		<title/>
+		<idno type="DOI">org/10.1145/2145204.2145212</idno>
+		<imprint>
+			<date type="published" when="2022-05-05">April 29-May 5, 2022</date>
+			<biblScope unit="volume">22</biblScope>
+			<pubPlace>New Orleans, LA, USA</pubPlace>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b84">
+	<monogr>
+		<title/>
+		<author>
+			<persName><forename type="first">Deborah</forename><surname>Tatar</surname></persName>
+		</author>
+		<idno type="DOI">Theorg/10.1145/2145204.2145212</idno>
+		<imprint>
+			<date type="published" when="2007">2007</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b85">
+	<analytic>
+		<title level="a" type="main">The design tensions framework</title>
+		<author>
+			<persName><forename type="first">Deborah</forename><surname>Tatar</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Human-Computer Interaction</title>
+		<imprint>
+			<biblScope unit="volume">22</biblScope>
+			<biblScope unit="page" from="413" to="451" />
+			<date type="published" when="2007">2007. 2007</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b86">
+	<analytic>
+		<title level="a" type="main">Distributed Knowledge in Crowds: Crowd on Hidden Profle Tasks</title>
+		<author>
+			<persName><forename type="first">Yla</forename><surname>Tausczik</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mark</forename><surname>Boons</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the International AAAI Conference on Web and Social Media</title>
+				<meeting>the International AAAI Conference on Web and Social Media</meeting>
+		<imprint>
+			<date type="published" when="2018">2018. 2018</date>
+			<biblScope unit="volume">12</biblScope>
+			<biblScope unit="page">10</biblScope>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b87">
+	<analytic>
+		<title level="a" type="main">To Share, or Not to Share? Community-Level Collaboration Open Innovation Contests</title>
+		<author>
+			<persName><forename type="first">Yla</forename><surname>Tausczik</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ping</forename><surname>Wang</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3134735</idno>
+		<ptr target="https://doi.org/10.1145/3134735" />
+	</analytic>
+	<monogr>
+		<title level="j">Proc. ACM Hum.-Comput. Interact</title>
+		<imprint>
+			<biblScope unit="volume">1</biblScope>
+			<biblScope unit="page">23</biblScope>
+			<date type="published" when="2017-12">Dec. 2017</date>
+			<publisher>CSCW</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b88">
+	<analytic>
+		<title level="a" type="main">Crowdsourcing may have solved a 20-year-old case</title>
+	</analytic>
+	<monogr>
+		<title level="j">The Washington Post</title>
+		<imprint>
+			<date type="published" when="2015">2015. 2015</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b89">
+	<analytic>
+		<title level="a" type="main">Designing for Citizen Data Analysis: A Cross-Sectional Case Study of a Multi-Domain Citizen Science Platform</title>
+		<author>
+			<persName><forename type="first">Max</forename><surname>Kleek</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Elena</forename><surname>Simperl</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Markus</forename><surname>Luczak-Rösch</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Robert</forename><surname>Simpson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Nigel</forename><surname>Shadbolt</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2702123.2702420</idno>
+		<ptr target="https://doi.org/10.1145/2702123.2702420" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 33rd Annual ACM Conference on Human Factors in Computing Systems</title>
+				<meeting>the 33rd Annual ACM Conference on Human Factors in Computing Systems<address><addrLine>Seoul, Republic of Korea; New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computing Machinery</publisher>
+			<date type="published" when="2015">2015</date>
+			<biblScope unit="page" from="4069" to="4078" />
+		</imprint>
+	</monogr>
+	<note>CHI &apos;15)</note>
+</biblStruct>
+
+<biblStruct xml:id="b90">
+	<analytic>
+		<title level="a" type="main">Purposive Sampling as a Tool for Informant Selection</title>
+		<author>
+			<persName><forename type="first">Ma</forename><surname>Dolores</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Tongco</surname></persName>
+		</author>
+		<ptr target="http://ethnobotanyjournal.org/index.php/era/article/view/126Number:0" />
+	</analytic>
+	<monogr>
+		<title level="j">Ethnobotany Research and Applications</title>
+		<imprint>
+			<biblScope unit="volume">5</biblScope>
+			<biblScope unit="issue">0</biblScope>
+			<biblScope unit="page" from="147" to="158" />
+			<date type="published" when="2007-12">2007. Dec. 2007</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b91">
+	<monogr>
+		<title level="m" type="main">Digital vigilantism as weaponisation of visibility. Philosophy and Technology</title>
+		<author>
+			<persName><forename type="first">Daniel</forename><surname>Trottier</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2017">2017. 2017</date>
+			<biblScope unit="volume">30</biblScope>
+			<biblScope unit="page" from="55" to="72" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b92">
+	<analytic>
+		<title level="a" type="main">CrowdSolve: aging Tensions in an Expert-Led Crowdsourced Investigation</title>
+		<author>
+			<persName><forename type="first">Sukrit</forename><surname>Venkatagiri</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Aakash</forename><surname>Gautam</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kurt</forename><surname>Luther</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Proceedings of the ACM on Human-Computer Interaction</title>
+		<imprint>
+			<biblScope unit="volume">5</biblScope>
+			<biblScope unit="page" from="1" to="30" />
+			<date type="published" when="2021">2021. 2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b93">
+	<analytic>
+		<title level="a" type="main">CrowdSolve: aging Tensions in an Expert-Led Crowdsourced Investigation</title>
+		<author>
+			<persName><forename type="first">Sukrit</forename><surname>Venkatagiri</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Aakash</forename><surname>Gautam</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kurt</forename><surname>Luther</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3449192</idno>
+		<ptr target="https://doi.org/10.1145/3449192" />
+	</analytic>
+	<monogr>
+		<title level="j">Proc. ACM Hum.-Comput</title>
+		<imprint>
+			<biblScope unit="volume">30</biblScope>
+			<date type="published" when="2021-04">2021. apr 2021</date>
+		</imprint>
+	</monogr>
+	<note>Interact. 5, CSCW1, Article 118</note>
+</biblStruct>
+
+<biblStruct xml:id="b94">
+	<analytic>
+		<title level="a" type="main">GroundTruth: Augmenting Image Geolocation with Crowdsourcing and Shared Representations</title>
+		<author>
+			<persName><forename type="first">Sukrit</forename><surname>Venkatagiri</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jacob</forename><surname>Thebault-Spieker</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Rachel</forename><surname>Kohler</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">John</forename><surname>Purviance</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Rifat</forename><surname>Sabbir Mansur</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kurt</forename><surname>Luther</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3359209</idno>
+		<ptr target="https://doi.org/10.1145/3359209" />
+	</analytic>
+	<monogr>
+		<title level="j">Proc. Hum.-Comput. Interact</title>
+		<imprint>
+			<biblScope unit="volume">3</biblScope>
+			<biblScope unit="page">30</biblScope>
+			<date type="published" when="2019-11">2019. Nov. 2019</date>
+			<publisher>CSCW</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b95">
+	<analytic>
+		<title level="a" type="main">HackEd: A Pedagogical Analysis of Online Vulnerability Discovery Exercises</title>
+		<author>
+			<persName><forename type="first">Daniel</forename><surname>Votipka</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Eric</forename><surname>Zhang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Michelle</forename><forename type="middle">L</forename><surname>Mazurek</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">IEEE</title>
+		<imprint>
+			<date type="published" when="2021">2021. 2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b96">
+	<monogr>
+		<idno type="DOI">10.1109/SP40001.2021.00092</idno>
+		<ptr target="https://doi.org/10.1109/SP40001.2021.00092" />
+		<title level="m">Symposium on Security and Privacy (SP)</title>
+				<meeting><address><addrLine>San Francisco, CA, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>IEEE</publisher>
+			<biblScope unit="page" from="1268" to="1285" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b97">
+	<analytic>
+		<title level="a" type="main">Validation Practices in Citizen Science</title>
+		<author>
+			<persName><forename type="first">Andrea</forename><surname>Wiggins</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yurong</forename><surname>He</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2818048.2820063</idno>
+		<ptr target="https://doi.org/10.1145/2818048.2820063" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 19th ACM Conference on Computer-Supported Cooperative Work and Social Computing</title>
+				<meeting>the 19th ACM Conference on Computer-Supported Cooperative Work and Social Computing<address><addrLine>San Francisco, USA; York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computing Machinery</publisher>
+			<date type="published" when="2016">2016</date>
+			<biblScope unit="page" from="1548" to="1559" />
+		</imprint>
+	</monogr>
+	<note>CSCW &apos;16)</note>
+</biblStruct>
+
+<biblStruct xml:id="b98">
+	<monogr>
+		<title level="m" type="main">Defning second generation open source (OSINT) the defense enterprise</title>
+		<author>
+			<persName><forename type="first">J</forename><surname>Williams</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ilana</forename><surname>Blum</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2018">2018</date>
+		</imprint>
+		<respStmt>
+			<orgName>RAND Corporation Santa Monica United States</orgName>
+		</respStmt>
+	</monogr>
+	<note type="report_type">Technical Report</note>
+</biblStruct>
+
+<biblStruct xml:id="b99">
+	<analytic>
+		<title level="a" type="main">Evidence for a Collective Intelligence Factor in the Performance of Human Groups</title>
+		<author>
+			<persName><forename type="first">Anita</forename><forename type="middle">Williams</forename><surname>Woolley</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Christopher</forename><forename type="middle">F</forename><surname>Chabris</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Alex</forename><surname>Pentland</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Nada</forename><surname>Hashmi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Thomas</forename><forename type="middle">W</forename><surname>Malone</surname></persName>
+		</author>
+		<idno type="DOI">10.1126/science.1193147</idno>
+		<ptr target="https://doi.org/10.1126/science.1193147Publisher" />
+	</analytic>
+	<monogr>
+		<title level="j">Science</title>
+		<imprint>
+			<biblScope unit="volume">330</biblScope>
+			<biblScope unit="page" from="686" to="688" />
+			<date type="published" when="2010-10">2010. Oct. 2010</date>
+			<publisher>American Association for the Advancement of Science Section</publisher>
+		</imprint>
+	</monogr>
+	<note type="report_type">Report</note>
+</biblStruct>
+
+<biblStruct xml:id="b100">
+	<analytic>
+		<title level="a" type="main">On the ground&apos; in Sidi Bouzid: investigating social media use during the tunisian revolution</title>
+		<author>
+			<persName><forename type="first">Kaoru</forename><surname>Volker Wulf</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Meryem</forename><surname>Misaki</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">David</forename><surname>Atam</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Markus</forename><surname>Randall</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Rohde</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2441776.2441935</idno>
+		<ptr target="https://doi.org/10.1145/2441776.2441935" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings the 2013 conference on Computer supported cooperative work (CSCW &apos;13)</title>
+				<meeting>the 2013 conference on Computer supported cooperative work (CSCW &apos;13)<address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computing Machinery</publisher>
+			<date type="published" when="2013">2013</date>
+			<biblScope unit="page" from="1409" to="1418" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b101">
+	<analytic>
+		<title level="a" type="main">What&apos;s the deal with &apos;websleuthing&apos;? News media representations of amateur detectives in networked spaces</title>
+		<author>
+			<persName><forename type="first">Elizabeth</forename><surname>Yardley</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Adam</forename><forename type="middle">George</forename></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Thomas</forename><surname>Lynes</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">David</forename><surname>Wilson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Emma</forename><surname>Kelly</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Crime, Media, Culture</title>
+		<imprint>
+			<biblScope unit="volume">14</biblScope>
+			<biblScope unit="page" from="81" to="109" />
+			<date type="published" when="2018">2018. 2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b102">
+	<analytic>
+		<title level="a" type="main">Online gaming motivations scale: development and validation</title>
+		<author>
+			<persName><forename type="first">Nick</forename><surname>Yee</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Nicolas</forename><surname>Ducheneaut</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Les</forename><surname>Nelson</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings the SIGCHI conference on human factors in computing systems</title>
+				<meeting>the SIGCHI conference on human factors in computing systems<address><addrLine>New York, NY, USA, 4</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computing Machinery</publisher>
+			<date type="published" when="2012">2012</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b103">
+	<analytic>
+		<title level="a" type="main">A comparison of social, learning, and fnancial strategies on crowd engagement and output quality</title>
+		<author>
+			<persName><forename type="first">Lixiu</forename><surname>Yu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Paul</forename><surname>André</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Aniket</forename><surname>Kittur</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Robert</forename><surname>Kraut</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings the 17th ACM conference on Computer supported cooperative work &amp; social computing (CSCW &apos;14)</title>
+				<meeting>the 17th ACM conference on Computer supported cooperative work &amp; social computing (CSCW &apos;14)<address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computing Machinery</publisher>
+			<date type="published" when="2014">2014</date>
+			<biblScope unit="page" from="967" to="978" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b104">
+	<analytic>
+		<title level="a" type="main">An expert system for detecting automobile insurance fraud using social network analysis</title>
+		<author>
+			<persName><forename type="first">Lovro</forename><surname>Šubelj</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Štefan</forename><surname>Furlan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Marko</forename><surname>Bajec</surname></persName>
+		</author>
+		<idno type="DOI">10.1016/j.eswa.2010.07.143</idno>
+		<ptr target="https://doi.org/10.1016/j.eswa.2010.07.143" />
+	</analytic>
+	<monogr>
+		<title level="j">Expert Systems with Applications</title>
+		<imprint>
+			<biblScope unit="volume">38</biblScope>
+			<biblScope unit="page" from="1039" to="1052" />
+			<date type="published" when="2011-01">2011. Jan. 2011</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+				</listBibl>
+			</div>
+		</back>
+	</text>
+</TEI>

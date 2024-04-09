@@ -1,0 +1,1796 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xml:space="preserve" xmlns="http://www.tei-c.org/ns/1.0" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.com/kermitt2/grobid/master/grobid-home/schemas/xsd/Grobid.xsd"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+	<teiHeader xml:lang="en">
+		<fileDesc>
+			<titleStmt>
+				<title level="a" type="main">Situational Recommender: Are You On the Spot, Refining Plans, or Just Bored?</title>
+			</titleStmt>
+			<publicationStmt>
+				<publisher/>
+				<availability status="unknown"><licence/></availability>
+			</publicationStmt>
+			<sourceDesc>
+				<biblStruct>
+					<analytic>
+						<author>
+							<persName><forename type="first">Sruthi</forename><surname>Viswanathan</surname></persName>
+							<email>sruthi.viswanathan@naverlabs.com</email>
+						</author>
+						<author>
+							<persName><forename type="first">Cecile</forename><surname>Bollard</surname></persName>
+							<email>cecile.bollard@naverlabs.com</email>
+						</author>
+						<author>
+							<persName><forename type="first">Adrien</forename><surname>Bruyat</surname></persName>
+							<email>adrien.bruyat@naverlabs.com</email>
+						</author>
+						<author>
+							<persName><forename type="first">Antonietta</forename><forename type="middle">Maria</forename><surname>Grasso</surname></persName>
+							<email>antonietta.grasso@naverlabs.com</email>
+						</author>
+						<author>
+							<affiliation key="aff0">
+								<orgName type="institution">NAVER LABS Europe</orgName>
+								<address>
+									<settlement>Meylan</settlement>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<affiliation key="aff1">
+								<orgName type="institution">NAVER LABS Europe</orgName>
+								<address>
+									<settlement>Meylan</settlement>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<affiliation key="aff2">
+								<orgName type="institution">NAVER LABS Europe</orgName>
+								<address>
+									<settlement>Meylan</settlement>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<affiliation key="aff3">
+								<orgName type="institution">NAVER LABS Europe</orgName>
+								<address>
+									<settlement>Meylan</settlement>
+									<country key="FR">France</country>
+								</address>
+							</affiliation>
+						</author>
+						<title level="a" type="main">Situational Recommender: Are You On the Spot, Refining Plans, or Just Bored?</title>
+					</analytic>
+					<monogr>
+						<imprint>
+							<date/>
+						</imprint>
+					</monogr>
+					<idno type="DOI">10.1145/3491102.3501909</idno>
+				</biblStruct>
+			</sourceDesc>
+		</fileDesc>
+		<encodingDesc>
+			<appInfo>
+				<application version="0.7.1" ident="GROBID" when="2022-07-22T05:01+0000">
+					<desc>GROBID - A machine learning software for extracting information from scholarly documents</desc>
+					<ref target="https://github.com/kermitt2/grobid"/>
+				</application>
+			</appInfo>
+		</encodingDesc>
+		<profileDesc>
+			<textClass>
+				<keywords>
+					<term>• Information systems → Recommender systems</term>
+					<term>• Humancentered computing → Human computer interaction (HCI)</term>
+					<term>User studies</term>
+					<term>Mobile devices Situation Aware, Situation modelling, POI Recommender System, Mobile Devices, User Studies, Prototyping, Interaction Design, CAI</term>
+				</keywords>
+			</textClass>
+			<abstract>
+<div xmlns="http://www.tei-c.org/ns/1.0"><p>When people engage in urban exploration, the tool they are most likely to use today is a mobile phone. In this paper, we present observations of users' "home" and "away" conducted to refine our understanding of situational Point-of-Interest (POI) needs. Our findings suggest three distinct categories of situations in which users seek POI information: On-the-spot, Refining plans, and Moments of boredom. Based on the similarities and differences of these three situations in five observed underlying constraints -distance of interest, engagement threshold, ambiguity of the search, profile matching, and other imperative constraints, we derive implications for designing and ranking POIs for a Situational Recommender. To further access our concept, we designed and prototyped Situational Recommender by providing an interactional representation of the situation, and ran a Wizard-of-Oz concept validation study. Our results suggest that participants understood the concept without much effort and appreciated its usefulness.</p></div>
+			</abstract>
+		</profileDesc>
+	</teiHeader>
+	<text xml:lang="en">
+		<body>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="1">INTRODUCTION</head><p>When people engage in urban exploration, the tool they are most likely to use today is a mobile phone. A variety of contextual elements characterise the mobile situations in which these leisure activity explorers find themselves. The same environmental contexts of location, time, and weather can result in diverse information needs for different people in different situations who are engaged in different activities (situated context) <ref type="bibr" target="#b12">[12]</ref>. Tourists and migrants coming to a city often find they need information about Point-of-Interests (POIs) (leisure activities such as museums and restaurants) in the city, but at times local people can also find themselves in need of such information <ref type="bibr" target="#b3">[4]</ref>. As found in previous research <ref type="bibr" target="#b3">[4]</ref>, local people mostly frequent the same places in their city and need information on new POIs when they wish to move outside their familiar zones. When travelling, smartphone users tend to use the same applications they use in everyday life for communication, entertainment, social media, navigation, and planning <ref type="bibr" target="#b64">[64]</ref>. It has also been observed that, users face similar situations and needs in travels to those at home for which they re-use their everyday applications <ref type="bibr" target="#b64">[64]</ref> [72]. However, despite existing studies, as technology designers, we found ourselves still lacking a clear understanding of the similarities and differences in situations people face when seeking information on POIs, which only direct observation can provide <ref type="bibr" target="#b32">[32]</ref>. With localised mobile search <ref type="bibr" target="#b48">[48]</ref> as the starting point, we aimed to design better urban POI exploration support for everyday users to be used both at home and away, by identifying their specific situational needs.</p><p>Researchers designing initial context-aware mobile devices in the early 2000s <ref type="bibr">[11]</ref> [30] stressed the importance of empowering end users to override the context which is automatically detected by the system. Yet, a recent study <ref type="bibr">[26]</ref> reports that end users' "lack of control" in commercial applications such as Google Maps, Facebook, and Netflix is the major problem with everyday intelligent systems. In 2020, The Human-Centered Artificial Intelligence (HCAI) framework <ref type="bibr" target="#b52">[52]</ref> established the importance to design interfaces that "ensure high level of human control with high levels of automation" to arrive at reliable, safe, and trustworthy systems. Our design rationale was to create a POI information system that would be easy to understand and control, with the identification and direct manipulation of situated context in the user interface (UI).</p><p>Prior research on recommender systems mainly focus on modelling user intents, contexts, and profiles using previously collected datasets on POI visits <ref type="bibr" target="#b0">[1]</ref>  <ref type="bibr" target="#b46">[46]</ref>. Few systems that address the topic of situation-aware recommendations are not in the domain of POIs, do not study the situated context of end users, and stress the importance of future research to address domain-specific user observations <ref type="bibr" target="#b8">[8]</ref>  <ref type="bibr" target="#b16">[16]</ref>  <ref type="bibr" target="#b47">[47]</ref>. To the best of our knowledge, we did not find any prior works discussing situation-aware POI recommendations. With the observations from our user studies (illustrated in Figure <ref type="figure">1</ref>) we aim to fill this gap in the literature by providing a comprehensive account of situations where users seek POI information.</p><p>We studied the urban exploration activities of tourists and migrants who had recently relocated to a new city (Section 3) and analysed our data by extracting situational stories rooted in the situated context (Section 4). Our findings suggest three distinct categories of situations in which users seek POI information: On the spot, Refining plans, and facing Moments of boredom. For the situations in which we use the term On the spot, we observed that the environmental context is crucial in determining user needs. This includes situational information such as when a user is standing outside in the street, possibly far from home, and looking for POIs near their current location to satisfy a need such as getting shelter from unpleasant cold weather. In these On-the-spot situations, we observed that the pressing nature of needing immediate information superseded the user's desire to find a "perfect" solution. For example, the priority of hungry users was not personal taste and culinary preferences; they rather settled for the food options located right next to them. At the other extreme, for the situations we classified as Moments of boredom, we observed that users tended to explore, looking for inspiration. Here, the users' environmental context is not as important, and it is crucial to consider their personal preferences to satisfy their need. For example, users who were situated comfortably lounging on their couch were interested in analysing a POI's popularity and they were willing to receive suggestions from other like-minded people. Finally, in situations in which participants were Refining plans, we observed that users do not have any pressing constraints in terms of place and time. Refining Plans is in between the other two situations discussed above, as here both the contextualisation and personalisation of results were important but not as crucial. Users in this situation searched for POIs to pass the time or to fill a gap in a predefined plan that was going to occur soon and already included (a) certain location(s). For example, users who reached the train station well ahead of their departure time were looking for something to do nearby which might be appealing to their personal preferences. These findings suggest differences in what makes a POI relevant in terms of: distance from the user (distance of interest), time available to look at the POIs (engagement threshold), presence or absence of user intent (ambiguity of the search), and importance to consider personal preferences (profile matching), and other factors such as weather, mode of transportation and companions (imperative constraints). Based on our findings, we derived implications for designing and ranking POIs for a Situational Recommender.</p><p>To test our concept, we designed a mobile POI recommender system based on our implications for Situational Recommender, by reifying <ref type="bibr" target="#b6">[6]</ref> the three identified situations in the situator, an interaction element. We mainly designed interactions that do not strictly limit users within these defined situations and gave them control over the system's automation with the possibility to fine-tune the underlying constraints affecting the POI ranking according to the actual situation they face (as shown in Figure <ref type="figure" target="#fig_2">4</ref>). To gain initial validation of our concept with end users, we prototyped (Section 6) and ran a Wizard-of-Oz concept validation study with ten locals in Paris (Section 7), who quickly understood our concept and appreciated the usefulness of such technology (Section 8). To conclude, we provide directions for future research on the connections between users and their current locations, modelling the ever-evolving context of an urban environment, and Comprehensible AI (CAI).</p><p>In summary, our contributions are:</p><p>• Categorisation of situations where people seek information on POIs into three: On the spot, Refining plans, and Moments of boredom. • An analysis of the differences and similarities between the three categorised situations in the five underlying constraints observed. Namely, Distance of interest, Engagement threshold, Ambiguity of the search, Profile matching, and Other imperative constraints. • Implications for designing and raking POIs for situational information seeking. • An analysis of the validation of the concept of Situational Recommender.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2">RELATED WORK 2.1 Mobile information seeking by tourists, new locals, and locals</head><p>A comprehensive diary study on location-based mobile searches <ref type="bibr" target="#b3">[4]</ref> found that locals tend to get stuck in a loop by revisiting several "frequent zones", while also wishing to break their habits and explore different parts of their city. This study characterised information needs in terms of their ambiguity as: precise, vague, and very vague. Based on these three categories, our focus is to further investigate local searches for vaguely defined POI information seeking, where the activity is explorative in nature. For example, finding POIs related to art and culture (very vague need) or a restaurant nearby (vague need), rather than the address of a specific restaurant (precise need). While this study <ref type="bibr" target="#b3">[4]</ref> and most of those conducted in the IR community in order to understand mobile search, for example <ref type="bibr" target="#b25">[25]</ref> [49], was conducted with locals, we also found studies about tourist behaviour. Touristic activity covers a set of actions that range from planning, navigating, visiting/experiencing, and sharing/reflecting <ref type="bibr" target="#b23">[23]</ref>  <ref type="bibr" target="#b58">[59]</ref>. Searches can occur prior to the visit <ref type="bibr" target="#b39">[39]</ref>, during the visit <ref type="bibr" target="#b58">[59]</ref>, and after the visit <ref type="bibr" target="#b53">[53]</ref>. Tourists tend to reach the place they visit with a more or less precise plan that targets a set of POIs <ref type="bibr">[11]</ref>. Brown and Chalmers found these predefined plans to be ambiguous and concluded that they "leave a lot unspecified" <ref type="bibr" target="#b23">[23]</ref>. They reported that much touristic activity is decided in situ, when "decisions are often easier to make." This is even more obvious today due to the in-situ access to information with smartphones. A study of on-thego travellers revealed that the use of technology has made travel less pre-planned, more flexible, more precise, and it takes less time to plan <ref type="bibr" target="#b64">[64]</ref>. Electronic tourist guides [11] <ref type="bibr" target="#b12">[12]</ref> reviewed in the literature used personal preferences and environmental contexts to aid the user during the tour. Even though smartphones better support in situ search for information, in many situations users may fail to use them to find what they are looking for <ref type="bibr" target="#b24">[24]</ref> [59], due to the poor match of the results to their specific situational needs.</p><p>Compared to tourists and locals, new locals' mobile information seeking is relatively studied less in the literature. New locals, people who have recently relocated to a city, were observed to aimlessly wander around their new surroundings with little help from mobile technologies <ref type="bibr" target="#b5">[5]</ref>. Our previous study on new locals' POI information seeking <ref type="bibr" target="#b62">[62]</ref> found them to often get lost, tired, or annoyed when they aimlessly wandered around the city hoping for serendipity.</p><p>The literature reported above focuses on a broad array of mobile information seeking for understanding the context, need, and characteristics of tourists <ref type="bibr" target="#b23">[23]</ref> [64], new locals <ref type="bibr" target="#b62">[62]</ref>, and locals <ref type="bibr" target="#b25">[25]</ref>. In contrast with the existing body of literature, our research focuses on studying the situations surrounding the users when they are seeking information on POIs in particular.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.2">Context-aware and situation-aware recommender systems</head><p>Recommender systems are designed to address the issue of time wasted when making a search, by proactively making recommendations to users <ref type="bibr" target="#b46">[46]</ref>. Personalised systems recommend new POIs (museums, cafés, parks, etc.) by learning the users' implicit preferences according to the POIs they had visited in their past (historical check-ins) <ref type="bibr">[69] [70]</ref>. Context-Aware Recommender Systems (CARS) <ref type="bibr" target="#b0">[1]</ref>, use temporal, geographical, and social data for providing contextualised and personalised recommendations <ref type="bibr">[21] [70]</ref>. Nearby POIs <ref type="bibr" target="#b7">[7]</ref> suggested based on social connections (i.e., collaborative filtering) <ref type="bibr" target="#b10">[10]</ref> [65] <ref type="bibr" target="#b69">[69]</ref>, are found to be more relevant than far away ones. Next-place prediction in unfamiliar places <ref type="bibr" target="#b41">[41]</ref> has been supported with factors of environmental context such as weather, types of transportation, place of residence, and time constraints of tourists. These efforts are supported by static user profiling combined with capture of the user's environmental context and they do not support situated context <ref type="bibr" target="#b12">[12]</ref>. Though less reported in the literature in comparison to CARS, Situation-Aware Recommender Systems have been of interest to the IR community in recent years, where multiple contextual dimensions such as a user's social group, location, and time <ref type="bibr" target="#b8">[8]</ref> are combined to understand the underlying dynamic situation. The system in <ref type="bibr" target="#b16">[16]</ref> incorporated situation awareness into a museum recommender by representing a situation as a collection of context variables. Unlike former efforts that mainly considered contextual variables that the system automatically exploits in the background, situation-aware systems are designed to 'guess' the fine-grained and semantically meaningful situations through learning approaches. Of this type is the work from <ref type="bibr" target="#b47">[47]</ref>, which provided five possible manually pre-determined situations such as "road trip on a hot, sunny day" for a music recommender system. <ref type="bibr" target="#b47">[47]</ref> highlights how this approach would require domain-specific observations for the development of Situation-Aware Recommender Systems.</p><p>We observe a gap in the literature reported above on contextaware and situation-aware recommenders, where nearly none of the previous research in the fields of IR and HCI have studied people seeking information on the domain of POIs for situation modelling. To fill this gap, we investigated the situations of mobile POI information seeking of people "home" and "away" to derive implications for designing and ranking POIs for situation-aware search and recommender systems.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3">USER STUDIES 3.1 Study 1: A day trip with tourists</head><p>Our first study was an ethnographic observation of tourists (P1 to P23), who went on a day trip to Lyon, a large metropolitan city in France with a population of over 500,000. We recruited ten main participants using a local recruiting agency, and they brought other participants along with them for the day trip. We did not give any directions to the participants on their activities during the study, other than asking them to spend at least five hours touring the city. They were free to participate with their friends, family, or alone. Including the companions of our main participants, we observed a total of 23 people (15 females and 8 males), composed of 18 adults (between 22 and 69 years old), two teenagers (14 and 16), and three children <ref type="bibr" target="#b5">(5,</ref><ref type="bibr" target="#b6">6</ref>, and 10 years old). During the ten sessions (day trips), participants were distributed into three family groups, four friend groups, and three solo visitors (see Table <ref type="table" target="#tab_0">1</ref>). All groups used their mobile phones at least once during the day trip, except one solo participant who did not have internet connectivity on her phone. We did not instruct the participants on when and how to use their phones. One of the authors shadowed all solo participants, and this author was joined by one of the co-authors to shadow the groups. We collected data by video recording all trip long and audio recording the discussions of the participants by affixing a microphone to the main participant's jacket. We also recorded their mobile phone screens whenever they used them using Lookback <ref type="bibr" target="#b37">[37]</ref>. To minimise the Hawthorne effect, we maintained a distance of about 50 meters from the participants at all times, we did not comment on their choices of POIs, and avoided helping them with any decisions or directions. In less than two weeks after the session, we set up a post interview with the ten main participants, one at a time, during which we discussed the events of their day trip, decisions made on that day and why at times they needed resources such as a map, guidebook, and smartphone. We collected more than 25 hours of video from these in-situ sessions, from which we could analyse situations involving search and exploration during the day. The main participants were rewarded with a payment of $25 per hour and the companions were rewarded with $25 in total. In addition, all participants were compensated for the cost of their train tickets. The data from this study is secured under GDPR data protection agreements.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.2">Study 2: Urban exploration of new locals</head><p>Our second study was a critical incident interview <ref type="bibr" target="#b29">[29]</ref> with new locals (P24 to P35), people who have recently relocated to a city. Unlike tourists, who engage in in urban exploration for long hours at a stretch, the new locals explore their new city for short periods of time, typically by walking, wandering, or heading somewhere <ref type="bibr" target="#b5">[5]</ref>. To investigate a diverse set of POIs visited and situations faced, we chose to interview the new locals about their experiences in the past months. A total of 12 participants (seven females and five males) were recruited with the help of the same local agency we used for Study 1 (Section 3.1) and some participants helped us recruit other participants. All participants had migrated in the past three months to Grenoble, a medium-sized city in France with a population of over 150,000. These new locals were in the process of exploring and getting familiar with their new city. They were young adults who often pursued leisure activities and they were all from middle class socio-economic backgrounds (as shown in Table <ref type="table">2</ref>).</p><p>The interview took place inside a café located in the centre of the city as we wanted the participants to recall and narrate their recent leisure activities in their new city. Using the critical incident interview technique <ref type="bibr" target="#b29">[29]</ref>, we probed the participants to narrate any significant recent incident related to an unsuccessful wandering exploration of the city (i.e., one that did not lead to a satisfactory outcome). The interviews were conducted one participant at a time. With these semi-structured interviews, we wanted to position the participants in the context of urban exploration and gain an understanding of their current problems and strategies for finding POI recommendations. The interviews lasted around 30 minutes and were conducted by one of the authors, while another co-author took notes. We audio and video recorded the sessions. All participants received gift certificates worth $35 as a reward at the end of the sessions. The data from this study is secured under GDPR data protection agreements. Our previous publication from part of this data and with a different prototype <ref type="bibr" target="#b62">[62]</ref>, reported the specific urban exploration habits and POIs needs of the new locals providing implications for user modelling. In this paper, we further analyse this data at the level of the situated context in combination with the data from Study 1 (described in Section 3.1) to classify situations in which people seek POI information and provide design implications for these situations as described in the next section (situation modelling).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4">DATA ANALYSIS</head><p>We performed reflexive thematic analysis <ref type="bibr" target="#b9">[9]</ref> on the data collected from the two studies described in Section 3 above. In the first phase of our analysis, the video recordings from the two studies were transcribed and open coded independently by the principal researchers of each study. We then compared the initial codes resulting from this and found similarities in the situations faced by both tourists (Study 1) and new locals (Study 2), as we had anticipated based Table <ref type="table">2</ref>: The demographics of new locals who participated in Study 2 described in Section 3.2 with the last columns displaying their preferences for activities in their new city on observations in the literature <ref type="bibr" target="#b64">[64]</ref> that people find themselves in similar situations and with similar needs both in travel and everyday life. As our end goal is to build a generic situational POI recommender system, to be used by different user groups in similar situations, we decided to analyse the two studies together by generating story narrations <ref type="bibr" target="#b31">[31]</ref>, thus normalising our data in the second phase of the analysis. We analysed the two datasets to identify different situations of POI information gathering encountered by our participants during their urban exploration. We chose to discard the searches resulting in step-by-step navigation (i.e., looking for directions to a predefined destination), and those related to seeking general navigational support (For example, "Is it possible to go there with public transport?" or "What is the best way to reach this place?") in the context of the analysis we provide in this paper. We extracted 45 situational stories (see Figure <ref type="figure" target="#fig_0">2</ref>) related to POI information needs and identified eight of these as related to precise information needs (for example, "What is the name of the building in front of me?"). While we do believe that these searches for precise information may also benefit from situation modelling, we have focused on those situational stories that contained vague or extremely vague information needs, as we wanted to identify requirements to proactively provide POI recommendations. This resulted in a total of 37 situational stories at the end of this phase. The third and last phase of our analysis involved open-coding of these 37 situational stories followed by a thorough reflexive thematic analysis <ref type="bibr" target="#b9">[9]</ref> of them at the level of situation classification. We labelled 13 constraints expressed by our participants for finding POIs (shown as columns in Figure <ref type="figure" target="#fig_0">2</ref>). These constraints were then grouped into five sets of constraints (minor themes) as described below:</p><p>• Distance of interest: The distance around the user in which they are interested to look for POIs. This could be categorised as very close i.e., ∼five minutes away from the user's current location, on the way and not necessarily nearby in our situational stories.</p><p>• Engagement threshold: The time a user has, or is willing to devote to finding the information they need. In our data we identified two levels of engagement threshold: very short, lasting for a maximum of five minutes and longer, and lasting up to 20 minutes. • Ambiguity of the search: As discussed in related work (Section 2), this describes the level of vagueness the user expresses in their information need. We coded these levels as precise, vague, and very vague. • Profile matching: To determine if a POI is a match for their profile, our participants had referenced their own personal preferences, social media, and people who they consider to be like themselves (peers). • Imperative constraints: Weather, company, and navigation mode (such as walking and biking) were significant constraints that constantly changed, and severely affected the need for POI information in our data.</p><p>Based on the differences between the situational stories in these five minor themes, we were able to further classify all of the situations we identified into three major themes of POI information need. We named these information seeking situations as On-the-spot, Refining plans and Moments of boredom. We detail our findings and their corresponding implications in the next section (Section 5).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5">FINDINGS AND IMPLICATIONS</head><p>We identified three major themes that reflect the situations of POIrelated information seeking in the context of urban exploration (as plotted in Figure <ref type="figure" target="#fig_0">2</ref>). They are: (i) On-the-spot, where the users are often located outdoors and are seeking practical information on POIs near them to address an urgent need; (ii) Refining plans, where the users have prior plans and they are seeking POI recommendations to refine them before a scheduled activity begins or they are seeking POIs to pass the time; and (iii) Moments of boredom, where  the current weather and constraints company the users do not have any major time or location constraints to be taken into account and they browse for POI recommendations, seeking to get inspired. In this section, we detail the characteristics of these three situations (as outlined in Table <ref type="table" target="#tab_1">3</ref>), and we provide implications for designing and modelling any mobile POI search and recommendation service which is able to handle the information needs of the users in the observed situations (as outlined in Figure <ref type="figure" target="#fig_1">3</ref>).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.1">On the spot</head><p>In On-the-spot situations, the participants were located outdoors, they were typically walking around and exploring the city. Most searches performed in this situation <ref type="bibr">(19/22)</ref> were about POIs in their vicinity. They performed these searches quickly and devoted very little time to gathering information, ranging from a few seconds to a maximum of five minutes. They did not have the time nor the patience to consider expert opinions such as POI reviews. In their quick searches, they either searched for specific information such as a POI's name or phone number, or they wanted support to explore what is available around them and quickly find a restaurant or a touristic attraction. Weather and company affected their information need at times, as in Story No. 9 below: P6 (the kid) is hungry and needs something to eat. P5 (the mother) tries going to a restaurant which was their first choice, but it has not opened yet. It is 11:30 in the morning and most restaurants open at 12:00 to serve lunch. The weather is freezing -3 °C/26.6 °F outside. P5 tries to find something on her phone, gives up within a minute, and finally they walk for few minutes and end up in a snack bar nearby. (Story No. 9)</p><p>For the stories in On-the-spot situation, where participants used their mobile phones, we observed that their interaction was made difficult by the environment. It was not easy to access the available content because their attention was constantly interrupted by environmental factors such as other people, traffic, and weather. On the one hand they did not want to spend too much time on their devices searching for information, but on the other they needed the information for making decisions at the exact moment they were looking for it, i.e., to decide on their next POIs. The situation of On-the-spot had the highest degree of constraints on the users' interaction with their mobile phones, as immediate information was needed with limited time and a fluctuating attention span. Given all these constraints, On-the-spot situations lowered the participants' expectations regarding the outcome of their mobile search. They gave priority to things right in front of them or close by, in our sample reachable by no more than a ten-minute walk (as in Story No. 18 below). P20 and P21 wanted to have breakfast nearby. P20 performed searches on her smartphone. Finally, they settled for an already-known chain café right in front of them. <ref type="bibr">(Story No. 18)</ref> When in On-the-spot situations, participants were inclined to compromise and settle for POIs that did not match their personal taste, provided their primary need was addressed, e.g., getting some shelter from extremely freezing weather. Given this situation, useful POI information was difficult to find and comprehend when facing large numbers of search results.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.1.1">Implications for design.</head><p>On-the-spot situations require an extremely easy-to-access interface to account for situationally induced impairments such as stress, walking, and others described in <ref type="bibr" target="#b53">[53]</ref>. The mobile POI information service should be accessible using a single hand and the user should be able to retrieve the required information with a few or (if possible) no interactions. Navigational information and specific information about a POI such as the POI's name, rating, phone number, and address should be visible to the user at a glance. However, textual information such as reviews should be made available to the user not at a glance, but rather on demand (after a few clicks). Only a few selective POIs should be recommended at first and more POI options could be made available on demand.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.1.2">Implications for POI ranking.</head><p>Ideally recommended POIs should be located very close to the user's current location. POIs that are reachable in a short amount of time with the user's current mode of transportation should be prioritised for recommendation. For example, if a user is currently walking, POIs that are accessible on foot should be ranked higher for recommendation than those that are not. If the weather is extremely hot, cold, or rainy and if the user is accompanied by friends or family, the personal preferences of the user should be considered less by the recommender to give more weight to these more pressing imperative constraints. For example, when it is extremely hot, more importance should be given to POIs that provide air conditioning and, if a user is accompanied by a child, more importance should be given to child-friendly POIs.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.2">Refining plans</head><p>In the stories we categorised as Refining plans, participants were either indoors and wanted to plan POI visits for the next few hours or they were outdoors and wanted to simply find a way to pass their time. Often but not necessarily, they were searching for POIs to pass their time while waiting for their primary pre-planned activity that was due to start in the next hours (as in Story No. 3 below).</p><p>P1 and P2 had approximately 1 hour to spend in the city before catching the train. They wandered in shopping areas and tried to see historical buildings of the city from outside. (Story No. 3) Almost all the queries were about POIs located along the participant's route or about POIs related to their plans. We observed both quick several-minute searches and more prolonged browsing sessions. In this situation, users were most likely to consider their personal preferences and expert's opinions (as described in Story No. 15 below).</p><p>While eating lunch at the restaurant with her friends, P12 was planning the activities for the afternoon. She exchanged text messages with her son asking for his advice, as he was knowledgeable about the POIs in the city they were touring (Lyon). (Story No. 15) Most of the searches were expressed in terms of vague or very vague information needs, participants were looking to plan their upcoming activities for the day, or they were looking to pass their time before a scheduled activity began. There was a considerable impact due to weather and company (as in Story No. 28 below). P26's father was visiting her on the day of the interview, and she did not know what activity to do with him as it had started raining. She was seeking indoor activities in her new city which were not far away from her current location. (Story No. 28) 5.2.1 Implications for design. The number of POIs recommended in Refining plans should be greater than those in the On-the-spot situation. The user should be able to browse through these recommendations. Some important information such as type of the POI and opening hours should be presented at a glance. If the user is already outdoors, the POI's distance from the user should be presented at a glance. Other detailed information about the POI such as reviews, address and phone number should be made available on demand. Users should have additional options to easily interact with the system to specify their intent (such as selecting their Mindset <ref type="bibr" target="#b63">[63]</ref>) and ways to demand more POIs that are further away from their current location.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>5.2.2</head><p>Implications for POI ranking. The Refining plans situation is situated in between the extremes of On the spot and Moments of boredom. Hence, the factors affecting the situation such as mode of transport, company, personal preferences, and expert's opinions are to be given equal importance when proactively recommending POIs. If the weather on the day is extreme or if the weather had changed in the past hour, then POIs relevant to the weather should be given more importance. For example, if it has started raining in the past hour, indoor activities should be ranked higher. The location of recommendations should be in the vicinity of the user. If the user's schedule of the day is available to the system, for example if they are taking a train at 5 pm or that they have bought a ticket for a music show for 8 pm, then POIs should be recommended along the way and around these scheduled activities.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.3">Moments of boredom</head><p>In situations that we classified as Moments of boredom, participants reported being indoors, mostly at home or work. They were engaged in several sessions of repeated browsing that they could pick up again after long pauses. They were looking for POIs that could be visited in the near future both nearby and far away in their city. Their personal preferences and expert opinions mattered a lot in this situation (as in Story No. 35 below). P30 gets POI recommendations from her friends, who have been living in the city for a few years. She also searches TripAdvisor for restaurants and likes to find activities in blogs. Sometimes she visits the restaurants on the same day that she found them, sometimes she saves them for the weekend or special days. She also often uses the website of the tourism department to check for the latest events in the city during her lunch break at work. <ref type="bibr">(Story No. 35)</ref> Participants searched in an extremely vague manner, as they were seeking to get a sense of having thoroughly explored the available options. Constraints such as the current weather, transportation, and company were not the primary considerations in this situation because their need is more inspirational than practical. Once they found an activity they would like to pursue, they chose the ideal time and companions for it (as in Story No. 25 below).</p><p>P25 does not look for things to do in the city centre any more. He plans on going to the mountains, which are a few hours away. He studies the directions, locations and the weather using multiple websites online. Then he extends invitations to some of his friends who may accompany him and his girlfriend on the hike. Also, he calls the mountain agency to see when the weather might be suitable for executing his plan. (Story No. 25) It is to be noted that in our sample only new locals were found to be in Moments of boredom (as shown in Figure <ref type="figure" target="#fig_0">2</ref>). This does not imply that tourists never get bored. As we observed tourists only for a maximum of five hours during their one-day trip in a big metropolitan city, we did not find situations in which they were the options in the UI to request more POIs located far away and to restrict the system to POIs located nearby. Other information about the POI such as reviews, ratings, opening hours and address should made available on demand. POI filtering categories (such as museums and restaurants) and Areas-of-Interest <ref type="bibr" target="#b42">[42]</ref> [61] could encourage the user to explore the recommendations.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.3.2">Implications for POI ranking.</head><p>All suitable POIs, both near to and far from the user's location in their city of interest should be recommended during Moments of boredom. More importance should given to the POIs that match the personal preferences of users. are likely to give importance to the activities of their friends or peers in the same location <ref type="bibr" target="#b10">[10]</ref>. Expert recommendations, ratings, and reviews have considerable value for users when they are bored, these should have an impact when ranking the POIs. Factors such as weather, company and navigation need not be considered here unless otherwise specified by the user (on demand).</p><p>Overall, if we place these three themes over a spectrum of time, ranging from On-the-spot to Moments of boredom with Refining plans in between, this illustrates the time a user has for an "action" based on the information they are seeking to gather. For On-the-spot situations, the time-to-action is expected to be the very moment of search. Here, time and location are the most important implicit constraints attached to the query, for example the hungry user is seeking information to go to a POI and eat right now. However, during the situations of Moments of boredom, the participants were rather in a context of gathering knowledge about a place and creating their own understanding to act upon sometime in the future. Finally, in the situations of Refining plans, the time horizon for acting was not necessarily immediate, but it was still in the next few hours and certainly known.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="6">PROTOTYPE DESIGN AND IMPLEMENTATION</head><p>Based on the implications for design discussed above, we prototyped Situational Recommender. Our prototype included the following elements (E1 to E5):</p><p>• E1: The location and state of motion of the user is detected, and their situation is proactively determined by the system as On-the-spot, Refining plans, or Moments of boredom. The outdoor/indoor detection using the smartphone's sensors, as proved in <ref type="bibr" target="#b66">[66]</ref>, would be an important element to build on. • E2: An egocentric radar is then drawn around the user with a radius of interest corresponding to the detected situation. • E3: An adaptive user interface [68] is then displayed with a number of POIs, with or without detailed POI, and navigational information in relation to the user's situation. • E4: Recommendations are computed by considering the distance of the POI from the user, the user's personal interests, their company, expert opinions, and the current weather. • E5: If there is an implicit or explicit change in the user's situation or the underlying constraints such as mode of transportation, the recommendations are re-calculated accordingly.</p><p>For the preliminary testing of our prototype, E1 was accomplished in a Wizard-of-Oz manner (as described in Section 6.2), and E4 was cherry-picked by us considering the context variables and the participant's profile (as described in Section 7).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="6.1">Interaction design</head><p>To support the three situations (major themes from our data analysis in Section 4) with a single system we adopted Beaudoin-Lafon's</p><p>Interaction model <ref type="bibr" target="#b6">[6]</ref> and its reification approach i.e., to reify the notion of the user's situation in a POI recommender with the situator instrument (marked as ○ 5 in Figure <ref type="figure" target="#fig_2">4</ref>). As sliders are widely adopted in the literature for their ease-of-use in dynamic querying <ref type="bibr" target="#b1">[2]</ref> [38] <ref type="bibr" target="#b52">[52]</ref>, we to represent the situator in the interface with a slider (Figure <ref type="figure" target="#fig_2">4</ref>). With the use of the slider the are not bound strictly to three situations of POI need, they do not need to be introduced to or to recall the names of the three but they are free to adjust the situator anywhere in between the three extremes offered by the system. When the situator placed someplace in between the three extremes, the settings for underlying constraints (marked as ○ 6 Figure <ref type="figure" target="#fig_2">4</ref>) are re-calibrated with respect to the position of the situator and POIs recommendations are rendered accordingly. In addition, given that Situationally Induced Impairments and Disabilities (SIID) could be relevant while walking and standing in the street <ref type="bibr" target="#b52">[52]</ref>, the sliders are suitable for mobile one-hand use <ref type="bibr" target="#b38">[38]</ref>. We displayed the recommended POIs inside an egocentric radar and included navigational information on the same screen as previously recommended in the literature on mobile urban exploration <ref type="bibr" target="#b60">[60]</ref>  <ref type="bibr" target="#b67">[67]</ref>. The translucent egocentric radar (or pop radius <ref type="bibr" target="#b67">[67]</ref>) was found to be highly enjoyable and to use for selecting POIs. We used a light colour (yellow) for radar as recommended in <ref type="bibr" target="#b60">[60]</ref> such that the details of the map beneath the radar are always visible to the user.</p><p>With our design we represent the situations of need as interactional <ref type="bibr" target="#b17">[17]</ref> (as described in Section 1). The situator is the key instrument in our interface, which could be adjusted by changing the relevance of the factors affecting the user's POI need (meta-instruments) that are made available in the settings of the application (minor themes from our data analysis in Section 4). With the situator we aimed to provide the users with more control their need, which would be autonomously detected by the We do this because user control over the recommended content has been identified as a primary problem with current systems <ref type="bibr">[26]</ref>. This issue was also pointed out by Cheverst et al. <ref type="bibr" target="#b12">[12]</ref>, where on experimentation with a context-aware system they conclude: "The intelligence of the agent responsible for adapting to context needs to be sufficiently flexible to enable users to override the adaptation strategy." Thus, we constructed a push-and-pull type [30] of situation-aware recommender, where the situator proactively pushes the situation of the user and they could pull the situation according to their need by adjusting the situator. By letting end users choose between different recommender algorithms they have observed to actively control the recommendations by selecting and switching algorithm <ref type="bibr" target="#b26">[27]</ref>. Finally, with the situator we aimed to make it easier to control the system without having to recall different names of the algorithms as in <ref type="bibr" target="#b26">[27]</ref>. By displaying the different settings and their levels considered by the algorithm for the corresponding situations (the screen is marked as ○ 6 in Figure <ref type="figure" target="#fig_2">4</ref>), we anticipated that users would better interpret the model of the recommender system and (if needed) make changes to it.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="6.2">Prototype implementation</head><p>To access our concept, we implemented Situational Recommender as illustrated in Figure <ref type="figure" target="#fig_2">4</ref>. Due to the Coronavirus disease (Covid-19) pandemic <ref type="bibr" target="#b72">[73]</ref>, we had to resort to a remote user study to validate our concept and its design with potential users. Hence, we implemented the concept using responsive web technologies: React <ref type="bibr" target="#b43">[43]</ref>, WebSocket <ref type="bibr" target="#b71">[71]</ref>, and MapBox <ref type="bibr" target="#b19">[19]</ref> for the map. The prototype was deployed on a web server and could adapt to mobile devices. user interface is composed of two main screens linked together by the situator (marked as ○ 5 in Figure <ref type="figure" target="#fig_2">4</ref>) and the settings button (marked as ○ 1 in Figure <ref type="figure" target="#fig_2">4</ref>).</p><p>To ensure more control during the experiment and to change the position of situator in a Wizard-of-Oz manner <ref type="bibr" target="#b20">[20]</ref>, the researcher, who played the Wizard, had control over the state of the situator at all times during the session. the the situation will be proactively detected (as described in element E1 above); in our prototype, the Wizard-of-Oz method helped us convey this proactive nature of the recommender system to our participants. Changing the value of the situator for one client will change its value for all other clients who are running the prototype, allowing the participants and researcher to have the same view of the system at any time. WebSocket technology combined with React <ref type="bibr" target="#b43">[43]</ref> and React Hooks <ref type="bibr" target="#b44">[44]</ref> allowed us to have this real-time interaction. This control concerns the situator itself (marked as ○ 5 in Figure <ref type="figure" target="#fig_2">4</ref>), along with other related elements that are directly interconnected in the system such as the settings available, radius of interest, the description and the number of POIs recommended, which are discussed below. When one of these elements is changed in our prototype, it automatically triggers a series of changes in all the other connected elements.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="6.2.1">Screen 1:</head><p>Map-based interface. The first screen displayed to the users when launching the prototype is a map-based interface composed of multiple elements. The main elements of this screen are the following:</p><p>The situator (marked as ○ 5 in Figure <ref type="figure" target="#fig_2">4</ref>) is both situation displayer and controller, a slider allowing users and the researcher to view and control the situation considered by the system.</p><p>• An egocentric light yellow-coloured circle, radius of interest is drawn around the user's current position (marked as ○ 3 in Figure <ref type="figure" target="#fig_2">4</ref>). This circle contains POI recommendations (marked as ○ 4 in Figure <ref type="figure" target="#fig_2">4</ref>) for the corresponding situation. • A settings button (marked as ○ 1 in Figure <ref type="figure" target="#fig_2">4</ref>) allowing users to access and close the settings screen. • A control button for centring the map around the user's location and a map scale to display the distance considered by the system (marked as ○ 2 in Figure <ref type="figure" target="#fig_2">4</ref>).</p><p>Moving the situator will change the number or recommendations displayed, the information about the recommendations displayed, and the radius of the circle around the user. Those possibilities are displayed inside the egocentric circle (as shown in Figure <ref type="figure" target="#fig_2">4a, b</ref> and The first screen is a map-based interface with ○ 2 control button for the user to centre the it has 3 an egocentric radius interest drawn around the current location of the user, which contains all ○ 4 the recommended POIs and their information ○ 5 the situator is a slider that helps the user to control the interface and change their situation and ○ 1 the settings button leads the user to ○ 6 the settings available in the second screen c). When the situator is moved in Screen 1, the values of the settings in Screen 2 also change.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="6.2.2">Screen 2:</head><p>Settings. Clicking on the settings button (marked as ○ 1 in Figure <ref type="figure" target="#fig_2">4</ref>) will lead the user to a list of available settings (marked as ○ 6 in Figure <ref type="figure" target="#fig_2">4</ref>). Moving the situator here, will change the context parameters (as in Figure <ref type="figure" target="#fig_2">4d</ref>, 4e and 4f) to prevalues and change the recommendations and radius of in Screen 1. The user can change the values of the listed settings individually. Here, the user can also change their preferred transportation mode and the company they are with. From top to (as shown in Figure <ref type="figure" target="#fig_2">4d</ref>, e and f), the list of settings available are:</p><p>• Radius of interest: Distance in kilometres of the radius drawn around the user's current geolocation. The POI recommendations will be located within the radius specified here. • Profile Match: How much the system should match the user's taste. • Endorsement: How much the system should promote highly rated places. • Transportation Mode: The default modes are walking for and Refining plans, and public transportation for Moments of boredom. The default mode could be changed by clicking on the icon.</p><p>• Weather: How much the system should consider the weather.</p><p>By default, the system considers the current weather in the location. • Company: How much the proposed activities should be matched to the needs of the kind of people accompanying the user. The options available in the system were: solo, for couples, for groups, for family and child friendly.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="7">STUDY 3: CONCEPT VALIDATION</head><p>We conducted a user study to validate the concept of Situational Recommender and collect early feedback <ref type="bibr" target="#b54">[54]</ref> [55] from the potential users before starting to build the information seeking framework and its algorithms. Concept validation is a UX methodology to test the concept with potential end users before building the sys- <ref type="bibr" target="#b36">[36]</ref>. We recruited ten participants (P36 to P45) using User Interviews <ref type="bibr">[58]</ref> to participate in a prototype testing session via a <ref type="bibr" target="#b73">[74]</ref> meeting. All participants had previously experienced being a tourist and a new local in Paris, and they self-identified to be locals in Paris at the time of the study. They had the habit of pursuing leisure activities in the city on a weekly basis and they used various commercial applications for this purpose (Table <ref type="table" target="#tab_2">4</ref>). Since we were interested in testing the concept of a situational recommender and not the quality of the recommended POIs, we did not personalise and contextualise the recommendations for each participant as in <ref type="bibr" target="#b62">[62]</ref>. Instead, among the 47 self-identified Parisians who qualified for our study, we chose ten participants who had similar profiles with common interests in general POIs such as cafés, restaurants, museums, and parks. All participants were shown the same set of POIs which we had cherry-picked for the simulation of the three identified situations (described below). We selected these POIs based on our implications for POI recommendations (in Sections 5.1.2, 5.2.2, and 5.3.2) and by considering their common interests. All participants were alone, and all sessions occurred during rainy weekend afternoons. No POI recommendation algorithm was used in our prototype as we anticipate the need of further research to model the type of POI returned based on different user groups. The POI recommendations were shown merely as example, participants were not asked to analyse, filter, select, or rate the POIs recommended. Throughout the session, the focus was on the end user's understanding, reception, and perception of the concept.</p><p>The sessions were conducted one participant at a time, and they lasted around 45 minutes each. During the session, we asked the participants to join our Zoom meeting using their mobile phones. We started by talking about their favourite leisure activities in Paris, to establish the topic of POI recommendation. Then we shared the prototype's web link with them via Zoom's chat box, asked them open it in their phone's browser, and to share their phone's in the Zoom meeting. Although the prototype was hosted in webpage, the participants were asked to consider it as a mobile application. They were asked to follow a think-aloud protocol <ref type="bibr" target="#b18">[18]</ref> throughout the session. The audio and video of the Zoom meeting was recorded, and the primary researcher moderated and took notes during the session. We tested the prototype with respect to following three situations, mimicking our three observed ones:</p><p>• Bored in the house (Moments of boredom): To begin with, we asked the participants to imagine being bored at home and to open the Situational Recommender app to seek POI recommendations. Playing the Wizard, we placed the situator to the far right, displaying over 20 POI recommendations (as shown in Figure <ref type="figure" target="#fig_2">4c</ref>) and the settings adjusted automatically for the Moments of boredom situation as planned (see Figure <ref type="figure" target="#fig_2">4f</ref>). • Standing in the street (On-the-spot): To experience the second situation, participants were asked to step outside their home and walk for a few minutes in the street. Then they were asked to pause and imagine that they have been taking a walk, they feel cold, and to look at the prototype to find POIs to visit nearby and now. When they were walking, we moved the situator to the far left displaying only five POIs around them with detailed information (see Figure <ref type="figure" target="#fig_2">4a</ref>) and the settings changed as well (see Figure <ref type="figure" target="#fig_2">4d</ref>). • Sitting on a roadside bench (Refining plans): Lastly, they were asked to sit on a roadside bench, imagine that they have been relaxing there, and to look at the recommendations again. We moved the situator to the middle here (see Figure <ref type="figure" target="#fig_2">4b</ref>) and the settings shifted accordingly (see Figure <ref type="figure" target="#fig_2">4e</ref>).</p><p>During the prototype testing and in the following discussions, participants were free to try the interactions with the situator and change the settings on their own. All participants wore surgical face masks and maintained social distancing when they had to go outside to test the prototype. All participants except P36 and P44 were able to experience the prototype by physically moving around. These two participants had to imagine sitting on a roadside bench due to heavy rainfall during their sessions. After testing the three situations, we entered into an open-ended discussion interview with the participants. They were asked to describe the differences they observed in the prototype when they moved between the situations, how useful they found the Situational Recommender and to provide feedback on the prototype. As a last step, the participants were asked to fill in the post-questionnaire while we explained the subjective measures. The Wizard-of-Oz method, which we used for adjusting the location of the situator for the participants to experience the three situations of use, was explained to them at the end of the study. All participants received gift coupons worth $25 for participating in the remote experiment.</p><p>The data from this study is secured under GDPR data protection agreements.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="8">RESULTS</head><p>Results from the post-questionnaire (see Figure <ref type="figure" target="#fig_3">5</ref>) shows overall successful reception of our concept in its preliminary evaluation. All participants (10/10) perceived Situational Recommender to be useful during any situation they face where they seek information on POIs both at home and in new cities. As we had anticipated, all participants (10/10) said they will make use of the options available in the settings to control the system. However, surprisingly only half of the participants (5/10) said they would change the settings every time they use the service, while others said that they might need change it only once in a while (see Figure This is due to comprehension brought by the settings and the situator, which led the participants to perceive control, trust, and interpretability over the recommended POIs as reflected in our post-questionnaire (see Figure <ref type="figure" target="#fig_3">5</ref>). Only some participants (4/10) could totally agree that they could change the recommended content, but this was mainly due to the limited number of POIs we had cherry-picked for the study. Most participants (8/10) also rated the system as suitable for single-handed use. In this section we detail the results from the concept validation of situational recommender.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="8.1">Comprehension of the concept</head><p>participants (10/10), including those who self-identified to be medium tech savvy (6/10), understood the concept of Situational Recommender. They were swift to notice the changes in the UI and settings when they were testing the prototype. Some of their comments after experiencing the prototype with the simulation of all three situations were: "It's really good that it could detect if I'm indoors or outdoors, walking or sitting. It makes so much sense These comments show that the concept of Situational Recomender was quite easy for our participants to grasp. The settings ere considered by all participants to be useful and easy to learn 0/10). They anticipated easily manipulating the settings for enrcing constraints and to check or change what is currently being onsidered by the app. Some participants (7/10) also commented on ow they will manipulate the settings of the prototype to receive eal recommendations. P43 who normally spends her weekends ith her family, said that when she is planning her weekends -she ill change the company settings to "family" and move the situator m w (1 fo c h id w w to further right so that she can analyse the options for places to visit with her family across the entire city. P37 who owns a bike said that he will set the transportation mode to strictly consider "bike" all the time. P38 pointed out that he could manipulate the settings of Situational Recommender to visit places where there will be no children as below:</p><p>"Actually, for company I would choose child friendly and specifically ask the system to not consider this as I want to avoid places with kids, I can use this app like this too, instead of asking for couple friendly places" (P38)</p><p>These observations suggest that our participants had a good comprehension of the concept and found it easy to learn and use.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="8.2">Preference compared to current commercial applications</head><p>Most participants (9/10) said they were likely to try using Situational Recommender in the future instead of the platforms they currently use to seek information. In comparison with the current commercial applications for POI recommendations (such as Google Maps), the transparency brought by the situation segregation and will choose it as its very creative. It's a concept I the possibility of direct manipulation by using the settings were haven't seen before, and it is pretty darn easy to use" considered to be the "added value" of Situational Recommender.</p><p>(P39)</p><p>"Sometimes you want to go somewhere random, and "The interface changes: I've seen nothing like this so this is just available on your mobile. It considers so I will say it's pretty innovative. " (P41) much more, about your situation and weather, the Our observations suggest that the direct manipulation of the situapp considers more things for you than even you do. ated context using UI elements made our concept easy to learn and I love it. " (P40) understand and preferable over current commercial applications.</p><p>"I like the recommendation interface where the current situation is considered" (P42)</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="8.3">Perceived usefulness of Situational Recommender</head><p>"What adds value to this app when compared to All Participants (10/10) perceived the concept to be useful for any Google Maps is that there is a lot of noise in Google situation they face and came up with different use cases by adapting Maps it takes this and that into account. And this app it to different situations in their life where they need information there the visible settings, difference inside/outside, on POIs. It is to be noted that to avoid recall of specific names such and only the recommendations. It is cleaner and good" as On the spot, Refining plans, and Moments of boredom we had not (P38) these terminologies to our participants. In Table <ref type="table" target="#tab_3">5</ref> below, "Most important thing is we have a lot of choice here we have mapped the 22 use cases foreseen by our participants to to set things or see the settings, I don't know what the three main categories which we had classified as situations in secret juice Google uses" (P37)</p><p>which end users seek POI information.</p><p>In line with our conceptualisation of On-the-spot situation, most Some participants (4/10) also credited the innovative nature of participants (7/10) perceived to use Situational Recommender to our prototype where the interface is shown changing according the find POIs located near them when they are outside in the streets to the situation they face -as their reason for preferring Situational (see Table <ref type="table" target="#tab_3">5</ref>). Similar to what we had termed as plans Recommender to current commercial applications. Some of their situation, most participants said that (8/10) they will use our system comments on the concept and the adaptive interface were:</p><p>in situations where they have spare time or when they have to  <ref type="table" target="#tab_3">5</ref>). Comparable to our grown more cautious of the money they spend in leisure activities Moments of boredom situation, most participants (7/10) anticipated and sought free events and other offers in their home city such as to use Situational Recommender for planning when feel bored happy hours. The infographic shown in Figure <ref type="figure" target="#fig_4">6</ref> below illustrate or when they would like to see the POIs available in the entire city the interests of our participants in the situations of a tourist, new that match their specific constraints (such as 'company' shown in local, and local. While this an initial insight into the differences Table <ref type="table" target="#tab_3">5</ref>). Also, most participants (7/10) explicitly noted that they between the user groups with our limited sample based in Paris, will further adjust the situator to narrow down their choices or further research is needed on modelling these differences which is select specific areas by zooming in or scrolling into a different area out of this paper's scope. Our findings corelated with the literature in the map. These 22 use cases perceived by our participants and on locals of a city wanting to discover new POIs and ephemeral their direct mapping to our concept further validates our findings in their city <ref type="bibr" target="#b3">[4]</ref> and new locals wanting neighbourhood from the first two user studies.</p><p>walks and new friends <ref type="bibr" target="#b5">[5]</ref> [62].</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>8.4</head><p>In the situations of a tourist, new local and DISCUSSION local 9.1 The connections between users and their</p><p>We had selected a very specific sample who were currently locals in Paris but had previously experienced it as new locals and tourists current locations as well. When they were probed during the post discussion, all While urban exploration was our focus, the design rationale of participants (10/10) agreed that they could foresee using Situational using the same mobile applications both in travel and everyday Recommender as tourists, new locals, and locals. They felt that they life also applies to a wide range of services such as transportation, could use it to both plan and explore serendipitously as quoted payments, information search, and social media <ref type="bibr" target="#b64">[64]</ref>. When using these services users carry forward their skills, routines, and habits (the "spillover effects" as they are termed in the literature) from "This weekend I'm going to Lille with my friends I their day-to-day use into travel <ref type="bibr" target="#b64">[64]</ref>. People are found to feel both would love to take this and plan seeing what it sug-"home" and "away" by continuing their participation in their everygests for me" (P37) day activities such as participation in pre-existing social networks "I was literally walking around all the time when I on vacation <ref type="bibr">[72]</ref>. The success of a location-based service to moved here, it would have been useful to have this" be useful to the users both home and away (in everyday life and (P38) travel) depends on the its adaptation to the changes in the users' "I'm spontaneous and easily bored, I would like to use connection with their environment. In our case with the Situational this everywhere" (P44)</p><p>Recommender, users' connection with their current city can be Although our concept applies across the three user groups at the situated anywhere in the spectrum ranging from first-time tourists level of the situation, as we had anticipated, it needs further adjust-know very little about their surroundings to locals who has ments at the level of the POIs recommended. When asked about extensive knowledge about their city. While we sampled particitype of POIs they were interested in as a tourist, new local, and local pants for the activity of urban exploration across three different Paris -only a few participants (3/10) wanted to find hidden gems user groups of tourists, new locals, or locals, there are other types but good/secret POIs), good restaurants, or museums connections between a user and a city such as hometown, a all the time. All participants (10/10) had visited famous sights as where one used to live, a city one frequents, a completely new tourists and most of them (7/10) were interested in ephemeral and city on the other side of the world etc. These connections are both food related POIs as a local. As new locals and locals they had also personal and private, it is best for the system to prompt and for the user to give input on where they are located in this spectrum between tourists and locals in a non-intrusive way. It is an open research question to understand the use of a user's connection with their spatial surrounding as a material to design for user modelling in location-based services.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="9.2">Modelling the ever-evolving context of an urban environment</head><p>Keeping up to date with the ongoing changes in a city's environment is an integral part of modelling a context-aware POI recommender system. We do not claim to have identified all the underlying constraints for the situations in which people seek information on POIs. As we conducted our concept validation study during the times of the ongoing covid-19 pandemic, some participants (5/10) of Study 3 (Section 7) wanted to have "safe POIs" in the settings, which they can ask the system to strictly consider for maintaining a safe social distance with other people around them during their visit. There were also two other suggestions -to include the newly available electric kick scooters in the settings for transportation modes and consider the current of pollution in the city alongside the consideration of weather. As suggested by our participants, these up and coming context variables, and other temporal, geographical, and social variables identified in the literature <ref type="bibr" target="#b0">[1]</ref> [21] <ref type="bibr" target="#b70">[70]</ref>, could be easily merged into our concept of Situational Recommender by future researchers.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="9.3">Comprehensible AI (CAI)</head><p>In Shneiderman's vision for responsible AI <ref type="bibr" target="#b51">[51]</ref>, he plots Comprehensible AI (CAI) alongside Explainable AI (XAI) "to prevent confusion and surprise by making comprehensible user interfaces that enable rapid interactive exploration of decision spaces. " With the Wizard-of-Oz technique and our high-fidelity prototype we made our participants experience an interactive representation of situations in which they seek POI recommendations and direct manipulation of the underlying constraints considered by the system. With this, all of our participants (10/10) gained a clear understanding of the system's reasoning. Although, POI recommender systems are a kinder domain in comparison to critical domains such as law and medicine, half of our participants (5/10) stated that they will not change the settings often as they trusted the comprehensible system that provided direct manipulation of the contextual features via sliders in the interface. This provides initial insights into the benefits of CAI as envisioned in [51] <ref type="bibr" target="#b52">[52]</ref>. We chose to use sliders in our prototype of a mobile application as they are proven in the literature to provide a good user experience in mobile situations and with one-hand usage <ref type="bibr" target="#b1">[2]</ref>  <ref type="bibr" target="#b38">[38]</ref>.</p><p>radar visualisation fared better in comparison with sliders for controlling music recommendations in a web application <ref type="bibr" target="#b22">[22]</ref>. Designing comprehensible visualisation techniques for interactive exploration of mobile recommender systems that outperform sliders is an open challenge for future researchers to take.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="10">LIMITATIONS AND FUTURE WORK</head><p>Our high-fidelity prototype and the Wizard-of-Oz experiment helped us to successfully communicate our concept to the participants and obtain their views on it. However, we stress that this concept validation is a preliminary evaluation; it will be necessary to implement the corresponding algorithms for detection and POI ranking/recommendation and test the situational recommender in use for a long period of time to evaluate certain aspects of it such as the quality of the recommended POIs. A complete service should be complemented by features such as the possibility to run precise searches, navigational support, and categorical filtering, as discussed in the literature <ref type="bibr" target="#b27">[28]</ref> [60] [62] <ref type="bibr" target="#b63">[63]</ref>.</p><p>We acknowledge that our sample is only a sub-set of people who travel and migrate. As noted in <ref type="bibr" target="#b5">[5]</ref>, new locals from low socioeconomic backgrounds either face serious problems in life or they stay within their closely knitted communities. Hence, we chose tourists (Section 3.1), new locals (Section 3.2), and locals (Section 7) who had sufficient free time, money, motivation, and energy to look for POI recommendations.</p><p>As a next step, we intend to construct an end-to-end proactive situational POI search and recommendation module with complete functionalities including a search bar for precise information needs, categories for filtering, connection to the calendar of the users to know their schedule, the navigational module, and the learning algorithms for situation detection, contextualisation, personalisation, POI recommendations. We also need to evaluate such a system in a longitudinal user study with a larger number of participants, encompassing cities of different sizes and different user groups.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>CONCLUSION</head><p>Our studies on the urban activity of tourists in Lyon and new locals in Grenoble found them in three distinct situations in which they needed POI information. Namely, On the spot, Refining plans, and Moments of boredom. From the findings of these two initial studies, we derived implications for modelling situational POI recommendations. To further support the feasibility of our concept, we designed a prototype of Situational Recommender, communicating the situation detected with the and enabling direct manipulation of the detected situation with elements the user interface. We ran a third study to gain an initial validation of our concept with locals in Paris, who generally appreciated the usefulness of the concept and the possibilities it offered for interaction. With this research on Situational Recommender, we contribute to the HCI literature with information on situated need of urban explorers. </p></div><figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_0"><head>Figure 2 :</head><label>2</label><figDesc>Figure 2: 45 situational stories from two user studies plotted as the three main situations of POI information seeking: On-thespot (black), Refining plans (grey) and Moments of boredom (yellow)</figDesc><graphic url="image-2.png" coords="6,94.29,83.69,423.41,535.25" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_1"><head>Figure 3 :</head><label>3</label><figDesc>Figure 3: A spider chart illustrating an overview of the implications modelling situational POI recommendations bored. As reported in the literature [40], tourists on long tours and visiting small cities do experience boredom. Hence, we do not exclude designing for bored tourists in our proposal for Situational Recommender.5.3.1 Implications for design.Unlike in the On-the-spot situation, when people are bored, a large number of POIs should be presented a glance in the UI to be browsed by the user. Photos of the POIs their approximate location or distribution in the city should be provided. As users look for POIs both near and far, they should be the options in the UI to request more POIs located far away and to restrict the system to POIs located nearby. Other information about the POI such as reviews, ratings, opening hours and address should made available on demand. POI filtering categories (such as museums and restaurants) and Areas-of-Interest<ref type="bibr" target="#b42">[42]</ref> [61] could encourage the user to explore the recommendations.</figDesc><graphic url="image-3.png" coords="9,144.61,83.69,322.79,244.21" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_2"><head>Figure 4 :</head><label>4</label><figDesc>Figure 4: Six screenshots of our prototype of the Situational Recommender displaying the map-based interface for the three situations of On the spot(3a), Refining plans(3b), and Moments of boredom (3c), and their respective settings (3d, 3e and 3f).The first screen is a map-based interface with ○ 2 control button for the user to centre the it has 3 an egocentric radius interest drawn around the current location of the user, which contains all ○ 4 the recommended POIs and their information ○ 5 the situator is a slider that helps the user to control the interface and change their situation and ○ 1 the settings button leads the user to ○ 6 the settings available in the second screen</figDesc><graphic url="image-4.png" coords="11,81.84,83.69,448.32,552.54" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_3"><head>Figure 5 :</head><label>5</label><figDesc>Figure 5: Results of subjective measures from the post-questionnaire</figDesc><graphic url="image-5.png" coords="14,177.48,83.68,257.03,356.97" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_4"><head>Figure 6 :</head><label>6</label><figDesc>Figure 6: An infographic of the POIs sought by our participants as a tourist, new and local change plans in the last minute (see Table5). Comparable to our grown more cautious of the money they spend in leisure activities Moments of boredom situation, most participants (7/10) anticipated and sought free events and other offers in their home city such as to use Situational Recommender for planning when feel bored happy hours. The infographic shown in Figure6below illustrate or when they would like to see the POIs available in the entire city the interests of our participants in the situations of a tourist, new that match their specific constraints (such as 'company' shown in local, and local. While this an initial insight into the differences Table5). Also, most participants (7/10) explicitly noted that they between the user groups with our limited sample based in Paris, will further adjust the situator to narrow down their choices or further research is needed on modelling these differences which is select specific areas by zooming in or scrolling into a different area out of this paper's scope. Our findings corelated with the literature in the map. These 22 use cases perceived by our participants and on locals of a city wanting to discover new POIs and ephemeral their direct mapping to our concept further validates our findings in their city<ref type="bibr" target="#b3">[4]</ref> and new locals wanting neighbourhood from the first two user studies.walks and new friends[5] [62].</figDesc><graphic url="image-6.png" coords="16,74.37,83.69,463.25,161.48" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0"><head></head><label></label><figDesc></figDesc><graphic url="image-1.png" coords="1,70.38,227.92,471.10,147.01" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_0"><head>Table 1 :</head><label>1</label><figDesc>The demographics of tourists who participated in Study 1 described in Section 3.1 with the last column displaying the activities of the participants during their touristic day trip</figDesc><table><row><cell>Main P. no. /age/ gender</cell><cell>Companions P. no(s). / age/</cell><cell>Group description</cell><cell>Activities during the day trip</cell></row><row><cell></cell><cell>gender</cell><cell></cell><cell></cell></row><row><cell>P1/ 33/Female</cell><cell>P2/32/Female</cell><cell>Two friends</cell><cell>Sightseeing, restaurant</cell></row><row><cell>P3/26/Female</cell><cell>None</cell><cell>Solo visitor</cell><cell>Sightseeing, museum</cell></row><row><cell>P4/59/Female</cell><cell>None</cell><cell>Solo visitor</cell><cell>Sightseeing, restaurant</cell></row><row><cell>P5/38/Female</cell><cell>P6/5/Male</cell><cell>Mum and son</cell><cell>Monuments, child-friendly</cell></row><row><cell></cell><cell></cell><cell></cell><cell>places</cell></row><row><cell>P7/43/Male</cell><cell>P8/37/Female; P9/16/Male;</cell><cell>Family</cell><cell>Museums, restaurant</cell></row><row><cell></cell><cell>P10/14/Male</cell><cell></cell><cell></cell></row><row><cell>P11/69/Male</cell><cell>None</cell><cell>Solo visitor</cell><cell>Museums</cell></row><row><cell>P12/62/Female</cell><cell cols="2">P13/34/Female; P14/55/Female; Four friends</cell><cell>Sightseeing, restaurant, park</cell></row><row><cell></cell><cell>P15/57/Female</cell><cell></cell><cell></cell></row><row><cell>P16/46/Male</cell><cell cols="2">P17/40/Female; P18/10/Female; Family</cell><cell>Shopping, museum, restaurant</cell></row><row><cell></cell><cell>P19/6/Female</cell><cell></cell><cell></cell></row><row><cell>P20/22/Female</cell><cell>P21/21/Female</cell><cell>Two friends</cell><cell>Museums, cafés</cell></row><row><cell>P22/25/Male</cell><cell>P23/24/Male</cell><cell>Two friends</cell><cell>Cycling, museum, sightseeing</cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_1"><head>Table 3 :</head><label>3</label><figDesc>An overview of the characteristics of the three main situations for POI information seeking (major themes) categorised with respect to the observed sets of constraints (minor themes)</figDesc><table><row><cell>Major themes →</cell><cell>On the spot</cell><cell>Refining plans</cell><cell>Moments of boredom</cell></row><row><cell>Minor themes ↓</cell><cell></cell><cell></cell><cell></cell></row><row><cell>Distance of interest</cell><cell>Very close (around five mins</cell><cell cols="2">Around the current location or Nearby or far away</cell></row><row><cell></cell><cell>away)</cell><cell>along the way</cell><cell>(anywhere/anytime)</cell></row><row><cell>Engagement threshold</cell><cell>Few minutes of attention</cell><cell>Searches lasting from 5 to 20</cell><cell>Longer searches, even repetitive</cell></row><row><cell></cell><cell></cell><cell>minutes</cell><cell>ones spanning many days</cell></row><row><cell>Ambiguity of the search</cell><cell>Mostly precise need (E.g.: I</cell><cell cols="2">Mostly vague needs (E.g.: How Mostly very vague needs (E.g.:</cell></row><row><cell></cell><cell>want to find a café near me)</cell><cell>can I pass the next few hours</cell><cell>Where can I go? What can I see?</cell></row><row><cell></cell><cell></cell><cell>around here?)</cell><cell>Is there anything interesting</cell></row><row><cell></cell><cell></cell><cell></cell><cell>near or far?)</cell></row><row><cell>Profile matching</cell><cell>Personal preferences rarely</cell><cell>Sometimes matter</cell><cell>Available to match personal</cell></row><row><cell></cell><cell>matter</cell><cell></cell><cell>taste and consult others</cell></row><row><cell>Imperative constraints</cell><cell cols="2">Current weather, company, and Constrained to an extent with</cell><cell>Mostly no imperative</cell></row><row><cell></cell><cell>navigation are important</cell><cell></cell><cell></cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_2"><head>Table 4 :</head><label>4</label><figDesc>The demographics of locals who participated in the concept validation of Situational Recommender described in Section 7 with the last column displaying their current POI information seeking commercial platforms.</figDesc><table><row><cell>P. no:</cell><cell>Age</cell><cell>Gender</cell><cell>Year(s) in the city</cell><cell>Job</cell><cell>POI information</cell></row><row><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell>seeking platforms</cell></row><row><cell>P36</cell><cell>23</cell><cell>Male</cell><cell>1 year</cell><cell>IT Manager</cell><cell>Instagram,</cell></row><row><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell>Facebook, Trip</cell></row><row><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell>Advisor</cell></row><row><cell>P37</cell><cell>27</cell><cell>Male</cell><cell>1 year</cell><cell>UX Designer</cell><cell>Google Maps,</cell></row><row><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell>Instagram</cell></row><row><cell>P38</cell><cell>27</cell><cell>Male</cell><cell>5 years</cell><cell cols="2">Restaurant Manager Google Maps,</cell></row><row><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell>Instagram,</cell></row><row><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell>Facebook, Trip</cell></row><row><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell>Advisor</cell></row><row><cell>P39</cell><cell>25</cell><cell>Male</cell><cell>2 years</cell><cell>PhD Student</cell><cell>Google Maps</cell></row><row><cell>P40</cell><cell>23</cell><cell>Female</cell><cell>1 year</cell><cell>Masters Student</cell><cell>Google Maps,</cell></row><row><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell>Instagram, Facebook</cell></row><row><cell>P41</cell><cell>24</cell><cell>Male</cell><cell>3 years</cell><cell>Financial Analyst</cell><cell>Instagram,</cell></row><row><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell>Facebook, Trip</cell></row><row><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell>Advisor</cell></row><row><cell>P42</cell><cell>23</cell><cell>Male</cell><cell>2 years</cell><cell>Research Assistant</cell><cell>Google Maps, Trip</cell></row><row><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell>Advisor</cell></row><row><cell>P43</cell><cell>29</cell><cell>Female</cell><cell>3 years</cell><cell>Performing Artist</cell><cell>Google Maps,</cell></row><row><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell>Instagram,</cell></row><row><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell>Facebook, Trip</cell></row><row><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell>Advisor</cell></row><row><cell>P44</cell><cell>35</cell><cell>Female</cell><cell>1 year</cell><cell>Makeup Artist</cell><cell>Instagram,</cell></row><row><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell>Facebook, Trip</cell></row><row><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell>Advisor</cell></row><row><cell>P45</cell><cell>28</cell><cell>Female</cell><cell>10 years</cell><cell>Front Desk Agent</cell><cell>Google Maps,</cell></row><row><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell>Instagram,</cell></row><row><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell>Facebook, Trip</cell></row><row><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell>Advisor</cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_3"><head>Table 5 :</head><label>5</label><figDesc>Use cases of Situational Recommender perceived by the participants in our concept validation study (section 7) mapped to the three main situation categories of On the spot, Refining plans, and Moments of boredom.</figDesc><table><row><cell>P.no.</cell><cell>On the spot</cell><cell>Refining plans</cell><cell>Moments of boredom</cell></row><row><cell>P36</cell><cell>-</cell><cell>"When I'm coming back from</cell><cell>"When me and my university</cell></row><row><cell></cell><cell></cell><cell>work"</cell><cell>mates bored in dorm"</cell></row><row><cell>P37</cell><cell>"Finding restaurant to eat</cell><cell>"Looking to go somewhere after</cell><cell>-</cell></row><row><cell></cell><cell>lunch"</cell><cell>a picnic"</cell><cell></cell></row><row><cell>P38</cell><cell>"When taking walks"</cell><cell>"If I close my bar early"</cell><cell>"When we do not know what to</cell></row><row><cell></cell><cell></cell><cell></cell><cell>do during a national holiday at</cell></row><row><cell></cell><cell></cell><cell></cell><cell>home"</cell></row><row><cell>P39</cell><cell>"When I feel hungry outside"</cell><cell>"When I miss my RER (local</cell><cell>-</cell></row><row><cell></cell><cell></cell><cell>train)"</cell><cell></cell></row><row><cell>P40</cell><cell>"When we are walking after</cell><cell>-</cell><cell>"Just seeing if anything</cell></row><row><cell></cell><cell>getting out from metro"</cell><cell></cell><cell>interests me"</cell></row><row><cell>P41</cell><cell>"When I want one-minute</cell><cell>-</cell><cell>-</cell></row><row><cell></cell><cell>suggestions around where I am"</cell><cell></cell><cell></cell></row><row><cell>P42</cell><cell>"Sometimes when roaming in</cell><cell>"Sometimes changing plans</cell><cell>"Just to see what is in the city"</cell></row><row><cell></cell><cell>the street without plans, can</cell><cell>when friends don't agree"</cell><cell></cell></row><row><cell></cell><cell>just walk and see"</cell><cell></cell><cell></cell></row><row><cell>P43</cell><cell>-</cell><cell>"In the break between my</cell><cell>"Seeing where I can go with</cell></row><row><cell></cell><cell></cell><cell>practices with my friends"</cell><cell>family"</cell></row><row><cell>P44</cell><cell>-</cell><cell>"When you go somewhere and</cell><cell>"When I'm bored"</cell></row><row><cell></cell><cell></cell><cell>its closed"</cell><cell></cell></row><row><cell>P45</cell><cell>"Outside, I will take a quick</cell><cell>"On the way back from work"</cell><cell>"To play with the settings and</cell></row><row><cell></cell><cell>look to see what it suggests in</cell><cell></cell><cell>see what I really need"</cell></row><row><cell></cell><cell>this neighbourhood for me"</cell><cell></cell><cell></cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_4"><head></head><label></label><figDesc>//doi.org/10.1145/2739999.2740000 26] Malin Eiband, Sarah Theres Völkel, Daniel Buschek, Sophia Cook, and Heinrich Hussmann. 2019. When People and Algorithms Meet: User-reported Problems in Intelligent Everyday Applications. 12</figDesc><table><row><cell>[</cell></row><row><cell>[</cell></row><row><cell>[</cell></row><row><cell>[</cell></row><row><cell>[</cell></row><row><cell>[</cell></row><row><cell>[</cell></row><row><cell>[</cell></row><row><cell>[</cell></row><row><cell>[</cell></row><row><cell>[</cell></row><row><cell>[</cell></row><row><cell>[</cell></row><row><cell>[</cell></row><row><cell>[</cell></row><row><cell>[</cell></row></table></figure>
+		</body>
+		<back>
+
+			<div type="acknowledgement">
+<div xmlns="http://www.tei-c.org/ns/1.0"><p>We thank all our participants for sharing their experiences with us, providing valuable feedback, devoting their time, and enthusiasm.</p></div>
+			</div>
+
+			<div type="references">
+
+				<listBibl>
+
+<biblStruct xml:id="b0">
+	<analytic>
+		<title level="a" type="main">Context-Aware Recommender Systems</title>
+		<author>
+			<persName><forename type="first">Gediminas</forename><surname>Adomavicius</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Bamshad</forename><surname>Mobasher</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Francesco</forename><surname>Ricci</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Alexander</forename><surname>Tuzhilin</surname></persName>
+		</author>
+		<idno type="DOI">10.1609/aimag.v32i3.2364</idno>
+		<ptr target="https://doi.org/10.1609/aimag.v32i3.2364" />
+	</analytic>
+	<monogr>
+		<title level="j">AI Magazine</title>
+		<imprint>
+			<biblScope unit="volume">32</biblScope>
+			<biblScope unit="issue">3</biblScope>
+			<biblScope unit="page" from="67" to="80" />
+			<date type="published" when="2011">2011</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b1">
+	<analytic>
+		<title level="a" type="main">Dynamic queries for information exploration: an implementation and evaluation</title>
+		<author>
+			<persName><forename type="first">Christopher</forename><surname>Ahlberg</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Christopher</forename><surname>Williamson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ben</forename><surname>Shneiderman</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/142750.143054</idno>
+		<ptr target="http://doi.acm.org/10.1145/142750.143054" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the SIGCHI Conference on HumanFactors in Computing Systems (CHI &apos;92)</title>
+				<meeting>the SIGCHI Conference on HumanFactors in Computing Systems (CHI &apos;92)</meeting>
+		<imprint>
+			<date type="published" when="1992">1992</date>
+			<biblScope unit="page" from="619" to="626" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b2">
+	<analytic>
+		<title level="a" type="main">Ability and Context Based Adaptive System: A Proposal for Machine Learning Approach</title>
+		<author>
+			<persName><forename type="first">Yeliz</forename><surname>Elgin Akpınar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Selim</forename><surname>Yeşilada</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Temizer</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Presented at the CHI&apos;19 Workshop: Addressing the Challenges of Situationally-Induced Impairments and Disabilities in Mobile Interaction</title>
+				<imprint>
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b3">
+	<monogr>
+		<author>
+			<persName><forename type="first">Alia</forename><surname>Amin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sian</forename><surname>Townsend</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jacco</forename><surname>Ossenbruggen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Lynda</forename><surname>Hardman</surname></persName>
+		</author>
+		<title level="m">Canary Wharf? A User Study on Location-Based Mobile Search</title>
+				<imprint>
+			<date type="published" when="2009">2009</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b4">
+	<monogr>
+		<idno type="DOI">10.1007/978-3-642-03655-2_80</idno>
+		<ptr target="https://doi.org/10.1007/978-3-642-03655-2_80" />
+		<title level="m">Proceedings of the 12th IFIP TC 13 International Conference on Human-Computer Interaction: Part I (INTERACT &apos;09)</title>
+				<meeting>the 12th IFIP TC 13 International Conference on Human-Computer Interaction: Part I (INTERACT &apos;09)<address><addrLine>Berlin, Heidelberg</addrLine></address></meeting>
+		<imprint>
+			<publisher>Springer-Verlag</publisher>
+			<biblScope unit="page" from="736" to="749" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b5">
+	<analytic>
+		<title level="a" type="main">Making the city my own: uses and practices of mobile location technologies for exploration of a new city</title>
+		<author>
+			<persName><forename type="first">Louise</forename><surname>Barkhuus</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Donghee Yvette Wohn</surname></persName>
+		</author>
+		<idno type="DOI">10.1007/s00779-018-01191-z</idno>
+		<ptr target="https://doi.org/10.1007/s00779-018-01191-z" />
+	</analytic>
+	<monogr>
+		<title level="j">Personal and Ubiquitous Computing</title>
+		<imprint>
+			<biblScope unit="volume">23</biblScope>
+			<biblScope unit="page" from="269" to="278" />
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b6">
+	<analytic>
+		<title level="a" type="main">Instrumental Interaction: An Interaction Model for Designing post-WIMP User Interfaces</title>
+		<author>
+			<persName><forename type="first">Michel</forename><surname>Beaudouin-Lafon</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/332040.332473</idno>
+		<ptr target="http://dx.doi.org/10.1145/332040.332473" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the SIGCHI Conference on Human Factors in Computing Systems (CHI &apos;00)</title>
+				<meeting>the SIGCHI Conference on Human Factors in Computing Systems (CHI &apos;00)<address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>ACM</publisher>
+			<date type="published" when="2000">2000</date>
+			<biblScope unit="page" from="446" to="453" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b7">
+	<analytic>
+		<title level="a" type="main">A recommendation system for spots in location-based online social networks</title>
+		<author>
+			<persName><forename type="first">Betim</forename><surname>Berjani</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Thorsten</forename><surname>Strufe</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/1989656.1989660</idno>
+		<ptr target="https://doi.org/10.1145/1989656.1989660" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 4thWorkshop on Social Network Systems -SNS &apos;11</title>
+				<meeting>the 4thWorkshop on Social Network Systems -SNS &apos;11</meeting>
+		<imprint>
+			<date type="published" when="2011">2011</date>
+			<biblScope unit="page" from="1" to="6" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b8">
+	<monogr>
+		<title level="m" type="main">Situation-Aware Approach to Improve Context-based Recommender System</title>
+		<author>
+			<persName><surname>Bouneffouf</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:1303.0481</idno>
+		<imprint>
+			<date type="published" when="2013">2013</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b9">
+	<analytic>
+		<title level="a" type="main">Reflecting on reflexive thematic analysis</title>
+		<author>
+			<persName><forename type="first">Virginia</forename><surname>Braun</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Victoria</forename><surname>Clarke</surname></persName>
+		</author>
+		<idno type="DOI">10.1080/2159676X.2019.1628806</idno>
+		<ptr target="http://dx.doi.org/10.1080/2159676X.2019.1628806" />
+	</analytic>
+	<monogr>
+		<title level="j">Qualitative Research in Sport, Exercise and Health</title>
+		<imprint>
+			<biblScope unit="volume">11</biblScope>
+			<biblScope unit="page" from="589" to="597" />
+			<date type="published" when="2019">2019. 2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b10">
+	<monogr>
+		<title level="m" type="main">Fused Matrix Factorization with Geographical and Social Influence in Location-Based Social Networks</title>
+		<author>
+			<persName><forename type="first">Chen</forename><surname>Cheng</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Haiqin</forename><surname>Yang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Irwin</forename><surname>King</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Michael</forename><forename type="middle">R</forename><surname>Lyu</surname></persName>
+		</author>
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b11">
+	<monogr>
+		<title level="m" type="main">Developing a context-aware electronic tourist guide: some issues and In &lt;i&gt;Proceedings of the SIGCHI conference on Human Factors in Systems (CHI &apos;00)</title>
+		<author>
+			<persName><forename type="first">Nigel</forename><surname>Cheverst</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Keith</forename><surname>Davies</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Adrian</forename><surname>Mitchell</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Christos</forename><surname>Friday</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/332040.332047</idno>
+		<ptr target="https://doi.org/10.1145/332040.332047" />
+		<imprint>
+			<date type="published" when="2000">Efstra-2000</date>
+			<publisher>Association for Computing Machinery</publisher>
+			<biblScope unit="page" from="17" to="24" />
+			<pubPlace>New York, NY, USA</pubPlace>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b12">
+	<analytic>
+		<title level="a" type="main">Using Context as a Crystal Ball: Rewards and Pitfalls</title>
+		<author>
+			<persName><forename type="first">Keith</forename><surname>Cheverst</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Nigel</forename><surname>Davies</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Keith</forename><surname>Mitchell</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Christos</forename><surname>Efstratiou</surname></persName>
+		</author>
+		<idno type="DOI">10.1007/s007790170020</idno>
+		<ptr target="https://doi.org/10.1007/s007790170020" />
+	</analytic>
+	<monogr>
+		<title level="j">Personal and Ubiquitous</title>
+		<imprint>
+			<biblScope unit="volume">5</biblScope>
+			<biblScope unit="page" from="8" to="11" />
+			<date type="published" when="2001">2001</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b13">
+	<analytic>
+		<title level="a" type="main">Understanding mobile web and mobile use in today&apos;s dynamic mobile landscape</title>
+		<author>
+			<persName><forename type="first">Karen</forename><surname>Church</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Nuria</forename><surname>Oliver</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2037373.2037385</idno>
+		<ptr target="https://doi.org/10.1145/2037373.2037385" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 13th International Conference on Human Computer Interaction with Mobile Devices and Services -MobileHCI &apos;11, 67</title>
+				<meeting>the 13th International Conference on Human Computer Interaction with Mobile Devices and Services -MobileHCI &apos;11, 67</meeting>
+		<imprint>
+			<date type="published" when="2011">2011</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b14">
+	<analytic>
+		<title level="a" type="main">Understanding the Intent Behind Mobile Needs</title>
+		<author>
+			<persName><forename type="first">Karen</forename><surname>Church</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Barry</forename><surname>Smyth</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/1502650.1502686</idno>
+		<ptr target="https://doi.org/10.1145/1502650" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 14th International Conference on Intelligent User Interfaces (IUI &apos;09)</title>
+				<meeting>the 14th International Conference on Intelligent User Interfaces (IUI &apos;09)</meeting>
+		<imprint>
+			<date type="published" when="2009">2009</date>
+			<biblScope unit="page" from="247" to="256" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b15">
+	<monogr>
+		<title level="m" type="main">Mobile Information Retrieval</title>
+		<author>
+			<persName><forename type="first">Fabio</forename><surname>Crestani</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Stefano</forename><surname>Mizzaro</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ivan</forename><surname>Scagnetto</surname></persName>
+		</author>
+		<idno type="DOI">10.1007/978-3-319-60777-1</idno>
+		<ptr target="https://doi.org/10.1007/978-3-319-60777-1" />
+		<imprint>
+			<date type="published" when="2017">2017</date>
+			<publisher>Springer International Publishing</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b16">
+	<analytic>
+		<title level="a" type="main">Incorporating Situation Awareness into Recommender Systems</title>
+		<author>
+			<persName><forename type="first">Jeremias</forename><surname>Dötterl</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ralf</forename><surname>Bruns</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jurgen</forename><surname>Dunkel</surname></persName>
+		</author>
+		<idno type="DOI">10.5220/0006385106760683</idno>
+		<ptr target="https://doi.org/10.5220/" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings the 19th International Conference on Enterprise Systems</title>
+				<meeting>the 19th International Conference on Enterprise Systems</meeting>
+		<imprint>
+			<date type="published" when="2017">2017</date>
+			<biblScope unit="page" from="676" to="683" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b17">
+	<analytic>
+		<title level="a" type="main">What we talk about when we talk about context</title>
+		<author>
+			<persName><forename type="first">Paul</forename><surname>Dourish</surname></persName>
+		</author>
+		<idno type="DOI">10.1007/s00779-003-0253-8</idno>
+		<ptr target="https://doi.org/10.1007/s00779-003-0253-8" />
+	</analytic>
+	<monogr>
+		<title level="j">Pers Ubiquit Comput</title>
+		<imprint>
+			<biblScope unit="volume">8</biblScope>
+			<biblScope unit="page" from="19" to="30" />
+			<date type="published" when="2004">2004</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b18">
+	<analytic>
+		<title level="a" type="main">The Use of Think-aloud Methods in Qualitative Research An Introduction to Think-aloud Methods. Brock Education : a</title>
+		<author>
+			<persName><forename type="first">Elizabeth</forename><surname>Charters</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Journal of Educational Research and Practice</title>
+		<imprint>
+			<biblScope unit="volume">12</biblScope>
+			<biblScope unit="page" from="68" to="82" />
+			<date type="published" when="2010">2010</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b19">
+	<analytic>
+		<title level="a" type="main">Build with live location data</title>
+		<author>
+			<persName><surname>Mapbox</surname></persName>
+		</author>
+		<ptr target="https://www.mapbox.com" />
+	</analytic>
+	<monogr>
+		<title level="j">Explore. Move. Connect</title>
+		<imprint>
+			<date type="published" when="2010-08-10">2010. August 10</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b20">
+	<analytic>
+		<title level="a" type="main">Prototyping an intelligent agent through Wizard of Oz</title>
+		<author>
+			<persName><forename type="first">David</forename><surname>Maulsby</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Saul</forename><surname>Greenberg</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Richard</forename><surname>Mander</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/169059.169215</idno>
+		<ptr target="https://doi.org/10.1145/169059.169215" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the SIGCHI conference on Human factors in computing systems -CHI &apos;93</title>
+				<meeting>the SIGCHI conference on Human factors in computing systems -CHI &apos;93</meeting>
+		<imprint>
+			<date type="published" when="1993">1993</date>
+			<biblScope unit="page" from="277" to="284" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b21">
+	<analytic>
+		<title level="a" type="main">Smart CAPs for Smart Its -Context Detection for Mobile Users</title>
+		<author>
+			<persName><forename type="first">Florian</forename><surname>Michahelles</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Michael</forename><surname>Samulowitz</surname></persName>
+		</author>
+		<idno type="DOI">10.1007/s007790200027</idno>
+		<ptr target="https://doi.org/10.1007/s007790200027" />
+	</analytic>
+	<monogr>
+		<title level="j">Personal and Ubiquitous Computing</title>
+		<imprint>
+			<biblScope unit="volume">6</biblScope>
+			<date type="published" when="2002">2002</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b22">
+	<analytic>
+		<title level="a" type="main">Controlling Spotify Recommendations: Effects of Personal Characteristics on Music Recommender User Interfaces</title>
+		<author>
+			<persName><forename type="first">Martijn</forename><surname>Millecamp</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yucheng</forename><surname>Nyi Nyi Htun</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Katrien</forename><surname>Jin</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Verbert</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3209219.3209223</idno>
+		<ptr target="https://doi.org/10.1145/3209219.3209223" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of 26th Conference on User Mod-Adaptation and Personalization (UMAP&apos;18)</title>
+				<meeting>26th Conference on User Mod-Adaptation and Personalization (UMAP&apos;18)<address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>ACM</publisher>
+			<date type="published" when="2018">2018</date>
+			<biblScope unit="volume">9</biblScope>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b23">
+	<analytic>
+		<title level="a" type="main">Tourism and mobile technology</title>
+		<author>
+			<persName><forename type="first">Barry</forename><surname>Brown</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Matthew</forename></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">ECSCW 2003</title>
+				<meeting><address><addrLine>Dordrecht</addrLine></address></meeting>
+		<imprint>
+			<publisher>Springer</publisher>
+			<date type="published" when="2003">2003</date>
+			<biblScope unit="page" from="335" to="354" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b24">
+	<analytic>
+		<title level="a" type="main">iPhone in vivo: video analysis of mobile device use</title>
+		<author>
+			<persName><forename type="first">Barry</forename><surname>Brown</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Moira</forename><surname>Mcgregor</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Eric</forename><surname>Laurier</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2470654.2466132</idno>
+		<ptr target="https://doi.org/10.1145/" />
+	</analytic>
+	<monogr>
+		<title level="m">CHI &apos;13 Proceedings of the SIGCHI Conference on Human Factors in Computing Systems</title>
+				<imprint>
+			<date type="published" when="2013">2013</date>
+			<biblScope unit="page" from="1031" to="1040" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b25">
+	<analytic>
+		<title level="a" type="main">Making Local Information More Accessible: A Diary Study of Information Channel Selection of Mobile Users</title>
+		<author>
+			<persName><forename type="first">Yung-Ju</forename><surname>Chang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mark</forename><forename type="middle">W</forename><surname>Newman</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2739999.2740000</idno>
+		<idno>DOI:https:</idno>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the Third International Symposium of Chinese CHI (Chinese CHI &apos;15)</title>
+				<meeting>the Third International Symposium of Chinese CHI (Chinese CHI &apos;15)<address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computing Machinery</publisher>
+			<date type="published" when="2015">2015</date>
+			<biblScope unit="page" from="1" to="8" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b26">
+	<analytic>
+		<title level="a" type="main">Letting Users Choose Recommender Algorithms: An Experimental Study</title>
+		<author>
+			<persName><forename type="first">Michael</forename><forename type="middle">D</forename><surname>Ekstrand</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Daniel</forename><surname>Kluver</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><forename type="middle">Maxwell</forename><surname>Harper</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Joseph</forename><forename type="middle">A</forename><surname>Konstan</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2792838.2800195</idno>
+		<ptr target="https://doi.org/10.1145/2792838.2800195" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 9th ACM Conference on Recommender Systems -RecSys &apos;15</title>
+				<meeting>the 9th ACM Conference on Recommender Systems -RecSys &apos;15</meeting>
+		<imprint>
+			<date type="published" when="2015">2015</date>
+			<biblScope unit="page" from="11" to="18" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b27">
+	<monogr>
+		<author>
+			<persName><forename type="first">Hector</forename><surname>Garcia-Molina</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Georgia</forename><surname>Koutrika</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Aditya</forename><surname>Parameswaran</surname></persName>
+		</author>
+		<title level="m">formation seeking: convergence of search, recommendations, and advertising</title>
+				<imprint>
+			<date type="published" when="2011">2011</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b28">
+	<analytic>
+		<title/>
+		<idno type="DOI">10.1145/2018396.2018423</idno>
+		<ptr target="https://doi.org/10.1145/" />
+	</analytic>
+	<monogr>
+		<title level="j">Commun. ACM</title>
+		<imprint>
+			<biblScope unit="volume">54</biblScope>
+			<biblScope unit="page" from="121" to="130" />
+			<date type="published" when="2011-11">November 2011</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b29">
+	<analytic>
+		<title level="a" type="main">The Critical Incident Technique in Service Research</title>
+		<author>
+			<persName><forename type="first">Dwayne</forename><forename type="middle">D</forename><surname>Gremler</surname></persName>
+		</author>
+		<idno type="DOI">10.1177/1094670504266138</idno>
+		<ptr target="https://doi.org/10.1177/1094670504266138" />
+	</analytic>
+	<monogr>
+		<title level="j">Journal of Service Research</title>
+		<imprint>
+			<biblScope unit="volume">7</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page" from="65" to="89" />
+			<date type="published" when="2004">2004</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b30">
+	<analytic>
+		<title level="a" type="main">Developing design guidelines for context-aware mobile applications</title>
+		<author>
+			<persName><forename type="first">Jonna</forename><surname>Häkkilä</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jani</forename><surname>Mäntyjärvi</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/1292331.1292358</idno>
+		<ptr target="https://doi.org/10.1145/1292331.1292358" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 3rd international conference on Mobile technology, applications &amp; systems (Mobility &apos;06)</title>
+				<meeting>the 3rd international conference on Mobile technology, applications &amp; systems (Mobility &apos;06)<address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<date type="published" when="2006">2006</date>
+			<biblScope unit="page">24</biblScope>
+		</imprint>
+	</monogr>
+	<note>Association for Computing Machinery</note>
+</biblStruct>
+
+<biblStruct xml:id="b31">
+	<analytic>
+		<title level="a" type="main">Color Portraits: From Picking to Interacting with Color</title>
+		<author>
+			<persName><forename type="first">Ghita</forename><surname>Jalal</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Nolwenn</forename><surname>Maudet</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Wendy</forename><forename type="middle">E</forename><surname>Mackay</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2702123.2702173</idno>
+		<ptr target="https://doi.org/10.1145/2702123.2702173" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 33rd Annual ACM Conference on Human Factors in Computing Systems (CHI &apos;15)</title>
+				<meeting>the 33rd Annual ACM Conference on Human Factors in Computing Systems (CHI &apos;15)<address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computing Machinery</publisher>
+			<date type="published" when="2015">2015</date>
+			<biblScope unit="page" from="4207" to="4216" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b32">
+	<analytic>
+		<title level="a" type="main">Indexicality: Understanding Mobile Human-Computer Interaction in Context</title>
+		<author>
+			<persName><surname>Kjeldskov</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jeni</forename><surname>Paay</surname></persName>
+		</author>
+		<idno type="DOI">14.10.1145/1879831.1879832</idno>
+	</analytic>
+	<monogr>
+		<title level="j">ACM Trans. Comput.-Hum. Interact</title>
+		<imprint>
+			<biblScope unit="volume">17</biblScope>
+			<date type="published" when="2010">2010</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b33">
+	<analytic>
+		<title level="a" type="main">Matrix Factorization Techniques for Recommender Systems</title>
+		<author>
+			<persName><forename type="first">Yehuda</forename><surname>Koren</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Robert</forename><surname>Bell</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Chris</forename><surname>Volinsky</surname></persName>
+		</author>
+		<idno type="DOI">10.1109/MC.2009.263</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Computer</title>
+		<imprint>
+			<biblScope unit="volume">42</biblScope>
+			<biblScope unit="issue">8</biblScope>
+			<biblScope unit="page" from="30" to="37" />
+			<date type="published" when="2009-08">Aug. 2009</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b34">
+	<analytic>
+		<title level="a" type="main">Going Mobile: Defining Context for On-the-Go Travelers</title>
+		<author>
+			<persName><forename type="first">Carlos</forename><surname>Lamsfus</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Dan</forename><surname>Wang</surname></persName>
+		</author>
+		<idno type="DOI">10.1177/0047287514538839</idno>
+		<ptr target="https://doi.org/10.1177/0047287514538839" />
+	</analytic>
+	<monogr>
+		<title level="j">Journal of Travel Research</title>
+		<imprint>
+			<biblScope unit="volume">54</biblScope>
+			<biblScope unit="page" from="691" to="701" />
+			<date type="published" when="2015">2015</date>
+		</imprint>
+	</monogr>
+	<note>Aurkene Alzua-Sorzabal, and Zheng Xiang</note>
+</biblStruct>
+
+<biblStruct xml:id="b35">
+	<analytic>
+		<title level="a" type="main">GeoMF: joint geographical modeling and matrix factorization for recommendation</title>
+		<author>
+			<persName><forename type="first">Defu</forename><surname>Lian</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Cong</forename><surname>Zhao</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Xing</forename><surname>Xie</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Guangzhong</forename><surname>Sun</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Enhong</forename><surname>Chen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yong</forename><surname>Rui</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2623330.2623638</idno>
+		<ptr target="https://doi.org/10.1145/2623330.2623638" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 20th ACM SIGKDD conference on knowledge discovery and data mining -KDD &apos;14</title>
+				<meeting>the 20th ACM SIGKDD conference on knowledge discovery and data mining -KDD &apos;14</meeting>
+		<imprint>
+			<date type="published" when="2014">2014</date>
+			<biblScope unit="page" from="831" to="840" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b36">
+	<monogr>
+		<title level="m" type="main">Concept validation: The perfect UX Research midway method</title>
+		<author>
+			<persName><forename type="first">Gabriella</forename><surname>Lanning</surname></persName>
+		</author>
+		<ptr target="https://uxdesign.cc/the-perfect-uxr-midway-method-concept" />
+		<imprint>
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b37">
+	<monogr>
+		<title level="m" type="main">Talk to your users</title>
+		<author>
+			<persName><surname>Lookback</surname></persName>
+		</author>
+		<ptr target="https://lookback.io&gt;" />
+		<imprint>
+			<date type="published" when="2013-08-10">2013. August 10. 2021from&lt;</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b38">
+	<analytic>
+		<title level="a" type="main">Discovering activities in your city using transitory search</title>
+		<author>
+			<persName><forename type="first">Jeni</forename><surname>Paay</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jesper</forename><surname>Kjeldskov</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mikael</forename><forename type="middle">B</forename><surname>Skov</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Per</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jon</forename><surname>Nielsen</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Pearce</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2935334.2935378</idno>
+		<ptr target="https://doi.org/10.1145/2935334.2935378" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the International Conference on Human-Computer Interaction with Mobile Devices and Services -MobileHCI &apos;16</title>
+				<meeting>the International Conference on Human-Computer Interaction with Mobile Devices and Services -MobileHCI &apos;16</meeting>
+		<imprint>
+			<date type="published" when="2016">2016</date>
+			<biblScope unit="page" from="387" to="393" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b39">
+	<analytic>
+		<title level="a" type="main">Social media use in pre-trip planning by tourists visiting a small regional leisure destination</title>
+		<author>
+			<persName><forename type="first">Anja</forename><surname>Pabel</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Bruce</forename><surname>Prideaux</surname></persName>
+		</author>
+		<idno type="DOI">10.1177/1356766715618998</idno>
+		<ptr target="https://doi.org/10.1177/1356766715618998" />
+	</analytic>
+	<monogr>
+		<title level="j">Journal of Vacation</title>
+		<imprint>
+			<biblScope unit="volume">22</biblScope>
+			<biblScope unit="page" from="335" to="348" />
+			<date type="published" when="2016">2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b40">
+	<monogr>
+		<title level="m" type="main">Tourist behaviour: Themes and conceptual schemes</title>
+		<author>
+			<persName><forename type="first">P</forename><forename type="middle">L</forename><surname>Pearce</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2005">2005</date>
+			<publisher>Channel View Publications</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b41">
+	<analytic>
+		<title level="a" type="main">Next place in unfamiliar places considering contextual factors</title>
+		<author>
+			<persName><forename type="first">Takashi</forename><surname>Nicholas Maeda</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kota</forename><surname>Tsubouchi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Fujio</forename><surname>Toriumi</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3139958.3139970</idno>
+		<ptr target="https://doi.org/10.1145/3139958.3139970" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 25th ACM SIGSPATIAL International Conference on Advances in Geographic Information Systems -SIGSPATIAL&apos;17</title>
+				<meeting>the 25th ACM SIGSPATIAL International Conference on Advances in Geographic Information Systems -SIGSPATIAL&apos;17</meeting>
+		<imprint>
+			<date type="published" when="2017">2017</date>
+			<biblScope unit="page" from="1" to="4" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b42">
+	<analytic>
+		<title level="a" type="main">Chatty, Happy, and Smelly Maps</title>
+		<author>
+			<persName><forename type="first">Daniele</forename><surname>Quercia</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2740908.2741717</idno>
+		<ptr target="https://doi.org/10.1145/2740908.2741717" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 24th International Conference on World Wide Web -WWW &apos;15 Companion</title>
+				<meeting>the 24th International Conference on World Wide Web -WWW &apos;15 Companion</meeting>
+		<imprint>
+			<date type="published" when="2015">2015</date>
+			<biblScope unit="page" from="741" to="741" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b43">
+	<monogr>
+		<title level="m" type="main">The heart of elastic stack</title>
+		<author>
+			<persName><surname>Reactjs</surname></persName>
+		</author>
+		<ptr target="https://reactjs.org&gt;" />
+		<imprint>
+			<date type="published" when="2013-08-10">2013. August 10</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b44">
+	<monogr>
+		<title level="m" type="main">React Hooks</title>
+		<ptr target="https://reactjs.org/docs/hooks-intro.html&gt;" />
+		<imprint>
+			<date type="published" when="2018-08-10">2018. August 10</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b45">
+	<analytic>
+		<title level="a" type="main">Factorization Machines</title>
+		<author>
+			<persName><forename type="first">S</forename><surname>Rendle</surname></persName>
+		</author>
+		<idno type="DOI">10.1109/ICDM.2010.127</idno>
+	</analytic>
+	<monogr>
+		<title level="m">2010 IEEE International Conference on Data Mining</title>
+				<meeting><address><addrLine>Sydney, NSW, Australia</addrLine></address></meeting>
+		<imprint>
+			<date type="published" when="2010">2010</date>
+			<biblScope unit="page" from="995" to="1000" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b46">
+	<monogr>
+		<title level="m" type="main">Introduction to Recommender Systems Handbook</title>
+		<author>
+			<persName><forename type="first">Francesco</forename><surname>Ricci</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Lior</forename><surname>Rokach</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Bracha</forename><surname>Shapira</surname></persName>
+		</author>
+		<idno type="DOI">10.1007/978-0-387-85820-3_1</idno>
+		<ptr target="https://doi.org/10.1007/978-0-387-85820-3_1" />
+		<editor>Recommender Systems Handbook, Francesco Ricci, Lior Rokach, Bracha Shapira and Paul B. Kantor</editor>
+		<imprint>
+			<date type="published" when="2011">2011</date>
+			<publisher>Springer US</publisher>
+			<biblScope unit="page" from="1" to="35" />
+			<pubPlace>Boston, MA</pubPlace>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b47">
+	<analytic>
+		<title level="a" type="main">Situation awareness for recommender systems</title>
+		<author>
+			<persName><forename type="first">Christian</forename><surname>Richthammer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Gunther</forename><surname>¨pernul</surname></persName>
+		</author>
+		<idno type="DOI">10.1007/s10660-018-9321-z</idno>
+		<ptr target="https://doi.org/10.1007/s10660-018-9321-z" />
+	</analytic>
+	<monogr>
+		<title level="j">Electronic Commerce Research</title>
+		<imprint>
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b48">
+	<monogr>
+		<title level="m" type="main">A mobile personalized tourist guide and its user evaluation. Information Technology &amp; Tourism</title>
+		<author>
+			<persName><forename type="first">Ernesto</forename><surname>Tarantino</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ivanoe</forename><surname>Falco</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">U</forename><surname>Scafuri</surname></persName>
+		</author>
+		<idno type="DOI">10.1007/s40558-019-00150-5</idno>
+		<imprint>
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b49">
+	<analytic>
+		<title level="a" type="main">Understanding the importance of location, time, and people in mobile local search behavior</title>
+		<author>
+			<persName><forename type="first">Jaime</forename><surname>Teevan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Amy</forename><surname>Karlson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Shahriyar</forename><surname>Amini</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">J</forename><surname>Bernheim Brush</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">John</forename><surname>Krumm</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2037373.2037386</idno>
+		<idno>DOI:https:</idno>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 13th International Conference on Human Computer Interaction with Mobile Devices and Services (MobileHCI &apos;11)</title>
+				<meeting>the 13th International Conference on Human Computer Interaction with Mobile Devices and Services (MobileHCI &apos;11)<address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computing Machinery</publisher>
+			<date type="published" when="2011">2011</date>
+			<biblScope unit="page" from="77" to="80" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b50">
+	<monogr>
+		<title level="m" type="main">Emerging Perspectives on the Design, Use, and Evaluation of Mobile and Handheld Devices</title>
+		<author>
+			<persName><forename type="first">Tomi</forename><surname>Heimonen</surname></persName>
+		</author>
+		<idno type="DOI">10.4018/978-1-4666-8583-3.ch004</idno>
+		<imprint>
+			<date type="published" when="2015-08-22">2015. Web. 22 Aug. 2019</date>
+			<publisher>IGI Global</publisher>
+			<biblScope unit="page" from="75" to="104" />
+		</imprint>
+	</monogr>
+	<note>Category-Based Interfaces for Mobile Search</note>
+</biblStruct>
+
+<biblStruct xml:id="b51">
+	<monogr>
+		<title level="m" type="main">Bridging From Ethics to Practice Communicaof the ACM</title>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">I</forename><surname>Shneiderman Responsible</surname></persName>
+		</author>
+		<idno type="DOI">32-3510.1145/3445973</idno>
+		<imprint>
+			<date type="published" when="2021-08">August 2021</date>
+			<biblScope unit="volume">64</biblScope>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b52">
+	<analytic>
+		<title level="a" type="main">Human-Centered Artificial Intelligence: Reliable, Safe &amp; Trustworthy</title>
+		<author>
+			<persName><forename type="first">Ben</forename><surname>Shneiderman</surname></persName>
+		</author>
+		<idno type="DOI">10.1080/10447318.2020.1741118</idno>
+	</analytic>
+	<monogr>
+		<title level="j">International Journal of Human-Computer Interaction</title>
+		<imprint>
+			<biblScope unit="volume">36</biblScope>
+			<biblScope unit="issue">6</biblScope>
+			<biblScope unit="page" from="495" to="504" />
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b53">
+	<analytic>
+		<title level="a" type="main">Sharing tourism experiences in social media: A literature review and a set of suggested business strategies</title>
+		<author>
+			<persName><forename type="first">D</forename><surname>Marios</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Sotiriadis</surname></persName>
+		</author>
+		<idno type="DOI">10.1108/IJCHM-05-2016-0300</idno>
+		<ptr target="https://doi.org/10.1108/IJCHM-05-2016-0300" />
+	</analytic>
+	<monogr>
+		<title level="j">International Journal of Contemporary Hospitality Management</title>
+		<imprint>
+			<biblScope unit="volume">29</biblScope>
+			<biblScope unit="page" from="179" to="225" />
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b54">
+	<analytic>
+		<title level="a" type="main">Toward harnessing user feedback for machine learning</title>
+		<author>
+			<persName><forename type="first">Simone</forename><surname>Stumpf</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Vidya</forename><surname>Rajaram</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Lida</forename><surname>Li</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Margaret</forename><surname>Burnett</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Thomas</forename><surname>Dietterich</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Russell</forename><surname>Sullivan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jonathan</forename><surname>Drummond</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Herlocker</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/1216295.1216316</idno>
+		<ptr target="https://doi.org/10.1145/" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 12th international conference on Intelligent user interfaces -IUI &apos;07</title>
+				<meeting>the 12th international conference on Intelligent user interfaces -IUI &apos;07</meeting>
+		<imprint>
+			<date type="published" when="2007">2007</date>
+			<biblScope unit="volume">82</biblScope>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b55">
+	<analytic>
+		<title level="a" type="main">Integrating rich user feedback into intelligent user interfaces</title>
+		<author>
+			<persName><forename type="first">Simone</forename><surname>Stumpf</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Erin</forename><surname>Sullivan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Erin</forename><surname>Fitzhenry</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ian</forename><surname>Oberst</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Weng-Keen</forename><surname>Wong</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Margaret</forename><surname>Burnett</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/1378773.137878</idno>
+		<ptr target="https://doi.org/10.1145/1378773.137878" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 13th international conference on Intelligent user interfaces -IUI &apos;08, 50</title>
+				<meeting>the 13th international conference on Intelligent user interfaces -IUI &apos;08, 50</meeting>
+		<imprint>
+			<date type="published" when="2008">2008</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b56">
+	<analytic>
+		<title level="a" type="main">Addressing the of Situationally-Induced Impairments and Disabilities in Mobile Interaction</title>
+		<author>
+			<persName><forename type="first">W</forename><surname>Garreth</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Zhanna</forename><surname>Tigwell</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Benjamin</forename><forename type="middle">M</forename><surname>Sarsenbayeva</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">David</forename><forename type="middle">R</forename><surname>Gorman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jorge</forename><surname>Flatla</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yeliz</forename><surname>Goncalves</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jacob</forename><forename type="middle">O</forename><surname>Yesilada</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Wobbrock</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3290607.3299029</idno>
+		<ptr target="https://doi.org/10.1145/3290607.3299029" />
+	</analytic>
+	<monogr>
+		<title level="m">Extended Abstracts of the 2019 CHI Conference on Human Factors in Computing Systems -CHI EA &apos;19</title>
+				<imprint>
+			<date type="published" when="2019">2019</date>
+			<biblScope unit="page" from="1" to="8" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b57">
+	<analytic>
+		<title level="a" type="main">A Point-of-Interest Recommender System Based on Factorization Machines</title>
+		<author>
+			<persName><forename type="first">Long-Fei Tu &amp; Dong</forename><surname>Wang</surname></persName>
+		</author>
+		<idno type="DOI">10.12783/dtcse/wcne2017/19891</idno>
+		<ptr target="10.12783/dtcse/wcne2017/19891" />
+	</analytic>
+	<monogr>
+		<title level="j">DEStech Transactions on Computer Science and Engineering</title>
+		<imprint>
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b58">
+	<analytic>
+		<title level="a" type="main">Phases of Urban Tourists&apos; Exploratory Navigation: A Field Study</title>
+		<author>
+			<persName><forename type="first">Tuomas</forename><surname>Vaittinen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">David</forename><surname>Mcgookin</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2016 ACM Conference Designing Interactive Systems (DIS &apos;16)</title>
+				<meeting>the 2016 ACM Conference Designing Interactive Systems (DIS &apos;16)<address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>ACM</publisher>
+			<date type="published" when="2016">2016</date>
+			<biblScope unit="page" from="1111" to="1122" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b59">
+	<monogr>
+		<title/>
+		<idno type="DOI">10.1145/2901790.2901795</idno>
+		<ptr target="https://doi.org/10.1145/2901790.2901795" />
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b60">
+	<analytic>
+		<title level="a" type="main">Uncover: supporting city exploration with egocentric visualizations of location-based content</title>
+		<author>
+			<persName><forename type="first">David</forename><surname>Vaittinen</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Mcgookin</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Personal Ubiquitous Comput</title>
+		<imprint>
+			<biblScope unit="volume">22</biblScope>
+			<biblScope unit="issue">4</biblScope>
+			<biblScope unit="page" from="807" to="824" />
+			<date type="published" when="2018-08">2018. August 2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b61">
+	<analytic>
+		<title level="a" type="main">Ageing Clouds: Novel yet Natural Support for Urban Exploration</title>
+		<author>
+			<persName><forename type="first">Sruthi</forename><surname>Viswanathan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Cecile</forename><surname>Boulard</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Antonietta</forename><forename type="middle">Maria</forename><surname>Grasso</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3301019.3323885</idno>
+		<ptr target="https://doi.org/10.1145/3301019.3323885" />
+	</analytic>
+	<monogr>
+		<title level="m">Companion Publication of the 2019 on Designing Interactive Systems Conference 2019 Companion -DIS &apos;19 Companion</title>
+				<imprint>
+			<date type="published" when="2019">2019</date>
+			<biblScope unit="page" from="313" to="317" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b62">
+	<analytic>
+		<title level="a" type="main">Designing Ambient Wanderer: Mobile Recommendations for Urban Exploration</title>
+		<author>
+			<persName><forename type="first">Sruthi</forename><surname>Viswanathan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Behrooz</forename><surname>Omidvar-Tehrani</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Adrien</forename><surname>Bruyat</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Frédéric</forename><surname>Roulland</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Antonietta</forename><forename type="middle">Maria</forename><surname>Grasso</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3357236.3395518</idno>
+		<ptr target="https://doi.org/10.1145/3357236.3395518" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2020 ACM Designing Interactive Systems Conference (DIS &apos;20)</title>
+				<meeting>the 2020 ACM Designing Interactive Systems Conference (DIS &apos;20)<address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computing Machinery</publisher>
+			<date type="published" when="2020">2020</date>
+			<biblScope unit="page" from="1405" to="1418" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b63">
+	<analytic>
+		<title level="a" type="main">What is Your Current Mindset?: Categories for a satisficing exploration of mobile point-of-interest recommendations</title>
+		<author>
+			<persName><forename type="first">Sruthi</forename><surname>Viswanathan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Behrooz</forename><surname>Omdivar-Tehrani</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jean-Michel</forename><surname>Renders</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3491102.3501912</idno>
+		<ptr target="https://doi.org/10.1145/3491102.3501912" />
+	</analytic>
+	<monogr>
+		<title level="m">InCHI Conference on Human Factors in Computing Systems (CHI&apos;22)</title>
+				<meeting><address><addrLine>New Orleans, LA, USA; New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>ACM</publisher>
+			<date type="published" when="2022-04-29">2022. April 29-May 5, 2022</date>
+			<biblScope unit="volume">27</biblScope>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b64">
+	<analytic>
+		<title level="a" type="main">Smartphone Use in Everyday Life and Travel</title>
+		<author>
+			<persName><forename type="first">Dan</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Zheng</forename><surname>Xiang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Daniel</forename><forename type="middle">R</forename></persName>
+		</author>
+		<idno type="DOI">10.1177/0047287514535847</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Journal of Travel Research</title>
+		<imprint>
+			<biblScope unit="volume">55</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page" from="52" to="63" />
+			<date type="published" when="2016">2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b65">
+	<analytic>
+		<title level="a" type="main">Human mobility, social ties, and link prediction</title>
+		<author>
+			<persName><forename type="first">Dashun</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Dino</forename><surname>Pedreschi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Chaoming</forename><surname>Song</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Fosca</forename><surname>Giannotti</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Albert-Barabasi</forename></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 17th ACM SIGKDD international conference on Knowledge discovery and data mining</title>
+				<meeting>the 17th ACM SIGKDD international conference on Knowledge discovery and data mining</meeting>
+		<imprint>
+			<date type="published" when="2011">2011</date>
+			<biblScope unit="page" from="1100" to="1108" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b66">
+	<analytic>
+		<title level="a" type="main">Indoor-Detection Using a Smart Phone Sensor</title>
+		<author>
+			<persName><forename type="first">Qiang</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Qun</forename><surname>Chang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Zesen</forename><surname>Li</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Wei</forename><surname>Shi</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Chen</surname></persName>
+		</author>
+		<idno type="DOI">10.3390/s16101563</idno>
+		<ptr target="https://doi.org/10.3390/s16101563" />
+	</analytic>
+	<monogr>
+		<title level="j">Sensors</title>
+		<imprint>
+			<biblScope unit="volume">16</biblScope>
+			<biblScope unit="page">1563</biblScope>
+			<date type="published" when="2016">2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b67">
+	<analytic>
+		<title level="a" type="main">Aurigo: An Interactive Tour Planner for Personalized Itineraries</title>
+		<author>
+			<persName><forename type="first">Alexandre</forename><surname>Yahi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Antoine</forename><surname>Chassang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Louis</forename><surname>Raynaud</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Hugo</forename><surname>Duthil</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Duen</forename><surname>Horng</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2678025.2701366</idno>
+		<ptr target="https://doi.org/10.1145/2678025.2701366" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 20th International Conference on Intelligent Interfaces -IUI &apos;15</title>
+				<meeting>the 20th International Conference on Intelligent Interfaces -IUI &apos;15</meeting>
+		<imprint>
+			<date type="published" when="2015">2015</date>
+			<biblScope unit="page" from="275" to="285" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b68">
+	<analytic>
+		<title level="a" type="main">Planning Adaptive Mobile Experiences When Wireframing</title>
+		<author>
+			<persName><forename type="first">Qian</forename><surname>Yang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">John</forename><surname>Zimmerman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Aaron</forename><surname>Steinfeld</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Anthony</forename><surname>Tomasic</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2016 ACM Conference on Designing Interactive Systems -DIS &apos;16</title>
+				<meeting>the 2016 ACM Conference on Designing Interactive Systems -DIS &apos;16</meeting>
+		<imprint>
+			<date type="published" when="2016">2016</date>
+			<biblScope unit="page" from="565" to="576" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b69">
+	<analytic>
+		<title level="a" type="main">Exploiting geographical influence for collaborative POI recommendation</title>
+		<author>
+			<persName><forename type="first">Mao</forename><surname>Ye</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Peifeng</forename><surname>Yin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Wang-Chien</forename><surname>Lee</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Dik-Lun</forename><surname>Lee</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2009916.2009962</idno>
+		<ptr target="https://doi.org/10.1145/2009916.2009962" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 34th international ACM SIGIR conference on Research and development in Information -SIGIR &apos;11</title>
+				<meeting>the 34th international ACM SIGIR conference on Research and development in Information -SIGIR &apos;11</meeting>
+		<imprint>
+			<date type="published" when="2011">2011</date>
+			<biblScope unit="page">325</biblScope>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b70">
+	<monogr>
+		<title level="m" type="main">A Survey of POI Recommendation in Location-Based Social Networks</title>
+		<author>
+			<persName><forename type="first">Yonghong</forename><surname>Yu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Xingguo</forename><surname>Chen</surname></persName>
+		</author>
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b71">
+	<analytic>
+		<title level="a" type="main">Home and away: Tourists in a Connected World</title>
+		<author>
+			<persName><forename type="first">Api</forename><surname>Websocket</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Peter</surname></persName>
+		</author>
+		<author>
+			<persName><surname>White</surname></persName>
+		</author>
+		<idno type="DOI">10.1016/j.annals.2006.07.001</idno>
+		<ptr target="https://doi.org/10.1016/j.annals.2006.07.001" />
+	</analytic>
+	<monogr>
+		<title level="j">Annals of Tourism Research</title>
+		<idno type="ISSN">0160- 7383</idno>
+		<imprint>
+			<biblScope unit="volume">34</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page" from="88" to="104" />
+			<date type="published" when="2007">2011. August 10, 2021. 2007</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b72">
+	<monogr>
+		<title level="m" type="main">World Health Organisation. Coronavirus disease (COVID-19) pandemic</title>
+		<ptr target="https://www.who.int/emergencies/diseases/novel-coronavirus-2019&gt;" />
+		<imprint>
+			<date type="published" when="2020-08-10">2020. August 10, 2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b73">
+	<monogr>
+		<title level="m" type="main">Zoom Video Communications</title>
+		<ptr target="https://zoom.us&gt;" />
+		<imprint>
+			<date type="published" when="2011-08-10">2011. August 10, 2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+				</listBibl>
+			</div>
+		</back>
+	</text>
+</TEI>

@@ -1,0 +1,1340 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xml:space="preserve" xmlns="http://www.tei-c.org/ns/1.0" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.com/kermitt2/grobid/master/grobid-home/schemas/xsd/Grobid.xsd"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+	<teiHeader xml:lang="en">
+		<fileDesc>
+			<titleStmt>
+				<title level="a" type="main">How can Explainability Methods be Used to Support Bug Identification in Computer Vision Models?</title>
+			</titleStmt>
+			<publicationStmt>
+				<publisher/>
+				<availability status="unknown"><licence/></availability>
+			</publicationStmt>
+			<sourceDesc>
+				<biblStruct>
+					<analytic>
+						<author>
+							<persName><forename type="first">Agathe</forename><surname>Balayn</surname></persName>
+							<email>a.m.a.balayn@tudelft.nl</email>
+						</author>
+						<author>
+							<persName><forename type="first">Natasa</forename><surname>Rikalo</surname></persName>
+							<email>natasa.rikalo@gmail.com</email>
+						</author>
+						<author>
+							<persName><forename type="first">Christoph</forename><surname>Lof</surname></persName>
+							<email>c.lof@tudelft.nl</email>
+						</author>
+						<author>
+							<persName><forename type="first">Jie</forename><surname>Yang</surname></persName>
+							<email>j.yang-3@tudelft.nl</email>
+						</author>
+						<author>
+							<persName><forename type="first">Alessandro</forename><surname>Bozzon</surname></persName>
+							<email>a.bozzon@tudelft.nl</email>
+						</author>
+						<author>
+							<affiliation key="aff0">
+								<orgName type="institution">Delft University of Technology Delft University of Technology Delft University of Technology</orgName>
+								<address>
+									<country>Netherlands Netherlands Netherlands</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<affiliation key="aff1">
+								<orgName type="institution">Delft University of Technology</orgName>
+								<address>
+									<country key="NL">Netherlands</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<affiliation key="aff2">
+								<orgName type="institution">Delft University of Technology</orgName>
+								<address>
+									<country key="NL">Netherlands</country>
+								</address>
+							</affiliation>
+						</author>
+						<title level="a" type="main">How can Explainability Methods be Used to Support Bug Identification in Computer Vision Models?</title>
+					</analytic>
+					<monogr>
+						<imprint>
+							<date/>
+						</imprint>
+					</monogr>
+					<idno type="DOI">10.1145/3491102.3517474</idno>
+				</biblStruct>
+			</sourceDesc>
+		</fileDesc>
+		<encodingDesc>
+			<appInfo>
+				<application version="0.7.1" ident="GROBID" when="2022-07-22T05:06+0000">
+					<desc>GROBID - A machine learning software for extracting information from scholarly documents</desc>
+					<ref target="https://github.com/kermitt2/grobid"/>
+				</application>
+			</appInfo>
+		</encodingDesc>
+		<profileDesc>
+			<textClass>
+				<keywords>
+					<term>computer vision</term>
+					<term>machine learning model debugging</term>
+					<term>machine learning explainability</term>
+					<term>user interface</term>
+				</keywords>
+			</textClass>
+			<abstract>
+<div xmlns="http://www.tei-c.org/ns/1.0"><p>Deep learning models for image classifcation sufer from dangerous issues often discovered after deployment. The process of identifying bugs that cause these issues remains limited and understudied. Especially, explainability methods are often presented as obvious tools for bug identifcation. Yet, the current practice lacks an understanding of what kind of explanations can best support the diferent steps of the bug identifcation process, and how practitioners could interact with those explanations. Through a formative study and an iterative co-creation process, we build an interactive design probe providing various potentially relevant explainability functionalities, integrated into interfaces that allow for fexible workfows. Using the probe, we perform 18 user-studies with a diverse set of machine learning practitioners. Two-thirds of the practitioners engage in successful bug identifcation. They use multiple types of explanations, e.g. visual and textual ones, through non-standardized sequences of interactions including queries and exploration. Our results highlight the need for interactive, guiding, interfaces with diverse explanations, shedding light on future research directions.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>CCS CONCEPTS</head><p>• Human-centered computing → User interface programming; Empirical studies in HCI ; • Computing methodologies → Computer vision; • Software and its engineering → Software testing and debugging.</p></div>
+			</abstract>
+		</profileDesc>
+	</teiHeader>
+	<text xml:lang="en">
+		<body>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="1">INTRODUCTION</head><p>Safely using deep learning models still proves challenging for many computer vision applications. Models sufer from spurious correlations, brittleness, or overftting, producing erroneous predictions and safety risks 1 or societal harms <ref type="bibr" target="#b25">[26]</ref>. The fact that these issues are often discovered only after deployment illustrates the existence of challenges in the practice of identifying and mitigating bugs in the models early. Yet, limited efort has been devoted to investigating the debugging practices of computer vision practitioners. The machine learning community develops various explainability methods, often arguing their usefulness for model bugs identifcation <ref type="bibr" target="#b7">[8,</ref><ref type="bibr" target="#b13">14,</ref><ref type="bibr" target="#b26">27,</ref><ref type="bibr" target="#b40">40,</ref><ref type="bibr" target="#b47">47]</ref>. However, few studies investigate their concrete uses in this process. As a result, it is still unclear what types of explanations (e.g. out-of-domain, global, or interactive <ref type="bibr" target="#b46">[46]</ref>) can be useful, for which steps of the process, and how.</p><p>In this work, we ask: how could diverse explainability methods be used to support the bug identifcation process of deep learning computer vision models? We focus on image classifcation tasks, as they are prone to model misbehavior, and there is an established body of (post-hoc) explainability methods to possibly support bug identifcation. Their practical use has not been studied yet, contrary to the ones for tasks that rely on tabular data <ref type="bibr" target="#b19">[20]</ref>. We study the identifcation of model failures and bugs in development; later steps like bug identifcation in deployment and bug correction are future work. We draw inspiration from works situated at the intersection of machine learning and HCI that investigate how machine learning or related tools (e.g. explainability, debugging user-interfaces, etc.) are used <ref type="bibr" target="#b35">[35]</ref>, or could be used <ref type="bibr" target="#b19">[20]</ref>, and how to design them <ref type="bibr" target="#b3">[4,</ref><ref type="bibr" target="#b52">52]</ref>. We build a design probe 2 in the shape of a user-interface by performing literature studies, a formative study, and co-creation sessions consisting of 18 interviews, to explore uses of explainability for debugging. Using an implemented probe and a carefully-crafted use-case, we then perform 18 user-studies with machine learning practitioners having diferent levels of experience with computer vision in various domains.</p><p>The user-studies show that a wide range of explanations are useful to identify bugs (e.g. both textual and visual explanations, global and local, companion with domain knowledge, etc.). These explanations are often not theory-heavy, but extremely informative when embedded into an interactive interface. Although they can sometimes be overwhelming and misinterpreted (leading to identify wrong bugs due to confrmation bias), these explanations also allow to identify the potential causes of various issues, and to envision correction strategies. This reveals an urgent need for more research on the design of new explanations relying on diverse user-interactions adapted to diferent kinds of practitioners.</p><p>The paper is organised as follows: we introduce related works in section 2, the probe and its rationale in sections 3, 4. We outline the user-study setup in section 5, and its results in section 6. We discuss implications in section 7, and conclude in section 8.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2">RELATED WORKS 2.1 Bug identifcation in software and machine learning models</head><p>To understand what bug identifcation means, we survey literature about machine learning testing (frst step of the debugging process) and traditional software systems where bug identifcation is more extensively studied.</p><p>Failures. Machine learning testing aims at detecting and characterizing diferences between current and expected functioning of a model <ref type="bibr" target="#b54">[54]</ref>. These diferences revolve around inferences (e.g. correctness, robustness, fairness, etc.), data, or code <ref type="bibr" target="#b10">[11,</ref><ref type="bibr" target="#b38">38]</ref>. Main causes of failures are structural or training bugs <ref type="bibr" target="#b34">[34]</ref>. Our formative study reveals sub-types of training bugs around datasets or training hyperparameters. We mainly focus on correctness failures (wrong model inferences or features) and dataset bugs, especially in relation to issues in the model features, as these are still overlooked research-wise despite being the primary debugging goal of practitioners and directly related to explainability methods. Software engineering distinguishes between reactive debugging (a failure is explicitly identifed) <ref type="bibr" target="#b4">[5,</ref><ref type="bibr" target="#b15">16]</ref>; proactive debugging (no explicit failure manifests); and general software understanding (for later debugging) <ref type="bibr" target="#b27">[28,</ref><ref type="bibr" target="#b50">50]</ref>, that we all study.</p><p>Methods. The software debugging workfow consists of four steps <ref type="bibr" target="#b4">[5,</ref><ref type="bibr" target="#b27">28,</ref><ref type="bibr" target="#b50">50]</ref>: 1) gathering context and hypothesis formulation, 2) instrumenting the hypothesis, 3) testing the hypothesis, 4) correcting the hypothesis, or applying a bug solution. To the best of our knowledge, there is no study of the bug identifcation practices for computer vision models. Instead, research focuses on developing methods for debugging models <ref type="bibr" target="#b23">[24,</ref><ref type="bibr" target="#b33">33,</ref><ref type="bibr" target="#b34">34,</ref><ref type="bibr" target="#b54">54]</ref> without any human activity or explainability (except <ref type="bibr" target="#b44">[44]</ref>). As our formative study shows that none of the automatic methods is employed by practitioners, we investigate how practitioners could perform manual bug identifcation supported by explainability.</p><p>User interfaces. A few user interfaces <ref type="bibr" target="#b39">[39,</ref><ref type="bibr" target="#b51">51,</ref><ref type="bibr" target="#b53">53]</ref> support developers in debugging models. None of the ones that make use of explainability methods are adapted to computer vision. The applicable ones all focus on investigating the choice of model and training hyperparameters <ref type="bibr" target="#b41">[41,</ref><ref type="bibr" target="#b42">42]</ref>, or visualising the data used to train the model <ref type="bibr" target="#b2">[3]</ref>. Our design probe instead presents diverse explanation artifacts designed for computer vision models.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.2">Machine learning explainability</head><p>Explainability provides explanations on the functioning of a model. A framework <ref type="bibr" target="#b47">[47]</ref> characterizing explainability works identifes model debugging as one of their purposes, and the following tasks developers might perform, e.g. "assessing reliability of a prediction", "detecting arbitrary behavior", etc, that our study also identifes.</p><p>Categorization. Explainability methods and resulting explanations can be categorized in various ways <ref type="bibr" target="#b5">[6,</ref><ref type="bibr" target="#b30">30,</ref><ref type="bibr" target="#b31">31,</ref><ref type="bibr" target="#b46">46]</ref>. One might want to diferentiate them regarding the explanation audience, the explanatory medium, the explanation scope, whether the explanations are about data or models, their faithfulness, etc. Algorithmic research distinguishes between local or global explanations, depending on the scope of data samples employed. Local explanations provide information on the reasoning a model follows to infer the label of a sample, through saliency maps <ref type="bibr" target="#b43">[43]</ref>, visual counterfactuals <ref type="bibr" target="#b14">[15]</ref>, or visualisations of activation layers <ref type="bibr" target="#b20">[21,</ref><ref type="bibr" target="#b36">36]</ref>. Global explanations indicate the general features used by a model, presented as visual hints (e.g. TCAV <ref type="bibr" target="#b26">[27]</ref>, ACE <ref type="bibr" target="#b13">[14]</ref>), or textual information (e.g. SECA <ref type="bibr" target="#b7">[8]</ref>). We use these categorizations to identify the explanations relevant to include in our probe.</p><p>Usages. Researchers have conducted user-studies on the use of certain explanations for certain stakeholders and data types <ref type="bibr" target="#b1">[2,</ref><ref type="bibr" target="#b11">12,</ref><ref type="bibr" target="#b12">13,</ref><ref type="bibr" target="#b22">23,</ref><ref type="bibr" target="#b24">25,</ref><ref type="bibr" target="#b52">52</ref>]. Yet, no extensive work involves developers debugging computer vision models. Only Bhatt et al. <ref type="bibr" target="#b9">[10]</ref> conducted inquiry interviews where developers solely reported using saliency maps to understand wrong inferences, or to identify spurious features, and none mentioned other explainability methods. Our work performs a human-grounded exploration where we collect developers' practices based on carefully-crafted debugging tasks.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3">PROBE DESIGN PROCESS</head><p>The goal of our probe is to explore potential uses of explainability methods for bug identifcation. Design probes have three fnegrained goals <ref type="bibr" target="#b21">[22]</ref>: "social science goal of collecting information about the use and the users of the technology in a real world setting, engineering goal of feld-testing the technology, and design goal of inspiring users and designers to think of new kinds of technology to support their needs". Table <ref type="table">1</ref> describes the requirements for our probe.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Index Requirement Description</head></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Rq1</head><p>Completeness of The probe should present the main information a functionalities for developer might look at when debugging. bug identifcation Rq2</p><p>Completeness of The probe should ofer the main available types explanations of explanations for computer vision models.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Rq3</head><p>Clarity of the pre-To proceed to valid user-studies, the participants sented information should understand clearly the functionalities presented to them, without being overwhelmed by the ofered information.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Rq4</head><p>Flexibility and The probe should not enforce a certain workfow objective pre-within the tool not to skew participants' behaviors sentation of the towards certain explanations, but instead make information the interactions as free as possible.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Rq5</head><p>Engineering feasi-The probe should be fully functional to exploit bility the explanations of an actual model, and to let participants make use of the technology.</p><p>Table <ref type="table">1</ref>: List of requirements defned for the probe.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.1">Mixed method research</head><p>To translate our requirements into a probe, we establish functionalities (Fx) to provide, and orthogonal categories (Ox) that indicate how these functionalities can be realized. Academic and grey literature analyses inform the list of explanations the probe should contain (Rq2). However, it does not focus on practitioners' experiences, and thus does not inform on other information needed to identify bugs (Rq1). Consequently, we perform a formative study in the shape of 18 semi-structured interviews with practitioners where we investigate their practices, challenges, and wishes. We synthesize the literature and the insights from the study to extract the functionalities (Fx) and orthogonal categories (Ox) (Table <ref type="table">2</ref>). Finally, we perform iterative co-creation sessions where we present designs of the probe to practitioners, and collect feedback to fne-tune information visualisations, and identify the minimum set of necessary interactions with these functionalities (Rq3, Rq4). The probe is then implemented so as to create a valuable user-experience (Rq5).</p><p>Concretely, in the formative study and co-creation sessions, we present to the participants a use-case involving the development of a deep learning model for a scene classifcation task. We describe an initial model that has been (hypothetically) built, and show example of images from the training dataset with their ground truth and model inferences. We make sure these examples present both cases where the model makes right and wrong inferences, using relevant and irrelevant features (same approach as in section 5). For the formative study, we then ask the participants to describe the approach they would follow to defne whether this model is ready for deployment, and if not, to characterize what the exact model failures to solve are. We analyse the results of such sessions by extracting intermediate goals (in the shape of questions in Table <ref type="table">2</ref>) the participants have while investigating the model, and types of information and tools they use to fulfll these. For the co-creation sessions, we ask the same questions. Yet, we additionally present the participants with mock-up user interfaces containing various types of explanations, and prompt them to envision how they would use such interfaces to answer the questions. We also ask them for feedback on the interfaces (e.g. missing, irrelevant, or unclear functionalities), and we iterate on the interfaces after each interview, going initially from low-fdelity mockups, to high-fdelity ones in the last interviews.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.2">Probe functionalities</head><p>We elicited the functionalities below needed for the probe. We illustrate them with the scenario of the user-studies (section 5): building a model that classifes the species of a bird displayed in an image. Importantly, our participants often referred to semantic concepts in relation to relevant sample pixels or potential humaninterpretable model features, to reason about potential failures and bugs. These concepts were either entities (e.g. cactus), attributes (e.g. green), entity-attribute combinations (e.g. green-cactus), or their logical negation (e.g. NOT cactus, i.e. absence of cactus).</p><p>• F1: performance understanding: Understand overall and class-specifc performance of the model. Looking at metrics gives a frst indication of the performance of the model, and the type of errors to investigate. Participants use the class-specifc metrics to decide for which types of samples to improve the model frst.</p><p>• F2: data-neighbor exploration: Understand and compare the content of data samples. Participants regularly explore the data to estimate the complexity of the task, to reason about causes for model failures, and identify features of the model. F1 and F2 can be supported with information about performance metrics and datasets, without explanations. • F3: local explanations: Understand how the model made an inference for a sample. Participants scrutinize or wish to scrutinize saliency maps, to detect overftting, or to judge the relevance of model features. This can be facilitated with explanations of single samples that show the connection between the sample content and its label (e.g. the model classifed this image as gila woodpecker by looking at the pixels of the cactus the bird is standing on Figure <ref type="figure">4</ref>). • F4: global explanations: Identify the main reasons for the model to classify samples into this class. Participants progressively achieve a global understanding of the model by formulating a hypothesis based on a single sample, and iterate on it by evaluating its validity across more samples. Some participants wished to have statistical summaries of visual concepts across images (e.g. for 80% images classifed as gila woodpecker, the model looked at pixels representing a cactus) to speedup their process and improve its results. For that, some participants suggested using crowdsourcing or object detectors to annotate images at scale (similarly to what the SECA method ofers <ref type="bibr" target="#b7">[8]</ref>). • F5: explanation comparison: Compare the reasoning of the model across samples or classes. Comparisons serve to judge the validity of feature hypotheses, and to understand misclassifcations (e.g. the model classifed this gila woodpecker image correctly using the cactus pixels, but that one incorrectly using the wings). • F6: explanation importance: Rank the explanations based on their frequency, or on the type of (in)correct inferences they lead to. A few participants mentioned that it would be convenient to automatically obtain a list of the most important features for the model. We foresee they might want to query and rank explanations according to diferent properties such as explanations that lead to correct or incorrect inferences (e.g. 20% of times when the model used the breast and belly pixels, it made a correct prediction, contrary to 90% for the cactus pixels). • F7: counterfactuals: Ask "what-if" questions to see the type of reasoning and inference class received by a sample with/out these visual concepts. This family of explanation was not directly mentioned as counterfactual, yet a few participants mentioned testing transformations of images based on certain concepts to understand how they impact the inferences (e.g. what would the model predict if there was no cactus in the image?). As setting up such transformations is complex (Rq5), we propose proxy textual-explanation based transformations (subsubsection 4.2.2). • F8: explanation recommendation: Visualise explanations, or search for specifc ones. While participants do not talk about this as they are used to search for local explanations by themselves, being able to query specifc explanations might speed up their process. This is also connected to the complexity of an explanation method. As participants did not know about many explanations, they did not refect further on their complexity. The extent to which an explanation can be generalised <ref type="bibr" target="#b46">[46]</ref>. Table <ref type="table">2</ref>: Summary of observations from the literature and formative study (main questions practitioners ask themselves within the bug identifcation process), and their mapping to the probe functionalities (Fx) and orthogonal categories (Ox).</p><p>Yet, they might want to delve deeper into the parameters of explainability methods once they are more familiar with them. • F9: domain expertise: Know what a domain expert (e.g. an ornithologist) would consider good reasons to classify a sample into a class. This functionality was contentious among participants. A few participants did not use domain knowledge explicitly but still relied on their understanding of the domain to understand potential wrong features of the model, while others advocated for the necessity of understanding the domain even before looking into the model.</p><p>We identify the following orthogonal categories:</p><p>• O1: breadth: While literature refers to local and global explanations as the two scopes of explanations, we see them as the two extremes of a scale. The participants did not always look into a single sample (local) or the overall set of data and inferences (global), but focused on various sets of classes (e.g. two classes or entire dataset), or samples with correct or incorrect inferences. • O2: medium: Participants are more accustomed to image-based explanations. Yet, a few participants insisted on getting textual explanations to more easily receive feedback from domain experts on feature relevance, or to query learned features or images of the training dataset. • O3: granularity/type: Participants typically reasoned about semantic concepts to identify issues with model features. Certain participants varied the granularity of these concepts and went to fne-granularities when they could not identify a pattern of reasoning within higher-granularity ones (e.g. entire wing or sub-parts with diferent colors).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4">RESULTING DESIGN PROBE</head><p>We frst describe the main types of explanations in the probe (F3, F4, O1 -O3), corresponding to the basic required functionalities.</p><p>We then explain how we organized these functionalities into a set of interactive tabs, to fulfll the other functionality requirements (F1, F2, F5 -F9). In our user-study (section 5), practitioners will use the probe to debug a model for the bird classifcation scenario.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.1">Materialisation of the probe explanations</head></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.1.1">Local explanations (F3).</head><p>To vary the medium of explanations (O2), we provide both visual ones (saliency maps Figure <ref type="figure" target="#fig_3">2</ref> (5a)) and textual ones (semantic features (5b)). We opted for SmoothGrad to retrieve the saliency maps <ref type="bibr" target="#b45">[45]</ref>. This method is sensitive to the parameters of a model while minimising noisy results, catering for more accurate capturing of a model behaviour. The semantic features are retrieved as by-products of applying the global explainability method.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.1.2">Global explanations ( F4).</head><p>We choose the SECA framework <ref type="bibr" target="#b7">[8]</ref> to extract explanations that refect the overall features of a model. It provides more complete explanations than ACE <ref type="bibr" target="#b13">[14]</ref>, it is more tractable than TCAV <ref type="bibr" target="#b26">[27]</ref> in an interactive mode (Rq5), and provides textual explanations that participants wished for. SECA takes as input images from each class of the dataset (we choose a balanced, random set of samples of the test dataset). It extracts the corresponding saliency maps and has them annotated by crowd workers. Then, it reconciles the annotations, and transforms information about the model (F1, F2, F9). F8 (recommendation) is provided all along the probe through the various parameters to choose as well as the query tab.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.2.1">Wiki tab (F9</head><p>). This tab displays the domain knowledge about each dataset class, that an expert typically possesses. It indicates relevant and irrelevant features for recognizing an image class.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.2.2">Qery tab (F7</head><p>). This tab (Figure <ref type="figure">1</ref> (1)) allows to query global and local explanations, and images with specifc visual content, their predictions, explanations, and ground truth, allowing to a certain extent to answer what-if questions.</p><p>The user is presented with text felds to fll in with features of interest, types of logical combinations, and/or class. They choose to query explanations within all images, or only in the correctly or incorrectly classifed ones, or within specifc classes (O1). The results are displayed underneath. These can be a) scores of a queried explanation, b) distribution of the presence of the queried features across the dataset, or c) samples associated to the local query. b) is displayed in a confusion matrix-like table (Figure <ref type="figure">1</ref> (2)) that shows, per cell, the percentage of images that have the features among the images of a cell, and the percentage of cell images that have the features among all images that have this feature.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.2.3">Confusion matrix tab ( F1).</head><p>This tab shows the accuracy and F1-score of the model, and its confusion matrix (see Figure <ref type="figure" target="#fig_3">2</ref> (1)). Each cell presents two rates. One (bottom) is computed over the entire dataset similarly to any confusion matrix. The other (top) is computed over the data of a single row corresponding to the precision or recall per class depending on what the rows and columns encode (ground truth or prediction). One can transpose these.</p><p>Users can click on the matrix cells to open a new page with the corresponding images (F2), as well as local and global explanations (F3, F4). The images and local explanations (Figure <ref type="figure" target="#fig_3">2</ref> (2)) are organized into four columns corresponding to the 4 cells of the matrix associated to the classes clicked initially, i.e. the ground truth A and predicted class B of the initial cell (A-B), as well as the corresponding diagonal cells of the two classes A-A and B-B, and the opposite cell that would invert the ground truth and prediction classes (B-A). This allows to compare these explanations (F3, F5). Clicking on an image or saliency map allows to zoom on it, and its related textual, local explanations (Figure <ref type="figure" target="#fig_3">2</ref> (5)).</p><p>The global explanations corresponding to the four cells (equivalent to considering a binary classifcation task involving classes A and B Figure <ref type="figure" target="#fig_3">2</ref> (3)) are also displayed in lists allowing for their comparisons (Figure <ref type="figure" target="#fig_3">2</ref> (4)) (F4, F5).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.2.4">Global explanation tab (F4, F5, F6</head><p>). This tab displays the global explanations computed over the entire dataset. It shows both the overall and class-specifc ones (respectively Figure <ref type="figure">1</ref> (3), ( <ref type="formula">4</ref>)).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.2.5">Dashboard tab.</head><p>A few participants from the co-creation sessions wished to see all the main functionalities on a unique page. The dashboard tab does so. Its top left part provides the performance functionalities (F1, F2), and the top right the corresponding local explanations (F3). At the bottom, the query functionality is enabled (F7). This organisation lets users explore explanations for diferent images, and compare these with additional queried information (F5, F6, F8).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Overall explanations</head><p>Percentage of times the features are used by the model within the dataset.</p><p>Percentage of times the features led to a correct prediction across all images for which the model used the features. Typicality score (from SECA): correlation between the presence of the features and the predicted classes, i.e. how strongly the features serve to distinguish one class from the others.</p><p>If 100 images are in the dataset, and the model used the feature "cactus" in 20 of them, then the score is 20%. In the 20 previous images, if the model made 5 correct predictions, the score is 5 * 100/20 = 25%. If cactus is associated to all gila woodpecker images, but to no image of any other class, then typicality would be high since the correlation would be strong, while wing which is used for all classes would have a lower typicality score.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Class-specifc explanations</head><p>Percentage of images that contain the features of interest among all images with the predicted class.</p><p>Percentage of images that received a correct prediction among images that contain the features and have this predicted class. Typicality score (from SECA): indicates how strongly the features serves to distinguish the specifc class from the others.</p><p>If 100 images were predicted to be a gila woodpecker, and 20 of these images have a cactus, then the score for cactus → gila woodpecker is 20%. Among the 20 previous images, if 5 images were indeed gila woodpecker images, then the score is of 25%. See above example for typicality. them into a table of semantic features. Post-processing techniques (e.g. rule mining) fnally identify combinations (logical conjunctions or disjunctions) of features (entities and/or attributes) highly correlated with certain predicted classes. This approach provides explanations at diferent levels of granularity (e.g. wing, or primary coverts, alula, etc.) depending on the granularity of the annotations requested to the annotators (O3). The feature combinations are accompanied with six scores (see Table <ref type="table" target="#tab_3">3</ref>) referring to overall explanations and class-specifc ones. Overall explanations represent the primary features used by the model to distinguish between classes (see Figure <ref type="figure">1</ref> (3)). In class-specifc explanations, the combinations of features are associated to a specifc class (see Figure <ref type="figure">1</ref> (4)), and the scores indicate the relevance of these features to this class. We represent these scores in bar plots for easy comparisons, as a result of multiple iterations where participants indicated the difculty in making use of numbers (Rq3).</p><p>The user can rank (F6) or flter the global explanations according to the scores (Figure <ref type="figure">1</ref> (5)). To vary the explanation scope (O1), one can compute the scores on various data subsets: (1) entire dataset: explains the general inference mechanisms a model follows;</p><p>(2) samples that received a (in)correct prediction: identifes and compares mechanisms for such predictions; (3) subset of the classes: identifes features used to distinguish between these classes. Where these choices can be made, we setup default parameters to reduce the complexity of the probe understanding (Rq3).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.2">The tab structure of the probe</head><p>To avoid skewing the participants towards a particular workfow (Rq4), we organize the primary functionalities into tabs, making them independent and equally important. In the user-study, we inform the participants that there is no sequential dependency between the tabs. The tabs allow us to provide the higher-level explainability functionalities (F5 -F7), as well as the other necessary    </p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5">USER-STUDY SET-UP</head><p>To study how practitioners would use explainability methods for bug identifcation, we conduct 18 user-studies of one hour each. We prompt our participants to answer a design brief with the design probe. We ask them to explain out-loud what they do, and we note their interactions with the probe (order of visited interfaces, functionalities used, etc.). When they identify a potential failure and the related bug, we ask which action they would take to solve it. Each session ends with an exit interview and a questionnaire to collect ratings around the usefulness and usability of the interfaces.</p><p>The questions combine the short version of the User Engagement Scale <ref type="bibr" target="#b37">[37]</ref>, and 7-point Likert scale questions around their likelihood to use the probe in the future. Before each session, we ask the participants for their agreement for recording. We later transcribe the recordings into anonymized transcripts, and destroy the recordings. The interview process has been reviewed by the ethics committee of our institution. We analyse the results of the userstudy qualitatively in relation to the functionalities and orthogonal categories identifed in section 3, and quantitatively based on the questionnaires, the count of commonalities in the steps followed by each participant, and the numbers of bugs identifed.</p><p>Participants. The 18 participants were recruited through the networks of the authors, searches on professional social networks, and by snowball within the contacts of the frst eight recruited participants. We only recruit participants who have experience with machine learning, but not necessarily with computer vision (CV), as they should understand the basic concepts around model failures. We categorize the participants based on their level of experience with CV. Low-CV experience participants (6) have never or only once developed a CV model, mid-CV experience participants <ref type="bibr" target="#b4">(5)</ref> have less than 4 years of CV model development experience, and high-CV experience participants (7) have more.</p><p>Design brief. The design brief presents a model bug identifcation scenario (Figure <ref type="figure" target="#fig_4">3</ref>). It is typical and simple enough for participants to refect on their own practices without envisioning entirely new workfows. Bird classifcation might require domain-knowledge, raising refections on the need to have domain expertise for bug identifcation. We scope the brief to the development setting as it encompasses a varied set of activities, with both reactive and proactive debugging.</p><p>Model. We train the machine learning model to be debugged to classify 10 species of birds. The training dataset is built with the BRIEF Context: A company wants to develop a system to support bird lovers in identifying the birds they might see in their daily life.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Current model:</head><p>An intern developed a deep learning model for 10-class bird classification. For this, he created a dataset by scraping images from the Web using Google search engine, and applied some typical data augmentation methods (e.g. flipping and cropping images, brightness transformation). He then fine-tuned a ResNet model pre-trained on ImageNet on this data.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Your task:</head><p>Unfortunately, his internship now ended. The company asks you to take over his model. It asks you to investigate whether the model developed by the intern can be deployed, or whether it needs improvement. In this case, what issues should be improved on, and how?  <ref type="table">4</ref>. To the best of our the model incorrectly uses the pixels corresponding to the knowledge, there is no established list of bugs and failures for comcactus to correctly predict the gila woodpecker class in puter vision models. We propose a preliminary one, inspired by the the left image. The bounding boxes show the features of literature on data biases <ref type="bibr" target="#b29">[29,</ref><ref type="bibr" target="#b48">48,</ref><ref type="bibr" target="#b49">49]</ref>, data shifts <ref type="bibr" target="#b17">[18]</ref>, robustness to the model. We create the frst failures by making sure that adversarial <ref type="bibr" target="#b0">[1]</ref> and natural perturbations <ref type="bibr" target="#b18">[19]</ref>, models using wrong cacti are present in all and only training samples of gila reasoning for making inferences <ref type="bibr" target="#b16">[17]</ref>, and from the bugs mentioned woodpeckers, while the test images do not all contain a in the formative study. Besides distribution shifts, we create wrong cactus. The second ones are created by making sure that sets of features (incompleteness or irrelevance) that lead to coronly the monk parakeet training samples present a green bird rect or incorrect predictions, i.e. implicit or explicit failures. See The model learns the red color for the pine grosbeak, which We choose a subset of training images (e.g. male is correct for the males, but not for the yellow females. images) that give a partial view of the entire class. The monk parakeet class is identifed by the model solely We choose classes so that certain have a unique through the color green.</p><p>feature compared to the others.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Simplistic/incomplete, relevant features Explicit failure</head><p>The features are relevant but incomplete, and lead to incorrect inferences.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Implicit failure</head><p>The model learns features that are relevant, but insufciently representing a class, while still allowing for correct inferences.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Spurious/irrelevant features Explicit failure</head><p>The model learns features that are not semantically related to the species, and lead to incorrect inferences.</p><p>The model recognizes gila woodpecker by identifying cactus in images, but there is not always a cactus in the image.</p><p>Training images of a class contain an irrelevant feature, absent from other training samples and test set.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Implicit</head><p>The model learns irrelevant features, but still makes correct inferences.</p><p>The model learns the presence of water to identify hooded mergansers.</p><p>Same as above, but with similar training and test sets. failure Table <ref type="table">4</ref>: Bugs introduced the models of our design brief.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="6">RESULTS</head><p>In this section, we present the results of our user-study, essentially the impact that the explanations in the probe have on the bug identifcation process, and how they are used in this process.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="6.1">Impact of explanations on the bug identifcation process</head><p>Figure <ref type="figure" target="#fig_6">5</ref> summarizes the number of bugs identifed by the participants in relation to the diferent types of model failures we introduced. We count one issue (1 point) as completely identifed a participant identifes both a bug and a relevant correction method, and give 0.5 point when the bug is well-characterized but no relevant correction method is found. This way, we make sure that the bug is characterized well-enough for the participant to propose a meaningful bug correction solution 3 . 6.1.1 Successful bug identification. The bug identifcation process of our participants was in majority successful, with 3.5 bugs and correction methods identifed on average, and up to 7 bugs identifed by experienced participants. For consistency, we frst let the participants explore the probe and failures they deemed important, and later discussed four specifc failures. They were typically able to on these failures, but not at the same speed, explaining the large standard deviations. Besides rapidity, three factors explain such deviation. 1) The low-CV participants deemed certain failures not worthy to debug due to their rarity. This can yet be wrong as high-CV participants discussed, since the error might be rare due to the data distribution, but still harmful. 2) The rare failure (one single lesser goldfinch mis-classifed a hairy woodpecker) was challenging, and only two high-CV participants proposed plausible bugs. The others pointed out to the lack of additional examples of this failure, preventing from comparing local explanations. 3) The participants did not think of the existence of implicit failures, except when nudged.</p><p>Overall, these results show that a probe presenting various types of explanations allows to debug various feature failures, in relation to various dataset bugs. In order to achieve such successful bug identifcation, participants used varied workfows to navigate the diferent functionalities. These workfows are discussed in the next subsections.</p><p>6.1.2 Disparate results for diferent explanation audiences. Among these successful results, we observe a high disparity in the number of bugs identifed between participants with diferent levels of experience in computer vision (CV).</p><p>Low-CV experience participants miss guidance. In general, participants with computer vision experience identify more bugs than the ones without experience. participants without experience identifed zero or one bug did not know where to start the process, how to proceed, and what kind of corrections to envision.</p><p>Misaligned mental models. Yet, three high-CV participants (removed from the plots) identifed less than two bugs. Their mental model of bug identifcation was not aligned with our probe. They did not want to look into model features for bug identifcation, and one was solely interested in unknown unknowns <ref type="bibr" target="#b6">[7,</ref><ref type="bibr" target="#b32">32,</ref><ref type="bibr" target="#b55">55]</ref> (outside the probe scope).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="6.1.3">Explainability allows to envision various, relevant bug correction methods.</head><p>The probe led the participants to formulate bug correction methods that are diverse, relevant, and to-the-point, thanks to the diferent kinds of explanations that allowed the identifcation of specifc data bugs. For instance, three participants discussed inappropriate data processing as a cause of failure, e.g. the image resolution is too small or the bird/background ratio too large, making the diferences between certain bird species undetectable, suggesting for transforming the data pipeline. Five participants restructuring the inference task by adding more classes, as a result of better characterizing the source of bugs, e.g. they identifed the color diferences between male (red) and female (yellow) pinegrosbeaks leading to high error rates for the female ones (confused with the yellow american goldfinch), and suggested to separate them into two classes to ease the learning. This is in line with other bug identifcation frameworks <ref type="bibr" target="#b44">[44]</ref> which report they support idea generation for bug correction. Particularly, we notice these envisioned correction methods are more precise and potentially more efective than in our formative study where few types of explanations were mentioned.</p><p>6.1.4 Participants still missed certain bugs. Incorrect features vs. correct inference. Participants focused on failures visible through the confusion matrix, when a of a diagonal cell is low, or when out-of-diagonal cell percentages are high. They often forgot that even classes with high accuracy might be based on problematic features. Some participants identifed these issues serendipitously when attempting to understand visible failures.</p><p>Confrmation bias. One participant identifed a very general bug from a few images: color bias of the model for most species. Confrmation bias led them to validate this bug by looking at images of diferent species, without going in more detail into the problematic colors and species, or searching for other bugs. We discuss these results further in section 7.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="6.2">Diferent categories of explanations for diferent users and bug identifcation steps</head><p>Figure <ref type="figure">6</ref> displays the perceived usefulness of each tab as rated by our participants. Overall, all tabs are perceived useful with an average rating of at least 4 out of 7, yet the mean rating and standard deviation vary across tabs. We discuss below these variations in relation to the functionalities provided by each tab.</p><p>Figure <ref type="figure">6</ref>: Perceived usefulness of the diferent tabs of the design probe. The ratings are displayed each category of participants.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="6.2.1">Local versus global explanations (F3, F4</head><p>). Hypothesis validation emphasized with the diversity of explanations. The participants primarily used the local and global explanations from the dashboard and confusion matrix, as testify the higher ratings for these two tabs (Figure <ref type="figure">6</ref>). These explanations served for generating bug hypotheses and validating them. This shows that proposing a diversity of explanations nudges a more extensive identifcation process than with fewer or no explanations where most participants skip hypothesis validation, as we observed in the formative study. Participants investigated explicit failures by entering diferent cells of the confusion matrix. The implicit failures required more diverse entry points to be identifed: 1) Serendipitously, while investigating explicit failures. While investigating an explicit failure by looking at the four columns of images/saliency maps in the tab obtained from clicking on a cell of the confusion matrix, they would notice that saliency maps would highlight irrelevant features even in the A-A or B-B columns that present samples with correct predictions. 2) By deciding to explore the global explanation tab (without having a specifc kind of failure in mind) and spotting clearly surprising features (e.g. water or branch are not features one would expect model to focus on when classifying bird images. Instead, parts and characteristic colors of the bird would be expected for the model to generalize to new images with more varied background for instance) for the context, or features that were not sufcient (e.g. purple only for the mandarin duck, whereas images displaying other birds might also have the purple color, e.g. in their background). 3) By deciding to look into the diagonal of the confusion matrix (typically starting with cells that have low rates) and the corresponding explanations (saliency maps, and rankings of textual explanations by frequency). By looking into these specifc features, they would refect on whether something is irrelevant or incomplete.</p><p>Local and global explanations are complementary. The choice of starting point does not have a consistent motivation. Typically, participants who use local explanations to generate feature hypotheses validate their hypotheses by at local explanations for more images, or by verifying the presence of the features in the global explanations. Instead, participants using global explanations for hypothesis generation validate the features by making sure these features are refected a few local explanations across correct or incorrect inferences.</p><p>Within hypothesis generation, many participants combined the two approaches as the types of features and correction methods they lead to identify intersect but do not entirely overlap. instance, incomplete or irrelevant but frequent features were typically identifed from global explanations through the diferent ranking systems (F6). Instead, infrequent failures and their correction methods were better understood by looking at the actual images and saliency maps (F5). Global explanations were also used to identify the features infuencing the majority of classifcation (typically the correct ones), which are in turn compared to the features used for incorrect inferences identifed through local explanations (F5: comparisons across explanation types). For instance, they identifed that overall, the color red is used by the model to infer pine grosbeaks, and locally understood that the only american goldfinch predicted as pine grosbeak was also displaying a red feature due to the brightness of the picture. Such fnding could not be reached through a sole look at global explanations for which brightness is not refected.</p><p>The choice explanation type depends on the practitioners' experience with explainability. We do not identify a strong correlation between the categories of explanations used by the participants and their expertise. Yet, most participants with high-CV experience are more reticent towards unfamiliar types of explanations, and use primarily local, visual explanations, i.e. saliency maps ("the dashboard gives almost everything. more familiar with its explanations" Participant 4 high-CV ). Instead, the participants with fewer experience operate smoother transitions between local and global ones, and explore more types of explanations. This explains the higher ratings they gave to the tab reached from the confusion matrix (that presents all types of explanations) compared to the dashboard that only presents local explanations. Using global explanations can be faster than using local ones, but it was also more tedious as participants need to get accustomed to the scores and ways to interpret them. All participants argued these explanations should be used particularly when many images present similar failures, as it is not tractable to look at each image.</p><p>The use of local and global explanations led to incorrect bugs. Two types of errors are typically done when using the local explanations for hypothesis generation. a) Participants wrongly assumed the local explanations for images that got correct inferences to be relevant features for the model. This led them to automatically judge irrelevant the features of samples with wrong while this is not necessarily the case. Warning about this assumption enabled them to refect further about the potential bugs. b) Some participants formulated an incorrect hypothesis about a feature by looking at very few images, and did not further verify it, leading to develop incorrect bug correction methods. They mentioned that the global explanations could allow to avoid such errors. Global explanations were misleading when participants would identify interesting features with very low support, not being representative most images.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="6.2.2">Explanation domain and medium ( O2).</head><p>Participants intuitively prefer in-domain explanations. All but one participant preferred using visual explanations than textual ones. They argued the cognitive load is lower and it is faster to make sense of features by glossing over several local, visual explanations, than textual ones.</p><p>The two types of medium are complementary locally. Yet, textual explanations were also used. The participants mentioned that since they are not familiar with the task domain, they cannot easily interpret the saliency maps to identify meaningful features. Hence, they look at the local, textual explanations (and map them the visual ones) to identify relevant bird features that one would expect the model to learn. They could also directly relate the wiki information that displays expected features according to an expert to these explanations.</p><p>One participant also suggested a functionality that only textual explanations can support: giving the freedom to explore new features as combinations of existing ones, to vary their granularity and create a taxonomy, e.g. combining plants and leaves into a larger green background. While this is possible within the query page, they would have liked to access this faster within the other interfaces, and to visualise the created taxonomy.</p><p>The preferred, medium depends on the familiarity with the task domain. Participants mentioned a difculty in interpreting the textual, global explanations as they were not familiar with the domain of the task. They however said that if they would know more about the domain, it would be easier to use as they could quickly get an idea of what a feature means on an image and what might be problematic with it.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="6.2.3">Explanation scope ( O1).</head><p>Preference for explanations of binaries. Participants primarily focused on two-class explanations. These explanations align with reactive bug identifcation for failures in specifc cells of the confusion matrix. Refecting on two classes is also easier than considering more classes: it is harder to relate overall explanations to model failures. Half of the participants explained that overall explanations are also useful but less natural as they start from the out-of-diagonal cells of the matrix. This shows clearly in the ratings given to the dashboard or confusion matrix tabs that provide binary explanations, in comparison to the ratings for the global-explanations tab.</p><p>Global explanations as a quick diagnostic tool. Yet, participants fnd uses to the global explanations computed on the entire dataset, as the large standard deviation testifes in comparison to the standard deviations for the other tabs. Participants prefer using such global explanations for tasks whose domain is familiar, and for diagonal cells of the confusion matrix. Simply by looking at these lists of explanations without having to click on each cell of a confusion matrix, they get a good overview of the features the model has learned per class, and can identify the pertinent, irrelevant or incomplete ones. Five participants actually used these explanations and their background knowledge to refect on the validity of the features, e.g. they quickly spotted potential issues with cactus or water concepts that one might not expect to classify birds, and with the large number of color features while the model should also relate on shapes.</p><p>Questioning the faithfulness of binary explanations. These explanations are complementary. Global explanations more accurately account for the features of the model and allow for a faster spotting of problematic features. Yet, practitioners prefer to understand specifc cells of the confusion matrix with binary explanations, which might lead to erroneous feature interpretations (one feature might seem discriminative for two classes but might not be important overall). A single mid-CV participant accurately refected on such limitation, that practitioners should be warned about. However, this refection was also problematic for our participant as it prevented them from obtaining insights from the probe: the participant constantly worried that correcting a specifc bug would create new ones in other matrix cells.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="6.2.4">Use of domain knowledge ( F9)</head><p>. Domain knowledge is used for successful hypothesis formulation and validation. This knowledge serves to a) formulate hypothesis on relevant features the model should learn for a class, and to compare them to the actual features, or b) to validate hypotheses about problematic features. For instance, Participant 4 high-CV naturally started to use it for specifc confusion cases where the model accurately looks at the bird (according to the saliency map) but apparently not at the right or complete bird features as it makes incorrect inferences. 6.2.5 Qery-related explanations ( F7). All participants used the passive mode of exploring the explanations, since it is less cognitively-demanding, and they are used to such explanations. Active querying is used only by half of the participants. This shows clearly by the lower average ratings and higher standard deviation the query tab got in comparison to the dashboard and confusion matrix tabs. Active querying allows to validate potential hypotheses around problematic features. For that, participants query the matrix of percentage to verify that a feature is only used for images that present specifc miss-classifcations. Three participants mentioned that active queries are especially efcient once one is familiar with the expected and the often problematic features. For instance, an expert participant mentioned that in their own medical use-case where it is known that the model might learn incorrect features relating to the background of X-ray images (e.g. a part of a pace-maker), they would like to query background features directly.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="6.2.6">Interactivity ( F8).</head><p>Interactivity to speed up and augment the bug identifcation process. Besides having functionalities that are currently not available (global explanations and query), the primary advantage of the probe was its interactivity and practicality, aligning with results for tabular data <ref type="bibr" target="#b19">[20]</ref>. It was especially useful to compare diverse images (the four types of images in a binary classifcation task) and explanations to estimate the feature's relative importance. For instance, some participants compared two queries where the only diference is the addition of one feature, to check how much this feature impacts the model inferences. "If the tool is ergonomic, fast and malleable, it would defnitely help me fasten my process, and it would help combine more information that I don't usually look at." Participant 8 high-CV. A third of the participants even suggested ways to have even more interactivity and fast transitions between explanation types.</p><p>Interactivity to select relevant explanations. To navigate global explanations, the participants used one main interactivity feature, the choice of settings, to rank or flter the explanations (F6). They could for instance identify a) frequent mistakes by ranking the explanations based on the number of incorrect predictions they lead to, b) frequent features by ranking explanations based on typicality scores and fltering out low-support ones, and c) features that lead solely to correct or incorrect inferences by computing the explanations independently on the set of samples which received correct or incorrect predictions. These settings are necessary due to the amount of information the probe provides.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="7">DISCUSSION 7.1 Summary of fndings</head><p>Our user-study brought new insights on the use of explanations towards bug identifcation, summarized in Table <ref type="table" target="#tab_5">5</ref>. While the most common explanations, i.e. local visual explanations, were primarily used due to their simplicity and familiarity, our probe also highlighted the importance to present diverse explanations. Global, textual, active, interactive, binary explanations, as well as domain knowledge, were also exploited to achieve diferent objectives, e.g. identifying new hypotheses, or the same objectives more efciently. Yet, by acknowledging the disparity in the use of the functionalities and in the number of bugs they led to identify, we can extract further implications for future explainability, debugging and HCI research. We now discuss the limitations of our work and these fndings.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Category Insight</head><p>Impact of explanations on the debugging process.  </p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="7.2">Limitations</head><p>There are several limitations in our probe and study. While we do not think they impact the validity of our results, they would need to be tackled in the future for more comprehensiveness. Scope of the probe. Our probe is adapted for a specifc type of computer vision models: deep learning models that perform classifcation tasks and from which local, visual explanations can be extracted. The global explanations can only be computed when it is possible to annotate local explanations with semantic features, and can be costly depending on the size of the dataset and number of classes. Hence, it can be challenging to use for certain applications. Adapting these explanations to other use-cases is a challenge on its own. Balancing the trade-of between cost and faithfulness of the explanations and making practitioners aware of it would also merit being investigated.</p><p>Scope of the study. the work involved a considerable number of participants (18 for the formative study and co-creation sessions, and 18 for the user-study) with various backgrounds, we cannot fully guarantee the generalizability of the results. Similarly, our study employed a use-case that requires domain knowledge none of our participants had (to bring consistency), and we made sure to provide the required knowledge. It would be interesting to study how participants, familiar with a use-case, would go about bug identifcation. This is however challenging as participants should share their data, it is costly to annotate, and the use-case would not be consistent across participants. Scaling our study to use-cases with more classes is also important as other works identify that "as scale increases, interpretability and satisfaction decrease" <ref type="bibr" target="#b19">[20]</ref>.</p><p>Impact of the probe The results of our user-study are inevitably mediated by the design, implementation and usability of our probe. As discussed in section 4, we however made sure to allow for diverse workfows and interactions with the explanations without biasing the users towards specifc As for usability, the answers (Figure <ref type="figure" target="#fig_7">7</ref>) to our exit questionnaire give an indication of how it might have afected our results. Most factors high-ratings, confrming that our participants appreciated the functionalities within our probe, and were likely not negatively impacted by them. Especially, they found it rewarding to use our probe and were eager to reuse it on their own use-cases, saying that it was more convenient than their usual development environment.</p><p>However, some participants felt overwhelmed at frst by the amount of functionalities (perceived ratings confrm this). While they got used to them, they would have liked guidance from the probe in the process. We could not do so not to skew them, yet this is an important indication for future tools. Similarly, they gave an average rating to the attractiveness (mean of 3.31 out of 5 points) as they would appreciate the probe a more modern look.  Guidance. As some participants had a hard time envisioning uses of certain explanations, future tools need to provide hints. Hints should be enough as simply explaining ways other participants used the explanations led the participants in difculty to successfully identify bugs.</p><p>Besides, the current probe allows for any sequence of interactions with the diferent types of explanations supported (in order not to skew user-study participants towards certain explanations and activities). Yet, further guiding these interactions by suggesting potential sequences of activities would also support practitioners further in debugging their model. Several participants mentioned that an ideal user-interface would not leave them as much freedom as currently is, but instead narrow down possibilities so as to simplify the debugging process and guide them towards the relevant activities for each type of failures and bugs. Hence, future tools would beneft from identifying the minimum set of user-journeys diferent types of practitioners and failures would require.</p><p>Participants with high-CV and explainability experience however require further investigation to understand when they would be ready to use less familiar explanations. Especially, for these participants, our observations difer from explanation on tabular data <ref type="bibr" target="#b19">[20]</ref>. The GAMUT probe led to fnd a strong correlation between the level of explainability expertise and the use diverse explanations, result totally opposed to ours. This could be motivated by the lack of practice, even for our high-expertise practitioners, with global, textual explanations for computer vision, contrary to practitioners working on tabular data who are more familiar with both types of explanations.</p><p>Warnings around typical misinterpretations. Blindly following the explanations sometimes leads to identify incorrect bugs. Yet, not all participants are aware of these dangers, and trust the explanations similarly. Only two participants asked us how the saliency maps were computed, and none refected on the potential noise in the salient pixels. As for the global explanations, only 4 participants questioned their faithfulness and the fact that an annotation of salient pixels does not necessarily refect what the model actually looks at (i.e. colors, textures, or shapes, etc.).</p><p>These observations around trust in explanations are aligned with the ones for tabular data, e.g. Hohman et al. <ref type="bibr" target="#b19">[20]</ref> mention needing skepticism" from practitioners. They are also inline with the notion of misuse of explanations <ref type="bibr" target="#b24">[25]</ref>: certain participants would misinterpret explanations by taking a brief look at them simply because they seemed to confrm their hypothesis. Future tools would merit displaying warnings against these limitations and misinterpretations.</p><p>Integration of structural and training bugs. Some participants tended to explain all bugs with issues of data content or data pipeline, without elaborating on other potential bugs, e.g. related to the model structure or training hyperparameters. They were either skewed by the focus of our probe on such types of bugs due to the visualisation of data content, or because they did not have in mind the other concerns. Some participants envisioned to use our probe once other bugs are corrected, others nuanced this view arguing for a more iterative process, where all types of bugs might need simultaneous considerations depending on the ways the bugs are corrected (e.g. data augmentation for balancing might lead to overftting and to increase the size of the model architecture). shows the need to investigate how to best combine the functionalities in our probe to the functionalities around the other types of bugs (e.g. tools such as <ref type="bibr" target="#b41">[41]</ref>), without overwhelming user. 7.3.2 Usefulness of diferent explanation types. Explanations for data enquiry. Explanations primarily served as artifacts for surfacing feature failures, identifying data bugs and bias-variance issues. Similarly to observations made for explainability with tabular data <ref type="bibr" target="#b19">[20]</ref>, the explanations were also used by four of the participants as an access point into the data. These participants used the query functionality with specifc features, ground truth and predicted to better understand what they look like within the dataset, and whether they are comprehensively represented. understanding was later used to refne hypotheses about dataset bugs. Future interfaces would hence merit combining further the extensive exploration of training datasets to the model exploration, and facilitating common interactions with the explanations towards that end.</p><p>Complementarity of explanation types. Our study showed that all explanation types are useful for participants in diferent stages of the bug identifcation workfow to answer diferent questions. Their use often depends on the degree of familiarity of the participants with the task domain, and with these types of explanations.</p><p>More research is needed to further develop these diferent types of explanations since, so far, research focuses primarily on local, visual ones. Especially, attention on textual explanations could beneft practitioners, e.g. for understanding how to best represent and query concepts and their combinations, taxonomies of concepts, etc. What-if (causal) questions that were rarely expressed here could merit research on accessibility as well. Finally, future tools could further combine in-and out of-domain explanations by showing example image patches corresponding to any displayed textual explanations so as to increase the learning rate of the practitioners. Two participants also suggested global, visual explanations by automatically clustering similar-looking, salient image patches. While this might be hard to realize in practice, this further shows their appreciation for visual information, and the need for further research.</p><p>Interactivity versus complexity. Surprisingly, our study showed that rather simple explanations can lead to successfully understand a large number of bugs: the global explanations were simple statistics computed over textual annotations of the dataset, but allowed a global understanding of the model. While simple in their calculation, their interpretation was already complex enough for the participants not familiar with the textual and global explainability paradigms. We argue that these simple explanations were useful thanks to the usability of the interactive interface and its focus on comparisons, which allowed to identify many similarities and diferences across images receiving diferent predictions.</p><p>This shows that it might not be urgent to develop highly complex explainability methods yet, as they are new black-boxes for the practitioners who might trust their faithfulness too much, while having a hard time using them. Instead, more research on the development of interactive interfaces could be more benefcial to the practitioners.</p><p>Manual exploration versus automation. Multiple participants suggested to automate parts of the interface to speed up and direct the debugging process. For instance, they would like to automatically be presented with explanations that refect bugs, or at least with a reduced set of potentially problematic features (the number of global explanations is otherwise overwhelming) through an automatic comparison of the explanations to the domain-knowledge.</p><p>Yet, we argue that extensive automation is not possible and desired. The relevance of a feature to a model is sometimes ambiguous, e.g. relevance of the cactus for gila woodpeckers, so the automatic comparison would lead to a skewed and non-transparent result. Besides, attention should be put into not making the debugging tool another black-box (besides the model to explain), as our participants already tended not to question the completeness and faithfulness of the displayed explanations. A way to limit automation could be to provide even quicker interactions, for instance to go from binary explanations to global ones so as to accurately estimate their relevance.</p><p>Nevertheless, facing the amount of debugging methods developed in machine learning testing literature that are unknown to practitioners, it is important to also investigate how much these methods are complementary to the manual process, and how to best involve them in this process.</p><p>Reliance on domain knowledge. study confrmed the importance of domain knowledge. All but one participant (who did not refect on features) used it (hence the high ratings the wiki tab obtained). Unfortunately, investigating the wiki was not consistently performed across failures, leading to miss certain bugs. For instance, participants who correctly understood the diference between the similar-looking bird species gila and hairy woodpeckers (brown or white body respectively) and the missing feature (body color), did not use the wiki page to inspect the pine grosbeak and american goldfinch, missing the hint for another bug (diference of colors for female and male grosbeaks). Using domain knowledge merits more support. Studying how to make practitioners and domain experts interact is important, i.e. the format in which they can best communicate, the inputs developers need, but also the most efective way for domain experts who are often not familiar with technical terms to provide useful information for the practitioners.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="8">CONCLUSION</head><p>In this work, we engaged in a formative study and a co-creation process to design a probe for investigating the interaction between explainability and bug identifcation. We then performed 18 userstudies with this probe. Our participants varied in their bug identifcation workfows, but managed to identify a consequential amount of bugs. These results showed explanations can be used in various steps of the process for diferent purposes, and especially for characterizing diverse types of feature failures. Diferent categories of explanations (e.g. global, out-of-domain, active, and interactive) showed to be useful and often complementary. Yet, our participants also struggled with various aspects of the process, falling into certain explainability traps, or being shy to explore unfamiliar explanations.</p><p>This shows the urgent need for more HCI research to provide the right amount of guidance to practitioners engaged in bug identifcation activities and having access to explainability methods, while still allowing for freedom adaptability of the process. Especially, process should be supported through the use of interactive interfaces with various types of interactions only with data and explanations but also with other artifacts to address non-feature failures. Additionally, our study points out to research directions for other communities: specifc types of explanations merit further development by the machine learning explainability community, and the efectiveness of machine learning testing methods needs to be characterized in comparison to the one of human debugging for future integration.         </p></div><figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_0"><head>5 Figure 1 :</head><label>51</label><figDesc>Figure 1: Query tab (left) and overall explanations tab (right). When querying (1) explanations, results are displayed underneath (2). The overall explanations tab shows both relevant (combinations of) concepts (3) and their association to each dataset class (4), and allows for varying the parameters to compute them<ref type="bibr" target="#b4">(5)</ref>.</figDesc><graphic url="image-3.png" coords="6,70.92,191.47,220.50,189.45" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_1"><head></head><label></label><figDesc>Ground truth: American Golfinch (0.03) -Prediction: Pine Grosbeaks (0.92) Bufflehead: 0.00, Downy Woodpecker: 0.00, Gila Woodpecker: 0.00, Hairy Woodpecker: 0.00, Hooded Merganser: 0.00, Lesser Goldfinch: 0.02, Mandarin Duck: 0.03, Monk Parakeet: 0the feature is used by the model within the dataset.% of times the feature led to a correct / incorrect prediction across images where the feature is used.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_2"><head></head><label></label><figDesc>that contain the feature among images with the predicted class. predicted class 88% % of images that received a correct prediction among images with the predicted class that contain the feature. % of images with this ground truth and predicted class within the dataset.% of images with this predicted class among images with this ground truth.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_3"><head>Figure 2 :</head><label>2</label><figDesc>Figure 2: Confusion matrix interactions. Our probe allows for diferent interactions with the explanations. E.g., when one clicks on a cell of the confusion matrix (1) corresponding to the predicted class A and ground truth class B, she is directed towards the corresponding local (2) (images corresponding to the cells A-A, A-B, B-A, B-B of the matrix) and global (4) explanations, as well as more performance indications (3). Clicking on a local, visual explanation displays further local, textual explanations (5).</figDesc><graphic url="image-7.png" coords="6,279.43,546.87,266.54,78.95" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_4"><head>Figure 3 :</head><label>3</label><figDesc>Figure 3: Overview of the design brief. Examples of samples of each class the model to be analyzed was trained on.Gila Woodpecker images</figDesc><graphic url="image-31.png" coords="7,388.40,246.93,146.71,110.33" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_5"><head></head><label></label><figDesc>(and in a standard position), while the test samples are more examples in Figure 4. To introduce these bugs, we vary the image diverse. content in training and test data, around class-specifc features (e.g. bird appearance), and less specifc features (e.g. background). Large diference in training and deployment We mention that training data are scraped from the Web, and a diferent context for shift images. the deployment data.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_6"><head>Figure 5 :</head><label>5</label><figDesc>Figure 5: Number of bugs and relevant correction methods identifed by our diferent participants during the user study.</figDesc><graphic url="image-42.png" coords="8,53.80,449.09,240.25,156.35" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_7"><head>Figure 7 :</head><label>7</label><figDesc>Figure 7: Aggregated factors of the User-Engagement form (short version) presented in boxplots.</figDesc><graphic url="image-44.png" coords="12,53.80,249.22,240.24,117.56" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_8"><head>7. 3</head><label>3</label><figDesc>Implications &amp; Future Work 7.3.1 Need develop user-experiences.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_9"><head>Figure 8 :</head><label>8</label><figDesc>Figure 8: Low-fdelity mock-up used the co-creation sessions: query functionality and the result interface after a query.</figDesc><graphic url="image-47.png" coords="15,345.33,246.17,160.66,132.16" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_10"><head>Figure 9 :</head><label>9</label><figDesc>Figure 9: Low-fdelity mock-up used in the co-creation ses-Figure 10: Low-fdelity mock-up used in the co-creation sessions: example display of important concepts and rules for sions: another example display of important rules and scores, one class, and their co-presence in other classes. in comparison to the scores of related rules for other classes.</figDesc><graphic url="image-49.png" coords="15,360.22,432.88,196.28,149.69" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_11"><head>Figure 11 :</head><label>11</label><figDesc>Figure 11: Display of the saliency maps within the probe.</figDesc><graphic url="image-48.png" coords="15,70.33,457.66,272.37,101.01" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_12"><head>2</head><label>2</label><figDesc></figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_13"><head>Figure 12 :</head><label>12</label><figDesc>Figure 12: Display of further local explanations.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_14"><head>Figure 13 :</head><label>13</label><figDesc>Figure 13: Overall performance information provided in the design probe.Figure 14: Query page with (1) query input and (2)</figDesc><graphic url="image-51.png" coords="16,362.51,172.17,193.08,90.31" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_15"><head>Figure 14 :</head><label>14</label><figDesc>Figure 13: Overall performance information provided in the design probe.Figure 14: Query page with (1) query input and (2) query results.</figDesc><graphic url="image-53.png" coords="16,129.46,304.92,353.07,147.56" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_16"><head>Figure 15 :</head><label>15</label><figDesc>Figure 15: Local explanations presented as a result of clicking on a confusion matrix cell.</figDesc><graphic url="image-54.png" coords="16,107.61,484.58,152.54,155.12" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_17"><head>3 Figure 16 :</head><label>316</label><figDesc>Figure 16: Display of global explanations within our probe. (1) shows the overall explanations, (2) shows the class-specifc explanations, (3) shows the settings that can tuned to compute the explanations. In (1), we show the global explanations displayed within the interface: (a) shows the typicality score, (b) the frequency of times the concept (or rule) is salient within the dataset, percentage of times when the image where the concept is salient got correct inference, (d) and conversely when it got an incorrect inference.</figDesc><graphic url="image-56.png" coords="16,267.19,581.77,157.30,81.53" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_3"><head>Table 3 :</head><label>3</label><figDesc>Overview of the scores in the global explanations.</figDesc><table /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_5"><head>Table 5 :</head><label>5</label><figDesc>Summary of the insights from our user-studies.</figDesc><table /></figure>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="3">We do not plot the numbers related to implicit, incomplete features because they are identical to the ones for implicit irrelevant features: participants who succeed in identifying the latter always mention that the features are irrelevant and by extension incomplete -other ones should have been used.</note>
+		</body>
+		<back>
+
+			<div type="acknowledgement">
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>ACKNOWLEDGMENTS</head><p>This work was partially supported by the HyperEdge Sensing project funded by Cognizant. We would like to thank all the participants of our studies, without whom this work would not have been possible. Besides, we would like to thank Floris Van Veen, Kanish Dwivedi, Silvia Mokranova, Mihai Filimon, and Mathieu Butenaerts who participated in building our design probe.</p></div>
+			</div>
+
+			<div type="annex">
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>A EXAMPLE MOCK-UPS USED IN THE CO-CREATION SESSIONS</head></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>B FIRST IMPLEMENTED PROTOTYPE FOR THE PROBE</head></div>			</div>
+			<div type="references">
+
+				<listBibl>
+
+<biblStruct xml:id="b0">
+	<analytic>
+		<title level="a" type="main">Threat of adversarial attacks on deep learning in computer vision: A survey</title>
+		<author>
+			<persName><forename type="first">Naveed</forename><surname>Akhtar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ajmal</forename><surname>Mian</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Ieee Access</title>
+		<imprint>
+			<biblScope unit="volume">6</biblScope>
+			<biblScope unit="page" from="14410" to="14430" />
+			<date type="published" when="2018">2018. 2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b1">
+	<analytic>
+		<title level="a" type="main">Evaluating saliency map explanations for convolutional neural networks: a user study</title>
+		<author>
+			<persName><forename type="first">Ahmed</forename><surname>Alqaraawi</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">IUI</title>
+				<imprint>
+			<date type="published" when="2020">2020</date>
+			<biblScope unit="page" from="275" to="285" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b2">
+	<analytic>
+		<title level="a" type="main">Modeltracker: Redesigning performance analysis tools for machine learning</title>
+		<author>
+			<persName><forename type="first">Saleema</forename><surname>Amershi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Max</forename><surname>Chickering</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Steven</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Bongshin</forename><surname>Drucker</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Patrice</forename><surname>Lee</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jina</forename><surname>Simard</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Suh</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 33rd Annual ACM Conference on Human Factors in Computing Systems</title>
+				<meeting>the 33rd Annual ACM Conference on Human Factors in Computing Systems</meeting>
+		<imprint>
+			<date type="published" when="2015">2015</date>
+			<biblScope unit="page" from="337" to="346" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b3">
+	<analytic>
+		<title level="a" type="main">Data-Centric Explanations: Explaining Training Data of Machine Learning Systems to Transparency</title>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2021 CHI Conference on Human Factors in Computing Systems</title>
+				<editor>
+			<persName><forename type="first">Ariful</forename><surname>Islam Anik</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">Andrea</forename><surname>Bunt</surname></persName>
+		</editor>
+		<meeting>the 2021 CHI Conference on Human Factors in Computing Systems</meeting>
+		<imprint>
+			<biblScope unit="page" from="1" to="13" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b4">
+	<analytic>
+		<title level="a" type="main">A general framework for debugging</title>
+		<author>
+			<persName><forename type="first">Keijiro</forename><surname>Araki</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Zengo</forename><surname>Furukawa</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jingde</forename><surname>Cheng</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">IEEE software</title>
+		<imprint>
+			<biblScope unit="volume">8</biblScope>
+			<biblScope unit="page" from="14" to="20" />
+			<date type="published" when="1991">1991. 1991</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b5">
+	<monogr>
+		<title level="m" type="main">One explanation does not ft all: A toolkit and taxonomy of ai explainability techniques</title>
+		<author>
+			<persName><forename type="first">Vijay</forename><surname>Arya</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Bellamy</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b6">
+	<analytic>
+		<title level="a" type="main">Beat the machine: Challenging humans to fnd a predictive model&apos;s &quot;unknown unknowns</title>
+		<author>
+			<persName><forename type="first">Joshua</forename><surname>Attenberg</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Panos</forename><surname>Ipeirotis</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Foster</forename><surname>Provost</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Journal of Data and Information Quality (JDIQ)</title>
+		<imprint>
+			<biblScope unit="volume">6</biblScope>
+			<biblScope unit="page" from="1" to="17" />
+			<date type="published" when="2015">2015. 2015</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b7">
+	<analytic>
+		<title level="a" type="main">What do You Mean? Interpreting Image Classifcation with Crowdsourced Concept Extraction and Analysis</title>
+		<author>
+			<persName><forename type="first">Agathe</forename><surname>Balayn</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Panagiotis</forename><surname>Soilis</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Christoph</forename><surname>Lof</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jie</forename><surname>Yang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Alessandro</forename><surname>Bozzon</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the Web Conference 2021</title>
+				<meeting>the Web Conference 2021</meeting>
+		<imprint>
+			<date type="published" when="1937">2021. 1937-1948</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b8">
+	<analytic>
+		<title level="a" type="main">Explanatory Dialogs: Towards Actionable, Interactive Explanations</title>
+		<author>
+			<persName><forename type="first">Gagan</forename><surname>Bansal</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">AIES &apos;18</title>
+				<imprint>
+			<date type="published" when="2018">2018</date>
+			<biblScope unit="page" from="356" to="357" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b9">
+	<analytic>
+		<title level="a" type="main">Explainable machine learning in deployment</title>
+		<author>
+			<persName><forename type="first">Umang</forename><surname>Bhatt</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Alice</forename><surname>Xiang</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">FAT*</title>
+				<imprint>
+			<date type="published" when="2020">2020</date>
+			<biblScope unit="page" from="648" to="657" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b10">
+	<monogr>
+		<title level="m" type="main">Tensorfow debugger: Debugging datafow graphs for machine learning</title>
+		<author>
+			<persName><forename type="first">Shanqing</forename><surname>Cai</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Eric</forename><surname>Breck</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Eric</forename><surname>Nielsen</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Sculley</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2016">2016. 2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b11">
+	<analytic>
+		<title level="a" type="main">Explaining decision-making algorithms through UI: Strategies to help non-expert stakeholders</title>
+		<author>
+			<persName><forename type="first">Hao-Fei</forename><surname>Cheng</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">CHI</title>
+				<imprint>
+			<date type="published" when="2019">2019</date>
+			<biblScope unit="page" from="1" to="12" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b12">
+	<analytic>
+		<title level="a" type="main">2021. I Think I Get Your Point, AI! The Illusion of Explanatory Depth in Explainable AI</title>
+		<author>
+			<persName><forename type="first">Michael</forename><surname>Chromik</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">IUI</title>
+				<imprint>
+			<biblScope unit="page" from="307" to="317" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b13">
+	<analytic>
+		<title level="a" type="main">Towards automatic concept-based explanations</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Ghorbani</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">NeurIPS</title>
+				<imprint>
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b14">
+	<analytic>
+		<title level="a" type="main">Counterfactual visual explanations</title>
+		<author>
+			<persName><forename type="first">Yash</forename><surname>Goyal</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ziyan</forename><surname>Wu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jan</forename><surname>Ernst</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Dhruv</forename><surname>Batra</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Devi</forename><surname>Parikh</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Stefan</forename><surname>Lee</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">ICML. PMLR</title>
+				<imprint>
+			<date type="published" when="2019">2019</date>
+			<biblScope unit="page" from="2376" to="2384" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b15">
+	<analytic>
+		<title level="a" type="main">Software debugging, testing, and verifcation</title>
+		<author>
+			<persName><forename type="first">Brent</forename><surname>Hailpern</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Padmanabhan</forename><surname>Santhanam</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">IBM Systems Journal</title>
+		<imprint>
+			<biblScope unit="volume">41</biblScope>
+			<biblScope unit="page" from="4" to="12" />
+			<date type="published" when="2002">2002. 2002</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b16">
+	<analytic>
+		<title level="a" type="main">Women also Overcoming bias in captioning models</title>
+		<author>
+			<persName><forename type="first">Lisa</forename><forename type="middle">Anne</forename><surname>Hendricks</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kaylee</forename><surname>Burns</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">ECCV</title>
+				<imprint>
+			<date type="published" when="2018">2018</date>
+			<biblScope unit="page" from="771" to="787" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b17">
+	<analytic>
+		<title level="a" type="main">The many faces of robustness: A critical analysis of out-of-distribution generalization</title>
+		<author>
+			<persName><forename type="first">Dan</forename><surname>Hendrycks</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Steven</forename><surname>Basart</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">ICCV</title>
+				<imprint>
+			<date type="published" when="2021">2021</date>
+			<biblScope unit="page" from="8340" to="8349" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b18">
+	<analytic>
+		<title level="a" type="main">Benchmarking Neural Network Robustness to Common Corruptions and Perturbations</title>
+		<author>
+			<persName><forename type="first">Dan</forename><surname>Hendrycks</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Thomas</forename><surname>Dietterich</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">ICLR</title>
+				<imprint>
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b19">
+	<analytic>
+		<title level="a" type="main">Gamut: A design probe to understand how data scientists understand machine learning models</title>
+		<author>
+			<persName><forename type="first">Fred</forename><surname>Hohman</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">CHI</title>
+				<imprint>
+			<date type="published" when="2019">2019</date>
+			<biblScope unit="page" from="1" to="13" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b20">
+	<analytic>
+		<title level="a" type="main">Summit: Scaling deep learning interpretability by visualizing activation and attribution summarizations</title>
+		<author>
+			<persName><forename type="first">Fred</forename><surname>Hohman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Haekyu</forename><surname>Park</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Caleb</forename><surname>Robinson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Duen Horng Polo</forename><surname>Chau</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">IEEE transactions on visualization and computer graphics</title>
+		<imprint>
+			<biblScope unit="volume">26</biblScope>
+			<biblScope unit="page" from="1096" to="1106" />
+			<date type="published" when="2019">2019. 2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b21">
+	<analytic>
+		<title level="a" type="main">Technology probes: inspiring design for and with families</title>
+		<author>
+			<persName><forename type="first">Hilary</forename><surname>Hutchinson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Wendy</forename><surname>Mackay</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">SIGCHI</title>
+				<imprint>
+			<date type="published" when="2003">2003</date>
+			<biblScope unit="page" from="17" to="24" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b22">
+	<analytic>
+		<title level="a" type="main">How can I choose an explainer? An Application-grounded of Post-hoc Explanations</title>
+		<author>
+			<persName><forename type="first">Jesus</forename><surname>Sérgio</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">FAccT</title>
+				<imprint>
+			<date type="published" when="2021">2021</date>
+			<biblScope unit="page" from="805" to="815" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b23">
+	<analytic>
+		<title level="a" type="main">Model assertions for debugging machine learning</title>
+		<author>
+			<persName><forename type="first">Daniel</forename><surname>Kang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Deepti</forename><surname>Raghavan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Peter</forename><surname>Bailis</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Matei</forename><surname>Zaharia</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">NeurIPS MLSys Workshop</title>
+				<imprint>
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b24">
+	<analytic>
+		<title level="a" type="main">Interpreting Interpretability: Understanding Data Scientists&apos; Use of Interpretability Tools for Machine Learning</title>
+		<author>
+			<persName><forename type="first">Harmanpreet</forename><surname>Kaur</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">CHI</title>
+				<imprint>
+			<date type="published" when="2020">2020</date>
+			<biblScope unit="page" from="1" to="14" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b25">
+	<analytic>
+		<title level="a" type="main">Key challenges for delivering clinical impact with artifcial intelligence</title>
+		<author>
+			<persName><forename type="first">J</forename><surname>Christopher</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Alan</forename><surname>Kelly</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mustafa</forename><surname>Karthikesalingam</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Corrado</forename><surname>Suleyman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Dominic</forename><surname>King</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">BMC medicine</title>
+		<imprint>
+			<biblScope unit="volume">17</biblScope>
+			<biblScope unit="page" from="1" to="9" />
+			<date type="published" when="2019">2019. 2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b26">
+	<analytic>
+		<title level="a" type="main">Interpretability beyond feature attribution: Quantitative testing with concept activation vectors</title>
+		<author>
+			<persName><forename type="first">B</forename><surname>Kim</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Wattenberg</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">ICML</title>
+				<imprint>
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b27">
+	<monogr>
+		<title level="m" type="main">Debugging revisited: Toward understanding the debugging needs of contemporary software developers</title>
+		<author>
+			<persName><forename type="first">Lucas</forename><surname>Layman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Madeline</forename><surname>Diep</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2013">2013. 2013</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b28">
+	<monogr>
+		<title level="m">ACM/IEEE international symposium on empirical software engineering and measurement</title>
+				<imprint>
+			<publisher>IEEE</publisher>
+			<biblScope unit="page" from="383" to="392" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b29">
+	<analytic>
+		<title level="a" type="main">Repair: Removing representation bias by dataset resampling</title>
+		<author>
+			<persName><forename type="first">Yi</forename><surname>Li</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Nuno</forename><surname>Vasconcelos</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">ICCV</title>
+				<imprint>
+			<date type="published" when="2019">2019</date>
+			<biblScope unit="page" from="9572" to="9581" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b30">
+	<analytic>
+		<title level="a" type="main">Questioning the AI: informing design practices for explainable AI user experiences</title>
+		<author>
+			<persName><surname>Vera Liao</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">CHI</title>
+				<imprint>
+			<date type="published" when="2020">2020</date>
+			<biblScope unit="page" from="1" to="15" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b31">
+	<analytic>
+		<title level="a" type="main">Why these Explanations? Selecting Intelligibility Types for Explanation Goals</title>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Brian</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Lim</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">IUI Workshops</title>
+				<imprint>
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b32">
+	<analytic>
+		<title level="a" type="main">Towards hybrid human-ai workfows for unknown unknown detection</title>
+		<author>
+			<persName><forename type="first">Anthony</forename><surname>Liu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Santiago</forename><surname>Guerra</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">WWW</title>
+				<imprint>
+			<date type="published" when="2020">2020</date>
+			<biblScope unit="page" from="2432" to="2442" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b33">
+	<analytic>
+		<title level="a" type="main">Debugging machine learning pipelines</title>
+		<author>
+			<persName><forename type="first">Raoni</forename><surname>Lourenço</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Juliana</forename><surname>Freire</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Dennis</forename><surname>Shasha</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 3rd International Workshop on Data Management for End-to-End Machine Learning</title>
+				<meeting>the 3rd International Workshop on Data Management for End-to-End Machine Learning</meeting>
+		<imprint>
+			<date type="published" when="2019">2019</date>
+			<biblScope unit="page" from="1" to="10" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b34">
+	<analytic>
+		<title level="a" type="main">MODE: automated neural network model debugging via state diferential analysis and input selection</title>
+		<author>
+			<persName><forename type="first">Shiqing</forename><surname>Ma</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yingqi</forename><surname>Liu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Wen-Chuan</forename><surname>Lee</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Xiangyu</forename><surname>Zhang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ananth</forename><surname>Grama</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">2018 ACM Joint Meeting on European Software Engineering Conference</title>
+				<imprint>
+			<date type="published" when="2018">2018</date>
+			<biblScope unit="page" from="175" to="186" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b35">
+	<analytic>
+		<title level="a" type="main">Model LineUpper: Supporting Interactive Model Comparison at Multiple Levels for AutoML</title>
+		<author>
+			<persName><forename type="first">Shweta</forename><surname>Narkar</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">IUI</title>
+				<imprint>
+			<date type="published" when="2021">2021</date>
+			<biblScope unit="page" from="170" to="174" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b36">
+	<analytic>
+		<title level="a" type="main">Feature visualization</title>
+		<author>
+			<persName><forename type="first">Chris</forename><surname>Olah</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Alexander</forename><surname>Mordvintsev</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ludwig</forename><surname>Schubert</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Distill</title>
+		<imprint>
+			<biblScope unit="volume">2</biblScope>
+			<biblScope unit="page">e7</biblScope>
+			<date type="published" when="2017">2017. 2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b37">
+	<analytic>
+		<title level="a" type="main">A practical approach to measuring user engagement with the refned user engagement scale (UES) and new UES short form</title>
+		<author>
+			<persName><forename type="first">L O'</forename><surname>Heather</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Paul</forename><surname>Brien</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mark</forename><surname>Cairns</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Hall</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">International Journal of Human-Computer Studies</title>
+		<imprint>
+			<biblScope unit="volume">112</biblScope>
+			<biblScope unit="page" from="28" to="39" />
+			<date type="published" when="2018">2018. 2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b38">
+	<analytic>
+		<title level="a" type="main">Amazon SageMaker Debugger: A System for Real-Time Insights into Machine Learning Model Training</title>
+		<author>
+			<persName><forename type="first">Nathalie</forename><surname>Rauschmayr</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Vikas</forename><surname>Kumar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Rahul</forename><surname>Huilgol</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Andrea</forename><surname>Olgiati</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Satadal</forename><surname>Bhattacharjee</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of Machine Learning and Systems</title>
+				<meeting>Machine Learning and Systems</meeting>
+		<imprint>
+			<date type="published" when="2021">2021. 2021</date>
+			<biblScope unit="volume">3</biblScope>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b39">
+	<analytic>
+		<title level="a" type="main">Squares: Supporting interactive performance analysis for multiclass classifers</title>
+		<author>
+			<persName><forename type="first">Saleema</forename><surname>Donghao Ren</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Bongshin</forename><surname>Amershi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jina</forename><surname>Lee</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jason</forename><forename type="middle">D</forename><surname>Suh</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Williams</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">IEEE transactions on visualization and computer graphics</title>
+		<imprint>
+			<biblScope unit="volume">23</biblScope>
+			<biblScope unit="page" from="61" to="70" />
+			<date type="published" when="2016">2016. 2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b40">
+	<analytic>
+		<title level="a" type="main">Why should i trust you? Explaining the predictions of any classifer</title>
+		<author>
+			<persName><forename type="first">Ribeiro</forename><surname>Marco Tulio</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">SIGKDD</title>
+				<imprint>
+			<date type="published" when="2016">2016</date>
+			<biblScope unit="page" from="1135" to="1144" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b41">
+	<monogr>
+		<title level="m" type="main">Cockpit: A Practical Debugging Tool for Training Deep Neural Networks</title>
+		<author>
+			<persName><forename type="first">Frank</forename><surname>Schneider</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Felix</forename><surname>Dangel</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Philipp</forename><surname>Hennig</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2021">2021. 2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b42">
+	<monogr>
+		<title level="m" type="main">UMLAUT: Debugging Deep Learning Programs using Program Structure and Model Behavior</title>
+		<author>
+			<persName><forename type="first">E</forename><surname>Schoop</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Huang</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Hartmann</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2021">2021</date>
+			<biblScope unit="page">2021</biblScope>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b43">
+	<analytic>
+		<title level="a" type="main">Deep Inside Convolutional Networks: Visualising Image Classifcation Models and Saliency Maps</title>
+		<author>
+			<persName><forename type="first">K</forename><surname>Simonyan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Vedaldi</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Zisserman</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">ICLR</title>
+				<imprint>
+			<date type="published" when="2014">2014</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b44">
+	<monogr>
+		<title level="m" type="main">Understanding Failures of Deep Networks via Robust Feature Extraction</title>
+		<author>
+			<persName><forename type="first">Sahil</forename><surname>Singla</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Besmira</forename><surname>Nushi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Shah</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Kamar</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Horvitz</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2020">2020. 2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b45">
+	<monogr>
+		<title level="m" type="main">SmoothGrad: removing noise by adding noise</title>
+		<author>
+			<persName><forename type="first">D</forename><surname>Smilkov</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2017">2017. 2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b46">
+	<analytic>
+		<title level="a" type="main">Explainability fact sheets: a framework for systematic assessment of explainable approaches</title>
+		<author>
+			<persName><forename type="first">Peter</forename><surname>Kacper</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Flach</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2020 Conference on Fairness, Accountability, and Transparency</title>
+				<meeting>the 2020 Conference on Fairness, Accountability, and Transparency</meeting>
+		<imprint>
+			<date type="published" when="2020">2020</date>
+			<biblScope unit="page" from="56" to="67" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b47">
+	<analytic>
+		<title level="a" type="main">Beyond Expertise and Roles: A Framework Characterize the Stakeholders of Interpretable Machine Learning and their Needs</title>
+		<author>
+			<persName><forename type="first">Harini</forename><surname>Suresh</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Steven</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K K</forename><surname>Gomez</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Nam</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Satyanarayan</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2021 CHI Conference on Human Factors in Computing Systems</title>
+				<meeting>the 2021 CHI Conference on Human Factors in Computing Systems</meeting>
+		<imprint>
+			<date type="published" when="2021">2021</date>
+			<biblScope unit="page" from="1" to="16" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b48">
+	<monogr>
+		<title level="m" type="main">A deeper look at dataset bias. In Domain adaptation in computer vision applications</title>
+		<author>
+			<persName><forename type="first">Tatiana</forename><surname>Tommasi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Novi</forename><surname>Patricia</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Barbara</forename><surname>Caputo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Tinne</forename><surname>Tuytelaars</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2017">2017</date>
+			<publisher>Springer</publisher>
+			<biblScope unit="page" from="37" to="55" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b49">
+	<analytic>
+		<title level="a" type="main">Unbiased look at dataset bias</title>
+		<author>
+			<persName><forename type="first">Antonio</forename><surname>Torralba</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Alexei</forename><forename type="middle">A</forename><surname>Efros</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">CVPR 2011. IEEE</title>
+				<imprint>
+			<date type="published" when="2011">2011</date>
+			<biblScope unit="page" from="1521" to="1528" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b50">
+	<analytic>
+		<title level="a" type="main">Program understanding behavior during debugging of large scale software</title>
+		<author>
+			<persName><forename type="first">Anneliese</forename><surname>Von Mayrhauser</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Marie</forename><surname>Vans</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Papers presented at the seventh workshop on Empirical studies of programmers</title>
+				<imprint>
+			<date type="published" when="1997">1997</date>
+			<biblScope unit="page" from="157" to="179" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b51">
+	<analytic>
+		<title level="a" type="main">The what-if tool: Interactive probing of machine learning models</title>
+		<author>
+			<persName><forename type="first">James</forename><surname>Wexler</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mahima</forename><surname>Pushkarna</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Tolga</forename><surname>Bolukbasi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Martin</forename><surname>Wattenberg</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Fernanda</forename><surname>Viégas</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jimbo</forename><surname>Wilson</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">IEEE transactions on visualization and computer graphics</title>
+		<imprint>
+			<biblScope unit="volume">26</biblScope>
+			<biblScope unit="page" from="56" to="65" />
+			<date type="published" when="2019">2019. 2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b52">
+	<analytic>
+		<title level="a" type="main">CheXplain: Enabling Physicians to Explore and Understand Data-Driven, AI-Enabled Medical Imaging Analysis</title>
+		<author>
+			<persName><forename type="first">Yao</forename><surname>Xie</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">CHI</title>
+				<imprint>
+			<date type="published" when="2020">2020</date>
+			<biblScope unit="page" from="1" to="13" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b53">
+	<analytic>
+		<title level="a" type="main">Manifold: A model-agnostic framework for interpretation and diagnosis of machine learning models</title>
+		<author>
+			<persName><forename type="first">Jiawei</forename><surname>Zhang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yang</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Piero</forename><surname>Molino</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Lezhi</forename><surname>Li</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">David S</forename><surname>Ebert</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">IEEE transactions on visualization and computer graphics</title>
+		<imprint>
+			<biblScope unit="volume">25</biblScope>
+			<biblScope unit="page" from="364" to="373" />
+			<date type="published" when="2018">2018. 2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b54">
+	<analytic>
+		<title level="a" type="main">Machine learning testing: Survey, landscapes and horizons</title>
+		<author>
+			<persName><forename type="first">J M</forename><surname>Zhang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Harman</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">IEEE Transactions on Software Engineering</title>
+		<imprint>
+			<date type="published" when="2020">2020. 2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b55">
+	<analytic>
+		<title level="a" type="main">Exploratory machine learning with unknown unknowns</title>
+		<author>
+			<persName><forename type="first">Peng</forename><surname>Zhao</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yu-Jie</forename><surname>Zhang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Zhi-Hua</forename><surname>Zhou</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">In AAAI</title>
+		<imprint>
+			<biblScope unit="volume">35</biblScope>
+			<biblScope unit="page" from="10999" to="11006" />
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+				</listBibl>
+			</div>
+		</back>
+	</text>
+</TEI>

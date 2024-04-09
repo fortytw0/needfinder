@@ -1,0 +1,1027 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xml:space="preserve" xmlns="http://www.tei-c.org/ns/1.0" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.com/kermitt2/grobid/master/grobid-home/schemas/xsd/Grobid.xsd"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+	<teiHeader xml:lang="en">
+		<fileDesc>
+			<titleStmt>
+				<title level="a" type="main">How Data Workers Cope with Uncertainty: A Task Characterisation Study</title>
+			</titleStmt>
+			<publicationStmt>
+				<publisher/>
+				<availability status="unknown"><licence/></availability>
+			</publicationStmt>
+			<sourceDesc>
+				<biblStruct>
+					<analytic>
+						<author>
+							<persName><forename type="first">Nadia</forename><surname>Boukhelifa</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="institution" key="instit1">LTCI</orgName>
+								<orgName type="institution" key="instit2">CNRS</orgName>
+								<orgName type="institution" key="instit3">Telecom ParisTech</orgName>
+								<orgName type="institution" key="instit4">Université Paris-Saclay</orgName>
+							</affiliation>
+							<affiliation key="aff3">
+								<orgName type="laboratory">UMR GMPA</orgName>
+								<orgName type="institution" key="instit1">AgroParisTech</orgName>
+								<orgName type="institution" key="instit2">INRA</orgName>
+								<orgName type="institution" key="instit3">Université Paris-Saclay</orgName>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Marc-Emmanuel</forename><surname>Perrin</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="institution" key="instit1">LTCI</orgName>
+								<orgName type="institution" key="instit2">CNRS</orgName>
+								<orgName type="institution" key="instit3">Telecom ParisTech</orgName>
+								<orgName type="institution" key="instit4">Université Paris-Saclay</orgName>
+							</affiliation>
+							<affiliation key="aff1">
+								<orgName type="laboratory">LRI</orgName>
+								<orgName type="institution" key="instit1">Univ. Paris-Sud</orgName>
+								<orgName type="institution" key="instit2">CNRS</orgName>
+								<orgName type="institution" key="instit3">Université Paris-Saclay</orgName>
+								<address>
+									<region>Inria</region>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Samuel</forename><surname>Huron</surname></persName>
+							<affiliation key="aff2">
+								<orgName type="institution" key="instit1">CNRS</orgName>
+								<orgName type="institution" key="instit2">Telecom ParisTech</orgName>
+								<orgName type="institution" key="instit3">Université Paris-Saclay</orgName>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">James</forename><surname>Eagan</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="institution" key="instit1">LTCI</orgName>
+								<orgName type="institution" key="instit2">CNRS</orgName>
+								<orgName type="institution" key="instit3">Telecom ParisTech</orgName>
+								<orgName type="institution" key="instit4">Université Paris-Saclay</orgName>
+							</affiliation>
+						</author>
+						<title level="a" type="main">How Data Workers Cope with Uncertainty: A Task Characterisation Study</title>
+					</analytic>
+					<monogr>
+						<imprint>
+							<date/>
+						</imprint>
+					</monogr>
+					<idno type="DOI">10.1145/3025453.3025738</idno>
+				</biblStruct>
+			</sourceDesc>
+		</fileDesc>
+		<encodingDesc>
+			<appInfo>
+				<application version="0.7.1" ident="GROBID" when="2022-07-22T05:04+0000">
+					<desc>GROBID - A machine learning software for extracting information from scholarly documents</desc>
+					<ref target="https://github.com/kermitt2/grobid"/>
+				</application>
+			</appInfo>
+		</encodingDesc>
+		<profileDesc>
+			<textClass>
+				<keywords>
+					<term>H.5.m. Information Interfaces and Presentation (e.g. HCI): Miscellaneous uncertainty</term>
+					<term>data analysis</term>
+					<term>data science</term>
+					<term>qualitative study</term>
+				</keywords>
+			</textClass>
+			<abstract>
+<div xmlns="http://www.tei-c.org/ns/1.0"><p>Uncertainty plays an important and complex role in data analysis, where the goal is to find pertinent patterns, build robust models, and support decision making. While these endeavours are often associated with professional data scientists, many domain experts engage in such activities with varying skill levels. To understand how these domain experts (or "data workers") analyse uncertain data we conducted a qualitative user study with 12 participants from a variety of domains. In this paper, we describe their various coping strategies to understand, minimise, exploit or even ignore this uncertainty. The choice of the coping strategy is influenced by accepted domain practices, but appears to depend on the types and sources of uncertainty and whether participants have access to support tools. Based on these findings, we propose a new process model of how data workers analyse various types of uncertain data and conclude with design considerations for uncertainty-aware data analytics.</p></div>
+			</abstract>
+		</profileDesc>
+	</teiHeader>
+	<text xml:lang="en">
+		<body>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>INTRODUCTION</head><p>Data scientists are professionals whose primary function is to extract knowledge or insight from structured and unstructured data. One of the key challenges they face is how to deal with uncertainty that could arise from, e.g., missing values, imprecision, and noise. In today's age of digital footprints, experts from various domains equally engage in data science activities with varying levels of skills. These non-professional data scientists, or data workers, acquire and generate datasets that they then need to explore, in order to find pertinent patterns, build robust models, and construct supporting arguments for decision making. Whereas professional data scientists may have formal training to deal with uncertainty (e.g. uncertainty modelling, propagation, and visualization techniques), it is not clear how data workers deal with this uncertainty in practice. Uncertain data may require special types of analysis tasks and exploration strategies, but little work has looked at how data workers manage uncertainty.</p><p>Existing work that has looked at data analysis in the wild did not necessarily focus on uncertainty <ref type="bibr" target="#b16">[16]</ref> or only examined one aspect of the analysis such as the uncertainty categories <ref type="bibr" target="#b31">[32]</ref>. Work that has considered the whole analysis pipeline has generally focused on specific domains or on trained data scientists <ref type="bibr" target="#b30">[31]</ref>. In addition, related user-studies on uncertain data analysis have largely dealt with simplified low-level tasks, making it unclear how applicable the results of these studies are in the real-world <ref type="bibr" target="#b29">[29]</ref>. When high level tasks are used, few authors justify their choice <ref type="bibr" target="#b19">[19]</ref>. Recent reviews <ref type="bibr" target="#b19">[19,</ref><ref type="bibr" target="#b18">18,</ref><ref type="bibr" target="#b2">3]</ref> on the exploration of uncertain data show an existing, large body of work that focuses on communication <ref type="bibr" target="#b17">[17,</ref><ref type="bibr" target="#b12">12]</ref>, collaboration <ref type="bibr" target="#b35">[35,</ref><ref type="bibr" target="#b7">8]</ref> and user evaluations <ref type="bibr" target="#b3">[4,</ref><ref type="bibr" target="#b33">34]</ref>. These reviews also highlight the need to focus on enabling reasoning and sense-making under uncertainty <ref type="bibr" target="#b25">[25]</ref>. Although there are established general data analysis and sense-making models, few frameworks explicitly consider uncertainty at all stages of analysis.</p><p>To better understand how data workers analyse uncertain data in practice, we conducted a qualitative user study to identify the various sources and types of uncertainty that our study participants encounter in their daily work; the tasks that they engage in when they are confronted with uncertainty; the different uncertainty coping strategies they deploy; and other factors that may affect analysis under uncertainty. Our contributions are (1) a characterisation of uncertainty-aware data analysis in practice, highlighting sources and types of uncertainty, specific tasks and processes, strategies to manage and exploit this uncertainty, and human and technical factors affecting the analysis; (2) a process model that describes common uncertainty-aware data analysis tasks and workflows; and (3) a set of design considerations and open research questions for further research in the analytics of uncertainty.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Data Culture</head><p>CHI 2017, May 6-11, 2017, Denver, CO, USA</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>RELATED WORK</head><p>A variety of research has focused on understanding how analysts work with uncertain data, including defining typologies, task taxonomies, coping strategies, and creating analysis and sense-making models. We contribute to this body of work an analysis of how real-world data workers think about, understand, and deal with uncertainty.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>The Diversity of Uncertainty Concepts and Terms</head><p>There is no unified single definition of uncertainty across all domains. The general consensus is that there are different meanings and that the term itself encapsulates many concepts. For example, in information theory, Klir et al. <ref type="bibr" target="#b22">[22]</ref> describe uncertainty as a source of deficiencies such as incompleteness or as imprecise, unreliable, vague or contradictory information. With some overlap to Klir et al.'s taxonomy, Pang et al. <ref type="bibr" target="#b27">[27]</ref> define uncertainty for the scientific visualization domain to include "statistical variations or spread, errors and differences, minimum-maximum range values, and noisy or missing data". In Geographic Information Science (GIScience), MacEachren et al. <ref type="bibr" target="#b26">[26]</ref> built on existing models of information uncertainty to produce a topology of geospatial uncertainty with the goal of supporting visualization. Their conceptualisation delineates nine components of information uncertainty including error, precision, completeness, consistency, and subjectivity.</p><p>To further characterise information uncertainty, a number of authors have looked at sources of uncertainty. Pang et al. <ref type="bibr" target="#b27">[27]</ref> discuss how uncertainty can be introduced to the visualization pipeline from models, measurements, data transformations, and the visualization process itself. Taking the decision-maker into account, Kahneman and Tversky's <ref type="bibr" target="#b15">[15]</ref> taxonomy for what they call variants of uncertainty describes two sources of uncertainty: internal attributed to the human thinker, and external relating to the outside world. In the same spirit, Schunn and Trafton <ref type="bibr" target="#b30">[31]</ref> divide sources of information uncertainty in scientific data analysis into four classes related to physics, computation, visualization, and cognition.</p><p>These efforts to conceptualise uncertainty can have different goals in mind (e.g. support data analysis, visualization or decision making), which may explain their differences. However, there are also some commonalities. Gershon <ref type="bibr" target="#b6">[7]</ref> proposed a high level taxonomy of causes for imperfect knowledge where uncertainty becomes one source of this imperfection, with the remaining causes: corrupted data and information, incompleteness, inconsistency, complexity and imperfect presentation. Skeels et al. <ref type="bibr" target="#b31">[32]</ref> also looked at common uncertainty categories across domains. Their classification captures two uncertainty dimensions: types and levels of uncertainty; where measurement uncertainty lives at the low level of the taxonomy, completeness at the mid level, inference at the high level, and credibility and disagreement span all levels.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Strategies and Tasks to Cope with Uncertainty</head><p>Although not the focus of their study, Skeels et al. <ref type="bibr" target="#b31">[32]</ref> looked at how domain experts deal with information uncertainty. Their participants decided to either "live with the uncertainty" or "try to become more certain". The choice of which strategy to adopt was the result of balancing the costs and benefits of accounting for the uncertainty. A more detailed description of uncertainty coping strategies in scientific data analysis can be found in <ref type="bibr" target="#b30">[31]</ref>. Based on longitudinal observations of experts in the field, Shunn and Trafton described two categories for dealing with informational uncertainty: diagnosis and reduction. They illustrated each strategy with tasks they observed from cognitive anthropological work that they carried out over several years for specific scientific domains. Like our work, they conducted interviews and real-world observations. Our focus in this work, however, is on understanding how data workers, or what we could call non-professional data scientists, think about, manage, and interpret uncertainty. As such, while we use similar methods, our participants come from a wider variety of domains and would not necessarily associate with the job title of "[data] scientist."</p><p>The closest work in spirit to ours is perhaps the study by Lipshitz and Strauss <ref type="bibr" target="#b23">[23]</ref>. Their work is also concerned with the understanding of uncertainty, coping strategies, and the relationship between the two. However, our contexts, methods and results differ. Lipshitz and Strauss focus on decision makers in the context of military defense. In contrast, our participants are data workers from a variety of domains and they engage in data-driven decision support; they are not necessarily decision makers. Further more, Lipshitz and Strauss use self reports of decision making scenarios drawing on participants' long term memory. We use interviews and think aloud walkthroughs and look specifically at user interactions with support tools.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Uncertainty-Aware Sensemaking Models</head><p>Various authors have proposed design guidelines for empirical evaluation studies that take into account pain points in the sense-making process (such as hypothesis management, reasoning, and decision making) and their associated cognitive biases <ref type="bibr" target="#b28">[28]</ref>. Klein et al.'s data-frame theory of sensemaking <ref type="bibr" target="#b21">[21,</ref><ref type="bibr" target="#b20">20]</ref> proposes a closed-loop to track anomalies, gauge data quality and infer new data that could be suitable to manage uncertainty in the sense-making process and on the user's mental model. These models suggest that analysts maintain a mental representation of what data should be like, allowing them to filter uncertain data from their workflows. The use of uncertainty in the decision making process is not new and impacts various domains, types of data, and kinds of analysis <ref type="bibr" target="#b11">[11]</ref>. Focusing on the human analyst, Grolemund and Wickham <ref type="bibr" target="#b8">[9]</ref> propose a cognitive model and interpretation of the data analysis process that describes the effects of cognitive bias inherited from sense-making processes, with a goal of improving current data-analysis. Other work has examined relationships between uncertainty and human trust <ref type="bibr">[30]</ref> to propose guidelines and challenges aiming to handle uncertainty, and to expose frameworks for uncertainty-aware visual analytics systems <ref type="bibr" target="#b5">[6,</ref><ref type="bibr" target="#b25">25]</ref>. By better understanding the role of uncertainty in the analytic process, we can provide data workers with much-needed tools to facilitate reflection over the relationships in a whole data set <ref type="bibr" target="#b0">[1]</ref> and to provide support for decision-making in the face of uncertainty <ref type="bibr" target="#b1">[2]</ref>.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>STUDY DESIGN</head><p>We conducted semi-structured interviews and think-aloud demos with domain experts to better understand their workflows Data Culture CHI 2017, May 6-11, 2017, Denver, CO, USA when they analyse uncertain data. In particular, we wanted to investigate the following aspects of analysis under uncertainty:</p><p>[A1] The types &amp; sources of uncertainty affecting analysis.</p><p>[A2] The tasks data workers engage in.</p><p>[A3] The strategies they deploy to cope with uncertainty.</p><p>[A4] The role of expertise &amp; automatic tools in the analysis.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Participants</head><p>We interviewed 12 domain experts (9 female) aged 26-56 (mean 38) from 11 different organisations (2 enterprise, 7 research and 3 mixed units). The organisations where from different sectors including healthcare, marketing, history and GIScience (Table <ref type="table" target="#tab_1">1</ref>). Participants were self identified as working with uncertainty describing it as an important aspect to consider during the analysis and decision making. They held a number of job titles, including "researcher", "historian", "medical surgeon", "consultant" and "chief data officer". Particiants ranged from PhD. students in their second year of work to chief data officer with over 14 years of experience. In this paper, we use the term "data worker" to refer to anyone whose primary job function includes working with data to answer questions that inform business <ref type="bibr" target="#b16">[16]</ref> or research decisions. We recruited participants by email contacts at organisations within our personal and professional networks.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Study Procedure</head><p>The study was conducted in the following steps. First, we carefully prepared a recruitment email paying attention not to bias potential participants. For instance, we did not provide a definition of what uncertainty means. However, when prompted, we gave this definition: "uncertainty is when you are not sure about one or more aspects of your data". Data was defined as any artifact used for the analysis such as text documents, data tables, images and maps. We asked our participants to prepare an analysis scenario from a recent project. We arranged to meet our participants in their workplace whenever possible (three participants were interviewed by means of video conferencing because they were travelling or due to visitor restrictions at their workplaces). Interviews were one-to-one and lasted from 45 minutes to 2 hours. They were conducted in the participant's native language (10 participants) or the second language to facilitate verbalisation. We began each interview with a quick introduction describing the purpose of the study: "to understand how domain experts explore and analyse uncertain data". The rest of the interview was conducted in a semi-structured fashion. Whenever possible, we asked participants to show us the tools and data sets they use within their current organisation and walk us through their scenario in a think-aloud demo style. All interviews were video recorded to better capture user interactions with the tools. Throughout the interview, we took extensive notes.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Interviews and Think-Aloud Demos</head><p>We asked open-ended questions and encouraged participants to describe their lived experiences, such as "walk us through a recent analysis scenario" or "if you had a magic wand, what would you change to improve the analysis described in your scenario?". The interview was structured in three parts. In the first part, we asked questions about what uncertainty means to the participant and their community's general approach for handling uncertainty [A1,A3]. In the second part, we asked participants to think of a recent project or scenario where they had to analyse data for their work, e.g. to report on their findings or to make a decision, and where taking uncertainty into account was important. After describing the context of the scenario, datasets and tools, we wanted to understand how the analysis is undertaken by asking participants to break down their workflow into three to six main steps. For each step, we asked participants questions to clarify the high level goals, specific tasks and uncertainty coping strategies [A2,A3]. In addition, we paid special attention to the different analysis stages affected by uncertainty, and the role of expertise and automatic tools at each step [A4]. Whenever possible, this part of the interview was run as a think-aloud demo session (7 out of 12 participants prepared a demo). Here, we asked the participants to proceed with their analysis while speaking out loud about what they are thinking of. The interviewer observed, asked questions and took extensive notes. In the final part, we had an open discussion about the main challenges data workers face today when exploring uncertain data and their views on how these could be addressed.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Data Collection and Analysis</head><p>We collected 681 minutes of recordings in total, which were transcribed by one author. The resultant data set contained 92,151 words. Two authors independently open coded the transcripts, highlighting interesting snippets of text and key ideas.</p><p>We then crossed checked the selected excerpts before extracting 805 snippets, we call "notes", into a data table. After filtering, we analysed 787 notes using iterative coding based on the grounded theory <ref type="bibr" target="#b4">[5]</ref> method and digital affinity diagramming. We grouped common types and sources of uncertainty; tasks and strategies; and tools and expertise into high level categories. We iterated and refined these categories in separate affinity diagrams as we gathered more data. An analysis of affinity diagramming log data for theoretical saturation found conceptual stability after ≈ 2 3 of the data analysis. Whenever possible, we went back to our participants for validation. In total we produced four independent affinity diagrams covering the different aspects of uncertainty: types and sources [A1], tasks and strategies [A2,A3], human and technical factors [A4], in addition to a global diagram containing all the notes.</p><p>A second type of analysis was carried out to extract workflows from participants' scenarios. This was achieved in the following steps: (a) two independent authors analysed the video and transcript data, and drew a process diagram for each participant's scenario; (b) each diagram was sent to the corresponding participant for validation; (c) two authors open coded participants' activities using, as much as possible, the task labels that emerged from the affinity diagramming (there were 161 tasks in total); (d) these domain-specific tasks were open coded by the same authors and mapped into five high-level categories, we call processes (Figure <ref type="figure">1</ref>).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Apparatus</head><p>To facilitate the exploration of our notes, we prototyped an affinity diagramming tool to use on a multi-touch wall-size display. Whereas analog affinity diagramming provides rich interactions and material affordances <ref type="bibr" target="#b10">[10]</ref>, we found that when dealing with a large set of notes, digital affinity diagramming is a more effective approach to accommodate our emerging hypotheses. It also helped to save time and avoid digitisation and note transfer errors.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>FINDINGS</head><p>In this section we report on our main findings, covering sources and types, processes and workflows, uncertainty coping strategies, and human and technical factors. As much as possible, we will give example statements from participants.</p><p>Our participants contributed their own definitions of what uncertainty means for their respective domains. We found that most of these definitions covered two important aspects of uncertainty: type and source. Uncertainty types refer to unknowns and imperfections that are often measurable in some way, qualitatively or quantitatively. Uncertainty sources refer to the causes of uncertainty. We note that although some participants referred to established taxonomies (e.g. in GIScience) to define precisely what uncertainty means for their domain, others used the term "uncertainty" more broadly.</p><p>Generally speaking, sources and types of uncertainty do not form a perfect dichotomy: some sources of uncertainty can also be considered as categories of uncertainty and vice versa, whereas some sources and types of uncertainty are independent. These terms fall generally into one of four layers: data, model, interface, and cognitive. At the data layer, uncertainty pertains to the data set itself, such as uncertainty about particular values in the data. At the model layer, uncertainty pertains more to processing applied to the underlying data, such as to fit them to a particular model. The interface layer deals with the software that acts as an interface between the data and the user. Finally, uncertainty at the cognitive level relates to how the user interprets and makes sense of the data.</p><p>Source and types of uncertainty do not cleanly partition into individual categories. For example, ambiguity may enter in at the data level or it may pertain to reasoning. As such, individual source-types of uncertainty may figure in at multiple levels.</p><p>(Note: quotations indicated with a † have been translated.)</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Types of Uncertainty</head><p>In this section, we describe the types of uncertainty that we identified in participant interviews. These types are not intended to provide an exhaustive taxonomy of the different kinds of uncertainty that exist. Rather, our intent is to provide a characterisation of the kinds of uncertainty that arose from our interviews.</p><p>Uncertainty arose at all layers of the data analysis model: at the data, model, interface, and cognitive layers. At the data layer, we identified five such types of uncertainty: Errors; imprecise or inaccurate data; inconsistency; missing or unknown data; and vagueness, ambiguity, and fuzziness. Errors pertain to captured data that might not accurately reflect ground truth, such as might be introduced by transcription errors; imprecision may be due to sensor error or historical artifacts. For example, one participant dealt with historical manuscripts that date from somewhere in the "13th or 14th century" (P5 † ). Ambiguity or fuzziness may derive from inexact naming: "The catch is that, in [this country], a city is not unique. There can be two [city-name]s in [this country]" (P7 † ). Finally, missing data pertains to values that might not have been recorded in the data set. Regardless of which kind of uncertainty is present, uncertainty at the data level relates to uncertainty that exists in the underlying captured data and its relationship to the phenomena they are intended to represent.</p><p>Model uncertainty is that which is related to the models that are used to, e. g., fit or analyze the data by automated means. This kind of uncertainty generally consists of inaccuracy and error, wherein the model may be an approximation of processes described by the data.</p><p>Interface uncertainty relates to the software interface used to process, visualise, or interact with the data. It is different from modelling types in that the software does not try to interpret or model the data. We identified two types of interface uncertainty: algorithmic errors and inconsistency between the system and interface. Algorithmic errors are those introduced by data processing algorithms, such as when OCR might misinterpret an 18th-century long "s" as an "f" (P5).</p><p>Finally, cognitive uncertainty pertains to the human reasoning process, such as sense-making or inter-personal dynamics. For example, one participant would try to reason about missing data by making several categories of possible values, carrying those possibilities throughout the different phases of the analysis process (P12).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Sources of Uncertainty</head><p>As with types of uncertainty, we have identified a variety of sources of uncertainty at the data, model, interface, and cognitive levels. Sources of uncertainty at the data level pertain to uncertainty that manifests itself directly in the data set itself. These sources thus pertain to uncertainty in the source data under consideration. We have identified the following kinds of data sources of uncertainty among our participants: variability, temporality, inconsistency, missing data, and bias.</p><p>One such example is when meaning may change over time: "[City A] is today a part of the city of [City B], but back then it was an independent parish" (P2 † ). These kinds of sources of uncertainty exist directly in the underlying data.  Model sources are not directly related to the data themselves but to applied models, such as by using sampling on a continuous data model (P6). Interface sources introduce uncertainty that is not necessarily present in the underlying data or the model, but rather in the tools used to communicate them to the user.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Data</head><p>Finally, cognitive sources of uncertainty come from reasoning about the data or other similar cognitive, human factors, rather than uncertainty intrinsic to the data. We identified three primary cognitive sources of uncertainty: ambiguity/communication, subjectivity, and more general human factors. For example, a historian reported that when "reading the same article, . . . , I understood one thing, and [my colleague] understood something else" (P2 † ).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Processes in Uncertain Data Analysis</head><p>In this section we describe abstract tasks that our participants engaged in when they analysed uncertain data. Our approach is similar to <ref type="bibr" target="#b14">[14]</ref> for collaborative visual analysis and <ref type="bibr" target="#b13">[13]</ref> for visualization construction, where we also focus on meta-level processes rather than low level tasks. We then use these processes as building blocks to illustrate participants' workflows from which we generate a process model that characterises uncertain data analysis. We illustrate this process model with a use case from participant P12 (Figure <ref type="figure">3</ref>).</p><p>Our analysis revealed five processes frequently used by our participants when analysing uncertain data (summarised in Table 2): acquire, manipulate, reason, characterise and present. Key to data analysis are the manipulate, characterise and reason processes. We differentiate between these processes by the output they each produce: manipulate generates data; characterise generates meta-data and reason generates thoughts. The characterise process being particular to uncertain data analysis. We note that these sensemaking processes are not strictly delineated in practice. In many cases, we observed overlaps between processes. In our analysis, we characterised these processes by the dominant process or by a transition between overlapping processes. We describe each process and provide real examples drawn from our study, discussing when relevant, the type and source of uncertainty, participants' tasks and any collaboration with other parties.</p><p>Acquire: Most participants start their analysis by acquiring data (11/12) and half of them would repeat this process at least once during the analysis. The acquisition process comprises activities involving collecting, generating, enriching and storing data. The result of this process is often a database. Our participants acquired images (P1,2), sensor data (P6, <ref type="bibr" target="#b8">9,</ref><ref type="bibr" target="#b11">11,</ref><ref type="bibr" target="#b12">12)</ref>, log data (P12), DNA sequencing tables (P3,4,8), and documents (P2,5,10). They either generated these datasets themselves or received them from a third party or a combination of both. Data acquisition in itself, was considered a source of uncertainty, often generating errors, imprecisions, vagueness, inconsistencies and missing values.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Manipulate:</head><p>The manipulation process consists of applying computerised tools that transform data. We have observed four groups of data manipulations: transform by application of statistical operations (e.g. normalisation) and aggregation; correct often to clean data or correct known biases; remove such as for filtering outliers; and enrich through data fusion, extrapolation, duplication and estimation. We consider operations that change models of data as part of this category. These operations can be manual or automatic and the output is typically a transformed or a new database or model. All our participants manipulated data or models of it; and used one or more of the aforementioned data manipulation tasks.</p><p>Characterise Uncertainty: This process involves any operation which tries to qualify or quantify uncertainty, thus generating information about uncertainty. We found this process to be characteristic of uncertainty-aware data analysis, and all our participants engaged in this activity. Characterisation tasks are either informal via annotations, or more formal to compute or model the uncertainty. When annotating, participants assigned notes to data, to describe their thoughts, doubts and their own or collaborative informal assessments of data quality. The output of this task are often annotations and comments, stored as metadata in a database (P1,2,3,4,10). This method was most used for annotating the following data level uncertainties: ambiguity (P1,2,10), imprecisions (P1,2,12) and inconsistency (P10). Computing the uncertainty was often carried out through statistical assessments of data quality (e.g. calculating the mean and standard deviation (P1,4,7)), or by defining a quality threshold manually (P1) or through learning and clustering algorithms (P7, <ref type="bibr" target="#b8">9,</ref><ref type="bibr" target="#b12">12)</ref>. This method was applied to a variety of uncertainty categories: variability (P1,4,7,9,12), missing data (P1,9), imprecision (P9,12), error (P7), noise (P9) and inconsistency (P12). Modelling is the most formal way to characterise uncertainty. A few participants engaged in this activity where they tried to build a model that takes uncertainty into account (P8,9,12) or model the uncertainty in itself (P12). All these models had a confidence attribute to characterise predictions or estimations. This method was most used for missing data (P8) and ambiguity (P12).</p><p>Reason: Reasoning encapsulates all tasks that result in the generation of thoughts, insights or decisions. This could be an individual or a collaborative task. The outcome of this process is currently not stored or exploitable in an automatic process. In this category, we include the following re-occurrent tasks within our participants: infer, interpret, make a hypothesis, cross check, compare, search, derive insight, conclude and validate with experts. All of our participants reasoned about their data and with uncertainty during their analysis. Present: In the present process, participants produced artefacts such as written reports, presentations and plots for the purpose of exploration, communication and dissemination. All participants used this process, usually towards the end of their analysis workflow. However, only a few participants used the present process to explore intermediate results. Amongst these participants, (P9) was interested in visualising two categories of uncertainty: noise and variability. This participant produced histograms to understand data distribution, and used Fourier transfom visualizations, to understand the quality of measured signals. Other participants, used graph based visualizations to explore ambiguous entity relationships (P2).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Data</head></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Sequences of Processes and Workflows</head><p>To understand how the five processes of analysis under uncertainty relate to one another, we created a process workflow for each participant using our process labels (Figure <ref type="figure">1</ref>). The visual analysis of these processes shows no common overall sequencing between participants. What is shared, however, is that many participants started their analysis with data acquisition and finished with a presentation of their findings (six participants). Starting with data acquisition seems a standard practice (11/12), however, what is interesting is that it could occur at any time during the analysis process itself. Indeed, participants often needed to enrich their data from external sources (P2,7), even towards the end of the analysis for comparison with initial views e.g. P1 who compared a 2D scan acquired at the beginning of the analysis with another one performed after a surgical operation.</p><p>Data manipulation, is at the core of the analysis, interleaved with reasoning and uncertainty characterisation. Similar to data acquisition and manipulation, but with a higher frequency is the uncertainty characterisation process. It appears that the majority of participants used this process extensively, often using two or more characterisation operations in a row. For participant P10 recorded various types of annotations when resolving conflicts related to software versioning. P5 adopted a similar approach for characterising ambiguous links between paragraphs in a manuscript. Interestingly, uncertainty characterisation is never at the end of the analysis (like data acquisition). This is because for all of our participants, managing uncertainty was an aspect of analysis and not the goal. Reasoning also happens at various places in the analysis. This is understandable, as participants form hypotheses that inform all other steps of data analysis.</p><p>We translated these findings about the process sequences into the process model in Figure <ref type="figure" target="#fig_0">2</ref>. The diagram illustrates our observation that the five data analysis processes can occur at anytime during the analysis. The links between the process boxes indicate possible sequence paths.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Use case</head><p>Participant (P12) is a GIScience expert working at a state agency. P12's employer plans a new update to the company's database. One source of information they are currently using are crowd-sourced GPS logs that walkers publish online. However the acquisition of these GPS logs could generate errors, noise, and incoherent data (&gt;acquire data). The first analysis step undertaken by P12 is to interpret the new data to locate the geospatial features described in the logs. P12 then tries to assess whether the new data is valid and meets the company's standards (&gt;reason). This can be done automatically or manually, and involves multiple sub-tasks: filtering outliers and aberrant values, and verifying whether the GPS logs have the expected scales, distances, directions and speed (&gt;characterise uncertainty). The outcome of this step determines whether or not P12 will save the crowdsourced data (&gt; manipulate data). If this data is not reliable, P12 tries to find more appropriate sources. Next, P12 compares logs with existing models (&gt; characterise) based on multiple criteria, in order to produce a trust score. P12 then tries to identify the new changes required to update their database (&gt; reason), for instance, adding a new path that has emerged in the forest due to incidents. If the changes are important and P12 is unsure, a surveyor is sent to the field to acquire data. P12 goes through the identification process again, and then finally saves the data (&gt; manipulate data) along with a trust score. Finally, the new data and the computed/modelled uncertainty are presented to decision makers. Based on this information, decision makers create new policies and construction plans.</p><p>Next, we go deeper into the analysis of uncertainty processes, by considering how data workers combine operations to achieve goals respect to uncertainty management.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Strategies to Cope with Uncertainty</head><p>The analysis of our data revealed two categories of uncertainty coping strategies: active and tacit. Active strategies involve methods that participants employed to understand, minimise or exploit the underlying uncertainties. We add to this category the ignore strategy, where participants chose to explicitly ignore uncertainty either because it was not relevant to the analysis or business need, or because it was difficult to control. Tacit strategies reflect accepted domain practices and perceptions with regards to uncertainty.</p><note type="other">Save Update? New Survey Present New Policy Reliable?</note><p>Save? Coherent? Valid? GPS logs Figure <ref type="figure">3</ref>. A simplified process diagram of participant P12. The coloured line under the sketch corresponds to the steps of the flow diagram analysis for that participant. Yellow bubbles represent the analysis steps affected by uncertainty information, as reported in our participant's scenario.</p><p>In the following sections we summarise active user strategies for coping with uncertainty at the data level, before discussing tacit coping strategies. We do not discuss active strategies relating to non-data levels as we do not have enough notes related to this aspect of analysis. For each strategy, we discuss key component tasks and relate them to the five analysis processes (Acquire, Manipulate, Characterise, Reason, Present), as well as uncertainty types and sources.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Active Data-Level Strategies</head><p>All participants used one or more active strategies for their analysis scenario. What is noticeable is that all participants deal with more than one category of uncertainty (min 2, max 6), with nine participants dealing with four or more types and sources of data uncertainty (Table <ref type="table">3</ref>).</p><p>Ignoring Uncertainty: Although seven participants declared having ignored a known uncertainty in their data at some point during the analysis, this is not a common strategy (P2, <ref type="bibr" target="#b3">4,</ref><ref type="bibr" target="#b4">5,</ref><ref type="bibr" target="#b5">6,</ref><ref type="bibr" target="#b6">7,</ref><ref type="bibr" target="#b11">11,</ref><ref type="bibr" target="#b12">12)</ref>. Our participants ignored known ties when the category of uncertainty itself was not relevant to the analysis or when dealing with it was outside the scope of their role or expertise. There are also cases where uncertainty was too difficult to control, e.g. or due to technical limitations, e.g. "We cannot do anything with the first [technical bias], which is the viewpoint of the camera." (P11 † ).</p><p>Ignoring ambiguity in data can involve taking actions such as excluding all ambiguous objects from the analysis, or duplicating objects: "... may be that [name of a historical person] in my database is the right one. I prefer to make a duplicate ... It is always yes or no. There is never a middle ground. And this is what I really need." (P2 † ). For inconsistency due to conflicting data sources, the ignore strategy involves propagating the conflict down the analysis pipeline rather than dealing with it at the source. Ignoring missing data, refers to making hypotheses or assumptions about an incomplete dataset.</p><p>We noticed that ignoring uncertainty at later stages of the analsis does not mean that the data worker did not deploy active strategies to understand, minimise or exploit this uncertainty earlier (e.g. at acquisition). Even within the same analysis stage, participants could choose to ignore uncertainty in one aspect of their data and try to minimise it for others. For instance, P7 who needed to send a marketing campaign based on a customer database having missing data: "Knowing where the person is based is primordial to the business [...]. The age and the postal address are the two subjects that interest us. For the rest, there is missing data but we don't care." (P7 † ).</p><p>Understanding Uncertainty: This category of strategies aims primarily to improve participants' understanding as well as others awareness of uncertainty. It does not necessarily act as an immediate step before minimising or exploiting uncertainty. Seven participants reported scenarios where they used nderstanding as their primary coping strategy for the uncertainty types they were dealing with (P1,2,7,8,9,10,12). Both application users and programmers deploy this strategy. Understanding uncertainty might be an end in itself, rather than a means, for different reasons similar to those behind the ignore strategies, i.e. low priority at a particular stage of the analysis, or difficulty in taking the analysis further due to the intrinsic nature of uncertainty or technical limitations.</p><p>The understand strategies are important for bookkeeping, monitoring and communication purposes. Apart from acquire, all analysis processes feature in this category. However, uncertainty characterisation was the most frequently applied, including all three levels (ordered by frequency): annotate, compute and model. Annotate often involved adding free text or comments to describe participant's confidence in the data or its quality, e.g. P10 † : "there are things which are uncertain [...] we created a column to put our comments [...] when we have comments, kind of a doubt about an application that is impacted, or a document, we try to put a comment.". Characterise: involved computing summary statistics or algorithms to quality of quantify the uncertainty, e.g. P9 † : "we have our four positions and our 20 measurements per position, and so we will do classical things, like and standard deviation, or median showing histograms, to have an idea of whether what we did are reproducible or not [... ] ". Modelling involved using theory to formalise the uncertainty, e.g. P12 † : "[...] there are fuzzy logic theories, probability and evidence theory that will allow us to store these imprecisions and even to present them afterwards.".</p><p>Unsurprisingly, participants who modelled data/uncertainty or computed a quality measure (P1,8,9,12) had higher technical expertise, whereas annotations were added by both groups (P1,2,7,10,12). These processes appeared sometimes in chained pairs. More frequent however, was the reasoncharacterise sequence. We also had cases where participants used uncertainty characterisation tasks in a row, for instance computing the variability of data then writing notes about the confidence in the results. There are understand strategies for each uncertainty category except for bias. Coincidently, this is the least handled uncertainty category amongst our participants (together with inconsistency). Bias as a source of uncertainty, appears to be well understood by our participants (e.g. camera setting bias reported by P10 above) or well documented by trusted parties who generated the data, e.g. P3 who receives a document explaining data provenance including transformations and known biases at data acquisition. Minimising Uncertainty: This is by far the most widely used strategy, with all participants deploying one or more uncer-tainty minimisation processes at some point in their analysis. Processes used in this strategy are, in order of frequency: manipulate, characterise uncertainty, reason, and acquire. Interestingly, the present process was not used for the aim of minimising uncertainty. The manipulate process applies to all uncertainty categories. Common data manipulation tasks include filtering of outliers, removal of (uncertain) data, tions of known errors, data aggregation to reduce imprecisions, and data enrichments from algorithmic or external data sources.</p><p>characterise process, as part minimisation strategy, applies to all uncertainty categories with the exception of bias and imprecision. Typically participants used annotations to reduce ambiguity, e.g. P2 † : "Uncertainty comes to mind automatically in my secondary sources. In my case, when I transcribe, my transcription becomes a secondary source [...] here I try to put a link to the digitised register [...] to reduce this uncertainty [referring to ambiguity in the identity of people, dates and places]". Specifically for ambiguity, modelling, which can also be used as an understand strategy, is considered a minimisation strategy as it addressed the problem of fuzzy object classification (P12). This process, however, was more often used in combination with other tasks, typically with an acquisition process when data is missing, in order to record provenance or confidence in the new data, e.g. P7 † : "all those who bought a train ticket without telling us their age, we estimate age, and then we put a low probability/confidence.". In other cases, uncertainty characterisation was followed by a data manipulation process to filter noise and errors, or remove erroneous models. However, only half the participants stated that they removed uncertain data (P4,6,8,9,11,12). P7 † noted: "For each type of data [estimated values from tests] we add a new column [to the database]. We never remove data.".</p><p>The reason process affected six out of eight uncertainty sources and types and were mostly to compare and contrast different data sources and to validate with colleagues and other experts. Participants always followed this process with a data manipulation or uncertainty characterisation tasks. Finally, the acquire process affects primarily three types of uncertainty categories: missing data, error and variability. This process was sometimes followed by a characterisation task (often annotation) or a data manipulation (e.g. data correction).</p><p>Exploiting Uncertainty: In some cases, uncertainty was not considered as a burden, instead, it was viewed as a valuable source of information. Only P12 used this strategy for missing and imprecise data. This participant was technically skilled and familiar with formal theories to quantify and represent uncertainty. P12's approach was to extract value from uncertainties in the data using inferences, model building and testing: "[...] For example, two objects that do not have an attribute, but the fact that there is no attribute gives me an information. May be that this object, [...], in our database, objects who are not important do not have attributes [...] so really, the lack of information, could be a source of information. I exploited this like that." (P12 † ).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Tacit Strategies</head><p>Besides the active strategies that participants articulated, there were overarching perceptions that appear to come from ac-cepted domain practices. We call these, tacit strategies and loosely place them on a continuous uncertainty scale from attitudes considering uncertainty to be permanently present (P2,5,7), to the other extreme where relevant aspects of the analysis undertaken by the participant are regarded free of uncertainty (P3,4,9). P4, on the high uncertainty end, considers uncertainty to be not pertinent to her task. Considering the overall context, this participant (a biologist) receives data that has been already cleaned to remove known biases and reduce variability. P2 † , on the other end of the scale, a historian who is confronted with uncertainty all the time: "in social history, uncertainty is present all the time.", her general method involves making hypotheses and trusting authoritative sources (and conversely, being skeptical about less reliable ones).</p><p>Some participants appear to be on or close to both ends of the scale. This can be attributed to the variety of uncertainty categories that data workers are confronted with at the same time, necessitating different practices. For instance, P7, a data officer, considers current automatic tools to handle missing postal addresses for their customers too error-prone, and therefore a huge source of uncertainty. In the other direction, other attributes in their database are not sensitive (or important to the business) and thus their related uncertainties can be ignored. We observed that most participants a nuanced, and less extreme, attitude towards uncertainty (seven participants), e.g. P1, a medical surgeon, takes a general accepting attitude uncertainty is intrinsic to their domain, improvising when necessary as advanced planning is not always possible, combined with being explicit when communicating uncertainty to others.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Human and Technical Factors</head><p>The uncertainty coping strategies adopted by our participants involve both manual and automatic processes. It appears that expertise plays an important role in deciding what types and sources of uncertainty to ignore, and how to help understand, minimise or exploit them. For example, P1: "The 2-D technique [for surgery planification] seems to be not accurate enough, [...] and in this case it is better to deal with an experienced surgeon who may be able to find solutions at the time of surgery, to improvise something at the time of surgery". With regards to manually judging the source and date of a manuscript, P5 † commented: "We know well if a manuscript has an Italian writing, done in Rome, Venice or Naples". Moreover, data analysis workflows often involve multiple actors. For analysis under uncertainty, we observed a strong link between our participants, data providers and facilitators. This was particularly true for validation processes, where some participants lacked specific expertise to evaluate the output of their analysis (e.g. P8), or direct access to primary data sources (e.g. P6). In such collaborative settings, human expertise plays an important role in explaining, validating and communicating known uncertainties. However, coordination sometimes comes at a cost, e.g. P8 † noted: "we cannot just look at [our model/results] and say, this is OK. We have to ask, verify etc. This takes time.".</p><p>Visualization tools were used by nine participants to support different tasks, e.g. P2 used Jigsaw <ref type="bibr" target="#b24">[24]</ref> to explore entity relationships; P7 used Tableau to communicate analysis findings to the marketing team, and P8 used open source tools to visu-  <ref type="table">3</ref>. Data uncertainty coping strategies by high level goals: Ignore, Understand and Minimise (Exploit is not shown as it only applies to missing data &amp; imprecision). Strategies can combine multiple processes and are exemplified using process_label:task notation, where process_label is A, M, C, R or P for Acquire, Manipulate, Characterise, Reason and Present. Symbol ∧ denotes a chained process and ∨ an alternative process.</p><p>alise large metabolic networks for presentations and research publications. We note that some participants constructed their own visualizations, sometimes manually, such as P5 using post-it notes and highlighter pens (to show plagiarism patterns in a historical manuscript). Apart from P2 who did some exploration, visualization was mostly used for presentation and communication purposes. However, a number of participants expressed their need for advanced visualization tools to better present, explore and exploit uncertainty information.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Relating The Various Aspects of Uncertainty Analysis</head><p>So far, we have identified categories of uncertainty and strategies used in analysis under uncertainty. Drawing upon these observations, we have proposed a five-block process model of how data workers analyse uncertain data in their own domains. In this section, we try to link these categories, processes, and strategies (Table <ref type="table">3</ref>). Our aim is not to find correlations, but to highlight some trends based on the intuition that the studied aspects of analysis are not independent.</p><p>What strategies are used for which categories of uncertainty?</p><p>Our participants generally employed different coping strategies for different categories of uncertainty. For example, we only observed participants attempting to exploit uncertainty with missing or imprecise data. When confronted with ambiguity, participants tried to understand it more often than for any other category of uncertainty. For all other categories, participants tried to minimise uncertainty more than they attempted to ignore, understand, or exploit it (in that order).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>How do strategies relate to the identified processes?</head><p>There is also evidence in our data that participants used different analysis processes depending on their uncertainty coping strategies. No single strategy involves all of our analysis processes. The strategy that involves the most processes is understand (MCRP). Ignore (MR) and exploit (AR) involve only two processes each. Reason is employed by all types of strategies, which indicates the importance of human-thinking and intervention in data analysis. We note that participants who tried to ignore uncertainty primarily used the manipulate process and, to a much lesser extent, the reason process. The understand strategy involves all processes except for acquire. It is also the strategy where the characterise process is used extensively. The minimise strategy involves all processes except for present. Finally, exploiting uncertainty seems to primarily involve the reason and acquire processes.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Which processes operate on what categories of uncertainty?</head><p>Looking at Table <ref type="table">3</ref>, it appears that variability is the only uncertainty category where all analysis processes are employed by our participants (AMCRP). Moreover, variability and noise are the only uncertainty categories that our participants tried to present. Missing data, error and imprecision are fairly common types of uncertainty within our participants pool (eight participants each). For these categories, participants employed four processes (AMCR), but surprisingly, they never tried to present the uncertainty. Finally, ambiguity is the least analysed category of uncertainty, with only three processes (MCR), albeit the most common uncertainty category (11 participants).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>DISCUSSION</head><p>In this section, we compare the different aspects of our findings and results to prior work. Our study supports existing findings, in particular the idea that uncertainty is multifaceted <ref type="bibr" target="#b27">[27,</ref><ref type="bibr" target="#b26">26,</ref><ref type="bibr" target="#b30">31,</ref><ref type="bibr" target="#b2">3]</ref>. Our participants deal with a variety of sources and types of uncertainty related to the data, models, interfaces and cognition. What we contribute are new observations on how real-world data workers adopt one or more strategies aiming to ignore, understand, minimise or exploit these uncertainties. A subset of the uncertainty strategies we identified have been observed by other researchers who did similar studies. The two strategies mentioned by Schunn and Trafton's <ref type="bibr" target="#b30">[31]</ref> for the diagnosis and reduction of uncertainty, directly map to our understand and minimise strategies. Moreover, Skeel's Data Culture CHI 2017, May 6-11, 2017, Denver, CO, USA et al. <ref type="bibr" target="#b31">[32]</ref> strategies to 'live with the uncertainty'and 'try to become more certain', correspond to our ignore and minimise strategies. Our exploit strategy, however, is a new addition to the list of existing strategies and highlights the potential of making useful inferences from imperfect data.</p><p>Pirolli and Card <ref type="bibr" target="#b28">[28]</ref> provide a high-level model of human activity called the "Sense-Making Cycle" where the goal is to gain insights from data with regards to a given task. This model includes five main components: foraging for data, searching for a schema, instantiating a schema, problem solving, and authoring, deciding or acting. Processes from this model relate well to our components, for example, "foraging for data" maps to our acquire process and "solving a problem" refers to our data manipulation process. We also share the same interactive approach. However, such general models do not specifically focus on the analysis of uncertain data.</p><p>Our framework is more specific to uncertainty analytics as it exposes the different notions of uncertainty through a "characterisation" process. We think our framework would enrich existing models with the observed evidence from our study.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>DESIGN IMPLICATIONS AND FUTURE DIRECTIONS</head><p>We discuss design implications and future directions for uncertainty-aware analytics, promoting tools and studies that consider uncertainty at various stages of the sensemaking loop:</p><p>1. Support different uncertainty strategies and processes:</p><p>Our study showed that data workers adopt different strategies depending on the uncertainty categories they are working with. As data workers often deal with many sources and types of uncertainty at the same time, there is need for tools that combine different types of uncertainty analysis and processes, whether aiming to ignore, understand, minimise or exploit the uncertainty. In particular, we highlight the need to develop tools that exploit uncertainty, making it an additional valuable of information.</p><p>2. Capture and exploit analysts' uncertainty: We found that a great deal of uncertainty characterisation was manual. Data workers used domain knowledge to asses data quality, disambiguate objects and remove outliers or errors in their data. We join McEachren <ref type="bibr" target="#b25">[25]</ref> and Kandel et al.'s <ref type="bibr" target="#b16">[16]</ref> calls to create tools that capture and encode analysts' annotations, particularly with regards to uncertainty. Some of our participants already noted that there is no value in using an annotation tool it does not provide the means to exploit annotations (P2 † : "it is interesting [referring to annotating uncertainty]. However, it should not just stay an annotation [...] because often this gets lost if we do not have a way to exploit it.").</p><p>3. Support uncertainty propagation in an integrated reasoning process: In our study, participants did not always have adequate tools to handle the complexity of uncertain data analysis. They often used separate tools in different parts of the analysis. Integrating the results of this conjoint processes, often manually, could in itself add uncertainty. We saw that passing provenance information from one step of the analysis to the next was rarely supported by existing tools. Tools that support uncertainty analysis should be integrated to the iterative process of sense-making, taking into account the different types, sources and levels of uncertainty (i.e. data, model, interface and cognitive) and uncertainty propagation. In real world contexts, where uncertainty has a high, often measurable, impact on decision making, the biggest challenge is to make sure that the analysis tools we build enable reasoning processes.</p><p>4. Support uncertainty-aware collaboration: Data workers rarely work in isolation. They are usually part of a team, colocated or remote. Their part of the analysis fits in a larger organisational context. They collaborate with other data workers, data providers, managers, and other parties. Each of them has a different role in the analysis workflow. Responsibilities are assigned with regards to processes, tasks and data. Such collaborations could help reduce uncertainty, but could also generate new ones due to compounded cognitive and relational factors. We envision uncertainty-aware data analysis tools that facilitate collaborative analysis of uncertain data by taking into account sources of uncertainty in the data as well as at the cognitive and relational levels.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.">Support decision makers through visualization:</head><p>We saw a need for advanced visualization tools to better present, explore, and exploit uncertainty information, taking into account the various categories of uncertainty. More importantly, these visualizations need to support decision makers, e.g. P12 † : "[decision makers] are not used to [uncertainty visualization]. And it makes the interpretation task heavy-weight".</p><p>6. Investigate the effect of tacit strategies on the analysis: Kahneman and Tversky <ref type="bibr" target="#b15">[15]</ref> found that the perceived source or reason for uncertainty determines the selected coping strategy. In our study we observed some differences between participants who came from domains where uncertainty is the 'norm', and participants where uncertainty is more 'controlled'using formal theory and modelling. More studies are needed to understand the effect of domain practices and user perceptions on the analysis of uncertain data.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Study Limitations</head><p>Our participants have different technical skill levels which may have had an impact on their behaviour and coping strategies. Moreover, our recruitment scheme may have introduced potential bias due to snowball and social network effects (e.g. 11 participants out of 12 were based in France).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>CONCLUSION</head><p>This paper presented the results of interviews with 12 domain experts within commercial and academic organisations. For our participants, data analysis was not their primary job. We presented findings that characterise how this type of "analysts", we coined data workers, explore uncertain data. Our participants had to deal with heterogeneous uncertainty categories operating at the data, model, interface and cognitive levels. They deployed four uncertainty management strategies: ignore, understand, minimise and exploit, at various stages of the analysis. Our study allowed to identify five key high level tasks which were the building blocks of a process model for uncertainty-aware data analysis. Finally, we proposed future directions for further research.</p></div><figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_0"><head>Figure 2 .</head><label>2</label><figDesc>Figure 2. A flow-diagram describing the variety of ways data workers interact with uncertainty information during data analysis and sensemaking. Characterising uncertainty is a distinctive step in uncertaintyaware data analysis and can happen at any stage.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_0"><head>Data Culture CHI 2017, May 6-11, 2017, Denver, CO, USA</head><label></label><figDesc></figDesc><table><row><cell cols="3">P# Org Domain</cell><cell>Analysis Tools</cell><cell>P#</cell><cell cols="2">Org Domain</cell><cell>Analysis Tools</cell></row><row><cell cols="2">(1) M</cell><cell>medecine</cell><cell>3-D planification tools, Excel</cell><cell>(7)</cell><cell>E</cell><cell>marketing</cell><cell>Hadoop, SPSS, SPARC, Tableau</cell></row><row><cell>2</cell><cell>R</cell><cell>history</cell><cell>Zotero, Excel, genealogy tools, Jigsaw [33]</cell><cell>(8)</cell><cell>R</cell><cell>bioinformatics</cell><cell>Python, graph drawing tools</cell></row><row><cell>3</cell><cell>R</cell><cell>biology</cell><cell>Excel, metabolic network analysis tools</cell><cell>(9)</cell><cell>R</cell><cell>medical imaging</cell><cell>Matlab</cell></row><row><cell cols="2">(4) R</cell><cell cols="2">bioinformatics R, Excel, PCA, bioinformatics analysis tools</cell><cell>10</cell><cell>E</cell><cell cols="2">project management Excel, email, shared repositories</cell></row><row><cell>5</cell><cell>R</cell><cell>history</cell><cell>Google search, office tools</cell><cell cols="2">(11) R</cell><cell>video analytics</cell><cell>Matlab</cell></row><row><cell cols="2">(6) M</cell><cell cols="2">vision research Matlab, Excel</cell><cell cols="2">(12) M</cell><cell>GIScience</cell><cell>GIS tools and scripting languages</cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_1"><head>Table 1 .</head><label>1</label><figDesc>Participants by domain of expertise. Organisation: R:research, E:enterprise and M:mixed. Participant IDs between brackets indicate data workers with scripting or programming skills. Tools refer to software packages and libraries used for the data analysis scenario.</figDesc><table /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_2"><head>Culture CHI 2017, May 6-11, 2017, Denver, CO, USA</head><label></label><figDesc></figDesc><table><row><cell>Process</cell><cell>Goal</cell><cell>Typical Tasks</cell><cell>Process Goal</cell><cell>Typical Tasks</cell></row><row><cell>Acquire</cell><cell>collect and enrich data</cell><cell>generate, measure, store</cell><cell cols="2">Reason derive meaning infer, hypothesise, compare, validate</cell></row><row><cell>Manipulate</cell><cell>transform data</cell><cell>transform, correct, remove</cell><cell>Present share findings</cell><cell>plot, write a report, make a presentation</cell></row><row><cell cols="3">Characterise* generate info on uncertainty annotate, compute, model</cell><cell></cell><cell></cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_3"><head>Table 2 .</head><label>2</label><figDesc>The five processes of data analysis under uncertainty. Characterise uncertainty being a key process.</figDesc><table /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_4"><head>Culture CHI 2017, May 6-11, 2017, Denver, CO, USA P1 Acquir</head><label></label><figDesc>chara Reas Reas chara chara Data Annot Annot Prese Acquir Reas P2 Acquir Reas Reas Data Reas Reas Annot Reas P3 Acquir chara Data Data chara Annot Reas Reas Reas Reas Reas Reas Reas Prese P4 Acquir chara Reas Data Reas chara Data Data chara Reas Data Annot Reas Reas Reas P5 Acquir Data Acquir Reas Reas chara Reas Acquir Annot Link ( chara Reas P6 Acquir Acquir Data chara Reas Data chara Reas chara Reas chara Reas Reas chara Data Prese P7 Reas Reas Acquir Reas chara Acquir Data Data Data Data chara chara chara Reas Prese Prese Data P8 Acquir Data Reas chara chara Reas P9 Acquir Data Data Data Data Reas chara chara chara Reas Reas Chara Data Reas P10 Acquir chara Data chara Acquir chara chara chara chara chara Prese Prese chara Data Reas P11 Acquir Data chara chara Data Acquir Data P12 Acquir Reas chara chara Data chara chara Reas Reas Reas Acquir Data Prese</figDesc><table><row><cell>Reasoning</cell><cell>ACQUIRE DATA</cell></row><row><cell>Present</cell><cell></cell></row><row><cell>Present</cell><cell>MANIPULATE DATA</cell></row><row><cell>Present</cell><cell></cell></row><row><cell>Present</cell><cell>CHARACTERIZE</cell></row><row><cell></cell><cell>UNCERTAINTY</cell></row><row><cell></cell><cell>REASON</cell></row><row><cell>Reasoning</cell><cell></cell></row><row><cell>Reasoning</cell><cell>PRESENT</cell></row><row><cell>Present</cell><cell></cell></row><row><cell>Reasoning</cell><cell></cell></row><row><cell>Reasoning</cell><cell></cell></row><row><cell cols="2">Figure 1. Analysis workflows for all participants using the five uncer-</cell></row><row><cell cols="2">tainty processes: acquire, manipulate, characterise, reason and present.</cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_5"><head></head><label></label><figDesc>C: annotate to disambiguate; R: compare to other sources ∧ M: enrich ∨ M: correct ; R: discuss with experts to decide on identity or class ∧ C: annotate ∨ M: remove; C: compute a quality threshold ∧ M: remove; C: model uncertainty (P2,<ref type="bibr" target="#b4">5,</ref><ref type="bibr" target="#b5">6,</ref><ref type="bibr" target="#b6">7,</ref><ref type="bibr" target="#b7">8,</ref><ref type="bibr" target="#b8">9,</ref><ref type="bibr" target="#b12">12)</ref> </figDesc><table><row><cell>Data Culture</cell><cell></cell><cell></cell><cell>CHI 2017, 6-11, 2017, Denver, CO, USA</cell></row><row><cell></cell><cell>Ignore</cell><cell>Understand</cell><cell>Minimise</cell></row><row><cell>Ambiguity</cell><cell>M: duplicate or remove</cell><cell>C: annotate, e.g. references and confidence; R:</cell><cell></cell></row><row><cell>(11 participants)</cell><cell>ambiguous object from</cell><cell>evaluate source reliability or quality; R: make</cell><cell></cell></row><row><cell></cell><cell>analysis; do nothing</cell><cell>a hypothesis ∧ M: test (P1,2,8,10)</cell><cell></cell></row><row><cell></cell><cell>(P2,4,5,6,11)</cell><cell></cell><cell></cell></row><row><cell>Inconsistency</cell><cell>M: propagate conflict</cell><cell>R: compare to other sources; C: annotate</cell><cell>M: data fusion ∧ C: compute a quality threshold ∧ R: create and</cell></row><row><cell>(3 participants)</cell><cell>(P12)</cell><cell>of data and versioning</cell><cell>apply rules for data fusion (P12)</cell></row><row><cell>Missing data</cell><cell cols="2">R: hypothesise (P6,7) C: compute data quality measures; C: model</cell><cell>A: new experiment; R: compare to related sources ∧ M: data fusion;</cell></row><row><cell>(8 participants)</cell><cell></cell><cell>missingness (P1,8)</cell><cell>estimate or extrapolate; A: collect data ∧ C: annotate confi-</cell></row><row><cell></cell><cell></cell><cell></cell><cell>∨ M: correct; R: infer from surrogate model ∧ M: enrich</cell></row><row><cell></cell><cell></cell><cell></cell><cell>(P1,2,3,5,6,7,8,12)</cell></row><row><cell>Bias</cell><cell>do nothing (P11)</cell><cell>φ</cell><cell>M: apply statistical transformation, e.g. normalise; M: filter uncer-</cell></row><row><cell>(3 participants)</cell><cell></cell><cell></cell><cell>tain data (P3,4)</cell></row><row><cell>Variability</cell><cell>φ</cell><cell>C: compute variability ∧ P: plot; interpret</cell><cell>A: take new measurements; C: identify a quality threshold ∧ M: filter</cell></row><row><cell>(6 participants)</cell><cell></cell><cell>∧ C: annotate (P7,9,12)</cell><cell>(P1,4,6,12)</cell></row><row><cell>Error</cell><cell>do nothing (P7)</cell><cell>C: annotate to prevent data usage of erroneous</cell><cell>M: filter uncertain data; M: delete model that generates errors; A:</cell></row><row><cell>(8 participants)</cell><cell></cell><cell>records (P7)</cell><cell>improve acquisition source and tools; A: acquire data from multiple</cell></row><row><cell></cell><cell></cell><cell></cell><cell>sources; R: group discussions ∧ M: manual correction; C: set task</cell></row><row><cell></cell><cell></cell><cell></cell><cell>constraints (P1,3,5,6,7,8,11,12)</cell></row><row><cell>Imprecision</cell><cell>do nothing (P5)</cell><cell>C: model uncertainty ; C: annotate data qual-</cell><cell>M: filter imprecise data; M: enrich with better quality data ∧ A:</cell></row><row><cell>(8 participants)</cell><cell></cell><cell>ity, confidence or possible range; R: com-</cell><cell>improve acquisition ∧ R: human expertise; M: aggregate data; R:</cell></row><row><cell></cell><cell></cell><cell>pare to literature ∧ C: set quality threshold</cell><cell>prevent error propagation (P1,3,7,9,11,12)</cell></row><row><cell></cell><cell></cell><cell>(P1,2,9,12)</cell><cell></cell></row><row><cell>Noise</cell><cell>φ</cell><cell>P: plot data with uncertainty (P9)</cell><cell>R: discuss with experts to identify noise ∧ M: remove noise; C:</cell></row><row><cell>(4 participants)</cell><cell></cell><cell></cell><cell>compute threshold level ∧ M: remove noise (P4,6,9,11)</cell></row><row><cell>Table</cell><cell></cell><cell></cell><cell></cell></row></table></figure>
+		</body>
+		<back>
+
+			<div type="acknowledgement">
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>ACKNOWLEDGEMENTS</head><p>This work was funded in part by Digitéo and the French National Research Agency (ANR).</p></div>
+			</div>
+
+			<div type="annex">
+<div xmlns="http://www.tei-c.org/ns/1.0" />			</div>
+			<div type="references">
+
+				<listBibl>
+
+<biblStruct xml:id="b0">
+	<analytic>
+		<title level="a" type="main">A Knowledge Task-Based Framework for Design and Evaluation of Information Visualizations</title>
+		<author>
+			<persName><forename type="first">Robert</forename><surname>Amar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">John</forename><surname>Stasko</surname></persName>
+		</author>
+		<idno type="DOI">10.1109/INFOVIS.2004.10</idno>
+		<ptr target="http://dx.doi.org/10.1109/INFOVIS.2004.10" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the IEEE Symposium on Information Visualization (INFOVIS &apos;04)</title>
+				<meeting>the IEEE Symposium on Information Visualization (INFOVIS &apos;04)<address><addrLine>Washington, DC, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>IEEE Computer Society</publisher>
+			<date type="published" when="2004">2004</date>
+			<biblScope unit="page" from="143" to="150" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b1">
+	<analytic>
+		<title level="a" type="main">being a translation of Bertin, J. La Graphique et le Traitement Graphique de l&apos;information</title>
+		<author>
+			<persName><forename type="first">Jacques</forename><surname>Bertin</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Graphics and Graphic Information Processing</title>
+				<meeting><address><addrLine>Berlin; Paris</addrLine></address></meeting>
+		<imprint>
+			<publisher>Walter de Gruyter</publisher>
+			<date type="published" when="1977">1981. 1977</date>
+		</imprint>
+	</monogr>
+	<note>Flammarion</note>
+</biblStruct>
+
+<biblStruct xml:id="b2">
+	<monogr>
+		<author>
+			<persName><forename type="first">Georges-Pierre</forename><surname>Bonneau</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Hans-Christian</forename><surname>Hege</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Chris</forename><forename type="middle">R</forename><surname>Johnson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Manuel</forename><forename type="middle">M</forename><surname>Oliveira</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kristin</forename><surname>Potter</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Penny</forename><surname>Rheingans</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Thomas</forename><surname>Schultz</surname></persName>
+		</author>
+		<idno type="DOI">10.1007/978-1-4471-6497-5_1</idno>
+		<ptr target="http://dx.doi.org/10.1007/978-1-4471-6497-5_1" />
+		<title level="m">Scientific Visualization: Uncertainty, Multifield, Biomedical, and Scalable Visualization</title>
+				<meeting><address><addrLine>London, London</addrLine></address></meeting>
+		<imprint>
+			<publisher>Springer</publisher>
+			<date type="published" when="2014">2014</date>
+			<biblScope unit="page" from="3" to="27" />
+		</imprint>
+	</monogr>
+	<note>Chapter Overview and State-of-the-Art of Uncertainty Visualization</note>
+</biblStruct>
+
+<biblStruct xml:id="b3">
+	<analytic>
+		<title level="a" type="main">Evaluating Sketchiness as a Visual Variable for the Depiction of Qualitative Uncertainty</title>
+		<author>
+			<persName><forename type="first">Nadia</forename><surname>Boukhelifa</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Anastasia</forename><surname>Bezerianos</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Tobias</forename><surname>Isenberg</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jean-Daniel</forename><surname>Fekete</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">IEEE Transactions on Visualization and Computer Graphics</title>
+		<imprint>
+			<biblScope unit="volume">18</biblScope>
+			<biblScope unit="page" from="2769" to="2778" />
+			<date type="published" when="2012-12">2012. December 2012</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b4">
+	<monogr>
+		<title level="m" type="main">Constructing Grounded Theory: A Practical Guide through Qualitative Analysis</title>
+		<author>
+			<persName><forename type="first">Kathy</forename><surname>Charmaz</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2006">2006</date>
+			<pubPlace>Sage, Thousand Oaks, CA</pubPlace>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b5">
+	<analytic>
+		<title level="a" type="main">A framework for uncertainty-aware visual analytics</title>
+		<author>
+			<persName><forename type="first">C</forename><forename type="middle">D</forename><surname>Correa</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><forename type="middle">H</forename><surname>Chan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><forename type="middle">L</forename><surname>Ma</surname></persName>
+		</author>
+		<idno type="DOI">10.1109/VAST.2009.5332611</idno>
+		<ptr target="http://dx.doi.org/10.1109/VAST.2009.5332611" />
+	</analytic>
+	<monogr>
+		<title level="m">Visual Analytics Science and Technology</title>
+				<imprint>
+			<date type="published" when="2009">2009. 2009. 2009</date>
+			<biblScope unit="page" from="51" to="58" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b6">
+	<analytic>
+		<title level="a" type="main">Visualization of an Imperfect world</title>
+		<author>
+			<persName><forename type="first">D</forename><surname>Nahum</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Gershon</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">IEEE Computer Graphics and Applications</title>
+		<imprint>
+			<biblScope unit="volume">18</biblScope>
+			<biblScope unit="page" from="43" to="45" />
+			<date type="published" when="1998">1998. 1998</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b7">
+	<analytic>
+		<title level="a" type="main">Effects of Implicit Sharing in Collaborative Analysis</title>
+		<author>
+			<persName><forename type="first">Nitesh</forename><surname>Goyal</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Gilly</forename><surname>Leshed</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Dan</forename><surname>Cosley</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Susan</forename><forename type="middle">R</forename><surname>Fussell</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2556288.2557229</idno>
+		<ptr target="http://dx.doi.org/10.1145/2556288.2557229" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the SIGCHI Conference on Human Factors in Computing Systems (CHI &apos;14)</title>
+				<meeting>the SIGCHI Conference on Human Factors in Computing Systems (CHI &apos;14)<address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>ACM</publisher>
+			<date type="published" when="2014">2014</date>
+			<biblScope unit="page" from="129" to="138" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b8">
+	<analytic>
+		<title level="a" type="main">A Cognitive Interpretation of Data Analysis</title>
+		<author>
+			<persName><forename type="first">Garrett</forename><surname>Grolemund</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Hadley</forename><surname>Wickham</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">International Statistical Review</title>
+		<imprint>
+			<biblScope unit="volume">82</biblScope>
+			<biblScope unit="page" from="184" to="204" />
+			<date type="published" when="2014">2014. 2014</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b9">
+	<monogr>
+		<title/>
+		<idno type="DOI">10.1111/insr.12028</idno>
+		<ptr target="http://dx.doi.org/10.1111/insr.12028" />
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b10">
+	<analytic>
+		<title level="a" type="main">Real-World Affinity Diagramming Practices: Bridging the Paper-Digital Gap</title>
+		<author>
+			<persName><forename type="first">Gunnar</forename><surname>Harboe</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Elaine</forename><forename type="middle">M</forename><surname>Huang</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2702123.2702561</idno>
+		<ptr target="http://dx.doi.org/10.1145/2702123.2702561" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 33rd Annual ACM Conference on Human Factors in Computing Systems (CHI &apos;15)</title>
+				<meeting>the 33rd Annual ACM Conference on Human Factors in Computing Systems (CHI &apos;15)<address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>ACM</publisher>
+			<date type="published" when="2015">2015</date>
+			<biblScope unit="page" from="95" to="104" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b11">
+	<analytic>
+		<title level="a" type="main">Shifting Perspectives: A Process Model for Sense Making Under Uncertainty</title>
+		<author>
+			<persName><forename type="first">Geoffrey</forename><surname>Hill</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Pratim</forename><surname>Datta</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">William</forename><surname>Acar</surname></persName>
+		</author>
+		<idno type="DOI">10.4018/ijsds.2015010103</idno>
+		<ptr target="http://dx.doi.org/10.4018/ijsds.2015010103" />
+	</analytic>
+	<monogr>
+		<title level="j">Int. J. Strateg. Decis. Sci</title>
+		<imprint>
+			<biblScope unit="volume">6</biblScope>
+			<biblScope unit="page" from="33" to="52" />
+			<date type="published" when="2015-01">2015. Jan. 2015</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b12">
+	<analytic>
+		<title level="a" type="main">Hypothetical Outcome Plots Outperform Error Bars and Violin Plots for Inferences about Reliability of Variable Ordering</title>
+		<author>
+			<persName><forename type="first">Jessica</forename><surname>Hullman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Paul</forename><surname>Resnick</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Eytan</forename><surname>Adar</surname></persName>
+		</author>
+		<idno type="DOI">10.1371/journal.pone.0142444</idno>
+		<ptr target="http://dx.doi.org/10.1371/journal.pone.0142444" />
+	</analytic>
+	<monogr>
+		<title level="j">PLoS ONE</title>
+		<imprint>
+			<biblScope unit="volume">10</biblScope>
+			<biblScope unit="page">11</biblScope>
+			<date type="published" when="2015-11-16">2015. 16 Nov. 2015</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b13">
+	<analytic>
+		<title level="a" type="main">Constructing Visual Representations: Investigating the Use of Tangible Tokens</title>
+		<author>
+			<persName><forename type="first">Samuel</forename><surname>Huron</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yvonne</forename><surname>Jansen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sheelagh</forename><surname>Carpendale</surname></persName>
+		</author>
+		<idno type="DOI">10.1109/TVCG.2014.2346292</idno>
+		<ptr target="http://dx.doi.org/10.1109/TVCG.2014.2346292" />
+	</analytic>
+	<monogr>
+		<title level="j">IEEE Transactions on Visualization and Computer Graphics</title>
+		<imprint>
+			<biblScope unit="volume">20</biblScope>
+			<biblScope unit="page">1</biblScope>
+			<date type="published" when="2014-08">2014. Aug. 2014</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b14">
+	<analytic>
+		<title level="a" type="main">An Exploratory Study of Visual Information Analysis</title>
+		<author>
+			<persName><forename type="first">Petra</forename><surname>Isenberg</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Anthony</forename><surname>Tang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sheelagh</forename><surname>Carpendale</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/1357054.1357245</idno>
+		<ptr target="http://dx.doi.org/10.1145/1357054.1357245" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the SIGCHI Conference on Human Factors in Computing Systems (CHI &apos;08)</title>
+				<meeting>the SIGCHI Conference on Human Factors in Computing Systems (CHI &apos;08)<address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>ACM</publisher>
+			<date type="published" when="2008">2008</date>
+			<biblScope unit="page" from="1217" to="1226" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b15">
+	<analytic>
+		<title/>
+		<author>
+			<persName><forename type="first">Daniel</forename><surname>Kahneman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Amos</forename><surname>Tversky</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">variants of uncertainty. cognition</title>
+		<imprint>
+			<biblScope unit="volume">11</biblScope>
+			<biblScope unit="page" from="143" to="157" />
+			<date type="published" when="1982">1982. 1982</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b16">
+	<analytic>
+		<title level="a" type="main">Enterprise Data Analysis and Visualization: An Interview Study</title>
+		<author>
+			<persName><forename type="first">Andreas</forename><surname>Kandel</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Joseph</forename><surname>Paepcke</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jeffrey</forename><surname>Hellerstein</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Heer</surname></persName>
+		</author>
+		<ptr target="http://vis.stanford.edu/papers/enterprise-analysis-interviews" />
+	</analytic>
+	<monogr>
+		<title level="m">IEEE Visual Analytics Science &amp; Technology (VAST)</title>
+				<imprint>
+			<date type="published" when="2012">2012</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b17">
+	<analytic>
+		<title level="a" type="main">When (Ish) is My Bus?: User-centered Visualizations of in Everyday, Mobile Predictive Systems</title>
+		<author>
+			<persName><forename type="first">Matthew</forename><surname>Kay</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Tara</forename><surname>Kola</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jessica</forename><forename type="middle">R</forename><surname>Hullman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sean</forename><forename type="middle">A</forename><surname>Munson</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2858036.2858558</idno>
+		<ptr target="http://dx.doi.org/10.1145/2858036.2858558" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2016 CHI Conference on Human Factors in Computing Systems (CHI &apos;16)</title>
+				<meeting>the 2016 CHI Conference on Human Factors in Computing Systems (CHI &apos;16)<address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>ACM</publisher>
+			<date type="published" when="2016">2016</date>
+			<biblScope unit="page" from="5092" to="5103" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b18">
+	<analytic>
+		<title level="a" type="main">Evaluating the effect of visually represented geodata uncertainty on decision-making: systematic review, lessons learned, and recommendations</title>
+		<author>
+			<persName><forename type="first">Christoph</forename><surname>Kinkeldey</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Alan</forename><forename type="middle">M</forename><surname>Maceachren</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Maria</forename><surname>Riveiro</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jochen</forename><surname>Schiewe</surname></persName>
+		</author>
+		<idno type="DOI">10.1080/15230406.2015.1089792</idno>
+		<ptr target="http://dx.doi.org/10.1080/15230406.2015.1089792" />
+	</analytic>
+	<monogr>
+		<title level="j">Cartography and Geographic Information Science</title>
+		<imprint>
+			<biblScope unit="page" from="1" to="21" />
+			<date type="published" when="2015">2015. 2015</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b19">
+	<analytic>
+		<title level="a" type="main">How to Assess Visual Communication of Uncertainty? A Systematic Review of Geospatial Uncertainty Visualization User Studies</title>
+		<author>
+			<persName><forename type="first">C</forename><surname>Kinkeldey</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Alan</forename><forename type="middle">M</forename><surname>Maceachren</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Schiewe</surname></persName>
+		</author>
+		<idno type="DOI">10.1179/1743277414Y.0000000099</idno>
+		<ptr target="http://www.maneyonline.com/doi/pdfplus/10.1179/1743277414Y.0000000099" />
+	</analytic>
+	<monogr>
+		<title level="j">Cartographic Journal</title>
+		<imprint>
+			<biblScope unit="volume">51</biblScope>
+			<biblScope unit="page" from="372" to="386" />
+			<date type="published" when="2014">2014. 2014</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b20">
+	<analytic>
+		<title level="a" type="main">Making Sense of Sensemaking 2: A Macrocognitive Model</title>
+		<author>
+			<persName><forename type="first">G</forename><surname>Klein</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Moon</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><forename type="middle">R</forename><surname>Hoffman</surname></persName>
+		</author>
+		<idno type="DOI">10.1109/MIS.2006.100</idno>
+		<ptr target="http://dx.doi.org/10.1109/MIS.2006.100" />
+	</analytic>
+	<monogr>
+		<title level="j">IEEE Intelligent Systems</title>
+		<imprint>
+			<biblScope unit="volume">21</biblScope>
+			<biblScope unit="page" from="88" to="92" />
+			<date type="published" when="2006-09">2006. Sept 2006</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b21">
+	<analytic>
+		<title level="a" type="main">A Data/Frame Theory of Sense Making</title>
+		<author>
+			<persName><forename type="first">G</forename><surname>Klein</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">K</forename><surname>Phillips</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><forename type="middle">L</forename><surname>Rall</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><forename type="middle">A</forename><surname>Peluso</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Expertise out of context: proceedings of the sixth International Conference on Naturalistic Decision Making</title>
+				<imprint>
+			<date type="published" when="2003">2003</date>
+			<biblScope unit="page" from="113" to="155" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b22">
+	<monogr>
+		<title level="m" type="main">Fuzzy Sets and Fuzzy Logic: Theory and Applications</title>
+		<author>
+			<persName><forename type="first">J</forename><surname>George</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Bo</forename><surname>Klir</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Yuan</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="1995">1995</date>
+			<publisher>Prentice-Hall, Inc</publisher>
+			<pubPlace>Upper Saddle River, NJ, USA</pubPlace>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b23">
+	<analytic>
+		<title level="a" type="main">Coping with Uncertainty: A Naturalistic Decision-Making Analysis</title>
+		<author>
+			<persName><forename type="first">Raanan</forename><surname>Lipshitz</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Orna</forename><surname>Strauss</surname></persName>
+		</author>
+		<idno type="DOI">10.1006/obhd.1997.2679</idno>
+		<ptr target="http://dx.doi.org/10.1006/obhd.1997.2679" />
+	</analytic>
+	<monogr>
+		<title level="j">Organizational Behavior and Human Decision Processes</title>
+		<imprint>
+			<biblScope unit="volume">69</biblScope>
+			<biblScope unit="page" from="149" to="163" />
+			<date type="published" when="1997">1997. 1997</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b24">
+	<analytic>
+		<title level="a" type="main">Mental Models, Visual Reasoning and Interaction in Information Visualization: A Top-down Perspective</title>
+		<author>
+			<persName><forename type="first">Zhicheng</forename><surname>Liu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">John</forename><forename type="middle">T</forename><surname>Stasko</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">IEEE Trans. Comput. Graph</title>
+		<imprint>
+			<biblScope unit="volume">16</biblScope>
+			<biblScope unit="page" from="999" to="1008" />
+			<date type="published" when="2010">2010. 2010</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b25">
+	<analytic>
+		<title level="a" type="main">Visual Analytics and Uncertainty: Its Not About the Data</title>
+		<author>
+			<persName><forename type="first">Alan</forename><forename type="middle">M</forename><surname>Maceachren</surname></persName>
+		</author>
+		<idno type="DOI">10.2312/eurova.20151104</idno>
+		<ptr target="http://dx.doi.org/10.2312/eurova.20151104" />
+	</analytic>
+	<monogr>
+		<title level="m">EuroVis Workshop on Visual Analytics</title>
+				<editor>
+			<persName><forename type="first">)</forename><surname>Eurova</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">E</forename><surname>Bertini</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">J</forename><forename type="middle">C</forename><surname>Roberts</surname></persName>
+		</editor>
+		<imprint>
+			<date type="published" when="2015">2015</date>
+		</imprint>
+	</monogr>
+	<note>The Eurographics Association</note>
+</biblStruct>
+
+<biblStruct xml:id="b26">
+	<analytic>
+		<title level="a" type="main">Visualizing geospatial information uncertainty: What we know and what we need to know</title>
+		<author>
+			<persName><forename type="first">Alan</forename><forename type="middle">M</forename><surname>Maceachren</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Anthony</forename><surname>Robinson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Steven</forename><surname>Gardner</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Robert</forename><surname>Murray</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mark</forename><surname>Gahegan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Elisabeth</forename><surname>Hetzler</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Cartography and Geographic. Information Science</title>
+		<imprint>
+			<biblScope unit="volume">32</biblScope>
+			<biblScope unit="page">160</biblScope>
+			<date type="published" when="2005">2005. 2005</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b27">
+	<analytic>
+		<title level="a" type="main">Approaches to Uncertainty Visualization</title>
+		<author>
+			<persName><forename type="first">Alex</forename><surname>Pang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Craig</forename><surname>Wittenbrink</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Suresh</forename><surname>Lodha</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">The Visual Computer</title>
+		<imprint>
+			<biblScope unit="volume">13</biblScope>
+			<biblScope unit="page" from="370" to="390" />
+			<date type="published" when="1997-11">1997. Nov 1997</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b28">
+	<monogr>
+		<title level="m" type="main">The sensemaking process and leverage points for analyst technology as identified through cognitive task analysis</title>
+		<author>
+			<persName><forename type="first">Peter</forename><surname>Pirolli</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Stuart</forename><surname>Card</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2005">2005. 2005</date>
+			<biblScope unit="page" from="2" to="4" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b29">
+	<analytic>
+		<title level="a" type="main">Towards Ecological Validity in Evaluating Uncertainty</title>
+		<author>
+			<persName><forename type="first">P</forename><surname>Samuel Quinan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Lace</forename><forename type="middle">M</forename><surname>Padilla</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sarah</forename><forename type="middle">H</forename><surname>Creem-Regehr</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Miriah</forename><surname>Meyer</surname></persName>
+		</author>
+		<idno type="DOI">10.1109/TVCG.2015.2467591</idno>
+		<ptr target="http://dx.doi.org/10.1109/TVCG.2015.2467591" />
+	</analytic>
+	<monogr>
+		<title level="m">The Role of Uncertainty, Awareness, and Trust in Visual Analytics. IEEE Transactions on Visualization and Computer Graphics (Proceedings of the Visual Analytics Science and Technology</title>
+				<editor>
+			<persName><forename type="first">Dominik</forename><surname>Sacha</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">Hansi</forename><surname>Senaratne</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">Geoffrey</forename><surname>Bum Chul Kwon</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">Daniel</forename><forename type="middle">A</forename><surname>Ellis</surname></persName>
+		</editor>
+		<editor>
+			<persName><surname>Keim</surname></persName>
+		</editor>
+		<imprint>
+			<date type="published" when="2015">2015. 2016. Jan. 2016</date>
+			<biblScope unit="volume">22</biblScope>
+			<biblScope unit="page" from="240" to="249" />
+		</imprint>
+	</monogr>
+	<note>Proceedings of Workshop on Visualization for Decision Making Under Uncertainty (VIS &apos;15</note>
+</biblStruct>
+
+<biblStruct xml:id="b30">
+	<analytic>
+		<title level="a" type="main">Handbook of the Psychology of Science</title>
+		<author>
+			<persName><forename type="first">D</forename><surname>Christian</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Schunn</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Gregory Trafton</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Chapter The Psychology of Uncertainty in Scientific Data Analysis</title>
+				<imprint>
+			<publisher>Springer-Verlag</publisher>
+			<date type="published" when="2012">2012</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b31">
+	<analytic>
+		<title level="a" type="main">Revealing Uncertainty for Information Visualization</title>
+		<author>
+			<persName><forename type="first">Meredith</forename><surname>Skeels</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Bongshin</forename><surname>Lee</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">George Robertson Greg</forename><surname>Smith</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Information Visualization</title>
+		<imprint>
+			<biblScope unit="volume">9</biblScope>
+			<biblScope unit="page" from="70" to="81" />
+			<date type="published" when="2010">2010. 2010</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b32">
+	<analytic>
+		<title level="a" type="main">Jigsaw: supporting investigative analysis through interactive visualization</title>
+		<author>
+			<persName><forename type="first">John</forename><forename type="middle">T</forename><surname>Stasko</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Carsten</forename><surname>Görg</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Zhicheng</forename><surname>Liu</surname></persName>
+		</author>
+		<idno type="DOI">10.1057/palgrave.ivs.9500180</idno>
+		<ptr target="http://dx.doi.org/10.1057/palgrave.ivs.9500180" />
+	</analytic>
+	<monogr>
+		<title level="j">Information Visualization</title>
+		<imprint>
+			<biblScope unit="volume">7</biblScope>
+			<biblScope unit="page" from="118" to="132" />
+			<date type="published" when="2008">2008. 2008</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b33">
+	<analytic>
+		<title level="a" type="main">Sketchy Rendering for Information Visualization</title>
+		<author>
+			<persName><forename type="first">Jo</forename><surname>Wood</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Petra</forename><surname>Isenberg</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Tobias</forename><surname>Isenberg</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jason</forename><surname>Dykes</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Nadia</forename><surname>Boukhelifa</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Aidan</forename><surname>Slingsby</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">IEEE Transactions on Visualization and Computer Graphics</title>
+		<imprint>
+			<biblScope unit="volume">12</biblScope>
+			<biblScope unit="page" from="2749" to="2758" />
+			<date type="published" when="2012">2012. 2012</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b34">
+	<monogr>
+		<title/>
+		<idno type="DOI">10.1109/TVCG.2012.262</idno>
+		<ptr target="http://dx.doi.org/10.1109/TVCG.2012.262" />
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b35">
+	<analytic>
+		<title level="a" type="main">RAMPARTS: Supporting Sensemaking with Spatially-Aware Mobile Interactions</title>
+		<author>
+			<persName><forename type="first">Pawel</forename><surname>Wozniak</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Nitesh</forename><surname>Goyal</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Przemyslaw</forename><surname>Kucharski</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Lars</forename><surname>Lischke</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sven</forename><surname>Mayer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Morten</forename><surname>Fjeld</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2858036.2858491</idno>
+		<ptr target="http://dx.doi.org/10.1145/2858036.2858491" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2016 CHI Conference on Human Factors in Computing Systems (CHI &apos;16)</title>
+				<meeting>the 2016 CHI Conference on Human Factors in Computing Systems (CHI &apos;16)<address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>ACM</publisher>
+			<date type="published" when="2016">2016</date>
+			<biblScope unit="page" from="2447" to="2460" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+				</listBibl>
+			</div>
+		</back>
+	</text>
+</TEI>

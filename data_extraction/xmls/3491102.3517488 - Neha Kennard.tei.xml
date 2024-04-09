@@ -1,0 +1,2219 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xml:space="preserve" xmlns="http://www.tei-c.org/ns/1.0" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.com/kermitt2/grobid/master/grobid-home/schemas/xsd/Grobid.xsd"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+	<teiHeader xml:lang="en">
+		<fileDesc>
+			<titleStmt>
+				<title level="a" type="main">&quot;In this online environment, we&apos;re limited&quot;: Exploring Inclusive Video Conferencing Design for Signers</title>
+			</titleStmt>
+			<publicationStmt>
+				<publisher/>
+				<availability status="unknown"><licence/></availability>
+			</publicationStmt>
+			<sourceDesc>
+				<biblStruct>
+					<analytic>
+						<author>
+							<persName><forename type="first">Jazz</forename><surname>Rui</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Xia</forename><surname>Ang</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Ping</forename><surname>Liu</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Emma</forename><forename type="middle">J</forename><surname>Mcdonnell</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Sarah</forename><surname>Coppola</surname></persName>
+						</author>
+						<author>
+							<affiliation key="aff0">
+								<orgName type="institution">University of Washington</orgName>
+								<address>
+									<country key="US">USA</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<affiliation key="aff1">
+								<orgName type="institution">University of Washington</orgName>
+								<address>
+									<country key="US">USA</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<affiliation key="aff2">
+								<orgName type="institution">University of Washington</orgName>
+								<address>
+									<country key="US">USA</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<affiliation key="aff3">
+								<orgName type="institution">University of Washington</orgName>
+								<address>
+									<country key="US">USA</country>
+								</address>
+							</affiliation>
+						</author>
+						<title level="a" type="main">&quot;In this online environment, we&apos;re limited&quot;: Exploring Inclusive Video Conferencing Design for Signers</title>
+					</analytic>
+					<monogr>
+						<imprint>
+							<date/>
+						</imprint>
+					</monogr>
+					<idno type="DOI">10.1145/3491102.3517488</idno>
+				</biblStruct>
+			</sourceDesc>
+		</fileDesc>
+		<encodingDesc>
+			<appInfo>
+				<application version="0.7.1" ident="GROBID" when="2022-07-22T05:01+0000">
+					<desc>GROBID - A machine learning software for extracting information from scholarly documents</desc>
+					<ref target="https://github.com/kermitt2/grobid"/>
+				</application>
+			</appInfo>
+		</encodingDesc>
+		<profileDesc>
+			<textClass>
+				<keywords>
+					<term>American Sign Language</term>
+					<term>sign language interpreting</term>
+					<term>accessible groupware</term>
+					<term>d/Deaf and hard-of-hearing</term>
+					<term>accessibility and inclusive design</term>
+					<term>accessible research methods</term>
+				</keywords>
+			</textClass>
+			<abstract>
+<div xmlns="http://www.tei-c.org/ns/1.0"><p>As video conferencing (VC) has become increasingly necessary for many aspects of daily life, many d/Deaf and hard of hearing people, particularly those who communicate via sign language (signers), face distinct accessibility barriers. To better understand the unique requirements for participating in VC using a visual-gestural language, such as ASL, and to identify practical design considerations for signer-inclusive videoconferencing, we conducted 12 interviews and four co-design sessions with a total of eight d/Deaf signers and eight ASL interpreters. We found that participants' access needs regarding consuming information (e.g., visual clarity of signs), communicating (e.g., getting attention of others), and collaborating (e.g., working with interpreter teams) are not well-met on existing VC platforms. We share novel insights into attending and conducting signer-accessible video conferences, outline considerations for future VC design, and provide guidelines for conducting remote research with d/Deaf signers.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>CCS CONCEPTS</head><p>• Human-centered computing → Accessibility; Accessibility design and evaluation methods; • General and reference → Crosscomputing tolls and techniques; Design;</p></div>
+			</abstract>
+		</profileDesc>
+	</teiHeader>
+	<text xml:lang="en">
+		<body>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="1">INTRODUCTION</head><p>As video conferencing (VC) becomes a mainstay of work and education, accelerated by the COVID-19 pandemic, particular considerations for d/Deaf and hard of hearing (DHH) people arise. Access to VC is vital, especially given the projected exponential growth in VC use by businesses, teleworkers and individuals over the next decade <ref type="bibr" target="#b47">[48,</ref><ref type="bibr" target="#b61">62]</ref>. However, mainstream VC platforms were largely designed with hearing people in mind <ref type="bibr">[82]</ref> and are inaccessible <ref type="bibr" target="#b42">[43,</ref><ref type="bibr" target="#b48">49]</ref> to the 430 million DHH people globally <ref type="bibr">[83]</ref>. These concerns are particularly relevant for people who communicate in sign language, or signers (including DHH people and sign language interpreters), who have to navigate using a visual mode of communication on platforms that prioritize auditory (e.g., identifying the active speaker based on sound), and textual (e.g., chat and closed captioning) modalities and often reduce visual information to a sea of thumbnails. This shift to VC happens against the backdrop of a history of technology that was once exclusively used by and designed for DHH people (e.g., text telephone relay calls) being replaced by more universally used commercial technologies <ref type="bibr" target="#b50">[51]</ref>. Existing VC platforms, which are not designed with the particular needs of signers in mind, fall short <ref type="bibr" target="#b42">[43]</ref>, in part due to technological (e.g., signifcant hardware capabilities for the frame rates required to view sign language <ref type="bibr" target="#b17">[18,</ref><ref type="bibr" target="#b42">43]</ref>) and environmental (e.g., small video thumbnails that make signing and lipreading difcult) oversights.</p><p>While DHH people use a range of communication methods, our focus is on those who primarily communicate through American Sign Language (ASL), a group conservatively estimated to be at least 500,000 people in the United States alone <ref type="bibr" target="#b56">[57]</ref>. When communicating with the 'mainstream' hearing community, Deaf 1 signers commonly utilize sign language interpreters, given that written English or captioning does not provide the same access, functional equivalency, or expressive power for signers <ref type="bibr" target="#b42">[43]</ref>. ASL is an independent visual-spatial language that shares no grammatical similarities to English <ref type="bibr" target="#b66">[67]</ref>, and written English can be inaccessible to signers as their English literacy may be relatively lower than their hearing peers <ref type="bibr" target="#b51">[52,</ref><ref type="bibr" target="#b53">54,</ref><ref type="bibr" target="#b63">64]</ref>. While the American with Disabilities Act (ADA) requires that employers and event hosts provide accessibility services to ensure "efective communication" with DHH people <ref type="bibr" target="#b83">[84]</ref>, even providing visual access to sign language interpreters during video conferences does not ensure full access. 'Efective communication' must include the ability to participate, communicate, and collaborate with both signers and non-signers, which mainstream videoconferencing does not currently guarantee <ref type="bibr" target="#b42">[43]</ref>.</p><p>Despite DHH people's diverse video communication needs, most prior work <ref type="bibr" target="#b15">[16,</ref><ref type="bibr" target="#b37">38,</ref><ref type="bibr" target="#b41">42]</ref> does not specifcally target signers, despite the fact that the key elements of ASL (handshape, movement, sign location, orientation and non-manual behaviors) generate unique requirements for inclusive interaction experience design <ref type="bibr" target="#b14">[15,</ref><ref type="bibr" target="#b24">25,</ref><ref type="bibr" target="#b42">43,</ref><ref type="bibr" target="#b48">49]</ref>. While prior HCI and CSCW studies have explored video communication in ASL, much has focused on automated ASL recognition <ref type="bibr" target="#b12">[13,</ref><ref type="bibr" target="#b39">40,</ref><ref type="bibr" target="#b72">73]</ref>, animation <ref type="bibr" target="#b0">[1,</ref><ref type="bibr" target="#b32">33,</ref><ref type="bibr" target="#b34">35]</ref>, and classroom use <ref type="bibr" target="#b15">[16,</ref><ref type="bibr" target="#b40">41]</ref>, with a very limited understanding of real-time computermediated ASL communication through interpreters <ref type="bibr" target="#b16">[17,</ref><ref type="bibr" target="#b48">49]</ref>. Additionally, while some work has explored the experiences of interpreters who work for Video Relay Service (VRS) or Video Remote Interpreting (VRI 2 ) providers <ref type="bibr" target="#b59">[60,</ref><ref type="bibr" target="#b70">71]</ref>, less is known about freelance community ASL interpreters' use of VC, who traditionally work in person and do not have formal remote interpreting support. In response to the exponential increase in use of desktop-based VC platforms during the COVID pandemic, we focus on specifc considerations that signers face in this unique context, providing the frst qualitative accounts of both d/Deaf 3 signers and ASL community interpreters' use of and design preferences for videoconferencing.</p><p>To address these gaps in literature, we conducted interviews and co-design sessions with 16 participants: eight d/Deaf signers and eight ASL community interpreters. All the research activities were designed to be conducted through the same VC platforms that we aim to improve. Prior accessibility research <ref type="bibr" target="#b7">[8,</ref><ref type="bibr" target="#b33">34,</ref><ref type="bibr" target="#b54">55]</ref> has highlighted how existing remote research methods, that were designed for the hearing community, do not fully account for d/Deaf signers' needs. This provided the impetus for us, a Deaf-hearing mixed-ability research team, to frst examine and design an inclusive remote research protocol that is culturally appropriate and accessible to d/Deaf signers. Using the accessible research process that we designed, we conducted 12 formative interviews, six with d/Deaf signers and six with interpreters, which then informed four co-design sessions, two with d/Deaf signers and two with interpreters. Our research was guided by the following questions:</p><p>• RQ1: What access barriers do signers face in consuming information, communicating and collaborating on VCs? • RQ2: What design opportunities exist for VC platforms to facilitate a signer-inclusive communication environment? Our fndings center on the accessibility barriers that signers face when they consume information (e.g., having visual clarity of signs), communicate (e.g., getting attention of others), and collaborate (e.g., working with team interpreters) on VC. Notably, the limited screen estate and afordances of VC platforms create challenges around identifying active signers, comprehending sign language, getting attention, and interjecting into ongoing conversation. Additionally, interpreters, who often work in teams, found that they could not efectively collaborate on VC platforms, leaving them to develop workarounds with varying degrees of success. Further, we provide a deeper understanding of the requirements for hosting accessible videoconferences and guidelines for conducting remote research with d/Deaf signers.</p><p>Our work contributes 1) an empirical account of VC use that highlights the perspectives of both d/Deaf signers and interpreters, and 2) user-elicited practical design recommendations for new and existing commercially available VC platforms. In addition, the authors also present practical guidelines for working with d/Deaf signers in qualitative studies and design activities for future research.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2">BACKGROUND AND RELATED WORK</head><p>We frst provide important background context about sign language and then discuss prior work in groupware and video conferencing accessibility, particularly for signers and interpreters.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.1">Deaf Culture &amp; Sign Language</head><p>Throughout most of the United States and Canada, American Sign Language (ASL) is the Deaf community's primary language. As an independent visual-spatial language, ASL has its own distinct grammatical rules and consists of a sequence of handshapes, locations, palm orientation, and non-manual markers (NMM) and movements <ref type="bibr" target="#b23">[24,</ref><ref type="bibr" target="#b48">49,</ref><ref type="bibr" target="#b74">74,</ref><ref type="bibr" target="#b77">77]</ref>. NMMs include visual-facial gestural expressions, head tilting, eye shifting and body positioning, and provide critical additional grammatical context to manual signs in ASL conversation. A common example of NMM use is furrowing one's eyebrows and doing a slight backwards head tilt to indicate that signed WH-words (e.g., who, what, when, where, why) are being used to ask a question <ref type="bibr" target="#b80">[80,</ref><ref type="bibr" target="#b84">85]</ref>. Additionally, signers rely on solely non-verbal backchannel feedback, a linguistic phenomenon wherein people signal their understanding, active attention, and dis/agreement to speakers without taking the communicative foor <ref type="bibr" target="#b29">[30,</ref><ref type="bibr" target="#b62">63,</ref><ref type="bibr" target="#b77">77]</ref>. Spoken languages use both non-verbal (e.g., lowered eyebrows to indicate confusion) and verbal (e.g., "mmhmm", "yeah") backchannelling, and hearing communicators can multitask, attending to the spoken content of a conversation alongside visual and non-visual backchannel feedback. Deaf signers, on the other hand, can only attend to communication in their line of sight and therefore require particular conversational environments to be able to follow both a conversation and backchannel feedback. Further, the use of eye gaze is critical in ASL as it is a key element of many grammatical structures such as verb agreement <ref type="bibr" target="#b76">[76]</ref>. ASL communication relies on many parts of the body, including handshapes, facial expressions, and body movements, and rendering this rich visual information online creates unique considerations.</p><p>While the hearing world often considers deafness to be a type of disability, many Deaf people instead see deafness as a cultural identity, akin to an ethnicity <ref type="bibr" target="#b33">[34,</ref><ref type="bibr" target="#b44">45]</ref>. ASL is central to Deaf culture and identity, operating not just as a preferred communication modality but as a site of community formation <ref type="bibr" target="#b44">[45]</ref>. Deaf studies scholar Tom Humphries coined the term "audism" to describe the systemic discrimination where "one is superior based on one's ability to hear or behave in the manner of one who hears" <ref type="bibr" target="#b7">[8,</ref><ref type="bibr" target="#b44">45,</ref><ref type="bibr" target="#b74">74]</ref>. While many DHH signers fall back on texting or captioning to communicate with others, prior work argues that an overemphasis on text-based modalities in technology development perpetuates audist biases that push DHH signers to conform with spoken and written English rather than respecting their preference for sign <ref type="bibr" target="#b7">[8,</ref><ref type="bibr" target="#b48">49]</ref>. This manifestation of audism can place the burden on DHH users to "cross the bridge" and accommodate to the hearing world's way of communication <ref type="bibr" target="#b7">[8,</ref><ref type="bibr" target="#b43">44,</ref><ref type="bibr" target="#b44">45]</ref>.</p><p>Avoiding audist practices and cultural appropriation in research requires focusing not only on technological artifacts but also on participants' social, cultural, and historical contexts <ref type="bibr" target="#b33">[34]</ref>. This sensitivity is necessary in all stages of research, including method and protocol design as many common HCI methods can exclude DHH participants, such as 'think aloud' protocols which require participants to explain their thoughts while completing an activity and are not well-suited to signed communication <ref type="bibr" target="#b7">[8,</ref><ref type="bibr" target="#b33">34,</ref><ref type="bibr" target="#b54">55]</ref>. Prior work has explored accessible methods such as translating existing questionnaires to ASL <ref type="bibr" target="#b9">[10,</ref><ref type="bibr" target="#b11">12,</ref><ref type="bibr" target="#b31">32]</ref>, conducting culturally-aware research <ref type="bibr" target="#b25">[26,</ref><ref type="bibr" target="#b33">34,</ref><ref type="bibr" target="#b65">66]</ref> and utilizing ASL questionnaires to collect data <ref type="bibr" target="#b10">[11,</ref><ref type="bibr" target="#b35">36]</ref>. Our research practices bring careful consideration of Deaf cultural context to interview and design methods, heeding Bauman's call to avoid "enforcing a normalcy that privileges speech over sign and hearing over deafness" <ref type="bibr" target="#b7">[8]</ref>.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.2">Sign Language Interpreting</head><p>As the COVID-19 pandemic increased DHH signers' need for desktop-based VC platforms (e.g., Zoom, Google Meet, Skype) in many aspects of daily life, many community ASL interpreters' work shifted to unfamiliar remote interpreting environments. There is a lack of existing research around VC use by community interpreters and little consideration of the demands on virtual interpreting teams. Particularly for jobs that last longer than an hour, sign language interpreters often work in teams of two or three, switching who is the active interpreter in set time intervals (e.g., every 20 minutes) <ref type="bibr" target="#b58">[59]</ref>. While the active ("on") interpreter is interpreting for the client, the inactive ("of") interpreter(s) assists the "on" interpreter whenever needed <ref type="bibr" target="#b8">[9]</ref>. For example, the inactive interpreter might sign a specifc term quickly to the active interpreter if the active interpreter missed the term due to a noisy environment. Public posts from community ASL interpreters indicate that while working online, the ability to get support from team interpreters is "greatly reduced" <ref type="bibr" target="#b18">[19]</ref>.</p><p>Sign-language-mediated communication between DHH signers and hearing people and the role technology plays in these interactions is a relatively underexplored area of HCI research. A noteworthy exception from Napier and Leneham <ref type="bibr" target="#b57">[58]</ref> found that diferent afordances (e.g., visual distractions, rendering signs in 2D) and factors (e.g., logistical set up) of VC afected the efcacy of remote VRI interpreting in legal contexts. However, while prior work has examined professional services such as VRS and VRI <ref type="bibr" target="#b59">[60,</ref><ref type="bibr" target="#b70">71]</ref>, the diferent social and technological barriers community interpreters using commercial VC platforms face have not yet been studied. By focusing on commercially available VC platforms for freelance interpreters specifcally, our work ofers new insights into how VC can help facilitate interpreter-mediated communication.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.3">Accessibility for Signers in Video</head><p>Conferencing Platforms There is an emerging interest from researchers to digitally mediate sign language communication through real-time machine learning recognition of signs <ref type="bibr" target="#b12">[13,</ref><ref type="bibr" target="#b13">14,</ref><ref type="bibr" target="#b39">40,</ref><ref type="bibr" target="#b72">73]</ref>. Existing works often explore generating ASL signs through animations and virtual human avatars <ref type="bibr" target="#b0">[1,</ref><ref type="bibr" target="#b32">33,</ref><ref type="bibr" target="#b34">35,</ref><ref type="bibr" target="#b36">37]</ref> but many have not addressed accurate facial and non-manual expression synthesis <ref type="bibr" target="#b13">[14,</ref><ref type="bibr" target="#b26">27,</ref><ref type="bibr" target="#b36">37]</ref>. Though progress has been made, critical sign language recognition and generation problems remain, hindering real-world applications <ref type="bibr" target="#b13">[14]</ref>. Gugenheimer et al. <ref type="bibr" target="#b26">[27]</ref> further argue that technology focused on spoken language/sign language translation may see low adoption rates because it does not account for Deaf social and cultural norms and forces adoption of hearing society's dominant (spoken) language. We seek to fll a gap in literature by assessing AT solutions within the context of d/Deaf community norms.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.3.2">Existing Accessibility Features for Video</head><p>Conferencing. Research on the accessibility of VC increased with the onset of the COVID-19 pandemic, (e.g., <ref type="bibr" target="#b52">[53,</ref><ref type="bibr" target="#b68">69,</ref><ref type="bibr" target="#b75">75]</ref>), fnding that online environments generate diferent access considerations than in-person communication. Two notable studies document the experiences of DHH researchers communicating on VC platforms and outline limitations that make video conferencing inaccessible for DHH users <ref type="bibr" target="#b42">[43,</ref><ref type="bibr" target="#b78">78]</ref>. Kushalnagar and Vogler <ref type="bibr" target="#b42">[43]</ref> found that DHH users face myriad challenges (e.g., reduced frame rates, difculty reading lips or signs etc.) when the meetings become too large relative to each individual's hardware capabilities and screen size, and that platforms' strategy of identifying active speakers based on audio does not serve signers. Vogler et al. <ref type="bibr" target="#b78">[78]</ref> found that online interpreting between ASL and English created considerable lag that discouraged DHH people's participation and highlighted overall challenges with VC solutions (e.g., unstable video jitters, insufcient frame rates required to understand sign language etc.) that remain unaddressed for DHH users. Additionally, the design of accessibility features on VC platforms makes it so that there is signifcant pressure and burden on meeting hosts to make meetings accessible <ref type="bibr">[82]</ref>. We aim to add to this new body of research, contributing both d/Deaf signers and community interpreters' perspectives on the in/accessibility of video conferencing and their preferences for future design.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.3.3">Accessible Video Conferencing Design.</head><p>To improve video conferencing design, prior HCI work has focused on improving visual access to sign language interpreters and reducing visual dispersion. This is motivated by the fact that, when having to contend with several simultaneous visual sources (e.g., interpreters, captions, class slides, speaker's body language), DHH signers often miss critical information <ref type="bibr" target="#b15">[16,</ref><ref type="bibr" target="#b20">21,</ref><ref type="bibr" target="#b45">46,</ref><ref type="bibr" target="#b51">52,</ref><ref type="bibr" target="#b55">56]</ref>. Previous research has explored several display confgurations to relieve this visual burden. For example, Kushalnagar et al. <ref type="bibr" target="#b20">[21]</ref> explored the concept of closed interpreting, allowing users to confgure the interpreter's video feed to their preference on pre-recorded lecture videos. The study found that moving and resizing the interpreter's screen over the video increases the signer's ease of viewing, satisfaction and comprehension. Cavender et al. <ref type="bibr" target="#b15">[16]</ref> enabled DHH students to consolidate various sources of information (e.g., slides, instructors, interpreters) in a customizable VC layout, and found that it increased performance. Miller et al., <ref type="bibr" target="#b55">[56]</ref> allowed a user to overlay a translucent video (of their interpreter or another collaborator) over a shared workspace (such as a spreadsheet), fnding limitations around how overlapping videos covered non-manual visual cues signifcant in ASL <ref type="bibr" target="#b55">[56]</ref>. While these interventions explore bespoke video-based ASL access, we instead explore the design of commercial, widely used VC platforms.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3">METHODS</head><p>Our research has three phases: accessible remote study protocol design, formative interviews, and co-design workshops. Our study design actively involved d/Deaf signers (including one of the cofrst authors) in the research process to ensure the protocol met their needs. All three phases were conducted remotely through videoconferencing -the same medium that our research aims to improve. Therefore, we had to frst develop an accessible protocol for d/Deaf participants.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.1">Remote Study Protocol Design</head><p>We iteratively designed our protocol based on six pilot sessions with 10 pilot participants. Content from the pilot sessions is not included in our fndings. Beginning with the pilot studies, and continuing throughout the entire research process, we adopted a critical refective perspective <ref type="bibr" target="#b19">[20,</ref><ref type="bibr" target="#b22">23,</ref><ref type="bibr" target="#b69">70]</ref> by journaling and conducting retrospective discussions to document and resolve the accessibility issues that signers and researchers faced. To ensure consistency and familiarity with the nuances of the research, two ASL interpreters, certifed by Registry of Interpreters for the Deaf, Inc. (RID), were hired as the designated interpreters to interpret for all sessions (including the pilots), hereafter referred to as research interpreters.</p><p>Both research interpreters are highly qualifed, and had an established working relationship with the Deaf co-frst author. One has been interpreting for over 30 years and the other is both an experienced researcher and interpreter. Our initial three pilot studies (two interviews, one co-design session with three signers) provided a preliminary understanding of access issues within our protocols. During each session, researchers created feld notes of their observations and participants' feedback, and sessions were followed by a 30-minute refective debrief with the research team (one Deaf researcher who primarily communicates in ASL, one hearing researcher, and two research interpreters). These debriefs guided protocol iteration based on challenges during the pilots (e.g., having a researcher sketch participant ideas rather than having participants juggle between signing and using Figma). To validate and fne-tune our updated protocols we conducted three more pilot studies (two interviews, with a d/Deaf signer and interpreter, and one codesign session with three DHH signers), continuing to debrief and iterate until we felt confdent that our protocol would allow the most accessible study we could conduct given the environmental constraints of remote research. We further detail protocol iterations in following subsections (Formative Interviews, and Co-design Workshops).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.2">Participants</head><p>Participants were recruited via email lists, snowball sampling, and social media posts. All recruitment materials and consent forms were provided in both English and ASL. Our study involved two groups of participants: sighted d/Deaf signers, who primarily communicate in ASL, and freelance ASL interpreters, who initially provided in-person interpretation service for the community and switched to remote interpreting due to the pandemic, hereafter referred to as interpreter participants. All interpreter participants identifed as hearing. We required that participants be 18 years or older, able to join a Zoom call, and located in the United States or Canada. We recruited eight d/Deaf signers 4 (four men, four women -see Table <ref type="table" target="#tab_1">1</ref>) and eight ASL interpreter participants (two men, four women, two undisclosed -see Table <ref type="table" target="#tab_2">2</ref>), selected out of 58 screener respondents (43 d/Deaf people and 15 ASL interpreters) to optimize for a more representative sample across their age group, gender, and video conferencing frequency.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.3">Formative Interviews</head><p>We conducted 12 semi-structured interviews with six d/Deaf signers and six ASL interpreter participants. Each 60-minute interview was conducted by a Deaf researcher who primarily communicates in ASL and a hearing researcher who knows basic ASL. Interviews with signers were conducted in ASL and interpreted to English by two research interpreters for the hearing researcher and for transcription purposes, while interviews with interpreter participants were conducted either in ASL or spoken English based on each participant's preference. The protocol design process (3.1) highlighted several technological considerations in running an accessible remote interview with signers. To mitigate these pitfalls, we made the following adjustments to standard interview processes:</p><p>• Modifed Deaf researcher's physical environment for virtual facilitation. Facilitating an interview on a single screen introduced multiple accessibility issues for the Deaf researcher (e.g., the researcher needed to sit at a distance from her camera to ensure her signing was in frame, which made interpreter's video feeds too small to be comprehensible). Hence, the Deaf researcher modifed her workstation to include an additional monitor (for interview questions), a tablet, (to access research interpreters) and a laptop (to view participants and maintain adequate eye contact) (See Supplementary Materials for more details).  • Specifc technological requirement for participants. We discovered during the pilot that Zoom's browser application did not include features necessary for d/Deaf signers' access (e.g., only able to see four video feeds during screen sharing).</p><p>To avoid potential technical issues from using the browser version of Zoom, we required that all participants download and use Zoom's desktop application version, not the browser version, for the study.</p><p>Our interviews sought to understand how participants used VC with non-signers, signers, and interpreters. We organized our interview protocol around three key aspects of VC-mediated interaction: consuming information (i.e., taking in content), communication (i.e., expressing ideas), and collaboration (i.e., doing shared tasks). The content of the interview focused on accessibility challenges while videoconferencing, VC platform usability issues, workarounds participants have developed, and refections on signing remotely. Protocols difered for d/Deaf signers and freelance interpreter participants to capture their specifc experiences. At the end of each session, interested participants were invited to the co-design workshops.</p><p>After completing interviews, we analyzed the transcripts and identifed eight key accessibility barriers that signers and interpreters faced (e.g., difculty getting signers' attention), which we used as a starting point for co-design discussions and tasks (see analysis details in Section 3.5). See Supplementary Materials for a list of these barriers, which groups they were presented to, and how they were explained to participants.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.4">Co-Design Workshops</head><p>We conducted four co-design workshops with 12 participants to explore design solutions based on the themes from our formative interviews. Sessions were limited to three participants each to account for the difculty in videoconferencing with larger groups, and we conducted two sessions with groups of d/Deaf signers and two sessions with groups of ASL interpreter participants. We separated participant groups to capture the nuanced diferences in each group's experiences and technology needs and to ensure that hearing interpreters' needs did not get prioritized over d/Deaf signers.</p><p>During our pilot process, we identifed several accessibility issues around conducting co-design sessions over VC and ultimately implemented the following adaptations:</p><p>• Establish communication rules. With varied signing styles and accents, research interpreters often require brief pauses for clarifcation. Furthermore, while multiple signers can efectively communicate at the same time, that is difcult to interpret into spoken English. To mitigate this, we asked participants to take turns and ensure that only one signer has the foor at a time, which is not always necessary when signing in person or without interpretation. • 1:1 ratio of d/Deaf participants and research interpreters. During the pilot, it was visually and cognitively overwhelming for two research interpreters to interpret for four signers (three d/Deaf participants and one Deaf researcher) simultaneously. Given that this can lead to research interpreters missing some participant's signs, we introduced a third research interpreter 5 for each workshop to make interpretation more manageable.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>6</head><p>• Interpreter participants to voice , rather than sign. We found that being able to hear how their signing was being interpreted could be distracting for hearing ASL interpreter participants, as the word choice used, emotive language or interpretation sometimes difered from what they intended.</p><p>To address this, we asked interpreter participants to voice, and the research interpreters primarily interpreted spoken English into ASL for the Deaf researcher. • Design assistant acts as the 'hands' of participant-led discussions. While co-design activities often ask participants to 'think-aloud' and sketch, signing and sketching simultaneously is inaccessible for d/Deaf signers. Sketching requires one's visual attention on the sketch and at least one hand to act on a design, which limits both expressive and receptive capacity for signers. The most accessible method we found was having a hearing researcher act as a design assistant, digitally sketching on a tablet in real-time while participants described their ideas. These sketches were screenshared and the design assistant continuously revised them according to participants' instructions. Participants were also encouraged to engage in any other ways they preferred (e.g., annotation tools, paper sketches etc.). Each co-design session lasted 90 minutes, beginning with brief discussion on two themes from the formative interviews. To capture a breadth of ideas, each session participants engaged with diferent themes around accessibility barriers that signers or interpreters face, covering all eight key accessibility barriers we identifed in our interviews over the course of the four co-design sessions. After open-ended refection and discussion about the issues presented, participants collectively ideated on possible solutions to address each theme, guiding the creation of the screenshared sketches. We prompted participants to discuss their design rationale throughout, and the session ended with a refective discussion of shared ideas and priorities.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.5">Analysis</head><p>The interpreted, spoken English from all interviews and co-design sessions was professionally transcribed. We conducted inductive, semantic, and realist refexive thematic analysis <ref type="bibr" target="#b14">[15,</ref><ref type="bibr" target="#b15">16]</ref> on both the interview and co-design workshop transcripts. First, the two co-frst authors familiarized themselves with all 12 interview transcripts, referring back to the video recordings for clarifcations when needed. They then coded the interview transcripts and collaboratively developed an initial set of codes. This set of codes was iteratively clustered into broad themes, diferentiating the data collected from d/Deaf participants and interpreter participants to identify themes that are unique to either group. After accounting for overlaps and mapping the relationships within the initial themes, we had a set of eight themes around key accessibility barriers our participants faced, which were used as a starting point for our co-design discussion and tasks.</p><p>Following the co-design workshops, we repeated the aforementioned analysis process on the set of four session transcripts. After developing an initial set of codes (separate from the interview codebook), the two co-frst authors iteratively clustered the codes derived from the co-design transcripts into frst-level themes. The data collected from d/Deaf participants and interpreter participants were also carefully diferentiated to identify themes that are unique to either group. Then these frst-level semantic themes from the co-design workshops were considered alongside codes from the initially analyzed interview data to identify and further synthesize cross-cutting, second-level themes. The themes at this stage, which concerned both specifc accessibility barriers and design implications, were refned by iteratively mapping thematic relationships within the dataset.</p><p>To further validate the second-level themes, we used visual analysis methods <ref type="bibr" target="#b46">[47,</ref><ref type="bibr">65]</ref> on observational video data and participantelicited design artifacts gathered during the co-design workshops. This process allowed the research team to deepen analysis around how signers and interpreters interact during remote work and to further refne themes deductively. To generate observational data on micro-interactions between d/Deaf signers, research interpreters, and researchers, the co-frst authors and research interpreters analyzed workshop video recordings <ref type="bibr" target="#b5">[6,</ref><ref type="bibr">65]</ref>. As a group, they reviewed the workshops in 10-15-minute segments, taking independent observational notes while viewing a segment and then discussing notable interactions before continuing on to the next segment. We invited the two primary research interpreters to participate in this process to include their frst-hand retrospective refections around what motivated certain interpretation decisions and their perspectives on the data in our analysis, providing unique insights around signer-interpreter interactions. After reaching shared understanding around interactions, the researchers coded the set of observational data, sorting them into existing second level themes or generating new themes. At this point, themes were further refned, removing themes without sufcient evidence and merging overlapping themes. Finally, the researchers used artifact analysis</p><p>[65] on the co-design sketches to identify patterns and diferences across ideas. These patterns revealed participants' design priorities and were clustered into their key purposes (e.g., identifying the speaker efciently). Similarly to the observational data, the clusters from artifact analysis were sorted into existing themes. At this point themes were fnalized, and we defned the key insights captured in each.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4">FINDINGS</head><p>Our analysis identifed accessibility barriers in VC use for signers and interpreters related to: (1) consuming information, (2) communicating, (3) collaborating, and (4) hosting meetings over VC platforms. Informed by the qualitative accounts and co-design sessions, we also highlight specifc design opportunities to make commercially used VC platforms more accessible for signers. We occasionally name specifc platforms mentioned by participants, but none of these mentions constitute an endorsement. We have also consolidated our design considerations into a list of signer-inclusive VC design requirements, tailored for platform designers, which is available in our Supplementary Materials.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.1">Consuming Information</head><p>First, we highlight the challenges that signers faced when consuming information in VCs. We defne consuming information as passive, non-participative and one-way information consumption, such as attending webinars and reading slides.</p><p>4.1.1 Locating Signers and Interpreters. Difculty locating signers. Both d/Deaf signers and ASL interpreters prioritized having the video feeds of all signers within their line of sight. However, existing platforms typically automatically resize, shrink and distribute video thumbnails over multiple pages, posing challenges for visual communication: "when there are more people in the room we can't all ft in one screen and so you have to swipe screens to get the view of the other people and that is a signifcant problem" (D1 7 ). When the active signer/speaker's video is not on the frst page, D3 shared, "I'm not sure who's signing, I'm not sure who's talking". d/Deaf signers explained that screen sharing exacerbates this problem. When signers are trying to identify attendees who are asking questions, only seeing a handful of videos on top of the screen poses difculty -D4 explained "[I don't] know if they've raised their hand or where they are. Sometimes I can't see them <ref type="bibr">[and]</ref> it'll be like, oh, they're on a diferent screen. "</p><p>Information gaps. Participants further highlighted how the delay in locating signers or interpreters made their interpretermediated conversation less accessible. TERP10 8 found herself "missing information" that should have been interpreted for/to the signer. Many d/Deaf signers like D2 rely heavily on a clear view of their interpreters to communicate, but often must "scroll through a whole gallery page of postage stamp sized cameras to fnd [interpreters]", to then manually prioritize interpreter's thumbnails using features such as the 'pin' option on Zoom. This can be particularly challenging when team interpreters switch -delays in locating the 'on' interpreter often result in information gaps. When team interpreters turn take and switch, D5 explained that, "[interpreters] usually will sign some signal to let me know that I need to look from one interpreter to the next." However, even with a preemptive notifcation, D2 described how she has to juggle locating the other interpreter's thumbnail and navigating the switch; "I have to kind of be quick on that because I don't want to miss any of the information".</p><p>Workaround attempts. Though some participants (6 of 12 participants) found workarounds to minimize information gaps useful, others described some of these workarounds, such as multi-pinning "the interpreter and the instructor at the same time" (D3) as temporary band-aids. For example, in the classes TERP13 interprets for, screen sharing "cancels out those two (pinned) videos and then just makes your whole screen full screen of whatever they're showing". D2 commented that signers and their interpreters still require some adjustment time to "do that little dance" and reconfgure the pins again. Like many participants, D1 uses multiple monitors to move "back and forth" between interpreters' videos on one side and other content (e.g., meeting notes) on another. In his coding classes, D1 feels behind because when his teacher "does some coding, [he has] to look at [his] interpreter, so [he] miss[es] it". Participants, like D4, often like to "look at the person who's making a comment or asking a question, [their] body language, facial expressions, and those sorts of things" to understand communication context and to take in the various NMMs 9 that are critical to ASL conversations. However, D4 explained that online visual dispersion forces her to make tradeofs: "When I look at that person, then I miss the next part of the interpreted message because I'm not looking at the interpreter at that moment. " The workarounds described by participants interfered with their ability to have efective signed conversations over VCs, as they continued to miss out on signs and NMMs..</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.1.2">Comprehending Signs and Visual</head><p>Cues. Lack visual clarity of signs. Our participants outlined how the size and fdelity of videos impacted their ability to comprehend linguistic information (such as hand shape, placement, movements etc.) conveyed in ASL. Users become "tiny little thumbnail video feeds" as the number of attendees increases and TERP8 further commented that, "I'm having to get this close to the camera, this close to the monitor, to make sense of what they're saying". Participants described similar challenges across diferent VC platforms, explaining that Microsoft Teams' display of videos as "little tiny blocks at the bottom [makes it] hard to see" (TERP13) and that Webex's screen sharing layout places video feeds "across the top [and] I can't see signing at that scale" (D5).</p><p>Signers also observed the efect that the boundaries of a camera feed have on their ability to articulate themselves efectively while signing. D6 explained that VC "limits the signing space that [she] can use" whereas in-person, she "can explain stories with all the space that [she has] at [her] disposal". For interpreter participants, they had to adapt by being "more visual gestural, a little bit more working toward the camera" (TERP8) to articulate their interpreted messages clearly to their clients. For instance, when conveying proper names or other English concepts without ASL analogs, TERP10 modifes her signing approach to "fngerspell 10 right in front of the camera [and to] fngerspell much slower" in an efort to increase the clarity of her signs. While ASL uses body positioning to convey important grammatical expressions, participants explained that the randomized layout of each person's video in a 2D space "[took] away the ability to do that body shift for clarity" (D2), and TERP9 found that the reduced depth perception makes signs "difcult to see. "</p><p>Difculty receiving backchannel feedback. In addition to the lack of visual-gestural clarity, participants highlighted the increased challenges of capturing nonverbal signals (e.g., nodding of heads, signing of 'I understand' or 'yes' etc.) to gauge active listening and understanding. While hearing people can assume the listener's understanding by receiving verbal backchannel feedback or clarifcations, in addition to nonverbal signals, D4 explained that for signers to track backchannelling over VC it is "a lot of jumping around with [her] eyeballs and it takes a lot of efort". Even in small groups, screen sharing limits the ability to see backchannel feedback, and D4 found she has to "[jump] in and out of screen share [just to] see the entire classroom at once". Interpreter participants, like TERP9, heavily rely on their client's backchannel responses such as "the nodding, the expressions" to assess their client's comprehension and "modify [their] interpreting approach" accordingly. When signers' videos are turned of or cannot be located, TERP8 shared how this can impact interpreting confdence: "Are they watching? Are they paying attention? I don't get any kind of feedback in the form of facial expressions or agreement. It's just I've got a black screen I'm interpreting to and that's defating. . . that does afect my interpreting. " 4.1.3 Design Considerations. We now highlight potential design considerations that can provide greater access to consuming information. These design ideas were often raised in interviews and deepened in co-design sessions. They refect both d/Deaf signers and interpreter participants' perspectives.</p><p>Flexibility to resize and reorder video frames (1A). All participants unanimously prioritized having the control to rearrange any video thumbnails based on individual preference. Signers expressed a strong preference to shift the videos to "be able to see who the deaf person is that's signing and also see the interpreter in the same space" (D5). Some wanted to not just arrange video feeds within a VC platform but across their monitors and other windows to minimize visual dispersion and maximize the amount of information within their sightline (Fig. <ref type="figure" target="#fig_1">1A</ref>). In a remote lecture setting, where signers are often required to multi-task, D1 wished that "I could have the interpreter on the same screen as the coding [beside] the professor". While interpreter participants had varied preferences to their setup, they overwhelmingly prioritized having their d/Deaf client's video to take up the most screen estate, such as TERP11's wish to have: "the deaf person's window [as] a large central image and then the other people surrounding that, perhaps, in thumbnails around where I can reference to them quickly and easily and see who's speaking". Despite similar priorities, fexibility is critical to support participants with diverse needs, contexts of use, and preferences.</p><p>Grouped videos (1B). In three out of four co-design sessions, participants saw value in having the ability to create customized groups of video feeds. D16 imagined a private group of signers and interpreters "pinned or tethered together" so that if screens are rearranged, "the interpreter moves with me [...] instead of getting lost in the shufe of screens". Interpreter participants stressed that this could address a key problem for accommodation service providers, as they are often separated from their clients when they are sent to meeting 'breakout rooms'. In both co-design sessions with interpreter participants, they expressed an overwhelming interest to automatically have a clear sightline of signers, where "[signers'] videos will come up rather than me having to search for each person" (TERP10). Some participants wanted interpreter teams to be connected to signers' video feeds so that interpreter switches could happen with less information loss.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.2">Communication</head><p>Here, we describe communication challenges participants faced while using VC. We defne communication as active, participative and two-way information exchange with non-signers, signers and/or interpreters (e.g., having group conversations, answering questions during lectures).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>4.2.1</head><p>Geting Atention without Audio. d/Deaf signers and ASL interpreters face various challenges when they are trying to get the attention of other signers on VC platforms because existing platforms are designed to identify participation through audio.</p><p>Impact of audio-centric platforms. Signers described how audio-centric VC platforms make it particularly difcult for d/Deaf people to get others' attention and to identify when others are trying to get their attention. D5 explained this issue: "hearing people just hear something and they are able to recognize that something's [or someone's] getting their attention", however, "deaf people don't have a similar access". To compensate for this inequitable access, D16 has to perpetually "hunt and peck through the sea of faces" to avoid overlooking when someone is "trying to get [his] attention". This is amplifed by the fact that VCs do not automatically identify active signers, which can cause interpreters to unintentionally overlook signers. D2 emphasized the importance of getting the attention of interpreters before signing: "sometimes I'll just be signing along and it's dead silent in the room...someone will talk and say, did you just say something?... And then the interpreter's like, 'oh I'm sorry. I couldn't see the comment. I'm so sorry. ' And that's embarrassing. So I don't like that. That can be a little traumatizing. "</p><p>Deaf cultural practices. There are many Deaf cultural practices for getting people's attention, but d/Deaf signers found that these approaches largely did not translate to VC. For instance, D16, who is currently teaching remotely, explained:</p><p>"When you're in a live classroom with other students, you can bang on the desk and get their attention that way and explain things that way. Or in a classroom environment, you can also fash the lights on and of, and get everybody's attention and say, hey, can everybody see me? But in this online environment we're limited. We're not allowed to do that. We can't do that. " -D16 Often, signers wave at the person whose attention they are seeking, but online, TERP7 explained, "you're waving at someone for like a long time and then she's like, oh sorry, didn't see you. " Participants had not found easy alternatives, as more extreme attention-grabbing methods lack the nuance that in-person spatial communication can allow: D16 had experienced people strobing fashlights at their camera and found that "everyone's attention is arrested and drawn to that one screen, but that person might just be trying to get my attention or one other person's".</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.2.2">Interpreting Delay.</head><p>Managing delay online. Some delay is inherent to all interpreting -moving between ASL and English is a process that takes time -but signers and interpreter participants explained that this delay was particularly difcult to manage online. TERP12 explained that traditionally, "when we're interpreting, we're still back at point B, and they've gone on to point C. And so there would be that kind of like that nudge or that reminder to the teacher or whoever was speaking to just say, 'OK, give me some time. I'm getting caught up with that point."' Interpretation is an iterative process; speakers need to be aware of the pace of interpretation and interpreters often ask signers to clarify their intent. However, this back and forth becomes difcult on VCs: TERP9 explained that "it's harder to ask for clarifcation, like, can you go back? Sometimes, they don't see me or can't see me, and so they don't see that request for clarifcation. "</p><p>Difculty interjecting on VC. Interpretation delay is particularly noticeable for signers when conversation participants are taking turns -D4 explained: "I'm thinking about what the person said, then another person has already said something or has already begun speaking. The interpreter has continued to interpret what the other person is saying, while I'm still contemplating what I just heard or saw". While makes joining conversations difcult regardless of environment, an increase in interpreter delay online amplifes this struggle. D1 shared that "my interpreter's all ready to answer the question or to interpret the answer that I've given, but then somebody else has overstepped them and is answering the question, because there's a little bit of a delay there. " Furthermore, online conversation norms create particular considerations for interpreters. TERP9 scribed how it can be "a challenge of how to interrupt appropriately, then at the same time, understand the signed utterance, and then interrupt at the right moment, " and that she often encountered the attitude that "this is not the time for interruptions, which just really feels oppressive to the Deaf person. " Echoing this, some feel inclined to interrupt for clarifcation in a digital medium [. . .] like interrupting kind of disrupts the whole thing" (TERP8). VC communication do not anticipate that some participants will be joining via interpreters, and delay in the interpretation process makes it harder for signers to communicate and interject.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.2.3">Identifying Speakers</head><p>Accurately. Active speakers. Many participants fnd that it is difcult or impossible to correctly identify active speakers on a VC, especially when conversations overlap. While participants noted that Zoom's yellow frame around active speakers (D2) or Microsoft Teams' captioning speaker identifcation (TERP9) could help bridge audio or context gaps for speaker identifcation, challenges persist. Signers sometimes rely on interpreters to identify speakers as they "can't look at the interpreter and simultaneously look at the person speaking" (D4), but this breaks down if interpreters cannot identify the speaker well and is particularly problematic when multiple people speak at once. Not only do signers lack full access, but without knowing who has spoken, they not are not able to "refer back to that person or that comment" (D2).</p><p>Eye gaze. Eye contact is ill-defned and inconsistent in virtual mediums, which has distinct consequences for signers. Interpreter participants reported being unsure of norms around eye contact: "where do I look? Do I look at the deaf person on screen? Do I look in the camera when I'm trying to look at neutral space?" (TERP7). This results in ambiguity because ASL grammar relies on eye contact to identify the person a sentence is directed towards. Without clear, mutual eye contact on VC platforms, it is difcult "to know if [a signer is] talking to me or talking to other students" (D3).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.2.4">Design Considerations.</head><p>Informed by the fndings above, we now provide a summary of our participants' recommendations and design rationales to address these communication barriers.</p><p>Visual and haptic feedback (2a). Both d/Deaf signers and interpreter participants expressed great interest in having various non-auditory means to get signers' attention privately and efciently before communicating. Signers wanted "some button[s] to push to get [others'] attention" (D16) and wanted to get that warning where they were looking, having it "pop up on my screen if that's possible" (D1). Other participants considered how they could get this notifcation across the devices they use, and D2 suggested "it would be great if my phone had vibrated, or something, to get my attention." All interpreter participants suggested ideas in their co-design sessions. For TERP10 commented how she wanted to have a "little attention grabber go across the screen" and TERP13 suggested it should also "go across the screen on whatever they're working on" when signers are multitasking. TERP11 supported their ideas and emphasized the importance of privacy, proposing that the notifcation is "not open to everybody, and it's just to that deaf person who's using the service. "</p><p>Prioritize the frames of active speakers next to ASL interpreters (2b and 2c). the speaker was a clear priority across co-design sketches, with many participants suggesting that solutions could place the interpreters and active speaker's video feed in the same sightline. D5 proposed that active speakers' "would come to the front or be at the beginning, [so it's] easy to recognize who it is that's speaking out of the sea of faces that you would see. " Participants highlighted that when their "eye gaze doesn't have to be too far-ranging" (D15) it would allow signers to capture the speaker's backchannel feedback without missing the interpreted messages.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.3">Collaboration</head><p>We also identifed collaboration barriers, where multiple people (signers, non-signers and interpreters) jointly work together, or in a team, to produce or act on something actively. While signers have shared challenges that relates to working with others remotely, communication and consuming information were largely the root causes of those barriers, which we previously described. Therefore, this section focuses on the unique collaboration challenges that interpreters face while working via VC.</p><p>is not familiar with a sign due to sign accents 11 ). When in person, clarifcation (also known as 'feeding') is traditionally done openly (e.g., quickly voicing a missed word), but interpreter participants described concerns around how doing so online can cause unnecessary interruptions to others and impact their perceived professionalism.</p><p>Open team interpreting. While interpreters have developed ways to discreetly communicate with and support each other in person, these strategies break down online. Efective team interpreting requires interpreters to be able to "recognize that something's wrong [. . .and] just jump in" (TERP9) and participants such as TERP11 emphasized that on VC this can be potentially disruptive to others as "anything that needs to be communicated is then broadcast to everybody". This barrier to openly 'feeding' information to their team interpreters "limits [their] teaming ability" (TERP9). Some interpreter participants felt strongly about avoiding unnecessary attention when interpreters communicate, and TERP9 explained: "I wouldn't want a whole room of Zoom people to see me going on camera, of camera, on camera, of camera [...] and bringing so much attention to the interpreter [that's] like waving wildly". To TERP11, the interpreter's "goal is to disappear into the woodwork like we don't exist in that space" and "having our business out in front of everybody to hear" may impact how they can build trust and be perceived as professional. TERP11 elaborated:</p><p>"Communication is about trust and if the people in the room hear one interpreter feeding the interpreter tons and tons, they're like, 'Wait a minute, maybe this frst interpreter really isn't doing so good.', and that can then destroy the trust relationship in that communication and that can then refect negatively the hearing person or deaf person. "-TERP11</p><p>Altered communication channels for team interpreting. To manage the limitations of open interpreting, interpreter participants often use alternative communication methods that inadequately support interpreting needs. Interpreters typically verbally communicate or sign to their team interpreters in-person, but TERP11 now utilizes text messaging when 'feeding' in the VC 4.3.1 Interpreting with Team Interpreters. When interpreters work as a team, the inactive interpreter often needs to provide clarifcations to the active interpreter (e.g., when the active interpreter becomes disruptive: "I prefer [...] instant message because I can set it up as a separate window and the reason I also prefer it is that privacy". Similarly, TERP8's team interpreters 'feed' by "sending <ref type="bibr">[her]</ref> in text what that word means". Some participants expressed concerns that existing means of communication (e.g., chat, openly communicating in the main room) do not sufciently protect client-interpreter exchanges, and they "do not want [the] interpreter's discussion to be recorded" (TERP11). To curb these problems, interpreters like TERP11 use "two devices [to have] two channels for communication" and set up one for private team communication. However, TERP9 explained that the noise interference with multiple devices can make team interpreting difcult: "You need to be able to hear exactly what's going on and you can't -there's that echo -it's impossible for us to hear each other and to feed each other. " 4.3.2 Design Considerations. Both co-design sessions with interpreter participants revealed similar design requirements for collaborating with each other on a shared virtual medium.</p><p>Private communication methods (3a and 3b). Five out of six interpreter participants largely saw value in having a private channel for team interpreters and signers to communicate without unnecessary attention. TERP11 wished that "It could all be combined into one device [where] we're all in the same, big room but I'd like to be able to privately communicate with my team". Several interpreter participants suggested the same idea of grouped videos (Fig. <ref type="figure" target="#fig_3">3b</ref>) and expanded it to include auditory and textual means of communicating (Fig. <ref type="figure" target="#fig_3">3a</ref>) to support efcient team interpreting "without the whole group hearing" (TERP9). In this example (Fig. <ref type="figure" target="#fig_3">3a</ref>), only the active interpreter can hear the clarifcation from the inactive interpreter due to their private auditory channel.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.4">Hosting</head><p>We found that while d/Deaf signers and ASL interpreters identifed similar problems associated with the control VC platforms give to hosts, they have difering perspectives on how to resolve those barriers to accessible VCs.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.4.1">Control on Accessible Features on VC. Accessible Features.</head><p>The accessibility features on existing platforms are not designed to help the platforms' users understand and set up accessible conferences. Setting up an accessible VC meeting requires signifcant forethought and efort and the responsibility to create an accessible virtual environment is placed on the host, who must learn and navigate the platform's controls. TERP9 observed a trend where "hearing people feel like they want to help with the spotlighting and then things get all messed up", refecting that, "they weren't trying to block access for Deaf people, but they just don't understand the need for the spotlight. And so that was defnitely a platform problem. " In addition, d/Deaf signers felt that the lack of certain permissions on the VC platforms is a barrier to creating an accessible conferencing experience for themselves. D4 described an experience where she could not access her interpreters on Zoom because while she needed "to make sure that the interpreters are pinned I couldn't pin them because I was not co-host. " D2 shared how this has stifed her learning experience, "[I] always kind of messed things up and always took some time at the beginning of every class...The professor was like, 'oh jeez'. It was a little embarrassing. I mean I knew the spotlight wasn't on me but I needed that service. "</p><p>Controlling authority. While d/Deaf signers continued to imagine hosts as stakeholders in making VC accessible, many ASL interpreters imagined ideal solutions where they would have the ability to confgure VC environments independently. As meeting hosts are not all familiar with the accessible features on VC platforms, ASL interpreters sometimes "need to remind [hosts] to make me a co-host and it allows me to pin multiple students at the same time" (TERP10) and educate meeting hosts that "deaf people often have a preference to see who is speaking because there's so much [they] can catch from facial expressions and that sort of thing" (TERP7). To help meeting hosts recognize interpreters easily, before the meeting starts, TERP8 "typically [does]..add the word, 'interpreter', to [her] name so that people can see that and then [she] will ask the host to please add [her] and the other interpreter [as co-hosts]" and advised hosts to "give the student the capability to multi-pin and so then they can decide to spotlight or what have you" (TERP8).</p><p>These workarounds put signifcant burdens on d/Deaf signers and ASL interpreters. Interpreter participants shared that "kind of my biggest fear is how much time do I have to get set before the speaker's of and running and I've got to be set to go" (TERP14). Even if given access to multi-pinned interpreters, the responsibility to enable accessibility still falls on signers which creates problems particularly when "the platform can change so often and if [the signers are] not aware" (TERP10). Additionally, TERP10 explains that often d/Deaf adolescents "still are not familiar with pinning" and as an educational interpreter, is always concerned: "How do [students] pin the interpreter in that meeting? . . . I'm also trying to teach my students, hey, did you fnd the three dots? Have you pinned me? So there's a lot of lost time". Interpreter participants identifed many aspects of their work where they played an active role in confguring accessibility, and desired greater autonomy in doing so.</p><p>4.4.2 Design Considerations. Our participants brainstormed some ideas on how to make the process of setting up an accessible environment easy for the meeting hosts, and the design considerations below are synthesized from co-design sessions with both groups.</p><p>Customizable layout templates. During our co-design sessions, both d/Deaf signers and interpreter participants expressed that future VC platforms should provide users the ability to customize their layouts. As TERP 11 stated, "it best if we had the freedom to set it up however it works for us." To quickly enable accessible features, TERP7 proposed that "if there were a few diferent templates there, yeah, I could see some people [could fnd it easily], that [would be] really useful. " Similarly, D5 imagined how the templates could be created and saved, "you would provide enough time to be able to learn and familiarize yourself with the changes, and then save that [. . .] then if there was anything that came last-minute, the host then would be to go on ahead and select a pre-saved template from a list".</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5">DISCUSSION</head><p>In this study, we designed an accessible remote research protocol and conducted interviews and co-design workshops with both signers and interpreters. Our fndings highlighted key accessibility barriers and practical VC design considerations to mitigate them. We further provided guidelines for conducting remote research with d/Deaf signers in the future. Here, we explore and refect on the larger social-cultural impact of (un)inclusive signing on VCs, our responsibility as designers, and future research considerations.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.1">Implications of Video Conferencing Accessibility on Signers</head><p>Our study has surfaced multiple VC access gaps experienced by both d/Deaf signers and ASL interpreters when consuming information, communicating, collaborating, and hosting accessible virtual meetings. While our data provides in-depth insights into our participants' access needs, it cannot fully encapsulate the broader social implications of inadequate VC access for the diversity of d/Deaf signers, especially in non-ideal environments. The use of auditory-centric VC tools, which supposedly enable remote visual communication, perpetuates speech normalcy by prioritizing spoken language users (e.g., automatically spotlighting only users who voice). This can make visual communicators invisible and perpetuates other learning disparities. Students who have had to learn remotely miss out on instruction when using inaccessible VC for school. In addition, while their hearing peers are engaged in class discussions, deaf signers can become more isolated and disconnected from their community. While our d/Deaf participants, who are at least 18 years old, attempted diferent workarounds (e.g., using chat, asking interpreters to interject etc.) to participate in VCs, it might be difcult for younger d/Deaf signers to use these same workarounds. d/Deaf children or young d/Deaf signers in remote K-12 education are at a signifcant <ref type="bibr" target="#b1">[2,</ref><ref type="bibr" target="#b49">50,</ref><ref type="bibr" target="#b71">72]</ref> and this can amplify the already ongoing language deprivation crisis for d/Deaf children <ref type="bibr" target="#b27">[28,</ref><ref type="bibr" target="#b71">72]</ref>. VC limitations for d/Deaf signers directly and indirectly reduce language exposure <ref type="bibr" target="#b2">[3,</ref><ref type="bibr" target="#b71">72]</ref>. The lifelong consequences of language deprivation, such as cognitive delays and mental health difculties <ref type="bibr" target="#b27">[28,</ref><ref type="bibr" target="#b28">29]</ref>, are far reaching and make granting d/Deaf children access to ASL, their frst language, an urgent priority.</p><p>VC's audio-centric design further perpetuates the Deaf studies concept of 'phonocentrism', or the idea that speech and sound defne the human experience <ref type="bibr" target="#b4">[5,</ref><ref type="bibr" target="#b6">7,</ref><ref type="bibr" target="#b81">81]</ref>. The experiences that signers shared our study reinforces Young et al. 's <ref type="bibr" target="#b81">[81]</ref> notion of the "translated Deaf self", where hearing people who don't sign only come to know deaf signers through the 'other', treating interpreters as not just a conduit for communication but as a partial representation of the signer. For example, some hearing people direct and turn their bodies towards the ASL interpreter, who is voicing, instead of the d/Deaf signer, when communicating in-person. Existing VC design enables this same bias in online environments by prioritizing the voicing interpreter's video over the signer's, leading hearing people to engage with the voice they hear and the person they see on the platform -the interpreter, not the deaf signer.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.2">Refections on Future Video Conferencing Design</head><p>To build signer-inclusive VC solutions, designers should consider the impact of two-dimensional space on use of sign language, a three-dimensional spatial language. In addition, designers should use an inclusive design approach to consider the diverse abilities of all their potential users <ref type="bibr" target="#b30">[31]</ref>.</p><p>Our fndings show that virtual environments limit the efective use of spatial aspects of ASL, particularly body movements, directionality, and hand orientation. Unlike in-person, signing on screen fattens and reduces the depth perception required to efectively convey relations spatially, making it so that signers have difculty describing locative expressions, physical spaces, and subject-object relationships <ref type="bibr" target="#b24">[25,</ref><ref type="bibr" target="#b38">39]</ref>. This has a critical impact on the intelligibility of ASL online because verb subjects and objects are conveyed via the movement and directionality of signs <ref type="bibr" target="#b21">[22,</ref><ref type="bibr" target="#b66">67,</ref><ref type="bibr" target="#b76">76]</ref>. For example, sign "I help her", a signer begins by positioning the handshape for "help" near their body and then faces another person and moves their hands towards her. However, if the signer moves the handshape for "help" from the other person towards themselves, they instead convey "she helps me" -this slight diference in movement signifcantly changes the meaning of the sign. VC platform design renders these locative expressions and subject-object relationships vague due to its two-dimensionality and varied screen layouts. In addition to the design ideas mentioned in Section 4, VC platforms could allow signers' video thumbnails to be tethered to their interpreter(s)' thumbnail and provide an option for signers and/or interpreters to all view the same layout. This solution enables more natural and accurate sign directionality, or using manual cues, such as body and hand movements (e.g., clearly pointing), to identify the subject or object of a sentence <ref type="bibr" target="#b76">[76]</ref>.</p><p>While the requirements we outline serve a specifc population, we argue that designers have a professional, social and ethical responsibility to consider the diverse abilities of their users, and advocate against design that only considers the majority. Our data show how only designing for privileged majorities (e.g., hearing non-signers) actively harms users who do not ft those norms. Existing VC design perpetuates audist beliefs (e.g., only identifying speakers who voice) which requires signers to adopt diferent 'workarounds' just to be seen and heard (e.g., additional meeting rooms for interpreters). Ironically, this has created visual communication technology (which found some of its earliest adopters in the Deaf community <ref type="bibr" target="#b60">[61]</ref>) that has little to no consideration for visual communicators. We call for an approach to VC design that meets the needs of all users and pays particular attention to who is denied access when design centers the needs of the majority.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.3">Recommendations for Future Inclusive Remote Study Design</head><p>Building from our experience conducting a remote study with d/Deaf signers and interpreters as a Deaf-hearing research team, we refect and highlight several considerations important for researchers working in this space. Since our research used the same inaccessible VC we were studying, we found shared problems with our participants but tailor these considerations for future remote research processes. Visual transparent interpreting strategies. During co-design workshops, we observed that d/Deaf signers sometimes lost track of the context of the conversation, particularly when interpreters were delayed in catching up on content. To mitigate this, our research interpreters spontaneously developed a visual signal to show that they are 'catching up' on the overlapping conversations, letting d/Deaf signers know to pause before sharing a new idea. During the pause, the interpreter was then able to quickly interject previously uninterpreted conversations or backchannel responses (e.g., signing 'I see', 'I understand' etc.). This visual signal also helped team research interpreters to visually communicate who should go next when managing overlapping conversations. This strategy, closely attuned to the needs of a workshop facilitated by Deaf and hearing researchers and enabled by long-term involvement of the same research interpreters, was efective in both setting accessible conversation norms and ensuring that all participants' ideas were shared. For future research involving d/Deaf signers, we recommend the research team develops similar visual signals to allow interpreters to enable transparent conversation access.</p><p>Deaf awareness and representation. Inaccessible research methods make the Deaf community, particularly Deaf signers, a signifcantly understudied group <ref type="bibr" target="#b3">[4,</ref><ref type="bibr" target="#b54">55]</ref>. Anderson et al. <ref type="bibr" target="#b3">[4]</ref> posits that linguistic and socio-political considerations should be taken into account when conducting qualitative research with the Deaf community. In line with this call for representation and community engagement, our research team consists of a Deaf researcher, two ASL research interpreters, two hearing accessibility researchers who know basic ASL, and a hearing HCI researcher. The identities, backgrounds, and knowledge of the research team served to increase cultural and linguistic accessibility and helped build trust, crucial for doing work with a community that researchers have historically harmed <ref type="bibr" target="#b43">[44,</ref><ref type="bibr" target="#b44">45]</ref>.</p><p>Throughout our research, we study materials with ASL linguistics as most research activities were conducted in ASL. In doing so, we found that asking interview questions and guiding codesign activities in ASL requires providing multiple examples for clarity, a common element of ASL grammar 12 , but that this can come into confict with researchers' desire to not lead or bias participants during studies. Prior work provides precedent for study protocols conducted in ASL that heavily rely upon examples <ref type="bibr" target="#b24">[25]</ref>. However, researchers without a deep knowledge of ASL may unintentionally and unknowingly conduct interpreted interviews that bias d/Deaf signer participants. We suggest that researchers who work with d/Deaf signers approach study protocol design with care, considering how to phrase questions and prompts that provide general examples that can be clearly communicated in ASL while not leading or biasing participants.</p><p>Inter-interpreter reliability. To ensure consistency, quality, and to reduce bias, we worked with the same two research interpreters throughout the entire research process. Working with the same team of interpreters from study design through analysis allowed for familiarity with signing styles, maintaining conceptual equivalence, and ensuring internal validity of transcribed data across all sessions. Because our researcher interpreters attended all meetings and study sessions, they were aware of the study's context and could tailor their interpretation to most clearly match the researcher's intent, standardizing interpretation across subsequent sessions. In addition, the research interpreters were involved in post-hoc video analysis <ref type="bibr" target="#b3">[4]</ref>, conferring with researchers and reaching consensus around interpretation of signs, non-manual grammar and body language. Though there are no perfect interpretation solutions between English and ASL, we found that closely engaging the same research interpreters throughout the entire study process allowed for greater 'inter-interpreter reliability. ' Other researchers working with signers may consider how to more closely engage interpreters the research process.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>LIMITATIONS AND FUTURE WORK</head><p>We outline limitations of our study and opportunities for future work. First, most of our participants had been using videoconferencing frequently since the start of the COVID-19 pandemic, and therefore our fndings may not refect the experiences of signers who are unfamiliar with VC platforms. Second, our participants overwhelmingly used Zoom, primarily in an educational or academic setting. While we did have participants refect on other platforms or non-academic settings, our fndings do not equally represent all VC platforms or use cases. Third, none of our participants identifed as hard of hearing, so our fndings may not apply to hard of hearing signers. Fourth, all transcription was based on our research interpreter's real-time voicing of participants' signing. We elected to place our confdence in these interpreters, who we trust and had worked with prior to this study, while acknowledging that interpreting is an imperfect representation of signed languages. Fifth, we intentionally scoped our study to the experiences of freelance, community interpreters, but future work could investigate the relevancy of our qualitative fndings and design recommendations to other remote interpreting settings such as VRI and VRS. Further, we provide design considerations but have not implemented them, and future work is needed to create and evaluate prototypes that integrate our design recommendations. The educational interpreters who participated in our study brought their perspectives on the unique accessibility challenges of interpreting remotely for young d/Deaf signers, and future work could explore the impact of VC-mediated communication on young people whose linguistic foundation in sign language is being built via a two-dimensional medium. Finally, future research could further explore solutions, such as haptics or VR, to bridge the gap between signing in person (3D) versus signing in a digital medium (2D).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="7">CONCLUSION</head><p>We present in-depth qualitative accounts from eight d/Deaf signers and eight ASL interpreters which reveal the unique challenges and accessibility barriers that signers and interpreters face on commercially available VC platforms. Additionally, we uncover novel design opportunities and practical guidelines that new and existing VC platforms can use to improve access for d/Deaf signers and interpreters. Throughout our participatory research process, we designed and iterated various strategies to provide an accessible remote study experience for our participants. As we look to a world where videoconferencing remains a mainstay of work, education, and social lives, we hope to help shape a medium that more fully supports visual communication.</p></div><figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_0"><head>a</head><label></label><figDesc>Refers to number of years working as a freelance community interpreter. b Participants were involved in one or both research activities: 'I' -Interview and 'C' -Co-design Workshop</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_1"><head>Figure 1 :</head><label>1</label><figDesc>Figure 1: Co-design workshop sketches of (a) video thumbnails of the professor and interpreter dragged-and-dropped over the top of a web browser on the user's secondary monitor (from session 2 with signers), and (b) three videos thumbnails (of e.g., signer, 'of' interpreter, and 'on' interpreter) in a private group that are pinned onto the top right corner (from session 2 with interpreters)</figDesc><graphic url="image-2.png" coords="9,87.82,83.68,436.37,154.06" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_2"><head>Figure 2 :</head><label>2</label><figDesc>Figure 2: Co-design workshop sketches of (a) a 'hand waving' visual overlay to get signer's attention (from session 2 with interpreters), (b) screenshare view with speaker's name clearly identifed on top and interpreter's screen pinned to the top (D1), and (c) speaker view confguration where the speaker's name and video is highlighted, while the interpreter's screen is pinned below (D5)</figDesc><graphic url="image-3.png" coords="10,87.82,83.69,436.36,108.53" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_3"><head>Figure 3 :</head><label>3</label><figDesc>Figure 3: Co-design workshop sketches of (a) a private room within a VC, where 'of' interpreter verbally 'feed' the team interpreter, and a pop-up text showing the feed (from session 1 with interpreters), and (b) a grouped video (with two signers and two team interpreters) communicating through a private chat room (from session 2 with interpreters)</figDesc><graphic url="image-4.png" coords="11,87.82,83.69,436.36,110.68" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_1"><head>Table 1 :</head><label>1</label><figDesc>Summary of d/Deaf participants' demographics, as reported in the screener. All participants primarily communicate in ASL. Participants were involved in one or both research activities: 'I' -Interview and 'C' -Co-design Workshop</figDesc><table><row><cell>ID</cell><cell>Gender</cell><cell>Identity</cell><cell>Age</cell><cell>Frequency of VC use</cell><cell>Reported usage of platforms</cell><cell>Participant for a</cell></row><row><cell>D1</cell><cell>M</cell><cell>deaf</cell><cell>19-25</cell><cell>Daily</cell><cell cols="2">Zoom, Google Meet, Microsoft Teams, I, C</cell></row><row><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell>Cisco WebEx</cell><cell></cell></row><row><cell>D2</cell><cell>F</cell><cell>Deaf</cell><cell>19-25</cell><cell>3-5 days per week</cell><cell>Zoom, Cisco WebEx</cell><cell>I, C</cell></row><row><cell>D3</cell><cell>F</cell><cell>deaf</cell><cell>19-25</cell><cell>3-5 days per week</cell><cell>Zoom, Microsoft Teams</cell><cell>I</cell></row><row><cell>D4</cell><cell>F</cell><cell>deaf</cell><cell>&gt;55</cell><cell>Daily</cell><cell>Zoom</cell><cell>I</cell></row><row><cell>D5</cell><cell>M</cell><cell>Deaf</cell><cell>26-35</cell><cell>Daily</cell><cell>Zoom, Cisco WebEx</cell><cell>I, C</cell></row><row><cell>D6</cell><cell>F</cell><cell>Deaf</cell><cell>46-55</cell><cell>3-5 days per week</cell><cell>Zoom, Microsoft Teams</cell><cell>I, C</cell></row><row><cell>D15</cell><cell>M</cell><cell>Deaf</cell><cell>26-35</cell><cell>1-2 days per month</cell><cell>Zoom</cell><cell>C</cell></row><row><cell>D16</cell><cell>M</cell><cell>Deaf</cell><cell>&gt;55</cell><cell>Daily</cell><cell>Zoom</cell><cell>C</cell></row><row><cell>a</cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_2"><head>Table 2 :</head><label>2</label><figDesc>Summary of ASL interpreter participants' demographics, as reported in the screener. TERP8 and TERP9 chose not to disclose their gender.</figDesc><table /></figure>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="2">Video Relay Service (VRS) or Video Remote Interpreting (VRI) are two mainstream telecommunication services which have allowed DHH signers to use remote interpreters to communicate with hearing people since the mid-1990s<ref type="bibr" target="#b2">3</ref> Although some hard of hearing people communicate in ASL, our fndings are scoped to d/Deaf people as all of our participants identifed as either deaf or Deaf.</note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="4">All our signer participants identifed as either deaf or Deaf, which we herein referred to as d/Deaf signers.</note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="5">The third research interpreter, who possessed a lot of experience interpreting across various settings and is also certifed by Registry of Interpreters for the Deaf, Inc. (RID), was engaged to interpret for the co-design workshops only.<ref type="bibr" target="#b5">6</ref> The terms "voice" or "voicing" are used as complements to "sign" or "signing" to indicate communication using spoken language.</note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="7">Identifer 'D' is used to refer to participants who identify as deaf or Deaf (d/Deaf)<ref type="bibr" target="#b7">8</ref> Identifer 'TERP' is used to refer to participants who are ASL interpreters</note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="9">Non-manual markers is a term used to describe the various visual-facial gestural expressions, head tilting, eye shifting and body positioning that provide critical grammatical information to manual signs used in ASL conversation.</note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="10">Fingerspelling is a technique used to convey proper names, niche vocabulary, or other English words by spelling them out letter-by-letter, using the manual ASL alphabet, where particular handshapes correspond to each letter of the English alphabet.</note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="11">Similar to spoken languages, sign languages have diferent accents based on regions and individuals' backgrounds. The same term can be signed in diferent ways across America and Canada.</note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="12">ASL is not "English on the hands" and as a visual language, it represents ideas or concepts with specifc examples<ref type="bibr" target="#b3">[4]</ref> </note>
+		</body>
+		<back>
+
+			<div type="acknowledgement">
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>ACKNOWLEDGMENTS</head><p>This work would not have been possible without Holly Wescott and Jef Williamson, our research interpreters who cannot be named as co-authors for professional reasons. We are indebted to their skilled interpreting, generosity, and input throughout the entire study process. This work was supported by the University of Washington CREATE, University of Washington's department of Human Centered Design and Engineering, the National Science Foundation under Grant No. IIS-1763199, and the National Science Foundation Graduate Research Fellowship under Grant No. DGE-1762114.</p></div>
+			</div>
+
+			<div type="references">
+
+				<listBibl>
+
+<biblStruct xml:id="b0">
+	<analytic>
+		<title level="a" type="main">Modeling the Speed and Timing of American Sign Language to Generate Realistic Animations</title>
+		<author>
+			<persName><forename type="first">Sedeeq</forename><surname>Al-Khazraji</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Larwan</forename><surname>Berke</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sushant</forename><surname>Kafe</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Peter</forename><surname>Yeung</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Matt</forename><surname>Huenerfauth</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3234695.3236356</idno>
+		<ptr target="https://doi.org/10.1145/3234695.3236356" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 20th International ACM SIGACCESS Conference on Computers and Accessibility (ASSETS &apos;18)</title>
+				<meeting>the 20th International ACM SIGACCESS Conference on Computers and Accessibility (ASSETS &apos;18)<address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<date type="published" when="2018">2018</date>
+			<biblScope unit="page" from="259" to="270" />
+		</imprint>
+	</monogr>
+	<note>Association for Computing Machinery</note>
+</biblStruct>
+
+<biblStruct xml:id="b1">
+	<analytic>
+		<title level="a" type="main">Virtual Classrooms for Hearingimpaired Students during the COVID-19 Pandemic</title>
+		<author>
+			<persName><forename type="first">Elham</forename><surname>Alsadoon</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Maryam</forename><surname>Turkestani</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Revista Romaneasca Pentru Educatie Multidimensionala</title>
+		<imprint>
+			<biblScope unit="page">1</biblScope>
+			<date type="published" when="2020">2020. 2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b2">
+	<monogr>
+		<title level="m" type="main">Using online information technology for deaf students during COVID-19: A closer look from experience</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Abdallah</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">Lynn</forename><surname>Alshawabkeh</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Faten</forename><forename type="middle">F</forename><surname>Woolsey</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Kharbat</surname></persName>
+		</author>
+		<idno type="DOI">10.1016/j.heliyon.2021.e06915</idno>
+		<ptr target="https://doi.org/10.1016/j.heliyon.2021.e06915" />
+		<imprint>
+			<date type="published" when="2021-05">2021. May 2021</date>
+			<biblScope unit="volume">7</biblScope>
+			<biblScope unit="page">e06915</biblScope>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b3">
+	<analytic>
+		<title level="a" type="main">Deaf Qualitative Health Research: Leveraging Technology to Conduct Linguistically and Sociopolitically Appropriate Methods of Inquiry</title>
+		<author>
+			<persName><forename type="first">Melissa</forename><forename type="middle">L</forename><surname>Anderson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Timothy</forename><surname>Riker</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kurt</forename><surname>Gagne</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Stephanie</forename><surname>Hakulin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Todd</forename><surname>Higgins</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jonah</forename><surname>Meehan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Elizabeth</forename><surname>Stout</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Emma</forename><surname>Pici-D'ottavio</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kelsey</forename><surname>Cappetta</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kelly</forename><forename type="middle">S Wolf</forename><surname>Craig</surname></persName>
+		</author>
+		<idno type="DOI">10.1177/1049732318779050</idno>
+		<ptr target="https://doi.org/10.1177/1049732318779050" />
+	</analytic>
+	<monogr>
+		<title level="j">Qual Health Res</title>
+		<imprint>
+			<biblScope unit="volume">28</biblScope>
+			<biblScope unit="issue">11</biblScope>
+			<biblScope unit="page" from="1813" to="1824" />
+			<date type="published" when="2018-09">2018. September 2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b4">
+	<analytic>
+		<title level="a" type="main">Sign, Play and Disruption: Derridean Theory and Sign Language</title>
+		<author>
+			<persName><forename type="first">Hannah</forename><surname>Anglin-Jafe</surname></persName>
+		</author>
+		<idno type="DOI">10.1080/14735784.2011.621665</idno>
+		<ptr target="https://doi.org/10.1080/14735784.2011.621665" />
+	</analytic>
+	<monogr>
+		<title level="j">Culture, Theory and Critique</title>
+		<imprint>
+			<biblScope unit="volume">52</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page" from="29" to="44" />
+			<date type="published" when="2011-04">2011. April 2011</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b5">
+	<analytic>
+		<title level="a" type="main">Use of photography and video in observational research</title>
+		<author>
+			<persName><forename type="first">Michael</forename><surname>Basil</surname></persName>
+		</author>
+		<idno type="DOI">10.1108/13522751111137488</idno>
+		<ptr target="https://doi.org/10.1108/13522751111137488" />
+	</analytic>
+	<monogr>
+		<title level="j">An International Journal</title>
+		<imprint>
+			<biblScope unit="volume">14</biblScope>
+			<biblScope unit="issue">3</biblScope>
+			<biblScope unit="page" from="246" to="257" />
+			<date type="published" when="2011-01">2011. January 2011</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b6">
+	<analytic>
+		<title level="a" type="main">Listening to Phonocentrism with Deaf Eyes: Derrida&apos;s Mute Philosophy of</title>
+		<author>
+			<persName><forename type="first">H.-Dirksen</forename><surname>Bauman</surname></persName>
+		</author>
+		<idno type="DOI">10.5840/eip20089118</idno>
+		<ptr target="https://doi.org/10.5840/eip20089118" />
+	</analytic>
+	<monogr>
+		<title level="j">Sign) Language. Essays in Philosophy</title>
+		<imprint>
+			<biblScope unit="volume">9</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page" from="41" to="54" />
+			<date type="published" when="2008-04">2008. April 2008</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b7">
+	<analytic>
+		<title level="a" type="main">Audism: Exploring the Metaphysics of Oppression</title>
+		<author>
+			<persName><forename type="first">L</forename><surname>H-Dirksen</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Bauman</surname></persName>
+		</author>
+		<idno type="DOI">10.1093/deafed/enh025</idno>
+		<ptr target="https://doi.org/10.1093/deafed/enh025" />
+	</analytic>
+	<monogr>
+		<title level="j">The Journal of Deaf Studies and Deaf Education</title>
+		<imprint>
+			<biblScope unit="volume">9</biblScope>
+			<biblScope unit="issue">2</biblScope>
+			<biblScope unit="page" from="239" to="246" />
+			<date type="published" when="2004-04">2004. April 2004</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b8">
+	<analytic>
+		<title level="a" type="main">Deaf-Hearing Interpreter Teams: A Teamwork Approach</title>
+		<author>
+			<persName><forename type="first">Jessica</forename><surname>Bentley-Sassaman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Christina</forename><surname>Dawson</surname></persName>
+		</author>
+		<ptr target="https://digitalcommons.unf.edu/joi/vol22/iss1/2" />
+	</analytic>
+	<monogr>
+		<title level="j">Journal of Interpretation</title>
+		<imprint>
+			<biblScope unit="volume">22</biblScope>
+			<date type="published" when="2013-05">2013. May 2013</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b9">
+	<analytic>
+		<title level="a" type="main">Design and Psychometric Evaluation of American Sign Language Translations of Usability Questionnaires</title>
+		<author>
+			<persName><forename type="first">Larwan</forename><surname>Berke</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Matt</forename><surname>Huenerfauth</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kasmira</forename><surname>Patel</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3314205</idno>
+		<ptr target="https://doi.org/10.1145/3314205" />
+	</analytic>
+	<monogr>
+		<title level="j">ACM Trans. Access. Comput</title>
+		<imprint>
+			<biblScope unit="volume">12</biblScope>
+			<biblScope unit="issue">2</biblScope>
+			<biblScope unit="page">43</biblScope>
+			<date type="published" when="2019-06">2019. June 2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b10">
+	<analytic>
+		<title level="a" type="main">Deaf and hard-ofhearing users&apos; prioritization of genres of online video content requiring accurate captions</title>
+		<author>
+			<persName><forename type="first">Larwan</forename><surname>Berke</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Matthew</forename><surname>Seita</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Matt</forename><surname>Huenerfauth</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3371300.3383337</idno>
+		<ptr target="https://doi.org/10.1145/3371300.3383337" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 17th International Web for All Conference (W4A &apos;20)</title>
+				<meeting>the 17th International Web for All Conference (W4A &apos;20)<address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computing Machinery</publisher>
+			<date type="published" when="2020">2020</date>
+			<biblScope unit="page" from="1" to="12" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b11">
+	<analytic>
+		<title level="a" type="main">Creating questionnaires that align with ASL linguistic principles and cultural practices within the Deaf community</title>
+		<author>
+			<persName><forename type="first">Rachel</forename><surname>Boll</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Shruti</forename><surname>Mahajan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jeanne</forename><surname>Reis</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Erin</forename><forename type="middle">T</forename><surname>Solovey</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3373625.3418071</idno>
+		<ptr target="https://doi.org/10.1145/3373625.3418071" />
+	</analytic>
+	<monogr>
+		<title level="m">The 22nd International ACM SIGACCESS Conference on Computers and Accessibility (ASSETS &apos;20)</title>
+				<meeting><address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<date type="published" when="2020">2020</date>
+			<biblScope unit="page" from="1" to="4" />
+		</imprint>
+	</monogr>
+	<note>Association for Computing Machinery</note>
+</biblStruct>
+
+<biblStruct xml:id="b12">
+	<analytic>
+		<title level="a" type="main">ASL Sea Battle: Gamifying Sign Language Data Collection</title>
+		<author>
+			<persName><forename type="first">Danielle</forename><surname>Bragg</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Naomi</forename><surname>Caselli</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">John</forename><forename type="middle">W</forename><surname>Gallagher</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Miriam</forename><surname>Goldberg</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Courtney</forename><forename type="middle">J</forename><surname>Oka</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">William</forename><surname>Thies</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3411764.3445416</idno>
+		<ptr target="http://doi.org/10.1145/3411764.3445416" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2021 CHI Conference on Human Factors in Computing Systems</title>
+				<meeting>the 2021 CHI Conference on Human Factors in Computing Systems<address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computing Machinery</publisher>
+			<date type="published" when="2021-09-07">2021. September 7</date>
+			<biblScope unit="page" from="1" to="13" />
+		</imprint>
+	</monogr>
+	<note>Retrieved</note>
+</biblStruct>
+
+<biblStruct xml:id="b13">
+	<analytic>
+		<title level="a" type="main">Sign Language Recognition, Generation, and Translation: An Interdisciplinary Perspective</title>
+		<author>
+			<persName><forename type="first">Danielle</forename><surname>Bragg</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Oscar</forename><surname>Koller</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mary</forename><surname>Bellard</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Larwan</forename><surname>Berke</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Patrick</forename><surname>Boudreault</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Annelies</forename><surname>Brafort</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Naomi</forename><surname>Caselli</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Matt</forename><surname>Huenerfauth</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Hernisa</forename><surname>Kacorri</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Tessa</forename><surname>Verhoef</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Christian</forename><surname>Vogler</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Meredith Ringel</forename><surname>Morris</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3308561.3353774</idno>
+		<ptr target="https://doi.org/10.1145/3308561.3353774" />
+	</analytic>
+	<monogr>
+		<title level="m">The 21st International ACM SIGACCESS Conference on Computers and Accessibility (ASSETS &apos;19)</title>
+				<meeting><address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computing Machinery</publisher>
+			<date type="published" when="2019">2019</date>
+			<biblScope unit="page" from="16" to="31" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b14">
+	<analytic>
+		<title level="a" type="main">Handshape contrasts in sign language phonology</title>
+		<author>
+			<persName><forename type="first">Diane</forename><surname>Brentari</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Petra</forename><surname>Eccarius</surname></persName>
+		</author>
+		<idno type="DOI">10.1017/CBO9780511712203.014</idno>
+		<ptr target="https://doi.org/10.1017/CBO9780511712203.014" />
+	</analytic>
+	<monogr>
+		<title level="m">Sign Languages, Diane Brentari</title>
+				<meeting><address><addrLine>Cambridge</addrLine></address></meeting>
+		<imprint>
+			<publisher>Cambridge University Press</publisher>
+			<date type="published" when="2010">2010</date>
+			<biblScope unit="page" from="284" to="311" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b15">
+	<analytic>
+		<title level="a" type="main">ClassInFocus: enabling improved visual attention strategies for deaf and hard of hearing students</title>
+		<author>
+			<persName><forename type="first">Anna</forename><forename type="middle">C</forename><surname>Cavender</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jefrey</forename><forename type="middle">P</forename><surname>Bigham</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Richard</forename><forename type="middle">E</forename><surname>Ladner</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/1639642.1639656</idno>
+		<ptr target="https://doi.org/10.1145/1639642.1639656" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 11th international ACM SIGACCESS conference on Computers and accessibility (Assets &apos;09)</title>
+				<meeting>the 11th international ACM SIGACCESS conference on Computers and accessibility (Assets &apos;09)<address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computing Machinery</publisher>
+			<date type="published" when="2009">2009</date>
+			<biblScope unit="page" from="67" to="74" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b16">
+	<analytic>
+		<title level="a" type="main">Activity analysis enabling real-time video communication on mobile phones for deaf users</title>
+		<author>
+			<persName><forename type="first">Neva</forename><surname>Cherniavsky</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jaehong</forename><surname>Chon</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jacob</forename><forename type="middle">O</forename><surname>Wobbrock</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Richard</forename><forename type="middle">E</forename><surname>Ladner</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Eve</forename><forename type="middle">A</forename><surname>Riskin</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/1622176.1622192</idno>
+		<ptr target="https://doi.org/10.1145/1622176.1622192" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 22nd annual ACM symposium on User interface software and technology (UIST &apos;09)</title>
+				<meeting>the 22nd annual ACM symposium on User interface software and technology (UIST &apos;09)<address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computing Machinery</publisher>
+			<date type="published" when="2009">2009</date>
+			<biblScope unit="page" from="79" to="88" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b17">
+	<analytic>
+		<title level="a" type="main">A Brief Overview of Factors Afecting Speech Intelligibility of People With Hearing Loss: Implications for Amplifcation</title>
+		<author>
+			<persName><forename type="first">Y</forename><forename type="middle">C</forename><surname>Teresa</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Harvey</forename><surname>Ching</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Dillon</surname></persName>
+		</author>
+		<idno type="DOI">10.1044/1059-0889(2013/12-0075)</idno>
+		<ptr target="https://doi.org/10.1044/1059-0889(2013/12-0075" />
+	</analytic>
+	<monogr>
+		<title level="j">American Journal of Audiology</title>
+		<imprint>
+			<biblScope unit="volume">22</biblScope>
+			<biblScope unit="page" from="306" to="309" />
+			<date type="published" when="2013-12">2013. December 2013</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b18">
+	<monogr>
+		<title level="m" type="main">Working Remotely as a Sign Language Interpreter. EmergencyAccess</title>
+		<author>
+			<persName><forename type="first">Colleen</forename><surname>Jones</surname></persName>
+		</author>
+		<ptr target="https://emergencyaccess.info/2020/05/working-remotely-as-a-sign-language-interpreter/" />
+		<imprint>
+			<date>September 7</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b19">
+	<analytic>
+		<title level="a" type="main">Critical Co-Refection on Artifact Use</title>
+		<idno type="DOI">10.1145/3452853.3452859</idno>
+		<ptr target="https://doi.org/10.1145/3452853.3452859" />
+	</analytic>
+	<monogr>
+		<title level="m">European Conference on Cognitive Ergonomics 2021 (ECCE 2021)</title>
+				<meeting><address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<biblScope unit="page" from="1" to="4" />
+		</imprint>
+	</monogr>
+	<note>Association for Computing Machinery</note>
+</biblStruct>
+
+<biblStruct xml:id="b20">
+	<analytic>
+		<title level="a" type="main">Closed ASL Interpreting for Online Videos</title>
+		<author>
+			<persName><forename type="first">Raja</forename><surname>Dorian</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Matthew</forename><surname>Seita</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Abraham</forename><surname>Glasser</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3058555.3058578</idno>
+		<ptr target="https://doi.org/10.1145/3058555.3058578" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 14th International Web for All Conference (W4A &apos;17)</title>
+				<meeting>the 14th International Web for All Conference (W4A &apos;17)<address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computing Machinery</publisher>
+			<date type="published" when="2017">2017</date>
+			<biblScope unit="page" from="1" to="4" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b21">
+	<monogr>
+		<title level="m" type="main">Space on hand: The exploitation of signing space to illustrate abstract thought</title>
+		<author>
+			<persName><forename type="first">Karen</forename><surname>Emmorey</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2001-01">2001. January 2001</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b22">
+	<analytic>
+		<title level="a" type="main">Refection and perception in professional practice</title>
+		<author>
+			<persName><forename type="first">Peter</forename><surname>Erlandson</surname></persName>
+		</author>
+		<idno type="DOI">10.10520/EJC154299</idno>
+		<ptr target="https://doi.org/10.10520/EJC154299" />
+	</analytic>
+	<monogr>
+		<title level="j">Indo-Pacifc Journal of Phenomenology</title>
+		<imprint>
+			<biblScope unit="volume">14</biblScope>
+			<biblScope unit="page" from="1" to="11" />
+			<date type="published" when="2014-05">2014. May 2014</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b23">
+	<analytic>
+		<title level="a" type="main">AACrobat: Using Mobile Devices to Lower Communication Barriers and Provide Autonomy with Gaze-Based AAC</title>
+		<author>
+			<persName><forename type="first">Alexander</forename><surname>Fiannaca</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ann</forename><surname>Paradiso</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mira</forename><surname>Shah</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Meredith Ringel</forename><surname>Morris</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2998181.2998215</idno>
+		<ptr target="https://doi.org/10.1145/2998181.2998215" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2017 ACM Conference on Computer Supported Cooperative Work and Social Computing (CSCW &apos;17)</title>
+				<meeting>the 2017 ACM Conference on Computer Supported Cooperative Work and Social Computing (CSCW &apos;17)<address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computing Machinery</publisher>
+			<date type="published" when="2017">2017</date>
+			<biblScope unit="page" from="683" to="695" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b24">
+	<analytic>
+		<title level="a" type="main">Gesture, sign, and language: The coming of age of sign language and gesture studies</title>
+		<author>
+			<persName><forename type="first">Susan</forename><surname>Goldin-Meadow</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Diane</forename><surname>Brentari</surname></persName>
+		</author>
+		<idno type="DOI">10.1017/S0140525X15001247</idno>
+		<ptr target="https://doi.org/10.1017/S0140525X15001247" />
+	</analytic>
+	<monogr>
+		<title level="j">Behavioral and Brain Sciences</title>
+		<imprint>
+			<biblScope unit="volume">40</biblScope>
+			<date type="published" when="2017">2017. 2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b25">
+	<analytic>
+		<title level="a" type="main">A Community-Participatory Approach to Adapting Survey Items for Deaf Individuals and American Sign Language</title>
+		<author>
+			<persName><forename type="first">Patrick</forename><surname>Graybill</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Julia</forename><surname>Aggas</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Robyn</forename><forename type="middle">K</forename><surname>Dean</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Susan</forename><surname>Demers</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Elizabeth</forename><forename type="middle">G</forename><surname>Finigan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Robert Q</forename><surname>Pollard</surname></persName>
+		</author>
+		<idno type="DOI">10.1177/1525822X10379201</idno>
+		<ptr target="https://doi.org/10.1177/1525822X10379201" />
+	</analytic>
+	<monogr>
+		<title level="j">Field Methods</title>
+		<imprint>
+			<biblScope unit="volume">22</biblScope>
+			<biblScope unit="issue">4</biblScope>
+			<biblScope unit="page" from="429" to="448" />
+			<date type="published" when="2010-11">2010. November 2010</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b26">
+	<analytic>
+		<title level="a" type="main">The Impact of Assistive Technology on Communication Quality Between Deaf and Hearing Individuals</title>
+		<author>
+			<persName><forename type="first">Jan</forename><surname>Gugenheimer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Katrin</forename><surname>Plaumann</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Florian</forename><surname>Schaub</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Patrizia</forename><surname>Di Campli San</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Saskia</forename><surname>Vito</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Melanie</forename><surname>Duck</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Enrico</forename><surname>Rabus</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Rukzio</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2998181.2998203</idno>
+		<ptr target="https://doi.org/10.1145/2998181.2998203" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2017 ACM Conference on Computer Supported Cooperative Work and Social Computing (CSCW &apos;17)</title>
+				<meeting>the 2017 ACM Conference on Computer Supported Cooperative Work and Social Computing (CSCW &apos;17)<address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computing Machinery</publisher>
+			<date type="published" when="2017">2017</date>
+			<biblScope unit="page" from="669" to="682" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b27">
+	<analytic>
+		<title level="a" type="main">What you don&apos;t know can hurt you: The risk of language deprivation by impairing sign language development in deaf children</title>
+		<author>
+			<persName><forename type="first">C</forename><surname>Wyatte</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Hall</surname></persName>
+		</author>
+		<idno type="DOI">10.1007/s10995-017-2287-y</idno>
+		<ptr target="https://doi.org/10.1007/s10995-017-2287-y" />
+	</analytic>
+	<monogr>
+		<title level="j">Matern Child Health J</title>
+		<imprint>
+			<biblScope unit="volume">21</biblScope>
+			<biblScope unit="page" from="961" to="965" />
+			<date type="published" when="2017-05">2017. May 2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b28">
+	<analytic>
+		<title level="a" type="main">Language Deprivation Syndrome: A Possible Neurodevelopmental Disorder with Sociocultural Origins</title>
+		<author>
+			<persName><forename type="first">C</forename><surname>Wyatte</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Leonard</forename><forename type="middle">L</forename><surname>Hall</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Melissa</forename><forename type="middle">L</forename><surname>Levin</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Anderson</surname></persName>
+		</author>
+		<idno type="DOI">10.1007/s00127-017-1351-7</idno>
+		<ptr target="https://doi.org/10.1007/s00127-017-1351-7" />
+	</analytic>
+	<monogr>
+		<title level="j">Soc Psychiatry Psychiatr Epidemiol</title>
+		<imprint>
+			<biblScope unit="volume">52</biblScope>
+			<biblScope unit="issue">6</biblScope>
+			<biblScope unit="page" from="761" to="776" />
+			<date type="published" when="2017-06">2017. June 2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b29">
+	<monogr>
+		<title level="m" type="main">Discourse and Language Education</title>
+		<author>
+			<persName><forename type="first">Evelyn</forename><surname>Hatch</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Hatch</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="1992">1992</date>
+			<publisher>Cambridge University Press</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b30">
+	<monogr>
+		<title level="m" type="main">Mismatch: How Inclusion Shapes Design</title>
+		<author>
+			<persName><forename type="first">Kat</forename><surname>Holmes</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2018">2018</date>
+			<publisher>MIT Press</publisher>
+			<pubPlace>Cambridge, MA, USA</pubPlace>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b31">
+	<analytic>
+		<title level="a" type="main">Design and Psychometric Evaluation of an American Sign Language Translation of the System Usability Scale</title>
+		<author>
+			<persName><forename type="first">Matt</forename><surname>Huenerfauth</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kasmira</forename><surname>Patel</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Larwan</forename><surname>Berke</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3132525.3132540</idno>
+		<ptr target="https://doi.org/10.1145/3132525.3132540" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 19th International ACM SIGACCESS Conference on Computers and Accessibility (ASSETS &apos;17)</title>
+				<meeting>the 19th International ACM SIGACCESS Conference on Computers and Accessibility (ASSETS &apos;17)<address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<date type="published" when="2017">2017</date>
+			<biblScope unit="page" from="175" to="184" />
+		</imprint>
+	</monogr>
+	<note>Association for Computing Machinery</note>
+</biblStruct>
+
+<biblStruct xml:id="b32">
+	<analytic>
+		<title level="a" type="main">Evaluating American Sign Language generation through the participation of native ASL signers</title>
+		<author>
+			<persName><forename type="first">Matt</forename><surname>Huenerfauth</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Liming</forename><surname>Zhao</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Erdan</forename><surname>Gu</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/1296843.1296879</idno>
+		<ptr target="https://doi.org/10.1145/1296843.1296879" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 9th international ACM SIGACCESS conference on Computers and accessibility (Assets &apos;07)</title>
+				<meeting>the 9th international ACM SIGACCESS conference on Computers and accessibility (Assets &apos;07)<address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computing Machinery</publisher>
+			<date type="published" when="2007">Jan Allbeck. 2007</date>
+			<biblScope unit="page" from="211" to="218" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b33">
+	<analytic>
+		<title level="a" type="main">Promoting inclusive and accessible design in usability testing: a teaching case with users who are deaf</title>
+		<author>
+			<persName><forename type="first">Liz</forename><surname>Hutter</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Halcyon</forename><forename type="middle">M</forename><surname>Lawrence</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3282665.3282668</idno>
+		<ptr target="https://doi.org/10.1145/3282665.3282668" />
+	</analytic>
+	<monogr>
+		<title level="j">Commun. Des. Q. Rev</title>
+		<imprint>
+			<biblScope unit="volume">6</biblScope>
+			<biblScope unit="page" from="21" to="30" />
+			<date type="published" when="2018-10">2018. October 2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b34">
+	<analytic>
+		<title level="a" type="main">Implementation and evaluation of animation controls sufcient for conveying ASL facial expressions</title>
+		<author>
+			<persName><forename type="first">Hernisa</forename><surname>Kacorri</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Matt</forename><surname>Huenerfauth</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2661334.2661387</idno>
+		<ptr target="https://doi.org/10.1145/2661334.2661387" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 16th international ACM SIGACCESS conference on Computers &amp; accessibility (ASSETS &apos;14)</title>
+				<meeting>the 16th international ACM SIGACCESS conference on Computers &amp; accessibility (ASSETS &apos;14)<address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computing Machinery</publisher>
+			<date type="published" when="2014">2014</date>
+			<biblScope unit="page" from="261" to="262" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b35">
+	<analytic>
+		<title level="a" type="main">Regression Analysis of Demographic and Technology-Experience Factors Infuencing Acceptance of Sign Language Animation</title>
+		<author>
+			<persName><forename type="first">Hernisa</forename><surname>Kacorri</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Matt</forename><surname>Huenerfauth</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sarah</forename><surname>Ebling</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kasmira</forename><surname>Patel</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kellie</forename><surname>Menzies</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mackenzie</forename><surname>Willard</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3046787</idno>
+		<ptr target="https://doi.org/10.1145/3046787" />
+	</analytic>
+	<monogr>
+		<title level="j">ACM Trans. Access. Comput</title>
+		<imprint>
+			<biblScope unit="volume">10</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page">33</biblScope>
+			<date type="published" when="2017-04">2017. April 2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b36">
+	<analytic>
+		<title level="a" type="main">Evaluating Facial Expressions in American Sign Language Animations for Accessible Online Information</title>
+		<author>
+			<persName><forename type="first">Hernisa</forename><surname>Kacorri</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Pengfei</forename><surname>Lu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Matt</forename><surname>Huenerfauth</surname></persName>
+		</author>
+		<idno type="DOI">10.1007/978-3-642-39188-0_55</idno>
+		<ptr target="https://doi.org/10.1007/978-3-642-39188-0_55" />
+	</analytic>
+	<monogr>
+		<title level="m">Universal Access in Human-Computer Interaction. Design Methods, Tools, and Interaction Techniques for eInclusion</title>
+		<title level="s">Lecture Notes in Computer Science</title>
+		<meeting><address><addrLine>Berlin, Heidelberg</addrLine></address></meeting>
+		<imprint>
+			<publisher>Springer</publisher>
+			<date type="published" when="2013">2013</date>
+			<biblScope unit="page" from="510" to="519" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b37">
+	<analytic>
+		<title level="a" type="main">Improving Real-Time Captioning Experiences for Deaf and Hard of Hearing Students</title>
+		<author>
+			<persName><forename type="first">Saba</forename><surname>Kawas</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">George</forename><surname>Karalis</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Tzu</forename><surname>Wen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Richard</forename><forename type="middle">E</forename><surname>Ladner</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2982142.2982164</idno>
+		<ptr target="https://doi.org/10.1145/2982142.2982164" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 18th International ACM SIGACCESS Conference on Computers and Accessibility (ASSETS &apos;16)</title>
+				<meeting>the 18th International ACM SIGACCESS Conference on Computers and Accessibility (ASSETS &apos;16)<address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computing Machinery</publisher>
+			<date type="published" when="2016">2016</date>
+			<biblScope unit="page" from="15" to="23" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b38">
+	<analytic>
+		<title level="a" type="main">American Sign Language in virtual space: Interactions between deaf users of computer-mediated video communication and the impact on practices</title>
+		<author>
+			<persName><forename type="first">Elizabeth</forename><surname>Keating</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Gene</forename><surname>Mirus</surname></persName>
+		</author>
+		<idno type="DOI">10.1017/S0047404503325047</idno>
+		<ptr target="https://doi.org/10.1017/S0047404503325047" />
+	</analytic>
+	<monogr>
+		<title level="j">Language in Society</title>
+		<imprint>
+			<biblScope unit="volume">32</biblScope>
+			<biblScope unit="page" from="693" to="714" />
+			<date type="published" when="2003-11">2003. November 2003</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b39">
+	<analytic>
+		<title level="a" type="main">Technology for the deaf</title>
+		<author>
+			<persName><forename type="first">Keith</forename><surname>Kirkpatrick</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3283224</idno>
+		<ptr target="https://doi.org/10.1145/3283224" />
+	</analytic>
+	<monogr>
+		<title level="j">Commun. ACM</title>
+		<imprint>
+			<biblScope unit="volume">61</biblScope>
+			<biblScope unit="page" from="16" to="18" />
+			<date type="published" when="2018">2018. 2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b40">
+	<analytic>
+		<title level="a" type="main">A Classroom Accessibility Analysis App for Deaf Students</title>
+		<author>
+			<persName><forename type="first">Raja</forename><surname>Kushalnagar</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3308561.3354640</idno>
+		<ptr target="https://doi.org/10.1145/3308561.3354640" />
+	</analytic>
+	<monogr>
+		<title level="m">The 21st International ACM SIGACCESS Conference on Computers and Accessibility (ASSETS &apos;19)</title>
+				<meeting><address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computing Machinery</publisher>
+			<date type="published" when="2019">2019</date>
+			<biblScope unit="page" from="569" to="571" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b41">
+	<analytic>
+		<title level="a" type="main">Enhancing caption accessibility through simultaneous multimodal information: visual-tactile captions</title>
+		<author>
+			<persName><forename type="first">S</forename><surname>Raja</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Gary</forename><forename type="middle">W</forename><surname>Kushalnagar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Joseph</forename><forename type="middle">S</forename><surname>Behm</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Vasu</forename><surname>Stanislow</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Gupta</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2661334.2661381</idno>
+		<ptr target="https://doi.org/10.1145/2661334.2661381" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 16th international ACM SIGACCESS conference on Computers &amp; accessibility (ASSETS &apos;14), Association for Computing Machinery</title>
+				<meeting>the 16th international ACM SIGACCESS conference on Computers &amp; accessibility (ASSETS &apos;14), Association for Computing Machinery<address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<date type="published" when="2014">2014</date>
+			<biblScope unit="page" from="185" to="192" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b42">
+	<analytic>
+		<title level="a" type="main">Teleconference Accessibility and Guidelines for Deaf and Hard of Hearing Users</title>
+		<author>
+			<persName><forename type="first">S</forename><surname>Raja</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Christian</forename><surname>Kushalnagar</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Vogler</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3373625.3417299</idno>
+		<ptr target="https://doi.org/10.1145/3373625.3417299" />
+	</analytic>
+	<monogr>
+		<title level="m">The 22nd International ACM SIGACCESS Conference on Computers and Accessibility (ASSETS &apos;20)</title>
+				<meeting><address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computing Machinery</publisher>
+			<date type="published" when="2020">2020</date>
+			<biblScope unit="page" from="1" to="6" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b43">
+	<monogr>
+		<title level="m" type="main">SignAloud Open Letter</title>
+		<author>
+			<persName><forename type="first">Lance</forename><surname>Forshay</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kristi</forename><surname>Winter</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Emily</forename><forename type="middle">M</forename><surname>Bender</surname></persName>
+		</author>
+		<ptr target="http://faculty.washington.edu/ebender/papers/SignAloudOpenLetter.pdf" />
+		<imprint>
+			<date type="published" when="2016">2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b44">
+	<analytic>
+		<title level="a" type="main">Ethnicity, Ethics, and the Deaf-World</title>
+		<author>
+			<persName><forename type="first">Harlan</forename><surname>Lane</surname></persName>
+		</author>
+		<idno type="DOI">10.1093/deafed/eni030</idno>
+		<ptr target="https://doi.org/10.1093/deafed/eni030" />
+	</analytic>
+	<monogr>
+		<title level="j">The Journal of Deaf Studies and Deaf Education</title>
+		<imprint>
+			<biblScope unit="volume">10</biblScope>
+			<biblScope unit="page" from="291" to="310" />
+			<date type="published" when="2005-07">2005. July 2005</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b45">
+	<analytic>
+		<title level="a" type="main">Higher Education for Deaf Students: Research Priorities in the New Millennium</title>
+		<author>
+			<persName><forename type="first">G</forename><surname>Harry</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Lang</surname></persName>
+		</author>
+		<idno type="DOI">10.1093/deafed/7.4.267</idno>
+		<ptr target="https://doi.org/10.1093/deafed/7.4.267" />
+	</analytic>
+	<monogr>
+		<title level="j">The Journal of Deaf Studies and Deaf Education</title>
+		<imprint>
+			<biblScope unit="volume">7</biblScope>
+			<biblScope unit="issue">4</biblScope>
+			<biblScope unit="page" from="267" to="280" />
+			<date type="published" when="2002-10">2002. October 2002</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b46">
+	<analytic>
+		<title level="a" type="main">Visual Artifacts as Tools for Analysis and Theorizing</title>
+		<author>
+			<persName><forename type="first">Ann</forename><surname>Langley</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Davide</forename><surname>Ravasi</surname></persName>
+		</author>
+		<idno type="DOI">10.1108/S0733-558X20190000059010</idno>
+		<ptr target="https://doi.org/10.1108/S0733-558X20190000059010" />
+	</analytic>
+	<monogr>
+		<title level="m">The Production of Managerial Knowledge and Organizational Theory: New Approaches to Writing, Producing and Consuming Theory</title>
+				<editor>
+			<persName><forename type="first">B</forename><surname>Tammar</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">John</forename><forename type="middle">M</forename><surname>Zilber</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">Johanna</forename><surname>Amis</surname></persName>
+		</editor>
+		<editor>
+			<persName><surname>Mair</surname></persName>
+		</editor>
+		<imprint>
+			<publisher>Emerald Publishing Limited</publisher>
+			<date type="published" when="2019">2019</date>
+			<biblScope unit="page" from="173" to="199" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b47">
+	<monogr>
+		<title level="m" type="main">79+ Video Conferencing Statistics REVEALED! |</title>
+		<author>
+			<persName><forename type="first">Lewis</forename><surname>Keegan</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b48">
+	<analytic>
+		<title level="a" type="main">Social App Accessibility for Deaf Signers</title>
+		<author>
+			<persName><forename type="first">Kelly</forename><surname>Mack</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Danielle</forename><surname>Bragg</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Meredith</forename><forename type="middle">Ringel</forename><surname>Morris</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Maarten</forename><forename type="middle">W</forename><surname>Bos</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Isabelle</forename><surname>Albi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Andrés</forename><surname>Monroy-Hernández</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3415196</idno>
+		<ptr target="https://doi.org/10.1145/3415196" />
+	</analytic>
+	<monogr>
+		<title level="j">Proc. ACM Hum.-Comput. Interact</title>
+		<imprint>
+			<biblScope unit="volume">4</biblScope>
+			<biblScope unit="page">31</biblScope>
+			<date type="published" when="2020-10">2020. October 2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b49">
+	<monogr>
+		<title level="m" type="main">Full exclusion during COVID-19: Saudi Deaf education is an example</title>
+		<author>
+			<persName><forename type="first">Abdullah</forename><surname>Madhesh</surname></persName>
+		</author>
+		<idno type="DOI">10.1016/j.heliyon.2021.e06536</idno>
+		<ptr target="https://doi.org/10.1016/j.heliyon.2021.e06536" />
+		<imprint>
+			<date type="published" when="2021-03">2021. March 2021</date>
+			<biblScope unit="volume">7</biblScope>
+			<biblScope unit="page">e06536</biblScope>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b50">
+	<analytic>
+		<title level="a" type="main">Technology Use Among Adults Who Are Deaf and Hard of Hearing: A National Survey</title>
+		<author>
+			<persName><forename type="first">Michella</forename><surname>Maiorana</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">-</forename><surname>Basas</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Claudia</forename><forename type="middle">M</forename><surname>Pagliaro</surname></persName>
+		</author>
+		<idno type="DOI">10.1093/deafed/enu005</idno>
+		<ptr target="https://doi.org/10.1093/deafed/enu005" />
+	</analytic>
+	<monogr>
+		<title level="j">The Journal of Deaf Studies and Deaf Education</title>
+		<imprint>
+			<biblScope unit="volume">19</biblScope>
+			<biblScope unit="issue">3</biblScope>
+			<biblScope unit="page" from="400" to="410" />
+			<date type="published" when="2014-07">2014. July 2014</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b51">
+	<monogr>
+		<title level="m" type="main">Educating Deaf Students: From Research to Practice</title>
+		<author>
+			<persName><forename type="first">Marc</forename><surname>Marschark</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Harry</forename><forename type="middle">G</forename><surname>Lang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">John</forename><forename type="middle">A</forename><surname>Albertini</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2001">2001</date>
+			<publisher>Oxford University Press</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b52">
+	<analytic>
+		<title level="a" type="main">2021. Social, Environmental, and Technical: Factors at Play the Current Use and Future Design of Small-Group Captioning</title>
+		<author>
+			<persName><forename type="first">J</forename><surname>Emma</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ping</forename><surname>Mcdonnell</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Liu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Steven</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Raja</forename><surname>Goodman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jon</forename><forename type="middle">E</forename><surname>Kushalnagar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Leah</forename><surname>Froehlich</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Findlater</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3479578</idno>
+		<ptr target="https://doi-org/10.1145/3479578" />
+	</analytic>
+	<monogr>
+		<title level="j">Proc. ACM Hum.-Comput. Interact</title>
+		<imprint>
+			<biblScope unit="volume">5</biblScope>
+			<date type="published" when="2021-10">October 2021</date>
+		</imprint>
+	</monogr>
+	<note>Article</note>
+</biblStruct>
+
+<biblStruct xml:id="b53">
+	<analytic>
+		<title level="a" type="main">Assessing Health Literacy in Deaf American Sign Language Users</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Michael</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Michael</forename><forename type="middle">K</forename><surname>Mckee</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Paul</forename><forename type="middle">C</forename><surname>Paasche-Orlow</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kevin</forename><surname>Winters</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Philip</forename><surname>Fiscella</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ananda</forename><surname>Zazove</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Thomas</forename><surname>Sen</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Pearson</surname></persName>
+		</author>
+		<idno type="DOI">10.1080/10810730.2015.1066468</idno>
+		<ptr target="https://doi.org/10.1080/10810730.2015.1066468" />
+	</analytic>
+	<monogr>
+		<title level="j">Journal of Health Communication</title>
+		<imprint>
+			<biblScope unit="volume">20</biblScope>
+			<biblScope unit="page" from="92" to="100" />
+			<date type="published" when="2015-10">2015. October 2015</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b54">
+	<analytic>
+		<title level="a" type="main">Ethical issues in conducting research with deaf populations</title>
+		<author>
+			<persName><forename type="first">Michael</forename><surname>Mckee</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Deirdre</forename><surname>Schlehofer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Denise</forename><surname>Thew</surname></persName>
+		</author>
+		<idno type="DOI">10.2105/AJPH.2013.301343</idno>
+		<ptr target="https://doi.org/10.2105/AJPH.2013.301343" />
+	</analytic>
+	<monogr>
+		<title level="j">Am J Public Health</title>
+		<imprint>
+			<biblScope unit="volume">103</biblScope>
+			<biblScope unit="page" from="2174" to="2178" />
+			<date type="published" when="2013-12">2013. December 2013</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b55">
+	<analytic>
+		<title level="a" type="main">Semitransparent video interfaces to assist deaf persons in meetings</title>
+		<author>
+			<persName><forename type="first">Dorian</forename><surname>Miller</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Karl</forename><surname>Gyllstrom</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">David</forename><surname>Stotts</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">James</forename><surname>Culp</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/1233341.1233431</idno>
+		<ptr target="https://doi.org/10.1145/1233341.1233431" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 45th annual southeast regional conference</title>
+				<meeting>the 45th annual southeast regional conference<address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<date type="published" when="2007">2007</date>
+			<biblScope unit="volume">45</biblScope>
+			<biblScope unit="page" from="501" to="506" />
+		</imprint>
+	</monogr>
+	<note>Association for Computing Machinery</note>
+</biblStruct>
+
+<biblStruct xml:id="b56">
+	<analytic>
+		<title level="a" type="main">How Many People Use ASL in the United States? Why Estimates Need Updating</title>
+		<author>
+			<persName><forename type="first">E</forename><surname>Ross</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Mitchell</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Travas</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Bellamie</forename><surname>Young</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Michael</forename><forename type="middle">A</forename><surname>Bachleda</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Karchmer</surname></persName>
+		</author>
+		<idno type="DOI">10.1353/sls.2006.0019</idno>
+		<ptr target="https://doi.org/10.1353/sls.2006.0019" />
+	</analytic>
+	<monogr>
+		<title level="j">Sign Language Studies</title>
+		<imprint>
+			<biblScope unit="volume">6</biblScope>
+			<biblScope unit="issue">3</biblScope>
+			<biblScope unit="page" from="306" to="335" />
+			<date type="published" when="2006">2006. 2006</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b57">
+	<analytic>
+		<title level="a" type="main">It Was Difcult to Manage the Communication&quot;: Testing the Feasibility of Video Remote Signed Language Interpreting in Court</title>
+		<author>
+			<persName><forename type="first">Jemina</forename><surname>Napier</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Marcel</forename><surname>Leneham</surname></persName>
+		</author>
+		<ptr target="https://digitalcommons.unf.edu/joi/vol21/iss1/5" />
+	</analytic>
+	<monogr>
+		<title level="j">Journal of Interpretation</title>
+		<imprint>
+			<biblScope unit="volume">21</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<date type="published" when="2012-02">2012. February 2012</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b58">
+	<monogr>
+		<title level="m" type="main">Sign language interpreting: Theory and practice in Australia and New Zealand</title>
+		<author>
+			<persName><forename type="first">Jemina</forename><surname>Napier</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Rachel</forename><forename type="middle">Locker</forename><surname>Mckee</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Della</forename><surname>Goswell</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2010">2010</date>
+			<publisher>Federation Press</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b59">
+	<analytic>
+		<title level="a" type="main">It&apos;s good for them but not so for me&quot;: Inside the sign language interpreting call centre</title>
+		<author>
+			<persName><forename type="first">Jemina</forename><surname>Napier</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Robert</forename><surname>Skinner</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Graham</forename><forename type="middle">H</forename><surname>Turner</surname></persName>
+		</author>
+		<idno type="DOI">10.12807/t&amp;i.v9i2.535</idno>
+		<ptr target="https://doi.org/10.12807/t&amp;i.v9i2.535" />
+	</analytic>
+	<monogr>
+		<title level="j">Translation &amp; Interpreting</title>
+		<imprint>
+			<biblScope unit="volume">9</biblScope>
+			<biblScope unit="issue">2</biblScope>
+			<biblScope unit="page" from="1" to="23" />
+			<date type="published" when="2017-07">2017. July 2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b60">
+	<monogr>
+		<title level="m" type="main">InfoGuides: HIST 330: Deafness and Technology: Videophones and Webcams</title>
+		<author>
+			<persName><forename type="first">Joan</forename><surname>Naturale</surname></persName>
+		</author>
+		<ptr target="https://infoguides.rit.edu/c.php?g=460666&amp;p=3150185" />
+		<imprint>
+			<date type="published" when="2009-09">September 9</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b61">
+	<analytic>
+		<title level="a" type="main">Changes in Digital Communication During the COVID-19 Global Pandemic: Implications for Digital Inequality and Future Research</title>
+		<author>
+			<persName><forename type="first">Minh</forename><surname>Hao Nguyen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jonathan</forename><surname>Gruber</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jaelle</forename><surname>Fuchs</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Will</forename><surname>Marler</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Amanda</forename><surname>Hunsaker</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Eszter</forename><surname>Hargittai</surname></persName>
+		</author>
+		<idno type="DOI">10.1177/2056305120948255</idno>
+		<ptr target="https://doi.org/10.1177/2056305120948255" />
+	</analytic>
+	<monogr>
+		<title level="j">Social Media + Society</title>
+		<imprint>
+			<biblScope unit="volume">6</biblScope>
+			<biblScope unit="issue">3</biblScope>
+			<biblScope unit="page">2056305120948255</biblScope>
+			<date type="published" when="2020-07">2020. July 2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b62">
+	<analytic>
+		<title level="a" type="main">Yes, No, Visibility, and Variation in ASL and Tactile ASL</title>
+		<author>
+			<persName><forename type="first">Karen</forename><surname>Petronio</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Valerie</forename><surname>Dively</surname></persName>
+		</author>
+		<idno type="DOI">10.1353/sls.2006.0032</idno>
+		<ptr target="https://doi.org/10.1353/sls.2006.0032" />
+	</analytic>
+	<monogr>
+		<title level="j">Sign Language Studies</title>
+		<imprint>
+			<biblScope unit="volume">7</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page" from="57" to="98" />
+			<date type="published" when="2006">2006. 2006</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b63">
+	<analytic>
+		<title level="a" type="main">Large-Scale Academic Achievement Testing of Deaf and Hard-of-Hearing Students: Past, Present, and Future</title>
+		<author>
+			<persName><forename type="first">Sen</forename><surname>Qi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ross</forename><forename type="middle">E</forename><surname>Mitchell</surname></persName>
+		</author>
+		<idno type="DOI">10.1093/deafed/enr028</idno>
+		<ptr target="https://doi.org/10.1093/deafed/enr028" />
+	</analytic>
+	<monogr>
+		<title level="j">The Journal of Deaf Studies and Deaf Education</title>
+		<imprint>
+			<biblScope unit="volume">17</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page" from="1" to="18" />
+			<date type="published" when="2012-01">2012. January 2012</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b64">
+	<monogr>
+		<title level="m" type="main">Qualitative Research: Analyzing Life</title>
+		<author>
+			<persName><forename type="first">Johnny</forename><surname>Saldana</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Matt</forename><surname>Omasta</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2016">2016</date>
+			<publisher>SAGE Publications</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b65">
+	<analytic>
+		<title level="a" type="main">Translation of the Multidimensional Health Locus of Control Scales for Users of American Sign Language</title>
+		<author>
+			<persName><forename type="first">Waheedy</forename><surname>Samady</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Georgia</forename><forename type="middle">Robins</forename><surname>Sadler</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Melanie</forename><surname>Nakaji</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Vanessa</forename><forename type="middle">L</forename><surname>Malcarne</surname></persName>
+		</author>
+		<idno type="DOI">10.1111/j.1525-1446.2008.00732.x</idno>
+		<ptr target="https://doi.org/10.1111/j.1525-1446.2008.00732.x" />
+	</analytic>
+	<monogr>
+		<title level="j">Public Health Nursing</title>
+		<imprint>
+			<biblScope unit="volume">25</biblScope>
+			<biblScope unit="page" from="480" to="489" />
+			<date type="published" when="2008">2008. 2008</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b66">
+	<monogr>
+		<title level="m" type="main">A few basics of American Sign Language (ASL) Linguistics</title>
+		<author>
+			<persName><forename type="first">Sarah</forename><forename type="middle">L</forename><surname>Rizer</surname></persName>
+		</author>
+		<ptr target="https://www.lifeprint.com/asl101/topics/linguistics2.htm" />
+		<imprint>
+			<date>September 7</date>
+		</imprint>
+	</monogr>
+	<note>Retrieved</note>
+</biblStruct>
+
+<biblStruct xml:id="b67">
+	<analytic>
+		<title level="a" type="main">Supporting the Development of Social Networking Mobile Apps for Deaf Users: Guidelines Based on User Experience Issues</title>
+		<author>
+			<persName><forename type="first">Ricardo</forename><forename type="middle">Pezzotti</forename><surname>Schefer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Matheus</forename><surname>Sousa Bezerra</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Luciana</forename><forename type="middle">A</forename><surname>Martinez Zaina</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3218585.3218672</idno>
+		<ptr target="https://doi.org/10.1145/3218585.3218672" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 8th International Conference on Software Development and Technologies for Enhancing Accessibility and Fighting Info-exclusion (DSAI 2018), Association for Computing Machinery</title>
+				<meeting>the 8th International Conference on Software Development and Technologies for Enhancing Accessibility and Fighting Info-exclusion (DSAI 2018), Association for Computing Machinery<address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<date type="published" when="2018">2018</date>
+			<biblScope unit="page" from="278" to="285" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b68">
+	<analytic>
+		<title level="a" type="main">Deaf and hard-ofhearing users&apos; preferences for hearing speakers&apos; behavior during technologymediated in-person and remote conversations</title>
+		<author>
+			<persName><forename type="first">Matthew</forename><surname>Seita</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sarah</forename><surname>Andrew</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Matt</forename><surname>Huenerfauth</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3430263.3452430</idno>
+		<ptr target="https://doi.org/10.1145/3430263.3452430" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 18th International Web for All Conference (W4A &apos;21)</title>
+				<meeting>the 18th International Web for All Conference (W4A &apos;21)<address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computing Machinery</publisher>
+			<date type="published" when="2021">2021</date>
+			<biblScope unit="page" from="1" to="12" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b69">
+	<analytic>
+		<title level="a" type="main">Refective design</title>
+		<author>
+			<persName><forename type="first">Phoebe</forename><surname>Sengers</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kirsten</forename><surname>Boehner</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Shay</forename><surname>David</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Joseph "jofsh"</forename><surname>Kaye</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/1094562.1094569</idno>
+		<ptr target="https://doi.org/10.1145/1094562.1094569" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 4th decennial conference on Critical computing: between sense and sensibility (CC &apos;05)</title>
+				<meeting>the 4th decennial conference on Critical computing: between sense and sensibility (CC &apos;05)<address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computing Machinery</publisher>
+			<date type="published" when="2005">2005</date>
+			<biblScope unit="page" from="49" to="58" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b70">
+	<monogr>
+		<title level="m" type="main">Interpreting via Video Link: Mapping of the Field</title>
+		<author>
+			<persName><forename type="first">Robert</forename><surname>Skinner</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jemina</forename><surname>Napier</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sabine</forename><surname>Braun</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b71">
+	<analytic>
+		<title level="a" type="main">Inaccessible media during the COVID-19 crisis intersects with the language deprivation crisis for young deaf children in the U</title>
+		<author>
+			<persName><forename type="first">Kaitlin</forename><surname>Stack</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Whitney</forename></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kristofer</forename><surname>Whitney</surname></persName>
+		</author>
+		<idno type="DOI">10.1080/17482798.2020.1858434</idno>
+		<ptr target="https://doi.org/10.1080/17482798.2020.1858434" />
+	</analytic>
+	<monogr>
+		<title level="j">S. Journal of Children and Media</title>
+		<imprint>
+			<biblScope unit="volume">15</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page" from="25" to="28" />
+			<date type="published" when="2021-01">2021. January 2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b72">
+	<analytic>
+		<title level="a" type="main">Towards Digitally-Mediated Sign Language Communication</title>
+		<author>
+			<persName><forename type="first">Kalin</forename><surname>Stefanov</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mayumi</forename><surname>Bono</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3349537.3352794</idno>
+		<ptr target="https://doi.org/10.1145/3349537.3352794" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 7th International Conference on Human-Agent Interaction (HAI &apos;19)</title>
+				<meeting>the 7th International Conference on Human-Agent Interaction (HAI &apos;19)<address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computing Machinery</publisher>
+			<date type="published" when="2019">2019</date>
+			<biblScope unit="page" from="286" to="288" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b73">
+	<monogr>
+		<title/>
+		<author>
+			<persName><forename type="first">Jazz</forename><surname>Ang</surname></persName>
+		</author>
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b74">
+	<analytic>
+		<title level="a" type="main">Politics and Language: American Sign Language and English in Deaf Education</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Stephen</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Nover</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Sociolinguistics in Deaf Communities</title>
+				<imprint>
+			<publisher>Gallaudet University Press</publisher>
+			<date type="published" when="1995">1995</date>
+			<biblScope unit="page" from="109" to="163" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b75">
+	<analytic>
+		<title level="a" type="main">Understanding the Telework Experience of People with Disabilities</title>
+		<author>
+			<persName><forename type="first">John</forename><surname>Tang</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3449104</idno>
+		<ptr target="https://doi.org/10.1145/3449104" />
+	</analytic>
+	<monogr>
+		<title level="j">Proc. ACM Hum.-Comput. Interact</title>
+		<imprint>
+			<biblScope unit="volume">5</biblScope>
+			<biblScope unit="page" from="1" to="27" />
+			<date type="published" when="2021-04">2021. April 2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b76">
+	<analytic>
+		<title level="a" type="main">The Relationship between Eye Gaze and Verb Agreement in American Sign Language: An Eye-Tracking Study</title>
+		<author>
+			<persName><forename type="first">Robin</forename><surname>Thompson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Karen</forename><surname>Emmorey</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Robert</forename><surname>Kluender</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Natural Language &amp; Linguistic Theory</title>
+		<imprint>
+			<biblScope unit="volume">24</biblScope>
+			<biblScope unit="issue">2</biblScope>
+			<biblScope unit="page" from="571" to="604" />
+			<date type="published" when="2006">2006. 2006</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b77">
+	<monogr>
+		<author>
+			<persName><forename type="first">Clayton</forename><surname>Valli</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ceil</forename><surname>Lucas</surname></persName>
+		</author>
+		<title level="m">Linguistics of American Sign Language: an introduction</title>
+				<meeting><address><addrLine>Washington, D.C</addrLine></address></meeting>
+		<imprint>
+			<publisher>Gallaudet University Press</publisher>
+			<date type="published" when="2000">2000</date>
+		</imprint>
+	</monogr>
+	<note>3rd ed ed.</note>
+</biblStruct>
+
+<biblStruct xml:id="b78">
+	<analytic>
+		<title level="a" type="main">Mixed local and remote participation in teleconferences from a deaf and hard of hearing perspective</title>
+		<author>
+			<persName><forename type="first">Christian</forename><surname>Vogler</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Paula</forename><surname>Tucker</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Norman</forename><surname>Williams</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2513383.2517035</idno>
+		<ptr target="https://doi.org/10.1145/2513383.2517035" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 15th International ACM SIGACCESS Conference on Computers and Accessibility (ASSETS &apos;13)</title>
+				<meeting>the 15th International ACM SIGACCESS Conference on Computers and Accessibility (ASSETS &apos;13)<address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computing Machinery</publisher>
+			<date type="published" when="2013">2013</date>
+			<biblScope unit="page" from="1" to="5" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b79">
+	<analytic>
+		<title level="a" type="main">Accessibility in Action: Co-Located Collaboration among Deaf and Hearing Professionals</title>
+		<author>
+			<persName><forename type="first">Emily</forename><forename type="middle">Q</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Anne</forename><forename type="middle">Marie</forename><surname>Piper</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3274449</idno>
+		<ptr target="https://doi.org/10.1145/3274449" />
+	</analytic>
+	<monogr>
+		<title level="j">Proc. ACM Hum.-Comput. Interact</title>
+		<imprint>
+			<biblScope unit="volume">2</biblScope>
+			<biblScope unit="page">25</biblScope>
+			<date type="published" when="2018-11">2018. November 2018</date>
+			<publisher>CSCW</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b80">
+	<analytic>
+		<title level="a" type="main">WH-questions in American Sign Language: Contributions of non-manual marking to structure and meaning</title>
+		<author>
+			<persName><forename type="first">L</forename><surname>Katharine</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Watson</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Theses and Dissertations Available from ProQuest</title>
+				<imprint>
+			<date type="published" when="2010-01">2010. January 2010</date>
+			<biblScope unit="page" from="1" to="130" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b81">
+	<analytic>
+		<title level="a" type="main">Hearing people perceiving deaf people through sign language interpreters at work: on the loss of self through interpreted communication</title>
+		<author>
+			<persName><forename type="first">Alys</forename><surname>Young</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Rosemary</forename><surname>Oram</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jemina</forename><surname>Napier</surname></persName>
+		</author>
+		<idno type="DOI">10.1080/00909882.2019.1574018</idno>
+		<ptr target="https://doi.org/10.1080/00909882.2019.1574018" />
+	</analytic>
+	<monogr>
+		<title level="j">Journal of Applied Communication Research</title>
+		<imprint>
+			<biblScope unit="volume">47</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page" from="90" to="110" />
+			<date type="published" when="2019-01">2019. January 2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b82">
+	<monogr>
+		<title level="m" type="main">for-deaf-andhard-of-hearing-people/ Deafness and hearing loss</title>
+		<ptr target="https://www.who.int/news-room/fact-sheets/detail/deafness-and-hearing-loss" />
+		<imprint>
+			<date>September 7. September 7</date>
+		</imprint>
+		<respStmt>
+			<orgName>Accessible Webinars for Deaf and Hard of Hearing People. Deaf/Hard of Hearing Technology Rehabilitation Engineering Research Center. Retrieved</orgName>
+		</respStmt>
+	</monogr>
+	<note>Retrieved</note>
+</biblStruct>
+
+<biblStruct xml:id="b83">
+	<monogr>
+		<title level="m" type="main">Americans with Disabilities Act: Title III Regulations</title>
+		<imprint>
+			<biblScope unit="volume">267</biblScope>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b84">
+	<monogr>
+		<ptr target="https://www.lifeprint.com/asl101/pages-layout/nonmanualmarkers.htm" />
+		<title level="m">Non-manual Markers in ASL (NMM&apos;s)</title>
+				<imprint>
+			<date>January 6</date>
+		</imprint>
+	</monogr>
+	<note>Retrieved</note>
+</biblStruct>
+
+				</listBibl>
+			</div>
+		</back>
+	</text>
+</TEI>

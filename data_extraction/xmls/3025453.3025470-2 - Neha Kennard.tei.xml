@@ -1,0 +1,1305 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xml:space="preserve" xmlns="http://www.tei-c.org/ns/1.0" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.com/kermitt2/grobid/master/grobid-home/schemas/xsd/Grobid.xsd"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+	<teiHeader xml:lang="en">
+		<fileDesc>
+			<titleStmt>
+				<title level="a" type="main">Uncovering the Values and Constraints of Real-time Ridesharing for Low-resource Populations</title>
+			</titleStmt>
+			<publicationStmt>
+				<publisher/>
+				<availability status="unknown"><licence/></availability>
+			</publicationStmt>
+			<sourceDesc>
+				<biblStruct>
+					<analytic>
+						<author>
+							<persName><forename type="first">Tawanna</forename><forename type="middle">R</forename><surname>Dillahunt</surname></persName>
+							<email>tdillahu@umich.edu</email>
+							<affiliation key="aff0">
+								<orgName type="department">School of Information</orgName>
+								<orgName type="institution">University of Michigan</orgName>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Vaishnav</forename><surname>Kameswaran</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="department">School of Information</orgName>
+								<orgName type="institution">University of Michigan</orgName>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Linfeng</forename><surname>Li</surname></persName>
+							<email>llinfeng@umich.edu</email>
+							<affiliation key="aff0">
+								<orgName type="department">School of Information</orgName>
+								<orgName type="institution">University of Michigan</orgName>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Tanya</forename><surname>Rosenblat</surname></persName>
+							<email>trosenbl@umich.edu</email>
+							<affiliation key="aff0">
+								<orgName type="department">School of Information</orgName>
+								<orgName type="institution">University of Michigan</orgName>
+							</affiliation>
+						</author>
+						<title level="a" type="main">Uncovering the Values and Constraints of Real-time Ridesharing for Low-resource Populations</title>
+					</analytic>
+					<monogr>
+						<imprint>
+							<date/>
+						</imprint>
+					</monogr>
+					<idno type="DOI">10.1145/3025453.3025470</idno>
+				</biblStruct>
+			</sourceDesc>
+		</fileDesc>
+		<encodingDesc>
+			<appInfo>
+				<application version="0.7.1" ident="GROBID" when="2022-07-22T04:57+0000">
+					<desc>GROBID - A machine learning software for extracting information from scholarly documents</desc>
+					<ref target="https://github.com/kermitt2/grobid"/>
+				</application>
+			</appInfo>
+		</encodingDesc>
+		<profileDesc>
+			<textClass>
+				<keywords>
+					<term>H.5.m. Information Interfaces and Presentation: Misc sharing economy</term>
+					<term>mobility</term>
+					<term>low-income populations</term>
+					<term>transportation scarcity</term>
+					<term>real-time ridesharing services</term>
+					<term>Uber</term>
+				</keywords>
+			</textClass>
+			<abstract>
+<div xmlns="http://www.tei-c.org/ns/1.0"><p>Real-time ridesharing services (e.g., Uber and Lyft) are often touted as sharing-economy leaders and dramatically lower the cost of transportation. However, how to make these services work better among low-income and transportation-scarce households, how these individuals experience these services, and whether they encounter barriers in enlisting these services is unknown. To address these questions, we onboarded 13 low-income individuals living in transportation-scarce environments to Uber as passengers. Our participants found these services to be reliable and benefited from rich social interactions with drivers; however, barriers such as cost, limited payment methods, and low digital literacy can make such services infeasible. We contribute platform designs that could lead to increased digital literacy and application transparency. To be more inclusive and to reach critical mass, we suggest that these companies foster belief in commons and community trust by coordinating with local businesses in low-resource areas with lower digital literacy.</p></div>
+			</abstract>
+		</profileDesc>
+	</teiHeader>
+	<text xml:lang="en">
+		<body>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>INTRODUCTION</head><p>Research has found that improved transportation mobility is a key predictor for upward social mobility in the United States <ref type="bibr" target="#b10">[11,</ref><ref type="bibr" target="#b14">15,</ref><ref type="bibr" target="#b15">16]</ref>. In fact, the relationship between social mobility and transportation is stronger than that between social mobility and factors like crime, percentage of two-parent families in a community, and elementary-school test scores <ref type="bibr" target="#b10">[11,</ref><ref type="bibr" target="#b14">15]</ref>. Further, car ownership is associated with an increased likelihood of higher incomes and employment <ref type="bibr" target="#b46">[43]</ref>, though vehicle ownership can be more onerous for low-income individuals because of costs of acquisition, gas, and maintenance. In Real-time ridesharing services such as Uber and Lyft can lower the cost of transportation by making use of under-used private cars. These services provide riders with flexibility in schedule and destination. Despite the lower cost, these services might still be out of reach for low-income households because of the payment mechanisms required to use these services and the need for mobile Internet access. It is possible that the biggest gain for using these services is for middle and high-income households <ref type="bibr" target="#b51">[48]</ref> who use these services rather than taxis. Furthermore, research suggests that low-income individuals do not benefit in the same way as higher-income individuals because some drivers are reluctant to serve poorer areas as a result of perceived safety issues and distance <ref type="bibr" target="#b35">[32,</ref><ref type="bibr" target="#b40">37]</ref>. Drivers have also been known to discriminate against passengers based on race and gender <ref type="bibr" target="#b24">[24,</ref><ref type="bibr" target="#b48">45]</ref>.</p><p>We conducted an exploratory study to understand how realtime ridesharing services might benefit low-income individuals living in transportation-scarce areas. We address the following research questions:</p><p>• RQ1: What are the digital sharing economy's feasibility requirements for low-income individuals living in transportation-scarce environments? • RQ2: How do these individuals describe their experience using the service as passengers? • RQ3: What barriers do these groups of individuals face in the onboarding process to use real-time ridesharing services?</p><p>While typical users of these services are relatively homogeneous groups consisting of younger demographics <ref type="bibr" target="#b12">[13]</ref>, those with higher income levels <ref type="bibr" target="#b12">[13]</ref>, and those who are highly proficient technology users <ref type="bibr" target="#b55">[52]</ref>, our target riders are atypical.</p><p>The riders/passengers in this study are also stakeholders but have not been studied in this context. Therefore, we contribute results from atypical users that include riders across a wide range of age groups who are low-income and live in transportation-scarce environments and who are less proficient with technology.</p><p>Our findings demonstrate the types of benefits that riders receive such as reliable transport and rich social interactions Supporting Low Resource Communities CHI 2017, May 6-11, 2017, Denver, CO, USA with drivers. While these outcomes are beneficial, our findings suggest that these services are infeasible for our riders because of cost, limited access to credit cards, and low digital literacy. Addressing these issues could help to reduce social isolation <ref type="bibr" target="#b13">[14,</ref><ref type="bibr" target="#b53">50]</ref> and support upward mobility <ref type="bibr" target="#b10">[11,</ref><ref type="bibr" target="#b14">15,</ref><ref type="bibr" target="#b15">16]</ref> among atypical users. We contribute design recommendations and suggestions for how these services could reach critical mass among our target users by alleviating such issues. We frame these suggestions around regulation and trust, and inclusive infrastructures and explain how these results generalize to broader populations and to the broader sharing economy.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>RELATED WORK</head><p>The sharing economy involves the sharing of under-utilized assets and services among people <ref type="bibr" target="#b9">[10]</ref>, and there is an increasing amount of research around the sharing economy in the areas of economics, business, law, public policy and more recently HCI and CSCW <ref type="bibr" target="#b2">[4,</ref><ref type="bibr" target="#b7">9,</ref><ref type="bibr" target="#b17">18,</ref><ref type="bibr" target="#b19">19,</ref><ref type="bibr" target="#b25">25,</ref><ref type="bibr" target="#b32">30,</ref><ref type="bibr" target="#b34">31,</ref><ref type="bibr" target="#b35">32,</ref><ref type="bibr" target="#b50">47]</ref>. In this section, we discuss the potential for real-time ridesharing services to address inequities in transportation in low-income areas. We discuss the sharing economy's principles and requirements and the contextual factors contributing to these requirements. Finally, we summarize sharing economy research in HCI and CSCW and how we extend this work.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Real-time Ridesharing Services</head><p>Access to travel options for socially disadvantaged groups is a major rationale for providing public transportation. For example, access to transportation enables low-income populations to have better health care <ref type="bibr" target="#b3">[5,</ref><ref type="bibr" target="#b5">7]</ref> and job opportunities.</p><p>In fact, improved transportation mobility is a key predictor for upward social mobility <ref type="bibr" target="#b11">[12,</ref><ref type="bibr" target="#b15">16]</ref>. But even though services such as Uber and Lyft offer an alternative to car ownership and can dramatically lower transportation costs by making private cars more productive, researchers have found that low-income households are much less likely than high-income households to use and benefit from these services <ref type="bibr" target="#b35">[32,</ref><ref type="bibr" target="#b50">47]</ref>. There are several possible explanations. Some drivers are reluctant to serve poorer areas because of the perceived safety issues and drivers' distance from low socioeconomic neighborhoods <ref type="bibr" target="#b35">[32,</ref><ref type="bibr" target="#b40">37]</ref>. In addition, ridesharing services may still be too expensive for low-income people <ref type="bibr" target="#b35">[32]</ref>. Finally, many low-income people do not have the payment mechanisms or the Internet access required to use these services.</p><p>Research suggests that Uber is "faster and cheaper" than taxis in low-income areas of Los Angeles <ref type="bibr" target="#b47">[44]</ref>. Smart et al. hired 18 riders from a temporary staffing agency who were ethnically diverse to use UberX and taxi services in low-income communities. While the study found that Uber was faster and cheaper than taxis, the study did not fully engage riders from low-income areas as participants, nor did it provide a first-hand account of the experiences of low-income individuals with limited access to transportation or to mobile Internet access <ref type="bibr" target="#b47">[44]</ref>. In addition, past HCI researchers have identified the potential for real-time ridesharing services such as Uber to support the mobility of groups with limited access to public transportation <ref type="bibr" target="#b25">[25]</ref>, which we investigate in detail.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Sharing Economy Principles and Requirements</head><p>Researchers of the sharing economy and its applications have identified several factors needed for the sharing economy to work. For example, some form of regulation <ref type="bibr" target="#b49">[46]</ref> to create trust <ref type="bibr" target="#b52">[49]</ref> is a key requirement. Other requirements include belief in the commons (i.e., belief that the system adds value to the community as a whole) <ref type="bibr" target="#b9">[10]</ref>, economic benefits <ref type="bibr" target="#b52">[49]</ref> (e.g., consumers of the sharing economy must see the cost and value, or the economic benefits of the service such as saving money), efficacy <ref type="bibr" target="#b52">[49]</ref> (e.g., enough individuals participating so that there is a choice, or critical mass <ref type="bibr" target="#b9">[10]</ref> and social proof so participants have enough information about how services work), ease of use <ref type="bibr" target="#b52">[49]</ref>, and idling capacity (underused resources) <ref type="bibr" target="#b9">[10]</ref>. Understanding whether and how these principles vary across applications is limited in HCI and CSCW work.</p><p>Dillahunt and Malone conducted a set of participatorydesign-inspired workshops to understand whether applications of the sharing economy (e.g., Lyft, Airbnb, TaskRabbit, NeighborGoods) were feasible among populations who were un(der)employed, financially constrained, and from lowsocioeconomic status neighborhoods <ref type="bibr" target="#b19">[19]</ref>. In this study, participants raised critical mass as a concern for applications such as NeighborGoods and TaskRabbit but not for Airbnb and Lyft <ref type="bibr" target="#b19">[19]</ref>. Trust was found to be a key requirement for the sharing economy to be successful, and distrust in technology was problematic among their target users to mediate safety <ref type="bibr" target="#b19">[19]</ref>. The participants were not comfortable providing systems with their credit card information <ref type="bibr" target="#b19">[19]</ref> and mistrusted user ratings of providers for Lyft. Trust spans privacy protection <ref type="bibr" target="#b34">[31]</ref>, safety <ref type="bibr" target="#b19">[19,</ref><ref type="bibr" target="#b52">49]</ref>, trust between strangers <ref type="bibr" target="#b9">[10,</ref><ref type="bibr" target="#b19">19,</ref><ref type="bibr" target="#b29">28,</ref><ref type="bibr" target="#b52">49]</ref>, monetary transactions managed by the platform <ref type="bibr" target="#b19">[19,</ref><ref type="bibr" target="#b29">28,</ref><ref type="bibr" target="#b52">49]</ref>, and upfront social commitment and time investment to build trusted relationships <ref type="bibr" target="#b34">[31]</ref>. While applications like Neighbor-Goods do not require credit cards or have user ratings, all applications require trust, especially those technologies that do rely on monetary and social transactions <ref type="bibr" target="#b30">[29]</ref>.</p><p>As Dillahunt and Malone's results suggest, requirements of the sharing economy likely vary across application type and even socioeconomic contexts; however, very limited research analyzes which principles are most critical to which applications and why. For example, while the car sharing service Zipcar was founded on the principle of community, or belief in the commons, in an in-depth interview with 40 Zipcar drivers in Boston, researchers found that drivers were very individualistic and utilitarian, suggesting that self-interest is why Zipcar works <ref type="bibr" target="#b6">[8]</ref>. Lampinen et al. suggest that a general understanding of how the sharing economy's benefits and risks vary among socioeconomic contexts is limited in HCI and CSCW work as well <ref type="bibr" target="#b34">[31]</ref>. This is exacerbated because the users of these services tend to be relatively homogeneous groups consisting of younger demographics (32% Gen X and 24% Millennials, in contrast to 15% Baby Boomers) <ref type="bibr" target="#b12">[13]</ref>, those with higher income levels <ref type="bibr" target="#b12">[13]</ref>, highly proficient technology users <ref type="bibr" target="#b55">[52]</ref>, and more innovative users <ref type="bibr" target="#b52">[49]</ref>. Our research helps to fill these gaps. In addition, the results may help to uncover which sharing economy principles are more relevant to real-time ridesharing among limited-resource populations.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Sharing Economy Research in CSCW and HCI</head><p>When taken holistically, HCI and CSCW research has described the motivations for using sharing-economy services, the requirements for the sharing economy to work (as previously discussed), and the opportunities for new research around labor, technology, and the design of these systems.</p><p>Motivations for using these services include community and sustainability (by providers) <ref type="bibr" target="#b7">[9]</ref> and value and convenience (for users) <ref type="bibr" target="#b7">[9]</ref>. Additional motivations include the benefits of social interactions and social connections <ref type="bibr" target="#b7">[9,</ref><ref type="bibr" target="#b25">25]</ref>, benefits to the community <ref type="bibr" target="#b19">[19]</ref>, economic benefits <ref type="bibr" target="#b7">[9,</ref><ref type="bibr" target="#b19">19,</ref><ref type="bibr" target="#b52">49]</ref>, and enjoyment <ref type="bibr" target="#b52">[49]</ref>. A deeper understanding is needed regarding sharing-economy outcomes such as value and convenience, sustainability, and any concrete benefits from social interactions and social connections.</p><p>Individuals living in contexts such as low-income or lowsocioeconomic status environments, for example, may not benefit in the same way as others using these systems as suggested in past CSCW and HCI work <ref type="bibr" target="#b17">[18,</ref><ref type="bibr" target="#b19">19,</ref><ref type="bibr" target="#b27">26,</ref><ref type="bibr" target="#b35">32,</ref><ref type="bibr" target="#b50">47]</ref>. These individuals may be at a disadvantage for two reasons: 1) drivers may choose to serve only wealthier populations <ref type="bibr" target="#b35">[32,</ref><ref type="bibr" target="#b47">44,</ref><ref type="bibr" target="#b50">47]</ref>, and 2) these riders pay higher premiums because of low critical mass <ref type="bibr" target="#b50">[47]</ref>. Research has found that physical appearance factors such as race, gender, and age have led to price discrimination for people using Airbnb <ref type="bibr" target="#b21">[21]</ref>.</p><p>From the perspective of real-time ridesharing services like Uber, researchers from HCI and CSCW have empirically evaluated the impact of algorithmic management on Uber drivers <ref type="bibr" target="#b35">[32]</ref> and contributed opportunities for new research in understanding labor, technology, and design <ref type="bibr" target="#b25">[25,</ref><ref type="bibr" target="#b42">39]</ref>. This work tends to focus on drivers and not passengers, and additional work is needed to understand how these insights translate into useful information for drivers and passengers, as well as regulators and decision-makers at these companies <ref type="bibr" target="#b42">[39]</ref>.</p><p>We contribute to the existing work by documenting the experiences of riders rather than drivers, and riders who are low-income individuals who live in transportation-scarce environments in the United States. By studying the use of real-time ridesharing services within this understudied group, we create an opportunity to investigate other factors that remain unexplored, such as trust, sharing-economy principles most relevant to these groups, potential discrimination-related issues, digital literacy, and social-interaction benefits.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>STUDY METHODS</head><p>Our goal was to reach a diverse population of low-income participants who live in a transportation-scarce area of the U.S. with nearby Uber availability. To meet our objectives, all authors first discussed site-selection and our study methods, which included participant recruitment, observations made during the recruitment process, and incentives. In our observations, we documented why some individuals were ineligible for or did not wish to participate in our study. We obtained consent from our participants per institutional review board requirements to complete all aspects of this study.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Site Selection</head><p>To meet the transportation requirement for our first research question, we selected Detroit, MI, a U.S. city where transportation is a scarce resource. The city has reduced and eliminated much of its bus service <ref type="bibr" target="#b38">[35]</ref>, and according to a recent Public Health and Policy article, 40% of the citizens do not own cars <ref type="bibr" target="#b23">[23]</ref>. Among lower-earning Detroit residents with limited transportation services, more than 10,000 travel each day to low-paying jobs in suburban communities that do not offer public transit <ref type="bibr" target="#b16">[17,</ref><ref type="bibr">34]</ref>. We also studied people in Detroit because Uber offers services here; at the time of our study UberX, UberXL, UberBLACK, UberSELECT, and UberSUV were available while Uber's POOL and Go services were unavailable. Uber for Business (U4B) was also available and allows employers to add their employees to their accounts. U4B allows employees to charge their rides to their employers, which worked well for our study; it provided us with a way to monitor ride-sharing usage among study participants by giving us ride details like source and destination addresses, cost, duration of rides, and driver names. Note that drivers in our study were unaware that participants were on U4B accounts.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Recruiting, Observations, and Incentive Process</head><p>Recruitment played an important role in helping us to identify the feasibility requirements for our target participants (RQ1) and to understand the barriers participants and potential participants faced in the onboarding process (RQ3). As such, we documented field notes during our recruitment process to capture these barriers. To ensure that we reached a wide range of participants from low-income areas of Detroit with limited access to transportation, we turned to a census-based website to identify low-income areas <ref type="bibr" target="#b0">[1]</ref> and used walkscore.com to identify areas with low walkability scores as an indicator of limited mobility. We accepted participants from ZIP codes with scores of 50-59, or somewhat walkable, to 25-49, or car dependent, according to [3]. We initially identified 10 ZIP codes to target our recruitment and expanded these areas because of recruitment difficulties. We recruited both online via Craigslist and Facebook, and offline using snowball and reputational case sampling to reach participants regardless of their level of digital literacy and Internet access <ref type="bibr" target="#b45">[42]</ref>. We posted flyers in public locations such as bus stops, barbershops, and hair salons. Additionally, we used snowball sampling and sent flyers to two community organizations that support economic and social mobility. One center specifically provides job-training services and serves clients with intellectual and developmental disabilities. Flyers contained our contact phone number and email address. We pre-screened participants for the following criteria: 1) They resided in our pre-determined ZIP codes (i.e., low-income and transportation-scarce areas), 2) they had access to an Internet and data-enabled smartphone and 3) they had limited access to reliable transportation (e.g., personal car, taxi, public bus).</p><p>We gave these individuals first priority to participate in our study. While some individuals who did not meet our prescreening requirements were not given first-priority, we did contact those who lived in ZIP codes with slightly higher walkability scores (e.g., car-dependent to somewhat walkable, versus car-dependent), yet were still lower income, at a later Supporting Low Resource Communities CHI 2017, May 6-11, 2017, Denver, CO, USA time. We also report data about participants who chose not to participate in our study or were ineligible.</p><p>To mitigate potential barriers for participation, we provided participants with $75 worth of Uber rides. U4B allowed us to onboard our participants as employees. Their rides were automatically billed to us as employers; however, this reduced our ability to investigate issues around monetary transactions and to experiment with pricing. Despite this, we gained some insights from interviews and the onboarding process.</p><p>To understand whether participants experienced difficulties being picked up from certain locations, we did not set trip guidelines in U4B. This allowed participants to take trips at any time and to any place. To mitigate issues of technology literacy, we helped to onboard participants by walking them through the Uber installation process onto their smartphones either in person, or via phone. We recorded these service access barriers in our field notes (RQ1, RQ3); we also documented information from third-party organizations and people who did not wish to take part in our study (RQ1), who were ineligible, or who were unable to participate (RQ3).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Diary and Semi-structured Interviews</head><p>To understand our participants' experiences using Uber (RQ2), we asked them to either complete a small journal, which we provided, or send us a text message describing their experiences. Participants also had the option of texting us a picture of their written entries. For consistency, we asked all participants to address these minimum tasks and questions to help document their experiences: 1) Briefly describe the reason for your trip; 2) What was the name of your Uber driver? (Participants saw driver names via the Uber application; this allowed us to match records and trips); 3) Did you have a discussion with the Uber driver?; 4) Provide us with a summary of your conversation (e.g., What led to the conversation? Did you learn anything new?); 5) On a scale of 1-5 how did you rate your driver and why? Other details like cost, duration, start and end destinations were available through the U4B account.</p><p>All members of the research team received email notifications when each participant took a ride. The business account also provided us with details of the trip taken. For example, we had access to our participants' starting location and destination, trip distance, and trip time to help us with labeling our data.</p><p>We developed a python script to automatically detect each participants' remaining balance and used Twilio to send a text notification with this information. We removed participants from our account before they exceeded their $75 allocation. If they had money left over, we gave it to them after the interview.</p><p>If they exceeded their allocation, we deducted it from their interview compensation.</p><p>Finally, to gain a detailed understanding of their experience using the site and to address questions related to their diary entries, we paid participants $25 to take part in a semi-structured interview. Semi-structured interviews provide richly detailed data and allow for exploring nuances of individual experiences <ref type="bibr" target="#b54">[51]</ref>. These interviews helped us to understand how participants managed their Uber rides, details about their interactions with the drivers, and their overall impressions of the service, and the interviews enabled us to probe more deeply into our participants' journal entries. All interviews were digitally recorded and transcribed. Participants provided us with their demographic details, a preferred alias, and information about their familiarity with technology in a short survey at the end of the interview. Shortly after each interview, researchers wrote summaries highlighting key insights. We contacted participants after interviews for any necessary clarification and to see whether they continued or planned to continue using the service.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Analysis</head><p>Data points included researcher notes and observations made during recruitment (RQ1 and RQ3), diary entries about ride experiences (RQ2), data obtained from the Uber business account (e.g., points of origin and destination, timing and duration of rides, decisions to accept surge pricing and the surge price multiplier while available; RQ1), and interview and survey data (RQ1, RQ2, RQ3). The first two authors supported analysis activities and held regular meetings to discuss and contextualize the results.</p><p>We analyzed journal entries by categorizing participant responses (e.g., trip purposes, conversation starters, learned something new). We summarized data obtained from the Uber business account such as number of trips taken, number of surges, the surge price multiplier, and duration of rides (see Table <ref type="table" target="#tab_0">1</ref>). We analyzed interview transcripts using a hybrid approach -we created codes using both a pre-set and an open coding process. We started with a priori codes that addressed our first research question. We used codes as outlined in the "Sharing Economy Principles.." subsection of our related work <ref type="bibr" target="#b9">[10,</ref><ref type="bibr" target="#b19">19,</ref><ref type="bibr" target="#b29">28,</ref><ref type="bibr" target="#b34">31,</ref><ref type="bibr" target="#b52">49]</ref>. Code examples included safety, economic benefits, critical mass and trust. We followed a similar approach to address our third research question and used our requirements as a priori codes.</p><p>To address our second research question, we pre-coded interview transcripts by highlighting and underlining significant participant quotes and interview text that stood out as noteworthy <ref type="bibr" target="#b43">[40]</ref>. We did this after receiving transcripts for each interview and added these codes to a shared codebook. Based on these emergent codes, we generated additional questions as we coded and continued coding with these questions in mind: Why are participants using Uber? Under what conditions do they use Uber over other transportation means? How do participants describe their drivers, the cars, and their overall experience? Then, we refined our codes and broke some of our emergent codes into sub-codes to better organize our data.</p><p>Finally, we analyzed our non-participant data. These included pre-screening surveys (access to smart phone and a data plan or Wi-Fi) and recruitment observation field notes. We discussed the challenges encountered while recruiting offline and broadly coded them as barriers to using ride-sharing services.</p><p>Understanding data from participants who opted out of our study or who were ineligible for our study helps to mitigate our use of non-random sampling methods, which are inherently biased. </p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>RESULTS</head><p>In summary, we successfully onboarded 13 participants (Table <ref type="table" target="#tab_0">1</ref>); however, soon after we onboarded Que, he had to withdraw from the study for personal reasons. Although no new patterns or themes arose from our data (e.g., we reached thematic/data saturation <ref type="bibr" target="#b39">[36]</ref>) after conducting eight interviews, we continued to interview and recruit participants for rigor. Our interviews lasted 30-60 minutes. Overall, we had 160 codes total; 31 were a priori and 129 were new codes that emerged. After using a priori codes to address RQ1, we then used an open-coding process to address RQ2 and RQ3.</p><p>We received 25 online responses (e.g., from online advertisements to Craigslist and Facebook), four organizational referrals, and five participants from snowball sampling. Only four of the 25 online participant responses satisfied our requirements. We approached approximately 30 individuals in our offline recruiting efforts. While two individuals expressed interest, neither of them contacted us. We documented and analyzed our recruiting observations, and report these results in this section as well. The mean income for all distinct ZIP codes (N=9) was $33,327 (standard deviation [SD]=$7,670.91); the mean walk score was 53.1 (SD=5.95). We also investigated transit and bike scores though this information was unavailable for three ZIP codes. These results were 37 (SD=2.51) and 56 (SD=5.35), respectively, which translated to "some transit" and "bikeable," though three of our participants were unable to bike because of accessibility issues.</p><p>Participants' incomes were in the $0-$19,999 USD range and all participants lacked access to reliable public transportation. Rosalyn and Dae Dae each owned a car, though both were inoperable and in need of maintenance. Three participants (Rosalyn, Acorn and Frog) had used Uber previously; Rosalyn was currently a student, Acorn was our most educated participant and Frog our most technically proficient. Our participants took a total of 82 trips lasting 1,062 minutes and spanning 413.62 miles. Based on survey results, our participants generally expressed comfort with using computers or smart phones for basic tasks like searching for information online and checking email. In the next subsections, we present the results for each research question.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Requirements of the Sharing Economy</head><p>We specified the necessary sharing-economy requirements for our target population based on a priori codes and new requirements that surfaced in our open coding. Requirements such as idling capacity <ref type="bibr" target="#b9">[10]</ref>, upfront social commitment and time, and privacy protection as mentioned by Lampinen et al. <ref type="bibr" target="#b34">[31]</ref> did not surface in our results-perhaps because Uber is not a new system. Drivers picked up all of our participants upon request. As a result, there were no issues of idling capacity or any obvious signs of discrimination. Although we saw some aspects of belief in the commons, efficacy, ease of use, social proof, and critical mass in our results, these were not as salient as regulation and trust, and economic benefits.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Regulation and Trust</head><p>Aspects of trust arising in our results included the lack of transparency around the regulatory platform (e.g., monetary transactions, surge-pricing decisions, decision-makers) and in two cases, trust between strangers.</p><p>To recruit, we visited several public offline sites in our targeted ZIP codes such as barbershops, hair salons, and wig shops because these businesses tend to reach a diverse clientele. While posting flyers on the public bulletin boards and as a result of leaving flyers with owners, individuals began to inquire about the study. We noted the perceptions and concerns regarding ridesharing systems, specifically Uber. For example, improper monetary transactions led some individuals to distrust the platform. In one case, three women at a hair salon stated that they had encountered invalid charges on their credit card from Uber. One of these women stated that she was charged by Uber but had never used the service and wondered how to get her money back; she was not able to find a number to call Uber. In this case, the fact that there was not a physical entity (i.e. no place to inquire about the charge), might have led to distrust. Another woman, not hearing the full conversation but familiar with Uber, asked, "Where's Uber located?" A lack of transparency in the way surge pricing works also contributed to one of our participants questioning Uber. Surge pricing occurs when fare prices are multiplied because of high demand. However, one participant, Acorn, during the interview showed us a price surge that had happened when rides were apparently available: Yeah, it could be higher or it could be lower or it could have ended. Yeah, now you see what I'm talking about and there's two cars together so I don't understand why it's surging. -Acorn (Interview)</p><p>Acorn described how in one case, the surge price went away as a result of her closing and reopening the application. In fact, the majority of our participants took rides during a surge. This type of misunderstanding could lead to distrust in the platform. There were also misunderstandings about the differences in the types of Uber vehicles available. While UberX vehicles are "everyday" four-door vehicles that are 2001 or newer, UberS-ELECT vehicles are "a step above everyday" (e.g., 2008 or newer luxury vehicles), and UberSUV vehicles must be 2007 or newer, black and have leather interior. Dae Dae selected Uber SUV on a couple of occasions. He was surprised after we contacted him about approaching his $75 allocation. He was unaware of the price differences between Uber SUV and UberX and stated that this should be clearer in the application. Vette chose UberSELECT and when asked in the interview why, she responded, I figured maybe that would be cheaper. -Vette (Interview)</p><p>Three study participants (Rosalyn, Acorn, and Frog) who had previously used Uber were asked whether they had faced issues when using the service previously. One participant reported issues linking her debit card to her Uber account to pay for rides. This resulted in creative workarounds. For example, she tried using a friend's credit card (which she saw as ineffective and burdensome), and she tried syncing her debit card through her PayPal account (which did not work). She found another way, but it was also inconvenient: Then we got my sister-in-law, we used her credit card for a while, and just paid her back; and that works fine. It was still an inconvenience, doing that, using her credit card, and calling her and saying, 'Hey, can we use ... Is it okay, it's going to be about this cost. Do you mind?' -Frog (Interview) When using her sister-in-law's credit card, she had to first seek permission to use the credit card and then arrange for re-payment. On the other hand, when she was unable to sync her debit card through a PayPal account to link to Uber, she attempted to contact both parties (Uber and PayPal) to resolve the issue. This was unsuccessful and ultimately she was not able to continue using the Uber service. It [Uber application] won't do the credit card thing, because of the debit card with the PayPal... tried linking my debit card through PayPal, so you sign in with PayPal and then request Uber; and it'll say 'Credit Card Not Valid.'... I tried to contact Uber; contacted PayPal, and one blames the other, and the other blames the oth-You know, one says it's the other one's fault; the other one says it's the other one's fault. -Frog (Interview) With regard to trust, while all participants said they felt safe taking Uber, Vette and TCash took some precautions just in case. Vette, for example, sent screen shots of her trip details: To my family members so if something were to happen, then they would know a pers-Put a face to the person, and a license plate, and a description of the car. That's why I like the app...We live in different days and times now, so you never know; but I never had a bad experience. I felt safe, but I'd rather always be safe than sorry. (Interview). TCash stated in an interview that I don't trust nobody, but I was comfortable with every Uber driver. In this case, TCash was comfortable with every driver he "selected,", which we discuss later.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Economic Benefits</head><p>At least three participants (Acorn, Jeff, Frog) said that Uber in some cases cost 50% less than taxis. While participants said that Uber cost about the same as jitneys, they said they felt safer with Uber. For example, Frog described how she divided her trips to Walmart into monthly or bi-monthly trips to save money. Taking Uber was much cheaper than taking a cab: That's only like once or twice a month, like a long distance, like to Walmart, because of the cost difference. I would definitely use Uber because it's so much cheaper. -Frog(Interview) Although these participants indicated they found economic benefits in using Uber, we paid for their use of the service and it was unclear from their comments whether the participants would benefit financially in the long term from using Uber. Therefore, we followed up with participants after 3 weeks to see whether they had continued to use the service. We were able to reach seven of our participants, and of these only one person, Rosalyn, had continued to use the service. Ace, for example, said that he managed to get a car and no longer needed to use Uber; Acorn, who had used Uber before our study, moved to an area where Uber was no longer available.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Belief in the Commons</head><p>Per our field notes, community organizations and participants who referred other individuals to our study showed a belief in the commons. A representative from one community organization that helped in our recruiting efforts described how the lack of transportation is a barrier for employment. In other words, when its clients do get an interview or find job fairs to attend, many struggle to find transportation. The representative said the organization was happy to help us in our recruitment because of the value the services brought to the community. Similarly, Vette stated in an interview, I have known people to have actually lost jobs due to the public transportation failure. She referred at least three people to our study who were having issues getting to work. Dae Dae provided us with the name of a single mother because he felt that these services were most beneficial for mothers who had no transportation and had to transport their kids.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Efficacy, Social Proof and Critical Mass</head><p>Our results suggest that efficacy is a requirement that may need to be broken down further given the socioeconomic context of our target population. This was especially true among individuals who we were unable to recruit because they felt uncomfortable using their smart phones in this way. This was also true among those we aimed to recruit who were not able to access Uber on the phone or in person. In other words, if something went wrong, the perception was that they could not reach Uber to address the issue; in one case we as researchers had to serve as a bridge to contact Uber when one of our participants was double-charged for a ride. This suggests a lack of social proof or connections to those who feel comfortable reaching out to these companies. As a result of the interviews, diary entries, and our recruiting observations, we found several requirements for improving access to ridesharing services.</p><p>To summarize, our results identified regulation and trust issues resulting from the lack of platform visibility (no physical location, no friends who knew how to use it) and charge discrepancies. This service did not appear to be economically beneficial in the long term based on those participants we were able to reach in our follow-up. However, participants felt safe, trusted their drivers, and described several benefits from using the service. Finally, we identified: opportunities to increase support for belief in commons, limited efficacy resulting from low digital literacy, and a lack of critical mass and social proof, as suggested in our offline recruitment efforts.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Uber Experiences</head><p>To understand how individuals described their experience using the service (RQ2), we generated emergent codes and refined our codes into sub-codes to better organize our data. We also generated extra questions such as "How do participants describe their drivers, the cars, and their overall experience?", "Why are participants using Uber?", and "Under what conditions do they use Uber over other transportation means?" Based on participant diaries, interviews, and U4B data, participants took rides to get to work, to run personal errands like grocery shopping and pharmacy pickups, to get to medical appointments and job interviews, to visit family, and for one participant, to go to restaurants and movies. Our participants described meeting retired school principals, former police officers, and aspiring entrepreneurs. Participants described rich social interactions when using the real-time ridesharing service and used the service primarily because of its reliability.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Rich Social Interactions and Common Courtesy</head><p>All participants noted in their journal entries the drivers' courtesy, friendliness, or helpful nature. Two participants also noted sensory aspects of the drivers such as the smell of the vehicle or driver, the cleanliness of the vehicle, and the feeling of comfort from accommodations such as being offered water, having the car door opened, or receiving help with groceries. Given that at least five participants knew less than 5% of their neighbors, these appeared to be beneficial: People are not as friendly as they used to be. I wave at people on my block. They wave, I wave back; but as far as conversing with them, no. -Vette (Interview)</p><p>Our findings also show that rides allowed for rich social interactions between the riders and drivers. Our interviews and participant journal entries revealed conversations about the city and other exchanges such as job leads, which we labeled as business/networking. For the most part, drivers were eager to share their experiences as Uber drivers in the city and often told their passengers about the city's history. For example, Ace, Rosalyn, and Melan had drivers who held conversations about local sites; Frog learned about historical landmarks during at least one of her rides.</p><p>We were talking about the growth in the city, like how the youth are, and how things change...when I was riding with Sam. He was telling me what certain businesses used to be that I didn't even know about. Riding down the Midtown area, down West Grand Boulevard. We were riding down there, he was telling me what certain businesses used to be -Ace (Interview) There were at least two instances of riders (Ace, TCash) and drivers using car rides to network and form business relationships. This is an indication of the potential of such ridesharing services to enhance weak ties and contribute to the formation of connecting ties to new people and perhaps to the building of social capital <ref type="bibr" target="#b19">[19]</ref>. It was right after I finished, it was my ride after that. And she was also a young entrepreneur trying to start up her own business and everything. We got contact information, exchanged contact information and everything. So I had a pretty good experience using Uber. Met nice good people. -Ace (Interview)</p><p>Dale was unemployed and receiving disability payments from a serious injury. When asked in the interview about whether a driver stood out to him, he said, Mr. Wayne: He asked me when he took me to Target did I work there and I told him that I was trying to get a job there, and he said if I have my license that Wayne County downtown was doing hiring for part[time] cleanup janitorial stuff. Dale was most grateful for Mr. Wayne's encouragement. He said, Most of them [the drivers] were nice but he [Mr.Wayne] made me feel comfortable, and talked to me, and gave me encouragement not to stop looking. Not all participants chatted or networked with their drivers during each ride. Bobby, Mostavo, Melan and Vette each reported one case in which they did not engage in conversations with their driver. These participants described texting during the ride, wearing headphones, and simply having "quiet but polite" (Vette) drivers.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Perceptions of Discrimination</head><p>No participants described explicit forms of being discriminated against at pickups, perhaps because it was unclear to them whether any drivers had canceled rides for this reason. However, when asked whether he learned about his drivers, Dae Dae commented in the interview that all of his drivers except were foreigners, and he this might be why they didn't see him as different: By them having different nationalities, they didn't discriminate, they didn't see me being a black guy, they just saw me being a person who needed some help. That's beautiful. They felt comfortable to talk to me. They was dressed very professional and I was dressed [in] urban wear, but they never judged me by how I was dressed.</p><p>On the hand, there were some indications of discrimination on the part of our passengers. For example, TCash selected Uber drivers he felt comfortable with based on profile pictures. He said in the interview that he had canceled three rides with drivers he thought he would feel uncomfortable with: I try to stay away from any type of situation to where I feel like I would be uncomfortable or anything, so when I look for Uber, I look for a person that's going to make me feel comfortable. You could say in a way, I kind of stereotype, so not necessarily with the race, but I stereotype age-wise. I want an older person picking me up.</p><p>Bobby made a similar comment in the interview. When asked whether he had ever canceled a ride, he said yes. Today before, I pressed the thing and requested a car and the picture and this is going to sound racist but I'm not racist at all, it popped up with a Muslim with the whole towel thing on and it just creeped me out a little bit so I canceled it and requested a different driver.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Accurate estimates of arrival times</head><p>By far, the primary reason participants used Uber was for reliability. At least six participants (Ace, Jeff, Dale, Rosalyn, Vette, TCash) noted that the application provided accurate estimates of arrival times, which allowed them to make better use of their waiting time and to prepare for the ride. This stood in stark contrast to experiences with existing transportation infrastructures like buses and cabs, which were often delayed by many hours. Participants spoke on the convenience of realtime ridesharing: Buses are not on time. They don't have as many buses on the routes like they used to. They have shut down routes at a certain time, where they had routes that would run all night, said Vette. TCash agreed: You have to wait too long [for buses]. Sometimes the bus don't come. Sometimes it come longer than expected. I prefer Uber, because you can actually see when they're coming, can see where they're at. I prefer Uber over bus transportation. I do a lot of cab also...the only difference from a cab and an Uber, if you ask me, I would say the conversation. Sometimes, you get better conversation from Uber drivers...Cab drivers, it's just more like get you to your destination and that's it...There's really no trust, also.</p><p>The majority of Dale's rides were to job interviews, so timing was especially important. He compared taxis versus Uber based on time and the cleanliness of the vehicle: Uber got me to the interviews that I had and I got there safely, and on time, and the transportation was a lot cleaner. When asked to specify what he meant by "cleaner," he said: Some cabs, they don't take the time to detail their vehicle. Uber, it was fresh, no cigarette smoke smell and the people were nice.</p><p>Knowing the car's arrival time was an important benefit to participants for other reasons, as well. That's what I like, because you can see them coming to you. We live in an apartment building, so no-If it's under 15 minutes, if it's a nice day, I'll go downstairs and wait; but if it's crappy weather, I'll stay up-stairs until, like, two or three minutes, and then go downstairs. I don't want to make them wait any extra time, because I know their time is money -Frog (Interview) Participants used the service if they knew they were running late and would miss their bus or if they had no bus fare. Missing a bus in some cases was a significant loss of time. For example, Jeff only used Uber to get to and from work; he typically took two buses to get to work, so he used Uber as a backup plan. It was a time where I got to the bus stop and I had just missed the bus, and the next bus was in 45 minutes. I was like, I got a little bit on my Uber...I can get home quicker... -Jeff (Interview).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Barriers</head><p>Finally, we provide the results of our third research question, What barriers do these groups of individuals face in using ridesharing services? An analysis of interested participants who we could not recruit revealed three impediments to using Uber: low digital literacy or access (e.g., a lack of access to smartphones, the Internet, or Wi-Fi), limited access to credit cards, and accessibility and mobility issues. Interview results also revealed barriers.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Low Digital Literacy</head><p>Three of the 25 people who expressed interest online in the study used a basic mobile phone with no Internet capabilities. These participants, like 32% of the U.S. population who do not own a smart phone <ref type="bibr" target="#b4">[6]</ref>, could not access the Uber application and consequently the service. One potential participant had a smart phone with no regular access to a data plan. While she knew that she could access Wi-Fi near her home, she feared being unable to hail a ride for her return trip.</p><p>Another challenge was adding participants onto the business account. This was a multi-stage process, which uncovered ease of use as a sharing-economy barrier that was left unaddressed. Adding participants to the account required that participants download the Uber application, create an Uber account for first-time users (N=11), accept an email invitation from the business (e.g., requires logging into an email account) and re-start the application. We guided participants through this process either face-to-face or step-by-step via phone. In four cases this proved insufficient; we saw that participants also requested assistance from family members and friends. This proved to be too daunting for at least one potential participant. An older man, perhaps in his early 60s and walking with a cane, was very interested in joining our study; however, he talked about his discomfort with his smart phone and felt he needed assistance initiating rides via the phone application. The barber in the shop where we met the man asked whether his grandson could assist the man. The older gentleman took a flyer and stated that he would contact us later in the day, but he never did. Additionally, throughout the study we made contact with participants via email, although in multiple cases participants expressed discomfort in accessing and sending emails. In those cases, we resorted to text messaging.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Lack of Credit Access</head><p>At least six participants (Mostavo, Frog, Que, Vette, Dae Dae, Bobby) in the study did not have a credit card, another prerequisite for using Uber. In the beginning of our study, this was a necessity even if participants were added to the business account and were not expected to pay for Uber rides. The company changed this policy at some point during our study. We circumvented the rule by onboarding participants using prepaid credit card that we purchased.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Accessibility and Mobility</head><p>Three of our participants (Acorn, Frog, Bobby) had mobility issues that required special accommodations. Acorn and Frog sought information to better prepare for the ride ahead, and this information was not available in the application at the time of our study. Frog, who had a shoulder injury, worried about whether the driver would provide assistance with her shopping bags and desired a way to find out beforehand: I'm limited on how much I can carry with my shoulder, so I always say, 'Well, I can't carry much' and they notice that, and they notice ... I don't always use this arm, like when I'm closing doors and that, because it's sore and hurts. It's getting better, so ... And they're willing to help you. That's what I like... Bobby spoke very highly of the drivers who aided him in getting into the car and said one driver helped him to his apartment door. However, there were still other accessibility concerns. Acorn, for example, had a sense of social anxiety around not knowing whether her walker would fit in the vehicle. She wanted to be able to see the size of the vehicle before initiating a ride: Sometimes I think, 'God, can that walker fit in that vehicle?' but we've gone into every vehicle, even if it has to [go] across the seat, the rear seat...That way, when a similar vehicle is showing up, I know how to do it...</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>DISCUSSION</head><p>It takes time to instill a culture of sharing in communities, which requires a regular progression from initial trust between strangers, to a more pervasive belief in the commons, to critical mass <ref type="bibr" target="#b9">[10]</ref>. Our results show that uptake of the real-time ridesharing system led to positive experiences such as rich social interactions and common courtesy, and reliable transportation to work, interviews, and other appointments among those who chose to participate in our study. To the best of our knowledge, these social benefits from real-time ridesharing services have not been observed in prior studies. least two of our participants held a belief in the commons and all of our participants felt comfortable with their drivers. Our results suggest that potential participants in the sharing economy required additional regulation and trust, efficacy, social proof, ease of use, and open forms of payment. These barriers stemmed primarily from financial limitations-as suggested in prior work <ref type="bibr" target="#b35">[32]</ref>-as well as low digital literacy, and limited Internet access. We generalize what prevented potential, or non-participants from receiving the same value that our participants received into two categories: regulation and trust, and (inclusive) infrastructures <ref type="bibr" target="#b49">[46]</ref>. We provide design implications for real-time ride sharing services and general sharing-economy applications for low-resource populations.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Regulation and Trust</head><p>Trust in the platform <ref type="bibr" target="#b29">[28]</ref> and in the brand <ref type="bibr" target="#b29">[28,</ref><ref type="bibr" target="#b49">46]</ref>, ease of use, and social proof/critical mass were the sharing-economy requirements that generated the most controversy in our study. Sundararajan defines two similar dimensions of trust as brand certification, and cultural dialog (familiarity) <ref type="bibr" target="#b49">[46]</ref>, and we believe these to be associated with social proof. Our study results revealed that some non-participants distrusted Uber because it had no physical presence in their community. In fact, though we successfully recruited some individuals from the web, where users are more likely to be technology-savvy, and more than half through referrals, as suggested by <ref type="bibr" target="#b19">[19]</ref>, we were unable to recruit from popular community locations. As Botsman alludes <ref type="bibr" target="#b9">[10]</ref>, initial trust (between strangers) leads to a more pervasive belief in the commons and eventually to critical mass. Our findings suggest that initial trust in the platform and in the company along with a perceived value to the community would eventually lead to critical mass among our targeted populations. Although in a slightly different context, Karlan et al. also suggested that hiring workers through referrals, or existing network connections, could create trust through familiarity <ref type="bibr" target="#b28">[27]</ref>. While sharing-economy systems support electronic referrals in this way, this sense of familiarity is lost among people with low digital literacy.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Lack of Familiarity and Trust</head><p>Our results suggest that for sharing-economy applications to effectively work within low-resource communities, companies must build and certify their brand to facilitate familiarity, or cultural dialog within a community in order to build trust. Demonstrating the value that these services offer to communities such as reliable transportation to work, reduced social isolation, common courtesy, and affordable rates could also be beneficial. Facilitating services, like UberPOOL-which provides lower rates as a result of split passenger fares with third-party organizations like job-training centers-could be successful as However, in a community where individuals are less likely to be online because of issues of digital literacy and access, brand certification for and adoption of online companies is difficult. In addition, if few people are online, within a community, there is little opportunity to obtain social proof and build critical mass, requirements for the sharing economy to work <ref type="bibr" target="#b9">[10]</ref>. For example, we were unable to recruit participants when visiting barbershops and hair salons, primarily because of monetary exchange issues and the absence of face-to-face interactions the company, which fostered mistrust. This innate feature would lead to issues across other sharing-economy applications.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Designing for Platform Trust</head><p>To address the aforementioned trust issues, we suggest platform designs that could lead to increased digital literacy, brand identity, visibility, and application transparency. For example, installing public kiosks in intermediate locations such as third-party organizations, barbershops, and community businesses through which people could call real-time ridesharing services would eliminate the need for smartphones while accommodating multiple forms of payment including cash, gift vouchers, and credit/debit cards. An open system such as this could also increase transparency <ref type="bibr" target="#b44">[41]</ref> in terms of how to operate these systems because would be others who had used the system and could support those who were less comfortable using the technology. This could be beneficial to the community (adds belief in the commons), and could help to build trust within low-resource communities. A public kiosk approach would present an opportunity to train local shop owners or employees how to handle transaction-related issues. While community engagement might be difficult, an alternative would be to establish signs, like at bus stops, near public Wi-Fi hot spots to increase visibility and also enable access for users without reliable data plans to initiate rides. This type of system is crucial to building trust. Keymolen argues this: "[T]he development of trust online is not just about you and me, but about you, me and the system that brings us together. Only when users are of the workings of and the mutual shaping effects technology-in-use has, can trust thrive online" <ref type="bibr">[28, p.147</ref>]. Similarly, designers must reduce uncertainty and perceived risks in order to engineer trustworthiness <ref type="bibr" target="#b41">[38]</ref>. Several participants expressed not knowing that certain services cost more than others (e.g., UberSUV, UberSELECT). In addition, Acorn expressed uncertainty about why prices were surging. To further increase transparency, applications should make the price structure clear to users without compromising system simplicity. For example, while the Uber application indicates how many cars are nearby, the application could also provide information about the nearby demand (e.g., how many riders are waiting). As suggested by Frog, allowing riders who need assistance to indicate that they need assistance would enable riders to be transparent about their needs, which could lessen anxiety about using the service. For example, UberACCESS allows those needing extra assistance or access to wheelchair-accessible vehicles to request safe and reliable rides <ref type="bibr" target="#b20">[20]</ref>. This design suggestion is one that could be generalized to other areas of transport. For example, current bus systems do not communicate their capacity (e.g., how many seats are available, how many for bicycles are available) in real time.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Inclusive Infrastructures</head><p>While sharing-economy application infrastructures do allow for financial exchanges, they do so in a context that is not inclusive. Understanding the contextual differences among system users and designing for these differences is not a simple task <ref type="bibr" target="#b2">[4]</ref>, yet many of the barriers we encountered in our recruiting were consistent with prior literature on low-resourced U.S populations. For example, the dependence on credit cards for payments excludes close to 7% of the U.S. population <ref type="bibr" target="#b22">[22]</ref>, who do not have bank accounts. Of this 7%, 4.9% have low income <ref type="bibr" target="#b22">[22]</ref>. Requiring a credit card for payment excludes people without a bank account <ref type="bibr" target="#b25">[25]</ref>; at least half of our study participants did not have a credit card. We agree with Glöss et al. <ref type="bibr" target="#b25">[25]</ref> that gift cards could address this issue as well as the cash payments supported by Uber's cash payment integration, which is currently operational in various parts of the world. Both options could go a long way in making Uber more inclusive in that they would allow people without bank accounts or debit/credit cards to sign up and use the service <ref type="bibr">[2]</ref>.</p><p>In fact, seamless integration into Uber's current payment system is simple. The use of coupon codes is already supported and has been used via business promotions. To account for context, these coupon codes should be sold in familiar places (e.g., local businesses, grocery stores) and accept cash or debit and credit card payments. Local business owners could receive a transaction fee from the company for selling the coupon codes, thereby contributing to the commons.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>LIMITATIONS AND CONCLUSION</head><p>Our study was limited to a specific context (e.g., people with low-income and few transportation options) and to one U.S. city. Additionally, while we were able to monitor rides taken with the business account, we were unable to effect pricing to identify price points. More than 30% of the rides were surge rides, which seems high, though it is unclear how this percentage compares to that in other areas. If this share is above average then at least one of the following could be true: our sample is less price-sensitive, though unlikely; the ride times were during peak times only; or perhaps most interestingly, surge pricing could reflect that few drivers go to these areas and our population paid more for the services because of driver unavailability, which is similar to findings in <ref type="bibr" target="#b50">[47]</ref>. We would like to better understand aspects of pricing and affordability, perhaps in a more controlled environment. While our results suggest that participants did not encounter discrimination as it relates to perceived issues of safety, distance, or race, we were unable to determine whether Uber drivers during this study rejected pick-up requests from our participants and confirm Lee et al.'s results <ref type="bibr" target="#b35">[32]</ref>. We would like to investigate this further. Finally, Uber application features are ever-changing (e.g., participants mistakenly selected options such as UberSELECT and UberXL at the time of our study; however, at the time of publication, Uber options included prices). Nevertheless, our underlying contributions hold true.</p><p>Our work extends the HCI and CSCW sharing economy research by presenting results of the use of a sharing-economy application among passengers from a low-resource city, a relatively unexplored population in this area of study. Our participants had positive interactions with drivers that led to new information about the city, job leads, and encouragement. Our findings contribute the importance of regulation and trust for inclusivity, particularly among populations did not participate in the study because of non-familiarity with the service, limited social proof, and platform distrust. We also confirm requirements of sharing-economy applications in other contexts. This suggests that our results are likely to be applicable to a wider user base including those who are disabled or in environments with developing infrastructure (e.g., limited Internet access and connectivity or credit card availability) where Uber and similar services operate. Broadly, our results contribute to a growing knowledge around how digital divides exist in society and present a call to the HCI community for greater understanding of the design of systems to consider all aspects of society. Our contributions could inform HCI researchers, designers, policy makers, and private companies in their development of future real-time ridesharing services and sharing-economy systems.</p></div><figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_0"><head>Table 1 .</head><label>1</label><figDesc>Uber Ride Summary (HS=High school, SC=Some college, MS=Master's Degree, *Unable to participate due to personal reasons)</figDesc><table><row><cell>Alias Demographics</cell><cell>No of rides</cell><cell>Average distance per ride (miles)</cell><cell>Average duration per ride (min)</cell><cell>Average cost per ride ($)</cell><cell>Number of surge rides</cell><cell>Avg surge value</cell><cell>Avg waiting time (min)</cell></row><row><cell>Ace, M, 20, HS, Office Assistant</cell><cell>6</cell><cell>5.35</cell><cell>13.83</cell><cell>14.38</cell><cell>5</cell><cell>2.00</cell><cell>7.17</cell></row><row><cell>Rosalyn, F, 22, SC, Student</cell><cell>6</cell><cell>6.58</cell><cell>13.83</cell><cell>12.48</cell><cell>2</cell><cell>2.10</cell><cell>10.67</cell></row><row><cell>Melan, F, 20-25, NA, NA</cell><cell>5</cell><cell>7.85</cell><cell>36.20</cell><cell>23.10</cell><cell>5</cell><cell>1.60</cell><cell>12.00</cell></row><row><cell>Acorn, F, 52, MS, Self-employed</cell><cell>9</cell><cell>3.35</cell><cell>9.78</cell><cell>8.46</cell><cell>5</cell><cell>1.52</cell><cell>9.56</cell></row><row><cell>Mostavo, M, 30-40, NA, Unemployed</cell><cell>6</cell><cell>7.46</cell><cell>16</cell><cell>11.91</cell><cell>0</cell><cell>0</cell><cell>9.33</cell></row><row><cell>Frog, F, 50, SC, Unemployed</cell><cell>9</cell><cell>4.62</cell><cell>10.11</cell><cell>7.86</cell><cell>1</cell><cell>1.30</cell><cell>10.33</cell></row><row><cell>Vette, F, 53, SC, Unemployed</cell><cell>3</cell><cell>6.04</cell><cell>11.67</cell><cell>23.29</cell><cell>0</cell><cell>0</cell><cell>11.00</cell></row><row><cell>TCash, M, 26, SC, Dry Cleaning</cell><cell>8</cell><cell>4.26</cell><cell>12.38</cell><cell>9.77</cell><cell>4</cell><cell>1.65</cell><cell>9.38</cell></row><row><cell>Jeff, M, 30, SC, Medical Assistant</cell><cell>8</cell><cell>5.84</cell><cell>10.25</cell><cell>9.31</cell><cell>3</cell><cell>1.60</cell><cell>10.13</cell></row><row><cell>Dae Dae, M, 37, Job corps, Automotive</cell><cell>5</cell><cell>4.98</cell><cell>12</cell><cell>20.86</cell><cell>0</cell><cell>0</cell><cell>10.60</cell></row><row><cell>Dale, M, 39, HS Not Completed, Unemployed</cell><cell>11</cell><cell>3.45</cell><cell>8.55</cell><cell>7.41</cell><cell>2</cell><cell>1.50</cell><cell>13.09</cell></row><row><cell>Bobby, M, 21, HS,</cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell></row><row><cell>Unemployed</cell><cell>6</cell><cell>4.08</cell><cell>11.67</cell><cell>17.73</cell><cell>0</cell><cell>0</cell><cell>15.50</cell></row><row><cell>Unable to Work</cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell></row><row><cell>*Que, M, 25-30, NA, NA</cell><cell>-</cell><cell>-</cell><cell>-</cell><cell>-</cell><cell>-</cell><cell>-</cell><cell>-</cell></row></table></figure>
+		</body>
+		<back>
+			<div type="references">
+
+				<listBibl>
+
+<biblStruct xml:id="b0">
+	<monogr>
+		<title level="m" type="main">Help Us Test Cash Payments</title>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">I</forename><surname>Detroit</surname></persName>
+		</author>
+		<ptr target="http://www.city-data.com/city/Detroit-Michigan.html" />
+		<imprint>
+			<date type="published" when="2002">2012. 2012. May 16, 2016. 2. 2015. 2015</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b1">
+	<monogr>
+		<title level="m" type="main">How Walk Score Works</title>
+		<ptr target="https://newsroom.uber.com/?s=cash+payment/3.2016" />
+		<imprint>
+			<date type="published" when="2016">2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b2">
+	<analytic>
+		<title level="a" type="main">Peer-to-peer in the workplace: A from the road</title>
+		<author>
+			<persName><forename type="first">Nicola</forename><forename type="middle">J</forename><surname>Syed Ishtiaque Ahmed</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Himanshu</forename><surname>Bidwell</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Zade</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Srihari</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Anupama</forename><surname>Muralidhar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Baneen</forename><surname>Dhareshwar</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Karachiwala</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jacki O'</forename><surname>Tandong Neba Cedrick</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Neill</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2858036.2858393</idno>
+		<ptr target="http://dx.doi.org/10.1145/2858036.2858393" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 34th Annual ACM Conference on Human Factors in Computing Systems, CHI 2016</title>
+				<meeting>the 34th Annual ACM Conference on Human Factors in Computing Systems, CHI 2016<address><addrLine>San Jose, U.S</addrLine></address></meeting>
+		<imprint>
+			<publisher>ACM Association for Computing Machinery</publisher>
+			<date type="published" when="2016">2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b3">
+	<analytic>
+		<title level="a" type="main">Barriers to healthcare access in a non-elderly urban poor American population</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Syed</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jeanne</forename><forename type="middle">P</forename><surname>Ahmed</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Nichol</forename><surname>Lemkau</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Barbara</forename><surname>Nealeigh</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Mann</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Health &amp; Social Care in the Community</title>
+		<imprint>
+			<biblScope unit="volume">9</biblScope>
+			<biblScope unit="page" from="445" to="453" />
+			<date type="published" when="2001">2001. 2001</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b4">
+	<analytic>
+		<title/>
+		<author>
+			<persName><forename type="first">Monica</forename><surname>Anderson</surname></persName>
+		</author>
+		<ptr target="http://www.pewinternet.org/2015/10/29/technology-device-ownership-2015/" />
+	</analytic>
+	<monogr>
+		<title level="j">Technology Device Ownership</title>
+		<imprint>
+			<date type="published" when="2015">2015. 2015</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b5">
+	<analytic>
+		<title level="a" type="main">Access to transportation and health care utilization in a rural region</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Thomas</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">John</forename><forename type="middle">S</forename><surname>Arcury</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Wilbert</forename><forename type="middle">M</forename><surname>Preisser</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">James M</forename><surname>Gesler</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Powers</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">The Journal of Rural Health</title>
+		<imprint>
+			<biblScope unit="volume">21</biblScope>
+			<biblScope unit="page" from="31" to="38" />
+			<date type="published" when="2005">2005. 2005</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b6">
+	<analytic>
+		<title level="a" type="main">Access-Based Consumption: The Case of Car Sharing</title>
+		<author>
+			<persName><forename type="first">Fleura</forename><surname>Bardhi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Giana</forename><forename type="middle">M</forename><surname>Eckhardt</surname></persName>
+		</author>
+		<idno type="DOI">10.1086/666376</idno>
+		<ptr target="http://dx.doi.org/10.1086/666376" />
+	</analytic>
+	<monogr>
+		<title level="j">Journal of Consumer Research</title>
+		<imprint>
+			<biblScope unit="volume">39</biblScope>
+			<biblScope unit="issue">4</biblScope>
+			<biblScope unit="page" from="881" to="898" />
+			<date type="published" when="2012">2012. 2012</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b7">
+	<monogr>
+		<title/>
+		<author>
+			<persName><forename type="first">Victoria</forename><surname>Bellotti</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Alexander</forename><surname>Ambard</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Daniel</forename><surname>Turner</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Christina</forename><surname>Gossmann</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kamila</forename><surname>Demkova</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">John</forename><forename type="middle">M</forename></persName>
+		</author>
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b8">
+	<analytic>
+		<title level="a" type="main">A Muddle of Models of Motivation for Using Peer-to-Peer Economy Systems</title>
+		<author>
+			<persName><forename type="first">Carroll</forename></persName>
+		</author>
+		<idno type="DOI">10.1145/2702123.2702272</idno>
+		<ptr target="http://dx.doi.org/10.1145/2702123.2702272" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 33rd Annual ACM Conference on Human Factors in Computing Systems (CHI &apos;15)</title>
+				<meeting>the 33rd Annual ACM Conference on Human Factors in Computing Systems (CHI &apos;15)<address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>ACM</publisher>
+			<date type="published" when="2015">2015</date>
+			<biblScope unit="page" from="1085" to="1094" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b9">
+	<monogr>
+		<title level="m" type="main">What&apos;s mine is yours: the rise of collaborative consumption</title>
+		<author>
+			<persName><forename type="first">Rachel</forename><surname>Botsman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ro</forename><surname>Rogers</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2010">2010</date>
+			<publisher>HarperCollins Publisher</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b10">
+	<monogr>
+		<author>
+			<persName><forename type="first">Mikayla</forename><surname>Bouchard</surname></persName>
+		</author>
+		<ptr target="http" />
+		<title level="m">Transportation Emerges as Crucial to Escaping Poverty</title>
+				<imprint>
+			<date type="published" when="2015">2015a</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b11">
+	<monogr>
+		<title level="m" type="main">Transportation Emerges as Crucial to Escaping Poverty. The New York Times</title>
+		<author>
+			<persName><forename type="first">Mikayla</forename><surname>Bouchard</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2015-05-07">2015b. May 7. 2015</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b12">
+	<monogr>
+		<title level="m" type="main">National Study quantifies the &quot;Sharing Economy&quot; movement</title>
+		<author>
+			<persName><surname>Campbell Mithun</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2012">2012. 2012</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b13">
+	<analytic>
+		<title level="a" type="main">Social exclusion, mobility and access1</title>
+		<author>
+			<persName><forename type="first">Noel</forename><surname>Cass</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Elizabeth</forename><surname>Shove</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">John</forename><surname>Urry</surname></persName>
+		</author>
+		<idno type="DOI">10.1111/j.1467-954X.2005.00565.x</idno>
+		<ptr target="http://dx.doi.org/10.1111/j.1467-954X.2005.00565.x" />
+	</analytic>
+	<monogr>
+		<title level="j">The Sociological Review</title>
+		<imprint>
+			<biblScope unit="volume">53</biblScope>
+			<biblScope unit="page" from="539" to="555" />
+			<date type="published" when="2005">2005. 2005</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b14">
+	<analytic>
+		<title level="a" type="main">The Effects of Exposure to Better Neighborhoods on Children: New Evidence from the Moving to Opportunity Experiment</title>
+		<author>
+			<persName><forename type="first">Raj</forename><surname>Chetty</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Nathaniel</forename><surname>Hendren</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Lawrence F</forename><surname>Katz</surname></persName>
+		</author>
+		<idno type="DOI">10.3386/w21156</idno>
+		<ptr target="http://dx.doi.org/10.3386/w21156" />
+	</analytic>
+	<monogr>
+		<title level="j">American Economic Review</title>
+		<imprint>
+			<biblScope unit="volume">106</biblScope>
+			<biblScope unit="page">90</biblScope>
+			<date type="published" when="2015-08">2015. August (2015</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b15">
+	<analytic>
+		<title level="a" type="main">Where is the land of Opportunity? The Geography of Intergenerational Mobility in the United States</title>
+		<author>
+			<persName><forename type="first">Raj</forename><surname>Chetty</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Nathaniel</forename><surname>Hendren</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Patrick</forename><surname>Kline</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Emmanuel</forename><surname>Saez</surname></persName>
+		</author>
+		<idno type="DOI">10.1093/qje/qju022</idno>
+		<ptr target="http://dx.doi.org/10.1093/qje/qju022" />
+	</analytic>
+	<monogr>
+		<title level="j">The Quarterly Journal of Economics</title>
+		<imprint>
+			<biblScope unit="volume">129</biblScope>
+			<biblScope unit="issue">4</biblScope>
+			<biblScope unit="page" from="1553" to="1623" />
+			<date type="published" when="2014-09">2014. September 2014</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b16">
+	<monogr>
+		<title level="m" type="main">Uphill Both Ways: Where are the Jobs in Metro Detroit?</title>
+		<author>
+			<persName><surname>Data Driven Detroit</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2015-03">2015. March 2015</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b17">
+	<analytic>
+		<title level="a" type="main">Does the Sharing Economy Do Any Good</title>
+		<author>
+			<persName><forename type="first">Tawanna</forename><surname>Dillahunt</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Airi</forename><surname>Lampinen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jacki O'</forename><surname>Neill</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Loren</forename><surname>Terveen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Cory</forename><surname>Kendrick</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 19th ACM Conference on Computer Supported Cooperative Work and Social Computing Companion</title>
+				<meeting>the 19th ACM Conference on Computer Supported Cooperative Work and Social Computing Companion</meeting>
+		<imprint>
+			<publisher>CSCW</publisher>
+			<date type="published" when="2016">2016</date>
+			<biblScope unit="page">16</biblScope>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b18">
+	<monogr>
+		<title level="m" type="main">Companion</title>
+		<idno type="DOI">10.1145/2818052.2893362</idno>
+		<ptr target="http://dx.doi.org/10.1145/2818052.2893362" />
+		<imprint>
+			<publisher>ACM</publisher>
+			<biblScope unit="page" from="197" to="200" />
+			<pubPlace>New York, NY, USA</pubPlace>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b19">
+	<analytic>
+		<title level="a" type="main">The Promise of the Sharing Economy Among Disadvantaged Communities</title>
+		<author>
+			<persName><forename type="first">Tawanna</forename><forename type="middle">R</forename><surname>Dillahunt</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Amelia</forename><forename type="middle">R</forename><surname>Malone</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2702123.2702189</idno>
+		<ptr target="http://dx.doi.org/10.1145/2702123.2702189" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 33rd Annual ACM Conference on Human Factors in Computing Systems (CHI &apos;15)</title>
+				<meeting>the 33rd Annual ACM Conference on Human Factors in Computing Systems (CHI &apos;15)<address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>ACM</publisher>
+			<date type="published" when="2015">2015</date>
+			<biblScope unit="page" from="2285" to="2294" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b20">
+	<monogr>
+		<title level="m" type="main">UberACCESS: Expanding Transportation Options</title>
+		<author>
+			<persName><forename type="first">Kate</forename><surname>Donahue</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2014">2014. 2014</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b21">
+	<analytic>
+		<title level="a" type="main">Digital Discrimination: The Case of Airbnb</title>
+		<author>
+			<persName><forename type="first">G</forename><surname>Benjamin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Michael</forename><surname>Edelman</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Luca</surname></persName>
+		</author>
+		<idno type="DOI">10.2139/ssrn.2377353</idno>
+		<ptr target="http://dx.doi.org/10.2139/ssrn.2377353" />
+	</analytic>
+	<monogr>
+		<title level="j">com. SSRN Electronic Journal</title>
+		<imprint>
+			<date type="published" when="2014-01">2014. jan 2014</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b22">
+	<monogr>
+		<title level="m" type="main">FDIC National Survey of Unbanked and Underbanked Households</title>
+		<author>
+			<persName><surname>Fdic</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2013">2013</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">Technical Report</note>
+</biblStruct>
+
+<biblStruct xml:id="b23">
+	<monogr>
+		<title level="m" type="main">Q&amp;A With Detroit&apos;s New Director of Public Health | Medpage Today</title>
+		<author>
+			<persName><forename type="first">Shannon</forename><surname>Firth</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2016-01-27">2016. 27 January 2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b24">
+	<monogr>
+		<title level="m" type="main">Racial and gender discrimination in transportation network companies</title>
+		<author>
+			<persName><forename type="first">Yanbo</forename><surname>Ge</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Christopher</forename><forename type="middle">R</forename><surname>Knittel</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Don</forename><surname>Mackenzie</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Stephen</forename><surname>Zoepf</surname></persName>
+		</author>
+		<idno type="DOI">10.3386/w22776</idno>
+		<ptr target="http://dx.doi.org/10.3386/w22776" />
+		<imprint>
+			<date type="published" when="2016">2016. 2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b25">
+	<analytic>
+		<title level="a" type="main">Designing for Labour: Uber and the On-Demand Mobile Workforce</title>
+		<author>
+			<persName><forename type="first">Mareike</forename><surname>Glöss</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Moira</forename><surname>Mcgregor</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Barry</forename><surname>Brown</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2016 CHI Conference on Human Factors in Computing Systems (CHI &apos;16)</title>
+				<meeting>the 2016 CHI Conference on Human Factors in Computing Systems (CHI &apos;16)</meeting>
+		<imprint>
+			<date type="published" when="2016">2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b26">
+	<monogr>
+		<title/>
+		<idno type="DOI">10.1145/2858036.2858476</idno>
+		<ptr target="http://dx.doi.org/10.1145/2858036.2858476" />
+		<imprint>
+			<publisher>ACM</publisher>
+			<biblScope unit="page" from="1632" to="1643" />
+			<pubPlace>New York, NY, USA</pubPlace>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b27">
+	<analytic>
+		<title level="a" type="main">Defining the Price of Hospitality: Networked Hospitality Exchange via Airbnb</title>
+		<author>
+			<persName><forename type="first">Tapio</forename><surname>Ikkala</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Airi</forename><surname>Lampinen</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2556420.2556506</idno>
+		<ptr target="http://dx.doi.org/10.1145/2556420.2556506" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 17th ACM Conference on Computer Supported Cooperative Work &amp; Social Computing</title>
+				<meeting>the 17th ACM Conference on Computer Supported Cooperative Work &amp; Social Computing</meeting>
+		<imprint>
+			<publisher>ACM Association for Computing Machinery</publisher>
+			<date type="published" when="2014">2014</date>
+			<biblScope unit="page" from="173" to="176" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b28">
+	<analytic>
+		<title level="a" type="main">Trust and Social Collateral</title>
+		<author>
+			<persName><forename type="first">Dean</forename><surname>Karlan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Markus</forename><surname>Mobius</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Tanya</forename><surname>Rosenblat</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Adam</forename><surname>Szeidl</surname></persName>
+		</author>
+		<idno type="DOI">10.1162/qjec.2009.124.3.1307</idno>
+		<ptr target="http://dx.doi.org/10.1162/qjec.2009.124.3.1307" />
+	</analytic>
+	<monogr>
+		<title level="j">The Quarterly Journal of Economics</title>
+		<imprint>
+			<biblScope unit="volume">124</biblScope>
+			<biblScope unit="page" from="1307" to="1361" />
+			<date type="published" when="2009">2009. 2009</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b29">
+	<analytic>
+		<title level="a" type="main">Trust and technology in collaborative consumption</title>
+		<author>
+			<persName><forename type="first">Esther</forename><surname>Keymolen</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Why it is not just about you and me. Bridging distances in technology and regulation</title>
+				<imprint>
+			<date type="published" when="2013">2013. 2013</date>
+			<biblScope unit="page" from="135" to="150" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b30">
+	<monogr>
+		<title level="m" type="main">Studying the &quot;Sharing Economy&quot;: Perspectives to peer-to-peer exchange</title>
+		<author>
+			<persName><forename type="first">Airi</forename><surname>Lampinen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Victoria</forename><surname>Bellotti</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Coye</forename><surname>Cheshire</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mary</forename><forename type="middle">L</forename><surname>Gray</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2015">2015a</date>
+			<biblScope unit="page">15</biblScope>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b31">
+	<analytic>
+		<title/>
+		<idno type="DOI">10.1145/2685553.2699339</idno>
+		<ptr target="http://dx.doi.org/10.1145/2685553.2699339" />
+	</analytic>
+	<monogr>
+		<title level="j">Companion</title>
+		<imprint>
+			<biblScope unit="page" from="117" to="121" />
+			<date type="published" when="2015">2015</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b32">
+	<monogr>
+		<title level="m" type="main">Studying the &quot;Sharing Economy&quot;: Perspectives to peer-to-peer exchange</title>
+		<author>
+			<persName><forename type="first">Airi</forename><surname>Lampinen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Victoria</forename><surname>Bellotti</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Andrés</forename><surname>Monroy-Hernández</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Coye</forename><surname>Cheshire</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Alexandra</forename><surname>Samuel</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2015">2015b</date>
+			<biblScope unit="page">15</biblScope>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b33">
+	<analytic>
+		<title/>
+		<idno type="DOI">10.1145/2685553.2699339</idno>
+		<ptr target="http://dx.doi.org/10.1145/2685553.2699339" />
+	</analytic>
+	<monogr>
+		<title level="j">Companion</title>
+		<imprint>
+			<biblScope unit="page" from="117" to="121" />
+			<date type="published" when="2015">2015</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b34">
+	<analytic>
+		<title level="a" type="main">Challenges to Participation in the Sharing Economy : The Case of Local Online Peer-to-Peer Exchange in a Single Parents</title>
+		<author>
+			<persName><forename type="first">Airi</forename><surname>Lampinen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kai</forename><surname>Huotari</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Coye</forename><surname>Cheshire</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Network. Interaction Design and Architecture(s) Journal</title>
+		<imprint>
+			<biblScope unit="volume">24</biblScope>
+			<biblScope unit="page" from="16" to="32" />
+			<date type="published" when="2015">2015c. 2015</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b35">
+	<analytic>
+		<title level="a" type="main">Working with Machines: The Impact of Algorithmic and Data-Driven Management on Human Workers</title>
+		<author>
+			<persName><forename type="first">Min</forename><forename type="middle">Kyung</forename><surname>Lee</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Daniel</forename><surname>Kusbit</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Evan</forename><surname>Metsky</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Laura</forename><surname>Dabbish</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2702123.2702548</idno>
+		<ptr target="http://dx.doi.org/10.1145/2702123.2702548" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings 33rd Annual ACM Conference on Human Factors in Computing Systems (CHI &apos;15)</title>
+				<meeting>33rd Annual ACM Conference on Human Factors in Computing Systems (CHI &apos;15)<address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>ACM</publisher>
+			<date type="published" when="2015">2015</date>
+			<biblScope unit="page" from="1603" to="1612" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b36">
+	<analytic>
+		<title level="a" type="main">Examining Transportation and Employment Outcomes: Evidence for Moving Beyond The Bus Pass</title>
+		<author>
+			<persName><forename type="first">Sara</forename><surname>Lichtenwalter</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Gary</forename><surname>Koeske</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Esther</forename><surname>Sales</surname></persName>
+		</author>
+		<idno type="DOI">10.1300/J134v10n01_05</idno>
+		<ptr target="http://dx.doi.org/10.1300/J134v10n01_05" />
+	</analytic>
+	<monogr>
+		<title level="j">Journal of Poverty</title>
+		<imprint>
+			<biblScope unit="volume">10</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page" from="93" to="115" />
+			<date type="published" when="2006">2006. 2006</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b37">
+	<analytic>
+		<title level="a" type="main">Detroit bankrupt: To see Detroit&apos;s decline, look at 40 years of federal policy</title>
+		<author>
+			<persName><forename type="first">Rick</forename><surname>Mathews</surname></persName>
+		</author>
+		<ptr target="http://goo.gl/" />
+	</analytic>
+	<monogr>
+		<title level="j">Policy.Mic</title>
+		<imprint>
+			<biblScope unit="volume">27</biblScope>
+			<date type="published" when="2013-05-12">2013. 2013. WXAQ1o Retrieved May 12. 2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b38">
+	<monogr>
+		<title level="m" type="main">Detroit has become such an &apos;economic desert&apos; that residents now commute up to four-hours each day just to find work</title>
+		<author>
+			<persName><forename type="first">Kelly</forename><surname>Mclaughlin</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2015-03">2015. March 2015</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b39">
+	<analytic>
+		<title level="a" type="main">Unsatisfactory Saturation&apos;: a critical exploration of the notion of saturated sample sizes in qualitative research</title>
+		<author>
+			<persName><forename type="first">O'</forename><surname>Michelle</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Nicola</forename><surname>Reilly</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Parker</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Qualitative Research</title>
+		<imprint>
+			<biblScope unit="page">1468794112446106</biblScope>
+			<date type="published" when="2012">2012. 2012</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b40">
+	<analytic>
+		<title level="a" type="main">Just a better taxi? A survey-based comparison of taxis, transit, and ridesourcing services in San Francisco</title>
+		<author>
+			<persName><forename type="first">Lisa</forename><surname>Rayle</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Danielle</forename><surname>Dai</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Nelson</forename><surname>Chan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Robert</forename><surname>Cervero</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Susan</forename><surname>Shaheen</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Transport Policy</title>
+		<imprint>
+			<biblScope unit="volume">45</biblScope>
+			<biblScope unit="page" from="168" to="178" />
+			<date type="published" when="2016">2016. 2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b41">
+	<analytic>
+		<title level="a" type="main">The mechanics of trust: A framework for research and design</title>
+		<author>
+			<persName><forename type="first">Jens</forename><surname>Riegelsberger</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">Angela</forename><surname>Sasse</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">John</forename><forename type="middle">D</forename><surname>Mccarthy</surname></persName>
+		</author>
+		<idno type="DOI">10.1016/j.ijhcs.2005.01.001</idno>
+		<ptr target="http://dx.doi.org/10.1016/j.ijhcs.2005.01.001" />
+	</analytic>
+	<monogr>
+		<title level="j">International Journal of Human-Computer Studies</title>
+		<imprint>
+			<biblScope unit="volume">62</biblScope>
+			<biblScope unit="page" from="381" to="422" />
+			<date type="published" when="2005">2005. 2005</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b42">
+	<monogr>
+		<title level="m" type="main">Uber&apos;s Drivers: Information Asymmetries and Control in Dynamic Work</title>
+		<author>
+			<persName><forename type="first">Alex</forename><surname>Rosenblat</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Luke</forename><surname>Stark</surname></persName>
+		</author>
+		<idno type="DOI">10.2139/ssrn.2686227</idno>
+		<ptr target="http://dx.doi.org/10.2139/ssrn.2686227" />
+		<imprint>
+			<date type="published" when="2015">2015</date>
+			<biblScope unit="page" from="1" to="17" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b43">
+	<monogr>
+		<author>
+			<persName><forename type="first">Johnny</forename><surname>Saldaña</surname></persName>
+		</author>
+		<title level="m">The Coding Manual for Qualitative Researchers</title>
+				<meeting><address><addrLine>Thousand Oaks, CA</addrLine></address></meeting>
+		<imprint>
+			<publisher>Sage</publisher>
+			<date type="published" when="2012">2012</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b44">
+	<analytic>
+		<title level="a" type="main">Intermediated Technology Use in Developing Communities</title>
+		<author>
+			<persName><forename type="first">Nithya</forename><surname>Sambasivan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ed</forename><surname>Cutrell</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kentaro</forename><surname>Toyama</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Bonnie</forename><surname>Nardi</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/1753326.1753718</idno>
+		<ptr target="http://dx.doi.org/10.1145/1753326.1753718" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the SIGCHI Conference on Human Factors in Computing Systems (CHI &apos;10)</title>
+				<meeting>the SIGCHI Conference on Human Factors in Computing Systems (CHI &apos;10)<address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>ACM</publisher>
+			<date type="published" when="2010">2010</date>
+			<biblScope unit="page" from="2583" to="2592" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b45">
+	<monogr>
+		<title level="m" type="main">Essential Ethnographic Methods: A Mixed Methods Approach</title>
+		<author>
+			<persName><forename type="first">J</forename><surname>Jean</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Margaret</forename><forename type="middle">D</forename><surname>Schensul</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Lecompte</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="1999">1999</date>
+			<publisher>AltaMira Press</publisher>
+			<biblScope unit="volume">386</biblScope>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b46">
+	<analytic>
+		<title level="a" type="main">A Longitudinal Analysis of Cars, Transit, and Employment Outcomes</title>
+		<author>
+			<persName><forename type="first">J</forename><surname>Michael</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Nicholas J</forename><surname>Smart</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Klein</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Publication MNTRC Report</title>
+		<imprint>
+			<biblScope unit="page" from="12" to="49" />
+			<date type="published" when="2015">2015. 2015</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b47">
+	<analytic>
+		<title level="a" type="main">Faster and Cheaper: How Ride-Sourcing Fills a Gap in Low-Income Los Angeles Neighborhoods</title>
+		<author>
+			<persName><forename type="first">Rosanna</forename><surname>Smart</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Brad</forename><surname>Rowe</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Angela</forename><surname>Hawken</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mark</forename><surname>Kleiman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Nate</forename><surname>Mladenovic</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Peter</forename><surname>Gehred</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Clarissa</forename><surname>Manning</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">BOTEC Analysis Corporation</title>
+		<imprint>
+			<date type="published" when="2015-07">2015. July 2015</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b48">
+	<monogr>
+		<title level="m" type="main">Uber seems to offer better service in areas with more white people. That raises some tough questions</title>
+		<author>
+			<persName><forename type="first">Jennifer</forename><surname>Stark</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Nicholas</forename><surname>Diakopoulos</surname></persName>
+		</author>
+		<ptr target="https://www.washingtonpost.com/news/wonk/wp/2016/03/10/uber-seems-to-offer-better-service-in-areas-with-more-white-people-that-raises-some-tough-questions/?utm" />
+		<imprint>
+			<date type="published" when="2016">2016. 2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b49">
+	<monogr>
+		<title level="m" type="main">The Sharing Economy: The End of Employment and the Rise of Crowd-Based Capitalism</title>
+		<author>
+			<persName><forename type="first">Arun</forename><surname>Sundararajan</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2016">2016</date>
+			<publisher>MIT Press</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b50">
+	<analytic>
+		<title level="a" type="main">Avoiding the South Side and the Suburbs: The Geography of Mobile Crowdsourcing Markets</title>
+		<author>
+			<persName><forename type="first">Jacob</forename><surname>Thebault</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">-</forename><surname>Spieker</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Loren</forename><forename type="middle">G</forename><surname>Terveen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Brent</forename><surname>Hecht</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2675133.2675278</idno>
+		<ptr target="http://dx.doi.org/10.1145/2675133.2675278" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 18th ACM Conference on Computer Supported Cooperative Work &amp; Social Computing (CSCW &apos;15)</title>
+				<meeting>the 18th ACM Conference on Computer Supported Cooperative Work &amp; Social Computing (CSCW &apos;15)<address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>ACM</publisher>
+			<date type="published" when="2015">2015</date>
+			<biblScope unit="page" from="265" to="275" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b51">
+	<monogr>
+		<title level="m" type="main">Geek Heresy: Rescuing Social Change from the Cult of Technology</title>
+		<author>
+			<persName><forename type="first">Kentaro</forename><surname>Toyama</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2015">2015. 2015</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b52">
+	<analytic>
+		<title level="a" type="main">Drivers and barriers of peer-to-peer accommodation stay: An exploratory study with American and Finnish travellers</title>
+		<author>
+			<persName><forename type="first">P</forename><surname>Iis</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Juho</forename><surname>Tussyadiah</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Pesonen</surname></persName>
+		</author>
+		<idno type="DOI">10.1080/13683500.2016.1141180</idno>
+		<ptr target="http://dx.doi.org/10.1080/13683500.2016.1141180" />
+	</analytic>
+	<monogr>
+		<title level="j">Current Issues in Tourism</title>
+		<imprint>
+			<biblScope unit="volume">3500</biblScope>
+			<biblScope unit="page" from="1" to="18" />
+			<date type="published" when="2016-04">2016. April (2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b53">
+	<analytic>
+		<title level="a" type="main">Social networks, mobile lives and social inequalities</title>
+		<author>
+			<persName><forename type="first">John</forename><surname>Urry</surname></persName>
+		</author>
+		<idno type="DOI">10.1016/j.jtrangeo.2011.10.003</idno>
+		<ptr target="http://dx.doi.org/10.1016/j.jtrangeo.2011.10.003" />
+	</analytic>
+	<monogr>
+		<title level="j">Journal of Transport Geography</title>
+		<imprint>
+			<biblScope unit="volume">21</biblScope>
+			<biblScope unit="page" from="24" to="30" />
+			<date type="published" when="2012">2012. 2012</date>
+		</imprint>
+	</monogr>
+	<note>Social Impacts and Equity Issues in Transport</note>
+</biblStruct>
+
+<biblStruct xml:id="b54">
+	<monogr>
+		<title level="m" type="main">Using Interviews as a Research Methodology</title>
+		<author>
+			<persName><forename type="first">Gill</forename><surname>Valentine</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="1997">1997</date>
+			<publisher>Routledge</publisher>
+			<biblScope unit="page" from="110" to="126" />
+			<pubPlace>New York, NY, USA</pubPlace>
+		</imprint>
+	</monogr>
+	<note>Tell Me About. second ed.</note>
+</biblStruct>
+
+<biblStruct xml:id="b55">
+	<monogr>
+		<title level="m" type="main">The consumer potential of Collaborative Consumption: Identifying the motives of Dutch Collaborative Consumers &amp; Measuring the consumer potential of Collaborative Consumption within the municipality of Amsterdam</title>
+		<author>
+			<persName><forename type="first">P</forename><forename type="middle">B</forename><surname>Van De Glind</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2013-08">2013. aug 2013</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b56">
+	<analytic>
+		<title level="a" type="main">Disparities and access to healthy food in the United States: A review of food deserts literature</title>
+		<author>
+			<persName><forename type="first">Renee</forename><forename type="middle">E</forename><surname>Walker</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Christopher</forename><forename type="middle">R</forename><surname>Keane</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jessica</forename><forename type="middle">G</forename><surname>Burke</surname></persName>
+		</author>
+		<idno type="DOI">10.1016/j.healthplace.2010.04.013</idno>
+		<ptr target="http://dx.doi.org/10.1016/j.healthplace.2010.04.013" />
+	</analytic>
+	<monogr>
+		<title level="j">Health &amp; Place</title>
+		<imprint>
+			<biblScope unit="volume">16</biblScope>
+			<biblScope unit="page" from="876" to="884" />
+			<date type="published" when="2010">2010. 2010</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b57">
+	<monogr>
+		<title level="m" type="main">Stranded: How America&apos;s Failing Public Transportation Increases Inequality. The Atlantic</title>
+		<author>
+			<persName><forename type="first">Gillian</forename><forename type="middle">B</forename><surname>White</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2015-05">2015. May 2015</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+				</listBibl>
+			</div>
+		</back>
+	</text>
+</TEI>

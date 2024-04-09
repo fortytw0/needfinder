@@ -1,0 +1,1839 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xml:space="preserve" xmlns="http://www.tei-c.org/ns/1.0" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.com/kermitt2/grobid/master/grobid-home/schemas/xsd/Grobid.xsd"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+	<teiHeader xml:lang="en">
+		<fileDesc>
+			<titleStmt>
+				<title level="a" type="main">Investigating How Online Help and Learning Resources Support Children&apos;s Use of 3D Design Software</title>
+			</titleStmt>
+			<publicationStmt>
+				<publisher/>
+				<availability status="unknown"><licence/></availability>
+			</publicationStmt>
+			<sourceDesc>
+				<biblStruct>
+					<analytic>
+						<author>
+							<persName><forename type="first">Nathaniel</forename><surname>Hudson</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="department">Autodesk Research Toronto</orgName>
+								<address>
+									<region>Ontario</region>
+									<country key="CA">Canada</country>
+								</address>
+							</affiliation>
+							<affiliation key="aff1">
+								<orgName type="institution">Ross Video Ottawa</orgName>
+								<address>
+									<region>ON</region>
+									<country key="CA">Canada</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Benjamin</forename><surname>Lafreniere</surname></persName>
+							<email>ben.lafreniere@autodesk.com</email>
+							<affiliation key="aff0">
+								<orgName type="department">Autodesk Research Toronto</orgName>
+								<address>
+									<region>Ontario</region>
+									<country key="CA">Canada</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Parmit</forename><forename type="middle">K</forename><surname>Chilana</surname></persName>
+							<email>pchilana@cs.sfu.ca</email>
+							<affiliation key="aff2">
+								<orgName type="institution">Simon Fraser University Burnaby</orgName>
+								<address>
+									<region>BC</region>
+									<country key="CA">Canada</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Tovi</forename><surname>Grossman</surname></persName>
+							<email>tovi.grossman@autodesk.com</email>
+							<affiliation key="aff0">
+								<orgName type="department">Autodesk Research Toronto</orgName>
+								<address>
+									<region>Ontario</region>
+									<country key="CA">Canada</country>
+								</address>
+							</affiliation>
+						</author>
+						<title level="a" type="main">Investigating How Online Help and Learning Resources Support Children&apos;s Use of 3D Design Software</title>
+					</analytic>
+					<monogr>
+						<imprint>
+							<date/>
+						</imprint>
+					</monogr>
+					<idno type="DOI">10.1145/3173574.3173831</idno>
+				</biblStruct>
+			</sourceDesc>
+		</fileDesc>
+		<encodingDesc>
+			<appInfo>
+				<application version="0.7.1" ident="GROBID" when="2022-07-22T04:58+0000">
+					<desc>GROBID - A machine learning software for extracting information from scholarly documents</desc>
+					<ref target="https://github.com/kermitt2/grobid"/>
+				</application>
+			</appInfo>
+		</encodingDesc>
+		<profileDesc>
+			<textClass>
+				<keywords>
+					<term>Software learning</term>
+					<term>child-computer interaction</term>
+					<term>online help H.5.m. Information interfaces and presentation: Misc</term>
+				</keywords>
+			</textClass>
+			<abstract>
+<div xmlns="http://www.tei-c.org/ns/1.0"><p>3D design software is increasingly available to children through libraries, maker spaces, and for free on the web. This unprecedented availability has the potential to unleash children's creativity in cutting edge domains, but is limited by the steep learning curve of the software. Unfortunately, there is little past work studying the breakdowns faced by children in this domain-most past work has focused on adults in professional settings. In this paper, we present a study of online learning resources and help-seeking strategies available to children starting out with 3D design software. We find that children face a range of challenges when trying to learn 3D design independently-tutorials present instructions at a granularity that leads to overlooked and incorrectly-performed actions, and online help-seeking is largely ineffective due to challenges with query formulation and evaluating found information. Based on our findings, we recommend design directions for nextgeneration help and learning systems tailored to children.</p></div>
+			</abstract>
+		</profileDesc>
+	</teiHeader>
+	<text xml:lang="en">
+		<body>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>INTRODUCTION</head><p>The last few years have seen the rising popularity of simplified and free versions of consumer-oriented 3D design tools that can be easily accessed by non-professional users <ref type="bibr" target="#b55">[53]</ref>. As part of this trend, children are a growing user group for 3D design software <ref type="bibr">[72]</ref>. These tools offer the potential to unleash children's creativity in cutting edge domains such as video game design <ref type="bibr" target="#b79">[74]</ref>, animation <ref type="bibr">[75]</ref>, and digital fabrication <ref type="bibr" target="#b21">[22]</ref>. Moreover, building an interest in 3D design at an early age may inspire children to pursue engineering or a related scientific field later in life <ref type="bibr">[68]</ref>.</p><p>Although 3D design tools have become more easily accessible, and offer great potential, they can still be difficult to learn and use, and getting started remains a significant barrier, even for adults <ref type="bibr" target="#b34">[35,</ref><ref type="bibr" target="#b41">41]</ref>. Since users have long abandoned static manuals and documentation <ref type="bibr">[64]</ref>, HCI experts and product designers have developed alternative learning and help techniques that offer more targeted and interactive assistance. For example, with the web emerging as the dominant platform for exchanging software-related experiences, HCI research has investigated novel ways of integrating web-based resources into design tools, including Q&amp;A features <ref type="bibr" target="#b56">[54]</ref>, stepby-step tutorials <ref type="bibr" target="#b29">[30,</ref><ref type="bibr" target="#b50">49,</ref><ref type="bibr" target="#b51">50]</ref>, videos <ref type="bibr" target="#b57">[55,</ref><ref type="bibr">61]</ref>, contextual help <ref type="bibr" target="#b26">[26,</ref><ref type="bibr" target="#b47">46]</ref>, and search interfaces <ref type="bibr" target="#b50">[49]</ref>, to name a few. While these innovations in software help and learning are promising, most of them have been designed based on formative studies with educated adults, typically in professional or formal educational contexts <ref type="bibr" target="#b34">[35,</ref><ref type="bibr" target="#b71">66]</ref>, and we know little about children's experiences and struggles with using common online instructional materials (e.g., in-app, video, and webbased tutorials) and help-seeking resources (e.g., web search, forums) when learning new software. Although there is a rich body of research on children's help-seeking behaviors in classrooms <ref type="bibr">[33,</ref><ref type="bibr">58]</ref> and online learning environments <ref type="bibr" target="#b1">[2,</ref><ref type="bibr" target="#b2">3]</ref>, the focus has mostly been on scholastic tasks, such as learning mathematics. Understanding the breakdowns faced by children, and the effectiveness of currently-available help and learning resources is important to inform the design of a new generation of help systems and learning resources. These resources may support not only children, but also adults in using 3D design tools and feature-rich software more broadly.</p><p>In this paper, we investigate the barriers faced by children when learning 3D design software, by evaluating the effectiveness of common help and learning resources that are available to children on the web. Our investigation addresses two main research questions: <ref type="bibr" target="#b0">(1)</ref> What challenges do children face in using instructional tutorials when learning 3D design software? and, <ref type="bibr" target="#b1">(2)</ref> To what extent do common online help-seeking behaviors, such as use of web search and online community help, support children in learning and using 3D design tools?</p><p>To address these questions, we conducted an in-lab study with children, ages 10-15, following tutorials in 3D design software in an individual setting. We intentionally prescribed different types of learning materials-including video, webbased, and in-application tutorials-and different help-seeking strategies to gain insights into the most prevalent online resources available to individual learners. The design of this study was informed by interviews with eight facilitators of 3D design workshops that shed light on current software tools and tasks used for teaching 3D design to children.</p><p>Our key findings suggest that children can face a range of challenges when trying to seek help and learn 3D design tools using online instructional materials. For example, when attempting to follow web-based tutorials, the children in our study often overlooked actions or performed them incorrectly, and experienced challenges with locating the UI elements required to carry out tutorial steps. In addition, we found that help-seeking practices such as the use of web search and community forums-resources commonly used by adults-were also ineffective for children. In particular, children struggled with evaluating the value and trustworthiness of search results and community-created content, and with formulating queries to locate relevant the relevant software help.</p><p>The implication of our findings is that children who wish to learn 3D design tools on their own, or who wish to continue learning and using these tools after a formal introduction to them in the classroom, face a formidable set of challenges. Thus, there is an unmet need for novel help and learning techniques to support children learning 3D design tools in individual settings. Specifically, reactive tutorials that can detect the success of individual actions and provide feedback would be valuable, as well as tutorial formats that better indicate relevant user interface elements.</p><p>Our main contribution is in providing empirical insights into the breakdowns that children face when learning 3D design software using currently-available instructional resources. Although we focus on 3D design software, we believe that our results can broadly apply to feature-rich software in other creative domains, such as graphic design and web design.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>RELATED WORK</head><p>To contextualize our findings, we draw upon research on children's use of feature-rich software for creative and problem-solving tasks, including 3D design; children's helpseeking behaviors in other contexts, such as formal education; and children's online information-seeking behaviors.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Children's use of creative and problem-solving software</head><p>There is a long history of research in the area of child-computer interaction on designing and evaluating tools to support creative and problem-solving tasks <ref type="bibr" target="#b39">[39]</ref>, in domains such as programming <ref type="bibr" target="#b25">[25,</ref><ref type="bibr" target="#b28">28,</ref><ref type="bibr" target="#b48">47]</ref>, storytelling <ref type="bibr">[40,</ref><ref type="bibr" target="#b78">73]</ref>, and gaming <ref type="bibr" target="#b12">[13,</ref><ref type="bibr" target="#b62">60,</ref><ref type="bibr" target="#b75">69]</ref>. These works have identified several common usability issues faced by children (e.g., maintaining focus on a relevant part of an application, wandering into obscure parts of an application, and difficulty processing text-based instructions). We build on this work, with a focus on how commonly-available tutorials, and online help and learning resources, support children in learning 3D design software.</p><p>Although studying children's use of 3D design software is a relatively new focus in HCI research, recent work has explored "maker" activities with 3D printers in the classroom and formal instruction settings <ref type="bibr">[8,</ref><ref type="bibr" target="#b21">22,</ref><ref type="bibr">27]</ref>, in special education and accessibility contexts <ref type="bibr" target="#b11">[12,</ref><ref type="bibr" target="#b42">42]</ref>, and in ICT4D environments <ref type="bibr" target="#b76">[70]</ref>. In addition to highlighting how 3D printing can be a valuable means of creative self-expression, these works have identified a range of usability challenges that children face with 3D design software and 3D printing hardware. However, this body of past work has generally been undertaken in settings where in-person assistance was available, and thus has had little to say about how children are supported in learning 3D design tools individually. Our study sheds light on children's learning of 3D design tools in individual settings, and provides specific design recommendations suitable for guiding the development of novel help and learning systems for 3D design, and creative and problem-solving tools more broadly.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Children's help-seeking behaviors in education</head><p>Although literature on how children learn and seek help when using new software is scant in HCI, several researchers have explored children's help-seeking behaviors in the education field. Different models have been proposed to better understand help-seeking among children, such as the one proposed by Nelson-Le <ref type="bibr">Gall [33]</ref> for classroom settings, and later adapted by Aleven et al. <ref type="bibr" target="#b2">[3]</ref> for electronic learning environments. These models provide a useful conceptualization of understanding the different stages of seeking help that include the following broad stages: Become aware of need for help; Decide to seek help; Identify potential helper/ resource; Use strategies to elicit help; and Evaluate the help-seeking episode. Our findings shed light on these stages of help-seeking in the context of learning a new 3D design application in an individual setting.</p><p>Other key results from the education field suggest that children's help-seeking behaviors are affected by various motivational factors and attitudes [58, 67], peer support [59], and the involvement of instructors <ref type="bibr">[67]</ref>. Recent works have also looked at integrated learning environments and how children seek help when using tools such as cognitive tutors <ref type="bibr" target="#b1">[2,</ref><ref type="bibr">48]</ref>. In both types of learning environments, children can struggle in monitoring task progress and assessing need for help <ref type="bibr" target="#b31">[32,</ref><ref type="bibr" target="#b59">57]</ref>, along with other metacognitive challenges. In our discussion, we reflect on our key results about children learning software for recreational and creative use in individual settings, in relation to these prior findings from more formal scholastic learning environments.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Children's online information-seeking behaviors</head><p>Although not specific to the context of learning or troubleshooting software, there have been several studies on children's use of general online search and information-seeking strategies that have relevance to children's use of online help resources. For example, some studies shed light on the topics that children are interested in searching on the web and how the difficulty of searching varies by topic <ref type="bibr" target="#b18">[19,</ref><ref type="bibr" target="#b20">21,</ref><ref type="bibr" target="#b65">62]</ref>. Others have explicitly focused on children's search and querying behaviors with online search engines <ref type="bibr" target="#b18">[19,</ref><ref type="bibr" target="#b19">20]</ref>. They have identified common problems experienced by children, such as spelling mistakes in queries, challenges with formulating relevant queries, understanding returned results, and accessing non-relevant content. Even though custom search engines for children have been developed (e.g., Yahooligans), they appear to present similar challenges for children in finding and assessing relevant content <ref type="bibr" target="#b6">[7]</ref>. Our findings complement these existing studies by investigating use of web search for software troubleshooting and learning tasks. We further discuss how children could be taught or encouraged to make better use of web-based resources and the rich technical help content that these resources contain.</p><p>In summary, our study complements the above body of literature with an evaluation of how commonly-available helpseeking behaviors and learning resources for 3D design software support children's use of these applications.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>RESEARCH APPROACH</head><p>Our approach to this research is motivated by two main trends. First, there is a general lack of formal opportunities for children to learn and practice 3D design skills. Although some elementary and secondary schools are beginning to offer formal 3D design training [8, 37, 56], this practice is not widespread. Less formal methods, such as 3D design workshops at summer camps, makerspaces, and libraries <ref type="bibr" target="#b24">[24]</ref> offer opportunities for children to learn the basics of this domain. However, since these workshops are relatively short, they may not offer the opportunity for longer-term learning and skill development. Second, a growing number of 3D design tools, such as Tinkercad <ref type="bibr" target="#b3">[4]</ref>, are becoming available for free on the web, as is an increasing body of online tutorials and help resources for these applications. In principle, this availability of tools and learning materials could provide children with all that they need to independently learn and develop skills in 3D design. However, the success of this strategy depends on whether the available resources can meet children's learning and help-seeking needs. Answering this question is the focus of this paper.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>INTERVIEWS WITH WORKSHOP FACILITATORS</head><p>To inform the design of our one-on-one observational study, we conducted interviews with facilitators of 3D design workshops. Our goal was to draw on their experiences to understand what parts of learning 3D design children most often struggle with; how children seek help while learning; and which tools, tasks, and concepts children are being taught.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Method</head><p>We conducted semi-structured interviews with eight facilitators who had experience working with children in workshops focused on 3D design or 3D printing. Each interview lasted between 45 and 60 minutes. Interviews were audio recorded, transcribed, and then analyzed for common themes. Three of the facilitators also invited us for site visits, giving us an opportunity to observe children learning 3D design, and gain additional context for our semi-structured interview data.</p><p>We asked facilitators to characterize their workshops, including the typical number of participants; participants' age range, backgrounds, and motivations for taking part in the workshops; the format for instruction; and the software tools they taught. We also asked the facilitators to describe the main challenges they had observed that participants faced in using 3D design tools in the workshop setting. Finally, we asked the facilitators to describe any help-seeking behaviors they had observed participants engaging in during the workshops, and whether they had observed participants using common online help and learning resources, such as web search or in-application help.</p><p>We used an inductive analysis approach <ref type="bibr">[15]</ref> to analyze the interview transcripts. Open coding was used to label transcript data, and affinity mapping was used to identify themes related to the format of the workshops, common breakdowns children experienced when learning 3D design software, and help-seeking behaviors in the workshop setting.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Results</head></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Workshop and Participant Characteristics</head><p>The workshops described by the facilitators typically consisted of between 5 and 20 participants, and were targeted at children between 8 and 15 years old. Participants came from a range of cultural and economic backgrounds, representative of the neighborhoods in which the workshops were held. Participants typically did not have experience with 3D design or other "maker" activities prior to the workshops. Likewise, facilitators reported that the typical parent of a participant had little familiarity with 3D design, as in the quote below:</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Most parents that bring their kids to the [workshop], most of them are like, 'I'm not handy at all, I can't make anything.' I'd say in a class of eight kids, there's probably one or two keen parents who know stuff. The rest are just like, 'My kid should be doing this because it's cool cutting-edge technology.' (F5)</head><p>This suggests that many children who take part in workshops will not be able to draw on their parents for continued support with learning at home once the workshop is finished.</p><p>The typical workshop described by the facilitators began with a live "follow-along" tutorial. The facilitator would project their screen and demonstrate how to construct an object step-by-step in the 3D design tool, while participants followed along at individual computers. The object used as a demonstration varied between facilitators (some examples are shown in Figure <ref type="figure" target="#fig_0">1</ref>), but was chosen to include a representative set of 3D design operations, including aligning objects, resizing, and additive/subtractive geometry operations. After the follow-along tutorial, students were typically allowed to pursue open-ended design exercises with help from the facilitator or an assistant as needed.</p><p>In terms of the 3D design tools taught in the workshops, Tinkercad was the choice of all facilitators. Tinkercad is a free, web-based 3D design tool that is popular among the maker community. It presents a simple interface (Figure <ref type="figure" target="#fig_0">1</ref>), and supports modeling through a paradigm in which solid shapes are dragged into a work space, positioned and manipulated through direct manipulation, and combined with other objects through Boolean addition and subtraction methods. The simplicity of Tinkercad's interface was cited as the primary reason for choosing it over alternative tools.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Challenges in Introducing 3D Design Tools to Children</head><p>Facilitators described a range of common challenges faced by children when using 3D design software for the first time. Many of these difficulties had to do with working in a 3D design environment. For example, six of the eight facilitators mentioned that participants had difficulty with 3D camera control, and five of the eight facilitators mentioned that participants had difficulties conceptualizing 3D space:</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Camera rotation is a really hard one for them. I feel like orientation of shapes is really hard too. […] For example, they're looking at a shape straight on and they think they have added a shape on top [of it], but when you pan the camera, that shape is several inches behind it. (F4)</head><p>Potentially related to this theme, most of the facilitators (7/8) mentioned that participants had trouble understanding what contributes to whether a model can be 3D printed or not.</p><p>Finally, six of the eight facilitators mentioned that participants experienced challenges with understanding how particular tools in the 3D design software operated.</p><p>Overall, the challenges discussed above are consistent with previously identified usability and learnability issues for 3D design software <ref type="bibr" target="#b41">[41,</ref><ref type="bibr">52]</ref>.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Help-seeking Behavior in Workshops</head><p>The most common form of help-seeking that we observed during our site visits was participants asking their peers for help, or looking to other participants for inspiration. We also observed participants actively seeking out peers to provide help to, or enthusiastically sharing new features of the software that they had discovered. One facilitator summarized the low inhibition of participants in seeking or offering help:</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>They will ask other people, especially if they see somebody doing something successfully that they can't seem to do…in general, kids are awesome about helping each other. They'll totally stop their own project and go help the other kid. (F1)</head><p>While these social help practices seemed positive in general, we also found some potential drawbacks. For example, three of the facilitators noted that children would sometimes hurt each other's feelings during social exchanges, and were not always effective teachers when they did try to provide help. As well, children who were shy were at a disadvantage, as they would sometimes run into trouble and not ask for help.</p><p>Participants also relied on the facilitators for help, with younger children relying more heavily on help from the facilitators while older children engaged in more peer-to-peer help. The facilitators we interviewed attributed this difference to older children having a better awareness of their own needs and the relevant skills or knowledge possessed by their peers.</p><p>Finally, we asked the facilitators about other potential helpseeking strategies that the children might use, including web search and other online help resources. The overwhelming response was that these were rare practices among workshop participants. One facilitator told us "if a [child] is using the Internet in one of our workshops it's because they've gotten sidetracked" (F1). Likewise, none of the facilitators had observed participants using Tinkercad's in-application help.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Summary</head><p>Overall, our interviews with facilitators illustrated a set of challenges and help-seeking behaviors used by children, and suggested that group workshops are an effective environment for introducing children to 3D design. However, not all children have access to these types of workshops, and even for those that do, there is a need for continued support once a workshop has ended. Moreover, we found that many parents of children who take part in the workshops were not themselves knowledgeable about 3D design tools, which suggests that children may not receive any ongoing support at home in learning 3D design. The above points suggest that it is important to understand the challenges faced by children learning 3D design software in individual settings.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>ONE-ON-ONE OBSERVATIONAL LAB STUDY</head><p>Based on the insights gained from our interviews, we designed our observational study to investigate (1) how individual learning resources, such as web-based tutorials, video tutorials, and in-application tutorials support children's needs; and (2) whether, and how, common online help-seeking behaviors such as web search and online community help support children's needs in this domain.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Method</head><p>We conducted an observational study in which children individually followed tutorials to perform 3D design tasks. The overall approach was guided by prior work describing best practices for conducting user studies with children <ref type="bibr" target="#b0">[1,</ref><ref type="bibr" target="#b10">11,</ref><ref type="bibr" target="#b17">18]</ref>. The study was approved by the Office of Research Ethics at the university at which the research was conducted.</p><p>We tested three tutorial types that are commonly used for software learning-static web pages with text and images, video tutorials, and in-application guided tutorials. Our intent was not to directly compare these three types of tutorials, but to gain insights on the appropriateness and trade-offs of each, specifically when used by children.</p><p>To investigate the effectiveness of various help-seeking behaviors, we employed a modified question-asking protocol <ref type="bibr" target="#b34">[35]</ref>. In the standard question-asking protocol, a participant works on a task with an expert observing them. The participant is encouraged to ask the expert for assistance throughout the process, which provides insights into the challenges faced by the participant, and their mental model of the system being studied. In our variation on this protocol, the experimenter directed the participant to different online help resources, to gain additional insights into the effectiveness of these resources and how they are used. When a participant asked a question, or was visibly stuck (indicated by repeating the same few incorrect actions; staring at the screen with no actions; expressing they were stuck more than once; or becoming visibly frustrated), the experimenter would prompt them to try to find the solution using either Google search or the Tinkercad knowledgebase (a search portal for Tinkercad's community forums). If the participant was still unsuccessful, the experimenter would provide answers and suggest actions to help the participant proceed with the study task.</p><p>In our pilot studies, we found that participants were often reluctant to ask the experimenter for help, so we adopted an approach in which the experimenter proactively observed the participant for signs that they were stuck, and prompted them to seek help. We also intentionally did not prompt participants to seek online help if they were visibly frustrated or had already failed to find help using a given resource several times. In these cases, we simply assisted the participant ourselves.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Participants</head><p>We recruited 15 participants (10 male, 5 female) in the 10-15 year age range. None of our participants had significant prior experience with 3D design software. Our rationale for selecting this particular age range was that children were likely to have reached Piaget's formal operational stage <ref type="bibr" target="#b5">[6]</ref>, and thus possess the deductive reasoning skills to make online helpseeking possible. We recruited from three main pools: a local children's sports team, children of members of a university mailing list, and children of employees of a large software company. Our entry interviews indicated that 6/15 participants had prior experience with 2D graphics software; 8/15 with Minecraft; 2/15 with web search (to find help with software); and 1/15 with web search (to find tutorials). Each study session took 45-60 minutes in total, and participants were given their choice of a small toy or a $25 gift card for participating.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Apparatus</head><p>The study sessions were held in a closed office where participants used a provided laptop computer (15" Apple Macbook Pro) with a USB mouse. Tinkercad was loaded in a Safari browser window and a separate browser tab contained the tutorial content. Participants were told that they were free to use the web to look up other content during the study session.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Study Tasks and Procedure</head><p>Each session began with a brief entry interview to gauge the participant's previous experience with computers, 3D design software, and web search. To build rapport, the experimenter also asked about the participant's hobbies, what they like and don't like at school, etc.-a measure that we found was effective at putting the participant at ease. Next, the participant was asked to perform a series of short tutorials built into the Tinkercad application, to familiarize themselves with the basics of camera movement, moving objects, and subtractive geometry. These tutorials launch automatically when the software is used for the first time, so this emulates a "first contact" experience with the software. Next, each participant performed a tutorial that walked them through the process of 3D modeling a boat (Figure <ref type="figure" target="#fig_1">2d</ref>). To capture insights into the full range of tutorial types typically found on the web, we employed three versions of this tutorial-a static web page with text and images (Figure <ref type="figure" target="#fig_1">2a</ref>); a video tutorial with a screen recording and voiceover (Figure <ref type="figure" target="#fig_1">2b</ref>); and an in-application interactive tutorial that provided text instructions augmented with outline indicators displayed in the workspace for some steps (Figure <ref type="figure" target="#fig_1">2c</ref>). The in-application tutorial was a preexisting Tinkercad feature, whereas the other tutorials were developed specifically for this study by translating the existing tutorial into these other formats. Instructional text and instructions were kept as consistent as possible across the three tutorial types, though modifications were made to adapt the instructions to each format. We balanced the assignment of tutorial types to participants (five participants to each type), and were careful to balance the ages of participants assigned to each of the three groups. All fifteen participants successfully completed the boat tutorial, with varying levels of assistance from the experimenter, suggesting that the task was at a reasonable level of difficulty. If time permitted, participants could work on an additional, more challenging task-we gave them an image of a toy car (Figure <ref type="figure" target="#fig_1">2e</ref>), and asked them to re-create it. Ten participants attempted this task, producing models of varying quality.</p><p>Video and screen recordings were collected for each session. We also manually recorded the types of help-seeking questions asked by participants. To analyze the gathered data, we used an inductive analysis approach, drawing on methods from grounded theory <ref type="bibr">[15]</ref>. Screen and audio recordings were reviewed by the primary experimenter to identify (1) instances where participants faced challenges (with the software, tutorials, or help-seeking approaches), (2) instances of problem-solving strategies employed to overcome challenges, and (3) instances where particular help-seeking approaches were used. The resulting observations were labelled using an open coding approach, and clustered using affinity mapping to identify common themes for each of the above areas. This process was led by the primary experimenter, with ongoing input from the other researchers in interpretation and synthesis sessions. Input from the other researchers included independent examinations of the data to help refine the coding scheme, and discussions of emerging themes, which led to additional ideas on how to cluster the data, or ideas on new themes that may explain the observed data. Through the above process, all of the researchers collaboratively developed the resulting coding scheme and clustering, while checking its legitimacy throughout the process. Over several iterations, the themes presented in the following sections emerged.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Challenges Following Instructional Tutorials</head><p>We start by presenting a comparison of the challenges we observed in participants using the three tutorial types, as well as broader themes we observed in how participants approached the tutorials. Overall, we did not observe any one of the tutorial types to be clearly superior to the others, though there were differences in how each was used by the participants. Table <ref type="table" target="#tab_1">1</ref> summarizes the most common challenges we observed for the three tutorials.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Challenges in locating referenced UI elements</head><p>Participants struggled to locate user interface elements referenced in tutorials, such as buttons or panels, an issue that has been previously documented in the context of learning feature-rich software <ref type="bibr" target="#b34">[35]</ref>. This was particularly a problem for Tinkercad's in-application tutorials, which at the time of this study did not provide screenshots or other visuals that could aid in locating referenced user interface elements.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Overlooking instructions, or performing them incorrectly</head><p>Several of the challenges that we observed relate to how participants consumed tutorial steps, and how this led them to overlook instructions, or perform instructions incorrectly.</p><p>In the video tutorial, there was no explicit demarcation of individual steps, but there were pauses after individual actions, occurring every 10-15 seconds. Three of the five video participants watched several of these "steps" before switching back to the application and attempting to perform all of them together. This frequently led to these participants omitting required actions, or performing actions incorrectly. This suggests that these participants overestimated their ability to recall and carry out the actions they had observed. It may also suggest that the explicit grouping of actions into steps (in the non-video tutorials) provides natural break points that prompt the participant to return to the application and carry out a set of actions. However, formats that included explicit steps were challenging for participants as well, as we discuss next.</p><p>In the text-and-image tutorials, 7/15 steps described multiple actions, and participants frequently overlooked some of the included actions. For example, one tutorial step read: "To give some unique touch for the boat, let's drag a Star shape on the Workplane. Push the Star a little bit into the cabin. Choose the Hole feature in the up right corner of the editor." Six of the fifteen participants performed the first action (dragging the Star shape onto the workplane) then moved on, overlooking the remaining two actions. In other cases, participants missed helpful tips at the end of a step. For the step: "To create smokestacks, drag a Cylinder shape on the Workplane. Scale it smaller to size of 8×8×8mm by pressing and holding down the shift button! This makes the Cylinder scale nicely without losing its shape", nine of fifteen participants missed the faster method of holding shift documented at the end of the step, and manually scaled all three axes of the cylinder individually.</p><p>Finally, for the text-and-image and in-application tutorials, some participants stopped attending to the written instructions altogether, and instead focused on the images (in the case of the text-and-image tutorials), or in-workspace guides (in the case of the in-application tutorials). In the case of the in-application tutorials this was a particular source of difficulty. The in-workspace guides-semi-transparent outlines in the workspace that indicate where to position elementsfrequently led participants to position objects so they looked correct from the current camera perspective, but were in fact not lined up correctly in 3D space.</p><p>One explanation for the above observations is that the children read the first part of the step, or observed the images or inworkspace guides, and assumed that they understood what they needed to do to perform that step, causing them to start acting without considering the instructions more carefully. This could also be based on a presumption that individual tutorial steps will represent one action each. </p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Participant comments also suggested a high initial confidence with tutorials, but later disappointment, as explained by one participant: "[The tutorial] should have had somebody new doing it, because then it would show how it could actually be hard. They made it look easy, but it's disappointing when you don't get it right." (P13)</head></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Imitating actions in tutorials</head><p>Another phenomenon we observed was that the children would mimic actions they had observed in tutorials, even without a full understanding of why those actions were necessary. This was apparent when participants imitated actions from tutorials in contexts where these actions were not required, suggesting the participant had formed an incorrect or incomplete understanding of the tool. While imitation often resulted in unnecessary actions, we did observe cases where this imitation behavior was beneficial and promoted best practices, as we describe below.</p><p>We observed that children who had seen camera movement in video or text-and-image tutorials would more frequently move the camera to look at the model from different views, imitating the behavior they had seen in the tutorials. This imitation behavior helped the participant observe problems alignment in the model they were creating. The tutorials no explicit instruction to move the camera, and the of alignment issues often came as a surprise to the participants, further suggesting that they were not using the camera movement to explicitly check that shapes were aligned properly, but were instead simply imitating camera adjustments observed in the tutorials. This behavior is important, because not moving the look at a model different angles is a well-documented source of diffifor novice users of 3D design tools <ref type="bibr" target="#b41">[41]</ref>. Moreover, we this challenge in as well, with the children in the in-application tutorial condition experichallenges stemming from not the camera the scene multiple angles. imitation of camera movement tended to yield positive we observed other cases where imitation behavior led difficulties, such as with use of the workplane tool. The tutorial performed by all participants included several that required moving the workplane, but when asked, eight of eleven children reported not understanding the purpose of the workplane tool. Despite this lack of understanding, five of the ten participants who performed the car task moved the workplane in situations where there was no advantage or clear reason for doing so. These participants reported that they were attempting to mimic best practices, and expressed that "the tutorial said that's the right way to do things" (P8). These imitation attempts would often create new difficulties for these participants, as it would cause object transformations to happen in unexpected ways.</p><p>summary, participants struggled with the types of tutowe tested, with many of their challenges stemming from actions in tutorial steps or choosing to attend to parts of the full guidance provided. Participants also actions or perceived best practices they had obin tutorials, which was sometimes beneficial but led to difficulties as well.</p><p>Individual Help-seeking Behaviors next present our observations of participants' use of online methods, the challenges that participants faced in locating and evaluating help resources, and a general negativity bias that we observed toward online help-seeking by the in the study. Before we present these findings, we by summarizing the triggers for help-seeking episodes, provide context for the subsequent findings.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Types of Questions Asked by Participants</head><p>As summarized in Table <ref type="table">2</ref>, the most common questions that received from participants were requests for procedural (57%). In these instances, the participant was aware of they needed to do, and that the software had the capato accomplish that goal, but they were not clear on the specific actions they needed to take. For example, one participant read the instruction "Drag the workplane on top of the Boat's body", then asked for help with how to accomplish this in the software.</p><p>In other cases, participants' questions were about awareness of functionality <ref type="bibr" target="#b34">[35]</ref>, including whether a particular task was posor whether particular features existed (25%). For one participant asked if there was a tool in Tinkercad "round over" shapes (typically known as a "fillet" in 3D a capability that Tinkercad did not have at the time). Other common types of questions concerned locating speuser interface elements in the application (14%), or requests for help with understanding terminology (5%).</p><p>with Online Help-seeking Although adults can often benefit from making coordinated use online resources when working with feature-rich software 30], none of the children in our study used web search or without being prompted. In our entry interviews, only two of the children reported having used web search in response to software difficulties in the past, and only one reported having used a forum to troubleshoot software.</p><p>When we received a request for help from a participant we directed them to two help resources-Google Search, and the Tinkercad Knowledgebase-alternating between the two on per-request basis. Web searches led participants to a variety of resources, including text-and-image tutorials (32%), blog (25%), video tutorials (18%), forums (14%), and other (11%). In general, we observed that none of these were broadly effective at helping participants to their goals. If we define success as cases where participant found the information they needed and apit successfully in the application, Google Search was in 17% of cases, and the Tinkercad Knowledgebase was successful in 5% of cases (Figure <ref type="figure" target="#fig_2">3</ref>). 1 Initially, we did not realize that the workplane tool would be point of difficulty for participants, so not all participants were asked about it. We observed two main ways that help-seeking failed -the participant failed to locate content that contained a solution for the challenge they were facing; or participants located a solution, but failed to recognize its relevance or how it could be put into action. To quantify this behavior, we recorded the webpages participants visited and had a member of the research team who was familiar with Tinkercad evaluate each page contained a relevant solution. We observed that even though participants' search queries varied widely in quality (discussed below), Google returned releresults 80% of the time (Figure <ref type="figure" target="#fig_2">3</ref>). However, participants only recognized and successfully applied the information they found in 17% of instances.</p><p>were less successful when using Tinkercad Knowledgebase, helpful 42% of instances, and using this information in 5% of instances.</p><p>Below we provide a more detailed discussion of the chalthat the children faced in formulating effective search queries for technical help and evaluating returned resources.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Challenges in Locating Relevant Help Resources</head><p>Over the study, participants issued 53 search queries in total (an average of 4 per participant). Consistent to what prior studies have found about how children search online in other contexts <ref type="bibr" target="#b18">[19]</ref>, participants in our study tended to search natural language questions such as "Does command z work on tinker cat" (sic) for technical help queries as well. experienced difficulties with terminology and while formulating queries, which is consistent with work <ref type="bibr" target="#b18">[19]</ref>. However, we were surprised by how autocorrect feature frequently caused terminology for participants as they tried to describe application-specific commands and features. For example, one who had previously correctly used the term in conversation, issued the search query "tinkercad move the workplne", which google corrected to move the workplace". The participant accepted the suggested incorrect terminology without question, and then began to use the incorrect term when speaking with the This suggests that this child viewed search results, or this spelling correction feature more specifically, as trustworthy or an authority, and that extra caution is needed around the use of generalized autocorrect for children when work with domain-specific terminology.</p><p>Search-query suggestions during query formulation were also a source of distraction for children as they tried to complete 3D design tasks. For example, autosuggest results such as, to be single" and "how to play Pokemon Go" prompted fits of laughter from the children, and the experimenter often to discourage them from following these suggestions. This with what we heard from the workshop facilitators, who that online resources were more a "source of disthan of help for children in their 3D design (In contrast, this distraction was less of an issue the application-specific knowledgebase, likely due to the more nature of the content it contained).</p><p>Finally, as seen in other studies with children and keyword <ref type="bibr" target="#b18">[19,</ref><ref type="bibr" target="#b19">20]</ref>, our participants also had difficulty formulatabstract help queries for technical help. In several cases issued queries that were overly specific to their problem with an application feature or functionality (e.g., to resize a cylinder to 6mm by 6mm by 6mm in tinker-In many cases the wording of these specific queries copied directly from the tutorial. The specificity of these limited the quality of the returned results. This was problematic when using the less sophisticated system provided by the knowledgebase.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Challenges in Evaluating Help</head><p>In addition to challenges with query formulation, we obthat children had difficulty evaluating the relevance help resources, a problem that has been identified in other for children <ref type="bibr" target="#b38">[38]</ref>. Although in many cases the chillocated web pages that contained a relevant answer, often failed to recognize that a page did contain a solution to their application-specific problem.</p><p>False rejection was particularly problematic when using the as deciphering the back-and-forth forum would often leave participants confused or irritated. <ref type="bibr">One</ref>  In many cases, false rejection occurred when search results reintroductory tutorials (both official tutorials associated Tinkercad, community-created). The children also difficulty skimming longer pages to find information, and would often reject such pages as being unhelpful. children would often spend considerable time search results that contained no useful information, contained potentially-relevant keywords and images. For API documentation, very old documentation, and for other software would often contain relevant to Tinkercad and images that would lead to believe that they may be helpful. One while trying to determine how to move objects spent several minutes trying to decipher the Shape Generator Overview", which is a developer API allowing for new shapes to be programmed using a specialized scripting language. She pointed to an image containing arrows overlaid on a cube, and the word "overview", as evidence that the page must contain information about how to move objects.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Negativity Bias Toward Help-seeking Methods</head><p>Due to their lack of success, participants quickly formed negopinions of the help-seeking methods we as part of our study method. In several cases, participants made exclamations such as "Oh dammit, I don't want to do this again!" (P8) when directed to these resources a second time. The participant who this comment went on to ignore the suggestion to seek help online, and continued to try and find a solution in the software's interface instead. This suggest that a bad experience caused by one of the factors discussed can cause children to a negative opinion of given help-seeking or decide reject key results (summarized in Figure <ref type="figure" target="#fig_3">4</ref>) indicate that chilstruggle with effectively utilizing common online and help-seeking resources, such as tutorials, web and community forums, which could potentially supthem in independently learning 3D design software.</p><p>Below, we contextualize our key findings in terms of existing and empirical results on children's help-seeking beand discuss our study's new insights into how children help and learn software for recreational and creative use. discuss several directions for future work to explore the design of next-generation help and learning systems for children using 3D design software and beyond.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Larger Context of Children's Help-Seeking Behaviors</head><p>One of the key challenges that children faced with tutorials was that they tended to overestimate their understanding of the intent of individual tutorial steps, causing them to overlook actions, or in the case of video tutorials, watch a large amount of tutorial content and then attempt to switch back to application to try and carry it all out. They rarely asked in such situations, even when they were visibly stuck. This be explained by results from past research that suggest a learner must engage in higher-order metacognitive functions in recognizing the difficulty of completing the task and monitoring task progress before the need for help can be as- <ref type="bibr" target="#b31">[32,</ref><ref type="bibr" target="#b59">57]</ref>. As children's meta-cognitive abilities are still development, they can struggle in monitoring and reflecting on their performance, and their need to seek help <ref type="bibr" target="#b9">[10]</ref>. children were prompted to search for help, some of their were similar to issues known to be faced by adults trying to describe software problems (e.g., formulating queries appropriate vocabulary [31]). However, such issues appeared to be more acute for children. For example, we found search features such as query suggest and autocorrect could mislead children or become a source of distraction, previous findings on children's struggles with information-seeking in other contexts <ref type="bibr" target="#b18">[19,</ref><ref type="bibr" target="#b19">20]</ref>. In instances children did locate a relevant help resource, we found they faced challenges with evaluating the usefulness of the resource, and with putting the found knowledge into practice. key observation of children's help-seeking behaviors was their quick formation of negative opinions of help reor tendency to reject them entirely in response to an help-seeking experience. This behavior is conwith other studies of help-seeking where children ignore do not make effective use of on-demand help in classrooms [67] and integrated learning environments <ref type="bibr" target="#b2">[3]</ref>. This behavior is consistent with more theoretical explanations on how chilmay avoid seeking help due to the additional cognitive load it imposes (i.e., they find it difficult to simultaneously work on an unfamiliar task and engage in help-seeking [71]).</p><p>the help-seeking challenges our study uncovered, future should investigate the extent to which help-seeking with age, particularly in recreational and individual use of feature-rich software.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Design Implications</head><p>research projects have been undertaken to make 3D more accessible to children, through novel interfaces 3D modeling, or new interactions with 3D environments <ref type="bibr">[29,</ref><ref type="bibr" target="#b43">43,</ref><ref type="bibr">51]</ref>). Our study complements this work, identifying additional opportunities to support children learning 3D design software by rethinking the design of help and learning Furthermore, many of our results are likely generalto children's interactions with software beyond 3D We discuss several of these opportunities below.</p><p>and Integrated Tutorials that children's challenges with help and learning resources be related to higher-order metacognitive functions, it would be valuable to investigate systems that help develop these metacognitive abilities, or that stand-in for them they are developing. For example, an integrated tutorial system could provide feedback steps the user has completed in a tutorial, helping the user to reflect on their progress. This approach could address the tendency for the children to to perform multiple tutorial steps together, to skip steps, and to overlook instructions within a given step. Along lines, reactive tutorial systems that enforce pacing, as the Pause-and-Play video tutorial system [61], could beneficial, as could tutorials that only reveal the next step the previous step has been completed. More broadly, tutorial systems could be developed that model the learner's knowledge, and generate or adapt tutorial accordingly-an approach that has been investigated in the programming domain <ref type="bibr">[36]</ref>. For 3D design, this by identifying specific skill deficits (e.g., in 3D navor Boolean operations) and providing tasks designed to practice or improve these skills.</p><p>One potentially valuable application of this approach be to encourage best practices. We observed that children often imitate practices they viewed in tutorials, even if did not always understand the intent of the practice.</p><p>not following best-practices was a source of diffifor participants. Adaptive tutorial systems <ref type="bibr" target="#b26">[26]</ref> could be to recognize when a user is not following best practices (e.g., an extended period of not moving the camera in 3D design software, or not checking for compile errors in programming tasks), and dynamically insert steps that prompt the learner to perform these actions. Likewise, the tutorial system could hide or de-emphasize such instructions once a learner has that they have acquired the relevant skill.</p><p>A similar could be applied to the challenge unfamiliar vocabulary and terminology, which we observed in study, and which is likely occur in other complex software domains as well. user's knowledge of domainspecific terminology could be modelled by the system, and tutorial content could be dynamically adapted to show or hide supplementary help and explanations of key terms.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Social Help-seeking Individual Learning Settings</head><p>Given the enthusiasm we observed among children engaging in social help-seeking and learning during group workshops, it would be interesting to try and recreate these for children learning in settings, potentially by connecting individual learners with a broader community of users. However, our one-on-one study indicated that children had difficulty establishing trust in online help resources or accessing information from forums. Thus, any communitybased help system for children should be developed with for establishing trust a primary design goal.</p><p>The 63] has had impressive success with connecting children with each other when learning proand best practices from that project may be to the 3D design domain as well.</p><p>Improving Search Systems for Finding Help language search has proven to be challenging for in a range of contexts <ref type="bibr" target="#b18">[19,</ref><ref type="bibr" target="#b19">20,</ref><ref type="bibr" target="#b33">34,</ref><ref type="bibr" target="#b38">38]</ref>, and our confirm that it is a challenge for children seeking help as well. To address these challenges, a range search systems have been developed to help children queries (e.g., visual query formulation systems 65]), which may be able to be applied to help children queries when seeking help with 3D design or other software. Automatic query expansion <ref type="bibr" target="#b13">[14,</ref><ref type="bibr" target="#b15">16]</ref> is approach that could be applied to this challenge.</p><p>Beyond formulating queries, a key challenge faced by the children in our study was recognizing that they had found relevant and successfully applying the found information. Thus, it may be valuable to explore systems that could assist children evaluating relevant help and learning materials. For exama system that integrates the user's web browser with the design application being used could help them evaluate the of resources in the context of the document being on in the application. Similar ideas have been explored in past work <ref type="bibr" target="#b22">[23,</ref><ref type="bibr" target="#b29">30]</ref>, but we are unaware of this idea being to children or the 3D design software domain.</p><p>One caution with the above is that the children who particiin our study did not use search tools to seek help unless prompted, and typically had little or no prior experience using web as a source of technical help. Unlike adults <ref type="bibr" target="#b4">[5,</ref><ref type="bibr" target="#b8">9,</ref><ref type="bibr" target="#b71">66]</ref>, in our study did not perceive search as a fruitful medium for seeking troubleshooting or learning help. This may a need for systems that explicitly introduce and teach skills, or suggest search as a strategy to the user (e.g., by detecting that the user is struggling). Another potential apis to monitor use of the application, and automatically help and learning resources to the user as they work. idea has been explored in prior work targeted at profesusers of 3D design software <ref type="bibr" target="#b57">[55]</ref>, but may be more effective for children who are used to receiving ambient help instruction from teachers, parents, and caregivers.</p><p>Limitations sampling methods may have introduced bias by overfrom specific communities, or children of parents are interested in technology. It is also possible that we recruited participants with low intrinsic motivation to learn 3D and this impacted their help-seeking effectiveness work has provided some evidence for a connection bemotivation and help-seeking effectiveness in children However, in our observations participants were eager to the study tasks, and we do not believe that motivaalone can explain all the challenges we observed.</p><p>Beyond issues of sampling, running studies with children is and the presence of the researcher may have influenced their behavior, as may have the lab setting in which the were carried out, and the specific design of our study. Finally, while we made our best efforts to construct tutorials of those found online for 3D design tools, we only tested tutorials for one application. 3D design tools are increasingly being used by non-professional users, including children, hobbyists, and casual makers, is a need to refine and update our understanding of how design software help and learning tools to accommodate new user populations. This paper provides a first step toestablishing a better understanding of children's learning help-seeking behaviors with 3D design software, and we that our findings can serve as a foundation for develnext-generation help and learning systems to enable to learn and improve 3D design skills.</p><p>This work was supported by a Mitacs Accelerate grant.</p></div><figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_0"><head>Figure 1 .</head><label>1</label><figDesc>Figure 1. Screenshot of the Tinkercad user interface, showing several models used by workshop instructors</figDesc><graphic url="image-1.png" coords="3,321.60,63.42,230.46,109.62" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_1"><head>Figure 2 .</head><label>2</label><figDesc>Figure 2. (a) text-and-images tutorial, (b) video tutorial, (c) in-application tutorial, (d) boat model, (e) toy car model.</figDesc><graphic coords="5,320.10,63.78,239.34,252.48" type="vector_box" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_2"><head>3 .</head><label>3</label><figDesc>Summary of outcomes for help-seeking instances.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_3"><head>4 .</head><label>4</label><figDesc>Summary of the key challenges faced by children 3D design, based on our study observations.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_0"><head>Text/Image Video In-app. Total</head><label></label><figDesc></figDesc><table><row><cell>Overlooking instructions or details of a step</cell><cell>4/5</cell><cell>2/5</cell><cell>2/5</cell><cell>8/15</cell></row><row><cell>Locating referenced user interface elements</cell><cell>2/5</cell><cell>1/5</cell><cell>4/5</cell><cell>7/15</cell></row><row><cell>Not moving the camera</cell><cell>1/5</cell><cell>2/5</cell><cell>4/5</cell><cell>7/15</cell></row><row><cell>Attempting to perform multiple steps together</cell><cell>0/5</cell><cell>3/5</cell><cell>0/5</cell><cell>3/15</cell></row><row><cell>Ignoring written instruc-tions altogether</cell><cell>1/5</cell><cell>N/A</cell><cell>2/5</cell><cell>3/10</cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_1"><head>Table 1 . Common challenges observed for the three tutorial types, and the number of participants that exhibited each.</head><label>1</label><figDesc></figDesc><table /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_2"><head>Most common types of help requested. CHI CHI 2018, April 21-26, 2018, Montréal, QC, Canada Paper 257</head><label></label><figDesc></figDesc><table><row><cell>Type</cell><cell>Count</cell></row><row><cell>Procedural Help (e.g., do I do this…)</cell><cell>67 (57%)</cell></row><row><cell>Determine Possibilities (e.g., I do this…)</cell><cell>29 (25%)</cell></row><row><cell>Locate in Interface (e.g., Where is this…)</cell><cell>17 (14%)</cell></row><row><cell>(e.g., What does this mean…)</cell><cell>5 (4%)</cell></row><row><cell>2.</cell><cell></cell></row></table></figure>
+		</body>
+		<back>
+			<div type="annex">
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Data Analysis</head></div>			</div>
+			<div type="references">
+
+				<listBibl>
+
+<biblStruct xml:id="b0">
+	<monogr>
+		<author>
+			<persName><forename type="first">Houman</forename><surname>Alborzi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Allison</forename><surname>Druin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jaime</forename><surname>Montemayor</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Michele</forename><surname>Platner</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jessica</forename><surname>Porteous</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Lisa</forename><surname>Sherman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Angela</forename><surname>Boltman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jack</forename><surname>Best</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Joe</forename><surname>Hammer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Alex</forename><surname>Kruskal</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Abby</forename><surname>Lal</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Thomas</forename><surname>Plaisant Lauren</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Rebecca</forename><surname>Sumida</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Wagner</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/347642.347673</idno>
+		<ptr target="https://doi.org/10.1145/347642.347673" />
+		<title level="m">Hendler. Designing StoryRooms: Interactive Storytelling Spaces for In Proceedings of the Conference on Designing Interactive Systems: Processes, Practices, Methods, and Techniques</title>
+				<imprint>
+			<biblScope unit="page" from="95" to="104" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b1">
+	<analytic>
+		<title level="a" type="main">Toward Meta-cognitive Tutoring: A of Help Seeking with a Cognitive Tutor</title>
+		<author>
+			<persName><forename type="first">Ido</forename><surname>Vincent Bruce Mclaren</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kenneth</forename><surname>Roll</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Koedinger</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Int. J. Artif. Intell. Ed</title>
+		<imprint>
+			<biblScope unit="volume">16</biblScope>
+			<biblScope unit="page" from="101" to="128" />
+			<date type="published" when="2006">2006</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b2">
+	<analytic>
+		<title level="a" type="main">Help Seeking and Help Design in Interactive Learning Environments</title>
+		<author>
+			<persName><forename type="first">Elmar</forename><surname>Vincent Aleven</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Silke</forename><surname>Stahl</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Frank</forename><surname>Schworm</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Raven</forename><surname>Wallace</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Review of Educational Research</title>
+		<imprint>
+			<biblScope unit="volume">73</biblScope>
+			<biblScope unit="page" from="277" to="320" />
+			<date type="published" when="2003">2003</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b3">
+	<monogr>
+		<title level="m" type="main">Tinkercad | Create 3D digital designs with CAD. Tinkercad</title>
+		<author>
+			<persName><surname>Autodesk</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2017-07-28">July 28. 2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b4">
+	<analytic>
+		<title level="a" type="main">Field studies of computer system administrators: analysis of system management tools and practices</title>
+		<author>
+			<persName><forename type="first">Rob</forename><surname>Barrett</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Eser</forename><surname>Kandogan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Paul</forename><forename type="middle">P</forename><surname>Maglio</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Eben</forename><forename type="middle">M A</forename><surname>Leila</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Madhu</forename><surname>Takayama</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Prabaker</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2004 ACM conference on Computer supported cooperative work</title>
+				<meeting>the 2004 ACM conference on Computer supported cooperative work</meeting>
+		<imprint>
+			<date type="published" when="2004">2004</date>
+			<biblScope unit="page" from="388" to="395" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b5">
+	<monogr>
+		<title level="m" type="main">Developing Person Through the Life Span</title>
+		<author>
+			<persName><forename type="first">Kathleen Stassen</forename><surname>Berger</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2007">2007</date>
+			<publisher>Worth Publishers</publisher>
+			<pubPlace>New York</pubPlace>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b6">
+	<analytic>
+		<title level="a" type="main">Children&apos;s use of the Yahooligans! Web search engine: I. Cognitive, physical, and affective behaviors on fact-based search tasks</title>
+		<author>
+			<persName><forename type="first">Dania</forename><surname>Bilal</surname></persName>
+		</author>
+		<idno type="DOI">10.1002/(SICI)1097-</idno>
+		<ptr target="https://doi.org/10.1002/(SICI)1097-" />
+	</analytic>
+	<monogr>
+		<title level="j">Journal the American Society for Information Science</title>
+		<imprint>
+			<biblScope unit="volume">7</biblScope>
+			<date type="published" when="2000">2000</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b7">
+	<monogr>
+		<title level="m" type="main">Digital fabrication and &apos;making&apos; in education: The democratization of invention. FabLabs: Of machines</title>
+		<author>
+			<persName><forename type="first">Paulo</forename><surname>Blikstein</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2013">2013</date>
+			<biblScope unit="page" from="1" to="21" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b8">
+	<analytic>
+		<title level="a" type="main">Two studies of opportunistic programming: interleaving web foraging, learning, and writing code</title>
+		<author>
+			<persName><forename type="first">Joel</forename><surname>Brandt</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Philip</forename><forename type="middle">J</forename><surname>Guo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Joel</forename><surname>Lewenstein</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mira</forename><surname>Dontcheva</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Scott</forename><forename type="middle">R</forename><surname>Klemmer</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the SIGCHI Conference on Human Factors in Systems</title>
+				<meeting>the SIGCHI Conference on Human Factors in Systems</meeting>
+		<imprint>
+			<date type="published" when="2009">2009</date>
+			<biblScope unit="page" from="1589" to="1598" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b9">
+	<analytic>
+		<title level="a" type="main">Learning, and understanding</title>
+		<author>
+			<persName><forename type="first">Ann</forename><forename type="middle">L</forename><surname>Brown</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">John</forename><forename type="middle">D</forename><surname>Bransford</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Roberta</forename><forename type="middle">A</forename><surname>Ferrara</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Joseph</forename><forename type="middle">C</forename><surname>Campione</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Handbook of Child Psychology, Mussen</title>
+				<imprint>
+			<publisher>Wiley</publisher>
+			<date type="published" when="1983">1983</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b10">
+	<monogr>
+		<title/>
+		<author>
+			<persName><forename type="first">Amy</forename><surname>Bruckman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Alisa</forename><surname>Bandlow</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Andrea</forename></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2002">2002</date>
+		</imprint>
+	</monogr>
+	<note>for kids</note>
+</biblStruct>
+
+<biblStruct xml:id="b11">
+	<analytic>
+		<title level="a" type="main">ABC and 3D: opportunities and obstacles to 3D printing in special education environments</title>
+		<author>
+			<persName><forename type="first">Erin</forename><surname>Buehler</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Shaun</forename><forename type="middle">K</forename><surname>Kane</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Amy</forename><surname>Hurst</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of 16th ACM Conference on Computers &amp; Accessibility</title>
+				<meeting>16th ACM Conference on Computers &amp; Accessibility</meeting>
+		<imprint>
+			<date type="published" when="2014">2014</date>
+			<biblScope unit="page" from="107" to="114" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b12">
+	<analytic>
+		<title level="a" type="main">Translating preschoolers&apos; game into design guidelines via a laddering study</title>
+		<author>
+			<persName><forename type="first">Véronique</forename><surname>Celis</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jelle</forename><surname>Husson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Leen</forename><surname>Vero Vanden Abeele</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">;</forename><surname>Loyez</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Luc</forename><surname>Geurts</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 12th International Conference on Interaction Design and Children</title>
+				<meeting>the 12th International Conference on Interaction Design and Children</meeting>
+		<imprint>
+			<date type="published" when="2013-01">Jan Wouters,. 2013</date>
+			<biblScope unit="page">156</biblScope>
+		</imprint>
+	</monogr>
+	<note>Lieven Van den Audenaeren, Pol Ghesquière, Ann Goeleven</note>
+</biblStruct>
+
+<biblStruct xml:id="b13">
+	<analytic>
+		<title level="a" type="main">Personalized query expansion for the web</title>
+		<author>
+			<persName><forename type="first">Paul-Alexandru</forename><surname>Chirita</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Claudiu</forename><forename type="middle">S</forename><surname>Firan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Wolfgang</forename><surname>Nejdl</surname></persName>
+		</author>
+		<ptr target="http://dl.acm.org/citation.cfm?id=1277746" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 30th annual international ACM SIGIR conference on Research and retrieval</title>
+				<meeting>the 30th annual international ACM SIGIR conference on Research and retrieval</meeting>
+		<imprint>
+			<date type="published" when="2007">2007</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b14">
+	<monogr>
+		<author>
+			<persName><forename type="first">Juliet</forename><surname>Corbin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Anselm</forename><surname>Strauss</surname></persName>
+		</author>
+		<title level="m">Basics of Qualitative Research: Techniques and Procedures for Developing Grounded Theory</title>
+				<imprint>
+			<publisher>Sage Publications, Inc</publisher>
+			<date type="published" when="2007">2007</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b15">
+	<analytic>
+		<title level="a" type="main">Probabilistic query expansion using query logs</title>
+		<author>
+			<persName><forename type="first">Hang</forename><surname>Cui</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Wei-Ying</forename><surname>Nie</surname></persName>
+		</author>
+		<ptr target="http://dl.acm.org/citation.cfm?id=511489" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 11th international conference on World Wide Web</title>
+				<meeting>the 11th international conference on World Wide Web</meeting>
+		<imprint>
+			<date type="published" when="2002">2002</date>
+			<biblScope unit="page" from="325" to="332" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b16">
+	<monogr>
+		<title level="m" type="main">The Maker Mindset. In Design, play: Growing the next generation of STEM innovators</title>
+		<author>
+			<persName><forename type="first">Dale</forename><surname>Dougherty</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2013">2013</date>
+			<publisher>Margaret Honey and David E. Kanter Routledge</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b17">
+	<monogr>
+		<title level="m" type="main">The Design of Children&apos;s</title>
+		<author>
+			<persName><forename type="first">Allison</forename><surname>Druin</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="1998">1998</date>
+			<publisher>Kaufmann Publishers Inc</publisher>
+			<pubPlace>San Francisco, CA, USA</pubPlace>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b18">
+	<analytic>
+		<title level="a" type="main">How children search the internet with keyword interfaces</title>
+		<author>
+			<persName><forename type="first">Allison</forename><surname>Druin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Elizabeth</forename><surname>Foss</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Leshell</forename><surname>Hatley</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Evan</forename><surname>Golub</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mona</forename><forename type="middle">Leigh</forename><surname>Guha</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jerry</forename><surname>Fails</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Hilary</forename></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 8th conference on interaction design and children</title>
+				<meeting>the 8th conference on interaction design and children</meeting>
+		<imprint>
+			<date type="published" when="2009">2009</date>
+			<biblScope unit="page" from="89" to="96" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b19">
+	<analytic>
+		<title level="a" type="main">Children&apos;s roles using keyword search interfaces at home</title>
+		<author>
+			<persName><forename type="first">Allison</forename><surname>Druin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Elizabeth</forename><surname>Foss</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Hilary</forename><surname>Hutchinson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Evan</forename></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Leshell</forename><surname>Hatley</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the SIGCHI Conference on Human Factors in Computing Systems</title>
+				<meeting>the SIGCHI Conference on Human Factors in Computing Systems</meeting>
+		<imprint>
+			<date type="published" when="2010">2010</date>
+			<biblScope unit="page" from="413" to="422" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b20">
+	<analytic>
+		<title level="a" type="main">What and how children search on the web</title>
+		<author>
+			<persName><forename type="first">Sergio</forename><forename type="middle">Duarte</forename><surname>Torres</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ingmar</forename><surname>Weber</surname></persName>
+		</author>
+		<ptr target="http://dl.acm.org/citation.cfm?id=2063638" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of 20th ACM international conference on Information and knowledge management</title>
+				<meeting>20th ACM international conference on Information and knowledge management</meeting>
+		<imprint>
+			<date type="published" when="2011">2011</date>
+			<biblScope unit="page" from="393" to="402" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b21">
+	<analytic>
+		<title level="a" type="main">3D printing for children: What build next?</title>
+		<author>
+			<persName><forename type="first">Michael</forename><surname>Eisenberg</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">International Journal of Child-Interaction</title>
+		<imprint>
+			<biblScope unit="volume">1</biblScope>
+			<biblScope unit="page" from="7" to="13" />
+			<date type="published" when="2013">2013</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b22">
+	<monogr>
+		<title level="m" type="main">Searching for learning resources using application context</title>
+		<author>
+			<persName><forename type="first">Michael</forename><surname>Ekstrand</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Wei</forename><surname>Li</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Tovi</forename><surname>Grossman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Justin</forename><surname>Matejka</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">George</forename><surname>Fitzmaurice</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2011">2011</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b23">
+	<monogr>
+		<idno type="DOI">10.1145/2047196.2047220</idno>
+		<ptr target="https://doi.org/10.1145/2047196.2047220" />
+		<title level="m">Proceedings of the 24th annual ACM symposium on User interface software and technology (UIST &apos;11)</title>
+				<meeting>the 24th annual ACM symposium on User interface software and technology (UIST &apos;11)</meeting>
+		<imprint>
+			<biblScope unit="page" from="195" to="204" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b24">
+	<monogr>
+		<title level="m" type="main">space for children and teens libraries and public places</title>
+		<author>
+			<persName><forename type="first">Sandra</forename><surname>Feinberg</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">James</forename><forename type="middle">Robert</forename><surname>Keller</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2010">2010</date>
+			<publisher>American Library Association</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b25">
+	<analytic>
+		<title level="a" type="main">Designing programming as joint performances among groups of children</title>
+		<author>
+			<persName><forename type="first">Ylva</forename><surname>Fernaeus</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jakob</forename></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Interacting with Computers</title>
+		<imprint>
+			<biblScope unit="volume">18</biblScope>
+			<biblScope unit="page" from="1012" to="1031" />
+			<date type="published" when="2006">2006</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b26">
+	<analytic>
+		<title level="a" type="main">Sketch-sketch revolution: an engaging tutorial system guided sketching and application learning</title>
+		<author>
+			<persName><forename type="first">Jennifer</forename><surname>Fernquist</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Tovi</forename><surname>Grossman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">George</forename><surname>Fitzmaurice</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 24th annual symposium on User interface software and technology</title>
+				<meeting>the 24th annual symposium on User interface software and technology</meeting>
+		<imprint>
+			<date type="published" when="2011">2011</date>
+			<biblScope unit="page" from="373" to="382" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b27">
+	<analytic>
+		<title level="a" type="main">children&apos;s designs for maker technologies</title>
+		<author>
+			<persName><forename type="first">Daniel</forename><surname>Fitton</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Janet</forename><forename type="middle">C</forename><surname>Read</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">John</forename><surname>Dempsey</surname></persName>
+		</author>
+		<ptr target="http://dl.acm.org/citation.cfm?id=2771921" />
+	</analytic>
+	<monogr>
+		<title level="m">of the 14th International Conference on Interaction Design and Children</title>
+				<imprint>
+			<date type="published" when="2015">2015</date>
+			<biblScope unit="page" from="379" to="382" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b28">
+	<analytic>
+		<title level="a" type="main">Designing ScratchJr: support early childhood learning through computer</title>
+		<author>
+			<persName><forename type="first">Louise</forename><forename type="middle">P</forename><surname>Flannery</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Brian</forename><surname>Elizabeth</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Kazakoff</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Marina</forename><forename type="middle">Umaschi</forename><surname>Bers</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Paula</forename><surname>Bontá</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mitchel</forename><surname>Resnick</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">;</forename></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sean</forename><surname>Follmer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Hiroshi</forename><surname>Ishii</surname></persName>
+		</author>
+		<ptr target="http://dl.acm.org/citation.cfm?id=2208403" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 12th International Conference on Interaction Design and Children</title>
+				<meeting>the 12th International Conference on Interaction Design and Children</meeting>
+		<imprint>
+			<date type="published" when="2012">2013. 2012</date>
+		</imprint>
+	</monogr>
+	<note>of the SIGCHI Conference on Human in Computing Systems</note>
+</biblStruct>
+
+<biblStruct xml:id="b29">
+	<analytic>
+		<title level="a" type="main">InterTwine: Creating interapplication information scent to support coordinated use of software</title>
+		<author>
+			<persName><forename type="first">Adam</forename><surname>Fourney</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ben</forename><surname>Lafreniere</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Parmit</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Terry</forename><surname>Chilana</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">of the 27th ACM Symposium on User Interface Software and Technology (UIST &apos;14)</title>
+				<imprint>
+			<date type="published" when="2014">2014</date>
+			<biblScope unit="page" from="429" to="438" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b30">
+	<analytic>
+		<title level="a" type="main">The Vocabulary Problem in Human-Communication</title>
+		<author>
+			<persName><forename type="first">G</forename><forename type="middle">W</forename><surname>Furnas</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><forename type="middle">K</forename><surname>Landauer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><forename type="middle">M</forename><surname>Gomez</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">T</forename></persName>
+		</author>
+		<idno type="DOI">10.1145/32206.32212</idno>
+		<ptr target="https://doi.org/10.1145/32206.32212" />
+	</analytic>
+	<monogr>
+		<title level="j">Commun. ACM</title>
+		<imprint>
+			<biblScope unit="volume">30</biblScope>
+			<biblScope unit="page">964</biblScope>
+			<date type="published" when="1987">1987</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b31">
+	<analytic>
+		<title level="a" type="main">Help-seeking: An problem-solving skill in children</title>
+		<author>
+			<persName><forename type="first">Sharon Nelson-Le</forename><surname>Gall</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Developmental Review</title>
+		<imprint>
+			<biblScope unit="volume">1</biblScope>
+			<biblScope unit="page" from="224" to="246" />
+			<date type="published" when="1981">1981</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b32">
+	<analytic>
+		<author>
+			<persName><forename type="first">Sharon Nelson-Le</forename><surname>Gall</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Help-Seeking Behavior in Learning</title>
+				<imprint>
+			<date type="published" when="1985">1985</date>
+			<biblScope unit="volume">2</biblScope>
+			<biblScope unit="page" from="55" to="90" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b33">
+	<analytic>
+		<title level="a" type="main">A comparative study about and adults&apos; perception of targeted web engines</title>
+		<author>
+			<persName><forename type="first">Tatiana</forename><surname>Gossen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Juliane</forename><surname>Höbel</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Andreas</forename></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the SIGCHI Conference on Human Factors in Computing Systems</title>
+				<meeting>the SIGCHI Conference on Human Factors in Computing Systems</meeting>
+		<imprint>
+			<date type="published" when="2014">2014</date>
+			<biblScope unit="page" from="1821" to="1824" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b34">
+	<analytic>
+		<title level="a" type="main">A Survey of Software Learnability: Metrics, and Guidelines</title>
+		<author>
+			<persName><forename type="first">Tovi</forename><surname>Grossman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">George</forename><surname>Fitzmaurice</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ramtin</forename><surname>Attar</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the SIGCHI Conference on Human Factors in Computing (CHI &apos;09</title>
+				<meeting>the SIGCHI Conference on Human Factors in Computing (CHI &apos;09</meeting>
+		<imprint>
+			<biblScope unit="page" from="649" to="658" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b35">
+	<analytic>
+		<title level="a" type="main">Automatically Generating Tutorials to Enable Middle School Children to Learn Programming Independently</title>
+		<author>
+			<persName><forename type="first">Kyle</forename><forename type="middle">J</forename><surname>Harms</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Dennis</forename><surname>Cosgrove</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Shannon</forename><surname>Gray</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Caitlin</forename><surname>Kelleher</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 12th International Conference on Interaction Design Children (IDC &apos;13)</title>
+				<meeting>the 12th International Conference on Interaction Design Children (IDC &apos;13)</meeting>
+		<imprint>
+			<date type="published" when="2013">2013</date>
+			<biblScope unit="page" from="11" to="19" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b36">
+	<analytic>
+		<title level="a" type="main">Classroom makerspaces: Identifying the opportunities and challenges</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Hira</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><forename type="middle">H</forename><surname>Joslyn</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">M</forename><surname>Hynes</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">IEEE Frontiers in Education (FIE) Proceedings</title>
+				<imprint>
+			<date type="published" when="2014">2014</date>
+			<biblScope unit="page" from="1" to="5" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b37">
+	<monogr>
+		<title/>
+		<idno type="DOI">10.1109/FIE.2014.7044263</idno>
+		<ptr target="https://doi.org/10.1109/FIE.2014.7044263" />
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b38">
+	<analytic>
+		<title level="a" type="main">Children&apos;s relevance criteria information seeking electronic resources</title>
+		<author>
+			<persName><forename type="first">Sandra</forename><forename type="middle">G</forename><surname>Hirsh</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Information Science and Technology</title>
+		<imprint>
+			<biblScope unit="volume">50</biblScope>
+			<biblScope unit="page">1265</biblScope>
+			<date type="published" when="1999">1999</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b39">
+	<monogr>
+		<title level="m" type="main">Child-Computer Interaction</title>
+		<author>
+			<persName><forename type="first">Juan</forename><surname>Pablo Hourcade</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2015">2015</date>
+			<publisher>CreateSpace Independent Publishing Platform</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b40">
+	<analytic>
+		<title level="a" type="main">Building KidPad: an application for children&apos;s collaborative storytelling</title>
+		<author>
+			<persName><forename type="first">Juan</forename><forename type="middle">Pablo</forename><surname>Hourcade</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Benjamin</forename><forename type="middle">B</forename><surname>Bederson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Allison</forename><surname>Druin</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Practice and Experience</title>
+		<imprint>
+			<biblScope unit="volume">34</biblScope>
+			<biblScope unit="issue">9</biblScope>
+			<biblScope unit="page" from="895" to="914" />
+			<date type="published" when="2004">2004</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b41">
+	<analytic>
+		<title level="a" type="main">Understanding Newcomers to 3D Motivations, Workflows, and Barriers of Makers</title>
+		<author>
+			<persName><forename type="first">Nathaniel</forename><surname>Hudson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Celena</forename><surname>Alcock</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Parmit</forename><forename type="middle">K</forename></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the SIGCHI Conference on Human Factors in Computing Systems</title>
+				<meeting>the SIGCHI Conference on Human Factors in Computing Systems</meeting>
+		<imprint>
+			<date type="published" when="2016">2016</date>
+			<biblScope unit="page" from="384" to="396" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b42">
+	<analytic>
+		<title level="a" type="main">Making making</title>
+		<author>
+			<persName><forename type="first">Amy</forename><surname>Hurst</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Shaun</forename><surname>Kane</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">of the 12th International Conference on Interaction Design and Children</title>
+				<imprint>
+			<date type="published" when="2013">2013</date>
+			<biblScope unit="page">638</biblScope>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b43">
+	<monogr>
+		<title level="m" type="main">Teddy: A Sketching Interface for 3D</title>
+		<author>
+			<persName><forename type="first">Takeo</forename><surname>Igarashi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Satoshi</forename><surname>Matsuoka</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Hidehiko</forename></persName>
+		</author>
+		<imprint>
+			<date type="published" when="1999">1999</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b44">
+	<monogr>
+		<author>
+			<persName><forename type="first">Freeform</forename><surname>Design</surname></persName>
+		</author>
+		<title level="m">of the 26th Annual on Computer Graphics and Interactive (SIGGRAPH &apos;99)</title>
+				<imprint>
+			<biblScope unit="page" from="409" to="416" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b45">
+	<analytic>
+		<title level="a" type="main">Collaboration by choice: Youth online creative collabs in Scratch</title>
+		<author>
+			<persName><forename type="first">Yasmin</forename><surname>Kafai</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ricarose</forename><surname>Roque</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Deborah</forename><surname>Fields</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Andres</forename><surname>Monroy-Hernandez</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 19th International Conference on in Education</title>
+				<meeting>the 19th International Conference on in Education</meeting>
+		<imprint>
+			<date type="published" when="2011">2011</date>
+			<biblScope unit="page" from="189" to="193" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b46">
+	<analytic>
+		<title level="a" type="main">Supporting sociable literacy in the international children&apos;s digital library</title>
+		<author>
+			<persName><forename type="first">Nancy</forename><surname>Kaplan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yoram</forename><surname>Chisik</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kendra</forename><surname>Knudtzon</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Rahul</forename><surname>Kulkarni</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Stuart</forename><surname>Moulthrop</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2004 conference on Interaction design and children: building a community</title>
+				<meeting>the 2004 conference on Interaction design and children: building a community<address><addrLine>Kathryn Summers, Holly Weeks</addrLine></address></meeting>
+		<imprint>
+			<date type="published" when="2004">2004</date>
+			<biblScope unit="page" from="89" to="96" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b47">
+	<analytic>
+		<title level="a" type="main">Stencilsbased tutorials: Design and evaluation</title>
+		<author>
+			<persName><forename type="first">Caitlin</forename><surname>Kelleher</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Randy</forename><surname>Pausch</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/1054972.1055047</idno>
+		<ptr target="https://doi.org/10.1145/1054972.1055047" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the SIGCHI Conference on Human Factors in Computing Systems (CHI &apos;05)</title>
+				<meeting>the SIGCHI Conference on Human Factors in Computing Systems (CHI &apos;05)</meeting>
+		<imprint>
+			<biblScope unit="page" from="541" to="550" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b48">
+	<analytic>
+		<title level="a" type="main">Storytelling alice motivates middle school learn programming</title>
+		<author>
+			<persName><forename type="first">Caitlin</forename><surname>Kelleher</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Randy</forename><surname>Pausch</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sara</forename><surname>Kiesler</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the SIGCHI Conference on Human Factors in Computing</title>
+				<meeting>the SIGCHI Conference on Human Factors in Computing</meeting>
+		<imprint>
+			<date type="published" when="2007">2007</date>
+			<biblScope unit="page" from="1455" to="1464" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b49">
+	<analytic>
+		<title level="a" type="main">the assistance dilemma in experiments with cognitive tutors</title>
+		<author>
+			<persName><forename type="first">R</forename><surname>Kenneth</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Koedinger</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Vincent Aleven</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Educational Psychology Review</title>
+		<imprint>
+			<biblScope unit="volume">3</biblScope>
+			<biblScope unit="page" from="239" to="264" />
+			<date type="published" when="2007">2007</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b50">
+	<analytic>
+		<title level="a" type="main">Task-centric interfaces for feature-rich software</title>
+		<author>
+			<persName><forename type="first">Benjamin</forename><surname>Lafreniere</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Andrea</forename><surname>Bunt</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Michael</forename><surname>Terry</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 26th Australian Computer-Interaction Conference (OZCHI &apos;14)</title>
+				<meeting>the 26th Australian Computer-Interaction Conference (OZCHI &apos;14)</meeting>
+		<imprint>
+			<date type="published" when="2014">2014</date>
+			<biblScope unit="page" from="49" to="58" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b51">
+	<analytic>
+		<title level="a" type="main">Community enhanced tutorials: tutorials with multiple demonstrations</title>
+		<author>
+			<persName><forename type="first">Benjamin</forename><surname>Lafreniere</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Tovi</forename><surname>Grossman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">George</forename></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">of the SIGCHI Conference on Human in Computing Systems (CHI &apos;13)</title>
+				<imprint>
+			<date type="published" when="2013">2013</date>
+			<biblScope unit="page" from="1779" to="1788" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b52">
+	<analytic>
+		<title level="a" type="main">The a child-friendly device for introductory threedesign</title>
+		<author>
+			<persName><forename type="first">Ben</forename><surname>Leduc</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">-</forename><surname>Mills</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Michael</forename><surname>Eisenberg</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 10th Conference on Interaction Design and Children</title>
+				<meeting>the 10th Conference on Interaction Design and Children</meeting>
+		<imprint>
+			<date type="published" when="2011">2011</date>
+			<biblScope unit="page" from="72" to="80" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b53">
+	<analytic>
+		<title level="a" type="main">Usability principles and best practices for the user interface design of complex 3D architectural design and engineering tools</title>
+		<author>
+			<persName><forename type="first">Ghang</forename><surname>Lee</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Charles</forename><forename type="middle">M</forename><surname>Eastman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Tarang</forename><surname>Taunk</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Chun-Heng</forename><surname>Ho</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">International Journal of Human-Computer Studies</title>
+		<imprint>
+			<biblScope unit="volume">1</biblScope>
+			<biblScope unit="issue">2</biblScope>
+			<biblScope unit="page" from="90" to="104" />
+			<date type="published" when="2010">2010</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b54">
+	<monogr>
+		<title/>
+		<idno type="DOI">10.1016/j.ijhcs.2009.10.001</idno>
+		<ptr target="https://doi.org/10.1016/j.ijhcs.2009.10.001" />
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b55">
+	<monogr>
+		<title level="m" type="main">Fabricated: The new world of 3D printing</title>
+		<author>
+			<persName><forename type="first">Hod</forename><surname>Lipson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Melba</forename><surname>Kurman</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2013">2013</date>
+			<publisher>John Wiley &amp; Sons</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b56">
+	<analytic>
+		<title level="a" type="main">IP-QAT: In-product Questions, Answers, &amp; Tips</title>
+		<author>
+			<persName><forename type="first">Justin</forename><surname>Matejka</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Tovi</forename><surname>Grossman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">George</forename><surname>Fitzmaurice</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2047196.2047218</idno>
+		<ptr target="https://doi.org/10.1145/2047196.2047218" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 24th Annual ACM Symposium on User Interface Software and Technology (UIST &apos;11)</title>
+				<meeting>the 24th Annual ACM Symposium on User Interface Software and Technology (UIST &apos;11)</meeting>
+		<imprint>
+			<biblScope unit="page" from="175" to="184" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b57">
+	<analytic>
+		<title level="a" type="main">Ambient help</title>
+		<author>
+			<persName><forename type="first">Justin</forename><surname>Matejka</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Tovi</forename><surname>Grossman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">George</forename><surname>Fitzmaurice</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/1978942.1979349</idno>
+		<ptr target="https://doi.org/10.1145/1978942.1979349" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of SIGCHI Conference on Factors in Computing Systems (CHI &apos;11)</title>
+				<meeting>SIGCHI Conference on Factors in Computing Systems (CHI &apos;11)</meeting>
+		<imprint>
+			<date type="published" when="2011">2011</date>
+			<biblScope unit="page" from="2751" to="2760" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b58">
+	<monogr>
+		<title level="m" type="main">MakerCart: mobile fab lab for the classroom</title>
+		<author>
+			<persName><forename type="first">Kylie</forename></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2013">2013</date>
+		</imprint>
+	</monogr>
+	<note>Position Paper at Conference (IDC</note>
+</biblStruct>
+
+<biblStruct xml:id="b59">
+	<analytic>
+		<title level="a" type="main">Children&apos;s self-assessment of performance and task-related help seeking</title>
+		<author>
+			<persName><forename type="first">S</forename></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Nelson-Le</forename><surname>Gall</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Kratzer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Jones</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Decooke</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Journal of Child Psychology</title>
+		<imprint>
+			<biblScope unit="volume">2</biblScope>
+			<biblScope unit="page" from="245" to="263" />
+			<date type="published" when="1990">1990</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b60">
+	<monogr>
+		<title level="m" type="main">Children&apos;s help-seeking in the classroom: The role of factors and attitudes</title>
+		<author>
+			<persName><forename type="first">Richard</forename><forename type="middle">S</forename><surname>Newman</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="1990">1990</date>
+			<biblScope unit="volume">82</biblScope>
+			<biblScope unit="page">71</biblScope>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b61">
+	<analytic>
+		<title level="a" type="main">Social influences on the development of children&apos;s adaptive help seeking: The role of parents, teachers, and peers</title>
+		<author>
+			<persName><forename type="first">S</forename><surname>Richard</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Newman</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Developmental review</title>
+		<imprint>
+			<biblScope unit="volume">20</biblScope>
+			<biblScope unit="page" from="350" to="404" />
+			<date type="published" when="2000">2000</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b62">
+	<analytic>
+		<title level="a" type="main">Brain points: a mindset incentive structure boosts persistence an educational game</title>
+		<author>
+			<persName><forename type="first">O'</forename><surname>Eleanor</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kyla</forename><surname>Rourke</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Christy</forename><surname>Haimovitz</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Dweck</forename><surname>Ballweber</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Zoran</forename><surname>Popović</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the Conference on Human Factors in Computing Systems</title>
+				<meeting>the Conference on Human Factors in Computing Systems</meeting>
+		<imprint>
+			<date type="published" when="2014">2014</date>
+			<biblScope unit="page" from="3339" to="3348" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b63">
+	<monogr>
+		<title/>
+		<author>
+			<persName><forename type="first">Suporn</forename><surname>Pongnumkul</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mira</forename><surname>Dontcheva</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Wilmot</forename><surname>Li</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jue</forename><forename type="middle">Lubomir</forename><surname>Bourdev</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Shai</forename><surname>Avidan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Michael</forename><forename type="middle">F</forename></persName>
+		</author>
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b64">
+	<analytic>
+		<title level="a" type="main">Pause-and-play: automatically linking screencast video tutorials with applications</title>
+		<author>
+			<persName><surname>Cohen</surname></persName>
+		</author>
+		<ptr target="http://dl.acm.org/citation.cfm?id=2047213" />
+	</analytic>
+	<monogr>
+		<title level="m">of the 24th annual ACM symposium on User interface software and technology</title>
+				<imprint>
+			<date type="published" when="2011">2011</date>
+			<biblScope unit="page" from="135" to="144" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b65">
+	<monogr>
+		<author>
+			<persName><forename type="first">Minna</forename><surname>Puustinen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jean-François</forename><surname>Rouet</surname></persName>
+		</author>
+		<title level="m">with new technologies: Help seeking and information searching revisited. &amp; Education</title>
+				<imprint>
+			<date type="published" when="2009">2009</date>
+			<biblScope unit="volume">53</biblScope>
+			<biblScope unit="page" from="1014" to="1019" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b66">
+	<monogr>
+		<title/>
+		<idno type="DOI">10.1016/j.compedu.2008.07.002</idno>
+		<ptr target="https://doi.org/10.1016/j.compedu.2008.07.002" />
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b67">
+	<analytic>
+		<title level="a" type="main">Scratch: programming for all</title>
+		<author>
+			<persName><forename type="first">Mitchel</forename><surname>Resnick</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">John</forename><surname>Maloney</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Andrés</forename><surname>Monroy-Natalie Rusk</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Evelyn</forename><surname>Eastmond</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Karen</forename><forename type="middle">Amon</forename><surname>Millner</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Eric</forename><surname>Rosenbaum</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jay</forename><surname>Silver</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Brian</forename><surname>Silverman</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Communications of the ACM</title>
+		<imprint>
+			<biblScope unit="volume">52</biblScope>
+			<biblScope unit="page" from="60" to="67" />
+			<date type="published" when="2009">2009</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b68">
+	<analytic>
+		<title level="a" type="main">Nobody reads documentation</title>
+		<author>
+			<persName><forename type="first">Marc</forename><surname>Rettig</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">ACM</title>
+		<imprint>
+			<biblScope unit="volume">34</biblScope>
+			<biblScope unit="page" from="19" to="24" />
+			<date type="published" when="1991">1991</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b69">
+	<monogr>
+		<title/>
+		<author>
+			<persName><forename type="first">Glenda</forename><surname>Revelle</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Allison</forename><surname>Druin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Michele</forename><surname>Platner</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ben</forename><forename type="middle">Juan</forename></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Pablo</forename><surname>Hourcade</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Lisa</forename><surname>Sherman</surname></persName>
+		</author>
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b70">
+	<analytic>
+		<title level="a" type="main">A visual search tool for early elementary science students</title>
+	</analytic>
+	<monogr>
+		<title level="j">Science Education and Technology</title>
+		<imprint>
+			<biblScope unit="volume">11</biblScope>
+			<biblScope unit="page" from="49" to="57" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b71">
+	<analytic>
+		<title level="a" type="main">A field study of exploratory strategies</title>
+		<author>
+			<persName><forename type="first">John</forename><surname>Rieman</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Transactions on Computer-Human Interaction (TOCHI)</title>
+		<imprint>
+			<biblScope unit="volume">3</biblScope>
+			<biblScope unit="page" from="189" to="218" />
+			<date type="published" when="1996">1996</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b72">
+	<monogr>
+		<title level="m" type="main">The role of motivation and attitudes in help seeking in math class</title>
+		<author>
+			<persName><forename type="first">Allison</forename><forename type="middle">M</forename><surname>Ryan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Paul</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Pintrich</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="1997">1997</date>
+			<biblScope unit="volume">89</biblScope>
+			<biblScope unit="page">329</biblScope>
+		</imprint>
+	</monogr>
+	<note>Should I for help. of educational psychology</note>
+</biblStruct>
+
+<biblStruct xml:id="b73">
+	<monogr>
+		<author>
+			<persName><forename type="first">Gina</forename><surname>Scala</surname></persName>
+		</author>
+		<title level="m">How 3D Printing Inspires 8th</title>
+				<imprint>
+			<date type="published" when="2016">2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b74">
+	<monogr>
+		<title level="m">Graders to Explore STEM Careers. Stratasys Blog</title>
+				<imprint>
+			<date type="published" when="2016-09-21">September 21. 2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b75">
+	<monogr>
+		<title level="m" type="main">The challenge of audience A developmental model for educational game engagement. New directions for child and adolescent development</title>
+		<author>
+			<persName><forename type="first">John</forename><forename type="middle">L</forename><surname>Sherry</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2013">2013. 2013</date>
+			<biblScope unit="volume">139</biblScope>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b76">
+	<analytic>
+		<title level="a" type="main">3D Printing Marginalized Children-An Exploration in a Palestinian Refugee Camp</title>
+		<author>
+			<persName><forename type="first">Oliver</forename><surname>Stickel</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Dominik</forename><surname>Hornung</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Konstantin</forename><surname>Aal</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Markus</forename><surname>Rohde</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Volker</forename><surname>Wulf</surname></persName>
+		</author>
+		<idno type="DOI">10.1207/s15516709cog1202_4</idno>
+		<ptr target="https://doi.org/10.1207/s15516709cog1202_4" />
+	</analytic>
+	<monogr>
+		<title level="m">ECSCW 2015: of the 14th Conference on Supported Cooperative Work</title>
+				<meeting><address><addrLine>Oslo, Norway</addrLine></address></meeting>
+		<imprint>
+			<date type="published" when="1988">2015. 2015. John Sweller. 1988</date>
+			<biblScope unit="volume">12</biblScope>
+			<biblScope unit="page" from="19" to="23" />
+		</imprint>
+	</monogr>
+	<note>Cognitive Load During Problem Solving: Effects on Learning</note>
+</biblStruct>
+
+<biblStruct xml:id="b77">
+	<monogr>
+		<title level="m" type="main">What Kids Can Teach Us About And The Future Of 3D Printing. Forbes</title>
+		<author>
+			<persName><forename type="first">Rosa</forename><surname>Trieu</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2014-09-21">2014. September 21. 2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b78">
+	<analytic>
+		<title level="a" type="main">The role of visually rich technology in facilitating children&apos;s writing</title>
+		<author>
+			<persName><forename type="first">John</forename><surname>Vincent</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Computer Assisted Learning</title>
+		<imprint>
+			<biblScope unit="volume">17</biblScope>
+			<biblScope unit="page" from="242" to="250" />
+			<date type="published" when="2001">2001</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b79">
+	<monogr>
+		<title level="m" type="main">Social Technical Factors Contributing to Successful 3D Animation Authoring by</title>
+		<author>
+			<persName><forename type="first">Mark</forename><surname>Ward</surname></persName>
+		</author>
+		<ptr target="https://smartech.gatech.edu/handle/1853/13120" />
+		<imprint>
+			<date type="published" when="2006">2015. September 21. 2006</date>
+			<pubPlace>Anne Marie Piper, and Amy S. Bruckman</pubPlace>
+		</imprint>
+	</monogr>
+	<note>How to turn your child into a video designer</note>
+</biblStruct>
+
+				</listBibl>
+			</div>
+		</back>
+	</text>
+</TEI>

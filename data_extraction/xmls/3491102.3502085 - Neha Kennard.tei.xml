@@ -1,0 +1,2889 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xml:space="preserve" xmlns="http://www.tei-c.org/ns/1.0" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.com/kermitt2/grobid/master/grobid-home/schemas/xsd/Grobid.xsd"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+	<teiHeader xml:lang="en">
+		<fileDesc>
+			<titleStmt>
+				<title level="a" type="main">Understanding Interactions for Smart Wheelchair Navigation in Crowds</title>
+			</titleStmt>
+			<publicationStmt>
+				<publisher/>
+				<availability status="unknown"><licence/></availability>
+			</publicationStmt>
+			<sourceDesc>
+				<biblStruct>
+					<analytic>
+						<author>
+							<persName><forename type="first">Bingqing</forename><surname>Zhang</surname></persName>
+							<email>bingqing.zhang.18@ucl.ac.uk</email>
+							<affiliation key="aff0">
+								<orgName type="institution">University College London University College London University College London London</orgName>
+								<address>
+									<settlement>London</settlement>
+									<country>United Kingdom, United Kingdom</country>
+								</address>
+							</affiliation>
+							<affiliation key="aff1">
+								<orgName type="institution">CHI &apos;22</orgName>
+								<address>
+									<addrLine>April 29-May 5</addrLine>
+									<postCode>2022</postCode>
+									<region>New Orleans, LA</region>
+									<country key="US">USA</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Giulia</forename><surname>Barbareschi</surname></persName>
+							<email>giulia.barbareschi.14@ucl.ac.uk</email>
+							<affiliation key="aff0">
+								<orgName type="institution">University College London University College London University College London London</orgName>
+								<address>
+									<settlement>London</settlement>
+									<country>United Kingdom, United Kingdom</country>
+								</address>
+							</affiliation>
+							<affiliation key="aff1">
+								<orgName type="institution">CHI &apos;22</orgName>
+								<address>
+									<addrLine>April 29-May 5</addrLine>
+									<postCode>2022</postCode>
+									<region>New Orleans, LA</region>
+									<country key="US">USA</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Roxana</forename><surname>Ramirez Herrera</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="institution">University College London University College London University College London London</orgName>
+								<address>
+									<settlement>London</settlement>
+									<country>United Kingdom, United Kingdom</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Roxana</forename><forename type="middle">Ramirez</forename><surname>Herrera</surname></persName>
+							<email>roxana.herrera.15@ucl.ac.uk</email>
+							<affiliation key="aff1">
+								<orgName type="institution">CHI &apos;22</orgName>
+								<address>
+									<addrLine>April 29-May 5</addrLine>
+									<postCode>2022</postCode>
+									<region>New Orleans, LA</region>
+									<country key="US">USA</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Tom</forename><surname>Carlson</surname></persName>
+							<affiliation key="aff1">
+								<orgName type="institution">CHI &apos;22</orgName>
+								<address>
+									<addrLine>April 29-May 5</addrLine>
+									<postCode>2022</postCode>
+									<region>New Orleans, LA</region>
+									<country key="US">USA</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Catherine</forename><surname>Holloway</surname></persName>
+							<affiliation key="aff1">
+								<orgName type="institution">CHI &apos;22</orgName>
+								<address>
+									<addrLine>April 29-May 5</addrLine>
+									<postCode>2022</postCode>
+									<region>New Orleans, LA</region>
+									<country key="US">USA</country>
+								</address>
+							</affiliation>
+						</author>
+						<title level="a" type="main">Understanding Interactions for Smart Wheelchair Navigation in Crowds</title>
+					</analytic>
+					<monogr>
+						<imprint>
+							<date/>
+						</imprint>
+					</monogr>
+					<idno type="DOI">10.1145/3491102.3502085</idno>
+				</biblStruct>
+			</sourceDesc>
+		</fileDesc>
+		<encodingDesc>
+			<appInfo>
+				<application version="0.7.1" ident="GROBID" when="2022-07-22T05:02+0000">
+					<desc>GROBID - A machine learning software for extracting information from scholarly documents</desc>
+					<ref target="https://github.com/kermitt2/grobid"/>
+				</application>
+			</appInfo>
+		</encodingDesc>
+		<profileDesc>
+			<textClass>
+				<keywords>
+					<term>Smart wheelchairs</term>
+					<term>Shared control</term>
+					<term>Wheelchair-pedestrian interactions</term>
+					<term>Wheelchair-user interactions</term>
+					<term>Navigation in crowds</term>
+				</keywords>
+			</textClass>
+			<abstract>
+<div xmlns="http://www.tei-c.org/ns/1.0"><p>Based on the results of the co-design session, we present design implications for shared control wheelchair around the need for empathy, embodiment and social awareness; situational awareness and adaptability; and selective information management.</p></div>
+			</abstract>
+		</profileDesc>
+	</teiHeader>
+	<text xml:lang="en">
+		<body>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="1">INTRODUCTION</head><p>Power wheelchairs represent an essential tool for many people with disabilities, enabling them to extend their mobility, carry out basic activities and participate fully in society <ref type="bibr" target="#b70">[72]</ref>. However, environmental barriers such as narrow doors and busy streets can hinder the mobility of power wheelchair users, especially when an individual struggles to perform fne movements necessary for navigating spaces with many obstacles <ref type="bibr" target="#b36">[37,</ref><ref type="bibr" target="#b39">40,</ref><ref type="bibr" target="#b78">80]</ref>. To this end, researchers have been developing smart shared control wheelchairs, which are normally built on standard power wheelchairs with additional modules for perception, navigation, or interaction purposes <ref type="bibr" target="#b77">[79]</ref>. Shared control is a semi-autonomous interaction mode that sees the user and the smart planner control the fnal motion of the wheelchair collaboratively. The user establishes the direction of the movement while the automated system takes care of avoiding collisions <ref type="bibr" target="#b54">[55,</ref><ref type="bibr" target="#b77">79]</ref>. Compared to a fully-autonomous mode of interaction, shared control maintains the agency of the user <ref type="bibr" target="#b82">[84]</ref>.</p><p>Shared control for power wheelchairs has been researched for over two decades <ref type="bibr" target="#b77">[79]</ref>. However, most studies have focused on establishing the feasibility of the technology in static or simple dynamic environments, which lack the complexity associated with the real-life situations faced by many wheelchair users <ref type="bibr" target="#b18">[19,</ref><ref type="bibr" target="#b35">36,</ref><ref type="bibr" target="#b54">55,</ref><ref type="bibr" target="#b80">82]</ref>. Recent advances in object tracking and trajectory prediction allow the application scenarios to be extended to crowds <ref type="bibr" target="#b27">[29,</ref><ref type="bibr" target="#b50">51,</ref><ref type="bibr" target="#b81">83]</ref>, bringing the technology closer to being deployed in the wild. However, the role of users is still widely overlooked in research. The only previous study we found, which specifcally looked at the shared control wheelchair users driving through crowds in urban environments identifed two dynamic loops constantly interacting as the person navigates through the crowd <ref type="bibr" target="#b96">[98]</ref>. The frst loop takes places between the user and the wheelchair (internal), whereas the second loop takes place between the user-wheelchair group with the crowd (external) <ref type="bibr" target="#b96">[98]</ref>.</p><p>In recent years, HCI researchers have explored user perspectives on diferent wheelchair interaction modalities in a variety of contexts and applications <ref type="bibr" target="#b21">[22,</ref><ref type="bibr" target="#b23">24,</ref><ref type="bibr">62]</ref>. Moreover, studies have also looked at how wheelchair users interact with pedestrians and other elements of the urban environment, particularly focusing on the accessibility challenges that many of these interactions can generate <ref type="bibr" target="#b2">[3,</ref><ref type="bibr" target="#b13">14,</ref><ref type="bibr" target="#b43">44]</ref>. However, these two interaction loops are rarely explored in combination. Such exploration is essential to understand the user requirements for a shared control power wheelchair which would allow for ease of navigation in crowds.</p><p>The present study answers an important research question that is essential to any successful deployment of shared control wheelchairs in the real-world: What do power wheelchair users need to be able to use a shared control wheelchair in a crowded environment, and how can we design new interactive systems that ensure safe and empowering navigation experiences? To address this question we conducted two studies. The frst study explored the user experience and difculty associated with driving through crowds, examining the requirements for a shared control system from a user perspective through a series of semi-structured interviews. In the second study, we conducted a design workshop with wheelchair users and designers to develop ideas for diferent interactions interfaces that could support shared control wheelchair navigation across a variety of crowded scenarios. Both studies highlighted the need to build two-way interaction systems for increasing pedestrians' situational awareness as much as facilitating user navigation, and identifed the needs of adaptable design which could adjust to various situations. Based on these results, we extract broader design implications for interaction systems supporting wheelchairs navigation in crowded environments.</p><p>The contributions of this paper include: 1. An understanding of requirements and challenges for smart wheelchair use in crowds. 2. The conceptualization of an interaction interface for smart wheelchairs which helps to manage interactions between user, wheelchair, and pedestrians across diferent crowd scenarios. 3. Refections on the implications of fndings highlighting the need to create empathetic communication between wheelchairs and other pedestrians, promote situational awareness to ensure adaptability and managing information overload during navigation in crowded environments.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2">RELATED WORK</head><p>The work presented in this paper builds on three areas of research: smart wheelchairs and shared control, user-wheelchair interactions, and interactions between wheelchairs and autonomous vehicles with crowds.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.1">Smart wheelchairs and shared control</head><p>Smart wheelchairs are fully or partially autonomous devices which can provide driving assistance to the user by planning and following a collision free path <ref type="bibr" target="#b76">[78]</ref>. Based on the level of autonomy, smart wheelchairs can be divided into two categories: fully-autonomous <ref type="bibr" target="#b50">[51,</ref><ref type="bibr" target="#b65">67]</ref> and semi-autonomous <ref type="bibr" target="#b18">[19,</ref><ref type="bibr" target="#b35">36]</ref>. Fully-autonomous wheelchairs are efective in achieving high-level goals for indoor and outdoor navigation <ref type="bibr" target="#b42">[43,</ref><ref type="bibr" target="#b65">67]</ref>. Users only need to indicate their preferred destination, and the path planner will then plan and execute the movement of the wheelchair to the intended destination without collision. However, this type of operating mode ignores users' capabilities and their short-term intentions. <ref type="bibr">Viswanathan et al. (2016)</ref> explored the level of control desired by the target population of the intelligent powered wheelchair and showed that users prefer to be in control during the operation and/or high level decision-making <ref type="bibr" target="#b86">[88]</ref>, this coincides with the fndings from the study of <ref type="bibr" target="#b15">Biddiss et al. (2007)</ref> which indicated a strong preference from upper limb prosthetic users to retain as much control as possible when using their prosthetic devices, and to not have a fully robotic arm which took over control of their intended movements <ref type="bibr" target="#b15">[16]</ref>. Semi-autonomous wheelchair control builds on this sentiment, and could potentially be appreciated by more users due to its collaborative characteristics.</p><p>The core of a semi-autonomous wheelchair lies in its control sharing strategy. A hierarchical shared control framework allows the user to remain in charge of high-level tasks such as choosing a desired manoeuvre upfront and then have the wheelchair take control of the low-level tasks necessary to avoid collisions <ref type="bibr" target="#b34">[35,</ref><ref type="bibr" target="#b80">82]</ref>. A second kind of shared control is achieved by continuously blending the input from both the user and the motion planner <ref type="bibr" target="#b18">[19,</ref><ref type="bibr" target="#b35">36,</ref><ref type="bibr" target="#b54">55]</ref>. This mode can be thought of as riding a horse, where the horse executes the fnal motion based on the collaborative efort between itself and the rider <ref type="bibr" target="#b41">[42]</ref>. For this type of shared control strategy, the wheelchair will not move unless input commands from both parties are received. This characteristic allows the user to retain greater control authority and allows more collaboration between the user and the wheelchair. Both control sharing strategies do not require perfect user input which makes them suitable for assisting users with limited upper limb dexterity who might struggle with the traditional joystick interface, and potentially all power wheelchair users who need to negotiate challenging scenarios.</p><p>Navigating through a crowd has been previously identifed as one of the most difcult scenarios for wheelchair users <ref type="bibr" target="#b88">[90]</ref>. It represents a potentially ideal application for shared control wheelchairs as it requires fne movement control that can be extremely challenging for many users. Although still computationally complex, recent advances in people tracking and trajectory prediction have boosted the research supporting the seamless navigation of robots through crowds <ref type="bibr" target="#b27">[29,</ref><ref type="bibr" target="#b56">57,</ref><ref type="bibr" target="#b81">83]</ref>. However, despite some similarities concerning the placement of sensors and the use of algorithms governing obstacle avoidance, a shared control wheelchair involves a human user in the control loop rather than an autonomous system, which introduces specifc requirements for user-wheelchair interaction. In addition, driving such a wheelchair in crowds introduces an additional interaction layer between the user-wheelchair unit and the surrounding pedestrians <ref type="bibr" target="#b96">[98]</ref>. The next two sections give a description of these two interaction channels and the past work that has been done in these areas.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.2">User-wheelchair Interactions</head><p>Interaction between users and wheelchairs have been actively explored in the HCI community [2, <ref type="bibr" target="#b8">9,</ref><ref type="bibr" target="#b20">21,</ref><ref type="bibr" target="#b22">23,</ref><ref type="bibr" target="#b23">24,</ref><ref type="bibr" target="#b38">39,</ref><ref type="bibr" target="#b45">46,</ref><ref type="bibr">62,</ref><ref type="bibr" target="#b88">90]</ref>. Much of the research on power wheelchair use both within and beyond HCI has focused on how users operate diferent input device ranges from commercial ones such as joystick, head-array, sip-puf to research prototypes of user-centred control systems [2, <ref type="bibr" target="#b20">21,</ref><ref type="bibr" target="#b22">23,</ref><ref type="bibr" target="#b38">39]</ref>. On the other hand, fewer studies have looked at how these diferent control systems can feed information back from the wheelchair to the user with the aim to support navigation <ref type="bibr" target="#b23">[24,</ref><ref type="bibr" target="#b45">46,</ref><ref type="bibr" target="#b88">90]</ref>. Such clear and efective feedback mechanisms between the user and the power wheelchair are essential to the success of a shared control system.</p><p>When using a smart wheelchair, the user indicates their intention to move in one direction through an interface, using either a traditional joystick or another type of input device. However, due to the dynamic and collaborative nature of the control loop, the fnal motion of the wheelchair may not fully match the user's expectation, which can cause frustration due to the mismatch between the actual wheelchair behavior and the one anticipated by the user <ref type="bibr" target="#b19">[20]</ref>. This has led to an explainable shared control paradigm which looks to resolve this misalignment while assistance and information feedback are considered together <ref type="bibr" target="#b98">[100]</ref>, as frustration can be reduced with better communication channels from the wheelchair to the user <ref type="bibr" target="#b87">[89]</ref>. As a consequence, researchers have looked at diferent ways of providing feedback to the user about the systems' decisions, thus helping them build a mental model of the navigation assistance <ref type="bibr" target="#b88">[90,</ref><ref type="bibr" target="#b99">101]</ref>.</p><p>Feedback can be provided via the same interface used to provide the initial driving instruction or through a diferent one. Researchers explored feedback techniques through diferent modalities, among which haptic feedback has received the most attention. <ref type="bibr">Wang et al. (2011)</ref> tested force feedback via a haptic joystick which blocked the wheelchair movement in the user's chosen direction if the system believed such action would lead to a collision <ref type="bibr" target="#b89">[91]</ref>. Hadj-Abdelkader et al. ( <ref type="formula">2012</ref>) and Morere et al. ( <ref type="formula">2015</ref>) used active and passive force feedback, simulating a spring efect as the user moved towards an obstacle <ref type="bibr" target="#b45">[46,</ref><ref type="bibr" target="#b61">63]</ref>. Both of these examples used the same channels for feedback, however this feedback can interfere with the driving action, particularly when there is a mismatch between the driving commands of the user and the collision avoidance system of the wheelchair. To address this concern, researches have explored providing haptic feedback through wearable devices which are disconnected from the input mechanism used for driving. Devigne et al. <ref type="bibr" target="#b31">(2020)</ref> used wearable vibrotactile feedback to inform the wheelchair users about the direction of the obstacles, two studies involving a small number of participants have demonstrated the viability and efectiveness of the proposed technique comparing it to not providing any environmental cue <ref type="bibr" target="#b30">[32]</ref>. Visual feedback has also been explored and added to the joystick, however, possibly due to the simplistic experimental set-up people chose not to look at the lights and the authors suggested that visual feedback should be provided in a more intuitive way than being attached to the joystick <ref type="bibr" target="#b89">[91]</ref>.</p><p>Carrington et al. <ref type="bibr" target="#b24">[25]</ref> (2014) explored user preference for input and output interface for a power wheelchair, and proposed form factor possibilities for chairable and wearable devices. When examining possibilities for output modalities for visual feedback, participants showed the strongest preference towards the use of head-mounted based output, compared to add-on screens and environmental projections which were seen as less practical across diferent situations. Recently, augmented reality (AR) has also been used for assisting smart wheelchair navigation. Through the examination of various augmented cues, <ref type="bibr" target="#b99">Zolotas et al. (2018)</ref> and (2019) demonstrated the potential for using AR as a feedback channel between the wheelchair and the user. However, the authors highlighted that care should be taken in the presentation of information to ensure that users are provided only with signifcant information that helps driving without creating unnecessary distractions <ref type="bibr" target="#b98">[100,</ref><ref type="bibr" target="#b99">101]</ref>. Finally, multi-modal interfaces to provide feedback for shared control of power wheelchairs have received increasing attention. Studies showed evidence that declines in single sensory channel processing capability due to aging can be potentially compensated by multisensory inputs <ref type="bibr" target="#b52">[53]</ref>. <ref type="bibr" target="#b51">Kumar et al. (2017)</ref> proposed that feedback could be provided in a more intuitive way through the combination of a user-centric wearable skin stretch device and a haptic joystick <ref type="bibr" target="#b51">[52]</ref>. A combination of haptic, visual and auditory feedback was proposed for older adults and successfully tested by <ref type="bibr" target="#b89">[91]</ref>. However, all these feedback methods for shared control wheelchair driving were tested and evaluated in simple indoor environments, and whether such feedback would work in crowds remains unclear. In addition, most work focused on the usability test and involve wheelchair users only during the testing stage where the user has limited opportunity to express their desire for the design of the feedback information and modality.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.3">Wheelchairs and Autonomous Vehicles Interactions with Crowds</head><p>Recently, the HCI community has begun to explore the interactions between autonomous vehicles and various groups of road users, including wheelchair users <ref type="bibr">[4,</ref><ref type="bibr" target="#b48">49]</ref>. Other studies have also looked at the interactions between wheelchair users and other road users both on the sidewalk but also on public transport, examining conficts and accessibility issues that can arise as a result of these interactions <ref type="bibr" target="#b79">[81,</ref><ref type="bibr" target="#b84">86]</ref>. However, to our knowledge, no study has investigated how these interactions could change when the wheelchair becomes a semi-autonomous vehicle and what would be the consequence on user requirements for smart wheelchairs. Interactions between autonomous vehicles (or other robots) and other pedestrians (including wheelchair users) are normally moderated by external Human Machine Interfaces (eHMIs). These are interfaces installed on, or projecting from, the external surface of a vehicle that provide information about the vehicle's status or give suggestions to the other road users <ref type="bibr" target="#b12">[13]</ref>. Based on the modality, eHMIs can be classifed as physical, auditory, or visual. <ref type="bibr" target="#b60">Mahadevan et al. (2018)</ref> studied the three modalities (visual, audio, physical) and found that visual was the most preferred. While there is potential for audio and physical feedback, some participants found them diffcult to be perceived and processed in real world scenarios. Being the most extensively investigated modality <ref type="bibr" target="#b29">[31,</ref><ref type="bibr" target="#b60">61]</ref>, state-of-theart research has explored diferent ways of visual communication including "light strips" <ref type="bibr" target="#b37">[38]</ref>, "laser projections" <ref type="bibr" target="#b32">[33]</ref> and "display" <ref type="bibr" target="#b67">[69]</ref>, exploring how they can be used to convey diferent information including "vehicle's states" and "suggested actions for the pedestrian" <ref type="bibr" target="#b69">[71]</ref>. While studies indicated that communicating via an eHMI increases the pedestrians' perceived safety and the level of comfort [27, 45], it is not clear which information should be prioritized.</p><p>Although the literature exploring the interaction between pedestrians and autonomous vehicles is extensive <ref type="bibr">[17, 26-28, 30, 45]</ref>, only a limited number of studies investigated interactions between a wheelchair and the surrounding people. <ref type="bibr" target="#b90">Watanabe et al. (2015)</ref> conducted an experiment to explore how the communication of movement intention from a power wheelchair, through a projected light path on the foor, afected the interaction between the wheelchair and a pedestrian at a road crossing. Results indicated that pedestrians preferred to be made aware of the wheelchair's navigational intention which resulted in smoother movements compared to the no communication scenario <ref type="bibr" target="#b90">[92]</ref>. Similarly, <ref type="bibr" target="#b75">Moondeep et al. (2018)</ref> used a red projected arrow to show the wheelchair's future direction to surrounding pedestrians and the results from their studies show that such methods are also successful in increasing cooperation from the participants <ref type="bibr" target="#b75">[77]</ref>.</p><p>Despite the potential of eHMIs in building interactions, <ref type="bibr" target="#b69">[71]</ref> pointed out that many design challenges such as the medium, the color, and the location of the eHMIs still need to be further explored. In relation to smart wheelchairs, the fact that the user can be seen by pedestrians may further afect the design requirements of the communication tool. Moreover, all these studies only explored the perception of surrounding pedestrians interacting with a smart wheelchair, but it is not known what the needs and preferences of wheelchair users driving the smart wheelchair through a crowd might be. In this paper, we explore for the frst time the user needs for shared control wheelchair driving in crowded environment by considering both the user-wheelchair interaction and the wheelchair (user)-crowds interaction loop. These needs bring us one step closer to in the wild testing of shared control wheelchairs.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3">STUDY 1:NEEDS AND EXPERIENCES OF DRIVING WHEELCHAIRS THROUGH CROWDS</head><p>While previous work <ref type="bibr" target="#b86">[88]</ref> has explored the needs and control preference for older adults with cognitive impairments, in this study we extend the scope to understand general power wheelchair users' driving experience in crowds, identify the user needs and design requirements for smart wheelchair use.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.1">Methods</head><p>To gather insights from the previous experiences of power wheelchair users about the challenges encountered when maneuvering their wheelchairs through a crowded environment and extract potential requirements for how a smart shared control wheelchair should behave, we conducted a series of semi-structured interviews with power wheelchair users.</p><p>3.1.1 Participants. Participants were recruited through a combination of social media advertising, mailing lists of local organizations of people with disabilities and targeted emails to an existing repository of potential participants collected by the research group. Participants who responded positively to the ad were quickly screened to confrm that they were above the age of 18, able to provide informed consent, and that they used a power wheelchair regularly as a means of mobility. Participants who met the inclusion criteria and gave their consent for participation were invited to take part in the interview study. A total of 15 power wheelchair users were recruited for this study. Individual one-to-one semi-structured interviews were conducted with 12 participants from UK, whereas 3 participants (from UK, France and Switzerland) were interviewed as a group. The group interview was carried out in this format for convenience reason as all three participant had joined an online open event linked to the project. The group interview may elicit richer understanding of the participants' experience comparing to the one-to-one interview. Table <ref type="table">1</ref> provides a summary of participants characteristics.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.1.2">Materials.</head><p>As one-to-one interviews took place before the start of the global pandemic, they were conducted in person in one of our university building, and were recorded with a portable audio recorder. The group interview was instead conducted remotely as it took place after the start of the pandemic. For the remote group interview, we chose to use the videoconferencing platform MS Teams as it complies with data protection regulations and university ethics standard.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.1.3">Study Procedures.</head><p>For both one-to-one and group interviews, we developed a semi-structured interview guide through an iterative process that involved all members of the research team. The questions started by asking participants about their experience in driving through crowds, what they found it difcult and how they managed, difculties across diferent scenarios. Participants were then shown an image of our intelligent wheelchair prototype (see Figure <ref type="figure" target="#fig_1">2</ref>) together with a short explanatory video demonstrating a simulated wheelchair navigating in a crowded street. Participants were then asked about their opinions of smart shared control wheelchairs, including detailed questions related to specifc features and potential challenges in various crowd scenarios. Individual interviews lasted between 30 and 45 minutes, whereas the group interview lasted for approximately 1 hour.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.1.4">Data Analysis.</head><p>The collected data included audio recordings from one-to-one and group interviews. Audio recordings were transcribed verbatim by the frst author. Thematic analysis <ref type="bibr" target="#b17">[18]</ref> focusing on semantic interpretation of the data was used to conceptualize themes from the interviews and following an inductive open coding approach. Initial coding was carried out by the frst author and, as the analysis progressed, the conceptualization of themes was discussed across the members of the research group.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.2">Results</head><p>As a result of our analysis, we conceptualize three themes that help to frame the experience of power wheelchair users and understand the requirements for shared control wheelchairs suitable for crowd navigation: "Communication", "Balancing safety, autonomy and social aspects" and "Ethics".</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.2.1">Communication.</head><p>Interestingly, although most wheelchair users identifed crowds as one of the most difcult scenarios to navigate, where frequent collisions happened, they thought that the problem was largely associated with pedestrians' lack of awareness and understanding of power wheelchairs, rather than the control of the wheelchair itself. Overall, participants felt ignored by other pedestrians, which could lead to challenging navigation and accidental collisions. "If you are in a wheelchair, you become invisible and people just don't see you. . . . "(P1)</p><p>"Especially in places such as airports and train stations, people may not see you, and they will fall on you. " (P3) Some participants stated that they had to use extremely direct strategies in order to deal with distracted pedestrians and safeguard themselves.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>"I normally shout at people or use my elbow to avoid them fall on me. "(P1)</head><p>"Sometimes I can ask a person to volunteer to clear the way when I'm coming, or I can make a sound like..'zzzz' , so people will turn their head back and see me coming. " (P8)</p><p>These insights help us identify the need for building interaction systems that facilitate communication between wheelchair users and the surrounding pedestrians to promote safety and minimize frustrations. It was pointed out by some wheelchair users that the most natural and efective way of increasing pedestrians' awareness of the wheelchair is by increasing the seat height, so that the wheelchair user can be at pedestrians' eye level. However, participants also stated that this could not be a permanent solution as it could hinder stability and convenience of transport. When asked about adding extra audio/visual system to the wheelchair to alert the surrounding pedestrians and communicate the intended direction of movement, most interviewees thought that these features could be helpful, but they should be efective and unobtrusive. In addition, many participants pointed out that the design should be adaptable to diferent crowd scenarios. Moreover, these systems should help to communicate the movement of the wheelchair without drawing attention to a users' disability:</p><p>"It can make people better aware [that] the wheelchair is coming, but I don't want to draw extra attention on me, especially on my disability.. "(P6).</p><p>Communication was seen as a priority not only between the wheelchair users and other pedestrians, but also between the user and the smart power wheelchair. Participants often found that power wheelchairs did not provide any feedback about the surrounding environment, which could be helpful when navigating crowded environments. People commented on a lack of natural feedback from a power wheelchair, when compared to a manual wheelchair:</p><p>"You don't have tactile feedback in these wheelchairs, whereas if you were in a manual chair, You know, you can feel the resistance when you're trying to push it. "(P2).</p><p>More generally, feedback was seen as benefcial when using a smart wheelchair, as sensors might detect unseen obstacles that could variate the expected trajectory of movement and appropriate feedback could help to avoid confusion and frustration.</p><p>"Yes, I would like to receive this kind of thing [i.e. feedback from the wheelchair], it would be nice to be told what it is going to do, so that you would be aware, and you're not taken by surprise. "(P5).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>3.2.2</head><p>Balancing safety, autonomy and social aspects. For many users, one of the most attractive features of a smart wheelchair was the increased safety brought by diferent sensors that could be leveraged to successfully navigate crowded environments and avoid collisions with objects or people. Shared control options were also seen as a way to make power wheelchairs more accessible to users who would struggle to use conventional interfaces efectively. This additional level of safety and autonomy brought levels of excitement from some people:</p><p>"It is a superb design! Clearly, it would enable more people to drive, because it's not excluding you on the basis of an inability to drive." (P8)   However, other users expressed concerns about the fact that functions for obstacle avoidance could override their decisions and suggested that the balance between smart wheelchair sensors and user command should be based on the scenario and the user's capability. For example, at a shopping mall or a social gathering obstacle avoidance could be useful to help users navigate, as many pedestrians could be moving around the space in unexpected ways. On the other hand, in an ofce space that the user is familiar with, the same feature could become an annoyance as it might interfere with the user intention to approach a desk or a photocopy machine.</p><p>Users thought that the need for safety should be balanced with the need for autonomy. Participants unanimously rejected the idea of a fully autonomous wheelchair that P4 argued "would make me feel like cargo". Several participants suggested that the system should have some form of context awareness and adapt the amount of assistance based on the context, for example reducing user autonomy and increasing smart control when one is tired. Participants with more experience driving power wheelchair were clear that the assistance from the system should not override their decisions or signifcantly impact their driving.</p><p>"I'm pretty good at driving the wheelchair and perceive the available space...If I say go through that gap, the technology should be making sure that I'm going through that gap and doing the avoidance, but not slowing down to crawl." (P10) Social situations were the only ones in which participants felt that allowing the smart wheelchair to take complete control of the driving might make sense, as it would allow them to focus completely on interacting with the people around them.</p><p>"Full autonomy will allow me to focus on other things. For example, say take me to platform H, it will take me automatically there while I can focus on chatting with my friend." (P11) 3.2.3 Ethics. The need to strike a balance between ensuring the safety of surrounding pedestrians and preserving the user autonomy also led to some interesting refections amongst participants about negotiating shared control from an ethical point of view. This was felt to be particularly crucial when there is confict between the needs and commands of the user and the safety system of the wheelchair, as participants felt there were diferent considerations to be taken into account. For example, P5 highlighted how, making sure that the wheelchair could safely move and avoid collision through a crowd, could not be achieved by constantly changing the trajectory of movement as this could lead to discomfort for users themselves.</p><p>"In the crowds, it is most likely the wheelchair will keep changing its direction to avoid people, which is the least thing I would want to have..It can be confusing and uncomfortable.. " (P5) Again, contextual awareness was seen as crucial as in certain environments, such as hospitals, the system should prioritize avoiding any type of collision over ensuring users comfort as "people there may be vulnerable and it is important not to hit them" (P1). Participants also highlighted that, when it came to preventing collisions, there might be a need to negotiate conficting priorities. Rather than leaving the decision to the smart wheelchair, they felt that the user would be better placed to make that decision. "Sometimes the system don't realize that you have perceived an issue and they will do something that you think is irresponsible..For example, you could have a collision avoidance system that is doing the best to avoid you running into a wall, but actually you are trying to get closer to the wall because you are trying to avoid a child running on the pavement" (P11)</p><p>Finally, participants stated that having their decision overridden by a shared control system might create misunderstandings with other pedestrians, in particular when the wheelchair movement might cause an accident or a near miss. The fear here was that the intention of the driving would be interpreted as the sole responsibility of the user.</p><p>"When the wheelchair does something out of my intention and that causes unhappiness for other people, I don't want people to think it is what I intend to do and I'm a bad guy. " (P15)</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4">STUDY 2: DESIGNING COMMUNICATION INTERFACES FOR SMART WHEELCHAIRS</head><p>By examining users' point of view in study 1, we highlighted the need for smart wheelchairs to have a clear and efective "internal" and "external" communication system to: 1) Facilitate users' creation of reliable mental model about the wheelchair intended behavior.</p><p>2) Provide information about the level of assistance provided (and allow users to adjust it if needed).</p><p>3) Increase pedestrians' awareness of the wheelchair.</p><p>To further explore these aspects and identify potential solutions for successful user-wheelchair-pedestrian interaction systems, we conducted a second design-focused study.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.1">Methods</head><p>Our second study was a virtual design workshop that involved both wheelchair users and designers. The aim of the design workshop was to explore and understand how internal and external communications systems for smart wheelchairs should be developed to support seamless navigation through crowds.</p><p>4.1.1 Participants. Power wheelchair users in the design workshop were recruited using a similar strategy to the one described for Study 1 using a combination of social media advertising, mailing lists and targeted emails. Inclusion criteria were the same as those for Study 1. Designers taking part in the workshop were recruited from our extended research group as they would have some experience working with people with disabilities, but had to have no previous involvement with the project to avoid bias.</p><p>Eight participants (6 adult power wheelchair users and 2 designers) took part in the design workshop. Table <ref type="table" target="#tab_1">2</ref> provides a summary of participants characteristics.</p><p>4.1.2 Materials. The workshop was conducted remotely through the online video conferencing tool MS Teams. In addition to being a viable data collection tool, studies show that remote engagement allows individuals to respond to design prompts in a convenient manner <ref type="bibr" target="#b58">[59,</ref><ref type="bibr" target="#b59">60]</ref>. To elicit engagement from the participants and manage collaboration, we used an online Miro board as design space. This tool works as a collaborative canvas and allows participants to easily demonstrate their ideas by writing, drawing or simply dragging and dropping existing design icons on a shared space. Due to the concern that wheelchair users without previous experience using these kinds of collaborative tools might encounter difculties throughout the design workshop, two additional researchers were available throughout the virtual workshop to support power wheelchair users and help them manage the board and input their ideas on the shared canvas if needed. The workshop was audio and video recorded according to participants' consent.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.1.3">Study Procedures.</head><p>At the start of the workshop, participants were given an introduction of the project and shown a video explaining what a smart wheelchair is and how the use of a shared control system might support navigation but also afect the driving experience. From our learning during Study 1, we noticed that wheelchair users with varying expertise and characteristics might have signifcantly diferent requirements that are hard to address in a single design session. To overcome this, and facilitate brainstorming amongst participants, in this study we used a persona based method and introduced an imaginary character "Ann" to our participants. Ann was described as a woman of 60 years who has difculty using a standard power wheelchair due to severe arthritis. In order to not limit the exploration of diferent interaction modalities, we designed Ann to have unimpaired visual, hearing and cognitive capability. During the workshop, we asked participants to design the communication system for Ann's smart wheelchair which would allow her to navigate in two crowded scenarios: crossing a busy ID Self-identifed Gender Age Years of experience of using power wheelchairs street and reaching a help desk in a crowded hospital. These scenarios were chosen for two reasons: frstly, these are typical use cases for a wheelchair in crowds; secondly, these scenarios have inherent diferences and may require the communication to be designed diferently.</p><p>After the introduction, participants assigned to two breakout each featuring 1 facilitator (researcher) and 1 designer. Due to one wheelchair user's network issues, 2 wheelchair users were assigned to room 1 whereas room 2 featured 4 wheelchair users. Each room was presented with a diferent scenario of smart wheelchair crowd navigation. The facilitator shared the screen with the Miro board. Participants in each breakout room were asked to complete three activities. Firstly, they had to identify the key components that characterize interactions and communication during navigation in their particular scenario, and formulate ideas about how the interaction system should work. The prompts for brainstorming included "What information should Ann receive?", "What information should the pedestrians receive?", "How should the information be presented?", "When should that be presented?". While wheelchair users spoke about their ideas, the facilitator helped to manage the Miro board asking them to confrm that the correct details were being captured at all time.</p><p>Secondly, participants were presented with a series of ideas for interaction systems that had been proposed in related literature. Participants were asked to give their opinions on whether the information provided and the modality of the interaction would be useful for Ann and surrounding pedestrians in each scenario. Finally, wheelchair users and designers were asked to work together on visualizing their ideas developing diagrams specifying important design parameters which included "function of the interface", "location of the interfaces", "timing of communication", "cues provided" and "interaction modalities". A collection of icons were provided in the Miro board to facilitate the design session, but participants were told that they could design new icons if needed. In the end, all participants were asked to rejoin the main room and each group presented their designs and ideas to other, which was followed by short discussion. The duration of the workshop was 2 hours.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.1.4">Data Analysis.</head><p>All the ideas and designs proposed by ticipants in the Miro boards were collected, together with the audio/video recording from the design workshop. Audio recording transcribed. Thematic analysis <ref type="bibr" target="#b17">[18]</ref> out primarily by the frst author with the aim of identifying and defning the features for smart wheelchair interfaces. We used a hybrid approach <ref type="bibr" target="#b40">[41]</ref> by deductively establishing broad categories for "Type of information needed", "Location of the interface" and "Modality of the interaction", while allowing for any additional theme and sub-theme directly from the data using inductive coding.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.2">Results</head><p>Four themes were conceptualized from our analysis of the design workshop. Beyond the three themes we deductively established "Type of information needed", "Location of the interface" and "Modality of the interaction", a fourth one named "Adaptable design" is described. A high level summary of the design workshop output is listed in Table <ref type="table">3</ref>.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.2.1">Type of Information</head><p>Needed. Through the categorization and analysis of the information necessary during shared control wheelchair navigation in crowds, it clearly emerged that the participant considered both internal and external communication to be equally important. As a person drives their shared control wheelchair through a crowd, participants stated that the user should receive environment information about what the wheelchair has perceived what obstacles have been detected and what are their characteristics), what the wheelchair has decided (e.g. what is the smart wheelchair's fnal decision on its motion and future trajectory), as well as the alignment or deviation between the user and the wheelchair.</p><p>I want to know where those pedestrians are, their movement, and especially for those that are behind me.(P5) "The system should tell me if the wheelchair is going to accelerate, and which way it is going. " (P4)</p><p>In addition, participants identifed the need for the wheelchair to externally communicate with the surrounding pedestrians. In this regard, the smart wheelchair and the user were seen as a combined unit which needs to communicate its fnal decisions and future movements to the surrounding people.</p><p>Pedestrians should know if Ann is approaching Knowing the future trajectory of the wheelchair would help. (P3) </p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Interface location</head><p>On the wheelchair On the wheelchair armrest -add-on screen arm(wearable), joystick, armrest -haptic feedback Table <ref type="table">3</ref>: A high level summary of the design workshop (study 2) output Although the content of the the cues used to communicate it, and the timing for communication may be diferent between information directed to the user and to surrounding pedestrians, participants felt that there was a defnite connection between the external and internal communication system of the wheelchair. As P5 pointed out, comprehensive and clear feedback from the wheelchair to the user is essential to build trust in the shared control system and ensure a smooth driving experience. At the same time, if the wheelchair is also able to efectively communicate with pedestrian, making sure that they give way and leave enough space, the amount of feedback to be given the user will decrease, as the number of "obstacles" around the wheelchair is reduced.</p><p>It [Feedback] will help me understand what the wheelchair is doing...so I can trust it [the smart system]. [...] But if people are properly informed, they will just give way to you. (P5) 4.2.2 Interaction Modality. Although participants assigned to different breakout rooms were tasked to design interaction interfaces for diferent scenarios, we found that most of the features and parameters of systems designed by participants were similar across the two teams. The most substantial diferences were related to the desired modality for communicating the cues when crossing a busy street versus when needing to reach a help-desk in a crowded Participants designing a smart wheelchair interface system for a street crossing scenario showed a clear preference towards a combined audio and visual feedback system to manage internal and external communication. Their design idea involved a screen on the wheelchair armrest or a wristwatch worn by the user to display wheelchair information. The speed and acceleration profle are communicated to both the user and surrounding pedestrians though color coded projection. A pop-up screen with a voice-over chat-bot could also be used to communicate important messages to the wheelchair user. The choice between the use of audio and/or visual cues would instead depend on the severity of the situation. When the wheelchair is at low risk of hitting people, less obtrusive visual cues are preferred, such a light projected on the ground for alerting pedestrians and a warning on the screen for the user. Audio feedback could also be leveraged in the form of soft and short sounds warning the user that an obstacle has been detected at a certain distance. On the other hand, when the risk of collision between the wheelchair and pedestrians increases, fashing lights and buzzer with longer beeps ware mentioned as a better way to attract the attention of both the user and surrounding pedestrians.</p><p>Figure <ref type="figure">3</ref> shows the diagram created by participants to their design.</p><p>Participants designing a smart wheelchair interface for the crowded hospital scenario showed an inclination towards visual and haptic feedback modalities rather than auditory ones. Their fnal design idea featured projected light cues such as arrows showing the wheelchair's future trajectory, and circles to highlight detected nearby pedestrians/obstacles. These would be color-coded to indicate information about distance (near or far) and type of obstacle (human or object). When obstacles close to the wheelchairs are detected, haptic feedback in the form of vibration from the wheelchair or an armband worn by the user could be provided as a warning. Figure <ref type="figure">4</ref> shows the drawing created by a participant to illustrate their design.</p><p>In both scenarios, participants found visual communication the most intuitive method to provide feedback to both the user and the surrounding pedestrians. However, participants had no specifc preference on how cues should be designed.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.2.3">Interface Location.</head><p>During the workshop, we asked participants to imagine what would be their preferred location for the main interface of the smart wheelchair. Overall, participants expressed a preference for interfaces connected to internal communications systems (i.e. between the wheelchair and the user) to be positioned on the wheelchair itself or to be embedded in a wearable device like a wrist band or a watch that could be worn by the user. However, the choice for the precise location of the interface was largely dependent on the modality of the feedback provided. For visual feedback, an add-on screen on the armrest and projection from the wheelchair were the most popular designs produced by participants. When it came to haptic feedback, some participants felt that this would be better delivered through the joystick, armrest or the back of the wheelchair. On the other hand, 2 wheelchair users (P1 &amp; P3) expressed concerns about a "chairable" haptic feedback (see <ref type="bibr" target="#b23">[24]</ref> for a reference the term) and thought that wearable device on the could represent a better solution.</p><p>"Haptic can be useful...but I don't want the wheelchair to vibrate...the chair is an extension of my body. " (P1)</p><p>Interestingly, and in contrast to our expectations based on previously published literature, participants expressed preferences for chairable interfaces also in relation to external communication between the wheelchair and surrounding pedestrians. In particular, both users and designers thought that providing auditory or haptic feedback directly to pedestrians could be perceived a "weird" invasion of one's personal space. "Warn the people through their phone is creepy...Imagine suddenly vibrate or make sound only because that I'm getting closer" (P4)</p><p>No specifc location preference was discussed by participants in relation to the external visual and audio feedback to surrounding pedestrians (i.e. in which direction should warning sounds be played or at what height should a projected light to indicate direction of movement should be placed) . However designs produced by participants showed that outputs were projected directly by the wheelchair rather than connecting to IoT devices used by pedestrians or smart roadside furniture as it had been suggested by previous studies <ref type="bibr" target="#b2">[3,</ref><ref type="bibr" target="#b60">61]</ref>.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.2.4">Adaptable Design.</head><p>Although wheelchair users stated that receiving comprehensive information from the smart wheelchair was important for them to develop trust in the system and achieve better navigation experience in crowds, they also stated that they did not want the system to communicate with them or other pedesat all times. External communication was only desired when the wheelchair was getting close to the pedestrians. On the other hand, when it came to the internal communication between the wheelchair and the user, the information they would want to receive would depend on the specifc situation.</p><p>All the information are important[...]to prevent a lot of distraction, I think a pop-up window that only shows relevant information is a better idea.(P4)</p><p>In general, while the wheelchair is moving, users stated that they would only like to receive general information which are relevant for driving such as acceleration, deceleration, and movement trajectory. A visual display showing the functioning status of the smart wheelchair was also mentioned by participants. However, the wheelchair detects an obstacle in its path, users would like to receive a haptic or audio warning. Although most participants felt that being provided with additional information (position, number, type) about any perceived would be helpful, this feature was seen as more desirable when the user is reversing rather than moving forward.</p><p>"I only need it [feedback on obstacles' information] when I am reversing...maybe something like SatNav?"(P1)</p><p>Finally, while participants found that being informed about the smart wheelchair's planned trajectory is enough in most cases, they expressed a need for more information to understand the reasons for discrepancy when their own instructions are overruled by the shared control system, which might result in the wheelchair motion being diferent from their own expectation. The idea of a projection or screen displaying similar to "Parking trajectory system" proposed by our designer (P8) was welcomed by most participants.</p><p>Overall, this suggests the need for smart wheelchair interface to have an adaptable design that can respond to the preferences of the user and the constraint of the situation. While the system itself should have the ability to provide appropriate information at suitable time, users should also be allowed to switch the interaction function on-of and choose their desired information.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5">DISCUSSION</head><p>Previously, HCI researchers have focused on exploring the interactions between pedestrians, including wheelchair users, and autonomous vehicles <ref type="bibr" target="#b2">[3,</ref><ref type="bibr" target="#b4">5,</ref><ref type="bibr" target="#b62">64,</ref><ref type="bibr" target="#b68">70]</ref> and engineering researchers have the potential of shared control wheelchairs <ref type="bibr" target="#b19">[20,</ref><ref type="bibr" target="#b35">36,</ref><ref type="bibr" target="#b54">55]</ref>. Our work represents the frst example of research looking specifcally at how power wheelchair users would wish to interact with shared control smart wheelchairs, including how they would expect the smart wheelchair to moderate their interactions with other pedestrians when navigating through a crowd.</p><p>Our fndings across the two studies highlight the presence of design tensions. These need to be addressed if we wish to develop smart wheelchairs that are safe to use when navigating a crowded space, and provide empowering experiences for users, addressing both functional and social needs across diferent situations.</p><p>Navigating a wheelchair through a crowd is acknowledged as a challenging experience due to the presence of numerous moving obstacles <ref type="bibr" target="#b43">[44]</ref>. However, rather than manoeuvrability, our participants attributed many of the difculties associated to navigating through a crowd to the lack of attention from surrounding pedestrians. The observation contribute to our frst design tension. The tension we identifed was between the need for smart wheelchairs to alert pedestrians of one's presence and ensure that people create sufcient space for passing, and the reluctance of users to attract unwanted attention to themselves and their disability. This fnding aligns with much of the literature around social accessibility <ref type="bibr" target="#b53">[54,</ref><ref type="bibr" target="#b73">75,</ref><ref type="bibr" target="#b74">76]</ref> and the importance of negotiating boundaries between alerting others of one's disability in order to manage expectations and avoid attracting unwanted stares from surrounding people <ref type="bibr" target="#b94">[96]</ref>.</p><p>The need for efectively communicating with surrounding pedestrians without causing excessive disturbances, particularly in environments where participants felt that this would be inappropriate, also emerged from the diference between the two ideas for smart wheelchair interfaces developed the design workshop. Participants working on the crossroad scenarios preferred interaction modalities that incorporated auditory components, whereas the ones working on the hospital scenario preferred an interface that relied on more discreet visual and haptic feedback. This was not unexpected as hospitals are normally perceived quieter spaces, whereas a busy street is a more intense scenario which may require a more decisive driving style while at the same time being more easily associated with louder noises. The diferent preferences towards the use of audio feedback are also consistent with the fnding in <ref type="bibr" target="#b49">[50]</ref>, who reported that people with visual impairments felt more comfortable using an assistive suitcase that emitted audio alerts in public places compared to quieter places such as hospitals and libraries.</p><p>Another tension that needs to be negotiated in the design of smart wheelchairs is related to the need to strike a balance between the safety of the system and the autonomy of the user. This is consistent with the fndings stated in <ref type="bibr" target="#b86">[88]</ref> where the users' attitudes toward intelligent wheelchairs specifcally related to user control were explored. Moderating factors in this case were the capabilities of the user, the characteristics of the environment and the specifc social situation in which the person is operating the smart wheelchair. As seen in previous studies, the capabilities of the users can be afected by a variety of factors ranging from experience, to tiredness or alcohol use <ref type="bibr" target="#b6">[7,</ref><ref type="bibr" target="#b92">94]</ref>. The more the individual feels that their capabilities are impaired the more they might be happy to let the wheelchair be in charge of navigating through a crowd. Similarly, existing research has shown that when negotiating extremely challenging environments, people with disabilities are not opposed to the idea of receiving help, as long as they can do so in terms that they feel comfortable with <ref type="bibr" target="#b10">[11]</ref>. Finally, participants stated that they would be happy to have the smart wheelchair take care of avoiding obstacles in a crowded environment for them, if this would enable them to focus on engaging socially with their companions. This is somehow similar to what is reported by <ref type="bibr" target="#b91">[93]</ref>, when people with visual impairments stated that, when going around with a sighted companion, they preferred to be guided by them as it enabled them to remain engaged in conversation rather than having to focus on navigational tasks.</p><p>A key strategy to better manage both issues of communication with surrounding pedestrians, and the need for balance between safety and user autonomy is to increase trust between humans, both users and surrounding pedestrians, and smart wheelchairs <ref type="bibr" target="#b97">[99]</ref>. As explored in some of the recent literature on self-driving vehicles, trust is built when a smart vehicle behaves a way that matches the mental model of the individual <ref type="bibr" target="#b63">[65]</ref>. These mental model are generally based on previous encounters, but also on the level of understanding that the person has of the technology and how it operates <ref type="bibr" target="#b5">[6,</ref><ref type="bibr" target="#b63">65]</ref>. This resonates with literature on technology explainability, both in relation to smart vehicles and other types of complex technologies showing that if a person understands the causality that governs the behaviour of technology (e.g. why a computer vision system does not recognise an object or why a smart vehicle switches lane on a motorway), they are more inclined to trust it and accept mistakes that might occur <ref type="bibr" target="#b71">[73]</ref>. From the wheelchair users' point-of-view this aligns with the explainable shared control paradigm <ref type="bibr" target="#b98">[100]</ref> and the communication needs expressed in study one, when participants said that they would particularly wish to receive feedback especially when the behaviour of the wheelchair might difer from the original command given. Explainable object-induced action feedback, such as the one proposed by Xu et al. <ref type="bibr" target="#b31">(2020)</ref>  <ref type="bibr" target="#b95">[97]</ref> for autonomous vehicles, where the system fags the specifc object detected that leads to a certain action (such as a red light would cause the car to stop), could represent a viable solution to this issue. On the other hand, previous studies on interactions between autonomous and pedestrians and cyclists needed less specifc information, but felt more safe if the eHMI clearly communicated the vehicle awareness of their presence, the intention of the vehicle (e.g. stopping, or turning towards a particular direction) and, in certain situations, the expected behaviour for the participants (e.g. gesturing a pedestrian that is safe for them to cross the road frst) <ref type="bibr" target="#b55">[56,</ref><ref type="bibr" target="#b64">66]</ref>.</p><p>The fnal tension we want to highlight is the one that emerged between the need to balance the needs of the users with the ones of surrounding pedestrians. In the frst interview study, this tension was most visible in the discussions surrounding ethical aspects of smart wheelchairs. All participants agreed that collisions with pedestrians should be avoided at all costs. However, implementing safety mechanisms during crowd navigation could also result in continuous starts and stops that would make the ride uncomfortable and potentially dangerous for the user. In the remote design workshop a similar issue of boundaries between what benefcial for smart wheelchair users what would be acceptable to the surrounding pedestrians was also touched upon when discussing ideal interaction locations. For instance, users acknowledged that being able to transmit a warning directly to a passerby that was standing in front of them by leveraging IoT connectivity and, for example, making their phone vibrate would be extremely convenient. However, they also felt it would be an unauthorised invasion of other people's personal space. As a result, participants decided that the optimal location of any interaction would also be based on the wheelchair, or easily traceable to it, even if it meant that the feedback provided to pedestrians would be less efective.</p><p>The importance of negotiating potentially conficting priorities when it comes to design interactions for equal access of opportunities has also been highlighted by <ref type="bibr" target="#b13">[14]</ref> and <ref type="bibr" target="#b47">[48]</ref>. As stated by <ref type="bibr">Bennett et al. (2021)</ref>, negotiating accessibility between diferent mobility needs on footpaths, or other crowded can be extremely challenging <ref type="bibr" target="#b13">[14]</ref>. As designers and researchers it is important we make sure to consider how power dynamics between pedestrians, wheelchair users and others can afect decisions we make and how we create accessible or inaccessible interactions.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>DESIGN IMPLICATIONS</head><p>Based on the results from our studies and the refections on the design tensions we presented in the discussion, we elaborated a series of design implications that we believe would be crucial to the development of future smart wheelchairs.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="6.1">Empathy, embodiment and social acceptance</head><p>When we compared the proposed internal and external communication design for smart wheelchairs created by participants versus the ones which are more commonly designed for autonomous vehicles, we noticed additional requirements related to the need to include elements of empathy, embodiment and social acceptance in smart wheelchair interaction design. Participants stated that they would consider a smart wheelchair as an extension of their body, akin to what has been previously reported for diferent types of assistive technology <ref type="bibr" target="#b9">[10,</ref><ref type="bibr" target="#b14">15]</ref>. As such, the way in which the smart wheelchair provides feedback to the user needs to feel appropriate, matching one's expectation for embodiment, which might be diferent across individuals. Moreover, when it comes to external communication, the way in which the wheelchair enables interactions between the user and surrounding pedestrians should incorporate considerations around social acceptability and empathetic communication. In contrast with other fully and semi-autonomous vehicles, and in line to what has been reported by users of diferent assistive technologies, the smart wheelchair is intrinsically connected to the image of the user, becoming part of how people with disabilities perceive themselves and are perceived others <ref type="bibr" target="#b7">[8,</ref><ref type="bibr" target="#b9">10,</ref><ref type="bibr" target="#b14">15,</ref><ref type="bibr" target="#b66">68]</ref>. Hence, any interaction with others becomes a much more personal experience. Although having the smart wheelchair emit loud noise might be an efective strategy to get some careless pedestrian to give way to the wheelchair, some users might feel uncomfortable with such a form of interaction in the same way that they would be reluctant to shout at the top of their lungs for people to move out of their way. Ultimately, users want to retain the ability to use more direct ways to attract attention as it might be needed in situations of emergency. However, in everyday they preferred their smart wheelchair to maintain a more polite and empathetic style of communication with surrounding pedestrians, in the same way that they would normally interact using their voices or bodies.</p><p>This relates well with fndings from previous studies examining the communication needs between diferent groups of road users, including smart vehicles, in shared spaces <ref type="bibr" target="#b55">[56]</ref>. Suggestions from participants highlight how wheelchair users generally prefer to use more discrete visual means, such as light projections or small screens mounted on the armrest, to both give and receive feedback most situations. As seen in both Li et al. (2021) <ref type="bibr" target="#b55">[56]</ref> and Asha et al. (2021) <ref type="bibr" target="#b2">[3]</ref> audio cues might be considered acceptable in emergency situations, where one needs to call immediate attention of surrounding pedestrians to avoid an immediate danger, but this mean of communication draws unwanted attention to the wheelchair users and was often seen as a last resort by participants. It is also important to remember that eHMIs might support the communication between wheelchair users and surrounding pedestrians in some situations, but users might deem them not necessary in many other circumstances. The survey carried out by <ref type="bibr">Li et al. (2021)</ref> showed that many cyclist and pedestrian preferred to receive information and signals from car drivers through hand gestures, eye contact and head nods rather than headlights fashing or horns beeping It is reasonable to expect that in many social shared space these preferences for human communication without the mediation of eHMIs might translate to the interactions between smart wheelchairs and pedestrians.</p><p>Finally, as shown by the two scenarios described in Study 2, smart wheelchairs are likely to be used in much more various situations compared to most other types of semi-autonomous vehicles. This has direct consequences on both internal and external feedback systems, as considerations about what are socially acceptable ways to interact are signifcantly diferent depending on the situation <ref type="bibr" target="#b0">[1,</ref><ref type="bibr" target="#b72">74,</ref><ref type="bibr" target="#b74">76]</ref>. Hence, interaction systems for smart wheelchairs need to incorporate a degree of fexibility to ensure that users are able to customise the way the smart wheelchair communicates with themselves and others in a way feels appropriate to the context.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="6.2">Situational Awareness and Adaptability</head><p>Situational awareness and adaptability are possibly the two most important key features for smart wheelchairs' interaction systems that we have identifed across the two studies. As mentioned in the previous section, in order to be efective, smart wheelchairs need to be suitable for use across a variety of indoor and outdoor environments and in a multitude of diferent social situations. This requires control and interaction systems to incorporate a great degree of fexibility to accommodate the requirements associated with diferent scenarios. Moreover, smart wheelchairs also need to be able to respond to the shifting capabilities and the changing preferences users adapting not only their mode of interaction, but also the degree of assistance provided to the individual.</p><p>Of course it is always possible to make these systems completely open and fully customisable, enabling users to continuously select their preferred depending on their personal state, the characteristics of the environment and the social context. However, although some users might be happy to be able to choose every single interaction and control aspect of their smart wheelchair, others might fnd this excessive degree of customization overwhelming, and prefer to be presented with simpler and more intuitive decisions <ref type="bibr" target="#b11">[12,</ref><ref type="bibr" target="#b46">47,</ref><ref type="bibr" target="#b57">58]</ref>. To strike a balance between customization and user burden and to promote more seamless navigation experiences as smart wheelchairs transition across diferent environments, we advocate for the use of ability-based design approaches and sense-modeladapt design patterns <ref type="bibr" target="#b92">[94,</ref><ref type="bibr" target="#b93">95]</ref>. By embedding smart wheelchairs with sensory capabilities that go beyond what might be currently needed to ensure the choice of safe path for navigation, it should be possible to enhance the contextual awareness of the system, facilitating the transition between diferent modes of use depending on the afective state of the user and the situational context. The implicit personalized user model proposed by Vanhooydonck colleagues ofer a good starting blueprint for such a system <ref type="bibr" target="#b83">[85]</ref>. The personalised user model would feature standard "smart driving" modes, such as zero assistance, which leaves the user in full control, or obstacle avoidance, which automatically modifes the path selected by the user in order to drive around a detected obstacle. However, specifc smart driving modes can also be added and created by integrating information from users and ambient sensors that are integrated in the wheelchair <ref type="bibr" target="#b83">[85]</ref>. For example, the physiological signal from an activity monitor might signal that the heartbeat of the user is slowing down signifcantly, which might indicate tiredness. This would signal the need for the smart wheelchair to increase the level of assistance provided, to make sure that the person is safe. Similarly, light sensors placed on the wheelchair might be used to detect conditions where lighting is poor which might require increased assistance or be more suitable to visual eHMIs such as projected light to signal one's presence to surrounding pedestrians. Although the user should always retain the ability to change and modify any of these settings according to their preference if they wish to do so, the smart wheelchair should assist and facilitate these choices based on its situational awareness.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="6.3">Selective information management</head><p>it is important for smart wheelchairs to be able to effectively communicate important information to both users and surrounding pedestrians, there is a need to carefully consider which information should be shared, how, with whom. Previous studies have shown that being bombarded with excessive information in a short space of time can lead to overload, which negatively afects an individual's performance <ref type="bibr" target="#b33">[34]</ref>. <ref type="bibr" target="#b60">Mahadevan et al. (2018)</ref>'s study examining interactions between autonomous vehicles and pedestrians showed that receiving too many cues, or cues with too many states that might be difcult to interpret, is more likely to cause information overload, especially when these cues rely on diferent sensory channels <ref type="bibr" target="#b60">[61]</ref>. Similarly, in our study, participants expressed the preference towards having only selected information relevant for driving the smart wheelchair displayed by the interface at all time, whereas any other cue concerning potential obstacles should only be provided at the appropriate time needed to prevent collision in order to not overload the user as well as the surrounding pedestrians. Moreover, some participants also mentioned that they want to be given the ability to switch on and of any non-essential cue as they desire. Furthermore, in the scenarios explored we assumed that our potential user Ann had unimpaired sensory and cognitive capabilities, it is important to remember that this might not be necessarily be true for all users or pedestrians at all times. For example as identifed by Asha et al. (2021) <ref type="bibr" target="#b2">[3]</ref>, a wheelchair user with reduced visual capabilities might prefer to receive feedback about surrounding obstacles using haptic feedback rather than visual clues. Similarly, in conditions of intense sunlight such cues might not be visible to anyone regardless of their personal capabilities <ref type="bibr" target="#b2">[3]</ref>. Moreover, user with reduced cognitive capabilities might still want to receive feedback about the path of the wheelchair, but not necessarily about the type and location of detected obstacles to make the fow of information easier to understand <ref type="bibr" target="#b85">[87]</ref>. Ultimately, although providing various cues in mixed modalities could potentially improve the decision-making performance for a wider range of people, this should be designed fexibly and with care in order to comply with situational and personal requirements and manage any potential risk for information overload.</p><p>Finally, while state-of-the-art interaction designs between autonomous vehicle and pedestrians include the need for information related to the recognition of pedestrians, explicit suggestions for pedestrians, the vehicle state and the vehicle intent, we only observed the need for the latter two when it came to smart wheelchair navigation in crowded environments <ref type="bibr" target="#b2">[3,</ref><ref type="bibr">27,</ref><ref type="bibr" target="#b60">61]</ref>. This is possibly due to the diferent dynamic between an autonomous vehicle and a smart wheelchair in relation to pedestrians. While the former usually crosses through a crowd of pedestrians, the latter is more likely to move along with the pedestrian fow. Hence, the need for negotiating the road use through recognition and suggestions is less, whereas the need for mutually understanding has increased for better collaboration.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="7">LIMITATIONS</head><p>While the target populations of the intelligent powered wheelchairs includes people who are not suitable to use a standard power wheelchair, our study sample was biased toward current power wheelchair users. In addition, the results presented could include gender bias as only one female participant was included in our second study.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="8">CONCLUSION</head><p>Navigation in crowds involves a complex interaction between the wheelchair user and the other pedestrians. Shared control create additional complexities to the user-wheelchair interaction. By conducting a series of semi-structured interviews followed by a design workshop, we explored for the frst time the user needs for shared control wheelchair driving in crowds and presented preliminary results for building two interaction loops in four themes: Type of information needed, interaction modality, interface location and adaptable design. Through refections and comparisons to other work, we further proposed a series of design implications which includes: 1) Empathy, embodiment social acceptance, 2) Situational awareness and adaptability 3) Selective information management.</p></div><figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_0"><head></head><label></label><figDesc>Table1: Demographic data of wheelchair users who took part in Study 1. Note the years of experience combines the manual and power wheelchair use.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_1"><head>Figure 2 :</head><label>2</label><figDesc>Figure 2: An image of our smart wheelchair prototype</figDesc><graphic url="image-6.png" coords="6,205.12,310.21,201.75,214.88" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_2"><head>Figure 3 :Figure 4 :</head><label>34</label><figDesc>Figure 3: Two internal and external communication design outputs from the workshop for the crowded street scenario. (a) Trafc color coded projection is used to indicate the wheelchair's speed. (b) The wheelchair's trajectory and its from the user's intention in indicated through "Parking trajectory alike system", either being projected or pop-up in an add-on screen. Short and long audio signals are used for warnings.</figDesc><graphic url="image-9.png" coords="10,53.80,297.10,239.58,124.57" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_0"><head></head><label></label><figDesc>ID Age Self-identifed Gender Years of Experience as wheelchair user</figDesc><table><row><cell>P1</cell><cell>63</cell><cell>Male</cell></row><row><cell>P2</cell><cell>26</cell><cell>Female</cell></row><row><cell>P3</cell><cell>40</cell><cell>Male</cell></row><row><cell>P4</cell><cell>25</cell><cell>Male</cell></row><row><cell>P5</cell><cell>65</cell><cell>Female</cell></row><row><cell>P6</cell><cell>47</cell><cell>Female</cell></row><row><cell>P7</cell><cell>46</cell><cell>Male</cell></row><row><cell>P8</cell><cell>47</cell><cell>Male</cell></row><row><cell>P9</cell><cell>44</cell><cell>Male</cell></row><row><cell cols="2">P10 28</cell><cell>Male</cell></row><row><cell cols="2">P11 62</cell><cell>Male</cell></row><row><cell cols="2">P12 38</cell><cell>Female</cell></row><row><cell cols="2">P13 76</cell><cell>Male</cell></row><row><cell cols="2">P14 32</cell><cell>Male</cell></row><row><cell cols="2">P15 55</cell><cell>Male</cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_1"><head>Table 2 :</head><label>2</label><figDesc>Demographic data of participants for Study 2</figDesc><table><row><cell>P1</cell><cell>Female</cell><cell>65</cell><cell>14</cell></row><row><cell>P2</cell><cell>Male</cell><cell>36</cell><cell>6</cell></row><row><cell>P3</cell><cell>Male</cell><cell>40</cell><cell>10</cell></row><row><cell>P4</cell><cell>Male</cell><cell>20</cell><cell>2</cell></row><row><cell>P5</cell><cell>Male</cell><cell>25</cell><cell>4</cell></row><row><cell>P6</cell><cell>Male</cell><cell>60</cell><cell>18</cell></row><row><cell>ID</cell><cell>Gender</cell><cell>Age</cell><cell>Years of experience as a designer</cell></row><row><cell>P7</cell><cell>Male</cell><cell>50</cell><cell>25</cell></row><row><cell>P8</cell><cell>Male</cell><cell>29</cell><cell>10</cell></row></table></figure>
+		</body>
+		<back>
+			<div type="references">
+
+				<listBibl>
+
+<biblStruct xml:id="b0">
+	<monogr>
+		<title level="m" type="main">Embracing Errors: Examining How Context of Impacts Blind Individuals&apos; Acceptance Navigation Aid Errors</title>
+		<author>
+			<persName><forename type="first">Ali</forename><surname>Abdolrahmani</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">William</forename><forename type="middle">Michele</forename><surname>Williams</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Stacy</forename><surname>Branham</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Amy</forename><surname>Hurst</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3025453.3025528</idno>
+		<ptr target="https://doi.org/10.1145/3025453.3025528" />
+		<imprint>
+			<date type="published" when="2017">2017</date>
+			<publisher>Association for Computing Machinery</publisher>
+			<biblScope unit="page" from="4158" to="4169" />
+			<pubPlace>New York, NY, USA</pubPlace>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b1">
+	<analytic>
+		<title level="a" type="main">Eye and Voice-Controlled Human Machine Interface System for Wheelchairs Using Image Gradient Approach</title>
+		<author>
+			<persName><forename type="first">Saba</forename><surname>Anwer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Asim</forename><surname>Waris</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Hajrah</forename><surname>Sultan</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Shahid Ikramullah</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Muhammad</forename><surname>Butt</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Moaz</forename><surname>Hamza Zafar</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Sarwar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Shafque</forename><surname>Imran Khan Niazi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Amit</forename><forename type="middle">N</forename><surname>Pujari</surname></persName>
+		</author>
+		<ptr target="https://www.mdpi.com/1424-8220/20/19/5510" />
+	</analytic>
+	<monogr>
+		<title level="j">Sensors</title>
+		<imprint>
+			<biblScope unit="volume">20</biblScope>
+			<biblScope unit="page">19</biblScope>
+			<date type="published" when="2020">2020. 2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b2">
+	<analytic>
+		<title level="a" type="main">Sowmya Somanath, Lora Oehlberg, and Ehud Sharlin. 2021. Co-Designing Interactions between Pedestrians in Wheelchairs and Autonomous Vehicles</title>
+		<author>
+			<persName><forename type="first">Asha</forename><surname>Ashratuz Zavin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Christopher</forename><surname>Smith</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Georgina</forename><surname>Freeman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sean</forename><surname>Crump</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3461778.3462068</idno>
+		<ptr target="https://doi.org/10.1145/3461778.3462068" />
+	</analytic>
+	<monogr>
+		<title level="m">Designing Interactive Systems Conference 2021 (Virtual Event, USA) (DIS &apos;21)</title>
+				<meeting><address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computing Machinery</publisher>
+			<biblScope unit="page" from="339" to="351" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b3">
+	<monogr>
+		<title level="m" type="main">Sowmya Somanath, Lora Oehlberg, and Ehud Sharlin. 2021. Co-Designing Interactions between Pedestrians in Wheelchairs and Autonomous Vehicles</title>
+		<author>
+			<persName><forename type="first">Asha</forename><surname>Ashratuz Zavin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Christopher</forename><surname>Smith</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Georgina</forename><surname>Freeman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sean</forename><surname>Crump</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3461778.3462068</idno>
+		<imprint>
+			<publisher>Association for Computing Machinery</publisher>
+			<biblScope unit="page">3462068</biblScope>
+			<pubPlace>New York, NY, USA</pubPlace>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b4">
+	<analytic>
+		<title level="a" type="main">Views from the Wheelchair: Understanding Interaction between Autonomous Vehicle and Pedestrians with Reduced Mobility</title>
+		<author>
+			<persName><forename type="first">Asha</forename><surname>Ashratuz Zavin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Christopher</forename><surname>Smith</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Lora</forename><surname>Oehlberg</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sowmya</forename><surname>Somanath</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ehud</forename><surname>Sharlin</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Extended Abstracts of the 2020 CHI Conference on Human Factors in Computing Systems</title>
+				<meeting><address><addrLine>Honolulu, HI, USA; New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computing Machinery</publisher>
+			<date type="published" when="2020">2020</date>
+			<biblScope unit="page" from="1" to="8" />
+		</imprint>
+	</monogr>
+	<note>CHI EA &apos;20)</note>
+</biblStruct>
+
+<biblStruct xml:id="b5">
+	<analytic>
+		<title level="a" type="main">Modeling Dispositional and Initial learned Trust in Automated Vehicles with Predictability and Explainability</title>
+		<author>
+			<persName><forename type="first">Jackie</forename><surname>Ayoub</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">X</forename><forename type="middle">Jessie</forename><surname>Yang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Feng</forename><surname>Zhou</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Transportation Research Part F: Trafc Psychology and Behaviour</title>
+		<imprint>
+			<biblScope unit="volume">77</biblScope>
+			<biblScope unit="page" from="102" to="116" />
+			<date type="published" when="2021-02">2021. 02 2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b6">
+	<analytic>
+		<title level="a" type="main">PLACES: A Framework for Supporting Blind and Partially Sighted People in Outdoor Leisure Activities</title>
+		<author>
+			<persName><forename type="first">Maryam</forename><surname>Bandukda</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Catherine</forename><surname>Holloway</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Aneesha</forename><surname>Singh</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Nadia</forename><surname>Berthouze</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">The 22nd International ACM SIGACCESS Conference on Computers and Accessibility (Virtual Event, Greece) (ASSETS &apos;20)</title>
+				<meeting><address><addrLine>New York, NY, USA, Article</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computing Machinery</publisher>
+			<date type="published" when="2020">2020</date>
+			<biblScope unit="volume">29</biblScope>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b7">
+	<analytic>
+		<title level="a" type="main">When They See a Wheelchair, They&apos;ve Not Even Seen Me&quot;-Factors Shaping the Experience of Disability Stigma and Discrimination in Kenya</title>
+		<author>
+			<persName><forename type="first">Giulia</forename><surname>Barbareschi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mark</forename><forename type="middle">T</forename><surname>Carew</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Elizabeth</forename><forename type="middle">Aderonke</forename><surname>Johnson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Norah</forename><surname>Kopi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Catherine</forename><surname>Holloway</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">International Journal of Environmental Research and Public Health</title>
+		<imprint>
+			<biblScope unit="volume">18</biblScope>
+			<date type="published" when="2021">2021. 2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b8">
+	<analytic>
+		<title level="a" type="main">Value beyond Function: Analyzing the Perception of Wheelchair Innovations in Kenya</title>
+		<author>
+			<persName><forename type="first">Giulia</forename><surname>Barbareschi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sibylle</forename><surname>Daymond</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jake</forename><surname>Honeywill</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Aneesha</forename><surname>Singh</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Dominic</forename><surname>Noble</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Nancy</forename><forename type="middle">N</forename><surname>Mbugua</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ian</forename><surname>Harris</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Victoria</forename><surname>Austin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Catherine</forename><surname>Holloway</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">The 22nd International ACM SIGACCESS Conference on Computers and Accessibility (Virtual Event, Greece) (ASSETS &apos;20). Association for Computing Machinery</title>
+				<meeting><address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+	<note>Article 37, 14 pages</note>
+</biblStruct>
+
+<biblStruct xml:id="b9">
+	<analytic>
+		<title level="a" type="main">Value beyond Function: Analyzing the Perception of Wheelchair Innovations in Kenya</title>
+		<author>
+			<persName><forename type="first">Giulia</forename><surname>Barbareschi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sibylle</forename><surname>Daymond</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jake</forename><surname>Honeywill</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Aneesha</forename><surname>Singh</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Dominic</forename><surname>Noble</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Nancy</forename><forename type="middle">N</forename><surname>Mbugua</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ian</forename><surname>Harris</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Victoria</forename><surname>Austin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Catherine</forename><surname>Holloway</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">The 22nd International ACM SIGACCESS Conference on Computers and Accessibility (Virtual Event, Greece) (ASSETS &apos;20). Association for Computing Machinery</title>
+				<meeting><address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+	<note>Article 37, 14 pages</note>
+</biblStruct>
+
+<biblStruct xml:id="b10">
+	<analytic>
+		<title level="a" type="main">Bridging the Divide: Exploring the Use of Digital and Physical Technology to Aid Mobility Impaired People Living in an Informal Settlement</title>
+		<author>
+			<persName><forename type="first">Giulia</forename><surname>Barbareschi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ben</forename><surname>Oldfrey</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Long</forename><surname>Xin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Grace</forename><surname>Nyachomba Magomere</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Wyclife</forename><surname>Ambeyi Wetende</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Carol</forename><surname>Wanjira</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Joyce</forename><surname>Olenja</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Victoria</forename><surname>Austin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Catherine</forename><surname>Holloway</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">The 22nd International ACM SIGACCESS Conference on Computers and Accessibility (Virtual Event, Greece) (ASSETS &apos;20). Association for Computing Machinery</title>
+				<meeting><address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+	<note>Article 50, 13 pages</note>
+</biblStruct>
+
+<biblStruct xml:id="b11">
+	<monogr>
+		<title level="m" type="main">Customizing Hybrid Products</title>
+		<author>
+			<persName><forename type="first">Steve</forename><surname>Benford</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Boriana</forename><surname>Koleva</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">William</forename><forename type="middle">Westwood</forename><surname>Preston</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Alice</forename><surname>Angus</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Emily-Clare</forename><surname>Thorn</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kevin</forename><surname>Glover</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3173574.3173604</idno>
+		<ptr target="https://doi.org/10.1145/3173574.3173604" />
+		<imprint>
+			<date type="published" when="2018">2018</date>
+			<publisher>Association for Computing Machinery</publisher>
+			<biblScope unit="page" from="1" to="12" />
+			<pubPlace>New York, NY, USA</pubPlace>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b12">
+	<monogr>
+		<title level="m" type="main">From HMI to HMIs: Towards an HMI Framework for Automated Driving. Information</title>
+		<author>
+			<persName><forename type="first">Klaus</forename><surname>Bengler</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Michael</forename><surname>Rettenmaier</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Nicole</forename><surname>Fritz</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Alexander</forename><surname>Feierle</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2020">2020</date>
+			<biblScope unit="volume">11</biblScope>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b13">
+	<monogr>
+		<title level="m" type="main">Patrick Carrington, and Sarah Fox. 2021. Accessibility and The Crowded Sidewalk: Micromobility&apos;s Impact on Public Space</title>
+		<author>
+			<persName><forename type="first">Cynthia</forename><surname>Bennett</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Emily</forename><surname>Ackerman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Bonnie</forename><surname>Fan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jefrey</forename><surname>Bigham</surname></persName>
+		</author>
+		<imprint>
+			<publisher>Association for Computing Machinery</publisher>
+			<biblScope unit="page" from="365" to="380" />
+			<pubPlace>New York, NY, USA</pubPlace>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b14">
+	<monogr>
+		<title level="m" type="main">An Intimate Laboratory? Prostheses as a Tool for Experimenting with Identity and Normalcy</title>
+		<author>
+			<persName><forename type="first">Cynthia</forename><forename type="middle">L</forename><surname>Bennett</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Keting</forename><surname>Cen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Katherine</forename><forename type="middle">M</forename><surname>Steele</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Daniela</forename><forename type="middle">K</forename><surname>Rosner</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2858036.2858564</idno>
+		<ptr target="https://doi.org/10.1145/2858036.2858564" />
+		<imprint>
+			<date type="published" when="2016">2016</date>
+			<publisher>Association for Computing Machinery</publisher>
+			<biblScope unit="page" from="1745" to="1756" />
+			<pubPlace>New York, NY, USA</pubPlace>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b15">
+	<analytic>
+		<title level="a" type="main">Upper limb prosthesis use and abandonment: A survey of the last 25 years</title>
+		<author>
+			<persName><forename type="first">Elaine</forename><forename type="middle">A</forename><surname>Biddiss</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Tom</forename><forename type="middle">T</forename><surname>Chau</surname></persName>
+		</author>
+		<idno type="DOI">10.1080/03093640600994581</idno>
+		<idno type="PMID">17979010</idno>
+		<ptr target="https://doi.org/10.1080/03093640600994581" />
+	</analytic>
+	<monogr>
+		<title level="j">Prosthetics and Orthotics International</title>
+		<imprint>
+			<biblScope unit="volume">31</biblScope>
+			<biblScope unit="page" from="236" to="257" />
+			<date type="published" when="2007">2007. 2007</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b16">
+	<analytic>
+		<title level="a" type="main">SAV2P: Exploring the Impact of an Interface for Shared Automated Vehicles on Pedestrians&apos; Experience</title>
+		<author>
+			<persName><forename type="first">Marc-Philipp</forename><surname>Böckle</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Anna</forename><forename type="middle">Pernestål</forename><surname>Brenden</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Maria</forename><surname>Klingegård</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings the 9th International Conference on Automotive User Interfaces and Interactive Vehicular Applications Adjunct</title>
+				<meeting>the 9th International Conference on Automotive User Interfaces and Interactive Vehicular Applications Adjunct<address><addrLine>Oldenburg, Germany; New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computing Machinery</publisher>
+			<date type="published" when="2017">2017</date>
+			<biblScope unit="page" from="136" to="140" />
+		</imprint>
+	</monogr>
+	<note>AutomotiveUI &apos;17)</note>
+</biblStruct>
+
+<biblStruct xml:id="b17">
+	<analytic>
+		<title level="a" type="main">Using thematic analysis in psychology</title>
+		<author>
+			<persName><forename type="first">Virginia</forename><surname>Braun</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Victoria</forename><surname>Clarke</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Qualitative research in psychology</title>
+		<imprint>
+			<biblScope unit="volume">3</biblScope>
+			<biblScope unit="issue">2</biblScope>
+			<biblScope unit="page" from="77" to="101" />
+			<date type="published" when="2006">2006. 2006</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b18">
+	<analytic>
+		<title level="a" type="main">Human-wheelchair collaboration through prediction of intention and adaptive assistance</title>
+		<author>
+			<persName><forename type="first">Tom</forename><surname>Carlson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yiannis</forename><surname>Demiris</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">IEEE International Conference on Robotics and Automation</title>
+		<imprint>
+			<biblScope unit="page" from="3926" to="3931" />
+			<date type="published" when="2008">2008. 2008</date>
+			<publisher>IEEE</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b19">
+	<analytic>
+		<title level="a" type="main">Increasing robotic safety with collaborative control: Evidence from secondary task experiments</title>
+		<author>
+			<persName><forename type="first">Tom</forename><surname>Carlson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yiannis</forename><surname>Demiris</surname></persName>
+		</author>
+		<idno type="DOI">10.1109/ROBOT.2010.5509257</idno>
+		<ptr target="https://doi.org/10.1109/ROBOT.2010.5509257" />
+	</analytic>
+	<monogr>
+		<title level="m">2010 IEEE International Conference on Robotics and Automation. 5582-5587</title>
+				<imprint>
+			<date type="published" when="2010">2010</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b20">
+	<analytic>
+		<title/>
+		<author>
+			<persName><forename type="first">Tom</forename><surname>Carlson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jose</forename><surname>Del</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Millan</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Brain-Controlled Wheelchairs: A Robotic Architecture. Robotics and Automation Magazine</title>
+		<imprint>
+			<biblScope unit="volume">20</biblScope>
+			<biblScope unit="page" from="65" to="73" />
+			<date type="published" when="2013-03">2013. 03 2013</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b21">
+	<analytic>
+		<title level="a" type="main">The Gest-Rest Family: Exploring Input Possibilities for Wheelchair Armrests</title>
+		<author>
+			<persName><forename type="first">Patrick</forename><surname>Carrington</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jian-Ming</forename><surname>Chang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kevin</forename><surname>Chang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Catherine</forename><surname>Hornback</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Amy</forename><surname>Hurst</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Shaun</forename><forename type="middle">K</forename><surname>Kane</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">ACM Transactions on Accessible Computing (TACCESS)</title>
+		<imprint>
+			<biblScope unit="volume">8</biblScope>
+			<biblScope unit="page" from="1" to="24" />
+			<date type="published" when="2016">2016. 2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b22">
+	<monogr>
+		<title level="m" type="main">The Gest-Rest: A Pressure-Sensitive Chairable Input Pad for Power Wheelchair Armrests. Association for Computing Machinery</title>
+		<author>
+			<persName><forename type="first">Patrick</forename><surname>Carrington</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Amy</forename><surname>Hurst</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Shaun</forename><forename type="middle">K</forename><surname>Kane</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2661334.2661374</idno>
+		<ptr target="https://doi.org/10.1145/2661334.2661374" />
+		<imprint>
+			<date type="published" when="2014">2014</date>
+			<pubPlace>New York, NY, USA</pubPlace>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b23">
+	<analytic>
+		<title level="a" type="main">Wearables and chairables: inclusive design of mobile input and output techniques for power wheelchair users</title>
+		<author>
+			<persName><forename type="first">Patrick</forename><surname>Carrington</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Amy</forename><surname>Hurst</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Shaun</forename><forename type="middle">K</forename><surname>Kane</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings the SIGCHI Conference on Human Factors in Computing Systems</title>
+				<meeting>the SIGCHI Conference on Human Factors in Computing Systems</meeting>
+		<imprint>
+			<date type="published" when="2014">2014</date>
+			<biblScope unit="page" from="3103" to="3112" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b24">
+	<monogr>
+		<title level="m" type="main">Wearables and Chairables: Inclusive Design of Mobile Input and Output Techniques for Power Wheelchair Users</title>
+		<author>
+			<persName><forename type="first">Patrick</forename><surname>Carrington</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Amy</forename><surname>Hurst</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Shaun</forename><forename type="middle">K</forename><surname>Kane</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2014">2014</date>
+			<publisher>Association for Computing Machinery</publisher>
+			<pubPlace>New York, NY, USA</pubPlace>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b25">
+	<analytic>
+		<title level="a" type="main">A Video-Based Study Comparing Communication Modalities between an Autonomous Car and a Pedestrian</title>
+		<author>
+			<persName><forename type="first">Chia-Ming</forename><surname>Chang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Koki</forename><surname>Toda</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yasuhiro</forename><surname>Takeo Masahiro Miyata</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Kobayashi</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3122986.3122989</idno>
+		<ptr target="https://doi.org/10.1145/3122986.3122989" />
+	</analytic>
+	<monogr>
+		<title level="m">Adjunct Proceedings the 10th International Conference on Automotive User Interfaces and Interactive Vehicular Applications</title>
+				<editor>
+			<persName><forename type="first">Chia-Ming</forename><surname>Chang</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">Koki</forename><surname>Toda</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">Daisuke</forename><surname>Sakamoto</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">Takeo</forename><surname>Igarashi</surname></persName>
+		</editor>
+		<meeting><address><addrLine>Toronto, ON, Canada; New York, NY, USA; Oldenburg, Germany; New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computing Machinery</publisher>
+			<date type="published" when="2017">2018. 2017</date>
+			<biblScope unit="page" from="65" to="73" />
+		</imprint>
+	</monogr>
+	<note>AutomotiveUI &apos;17)</note>
+</biblStruct>
+
+<biblStruct xml:id="b26">
+	<analytic>
+		<title level="a" type="main">Eyes on a Car: An Interface Design for Communication between an Autonomous Car and a</title>
+		<author>
+			<persName><forename type="first">Koki</forename><surname>Toda</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Daisuke</forename><surname>Sakamoto</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Takeo</forename><surname>Igarashi</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3122986.3122989</idno>
+		<ptr target="https://doi.org/10.1145/3122986.3122989" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 9th International Conference on Automotive User Interfaces and Interactive Vehicular Applications</title>
+				<meeting>the 9th International Conference on Automotive User Interfaces and Interactive Vehicular Applications<address><addrLine>Oldenburg, Germany; York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computing Machinery</publisher>
+			<date type="published" when="2017">2017</date>
+			<biblScope unit="page" from="65" to="73" />
+		</imprint>
+	</monogr>
+	<note>AutomotiveUI &apos;17)</note>
+</biblStruct>
+
+<biblStruct xml:id="b27">
+	<analytic>
+		<title level="a" type="main">Crowdrobot interaction: Crowd-aware robot navigation with attention-based deep reinforcement learning</title>
+		<author>
+			<persName><forename type="first">Changan</forename><surname>Chen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yuejiang</forename><surname>Liu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sven</forename><surname>Kreiss</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Alexandre</forename><surname>Alahi</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">2019 International Conference on Robotics Automation (ICRA)</title>
+				<imprint>
+			<publisher>IEEE</publisher>
+			<date type="published" when="2019">2019</date>
+			<biblScope unit="page" from="6015" to="6022" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b28">
+	<analytic>
+		<title level="a" type="main">External Human-Machine Automated Vehicles: Efects on Pedestrian Crossing Decisions</title>
+		<author>
+			<persName><forename type="first">Andre</forename><surname>Koen De Clercq</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Juan Pablo Núñez</forename><surname>Dietrich</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Velasco</surname></persName>
+		</author>
+		<idno type="DOI">10.1177/0018720819836343</idno>
+		<idno type="PMID">30912985</idno>
+		<ptr target="https://doi.org/10.1177/0018720819836343" />
+	</analytic>
+	<monogr>
+		<title level="j">Human Factors</title>
+		<imprint>
+			<biblScope unit="volume">61</biblScope>
+			<biblScope unit="page" from="1353" to="1370" />
+			<date type="published" when="2019">2019. 2019</date>
+		</imprint>
+	</monogr>
+	<note>Joost de Winter, Riender Happee</note>
+</biblStruct>
+
+<biblStruct xml:id="b29">
+	<analytic>
+		<title level="a" type="main">Investigating pedestrian suggestions for external features on fully autonomous vehicles: A virtual reality experiment</title>
+		<author>
+			<persName><forename type="first">Shuchisnigdha</forename><surname>Deb</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Lesley</forename><forename type="middle">J</forename><surname>Strawderman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Daniel</forename><forename type="middle">W</forename><surname>Carruth</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Transportation Research Part F: Trafc Psychology and Behaviour</title>
+		<imprint>
+			<biblScope unit="volume">59</biblScope>
+			<biblScope unit="page" from="135" to="149" />
+			<date type="published" when="2018">2018. 2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b30">
+	<monogr>
+		<title/>
+		<author>
+			<persName><forename type="first">Louise</forename><surname>Devigne</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Marco</forename><surname>Aggravi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Morgane</forename><surname>Bivaud</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Nathan</forename><surname>Balix</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Stefan</forename><surname>Catalin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Tom</forename><forename type="middle">Tom</forename><surname>Teodorescu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Claudio</forename><surname>Spreters</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Marie</forename><surname>Pacchierotti</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Babel</surname></persName>
+		</author>
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b31">
+	<monogr>
+		<title level="m" type="main">Power Wheelchair Navigation Assistance Using Wearable Vibrotactile Haptics</title>
+		<idno type="DOI">10.1109/TOH.2019.2963831</idno>
+		<ptr target="https://doi.org/10.1109/TOH.2019.2963831" />
+		<imprint>
+			<date type="published" when="2020">2020</date>
+			<biblScope unit="volume">13</biblScope>
+			<biblScope unit="page">1</biblScope>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b32">
+	<analytic>
+		<title level="a" type="main">Projection-Based External Human Machine Interfaces -Enabling Interaction between Automated Vehicles and Pedestrians</title>
+		<author>
+			<persName><forename type="first">André</forename><surname>Dietrich</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jan-Henning</forename><surname>Willrodt</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Karolin</forename><surname>Wagner</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Klaus</forename><surname>Bengler</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings the Driving Simulation Conference 2018 Europe VR</title>
+				<editor>
+			<persName><forename type="first">Andras</forename><surname>Kemeny</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">Florent</forename><surname>Colombet</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">Frédéric</forename><surname>Merienne</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">Stéphane</forename><surname>Espié</surname></persName>
+		</editor>
+		<meeting>the Driving Simulation Conference 2018 Europe VR<address><addrLine>Antibes, France</addrLine></address></meeting>
+		<imprint>
+			<date type="published" when="2018-09-05">2018. 2018-09-05</date>
+			<biblScope unit="page" from="43" to="50" />
+		</imprint>
+	</monogr>
+	<note>Driving Simulation Association</note>
+</biblStruct>
+
+<biblStruct xml:id="b33">
+	<analytic>
+		<title level="a" type="main">The Concept of Information Overload: A Review of Literature from Organization Science, Accounting, Marketing, MIS, and Related Disciplines</title>
+		<author>
+			<persName><forename type="first">J</forename><surname>Martin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jeanne</forename><surname>Eppler</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Mengis</surname></persName>
+		</author>
+		<idno type="DOI">10.1080/01972240490507974</idno>
+		<ptr target="https://doi.org/10.1080/01972240490507974" />
+	</analytic>
+	<monogr>
+		<title level="j">The Information Society</title>
+		<imprint>
+			<biblScope unit="volume">20</biblScope>
+			<biblScope unit="page" from="325" to="344" />
+			<date type="published" when="2004">2004. 2004</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b34">
+	<analytic>
+		<title level="a" type="main">Multimodal control of a robotic wheelchair: Using contextual information for usability improvement</title>
+		<author>
+			<persName><forename type="first">Arturo</forename><surname>Escobedo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Anne</forename><surname>Spalanzani</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Christian</forename><surname>Laugier</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">RSJ International Conference on Intelligent Robots and Systems. IEEE</title>
+		<imprint>
+			<biblScope unit="page" from="4262" to="4267" />
+			<date type="published" when="2013">2013. 2013</date>
+		</imprint>
+	</monogr>
+	<note>IEEE</note>
+</biblStruct>
+
+<biblStruct xml:id="b35">
+	<analytic>
+		<title level="a" type="main">Probabilistic vs linear blending approaches to shared control for wheelchair driving</title>
+		<author>
+			<persName><forename type="first">Chinemelu</forename><surname>Ezeh</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Pete</forename><surname>Trautman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Louise</forename><surname>Devigne</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Valentin</forename><surname>Bureau</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Marie</forename><surname>Babel</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Tom</forename><surname>Carlson</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">2017 International Conference on Rehabilitation Robotics (ICORR)</title>
+				<imprint>
+			<publisher>IEEE</publisher>
+			<date type="published" when="2017">2017</date>
+			<biblScope unit="page" from="835" to="840" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b36">
+	<analytic>
+		<title level="a" type="main">Comparing shared control approaches for alternative interfaces: A wheelchair simulator experiment</title>
+		<author>
+			<persName><forename type="first">Chinemelu</forename><surname>Ezeh</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Pete</forename><surname>Trautman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Catherine</forename><surname>Holloway</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Tom</forename><surname>Carlson</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">2017 IEEE International Conference on Systems, Man, and Cybernetics (SMC)</title>
+				<imprint>
+			<publisher>IEEE</publisher>
+			<date type="published" when="2017">2017</date>
+			<biblScope unit="page" from="93" to="98" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b37">
+	<monogr>
+		<title level="m" type="main">Yielding Light Signal Evaluation for Selfdriving Vehicle and Pedestrian Interaction</title>
+		<author>
+			<persName><forename type="first">Stefanie</forename><surname>Faas</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Martin</forename><surname>Baumann</surname></persName>
+		</author>
+		<idno type="DOI">10.1007/978-3-030-27928-8_29</idno>
+		<ptr target="https://doi.org/10.1007/978-3-030-27928-8_29" />
+		<imprint>
+			<date type="published" when="2020">2020</date>
+			<biblScope unit="page" from="189" to="194" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b38">
+	<analytic>
+		<title level="a" type="main">Evaluation of Distinct Input Methods of an Intelligent Wheelchair in Simulated and Real Environments: A Performance and Usability Study</title>
+		<author>
+			<persName><forename type="first">Brígida</forename><surname>Faria</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Luís</forename><surname>Vasconcelos</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Nuno</forename><surname>Reis</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Lau</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Assistive technology : the ofcial journal of RESNA</title>
+		<imprint>
+			<biblScope unit="volume">25</biblScope>
+			<biblScope unit="page" from="88" to="98" />
+			<date type="published" when="2013-04">2013. 04 2013</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b39">
+	<monogr>
+		<title level="m" type="main">Adequacy of power wheelchair control interfaces for persons with severe disabilities: A clinical survey. of rehabilitation research and development</title>
+		<author>
+			<persName><forename type="first">Linda</forename><surname>Fehr</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Steven</forename><forename type="middle">B</forename><surname>Edwin Langbein</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Skaar</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2000">2000. 2000</date>
+			<biblScope unit="volume">37</biblScope>
+			<biblScope unit="page" from="353" to="360" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b40">
+	<analytic>
+		<title level="a" type="main">Demonstrating Rigor Using Thematic Analysis: A Hybrid Approach of Inductive and Deductive Coding and Theme Development</title>
+		<author>
+			<persName><forename type="first">Jennifer</forename><surname>Fereday</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Eimear</forename><surname>Muir-Cochrane</surname></persName>
+		</author>
+		<idno type="DOI">10.1177/160940690600500107</idno>
+		<ptr target="https://doi.org/10.1177/160940690600500107" />
+	</analytic>
+	<monogr>
+		<title level="j">International Journal of Qualitative Methods</title>
+		<imprint>
+			<biblScope unit="volume">5</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page" from="80" to="92" />
+			<date type="published" when="2006">2006. 2006</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b41">
+	<monogr>
+		<title level="m" type="main">The H-Metaphor as a Guideline for Vehicle Automation and Interaction</title>
+		<author>
+			<persName><forename type="first">Frank</forename><surname>Flemisch</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Catherine</forename><surname>Adams</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sheila</forename><surname>Conway</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ken</forename><surname>Goodrich</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Michael</forename><surname>Palmer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Paul</forename><surname>Schutte</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2003">2003</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b42">
+	<analytic>
+		<title level="a" type="main">Towards Autonomous Wheelchair Systems in Urban Environments</title>
+		<author>
+			<persName><forename type="first">Chao</forename><surname>Gao</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Michael</forename><surname>Sands</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">John</forename><surname>Spletzer</surname></persName>
+		</author>
+		<idno type="DOI">10.1007/978-3-642-13408-1_2</idno>
+		<ptr target="https://doi.org/10.1007/978-3-642-13408-1_2" />
+	</analytic>
+	<monogr>
+		<title level="j">Springer Tracts in Advanced Robotics</title>
+		<imprint>
+			<biblScope unit="volume">62</biblScope>
+			<biblScope unit="page" from="13" to="23" />
+			<date type="published" when="2009">2009</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b43">
+	<analytic>
+		<title level="a" type="main">Towards More Universal Wayfnding Technologies: Navigation Preferences Across Disabilities</title>
+		<author>
+			<persName><forename type="first">Maya</forename><surname>Gupta</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ali</forename><surname>Abdolrahmani</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Emory</forename><surname>Edwards</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mayra</forename><surname>Cortez</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Andrew</forename><surname>Tumang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yasmin</forename><surname>Majali</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Marc</forename><surname>Lazaga</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Samhitha</forename><surname>Tarra</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Prasad</forename><surname>Patil</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ravi</forename><surname>Kuber</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Stacy</forename><forename type="middle">M</forename><surname>Branham</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings the 2020 CHI Conference on Human Factors in Computing Systems</title>
+				<meeting>the 2020 CHI Conference on Human Factors in Computing Systems<address><addrLine>Honolulu, HI, USA; New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computing Machinery</publisher>
+			<date type="published" when="2020">2020</date>
+			<biblScope unit="page" from="1" to="13" />
+		</imprint>
+	</monogr>
+	<note>CHI &apos;20)</note>
+</biblStruct>
+
+<biblStruct xml:id="b44">
+	<analytic>
+		<title level="a" type="main">Rikard Fredriksson, Stas Krupenia, Dennis Saluäär, and Pontus Larsson</title>
+		<author>
+			<persName><forename type="first">Azra</forename><surname>Habibovic</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jonas</forename><surname>Victor Malmsten Lundgren</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Maria</forename><surname>Andersson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Tobias</forename><surname>Klingegård</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Anna</forename><surname>Lagström</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Johan</forename><surname>Sirkka</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Claes</forename><surname>Fagerlönn</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Edgren</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Frontiers in Psychology</title>
+		<imprint>
+			<biblScope unit="volume">9</biblScope>
+			<biblScope unit="page">1336</biblScope>
+			<date type="published" when="2018">2018. 2018</date>
+		</imprint>
+	</monogr>
+	<note>Communicating Intent of Automated Vehicles to Pedestrians</note>
+</biblStruct>
+
+<biblStruct xml:id="b45">
+	<monogr>
+		<title level="m" type="main">Haptic feedback control of a smart wheelchair</title>
+		<author>
+			<persName><forename type="first">G</forename><surname>Mohammed-Amine Hadj-Abdelkader</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Bourhis</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Cherki</surname></persName>
+		</author>
+		<idno>HRI 2012</idno>
+		<imprint>
+			<date type="published" when="2012">2012</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b46">
+	<analytic>
+		<title level="a" type="main">People, Sensors, Decisions: Customizable and Adaptive Technologies for Assistance in Healthcare</title>
+		<author>
+			<persName><forename type="first">Jesse</forename><surname>Hoey</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Craig</forename><surname>Boutilier</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Pascal</forename><surname>Poupart</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Patrick</forename><surname>Olivier</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Andrew</forename><surname>Monk</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Alex</forename><surname>Mihailidis</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">ACM Trans. Interact. Intell. Syst</title>
+		<imprint>
+			<biblScope unit="volume">36</biblScope>
+			<date type="published" when="2013-01">2013. Jan. 2013</date>
+		</imprint>
+	</monogr>
+	<note>2, 4, Article 20</note>
+</biblStruct>
+
+<biblStruct xml:id="b47">
+	<analytic>
+		<title level="a" type="main">Living Disability Theory: Refections on Access, Research, and Design</title>
+		<author>
+			<persName><forename type="first">Megan</forename><surname>Hofmann</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Devva</forename><surname>Kasnitz</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jennifer</forename><surname>Mankof</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Cynthia</forename><forename type="middle">L</forename><surname>Bennett</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">The 22nd International ACM SIGACCESS Conference on Computers and Accessibility (Virtual Event, Greece) (ASSETS &apos;20)</title>
+				<meeting><address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computing Machinery</publisher>
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+	<note>Article 4, 13 pages</note>
+</biblStruct>
+
+<biblStruct xml:id="b48">
+	<monogr>
+		<title level="m" type="main">A Taxonomy of Vulnerable Road Users for HCI Based On A Systematic Literature Review</title>
+		<author>
+			<persName><forename type="first">Kai</forename><surname>Holländer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mark</forename><surname>Colley</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Enrico</forename><surname>Rukzio</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Andreas</forename><surname>Butz</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3411764.3445480</idno>
+		<ptr target="https://doi.org/10.1145/3411764.3445480" />
+		<imprint>
+			<date type="published" when="2021">2021</date>
+			<publisher>Association for Computing Machinery</publisher>
+			<pubPlace>New York, NY, USA</pubPlace>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b49">
+	<monogr>
+		<title level="m" type="main">BBeep: A Sonic Collision Avoidance System for Blind Travellers and Nearby Pedestrians</title>
+		<author>
+			<persName><forename type="first">Seita</forename><surname>Kayukawa</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Keita</forename><surname>Higuchi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">João</forename><surname>Guerreiro</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Shigeo</forename><surname>Morishima</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yoichi</forename><surname>Sato</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kris</forename><surname>Kitani</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Chieko</forename><surname>Asakawa</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2019">2019</date>
+			<publisher>Association for Computing Machinery</publisher>
+			<biblScope unit="page" from="1" to="12" />
+			<pubPlace>New York, NY, USA</pubPlace>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b50">
+	<analytic>
+		<title level="a" type="main">Socially adaptive path planning in human environments using inverse reinforcement learning</title>
+		<author>
+			<persName><forename type="first">Beomjoon</forename><surname>Kim</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Joelle</forename><surname>Pineau</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Journal of Social Robotics</title>
+		<imprint>
+			<biblScope unit="volume">8</biblScope>
+			<biblScope unit="page" from="51" to="66" />
+			<date type="published" when="2016">2016. 2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b51">
+	<analytic>
+		<title level="a" type="main">A user-centric feedback device for powered wheelchairs comprising a wearable skin stretch device and a haptic joystick</title>
+		<author>
+			<persName><forename type="first">Han</forename><forename type="middle">Ul</forename><surname>Namita Anil Kumar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Pilwon</forename><surname>Yoon</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Hur</surname></persName>
+		</author>
+		<idno type="DOI">10.1109/ARSO.2017.8025196</idno>
+		<ptr target="https://doi.org/10.1109/ARSO.2017.8025196" />
+	</analytic>
+	<monogr>
+		<title level="j">IEEE Workshop on Advanced Robotics and its Social Impacts (ARSO)</title>
+		<imprint>
+			<biblScope unit="page" from="1" to="2" />
+			<date type="published" when="2017">2017. 2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b52">
+	<analytic>
+		<title level="a" type="main">Funding Information: This work was supported by NIH grant NS 42568 (PJL). We would like to thank Ms</title>
+		<author>
+			<persName><forename type="first">Paul</forename><forename type="middle">J</forename><surname>Laurienti</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jonathan</forename><forename type="middle">H</forename><surname>Burdette</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mark</forename><forename type="middle">T</forename><surname>Joseph A Maldjian</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Wallace</surname></persName>
+		</author>
+		<idno type="DOI">10.1016/j.neurobiolaging.2005.05.024</idno>
+		<ptr target="https://doi.org/10.1016/j.neurobiolaging.2005.05.024" />
+	</analytic>
+	<monogr>
+		<title level="j">Neurobiology of Aging</title>
+		<imprint>
+			<biblScope unit="volume">27</biblScope>
+			<biblScope unit="page" from="1155" to="1163" />
+			<date type="published" when="2006-08">2006. Aug. 2006</date>
+		</imprint>
+	</monogr>
+	<note>Enhanced multisensory integration in older adults. Debra Hege for her assistance with data collection and analyses</note>
+</biblStruct>
+
+<biblStruct xml:id="b53">
+	<monogr>
+		<title level="m" type="main">I Choose Assistive Devices That Save My Face&quot;: A Study on Perceptions of Accessibility and Assistive Technology Use Conducted in China</title>
+		<author>
+			<persName><forename type="first">Franklin Mingzhe</forename><surname>Li</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Di</forename><forename type="middle">Laura</forename><surname>Chen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mingming</forename><surname>Fan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Khai</forename><forename type="middle">N</forename><surname>Truong</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3411764.3445321</idno>
+		<ptr target="https://doi.org/10.1145/3411764.3445321" />
+		<imprint>
+			<date type="published" when="2021">2021</date>
+			<publisher>Association for Computing Machinery</publisher>
+			<pubPlace>New York, NY, USA</pubPlace>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b54">
+	<analytic>
+		<title level="a" type="main">Dynamic shared control for human-wheelchair cooperation</title>
+		<author>
+			<persName><forename type="first">Chen</forename><surname>Qinan Weidong</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jingchuan</forename><surname>Wang</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">IEEE International Conference on Robotics and Automation</title>
+		<imprint>
+			<biblScope unit="page" from="4278" to="4283" />
+			<date type="published" when="2011">2011. 2011</date>
+			<publisher>IEEE</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b55">
+	<monogr>
+		<author>
+			<persName><forename type="first">Yang</forename><surname>Li</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Hao</forename><surname>Cheng</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Zhe</forename><surname>Zeng</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Hailong</forename><surname>Liu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Monika</forename><surname>Sester</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2104.06916</idno>
+		<title level="m">Autonomous Vehicles Drive into Shared Spaces: eHMI Design Concept Focusing on Vulnerable Road Users</title>
+				<imprint>
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+	<note>cs.HC</note>
+</biblStruct>
+
+<biblStruct xml:id="b56">
+	<analytic>
+		<title level="a" type="main">Robot Navigation in Crowded Environments Using Deep Reinforcement Learning</title>
+		<author>
+			<persName><forename type="first">Lucia</forename><surname>Liu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Daniel</forename><surname>Dugas</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Gianluca</forename><surname>Cesari</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Roland</forename><surname>Siegwart</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Renaud</forename><surname>Dubé</surname></persName>
+		</author>
+		<idno type="DOI">10.1109/IROS45743.2020.9341540</idno>
+		<ptr target="https://doi.org/10.1109/IROS45743.2020.9341540" />
+	</analytic>
+	<monogr>
+		<title level="m">2020 IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS)</title>
+				<imprint>
+			<date type="published" when="2020">2020</date>
+			<biblScope unit="page" from="5671" to="5677" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b57">
+	<analytic>
+		<title level="a" type="main">Triggers and Barriers to Customizing Software</title>
+		<author>
+			<persName><forename type="first">Wendy</forename><forename type="middle">E</forename><surname>Mackay</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings the SIGCHI Conference on Human Factors in Computing Systems</title>
+				<meeting>the SIGCHI Conference on Human Factors in Computing Systems<address><addrLine>New Orleans, Louisiana, USA; New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computing Machinery</publisher>
+			<date type="published" when="1991">1991</date>
+			<biblScope unit="page" from="153" to="160" />
+		</imprint>
+	</monogr>
+	<note>CHI &apos;91)</note>
+</biblStruct>
+
+<biblStruct xml:id="b58">
+	<analytic>
+		<title level="a" type="main">A Guide to Using Asynchronous Remote Communities (ARC) for Researching Distributed Populations</title>
+		<author>
+			<persName><forename type="first">Haley</forename><surname>Macleod</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ben</forename><surname>Jelen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Annu</forename><surname>Prabhakar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Lora</forename><surname>Oehlberg</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Katie</forename><surname>Siek</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kay</forename><surname>Connelly</surname></persName>
+		</author>
+		<idno type="DOI">10.4108/eai.18-7-2017.152898</idno>
+		<ptr target="https://doi.org/10.4108/eai.18-7-2017.152898" />
+	</analytic>
+	<monogr>
+		<title level="j">EAI Endorsed Transactions on Pervasive Health and Technology</title>
+		<imprint>
+			<biblScope unit="volume">3</biblScope>
+			<biblScope unit="page">152898</biblScope>
+			<date type="published" when="2017-07">2017. 07 2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b59">
+	<monogr>
+		<title level="m" type="main">Defning Through Expansion: Conducting Asynchronous Remote Communities (ARC) Research with Stigmatized Groups</title>
+		<author>
+			<persName><forename type="first">Juan</forename><surname>Maestre</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Haley</forename><surname>Macleod</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Julia</forename><surname>Connelly</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jordan</forename><surname>Dunbar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Katie</forename><surname>Beck</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Patrick</forename><surname>Siek</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Shih</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3173574.3174131</idno>
+		<ptr target="https://doi.org/10.1145/3173574.3174131" />
+		<imprint>
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b60">
+	<monogr>
+		<title level="m" type="main">But, I Don&apos;t Want/Need a Power Wheelchair&quot;: Toward Accessible Power Assistance for Manual Wheelchairs</title>
+		<author>
+			<persName><forename type="first">Karthik</forename><surname>Mahadevan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sowmya</forename><surname>Somanath</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ehud</forename><surname>Sharlin</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3173574.3174003</idno>
+		<editor>Dafne Zuleima Morgado Ramirez and Catherine Holloway</editor>
+		<imprint>
+			<date type="published" when="2017">2018. 2017</date>
+			<publisher>Association for Computing Machinery</publisher>
+			<biblScope unit="page" from="1" to="12" />
+			<pubPlace>New York, NY, USA; New York, NY, USA</pubPlace>
+		</imprint>
+	</monogr>
+	<note>Communicating Awareness and Intent in Autonomous Vehicle-Pedestrian Interaction</note>
+</biblStruct>
+
+<biblStruct xml:id="b61">
+	<analytic>
+		<title level="a" type="main">Haptic control for powered wheelchair driving assistance</title>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Morère</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">A</forename><surname>Hadj Abdelkader</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Cosnuau</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Guilmois</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Bourhis</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">IRBM</title>
+		<imprint>
+			<biblScope unit="volume">36</biblScope>
+			<biblScope unit="page" from="293" to="304" />
+			<date type="published" when="2015">2015. 2015</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b62">
+	<analytic>
+		<title level="a" type="main">The Social Behavior of Autonomous Vehicles</title>
+		<author>
+			<persName><forename type="first">Lars</forename><surname>Müller</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Malte</forename><surname>Risto</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Colleen</forename><surname>Emmenegger</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2968219.2968561</idno>
+		<ptr target="https://doi.org/10.1145/2968219.2968561" />
+	</analytic>
+	<monogr>
+		<title level="m">of the 2016 ACM International Joint Conference on Pervasive and Ubiquitous Computing: Adjunct (Heidelberg, Germany) (UbiComp &apos;16)</title>
+				<meeting><address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computing Machinery</publisher>
+			<date type="published" when="2016">2016</date>
+			<biblScope unit="page" from="686" to="689" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b63">
+	<analytic>
+		<title level="a" type="main">Promoting trust in self-driving vehicles</title>
+		<author>
+			<persName><forename type="first">Cristina</forename><surname>Olaverri-Monreal</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Nature Electronics</title>
+		<imprint>
+			<biblScope unit="volume">3</biblScope>
+			<biblScope unit="page" from="292" to="294" />
+			<date type="published" when="2020">2020. 2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b64">
+	<analytic>
+		<title level="a" type="main">2021. nations in Autonomous Driving: A Survey</title>
+		<author>
+			<persName><forename type="first">Daniel</forename><surname>Omeiza</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Marina</forename><surname>Webb</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Lars</forename><surname>Jirotka</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Kunze</surname></persName>
+		</author>
+		<idno type="DOI">10.1109/tits.2021.3122865</idno>
+		<ptr target="https://doi.org/10.1109/tits.2021.3122865" />
+	</analytic>
+	<monogr>
+		<title level="j">IEEE Transactions on Intelligent Transportation Systems</title>
+		<imprint>
+			<biblScope unit="page" from="1" to="21" />
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b65">
+	<analytic>
+		<title level="a" type="main">A robotic wheelchair roaming in a railway station</title>
+		<author>
+			<persName><forename type="first">E</forename><surname>Prassler</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Scholz</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Fiorini</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proc. Int. Conf. Field and Service Robotics</title>
+				<meeting>Int. Conf. Field and Service Robotics<address><addrLine>Pittsburgh</addrLine></address></meeting>
+		<imprint>
+			<date type="published" when="1999">1999</date>
+			<biblScope unit="page" from="31" to="36" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b66">
+	<analytic>
+		<title level="a" type="main">Nothing to Hide: Aesthetic Customization of Hearing Aids and Cochlear Implants in an Online Community</title>
+		<author>
+			<persName><forename type="first">P</forename><surname>Halley</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Profta</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Laura</forename><surname>Stangl</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sigrunn</forename><surname>Matuszewska</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Shaun</forename><forename type="middle">K</forename><surname>Sky</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Kane</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings the 18th International ACM SIGACCESS Conference on Computers and Accessibility</title>
+				<meeting>the 18th International ACM SIGACCESS Conference on Computers and Accessibility<address><addrLine>Reno, Nevada, USA; New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computing Machinery</publisher>
+			<date type="published" when="2016">2016</date>
+			<biblScope unit="page" from="219" to="227" />
+		</imprint>
+	</monogr>
+	<note>ASSETS &apos;16)</note>
+</biblStruct>
+
+<biblStruct xml:id="b67">
+	<analytic>
+		<title level="a" type="main">Passing through the Bottleneck -The Potential of External Human-Machine Interfaces</title>
+		<author>
+			<persName><forename type="first">Michael</forename><surname>Rettenmaier</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jonas</forename><surname>Moritz</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Klaus</forename><surname>Schmidtler</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Bengler</surname></persName>
+		</author>
+		<idno type="DOI">10.1109/IVS.2019.8814082</idno>
+		<ptr target="https://doi.org/10.1109/IVS.2019.8814082" />
+	</analytic>
+	<monogr>
+		<title level="m">2019 IEEE Intelligent Vehicles Symposium (IV). 1687-1692</title>
+				<imprint>
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b68">
+	<analytic>
+		<title level="a" type="main">Ghost Driver: A Platform for Investigating Interactions between Pedestrians and Driverless Vehicles</title>
+		<author>
+			<persName><forename type="first">Dirk</forename><surname>Rothenbücher</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jamy</forename><surname>Li</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">David</forename><surname>Sirkin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Brian</forename><surname>Mok</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Wendy</forename><surname>Ju</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Adjunct Proceedings the 7th International Conference on Automotive User Interfaces and Interactive Vehicular Applications</title>
+				<meeting><address><addrLine>Nottingham, United Kingdom; New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computing Machinery</publisher>
+			<date type="published" when="2015">2015</date>
+			<biblScope unit="page" from="44" to="49" />
+		</imprint>
+	</monogr>
+	<note>AutomotiveUI &apos;15)</note>
+</biblStruct>
+
+<biblStruct xml:id="b69">
+	<analytic>
+		<title level="a" type="main">External Human-Machine Interfaces for Autonomous Vehicle-to-Pedestrian Communication: A Review of Empirical Work</title>
+		<author>
+			<persName><forename type="first">Alexandros</forename><surname>Rouchitsas</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Håkan</forename><surname>Alm</surname></persName>
+		</author>
+		<idno type="DOI">10.3389/fpsyg.2019.02757</idno>
+		<ptr target="https://doi.org/10.3389/fpsyg.2019.02757" />
+	</analytic>
+	<monogr>
+		<title level="j">Frontiers in Psychology</title>
+		<imprint>
+			<biblScope unit="volume">10</biblScope>
+			<biblScope unit="page">2757</biblScope>
+			<date type="published" when="2019">2019. 2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b70">
+	<analytic>
+		<title level="a" type="main">Mobility devices to promote activity and participation: a systematic review</title>
+		<author>
+			<persName><forename type="first">Anna-Liisa</forename><surname>Salminen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Åse</forename><surname>Brandt</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kersti</forename><surname>Samuelsson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Outi</forename><surname>Töytäri</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Antti</forename><surname>Malmivaara</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">of rehabilitation medicine</title>
+		<imprint>
+			<biblScope unit="volume">41</biblScope>
+			<biblScope unit="page" from="697" to="706" />
+			<date type="published" when="2009">2009. 2009</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b71">
+	<analytic>
+		<title level="a" type="main">The efects of explainability and causability on perception, trust, and acceptance: Implications for explainable AI</title>
+		<author>
+			<persName><forename type="first">Donghee</forename><surname>Shin</surname></persName>
+		</author>
+		<idno type="DOI">10.1016/j.ijhcs.2020.102551</idno>
+		<idno>102551. 2020.102551</idno>
+	</analytic>
+	<monogr>
+		<title level="j">International Journal of Human-Computer Studies</title>
+		<imprint>
+			<biblScope unit="volume">146</biblScope>
+			<date type="published" when="2021">2021. 2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b72">
+	<analytic>
+		<title level="a" type="main">Tenets for Social Accessibility: Towards Humanizing Disabled People in Design</title>
+		<author>
+			<persName><forename type="first">Kristen</forename><surname>Shinohara</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Cynthia</forename><surname>Bennett</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Wanda</forename><surname>Pratt</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jacob</forename><surname>Wobbrock</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3178855</idno>
+		<ptr target="https://doi.org/10.1145/3178855" />
+	</analytic>
+	<monogr>
+		<title level="j">ACM Transactions on Accessible Computing</title>
+		<imprint>
+			<biblScope unit="volume">11</biblScope>
+			<biblScope unit="page" from="1" to="31" />
+			<date type="published" when="2018-03">2018. 03 2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b73">
+	<monogr>
+		<author>
+			<persName><forename type="first">Kristen</forename><surname>Shinohara</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jacob</forename><forename type="middle">O</forename><surname>Wobbrock</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/1978942.1979044</idno>
+		<title level="m">the Shadow of Misperception: Assistive Technology Use and Social Interactions</title>
+				<meeting><address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computing Machinery</publisher>
+			<date type="published" when="2011">2011. 1979044</date>
+			<biblScope unit="page" from="705" to="714" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b74">
+	<analytic>
+		<title level="a" type="main">Self-Conscious Self-Confdent? A Diary Study Conceptualizing the Social Accessibility of Assistive Technology</title>
+		<author>
+			<persName><forename type="first">Kristen</forename><surname>Shinohara</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jacob</forename><forename type="middle">O</forename><surname>Wobbrock</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2827857</idno>
+		<ptr target="https://doi.org/10.1145/2827857" />
+	</analytic>
+	<monogr>
+		<title level="j">ACM Trans. Access. Comput</title>
+		<imprint>
+			<biblScope unit="volume">8</biblScope>
+			<biblScope unit="issue">5</biblScope>
+			<biblScope unit="page">31</biblScope>
+			<date type="published" when="2016-01">2016. Jan. 2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b75">
+	<analytic>
+		<title level="a" type="main">Communicating Directional Intent in Robot Navigation using Projection Indicators</title>
+		<author>
+			<persName><forename type="first">C</forename><surname>Moondeep</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Tomoya</forename><surname>Shrestha</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ayano</forename><surname>Onishi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mitsuhiro</forename><surname>Kobayashi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Shigeki</forename><surname>Kamezaki</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Sugano</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">27th IEEE International Symposium on Robot and Human Interactive Communication</title>
+				<meeting><address><addrLine>RO-MAN</addrLine></address></meeting>
+		<imprint>
+			<date type="published" when="2018">2018. 2018</date>
+			<biblScope unit="page" from="746" to="751" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b76">
+	<analytic>
+		<title level="a" type="main">The smart wheelchair component system</title>
+		<author>
+			<persName><forename type="first">Richard</forename><surname>Simpson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Edmund</forename><surname>Lopresti</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Steve</forename><surname>Hayashi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Illah</forename><surname>Nourbakhsh</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">David</forename><surname>Miller</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Journal of Rehabilitation Research &amp; Development</title>
+		<imprint>
+			<biblScope unit="volume">41</biblScope>
+			<date type="published" when="2004">2004. 2004</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b77">
+	<analytic>
+		<title level="a" type="main">Smart wheelchairs: A literature review</title>
+		<author>
+			<persName><forename type="first">C</forename><surname>Richard</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Simpson</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Journal of rehabilitation research and development</title>
+		<imprint>
+			<biblScope unit="volume">42</biblScope>
+			<biblScope unit="page">423</biblScope>
+			<date type="published" when="2005">2005. 2005</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b78">
+	<analytic>
+		<title level="a" type="main">Adaptive shared control of a smart wheelchair operated by voice control</title>
+		<author>
+			<persName><forename type="first">C</forename><surname>Richard</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Simon P</forename><surname>Simpson</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Levine</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings the 1997 IEEE/RSJ International Conference on Intelligent Robot and Systems. Innovative Robotics for Real-World Applications. IROS&apos;97</title>
+				<meeting>the 1997 IEEE/RSJ International Conference on Intelligent Robot and Systems. Innovative Robotics for Real-World Applications. IROS&apos;97</meeting>
+		<imprint>
+			<publisher>IEEE</publisher>
+			<date type="published" when="1997">1997</date>
+			<biblScope unit="volume">2</biblScope>
+			<biblScope unit="page" from="622" to="626" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b79">
+	<analytic>
+		<title level="a" type="main">Utilizing Augmented Reality Technology for Crowd Pedestrian Analysis Involving Individuals With Disabilities (International Design Engineering Technical Conferences and Computers and Information in Engineering Conference</title>
+		<author>
+			<persName><forename type="first">Daniel</forename><surname>Stuart</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Keith</forename><surname>Christensen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Anthony</forename><surname>Chen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yong</forename><surname>Kim</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yangquan</forename><surname>Chen</surname></persName>
+		</author>
+		<idno type="DOI">10.1115/DETC2013-12765</idno>
+		<ptr target="https://asmedigitalcollection.asme.org/IDETC-CIE/proceedings-V004T08A004" />
+	</analytic>
+	<monogr>
+		<title level="m">18th Design for Manufacturing and the Life Cycle Conference; 2013 ASME/IEEE International Conference on Mechatronic and Embedded Systems and Applications</title>
+				<imprint>
+			<date type="published" when="2013">2013</date>
+			<biblScope unit="volume">4</biblScope>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b80">
+	<analytic>
+		<title level="a" type="main">Development of smart wheelchair system for a user with severe motor impairment</title>
+		<author>
+			<persName><forename type="first">Yoshinori</forename><surname>Mohd Razali Md Tomari</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yoshinori</forename><surname>Kobayashi</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Kuno</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Procedia Engineering</title>
+		<imprint>
+			<biblScope unit="volume">41</biblScope>
+			<biblScope unit="page" from="538" to="546" />
+			<date type="published" when="2012">2012. 2012</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b81">
+	<analytic>
+		<title level="a" type="main">Robot navigation in dense human crowds: Statistical models and experimental studies of human-robot cooperation</title>
+		<author>
+			<persName><forename type="first">Pete</forename><surname>Trautman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jeremy</forename><surname>Ma</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Richard</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Andreas</forename><surname>Murray</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Krause</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">The International Journal of Robotics Research</title>
+		<imprint>
+			<biblScope unit="volume">34</biblScope>
+			<biblScope unit="issue">3</biblScope>
+			<biblScope unit="page" from="335" to="356" />
+			<date type="published" when="2015">2015. 2015</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b82">
+	<monogr>
+		<title level="m" type="main">A new multi-criteria optimization strategy for shared control in wheelchair assisted navigation. Autonomous Robots 30</title>
+		<author>
+			<persName><forename type="first">Cristina</forename><surname>Urdiales</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jose</forename><surname>Peula</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Fdez-Carmona</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Cristian</forename><surname>Barrué</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Pérez</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">I</forename><surname>Sánchez-Tato</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">C</forename><surname>Toro</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Francesco</forename><surname>Galluppi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ulises</forename><surname>Cortés</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Roberta</forename><surname>Annicchiarico</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Carlo</forename><surname>Caltagirone</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Francisco</forename><surname>Sandoval</surname></persName>
+		</author>
+		<idno type="DOI">10.1007/s10514-010-9211-2</idno>
+		<ptr target="https://doi.org/10.1007/s10514-010-9211-2" />
+		<imprint>
+			<date type="published" when="2010-02">2010. 02 2010</date>
+			<biblScope unit="page" from="179" to="197" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b83">
+	<analytic>
+		<title level="a" type="main">Adaptable navigational assistance for intelligent wheelchairs by means of an implicit personalized user model</title>
+		<author>
+			<persName><forename type="first">Dirk</forename><surname>Vanhooydonck</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Alexander</forename><surname>Demeester</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Johan</forename><surname>Hüntemann</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Gerolf</forename><surname>Philips</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Van</forename><surname>Vanacker</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Marnix</forename><surname>Brussel</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Nuttin</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Robotics Auton. Syst</title>
+		<imprint>
+			<biblScope unit="volume">58</biblScope>
+			<biblScope unit="page" from="963" to="977" />
+			<date type="published" when="2010">2010. 2010</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b84">
+	<analytic>
+		<title level="a" type="main">Transport accessibility for wheelchair users: A qualitative analysis of inclusion and health</title>
+		<author>
+			<persName><forename type="first">Raquel</forename><surname>Velho</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">International Journal of Transportation Science and Technology</title>
+		<imprint>
+			<biblScope unit="volume">8</biblScope>
+			<biblScope unit="page" from="103" to="115" />
+			<date type="published" when="2019">2019. 2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b85">
+	<analytic>
+		<title level="a" type="main">Navigation and Obstacle Avoidance Help (NOAH) for Older Adults with Cognitive Impairment: A Pilot Study</title>
+		<author>
+			<persName><forename type="first">Pooja</forename><surname>Viswanathan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">James</forename><forename type="middle">J</forename><surname>Little</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Alan</forename><forename type="middle">K</forename><surname>Mackworth</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Alex</forename><surname>Mihailidis</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">The Proceedings the 13th International ACM SIGACCESS Conference on Computers and Accessibility</title>
+				<meeting><address><addrLine>Dundee, Scotland, UK; New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computing Machinery</publisher>
+			<date type="published" when="2011">2011</date>
+			<biblScope unit="page" from="43" to="50" />
+		</imprint>
+	</monogr>
+	<note>ASSETS &apos;11)</note>
+</biblStruct>
+
+<biblStruct xml:id="b86">
+	<analytic>
+		<title level="a" type="main">Intelligent wheelchair control strategies for older adults with cognitive impairment: user attitudes, needs, and preferences</title>
+		<author>
+			<persName><forename type="first">Pooja</forename><surname>Viswanathan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ellen</forename><surname>Pereira Zambalde</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Genevieve</forename><surname>Foley</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Julianne</forename><surname>Graham</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Rosalie</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Bikram</forename><surname>Adhikari</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Alan</forename><surname>Mackworth</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Alex</forename><surname>Mihailidis</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">William</forename><surname>Miller</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ian</forename><surname>Mitchell</surname></persName>
+		</author>
+		<idno type="DOI">10.1007/s10514-016-9568-y</idno>
+		<ptr target="https://doi.org/10.1007/s10514-016-9568-y" />
+	</analytic>
+	<monogr>
+		<title level="j">Autonomous Robots</title>
+		<imprint>
+			<biblScope unit="volume">41</biblScope>
+			<date type="published" when="2017-03">2017. 03 2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b87">
+	<analytic>
+		<title level="a" type="main">Usability testing of multimodal feedback interface and simulated collision-avoidance power wheelchair for long-term care home residents with cognitive impairments</title>
+		<author>
+			<persName><forename type="first">Rosalie</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Alex</forename><surname>Mihailidis</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Tilak</forename><surname>Dutta</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Geof</forename><surname>Fernie</surname></persName>
+		</author>
+		<idno type="DOI">10.1682/JRRD.2010.08.0147</idno>
+		<ptr target="https://doi.org/10.1682/JRRD.2010.08.0147" />
+	</analytic>
+	<monogr>
+		<title level="j">Journal of rehabilitation research and development</title>
+		<imprint>
+			<biblScope unit="volume">48</biblScope>
+			<biblScope unit="page" from="801" to="822" />
+			<date type="published" when="2011-08">2011. 08 2011</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b88">
+	<analytic>
+		<title level="a" type="main">Power mobility with collision for older User, caregiver and prescriber perspectives</title>
+		<author>
+			<persName><forename type="first">H</forename><surname>Rosalie</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Alexandra</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Laura</forename><forename type="middle">Hurd</forename><surname>Korotchenko</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Clarke</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Alex</forename><surname>Ben Mortenson</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Mihailidis</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Journal of rehabilitation research and development</title>
+		<imprint>
+			<biblScope unit="volume">50</biblScope>
+			<biblScope unit="page">1287</biblScope>
+			<date type="published" when="2013">2013. 2013</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b89">
+	<monogr>
+		<title level="m" type="main">Enabling power wheelchair mobility with longterm care home residents with cognitive impairments</title>
+		<author>
+			<persName><forename type="first">Rosalie Hsueh Ling</forename><surname>Wang</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2011">2011</date>
+		</imprint>
+	</monogr>
+	<note>Ph.D. Dissertation</note>
+</biblStruct>
+
+<biblStruct xml:id="b90">
+	<monogr>
+		<author>
+			<persName><forename type="first">Atsushi</forename><surname>Watanabe</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Tetsushi</forename><surname>Ikeda</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Morales</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kazuhiko</forename><surname>Shinozawa</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Takahiro</forename><surname>Miyashita</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Norihiro</forename><surname>Hagita</surname></persName>
+		</author>
+		<title level="m">Communicating Robotic Navigational Intentions</title>
+				<imprint>
+			<date type="published" when="2015">2015</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b91">
+	<analytic>
+		<title level="a" type="main">just Let the Cane Hit It&quot;: How the Blind and See Navigation Diferently</title>
+		<author>
+			<persName><forename type="first">Michele</forename><forename type="middle">A</forename><surname>Williams</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Caroline</forename><surname>Galbraith</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Shaun</forename><forename type="middle">K</forename><surname>Kane</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Amy</forename><surname>Hurst</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2661334.2661380</idno>
+		<ptr target="https://doi.org/10.1145/2661334.2661380" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 16th International ACM SIGACCESS Conference on Computers &amp; Accessibility</title>
+				<meeting>the 16th International ACM SIGACCESS Conference on Computers &amp; Accessibility<address><addrLine>Rochester, New York, USA; New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computing Machinery</publisher>
+			<date type="published" when="2014">2014</date>
+			<biblScope unit="page" from="217" to="224" />
+		</imprint>
+	</monogr>
+	<note>ASSETS &apos;14)</note>
+</biblStruct>
+
+<biblStruct xml:id="b92">
+	<analytic>
+		<title level="a" type="main">Situationally Aware Mobile Devices for Overcoming Situational Impairments</title>
+		<author>
+			<persName><forename type="first">Jacob</forename><forename type="middle">O</forename><surname>Wobbrock</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings the ACM SIGCHI Symposium on Engineering Interactive Computing Systems</title>
+				<meeting>the ACM SIGCHI Symposium on Engineering Interactive Computing Systems<address><addrLine>Valencia, Spain; New York, NY, USA, Article 1</addrLine></address></meeting>
+		<imprint>
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+	<note>EICS &apos;19). Association for Computing Machinery. 18 pages</note>
+</biblStruct>
+
+<biblStruct xml:id="b93">
+	<analytic>
+		<title level="a" type="main">Ability-based design: Concept, principles and examples</title>
+		<author>
+			<persName><forename type="first">O</forename><surname>Jacob</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Shaun</forename><forename type="middle">K</forename><surname>Wobbrock</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Kane</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Z</forename><surname>Krzysztof</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Susumu</forename><surname>Gajos</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jon</forename><surname>Harada</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Froehlich</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">ACM Transactions on Accessible Computing (TACCESS)</title>
+		<imprint>
+			<biblScope unit="volume">3</biblScope>
+			<biblScope unit="page" from="1" to="27" />
+			<date type="published" when="2011">2011. 2011</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b94">
+	<analytic>
+		<title level="a" type="main">Visual Impairment in the City: Young People&apos;s Social Strategies for Independent Mobility</title>
+		<author>
+			<persName><forename type="first">Nancy</forename><surname>Worth</surname></persName>
+		</author>
+		<idno type="DOI">10.1177/0042098012468898</idno>
+		<ptr target="https" />
+	</analytic>
+	<monogr>
+		<title level="j">Urban Studies</title>
+		<imprint>
+			<biblScope unit="volume">50</biblScope>
+			<biblScope unit="page" from="574" to="586" />
+			<date type="published" when="2013-02">2013. 02 2013</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b95">
+	<monogr>
+		<title level="m" type="main">Explainable Object-induced Action Decision for Autonomous Vehicles</title>
+		<author>
+			<persName><forename type="first">Yiran</forename><surname>Xu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Xiaoyin</forename><surname>Yang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Lihang</forename><surname>Gong</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Hsuan-Chu</forename><surname>Lin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Tz-Ying</forename><surname>Wu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yunsheng</forename><surname>Li</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Nuno</forename><surname>Vasconcelos</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2003.09405</idno>
+		<imprint>
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+	<note>cs.CV</note>
+</biblStruct>
+
+<biblStruct xml:id="b96">
+	<analytic>
+		<title level="a" type="main">Shared-control in Wheelchairs-Building Interaction Bridges</title>
+		<author>
+			<persName><forename type="first">Bingqing</forename><surname>Zhang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Catherine</forename><surname>Holloway</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Carlson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R Ramirez</forename><surname>Herrera</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">CHI&apos;19 Workshop: Weaving the Threads of Vehicle Automation</title>
+				<imprint>
+			<publisher>ACM</publisher>
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b97">
+	<analytic>
+		<title level="a" type="main">Human-Machine Interaction for Autonomous Vehicles: A Review</title>
+		<author>
+			<persName><forename type="first">Jiehuang</forename><surname>Zhang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ying</forename><surname>Shu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Han</forename><surname>Yu</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Social Computing and Social Media: Experience Design and Social Network Analysis, Gabriele Meiselwitz</title>
+				<meeting><address><addrLine>Cham</addrLine></address></meeting>
+		<imprint>
+			<publisher>Springer International Publishing</publisher>
+			<date type="published" when="2021">2021</date>
+			<biblScope unit="page" from="190" to="201" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b98">
+	<analytic>
+		<title level="a" type="main">Towards Explainable Shared Control using Augmented Reality</title>
+		<author>
+			<persName><forename type="first">Mark</forename><surname>Zolotas</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yiannis</forename><surname>Demiris</surname></persName>
+		</author>
+		<idno type="DOI">10.1109/IROS40897.2019.8968117</idno>
+		<ptr target="https://doi.org/10.1109/IROS40897.2019.8968117" />
+	</analytic>
+	<monogr>
+		<title level="m">2019 IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS)</title>
+				<imprint>
+			<date type="published" when="2019">2019</date>
+			<biblScope unit="page" from="3020" to="3026" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b99">
+	<analytic>
+		<title level="a" type="main">Head-Mounted Augmented Reality for Explainable Robotic Wheelchair Assistance</title>
+		<author>
+			<persName><forename type="first">Mark</forename><surname>Zolotas</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Joshua</forename><surname>Elsdon</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yiannis</forename><surname>Demiris</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">2018 IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS)</title>
+				<imprint>
+			<date type="published" when="2018">2018</date>
+			<biblScope unit="page" from="1823" to="1829" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+				</listBibl>
+			</div>
+		</back>
+	</text>
+</TEI>

@@ -1,0 +1,1181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xml:space="preserve" xmlns="http://www.tei-c.org/ns/1.0" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.com/kermitt2/grobid/master/grobid-home/schemas/xsd/Grobid.xsd"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+	<teiHeader xml:lang="en">
+		<fileDesc>
+			<titleStmt>
+				<title level="a" type="main">Algorithmic Anxiety and Coping Strategies of Airbnb Hosts</title>
+			</titleStmt>
+			<publicationStmt>
+				<publisher/>
+				<availability status="unknown"><licence/></availability>
+			</publicationStmt>
+			<sourceDesc>
+				<biblStruct>
+					<analytic>
+						<author>
+							<persName><forename type="first">Shagun</forename><surname>Jhaver</surname></persName>
+							<email>jhaver.shagun@gatech.edu</email>
+							<affiliation key="aff0">
+								<orgName type="institution">Georgia Institute of Technology Atlanta</orgName>
+								<address>
+									<country key="US">USA</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Yoni</forename><surname>Karpfen</surname></persName>
+							<email>yoni.karpfen@airbnb.com</email>
+							<affiliation key="aff1">
+								<orgName type="institution">Airbnb Inc. San Francisco</orgName>
+								<address>
+									<country key="US">USA</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Judd</forename><surname>Antin</surname></persName>
+							<email>judd.antin@airbnb.com</email>
+							<affiliation key="aff2">
+								<orgName type="institution">Airbnb Inc. San Francisco</orgName>
+								<address>
+									<country key="US">USA</country>
+								</address>
+							</affiliation>
+						</author>
+						<title level="a" type="main">Algorithmic Anxiety and Coping Strategies of Airbnb Hosts</title>
+					</analytic>
+					<monogr>
+						<imprint>
+							<date/>
+						</imprint>
+					</monogr>
+					<idno type="DOI">10.1145/3173574.3173995</idno>
+				</biblStruct>
+			</sourceDesc>
+		</fileDesc>
+		<encodingDesc>
+			<appInfo>
+				<application version="0.7.1" ident="GROBID" when="2022-07-22T05:03+0000">
+					<desc>GROBID - A machine learning software for extracting information from scholarly documents</desc>
+					<ref target="https://github.com/kermitt2/grobid"/>
+				</application>
+			</appInfo>
+		</encodingDesc>
+		<profileDesc>
+			<textClass>
+				<keywords>
+					<term>H.5.m. Information Interfaces and Presentation (e.g. HCI): Miscellaneous</term>
+					<term>Algorithm</term>
+					<term>coping strategies</term>
+					<term>sensemaking</term>
+					<term>algorithmic awareness</term>
+					<term>human-centered algorithms</term>
+					<term>performance evaluation</term>
+					<term>Airbnb</term>
+					<term>sharing economies</term>
+				</keywords>
+			</textClass>
+			<abstract>
+<div xmlns="http://www.tei-c.org/ns/1.0"><p>Algorithms increasingly mediate how work is evaluated in a wide variety of work settings. Drawing on our interviews with 15 Airbnb hosts, we explore the impact of algorithmic evaluation on users and their work practices in the context of Airbnb. Our analysis reveals that Airbnb hosts engage in a double negotiation on the platform: They must negotiate efforts not just to attract potential guests but also to appeal to only partially transparent evaluative algorithms. We found that a perceived lack of control and uncertainty over how algorithmic evaluation works can create anxiety among some Airbnb hosts. We present a framework for understanding this double negotiation, as well as a case study of coping strategies that hosts employ to deal with their anxiety. We conclude with a discussion of design solutions that can help reduce algorithmic anxiety and increase confidence in algorithmic systems.</p></div>
+			</abstract>
+		</profileDesc>
+	</teiHeader>
+	<text xml:lang="en">
+		<body>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>INTRODUCTION</head><p>Algorithms play an increasingly influential role in defining how work is evaluated for a wide range of populations ranging from warehouse workers <ref type="bibr" target="#b33">[32]</ref> and UPS deliverymen <ref type="bibr" target="#b10">[11]</ref> to Uber drivers <ref type="bibr" target="#b28">[29]</ref> and Airbnb hosts. While such algorithms are a key part of getting work done, only hints about how they work are usually made public. They are opaque by design, both to protect intellectual property and to prevent users from gaming the system. This necessary lack of transparency raises questions about the impact of algorithms on workers. How do workers feel about being evaluated by semi-transparent algorithms? How do their work practices change in response to such algorithms?</p><p>The increasing prevalence of algorithmic systems coupled with their power and lack of transparency has drawn the attention of many researchers <ref type="bibr" target="#b16">[18,</ref><ref type="bibr" target="#b18">20,</ref><ref type="bibr" target="#b28">29,</ref><ref type="bibr">39]</ref>. Recent studies in HCI have taken an active interest in user awareness and misunderstanding of algorithms that drive complex online platforms like Facebook and Twitter <ref type="bibr" target="#b11">[12,</ref><ref type="bibr" target="#b15">17,</ref><ref type="bibr" target="#b16">18,</ref><ref type="bibr" target="#b17">19,</ref><ref type="bibr" target="#b25">26,</ref><ref type="bibr" target="#b37">35]</ref>. However, there has been little empirical work on how algorithmic evaluation affects workers and their work practices in sharing economy platforms.</p><p>In this paper, we explore the effects of algorithmic evaluation on users in the context of Airbnb, an online peer-to-peer marketplace primarily for short-term lodging that facilitates monetary and social exchange between users <ref type="bibr" target="#b30">[30]</ref>. Through interviews with <ref type="bibr" target="#b13">15</ref> Airbnb hosts, we found that hosts engage in a double negotiation on the platform: their actions are at the intersection of attracting potential guests and appealing to evaluative algorithms that they don't fully understand. Hosts are more certain about the importance of some factors involved in their algorithmic evaluation (e.g., reviews) and less certain about others (e.g., tenure as host) 1 . We learned that uncertainty about how Airbnb algorithms work and a perceived lack of control can cause what we call algorithmic anxiety. We also found that hosts use coping mechanisms such as reverseengineering evaluative algorithms and comparing themselves to other hosts to deal with their uncertainty.</p><p>Our findings highlight the challenges and opportunities of designing human-centered algorithmic evaluation systems in already complex systems of online and offline social exchange. We propose a set of design implications to improve such systems in which users experience the double negotiation inherent in dealing with algorithms and other people at the same time.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>RELATED WORK The Challenges of Being a Microentrepreneur</head><p>The sharing economy is the broad realm of online peer-to-peer sharing systems that allows individuals to provide and benefit from basic skills and services such as dog-walking and housecleaning, or physical resources such as housing, transportation and wi-fi networks <ref type="bibr" target="#b13">[15,</ref><ref type="bibr" target="#b27">28,</ref><ref type="bibr" target="#b32">31]</ref>. Sharing economy platforms like Uber, Airbnb and TaskRabbit are attracting increasing scholarly attention within HCI and CSCW <ref type="bibr" target="#b12">[14,</ref><ref type="bibr" target="#b13">15,</ref><ref type="bibr" target="#b23">24,</ref><ref type="bibr" target="#b26">27,</ref><ref type="bibr" target="#b28">29,</ref><ref type="bibr" target="#b30">30,</ref><ref type="bibr" target="#b38">36,</ref><ref type="bibr" target="#b45">42,</ref><ref type="bibr" target="#b47">43]</ref>.</p><p>Our research is most directly motivated by recent work on the sharing economy that has begun to identify the challenges associated with being a sharing economy "microentrepenuer". <ref type="bibr">Raval</ref> and Dourish argue that it is important to consider the immaterial labor, including the management and maintenance of emotions, that workers have to perform when examining labor practices in ridesharing services <ref type="bibr" target="#b38">[36]</ref>. Gloss et al. compared the work practices and perspectives of Uber drivers and traditional taxi drivers and found that Uber drivers found their work more flexible but also more demanding <ref type="bibr">[21]</ref>. In a similar vein, Ahmed et al. studied the adoption of Ola, a peer-to-peer ridesharing service, by auto-drivers in India and found that Ola introduced new elements of competition but did little to reduce drivers' uncertainty <ref type="bibr" target="#b0">[1]</ref>. Lee et al. explored the problems that algorithmic task assignment poses for workers in ridesharing services such as Uber and Lyft <ref type="bibr" target="#b28">[29]</ref>. Rosenblat and Stark studied how the reputation system in Uber created frustration and anxiety among drivers when their ratings declined for reasons they couldn't identify <ref type="bibr" target="#b41">[38]</ref>. In sum, much of the existing research reveals a complex ecosystem in which workers negotate their work practices with each other and with algorithmic systems in a way that can cause uncertainty, frustration, and anxiety.</p><p>Most of the research in this space has focused on workers in ridesharing services. However, there is relatively little understanding about the challenges that workers in hospitalityexchange services face. We seek to fill this gap by exploring the challenges that Airbnb hosts face in their work and the strategies they use to address those challenges.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>The Impact of Algorithmic Awareness on Users</head><p>Online sociotechnical systems such as Facebook, Google and Airbnb are becoming increasingly reliant on software algorithms to manage the information needs of their users and deal with the increasing amounts of social information produced online. A growing body of research in human-computer interaction is exploring how the awareness of these algorithms affects users <ref type="bibr" target="#b16">[18,</ref><ref type="bibr" target="#b25">26,</ref><ref type="bibr">39]</ref>.</p><p>Many recent studies have focused on users' perceptions of algorithmically-driven content curation systems. In an analysis of user awareness of Facebook News Feed curation algorithm, Eslami et al. found that a majority of their participants were unaware of the algorithm's existence and many users wrongly attributed missing stories in their feeds to their friends' decisions to exclude them rather than to the algorithm <ref type="bibr" target="#b16">[18]</ref>. They also found that users initially felt betrayed when they discovered the existence of the algorithm but their awareness of the algorithm led to more active engagement with the site. Eslami et al. and Rader et al studied users' beliefs about what and why the Facebook News Feed chooses to display, and the effects of such beliefs on their behavior <ref type="bibr" target="#b15">[17,</ref><ref type="bibr" target="#b37">35]</ref>. Gillespie explored the controversy over Twitter trends and accusations of algorithmic censorship of the tag #occupywallstreet and inferred that "there is a tension between what we understand these algorithms to be, what we need them to be, and what they in fact are" <ref type="bibr" target="#b18">[20]</ref>. In a study of user backlash to rumors about introduction of algorithmic curation to Twitter's timeline, De-Vito et al. concluded that users' resistance to algorithmic change are shaped by their folk-theory based understandings of algorithmically-driven systems <ref type="bibr" target="#b11">[12]</ref>. The above literature provides a rich understanding of how users react to algorithms on social network sites and again highlights the potential for uncertainty and frustration.</p><p>Researchers have also studied the effects of explanation of specific algorithms in other contexts such as recommendation systems <ref type="bibr" target="#b9">[10,</ref><ref type="bibr">40,</ref><ref type="bibr" target="#b48">44]</ref>, ranking [13], scoring <ref type="bibr" target="#b25">[26]</ref> and personalization <ref type="bibr" target="#b14">[16]</ref>. However, research on the impact of algorithmic awareness on microentrepreneurs in sharing economy platforms is relatively scarce. A notable exception is Lee et al.'s study of human workers' interactions with and perspectives of algorithmic management in ridesharing services Uber and Lyft <ref type="bibr" target="#b28">[29]</ref>. Research in entrepreneurial domains is important as the stakes are often much higher for the users: their livelihoods depend on how they can interact with algorithms. We build on Lee at al's work by exploring the impact of algorithmic awareness and understanding on Airbnb users. Our choice of qualitative methods provides an in-depth perspective into how users' actions are motivated by a quest to appeal both to opaque algorithms and to prospective guests.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>STUDY CONTEXT: THE WORK OF HOSTING</head><p>Hospitality-exchange services, a subset of the larger sharing economy boom, allow people to share housing for shortterm accommodations on a previously unimaginable scale. A number of recent studies in HCI on monetized network hospitality have examined the hospitality exchange processes that take place via Airbnb <ref type="bibr" target="#b20">[22,</ref><ref type="bibr" target="#b23">24,</ref><ref type="bibr" target="#b24">25,</ref><ref type="bibr" target="#b27">28,</ref><ref type="bibr" target="#b30">30,</ref><ref type="bibr" target="#b35">34,</ref><ref type="bibr" target="#b44">41]</ref>. <ref type="bibr">Ma et al.</ref> studied the type of content that Airbnb hosts self-disclose in their profiles and showed that hosts optimize their disclosures for trustworthiness by revealing more assessment signals than conventional ones <ref type="bibr" target="#b30">[30]</ref>. Ikkala and Lampinen showed that while Airbnb hosts are motivated by financial reasons to participate on the platform, the social aspects of hosting also help sustain their motivation to keep participating <ref type="bibr" target="#b23">[24]</ref>. Qing Ke examined the effects of socio-economic statuses on participation on Airbnb and found that US census tracts with lower median household income are likely to have more residents who become Airbnb hosts <ref type="bibr" target="#b24">[25]</ref>. We contribute to this line of work by examining the impact of algorithms on hospitality exchange processes on Airbnb.</p><p>Airbnb can be a significant source of income, but hosts' ability to generate it consistently depends to a large degree on how frequently and at what price they are able to attract bookings from potential guests. Hosts have some significant levers to control how often and at what price they are booked by guests. For example, they can change their profile title and description, modify their listing's photos, or offer discounts. Yet, demand from guests is also affected by how Airbnb represents hosts on its platform. For instance, when Airbnb guests search the site to reserve accommodation, the order in which different listings are shown in the search results could affect their likelihood of being booked (Figure <ref type="figure" target="#fig_0">1</ref>). Although the algorithms that drive this process aid efficient decision-making for guests, relatively little is known about their impact on hosts. How might hosts feel about the algorithms' decisions in this context? How might their perceptions of algorithmic decisions affect their work practices? We explore these questions in this research.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>STUDY DESIGN</head><p>Our study took place from May to August 2017 and included 15 in-depth, semi-structured interviews of Airbnb hosts. We disseminated the recruitment advertisements to 500 active Airbnb hosts through emails. Participants were first directed to an online survey where they were asked about their interest in interviewing with us and their availability. We also included questions in this screener to infer how engaged the hosts are on the Airbnb platform. We used information from the screening survey as well as the hosts' demographic data (age, gender, etc.) to screen participants. We expected that perceptions of Airbnb hosting could vary to a great extent in different age groups and occupations. Therefore, we aimed to recruit hosts from a broad age range and having a variety of occupations while balancing gender composition in our sample. We used semi-structured interviews to allow our participants the freedom to explain their perceptions of different aspects of hosting and then used thematic analysis <ref type="bibr" target="#b34">[33]</ref> to identify pervasive and salient concepts as explained below.</p><p>The interviews began with general questions about why participants hosted on Airbnb, and what they liked and disliked about hosting. This provided context to ask the participants how they felt about the number and types of bookings they received. We also asked them questions about their views on Airbnb tools and algorithmic features, and what actions they take to improve their earnings on Airbnb. We conducted all our interviews through video chat services like Skype and FaceTime, and each interview session lasted between 30-90 minutes.</p><p>Although we set out to study hosts' interactions with and perceptions of Airbnb's search algorithm in particular, we learned that our participants' points of view were usually not that specific. We found that the hosts we interviewed, many of whom were less technologically sophisticated, tended to refer to a monolithic "Airbnb algorithm," rather than differentiating between different algorithms (e.g. search, pricing). Our analysis generally allowed us to understand what specific functions or interactions hosts were referring to. However, to retain the voice of our participants, we describe our findings by referring more generically to Airbnb algorithm(s).</p><p>Participants <ref type="bibr" target="#b13">15</ref> Airbnb hosts participated in the study (8 males, 7 females; age range from 26 to 74). Participants were given $125 for their participation. Although most of them are from the US, we also interviewed participants from Canada, UK and Brazil. Table <ref type="table" target="#tab_1">1</ref> provides some information about our participants.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Analysis</head><p>We fully transcribed data from the interviews and read it multiple times. Next, we applied interpretive qualitative analysis to all interview transcripts <ref type="bibr" target="#b34">[33]</ref>. Our analysis began with "open coding" <ref type="bibr" target="#b8">[9]</ref>, in which we assigned short phrases as codes to our data. This first round of coding was done on a line-by-line basis, so that codes stayed close to data. Examples of firstlevel codes include "raising prices when someone cancels," "looking at similar listings in the neighborhood," and "being unsure about how search works."</p><p>Next, we conducted focused coding <ref type="bibr" target="#b8">[9]</ref> by identifying frequently occurring codes in our data and using them to form higher-level descriptions. Focused codes included "Understandings of how search works," and "Comparisons with other hosts." We then began writing memos and engaging in the continual comparison of codes and their associated data with one another. We conducted iterative coding, interpretation, comparison, and verification throughout the course of our analysis. Following this, we arrived at nine distinct themes that highlight how our participants viewed different aspects of hosting and how they developed personal strategies to attain their goals. Finally, we established connections between the themes which led to the synthesis we present below.</p><p>Our participants did not usually draw a direct connection between their perceptions and behaviors on the one hand and the algorithm on the other. Instead, the relationships were usually more subtle and multi-faceted -shaped by algorithms but also by other factors. By focusing on context, meaning, and themes in the qualitative data, we paid special attention to analyzing the role(s) of algorithms, even when the participants themselves didn't point to them directly.</p><p>Next, we describe our findings. We structure our findings by first describing how hosts' work practices involve addressing guests as well as the Airbnb algorithms. We discuss how lack of certainty about how Airbnb algorithms work affects hosts. Finally, we discuss the information and activities that together help hosts build intuition in an uncertain context.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>NEGOTIATIONS BY HOSTS</head><p>Our analysis shows that Airbnb hosts engage in a double negotiation on the platform: They simultaneously navigate the uncertain process of attracting potential guests, while also trying to understand and respond to the influence of Airbnb algorithms.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Negotiating their Relationship with Potential Guests</head><p>Many participants said that they set up their profile and perform actions to cater to what they believe guests want. They form their intuitions about what guests want by paying close attention to their guest reviews, speaking with guests who stay at their listing, and using their own experiences as Airbnb guests.</p><p>Many participants described curating their profile by imagining how a potential guest would read it. For example, P-5 suspected that guests don't read the entire description of her profile, so she highlights the most attractive aspects of her listing at the top of the profile description. Many participants assumed that guests pay attention to profile pictures, and therefore they carefully curate those pictures. A few participants also said that they pay special attention to aspects of their profile that are visible to guests on the search results page (Figure <ref type="figure" target="#fig_0">1</ref>). These details include the title of the listing, the price, and a scrollable list of photos.</p><p>"Well, in terms of tweaking the description, I put everything in the title, I push the guest washroom and I push the free parking, all of that in my title. . . I imagine it's going to get more eyeballs in the search results, and then they'll click through." -P-14</p><p>Some participants said that they have a mental model of the type of users who would book their listing, and they curate their profile to attract those users. For example, P-07 said:</p><p>"We know what we're marketing towards, and we're marketing towards that 'looking for a deal' sort of niche, 'don't want to pay for a big hotel downtown', 'enjoying the suburbs', 'want a place to park', 'want that smaller feel, but ultimately want a good deal'. That's the big factor for us." -P-07</p><p>In some instances, hosts take contrasting actions based on their different mental models of how those actions are perceived by guests. For example, P-12 told us that she uses instant booking 2 to signal to her guests that she doesn't discriminate against anyone. She believes that her non-discriminatory values would attract potential guests. On the other hand, P-11 said that he doesn't turn on instant booking because he believes that turning it on deters potential guests from trying to inquire about the property.</p><p>"I think, a lot of times, the guest has more questions. They want to clarify what they're doing and I think the instant book just made them feel like, 'I can't ask those questions.'" -P-11</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Negotiating their Relationship with Airbnb Algorithms</head><p>Many participants discussed how they interact with and respond to different algorithmic features on Airbnb's website. Although Airbnb doesn't explictly mention the presence of any algorithms, many participants assumed that algorithms work behind-the-scenes to drive features like search, pricing suggestions, and star ratings.</p><p>Many participants seemed to have a basic understanding of the way that a search algorithm might operate. For instance, participants believed that when a guest uses Airbnb search to book reservations, the algorithm filters all the listings that satisfy the search parameters (like location, reservation dates, desired price range, etc.) and ranks them in some way. These ranked listings are then shown to the guests in a paginated order. Participants considered the position of their listing in search results as essential for maintaining good occupancy. For example, P-12 said, "I think it [position in search results] is probably pretty impactful. If we're buried somewhere at the bottom of a search and there's a bunch of viable options in front of us, then ... I mean, unless somebody is very thoroughly checking every single option that's out there for them, which seems like an overkill ... That you would get way less bookings when you're buried somewhere." -P-12 P-12, like most participants, didn't draw a straight line between her behavior and the search algorithm. However, this quote is illustrative of a common perception of the cause and effect relationship between search ranking and bookings, and it implies a potentially strong influence on behavior.</p><p>Airbnb also uses data-driven processes to make personalized recommendations to hosts on how they can improve their occupancy. For example, hosts are sometimes suggested to lower their listing price by a certain percentage in order to "capture the interests of guests who are excited to travel for less" <ref type="bibr" target="#b5">[6]</ref>. Airbnb also uses a pricing tool that suggests that hosts set particular prices for their listing based on factors like daily demand, location of the property and season. In these cases, hosts can choose whether or not to take advantage of the suggestions. Many of our participants noted that they carefully consider pricing and other algorithmic recommendations. However, they felt unsure about how ignoring those suggestions could affect their evaluation by those same algorithms.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Double Negotiation</head><p>Participants discussed how their intentions to appeal to potential guests and to Airbnb algorithms can intersect in harmony as well as in conflict.</p><p>Participants believed that in many instances, their efforts to appeal to potential guests can also improve their evaluation by algorithms. For example, they attempt to get good reviews from their guests not just because they seek to provide good hospitality or because they believe future guests will be attracted by positive reviews, but also because they suspect that good reviews have some abstract positive effect on Airbnb algorithms that evaluate them.</p><p>Similarly, many participants pointed out that they pay close attention to how quickly they are responding to guest queries. They assume that their response rate influences how they are evaluated by Airbnb. Airbnb's "Superhost" 3 program, in fact, specifically incentivizes hosts to respond quickly to guests. At the same time, they expect that responding quickly would influence potential guests to confirm their bookings and to give them a positive review after the stay.</p><p>"Hosts' response rate is put out there on the main page too so the guests, the renters, can see it: 'Owner usually responds within three hours'. So if I were booking on Airbnb, I would want to know that someone is gonna respond to me fairly quickly." -P-11</p><p>On the other hand, there are instances when hosts believe they have to make a choice between appealing to guests and appealing to Airbnb algorithms. For example, many participants suspect that if they decline many booking requests, Airbnb's algorithms will penalize them. Some participants who preferred longer-term bookings said that they avoid being penalized for declining short-term booking requests by setting up preferences that strictly limit any bookings to longer-term guests. They argue, however, that this setting filters out many potential guests and it might result in lost revenue if no guest books:</p><p>"You could sort through guests as they start putting in requests, but that would affect your rating if you were to say no to people all the time, so it's better to do it in the system, to either incentivize those longer stays or to set the minimum rather than just say no to a bunch of people hoping you'll fish around and get a longer-term one." -P-07</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>PERCEPTIONS OF CONTROL AND UNCERTAINTY</head><p>Hosts consider a variety of factors to be important to how Airbnb algorithms evaluate them. Our interviews reflect that hosts perceive more control over some of these factors and less control over others. Moreover, we found that hosts feel certain that elements like guest reviews and response rate are important to their evaluation but for other factors such as their profile details, hosts feel uncertain whether they really affect their algorithmic evaluation. Based on our analysis, Figure <ref type="figure" target="#fig_1">2</ref> arranges the factors our participants discussed on two different dimensions: perceived control and perceived uncertainty. We positioned each factor depending on how most participants felt about that factor -whether or not they felt they could control that factor and whether or not they felt certain that factor is important to their evaluation. We next discuss how these two dimensions affect hosts' perceptions of fairness and their anxiety about hosting.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Perceived Control</head><p>Our participants believed they have direct control over some factors that affect their evaluation by algorithms but indirect or no control over others (Figure <ref type="figure" target="#fig_1">2</ref>). They suspected that algorithms consider many factors such as their cancellations and response rate, their profile details, and whether or not they use instant booking that they have considerable control over. However, there are other factors that they argued they had almost no control over. Such factors include the location of their listing, the number of bedrooms and bathrooms the listing has, and their tenure as a host on Airbnb. For instance, participants lamented that they cannot instantly change their hosting tenure or the location of their listing to improve their evaluation compared to other hosts.</p><p>Participants' perception of whether it is fair for algorithms to consider each factor in their evaluation often depended on their sense of control over that factor. For example, P-10 said that he considers it fair for Airbnb algorithms to consider hosts' response rate in how their listings are evaluated because hosts can directly control that rate. He argued that hosts like him who spend a lot of effort in responding quickly should be rewarded by the algorithm compared to less responsive hosts. On the other hand, many participants who assumed that Airbnb uses their average star rating 4 to evaluate them argued that using star ratings for evaluation is not ideal because they do not have sufficient control over them. They felt that different guests may have different ideas about what a 4-star or a 5-star stay means, and therefore, these ratings are subjective. Some participants described how they are disappointed when guests rate them with fewer than five stars in their review despite providing positive comments.</p><p>"I'm always shooting for five stars. I think, oh man, they gave me four stars only. Oh man. It'll be so many good things about your place, and then still they give you four stars. I don't understand. I don't want to push it. I don't ask them. I just leave it alone." -P-13</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Perceived Uncertainty</head><p>Hosts also perceived different levels of uncertainty over whether each factor is important to their evaluation. For example, Airbnb provides some guidelines on how certain factors can help hosts improve their position in search results <ref type="bibr" target="#b2">[4]</ref> and these guidelines make hosts more certain about the importance of those factors. Such factors include reviews, location, and cancellations.</p><p>On the other hand, participants expressed more uncertainty about the importance of some factors. For example, some participants wondered whether using pricing suggestions, choosing instant booking or changing their profile details affects their position in search results. They expressed more anxiety about how such factors affect their earnings. One participant, P-15, went so far as to change the title and description of his listing every day in an effort to improve his position in search results -even though Airbnb doesn't say anything about the effects of such actions. Lack of reliable information on whether such profile updates are useful makes him more anxious.</p><p>"I don't like it [changing the listing title every day] because I might spend half an hour of my time every day, and then it's not worth it. . . I still do it because there's lots of blogs and stuff saying that you need to do it, and I don't want to lose reservations." -P-15</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Algorithmic Anxiety</head><p>We found that the hosts in our sample already deal with anxiety and uncertainty around appealing to potential guests. Yet, their interactions with Airbnb algorithms and their perceived lack of control and uncertainty around responding to algorithms compounded their anxiety. Many participants told us that they remain concerned that if they perform actions that are deemed negative by the platform, it would have a negative effect on their earnings. For example, Participant P-04 worried how declining requests by potential guests would affect her evaluation.</p><p>" Some participants looked at Airbnb search results for listings in their neighborhood and felt unsatisfied with the position of their own listing in these results. This perceived unfairness distressed hosts and weakened their trust in the system.</p><p>"I feel less motivated because I don't think that it's clear what I need to do, and I think that it's seeing lots of listings that are worse than mine are in higher positions." -P-15</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>COPING STRATEGIES OF HOSTS</head><p>In the previous sections, we illustrated a wide variety of factors that hosts perceive influence their double negotiation. We found that the hosts we spoke to are committed actors in the Airbnb ecosystem, doing their best to provide hospitality and make a living. In the face of potential uncertainty and lack of control in the double negotiations, most hosts in our sample chose not to simply accept that reality. Instead, they developed a range of coping strategies aimed at increasing the perception of their own agency and creating more certainty where possible. We discuss these coping strategies below.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Trust in Fairness</head><p>Although all our participants told us that they did not understand exactly how search works, they often expressed confidence that search results are fair. They believe that if they continue to do what Airbnb expects them to do as a host, Airbnb will represent them well in search results and they will continue to have success.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>"Yes, I do [have confidence in search results</head><p>] because I play the game with you. I don't misbehave. I'm a good host. Therefore, you represent me fairly. I think if I messed up, I would not be ranked <ref type="bibr">[well]</ref>." -P-04 P-12 pointed out that her own experience of seeing listings with good reviews in search as a guest motivated her to believe that if she continues to be a good host, the algorithm will fairly reward her.</p><p>"When I search for places, there's never something I like at the top of the list where there's zero reviews or negative reviews and most of them are usually Superhosts" -P-12</p><p>P-11 noted that other platforms like HomeAway allow hosts to feature higher up in search results by paying a premium price. He described why he doesn't like this feature, and appreciates that Airbnb doesn't offer it:</p><p>"I mean, I don't like the idea of it because it's not based on any facts, it's more based on just that you're paying more. So as far as the guest goes, they may be getting a property that really is subpar, and not as good a property, just because the owners decided to throw it up there." -P-11</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Reverse-engineering the Search Algorithm</head><p>Some participants told us that they try to figure out exactly how Airbnb's search algorithm ranks different listings. They believed that this would help them understand what actions they can take to improve their position in search results.</p><p>Online forums and the documentation Airbnb provides for hosts seemed to be rich source materials for some participants to reverse-engineer algorithms. P-15 even looked at Airbnb engineering team's technical blog posts to attempt to learn how search algorithm is implemented.</p><p>A few participants described taking an experimental approach to understanding how the search algorithm might work. These hosts described changing one specific aspect of their profile at a time to see how it affects their position in search. They pointed out that they use Airbnb accounts other than their own to conduct these experiments because they suspect that using their own account would bias the search results. Participants developed a number of folk theories about which actions can improve their position in search results. They developed these theories from a variety of influences such as Facebook groups for Airbnb hosts, blog posts and websites dedicated to helping hosts succeed and their use of other online rental marketplaces. For example, P-11 pointed out that he believes that frequently updating his Airbnb calendar affects his position in search results. He said that this belief derives from his use of HomeAway as a host.</p><p>"I mean on HomeAway, I know for a fact that [calendar update] does [affect position in search results]. They say, the more often that you update the calendar, the higher your ranking will be." -P-11</p><p>Other participants came to believe that actions such as how frequently they open the Airbnb website or how often they update their Airbnb profile affect their position in search results. Participants usually had doubts about whether such theories were true but despite their uncertainty still performed those actions in an attempt to influence the algorithm.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Comparisons with Other Airbnb Hosts</head><p>Although Airbnb does not require or even encourage hosts to compare their listing with other Airbnb listings, many participants said that they pay keen attention to other listings in their neighborhood. They use the map in Airbnb search to find listings that are located nearby and compare them with their own listing. Many participants told us that they perform these comparisons in order to determine how they can optimally price their listing at a rate that will be seen favorably by potential guests. Some new hosts said that they also study other descriptions as a guide to composing or improving their own.</p><p>"We look at their listings. We monitor really closely, and I mean, pretty darn closely, like we notice when nice places change, we notice when their descriptions change, we notice when the pictures change. We read the reviews that are around us." -P-07 Some participants pointed out that these comparisons are often rife with uncertainty. For example, they look at other listings' calendars to estimate how booked they are, even though they realize that other hosts may have their calendar marked as unavailable for reasons other than having a booked guest.</p><p>"I've gone in there and checked some of the other ones. It's not always identical comparison because they're in a different location or their property is a little smaller. But, I do look every once in a while to see if there are as many bookings around me." -P-11</p><p>Participants said that they tend to compare their listing with other listings more frequently when they first start hosting on Airbnb or when their bookings slow down. Conversely, they stop paying attention to such comparisons when their bookings are consistent.</p><p>Although these comparisons help hosts optimize their bookings or earnings, some participants pointed out that the necessity of this additional work can make hosting more stressful to them. For example, P-12 said that she has lately avoided looking at search results in her neighborhood in order to avoid being stressed.</p><p>"That's one of those things, so ... my whole competitiveness, I feel that if I looked at it, it would kind of haunt my dreams, like, how I could do more bookings and I would think about it way too much" -P-12</p><p>Providing Unique Facilities</p><p>Many participants believe that when guests book on Airbnb, they look for a listing with a specific set of features. They provide amenities or facilities that other hosts in their neighborhood don't provide so that they can attract guests who have unique needs. For example, P-11 feels that his listing attracts many bookings because it has free parking, an facility among the listings in his neighborhood. Similarly, P-12 feels that her listing gets many bookings because she allows dogs in her listing when other listings in the area don't.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Adjusting Listing Price</head><p>Hosts adjust their listing prices in order to optimize their earnings. As we noted earlier, many participants set up a price that keeps them competitive with other listings in the area.</p><p>They often look at the price of listings that are similar to their own and in their neighborhood using Airbnb search in order to determine their listing price.</p><p>Participants believed that listing price is one of the most important factors that determine their occupancy. Some participants discussed how they change the price depending on the extent to which they want to ensure that their listing is booked on certain dates.</p><p>"If market price is $38, and I want to get that room booked in x amount of time, or by x date...if there's more of a sense of urgency for me, then I'll bring it down to $38 market price. If I don't have that sense of urgency, then I'm going to kick it up a couple of bucks." -P-08 Some of our participants told us explicitly that they suspect that price adjustments affect their position in search results.</p><p>Therefore, although price adjustments might be expected as a normal part of managing a seasonal business, the perception of Airbnb's additional use of pricing information in unknown ways seems to add uncertainty and contribute to hosts'anxiety.</p><p>In some cases, hosts keep their listing price low in order to compensate for other disadvantages that they may have in comparison to their competition in the neighborhood. For example, some participants noted that they kept their listing price low when they started out in order to attract bookings and accumulate initial reviews. Once they had enough good reviews, they felt that their listing would appear more reliable to potential guests, and they increased their price.</p><p>Some participants noted that they observe how fast and how much in advance their listing gets booked to gauge whether they need to change their listing price.</p><p>"We set our price initially, I think we set it around $70. What we found was that the apartment was just going so fast that we assumed we were a little off with our price." -P-7</p><p>Many hosts pointed out that they modify listing price in different seasons and during the holidays and special events in the neighborhood. Some hosts said that they pay particular attention to local events that would attract more guests because during such events, many hotels are booked or their prices are too high. Participant P-7 noted that when deciding her listing price, she considers that putting too high a price for her listing may negatively affect her reviews, and therefore, her future earnings.</p><p>"[I think about] how happy the person is, because I think there's a threshold where if you charge too much, a person will start to feel like it's not a good deal, and then it starts to show up in the review." -P-7</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Prioritizing Convenience</head><p>Participants said that they sometimes prioritized their convenience over their desire to maintain occupancy, and ultimately they take actions that could compromise their earnings. For example, some participants said that they prefer long-term guests to short-term guests because that requires less frequent preparations for the next guest. They offer discounts for bookings of longer durations to make hosting more convenient for themselves.</p><p>"Because we do all of our own cleaning and stuff too so, we had had one-night minimum stays, which meant that very often we were cleaning the house, the space every single day in order to prepare for the next guest coming in the same day. And so that got a little hectic and we weren't really fans of that but so it was on our own control, we changed that recently so it's not a one-night minimum stay anymore." -P-12</p><p>A few hosts noted that they raise their listing price when they only want to exert the effort required for hosting if the earnings are high enough.</p><p>"If one day I don't feel like working, or cleaning the house or maybe the price is going to be higher. If I'm going to do it, it has to be for a good reason." -P-3</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>DISCUSSION</head></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>The Double Negotiation</head><p>Our findings reveal that hosts engage in a double negotiation in their interactions with Airbnb. In an uncertain system where they feel they have limited control, hosts must grapple both with guests and with algorithms. While hosts sometimes found harmony by taking actions that they believed would be in service of both negotiations, that was not always the case.</p><p>For our participants, their task could feel like the equivalent of striking an unclear target that is moving in multiple dimensions. Dealing with the complexities of appealing to guests is hard enough, but at least hosts and potential guests have a shared understanding of social situations. However, dealing with semi-transparent algorithms becomes particularly challenging because they seem to operate according to an ambiguous set of rules. As Rader and Gray assert, mismatch between user's and algorithm's goals can create tensions among users <ref type="bibr" target="#b37">[35]</ref>.</p><p>Many of our participants took it on faith that their good actions would be rewarded by the algorithm, and doing what Airbnb asked of them would yield good results. But they also felt the anxiety of never having a way to know for sure, either what the algorithm might want or what a potential guest might want. It's easy to understand why this caused significant stress for some.</p><p>Airbnb is not the only system in which such a double negotiation may occur, may cause anxiety, or lead to coping strategies. Prior research indicates that workers in other sharing economy platforms like Uber and Lyft work towards building a connection with riders <ref type="bibr" target="#b38">[36]</ref> as well as engage in social sense-making around algorithmic systems in order to try and improve their evaluation <ref type="bibr" target="#b28">[29]</ref>. Similarly, individuals who post on Facebook either for fun or for profit, may navigate questions both about what might be appealing to friends or customers, and what might be ranked highly by Facebook's algorithms that determine their posts' visibility <ref type="bibr" target="#b16">[18]</ref>.</p><p>Merely recognizing the presence of the double negotiation is one key contribution of this work, as it helps to reveal the underlying conditions of a crucial socio-technical system. However, there are also steps that platforms such as Airbnb could take to assuage some of the anxiety they cause. We have identified uncertainty and perceived control as the two key axes of the double negotiation, and they are likewise the two key axes of potential solutions to anxiety. To the degree that systems can add information and provide control that does not undermine the system, they may improve user experiences and reduce anxiety.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Algorithmic Anxiety and the Paradox of Algorithmic</head></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Transparency</head><p>As we mentioned in our findings, Airbnb provides some guidelines to hosts on how they can improve their position in search results <ref type="bibr" target="#b2">[4]</ref>. However, we found that regardless of what Airbnb says about how the system works, the introduction of an algorithm itself can induce uncertainty in hosts because it combines known and unknown factors in a non-deterministic way. For instance, Airbnb notes in its guidelines: "If you do cancel on a guest, it can negatively impact where your listing appears in search" <ref type="bibr" target="#b2">[4]</ref>, but it does not specify exactly how a cancellation might impact a host or after how many cancellations.</p><p>In fact, it can be difficult for platforms to provide specific guidelines because these algorithms are so complex that their embedded internal processes are hard to analyze <ref type="bibr" target="#b17">[19]</ref>. Furthermore, it may not be in the interests of platforms like Airbnb to be too specific about which factors matter in what way. As we discussed, Airbnb hosts find their position in search results important to their success on the platform. Therefore, there needs to be some degree of uncertainty about how these algorithmic systems work or otherwise, some hosts would inevitably game the system. Moreover, these algorithms are a crucial part of the Airbnb software ecosystem, and their semi-transparency serves to protect its intellectual property.</p><p>Therein lies the paradox of algorithmic transparency: Evaluative algorithmic systems need to be deliberately somewhat vague in order to deal with inventive bad actors. Crucially, algorithmic systems need to serve in a way that Airbnb guests find listings that match their preferences, and therefore, they aim to encourage hosts to focus on providing quality service instead of attending to the peculiarities of the evaluation criteria. However, their vagueness creates anxiety among users because they feel unsure how their actions could impact their earnings. They desire more specificity in how these algorithms work.</p><p>The ongoing debate in the HCI community around seamless versus 'seamful' design points to the complexity of the above mentioned paradox <ref type="bibr" target="#b15">[17,</ref><ref type="bibr" target="#b22">23,</ref><ref type="bibr" target="#b25">26]</ref>. Some prior research has shown that designing certain seams into an algorithmic system can affect users' understanding of that system and their interactions with it <ref type="bibr" target="#b6">[7,</ref><ref type="bibr" target="#b7">8,</ref><ref type="bibr" target="#b15">17]</ref>. Researchers have argued that a seamful "design emphasizes experience and reflection, inviting the user to explore and discover connection in the system through manipulation, comparison and feedback" <ref type="bibr" target="#b15">[17]</ref>. Our findings also suggest the need for building carefully designed seams that expose more about algorithmic evaluation systems like Airbnb's. If users can be made aware of how their actions affect their profile representation on the site, it has the potential to decrease their anxiety. This further emphasizes the need for designers to look beyond providing seamless experiences to their users.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Alerting Workers on Damaging Actions</head><p>Eslami et al. argued that systems should integrate alerting users about the function of algorithms into their routine use rather than explaining them in help pages that users may not be aware of or may find too complex to be meaningful <ref type="bibr" target="#b16">[18]</ref>. We agree with this assessment and we suggest that designers can provide more concrete guidelines to workers by using automated mechanisms that detect when any of workers' actions significantly affect their evaluation, either positively or negatively. Such insights can offer users more agency, incentivize them to continue providing good service, and enable them to have a deeper relationship with the platform. Platforms can use data mining to identify patterns in how workers use the site and alert users who engage in wasteful activities (e.g., changing title everyday) that those actions have no effects on their algorithmic evaluation.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Sharing Information about Patterns in Consumer Activity</head><p>Platforms can consider sharing information about weekly or seasonal patterns in consumer activity in the neighborhood with workers. In the context of Airbnb, information about patterns in booking requests may help reduce the uncertainty of hosts who wonder whether their decline is bookings is due to a negative evaluation of their own performance or due to a slump in overall demand. It may also save hosts the additional work of researching other listings in the neighborhood to predict market demand.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Evaluating Workers over Factors They Control</head><p>We saw that Airbnb hosts often felt anxious because they perceived being evaluated by algorithms on factors they had little control over such as their location and tenure as host. Guest reviews and star ratings may seem like sensible metrics to review hosts on as they are important indicators of the quality of hosting. However, hosts worried about being rated based on those metrics because they felt they had insufficient control over the subjective assessments of guests. Prior research has found similar results on ridesharing platforms where drivers blamed their low ratings on passengers using inappropriate review rubrics <ref type="bibr" target="#b28">[29]</ref>.</p><p>We suggest that deploying award mechanisms like badges that evaluate workers on factors they perceive direct control over (e.g., in the context of Airbnb, hosts' response rate and cancellations) may increase their trust in the evaluation. Such badges can be displayed on the workers' profile pages where future consumers may see them. As P15 put it, "That badge, 'Superhost', it should be for a super host, which is a host, the person, and then there is a 'superapartment', that's for apartment, there should be two separate things. Why shouldn't you be a superhost if you are great, but the apartment, or the building has location, or noise or some other problems"? Such mechanisms would allow workers to have a clearer feedback mechanism and understand the effects of their actions on the system.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Integrating with Traditional Evaluation</head><p>Echoing Rosenblat et al's suggestions for ridesharing services <ref type="bibr" target="#b40">[37]</ref>, we suggest that rather than using algorithmic evaluation as a substitute for evaluation by human managers, designers can consider mixed initiative applications where algorithms are used in tandem with a more traditional evaluation system. In such a design, trained human evaluators might investigate and provide a direct appraisal of workers who receive low consumer scores and suggest them specific feedback for improvements. Such an intervention may assuage some of the workers' anxiety about being evaluated by algorithms but it may compromise the cost savings that come from using algorithmic evaluation alone.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Designing for Multiple Stakeholders</head><p>Although this study has largely focused on workers' concerns, it is important to keep in mind the interests of other stakeholders, particularly the consumers and the platform. One approach could be to create opportunities for improving workerconsumer relationships. Some of our participants attributed their actions to their desire for not inconveniencing the guests rather than for scoring points in their evaluation. We posit that designers should experiment with creating solutions that appeal to workers' empathy with their customers in order to encourage them to act in ways that improve guests' experiences.</p><p>We also believe that designing for better worker evaluation can improve worker quality across the platform, and therefore, it may improve consumer experiences on average.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Limitations</head><p>This work has some limitations. First, our results are from interviews with a small sample of Airbnb hosts. However, our sample is diversified in that our participants came from various age groups and geographical areas, representing different occupations. Moreover, we did not learn any significantly new things during our last interviews, suggesting theoretical saturation. Therefore, we expect that our results are valid.</p><p>Second, our data is based on a single platform, Airbnb, and it is, therefore, tied to the circumstances around that platform. Future work should look into algorithmic evaluation and the double negotiation in other contexts.</p><p>Finally, we only used self-reported data of participants, not their actual behavioral data. A mixed methods study incorporating data mining may provide additional insights into the work practices and coping strategies of hosts.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>CONCLUSION</head><p>Software algorithms are increasingly changing how work is evaluated in an ever growing number of fields. In this paper, we explore the impact of algorithmic evaluation on workers in the context of Airbnb. Our findings from a qualitative study reveal the paradox of algorithmic transparency, and the resultant challenges in designing human-centered algorithmic evaluation systems.</p><p>Algorithms are in the foreground as well as the background of different platforms. They are increasingly explicit actors in online systems but also pervasive background actors that are hard for many users to name or point out. This suggests a shift where it is not just other humans on one hand and information systems on the other, but a middle layer of seeming-human judgment and decision-making, done by algorithms, which demands more study. We argue that it is critical for designers and researchers to pay more attention to this layer especially as algorithms, ML and AI become pervasive parts of sociotechnical systems.</p><p>In this paper, we discuss opportunities for designing systems that address algorithmic anxiety and foster trust between the users and the systems. We hope this work inspires future research into the impact of algorithmic evaluation on workers in other contexts.</p></div><figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_0"><head>Figure 1 .</head><label>1</label><figDesc>Figure 1. Airbnb Search.</figDesc><graphic url="image-2.png" coords="3,96.36,62.51,425.41,232.24" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_1"><head>Figure 2 .</head><label>2</label><figDesc>Figure 2. Factors that Airbnb hosts believe affect their position in search. Each factor is placed in one of four quarters based on (1) whether hosts feel certain that factor is important for evaluation and (2) whether hosts feel they can directly control that factor. Spatial positioning of factors inside each quarter is irrelevant.</figDesc><graphic url="image-3.png" coords="6,96.36,62.36,425.38,262.15" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_0"><head></head><label></label><figDesc>Airbnb is one of the most successful examples of such services. Since its foundation in 2008, Airbnb has grown extraordinarily rapidly and it now has over 3 million active listings in 65,000 cities and 191 countries [2].</figDesc><table /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_1"><head>Table 1 .</head><label>1</label><figDesc>Study Participants</figDesc><table><row><cell>P#</cell><cell cols="3">Age Gender Country</cell><cell>Occupation</cell></row><row><cell>P1</cell><cell>74</cell><cell>F</cell><cell>US</cell><cell>Retiree</cell></row><row><cell>P2</cell><cell>42</cell><cell>M</cell><cell>UK</cell><cell>Photographer</cell></row><row><cell>P3</cell><cell>30</cell><cell>M</cell><cell>US</cell><cell>Musician</cell></row><row><cell>P4</cell><cell>57</cell><cell>F</cell><cell>US</cell><cell>Realtor</cell></row><row><cell>P5</cell><cell>63</cell><cell cols="2">F Canada</cell><cell>Editor</cell></row><row><cell>P6</cell><cell>32</cell><cell>F</cell><cell>US</cell><cell>Professor</cell></row><row><cell>P7</cell><cell>32</cell><cell cols="2">F Canada</cell><cell>Urban planner</cell></row><row><cell>P8</cell><cell>46</cell><cell>M</cell><cell>US</cell><cell>IT Manager</cell></row><row><cell>P9</cell><cell>40</cell><cell>F</cell><cell>US</cell><cell>Scientist</cell></row><row><cell>P10</cell><cell>36</cell><cell>M</cell><cell>UK</cell><cell>Accountant</cell></row><row><cell>P11</cell><cell>45</cell><cell>M</cell><cell>US</cell><cell>Physician</cell></row><row><cell>P12</cell><cell>32</cell><cell>F</cell><cell cols="2">US Research Coordinator</cell></row><row><cell>P13</cell><cell>65</cell><cell>M</cell><cell>US</cell><cell>Retiree</cell></row><row><cell>P14</cell><cell>26</cell><cell cols="3">M Canada Ecommerce Manager</cell></row><row><cell>P15</cell><cell>44</cell><cell>M</cell><cell>Brazil</cell><cell>Consultant</cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_3"><head></head><label></label><figDesc>I'll test...to see, generally if I were zooming in, how far out on the search can I be before you see it, if I changed the room type, how quickly do we show up, if I changed the price range, how quickly do I show up. We would test with all these different factors, and then we would make determinations based on what we needed then to do from there." -P-7</figDesc><table><row><cell>They also</cell></row><row><cell>experiment with searching for their own listings by putting a</cell></row><row><cell>variety of filters and interacting with map to replicate what</cell></row><row><cell>guests might do.</cell></row></table><note>"</note></figure>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="1">We see value in trying to understand how Airbnb hosts think evaluative algorithms work. Nothing in this paper should be construed to discern how Airbnb algorithms actually work.</note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="2">Instant Book listings don't require approval from the host before they can be booked. Instead, guests can choose their travel dates and book with the host immediately<ref type="bibr" target="#b4">[5]</ref>.</note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="3">Airbnb confers 'superhost' status to hosts who perform well on measures of commitment, communication, guest satisfaction and experience. The listing profiles of hosts who earn this status display a Superhost badge which makes them more attractive to potential guests<ref type="bibr" target="#b1">[3]</ref>.</note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="4">An aggregate of the primary scores on a scale from 1-5 given by guests</note>
+		</body>
+		<back>
+
+			<div type="acknowledgement">
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>ACKNOWLEDGMENTS</head><p>We are grateful to our participants for being involved in this research. We also thank anonymous reviewers and our colleagues at Airbnb and School of Interactive Computing at Georgia Tech for their valuable feedback on this work.</p></div>
+			</div>
+
+			<div type="references">
+
+				<listBibl>
+
+<biblStruct xml:id="b0">
+	<analytic>
+		<title level="a" type="main">Peer-to-peer in the Workplace: A View from the Road</title>
+		<author>
+			<persName><forename type="first">Nicola</forename><forename type="middle">J</forename><surname>Syed Ishtiaque Ahmed</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Himanshu</forename><surname>Bidwell</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Zade</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Srihari</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Anupama</forename><surname>Muralidhar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Baneen</forename><surname>Dhareshwar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Cedrick</forename><forename type="middle">N</forename><surname>Karachiwala</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jacki O'</forename><surname>Tandong</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Neill</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2858036.2858393</idno>
+		<ptr target="http://dx.doi.org/10.1145/2858036.2858393" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2016 CHI Conference on Human Factors in Computing Systems (CHI &apos;16)</title>
+				<meeting>the 2016 CHI Conference on Human Factors in Computing Systems (CHI &apos;16)<address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>ACM</publisher>
+			<date type="published" when="2016">2016</date>
+			<biblScope unit="page" from="5063" to="5075" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b1">
+	<monogr>
+		<title level="m" type="main">Airbnb Superhost</title>
+		<author>
+			<persName><surname>Airbnb</surname></persName>
+		</author>
+		<ptr target="https://www.airbnb.com/superhost" />
+		<imprint>
+			<date type="published" when="2017">2017b. 2017</date>
+			<biblScope unit="page" from="2017" to="2019" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b2">
+	<monogr>
+		<title level="m" type="main">What factors determine how my listing appears in search results?</title>
+		<author>
+			<persName><surname>Airbnb</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2017">2017c</date>
+			<publisher>Airbnb Help Center</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b3">
+	<monogr>
+		<title level="m" type="main">factors-determine-how-my-listing-appears-in-search-results</title>
+		<ptr target="https://www.airbnb.com/help/article/39/what-" />
+		<imprint>
+			<date type="published" when="2017">2017</date>
+			<biblScope unit="page" from="2017" to="2019" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b4">
+	<monogr>
+		<author>
+			<persName><surname>Airbnb</surname></persName>
+		</author>
+		<ptr target="https://www.airbnb.com/help/article/523/what-is-instant-book" />
+		<title level="m">What is Instant Book? -Airbnb Help Center</title>
+				<imprint>
+			<date type="published" when="2017">2017d. 2017</date>
+			<biblScope unit="page" from="2017" to="2019" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b5">
+	<monogr>
+		<title level="m" type="main">Airbnb Launches New Dashboard and Updated app for Hosts</title>
+		<author>
+			<persName><forename type="first">Roberto</forename><surname>Baldwin</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2015">2015. 2015</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b6">
+	<analytic>
+		<title level="a" type="main">Design for privacy in ubiquitous computing environments</title>
+		<author>
+			<persName><forename type="first">Victoria</forename><surname>Bellotti</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Abigail</forename><surname>Sellen</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the Third European Conference on Computer-Supported Cooperative Work 13-17</title>
+				<meeting>the Third European Conference on Computer-Supported Cooperative Work 13-17<address><addrLine>Milan, Italy ECSCW 93</addrLine></address></meeting>
+		<imprint>
+			<publisher>Springer</publisher>
+			<date type="published" when="1993-09">1993. September 1993</date>
+			<biblScope unit="page" from="77" to="92" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b7">
+	<analytic>
+		<title level="a" type="main">Seamful and seamless design in ubiquitous computing</title>
+		<author>
+			<persName><forename type="first">Matthew</forename><surname>Chalmers</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ian</forename><surname>Maccoll</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Workshop at the crossroads: The interaction of HCI and systems issues in UbiComp</title>
+				<imprint>
+			<date type="published" when="2003">2003</date>
+			<biblScope unit="volume">8</biblScope>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b8">
+	<analytic>
+		<title level="a" type="main">Constructing grounded theory: A practical guide through qualitative research</title>
+		<author>
+			<persName><forename type="first">Kathy</forename><surname>Charmaz</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">SagePublications Ltd</title>
+		<imprint>
+			<date type="published" when="2006">2006. 2006</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b9">
+	<analytic>
+		<title level="a" type="main">The effects of transparency on trust in and acceptance of a content-based art recommender</title>
+		<author>
+			<persName><forename type="first">Henriette</forename><surname>Cramer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Vanessa</forename><surname>Evers</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Satyan</forename><surname>Ramlal</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Maarten</forename><surname>Van Someren</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Lloyd</forename><surname>Rutledge</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Natalia</forename><surname>Stash</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Lora</forename><surname>Aroyo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Bob</forename><surname>Wielinga</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">User Modeling and User-Adapted Interaction</title>
+		<imprint>
+			<biblScope unit="volume">18</biblScope>
+			<biblScope unit="page">455</biblScope>
+			<date type="published" when="2008">2008. 2008</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b10">
+	<monogr>
+		<title level="m" type="main">The future of work looks like a UPS truck</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Davidson</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Kestenbaum</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2014">2014. 2014</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b11">
+	<analytic>
+		<title level="a" type="main">Algorithms Ruin Everything&quot;: #RIPTwitter, Folk Theories, and Resistance to Algorithmic Change in Social Media</title>
+		<author>
+			<persName><forename type="first">Michael</forename><forename type="middle">A</forename><surname>Devito</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Darren</forename><surname>Gergle</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jeremy</forename><surname>Birnholtz</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3025453.302565913</idno>
+		<ptr target="http://dx.doi.org/10.1145/3025453.302565913" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2017 CHI Conference on Human Factors in Computing Systems (CHI &apos;17)</title>
+				<meeting>the 2017 CHI Conference on Human Factors in Computing Systems (CHI &apos;17)<address><addrLine>New York, NY, USA; Stephen Cass, and Joshua Romero</addrLine></address></meeting>
+		<imprint>
+			<publisher>Nicholas Diakopoulos</publisher>
+			<date type="published" when="2014">2017. 2014</date>
+			<biblScope unit="page" from="3163" to="3174" />
+		</imprint>
+	</monogr>
+	<note>Proceedings of the Symposium on Computation+ Journalism</note>
+</biblStruct>
+
+<biblStruct xml:id="b12">
+	<analytic>
+		<title level="a" type="main">Does the Sharing Economy do any Good</title>
+		<author>
+			<persName><forename type="first">Tawanna</forename><surname>Dillahunt</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Airi</forename><surname>Lampinen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jacki O'</forename><surname>Neill</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Loren</forename><surname>Terveen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Cory</forename><surname>Kendrick</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 19th ACM Conference on Computer Supported Cooperative Work and Social Computing Companion</title>
+				<meeting>the 19th ACM Conference on Computer Supported Cooperative Work and Social Computing Companion</meeting>
+		<imprint>
+			<publisher>ACM</publisher>
+			<date type="published" when="2016">2016</date>
+			<biblScope unit="page" from="197" to="200" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b13">
+	<analytic>
+		<title level="a" type="main">The Promise of the Sharing Economy Among Disadvantaged Communities</title>
+		<author>
+			<persName><forename type="first">Tawanna</forename><forename type="middle">R</forename><surname>Dillahunt</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Amelia</forename><forename type="middle">R</forename><surname>Malone</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2702123.2702189</idno>
+		<ptr target="http://dx.doi.org/10.1145/2702123.2702189" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 33rd Annual ACM Conference on Human Factors in Computing Systems (CHI &apos;15)</title>
+				<meeting>the 33rd Annual ACM Conference on Human Factors in Computing Systems (CHI &apos;15)<address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>ACM</publisher>
+			<date type="published" when="2015">2015</date>
+			<biblScope unit="page" from="2285" to="2294" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b14">
+	<analytic>
+		<title level="a" type="main">Transparent user models for personalization</title>
+		<author>
+			<persName><forename type="first">Khalid</forename><surname>El-Arini</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ulrich</forename><surname>Paquet</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ralf</forename><surname>Herbrich</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jurgen</forename><surname>Van Gael</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Blaise</forename><surname>Agüera Y Arcas</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 18th ACM SIGKDD international conference on Knowledge discovery and data mining</title>
+				<meeting>the 18th ACM SIGKDD international conference on Knowledge discovery and data mining</meeting>
+		<imprint>
+			<publisher>ACM</publisher>
+			<date type="published" when="2012">2012</date>
+			<biblScope unit="page" from="678" to="686" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b15">
+	<analytic>
+		<title level="a" type="main">First I &quot;Like&quot; It, then I Hide It: Folk Theories of Social Feeds</title>
+		<author>
+			<persName><forename type="first">Motahhare</forename><surname>Eslami</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Karrie</forename><surname>Karahalios</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Christian</forename><surname>Sandvig</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kristen</forename><surname>Vaccaro</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Aimee</forename><surname>Rickman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kevin</forename><surname>Hamilton</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Alex</forename><surname>Kirlik</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2858036.2858494</idno>
+		<ptr target="http://dx.doi.org/10.1145/2858036.2858494" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2016 CHI Conference on Human Factors in Computing Systems (CHI &apos;16)</title>
+				<meeting>the 2016 CHI Conference on Human Factors in Computing Systems (CHI &apos;16)<address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>ACM</publisher>
+			<date type="published" when="2016">2016</date>
+			<biblScope unit="page" from="2371" to="2382" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b16">
+	<analytic>
+		<title level="a" type="main">I always assumed that I wasn&apos;t really that close to [her</title>
+		<author>
+			<persName><forename type="first">Motahhare</forename><surname>Eslami</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Aimee</forename><surname>Rickman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kristen</forename><surname>Vaccaro</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Amirhossein</forename><surname>Aleyasen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Andy</forename><surname>Vuong</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Karrie</forename><surname>Karahalios</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kevin</forename><surname>Hamilton</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Christian</forename><surname>Sandvig</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2702123.2702556</idno>
+		<ptr target="http://dx.doi.org/10.1145/2702123.2702556" />
+	</analytic>
+	<monogr>
+		<title level="m">Reasoning About Invisible Algorithms in News Feeds. Proceedings of the 33rd Annual ACM Conference on Human Factors in Computing Systems -CHI &apos;15 APRIL</title>
+				<imprint>
+			<date type="published" when="2015">2015. 2015</date>
+			<biblScope unit="page" from="153" to="162" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b17">
+	<analytic>
+		<title level="a" type="main">Be Careful; Things Can Be Worse than They Appear&quot;: Understanding Biased Algorithms and Users&apos; Behavior Around Them in Rating Platforms</title>
+		<author>
+			<persName><forename type="first">Motahhare</forename><surname>Eslami</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kristen</forename><surname>Vaccaro</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Karrie</forename><surname>Karahalios</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kevin</forename><surname>Hamilton</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">ICWSM</title>
+				<imprint>
+			<date type="published" when="2017">2017</date>
+			<biblScope unit="page" from="62" to="71" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b18">
+	<monogr>
+		<title level="m" type="main">Can an algorithm be wrong? Limn</title>
+		<author>
+			<persName><forename type="first">Tarleton</forename><surname>Gillespie</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2012">2012. 2012</date>
+			<biblScope unit="volume">1</biblScope>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b19">
+	<analytic>
+		<title level="a" type="main">Designing for labour: uber and the on-demand mobile workforce</title>
+		<author>
+			<persName><forename type="first">Mareike</forename><surname>Glöss</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Moira</forename><surname>Mcgregor</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Barry</forename><surname>Brown</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2016 CHI Conference on Human Factors in Computing Systems</title>
+				<meeting>the 2016 CHI Conference on Human Factors in Computing Systems</meeting>
+		<imprint>
+			<publisher>ACM</publisher>
+			<date type="published" when="2016">2016</date>
+			<biblScope unit="page" from="1632" to="1643" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b20">
+	<analytic>
+		<title level="a" type="main">Search Ranking And at Airbnb</title>
+		<author>
+			<persName><forename type="first">Mihajlo</forename><surname>Grbovic</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the Eleventh ACM Conference on Recommender Systems (RecSys &apos;17)</title>
+				<meeting>the Eleventh ACM Conference on Recommender Systems (RecSys &apos;17)</meeting>
+		<imprint>
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b21">
+	<monogr>
+		<title/>
+		<idno type="DOI">10.1145/3109859.3109920</idno>
+		<ptr target="http://dx.doi.org/10.1145/3109859.3109920" />
+		<imprint>
+			<publisher>ACM</publisher>
+			<biblScope unit="page" from="339" to="340" />
+			<pubPlace>New York, NY, USA</pubPlace>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b22">
+	<analytic>
+		<title level="a" type="main">A path to understanding the effects of algorithm awareness</title>
+		<author>
+			<persName><forename type="first">Kevin</forename><surname>Hamilton</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Karrie</forename><surname>Karahalios</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Christian</forename><surname>Sandvig</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Motahhare</forename><surname>Eslami</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">CHI&apos;14 Extended Abstracts on Human Factors in Computing Systems</title>
+				<imprint>
+			<publisher>ACM</publisher>
+			<date type="published" when="2014">2014</date>
+			<biblScope unit="page" from="631" to="642" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b23">
+	<analytic>
+		<title level="a" type="main">Monetizing Network Hospitality</title>
+		<author>
+			<persName><forename type="first">Tapio</forename><surname>Ikkala</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Airi</forename><surname>Lampinen</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2675133.2675274</idno>
+		<ptr target="http://dx.doi.org/10.1145/2675133.2675274" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 18th ACM Conference on Computer Supported Cooperative Work &amp; Social Computing -CSCW &apos;15</title>
+				<meeting>the 18th ACM Conference on Computer Supported Cooperative Work &amp; Social Computing -CSCW &apos;15<address><addrLine>New York, New York, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>ACM Press</publisher>
+			<date type="published" when="2015">2015</date>
+			<biblScope unit="page" from="1033" to="1044" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b24">
+	<monogr>
+		<title level="m" type="main">Service Providers of the Sharing Economy</title>
+		<author>
+			<persName><forename type="first">Qing</forename><surname>Ke</surname></persName>
+		</author>
+		<idno>abs/1709.07580</idno>
+		<ptr target="http://arxiv.org/abs/1709.07580" />
+		<imprint>
+			<date type="published" when="2017">2017. 2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b25">
+	<analytic>
+		<title level="a" type="main">How Much Information?: Effects of Transparency on Trust in an Algorithmic Interface</title>
+		<author>
+			<persName><forename type="first">F</forename><surname>René</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Kizilcec</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2858036.2858402</idno>
+		<ptr target="http://dx.doi.org/10.1145/2858036.2858402" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2016 CHI Conference Human Factors in Computing Systems (CHI &apos;16)</title>
+				<meeting>the 2016 CHI Conference Human Factors in Computing Systems (CHI &apos;16)<address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>ACM</publisher>
+			<date type="published" when="2016">2016</date>
+			<biblScope unit="page" from="2390" to="2395" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b26">
+	<analytic>
+		<title level="a" type="main">Studying the sharing economy: Perspectives to peer-to-peer exchange</title>
+		<author>
+			<persName><forename type="first">Airi</forename><surname>Lampinen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Victoria</forename><surname>Bellotti</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Andrés</forename><surname>Monroy-Hernández</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Coye</forename><surname>Cheshire</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Alexandra</forename><surname>Samuel</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 18th ACM Conference Companion on Computer Supported Cooperative Work &amp; Social Computing</title>
+				<meeting>the 18th ACM Conference Companion on Computer Supported Cooperative Work &amp; Social Computing</meeting>
+		<imprint>
+			<publisher>ACM</publisher>
+			<date type="published" when="2015">2015</date>
+			<biblScope unit="page" from="117" to="121" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b27">
+	<analytic>
+		<title level="a" type="main">Hosting via Airbnb: Motivations and Financial Assurances in Monetized Network Hospitality</title>
+		<author>
+			<persName><forename type="first">Airi</forename><surname>Lampinen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Coye</forename><surname>Cheshire</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2858036.2858092</idno>
+		<ptr target="http://dx.doi.org/10.1145/2858036.2858092" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2016 CHI Conference on Human Factors in Computing -CHI &apos;16</title>
+				<meeting>the 2016 CHI Conference on Human Factors in Computing -CHI &apos;16<address><addrLine>New York, New York</addrLine></address></meeting>
+		<imprint>
+			<publisher>ACM Press</publisher>
+			<date type="published" when="2016">2016</date>
+			<biblScope unit="page" from="1669" to="1680" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b28">
+	<analytic>
+		<title level="a" type="main">Working with Machines: The Impact of Algorithmic and Data-Driven Management on Human Workers</title>
+		<author>
+			<persName><forename type="first">Min</forename><forename type="middle">Kyung</forename><surname>Lee</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Daniel</forename><surname>Kusbit</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Evan</forename><surname>Metsky</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Laura</forename><surname>Dabbish</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">of the 33rd Annual ACM Conference on Human Factors in Computing Systems (CHI &apos;15)</title>
+				<meeting><address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>ACM</publisher>
+			<date type="published" when="2015">2015</date>
+			<biblScope unit="page" from="1603" to="1612" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b29">
+	<monogr>
+		<title/>
+		<idno type="DOI">10.1145/2702123.2702548</idno>
+		<ptr target="http://dx.doi.org/10.1145/2702123.2702548" />
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b30">
+	<analytic>
+		<title level="a" type="main">Self-Disclosure and Perceived Trustworthiness of Airbnb Host Profiles</title>
+		<author>
+			<persName><forename type="first">Xiao</forename><surname>Ma</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jeffery</forename><forename type="middle">T</forename><surname>Hancock</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kenneth</forename><surname>Lim Mingjie</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mor</forename><surname>Naaman</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings the 2017 ACM Conference on Computer Supported Cooperative Work and Social Computing (CSCW &apos;17)</title>
+				<meeting>the 2017 ACM Conference on Computer Supported Cooperative Work and Social Computing (CSCW &apos;17)<address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<date type="published" when="2017">2017</date>
+			<biblScope unit="page" from="2397" to="2409" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b31">
+	<monogr>
+		<title/>
+		<idno type="DOI">10.1145/2998181.2998269</idno>
+		<ptr target="http://dx.doi.org/10.1145/2998181.2998269" />
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b32">
+	<analytic>
+		<title level="a" type="main">The Sharing Economy -What It Is, Examples, And How Big Data, Platforms And Fuel It</title>
+		<author>
+			<persName><forename type="first">Bernard</forename><surname>Marr</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Forbes</title>
+		<imprint>
+			<date type="published" when="2016-10">2016. Oct 2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b33">
+	<analytic>
+		<title level="a" type="main">2012. I was a warehouse wage slave</title>
+		<author>
+			<persName><forename type="first">Mac</forename><surname>Mcclelland</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Mother Jones</title>
+				<imprint>
+			<date type="published" when="2012-04">March/April (2012</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b34">
+	<monogr>
+		<title level="m" type="main">Qualitative research in practice: Examples for discussion and analysis</title>
+		<author>
+			<persName><forename type="first">B</forename><surname>Sharan</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Merriam</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2002">2002</date>
+			<publisher>Jossey-Bass Inc Pub</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b35">
+	<monogr>
+		<title level="m" type="main">Airbnb: Turning the Collaborative Economy into a Collaborative In Collaborative Economy and Tourism</title>
+		<author>
+			<persName><forename type="first">D</forename><surname>Michael</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">O'regan</forename></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jaeyeon</forename><surname>Choe</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b36">
+	<monogr>
+		<title/>
+		<author>
+			<persName><surname>Springer</surname></persName>
+		</author>
+		<imprint>
+			<biblScope unit="page" from="153" to="168" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b37">
+	<analytic>
+		<title level="a" type="main">Understanding beliefs about algorithmic curation in the Facebook news feed</title>
+		<author>
+			<persName><forename type="first">Emilee</forename><surname>Rader</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Rebecca</forename><surname>Gray</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">of the 33rd Annual ACM Conference on Human Factors in Computing Systems</title>
+				<imprint>
+			<publisher>ACM</publisher>
+			<date type="published" when="2015">2015</date>
+			<biblScope unit="page" from="173" to="182" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b38">
+	<analytic>
+		<title level="a" type="main">Standing Out from the Crowd: Emotional Labor, Body Labor, and Temporal Labor in Ridesharing</title>
+		<author>
+			<persName><forename type="first">Noopur</forename><surname>Raval</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Paul</forename><surname>Dourish</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 19th ACM Conference on Computer-Supported Work &amp; Social Computing (CSCW &apos;16)</title>
+				<meeting>the 19th ACM Conference on Computer-Supported Work &amp; Social Computing (CSCW &apos;16)</meeting>
+		<imprint>
+			<date type="published" when="2016">2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b39">
+	<monogr>
+		<title/>
+		<idno type="DOI">10.1145/2818048.2820026</idno>
+		<ptr target="http://dx.doi.org/10.1145/2818048.2820026" />
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b40">
+	<monogr>
+		<author>
+			<persName><forename type="first">Alex</forename><surname>Rosenblat</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><forename type="middle">C</forename><surname>Karen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Solon</forename><surname>Levy</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Tim</forename><surname>Barocas</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Hwang</surname></persName>
+		</author>
+		<title level="m">Discriminating tastes: Customer ratings as for bias</title>
+				<imprint>
+			<date type="published" when="2016">2016. 2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b41">
+	<analytic>
+		<title level="a" type="main">Uber&apos;s Drivers: Asymmetries and Control in Dynamic Work</title>
+		<author>
+			<persName><forename type="first">Alex</forename><surname>Rosenblat</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Luke</forename><surname>Stark</surname></persName>
+		</author>
+		<idno type="DOI">10.2139/ssrn.2686227</idno>
+		<ptr target="http://dx.doi.org/10.2139/ssrn.2686227" />
+	</analytic>
+	<monogr>
+		<title level="j">SSRN Electronic Journal</title>
+		<imprint>
+			<date type="published" when="2015-07">2015. jul 2015</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b42">
+	<analytic>
+		<title level="a" type="main">Re-centering algorithms</title>
+		<author>
+			<persName><forename type="first">Christian</forename><surname>Sandvig</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kevin</forename><surname>Hamilton</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Karrie</forename><surname>Karahalios</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Cedric</forename><surname>Langbort</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Governing Algorithms: A Conference on Computation, Automation, and Control</title>
+				<imprint>
+			<date type="published" when="2013">2013</date>
+			<biblScope unit="page" from="16" to="17" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b43">
+	<analytic>
+		<title level="a" type="main">Getting the Message?: A Study of Explanation Interfaces for Microblog Data Analysis</title>
+		<author>
+			<persName><forename type="first">James</forename><surname>Schaffer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Prasanna</forename><surname>Giridhar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Debra</forename><surname>Jones</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Tobias</forename><forename type="middle">Tarek</forename><surname>Abdelzaher</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">John O'</forename><surname>Donovan</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2678025.2701406</idno>
+		<ptr target="http://dx.doi.org/10.1145/2678025.2701406" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 20th International Conference on Intelligent User Interfaces (IUI &apos;15)</title>
+				<meeting>the 20th International Conference on Intelligent User Interfaces (IUI &apos;15)<address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>ACM</publisher>
+			<date type="published" when="2015">2015</date>
+			<biblScope unit="page" from="345" to="356" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b44">
+	<analytic>
+		<title level="a" type="main">Price Determinants on Airbnb: How Reputation Pays off In the Sharing Economy</title>
+		<author>
+			<persName><forename type="first">Timm</forename><surname>Teubner</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Florian</forename><surname>Hawlitschek</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">David</forename><surname>Dann</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Journal of Self-Governance and Management Economics</title>
+		<imprint>
+			<biblScope unit="volume">5</biblScope>
+			<biblScope unit="page">4</biblScope>
+			<date type="published" when="2017">2017. 2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b45">
+	<analytic>
+		<title level="a" type="main">Toward a Geographic Understanding of the Sharing Economy</title>
+		<author>
+			<persName><forename type="first">Jacob</forename><surname>Thebault-Spieker</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Loren</forename><surname>Terveen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Brent</forename><surname>Hecht</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Systemic Biases in UberX and TaskRabbit</title>
+				<imprint>
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b46">
+	<analytic>
+		<title level="a" type="main">Article 21</title>
+		<idno type="DOI">10.1145/3058499</idno>
+		<ptr target="http://dx.doi.org/10.1145/3058499" />
+	</analytic>
+	<monogr>
+		<title level="j">ACM Trans. Comput.-Hum. Interact</title>
+		<imprint>
+			<biblScope unit="volume">24</biblScope>
+			<date type="published" when="2017-04">April 2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b47">
+	<analytic>
+		<title level="a" type="main">Avoiding the South Side and the Suburbs: The Geography of Mobile Crowdsourcing Markets</title>
+		<author>
+			<persName><forename type="first">Jacob</forename><surname>Thebault</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">-</forename><surname>Spieker</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Loren</forename><forename type="middle">G</forename><surname>Terveen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Brent</forename><surname>Hecht</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2675133.2675278</idno>
+		<ptr target="http://dx.doi.org/10.1145/2675133.2675278" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 18th ACM Conference on Computer Supported Cooperative Work &amp;#38; Social Computing (CSCW &apos;15)</title>
+				<meeting>the 18th ACM Conference on Computer Supported Cooperative Work &amp;#38; Social Computing (CSCW &apos;15)<address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>ACM</publisher>
+			<date type="published" when="2015">2015</date>
+			<biblScope unit="page" from="265" to="275" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b48">
+	<analytic>
+		<title level="a" type="main">A survey of explanations in recommender systems</title>
+		<author>
+			<persName><forename type="first">Nava</forename><surname>Tintarev</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Judith</forename><surname>Masthoff</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">IEEE 23rd International Conference on</title>
+				<imprint>
+			<publisher>IEEE</publisher>
+			<date type="published" when="2007">2007. 2007</date>
+			<biblScope unit="page" from="801" to="810" />
+		</imprint>
+	</monogr>
+	<note>Data Engineering Workshop</note>
+</biblStruct>
+
+				</listBibl>
+			</div>
+		</back>
+	</text>
+</TEI>

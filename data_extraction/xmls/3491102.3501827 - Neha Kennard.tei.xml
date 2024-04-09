@@ -1,0 +1,1261 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xml:space="preserve" xmlns="http://www.tei-c.org/ns/1.0" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.com/kermitt2/grobid/master/grobid-home/schemas/xsd/Grobid.xsd"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+	<teiHeader xml:lang="en">
+		<fileDesc>
+			<titleStmt>
+				<title level="a" type="main">Driving from a Distance: Challenges and Guidelines for Autonomous Vehicle Teleoperation Interfaces</title>
+			</titleStmt>
+			<publicationStmt>
+				<publisher/>
+				<availability status="unknown"><licence/></availability>
+			</publicationStmt>
+			<sourceDesc>
+				<biblStruct>
+					<analytic>
+						<author>
+							<persName><forename type="first">Felix</forename><surname>Tener</surname></persName>
+							<email>felix.tener@gmail.com</email>
+							<affiliation key="aff0">
+								<orgName type="institution">University of Haifa</orgName>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Joel</forename><surname>Lanir</surname></persName>
+							<email>ylanir@is.haifa.ac.il</email>
+							<affiliation key="aff1">
+								<orgName type="institution">University of Haifa</orgName>
+							</affiliation>
+						</author>
+						<title level="a" type="main">Driving from a Distance: Challenges and Guidelines for Autonomous Vehicle Teleoperation Interfaces</title>
+					</analytic>
+					<monogr>
+						<imprint>
+							<date/>
+						</imprint>
+					</monogr>
+					<idno type="DOI">10.1145/3491102.3501827</idno>
+				</biblStruct>
+			</sourceDesc>
+		</fileDesc>
+		<encodingDesc>
+			<appInfo>
+				<application version="0.7.1" ident="GROBID" when="2022-07-22T04:56+0000">
+					<desc>GROBID - A machine learning software for extracting information from scholarly documents</desc>
+					<ref target="https://github.com/kermitt2/grobid"/>
+				</application>
+			</appInfo>
+		</encodingDesc>
+		<profileDesc>
+			<textClass>
+				<keywords>
+					<term>Teleoperation</term>
+					<term>Autonomous vehicles</term>
+					<term>Remote driving</term>
+					<term>Teleassistance</term>
+					<term>Tele-driving</term>
+					<term>User interface design</term>
+					<term>Teleoperation challenges</term>
+				</keywords>
+			</textClass>
+			<abstract>
+<div xmlns="http://www.tei-c.org/ns/1.0"><p>Autonomous vehicle (AV) technologies are rapidly evolving with the vision of having self-driving cars moving safely with no human input. However, it is clear that at least in the near and foreseeable future, AVs will not be able to resolve all road incidents and that in some situations remote human assistance will be required. However, remote driving is not trivial and introduces many challenges stemming mostly from the physical disconnect of the remote operator. In order to highlight these challenges and understand how to better design AV teleoperation interfaces, we conducted several observations of AV teleoperation sessions as well as in-depth interviews with 14 experts. Based on these interviews, we provide an investigation and analysis of the major AV teleoperation challenges. We follow this by providing design guidelines for the development of future teleoperation interfaces for assistance and driving of AVs.</p></div>
+			</abstract>
+		</profileDesc>
+	</teiHeader>
+	<text xml:lang="en">
+		<body>
+<div xmlns="http://www.tei-c.org/ns/1.0"><p>for any human involvement <ref type="bibr" target="#b12">[12]</ref>. It is widely believed today, both in academia and industry, that AVs will not be able to resolve all ambiguous trafc situations by their own <ref type="bibr" target="#b12">[12,</ref><ref type="bibr" target="#b36">35]</ref>. Situations such as a malfunctioning trafc light, bad visibility conditions, or a big puddle in the middle of the road, might prevent an AV from moving autonomously because it did not yet encounter such a situation before, because the situation or how to address it is unclear to the algorithm, or because there are rules and regulations which the AV must obey. A promising approach to resolve these ambiguities and provide an actionable solution for edge situations is Teleoperation. Teleoperation involves a remote human operator (RO) who can monitor and control the vehicle from afar. When a vehicle encounters a problem in a particular situation, a RO can be called to assess the situation and guide the vehicle until the problem is resolved.</p><p>Teleoperation systems for AVs are already in use and are being developed by various automotive companies <ref type="bibr" target="#b36">[35]</ref>. However, remote driving is not a trivial task and there are various challenges that a RO must face. For example, since the RO is physically disconnected from the operated AV, she cannot feel the forces that are applied on the teleoperated vehicle or hear its surroundings sounds. Other challenges might be related to the fact that a lot of information should be transmitted from the AV to the RO over the network, and thus, latency might be an issue <ref type="bibr" target="#b22">[22]</ref> <ref type="bibr" target="#b46">[45]</ref>. Finally, the RO has to gain situation awareness (SA) quickly under a heavy cognitive load and impaired visibility conditions.</p><p>The purpose of this work is to unveil the major vehicle teleoperation challenges and create design recommendations for future teleoperation interfaces of AVs. Human performance issues have been widely investigated in feld of robotic teleoperation <ref type="bibr" target="#b11">[11]</ref>. Many of these issues, such as the importance of latency, are also applicable for teleoperated AVs. However, AVs operate in a much more complex environment and face greater and diferent challenges. For example, while for most robots, a short communication problem will simply have the robot stop and wait until the communication returns, a communication problem with a remotely operated vehicle driving 100 km/h on a highway is a totally diferent story. In order to unveil the major challenges and issues in AV teleoperation, we conducted semi-structured in-depth interviews with 14 experts from industry and academia, who have extensive experience with AVs, teleoperation, command and control, or the auto-industry in general. To complement the interviews, we also observed eight teleoperation driving sessions of AVs. Based on these interviews and observations, we created a framework of overall tele-driving challenges grouped into six clusters. In addition, we provide initial suggestions for the design of AV teleoperation interfaces. The results of this work may be used to help future engineers, designers, and researchers to design and build remote driving interfaces, which take into account the discovered limitations and challenges.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2">RELATED WORK 2.1 Robotic Teleoperation Interfaces</head><p>The design and implementation of robotic teleoperation interfaces have been explored since the early 1970's. These robotic vehicles have been used in situations in which it may be inconvenient, dangerous, or impossible for a human operator to be present. Applications of robotic telepresence are most common in military and space contexts, but also span civilian of-road contexts such as agriculture, manufacturing and mining. The operator's situation awareness, i.e., her ability to perceive and comprehend the remote environment was determined to be crucial for the success of the remote operation task <ref type="bibr" target="#b0">[1]</ref>. Initial studies examined how to improve SA using various tools to better perceive the remote environment, attempting to maximize information transfer while minimizing cognitive and sensorimotor workload <ref type="bibr" target="#b20">[20]</ref>. Other works looked into various human performance issues and user interface design of teleoperation interfaces, including how to make decisions and to issue commands, how to increase spatial orientation and object identifcation of the operator, and the efect of reliability, feld of view, orientation, viewpoint and depth perception of the video images on human performance <ref type="bibr" target="#b10">[10,</ref><ref type="bibr" target="#b11">11]</ref>.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.2">Teleoperation of Autonomous Vehicles</head><p>While robotic teleoperation interfaces have been examined since the early 1970's, vehicle-teleoperated interfaces are a relatively new feld of research. The Society of Automotive Engineers (SAE) defned an industry standard of six levels of driving automation from 0 to 6 <ref type="bibr" target="#b42">[41]</ref>. In level three (conditional automation), the vehicle can drive autonomously, however a human must be present in the car, seated in the driving seat and ready to take over if there is an immediate need. This passing of control between the autonomous vehicle and the driver is called take-over request. Several works investigated how to best utilize take-over requests and what may afect the driver's response time <ref type="bibr" target="#b3">[4]</ref><ref type="bibr" target="#b4">[5]</ref><ref type="bibr" target="#b5">[6]</ref><ref type="bibr" target="#b40">39]</ref>. Levels four (high automation) and fve (full automation) do not require the humans in the car to monitor or control the vehicle, and in fact, do not even require the vehicle to have pedals and a steering wheel. While AV technology is continuously evolving, the highest automation level currently available is at level 3. However, several automotive companies are continuously doing test runs for high automation, and many resources are invested into making self-driving cars a reality.</p><p>Although there might be long periods of time of self-driving in highly automated vehicles, it is widely acknowledged today that AVs will not be able to handle all road situations <ref type="bibr" target="#b26">[26,</ref><ref type="bibr" target="#b28">28,</ref><ref type="bibr" target="#b36">35]</ref>. The underlying assumption is that there are simply too many exceptional situations (i.e., "edge cases") vehicles can encounter when driving. These situations may occur, for example, because of perception problems (e.g., heavy snow that does not allow to perceive the AVs environment via radar, LIDAR, or cameras), because the vehicle encounters an unknown situation (e.g., an unknown animal blocks the road), because the vehicle cannot make a decision due to rules, regulations or other issues (e.g., inability to cross a continuous separation lane when the road is blocked), or because the AV cannot unambiguously determine the situation (e.g., whether an object is a plastic bag or a big rock). Thus, despite the advancements in AV sensors and AI algorithms, and although humans may also struggle with some of the edge cases, humans still have higher-level interpretation skills for complex or novel situations. A complex edge case for an AV might be easily interpreted and handled by a human. Furthermore, in automation level 4, the vehicle is still limited to some aspects and there might be regulations that require humans to perform certain actions (e.g., decide to cross a separation line). Thus, for a vehicle to be able to operate in automation level 4 or level 5, in which there is no human behind the steering wheel able to intervene, a remote human operator must be available to interpret edge case scenarios and remotely intervene when a problem occurs. Teleoperation of a vehicle on an urban road is a very diferent challenge than robotic teleoperation. Driving a remote car on an urban road requires the operator to utilize much cognitive resources in order to keep the vehicle in lane, control the speed and acceleration of the car, and be able to react to immediate hazards such as pedestrians, other vehicles, and various unexpected events. The teleoperation system and interface should be designed to maximize the operator's situation awareness so he or she could best perceive the environment and act accordingly. Several works examined whether head-mounted displays can enhance the situation awareness and spatial awareness of remote drivers of AVs <ref type="bibr">[23][7]</ref>. These studies mostly indicate that while state of the art head-mounted displays allow a higher feeling of immersion, they do not necessarily improve the driving performance.</p><p>Few recent studies started to look at requirements for teleoperation-based interfaces <ref type="bibr">[24]</ref>, at defning the design space for advanced visual interfaces of AVs <ref type="bibr" target="#b25">[25]</ref>, and investigating the needs of future control centers <ref type="bibr" target="#b31">[30]</ref>. Our study extends these works. However, while <ref type="bibr">Graf and Hussmann [24,</ref><ref type="bibr" target="#b25">25]</ref> focused on providing a list of user requirements for AV teleoperation, which includes comprehensive information on the vehicle and surrounding environment (e.g., vehicle position, vehicle status, weather condition, etc.) which is needed for teleoperation purposes, our work takes a diferent perspective focusing on the general challenges of tele-driving and the design of tele-driving interfaces.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3">METHODOLOGY</head><p>To fnd out what are the main teleoperation challenges in remote driving of autonomous vehicles, we frst conducted in-depth semistructured interviews with professionals working in the automotive industry as well as a few researchers of teleoperation from the academia. Following the interviews, we conducted informal observations of 8 people who drove an autonomous vehicle remotely in a test site. In the following section we describe the process in more detail.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.1">Formal interviews</head><p>Participants. We recruited 14 participants (1 female) ranging from 29 to 55 years old (M = 43.5, SD = 6.95). Seven participants are members of a consortium composed of academic institutions and leading automotive companies, formed to promote the legal and technological foundations for the widespread deployment of AV feets through teleoperations. Other participants were recruited from innovation centers of well-known automotive corporations or leading start-ups in the AV teleoperation feld, which were linked to the consortium. The participants were recruited via email and did not receive any compensation for their assistance. On average, participants had 20.3 years of experience in the industry/academy and 16.1 years of experience with AVs, teleoperation, command and control, or auto-industry in general. All the participants obtained undergraduate education in engineering, science, or business, most of them had graduate degrees, and all had a valid driving license. Table <ref type="table" target="#tab_0">1</ref> summarizes the background of each participant. Interview Procedure. We conducted semi-structured interviews with the participants. The main questions were the same for all participants, however, we requested each participant to elaborate and asked follow-up questions according to the interview answers. The main questions, which were asked during the interview were:</p><p>What are the main teleoperation challenges that a remote operator encounters when driving, assisting, or monitoring an AV?</p><p>What is, in your opinion, important for the remote operator to know about the AV in order to assist it in its movement? Which elements should be available to the remote operator in the interface?</p><p>Based on your experience, what types of faults can happen to an autonomous vehicle? please give concrete examples for situations in which an AV might need remote intervention. Each interview lasted around 60 minutes, but in some cases, depending on the willingness of our participants, we scheduled an additional session to collect more information. The interviews were conducted remotely via the Zoom video conferencing tool. All sessions were recorded. In the beginning of each interview session, a consent form was obtained, and participants were asked to fll in a demographic questionnaire. In the current work, we focus on the teleoperation challenges (question 1) and the teleoperator's user interface (questions 2).</p><p>Data analysis. First, we fully transcribed the interviews from the recordings. We used an inductive approach to the qualitative analysis of the texts following the guidelines of thematic analysis <ref type="bibr" target="#b8">[8]</ref>. Specifcally, we grouped participants' answers using a separate spreadsheet for each question. Each data record in the "Teleoperation Challenges" section had the following characteristics attached to it: (1) The challenge -general description, (2) Literal description of the challenge by each participant (i.e., a citation of what the participant said), (3) Origin -which participant mentioned this challenge, (4) Number of appearances of the challenge within the data, and (5) Category. The "Category" characteristic was added after cleaning redundancies and grouping challenges together based on thematic similarities (Bottom-up approach). After categorizing our fndings, we counted the number of times each category or sub-category was mentioned by diferent participants (Figure <ref type="figure" target="#fig_1">2</ref>).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.2">Observations of tele-driving sessions</head><p>Participants. Eight participants (2 female) ranging from 28 to 64 years old (M = 41.75, SD = 12.39) participated in the driving sessions. All participants had an undergraduate degree, six of them in engineering or sciences. Only one participant had previously driven an AV remotely, and three of them had extensive experience with video games. Most of the participants (6/8) were employees of the teleoperation company, which conducted the experiment for its internal needs. All participate agreed to participate in our observations and did not receive any compensation. In the rest of the paper, we refer to these participants as OP1-OP8.</p><p>Procedure. After going through an appropriate safety briefng, each participant was requested to perform several remote driving tasks using a dedicated tele-driving station (Figure <ref type="figure" target="#fig_0">1</ref> -left). The remote car was located 60km away from the station in a dedicated experimental polygon for smart transportation testing (Figure <ref type="figure" target="#fig_0">1</ref> right).</p><p>During the tele-driving sessions, participants wore a headset (Figure <ref type="figure" target="#fig_0">1</ref> -left) via which they communicated with a safety driver who was located withing the AV at the remote polygon. Each participant drove the AV for around 15 minutes and was guided to perform the following tasks:</p><p>1. Driving straight within the boundaries of a lane. 2. Performing a U-turn. 3. Speeding up and stopping abruptly. 4. Maneuvering between several cones, organized in a straight line several meters apart. 5. Bypassing an obstacle without touching nearby standing cones.</p><p>The participants were observed while performing the teledriving tasks and interviewed immediately after. Both the observations and the following interviews were video recorded. In the beginning of each interview, a consent form was obtained and participants were asked to fll in a demographic questionnaire. The main questions, which were presented to the participants were:</p><p>1. Can you please share your recent remote driving experience?</p><p>What did you feel? 2. Which challenges did you face while driving the vehicle remotely? 3. What disturbed you in the existing interface? What could be improved? How would you improve the UI of the teleoperation station?</p><p>Data analysis. During the driving sessions we recorded notes of any difculty or problem we observed. Analysis of observation interviews was similar to the interview step. First, we fully transcribed the interviews from the recordings. Then, we grouped participants' answers. Each data record had the following characteristics attached to it: (1) The challenge -general description, (2) Literal description of the challenge by each participant (i.e., a citation of what the participant said), (3) Origin -which participant mentioned this challenge, (4) Number of appearances of the challenge within the data. We also separated generic teleoperation challenges from station specifc challenges. After categorizing our fndings, we counted how many times each category or subcategory was mentioned by diferent participants (OP m ) and added it to the sum we already calculated based on the answers of the interviewed experts (P n ) (Figure <ref type="figure" target="#fig_1">2</ref>).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4">RESULTS</head><p>From the interview analysis, the following main categories for teleoperation challenges have emerged (Figure <ref type="figure" target="#fig_1">2</ref>): 1. Lack of physical sensing (mentioned 31 times), 2. Human cognition and perception (28), 3. Video and communication quality (25), 4. Remote interaction with humans (19), 5. Impaired visibility <ref type="bibr" target="#b15">(15)</ref>, and 6. Lack of sounds <ref type="bibr" target="#b8">(8)</ref>. All the categories and the sub-categories (except one 1 ) above were directly derived from the statements (citations) of the interviewed experts (P n ) or the remote drivers (OP M ). Additionally, at the end of this section we also share some of the observed mistakes and phenomena that were noticed during the remote driving experiment. Next, we explain each category and provide additional details and examples.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.1">Lack of physical sensing</head><p>When a human driver is physically present within a vehicle, she receives various kinds of physical feedback on her actions. For example, when a driver presses the gas pedal, the vehicle accelerates and the driver's chair applies force on the driver's body. However, when a remote driver performs the same action, the feedback is provided only in a visual form while the haptic and physical feedbacks are missing <ref type="bibr" target="#b11">[11]</ref> <ref type="bibr" target="#b27">[27]</ref>. Participants commented that when driving a vehicle remotely, a RO has difculty to feel and estimate 1. Linear and angular accelerations (or forces that infuence the driver) (mentioned by 8 participants), 2. Speeds (of the car, as well as the speed of other vehicles) (5 participants), and 3. Moderate road inclinations (1). It's also worth mentioning that 5 ROs in the experiment reported the general disconnect between their bodies and the AV without mentioning any of the above sub-categories.</p><p>P13 commented that ". . . The information arrives to the driver mostly visually and there are almost no other sensations: hard to hear, feel vibrations, feel accelerations, feel speeds . . .". The same participant also said that ". . . The issue of turns is very difcult. I didn't see a [remote] driver, who didn't ask his passengers 'how was the turn?' [after completing one] . . .". He also mentioned that ". . . It is very difcult to get the sense of speed. When you are in a car and you look away, you have no idea if you are traveling 60km/h or 80km/h. This happens a lot of times when you drive remotely . . .". This was corroborated by our observations of the tele-driving sessions; Two participants noted that ". . . the speed [as observed in from the video feed] isn't connected to reality <ref type="bibr">[and]</ref> looks much faster than it is . . .". OP6 also mentioned that it was ". . .very hard to take a turn and maintain the same speed . . .".</p><p>In addition, since the RO does not have physical connection with the vehicle's controls, she lacks the feedback from the steering wheel and the pedals (mentioned by 6 experts and 6 ROs). P3, who works as a teleoperator of an autonomous shuttle, shared that it is ". . . very to feel when you actually remove your leg from the brakes . . .". Moreover, the feedback of the road surface, is missing. P6 commented that the RO doesn't feel the ". . . of the road, bumps, etc. . . .". Connection to road surfaces and its infuence on applied forces and accelerations was also mentioned during our observations by OP3 and OP6. Finally, it stems from our observations, that physical disconnect from a remote vehicle not only makes it challenging to control the AV remotely, but also may have a negative physiological infuence on some of the remote drivers. OP2 and OP5 reported that they felt nauseous and dizzy after a 15-minute driving experience. fnding also correlates well with the literature <ref type="bibr" target="#b19">[19]</ref>.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.2">Human cognition and perception</head><p>This category deals with various cognition and perception factors that infuence the RO's ability to successfully drive the remote vehicle. These factors include: 1. Situation awareness (mentioned by 5 participants), 2. Cognitive load (6), 3. Depth perception (7), 4. Spatial awareness (7), and 5. Development of mental models <ref type="bibr" target="#b2">(3)</ref>.</p><p>Situation awareness is a general term that describes how a person perceives the environment. More specifcally, according to Endsley <ref type="bibr" target="#b15">[15]</ref>, SA is the perception of environmental elements and events with respect to time or space, the comprehension of their meaning, and the projection of their future status. SA can be considered as a high-level challenge for remote operation <ref type="bibr" target="#b11">[11]</ref> and indeed, many of the challenges mentioned in this paper are important for improving the overall SA of the RO. In remote driving, SA is critical before, during, and after an intervention request. One of the challenges, specifcally in remote driving, is that the RO must gain SA quickly because the situation on the road changes rapidly and human lives are involved.</p><p>Another remote driving challenge is the cognitive of the RO. According to P3, who works as a remote operator on a daily basis, "... The concentration level that is needed while teleoperating a vehicle is diferent ... You are in a high alert state and it sucks [your] cognitive abilities... ". In our observations, OP2 said the tele-driving experience was ". . . hard and dubious . . .". He also explained that ". . . a regular driving, you absorb the information automatically, [while] in remote driving it's overwhelming [It's] a huge efort ...". OP5 defned the experience to be ". . . stressful . . .". Other participants emphasized the need to design a teleoperation station in a way that ". . .will give the relevant information when it is needed, but not more than that. . ." (P11) in order to avoid overwhelming the RO with too much information.</p><p>Another challenge is the lack of spatial awareness in teleoperation. When a driver is physically present in a vehicle, she feels how much space the vehicle occupies, and which maneuvers the vehicle is able to perform. When one drives a vehicle this feeling is lost, which may cause remote drivers not to take risks that they are ready take when inside a vehicle. P6 gave an example for this in road fooding: "... you drive a car, you feel the depth of the water. You can feel if the water is standing or moving because the car will move you a bit. That is exactly the diference between a small puddle and drowning a passenger ... Orientation in space is easier when you move with the vehicle ...". Understanding the vehicle's placement in space was a major issue that was raised during our tele-driving observations. Five participants stated that it was hard for them to estimate the vehicle's width. One of our observation participants also mentioned that she couldn't tell when she has completed a U-turn.</p><p>Depth perception was also raised as a challenge by several participants. It is more difcult to estimate distances in teleoperation: ". . . you seem to see where you are, but all the depth hints are no longer there . . ." (P5) and thus, ". . . is very hard to know what is close and what is far away . . ." (P3). Additionally, it is difcult to estimate approaching / moving away speed of vehicles that move with high speed. During our observations, depth perception was mentioned as a challenge by 3 participants, however, two of the participants said that ". . . takes time to get used to it . . .". Additionally, based on our observations, we can tell that depth perception was mostly an issue when they tried to maneuver around the cones. One possible reason to the above could be the fact that the side cameras have distorted the distance, similarly to the phenomena with side mirrors in regular vehicles.</p><p>Finally, it may be challenging for the RO to develop correct models of the vehicle and its environment <ref type="bibr" target="#b39">[38]</ref>, especially when the RO needs alternate and operate more than one vehicle. In the context of remote driving, mental models were raised by participants in regards to the understanding of the remote vehicle's controls, size, and behavior. Participant P14 mentioned that ". . . tele-driving there is a challenge of adapting to diferent vehicles even when they are of the same size (bus vs. truck) . . .". Participant P11 asks ". . . how does pressing the accelerator pedal afect a Ford Focus versus the same pressure in a Fiat Punto? . . .". In other words, it is a challenge for the RO to build the correct understanding of the remote vehicle and its behaviors in various situations. Since ROs in teleoperation centers may not have the luxury of habituation to each and every AV they operate, various AVs will become a real challenge for ROs, who will have to get used to various vehicle sizes, diferent sensations of pedals, diferent camera settings, etc.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.3">Video and communication quality</head><p>When a driver is physically present and driving the vehicle, she receives the information from three major sensory channels: visual, haptic, and audio. However, as mentioned above, in remote driving the haptic and audio modalities are usually missing. Therefore, visual information has greater importance in remote driving. We recognize several challenges that deal with the way that the RO can view the remote environment. This mostly has to do with the way the cameras in the car capture and transmit the video feeds and the way this information is presented to the RO.</p><p>Nine of our interviewees mentioned latency as one of the major challenges in teleoperation, which also correlates with the literature <ref type="bibr" target="#b1">[2]</ref>[13][14] <ref type="bibr" target="#b37">[36]</ref>. According to P8, ". . . if the latency is below 200-250ms, one can do teleoperation, but more than that, it's impossible . . .". Additional important characteristic of latency is its variability. In other words, ". . . latency isn't something permanent, but something that changes depending on various factors. If it changes signifcantly all the time, it is very tiring for a RO [to the point of dizziness] . . ." (P8). Latency was also a major issue in our observations; Five out of eight participants mentioned that latency a challenge for them. Latency not only caused over-steering and under-steering 2 , but also caused remote drivers to more (or less) on the gas and brake pedals. These phenomena undermined the feeling of confdence in the system for some operators.</p><p>Another afecting aspect of video transmission which is related to latency is the video's frequency, which is measured in Frames Per Second (FPS) <ref type="bibr" target="#b13">[13]</ref>. Three of the interviewed experts have mentioned this challenge and P8 shared with us that " ... When there is a (network) load, frst thing you do is reduce FPS. The human eye does not diferentiate over 24 FPS, but there is a huge diference between 30 and 24 FPS. When the pace is 30FPS the person gets much less tired even seemingly there should be no diference. If you need to reduce the rate to 15-20 FPS, it's bad ... ".</p><p>The third characteristic of video that was mentioned in the inby three experts is the video resolution. P6 shared that ". . .if the remote driver cannot view the video in full HD, her ability to function is impaired ...". In addition, P13 stated that "... The sensors have a much lower resolution than the human eye... A person can see something and focus on it, but in remote driving it's very difcult to so. . . The video doesn't let you zoom in where you want. At 10 degrees, you see very sharp, at 30-40 degrees you see fne, and beyond that you can barely see . . .". In other words, the video's sharpness is not consistent throughout the feld of view (Figure <ref type="figure" target="#fig_2">3</ref>).</p><p>An additional aspect of video quality is whether video stitching (combining images overlapping felds of view to produce a wide-angle image) was done. In a remote driving station, often several camera feeds (from diferent cameras) placed on a car are stitched together to provide one wide-angle view. According to P2 ". . . RO's chance of understanding what's happening, when he has a concave screen in which the images are stitched, is higher than when he sees several screens with bezels between them . . .". However, 2 Understeer and oversteer are vehicle dynamics terms used to describe the sensitivity of a vehicle to steering. Oversteer is what occurs when a car turns (steers) by more than the amount commanded by the driver. Conversely, understeer is what occurs when a car steers less than the amount commanded by the driver. video stitching is an expensive processing procedure that companies are reluctant to invest in. Lack of stitching or low-quality stitching (Figure <ref type="figure" target="#fig_3">4</ref>) may increase the RO's cognitive load. This fnding was supported by one interviewee and experienced 3 remote drivers.</p><p>Finally, another factor, which can reduce the RO's ability to assist a remote vehicle, is cameras that are uncalibrated. P2 mentioned that ". . . The brightness, resolution, and contrast of all cameras should be the same. That is, the cameras must be calibrated. The green should be the same green and the blue the same blue. . .". Additional important aspect of camera calibration is how distance to objects is refected in the video feeds. In other words, the distance to an object from the front cameras should be the same as the distance to the same object from the side cameras (Figure <ref type="figure" target="#fig_4">5</ref>). Lack of such calibration creates a confusing efect, which makes it hard for the RO to estimate distance to objects.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.4">Remote interaction with humans</head><p>Ultimately, AVs are intended to provide service to people. Therefore, in addition to the many technical and human factors challenges, ROs of AVs will also have to address the challenges that are related to remote communication with other humans that will be involved in various trafc scenarios <ref type="bibr" target="#b2">[3]</ref> .</p><p>Remote communication with passengers within an AV is one such scenario (e.g., see also <ref type="bibr" target="#b32">[31]</ref> <ref type="bibr" target="#b34">[33]</ref>). P2 described a hypothetical scenario in which a ". . . passenger [and] a child arrived [in an AV] to their destination. [The passenger] got out of the vehicle and went to take her [small] child out of the AV. However, the vehicle locked itself and drove to its next destination because it recognized one exit and one entrance [into itself] . . .". This is a very complex scenario, and it is clear that a RO must be quickly involved in the loop. Communication with passengers was mentioned by 6 experts.</p><p>with drivers of other, non-autonomous vehicles is another possible scenario that was mentioned by one expert during the interviews. Oftentimes, human drivers communicate with each other through gestures and eye contact in order to bridge gaps that were not outlined by the law. For example, drivers arriving simultaneously on a 4-way stop sometimes rely on non-verbal communication between themselves to decide who will proceed frst. In a hybrid environment, in which one vehicle is controlled  by a human and the other is autonomous, such situations can be ambiguous. Therefore, a RO might be evoked resolve the problem.</p><p>Finally, AVs might also need to communicate with pedestrians and people outside the vehicle (mentioned by 6 experts). Several works have examined AV-pedestrian communication, looking at how pedestrians could better understand AVs intents <ref type="bibr" target="#b17">[17]</ref>[34] <ref type="bibr" target="#b41">[40]</ref>. However, in certain situations, there would also be a need to open a channel of communication between the RO and a pedestrian. P9 stated that "... Ultimately there should be communication between a police ofcer and a remote operator . . .". Indeed, there may be scenarios in which a law enforcement representative directs the trafc and contradicts the trafc rules in a place. Thus, for an AV, alternative mechanisms of communication will have to be set, and methods of communication, between the RO and the human agent should be determined. Similarly, the RO will need to be able to communicate with other humans in the environment. Participants mentioned use cases that included communication between a RO and a guard at an entrance to a compound, a pizza delivery (by an AV) that didn't arrive to the correct destination, an older adult who blocks a road lane because his groceries fell from his basket, and more.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Impaired</head><p>As mentioned above, often, visual feedback is the only feedback available to a RO and thus, the video quality is imperative. However, with perfect video representation, the vision of the RO may be impaired during remote driving because of various reasons. The interviews highlighted several such situations.</p><p>Five experts and one RO mentioned that a limited (or distorted) feld of view can impair the RO's perception of the actual scene (see also <ref type="bibr">[16][44]</ref>). Since the world view is seen by the RO via computer screens and depends on the cameras that are installed on the vehicle, if the angular coverage of front cameras does not reach 180 degrees, the operator's view may be impaired. a geometric distortion might happen when compressing 180 degrees feld of view from the cameras to a computer screen that is not wide enough (Figure <ref type="figure" target="#fig_2">3</ref>). According to P10, such distortion ". . . cause slower response times . . ." because according to P11, ". . . the information is delivered to the RO not necessarily in the way he is used to seeing it . . .".</p><p>Three interviewed experts claimed that lack of peripheral vision is another RO challenge since peripheral vision is important for lane keeping and lateral control <ref type="bibr" target="#b33">[32]</ref> <ref type="bibr" target="#b16">[16]</ref>. Thus, as P5 has stated: ". . . Everything that peripheral vision gives me in a real vehicle, is lacking in remote operation. In driving, the efect of peripheral vision is very important . . .". In other words, the peripheral vision may not be used when the vehicle's environment is located on screens in front of the RO. In fact, during our observations, we noticed that ROs are so focused on the central front part of the screen that they completely neglect or preferred not to look at other UI elements that appear on the sides of the screen: OP3 didn't look at the steering wheel UI element, OP5 reported that she has ". . . deleted [in her mind] the side cameras . . .", and OP7 completely neglected the speedometer, which was right in front of her.</p><p>Lack of ability to improve the viewpoint is another challenge (mentioned by four interviewees). When a driver is physically present inside a vehicle, she can change and improve her viewpoint based on the situation, and is not necessarily dependent on sensors. For example, during parking, she can lengthen or turn her neck to see a bit further, and when she performs a turn right, she has an option to turn her head and increase her feld of view. Such freedom of movement does not exist in remote driving. According to P6 ". . .This [point of view improvement] is missing in teleoperation because all the sensors are fxed to one place. If there is something that interferes with your feld of vision, you don't know what is going on behind it . . .". P5 further explained that ". . . difcult for a RO that he can't turn his head and see if he can perform a road turn [or not] . . .".</p><p>Finally, changing lighting conditions can also afect the RO's perception (one expert + one RO). Our eyes can adapt to lighting changes in the environment by changing the pupil's diameter. The camera's aperture is built to imitate the eye pupil to control its exposure to light. However, when rapid lighting changes are visible through eyes and cameras it can cause a visual disturbance to the RO. According to P8, ". . . an AV approaches a lighting poll at night, the camera's shutter closes and vice versa. If the traveling speed is fast, a fickering efect is created and it can drive the ROs crazy . . .". During our observations, OP2 has explicitly mentioned the fact that when diferent camera views have diferent lighting conditions (because of the sun direction), it disturbs performance of remote driving (Figure <ref type="figure" target="#fig_4">5</ref>).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.6">Lack of sounds</head><p>According to eight participants (7 experts and 1 RO), an important environmental aspect that can be missing in remote driving is sound <ref type="bibr" target="#b9">[9]</ref>. When inside a vehicle, drivers can hear a multitude of sounds: 1. Sounds that are produced other entities on the road (such as sirens, honks, human voices, or dog barking), 2. Sounds that appear as a result of the interaction of the vehicle with its surrounding (such as the road surface, or the leaves on the side of the road), 3. Sounds that appear from within the vehicle itself (such as the sounds of the engine or other mechanical parts), and 4. Weatherrelated sounds (such as strong winds, a rockslide, 3 . All these sounds may impact the SA of the RO if they are not available or if they are provided poorly. P6 gave us a vivid example: ". . . Suppose that a rack component is broken, it is a physical component that doesn't have a sensor. Therefore, it will not activate any warning the vehicle's dashboard. If you were in the car, you would hear a rumbling sound, but if you are not there, you don't feel the vibrations of the car, and you don't hear the car, you will not know it. Thus, it will be more difcult for you to understand the problem and why the vehicle drags to one side. . .".</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.7">Remote Driving Performance Issues.</head><p>While measuring remote driving performance was not the main purpose of this research, we would like to share some of the observed mistakes and phenomena that were noticed during the remote driving experiment. While some ROs could easily complete all the remote driving tasks without any difculty and even described the experience as ". . .cool. . .", three participants (OP1, OP2, OP3) reported nausea and dizziness. In one case, a RO (OP1) has even requested stop the experiment in the middle because of seasickness. It is also interesting to mention that two of the operators (OP4, OP8), who were very in the teleoperation tasks, had previous extensive experience with video games. One of these drivers also had previous driving experience of driving a (real) military light military truck, which enabled him to estimate vehicle's width dimensions without seeing its whole front side. Additionally, it was observed that operators relatively quickly adapted to UI defciencies and to the experienced latency. Among all the tasks that ROs had to perform, the slalom task among cones and bypassing an obstacle were the most challenging. In some cases, ROs overran cones while driving and almost always weren't sure if they did or did not hit a cone. Oversteering understeering efects were evident in the above tasks, but also existed when performing a U-turn.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5">USER INTERFACE SUGGESTIONS</head><p>In this section we outline several design guidelines for the AV RO's user interface that may address or mitigate some of the challenges as listed above. We focus on general guidelines that came out of the interviews or observations, have to do with the RO's user interface, and address one or more challenges.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.1">Add UI cues to bridge physical disconnect</head><p>As mentioned, in Section 4.1, one of the major challenges of remote driving is the physical disconnect of the RO from the operated AV. Because of this disconnect, ROs have to feel and estimate speeds, accelerations (linear -when speeding up and slowing down, angular -when performing turns), road inclinations, and the fnegrained feel of the efect of the gas and brake pedals. To alleviate this, we recommend adding special visual elements and cues to the teleoperation UI that would indicate felt and applied physical forces. For example, in <ref type="bibr" target="#b29">[29]</ref>, a visualization of pedaling force was made for training of cyclers. In our case, to provide feedback about the force that is applied (by the RO) on the gas and the brake pedals, it is possible to add visualizations that correlate to this force. Figure <ref type="figure">6</ref> provides an example of how this can be visualized in the user interface. We believe that such a visualization can also help ROs create proper mental models, as mentioned in Section 4.5. In addition, instead of visualizing accelerations, which not only depend on the contact of the RO with the gas and stop pedals, but also on the road grip and the road inclinations, we suggest visualizing the Figure <ref type="figure">6</ref>: Visualizing gas pedal contact via a continuous green element across the main tele-driving screen. The more the operator presses on the gas pedal, the wider the element becomes and its opacity decreases (and vice versa). A similar red element can depict pressing on the brake pedal. forces, which are applied on the humans inside the AV. Figure <ref type="figure" target="#fig_5">7</ref> shows a design example that supports force visualization.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.2">Emphasize the intervention reason</head><p>Each remote intervention consists of three main phases: In the frst phase, the RO accepts an intervention request and understands the situation and what needed assistance. In the second phase, the operator provides the needed assistance and makes sure that her guidance was followed the AV. In the third and fnal phase, the RO leaves the session. One of the challenges, specifc to remote driving, is that the RO must gain SA quickly because the situation on the road changes rapidly and because human lives might be involved.</p><p>order to shorten the length of the frst phase and increase RO's SA during this phase, it is important not only to notify the RO that she has to take control of the vehicle <ref type="bibr" target="#b1">[2]</ref> <ref type="bibr" target="#b4">[5]</ref>, but also to clearly and quickly show the RO the reason for the requested intervention. P6 gave an example: "... Did the vehicle stop because the camera stopped working or because someone sprayed some mud on the lens? ... ". This was echoed by other participants P9, P10, P12, P14) as well. The requested intervention can be conveyed by simple message, by adding appropriate virtual layers on top of the video feed, or in other ways.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.3">Add contextual road information</head><p>One important diference between continuous driving inside a vehicle and a remote driving intervention is that a real driver has contextual information about the vehicle, the situation and the road conditions that stems from the continuous driving process. Conversely, a RO may be missing critical information because of the short time she was requested intervene in. According to P12, ". . .when a real driver drives, he holds this information in his head, while the teleoperator -doesn't because he is entering the situation in the middle . . .". Thus, it is important to provide contextual road information, such as speed limits or prohibition of detours to the RO. Forster et.al. <ref type="bibr" target="#b21">[21]</ref> suggested fusing vehicle-localized ronment perception (i.e., what can be perceived according to the vehicle's sensors) with information provided by other road users or infrastructure (so-called cooperative perception) to improve invehicle assistive systems for human drivers. For example, it may be possible to provide drivers with advanced information about upcoming system limits to improve driving performance during invehicle take-over situations. We suggest expanding this approach to remotely operated vehicles in order to increase RO's SA during interventions.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.4">Integrate AI suggestions into the UI</head><p>Automated vehicles are operated based on advanced AI algorithms. Human assistance is needed when these algorithms fail or are unable to determine what to do. However, the human RO can highly beneft from this AI knowledge <ref type="bibr" target="#b44">[43]</ref>, even it may not be able to precisely determine the action to take. AI-based insight can be integrated into the teleoperation UI to help ROs in their decisions and to reduce cognitive load. One possible way to do so is to provide the RO with possible alternatives to solve a specifc use-case. For example, if a dog is lying in front of an AV in the middle of a two-way street with a continuous separation line, there might be several options: (1) Cross the separation line, (2) Find an alternative route, (3) Stop and wait, (4) Slowly move towards the dog without harming it. Having the AI suggest these solutions to the RO would signifcantly shorten the intervention time and might reduce the RO's cognitive load (see Section 4.5). In addition, the AI might suggest its preferred for the RO to simply approve. </p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.5">Visualize AVs direction based on the current position of the steering wheel</head><p>Another important point that stems mostly from our observations, but also came up in the interviews, is the importance of providing continuous feedback on the AV's trajectory as a factor of the steering wheel rotation angle. In several industrial UIs that we have examined, a rotating UI element that represents the position of the steering wheel was used to convey the vehicle's actual direction. When using such a representation, the RO projects the AV's trajectory in his mind based on the angle of the steering wheel in the UI. Such a cognitive efort has an even greater downside when taking the overall RO workload into account Section 4.5). Instead, we suggest projecting the future trajectory of the AV on the video image itself (see Figure <ref type="figure" target="#fig_6">8</ref>). A similar approach was taken by researchers from Japan <ref type="bibr" target="#b43">[42]</ref> in order to create a more comfortable environment for the passenger by increasing the passenger's SA. Another important beneft of the suggested trajectory overlay is that, when appropriately designed, it can visualize the AV's width, which may increase the spatial awareness of the RO (see Section 4.5).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.6">Add depth perception cues</head><p>Another challenge that was raised in Section 4.5 was the lack of depth perception (e.g., it might be difcult to estimate whether a vehicle is approaching or moving away from the AV). This can be mitigated by adding depth cues to the interface, possibly by utilizing color, similarly to what is often done in medical visualizations <ref type="bibr" target="#b38">[37]</ref>. For example, a vehicle is moving away (in the same direction), its color can become less saturated and vice versa. An additional method, suggested by P6, is to apply diferent colors to vehicles that move in the same direction (of the teleoperated AV) and those that move in the opposite direction. However, not every visual representation will be useful in such cases. For instance, simply adding a number that represents a distance to an object would probably not be useful and would add too much cognitive load. A possible approach, suggested by P3, is adding virtual layers on top of the video feed, which will be divided into colorful sections (red, yellow, green) that represent depth, similarly to what is used today in rear cameras of vehicles when driving backwards.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.7">Calibrate all video cameras and stitch images from overlapping video streams</head><p>One of the challenges mentioned in Sections 4.3 and 4.4 is the fact that uncalibrated cameras and changing lighting conditions can increase cognitive load making it challenging to drive a vehicle remotely. Additionally, during our observations we noticed that diferent zoom levels of front and side cameras can create confusion and make it more difcult to estimate distances to objects. Thus, it is important to calibrate all the front cameras and apply images processing techniques to reduce RO's cognitive load and to avoid losing details when the video image is dark (Figure <ref type="figure" target="#fig_6">8</ref>). Additionally, the zoom levels of all cameras should be calibrated such that the distance to an object from the front cameras will be similar to that same distance when viewed from a side camera. Another challenge, mentioned in Section 4.3, was lack of image stitching. Image stitching is an expensive because it requires to apply image processing techniques require resources and time. However, it is important in order to provide a clear image of the environment, reducing the RO's cognitive load.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.8">Visualize network and video quality</head><p>In Section 4.3, we mentioned that video and communication quality are among the major teleoperation challenges. Multiple companies and teams work toward the goal of reducing latency and improving video quality of remote vehicles. However, this challenge can also be mitigated by improving the user experience. the RO continuous feedback about the network quality and the frame rate at any particular moment, can help to increase the RO's situation awareness, and thus, solve any misunderstandings the RO might have. For example, visualizing network speed, similarly to what is done today in online video games, can be an intuitive way to show latency (see also the two outmost right icons in fgure 7).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="6">LIMITATIONS</head><p>Our research has several limitations mostly related to the remote driving experiment. First, the experimental scenario was somewhat limited in scope. For example, ROs were required to drive backwards or drive within trafc (an essential safety precaution). Thus, it was not possible to evaluate the usage of the rear, right, and left cameras. Additionally, the experiment was performed in a hot and dry weather. Thus, it not possible to examine whether related phenomena, such as sliding or bad visibility. Finally, as one see in Figure <ref type="figure" target="#fig_0">1</ref> (right), the experiment site is relatively fat. This fact did not us to investigate ROs sensations on roads with inclinations, which might possibly worsen the physical disconnect between the AV and the RO (since the ROs would probably not feel the forces that were applied on the vehicle). Second, several other limitations were related to the teleoperation station itself. The tele-driving tasks were performed using an initial version of a single user interface and were not compared to other teleoperation or user interfaces. Thus, some difculties could be related to a specifc interface design. For example, during the experiment, the engineers discovered that there is a delay between the steering wheel and its representation on the screen, regardless to the inevitable network latency. Such a defciency could be another reason for over-steering and under-steering phenomena. In addition, since the front vehicle's cameras were arranged to minimize the overlap among them, it resulted in cutting the full width of the vehicle's front part (see Figures <ref type="figure" target="#fig_6">6 and 8</ref>). Such an arrangement could reduce the spatial orientation of the ROs during the experiment. Additionally, almost all the ROs complained on the lack of pedals' sensitivity. While we believe that this problem stems from the disconnect of the RO from the actual vehicle, a diferent more or less sensitive set of pedals might be able to alleviate this problem.</p><p>Another limitation is that most of the remote driving participants were employees a single company, which is related to the design and development of tele-driving technology. While we observed behavior when remotely driving (all but one had no experience), their answers might be biased as they may wish the experiment to be successful.</p><p>Finally, related to the expert interviews, while being experts in their respective felds (AVs, teleoperation, command and control, and auto-industry in general), not all interviewed experts had the chance to remotely drive a vehicle. In addition, our fndings could be more robust if we had the chance to interview more experts.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="7">CONCLUSION</head><p>Autonomous vehicles are rapidly evolving in recent years with the promise of replacing human-driven vehicles and changing not only the vehicle industry, also the world around us. However, at least in the nearby future, it seems that AVs will not be able to handle each and every case they encounter. Thus, a remote operator will be needed help in cases in which the vehicle does not know or cannot decide how to proceed. As such, AV teleoperation is emerging as a new and promising feld of research. The purpose of this work was to unveil the major tele-driving challenges in order to inform the design of future teleoperation interfaces. Taking a frst at AV teleoperation from the perspective of the remote operator's task and interface, we present a framework of teleoperation grouped into six clusters and provide initial suggestions for the design of AV teleoperation interfaces.</p><p>This work lays an initial foundation for future research and raises important challenges which should be addressed by designers and engineers in the future. How to bridge the physical disconnect between an RO and an AV without investing in sophisticated motion simulators or specialized force-sensitive tele-driving suits? How to convey remote sounds to the ROs without overwhelming them? Can user interface methods be to engineering problems such as latency? How to compensate RO's to change her point of view? How to help ROs to create correct mental models of the remote environment in very short periods of time? All these questions and many more are left for future research. Addressing the above challenges might require not only a creative and a multi-disciplinary approach, but also the adoption of novel design paradigms. One such paradigm is tele-assistance <ref type="bibr" target="#b36">[35]</ref>, which suggests that ROs will not be required to take full remote of the AV in order to provide efective assistance to it. This paradigm suggests that AVs will be responsible for their own safety and movement in space, while the RO will only provide short discrete commands to guide them by resolving emerging ambiguities. Additionally, researchers, designers, and engineers will have to think about teleoperation more holistically; Particularly, examine a solution of a collection of co-located teleoperation stations within a single control center that should provide assistance to tens of thousands of AVs in complex urban environments on a daily basis -teleoperation as a service. Finally, given the various challenges highlighted in our research, it is clear that ROs will not only need to go through a preliminary selection process, but will also have to be trained accordingly in order to be capable of such a complex and a responsible job.</p></div><figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_0"><head>Figure 1 :</head><label>1</label><figDesc>Figure 1: Left -Remote tele-driving station. Right -Experimental polygon.</figDesc><graphic url="image-1.png" coords="4,109.74,83.69,392.53,162.90" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_1"><head>Figure 2 :</head><label>2</label><figDesc>Figure 2: Categories of teleoperation challenges. The numbers near each category name indicate how many times themes in this category appeared in the data (interviews and observations). Within the subcategories we show how many times each theme was mentioned by interviewees (left) and remote drivers (right).</figDesc><graphic url="image-2.png" coords="5,87.82,83.69,436.36,276.72" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_2"><head>Figure 3 :</head><label>3</label><figDesc>Figure 3: A view from a front camera installed on an AV. The image resolution within the red circle is much lower than the image resolution within the blue circle because of the angle from the center of the camera.</figDesc><graphic url="image-3.png" coords="7,87.82,83.69,436.36,118.62" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_3"><head>Figure 4 :</head><label>4</label><figDesc>Figure4: A view from 3 front cameras in a teleoperation station, taken from our observations. The image captures a cone, which appears twice on the screen because an overlap between two front cameras.</figDesc><graphic url="image-4.png" coords="8,87.82,83.69,436.39,196.27" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_4"><head>Figure 5 :</head><label>5</label><figDesc>Figure 5: The left image shows the video feed from the front cameras. The right image shows the video feed from the rightside camera. The distance to the pavement seems diferent in both views. The color palate is also not calibrated.</figDesc><graphic url="image-5.png" coords="8,87.82,325.78,436.38,89.91" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_5"><head>Figure 7 :</head><label>7</label><figDesc>Figure 7: The blue human fgures on the left of the compass and on the right of the speed limit should move left and right according to the force that the RO (or the passenger) feels when in the AV.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_6"><head>Figure 8 :</head><label>8</label><figDesc>Figure 8: projecting future trajectory on the video image.</figDesc><graphic url="image-8.png" coords="11,87.82,83.69,436.38,115.30" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_0"><head>Table 1 :</head><label>1</label><figDesc>Participants current role and experience in the AV industry.</figDesc><table><row><cell>Participant</cell><cell>Participant Current Role</cell><cell>Experience Description</cell></row><row><cell>P1</cell><cell>Co-Founder &amp; CEO of a startup, dealing with</cell><cell>Has 9 years of experience in the feld of computer vision. In the last 3</cell></row><row><cell></cell><cell>computer vision systems for mobile robotics.</cell><cell>years focused on remote navigation of robotic systems in domestic,</cell></row><row><cell></cell><cell></cell><cell>industrial, and agricultural settings.</cell></row><row><cell>P2</cell><cell cols="2">VP Mobility Solutions in a company developing Manages a division focusing on experiments and regulations in the</cell></row><row><cell></cell><cell cols="2">"robot as a service" platform to connect multiple area of smart transportation and autonomy, as well as a national</cell></row><row><cell></cell><cell cols="2">autonomous systems to real world application. project that deals with trafc congestion, sensors, passengers load,</cell></row><row><cell></cell><cell></cell><cell>vehicle safety, etc.</cell></row><row><cell>P3</cell><cell cols="2">Senior test manager and an autonomous driver Plans and executes various tests for automotive and smart</cell></row><row><cell></cell><cell>in a company deploying autonomous shuttles.</cell><cell>transportation technologies.</cell></row><row><cell>P4</cell><cell cols="2">Senior innovation leader in an innovation lab of Leads the sensors feld within the innovation center and is focused</cell></row><row><cell></cell><cell>a large vehicle corporation.</cell><cell>on scouting and evaluating relevant start-ups.</cell></row><row><cell>P5</cell><cell cols="2">Teleoperation researcher (post doctorate) in an Research is focused on human factor issues in remote operation of</cell></row><row><cell></cell><cell>academic institution.</cell><cell>AVs.</cell></row><row><cell>P6</cell><cell>Technical scout in an innovation lab of a large</cell><cell>Looking for innovative solutions in areas related to AVs and</cell></row><row><cell></cell><cell cols="2">German vehicle corporation (diferent from the teleoperation. Previously worked for 15 years as a journalist</cell></row><row><cell></cell><cell>corporation where P4 is employed).</cell><cell>reviewing auto-related issues.</cell></row><row><cell>P7</cell><cell>Co-founder and COO of a teleoperation</cell><cell>Worked over 18 years in the AVs area in military-oriented companies</cell></row><row><cell></cell><cell>company.</cell><cell>and later in a start-up company.</cell></row><row><cell>P8</cell><cell>VP of business development and autonomous</cell><cell>Founded the AVs and robotics branch in the military, where he spent</cell></row><row><cell></cell><cell cols="2">systems consultant in a teleoperation company. researching, developing, and deploying AVs for real world</cell></row><row><cell></cell><cell></cell><cell>applications for 10 years. Later, co-founded a company for</cell></row><row><cell></cell><cell></cell><cell>teleoperation of AVs.</cell></row><row><cell>P9</cell><cell cols="2">Lab group manager in a large American vehicle Works in the feld of human factors and engineering for Advanced</cell></row><row><cell></cell><cell>corporation (diferent from the corporations</cell><cell>Driving Assistance System systems and AVs for more than 25 years.</cell></row><row><cell></cell><cell>where P4 and P6 are employed).</cell><cell></cell></row><row><cell>P10</cell><cell>Director of innovation in a start-up, which</cell><cell>Has 20 years of experience in system engineering and</cell></row><row><cell></cell><cell>focuses on tele-communication with AVs.</cell><cell>communication with autonomous satellites. Recently joined a</cell></row><row><cell></cell><cell></cell><cell>company dealing with teleoperation of AVs.</cell></row><row><cell>P11</cell><cell>Research scientist (faculty) in an academic</cell><cell>Engaged in the research of transportation safety systems and</cell></row><row><cell></cell><cell>laboratory for robotics and AVs.</cell><cell>autonomous systems for more than 16 years.</cell></row><row><cell>P12</cell><cell>Director of partnerships and business</cell><cell>Has around 7 years of experience in companies that are related to</cell></row><row><cell></cell><cell>development in a small company developing</cell><cell>vehicles and vehicle simulations.</cell></row><row><cell></cell><cell>simulations for Advanced Driving Assistance</cell><cell></cell></row><row><cell></cell><cell>System and AV developers.</cell><cell></cell></row><row><cell>P13</cell><cell cols="2">VP of business development and co-founder of a Has more than 20 years of experience in the feld of</cell></row><row><cell></cell><cell>start-up for teleoperation of AVs.</cell><cell>tele-communications and in the last 5 years works in the feld of AVs.</cell></row><row><cell>P14</cell><cell>VP of Innovation in a company that develops</cell><cell>Many years of experience as a group manager of</cell></row><row><cell></cell><cell>command and control systems.</cell><cell>command-and-control systems in the navy, recently focusing on</cell></row><row><cell></cell><cell></cell><cell>command and control for AVs.</cell></row></table></figure>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="1">The sub-category Lack of Sounds from Other Entities was added after holistic evaluation of all the research fndings and based on common sense.</note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="3">The importance to hear sounds was mentioned by 7 experts and 1 RO. However, not all the participants mentioned sounds in a particular sub-category. In addition, the subcategory Lack of Sounds from other Entities wasn't explicitly mentioned. However, evaluating our fndings holistically, as well as, applying common sense, we decided to add this category as well.</note>
+		</body>
+		<back>
+
+			<div type="acknowledgement">
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>ACKNOWLEDGMENTS</head><p>The research was supported by the Israeli Innovation Authority through the Andromeda consortium. We would like to thank the people from DriveU and especially Eli Shapira for allowing us to participate in their remote driving experiment and for their support in this study. We would also like to thank all our interviewees for sharing their knowledge and insights.</p></div>
+			</div>
+
+			<div type="references">
+
+				<listBibl>
+
+<biblStruct xml:id="b0">
+	<monogr>
+		<title level="m" type="main">Unmanned vehicle situation awareness: A path forward. In systems integration symposium</title>
+		<author>
+			<persName><forename type="first">Julie A</forename><surname>Adams</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2007">2007</date>
+			<biblScope unit="page" from="31" to="89" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b1">
+	<analytic>
+		<title level="a" type="main">Take-over requests in highly automated driving: A crowdsourcing survey on auditory, vibrotactile, and visual displays</title>
+		<author>
+			<persName><forename type="first">P</forename><surname>Bazilinskyy</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">M</forename><surname>Petermeijer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">V</forename><surname>Petrovych</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Dodou</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">C F</forename><surname>Winter</surname></persName>
+		</author>
+		<idno type="DOI">10.1016/j.trf.2018.04.001</idno>
+		<ptr target="https://doi.org/10.1016/j.trf.2018.04.001" />
+	</analytic>
+	<monogr>
+		<title level="j">Transp. Res. Part F Trafc Psychol. Behav</title>
+		<imprint>
+			<biblScope unit="volume">56</biblScope>
+			<biblScope unit="page" from="82" to="98" />
+			<date type="published" when="2018">2018. 2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b2">
+	<monogr>
+		<title level="m" type="main">Communication and Communication Problems Between Autonomous Vehicles and Human Drivers</title>
+		<author>
+			<persName><forename type="first">Berthold</forename><surname>Färber</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2016">2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b3">
+	<analytic>
+		<title level="a" type="main">Feel the movement: Real motion infuences responses to Take-over requests in highly automated vehicles</title>
+		<author>
+			<persName><forename type="first">Susanne</forename><forename type="middle">C J</forename><surname>Shadan Sadeghian Borojeni</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Wilko</forename><surname>Boll</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Heinrich</forename><forename type="middle">H</forename><surname>Heuten</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Lewis</forename><surname>Bülthof</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Chuang</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3173574.3173820</idno>
+		<ptr target="https://doi.org/10.1145/3173574.3173820" />
+	</analytic>
+	<monogr>
+		<title level="m">Conf. Hum. Factors Comput. Syst. -Proc</title>
+				<imprint>
+			<date type="published" when="2018">2018. 2018</date>
+			<biblScope unit="page" from="1" to="13" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b4">
+	<analytic>
+		<title level="a" type="main">Assisting drivers with ambient take-over requests in highly automated driving</title>
+		<author>
+			<persName><surname>Shadan Sadeghian</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Lewis</forename><surname>Borojeni</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Wilko</forename><surname>Chuang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Susanne</forename><surname>Heuten</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Boll</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3003715.3005409</idno>
+		<ptr target="https://doi.org/10.1145/3003715.3005409" />
+	</analytic>
+	<monogr>
+		<title level="m">AutomotiveUI 2016 -8th Int. Conf. Automot. User Interfaces Interact</title>
+				<imprint>
+			<date type="published" when="2016">2016. 2016</date>
+			<biblScope unit="page" from="237" to="244" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b5">
+	<analytic>
+		<title level="a" type="main">From reading to driving: priming mobile users for take-over situations in highly automated driving</title>
+		<author>
+			<persName><forename type="first">Lars</forename><surname>Shadan Sadeghian Borojeni</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Wilko</forename><surname>Weber</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Susanne</forename><surname>Heuten</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Boll</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 20th international conference on humancomputer interaction with mobile devices and services</title>
+				<meeting>the 20th international conference on humancomputer interaction with mobile devices and services</meeting>
+		<imprint>
+			<date type="published" when="2018">2018</date>
+			<biblScope unit="page" from="1" to="12" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b6">
+	<analytic>
+		<title level="a" type="main">A head-mounted display to support teleoperations shared automated vehicles</title>
+		<author>
+			<persName><forename type="first">Martijn</forename><surname>Bout</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Anna</forename><forename type="middle">Pernestal</forename><surname>Brenden</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Maria</forename><surname>Klingeagrd</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Azra</forename><surname>Habibovic</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Marc Philipp</forename><surname>Böckle</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">AutomotiveUI 2017 -9th Int. ACM Conf. Automot</title>
+				<imprint>
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b7">
+	<analytic>
+		<title/>
+		<idno type="DOI">10.1145/3131726.3131758</idno>
+		<ptr target="https://doi.org/10.1145/3131726.3131758" />
+	</analytic>
+	<monogr>
+		<title level="j">User Interfaces Interact. Veh. Appl. Adjun. Proc</title>
+		<imprint>
+			<biblScope unit="page" from="62" to="66" />
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b8">
+	<analytic>
+		<title level="a" type="main">Using thematic analysis in psychology</title>
+		<author>
+			<persName><forename type="first">Virginia</forename><surname>Braun</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Victoria</forename><surname>Clarke</surname></persName>
+		</author>
+		<idno type="DOI">10.1191/1478088706qp063oa</idno>
+		<ptr target="https://doi.org/10.1191/1478088706qp063oa" />
+	</analytic>
+	<monogr>
+		<title level="j">Qual. Res. Psychol</title>
+		<imprint>
+			<date type="published" when="2006">2006. 2006</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b9">
+	<monogr>
+		<title level="m" type="main">A Survey on Teleoperation</title>
+		<author>
+			<persName><forename type="first">Nidia</forename><surname>Calvo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Elias</forename><surname>Seixas Lorosa</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2005-08">2005. August (2005</date>
+			<biblScope unit="page" from="607" to="612" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b10">
+	<analytic>
+		<title level="a" type="main">Human -Agent teaming for multirobot control: A review of human factors issues</title>
+		<author>
+			<persName><forename type="first">Y</forename><forename type="middle">C</forename><surname>Jessie</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Michael</forename><forename type="middle">J</forename><surname>Chen</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Barnes</surname></persName>
+		</author>
+		<idno type="DOI">10.1109/THMS.2013.2293535</idno>
+		<ptr target="https://doi.org/10.1109/THMS.2013.2293535" />
+	</analytic>
+	<monogr>
+		<title level="j">IEEE Trans. Human-Machine Syst</title>
+		<imprint>
+			<biblScope unit="volume">44</biblScope>
+			<biblScope unit="page" from="13" to="29" />
+			<date type="published" when="2014">2014. 2014</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b11">
+	<analytic>
+		<title level="a" type="main">Human performance issues and user interface design for teleoperated robots</title>
+		<author>
+			<persName><forename type="first">Y</forename><forename type="middle">C</forename><surname>Jessie</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ellen</forename><forename type="middle">C</forename><surname>Chen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Michael</forename><forename type="middle">J</forename><surname>Haas</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Barnes</surname></persName>
+		</author>
+		<idno type="DOI">10.1109/TSMCC.2007.905819</idno>
+		<ptr target="https://doi.org/10.1109/TSMCC.2007.905819" />
+	</analytic>
+	<monogr>
+		<title level="j">IEEE Trans. Syst. Man Cybern. Part C Appl. Rev</title>
+		<imprint>
+			<biblScope unit="volume">37</biblScope>
+			<biblScope unit="page" from="1231" to="1245" />
+			<date type="published" when="2007">2007. 2007</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b12">
+	<analytic>
+		<title level="a" type="main">Human factors of remotely operated vehicles</title>
+		<author>
+			<persName><forename type="first">J</forename><surname>Nancy</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Cooke</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the Human Factors and Ergonomics Society Annual Meeting</title>
+				<meeting>the Human Factors and Ergonomics Society Annual Meeting</meeting>
+		<imprint>
+			<date type="published" when="2006">2006</date>
+			<biblScope unit="page" from="166" to="169" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b13">
+	<analytic>
+		<title level="a" type="main">Sensor spatial distortion, visual latency, and update rate efects on 3D tracking in virtual environments</title>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">R</forename><surname>Ellis</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><forename type="middle">D</forename><surname>Adelstein</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Baumeler</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><forename type="middle">J</forename><surname>Jense</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><forename type="middle">H</forename><surname>Jacoby</surname></persName>
+		</author>
+		<idno type="DOI">10.1109/vr.1999.756954</idno>
+		<ptr target="https://doi.org/10.1109/vr.1999.756954" />
+	</analytic>
+	<monogr>
+		<title level="m">Proc. -Virtual Real. Symp</title>
+				<meeting>-Virtual Real. Symp</meeting>
+		<imprint>
+			<date type="published" when="1999">1999. 1999</date>
+			<biblScope unit="page" from="218" to="221" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b14">
+	<analytic>
+		<title level="a" type="main">Generalizeability of Latency Detection in a Variety of Virtual Environments</title>
+		<author>
+			<persName><forename type="first">R</forename><surname>Stephen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Katerina</forename><surname>Ellis</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Bernard</forename><forename type="middle">D</forename><surname>Mania</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Michael</forename><forename type="middle">I</forename><surname>Adelstein</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Hill</surname></persName>
+		</author>
+		<idno type="DOI">10.1177/154193120404802306</idno>
+		<ptr target="https://doi.org/10.1177/154193120404802306" />
+	</analytic>
+	<monogr>
+		<title level="j">Proc. Hum. Factors Ergon. Soc. Annu. Meet</title>
+		<imprint>
+			<biblScope unit="volume">48</biblScope>
+			<biblScope unit="page" from="2632" to="2636" />
+			<date type="published" when="2004">2004. 2004</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b15">
+	<analytic>
+		<title level="a" type="main">Measurement of situation awareness in dynamic systems</title>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">R</forename><surname>Endsley</surname></persName>
+		</author>
+		<idno type="DOI">10.1518/001872095779049499</idno>
+		<ptr target="https://doi.org/10.1518/001872095779049499" />
+	</analytic>
+	<monogr>
+		<title level="j">Hum. Factors</title>
+		<imprint>
+			<date type="published" when="1995">1995. 1995</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b16">
+	<analytic>
+		<title level="a" type="main">Image parameters for driving with indirect viewing systems</title>
+		<author>
+			<persName><forename type="first">B</forename><forename type="middle">F</forename><surname>Jan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Pieter</forename><surname>Van Erp</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Padmos</surname></persName>
+		</author>
+		<idno type="DOI">10.1080/0014013032000121624</idno>
+		<ptr target="https://doi.org/10.1080/0014013032000121624" />
+	</analytic>
+	<monogr>
+		<title level="j">Ergonomics</title>
+		<imprint>
+			<biblScope unit="volume">46</biblScope>
+			<biblScope unit="page" from="1471" to="1499" />
+			<date type="published" when="2003">2003. 2003</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b17">
+	<analytic>
+		<title level="a" type="main">A Longitudinal Video Study on Communicating and Intent for Self-Driving Vehicle A-Pedestrian Interaction</title>
+		<author>
+			<persName><forename type="first">Stefanie</forename><forename type="middle">M</forename><surname>Faas</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Andrea</forename><forename type="middle">C</forename><surname>Kao</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Martin</forename><surname>Baumann</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3313831.3376484</idno>
+		<ptr target="https://doi.org/10.1145/3313831.3376484" />
+	</analytic>
+	<monogr>
+		<title level="j">Conf. Hum. Factors Comput. Syst. -Proc</title>
+		<imprint>
+			<biblScope unit="page" from="1" to="14" />
+			<date type="published" when="2020">2020. 2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b18">
+	<analytic>
+		<title level="a" type="main">Preparing a nation for autonomous vehicles: Opportunities, barriers and policy recommendations</title>
+		<author>
+			<persName><forename type="first">J</forename><surname>Daniel</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kara</forename><surname>Fagnant</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Kockelman</surname></persName>
+		</author>
+		<idno type="DOI">10.1016/j.tra.2015.04.003</idno>
+		<ptr target="https://doi.org/10.1016/j.tra.2015.04.003" />
+	</analytic>
+	<monogr>
+		<title level="j">Transp. Res. Part A Policy Pract</title>
+		<imprint>
+			<biblScope unit="volume">77</biblScope>
+			<biblScope unit="page" from="167" to="181" />
+			<date type="published" when="2015">2015. 2015</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b19">
+	<analytic>
+		<title level="a" type="main">Collaborative Control: A Robot-Centric Model for Vehicle Teleoperation</title>
+	</analytic>
+	<monogr>
+		<title level="j">Aaai Mishkin</title>
+		<imprint>
+			<date type="published" when="0198">2001. 2001. 198</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b20">
+	<analytic>
+		<title level="a" type="main">Vehicle teleoperation interfaces</title>
+		<author>
+			<persName><forename type="first">Terrence</forename></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Charles</forename><surname>Thorpe</surname></persName>
+		</author>
+		<idno type="DOI">10.1023/A:1011295826834</idno>
+		<ptr target="https://doi.org/10.1023/A:1011295826834" />
+	</analytic>
+	<monogr>
+		<title level="j">Auton. Robots</title>
+		<imprint>
+			<biblScope unit="volume">11</biblScope>
+			<biblScope unit="page" from="9" to="18" />
+			<date type="published" when="2001">2001. 2001</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b21">
+	<monogr>
+		<title level="m" type="main">Your Turn or My Turn?</title>
+		<author>
+			<persName><forename type="first">Yannick</forename><surname>Forster</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Frederik</forename><surname>Naujoks</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Alexandra</forename><surname>Neukum</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3003715.3005463</idno>
+		<ptr target="https://doi.org/10.1145/3003715.3005463" />
+		<imprint>
+			<date type="published" when="2016">2016. 2016</date>
+			<biblScope unit="page" from="253" to="260" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b22">
+	<analytic>
+		<title level="a" type="main">An adaptable and immersive real time interface for resolving system limitations of automated vehicles with teleoperation</title>
+		<author>
+			<persName><forename type="first">Jean</forename><surname>Michael</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Georg</forename></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Frank</forename><surname>Diermeyer</surname></persName>
+		</author>
+		<idno type="DOI">10.1109/SMC.2019.8914306</idno>
+		<ptr target="https://doi.org/10.1109/SMC.2019.8914306" />
+	</analytic>
+	<monogr>
+		<title level="m">Conf. Proc. -IEEE Int. Conf. Syst. Man Cybern</title>
+				<imprint>
+			<date type="published" when="2019">2019-Octob, (2019</date>
+			<biblScope unit="page" from="2659" to="2664" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b23">
+	<analytic>
+		<title level="a" type="main">Teleoperated Driving, a Key Technology for Automated Driving? Comparison of Actual Test Drives with a Head Mounted Display and Conventional Monitors *</title>
+		<author>
+			<persName><forename type="first">Jean</forename><surname>Michael Georg</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Johannes</forename><surname>Feiler</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Frank</forename><surname>Diermeyer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Markus</forename><surname>Lienkamp</surname></persName>
+		</author>
+		<idno type="DOI">10.1109/ITSC.2018.8569408</idno>
+		<ptr target="https://doi.org/10.1109/ITSC.2018.8569408" />
+	</analytic>
+	<monogr>
+		<title level="m">IEEE Conf. Intell. Transp. Syst. Proceedings, ITSC 2018-Novem</title>
+				<imprint>
+			<date type="published" when="2018">2018. 2018</date>
+			<biblScope unit="page" from="3403" to="3408" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b24">
+	<analytic>
+		<title level="a" type="main">User requirements remote teleoperation-based Adjun</title>
+		<author>
+			<persName><forename type="first">Gaetano</forename><surname>Graf</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Heinrich</forename><surname>Hussmann</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3409251.3411730</idno>
+		<ptr target="https://doi.org/10.1145/3409251.3411730" />
+	</analytic>
+	<monogr>
+		<title level="m">Proc. -12th Int. ACM Conf. Automot. User Interfaces Interact</title>
+				<meeting>-12th Int. ACM Conf. Automot. User Interfaces Interact</meeting>
+		<imprint>
+			<date type="published" when="2020">2020. 2020</date>
+			<biblScope unit="volume">2020</biblScope>
+			<biblScope unit="page" from="85" to="88" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b25">
+	<analytic>
+		<title level="a" type="main">A Design Space for Advanced Visual Interfaces for Teleoperated Autonomous Vehicles</title>
+		<author>
+			<persName><forename type="first">Gaetano</forename><surname>Graf</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Henri</forename><surname>Palleis</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Heinrich</forename><surname>Hussmann</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3399715.3399942</idno>
+		<ptr target="https://doi.org/10.1145/3399715.3399942" />
+	</analytic>
+	<monogr>
+		<title level="j">ACM Int. Conf. Proceeding Ser</title>
+		<imprint>
+			<date type="published" when="2020">2020. 2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b26">
+	<analytic>
+		<title level="a" type="main">Beyond safety drivers: Applying air trafc control principles to support the of driverless vehicles</title>
+		<author>
+			<persName><forename type="first">C</forename><surname>Robert</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Shan</forename><surname>Hampshire</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Bao</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Walter</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Andrew</forename><surname>Lasecki</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jamol</forename><surname>Daw</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Pender</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">PLoS One</title>
+		<imprint>
+			<biblScope unit="volume">15</biblScope>
+			<biblScope unit="page">e0232837</biblScope>
+			<date type="published" when="2020">2020. 2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b27">
+	<monogr>
+		<title level="m" type="main">Contribution of neuroscience to the teleoperation of rehabilitation robot</title>
+		<author>
+			<persName><forename type="first">Enrique</forename><surname>Hortal</surname></persName>
+		</author>
+		<idno type="DOI">10.1007/978-3-319-95705-0_4</idno>
+		<ptr target="https://doi.org/10.1007/978-3-319-95705-0_4" />
+		<imprint>
+			<date type="published" when="2019">2019. 2019</date>
+			<biblScope unit="page" from="49" to="67" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b28">
+	<analytic>
+		<title level="a" type="main">Driving to safety: How many miles of driving would it take to demonstrate autonomous vehicle reliability?</title>
+		<author>
+			<persName><forename type="first">Nidhi</forename><surname>Kalra</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Susan</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Paddock</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Transp. Res. Part A Policy Pract</title>
+		<imprint>
+			<biblScope unit="volume">94</biblScope>
+			<biblScope unit="page" from="182" to="193" />
+			<date type="published" when="2016">2016. 2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b29">
+	<monogr>
+		<author>
+			<persName><forename type="first">Oral</forename><surname>Kaplan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Goshiro</forename><surname>Yamamoto</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yasuhide</forename><surname>Yoshitake</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Takafumi</forename><surname>Taketomi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Christian</forename><surname>Sandor</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Hirokazu</forename><surname>Kato</surname></persName>
+		</author>
+		<title level="m">-situ visualization of pedaling forces on cycling training videos. 2016 IEEE Int. Conf. Syst. Man, Cybern. SMC 2016 -Conf</title>
+				<imprint>
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b30">
+	<monogr>
+		<idno type="DOI">10.1109/SMC.2016.7844371</idno>
+		<ptr target="https://doi.org/10.1109/SMC.2016.7844371" />
+		<title level="m">Proc</title>
+				<meeting>null</meeting>
+		<imprint>
+			<date type="published" when="2017">2017</date>
+			<biblScope unit="page" from="994" to="999" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b31">
+	<analytic>
+		<title level="a" type="main">Requirements of Future Control Centers in Public Transport</title>
+		<author>
+			<persName><forename type="first">Carmen</forename><surname>Kettwich</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Annika</forename><surname>Dreßler</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3409251.3411726</idno>
+		<ptr target="https://doi.org/10.1145/3409251.3411726" />
+	</analytic>
+	<monogr>
+		<title level="j">Adjun. Proc. -12th Int. ACM Conf. Automot. User Interfaces Interact. Veh. Appl. AutomotiveUI</title>
+		<imprint>
+			<biblScope unit="volume">2020</biblScope>
+			<biblScope unit="page" from="69" to="73" />
+			<date type="published" when="2020">2020. 2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b32">
+	<analytic>
+		<title level="a" type="main">Autonomous Taxi Service Design and User Experience</title>
+		<author>
+			<persName><forename type="first">Sangwon</forename><surname>Kim</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jennifer</forename><forename type="middle">Jah</forename></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Eun</forename><surname>Chang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Hyun</forename><forename type="middle">Ho</forename><surname>Park</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Seon Uk</forename><surname>Song</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Chang</forename><surname>Bae Cha</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ji</forename><forename type="middle">Won</forename><surname>Kim</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Namwoo</forename><surname>Kang</surname></persName>
+		</author>
+		<idno type="DOI">10.1080/10447318.2019.1653556</idno>
+		<ptr target="https://doi.org/10.1080/10447318.2019.1653556" />
+	</analytic>
+	<monogr>
+		<title level="j">Int. J. Hum. Comput. Interact</title>
+		<imprint>
+			<biblScope unit="volume">36</biblScope>
+			<biblScope unit="page" from="429" to="448" />
+			<date type="published" when="2020">2020. 2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b33">
+	<analytic>
+		<title level="a" type="main">Where we look when we steer</title>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">F</forename><surname>Land</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><forename type="middle">N</forename><surname>Lee</surname></persName>
+		</author>
+		<idno type="DOI">10.1038/369742a0</idno>
+		<ptr target="https://doi.org/10.1038/369742a0" />
+	</analytic>
+	<monogr>
+		<title level="j">Nature</title>
+		<imprint>
+			<date type="published" when="1994">1994. 1994</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b34">
+	<analytic>
+		<title level="a" type="main">To please in a pod: Employing an anthropomorphic agentinterlocutor to enhance trust and user experience an autonomous, self-driving vehicle</title>
+		<author>
+			<persName><forename type="first">David</forename><forename type="middle">R</forename><surname>Large</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kyle</forename><surname>Harrington</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Gary</forename><surname>Burnett</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jacob</forename><surname>Luton</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Peter</forename><surname>Thomas</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Pete</forename><surname>Bennett</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3342197.3344545</idno>
+		<ptr target="https://doi.org/10.1145/3342197.3344545" />
+	</analytic>
+	<monogr>
+		<title level="m">Proc. -11th Int. ACM Conf. Automot. User Interfaces Interact</title>
+				<meeting>-11th Int. ACM Conf. Automot. User Interfaces Interact</meeting>
+		<imprint>
+			<date type="published" when="2019">2019. 2019</date>
+			<biblScope unit="volume">2019</biblScope>
+			<biblScope unit="page" from="49" to="59" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b35">
+	<analytic>
+		<title level="a" type="main">Communicating awareness and intent autonomous vehicle-pedestrian interaction</title>
+		<author>
+			<persName><forename type="first">Karthik</forename><surname>Mahadevan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sowmya</forename><surname>Somanath</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ehud</forename><surname>Sharlin</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3173574.3174003</idno>
+		<ptr target="https://doi.org/10.1145/3173574.3174003" />
+	</analytic>
+	<monogr>
+		<title level="j">Conf. Hum. Factors Comput. Syst. -Proc</title>
+		<imprint>
+			<biblScope unit="page" from="1" to="12" />
+			<date type="published" when="2018-04">2018. 2018-April, (2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b36">
+	<analytic>
+		<title level="a" type="main">Updating our understanding of situation awareness in relation to remote operators of autonomous vehicles</title>
+		<author>
+			<persName><forename type="first">Clare</forename><surname>Mutzenich</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Szonya</forename><surname>Durant</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Shaun</forename><surname>Helman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Polly</forename><surname>Dalton</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Cogn. Res. Princ. Implic</title>
+		<imprint>
+			<biblScope unit="volume">6</biblScope>
+			<biblScope unit="page" from="1" to="17" />
+			<date type="published" when="2021">2021. 2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b37">
+	<analytic>
+		<title level="a" type="main">Teleoperation: Holy Grail to solve problems of automated driving? Sure, but latency matters</title>
+		<author>
+			<persName><forename type="first">Stefan</forename><surname>Neumeier</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Philipp</forename><surname>Wintersberger</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Anna</forename><forename type="middle">Katharina</forename><surname>Frison</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Armin</forename><surname>Becher</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Christian</forename><surname>Facchi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Andreas</forename><surname>Riener</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3342197.3344534</idno>
+		<ptr target="https://doi.org/10.1145/3342197.3344534" />
+	</analytic>
+	<monogr>
+		<title level="m">Proc. -11th Int. ACM Conf. Automot. User Interfaces Interact</title>
+				<meeting>-11th Int. ACM Conf. Automot. User Interfaces Interact</meeting>
+		<imprint>
+			<date type="published" when="2019">2019. 2019</date>
+			<biblScope unit="volume">2019</biblScope>
+			<biblScope unit="page" from="186" to="197" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b38">
+	<analytic>
+		<title level="a" type="main">Augmented visualization with depth perception cues to improve the surgeon&apos;s performance in minimally invasive surgery</title>
+		<author>
+			<persName><forename type="first">Lucio</forename><forename type="middle">Tommaso</forename></persName>
+		</author>
+		<author>
+			<persName><forename type="first">De</forename><surname>Paolis</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Valerio De Luca</surname></persName>
+		</author>
+		<idno type="DOI">10.1007/s11517-018-1929-6</idno>
+		<ptr target="https://doi.org/10.1007/s11517-018-1929-6" />
+	</analytic>
+	<monogr>
+		<title level="j">Med. Biol. Eng. Comput</title>
+		<imprint>
+			<biblScope unit="volume">57</biblScope>
+			<biblScope unit="page" from="995" to="1013" />
+			<date type="published" when="2019">2019. 2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b39">
+	<analytic>
+		<title level="a" type="main">What a Driver Wants: User Preferences in Semi-Autonomous Vehicle Decision-Making</title>
+		<author>
+			<persName><forename type="first">Dylan</forename><forename type="middle">James</forename><surname>So Yeon Park</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">David</forename><surname>Moore</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Sirkin</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3313831.3376644</idno>
+		<ptr target="https://doi.org/10.1145/3313831.3376644" />
+	</analytic>
+	<monogr>
+		<title level="m">Conf. Hum. Factors Comput. Syst. -Proc</title>
+				<imprint>
+			<date type="published" when="2020">2020. 2020</date>
+			<biblScope unit="page" from="1" to="13" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b40">
+	<monogr>
+		<title level="m" type="main">Language-based multimodal displays for the handover of control in autonomous cars</title>
+		<author>
+			<persName><forename type="first">Ioannis</forename><surname>Politis</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Stephen</forename><surname>Brewster</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Frank</forename><surname>Pollick</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2799250.2799262</idno>
+		<ptr target="https://doi.org/10.1145/2799250.2799262" />
+		<imprint>
+			<date type="published" when="2015">2015. 2015</date>
+			<biblScope unit="page" from="3" to="10" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b41">
+	<analytic>
+		<title level="a" type="main">Ghost driver: A feld study investigating the interaction between pedestrians and driverless vehicles</title>
+		<author>
+			<persName><forename type="first">Dirk</forename><surname>Rothenbucher</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jamy</forename><surname>Li</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">David</forename><surname>Sirkin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Brian</forename><surname>Mok</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Wendy</forename><surname>Ju</surname></persName>
+		</author>
+		<idno type="DOI">10.1109/ROMAN.2016.7745210</idno>
+		<ptr target="https://doi.org/10.1109/ROMAN.2016.7745210" />
+	</analytic>
+	<monogr>
+		<title level="j">25th IEEE Int. Symp. Robot Hum. Interact. Commun. RO-MAN</title>
+		<imprint>
+			<biblScope unit="volume">2016</biblScope>
+			<biblScope unit="page" from="795" to="802" />
+			<date type="published" when="2016">2016. 2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b42">
+	<monogr>
+		<title level="m" type="main">Taxonomy and Defnitions for Terms Related to Driving Automation Systems for On-Road Motor Vehicles</title>
+		<author>
+			<persName><surname>Sae</surname></persName>
+		</author>
+		<ptr target="https://www.sae.org/standards/content/j3016_201806/" />
+		<imprint>
+			<date type="published" when="2018">2018. 2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b43">
+	<analytic>
+		<title level="a" type="main">MR visualization of wheel trajectories of driving vehicle by seeing-through dashboard</title>
+		<author>
+			<persName><forename type="first">Shota</forename><surname>Sasai</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Itaru</forename><surname>Kitahara</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yoshinari</forename><surname>Kameda</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yuichi</forename><surname>Ohta</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Masayuki</forename><surname>Kanbara</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yoichi</forename><surname>Morales</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Norimichi</forename><surname>Ukita</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Norihiro</forename><surname>Hagita</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Tetsushi</forename><surname>Ikeda</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kazuhiko</forename><surname>Shinozawa</surname></persName>
+		</author>
+		<idno type="DOI">10.1109/ISMARW.2015.17</idno>
+		<ptr target="https://doi.org/10.1109/ISMARW.2015.17" />
+	</analytic>
+	<monogr>
+		<title level="m">Proc</title>
+				<meeting>null</meeting>
+		<imprint>
+			<date type="published" when="2015">2015. 2015. 2015</date>
+			<biblScope unit="volume">2015</biblScope>
+			<biblScope unit="page" from="40" to="46" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b44">
+	<analytic>
+		<title level="a" type="main">Communicating intent to develop shared awareness and engender trust in human-agent teams</title>
+		<author>
+			<persName><forename type="first">Kristin</forename><forename type="middle">E</forename><surname>Schaefer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Edward</forename><forename type="middle">R</forename><surname>Straub</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jessie</forename><forename type="middle">Y C</forename><surname>Chen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Joe</forename><surname>Putney</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">W</forename><surname>Evans</surname></persName>
+		</author>
+		<idno type="DOI">10.1016/j.cogsys.2017.02.002</idno>
+		<ptr target="https://doi.org/10.1016/j.cogsys.2017.02.002" />
+	</analytic>
+	<monogr>
+		<title level="j">Cogn. Syst. Res</title>
+		<imprint>
+			<biblScope unit="volume">46</biblScope>
+			<biblScope unit="page" from="26" to="39" />
+			<date type="published" when="2017">2017. 2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b45">
+	<monogr>
+		<title level="m" type="main">The efect of stereoscopic and wide feld of view conditions on teleoperator performance</title>
+		<author>
+			<persName><forename type="first">R</forename><surname>David</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">James</forename><forename type="middle">W</forename><surname>Scribner</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Gombash</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="1998">1998. 1998</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b46">
+	<analytic>
+		<title level="a" type="main">Toward Automated Vehicle Teleoperation: Vision, Opportunities, and Challenges</title>
+		<author>
+			<persName><forename type="first">Tao</forename><surname>Zhang</surname></persName>
+		</author>
+		<idno type="DOI">10.1109/JIOT.2020.3028766</idno>
+		<ptr target="https://doi.org/10.1109/JIOT.2020.3028766" />
+	</analytic>
+	<monogr>
+		<title level="j">IEEE Internet Things J</title>
+		<imprint>
+			<biblScope unit="volume">7</biblScope>
+			<biblScope unit="page" from="11347" to="11354" />
+			<date type="published" when="2020">2020. 2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+				</listBibl>
+			</div>
+		</back>
+	</text>
+</TEI>

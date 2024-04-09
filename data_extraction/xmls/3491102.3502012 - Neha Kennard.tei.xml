@@ -1,0 +1,1150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xml:space="preserve" xmlns="http://www.tei-c.org/ns/1.0" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.com/kermitt2/grobid/master/grobid-home/schemas/xsd/Grobid.xsd"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+	<teiHeader xml:lang="en">
+		<fileDesc>
+			<titleStmt>
+				<title level="a" type="main"></title>
+			</titleStmt>
+			<publicationStmt>
+				<publisher/>
+				<availability status="unknown"><licence/></availability>
+			</publicationStmt>
+			<sourceDesc>
+				<biblStruct>
+					<analytic>
+						<author>
+							<persName><forename type="first">Tianshi</forename><surname>Li</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="department">Lorrie Faith Cranor, and Jason I</orgName>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Kayla</forename><surname>Reiman</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="department">Lorrie Faith Cranor, and Jason I</orgName>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Yuvraj</forename><surname>Agarwal</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="department">Lorrie Faith Cranor, and Jason I</orgName>
+							</affiliation>
+						</author>
+					</analytic>
+					<monogr>
+						<imprint>
+							<date/>
+						</imprint>
+					</monogr>
+					<idno type="DOI">10.1145/3491102.3502012</idno>
+				</biblStruct>
+			</sourceDesc>
+		</fileDesc>
+		<encodingDesc>
+			<appInfo>
+				<application version="0.7.1" ident="GROBID" when="2022-07-22T05:00+0000">
+					<desc>GROBID - A machine learning software for extracting information from scholarly documents</desc>
+					<ref target="https://github.com/kermitt2/grobid"/>
+				</application>
+			</appInfo>
+		</encodingDesc>
+		<profileDesc>
+			<textClass>
+				<keywords>
+					<term>This work is licensed under a Creative Commons Attribution International 4.0 License Privacy</term>
+					<term>Privacy Nutrition Label</term>
+					<term>iOS Development</term>
+					<term>Developer Study</term>
+					<term>Interview</term>
+				</keywords>
+			</textClass>
+			<abstract>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>See Details</head><p>The developer, PalAbout Inc., indicated that the app's privacy practices may include handling of data as described below. For more information, see the developer's privacy policy.</p></div>
+			</abstract>
+		</profileDesc>
+	</teiHeader>
+	<text xml:lang="en">
+		<body>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="1">INTRODUCTION</head><p>In 2009, Kelley et al. <ref type="bibr" target="#b16">[17]</ref> proposed and evaluated the frst privacy nutrition label for websites. In this seminal work, they argued that companies should provide a clear, uniform, brief summary Pittsburgh, USA lorrie@cmu.edu of what data is collected along with how it is used and shared (similar to a standardized nutrition label on food) to complement privacy policies, which are often lengthy, ambiguous, and hard to understand. In 2013, some of the same authors proposed privacy nutrition labels for mobile apps <ref type="bibr" target="#b18">[19]</ref>. After a decade, this concept has fnally made its way from the research lab into the two major mobile app stores. As of December 2020, Apple requires all apps to provide app privacy details, which the Apple app store displays as a privacy label in an App Privacy section on each app's product page to empower users to learn about the app's collection and use of data before installation (Figure <ref type="figure" target="#fig_0">1 left</ref>). Following Apple's new requirements, Google also announced that a similar safety section would be rolled out in the Google Play app store in early 2022 (Figure <ref type="figure" target="#fig_0">1 right</ref>).</p><p>The usefulness of privacy nutrition labels and any future standardized privacy notices is highly contingent on their accuracy. However, we currently have little understanding of developers' ability to create accurate privacy nutrition labels. Even assuming that developers are motivated to create accurate privacy labels, it is not a trivial task. Developers need to comprehend the defnitions of all of the data types and uses in the app store's framework. They also need to understand the data practices of their apps, including practices associated with any third-party libraries they may have included. Finally, they need to choose the proper disclosures to describe the data practices of their apps. Furthermore, developers need to be aware of any changes in the app's data practices and update the privacy nutrition labels in a timely manner. This process may be challenging for developers who are often not experts in privacy and treat privacy as a secondary goal <ref type="bibr" target="#b3">[4,</ref><ref type="bibr" target="#b19">20]</ref>.</p><p>Apple's large-scale deployment of the privacy nutrition label concept ofers an opportunity to study how developers create privacy labels for their apps. In this paper, we take the frst step to examine the usability and understandability of privacy nutrition labels from the developers' perspective by probing iOS developers' perceptions and practices around Apple's privacy labels. By identifying common errors and challenges that developers face when creating Apple privacy labels, we aim to uncover limitations in Apple's privacy label design and ofer timely design recommendations for platforms that want to deploy privacy nutrition labels. Using Apple privacy labels as an example, our fndings may also shed light on how to support developers to provide accurate information in any future standardized privacy notices.</p><p>More formally, we have three research questions:</p><p>RQ1 What are developers' perceptions about privacy labels? RQ2 What types of errors or misunderstandings do developers exhibit when creating privacy labels? RQ3 What challenges do developers face in flling out forms to create privacy labels accurately and efciently?</p><p>We investigate these research questions by observing 12 iOS app developers creating an Apple privacy label and interviewing them about this process remotely. During the study, we asked our participants to create a privacy label for a real-world app that they developed. We then interviewed them to identify potential mismatches between the actual data collection behavior of the app and what they initially specifed in the privacy label, examined what caused the inaccuracies, and probed their attitudes and actions regarding privacy labels. We qualitatively analyzed the interview transcripts using a bottom-up open coding approach to identify developers' perceptions, recurring errors and misunderstandings, and challenges regarding Apple privacy labels.</p><p>From our interviews, we learned that although many iOS developers considered Apple's privacy labels benefcial and were willing to disclose their data practices, accurately flling out the forms to create a privacy label was a challenging task. We identifed recurring errors and misunderstandings about privacy labels shared by many participants that were potentially caused by knowledge gaps and task complexity. A novel fnding was that while Apple uses defnitions of privacy-related terms that are relatively unusual and specifc, many developers assumed more general defnitions, leading to errors in their privacy labels. Furthermore, developers had trouble correctly disclosing data practices of third-party libraries, partly because they were not fully aware of the libraries' data practices and because they did not know about the existence of resources that could help them with this task. We present both concrete short-term design recommendations for the platforms and Tianshi Li, Kayla Reiman, Yuvraj Agarwal, Lorrie Faith Cranor, and Jason I. Hong long-term research directions to improve the accuracy of privacy labels by providing better developer support.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2">BACKGROUND AND RELATED WORK</head><p>In this section we introduce the Apple privacy nutrition labels and then discuss prior research on privacy nutrition labels and on the challenges developers face in meeting privacy requirements.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.1">App Privacy Details</head><p>In December 2020, the Apple App Store introduced App Privacy Details 1 to help users learn about the privacy practices of an app before downloading it. The privacy details are shown in the App Privacy section when installing the app (Figure <ref type="figure" target="#fig_0">1 left</ref>). This section contains two layers. On the frst layer, users can see the high-level data categories that the app collects (e.g., location) and whether this data category is linked to users or used to track users. Users can click the see details link to see the second layer, which includes more specifc data types (e.g., Coarse/Precise location), what the data is used for (e.g., Third-Party Advertising, App Functionality), and whether each data type is linked to users or used to track users. If the developer has reported that no data is collected by the app, the App Privacy section shows Data Not Collected. If the developer has not flled out the privacy details, this section shows No Privacy Details Provided.</p><p>All the privacy details are self-reported by app developers using a web-based tool on the Apple developer dashboard App Store Connect (Figure <ref type="figure" target="#fig_2">2</ref>). This tool breaks down the process of submitting privacy details into two stages and walks developers through the process using a series of wizard interfaces. In the frst stage (Steps 1 and 2 in Figure <ref type="figure" target="#fig_2">2</ref>), the developer needs to select whether their app (or third-party partners) collects data, and if so, what data types are collected. Then, all the selected data types are displayed on one page, with the developer expected to provide details for each data type. In the second stage (Steps 3a-3c in Figure <ref type="figure" target="#fig_2">2</ref>), the developer needs to indicate what the data type is used for (i.e., purposes), whether the data type is linked to users, and whether the data type is used to track users. Some questions require a binary answer, such as whether data is collected, linked to users, and/or used to track users. Other questions require developers to select options from pre-defned taxonomies (i.e., data types and purposes). The key concept defnitions are presented in the developer interface when a related question is encountered.</p><p>Importantly, we note that developers can update the privacy details without updating the app itself, while they cannot release a new app or update an existing app if they haven't submitted the privacy details. The privacy details are published immediately after submission and are not verifed by the App Store before publishing. In our study, we examined the types of errors that developers may make when submitting privacy details, focusing on non-malicious errors such as those caused by developers' misconceptions.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.2">Privacy Nutrition Label Research</head><p>Website privacy policies are well known for being long and difcult to read <ref type="bibr" target="#b15">[16,</ref><ref type="bibr" target="#b23">24]</ref>. To make it easier for users to quickly glean important information from those policies and to compare privacy</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Data Collection</head><p>Thanksforhelpingusersundersrnndyourapp'sprivacypractkes Remember!hat you',eresponsib~torany1hird-partycodethatisaddedtoyourapp,soifyou,thi,d par!yµa,tnerscolectda1"1,omyuu,app,yournustreprnsent1h"linyau, responses</p><p>, "CoPect'rete~totraMmittir,gdataoflthedeviceinawaythatallowsyouar"&gt;d/or yourthird-pany partners !oaccess ~ forapefiod longe,than necessa,yto service 1ho transmit1cd r&lt;&gt;&lt;1uos1 in real time</p><p>• "Third-partyportnnrs"includoonalyticstools,odvortisingnotwo,k,,lhird-pa,ty SOKs,o,othere,ternalver"&gt;do,swhosecodeyoohaveaddedwtheapp </p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>-</head><p>Step 1: Select whether this app collects data</p><p>Step 2: Select data types collected by this app</p><p>Step 3a: Select what Name is used for</p><p>Step 3b: Select whether Name is linked to the user's identity</p><p>Step 3c: Select whether Name is used to track the user</p><p>Step 3: Complete details for all selected data types In Step 3 the selected data types are displayed in one page with a link next to each data type to a three-part form for providing details about the purposes for which that data type is collected and whether or not it is linked to users and/or used for tracking (Steps 3a-3c, using the data type Name as an example).</p><p>practices between websites, Kelley et al. <ref type="bibr" target="#b16">[17]</ref> proposed and evaluated a design for privacy nutrition labels for websites, drawing on lessons from the food nutrition labeling literature such as adopting a standardized and brief format. Kelley et al. <ref type="bibr" target="#b17">[18]</ref> evaluated the proposed privacy label design, comparing it with shorter tabular and text variants as well as traditional long privacy policies in a large-scale randomized controlled trial. The researchers found that standardized labels could increase both speed of fnding information and accuracy of users' comprehension. They found that privacy labels allowed users to better compare policies, and users found standardized formats more enjoyable to read. In 2013, Kelley et al. <ref type="bibr" target="#b18">[19]</ref> followed up with a privacy nutrition label design for mobile apps, demonstrating that labels presented clearly and at relevant times could afect users' decisions when choosing between similar apps. Later Emami-Naeini et al. <ref type="bibr" target="#b12">[13]</ref> proposed a privacy and security label for Internet of Things devices and showed it could help consumers incorporate privacy and security into their IoT device purchase decisions. </p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Name</head><p>Suggested Practice Main Source(s)</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Standardization</head><p>Uniformity in formatting and terminology helps consumers gain familiarity and <ref type="bibr" target="#b9">[10,</ref><ref type="bibr" target="#b17">18,</ref><ref type="bibr" target="#b33">34]</ref> compare practices between labels. Length Shorter policies can be read more quickly and improve users' recall. <ref type="bibr" target="#b17">[18,</ref><ref type="bibr" target="#b23">24,</ref><ref type="bibr" target="#b30">31,</ref><ref type="bibr" target="#b33">34</ref>] Salience of frst layer A simple frst layer helps people focus on critical elements. Since not everybody will <ref type="bibr" target="#b9">[10,</ref><ref type="bibr" target="#b12">13,</ref><ref type="bibr" target="#b24">25,</ref><ref type="bibr" target="#b30">31]</ref> click through, this should have the most salient information in it.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Early usability studies</head><p>Users' interpretations of terms in context may not match expert opinions. Checking <ref type="bibr" target="#b6">[7,</ref><ref type="bibr" target="#b30">31]</ref> usability before deployment is crucial, and earlier is better.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Relevant presentation</head><p>Users are more likely to pay attention to notices in-app as the information becomes <ref type="bibr" target="#b5">[6,</ref><ref type="bibr" target="#b11">12,</ref><ref type="bibr" target="#b30">31]</ref> relevant, rather than only being shown in the app store when scrolling is required and users may lack context and interest to understand them (but they should also be included in the app store for motivated users to view prior to app download).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Pairing notice with choice</head><p>Beyond promoting awareness via notices, privacy controls (i.e. choices) are crucial. <ref type="bibr" target="#b9">[10,</ref><ref type="bibr" target="#b30">31]</ref> </p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Machine Readability</head><p>Making notices machine-readable is a pre-requisite for automation and the potential <ref type="bibr" target="#b9">[10,</ref><ref type="bibr" target="#b27">28]</ref> for enforcement. Incentives and Enforcement Widespread adoption is dependent on incentives and enforcement, as shown through <ref type="bibr" target="#b9">[10]</ref> the failure of P3P adoption.</p><p>Researchers have also investigated how to maximize the benefts of privacy labels by exploring and evaluating design variants of privacy nutrition labels in multiple dimensions <ref type="bibr" target="#b5">[6,</ref><ref type="bibr" target="#b9">10,</ref><ref type="bibr" target="#b12">13,</ref><ref type="bibr" target="#b17">18,</ref><ref type="bibr" target="#b27">28,</ref><ref type="bibr" target="#b30">31,</ref><ref type="bibr" target="#b33">34]</ref>. This line of work has yielded design recommendations for improving the design of privacy nutrition labels, as summarized in Table <ref type="table" target="#tab_0">1</ref>.</p><p>In this work, we take the frst step in studying privacy nutrition labels from the developer's perspective. More specifcally, we examine challenges developers face in flling out forms to create privacy labels accurately and efciently. Although our study is contextualized in the specifc design of Apple's version of privacy labels and the associated developer tool, we expect our fndings can also shed light on issues and design opportunities for other forms of privacy nutrition labels and standardized privacy notices in general.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.3">Challenges for Developers in Handling Privacy Requirements</head><p>Software developers have increasing responsibility to deal with the ever-growing privacy requirements from platform providers (e.g. Apple and Google) and recently enacted laws (e.g. GDPR, CCPA), and consequently face an increasing number of challenges. Although we are not aware of prior work that studied the task of creating privacy nutrition labels, our study was informed by prior work that identifed privacy-related challenges for developers in other contexts <ref type="bibr" target="#b3">[4,</ref><ref type="bibr" target="#b19">20,</ref><ref type="bibr" target="#b20">21,</ref><ref type="bibr" target="#b32">33,</ref><ref type="bibr" target="#b34">35,</ref><ref type="bibr" target="#b35">36]</ref>. A fundamental issue that has been repeatedly identifed is that developers often view privacy as a secondary goal <ref type="bibr" target="#b3">[4,</ref><ref type="bibr" target="#b19">20]</ref>. Therefore, they may prioritize other factors over privacy, such as time to market and usability. However, even when developers care about privacy it is still challenging to meet privacy requirements. A major reason is related to blindspots in their knowledge. For example, past work found that developers tend to reduce privacy to security issues, ignoring other privacy goals such as improving data transparency <ref type="bibr" target="#b4">[5,</ref><ref type="bibr" target="#b32">33]</ref>. Tahaei et al. <ref type="bibr" target="#b34">[35]</ref> found that developers often rely on Stack Overfow for privacy advice, but these posts were biased towards a partial set of privacy design strategies. Furthermore, it may be challenging for developers to maintain awareness of all of their apps' data practices, especially when apps are developed by large teams or use third-party libraries. Balebako et al. <ref type="bibr" target="#b4">[5]</ref> found that developers were overwhelmingly unaware of data collected by pervasive third-party tools for ads and analytics. Li et al. <ref type="bibr" target="#b19">[20]</ref> found that developers sometimes lost track of the data practices of their apps because they are not well-documented. Another type of challenge is related to the extra overhead for fulflling privacy requirements. Specifcally, Li et al. <ref type="bibr" target="#b20">[21]</ref> observed on the r/androiddev subreddit that many developers held a negative attitude towards platform or legal requirements about privacy because they were perceived as burdensome and not benefcial to developers.</p><p>Prior research has identifed platform requirements as a major driver for developers to take privacy-related actions, which in turn leads them to ask privacy-related questions on Stack Overfow <ref type="bibr" target="#b0">[1,</ref><ref type="bibr" target="#b34">35,</ref><ref type="bibr" target="#b35">36]</ref> and have privacy-related discussions on platform-specifc developer forums <ref type="bibr" target="#b13">[14,</ref><ref type="bibr" target="#b20">21]</ref>.</p><p>Other prior work highlights the difculty that people face in describing data use using a standard set of terms. Balebako et al. <ref type="bibr" target="#b6">[7]</ref> tested both crowd workers' and privacy experts' ability to categorize realistic data-sharing scenarios using a predefned taxonomy, which is similar to the task that developers face in creating a privacy label. They found that there was much variance in participants' understanding of the concepts in the taxonomy, even among experts. We found similar variances among developers' understanding in our studies.</p><p>To the best of our knowledge, this is the frst work that examines the challenges developers face in creating privacy labels. In the context of this new task, we identifed challenges echoing prior fndings such as developers under-reporting data collection because they were not fully aware of the data practices of their third-party libraries <ref type="bibr" target="#b4">[5]</ref>. We also identifed new challenges, such as developers relying on their preconceptions, which led to errors in privacy labels. We used a novel study method, observing developers conducting the task based on the actual apps they developed using a replica of the real-world interface. We believe this approach may yield more in-depth understandings of the challenges developers encountered in real life than recall-based interviews <ref type="bibr" target="#b4">[5,</ref><ref type="bibr" target="#b19">20]</ref> or studies that used hypothetical scenarios <ref type="bibr" target="#b31">[32]</ref> or asked developers to modify other people's apps <ref type="bibr" target="#b21">[22]</ref>.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3">METHODS</head><p>We recruited 12 iOS app developers to observe how they flled out the privacy label forms for their own apps. We employed this approach to leverage developers' familiarity with their own apps and their previous experiences creating privacy labels to gain in-depth understandings of real-world challenges. Then we followed up with a semi-structured interview to examine developers' perceptions about this task and to better understand their approach. The study sessions were conducted remotely on Zoom in July and August, 2021.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.1">Recruitment</head><p>We recruited our participants from Prolifc, Upwork, and Twitter. Prolifc is a website for recruiting research study participants and Upwork is a freelance website. On Prolifc, we selected the predefned criteria "Industry -Software" and "Computer Programming -Yes" to narrow down the search scope to only people who selfreport as a developer. On Upwork, the job we posted about this study was visible to all registered freelancers, and we sent separate invites to some developers who showcased iOS apps they developed in their portfolios. On Twitter, we posted on our personal accounts about this study. We wanted to gather a diverse sample with varying levels of privacy knowledge and familiarity with privacy labels. Hence, we intentionally did not mention privacy labels or use any other privacy-related language in our recruiting materials. For example, in our recruiting post, we described the study goals as: "We are recruiting iOS developers to ofer perspectives on the process of submitting apps to the app store. "</p><p>We used a pre-screening survey to check the eligibility of potential participants. Among other questions, we asked for the App Store links for up to three iOS apps that they recently developed. Since creating privacy labels is part of the app submission and update process on the App Store, we screened out people who had not participated in developing an English-language app that had been released on the App Store. The complete pre-screening survey appears in Appendix A. We invited participants who provided at least one valid App Store link to participate in our study. Of the 225 people who responded through Prolifc, 17 passed the pre-screening and 10 actually participated. Of the 6 people who responded to the job posting on Upwork, 2 passed the pre-screening and 1 actually participated. The only person signed up via our recruiting post on Twitter passed the pre-screening and participated in the study. Per Prolifc's community guidelines, we had a separate study solely for pre-screening purposes and added the IDs of people who passed the pre-screening to the allowlist of the main study. Regardless of acceptance into the interview phase, people who completed CHI '22, April 29-May 5, 2022, New Orleans, LA, USA the pre-screening survey were compensated $0.50 USD 2 . Upwork supports embedding the pre-screening questions in the job post and therefore requires no extra payment. For Twitter, we embedded the pre-screening survey link in the post. All 12 participants completed the main study and were compensated $70 USD each.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.2">Demographics and Selected App Information</head><p>Our sample covers developers from diferent countries and with varying iOS development experiences (Table <ref type="table">2</ref>). Our participants were fairly young: six participants self-reported to be within the 18-24 age group, fve within 25-34, and one within 55-64. One participant self-identifed as non-binary and the other 11 all selfidentifed as males. We interviewed one Black participant, one mixed-race participant, and 10 White participants. Although we tried several platforms to post recruiting messages and invited all qualifed participants, our participants were mostly young, White, and male. This may be related to the gender, race, and age gaps in the iOS developer community.</p><p>As shown in Table <ref type="table">2</ref>, we obtained a diverse set of apps for the study. The 12 apps came from eight categories with diferent purposes and number of downloads. For example, we interviewed a developer who developed an app as a personal hobby with less than 1,000 downloads, and the developer of a large-scale commercial app with over 500K downloads. The participants held various roles in their respective teams, including six who developed both the front-end and back-end parts of the project, and six who only coded the front-end part.</p><p>Moreover, there were some apps that already had a privacy label as well as some that did not, an indicator of participants' varying levels of familiarity with Apple's privacy label. Four out of the 12 apps did not have a privacy label before the study, fve apps had a privacy label stating "Data Not Collected, " and three apps had a privacy label that specifed some data collection practices.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.3">Study Design</head><p>We selected one app for each participant from their pre-screening survey responses so that we could contextualize our inquiries about privacy labels in a concrete and familiar context. For developers who mentioned multiple apps on the screening survey, we selected the most recently updated app that had an English version. Before the main study, we used a pre-study survey to gain more understanding of the app and the developer, such as the number of downloads and the developer's location. The interviewers also browsed the app product page before the interview to familiarize themselves with the app, especially the app functionality, the current privacy label (if it had one), and the current privacy policy.</p><p>During the study session, we observed how the developer flled out the privacy label form for the selected app and conducted a semi-structured interview afterward to delve into this process. We asked the participant to keep sharing their screen and recorded both the audio and the screen for later analysis. The length of the study Table <ref type="table">2</ref>: Participant Overview. Our sample features a good sample of developers and apps across several dimensions, including participant's iOS development experience (iOS Exp.), participant's geographic location (Location), app categories (App Cat.), app downloads (Downloads), app development purpose (Purpose), app development team size (Team Size), and participant's role(s) in the development team (Participant's Role(s) In Team). The app development purposes involve four options, covering situations when the participant developed the app as part of their job (Job), as part of their hobby (Hobby), for a course project (Course), and for a research project (Research). This study was approved by the Carnegie Mellon University Institutional Review Board. At the beginning of each study session, the interviewer briefed the participant on the study goals and procedures and then asked them to sign a consent form.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>ID iOS</head></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.3.1">Direct observation of privacy label creation.</head><p>In the frst part of the study session we asked the participant to create a privacy label for their app using a replica of Apple's ofcial website for this task that we implemented (detailed in Section 2.1). 3 To make this experience more realistic, the interviewer instructed the participant to handle this task as they normally would and take as long as they needed, and encouraged them to look at any documentation they would normally consult, except for the app's current privacy label on the App Store (if it had one). The interviewer also encouraged them to mention any resources or person they needed to consult, including anyone unavailable at the moment, and anything they were confused about. We also deferred answering their questions to the end of the study, to minimize any potential impact on their perceptions and reasoning process.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>3.3.2</head><p>Semi-structured interviews for in-depth understandings of challenges. After the participant created the privacy label, we followed up with a semi-structured interview to help us spot inaccuracies in the privacy label they created and to understand what caused these inaccuracies. Participants were shown an online survey during the interview to help present text information such as the defnitions of privacy label concepts (complete version attached in Appendix C). Participants read the information on the survey and discussed their responses with the interviewer, who asked follow-up questions based on participants' responses.</p><p>The interviewer frst guided the participant to thoroughly report and refect on their app's data use to identify possible inaccuracies. For each data type initially reported as being collected, we asked the participant to explain whether the data were collected by any third parties, by themselves, or both; whether and where the data were stored; what were the purposes for collecting the data and how they selected the purposes in the privacy label; how they determined whether or not the data were linked to users; and how they determined whether or not the data were used to track users. For developers who did not specify any data collection, we asked them to briefy introduce the app functionality and why they believed no data was collected.</p><p>We then used two sets of questions to uncover missing data practices that should have been reported. The frst was about use of third-party libraries, which past work has found to be a common source of privacy issues to end users <ref type="bibr" target="#b1">[2,</ref><ref type="bibr" target="#b8">9,</ref><ref type="bibr" target="#b22">23]</ref> and challenges for developers <ref type="bibr" target="#b4">[5,</ref><ref type="bibr" target="#b26">27]</ref>. During the study, the interviewer frst asked the developers to report all libraries used in this app via the online survey. Then the interviewer asked them if they were aware of any data collected by these libraries and how they fgured out the data practices of these libraries.</p><p>The second set of questions was about developers' perceptions of key concepts in Apple's standard vocabulary for privacy labels. The goal was to help the participant align their understanding of these concepts with Apple's defnitions, and potentially recall more data practices and recognize errors. This process was also facilitated by the online survey, which presented Apple's ofcial defnitions of the concepts and asked participants whether each of them was surprising, unclear, or unreasonable. 4 The defnitions were displayed across multiple pages of the survey in random order. To understand their mental model, the interviewer prompted the participant to keep thinking aloud as they read through these defnitions and asked follow-up questions about their understandings, confusions, and what they liked or disliked about the defnitions.</p><p>Then we zoomed out and asked questions about how developers flled out privacy labels in real life, covering aspects including teamwork and collaboration, app monetization, privacy-related design decisions, and app update plans. Finally, we asked participants to compare the privacy label created during the study and the current privacy label on the App Store (if the app had one) and ofer their perspectives on the diferences. We concluded the interview by soliciting their perceived pros and cons of providing a privacy label for their app on the App Store and gathering feedback on Apple's design of the developer interface for this task.</p><p>During the interview, we encouraged participants to identify and fx inaccuracies themselves and reassured them that our goal was not to measure their performance, and that we would anonymize all fndings in any publications to make them comfortable talking about fallacies in their understanding and practices. In addition, the interviewers also noted any inconsistencies between what participants told them and what they had implemented in their privacy label during the frst part of the study, and prompted participants to verify and fx related errors in the privacy label after examining the defnitions of related concepts. For example, the interviewer asked the participant to consider editing the privacy label if they mentioned some user data being stored with the user ID but did not specify the data as linked to users.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.4">Qualitative Analysis</head><p>Guided by the three research questions, we qualitatively analyzed the interview transcripts and screen recordings using a bottom-up open coding method facilitated by the software MAXQDA. Our analysis involved two rounds of coding as recommended by Saldaña <ref type="bibr" target="#b29">[30]</ref>.</p><p>In the frst round of coding, two researchers coded the same four interviews independently to develop a codebook. When coding the same four interviews, the two researchers held daily meetings to discuss their codes, reconcile coding discrepancies, and iteratively merge their codebooks. By the end of the frst round of coding, we derived an initial codebook with 95 codes. Then the two researchers collectively conducted an axial coding analysis to merge similar codes and group them into high-level themes for answering the three research questions.</p><p>In the second round of coding, the remaining eight interviews were each independently coded by one of the two researchers using the new codebook (each researcher coded four interviews). Minor changes were made to the codes and themes as needed, and all changes were discussed and agreed by both researchers in a series of weekly meetings. Per the recommendations of McDonald et al. <ref type="bibr" target="#b25">[26]</ref>, we did not calculate the inter-rater reliability because our goal is to identify emergent themes rather than seek agreement. The fnal codebook contains 25 codes grouped into 8 themes. The themes are detailed in the following sections, and the complete codebook (including codes and memos) is included in Appendix E.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4">RQ1 RESULTS: DEVELOPERS' PERCEPTIONS OF PRIVACY LABELS</head><p>Developers were heavily involved in the creation of privacy labels. Among our participants, nine out of the 12 developers were in charge of releasing or updating the app in the App Store, and fve out of the eight developers of the apps that already had a privacy label before the study said that they participated in creating their apps' privacy labels. We observed both positive and negative perceptions of Apple's privacy labels from the developers we interviewed, including mixed feelings from many of our interviewees.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.1">Privacy Labels Are Helpful to Users and Developers (All but P5)</head><p>Most participants agreed that providing a privacy label is benefcial to their users. They felt that users deserved to know their apps' data practices and they had nothing to hide. When speaking of the impact of privacy labels on users, some participants shared their personal experiences as a user to explain why they supported privacy labels.</p><p>It's something that I care very much about, so I think it's a very good thing that it's happening in general. And I think it's probably overdue based on how much data that you know, has been collected over the past few years, especially given there's more and more data collected. So I really like that Apple has done this, even though it might be a pain for a little bit for developers to get used to. I think it'll be a good thing in the long run for people's privacy. (P7)</p><p>Moreover, because Apple's privacy label provides an easier way for developers to inform users of everything their apps are doing, it was also perceived as benefcial to developers: "Having transparency as a developer could mean trust, and having users' trust is always something, to me personally, important." (P2) When asked what may be some negative aspects of providing a privacy label for his app, P9 said, I don't see any negative aspects to that. I think, if anything, there are benefts that both developers can ensure they're including everything that's relevant to the users need to be aware of, and it just makes it easier for the users to see. So I can't imagine there are any negatives to this.</p><p>Conversely, P5, who was part of a large app-development team, did not view the privacy label as helpful to developers because he considered privacy was not the responsibility of developers.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.2">Filling out Privacy Labels Was Perceived as</head><p>Challenging Extra Work (P2, P3, P4, P6, P7, P8)</p><p>Many participants perceived accurately flling out privacy labels to be challenging, especially for apps that collected a lot of data. For example, P8 individually developed an app as part of their hobby. In contrast, we found participants who did not collect much data perceived creating privacy labels a simple task. For example, P12 developed an app without a back-end and therefore did not store any data, and he said, "In terms of creating it, I mean, for me, it was very easy because I purposefully don't collect data." P4 represented an intriguing case because his app originally used the Google Analytics library (part of Google Firebase, which was mentioned interchangeably with Google Analytics by P4) but he had intentionally replaced it with a simpler analytics library to simplify the privacy label creation process. This is a promising example that requiring developers to provide standardized privacy notices may give them incentives to adopt more privacy-friendly designs.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.4">Erring on Side of Caution for Ambiguities (P3, P4, P7, P8)</head><p>Ambiguities are a common issue for developers when creating privacy labels, often due to undefned behaviors and vague concepts in Apple's documentation. Interestingly, we found that a recurring strategy to deal with these ambiguities is to err on the side of caution. For example, P4 was using third-party crash analytics services and was not sure whether they should count as data used for tracking users. Although Apple's defnition of tracking only mentions "data linked with third-party data for advertising measurement purposes" and "data shared with data brokers, " P4 still reported this data use for crash reporting as tracking and explained his rationale as follows: "If I'm erring, I'm erring on the side of not underestimating how much data we use, if you see what I mean, I'm trying to be as honest as I can." At a high level, this strategy is in line with their positive perceptions of using privacy labels to increase transparency for users.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.5">Filling out Privacy Labels Stimulated</head><p>Refections (P1, P4, P6, P7) Some developers viewed this task as benefcial, as it prompted them to refect on their privacy practices. P6 refected on his data use: P7 adjusted his privacy policy to make it more consistent with the privacy label:</p><p>I tried to make it similar [to the privacy label], like I added this sentence at the end of it, 'any information is possibly collected is not retained longer than reasonably necessary', I added that sentence from the [privacy label] template because any information that's used isn't retained any longer than I needed.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.6">Developers Felt Unconcerned About</head><p>Privacy and that It Was not Their Responsibility (P5, P6)</p><p>There were also participants not as concerned about flling out privacy labels or protecting user privacy in general. The app that P5 participated in developing was the most downloaded app in our sample and they also had the most complicated development team structure. This app was a joint efort between four organizations, with one developing the mobile app, two working on the backend, and one for UI/UX design. All four organizations worked for a client company that actually owned the app. Therefore, P5's perception of developers' responsibility is limited to the specifc mobile app development work. "From my experience, the developer will not handle the app privacy. When an organization have teams for privacy, it's not his work to do this. That's my opinion. We are just here to make things." (P5)</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.7">Concerns About Users' Distrust (P2, P7)</head><p>Nevertheless, participants who generally supported Apple's privacy labels also expressed concerns about users' distrust in privacy labels, which is related to the fact that all privacy labels are self-reported and do not undergo a standard verifcation process by Apple. For example, P7 mentioned that one of his users complained that the app was collecting IP addresses while its privacy label indicated "Data Not Collected." Although he explained to the user that the IP addresses were used for serving a request but not stored, which did not count as data collection per Apple's defnition, he still got a bad review on the App Store.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5">RQ2 RESULTS: RECURRING ERRORS AND MISUNDERSTANDINGS IN PRIVACY LABELS</head><p>Although most participants felt positive about Apple's Privacy Labels and were willing to disclose their data practices, we found that errors and misunderstandings were still prevalent in the privacy labels generated during the study. Specifcally, nine out of the 12 participants made errors, and seven confrmed and fxed them during the interview. 5 Moreover, among the eight apps that already had a privacy label before the study, six of our participants re-created a privacy label in our study that was inconsistent with the label published on the App Store. In this section, we provide an overview of developers' recurring errors and misunderstandings that may lead to errors (summarized in Table <ref type="table" target="#tab_4">3</ref>).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.1">Errors: Underreporting data collection (False Negative)</head><p>The frst type of errors are cases where developers did not report an actual data practice.</p><p>5.1.1 Missing Linked Data (P1, P2, P5, P6, P7, P9, P11, P12). Many participants had a misconception about Data Linked to Usersnamely, they did not consider data that is not identifable on its own as data linked to users, even if the data was stored with other identifable information. For example, when asked about his understanding of what counts as data linked to users, P2 immediately responded "anything that could lead me to a person in real life." Since this misconception repeatedly emerged among the frst fve participants, we added a question in our protocol to more formally examine this issue. In this question, we presented a table to represent a hypothetical relational database, containing three columns corresponding to the data types: user ID, phone number, and date of last login respectively. Then we asked our participants which of these three data types were linked to users in this scenario. The correct answer should be all of the three data types because the date of last login is stored on the same row of the other two identifable data types. However, only two of the seven participants (P8, P10) correctly selected all three data types, with the other fve missing date of last login and two of them also missing user ID because these data types were not perceived as identifable.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.1.2">Missing</head><p>Third-party Data Use (P1, P5, P6, P7, P9, P10). Analytics and social media are two types of third-party libraries that were commonly used by our participants and may have unexpected data collection behaviors. However, developers tended to focus on the data directly associated with the libraries' functionality (e.g., user account information for social media libraries) or data they can directly view from the third-party services (e.g., crash reports for analytics libraries). When asked whether he considered if any data can be automatically collected by Firebase, P6 answered, "I don't think so. My understanding of the data that's collected by Firebase is how we use Firebase." This echoes prior work's fndings that developers often have limited understanding of libraries' data practices under the hood <ref type="bibr" target="#b4">[5]</ref>.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.1.3">Missing Data Types (P3, P6, P10</head><p>). This error refers to when developers did not report all data types collected and stored on their back-end server. The developer tool for generating privacy labels is structured such that if the developer did not select all data types correctly in the frst place, they would not have the chance to provide further details for how these data types were used, stored, and shared (see Figure <ref type="figure" target="#fig_2">2</ref>). Some participants missed data types for reasons such as not checking all data types carefully, having wrong preconceptions about a certain data type not being personal, and forgetting to include data types that were newly collected in recent versions.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.1.4">Missing Interactions</head><p>Outside the App (P1, P6). Some developers did not report data collected or used outside the app. For example, P6 mentioned that to send a newsletter they only used the email address collected by the app and used an external service MailChimp to look up the customer's name based on the email address. He only reported Email Address but not Name data as being used for Developer's Advertising or Marketing purpose, because he perceived it as "a diferent process that's outside of the app" (P6).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.1.5">Missing Optional Data Practices (P3, P4</head><p>). Some developers did not report data practices that were optional. 6 For example, P4 provided their users with the option to enter their name in the system so the users could be addressed using their name rather than the email address. However, he did not mark it as used for the Personalization purpose, because "It's personalization, but it's optional. We don't insist that they give us the name." On the other hand, he did indicate that the collected email addresses were used for personalization, because "we do insist they give us the email." (P4)</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.2">Errors: Overreporting data collection (False Positive)</head><p>The second type of errors are cases where developers reported more than the actual data practices.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.2.1">Overreporting</head><p>Tracking (P1, P3, P6, P8, P9, P10, P11, P12). Apple's defnition of data used to track users only covers very specifc tracking scenarios -namely, linking data about a particular user or device with third-party data for advertising measurement purposes or sharing the data with data brokers. However, some of our participants did not read the defnition in detail and relied on a casual interpretation of tracking, such as location tracking (P9) or tracking users' interactions (P10). Some participants carefully read the defnition, and even a few of those had similar misconceptions. For example, P11 explained his interpretation of Apple's tracking defnition as "Obviously, there are other scenarios where, you know, tracking will be used not just for advertisement, but just for kind of user profling really."</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>5.2.2</head><p>Reporting Data Not Stored on Backend (P4, P5, P6). Apple's defnition of data collection uses very specifc criteria -namely, the data is transmitted of the device and stored in the backend. We asked participants if each data type specifed in their privacy label was stored, and if so, where it was stored. We found that some developers missed these criteria and reported data that was collected but not stored (P5) or data only stored on device as data collection (P4, P6). </p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="6">RQ3 RESULTS: CHALLENGES FOR CREATING ACCURATE PRIVACY LABELS</head><p>In this section, we delve into developers' challenges for creating accurate privacy labels to identify possible causes of errors and misunderstandings discussed in the previous section. We grouped these challenges into three themes (see Table <ref type="table" target="#tab_5">4</ref>). The frst two themes are related to gaps in developers' knowledge, and the last theme is related to complexities that developers may encounter throughout the app development life cycle.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="6.1">Unknown Unknowns: Situations Where Developers Don't Realize that They Don't Know Something</head><p>The frst theme is Unknown Unknowns, which encompass situations where developers were unaware of the errors that they may have introduced into the privacy labels. Under these circumstances, developers often trusted in their own judgement (and were sometimes wrong), and only realized their problems later on with the help of external prompts.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="6.1.1">Blinded by Preconceptions (All but P12</head><p>). As we guided the participants to closely examine all the defnitions, almost all of them realized some of the errors they made due to their preconceived understandings of Apple privacy label concepts that were inconsistent with Apple's defnitions. These preconceptions were deeply tied to many of the errors identifed in the previous section (Table <ref type="table" target="#tab_4">3</ref>). For example, P9 initially explained his understanding of "data used for tracking" as "live tracking.... where, you know, some apps will track your location in the background even when you're not using them." However, after the interviewer showed him Apple's defnition of this concept again, he was surprised that it difered from his expectations:</p><p>I guess my question so much as just being surprised that tracking here only refers to advertising. That's not what I would anticipate that to mean, like, either as an end user or developer. That's not the word I would use for that.</p><p>Note that the same defnition was shown to him in Apple's interface while he created the privacy label, but he did not realize the discrepancy between his understanding and Apple's defnition, indicating that he likely did not read or did not remember Apple's defnition when trying to accomplish this task during the study. In fact, we believe these errors may be more frequent in practice than in our study, since some participants told us they were more careful creating their privacy label for the study than they were in real life. When asked to contrast the experience for our study versus in the real world, P11 said, "As obviously, with regards to the study, I just probably thought about it more, whereas I might have glanced over it [in real life]."</p><p>6.1.2 Knowledge Blindspots (All but P3, P7, P8). We found two types of knowledge blindspots during the study.</p><p>Not familiar with Apple Privacy Labels (P2, P6, P9, P10, P11, P12). Many participants acknowledged that they were not familiar with Apple Privacy Labels before the study. Some developers had never heard about privacy labels and so had never considered creating them for their own apps, though this was mainly true of developers for apps that had not been updated for a while. Some had heard about it or seen it on the App Store as a user, but had never created a privacy label themselves. Some developers knew they needed to create a privacy label but had misunderstandings about the overall process and therefore deferred their plan. For example, some misunderstandings include believing that they can only update the privacy label with a new version release, or that updating the privacy label will trigger a new round of review process. One participant said, I assumed that if you would change something, that might trigger something on [the App Store], and we have the need to be temporarily pulled for review. That would be the only thing that would make me hesitant.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>(P9)</head><p>Not accessing library documentation (P1, P4, P5, P6, P9, P10).</p><p>Many libraries have created documentation to specifcally prepare developers for creating privacy labels, such as analytics libraries like Google Analytics and social media libraries like the Facebook SDK. However, during our interview, none of the developers that used these libraries pulled up any of these resources made for this task or mentioned that they had checked them in real life when asked about how they fgured out what data was collected by the libraries used in their apps, which suggested that they were unaware that this documentation existed. We discussed this issue with P4, since he switched from Google Analytics to another library because he could not fgure out exactly what data types were collected by Google Analytics and also distrusted Google's privacy practices.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Initially he said,</head><p>What you really need is something I don't think Google will ever provide, which is a quick way of answering Apple's questions in the context of Google Analytics. But I've never found a document that does that. (P4)</p><p>After the interviewer showed him the Google Analytics' documentation for this task, 7 he was very surprised and said, "And then I 7 https://support.google.com/analytics/answer/10285841 apologize to Google. But this was not there when I was doing this." (P4)</p><p>6.1.3 Misinterpretation of Definitions (P1, P2, P4, P5, P7, P8, P10, P11). We further observed that developers may misinterpret Apple's defnitions even after reading them carefully. For example, although P8 had been asked to carefully read the defnition of data used to track users, he still held an incorrect understanding of the scope of tracking per Apple's defnition: "Data tracked is like you're using it to personalize stuf, and like personalized ads or other content." (P8) Although he did notice "used for advertising purposes, " he expanded that to content personalization in general, which is an over-generalization of the tracking defnition that may lead to overreporting of tracking (as discussed in Section 5.2.1).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="6.2">Known Unknowns: Situations Where Developers Are Unsure About Their Own Understanding</head><p>In the second theme, we report on developers' confusion about Apple's requirements and uncertainty about their understanding and their answers for generating the privacy label.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="6.2.1">Limitations of Apple's Documentation (All participants).</head><p>Our participants voiced much confusion regarding Apples documentation related to privacy labels, including the instructions in the web-based developer tool and the documentation about app privacy details, especially about concept defnitions presented in both the tool and the documentation.</p><p>Table <ref type="table">5</ref>: A summary of expressions that more than one developers found confusing or hard to comprehend in Apple's ofcial documentation and the web-based developer tool for flling out privacy labels.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Reasons for confusion</head><p>Expressions that developers found hard to understand Unfamiliar tech concept screen name, social graph, hashed email address/phone number, approxlocation services, a latitude and longitude with three or more decimal places, link the data back to users' identity, the Motion and Fitness API Jargon data broker, third-party data, purchase tendencies Diference by country credit score</p><p>Hard-to-understand expressions in Apple's documentation (All but P11). Many participants found certain concepts and defnitions hard to understand because they used unfamiliar jargon, unfamiliar technologies, or concepts that were not commonly used in countries other than the U.S. (summarized in Table <ref type="table">5</ref>).</p><p>For the frst group of issues, developers did not have sufcient technical knowledge about what certain terms mean or how to obtain certain types of data. For example, Apple defnes the data type Email Address as "Including but not limited to a hashed email address. " However, several developers were not sure what hashed email address means here. Specifcally, P12 explained his confusion as follows, "I'm gonna sound like a noob for a person who has computer science background, but I don't know what a hashed address is. In this case, I'll google this."</p><p>The second group of issues includes privacy-related concepts that developers were unfamiliar with. For example, many developers had never heard of the term data broker, which is an essential part of Apple's defnition of tracking. When P7 examined the defnition, he said, "I suppose one question I have is mostly just what is a data broker? I'm not actually sure of the top of my head. That would be something I would want to look up." Because Apple's defnitions seemed to be designed primarily for the U.S., some issues were caused by developers from outside the U.S. not understanding terminology specifc to the U.S. P1 and P2 both mentioned that they did not understand the term credit score. P2 said, "The other one credit score, I feel like it's something that only works in the U.S., which I'm not familiar with."</p><p>Vague, ambiguous defnitions need clarifcation or examples (All but P5 and P9). Our participants also found many of the ofcial defnitions vague and ambiguous, and hoped that Apple could provide more examples or clarifcations. One representative example is the frequent use of "other types" categories, such as Other Data Types and Other Purposes. Although participants understood the necessity of providing a catch-all term to cover corner cases, they found it hard to imagine what instances could fall into these categories and hence found them very confusing. Specifcally, P11 considered the Other Data Types concept "the most egregious one" as compared to other similar concepts such as Other Financial Tianshi Li, Kayla Reiman, Yuvraj Agarwal, Lorrie Faith Cranor, and Jason I. Hong Info, because "the other ones were a bit vague, but at least they were tied into something.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>" (P11)</head><p>Inefective examples (P4, P7, P8, P12). Conversely, developers did not always perceive providing more examples as helpful. For example, when defning Sensitive Info, Apple simply lists a number of data types such as racial or ethnic data, sexual orientation, or biometric data. One participant found it confusing, because, "It seems like it's just giving random things. I guess they could clarify more on what it means by that, instead of just giving examples." (P8) 6.2.2 Lacking Support for Teams and Organizations (P3, P4, P5, P6, P7, P8, P9). Developers also talked about challenges regarding not receiving sufcient support from their development team or their organization, as well as the challenges of working on their own. One type of challenge was that developers may only have control over and understand part of the life cycle of data collected by their apps. This problem mainly applied to developers employed by large companies (e.g., P5) or developers developing apps for a client (e.g., P3, P6, P9). For example, P9 developed an app for a research project and shared much of the back-end data with the researchers, but he was not sure how the researchers used the data from then on. Nevertheless, P9 was responsible for submitting the app to the App Store and out the privacy label, which suggests that he may not be able to comprehensively summarize the data practices of this app.</p><p>Other challenges include lacking sufcient written documentation to understand the apps' data practices especially when they were a new member of an old project (P3, P4, P5), organizational training for fulflling this task (P4, P6, P8), and wanting help from legal experts for interpreting complicated defnitions (P3, P7, P8).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="6.3">Complexities: Extra Overhead Required for Creating Privacy Labels</head><p>The third theme of challenges concerns factors that caused signifcant overhead in creating privacy labels, which is orthogonal to the previous themes about knowledge gaps that may cause inaccuracies in the privacy labels.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="6.3.1">Overwhelmed due to Information Load (All but P3 and P11).</head><p>Most participants felt this task overwhelming and time-consuming due to information load, especially for frst timers. The vagueness and ambiguities in the defnitions aggravated the problem, since developers had to read certain defnitions several times to gain enough confdence in their understanding. For example, when explaining his confusion about the defnition of tracking, P12 said, "I didn't fnd it unclear after reading it several times. But I think that's just the nature of these things are quite complicated." Moreover, the pain of reading all the information may discourage developers from updating privacy labels in a timely manner. P1 expected to update privacy labels twice per year, which means "you have a six month gap where you can collect data without telling people," because "upgrading it, or at least reviewing it on every update would be tiresome." (P1) 6.3.2 Memory Challenges (P1, P2, P3, P4, P8, P10, P11, P12). To correctly fll out privacy label forms, developers need to grapple with multiple types of memory challenges. First, developers sometimes did not remember their rationale for selecting certain options when previously generating a privacy label, which could cause inconsistencies. For example, P10 changed the selection of purposes for a specifc data type during the study, but he couldn't recall why he initially made a diferent selection. The second type concerns the challenge of remembering the defnitions. We noticed that some developers who had just read and discussed the defnitions of some concepts roughly thirty minutes earlier had trouble recalling these concepts. For example, P4 and P12 both forgot the exact resolution of coarse and precise location.</p><p>The third type was related to challenges of keeping track of their apps' data practices. When comparing P10's re-created privacy label with the real-world privacy label, he found that he forgot they collected search history during the interview.</p><p>I don't think we keep track of search history? That's why I think that was a miscommunication there... Okay, I take that back. Sorry. We actually do [store the search history] on Algolia. It keeps track of like, what searches popped up the most, but it's not linked to specifc users. The fourth type was regarding challenges of remembering to update a privacy label in a timely manner. P10 found that the Contacts data type was missing on their privacy label on the App Store, because they forgot to update the privacy label when adding Contacts data collection in recent versions.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>6.3.3</head><p>Challenges of Cross-platform Apps (P1, P3, P6, P7, P8, P9, P11, P12). Many participants developed one web app for both the Apple App Store and the Google Play Store, which means that they need to handle requirements on both platforms. Since Android recently announced their plans of rolling out a similar requirement on Google Play (see Figure <ref type="figure" target="#fig_0">1</ref>), these developers would need to do duplicate work for generating the Google privacy label. Another challenge is regarding maintaining the privacy label. Because these web apps allow for server-side updates, data practice updates may not need to go through the App Store, increasing the likelihood of having outdated privacy labels.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="6.3.4">Communication</head><p>Cost (P3, P4, P5, P6, P8, P12). We identifed many challenges for creating and maintaining privacy labels regarding developers' communication with diferent entities, such as other developers, their boss, their clients, and their former employers. First, diferent people on the team may have diferent priorities and may not all care about privacy and privacy labels. P4 said he had a big fght with other team members when deciding to replace Google Analytics with a library to trade of functionality for better privacy: "I have to say not everybody was happy with that choice" (P4). He explained that the complexity of creating the label and the ambiguities of Apple's documentation made it hard to fulfll his boss' expectations:</p><p>...at the end of the day, you have to go to your boss and say, 'Well, I don't know if I really understood this correctly. But here's the answer.' You know, my boss wants a defnite answer. He doesn't want ambiguities. Especially if I spent three days doing it. (P4) Second, communication was harder when early members already left the team, and for projects that were a joint efort of several diferent teams or even diferent organizations (P5). Third, some developers released the app using an organization account, which made it harder to update the privacy label if they have left the organization. Although theoretically the employer should take over the responsibility of updating the privacy label once the original developers have left, this may not be realistic in some situations. For example, P12's app developed for his research project published under the university's account did not have a privacy label at the time we interviewed him. He explained that "I no longer work for this university. I worked very closely with them, but ultimately, this is managed by the university and their IT team."</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="7">DISCUSSION</head><p>We begin by discussing why it is important for privacy labels to be accurate and the barriers to label accuracy that we observed. Next we discuss the positive impact of privacy labels, including the possibility that they may encourage developers to adopt more privacy-friendly practices. We ofer several short-term design implications and suggest directions for future research. Finally we review some limitations of our study.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="7.1">Importance of and Barriers to Creating Accurate Privacy Labels</head><p>Accuracy is an essential requirement for privacy labels and any standardized privacy notice in general. Individual users can only get a correct understanding of apps' data practices if labels are accurate. Conversely, if many privacy labels are inaccurate, it may lead to distrust by users and impede long-term adoption. Through our studies, we learned that the causes of inaccuracies are complicated, and even developers with benign intentions may inadvertently introduce errors. Table <ref type="table" target="#tab_5">4</ref> summarizes challenges developers face regarding privacy labels. Although knowledge gaps are the direct causes of many inaccuracies, the fundamental issue is the general complexity of this task. Furthermore, we believe this task will be even more challenging in practice; during the study, developers were fully concentrating on this task and could discuss any confusion with the interviewers, who were privacy researchers already familiar with privacy labels. Our fndings echo developers' challenges for other privacy tasks as identifed by prior work, such as limited awareness of third-party library data use <ref type="bibr" target="#b4">[5]</ref>, regarding privacy as a secondary concern <ref type="bibr" target="#b0">[1,</ref><ref type="bibr" target="#b3">4,</ref><ref type="bibr" target="#b19">20]</ref>, and lacking privacy design and engineering knowledge <ref type="bibr" target="#b2">[3,</ref><ref type="bibr" target="#b14">15,</ref><ref type="bibr" target="#b31">32]</ref>. These same problems are present in this new task and may substantially diminish the usefulness and trustworthiness of privacy labels or standardized privacy notices in general. This suggests the importance of studying developers' perceptions and practices in usable privacy research.</p><p>The three Unknown unknowns challenges are novel fndings that have not been identifed in prior work. They are crucial problems, as developers do not actively do further research to check their understanding and correct their mistakes under these circumstances. Moreover, some kinds of resources to help developers handle privacy requirements (e.g., third-party libraries' guides to flling out the label form) may not be useful unless they are more accessible to developers.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="7.2">The Positive Impact of Privacy Labels on User Data Privacy</head><p>We observed some positive impacts of privacy labels on user privacy. First, several developers considered privacy labels a convenient and transparent way to disclose data practices and therefore benefcial to both users and developers (Section 4.1). Second, some developers liked the label creation task because it ofered them an opportunity to refect on their data practices and the privacy implications (Section 4.5). Third, a few developers even took further action to modify their apps and traded functionality for privacy. For example, P7 updated his app's privacy policy to improve the consistency with the privacy label (Section 4.5) and P4 replaced Google Analytics with a less privacy-invasive analytics library to streamline the privacy label creation process (Section 4.3 and 6.3.4). These fndings suggest that requiring developers to ofer a more succinct, readable privacy notice may incentivize them to adopt privacy-friendly designs, since collecting less data will make creating privacy labels easier. All these positive implications echo fndings about the important role platforms play in shaping developers' perceptions and practices regarding privacy <ref type="bibr" target="#b20">[21,</ref><ref type="bibr" target="#b35">36]</ref>. Importantly, past research found that developers do not like platform policies that impose rigid restrictions on data collection <ref type="bibr" target="#b20">[21]</ref>, but our study observes they do seem to support the requirements for more disclosure of data practices to end users. This suggests that developers may be more amenable to improving data transparency and that privacy labels may also lead to a voluntary reduction in data collection.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="7.3">Design Implications: Short-term Design</head><p>Recommendations and Future Research Directions</p><formula xml:id="formula_0">7.</formula><p>3.1 Short-term Recommendations. We frst present design recommendations that require relatively minor changes.</p><p>Revise defnitions to improve clarity. We identifed minor changes in defnitions that may be helpful for improving developers' comprehension. Many participants mentioned that they wanted to see more concrete examples in the defnitions. For example, what is considered data linked to users? What might fall under the Other Data Type category? Developers may be unfamiliar with certain technologies or jargon (e.g., hashed email address, data broker), which should be avoided or explained. Furthermore, platforms should be wary of using a common term like tracking but associating it with an unusual or special defnition because developers may not always pay attention to or fully understand that defnition. To improve clarity, terms like "longer than necessary" that are subject to developers' interpretations should generally be avoided, or facilitated with more objective criteria.</p><p>Clarify common misconceptions proactively. Given that the misconceptions were concentrated on certain concepts, such as data linked to users and data used to track users, platforms may want to provide proactive warnings of potential misconceptions. Furthermore, some developers had misconceptions about the process of flling out the privacy label, such as they had to wait until the next version release to update the privacy label or that updating the privacy label would trigger an app review. The platform should also clarify these misconceptions up front in the developer tool.</p><p>Check internal validity and consistency of labels. Per Apple's defnitions, some concepts are interrelated, though developers used them independently. For example, if the developer specifed certain data is used for Third-Party Advertising, it is likely that the data is also used to track users. If the developer reported the collection of personally identifable information such as name or email address, it is likely that the data is also linked to the users. Currently, Apple does not verify the privacy labels, but it would be useful and relatively easy if platforms check them for internal validity and consistency, and prompt developers when there is a potential error. A complementary approach is to auto-fll part of the answers based on their dependencies with information that have already been provided by developers.</p><p>Use formats other than text for guidance. Parts of the current privacy label documentation and the developer tool are textheavy, making comprehension difcult (specifcally the paragraphs about optional disclosure, linking, and tracking). Thus, it may be benefcial to present the same information in other formats, perhaps using diagrams, videos, or interactive materials with quizzes to help developers check whether their understanding of key points is correct. For example, since we found that developers often only perceived data identifable on its own as linked to users, it may be helpful to use a diagram that emulates the structure of a database to showcase under what circumstances the data is considered linked to users, similar to the example we used in our study (Section 5.1.1).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="7.3.2">Directions for Future</head><p>Research. Next, we discuss future research directions to address more fundamental issues.</p><p>Verify the privacy label against actual data practices. It appears that Apple does not check for the validity of the self-reported privacy labels, which means that developers do not get feedback that would help them discover their misconceptions. One essential reason is that Apple currently employs a defnition of data collection that prevents complete verifcation unless auditors have access to the app's back-end data storage (which is infeasible). However, partial verifcation may still be possible, for example if auditors consider separately local access, data transmission, and remote storage. Local access and data transmission could be more easily verifed. In iOS 15, a new feature called "Apple Privacy Report" already reveals some information about local data access and data transmission to end-users. 8 The privacy report shows which apps access permission-protected resources such as location, camera, and photos at what times. Analyzing the exact data transmitted outside of an iOS app is a very challenging problem, but researchers have demonstrated some promising solutions. For example, Egele et al. <ref type="bibr" target="#b10">[11]</ref> statically analyzed more than 1,400 iOS apps and found over half of the apps leaked the unique ID of the device over the network. Note that the difculty largely comes from the heavy security restrictions imposed by the iOS platform such as app encryption, which means that it is likely an easier task if conducted by the platform.</p><p>Even using the current defnitions, it is feasible to verify parts of the privacy label automatically -for example, using the identifer for advertising (IDFA) as an indicator of tracking and analyzing third-party libraries used in the app <ref type="bibr" target="#b7">[8]</ref>.</p><p>Support code-based auto-flling or auto-generation of privacy labels. Another direction to both improve the accuracy of privacy labels and reduce the burden on developers is to automatically fll out part of the privacy label forms based on code analysis. Prior research has studied code-based generation of privacy policies <ref type="bibr" target="#b36">[37]</ref> and in-app privacy notices <ref type="bibr" target="#b21">[22]</ref>. Similarly, we envision code-based auto-generation of privacy labels would also be a compelling idea, especially for handling third-party libraries and for generating diferent versions of privacy labels of crossplatform apps. The privacy label generator may be integrated with the IDE <ref type="bibr" target="#b19">[20,</ref><ref type="bibr" target="#b21">22,</ref><ref type="bibr" target="#b28">29]</ref> and use developers' annotations to improve the accuracy (e.g., detecting network requests and asking developers to specify storage practices).</p><p>Conduct usability tests with a wider range of developers. Although a number of studies have investigated the usability of privacy labels from users' perspectives (Table <ref type="table" target="#tab_0">1</ref>), there is limited understanding from developers' perspectives. Our study ofers a frst step towards understanding developers' perspectives, but further testing with a more diverse sample of developers would be helpful -aiming for diversity in location, technical profciency, gender, English fuency, and other factors.</p><p>Reconcile diferences across platforms and helping developers handle platform diferences. We already noticed a few diferences between Apple's design and Google's tentative design of privacy labels (Figure <ref type="figure" target="#fig_0">1</ref>). For example, Google requires developers to disclose data as Collected as long as it is transmitted of the device, while Apple's defnition of data collection requires both transmission and backend storage (i.e. having access for "a period longer than what is necessary").A further challenge is that the iOS guidance specifes"You are not responsible for disclosing data collected by Apple", while Google does not ofer the same stipulation. Therefore, developers handling requirements from both platforms may get more confused and make more errors. Ideally, these platforms should work together to make their defnitions as consistent as possible and provide usable and accessible developer support to handle the diferences.</p><p>Iteratively evaluate and improve the label design and developer tools. In our analysis, we regarded Apple's defnitions of privacy label terminologies as the gold standard and referred to the diference in developers' understandings from Apple's defnitions as "misinterpretations. " However, we acknowledge that Apple's defnitions may be imperfect and that the label design itself may beneft from improvements. Ideally, the design of a standardized privacy notice should use defnitions that match the intuitive understandings of users and developers (or other roles who are responsible for flling out privacy label forms). Further work is needed to assess users' understanding of Apple privacy labels and the extent to which the labels are useful to them as they make decisions about downloading apps and providing information to them. Given our observations of the difculties developers had in understanding privacy label concepts and jargon, we would expect to fnd even more confusion among end users. We recommend a more holistic assessment of what information is most useful to convey to users, how best to convey it, and how to support developers in reporting their app's data practices accurately and efciently. </p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="7.4">Limitations</head><p>This research has several limitations. First, due to the recruiting platforms and the gender, age, and race gaps of the iOS developer community, our sample mainly comprises young, White, male developers coming from North America and Europe. A useful future direction is to conduct survey studies at scale with a more diverse sample. Second, although we reassured our participants that we would only release anonymized fndings and we did not intend to evaluate their abilities, they may not have all felt comfortable expressing controversial or negative opinions about privacy labels. Lastly, although we have confrmed potential errors and misunderstandings with participants, we did not have access to their code or database and therefore could not verify these errors. Hence there may have been more errors than the interviewers were able to observe. However, given the context provided, we consider our fndings still yielded useful insights into the patterns and fallacies in developers' perceptions and practices about privacy labels.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>8</head><p>In this paper, we present the results of 12 semi-structured interviews with iOS developers regarding Apple's privacy labels. This is the frst study that examined the usability and understandability of privacy labels from developers' perspectives. We learned that our participants generally held positive attitudes towards privacy labels, but were also concerned about users' distrust in the labels and the extra workload associated with creating them. We identifed a set of common errors and misunderstandings, and discussed the challenges of knowledge gaps and task complexity that caused these issues. Finally, we discussed the design implications, including concrete short-term design recommendations for platform providers such as Apple and Google to improve their design of privacy labels from developers' perspectives, as well as long-term research directions that may beneft the adoption of standardized privacy notices in general.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>A PRE-SCREENING SURVEY</head><p>Our group in the Human Computer Interaction Institute at Carnegie Mellon University has been researching tools for software developers for many years. We are currently working on a 90-minute interview study for understanding the process of submitting apps to the Apple app store. The fndings may also inspire us to design better developer tools to streamline this task.</p><p>This study was approved by the Institutional Review Board (IRB) at CMU. We will not identify you, your app, or your organization in any publications that come out of this research without your written permission.</p><p>To be eligible for this study, you must be 18 or older and have some experience in iOS app development. We will contact you if you are selected for the study. Thanks for completing this pre-screening. We will contact you soon to let you know whether you have been selected for the 90minute interview and associated $70 compensation. The next page will redirect you to Prolifc.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>B PRE-STUDY SURVEY</head><p>Thank you for agreeing to participate in this Carnegie Mellon study on the process of submitting apps to the Apple app store. We look forward to interviewing you.</p><p>For this interview study, we will ask you to report on one iOS app that we selected from your recent iOS apps. The selected app has been sent to you via the Prolifc messaging system. If you are not sure which app to report on, please message us to ask.</p><p>In this pre-study survey, we would like to ask a few questions about you and the selected app. At the end of the survey, you will see a scheduling link where you can make a booking for our interview.</p><p>After submitting the response, you will be redirected to the Prolifc completion link.</p><p>(1) What is your participant ID for this study? (The ID was sent to you via the Prolifc messaging system.) (2) What is the app store link to the app that you will report on?</p><p>(The selected app was sent to you via the Prolifc messaging system.) (3) How many times has this app been downloaded?</p><p>• Under 1,000</p><p>• 1,001 -10,000</p><p>• 10,001 -50,000</p><p>• 50,001 -100,000</p><p>• 100,001 -500,000</p><p>• 500,001 -1,000,000</p><p>• 1,000,001 -5,000,000 • 5,000,001 -10,000,000 • 10,000,001 -50,000,000</p><p>• 50,000,001 -100,000,000</p><p>• 100,000,001 -500,000,000 Data collected from an app is usually linked to the user's identity via these means, unless specifc privacy protections are put in place before collection to de-identify or anonymize it, such as:</p><p>• Stripping data of any direct identifers, such as e-mail address or name, before collection. • Manipulating data to break the linkage and prevent relinkage to real-world identities. Additionally, in order for data not to be linked to a particular user's identity, you must avoid certain activities after collection:</p><p>-You must not attempt to link the data back to the user's -You must not tie the data to other datasets that enable it to be linked to the user's identity Note: "Personal Information" and "Personal Data", as defned under relevant privacy laws, are considered linked to the user Linking question 1: Do you fnd this defnition unclear, surprising, or unreasonable?</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>• Yes • No</head><p>Linking question 2 (on a separate page): In this example data table (assuming there were more rows, shown in Figure <ref type="figure" target="#fig_5">3</ref>), which data would you consider linked to users, if any? Please explain your reasoning. Tracking is linking data collected from your app about a particular end-user or device such as a user ID, device ID, or profle, with Third-Party Data for targeted advertising or advertising measurement purposes. It also refers to sharing data collected from your app about a particular end-user or device with a data broker.</p><p>Tracking does not apply in the following situations:</p><p>• When the data is linked solely on the end-user's device and is not sent of the device in a way that can identify the end-user or device • When the data broker uses the data shared with them solely for fraud detection or prevention or security purposes • When the data broker is a consumer reporting agency and the data is shared with them for purposes of (1) reporting on a consumer's creditworthiness, or (2) obtaining information on a consumer's creditworthiness for the specifc purpose of making a credit determination.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Third-Party Data</head><p>Third-Party Data is any data about a particular end-user or device collected from the apps, websites, or ofine properties not owned by the developer.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Examples</head><p>To help put tracking into context, here are a few examples: </p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>C.3 Personal Data &amp; Linking</head><p>Under the defnition of linked data, there is a note: Note: "Personal Information" and "Personal Data", as defned under relevant privacy laws, are considered linked to the user.</p><p>Which of these data categories (if any) do you think privacy laws would defne as personal and therefore automatically linked, given where your potential app users live? Note: These showed up in random order.</p><formula xml:id="formula_1">• Crash Data • Performance Data • Other Diagnostic Data • Product Interaction • Advertising Data • Other Usage Data • Purchase History • User ID • Device ID • Search History • Browsing History • Emails or Text Messages • Photos or Videos • Audio Data • Gameplay Content • Customer Support • Other User Content • Contacts • Sensitive Info • Coarse Location • Precise Location • Payment Info • Credit Info • Other Financial Info • Health • Fitness • Name • Email Address • Phone Number • Physical Address • Other User Contact Info • Other Data Types D INTERVIEW SCRIPT D.0.1 Introduction.</formula><p>Thanks for agreeing to participate in our study. First, I need to read our standard introduction, as required by our study protocol.</p><p>Our group at Carnegie Mellon University has been doing research for many years on tools for developers. We are currently working on a research project about the iOS privacy labels, which is CHI '22, April 29-May 5, 2022, New Orleans, LA, USA a new feature of the iOS app store that shows details of iOS apps to end users. iOS developers are now required to provide the privacy details for their apps by answering certain questions about data collection, use, and whether users are being tracked. The general goal of our research is to learn about how iOS developers accomplish this task, how they perceive the concepts used to describe data practices, and what barriers there are for correctly and efciently accomplishing this task. The fndings may also inspire us to design better developer tools to streamline this task.</p><p>We understand that you have published an app named [the app name] on the iOS app store. We would like to interview you about the process of submitting apps to the app store and have you complete some tasks about that app on our website. We expect the entire study session to take approximately 90 minutes, though timing may vary depending on the complexity of the app. During the study, we will ask you to answer some questions about your app's data practices using a website built by our group implements the priquestionnaire from the ofcial Apple developer website. Then we will ask you some follow-up questions regarding why you selected certain options, how you perceive certain concepts, and whether you encountered any difculty during the process. Since we want to observe how you completed this task, we would like you to share your screen during the interview. We need to record both the audio and the screen during the entire interview solely for analysis purposes. We will use Zoom to make the recordings. Only researchers in our group working on this project will have access to the recordings. The interviews will be transcribed automatically by Zoom and we may include parts of the transcripts in our research papers that do not identify you, your app, or your organization.</p><p>Your participation is entirely voluntary and you may quit the study at any time. If you don't feel comfortable answering a question, feel free to skip it and it will not afect your compensation. You must be 18 or older to participate in this study. You will be compensated $70 for participating. The interview will be conducted remotely through the computer. Since the interview will be recorded, it is important that you be in a private room, and not in an openspace cubicle, for example. These recordings may be stored on protected computers at CMU and on Zoom, with transcripts potentially edited using a service called Otter. There are no expected risks or benefts to you for participating, beyond the benefts of helping improve the understanding of privacy labels in general.</p><p>This study was approved by the Institutional Review Board (IRB) at CMU. We will not identify you, your app, or your organization in any publications that come out of this research without your written permission.</p><p>Is that all OK? If yes, please sign the consent form (digitally). Is it OK if I record the interview? [Start recording after receiving their positive answer] D.0.2 Observation of Answering Privacy Qestions About the App. In the frst part, we'll ask you to use an interface that imitates Apple's developer website. There, you'll answer questions about if and how your app [the app name] uses data.</p><p>Please handle this task as you normally would and take as long as you need. You are welcome to look at any documentation you would normally consult, except for the app's privacy label. In order for us to see any resources you use, please either share your full screen or open any additional resources in the same window where you're completing the task.</p><p>If you need a resource that is not currently available or would ordinarily ask somebody for help, please say aloud what resources you would use and who you would usually contact.</p><p>I won't be able to answer questions during the task but please voice any areas of confusion, and we'll answer them to the best of our ability at the end of this interview.</p><p>I will put the website in the chat now. Your participant ID is [participant ID]. Please start sharing your screen as soon as the website is open. Do you have any questions? **allow time for flling it out** Thanks so much! We'll now delve into some more questions about your process. You are to change your answers at any time. As a reminder, we're not measuring your performance and will not include any information about you, your app, or your organization in our publications. The goal of this study is to understand developer perspectives on using the Apple interface for flling out privacy labels. We're also interested in tools to improve the accuracy. It's actually helpful if you point out and fx any inaccuracies during the rest of this interview, since that will help us understand sources of inaccuracies in the labels. • Which 3rd party library collects this data, or is it just collected by you? • If you collect this data manually, where is this data stored?</p><p>Examples include on the user's device, a database you built, or via a database service like Firebase. • How did you select these data uses (i.e. purposes)?</p><p>• How did you determine whether the data is linked to the user's identity? • How did you determine whether the data is used for tracking purposes? D.0.5 Definitions and Follow-up Qestions. In the next section, we would like to examine some key concepts that were used in Apple's privacy label. We are curious about what they mean to you, and whether any part of Apple's defnition looks surprising, unclear, or unreasonable to you. By identifying both matches and mismatches between developers' understanding and Apple's defnitions of these concepts, we hope to gain a better understanding of what may cause difculty in flling out the privacy label and also help you improve the accuracy of privacy labels. Please let us know if anything surprises you or does not make sense to you, even if it's just a tiny part of the defnition. Alternatively, if there are defnitions or parts that are defned very clearly and/or in line with your previous understanding, that's good to know too. We'll ask you to keep screen-sharing the Qualtrics survey. </p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Personal Data &amp; Linking</head><p>For the fnal task in the survey, when developers are selecting which items they consider "personal data", ask them which lawsif any -are informing how they answer the question. D.0.6 How developers fill out the labels in real life. The next section focuses on learning more about how your app was created and understanding your perspective as a developer.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>• Teamwork and Collaboration</head><p>-Have you flled out an Apple privacy label before? -If yes: * Was it for this app? * How long ago did you fll it out? * Approximately how long did it take you? -Which parts of the app, if any, were implemented by other members of your team? * For these parts, how did you fgure out the corresponding data practices and select the option to describe them? -If their app has already provided a privacy policy and it's a group app: Which team member created the privacy policy, and was it discussed among multiple team members? -If their app has already provided a privacy label and it's a group app: We're curious to learn more about the process of flling this out in real life. Which team member flled in the privacy label questionnaire, and was it discussed among multiple team members? -Given that the questions are the same, was the experience of flling out this form in real life diferent from doing this task in today's study? * Are there any challenges that you have encountered when flling out this form in real life but were not covered in this study? • Monetization -How is your app monetized, if at all? -Did it afect how you answered these questions? • Privacy-enhancing design or technologies -Did you use any approaches to protect the data privacy of your app? * Did they afect how you answered these questions?</p></div><figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_0"><head>Figure 1 :</head><label>1</label><figDesc>Figure 1: An example of iOS' privacy labels (left) and Android's tentative design for its forthcoming safety section (right).</figDesc><graphic url="image-2.png" coords="1,317.96,243.40,110.97,190.95" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_1"><head>Ooyouoryourthird</head><label></label><figDesc>SuchMdisplayingthird-partyadsinyourapp,o,sha,ingdatawithenMieswho display third-party ads Oevek&gt;µe,'sAdvertisingorMa,keling Suchasdisplayinglirst-partyadsinyourapp,sendir,gmar1&lt;etingcomrrunications directlytoyourusers,orsharingda1awithentitieswr.Qwilldisplayyourads PJAnalytics Usingdatatoevaluatecserbehavior,includingtounde,standtheeffect,venesso1 exisbngproductfeatures,planriewteatures,ormea,ureaudience,izeor characteristics PJProductPer,;onalization Customizingwhat!heusersees,suchasalistofrecomroondedproducts,pos!s,o, suggest&gt;ons PJAppFunctionality Suchastoauthenticatetheuser,enab~features,p,eventfraud,implementsecurrty measures, ensure server up-time, minimize app crast&gt;es, improve scalability and performanceand medical data. incklding DUI not limited to rrom the Clink:al Health RecordsAPl,HealthKitAPl,MovementDisorderAPls,health-relatedhuman subjectresearch,oranyotheruserp,ovKledheal1ho,medicaldata PJFitness Fitnessal\de,ercisedata,includingbutnotlimited101heMotionandFitriessAPI 0Name, Next,indicateifthedatacollectedfromthisappislinkedtotheuser'sidentity(viatheir Datacoltectedfromanappisusuallylinked1otheuser'sidentityviathesemeans, unle .. speci!icp,ivacyprotectionoa,eputinpl&amp;eebefo,ecollectiontode-identifyor aoonym'ze't,suchas • Strippingdataofanydirectidenti!iers,suchase-mailaddresso,name,before • ~anipulating dalato break the linkage and prevent re-linka~etoreal-world • Additionally,inorderlordatanottobelO'lkedtoaparticularuser'siden1ity,youmust , Youmcstnotattempttolinkthedatabackto1heuser'sidentrty user'siden1,1y. Note:"Personallnfo,mat:on•and"Per,;onalDa!a",asdefinedunder,elevantprivacy laws,a,econskleredllnkedto1t&gt;euser. Arethenamescollectedlromthlsappllnkedtotheuser'sldentlty? O Yes,namescolHlc!edfromthisapparelinkedtotheuser'sidemity No,</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_2"><head>Figure 2 :</head><label>2</label><figDesc>Figure 2: A demonstration of Apple's web-based developer tool for submitting privacy details to create a privacy label (which we replicated for our study). In Step 1 the developer selects whether their app or third-party partner collects data. If the app collects data, the developer indicates what data types are collected in Step 2.In Step 3 the selected data types are displayed in one page with a link next to each data type to a three-part form for providing details about the purposes for which that data type is collected and whether or not it is linked to users and/or used for tracking (Steps 3a-3c, using the data type Name as an example).</figDesc><graphic url="image-5.png" coords="3,59.93,338.81,141.25,167.43" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_3"><head>CHI ' 22 ,</head><label>22</label><figDesc>April 29-May 5, 2022, New Orleans, LA, USA</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_4"><head>•</head><label></label><figDesc>User ID • Phone Number • Date of last login C.2.5 Tracking. Please read Apple's defnition below: Data used to track users: Tracking</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_5"><head>D.0. 3</head><label>3</label><figDesc>Libraries. What libraries are used in this app? Here is a list of common types of third-party libraries and representative examples to help refresh your memory. **Direct participants to the Qualtrics survey** How did you fgure out the data practices of the libraries you use? D.0.4 Explanation of Answers. For each block, will you help us understand how you flled it out based on the following questions?</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_6"><head>Tianshi Li ,</head><label>Li</label><figDesc>Kayla Reiman, Yuvraj Agarwal, Lorrie Faith Cranor, and Jason I. Hong Note: This part will be facilitated by the Qualtrics survey with a verbal component (full version in Appendix C). The structure is below. Process for Discussing Defnitions • Show Apple Defnition • For each defnition, ask whether they fnd it surprising, and/or unreasonable • Ask follow-up questions about whatever they fag • If they express a change in understanding, ask if it would change how they fll out the label Defnitions in the Survey • Data Collection (1 defnition) • Data Categories/Types (14 categories such as "Contact info" and 32 types such as "Name" or Address") • Data use (6 defnitions) • Linking (1 defnition w/ 1 follow-up question) • Tracking (1 defnition)</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_0"><head>Table 1 :</head><label>1</label><figDesc>Design Recommendations Based on Research on Privacy Nutrition Labels From the User's Perspective.</figDesc><table /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_2"><head></head><label></label><figDesc>With the help of the interviewer, he corrected several errors in the privacy label due to misunderstanding of some key concepts in Apple's defnitions. Later in the interview, he expressed his frustration as follows: "I'm not like a big company or whatever, so it's a little hard to go through all this information. And as you can see, I didn't get everything totally accurate."</figDesc><table><row><cell>4.3 Filling out Privacy Labels Was Perceived</cell></row><row><cell>Easy for Apps not Collecting Much Data</cell></row><row><cell>(P1, P4, P11, P12)</cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_3"><head></head><label></label><figDesc>Tianshi Li, Kayla Reiman, Yuvraj Agarwal, Lorrie Faith Cranor, and Jason I. Hong I think the positive thing is, it forces the developer to think about all the data that they're capturing. Every time you're adding a new column, every time adding a new table, it's important to think of the information that's being collected, you know, and usually, we think about it in performance terms. but we never think about in the privacy context."</figDesc><table /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_4"><head>Table 3 :</head><label>3</label><figDesc>An overview of recurring errors and misunderstandings in privacy label identifed during our study (RQ2). Apple's defnition only considers data linked with third-party data for advertising measurement purposes or shared with data brokers as data used to track users) Reporting data not stored on the back-end as collected Reporting data collected by Apple SDK (Per Apple's guideline, developers are not responsible for disclosing Apple's data collection) 5.2.3 Reporting Apple Data Use (P1, P6, P8). The documentation for developers mentions that developers are not responsible for disclosing data collected by Apple services, such as using MapKit, CloudKit, or App Analytics (which is automatically available for all iOS apps on the Apple app store). However, some developers still reported data practices that were only due to these Apple frameworks in their privacy label. We note that these data practices may be relevant to users, and this exception case for data collection by Apple may result in inconsistencies between what apps report and what users understand about an app's data practices.</figDesc><table><row><cell>Error Type</cell><cell>Error Name</cell><cell>Explanation</cell></row><row><cell>Underreporting</cell><cell>Missing Linked Data</cell><cell>Not reporting data stored with identifable data as linked because the</cell></row><row><cell></cell><cell></cell><cell>data itself is not identifable.</cell></row><row><cell></cell><cell>Missing Third-party Data Use</cell><cell>Not reporting all third-party data use.</cell></row><row><cell></cell><cell>Missing Data Types</cell><cell>Not reporting all collected data types based on Apple's defnition.</cell></row><row><cell></cell><cell>Missing Interaction Outside the App</cell><cell>Not reporting data collection happening outside the app.</cell></row><row><cell></cell><cell>Missing Optional Data Practices</cell><cell>Not reporting certain data practices because they were optional.</cell></row><row><cell>Overreporting</cell><cell>Overreporting Tracking</cell><cell>Over-generalizing tracking scenarios (</cell></row><row><cell></cell><cell>Reporting Unstored Data</cell><cell></cell></row><row><cell></cell><cell>Reporting Apple SDK Data Use</cell><cell></cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_5"><head>Table 4 :</head><label>4</label><figDesc>An overview of developer's challenges for flling out privacy labels accurately and efciently (RQ3). Understanding Challenges for Developers to Create Accurate Privacy Nutrition Labels CHI '22, April 29-May 5, 2022, New Orleans, LA, USA</figDesc><table><row><cell>Challenge Level</cell><cell>Challenge Type</cell><cell>Summary of Challenges</cell></row><row><cell>Unknown unknowns</cell><cell>Blinded by Preconceptions</cell><cell>Developers were overconfdent in their preconceptions of cer-</cell></row><row><cell></cell><cell></cell><cell>tain concepts (e.g., data collection, linking, tracking) while their</cell></row><row><cell></cell><cell></cell><cell>understanding difered from Apple's defnitions.</cell></row><row><cell></cell><cell>Knowledge Blindspots</cell><cell>Developers were not familiar with Apple privacy labels and did</cell></row><row><cell></cell><cell></cell><cell>not know resources that could help them with the task.</cell></row><row><cell></cell><cell>Misinterpreting Defnitions</cell><cell>Developers misinterpreted Apple's defnitions and did not real-</cell></row><row><cell></cell><cell></cell><cell>ize the issue without external prompts.</cell></row><row><cell>Known unknowns</cell><cell>Limitations of the Apple's Documentation</cell><cell>Developers found part of the developer tool and the ofcial</cell></row><row><cell></cell><cell></cell><cell>documentation hard to understand, confusing, or ambiguous.</cell></row><row><cell></cell><cell>Lacking Team and Org Support</cell><cell>Developers were only responsible for part of the project and</cell></row><row><cell></cell><cell></cell><cell>did not know all data practices.</cell></row><row><cell>Complexities</cell><cell>Overwhelmed due to Info Load</cell><cell>Developers needed to spend a lot of time and efort to read</cell></row><row><cell></cell><cell></cell><cell>and understand the large amount of information in the ofcial</cell></row><row><cell></cell><cell></cell><cell>content.</cell></row><row><cell></cell><cell>Memory Challenge</cell><cell>Developers struggled with multiple types of memory challenges,</cell></row><row><cell></cell><cell></cell><cell>such as recalling the exact defnitions of certain concepts and</cell></row><row><cell></cell><cell></cell><cell>their apps' data practices.</cell></row><row><cell></cell><cell>Challenges of Cross-platform Apps</cell><cell>Developers who developed cross-platform apps needed to deal</cell></row><row><cell></cell><cell></cell><cell>with duplicate requirements from diferent platforms.</cell></row><row><cell></cell><cell>Communication Cost</cell><cell>Developers had trouble communicating and collaborating with</cell></row><row><cell></cell><cell></cell><cell>their teammates, employers, and clients to create and update</cell></row><row><cell></cell><cell></cell><cell>privacy labels.</cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_7"><head></head><label></label><figDesc>Fitness and exercise data, including but not limited to the Motion and Fitness API (3) For Financial Info, Apple presents the following defnitions. Do you fnd any of them confusing, surprising, and/or unreasonable? (Select 'yes' or 'no' for each item) • Payment Info: Such as form of payment, payment card number, or bank account number. If your app uses a payment service, the payment information is entered outside your app, and you as the developer never have access to the payment information, it is not collected and does not need to be disclosed. Apple presents the following defnitions. Do you fnd any of them confusing, surprising, and/or unreasonable? (Select 'yes' or 'no' for each item) • Email or Text Messages: Including subject line, sender, recipients, and contents of the email or message • Photos or Videos: The user's photos or videos • Audio Data: The user's voice or sound recordingsFigure 3: Example data used to ask respondents whether they thought each feld would be linked to users. Such as displaying third-party ads in your app, or sharing data with entities who display third-party ads • Developer's Advertising or Marketing: Such as displaying frst-party ads in your app, sending marketing communications directly to your users, or sharing data with entities who will display your ads • Analytics: Using data to evaluate user behavior, including to understand the efectiveness of existing product features, Any other purposes not listed C.2.4 Linking. Please read Apple's defnition below: Data Linked to Users Next, indicate if the data collected from this app is linked to the user's identity (via their account, device, or details).</figDesc><table><row><cell></cell><cell>CHI '22, April 29-May 5, 2022, New Orleans, LA, USA</cell></row><row><cell>(1) For Contact Info, Apple presents the following defnitions. Do you fnd any of them confusing, surprising, and/or un-reasonable? (Select 'yes' or 'no' for each item) • Name: Such as frst or last name • Email Address: Including but not limited to a hashed email address • Phone Number: Including but not limited to a hashed phone number • Physical address: Such as home address, physical ad-dress, or mailing address</cell><cell>A 2 alasdfasdfaser2124Sdf3 User ID (7) For User Content, • Gameplay Content: Such as saved games, multiplayer 8 C Phone number Date of last loein 111-111-1111 7/27/21 3 as34sdim39bnas84mgi 222-222-2222 7/27/21 matching or gameplay logic, or user-generated content 4 s28end83nbm38505nl 333-333-3333 7/7/21 in-game 5 a3mbit6hmasdg93hm 444-444-4444 7/8/21</cell></row><row><cell>• Other User Contact Info: any other information that</cell><cell>• Customer Support: Data generated by the user during a</cell></row><row><cell>can be used to contact the user outside the app</cell><cell>customer support request</cell></row><row><cell>(2) For Health &amp; Fitness, Apple presents the following def-</cell><cell>• Other User Content: Any other user-generated content</cell></row><row><cell>nitions. Do you fnd either of them confusing, surprising,</cell><cell>(8) For Browsing History, Apple presents the following def-</cell></row><row><cell>and/or unreasonable? (Select 'yes' or 'no' for each item)</cell><cell>nition. Do you fnd it confusing, surprising, and/or unrea-</cell></row><row><cell>• Health: Health and medical data, including but not limited</cell><cell>sonable? (Select 'yes' or 'no')</cell></row><row><cell>to data from the Clinical Health Records API, HealthKit</cell><cell>• Browsing History: Information about content the user</cell></row><row><cell>API, MovementDisorderAPIs, or health-related human</cell><cell>has viewed that is not part of the app, such as websites</cell></row><row><cell>subject research or any other user provided health or med-</cell><cell>(9) For Search History, Apple presents the following defnition.</cell></row><row><cell>ical data</cell><cell>Do you fnd it confusing, surprising, and/or unreasonable?</cell></row><row><cell>• Fitness: • Credit Info: Such as credit score</cell><cell>• Over 500 million (4) Which option best describes this iOS app? • Research project • Course project Hobby Project Other (5) If this iOS app is part of a commercial project, how many employees work in the company that developed this app? • 1-4 • 5-9 • 10-19 • 20-49 (Select 'yes' or 'no') • Search History: Information about searches performed in the app (10) For Identifers, Apple presents the following defnitions. Do you fnd either of them confusing, surprising, and/or unreasonable? (Select 'yes' or 'no' for each item) • User ID: Such as screen name, handle, account ID, as-signed user ID, customer number, or other user-or account-level ID that can be used to identify a particu-lar user or account • Device ID: Such as the device's advertising identifer, or other device-level ID</cell></row><row><cell>• Other Financial Info: Such as salary, income, assets,</cell><cell>• 50-99 (11) For Purchases, Apple presents the following defnition. Do</cell></row><row><cell>debts, or any other fnancial information</cell><cell>• 100-249 you fnd it confusing, surprising, and/or unreasonable? (Se-</cell></row><row><cell>(4) For Location, Apple presents the following defnitions. Do</cell><cell>• 250-499 lect 'yes' or 'no')</cell></row><row><cell>you fnd either of them confusing, surprising, and/or unrea-</cell><cell>• 500-999 • Purchase History: An account's or individual's pur-</cell></row><row><cell>sonable? (Select 'yes' or 'no' for each item)</cell><cell>• 1,000 or more chases or purchase tendencies</cell></row><row><cell>• Precise Location: Information that describes the location</cell><cell>(6) Is this an individual-developed app or group-developed app? (12) For Usage Data, Apple presents the following defnitions.</cell></row><row><cell>of a user or device with the same or greater resolution as a</cell><cell>• individual Do you fnd any of them confusing, surprising, and/or un-</cell></row><row><cell>latitude and longitude with three or more decimal places</cell><cell>• group reasonable? (Select 'yes' or 'no' for each item)</cell></row><row><cell>• Coarse Location: Information that describes the location</cell><cell>(7) Which of these roles describe your job for developing this • Product Interaction: Such as app launches, taps, clicks,</cell></row><row><cell>of a user or device with lower resolution than a latitude</cell><cell>app? (Please select all that apply) scrolling information, music listening data, video views,</cell></row><row><cell>and longitude with three or more decimal places, such as</cell><cell>• Backend developer saved place in a game, video, or song, or other information</cell></row><row><cell>Approximate Location Services</cell><cell>• Data Scientist and Analyst about how the user interacts with the app</cell></row><row><cell>(5) For Sensitive Info, Apple presents the following defnition.</cell><cell>• Designer • Advertising Data: Such as information about the adver-</cell></row><row><cell>Do you fnd it confusing, surprising, and/or unreasonable?</cell><cell>• Project Manager tisements the user has seen</cell></row><row><cell>(Select 'yes' or 'no')</cell><cell>• Security Engineer • Other Usage Data: Any other data about user activity in</cell></row><row><cell>• Sensitive Info: Such as racial or ethnic data, sexual ori-</cell><cell>• Privacy Engineer the app</cell></row><row><cell>entation, pregnancy or childbirth information, disability,</cell><cell>• Quality Assurance Analyst (13) For Diagnostics, Apple presents the following defnitions.</cell></row><row><cell>religious or philosophical beliefs, trade union membership,</cell><cell>• Other Roles (please specify) Do you fnd any of them confusing, surprising, and/or un-</cell></row><row><cell>political opinion, genetic information, or biometric data</cell><cell>(8) Are you a professional Software Developer, i.e. software reasonable? (Select 'yes' or 'no' for each item)</cell></row><row><cell>(6) For Contacts, Apple presents the following defnition. Do</cell><cell>development is the major component of job? • Crash Data: Such as crash logs</cell></row><row><cell>you fnd it confusing, surprising, and/or unreasonable? (Se-</cell><cell>Yes • Performance Data: Such as launch time, hang rate, or</cell></row><row><cell>lect 'yes' or 'no')</cell><cell>• No energy use</cell></row><row><cell>• Contacts: Such as a list of contacts in the user's phone,</cell><cell>(9) Did you major in computer science or related felds in school? • Other Diagnostic Data: Any other data collected for the</cell></row><row><cell>address book, or social graph</cell><cell>• Yes purposes of measuring technical diagnostics related to the</cell></row><row><cell></cell><cell>• No app</cell></row></table><note><ref type="bibr" target="#b13">(14)</ref> For Other Data, Apple presents the following defnition.Do you fnd it confusing, surprising, and/or unreasonable? (Select 'yes' or 'no')• Other Data Types: Any other data types not mentioned Note: This was the only non-randomized data category was and always presented last C.2.3 Data Use (purposes). Apple presents the following defnitions for data uses (i.e. purposes). Do you fnd any of them confusing, surprising, and/or unreasonable? (Select 'yes' or 'no' for each item) • Third-Party Advertising: plan new features, or measure audience size or characteristics • Product Personalization: Customizing what the user sees, such as a list of recommended products, posts, or suggestions • App Functionality: Such as to authenticate the user, enable features, prevent fraud, implement security measures, ensure server up-time, minimize app crashes, improve scalability and performance, or perform customer support • Other Purposes:</note></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_8"><head></head><label></label><figDesc>If you plan to request access to the advertising identifer (IDFA), you must indicate on your App Store privacy label that you collect Device IDs and use them for tracking purposes.</figDesc><table><row><cell>Question Do you fnd this defnition unclear, surprising, or</cell></row><row><cell>unreasonable?</cell></row><row><cell>• Yes</cell></row><row><cell>• No</cell></row><row><cell>• Displaying targeted advertisements in your app based on</cell></row><row><cell>user data collected from apps and websites owned by other</cell></row><row><cell>companies</cell></row><row><cell>• Sharing device location data or email lists with a data broker</cell></row><row><cell>• Sharing a list of emails, advertising IDs, or other IDs with a</cell></row><row><cell>third-party advertising network that uses that information</cell></row><row><cell>to retarget those users in other developers' apps or to fnd</cell></row><row><cell>similar users</cell></row><row><cell>• Placing a third-party SDK in your app that combines user</cell></row><row><cell>data from your app with user data from other developers'</cell></row><row><cell>apps to target advertising or measure advertising efciency,</cell></row></table><note>even if you don't use the SDK for these purposes. For example, using a login SDK that repurposes the data it collects from your app to enable targeted advertising in other developers' apps.</note></figure>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="2">The frst 30 people were ofered $0.35 for an advertised two-minute survey, but after seeing the initial timing data, this was subsequently adjusted to $0.50 for a three-minute survey</note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="3">Our source code of the website is available at: https://github.com/i7mist/privacylabel-questions</note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="4">The concepts we examined included data collection, data linked to users, data used to track users, and Apple's pre-defned taxonomies of data uses (such as Third-Party Advertising) and data types (such as Contact Info). Source: https://developer.apple.com/appstore/app-privacy-details/</note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="5">We changed our study protocol slightly after the frst two participants. For these two participants, we only told them they were encouraged to correct their errors but did not prompt them about particular errors. Since we found that developers did not seem to have enough incentives to actively make corrections, we changed the protocol and actively confrmed the potential errors that we identifed during the interview with the other ten participants.</note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="6">Apple lists four criteria that must all be satisfed in order for disclosure to be considered optional, with optional data collection satisfying only one of these criteria. Source: https://developer.apple.com/app-store/app-privacy-details/</note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="8">Apple App Privacy Report: https://developer.apple.com/news/?id=n5jlz7ox</note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot">CHI '22, April 29-May 5, 2022, New Orleans, LA, USA Tianshi Li, Kayla Reiman, Yuvraj Agarwal, Lorrie Faith Cranor, and Jason I. Hong</note>
+		</body>
+		<back>
+
+			<div type="acknowledgement">
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>ACKNOWLEDGMENTS</head><p>This research was supported in part by the National Science Foundation under Grant No. CNS-1801472, Air Force Research Laboratory under agreement number FA8750-15-2-0281, and Innovators Network Foundation. Tianshi Li was supported in part by the CMU CyLab Presidential Fellowship. The U.S. Government is authorized to reproduce and distribute reprints for Governmental purposes notwithstanding any copyright notation thereon. The views and conclusions contained herein are those of the authors and should not be interpreted as necessarily representing the ofcial policies or endorsements, either expressed or implied, of Air Force Research Laboratory or the U.S. Government. We thank the anonymous reviewers for their constructive feedback.</p></div>
+			</div>
+
+			<div type="annex">
+<div xmlns="http://www.tei-c.org/ns/1.0"> <ref type="bibr" target="#b9">(10)</ref> <p>• Prefer not to answer <ref type="bibr" target="#b12">(13)</ref> In which country do you currently reside? (drop-down menu of countries from Qualtrics)</p><p>Thanks for completing the pre-study survey! Before submitting your response, please open this link in a new tab to schedule the interview: https://iosdeveloperstudy.youcanbook.me/ We would appreciate it if you could schedule earlier time slots (e.g., time slots in the frst week). If none of the time slots works for you, please message us on Prolifc and we will send you more options.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>C MAIN SURVEY (USED DURING THE INTERVIEW) C.1 Libraries</head></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Please enter your participant ID</head><p>What libraries are used in this app? Here is a list of common types of third-party libraries and representative examples to help refresh your memory.</p><p>(1) Tools from Apple D.0.7 Compare with the privacy label on the App Store. Now we would like to compare the privacy label you just provided with the privacy label of your app on the App Store. We're anticipating there may be some discrepancies. The goal of this study is not to measure your ability, and discussing these discrepancies will help us identify challenges developers may encounter when handling this task so please don't be shy in noting any inaccuracies in either label. Your perspective is really helpful, and no identifying information will be shared about you, your app, or your company, in our report.</p><p>(If there are any discrepancies between the two privacy labels) What do you think could possibly cause the diference between the two privacy labels? D.0.8 How developers think about privacy labels and Apple's tool for filling out the privacy label. As a concluding task, we'd like to ask some big-picture questions about privacy label interface.</p><p>• What do you think are positive and negative aspects of having a privacy label from a developer's perspective? with they had never thought privacy deeply about privacy in practice or considered privacy not their responsibilities Chance to refect The developer appreciated on data practices the fact that flling out privacy labels gave them an opportunity to refect on how the collected and used data and get a better understanding of their data practices.</p></div>			</div>
+			<div type="references">
+
+				<listBibl>
+
+<biblStruct xml:id="b0">
+	<analytic>
+		<title level="a" type="main">You Get Where You&apos;re Looking for: The Impact of Information Sources on Code Security</title>
+		<author>
+			<persName><forename type="first">Yasemin</forename><surname>Acar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Michael</forename><surname>Backes</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sascha</forename><surname>Fahl</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Doowon</forename><surname>Kim</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Michelle</forename><forename type="middle">L</forename><surname>Mazurek</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Christian</forename><surname>Stransky</surname></persName>
+		</author>
+		<idno type="DOI">10.1109/sp.2016.25</idno>
+		<ptr target="https://doi.org/10.1109/sp.2016.25" />
+	</analytic>
+	<monogr>
+		<title level="m">2016 IEEE Symposium on Security and Privacy (SP). IEEE</title>
+				<imprint>
+			<date type="published" when="2016">2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b1">
+	<analytic>
+		<title level="a" type="main">ProtectMyPrivacy: detecting and mitigating privacy leaks on iOS devices using crowdsourcing</title>
+		<author>
+			<persName><forename type="first">Yuvraj</forename><surname>Agarwal</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Malcolm</forename><surname>Hall</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2462456.2464460</idno>
+		<ptr target="https://doi.org/10.1145/2462456.2464460" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceeding of the 11th annual international conference on Mobile systems, applications, and services -MobiSys &apos;13</title>
+				<meeting>eeding of the 11th annual international conference on Mobile systems, applications, and services -MobiSys &apos;13</meeting>
+		<imprint>
+			<publisher>ACM Press</publisher>
+			<date type="published" when="2013">2013</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b2">
+	<analytic>
+		<title level="a" type="main">Exploring Design and Governance Challenges in the Development of Privacy-Preserving Computation</title>
+		<author>
+			<persName><forename type="first">Nitin</forename><surname>Agrawal</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Reuben</forename><surname>Binns</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Max</forename><surname>Van Kleek</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kim</forename><surname>Laine</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Nigel</forename><surname>Shadbolt</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3411764.3445677</idno>
+		<ptr target="https://doi.org/10.1145/3411764.3445677" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2021 CHI Conference on Human Factors in Computing Systems</title>
+				<meeting>the 2021 CHI Conference on Human Factors in Computing Systems</meeting>
+		<imprint>
+			<publisher>ACM</publisher>
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b3">
+	<analytic>
+		<title level="a" type="main">Improving App Privacy: Nudging App Developers to Protect User Privacy</title>
+		<author>
+			<persName><forename type="first">Rebecca</forename><surname>Balebako</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Lorrie</forename><surname>Cranor</surname></persName>
+		</author>
+		<idno type="DOI">10.1109/msp.2014.70</idno>
+		<ptr target="https://doi.org/10.1109/msp.2014.70" />
+	</analytic>
+	<monogr>
+		<title level="j">IEEE Security &amp; Privacy</title>
+		<imprint>
+			<biblScope unit="volume">12</biblScope>
+			<biblScope unit="issue">4</biblScope>
+			<biblScope unit="page" from="55" to="58" />
+			<date type="published" when="2014-07">2014. jul 2014</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b4">
+	<analytic>
+		<title level="a" type="main">The Privacy and Security Behaviors of Smartphone App Developers</title>
+		<author>
+			<persName><forename type="first">Rebecca</forename><surname>Balebako</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Abigail</forename><surname>Marsh</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jialiu</forename><surname>Lin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jason</forename><surname>Hong</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Lorrie</forename><forename type="middle">Faith</forename><surname>Cranor</surname></persName>
+		</author>
+		<idno type="DOI">10.14722/usec.2014.23006</idno>
+		<ptr target="https://doi.org/10.14722/usec.2014.23006" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings 2014 Workshop on Usable Security. Internet Society</title>
+				<meeting>2014 Workshop on Usable Security. Internet Society</meeting>
+		<imprint>
+			<date type="published" when="2014">2014</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b5">
+	<analytic>
+		<title level="a" type="main">The Impact of Timing on the Salience of Smartphone App Privacy Notices</title>
+		<author>
+			<persName><forename type="first">Rebecca</forename><surname>Balebako</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Florian</forename><surname>Schaub</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Idris</forename><surname>Adjerid</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Alessandro</forename><surname>Acquisti</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Lorrie</forename><surname>Cranor</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2808117.2808119</idno>
+		<ptr target="https://doi.org/10.1145/2808117.2808119" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 5th Annual ACM CCS Workshop on Security and Privacy in Smartphones and Mobile Devices</title>
+				<meeting>the 5th Annual ACM CCS Workshop on Security and Privacy in Smartphones and Mobile Devices</meeting>
+		<imprint>
+			<publisher>ACM</publisher>
+			<date type="published" when="2015">2015</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b6">
+	<analytic>
+		<title level="a" type="main">Is Your Inseam a Biometric? A Case Study on the Role of Usability Studies in Developing Public Policy</title>
+		<author>
+			<persName><forename type="first">Rebecca</forename><surname>Balebako</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Richard</forename><surname>Shay</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Lorrie</forename><forename type="middle">Faith</forename><surname>Cranor</surname></persName>
+		</author>
+		<idno type="DOI">10.14722/usec.2014.23039</idno>
+		<ptr target="https://doi.org/10.14722/usec.2014.23039" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings 2014 Workshop on Usable Security. Internet Society</title>
+				<meeting>2014 Workshop on Usable Security. Internet Society</meeting>
+		<imprint>
+			<date type="published" when="2014">2014</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b7">
+	<analytic>
+		<title level="a" type="main">Following Devil&apos;s Footprints: Cross-Platform Analysis of Potentially Harmful Libraries on Android and iOS</title>
+		<author>
+			<persName><forename type="first">Kai</forename><surname>Chen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Xueqiang</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yi</forename><surname>Chen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Peng</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yeonjoon</forename><surname>Lee</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Xiaofeng</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Bin</forename><surname>Ma</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Aohui</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yingjun</forename><surname>Zhang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Wei</forename><surname>Zou</surname></persName>
+		</author>
+		<idno type="DOI">10.1109/sp.2016.29</idno>
+		<ptr target="https://doi.org/10.1109/sp.2016.29" />
+	</analytic>
+	<monogr>
+		<title level="m">2016 IEEE Symposium on Security and Privacy (SP). IEEE</title>
+				<imprint>
+			<date type="published" when="2016">2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b8">
+	<analytic>
+		<title level="a" type="main">Does this App Really Need My Location?: Context-Aware Privacy Management for Smartphones</title>
+		<author>
+			<persName><forename type="first">Nishad</forename><surname>Chitkara</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Suhas</forename><surname>Gothoskar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jason</forename><forename type="middle">I</forename><surname>Harish</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yuvraj</forename><surname>Hong</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Agarwal</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3132029</idno>
+		<ptr target="https://doi.org/10.1145/3132029" />
+	</analytic>
+	<monogr>
+		<title level="j">Proceedings of the ACM on Interactive, Mobile, Wearable and Ubiquitous Technologies</title>
+		<imprint>
+			<biblScope unit="volume">1</biblScope>
+			<biblScope unit="issue">3</biblScope>
+			<biblScope unit="page" from="1" to="22" />
+			<date type="published" when="2017-09">2017. sep 2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b9">
+	<analytic>
+		<title level="a" type="main">Necessary but not sufcient: Standardized mechanisms for privacy notice and choice</title>
+		<author>
+			<persName><forename type="first">Lorrie</forename><forename type="middle">Faith</forename><surname>Cranor</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">J. on Telecomm. &amp; High Tech. L</title>
+		<imprint>
+			<biblScope unit="volume">10</biblScope>
+			<biblScope unit="page">273</biblScope>
+			<date type="published" when="2012">2012. 2012</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b10">
+	<analytic>
+		<title level="a" type="main">PiOS: Detecting Privacy Leaks in iOS Applications</title>
+		<author>
+			<persName><forename type="first">Manuel</forename><surname>Egele</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Christopher</forename><surname>Kruegel</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Engin</forename><surname>Kirda</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Giovanni</forename><surname>Vigna</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">NDSS</title>
+				<imprint>
+			<date type="published" when="2011">2011</date>
+			<biblScope unit="page" from="177" to="183" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b11">
+	<analytic>
+		<title level="a" type="main">Timing is everything? The efects of timing and placement of online privacy indicators</title>
+		<author>
+			<persName><forename type="first">Serge</forename><surname>Egelman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Janice</forename><surname>Tsai</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Lorrie</forename><forename type="middle">Faith</forename><surname>Cranor</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Alessandro</forename><surname>Acquisti</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/1518701.1518752</idno>
+		<ptr target="https://doi.org/10.1145/1518701.1518752" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the SIGCHI Conference on Human Factors in Computing Systems</title>
+				<meeting>the SIGCHI Conference on Human Factors in Computing Systems</meeting>
+		<imprint>
+			<date type="published" when="2009">2009</date>
+			<biblScope unit="page" from="319" to="328" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b12">
+	<analytic>
+		<title level="a" type="main">Ask the Experts: What Should Be on an IoT Privacy and Security Label</title>
+		<author>
+			<persName><forename type="first">Pardis</forename><surname>Emami-Naeini</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yuvraj</forename><surname>Agarwal</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Lorrie</forename><forename type="middle">Faith</forename><surname>Cranor</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Hanan</forename><surname>Hibshi</surname></persName>
+		</author>
+		<idno type="DOI">10.1109/sp40000.2020.00043</idno>
+		<ptr target="https://doi.org/10.1109/sp40000.2020.00043" />
+	</analytic>
+	<monogr>
+		<title level="m">2020 IEEE Symposium on Security and Privacy (SP). IEEE</title>
+				<imprint>
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b13">
+	<analytic>
+		<title level="a" type="main">Platform privacies: Governance, collaboration, and the diferent meanings of &quot;privacy&quot; in iOS and Android development</title>
+		<author>
+			<persName><forename type="first">Daniel</forename><surname>Greene</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Katie</forename><surname>Shilton</surname></persName>
+		</author>
+		<idno type="DOI">10.1177/1461444817702397</idno>
+		<ptr target="https://doi.org/10.1177/1461444817702397" />
+	</analytic>
+	<monogr>
+		<title level="j">New Media &amp; Society</title>
+		<imprint>
+			<biblScope unit="volume">20</biblScope>
+			<biblScope unit="issue">4</biblScope>
+			<biblScope unit="page" from="1640" to="1657" />
+			<date type="published" when="2017-04">2017. apr 2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b14">
+	<analytic>
+		<title level="a" type="main">Privacy by designers: software developers&apos; privacy mindset</title>
+		<author>
+			<persName><forename type="first">Irit</forename><surname>Hadar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Tomer</forename><surname>Hasson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Oshrat</forename><surname>Ayalon</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Eran</forename><surname>Toch</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Michael</forename><surname>Birnhack</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sofa</forename><surname>Sherman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Arod</forename><surname>Balissa</surname></persName>
+		</author>
+		<idno type="DOI">10.1007/s10664-017-9517-1</idno>
+		<ptr target="https://doi.org/10.1007/s10664-017-9517-1" />
+	</analytic>
+	<monogr>
+		<title level="j">Empirical Software Engineering</title>
+		<imprint>
+			<biblScope unit="volume">23</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page" from="259" to="289" />
+			<date type="published" when="2017-04">2017. apr 2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b15">
+	<analytic>
+		<title level="a" type="main">Privacy policies as decision-making tools: evaluation of online privacy notices</title>
+		<author>
+			<persName><forename type="first">Carlos</forename><surname>Jensen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Colin</forename><surname>Potts</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/985692.985752</idno>
+		<ptr target="https://doi.org/10.1145/985692.985752" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2004 conference on Human factors in computing systems -CHI &apos;04</title>
+				<meeting>the 2004 conference on Human factors in computing systems -CHI &apos;04</meeting>
+		<imprint>
+			<publisher>ACM Press</publisher>
+			<date type="published" when="2004">2004</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b16">
+	<analytic>
+		<title level="a" type="main">A &quot;nutrition label&quot; for privacy</title>
+		<author>
+			<persName><forename type="first">Patrick Gage</forename><surname>Kelley</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Joanna</forename><surname>Bresee</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Lorrie</forename><forename type="middle">Faith</forename><surname>Cranor</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Robert</forename><forename type="middle">W</forename><surname>Reeder</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/1572532.1572538</idno>
+		<ptr target="https://doi.org/10.1145/1572532.1572538" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 5th Symposium on Usable Privacy and Security -SOUPS &apos;09</title>
+				<meeting>the 5th Symposium on Usable Privacy and Security -SOUPS &apos;09</meeting>
+		<imprint>
+			<publisher>ACM Press</publisher>
+			<date type="published" when="2009">2009</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b17">
+	<analytic>
+		<title level="a" type="main">Standardizing privacy notices: an online study of the nutrition label approach</title>
+		<author>
+			<persName><forename type="first">Patrick Gage</forename><surname>Kelley</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Lucian</forename><surname>Cesca</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Joanna</forename><surname>Bresee</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Lorrie</forename><forename type="middle">Faith</forename><surname>Cranor</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/1753326.1753561</idno>
+		<ptr target="https://doi.org/10.1145/1753326.1753561" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 28th international conference on Human factors in computing systems -CHI &apos;10</title>
+				<meeting>the 28th international conference on Human factors in computing systems -CHI &apos;10</meeting>
+		<imprint>
+			<publisher>ACM Press</publisher>
+			<date type="published" when="2010">2010</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b18">
+	<analytic>
+		<title level="a" type="main">Privacy as part of the app decision-making process</title>
+		<author>
+			<persName><forename type="first">Patrick Gage</forename><surname>Kelley</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Lorrie</forename><forename type="middle">Faith</forename><surname>Cranor</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Norman</forename><surname>Sadeh</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2470654.2466466</idno>
+		<ptr target="https://doi.org/10.1145/2470654.2466466" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the SIGCHI Conference on Human Factors in Computing Systems</title>
+				<meeting>the SIGCHI Conference on Human Factors in Computing Systems</meeting>
+		<imprint>
+			<publisher>ACM</publisher>
+			<date type="published" when="2013">2013</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b19">
+	<analytic>
+		<title level="a" type="main">Coconut: An IDE Plugin for Developing Privacy-Friendly Apps</title>
+		<author>
+			<persName><forename type="first">Tianshi</forename><surname>Li</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yuvraj</forename><surname>Agarwal</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jason</forename><forename type="middle">I</forename><surname>Hong</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3287056</idno>
+		<ptr target="https://doi.org/10.1145/3287056" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the ACM on Interactive, Mobile, Wearable and Ubiquitous Technologies</title>
+				<meeting>the ACM on Interactive, Mobile, Wearable and Ubiquitous Technologies</meeting>
+		<imprint>
+			<date type="published" when="2018-12">2018. dec 2018</date>
+			<biblScope unit="volume">2</biblScope>
+			<biblScope unit="page" from="1" to="35" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b20">
+	<analytic>
+		<title level="a" type="main">How Developers Talk About Personal Data and What It Means for User Privacy: A Case Study of a Developer Forum on Reddit</title>
+		<author>
+			<persName><forename type="first">Tianshi</forename><surname>Li</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Elizabeth</forename><surname>Louie</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Laura</forename><surname>Dabbish</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jason</forename><forename type="middle">I</forename><surname>Hong</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3432919</idno>
+		<ptr target="https://doi.org/10.1145/3432919" />
+	</analytic>
+	<monogr>
+		<title level="j">Proceedings of the ACM on Human-Computer Interaction</title>
+		<imprint>
+			<biblScope unit="volume">4</biblScope>
+			<biblScope unit="page" from="1" to="28" />
+			<date type="published" when="2021-01">2021. jan 2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b21">
+	<analytic>
+		<title level="a" type="main">Honeysuckle: Annotation-Guided Code Generation of In-App Privacy Notices</title>
+		<author>
+			<persName><forename type="first">Tianshi</forename><surname>Li</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Elijah</forename><forename type="middle">B</forename><surname>Neundorfer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yuvraj</forename><surname>Agarwal</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jason</forename><forename type="middle">I</forename><surname>Hong</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3478097</idno>
+		<ptr target="https://doi.org/10.1145/3478097" />
+	</analytic>
+	<monogr>
+		<title level="j">Proceedings of the ACM on Interactive</title>
+		<editor>Mobile, Wearable and Ubiquitous Technologies Tianshi Li, Kayla Reiman, Yuvraj Agarwal, Lorrie Faith Cranor, and Jason I. Hong</editor>
+		<imprint>
+			<biblScope unit="volume">5</biblScope>
+			<biblScope unit="page" from="1" to="27" />
+			<date type="published" when="2021-09">sep 2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b22">
+	<analytic>
+		<title level="a" type="main">Expectation and purpose: understanding users&apos; mental models of mobile app privacy through crowdsourcing</title>
+		<author>
+			<persName><forename type="first">Jialiu</forename><surname>Lin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Norman</forename><surname>Sadeh</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Janne</forename><surname>Amini</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jason</forename><forename type="middle">I</forename><surname>Lindqvist</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Joy</forename><surname>Hong</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Zhang</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2370216.2370290</idno>
+		<ptr target="https://doi.org/10.1145/2370216.2370290" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2012 ACM Conference on Ubiquitous Computing -UbiComp &apos;12</title>
+				<meeting>the 2012 ACM Conference on Ubiquitous Computing -UbiComp &apos;12</meeting>
+		<imprint>
+			<publisher>ACM Press</publisher>
+			<date type="published" when="2012">2012</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b23">
+	<analytic>
+		<title level="a" type="main">The cost of reading privacy policies. I/S: A</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Aleecia</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Lorrie</forename><forename type="middle">Faith</forename><surname>Mcdonald</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Cranor</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Journal of Law and Policy for the Information Society</title>
+		<imprint>
+			<biblScope unit="volume">4</biblScope>
+			<biblScope unit="page">543</biblScope>
+			<date type="published" when="2008">2008. 2008</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b24">
+	<analytic>
+		<title level="a" type="main">A comparative study of online privacy policies and formats</title>
+		<author>
+			<persName><forename type="first">Aleecia</forename><forename type="middle">M</forename><surname>Mcdonald</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Robert</forename><forename type="middle">W</forename><surname>Reeder</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Patrick</forename><forename type="middle">Gage</forename><surname>Kelley</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Lorrie</forename><forename type="middle">Faith</forename><surname>Cranor</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/1572532.1572586</idno>
+		<ptr target="https://doi.org/10.1145/1572532.1572586" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 5th Symposium on Usable Privacy and Security -SOUPS &apos;09</title>
+				<meeting>the 5th Symposium on Usable Privacy and Security -SOUPS &apos;09</meeting>
+		<imprint>
+			<publisher>ACM Press</publisher>
+			<date type="published" when="2009">2009</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b25">
+	<analytic>
+		<title level="a" type="main">Reliability and Inter-rater Reliability in Qualitative Research: Norms and Guidelines for CSCW and HCI Practice</title>
+		<author>
+			<persName><forename type="first">Nora</forename><surname>Mcdonald</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sarita</forename><surname>Schoenebeck</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Andrea</forename><surname>Forte</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3359174</idno>
+		<ptr target="https://doi.org/10.1145/3359174" />
+	</analytic>
+	<monogr>
+		<title level="j">Proceedings of the ACM on Human-Computer Interaction</title>
+		<imprint>
+			<biblScope unit="volume">3</biblScope>
+			<biblScope unit="page" from="1" to="23" />
+			<date type="published" when="2019-11">2019. nov 2019</date>
+			<publisher>CSCW</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b26">
+	<monogr>
+		<title level="m" type="main">We Can&apos;t Live without Them!&quot; App Developers&apos; Adoption of Ad Networks and Their Considerations of Consumer Risks (SOUPS&apos;19). USENIX Association, USA</title>
+		<author>
+			<persName><forename type="first">Abraham</forename><forename type="middle">H</forename><surname>Mhaidli</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yixin</forename><surname>Zou</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Florian</forename><surname>Schaub</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2019">2019</date>
+			<biblScope unit="page" from="225" to="244" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b27">
+	<analytic>
+		<title level="a" type="main">SoK: Three Facets of Privacy Policies</title>
+		<author>
+			<persName><forename type="first">Victor</forename><surname>Morel</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Raúl</forename><surname>Pardo</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 19th Workshop on Privacy in the Electronic Society</title>
+				<meeting>the 19th Workshop on Privacy in the Electronic Society</meeting>
+		<imprint>
+			<date type="published" when="2020">2020</date>
+			<biblScope unit="page" from="41" to="56" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b28">
+	<analytic>
+		<title level="a" type="main">A Stitch in Time: Supporting Android Developers in WritingSecure Code</title>
+		<author>
+			<persName><forename type="first">Dominik</forename><surname>Duc Cuong Nguyen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yasemin</forename><surname>Wermke</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Michael</forename><surname>Acar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Charles</forename><surname>Backes</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sascha</forename><surname>Weir</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Fahl</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3133956.3133977</idno>
+		<ptr target="https://doi.org/10.1145/3133956.3133977" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2017 ACM SIGSAC Conference on Computer and Communications Security</title>
+				<meeting>the 2017 ACM SIGSAC Conference on Computer and Communications Security</meeting>
+		<imprint>
+			<publisher>ACM</publisher>
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b29">
+	<analytic>
+		<title level="a" type="main">The coding manual for qualitative researchers</title>
+		<author>
+			<persName><forename type="first">Johnny</forename><surname>Saldaña</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Sage</title>
+		<imprint>
+			<date type="published" when="2015">2015</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b30">
+	<analytic>
+		<title level="a" type="main">A Design Space for Efective Privacy Notices</title>
+		<author>
+			<persName><forename type="first">Florian</forename><surname>Schaub</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Rebecca</forename><surname>Balebako</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Adam</forename><forename type="middle">L</forename><surname>Durity</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Faith</forename><surname>Cranor</surname></persName>
+		</author>
+		<ptr target="https://www.usenix.org/conference/soups2015/proceedings/presentation/schaub" />
+	</analytic>
+	<monogr>
+		<title level="m">Eleventh Symposium On Usable Privacy and Security (SOUPS 2015). USENIX Association</title>
+				<meeting><address><addrLine>Ottawa</addrLine></address></meeting>
+		<imprint>
+			<date type="published" when="2015">2015</date>
+			<biblScope unit="page" from="1" to="17" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b31">
+	<analytic>
+		<title level="a" type="main">Why developers cannot embed privacy into software systems?: An empirical investigation</title>
+		<author>
+			<persName><forename type="first">Awanthika</forename><surname>Senarath</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><forename type="middle">G</forename><surname>Nalin</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Arachchilage</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3210459.3210484</idno>
+		<ptr target="https://doi.org/10.1145/3210459.3210484" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 22nd International Conference on Evaluation and Assessment in Software Engineering</title>
+				<meeting>the 22nd International Conference on Evaluation and Assessment in Software Engineering</meeting>
+		<imprint>
+			<publisher>ACM</publisher>
+			<date type="published" when="2018">2018. 2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b32">
+	<analytic>
+		<title level="a" type="main">Us and them: a study of privacy requirements across north america, asia, and europe</title>
+		<author>
+			<persName><forename type="first">Swapneel</forename><surname>Sheth</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Gail</forename><surname>Kaiser</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Walid</forename><surname>Maalej</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2568225.2568244</idno>
+		<ptr target="https://doi.org/10.1145/2568225.2568244" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 36th International Conference on Software Engineering</title>
+				<meeting>the 36th International Conference on Software Engineering</meeting>
+		<imprint>
+			<publisher>ACM</publisher>
+			<date type="published" when="2014">2014</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b33">
+	<analytic>
+		<title level="a" type="main">Protecting Consumer Privacy in an Era of Rapid Change-A Proposed Framework for Businesses and Policymakers</title>
+		<author>
+			<persName><surname>Ftc Staf</surname></persName>
+		</author>
+		<idno type="DOI">10.29012/jpc.v3i1.596</idno>
+		<ptr target="https://doi.org/10.29012/jpc.v3i1.596" />
+	</analytic>
+	<monogr>
+		<title level="j">Journal of Privacy and Confdentiality</title>
+		<imprint>
+			<date type="published" when="2011-06">2011. jun 2011</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b34">
+	<analytic>
+		<title level="a" type="main">Understanding Privacy-Related Advice on Stack Overfow</title>
+		<author>
+			<persName><forename type="first">Mohammad</forename><surname>Tahaei</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Tianshi</forename><surname>Li</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kami</forename><surname>Vaniea</surname></persName>
+		</author>
+		<idno type="DOI">10.2478/popets-2022-0032</idno>
+		<ptr target="https://doi.org/10.2478/popets-2022-0032" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings on Privacy Enhancing Technologies. 1--18</title>
+				<meeting>on Privacy Enhancing Technologies. 1--18</meeting>
+		<imprint>
+			<date type="published" when="2022">2022</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b35">
+	<monogr>
+		<title level="m" type="main">Understanding Privacy-Related Questions on Stack Overfow. Association for Computing Machinery</title>
+		<author>
+			<persName><forename type="first">Mohammad</forename><surname>Tahaei</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kami</forename><surname>Vaniea</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Naomi</forename><surname>Saphra</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3313831.3376768</idno>
+		<ptr target="https://doi.org/10.1145/3313831.3376768" />
+		<imprint>
+			<date type="published" when="2020">2020</date>
+			<biblScope unit="page" from="1" to="14" />
+			<pubPlace>New York, NY, USA</pubPlace>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b36">
+	<analytic>
+		<title level="a" type="main">PrivacyFlash Pro: Automating Privacy Policy Generation for Mobile Apps</title>
+		<author>
+			<persName><forename type="first">Sebastian</forename><surname>Zimmeck</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Rafael</forename><surname>Goldstein</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">David</forename><surname>Baraka</surname></persName>
+		</author>
+		<idno type="DOI">10.14722/ndss.2021.24100</idno>
+		<ptr target="https://doi.org/10.14722/ndss.2021.24100" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings 2021 Network and Distributed System Security Symposium. Internet Society</title>
+				<meeting>2021 Network and Distributed System Security Symposium. Internet Society</meeting>
+		<imprint>
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+				</listBibl>
+			</div>
+		</back>
+	</text>
+</TEI>

@@ -1,0 +1,1442 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xml:space="preserve" xmlns="http://www.tei-c.org/ns/1.0" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.com/kermitt2/grobid/master/grobid-home/schemas/xsd/Grobid.xsd"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+	<teiHeader xml:lang="en">
+		<fileDesc>
+			<titleStmt>
+				<title level="a" type="main">Whose AI Dream? In search of the aspiration in data annotation</title>
+			</titleStmt>
+			<publicationStmt>
+				<publisher/>
+				<availability status="unknown"><licence/></availability>
+			</publicationStmt>
+			<sourceDesc>
+				<biblStruct>
+					<analytic>
+						<author>
+							<persName><forename type="first">Ding</forename><surname>Wang</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="institution">Google Research Bangalore</orgName>
+								<address>
+									<country key="IN">India</country>
+								</address>
+							</affiliation>
+						</author>
+						<author role="corresp">
+							<persName><forename type="first">Shantanu</forename><surname>Prabhat</surname></persName>
+							<email>shprabhat@google.com</email>
+							<affiliation key="aff1">
+								<orgName type="institution">Google Research Bangalore</orgName>
+								<address>
+									<country key="IN">India</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Nithya</forename><surname>Sambasivan</surname></persName>
+							<affiliation key="aff2">
+								<orgName type="institution">Google Research Bangalore</orgName>
+								<address>
+									<country key="IN">India</country>
+								</address>
+							</affiliation>
+						</author>
+						<title level="a" type="main">Whose AI Dream? In search of the aspiration in data annotation</title>
+					</analytic>
+					<monogr>
+						<imprint>
+							<date/>
+						</imprint>
+					</monogr>
+					<idno type="DOI">10.1145/3491102.3502121</idno>
+				</biblStruct>
+			</sourceDesc>
+		</fileDesc>
+		<encodingDesc>
+			<appInfo>
+				<application version="0.7.1" ident="GROBID" when="2022-07-22T04:58+0000">
+					<desc>GROBID - A machine learning software for extracting information from scholarly documents</desc>
+					<ref target="https://github.com/kermitt2/grobid"/>
+				</application>
+			</appInfo>
+		</encodingDesc>
+		<profileDesc>
+			<textClass>
+				<keywords>
+					<term>data annotation</term>
+					<term>AI labour</term>
+					<term>future of work</term>
+					<term>qualitative study</term>
+				</keywords>
+			</textClass>
+			<abstract>
+<div xmlns="http://www.tei-c.org/ns/1.0"><p>Data is fundamental to AI/ML models. This paper investigates the work practices concerning data annotation as performed in the industry, in India. Previous human-centred investigations have largely focused on annotators' subjectivity, bias and efficiency. We present a wider perspective of the data annotation: following a grounded approach, we conducted three sets of interviews with 25 annotators, 10 industry experts and 12 ML/AI practitioners. Our results show that the work of annotators is dictated by the interests, priorities and values of others above their station. More than technical, we contend that data annotation is a systematic exercise of power through organizational structure and practice. We propose a set of implications for how we can cultivate and encourage better practice to balance the tension between the need for high quality data at low cost and the annotators' aspiration for well-being, career perspective, and active participation in building the AI dream.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>CCS CONCEPTS</head><p>• Human-centered computing → Empirical studies in HCI; Field studies.</p></div>
+			</abstract>
+		</profileDesc>
+	</teiHeader>
+	<text xml:lang="en">
+		<body>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="1">INTRODUCTION</head><p>Artificial Intelligence (AI), Machine Learning (ML), and Internet of Things (IoT) have already been on a fast-growing trajectory, and the COVID-19 pandemic has further accelerated the pace of adoption of automation in healthcare, education, entertainment, and more <ref type="bibr" target="#b8">[9,</ref><ref type="bibr" target="#b15">16]</ref>. Machine Learning (ML), the most popular subset of AI techniques, depends on data to 'learn', that is, to uncover patterns, make classifications or predict future outcomes. Therefore, data, particularly the labeled and annotated datasets, are fundamental to the development and success of ML models.</p><p>Data annotation and labeling work, predominantly done manually, has historically been dependent on and carried out by independent workers on crowd-work platforms like Amazon Mechanical Turk, Appen, or Clickworker <ref type="bibr" target="#b27">[28,</ref><ref type="bibr" target="#b36">37]</ref>. However, there has been a rise in private annotation firms dedicated to providing data labelling and annotation services. These are third-party companies, who employ full-time staff for annotation work and take up contracts for annotation and labeling tasks in bulk. Annotation firms employ thousands of people as data annotators <ref type="bibr" target="#b32">[33,</ref><ref type="bibr" target="#b53">55]</ref>. Annotation firms scale to global customers, serving technology clients like Microsoft, TripAdvisor, and eBay. The third-party data labeling solutions market is projected to grow to 4.1 billion USD by 2024 <ref type="bibr" target="#b49">[51]</ref>. The rapid rise of the data annotation market is not embraced by the industry alone. Governments from the 'Global South' have taken notice of the demand and are investing in data annotation as the welfare and economic growth programs. For instance, China has established dozens of government-endorsed poverty alleviation programs partnering with Chinese tech companies (e.g., Alibaba and JD) to bring data labeling jobs to remote and rural parts <ref type="bibr" target="#b56">[58]</ref>. At the same time, India's national AI strategy report praises the importance of data labeling in generating employment <ref type="bibr" target="#b34">[35]</ref>. Data annotation is now a mainstream part of the AI/ML economy, owing in part to the rise of annotation firms.</p><p>The work of data annotation has considerably different characteristics at a firm compared to platform-based labeling work. First, annotation firms employ full-time workforces, in contrast to the freelancing model of platform-based work. Annotation firms have payrolls with fixed salaries, provide computerized equipment, and enjoy well-organized work structures and benefits. In contrast, platform-based workers have been reported to be under-paid and exploited in precarious work conditions with no employee benefits <ref type="bibr" target="#b21">[22,</ref><ref type="bibr" target="#b27">28]</ref>. Second, the initial capital required for a third-party annotation company is considerably smaller, thus more accessible for entrepreneurs to set up such start-ups. However, platform-based labeling requires heavy resources for setup and to mediate the match between clients with data needs and workers with the right skills. Finally, annotation companies provide ancillary services such as project management for the annotation tasks, dedicated client communication channels and touch-pints, quality control mechanisms, and privacy risk mitigation (such as NDAs), etc. 1 This balance between the quality and cost that the annotation companies promise attracts more data requesters to choose them over platforms. In contrast, platforms can only offer labeling or annotation services.</p><p>Compared to the well-celebrated market value of data annotation, the human labor required to sift through and sort data and ultimately train these systems remains under-recognized (beyond a few notable exceptions (e.g., <ref type="bibr" target="#b13">[14,</ref><ref type="bibr" target="#b27">28,</ref><ref type="bibr" target="#b30">31,</ref><ref type="bibr" target="#b45">46]</ref>). The annotation industry employs thousands of workers worldwide to read texts, view images and video, and label data to enable the models that AI systems rely upon. A straightforward example here is the work involved in labeling faces in photographs. Although many computer vision systems tout the incredible performance of algorithms that identify faces, attention is rarely given to work involved in labeling the data-despite its importance in training and refining the models. Complicating such labor processes are the norms imposed on labelers, in the form of labeling tasks and processes, which are often homogeneous and standardized across labelers, e.g., in the normalization of image classification. The enforcement of homogeneity of norms ignores frictions between multiple layers of meaning and, often, culturally-sensitive value systems <ref type="bibr" target="#b38">[39,</ref><ref type="bibr" target="#b48">50]</ref>. Prior HCI and CSCW scholarship has examined the experiences of platform-based workers <ref type="bibr" target="#b27">[28,</ref><ref type="bibr" target="#b30">31]</ref>. However, we know little about how annotation work structures, work practices, and personal experiences of data annotators employed as full-time office workers. How do the material, infrastructural, and organizational factors of data annotation firms affect the worker?</p><p>In this paper, we investigate the work practices concerning data annotation as performed in the industrial context of India. We report from in-depth, semi-structured interviews with three stakeholder groups of data annotation: twenty-five data annotators (in India), ten managers coordinating annotation requests (global, including India, Kenya, Nepal, Philippines, Nigeria, and the US), and twelve AI/ML engineers (in the US, Israel, and the UK) whose work relied on annotated data sets. 2 We examine the work practices and experiences starting from recruitment of the workers, to the orientation and on-job training, to their evaluation and career progression, juxtaposed with the operational insights and understanding of the industry landscape from the managers as well as the requesters' needs and priorities when procuring data work. Our research reveals that despite the transition from platform-facilitated, task-based piece work to full-time employment, the working conditions for individual annotators remained problematic. For instance, the pursuit of high quality in their work output translated into layers of scrutiny and created immense work pressure. Annotator jobs were still subjected to great precarity. There was little career progression for individual annotators to either continue in annotation or transition out to technical positions. The rapid pace of growth of the data annotation industry did not translate to benefit the individual annotators, as it did other stakeholders. For instance, the average tenure for an annotator contract was between 12-18 months, which offered little stability and opportunities for long-term career development. Annotators were often engineering graduates who imagined data annotation as a gateway to working on cutting-edge AI applications, such as self-driving cars. Annotators reported facing enormous work pressure to meet unrealistic deadlines, laid out by those above their station, to prioritize clients' interests and timelines. A common practice shared by annotation companies was the 'ever-increasing target rate': as soon as the annotators were able to complete the daily tasks, the target for completion they had to meet increased.</p><p>Despite the professionalization of data annotation jobs, the pathways for growth are broken, workers are still anxious about employment and performance. There are admittedly advantages such professionalization has over the platform. The worker benefit comes with formal employment (e.g., access to pension and insurance). Overall, the lack of professional growth, tightened control through organizational structure, and the unpaid and much-expected overwork paint a grim picture. We discuss implications for the organizations, operations, and data set tasks in working with annotators. We intend this paper to make the following contributions to HCI and CSCW:</p><p>• It provides a detailed empirical investigation that identifies characteristics of being an annotator, conducted with full-time employees, fixed workplaces, and well-organized working structures. Our work further motivates a critical mode of inquiry into the organization of work and labor in data production and how they spread or evolve into other forms across the gig economy. • An understanding that professionalizing data annotation jobs can positively or negatively impact various stakeholders such as individual annotators, data requesters, and annotation companies. • We propose high-level recommendations for engaging with organized data annotation, particularly its organization, operation, and relevance to the growing importance of ethical practices in data.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2">RELATED WORK 2.1 The Work of Data</head><p>The remarkable capacities of AI-infused and data-intensive systems are regularly lauded not only by the digerati but in the popular press. Far less recognized, beyond some notable exceptions (e.g. <ref type="bibr" target="#b13">[14,</ref><ref type="bibr" target="#b27">28,</ref><ref type="bibr" target="#b30">31,</ref><ref type="bibr" target="#b45">46]</ref>), is the human labor required to sift through and sort data and ultimately train these systems. Data work is underappreciated at a structural level in AI <ref type="bibr" target="#b47">[49]</ref>. Crowd-sourcing platforms worldwide employ thousands of workers to read texts, view images and video, and label data to produce the models that AI systems rely on. Without the work humans pour into making sense and labeling the data to train and refine it, even the most advanced systems could not make a prediction <ref type="bibr" target="#b39">[40,</ref><ref type="bibr" target="#b40">41,</ref><ref type="bibr" target="#b43">44]</ref>. Complicating such labors are the norms that are imposed on annotators. This enforcement in the homogeneity of norms used, for example, in the normalization of image classification mask frictions between multiple layers of meaning and, often, culturally sensitive value systems <ref type="bibr" target="#b19">[20,</ref><ref type="bibr" target="#b37">38,</ref><ref type="bibr" target="#b38">39,</ref><ref type="bibr" target="#b48">50]</ref>. To define such a 'norm' itself even with in an organization is no easy task. Muller et al. presented a detail account of the challenges faced and mitigation techniques adopted by the data science teams while defining ground-truth from an organizational perspective <ref type="bibr" target="#b40">[41]</ref>. That the process to reach the desirable ground-truth is far from straight-forward and it requires rounds of iteration , improvisation, and collaboration and coordination beyond the labeling team <ref type="bibr">[ibid]</ref>.</p><p>The invisible work and hidden labor in crowd-sourced microtasks have been well discussed in HCI/CSCW <ref type="bibr" target="#b27">[28,</ref><ref type="bibr" target="#b28">29,</ref><ref type="bibr" target="#b30">31,</ref><ref type="bibr" target="#b36">37]</ref>. Though the visibility of work is complex, as de Carvalho argued, it is the result of both the politics of the work and the content itself <ref type="bibr" target="#b16">[17]</ref>. As Suchman argues the underlying work practices often get obscured by the representation of work and the assumptions about how work tasks are performed by various actors other than the worker themselves <ref type="bibr" target="#b52">[54]</ref>. Similarly, Barley and Kunda suggest that how we talk about work "indexes our assumptions about how work is organized" <ref type="bibr" target="#b0">[1]</ref>. 'When work occurs in a technological platform that splits or masks workers' is one of the conditions Poster et al. argue that would make work invisible <ref type="bibr" target="#b12">[13]</ref>. They further argue that the lack of transparency is often accelerated by the platforms that 'hide the nature of the labor process itself, including the location of the work; the conditions under which it is done; and the ethnicity, race, and nationalities of the workers' <ref type="bibr">[ibid]</ref>. Our study continues this discussion on the visibility of work by adding an empirical corpus from the annotators whose work is also made hidden. This provides the indispensable context and sensibility to the context <ref type="bibr" target="#b4">[5,</ref><ref type="bibr" target="#b20">21]</ref> that in which more detailed design for annotation and annotators take place.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.2">Changing Trends</head><p>Past work in HCI/CSCW and beyond has drawn attention to precisely these hidden and often exploitative labors <ref type="bibr" target="#b1">[2,</ref><ref type="bibr" target="#b27">28,</ref><ref type="bibr" target="#b30">31,</ref><ref type="bibr" target="#b45">46]</ref>. Our work investigates a contemporary moment where the global gig economy relies on new organizational actors emerging in the Global South <ref type="bibr" target="#b41">[42]</ref>. Smaller platforms, such as iMerit in India 3 , CloudFactory in Nepal 4 , Samasource in Kenya 5 , are creating new models to compete with the likes of Amazon's Mechanical Turk. Based on a very different business model, these start-ups moved away from sourcing and providing microtasks for their labelers and towards an overtly ethical model that prioritizes worker training and developing local expertise.</p><p>Meanwhile, we have also been witnessing the change of traditional work landscape -a trend towards 'taskification' of work, that instead of full-time workers, companies prefer project-and task-oriented contractual hiring, and the availability of necessary digital infrastructure to match clients with freelancers online efficiently and at scale <ref type="bibr" target="#b16">[17,</ref><ref type="bibr" target="#b23">24,</ref><ref type="bibr" target="#b27">28]</ref>. When work is task-oriented, the individual's expertise is valued over past organizational and educational credentials <ref type="bibr" target="#b22">[23]</ref>. The emphasis on individual expertise is echoed in Blaising et al. 's work uncovering the strategies adopted by freelancers to manage long-term career trajectories <ref type="bibr" target="#b2">[3]</ref>.</p><p>As the historically task-based, crowd-sourced, platform-facilitated work becomes more organized and structured <ref type="bibr" target="#b41">[42,</ref><ref type="bibr" target="#b55">57]</ref> the traditional work is being taskified <ref type="bibr" target="#b7">[8,</ref><ref type="bibr" target="#b17">18,</ref><ref type="bibr" target="#b22">23,</ref><ref type="bibr" target="#b23">24]</ref>. In our study, we saw both trends intertwined. While the organizations participating in hiring workers through structured employment to perform previously crowd-sourced tasks on the increase, the workers were guaranteed stability through the employment necessarily and were anticipated to become part of the 'crowd' eventually.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.3">Towards ethical and responsible AI</head><p>Previous academic work has provided a critical discussion on the politics involved in data-driven systems <ref type="bibr" target="#b14">[15,</ref><ref type="bibr" target="#b18">19,</ref><ref type="bibr" target="#b35">36]</ref>. What's highlighted is also the discussion on investigating the capitalistic logics embedded into them <ref type="bibr" target="#b3">[4,</ref><ref type="bibr" target="#b9">10]</ref>. However, such discussion has to go beyond the data and systems in question. The critical perspective ought to be extended to the process of the work involved in the production of data that powers these systems to avoid data cascades of downstream harm <ref type="bibr" target="#b47">[49]</ref>. Although, in light of more discussion on ethical and responsible AI, data documentation such as datasheet <ref type="bibr" target="#b24">[25]</ref> and data nutrition label <ref type="bibr" target="#b29">[30]</ref>, efforts to document the sociological aspects of data <ref type="bibr" target="#b31">[32]</ref> and documentation to promote reflexivity <ref type="bibr" target="#b38">[39]</ref> still put the emphasis on data, and its impact on model design and development, rarely does the practice and process during the data annotation or the data workers take the center of the stage. A recent discussion on AI Ethics detailed the concrete steps we ought to follow but still does not include the discussion on data practice <ref type="bibr" target="#b51">[53]</ref>. What is encouraging is that the discourse on ethical AI practices has moved beyond a mere discussion. In an unprecedented draft of Internet Information Service Algorithm Recommendation Management Regulations published by China's cyberspace watchdog, the Cyberspace Administration of China (CAC) <ref type="bibr" target="#b6">[7]</ref>, the 17th article specifically commented on the worker and labor involved in AI recommendation service.</p><p>The provider of algorithmic recommendation service who provides work scheduling services to workers shall establish and improve related algorithms such as platform order distribution, remuneration composition, payment, working hours, rewards and punishments, and fulfill the obligations of protecting workers' rights and interests.</p><p>Though not explicitly spelled out, the workers referred to here are gig workers dependent on the platform economy. Annotators can be part of this new regulative protection depending on their employment capacity. Our research argues that practices adopted in data annotation, beyond the annotation itself, from recruitment to training to evaluation, should also appear in the discussion around ethical and responsible AI as they are an integral part of how the data comes into being. Without the work and labor that were poured into the data annotation process, ML efforts are no more than sandcastles.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3">METHODOLOGY</head><p>This paper defines data annotation as the sense-making practice of a given dataset, where annotators assign meaning to data using (pre-defined) labels. Previous human-centered investigations have primarily focused on annotators' subjectivities, biases, and efficiency. We propose a broader and more holistic view of the data annotation practice: guided by a grounded approach <ref type="bibr" target="#b25">[26,</ref><ref type="bibr" target="#b26">27]</ref>, we conducted a qualitative study consisting of three sets of in-depth and semi-structured with twenty-five annotators from India, ten industry experts who operate and manage data annotation companies across the globe (e.g., India, Kenya, Nepal, Philippines, and the US) and twelve experts who are engineers (majority ML/AI practitioners) whose work relies on annotated data sets from India, the US, and Israel during December 2020 to July 2021.</p><p>We collaborated with two third-party research recruitment agencies on the recruitment for all three different types of participants. In addition, we worked with one recruitment agency based in India to recruit the annotators. Unlike the studies on crowd workers or freelancers, where the participant recruitment advertisement could be posted as a job on the platforms where the crowd workers and freelancers find jobs, it was proven to be difficult to break into the annotators' circle (especially during the pandemic). Our sampling strategy included four main criteria:</p><p>• to include annotators from diverse areas of expertise and skill; • to include both annotators who are relatively new to the field (having experience of three months to one year) and those who have been a part of it for several years; • to include annotators from different levels of seniority and work cycle, i.e., from the ones who work on annotation, to quality control to team management.</p><p>However, despite the desire to cover a diverse area of expertise and skills, most of our annotator participants specialized in image/video annotation for the automotive industry due to the time constraint and access. We chose India because the country is home to one of the largest annotation labor markets in the world <ref type="bibr">[47]</ref>. The thirdparty recruitment agency helped liaise and arrange interviews with the interested participants who expressed their willingness to participate in the study. Our sample consisted of fourteen male and eleven female participants across India (see Table <ref type="table" target="#tab_1">1</ref> in the next section for details). Typical tasks they had done thus far during their annotation career included drawing bounding boxes, identifying semantic and polygonal segmentation, annotating general images and video, labeling entities, and categorizing content and text for different projects and clients, and industries. The majority of our participants worked to support the autonomous vehicle industry, with only a few working in what could be categorized as advertising and marketing. Given the geographical spread of our participants and the raging pandemic at the time in India, interviews were conducted online using video conferencing software. Interviews were scheduled based on participants' convenience and conducted in English. Informed written consent was electronically obtained from all interviewees via the third-party agency prior to the commencement of interviews. Separate consent was obtained for recording the interviews. The audiotapes were transcribed verbatim subsequently. The consent process involved explicitly informing freelancers that their participation, responses, and duration of engagement were entirely voluntary. At the outset, participants were informed that they could stop at any time or refuse to answer any questions. Although the interviews ranged from 35 to 70 minutes, this did not affect their compensation rate, nor were they rated differently. All annotator interviewees received a flat rate of 1500 INR (roughly 20 USD) as compensation for participation. This amount was in escrow, and participants knew beforehand that they would get paid regardless of how long they engaged with us. Therefore, the research team took these steps to diffuse potential power imbalances as per standard practices. The interview protocol covered a range of topics such as their work/job, their motivations to take up annotation jobs, the challenges they experienced with it, their use of annotation tools and software, what they liked about the work and what they did not, their experiences working with different kinds of companies, clients and tasks, how they managed their work, and how they were managed, recruited, and trained. Interview transcripts were then analyzed collaboratively by all authors to identify relevant themes. The analysis was consistent with and inspired by the ethnomethodological ethnographies in HCI <ref type="bibr" target="#b10">[11,</ref><ref type="bibr" target="#b11">12,</ref><ref type="bibr" target="#b42">43]</ref>. Our analysis took a broadly ethnomethodological perspective. Ethnomethodologically-informed, ethnographies explicate the knowledgeable, artful ways in which workers orient to their work and how technologies and other artifacts are used as part of the methodical accomplishment of that work <ref type="bibr" target="#b5">[6,</ref><ref type="bibr" target="#b44">45]</ref>. As well as analyzing interview transcripts, we took the additional step to examine the tools used by the annotators through two walk-through sessions from the industry experts to get a holistic picture of the annotator's work. <ref type="bibr">Ethnomethodological</ref>  The data were analyzed by the first author individually and by the first author and the second author in analysis sessions explicating a particular topic, as is typical of the ethnomethodological approach. Since we adopted the 'grounded approach' <ref type="bibr" target="#b25">[26,</ref><ref type="bibr" target="#b26">27]</ref>, the techniques of constant comparison and constant iteration (i.e., iterations of coding and re-coding) were used in the development of themes so as to avoid the classic problems of 'cumulation' and 'theoretical imperialism' -"an analytically imposed reconstruction of the procedures of a setting, insufficiently sensitive to the understandings of a setting's participants." <ref type="bibr" target="#b25">[26]</ref> These analytic sessions allowed interesting topics to be identified and endogenous themes to emerge from the data (such as the annotation process, an annotator's aspiration, and their frustration). To stay true to the grounded approach, we were extremely cautious not to impose categories external to the data to codify the data. Ethnomethodological ethnographies are valuable in informing design <ref type="bibr" target="#b44">[45]</ref>, and we used the resulting understanding of the annotation work from all three perspectives to inspire a set of implications that aim to address some of the challenges annotators and requesters face and therefore to steer the discussion around the work annotation towards a more constructive and worker-centered direction.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4">PARTICIPANT BACKGROUNDS</head><p>We present in the following tables the detailed backgrounds of the three different set of participants that contributed to our study: the data annotators (in Table <ref type="table" target="#tab_1">1</ref>), the industry experts (in Table <ref type="table">2</ref>) and the ML/AI engineers whose work depend on annotated data (in Table <ref type="table" target="#tab_2">3</ref>).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5">FINDINGS</head><p>Our findings present different patterns and practices regarding the entire annotation process and seeing annotation as an industry. It is Table <ref type="table">2</ref>: Industry Experts who operates and manages data annotation projects essential to point out that we look at the annotation as its industry consisting of a set of practices widely adopted as standards by different stakeholders in the industry. Through juxtaposing the themes that emerged from the set of interviews with the annotators to the ones that came from the study with the data requesters and industry experts, 6 we demonstrate the widely accepted yet questionable industry practices, such as the hiring practice and quality control; and the potential catalysts for these practices, e.g., the pursuit of near perfection in data quality and the desire for diversity.</p><p>highlight the competing priorities that led to the status quo of the annotation practice and process. 5.1 Becoming an annotator -a gateway to AI?</p><p>5.1.1 The recruitment. The first thing that stood out about our annotator participants was their qualifications. All twenty-five annotators we interviewed had undergraduate degrees in B Tech or BE (i.e., technology and engineering), several majored in computer science, one even had a Master's degree, and one at the time of the interview was pursuing an MBA degree. Although Ross et al. <ref type="bibr" target="#b46">[48]</ref> showed that the crowd-workers from developing countries are more likely to have a Bachelor's degree, we were surprised by how well (if not over) qualified the annotators are. We picked this pattern from the recruitment stage and probed our participants during the interview to understand whether this was a selection bias -that the recruitment agency we collaborated with was only looking for participants with Bachelor's degrees. As it turned out, this was not a bias introduced during the participant recruitment process but a status quo of the annotation industry in India-having a Bachelor's degree is a mere entry requirement to become an annotator with the annotation companies. Interestingly, the emphasis on a higher educational background is valued over having relevant previous experiences. When asked what the requirement was to become an annotator, whether the relevant previous experience was either necessary or desirable, all of our participants reported no previous experience required to get their first annotation jobs but having a bachelor's degree in technology or engineering is a must. Having such a high entry bar in regards to educational background is not unique to the annotation industry in India. Our interviews with the industry experts revealed that this is a common practice among annotation companies in Nepal, Kenya, and the Philippines too, as one of our experts put it Most of our hires would have an undergraduate degree. We hire them directly from the campus, some might be still doing their degree, but that is okay. Bottom-line is, they will have to have a high school diploma at the very least and good, good at what they do. (Expert 2) This is echoed by Expert 1, who provided us with a potential explanation for insisting on requiring undergraduate degrees. For the company, this requirement serves as a short-cut to effectively filter out candidates that do not meet the literacy requirements -reading and writing literacy in English to comprehend and complete tasks, computer literacy to operate the devices and tools for work, and the digital and technical literacy to grasp and contextualize what their tasks mean to the systems dependent on the annotated data. What appears to be a 'short-cut' for the annotation companies significantly narrowed the access to the employment generated by annotation. The access is not defined by the ability of the potential worker but by the convenience and interest of the annotation firms. Additionally, at times, having previous experience in annotation was seen as a disadvantage because experienced annotators would expect higher pay. As one of our annotators explained her struggle to get employed as an experienced annotator: oh, they won't prefer the experienced people, they prefer for freshers itself, so that they can pay less for fresher. Experienced people will also get hired but it depends. Here they took experienced [annotators] but only for two months. Like the project is only for two months, so they hired experience so that they can give how much they want, but for long project I don't [think] they hire experienced. (P15) However, the fact that the job as an annotator required no previous experience was appreciated by the first-timer annotators.</p><p>Like it's easy compared to other technologies and all and it is like there's no risk factor in this and like I like to do is job. It's easy to work without any stress and all. No need of any other knowledge much knowledge. Just the basic thing you need like computer knowledge and little bit of the ... what the client needs based on that we work. (P4) Since it is not required for the prospect annotators to have previous experience, many took annotations as their first employment after graduation. From the interviews, we learned that usually, there are three common paths for a potential job seeker to come across annotation jobs -campus recruitment organized by the annotation companies each year, online job search, and internal referral. Out of the three paths, the referral was the most common way for our annotator participants to find their employments at the time.</p><p>Nearly half of them were referred to their companies by a friend, a classmate or alumni. What's particularly interesting was that when asked about the motivation behind joining the annotation industry, almost all of our participants 7 expressed their excitement and desire to be part of this new industry that is part of the AI boom happening in India and this is also a gateway for them to be connected to the global AI market. As one of our participant said I heard like this was the upcoming booming technology. It was new technology like in India for data annotation thing. It was like just a new thing. So I thought like it may be like, it has some growth in annotation. That is why I joined this. A few company has annotations. (P1) What made this AI boom more convincing and attractive was that rapid growth was not just seen in flashy marketing material. It was witnessed and experienced by our participants. As P19 noted, the number of annotation companies in the little town on the west coast of India, where he lived, grew from 2-3 when he started to 6-8 after only a year. To him (or to any), this was the sign of a growing field. Another noted the quick growth of the company he works for as the project intake increased and project portfolio widened, It depends, means a project, like first they only started with a traffic light marking. Later, they got the project from the same client as pedestrian one marking then, then sign marking and some computer graphics like some other computer graphics project also there, and so the amount of data coming is very very large. So only few people can complete that data in a particular time, so they increase the head count. Some hundred were added. The newness and the promise of a bright future that comes with the shiny new tech industry attracted our participants to become annotators. However, this narrative around AI, annotation, and technology (autonomous vehicle in particular) at large is purposely crafted and marketed to the annotators. More than half the annotators we interviewed were drawn initially to annotation because of its close connection to AI and ML, that it is fundamental to building the future of 'driver-less cars chauffeuring people around'. P10 recalled that during his interview, he was asked what autonomous driving cars he liked, in addition to the questions about how tagged images can be used to train the models autonomous cars depend on. As this advertisement depicts, a typical annotation job post portrays the job as a well-paid, reputable, and noble part of this more significant industry, a great company, and a fancy AI dream (Figure <ref type="figure" target="#fig_0">1</ref>).</p><p>Generally, there were multiple rounds of interviews. First, there were interviews where the prospect annotators were introduced to annotation, and some were interviewed to perform example tasks to test their ability to interpret the annotation requirements and execute them. What is particularly interesting is that, in addition to the more related to annotation, there is a technical round where the prospect annotators are interviewed for their technical capabilities i.e., writing codes in various programming languages (e.g., C, Java, and Python etc). Some participants were made to write elementary 7 apart from the one who was working at an annotation intern who also happened to be the only one working in the annotation for digital marketing at the time C programs (check for even or odd). Others were hired because they listed relevant skills like "CAD" on the job sites. Though our initial thought was that it might be a practice that a few companies in the industry adopted, to our surprise that this was not at all a unique practice to some annotation companies. Instead, this was a widespread phenomenon across all the participants and their companies. The technical round to test their coding ability during the interview has been normalized as industry-standard. Some participants explained that some open-sourced annotation interfaces might require coding ability to have additional extensions for the tasks at hand, though what is required to program these extensions is HTML or Python, rather than C or Java. We learned that none of our participants ever needed to code or program during their tenure as annotators. Many have mentioned that the technical teams would handle the software or interface design and development. However, by having a technical round, the annotator job appeared instantly to be more technical, and the selection process became more complex and rigorous at the same time.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>5.1.2</head><p>The training process. Given that most of the annotators went into the field without previous experience or even knowledge about what annotation entailed, it made training an essential step for them to transition into being an annotator. We found two types of training for the annotators, orientation training for when they first joined a company and pre-project training for whenever they were assigned to a new project. Almost all the companies that the annotators worked for provided mandatory orientation training. The majority of the orientation training usually takes two weeks to complete, though there are two companies that the annotators worked for that provided longer training which lasted three to four weeks. During the orientation training, the emphasis was placed on getting the annotators familiarised with the tools, tasks, and processes. Depending on the company, the orientation training takes different forms. Some companies organized the orientation training as a presentation given by the team lead, some companies used pre-recorded videos, and some solely relied on the annotators to go through the training brochures on their own. According to the annotators, these training materials usually consist of samples of what data annotation requirements look like, a step-by-step guide on completing an annotation task (e.g., drawing bounding boxes on a pedestrian in an image), and how to interact and operate the tools for annotation (e.g., how to upload the data to the system, how to use the interface and how to export the file). In addition to the more theoretical training, the annotators also need to take on practical training. Again, it is the learning process; the annotators will go The orientation training covered the general knowledge required to complete the tasks, and due to the diversity of annotation tasks and the speed at which annotation tasks, techniques, and tools evolve, the training material is often out of date by the time it was delivered to the annotators. Hence, it was not a surprise that some found it redundant, like, it's easy and no need of training and just, just required detailed manual instructions only that is necessary and the tools which they want us to use. (P1) Detailed instruction for the tasks at hand provides more value than the training materials. The skills required for data annotation for different projects were ubiquitous, and once the annotators had experience with one project, they could do another project.</p><p>Actually, the only thing we want is the detailed eye, and interested in the tool and the techniques. if we actually annotation, how they using some three four techniques like bounding box an notation, semantic annotation and cuboid annotation polygon annotation. For means they are marking like a traffic signs traffic signals pedestrians. So for each project either issues bounding box annotation or semantic annotation. So if we worked in one project we can also do another project also. (P19)</p><p>As the quote demonstrates, though the training can be helpful, the implicit and tacit knowledge they take from one project to another as they gather more experience. The annotator then gave a specific example of such tacit knowledge. I found that... if we get an image <ref type="bibr">[folder]</ref>. We like tag first image then next second image. Actually. That is the wrong way, first thing you notice the entire images, entire images in that folder and if we get one image, we have to check means we have to we have to analyze that image like from my point of view start from left to right or right to left then only we can reduce the mistakes. (P19) He summarised through experience that the specific procedure guarantees better output and quality. This is tacit knowledge essential to the annotators' work yet not included in the orientation training. Another annotator shared proudly that it took him two weeks to figure out, on his own, all the keyboard short-cuts in the software his company used to perform annotation tasks. This discovery dramatically improved his productivity. Though crucial to one's productivity, the software short-cuts were not part of the orientation training.</p><p>The pre-project training before each project was where this kind of tacit knowledge could often get passed from one annotator to another as it was often led by the team lead or project lead at a team level. The purpose of this training was to get the annotators instructed with the specific dataset and requirements for the project they were about to work on. This training was relatively short; it usually takes a few days to get all the annotators on the project up to speed with the annotation guidelines and the data. Companies sometimes skip the pre-project training to compress the project time to impress the client (this was particularly true to the companies that praised themselves for turnaround speed), especially when the project was under a time crunch and extra workers were dropped halfway in order to speed up the delivery process.</p><p>That was not like training thing. Just we used to sit with the one who was working there also the new joiners . But they also had the same training and we used to absorb everything. (P15) Joining mid project means no proper training, the training was done through sitting next to the experience annotators on the project and observe. (P22)</p><p>Though training is essential to the annotators' work, under the enormous delivery pressure, the step often gets omitted to save time. However, as we learned from the annotators, skipping the training can be counterproductive. As the knowledge transfer from the organization to the worker and among workers regarding procures, protocols and tactics are the cornerstones of annotation quality and productivity. Compared to the client's request, the annotators' interest remained secondary to the annotation companies. The data quality is regarded as a set of measurable performance metrics, i.e., accuracy rate.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.2">Being an annotator</head><p>5.2.1 Day in the life for an annotator. An annotator usually spent 8 to 10 hours (sometimes 12 hours) daily working on projects. However, through the interview, we learned that the working hour is not the hour spent in the office but rather the hours spent on tasks, which indicates the actual working hour was likely more protracted than what the annotators reported.</p><p>It was 9:00 [am] to 6:00 [pm] before [in the previous company], but here [in the current one] also the timings has a 9 to 6 itself. But somewhat work pressure is the know like need to deliver the project early. So it takes 10 hours, 11 hours. (P15)</p><p>When we asked whether the annotators were compensated for extra working hours, they all said no.</p><p>All except two of our annotator participants worked on-site in their company offices or on their client's premises prior to the pandemic lock-down. By the time of our interview, almost all who had previously worked in an office who still had an annotation job had returned to their offices (this was before the deadly second wave hit India). Their day typically started with a status check led by the team or project lead, either as a meeting or through an email. Firstly, they reviewed any pending tasks from the day before needed rework or completion, then the lead handed out the data of the day waiting to be labeled to the annotators and walked through the update related to the tools and attributes. After which, the annotators would begin their day of work on the data sets to meet the daily target set by the company. The annotators first familiarized themselves with the data set and the annotation guideline. Then they began annotating each image, a frame of a video, or a snippet of text according to the instruction, e.g., identifying the object or keyword and assigning attributes to them. Before the day ended, a quality analyst would collect all the data from the annotators and check for quality. The errors and feedback (i.e., issues that were not mistakes but poor practices) highlighted during the quality check will be sent back to the annotators as pending tasks to complete the first thing the next day and incorporate in future work.</p><p>Apart from the only freelancing annotator and the annotator intern, every annotator we interviewed worked with a laptop provided by their employers. These laptops were usually under close control by the employer apart from the websites and soft-wares deemed relevant to their work, such as Microsoft Teams, Google chat, and WhatsApp in sporadic cases. These communication tools are vital to the annotators as they were the primary venue where they usually raise quires regarding the task, the tool they use, and other work-related issues. Even though most companies prohibit personal communication tools such as WhatsApp and Facebook Messenger for work, it is common for annotators to create What-sApp group chats for work.</p><p>We are connected on WhatsApp and we have a group, we all the, all the labelers and our seniors for are there, [through] which we are connected and if we get any difficulty facing you regarding the server, regarding the labeling or anything. If any issue is there then our seniors are there and they are very sweet and they totally help us. (P2)</p><p>The access to unauthorized websites or soft-wares was blocked, making it nearly impossible for them to use their laptop outside work or working hours for other purposes. The annotators often had experience with a wide variety of annotations tools, ranging from open-source tools (e.g., CVAT, Data Turks and Labellmg, etc.) to in-house tools developed by the annotation company to client tools. From both the interviews with the annotators and the industry experts, we realized that more data annotation companies started developing their annotation tools (some with data analytics features) to provide data annotation as an end-to-end service.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.2.2">More than technical.</head><p>The process of data annotation, during which the annotators work to assign meanings to the images, texts, and audios, might be technical. However, we contend that data annotation is more than technical, that it is a systematic exercise of organizational structure and power (Figure <ref type="figure" target="#fig_2">2</ref>). This is consistent with what Miceli et al. <ref type="bibr" target="#b37">[38]</ref> have observed in the data annotation companies in Argentina and Bulgaria.</p><p>As mentioned in the above section that the annotators had to meet a target (often daily and in some companies weekly) in terms of both the quantity (i.e., target rate) and the quality (i.e., accuracy rate) of tasks. The daily target rate is not a randomly assigned number. Often it was the team lead based on the past project experience to decide the daily target rate considering the turnaround time requested by the client. Another way to set the target rate, in general, was to find an average task completion rate among annotators. There were two popular ways of target setting. The first way was to find the best-performing, average-performing, and worst-performing annotators (based on the past performance on speed and accuracy) to work through a random sample from a new set of data. The target rate would be the average quantity of the tasks completed by all three types of annotators in a set time (an hour or a day).The other way was simply sending the sample data out for annotation to a team of annotators and taking that average. Given the average completion rate being set as the target, while there were annotators who exceeded the target, there were annotators who would inevitably struggle to meet this goal. Either way, the annotators did not get a say in a reasonable daily target rate. To make the matter worse, a common practice among the data annotation companies was to increase the target as soon as most of the annotators were able to hit the rate.</p><p>Per day, it was initially not fixed and often that one week 30, and again, the next week is 40 again 50. 65 was the last. 65 images was target, but for QC it was 250 images. <ref type="bibr" target="#b14">(15)</ref> As our participant noted, as the average annotators chased the ever-increasing target rate, the rate for a quality analyst was stable though considerably larger. It is worth pointing out that the rejected tasks from the day before that required reworking were out of the daily target count. Meeting this target was a norm among annotators and taken for granted by their companies. For the annotators, it was not a matter ever up for negotiation. Many were taken aback when asked what would happen if someone did not make the target. As P15 explained, "Nothing, like they don't say anything but it will be assigned for us now, so we need to complete. " As for the excellent annotators who consistently meet their target, their efforts would be acknowledged in appraisals in meetings or emails; there were no other rewards or bonuses.</p><p>Delivering high-quality data at the lowest cost possible is at the core of many annotation companies. 8 Being able to ensure the annotation quality is key to annotation companies proactively. Wang et al. <ref type="bibr" target="#b55">[57]</ref> also noted the companies' proactive monitoring of work quality. Organizationally, there were three quality control lead levels: quality control analysts (QC), senior quality control analysts (SQC), and the client or project manager. QCs were required to check every single attribution in every file from the annotators. Generally, in one annotation team, the ratio of QC to annotator was 1:4 or 5. After the QC completed the first round of checks, SQC stepped in (at some companies, the team lead played this role) to double-check the quality by random sampling the annotated and checked data set. Finally, the project manager performed the last level of quality control before 'shipping the data'. Usually, after these three rounds of quality control, the accuracy rate before the data shipping was around 98%. Valentine et al. <ref type="bibr" target="#b54">[56]</ref> suggested that establishing organizational structures improved the task process and productivity. Some annotators (P19, P23 and P14) reported that their companies pushed this even further to zero error rates.</p><p>If you are making some mistakes then higher people don't accept, it affects their mood. (P23)</p><p>Like yeah, it depends on clients also for accuracy thing. Like if they expect more no we have to give. (P14) Technique-wise, there were also automated checks in addition to the manual quality check. Both the annotators and experts noted that the right combination of manual and automated checks could drastically improve the accuracy rate and productivity. For instance, using a script to check for missing bounding boxes or attributes automatically and wrong attributes allowed the QCs and SQCs to manually check for, say, the size of a bounding box, which is more of a best practice issue than an accuracy issue. Additionally, these layers of quality checks, especially the ones done by humans, were essential to catch the human errors from the annotators and vital to catch errors caused by the annotation tools. For example, P 19 noted that the annotation tool would shift the bounding boxed out the place before it finally crashed. This was an error that the script could not catch, but a QC who knew about the occasional crashes would keep an eye on it.</p><p>At times, the annotators reported issues they encountered working with the client tool or their in-house development team. Though the SQC or the team lead often mediated this, the annotator reported up the chain following the hierarchy. Issues with the tool they worked with were common. They ranged from random crashes to missing attributes 9 ; from the lack of support in the tool for the precision required to the format errors that'd occur during exporting annotated images. Two annotators commented that the tools from the 'first timer' clients would require many updates and subsequently more back and forth communication. Even though some tools included features for the annotators to raise the issue or share it with other annotators to search for a solution, the reporting and discussion regarding issues remained in the communication tools separate from the annotation tool. Screenshots were often used to provide context to the issues they raised. Only the issues that could not be resolved locally among the annotators, QCs, and team leads would reach the clients. The responses from the client-side were communicated down the pecking order, that "it will be explained from project Lead to the all the labelers" (P15).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>5.2.3</head><p>Too good for the job? Our annotator participants shared a somewhat mixed view of annotation. Some, although critical, still held a positive overview of both their jobs and the industry, but for some, they became more disillusioned as they worked. The more disillusioned ones were disappointed mainly by the dissonance between the narrative of a fancy new industry and the often tedious day-to-day work. As some voiced, Anyone can do it, a 6th grader can do it... with some training, it's not difficult. Same thing over and over. (P8) No changes, each and every single day. (P7)</p><p>The repetitiveness and tedium of the job were noted by many. However, not all of their concern was on the monotony. Some were more worried that the lack of diversity in their portfolio would negatively impact their future employability.</p><p>Technique is a technique, so if we learn more that will be good for our career... I didn't feel anything bore, but actually semantic segmentation is taking much time.</p><p>As it was not just Having exposure to a wide variety of annotation tasks, industries and techniques increased the likelihood for an annotator to go independent and their chance of getting hired by the next company. This promised one the 'sense of control' over their career, which is why P1 chose to become a freelancer. Annotators who worked on a diverse range of projects spoke fondly of the rotation between projects in some companies every a few months. The diversity in the projects provided the annotators more than the professional exposure they needed but sometimes a lens through which they were able to see the world. For example, P7 shared how much she enjoyed the video annotation project where she could see snow! However, working on a variety of projects is a luxury that was not the case for many.</p><p>The stress to meet the sometimes unrealistic target is another common cause for the annotators to feel dissatisfied. So much of work pressure. Like they wanted to deliver the project early. So it was quite a lot of work pressure. (P15) 9 For instance, the attributes were required by the guideline yet not in the tool Multiple annotators during the interview expressed their preference for 'easy tasks' that the tasks that took less time to complete were 'good tasks'. This preference was not due to laziness. Instead, it was a direct result of the often unrealistic target rate! So sometimes we can't reach the target, that is the issue in semantic segmentation... semantic segmentation is like pixel labeling, like we have to mark everything in that images like trees, roads sidewalk like everything, depends the project, but we have to tag it precisely. (P19) Regardless of the clear difference between the two annotation techniques' efforts, the target image/frame rate was the same. The lack of clear instructions, low quality of the raw data, and the poor usability of the tools were the three leading causes for the annotators to miss their target on either quantity or quality that were also not entirely in their control. Their feedback rarely made it through the reporting chain and was addressed or implemented. P19 was the only annotator who shared a positive experience where his design suggestion to the UI of the client tool was adopted. He suggested adding a 'magnifying glass' icon to the UI, so it was more intuitive for the annotators to enlarge the otherwise small image they needed to annotate. More often than usual, the annotators' input was overlooked, especially when the annotation itself. P23 gave us an example when they were required to label the grass by the roadside. Upon submitting the annotated data, the client rejected the work because the dry grass was not separate from gravel, which was not part of the initial guideline. Depending on the image quality, it could be challenging to tell the dry grass from the gravel. The annotator explained that if the images were captured during the summer when the grass was drier, it could tell the difference, but their annotation had to cover all seasons. He was particularly frustrated when he discovered such fine detail would not have mattered in some cases. For example, for autonomous cars, there is a safe distance of 30cm between a detected object and the car. So when there was a visible fence in the image, there was no point in labeling grass from the gravel as the car would not be near it. This feedback was dismissed, and the motivation behind the feedback was regarded as pure laziness. These annotators were tested and hired for the technical ability to comprehend the AI and ML projects their data contributed to. However, ironically, it was not valued when they posed questions based on their understanding of ML and experience as annotators.</p><p>If any object doesn't not belong to any class, there is a subclass called, no class, we tag that as no class actually. It is not... it doesn't means it's right. It's like the criteria from the client up to their liking. (P17) For a machine to be able to see as a human, annotators have to see from the lens of the machine, make sense of the sight and label it accordingly. Unfortunately, the accuracy is often lost in this process that's not in the control of the annotators, yet they are the ones being blamed for the low accuracy and had to bear the consequence of it.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.3">An annotator's aspiration</head><p>More than half of the annotators we interviewed saw data annotation as a preliminary job to becoming an engineer in AI and ML before entering the field. They soon understood the distance between annotation and ML. Despite the dependency AI and ML have on data annotation, at an individual level, the knowledge, skills, and experiences the annotators acquired during their tenure on data did not translate to what was required to become an ML engineer. This realization was what essentially made many of them stay on. We found that everyone, the annotators, experts, and requesters talked about the importance of 'having the right expertise'. However, there was no consensus on what qualified as expertise and what made the 'right'. The current articulation regarding an annotator's expertise was either a set of annotation techniques they mastered or the annotation tasks' domain. However, having experience annotating medical images does not make one a medical professional. The difficulty for them to break into the more technical side was real. Expert 1 estimated that roughly 10% of the annotators could take up more technical roles (e.g., software engineers and data analysts). However, we suspect the actual number was fewer. Only one out of the twenty-five annotators we interviewed made it into data science. This was not because of his experience as an annotator but rather the online courses he had taken on data analytics. When we asked our industry experts where the annotators would go, it was clear that the experts did not quite know. Though Expert 1 and 5 shared some anecdotal examples of previous annotators who were able to use the "capital" they accumulated working as an annotator to start their own small business (such as grocery shops), and some took the "experience and training" from the annotation companies and became freelancers. On the other hand, our annotators shared the other side of the story that was not as straightforward to go freelance. Experience-wise, lack of project diversity did not provide the competitive advantage they need, and the practical training in using annotation interfaces did not always transfer from one tool to another.</p><p>Annotation is a trade that indeed attested to 'practice makes perfect'. According to our annotators who had moved up the ladder once in a firm <ref type="bibr">(22/25)</ref> and those above the annotator level (13/25), the promotion from annotators to QCs typically after six months, and one was promoted after only three months into the job. People quickly moved up the job ladder from annotators to QC and from QC to SQC. However, very few made the next promotion above SQC (2/25). The glass ceiling in annotation was low and fast to reach. If not moving up, then they would move around. The retention rate is not high. All eight industry experts who managed and operated data annotation companies confirmed that the annotators typically stay for 12-18 months. 10 . We contend that the current compensation system was not designed to keep annotators. P17 shared that her biggest frustration with her job was that there was no annual increment to her salary regardless of the companies she worked for. The salary increase happened only when they moved up the ladder. Thus, there was little encouragement to stay for the annotator who did not move the ladder. The aspiration to a normal career progression or stability in annotation was struck hard by the reality.</p><p>No, I don't want to work in this stream again. Like it is not safe... stable like, oh the project may end anytime and we will not be having the work. I like... it is not stable as other profiles. Like if they have the projects now they will be hiring lot of people's for that. Once the project has ended, they won't think there is no second thought of how continuing with the employees they were directly fire them off. (P15) The pandemic added extra pressure. With 32 million Indians knocked out of the middle class in 2020, India contributed the largest share -about 60% -of the total global decline in the middle class during the pandemic <ref type="bibr" target="#b33">[34]</ref>. As one of the worst-hit countries by COVID, this does not surprise. However, this is the reality that these annotators live in. Pursuing one's aspiration is pure luxury, as it requires additional financial and time investments while their livelihood was subject to changes often beyond their control.</p><p>Due to this pandemic situation the company lost the project, and the company got shut down, then for two to three months I was not worked. (P22) Actually my first organization I lost my job in this this current situation after two months. I later I placed here. (P15) At the time of our interview, about a third of our participants had experienced a job loss due to the pandemic, three were able to find another annotation job, and five were still job seeking.</p><p>Regardless of the hardship, most of our annotators shared a relatively positive sentiment towards annotation. They were very aware of their incremental contribution to AI and ML, and they took great pride in what they did.</p><p>Before like we are not their data annotator, we can't... they cannot do something like machine learning. AI systems also not working without data so that same we are too proud of us, we are giving... that that much quality and that much productivity. P16 Machine learning and AI system so we can't move without data. So what I am giving the data so machine learning and AI system are working. Without data they don't work. So what I'm saying, like I'm proud of to there like data labelling work. P23 So it was an interesting thing and it was something like good to do because it is necessary. Like if some default is there then the car manufacturer will be like defect if based on the raw data is wrong. Then the machine will predict incorrect. So if it was like we need to do exactly what the given like zero, without zero percent error. (P1) AI and ML promise to take away the repetitive, tedious, and dangerous work from humans, such as driving. However, it is currently at the cost of overqualified people performing tedious labor to build the AI dream.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.4">From the requester's perspective</head><p>All twelve of the ML practitioners we interviewed ranked the quality of the data and the production cost associated with it as the top two things they cared about the most. They were also the most important criteria for these requesters to solicit a platform or a company to handle their data. There is a delicate balance between the requirement for high-quality data and the desire for a low cost that the requesters are fully aware of.</p><p>It makes a difference where you go, you know, if you go to a [crowd-sourcing platform] which is something that we use extensively, it's good for certain things, it's cheap, it's not good for other things. And then, you know, we have to go to a different place. And we use [name of a third party annotation company] for that, which is much higher quality. At a cost though, of course. (R8)</p><p>The third-party annotation companies' main attraction is the right balance between quality and cost. Additionally, the requesters were also very conscious about the resources and time required to manage the data production. The annotation companies offered services beyond simply getting the data annotated compared to crowdsourcing platforms. They provided the organizational structure to recruit and train the annotators, active monitoring and checks to ensure quality, and project management throughout the data production. To some requesters, the extra cost was worth it, as, after all, they are "engineers hired to build ML rather than managing the crowd workers!" In addition, the annotation companies helped them to address their previous concern with the lack of self-contained quality control mechanisms with the crowd-sourcing platforms.</p><p>The emphasis the requestors put on data quality manifested itself in rounds of quality checks at both the production and delivery end. The annotation companies tackled it with proactive monitoring reinforced through the organizational hierarchy during the production. The requestors created various technical solutions, the most common being scripts and plug-ins for automated quality control. R6, who provided their tool for data annotation, shared that their team would periodically embed random "hidden tests" among the ordinary tasks to get a sense of the annotators' average performance and catch "the ones that might be struggling". We have already learned from the industry experts that there were periodic exams on accuracy and speed to identify workers who might need extra training. However, the trust towards annotators from the requesters was not exceptionally high, and the fact that there was no direct channel between the annotators working the data and the requestors did not help. The data collection and data annotation process still mainly remained a black box for the requesters, i.e., they have little to no idea of who the annotators are, how they were trained, and how they carried out the tasks. Despite very few (2/12) regarded the interaction between the requesters and the taskers as unnecessary, more acknowledged that having more knowledge on the production of the data improves the overall quality (beyond just the one dataset but long-term collaboration). R6's company was the only one that actively shared the impact of the annotators' work with them, that R6 would update the annotators on the improvement of the model performance based on the data they worked hard on.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="6">DISCUSSION</head><p>Data annotation, in our study, is the process of sense-making carried out by the annotators who are hired as full-time employees, with fixed salaries, embedded in well-organised working structures. Third-party data annotation as an industry emerged at the back of the continuous expansion of AI and ML systems into more domains (such as an autonomous vehicle), and the growing investments in annotation from states only catalyzed it <ref type="bibr" target="#b34">[35,</ref><ref type="bibr" target="#b49">51,</ref><ref type="bibr" target="#b56">58]</ref>. Our research indicates that despite the rapid growth in data annotation as an industry, its benefit didn't serve the individual annotators. It did other stakeholders. The experience, working as an annotator tells a different narrative to the well-celebrated success story of data annotation. Data annotation companies draw on the growth of historically crowd-sourced tasks to provide an alternative for AI/ML practitioners to find workers with the right set of skills. This alternative allows the practitioners to avoid decomposing complex tasks into smaller piece works, finding suitable solo workers with the corresponding skills, and project managing these tasks. In order to deliver such services, the data annotation companies set up a well-defined role and follow a clear organizational hierarchy that is tailored towards managing the complexities and high client expectations. Rigid organizational hierarchy does deliver more than desirable results to the requesters (e.g., higher data quality and faster turnaround). However, it impacts both the interpretation of the data <ref type="bibr" target="#b37">[38]</ref> and the individual annotators. What is particularly problematic is that 'data quality' has been interpreted and measured as performance metrics i.e. accuracy rate. It speaks nothing to the skills the annotators bring or the perspectives they hold. Such a narrow interpretation of data quality is also detrimental to the dataset.</p><p>With the parameters of 'success' defined and decided, any scope for ingenuity is removed. Doing so eliminates nuances that might be beneficial to the dataset and the definition of quality. We found that our annotators rarely questioned the power that management and clients have over them in influencing their understanding of the data as well as their working conditions. Let us step through what this could mean in the specific situation that we have a very narrow idea on what it means to perform well that it is predetermined by the requesters in the Global North. There is little room for considerations and reflectections upon the misalignment between the annotators in the Global South and the requesters in the Global North. Additionally, none of them considered the technical tests during their interview unnecessary or unfair. They accepted the verbal appraisal and the promise of potential promotion as the appropriate rewards for excelling in their work.</p><p>We present implications for practitioners, researchers, institutions and organizations in supporting their aspirations while working with annotators. In line with what Dourish has spelled out in his seminal work, Implications for Design <ref type="bibr" target="#b20">[21]</ref>, the merit of this paper and the implications we propose are not on trivial recommendations for design. Rather, this paper attempts to provide the sensitivity of the context that designs for annotations are taking place. We echo Dourish's argument that the focus on implications for design is misplaced, as it misconstrues the nature of the ethnographic enterprise. Such misinterpretation of implication misses where ethnographic and qualitative inquiry can provide major insight and benefit for HCI research. As the value of ethnographic investigations for design goes beyond the specific design recommendations <ref type="bibr" target="#b4">[5]</ref>. Ethnographic research does not rule out design options, but it points towards the consequences of the design choice that one makes <ref type="bibr" target="#b10">[11]</ref>. It is to influence the design and development of computing systems by providing an in-depth understanding of how work gets done in practice in order to better support it. To sensitize designers and developers to the myriad issues that people who use technologies confront at both individual and organizational levels <ref type="bibr">[ibid]</ref>. As we demonstrated, the annotation process presents a complex work setting. Before giving the annotators more tools, we need to understand the setting and the people, such as their aspirations and what they bring. 11   </p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="6.1">From crowdwork to organised employment</head><p>The trend that the traditional employment is slowly being 'taskfied', full-time employment is on the decline while task-oriented contractual hiring is on the rise accelerated by the platforms facilitating the match between a job and a worker <ref type="bibr" target="#b16">[17,</ref><ref type="bibr" target="#b27">28]</ref>. From our study, we noticed a different, if not opposite, trend in the field of data annotation -instead of leaning more towards crowd work and microwork through platforms, the industry is showing a steady preference for organized labor, hiring annotators as full-time employees. Annotation firms offer stability and the usual benefits associated with employment (leaves, insurances, equipment, and office) for as long as the employment lasts. However, this trend does not eliminate the downsides that are associated with annotation work previously experienced by crowd workers, such as the precarity of the work (that the average tenure is between 12-18 months) and the undesirable working conditions (the long working hours, the unpaid extra labor, the constant scrutiny, and monitoring). Adding to the complexity, offering clear advantages over hiring solo-crowd workers with the add-on service values, the participation of third-party annotation companies in the traditional micro task space would inevitably make the market a more competitive place for solo workers. We found that a contributing factor of the short tenure is to keep the pool of annotators hired in one company constantly refreshed and updated. Though the annotation companies see it to achieve diversity, it is counterproductive. When the recruitment criteria and methods remain the same, a similar set of people would be added to the pool.</p><p>We found that as data annotation becomes organized employment, it didn't make the work annotators do visible. Rather it became more invisible. As we described in section 5.4, since the little interaction between a requester and an annotator that might happen before on a crowd-sourced platform being taken over by client managers in data annotation companies, the work that an annotator does become more opaque from a requester's perspective. Knowing the labor process, including the conditions under which it is done and the workers, is key to increasing the visibility of the work <ref type="bibr" target="#b12">[13]</ref>. We found that little did the data requesters know about who these annotators were, the working conditions they were under, the hiring requirements they needed to fulfill, and the career aspirations they had. We argue that the impact of knowing the workers and working conditions goes beyond the discussion on the politics of work visibility.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="6.2">More than just a job, it is a dream</head><p>What makes our study particularly interesting is that data annotation is yet another form of full-time employment, especially the fact that it is portrayed as a gateway to the technology and AI industry. People turn to and continue in task-based online works for income <ref type="bibr" target="#b36">[37]</ref>, a sense of control <ref type="bibr" target="#b7">[8]</ref> and flexibility <ref type="bibr" target="#b2">[3,</ref><ref type="bibr" target="#b7">8]</ref>. Gray and Suri <ref type="bibr" target="#b27">[28]</ref> argue that since the lack of agreement on the social status and baggage associated with getting data work from the platforms, people pursuing such work made their decisions weighing the costs and benefits according to their situation. We found a clear social status or even prestige attached to working for a data annotation company in our study for our participants. Regardless of what attracted the people to either take part in the platform-facilitated data work or the organized ones through employment, what's common is the lack of long-term stability and career progression. Out of our twenty-five participants, only two could progress substantially in their careers. These job prospects reflect the growing and sobering reality of what is available 1to working-age adults around the globe. As we detailed in our findings, structurally, the annotators are not supported to make meaningful progress in this field or break out of it. Though they might move up annotators to quality analysts quickly, few were able to move beyond senior quality analysts into management. The annotation companies have an organizational structure with an extremely large worker base and a tiny management team. The competition to make it to the top is fierce! There simply aren't enough positions in the chain for the annotators to move forward and upward. The annotators who attempted to break into the more technical world found they didn't have the 'right' work experience. The skillsets and expertise they developed during their annotation tenure did not warranty them a position as an ML engineer or data scientist. In order to obtain the right credentials to transition into the technical field, the annotators need the investment in courses and certificates that serve as the relevant experiences. The irony is that these annotators in our study did come from a technical background with Bachelor's degrees in engineering and technology. Being stuck in annotation and as an annotator means they do not aspire to be anything different or anyone different.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="6.3">Supporting the aspiration</head><p>The expertise of individuals rather than the educational credentials gives one both the employability and a possibility for long-term career trajectory <ref type="bibr" target="#b2">[3,</ref><ref type="bibr" target="#b7">8,</ref><ref type="bibr" target="#b22">23]</ref>. However, from our research, we found that the expertise the annotators developed during their work seems to have a small application area that does not go beyond the annotation field. Annotation companies made hires based on the educational background while having low previous expertise requirements. The market projection for organized annotation is set to grow as the proliferation of AI systems continues. As the annotation gains increasing popularity, we as researchers need to look at the root cause for the low transferability of annotation skills. We argue that the fundamental skills required for an annotation job are beyond a set of techniques and are currently completely overlooked. We contend that without a clear articulation of the skills, employers will look for proxies such as the educational background to select workers. Whether the 'upskilling' needed for an annotator is additional vocational training aimed at different trades in AI and data at large or simply the knowledge to identify and articulate their skill sets in relevance to other jobs and industries. For instance, the fast learning ability and attention to detail the annotators acquired through extensive domain and bias sensitivity training are qualities important for any job yet overlooked by annotators and their employers. Therefore, training for the job in annotation or industry is of great importance. We ought to ask what is the right or suitable training for annotators to develop the skills needed for work and assist them in pursuing their aspirations, which may or may not be in the annotation industry. The growth in one's career is an aspiration. As discussed above, the pathways upward and forward in annotation are difficult. Though admittedly challenging, there should be a built-in career perspective in the annotation industry. It is also a responsibility that should not be carried alone by the annotation companies. Skill shares, talks, and exposure to the ML/AL systems enabled by the annotator's work can be gateways for an annotator to gain relevant experience transferable to a technical role. Ethical practices around data annotation are yet to break into ethical AI policy and regulatory discussions. This is evident in even the very recent discussions in China and the US concerning algorithms ethics from legal and regulatory perspectives <ref type="bibr" target="#b6">[7,</ref><ref type="bibr" target="#b51">53]</ref>. On a positive note, fair working condition for platform-based gig workers is part of the CAC regulation <ref type="bibr" target="#b6">[7]</ref> and are soon to be implemented. At a practice level, as the push for data documentation is picked up by ML practitioners, we too see this as an opportunity where the data labor practice can be documented and reviewed <ref type="bibr" target="#b24">[25,</ref><ref type="bibr" target="#b37">38,</ref><ref type="bibr" target="#b38">39]</ref>. Since the regulatory measure is yet to be implemented and the documentation practice is still new, we don't know the impact these measures have on either the work of annotation or the annotators. Therefore, substantial research could be done to again look at the impact of these measures from the annotator's perspective. In turn, we argue the insights from annotators would inform improvement in both the policies and practices aimed at protecting their rights.</p><p>In our work, what we call upon is a re-centering of data workers as situated and agile experts. The extensive domain and bias sensitivity training they must undergo and how they capitalize on existing forms of expertise must be seen and valued. They are fast-adapting, flexible, and responsive actors to the evolving field of AI and ML must be recognized as qualities that should assist them with career development. This paper is more than an attempt to show that annotators are hidden from view or marginalized in innovation and regulatory processes that are needed. We advocate for systematic and structural changes towards the discretion and care given to data work and data annotators through the collaboration between CSCW/HCI researchers, ML practitioners, legal experts, and policymakers.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="7">CONCLUSION</head><p>Our study provides a first holistic view on data annotation as organized employment, including the perspectives from individual annotators, to managers from annotation companies to the requesters procure and consume annotated data. Though relatively new, the third-party annotation firms span across the globe, hire millions of workers, and set to grow in billions. Our study reveals that the methodical work practices and organized procedures of annotation serve the interest of the annotation companies and requesters more than they do the workers. The professionalization of data annotation jobs offers some benefits of full-time employment over the annotation platforms (e.g., access to pension and insurances). Overall with the pathways for growth are broken, workers are still anxious about employment and performance in the organized annotation. The lack of professional development and progression intensified control through organizational structure, unpaid and much-expected overwork paints a grim picture working in organized annotation employments. We discuss implications for the organization, operations, and data set tasks in working with annotators and call upon our systematic and structural changes centering on the care for both individual annotators and the aspirations they have.</p><p>A limitation of the research is the representativeness of the sample. The annotators who provided the majority of insights in our work were mostly from for-profit annotation firms specialized data for autonomous vehicle development. Therefore, annotators from other domain areas and organizations might have different experiences, for instance, the ones who work for impact sourcing annotation firms that specialize in medical image annotation. Additionally, the study was conducted during the COVID pandemic when observation of how their job unfolds in their work settings was impossible. We relied on video call interviews. We were not able to focus on the actual task processes that took place during annotation. Hence we were not able to explore the impact of the task processes on the workers.</p></div><figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_0"><head>Figure 1 :</head><label>1</label><figDesc>Figure1: A typical annotation job advertisement in India<ref type="bibr" target="#b32">[33]</ref> </figDesc><graphic url="image-2.png" coords="7,378.02,83.69,120.12,108.20" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_1"><head></head><label></label><figDesc>through a data set demo to apply what they have learned from the training material in practice. The orientation training aimed to ramp the annotators up to the pace to handle actual annotation work. It clearly emphasized the practical use of the tool and how to get the work done.Training is like first time they show the raw data and they've these how to how to use the tool because the tool have lots of, uhm, loads of attributes and, uhm, means functions, uhm, like tool every time the tool is getting updated like that is the one thing. Then they also teach how to tag the object. I know what we need to concentrate on annotation time and how to start the annotation and yeah like that. (P19)Although the emphasis on the connection between annotation and AI was central to the narrative to get the annotators on board, during the orientation training, there was little mention of either the AI or its dependency on the data the annotators were to work on. As our participant noted, They just give me the brief introduction on how the machine works and how the deep learning works. They give you more information on how the image segmentation [an annotation technique] works then image like... how to split frames [in a video]... and a little bit knowledge of machine learning. (P3)</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_2"><head>Figure 2 :</head><label>2</label><figDesc>Figure 2: Organisational Hierarchy In Annotation in Indian Companies</figDesc><graphic url="image-3.png" coords="9,317.96,83.69,240.24,143.67" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_0"><head></head><label></label><figDesc>analyses of work are useful in generating a granular understanding of what activities constitute 'work' in a setting, how they are accomplished in practice, who is involved in this accomplishment, what resources are drawn upon, and what skills and tools are involved in mobilizing those resources [ibid]. Through this close look at the seemingly ordinary details, our analysis seeks to unveil not just what the world looks like but how it comes to look as it does. The emphasis is, in other words, on the detail of work as understood and interpreted by the people who perform it.</figDesc><table /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_1"><head>Table 1 :</head><label>1</label><figDesc>Annotator Participant's Qualification, Role and Experience</figDesc><table><row><cell>P#</cell><cell>Employment Status</cell><cell>Highest Qualification</cell><cell>Role</cell><cell></cell><cell>Experience</cell></row><row><cell>P1</cell><cell>Freelancer</cell><cell>BE (EC)</cell><cell cols="2">Data Annotator</cell><cell>year 4 months</cell></row><row><cell>P2</cell><cell>Internship</cell><cell>BE (EC)</cell><cell cols="2">Data Annotator</cell><cell>month</cell></row><row><cell>P3</cell><cell>Employed-Full time</cell><cell>BE (Mechanical)</cell><cell cols="2">Data Quality Analyst</cell><cell>years 3 months</cell></row><row><cell>P4</cell><cell>Employed-Full time</cell><cell>B Tech</cell><cell cols="2">Data annotator</cell><cell>years</cell></row><row><cell>P5</cell><cell>Seeking for a job</cell><cell>B Tech (CS)</cell><cell cols="2">Engineer data operations</cell><cell>years</cell></row><row><cell>P6</cell><cell>Seeking for a job</cell><cell>BE</cell><cell cols="2">Annotator and validator</cell><cell>years</cell></row><row><cell>P7</cell><cell>Employed-Full time</cell><cell>B E (CS)</cell><cell cols="2">Senior Data annotator</cell><cell>year 6 months</cell></row><row><cell>P8</cell><cell>Employed-Full time</cell><cell>B E (CS)</cell><cell cols="2">Senior data annotator</cell><cell>year 2 months</cell></row><row><cell>P9</cell><cell>Seeking for a job</cell><cell>Masters (CS)</cell><cell cols="2">Senior executive</cell><cell>years 7 months</cell></row><row><cell>P10</cell><cell>Employed-Full time</cell><cell>BE (EC)</cell><cell cols="2">Data annotator</cell><cell>year</cell></row><row><cell>P11</cell><cell>Seeking for a job</cell><cell>BE (CS)</cell><cell cols="2">Process executive</cell><cell>year 6 months</cell></row><row><cell>P12</cell><cell>Employed-Full time</cell><cell>BE (EC)</cell><cell cols="3">Data annotation Engineer</cell><cell>year 2 months</cell></row><row><cell>P13</cell><cell>Employed-Full time</cell><cell>BE</cell><cell cols="2">Process executive</cell><cell>years 3 months</cell></row><row><cell>P14</cell><cell>Employed-Full time</cell><cell>BE (EC)</cell><cell cols="2">Data Engineer</cell><cell>years 9 months</cell></row><row><cell>P15</cell><cell>Employed-part time</cell><cell>BE</cell><cell cols="2">Annotation engineer</cell><cell>year 2 months</cell></row><row><cell>P16</cell><cell>Employed-part time</cell><cell>Pursuing MBA</cell><cell cols="2">Anotation Lead</cell><cell>years 5 months</cell></row><row><cell>P17</cell><cell>Employed-part time</cell><cell>BE</cell><cell cols="2">Annotation engineer</cell><cell>years 5 months</cell></row><row><cell>P18</cell><cell>Employed-Full time</cell><cell>BE</cell><cell cols="2">Data Engineer</cell><cell>years 3 months</cell></row><row><cell>P19</cell><cell>Employed-Full time</cell><cell>BE</cell><cell cols="2">Quality Analyst</cell><cell>years</cell></row><row><cell>P20</cell><cell>Seeking for a job</cell><cell>BE (Civil)</cell><cell cols="3">Data annotation Engineer</cell><cell>year 9 months</cell></row><row><cell>P21</cell><cell>Employed-Full time</cell><cell>B Tech</cell><cell cols="3">Trainee Graphic Designer</cell><cell>year 2 months</cell></row><row><cell>P22</cell><cell>Seeking for a job</cell><cell>BE (EC)</cell><cell cols="2">Senior associate</cell><cell>years 4 months</cell></row><row><cell>P23</cell><cell>Employed-Full time</cell><cell>BE (Mechanical)</cell><cell cols="2">Data Engineer</cell><cell>years 8 months</cell></row><row><cell>P24</cell><cell>Employed-Full time</cell><cell>BE (CS)</cell><cell cols="3">Data Annotation Engineer</cell><cell>year 2 months</cell></row><row><cell>P25</cell><cell>Employed-Full time</cell><cell>BE (Mechanical)</cell><cell cols="3">Data Annotation Engineer</cell><cell>year 6 months</cell></row><row><cell>P#</cell><cell>Position/Role</cell><cell></cell><cell></cell><cell>Country</cell><cell>Area</cell></row><row><cell>E1</cell><cell cols="2">Senior Associate Manager of Operations</cell><cell></cell><cell>Kenya</cell><cell>Data Annotation</cell></row><row><cell>E2</cell><cell cols="2">Program Manager for ML research</cell><cell></cell><cell>India</cell><cell>Mobile Application</cell></row><row><cell>E3</cell><cell>Global Director</cell><cell></cell><cell></cell><cell>Nepal</cell><cell>Data Annotation</cell></row><row><cell>E4</cell><cell cols="2">Product Manager (manages Data Annotation needs)</cell><cell></cell><cell>US</cell><cell>Machine Learning</cell></row><row><cell>E5</cell><cell cols="2">Head of Customer Recruit</cell><cell></cell><cell>Kenya</cell><cell>Data Annotation</cell></row><row><cell>E6</cell><cell cols="2">Senior Customer Success Engineer</cell><cell></cell><cell>India</cell><cell>Data Annotation</cell></row><row><cell>E7</cell><cell cols="2">Custom Recruit/President and CEO</cell><cell></cell><cell>Philippines</cell><cell>Data Annotation</cell></row><row><cell>E8</cell><cell cols="3">Adjunct Professor (manages Data Annotation Projects</cell><cell>US</cell><cell>Machine Learning</cell></row><row><cell></cell><cell>for research)</cell><cell></cell><cell></cell><cell></cell></row><row><cell>E9</cell><cell cols="2">Chief Operation Manager</cell><cell></cell><cell>Nigeria</cell><cell>Data Annotation</cell></row><row><cell>E10</cell><cell cols="2">Co-founder (manages Data Annotation Needs)</cell><cell></cell><cell>US</cell><cell>Machine Learning</cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_2"><head>Table 3 :</head><label>3</label><figDesc>Practitioner in AI/ML whose work depends on annotated datasets</figDesc><table><row><cell>P#</cell><cell>Role</cell><cell>Country</cell><cell>Nature of Work</cell><cell>Annotation Type</cell></row><row><cell>R1</cell><cell>Programme Manager</cell><cell>US</cell><cell>ML Product Development</cell><cell>Text, Image</cell></row><row><cell>R2</cell><cell>Research Scientist</cell><cell>Israel</cell><cell>Research</cell><cell>Text</cell></row><row><cell>R3</cell><cell>Research Scientist</cell><cell>UK</cell><cell>Research</cell><cell>Text, Audio</cell></row><row><cell>R4</cell><cell>Product Manager</cell><cell>Israel</cell><cell>Research</cell><cell>GIS Data, Image</cell></row><row><cell>R5</cell><cell>Consultant</cell><cell>US</cell><cell>ML Product Development</cell><cell>Image</cell></row><row><cell>R6</cell><cell>Technical Lead</cell><cell>US</cell><cell>ML Product Development</cell><cell>Text, Image</cell></row><row><cell>R7</cell><cell>Technical Lead</cell><cell>US</cell><cell>ML Product Development</cell><cell>Image, Text</cell></row><row><cell>R8</cell><cell>Product Manager</cell><cell>US</cell><cell>ML Product Development</cell><cell>Text</cell></row><row><cell>R9</cell><cell>Professor/Entrepreneur</cell><cell>US</cell><cell>Research/ML Product Develop-</cell><cell>Image, Text, Audio</cell></row><row><cell></cell><cell></cell><cell></cell><cell>ment</cell><cell></cell></row><row><cell>R10</cell><cell>Head of NLP</cell><cell>UK</cell><cell>ML Product Development</cell><cell>Text</cell></row><row><cell>R11</cell><cell>Data Scientist</cell><cell>US</cell><cell>ML Product Development</cell><cell>Text, Image</cell></row><row><cell>R12</cell><cell>CEO</cell><cell>US</cell><cell>ML Product Development</cell><cell>Text</cell></row></table></figure>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="1">There are also annotation companies that adopt an impact sourcing model, which aims to provide job opportunities to the population historically excluded from formal employment (e.g., marginalized communities in rural areas and people with disabilities) and prioritize worker training and developing local expertise.</note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="2">In this paper, we primarily focus on the annotators' perspectives and the interviews with the managers and requesters are used to supplement the annotators' stories.</note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="3">https://imerit.net/ 4 https://www.cloudfactory.com/ 5 https://www.sama.com/</note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="6">In this paper, we put a conscious emphasis on the annotators' stories. We present the industry experts' perspective to supplement and contrast the annotators' account (sections 5.1 to 5.3). In 5.4, we highlight a more distinct view from the data requesters to</note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="8">Quality and cost are the top two priority for ML practitioners, we present this in detail in section 5.4</note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="10">Expert 6 provided a particular interesting note, that in his company, the in house annotators in their US offices had been there for more than three years and one even had tenure as old as the company which was five years. While the annotators through third party were always changing</note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="11"> Dourish [21]  cites Schmidt<ref type="bibr" target="#b50">[52]</ref> to make the point that the most influential workplace studies in CSCW have been ones that did not harness themselves to specific design efforts or limit their discussion of implications to then-available design opportunities.</note>
+		</body>
+		<back>
+
+			<div type="acknowledgement">
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>ACKNOWLEDGMENTS</head><p>To all the participants who talked to us during a particularly challenging and confusing time. Without the kindness and generosity of these 'strangers', there shall be no research, in particular these qualitative ones.</p></div>
+			</div>
+
+			<div type="references">
+
+				<listBibl>
+
+<biblStruct xml:id="b0">
+	<analytic>
+		<title level="a" type="main">Bringing work back in</title>
+		<author>
+			<persName><forename type="first">R</forename><surname>Stephen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Gideon</forename><surname>Barley</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Kunda</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Organization science</title>
+		<imprint>
+			<biblScope unit="volume">12</biblScope>
+			<biblScope unit="page" from="76" to="95" />
+			<date type="published" when="2001">2001. 2001</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b1">
+	<analytic>
+		<title level="a" type="main">Search algorithms, hidden labour and information control</title>
+		<author>
+			<persName><forename type="first">Paško</forename><surname>Bilić</surname></persName>
+		</author>
+		<idno type="DOI">10.1177/2053951716652159</idno>
+		<ptr target="https://doi.org/10.1177/2053951716652159" />
+	</analytic>
+	<monogr>
+		<title level="j">Big Data &amp; Society</title>
+		<imprint>
+			<biblScope unit="volume">3</biblScope>
+			<biblScope unit="page">2053951716652159</biblScope>
+			<date type="published" when="2016">2016. 2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b2">
+	<analytic>
+		<title level="a" type="main">Making it Work, or Not: A Longitudinal Study of Career Trajectories Among Online Freelancers</title>
+		<author>
+			<persName><forename type="first">Allie</forename><surname>Blaising</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yasmine</forename><surname>Kotturi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Chinmay</forename><surname>Kulkarni</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Laura</forename><surname>Dabbish</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Proceedings of the ACM on Human-Computer Interaction</title>
+		<imprint>
+			<biblScope unit="volume">4</biblScope>
+			<biblScope unit="page" from="1" to="29" />
+			<date type="published" when="2021">2021. 2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b3">
+	<analytic>
+		<title level="a" type="main">New frontiers of philanthro-capitalism: Digital technologies and humanitarianism</title>
+		<author>
+			<persName><forename type="first">Ryan</forename><surname>Burns</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Antipode</title>
+		<imprint>
+			<biblScope unit="volume">51</biblScope>
+			<biblScope unit="page" from="1101" to="1122" />
+			<date type="published" when="2019">2019. 2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b4">
+	<analytic>
+		<title level="a" type="main">The ethnographic tradition and design</title>
+		<author>
+			<persName><forename type="first">Graham</forename><surname>Button</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Design studies</title>
+		<imprint>
+			<biblScope unit="volume">21</biblScope>
+			<biblScope unit="page" from="319" to="332" />
+			<date type="published" when="2000">2000. 2000</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b5">
+	<monogr>
+		<title level="m" type="main">The Production of Order and the Order of Production: Possibilities for Distributed Organisations, Work and Technology in the Print Industry</title>
+		<author>
+			<persName><forename type="first">Graham</forename><surname>Button</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Wes</forename><surname>Sharrock</surname></persName>
+		</author>
+		<idno type="DOI">10.1007/978-94-015-7372-6_1</idno>
+		<ptr target="https://doi.org/10.1007/978-94-015-7372-6_1" />
+		<imprint>
+			<date type="published" when="1997">1997</date>
+			<publisher>Springer</publisher>
+			<biblScope unit="page" from="1" to="16" />
+			<pubPlace>Netherlands, Dordrecht</pubPlace>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b6">
+	<monogr>
+		<ptr target="http://www.cac.gov.cn/2021-08/27/c_1631652502874117.htm.Accessedon08/24/2021" />
+		<title level="m">CAC. 2021. Internet Information Service Algorithm Recommendation Management Regulations{draft open for comment</title>
+				<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b7">
+	<analytic>
+		<title level="a" type="main">A Study of Freelancers&apos; Experiences with Gig Economy Platforms</title>
+		<author>
+			<persName><forename type="first">Juan Carlos Alvarez De La</forename><surname>Vega</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Marta</forename><forename type="middle">E</forename><surname>Cecchinato</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">John</forename><surname>Rooksby</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3411764.3445305</idno>
+		<ptr target="https://doi.org/10.1145/3411764.3445305" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2021 CHI Conference on Human Factors in Computing Systems</title>
+				<meeting>the 2021 CHI Conference on Human Factors in Computing Systems<address><addrLine>New York, NY, USA, Article</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computing Machinery</publisher>
+			<date type="published" when="2021">2021</date>
+			<biblScope unit="volume">455</biblScope>
+		</imprint>
+	</monogr>
+	<note>Why Lose Control?</note>
+</biblStruct>
+
+<biblStruct xml:id="b8">
+	<monogr>
+		<title level="m" type="main">Thinking about a career change during the coronavirus pandemic? Here are 8 things to consider -The Economic Times</title>
+		<author>
+			<persName><forename type="first">Devashish</forename><surname>Chakravarty</surname></persName>
+		</author>
+		<ptr target="https://economictimes.indiatimes.com/wealth/earn/thinking-about-a-career-change-during-the-coronavirus-pandemic-here-are-8-things-to-consider/articleshow/75371025.cms.Accessedon08/24/2021" />
+		<imprint>
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b9">
+	<analytic>
+		<title level="a" type="main">Data colonialism: Rethinking big data&apos;s relation to the contemporary subject</title>
+		<author>
+			<persName><forename type="first">Nick</forename><surname>Couldry</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ulises</forename><forename type="middle">A</forename><surname>Mejias</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Television &amp; New Media</title>
+		<imprint>
+			<biblScope unit="volume">20</biblScope>
+			<biblScope unit="page" from="336" to="349" />
+			<date type="published" when="2019">2019. 2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b10">
+	<monogr>
+		<title level="m" type="main">Doing design ethnography</title>
+		<author>
+			<persName><forename type="first">Andrew</forename><surname>Crabtree</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mark</forename><surname>Rouncefield</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Peter</forename><surname>Tolmie</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2012">2012</date>
+			<publisher>Springer</publisher>
+			<pubPlace>London</pubPlace>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b11">
+	<analytic>
+		<title level="a" type="main">How many bloody examples do you want?&quot;: fieldwork and generalisation</title>
+		<author>
+			<persName><forename type="first">Andy</forename><surname>Crabtree</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Peter</forename><surname>Tolmie</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mark</forename><surname>Rouncefield</surname></persName>
+		</author>
+		<idno type="DOI">10.1007/978-1-4471-5346-7_1</idno>
+		<ptr target="https://doi.org/10.1007/978-1-4471-5346-7_1" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 13th European Conference on Computer Supported Cooperative Work ECSCW 2013</title>
+				<editor>
+			<persName><forename type="first">W</forename><surname>Olav</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">Luigina</forename><surname>Bertelsen</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">Maria</forename><forename type="middle">Antonietta</forename><surname>Ciolfi</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">George Angelos</forename><surname>Grasso</surname></persName>
+		</editor>
+		<editor>
+			<persName><surname>Papadopoulos</surname></persName>
+		</editor>
+		<meeting>the 13th European Conference on Computer Supported Cooperative Work ECSCW 2013<address><addrLine>London</addrLine></address></meeting>
+		<imprint>
+			<publisher>Springer Verlag</publisher>
+			<date type="published" when="2013">2013</date>
+			<biblScope unit="page" from="1" to="20" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b12">
+	<monogr>
+		<title level="m" type="main">Invisible labor: Hidden work in the contemporary world</title>
+		<author>
+			<persName><forename type="first">Marion</forename><surname>Crain</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Winifred</forename><surname>Poster</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Miriam</forename><surname>Cherry</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2016">2016</date>
+			<publisher>University of California Press</publisher>
+			<pubPlace>Oakland, CA</pubPlace>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b13">
+	<monogr>
+		<title level="m" type="main">The Atlas of AI</title>
+		<author>
+			<persName><forename type="first">Kate</forename><surname>Crawford</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2021">2021</date>
+			<publisher>Yale University Press</publisher>
+			<pubPlace>Cambridge, MA</pubPlace>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b14">
+	<analytic>
+		<title level="a" type="main">Excavating AI: The politics of images in machine learning training sets</title>
+		<author>
+			<persName><forename type="first">Kate</forename><surname>Crawford</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Trevor</forename><surname>Paglen</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">AI &amp; SOCIETY</title>
+		<imprint>
+			<biblScope unit="volume">36</biblScope>
+			<biblScope unit="page" from="1" to="12" />
+			<date type="published" when="2021">2021. 2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b15">
+	<monogr>
+		<title level="m" type="main">In a season of layoffs, here&apos;s where jobs can be found</title>
+		<author>
+			<persName><forename type="first">Goutam</forename><surname>Das</surname></persName>
+		</author>
+		<ptr target="https://www.livemint.com/news/india/in-a-season-of-layoffs-here-s-where-jobs-can-be-found-11592915831636.html.Accessedon08/24/2021" />
+		<imprint>
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b16">
+	<analytic>
+		<title level="a" type="main">Corollary work: The mainstay of mobile knowledge work</title>
+		<author>
+			<persName><forename type="first">Aparecido Fabiano Pinatti De</forename><surname>Carvalho</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Made to Work</title>
+				<meeting><address><addrLine>Routledge, London</addrLine></address></meeting>
+		<imprint>
+			<date type="published" when="2020">2020</date>
+			<biblScope unit="page" from="30" to="58" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b17">
+	<analytic>
+		<title level="a" type="main">Crowdsourcing, the Gig-Economy, and the Law</title>
+		<author>
+			<persName><forename type="first">Stefano</forename><surname>Valerio De</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Comp. Lab. L. &amp; Pol&apos;y J</title>
+		<imprint>
+			<biblScope unit="volume">37</biblScope>
+			<biblScope unit="page">461</biblScope>
+			<date type="published" when="2015">2015. 2015</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b18">
+	<monogr>
+		<title level="m" type="main">2020. Data feminism</title>
+		<author>
+			<persName><forename type="first">D</forename><surname>Catherine</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Lauren</forename><forename type="middle">F</forename><surname>Klein</surname></persName>
+		</author>
+		<imprint>
+			<publisher>MIT press</publisher>
+			<pubPlace>Cambridge, MA</pubPlace>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b19">
+	<analytic>
+		<title level="a" type="main">Value-Laden Disciplinary Shifts in Machine Learning</title>
+		<author>
+			<persName><forename type="first">Ravit</forename><surname>Dotan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Smitha</forename><surname>Milli</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3351095.3373157</idno>
+		<ptr target="https://doi.org/10.1145/3351095.3373157" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2020 Conference on Fairness, Accountability, and Transparency</title>
+				<meeting>the 2020 Conference on Fairness, Accountability, and Transparency<address><addrLine>Barcelona, Spain; New York, NY, USA, 294</addrLine></address></meeting>
+		<imprint>
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+	<note>Association for Computing Machinery</note>
+</biblStruct>
+
+<biblStruct xml:id="b20">
+	<analytic>
+		<title level="a" type="main">Implications for Design</title>
+		<author>
+			<persName><forename type="first">Paul</forename><surname>Dourish</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/1124772.1124855</idno>
+		<ptr target="https://doi.org/10.1145/1124772.1124855" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the SIGCHI Conference on Human Factors in Computing Systems</title>
+				<meeting>the SIGCHI Conference on Human Factors in Computing Systems<address><addrLine>Montréal, Québec, Canada; New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computing Machinery</publisher>
+			<date type="published" when="2006">2006</date>
+			<biblScope unit="page" from="541" to="550" />
+		</imprint>
+	</monogr>
+	<note>CHI &apos;06)</note>
+</biblStruct>
+
+<biblStruct xml:id="b21">
+	<monogr>
+		<title level="m" type="main">Training self-driving cars for $1 an hour</title>
+		<author>
+			<persName><forename type="first">Vittoria</forename><surname>Elliott</surname></persName>
+		</author>
+		<ptr target="https://restofworld.org/2021/self-driving-cars-outsourcing/" />
+		<imprint>
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b22">
+	<analytic>
+		<title level="a" type="main">Flexible turtles and elastic octopi: Exploring agile practice in knowledge work</title>
+		<author>
+			<persName><forename type="first">Ingrid</forename><surname>Erickson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Deepti</forename><surname>Menezes</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Raghav</forename><surname>Raheja</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Thanushree</forename><surname>Shetty</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Computer Supported Cooperative Work</title>
+		<imprint>
+			<biblScope unit="volume">28</biblScope>
+			<biblScope unit="page" from="627" to="653" />
+			<date type="published" when="2019">2019. 2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b23">
+	<analytic>
+		<title level="a" type="main">The great freelancer movement: Eight reasons why your next job will be a project</title>
+		<author>
+			<persName><forename type="first">Thomas</forename><surname>Frey</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Journal of environmental health</title>
+		<imprint>
+			<biblScope unit="volume">76</biblScope>
+			<biblScope unit="page">46</biblScope>
+			<date type="published" when="2013">2013. 2013</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b24">
+	<analytic>
+		<title level="a" type="main">Datasheets for Datasets</title>
+		<author>
+			<persName><forename type="first">Timnit</forename><surname>Gebru</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jamie</forename><surname>Morgenstern</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Briana</forename><surname>Vecchione</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jennifer</forename><forename type="middle">Wortman</forename><surname>Vaughan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Hanna</forename><surname>Wallach</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Hal</forename><surname>Daumé</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Iii</forename></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kate</forename><surname>Crawford</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3458723</idno>
+		<ptr target="https://doi.org/10.1145/3458723" />
+	</analytic>
+	<monogr>
+		<title level="j">Commun. ACM</title>
+		<imprint>
+			<biblScope unit="volume">64</biblScope>
+			<biblScope unit="page" from="86" to="92" />
+			<date type="published" when="2021-11">2021. nov 2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b25">
+	<monogr>
+		<title level="m" type="main">Doing grounded theory: Issues and discussions</title>
+		<author>
+			<persName><forename type="first">G</forename><surname>Barney</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Glaser</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="1998">1998</date>
+			<publisher>Sociology Press</publisher>
+			<biblScope unit="volume">254</biblScope>
+			<pubPlace>Mill Valley, CA</pubPlace>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b26">
+	<monogr>
+		<title level="m" type="main">Discovery of grounded theory: Strategies for qualitative research</title>
+		<author>
+			<persName><forename type="first">G</forename><surname>Barney</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Anselm</forename><forename type="middle">L</forename><surname>Glaser</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Strauss</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2017">2017</date>
+			<pubPlace>Routledge, London</pubPlace>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b27">
+	<monogr>
+		<title level="m" type="main">Ghost work: How to stop Silicon Valley from building a new global underclass</title>
+		<author>
+			<persName><forename type="first">L</forename><surname>Mary</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Siddharth</forename><surname>Gray</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Suri</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2019">2019</date>
+			<publisher>Eamon Dolan Books</publisher>
+			<pubPlace>Boston, MA</pubPlace>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b28">
+	<analytic>
+		<title level="a" type="main">GROUP &apos;14). Association for Computing Machinery</title>
+		<author>
+			<persName><forename type="first">Neha</forename><surname>Gupta</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">David</forename><surname>Martin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Benjamin</forename><forename type="middle">V</forename><surname>Hanrahan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jacki O'</forename><surname>Neill</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2660398.2660403</idno>
+		<ptr target="https://doi.org/10.1145/2660398.2660403" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 18th International Conference on Supporting Group Work</title>
+				<meeting>the 18th International Conference on Supporting Group Work<address><addrLine>Sanibel Island, Florida, USA; New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<date type="published" when="2014">2014</date>
+			<biblScope unit="page" from="1" to="11" />
+		</imprint>
+	</monogr>
+	<note>Turk-Life in India</note>
+</biblStruct>
+
+<biblStruct xml:id="b29">
+	<monogr>
+		<author>
+			<persName><forename type="first">Sarah</forename><surname>Holland</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ahmed</forename><surname>Hosny</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sarah</forename><surname>Newman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Joshua</forename><surname>Joseph</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kasia</forename><surname>Chmielinski</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:1805.03677</idno>
+		<title level="m">The Dataset Nutrition Label: A Framework To Drive Higher Data Quality Standards</title>
+				<imprint>
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+	<note>cs.DB</note>
+</biblStruct>
+
+<biblStruct xml:id="b30">
+	<analytic>
+		<title level="a" type="main">Turkopticon: Interrupting Worker Invisibility in Amazon Mechanical Turk</title>
+		<author>
+			<persName><forename type="first">C</forename><surname>Lilly</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Irani</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Six Silberman</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2470654.2470742</idno>
+		<ptr target="https://doi.org/10.1145/2470654.2470742" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the SIGCHI Conference on Human Factors in Computing Systems</title>
+				<meeting>the SIGCHI Conference on Human Factors in Computing Systems<address><addrLine>Paris, France; New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computing Machinery</publisher>
+			<date type="published" when="2013">2013</date>
+			<biblScope unit="page" from="611" to="620" />
+		</imprint>
+	</monogr>
+	<note>CHI &apos;13)</note>
+</biblStruct>
+
+<biblStruct xml:id="b31">
+	<analytic>
+		<title level="a" type="main">Lessons from Archives: Strategies for Collecting Sociocultural Data in Machine Learning</title>
+		<author>
+			<persName><forename type="first">Eun</forename><surname>Seo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jo</forename></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Timnit</forename><surname>Gebru</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3351095.3372829</idno>
+		<ptr target="https://doi.org/10.1145/3351095.3372829" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2020 Conference on Fairness, Accountability, and Transparency</title>
+				<meeting>the 2020 Conference on Fairness, Accountability, and Transparency<address><addrLine>Barcelona, Spain; New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computing Machinery</publisher>
+			<date type="published" when="2020">2020</date>
+			<biblScope unit="page" from="306" to="316" />
+		</imprint>
+	</monogr>
+	<note>FAT* &apos;20)</note>
+</biblStruct>
+
+<biblStruct xml:id="b32">
+	<monogr>
+		<title level="m" type="main">How artificial intelligence is creating jobs in India, not just stealing them | India News -Times of India</title>
+		<author>
+			<persName><forename type="first">Sonam</forename><surname>Joshi</surname></persName>
+		</author>
+		<ptr target="https" />
+		<imprint>
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b33">
+	<monogr>
+		<title level="m" type="main">-the-pandemic-indias-middle-class-shrinks-and-povertyspreads-while-china-sees-smaller-changes/?</title>
+		<author>
+			<persName><forename type="first">Rakesh</forename><surname>Kochhar</surname></persName>
+		</author>
+		<ptr target="https://www.pewresearch.org/fact-tank/2021/03/18/in" />
+		<imprint>
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+	<note>India&apos;s middle class shrinks amid COVID-19 as China sees less change | Pew Research Center. utm_content=buffer1aa7f&amp;utm_ medium=social&amp;utm_source=twitter.com&amp;utm_campaign=buffer. Accessed on 09/06/2021</note>
+</biblStruct>
+
+<biblStruct xml:id="b34">
+	<monogr>
+		<title level="m" type="main">Discussion Paper on National Strategy for Artificial Intelligence</title>
+		<author>
+			<persName><forename type="first">Anab</forename><surname>Kumar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Punit</forename><surname>Shukla</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Aalekh</forename><surname>Sharan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Tanay</forename><surname>Mahindru</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2018-06">June 2018</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">Technical Report</note>
+</biblStruct>
+
+<biblStruct xml:id="b35">
+	<analytic>
+		<title level="a" type="main">Algorithmic ideology: How capitalist society shapes search engines. Information</title>
+		<author>
+			<persName><forename type="first">Astrid</forename><surname>Mager</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Communication &amp; Society</title>
+		<imprint>
+			<biblScope unit="volume">15</biblScope>
+			<biblScope unit="page" from="769" to="787" />
+			<date type="published" when="2012">2012. 2012</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b36">
+	<analytic>
+		<title level="a" type="main">Being a Turker</title>
+		<author>
+			<persName><forename type="first">David</forename><surname>Martin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Benjamin</forename><forename type="middle">V</forename><surname>Hanrahan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jacki</forename><forename type="middle">O</forename><surname>Neill</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Neha</forename><surname>Gupta</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2531602.2531663</idno>
+		<ptr target="https://doi.org/10.1145/2531602.2531663" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 17th ACM Conference on Computer Supported Cooperative Work; Social Computing</title>
+				<meeting>the 17th ACM Conference on Computer Supported Cooperative Work; Social Computing<address><addrLine>Baltimore, Maryland, USA; New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computing Machinery</publisher>
+			<date type="published" when="2014">2014</date>
+			<biblScope unit="page" from="224" to="235" />
+		</imprint>
+	</monogr>
+	<note>CSCW &apos;14)</note>
+</biblStruct>
+
+<biblStruct xml:id="b37">
+	<analytic>
+		<title level="a" type="main">Between subjectivity and imposition: Power dynamics in data annotation for computer vision</title>
+		<author>
+			<persName><forename type="first">Milagros</forename><surname>Miceli</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Martin</forename><surname>Schuessler</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Tianling</forename><surname>Yang</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Proceedings of the ACM on Human-Computer Interaction</title>
+		<imprint>
+			<biblScope unit="volume">4</biblScope>
+			<biblScope unit="page" from="1" to="25" />
+			<date type="published" when="2020">2020. 2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b38">
+	<analytic>
+		<title level="a" type="main">Documenting Computer Vision Datasets: An Invitation to Reflexive Data Practices</title>
+		<author>
+			<persName><forename type="first">Milagros</forename><surname>Miceli</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Tianling</forename><surname>Yang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Laurens</forename><surname>Naudts</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Martin</forename><surname>Schuessler</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Diana</forename><surname>Serbanescu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Alex</forename><surname>Hanna</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3442188.3445880</idno>
+		<ptr target="https://doi.org/10.1145/3442188.3445880" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2021 ACM Conference on Fairness, Accountability, and Transparency (Virtual Event, Canada) (FAccT &apos;21)</title>
+				<meeting>the 2021 ACM Conference on Fairness, Accountability, and Transparency (Virtual Event, Canada) (FAccT &apos;21)<address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computing Machinery</publisher>
+			<date type="published" when="2021">2021</date>
+			<biblScope unit="page" from="161" to="172" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b39">
+	<analytic>
+		<title level="a" type="main">How Data Science Workers Work with Data: Discovery, Capture, Curation, Design, Creation</title>
+		<author>
+			<persName><forename type="first">Michael</forename><surname>Muller</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ingrid</forename><surname>Lange</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Dakuo</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">David</forename><surname>Piorkowski</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jason</forename><surname>Tsay</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Q</forename><forename type="middle">Vera</forename><surname>Liao</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Casey</forename><surname>Dugan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Thomas</forename><surname>Erickson</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3290605.3300356</idno>
+		<ptr target="https://doi.org/10.1145/3290605.3300356" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2019 CHI Conference on Human Factors in Computing Systems</title>
+				<meeting>the 2019 CHI Conference on Human Factors in Computing Systems<address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computing Machinery</publisher>
+			<date type="published" when="2019">2019</date>
+			<biblScope unit="page" from="1" to="15" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b40">
+	<analytic>
+		<title level="a" type="main">Designing Ground Truth and the Social Life of Labels</title>
+		<author>
+			<persName><forename type="first">Michael</forename><surname>Muller</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Christine</forename><forename type="middle">T</forename><surname>Wolf</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Josh</forename><surname>Andres</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Michael</forename><surname>Desmond</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Narendra</forename><forename type="middle">Nath</forename><surname>Joshi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Zahra</forename><surname>Ashktorab</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Aabhas</forename><surname>Sharma</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kristina</forename><surname>Brimijoin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Qian</forename><surname>Pan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Evelyn</forename><surname>Duesterwald</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Casey</forename><surname>Dugan</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3411764.3445402</idno>
+		<ptr target="https://doi.org/10.1145/3411764.3445402" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2021 CHI Conference on Human Factors in Computing Systems</title>
+				<meeting>the 2021 CHI Conference on Human Factors in Computing Systems<address><addrLine>New York, NY, USA, Article</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computing Machinery</publisher>
+			<date type="published" when="2021">2021</date>
+			<biblScope unit="volume">94</biblScope>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b41">
+	<monogr>
+		<title level="m" type="main">Just and equitable data labelling: Towards a responsible AI supply chain</title>
+		<author>
+			<persName><forename type="first">Kushang</forename><surname>Sarayu Natarajan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Suha</forename><surname>Mishra</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Alex</forename><forename type="middle">S</forename><surname>Mohamed</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Taylor</surname></persName>
+		</author>
+		<ptr target="https://uploads.strikinglycdn.com/files/7d492f74-a51f-423b-bf5d-65c9f88eee06/AI_Data_Labelling_Report_DIGITAL_25FEB1033.pdf" />
+		<imprint>
+			<date type="published" when="2021-02-25">25 Feb 2021</date>
+			<pubPlace>Bangalore, India</pubPlace>
+		</imprint>
+	</monogr>
+	<note type="report_type">Technical Report. Aapti Institute</note>
+</biblStruct>
+
+<biblStruct xml:id="b42">
+	<analytic>
+		<title level="a" type="main">From Ethnographic Study to Mixed Reality: A Remote Collaborative Troubleshooting System</title>
+		<author>
+			<persName><forename type="first">Jacki O'</forename><surname>Neill</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Stefania</forename><surname>Castellani</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Frederic</forename><surname>Roulland</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Nicolas</forename><surname>Hairon</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Cornell</forename><surname>Juliano</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Liwei</forename><surname>Dai</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/1958824.1958859</idno>
+		<ptr target="https://doi.org/10.1145/1958824.1958859" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the ACM 2011 Conference on Computer Supported Cooperative Work</title>
+				<meeting>the ACM 2011 Conference on Computer Supported Cooperative Work<address><addrLine>Hangzhou, China; New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computing Machinery</publisher>
+			<date type="published" when="2011">2011</date>
+			<biblScope unit="page" from="225" to="234" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b43">
+	<analytic>
+		<title level="a" type="main">Data Vision: Learning to See Through Algorithmic Abstraction</title>
+		<author>
+			<persName><forename type="first">Samir</forename><surname>Passi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Steven</forename><surname>Jackson</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2998181.2998331</idno>
+		<ptr target="https://doi.org/10.1145/2998181.2998331" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2017 ACM Conference on Computer Supported Cooperative Work and Social Computing</title>
+				<meeting>the 2017 ACM Conference on Computer Supported Cooperative Work and Social Computing<address><addrLine>Portland, Oregon, USA; New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computing Machinery</publisher>
+			<date type="published" when="2017">2017</date>
+			<biblScope unit="page" from="2436" to="2447" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b44">
+	<monogr>
+		<title level="m" type="main">Fieldwork for design: theory and practice</title>
+		<author>
+			<persName><forename type="first">David</forename><surname>Randall</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Richard</forename><surname>Harper</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mark</forename><surname>Rouncefield</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2007">2007</date>
+			<publisher>Springer Science &amp; Business Media</publisher>
+			<pubPlace>London</pubPlace>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b45">
+	<analytic>
+		<title level="a" type="main">Standing Out from the Crowd: Emotional Labor, Body Labor, and Temporal Labor in Ridesharing</title>
+		<author>
+			<persName><forename type="first">Noopur</forename><surname>Raval</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Paul</forename><surname>Dourish</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2818048.2820026</idno>
+		<ptr target="https://doi.org/10.1145/2818048.2820026" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 19th ACM Conference on Computer-Supported Cooperative Work &amp; Social Computing</title>
+				<meeting>the 19th ACM Conference on Computer-Supported Cooperative Work &amp; Social Computing<address><addrLine>San Francisco, California, USA; New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<date type="published" when="2016">2016</date>
+			<biblScope unit="page" from="97" to="107" />
+		</imprint>
+	</monogr>
+	<note>CSCW &apos;16). Association for Computing Machinery</note>
+</biblStruct>
+
+<biblStruct xml:id="b46">
+	<analytic>
+		<title level="a" type="main">Who Are the Crowdworkers? Shifting Demographics in Mechanical Turk</title>
+		<author>
+			<persName><forename type="first">Joel</forename><surname>Ross</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Lilly</forename><surname>Irani</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Six</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Andrew</forename><surname>Silberman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Bill</forename><surname>Zaldivar</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Tomlinson</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/1753846.1753873</idno>
+		<ptr target="https://doi.org/10.1145/1753846.1753873" />
+	</analytic>
+	<monogr>
+		<title level="m">CHI &apos;10 Extended Abstracts on Human Factors in Computing Systems</title>
+				<meeting><address><addrLine>Atlanta, Georgia, USA; New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computing Machinery</publisher>
+			<date type="published" when="2010">2010</date>
+			<biblScope unit="page" from="2863" to="2872" />
+		</imprint>
+	</monogr>
+	<note>CHI EA &apos;10)</note>
+</biblStruct>
+
+<biblStruct xml:id="b47">
+	<analytic>
+		<title level="a" type="main">Everyone Wants to Do the Model Work, Not the Data Work&quot;: Data Cascades in High-Stakes AI</title>
+		<author>
+			<persName><forename type="first">Nithya</forename><surname>Sambasivan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Shivani</forename><surname>Kapania</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Hannah</forename><surname>Highfill</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Diana</forename><surname>Akrong</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Praveen</forename><surname>Paritosh</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Lora</forename><forename type="middle">M</forename><surname>Aroyo</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3411764.3445518</idno>
+		<ptr target="https://doi.org/10.1145/3411764.3445518" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2021 CHI Conference on Human Factors in Computing Systems</title>
+				<meeting>the 2021 CHI Conference on Human Factors in Computing Systems<address><addrLine>Yokohama, Japan; New York, NY, USA, Article</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computing Machinery</publisher>
+			<date type="published" when="2021">2021</date>
+			<biblScope unit="volume">15</biblScope>
+		</imprint>
+	</monogr>
+	<note>CHI &apos;21)</note>
+</biblStruct>
+
+<biblStruct xml:id="b48">
+	<analytic>
+		<title level="a" type="main">How We&apos;ve Taught Algorithms to See Identity: Constructing Race and Gender in Image Databases for Facial Analysis</title>
+		<author>
+			<persName><forename type="first">Kandrea</forename><surname>Morgan Klaus Scheuerman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Caitlin</forename><surname>Wade</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jed</forename><forename type="middle">R</forename><surname>Lustig</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Brubaker</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3392866</idno>
+		<ptr target="https://doi.org/10.1145/3392866" />
+	</analytic>
+	<monogr>
+		<title level="j">Proc. ACM Hum.-Comput</title>
+		<imprint>
+			<biblScope unit="volume">35</biblScope>
+			<date type="published" when="2020-05">2020. May 2020</date>
+		</imprint>
+	</monogr>
+	<note>Interact. 4, CSCW1, Article 058</note>
+</biblStruct>
+
+<biblStruct xml:id="b49">
+	<monogr>
+		<title/>
+		<author>
+			<persName><forename type="first">Ronald</forename><surname>Schmelzer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kathleen</forename><surname>Walch</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Megan</forename><surname>Yarbrough</surname></persName>
+		</author>
+		<ptr target="https://www.cognilytica.com/document/data-preparation-labeling-for-ai-2020/" />
+		<imprint>
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b50">
+	<monogr>
+		<title level="m" type="main">The critical role of workplace studies in CSCW</title>
+		<author>
+			<persName><forename type="first">Kjeld</forename><surname>Schmidt</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2000">2000</date>
+			<biblScope unit="page" from="141" to="149" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b51">
+	<analytic>
+		<title level="a" type="main">Algorithms and Economic Justice: A Taxonomy of Harms and a Path Forward for the Federal Trade Commission</title>
+		<author>
+			<persName><forename type="first">Rebecca</forename><forename type="middle">Kelly</forename><surname>Slaughter</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Janice</forename><surname>Kopec</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mohamad</forename><surname>Batal</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Yale Journal of Law &amp; Technology</title>
+		<imprint>
+			<biblScope unit="volume">23</biblScope>
+			<biblScope unit="page" from="S1" to="S1" />
+			<date type="published" when="2020">2020. 2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b52">
+	<analytic>
+		<title level="a" type="main">Making work visible</title>
+		<author>
+			<persName><forename type="first">Lucy</forename><surname>Suchman</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Commun. ACM</title>
+		<imprint>
+			<biblScope unit="volume">38</biblScope>
+			<biblScope unit="page" from="56" to="64" />
+			<date type="published" when="1995">1995. 1995</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b53">
+	<monogr>
+		<title level="m" type="main">Amid Automation, Will We See More Data Labelling Jobs In India?</title>
+		<author>
+			<persName><forename type="first">Anu</forename><surname>Thomas</surname></persName>
+		</author>
+		<ptr target="https://analyticsindiamag.com/will-we-see-more-data-labelling-jobs-in-india/.Accessedon08/24/2021" />
+		<imprint>
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b54">
+	<analytic>
+		<title level="a" type="main">Flash Organizations: Crowdsourcing Complex Work by Structuring Crowds As Organizations</title>
+		<author>
+			<persName><forename type="first">Melissa</forename><forename type="middle">A</forename><surname>Valentine</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Daniela</forename><surname>Retelny</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Alexandra</forename><surname>To</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Negar</forename><surname>Rahmati</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Tulsee</forename><surname>Doshi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Michael</forename><forename type="middle">S</forename><surname>Bernstein</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3025453.3025811</idno>
+		<ptr target="https://doi.org/10.1145/3025453.3025811" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2017 CHI Conference on Human Factors in Computing Systems</title>
+				<meeting>the 2017 CHI Conference on Human Factors in Computing Systems<address><addrLine>Denver, Colorado, USA; New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computing Machinery</publisher>
+			<date type="published" when="2017">2017</date>
+			<biblScope unit="page" from="3523" to="3537" />
+		</imprint>
+	</monogr>
+	<note>CHI &apos;17)</note>
+</biblStruct>
+
+<biblStruct xml:id="b55">
+	<analytic>
+		<title level="a" type="main">An Examination of the Work Practices of Crowdfarms</title>
+		<author>
+			<persName><forename type="first">Yihong</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Konstantinos</forename><surname>Papangelis</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Michel</forename><surname>Saker</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ioanna</forename><surname>Lykourentzou</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Vassilis-Javed</forename><surname>Khan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Alan</forename><surname>Chamberlain</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jonathan</forename><surname>Grudin</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3411764.3445603</idno>
+		<ptr target="https://doi.org/10.1145/3411764.3445603" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2021 CHI Conference on Human Factors in Computing Systems</title>
+				<meeting>the 2021 CHI Conference on Human Factors in Computing Systems<address><addrLine>New York, NY, USA, Article</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computing Machinery</publisher>
+			<date type="published" when="2021">2021</date>
+			<biblScope unit="volume">139</biblScope>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b56">
+	<monogr>
+		<title level="m" type="main">The Status of Chinese Data Annotation Market Needs in 2021 -An industry research report</title>
+		<author>
+			<persName><forename type="first">Weijia</forename><surname>Zhang</surname></persName>
+		</author>
+		<ptr target="https://www.qianzhan.com/analyst/detail/220/210508-8792d1e4.html.Accessedon08/24/2021" />
+		<imprint>
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+				</listBibl>
+			</div>
+		</back>
+	</text>
+</TEI>

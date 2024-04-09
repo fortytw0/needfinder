@@ -1,0 +1,951 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xml:space="preserve" xmlns="http://www.tei-c.org/ns/1.0" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.com/kermitt2/grobid/master/grobid-home/schemas/xsd/Grobid.xsd"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+	<teiHeader xml:lang="en">
+		<fileDesc>
+			<titleStmt>
+				<title level="a" type="main">Understanding the Aesthetic Evolution of Websites: Towards a Notion of Design Periods</title>
+			</titleStmt>
+			<publicationStmt>
+				<publisher/>
+				<availability status="unknown"><licence/></availability>
+			</publicationStmt>
+			<sourceDesc>
+				<biblStruct>
+					<analytic>
+						<author>
+							<persName><forename type="first">Wen</forename><surname>Chen</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="department">School of Informatics and Computing</orgName>
+								<orgName type="institution">Indiana University Bloomington</orgName>
+								<address>
+									<region>Indiana</region>
+									<country key="US">USA</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">David</forename><forename type="middle">J</forename><surname>Crandall</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="department">School of Informatics and Computing</orgName>
+								<orgName type="institution">Indiana University Bloomington</orgName>
+								<address>
+									<region>Indiana</region>
+									<country key="US">USA</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Norman</forename><surname>Makoto</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="department">School of Informatics and Computing</orgName>
+								<orgName type="institution">Indiana University Bloomington</orgName>
+								<address>
+									<region>Indiana</region>
+									<country key="US">USA</country>
+								</address>
+							</affiliation>
+						</author>
+						<title level="a" type="main">Understanding the Aesthetic Evolution of Websites: Towards a Notion of Design Periods</title>
+					</analytic>
+					<monogr>
+						<imprint>
+							<date/>
+						</imprint>
+					</monogr>
+					<idno type="DOI">10.1145/3025453.3025607</idno>
+				</biblStruct>
+			</sourceDesc>
+		</fileDesc>
+		<encodingDesc>
+			<appInfo>
+				<application version="0.7.1" ident="GROBID" when="2022-07-22T04:57+0000">
+					<desc>GROBID - A machine learning software for extracting information from scholarly documents</desc>
+					<ref target="https://github.com/kermitt2/grobid"/>
+				</application>
+			</appInfo>
+		</encodingDesc>
+		<profileDesc>
+			<textClass>
+				<keywords>
+					<term>H.5.m. Information Interfaces and Presentation (e.g. HCI): Miscellaneous Design periods</term>
+					<term>interaction design criticism</term>
+					<term>websites</term>
+					<term>art</term>
+				</keywords>
+			</textClass>
+			<abstract>
+<div xmlns="http://www.tei-c.org/ns/1.0"><p>In art and music, time periods like "classical" and "impressionist" are powerful means for academics and practitioners to compare and contrast artifacts that share aesthetics or philosophies. While web designs have undergone changes for 25 years, we lack theories to describe or explain these changes. In this paper, we take a first step towards identifying and understanding the design periods of websites. Drawing from humanistic HCI methods, subject experts of web design critically analyzed a dataset of prominent websites whose lifetimes span over a decade. These informed judgments reveal a set of key markers that signal shifts in design periods. For instance, advances in display technologies and changes in company strategies help explain how design periods demarcated by particular layout templates and navigation models arise. We suggest that designers and marketers can draw inspiration from website designs curated into design periods.</p></div>
+			</abstract>
+		</profileDesc>
+	</teiHeader>
+	<text xml:lang="en">
+		<body>
+<div xmlns="http://www.tei-c.org/ns/1.0"><p>To describe the historical narrative of art, historians and critics have developed rich notions of "periods" or "movements" that describe time intervals when artists and their work have shared a particular aesthetic style or philosophy (e.g. classical, romantic, impressionist) <ref type="bibr" target="#b25">[22,</ref><ref type="bibr" target="#b35">31,</ref><ref type="bibr" target="#b36">32]</ref>. Although the analogy is not perfect-changes on the web may be driven more by evolution in technology than in changes in aesthetic style, for exampleidentifying "periods" of online design may nevertheless be useful to better understand its evolution over time. Periods enable critics to coherently compare and contrast works according to their particular qualities (e.g., impressionist art emphasizes tone color and atmosphere). By defining a period, techniques (e.g., screen printing), styles (e.g., cubism), tools (e.g., camera obscura), and vocabulary (e.g., found art) are identified, and become portable concepts that are appropriated, built-upon, and even rejected (e.g., impressionist music as a reaction to romantic music) by future artists. Periods posit a definition of art that is institutional <ref type="bibr" target="#b1">[3]</ref>; in other words, art is created not in isolation but are "joint products of all the people who cooperate via an art world's characteristic conventions to bring works like that into existence" <ref type="bibr">[6, p.35]</ref>. Thus artists must work within the social context, conventions, and histories of critics, galleries, the public, and other members of the art world so that what they do can be legitimately regarded as art.</p><p>Just as artists find periods useful in stimulating their own work, researchers in human-computer interaction have argued that designers should be aware of the designed artifacts that surround them, using tools like annotated portfolios of designed artifacts to compare, contrast, and describe the characteristics, aesthetics, and uses of existing designs <ref type="bibr" target="#b10">[9,</ref><ref type="bibr" target="#b20">18]</ref>. By amalgamating artifacts into various categories or designs, these portfolios help HCI practitioners see particular "styles" of design that arise from a single organization. In fact, Gaver and Bowers <ref type="bibr" target="#b20">[18]</ref> argue that annotated portfolios resonate with HCI designers because they replicate practices that artists use to articulate and motivate their work. Portfolios not only inform designers of the landscape of interactive artifacts, but can also "inspire...as a reference point for future design work" <ref type="bibr" target="#b20">[18]</ref>. Some work has suggested examining design styles from a historic perspective, for example looking at past designs (e.g. patents) to help reflect on what it means to have or design an innovative prototype <ref type="bibr" target="#b12">[11,</ref><ref type="bibr">37]</ref>. Past designs also reveal old interaction styles that gave rise to rich experiences or sensations that have been lost, and interaction designers may find inspiration by reviving these experiences in today's users <ref type="bibr" target="#b29">[25,</ref><ref type="bibr">39]</ref>.</p><p>Thus it may be worthwhile to holistically reflect upon multiple design styles over time, similar to how artists may reflect on or respond to multiple styles and periods. Meggs et al. <ref type="bibr" target="#b26">[23]</ref> provide an expansive history of graphic design from Egyptian cuneiform to web and interactive design. Yet, unlike in art, we are not aware of any formal effort to describe or characterize design periods of the web, despite its 25-year history. Indeed, as <ref type="bibr">Bardzell and Bardzell [5,</ref><ref type="bibr">p.18]</ref> note, "[m]any HCI systems are presented with little to no reference to their own historical genealogies...Yet other design fields...do have significant histories, and practicing designers know how to use them." We see a need to understand the patterns of change in web design, to explain how and why certain designs have stayed while others have faded, and to provide insight into past, present, and future design practices. Analogous to annotated portfolios, we believe that characterizing and capturing online design periods could be valuable to website designers. For example, designers could search for websites belonging to the same design period as Apple's, or find sites that embrace the hacker aesthetic of Reddit. Marketers could draw from design periods that have proven successful in the past. We also imagine design periods to be useful beyond HCI. Organizational scholars could examine the relationship between innovation and design: e.g., are companies that are trend setters in the "art world" of web design (by starting new web design periods) more innovative? Political scientists could examine whether design periods represent particular values (e.g., conservatism vs liberalism).</p><p>In this paper, we draw from methods of Humanistic HCI <ref type="bibr" target="#b4">[5]</ref> to take first steps towards developing a concept of design periods for websites. We assembled a dataset of nearly 14,000 snapshots of 9 prominent websites over a 13 year period using the Internet Archive <ref type="bibr">[2]</ref>. We then created posters showing each website's appearance at regular temporal intervals. Blending think-aloud [24] and interview techniques <ref type="bibr" target="#b41">[36]</ref> with interaction criticism <ref type="bibr" target="#b2">[4]</ref>, we facilitated sessions asking recruited experts-web designers and developers and visual artists-to offer a critical analysis of the website designs, guiding them to identify design periods (as they judged them), to describe similarities and differences of periods across time, to articulate potential period names, and to form justified positions on the forces that drove shifts from one period to another.</p><p>Our findings make three key contributions towards the notion of design periods. Although preliminary and based on a small sample of websites and experts, these findings nevertheless lay the groundwork for the longer-term goal of understanding how web design has evolved over time. First, our findings suggest that there are several key markers of web design periods. Our experts identified differences in visually-identifiable properties of websites that served to separate design periods from one another, specifically information architectural models (the underlying navigation model afforded by the design), visual flavors (aesthetic qualities of the design), and media composition (ratios of different types of media like video and text). A shift in marker (e.g., highlighting search bars over navigation bars) suggested a shift in design periods. Second, drawing from our experts' responses and experiences with web design, we identify possible factors that suggest why these markers instigated new design periods. Increased information density requirements, new technological innovations, changing company strategies, and design fashions helped create new design periods. Third, we take a preliminary step towards describing the history of the web according to global design periods, suggesting four periods in particular: Rudimentary, Chaos, Formative, and Condensation (using names suggested by our experts). We close by discussing implications and limitations of our research in understanding web design periods.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>RELATED WORK</head><p>Science and technology studies, particularly studies on the social construction of technology (SCOT) <ref type="bibr" target="#b30">[26]</ref>, have emphasized the historical nature of design and that the social, cultural, and institutional context of artifacts has a key role in shaping the function, intent, and look of designs. The evolution of technologies such as lighting <ref type="bibr" target="#b9">[8]</ref> and automobiles <ref type="bibr" target="#b22">[20]</ref> have been probed through the lens of SCOT. These studies have revealed the sometimes surprising role that humans have in the designs and uses (e.g., uses that are both unintended or perhaps subtly intended <ref type="bibr" target="#b44">[38]</ref> by the designers themselves) of technology.</p><p>In HCI, there have been calls to examine the history of interactive designs. <ref type="bibr">Wyche et al. [39]</ref> examined patents and popular literature archives to derive cultural themes in domestic technologies. Leahu et al. <ref type="bibr" target="#b23">[21]</ref> reviewed challenges in AI's history and how solutions to such challenges might also apply to ubiquitous computing. Buxton gives a historical account of touch screens <ref type="bibr" target="#b12">[11]</ref>, observing that this approach can "shed light on the nature of innovation." The Buxton Collection [1] is a website featuring historical collections of designs (e.g., computer mice), but does not present them in any systematic fashion nor offer any analysis of the designs.</p><p>Two particular lines of work examining style have direct relevance to our own interest in design periods. Øritsland and Burr's <ref type="bibr" target="#b29">[25]</ref> research seeks to understand the concept of style over time by focusing on physical products with small displays and limited buttons (e.g., thermostats). Looking at product lines from a single company, experts were able to identify distinct interaction style periods based on how they differed on three properties: new technological innovations, company spirit, and current societal trends. We refer to and build upon some of these attributes of style periods in our own findings. Bertelsen and Pold [7] present an interaction criticism guide to interrogate interaction designs. Through use of the guide, they examined how students in multimedia education both identify and find motivations behind interaction styles of applications such as Microsoft Word and a web-based calendar system that draw from baroque and renaissance architecture. While our work does not explicitly use this guide, we similarly facilitated sessions with experts to draw out their skilled judgments on what counts for design periods in digital artifacts.</p><p>While the web is arguably the most encountered interaction design today, little work has systematically examined the evolution of its design. Visualization tools have been developed to see how webpage content has changed (e.g., in Wikipedia <ref type="bibr" target="#b40">[35]</ref>). Similar to how past work has examined visualizing the evolution of web ecologies <ref type="bibr" target="#b14">[13]</ref>, we are also concerned with the evolution of design ecologies (trends spanning multiple websites). Our methods find inspiration from work that uses visualizations as a method to elicit rich feedback from users <ref type="bibr" target="#b13">[12,</ref><ref type="bibr" target="#b38">34]</ref>.</p><p>Lastly, a body of work examines the relation of websites' particular visual qualities to factors such as visual appeal and cultural dimensions. Work by Reinecke et al. <ref type="bibr" target="#b33">[29]</ref> has made great strides in operationalizing the aesthetic qualities of a website. They found that image metrics such as text/non-text areas and colorfulness significantly impact the perception of visual complexity, and that visual appeal dropped with increased complexity. We hope to build upon Reinecke et al.'s work by adding new factors that may help operationalize the visual qualities of websites. In a later study, Reinecke and Gajos <ref type="bibr" target="#b32">[28]</ref> examined website preferences from around the world, finding, for example, that visitors from Finland preferred less colorful websites. They found that older participants preferred more complex websites and speculate that "older users might simply be more used to text-heavy 'web 1.0' designs." This web 1.0 design, we argue, could be regarded as a distinct design period.</p><p>While not a rigorous study, Cook and Finlayson <ref type="bibr" target="#b16">[14]</ref> conduct a study similar to ours that examines qualitative differences of websites, in particular examining how design aspects map to cultural constructs like individuality. They suggest that particular images that take up prominent space reflect on a society's individualism or lack thereof. We similarly ask our informants to identify important aspects of websites, but in the context of identifying components that mark off design periods.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>INTERACTION DESIGN CRITICISM SESSIONS</head><p>We sought to take a first step towards understanding what it might mean to talk about periods of design for websites. While a humanistic approach would prioritize our own sensibilities as academics actively engaged in modes of criticism such as discourse analysis and close reading, we felt a need to explicitly incorporate the expertise of practitioners. Practitioners and researchers are often mentioned as the beneficiaries of research results, but, when viewed as experts, they provide different but complimentary ways to understand how to situate a work within a notion of periods-our approach blends our abilities to do and facilitate interaction criticism <ref type="bibr" target="#b2">[4]</ref> with the designers' long-term honed, practical knowledge of designing websites. For instance, we reason that designers who have worked in industry can judge the underlying organizational motivations behind design periods better than academics.</p><p>We give voice to the judgments of our practitioners via what we call interaction design criticism sessions. We generated large posters that chronologically showed a website's appearance over time. Practitioner experts were guided by the authors, experts in criticism, to treat the poster as a gallery of art pieces. In essence, these galleries were collections of technological artifacts subject to interaction criticism, or close readings of designs <ref type="bibr" target="#b2">[4]</ref>. We facilitated these sessions by introducing stylistic periods as conventionally taught in humanities (e.g., music appreciation <ref type="bibr" target="#b35">[31,</ref><ref type="bibr" target="#b36">32]</ref>) and engaging in practices of interaction criticism relevant to periods such as explicating an artifact's position in history, reception, designers, interface qualities, social context, subject matter, and exemplars. We strove to create an egalitarian environment where dialogue between academic and practitioner is discursive, interpretative, and evolving.</p><p>Bardzell and Bardzell [5, p.52-53] discuss a humanistic methodology in HCI by which critical and social scientific approaches are blended. The examples they provide "blend" by doing critical analysis of empirical data. Analogously, our interaction design criticism sessions represent a blend of empirical data collections methods-semi-structured interviews <ref type="bibr" target="#b41">[36]</ref> and think-aloud techniques-with interaction design criticism. We differ in that our analysis is also grounded in the critiques proffered by our subject experts, practitioners with extensive experience in web development, design, and art.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Subject Expert Recruitment</head><p>From September to December 2015, we recruited 10 practitioners from four categories of expertise-web designer, web developer, user interface developer, visual artist-to seek diverse viewpoints on the aesthetic evolution of web design. These categories reflect our interest in critiques from experts to interpret aesthetic qualities of websites, websites as a visual art form, or the web's underlying technologies. All experts had at least two years of professional experience (see Table <ref type="table">1</ref>).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Posters</head><p>Our experts did close readings of large posters (about 1m wide by 2m tall) that chronologically showed a subset of snapshots of a website's appearance over time. We used the Internet Archive's Wayback Machine [2] as the source of our snapshots. This service hosts over 150 billion archived pages, dating back as early as 1996, though its archives are not complete and contain errors (e.g., some images hosted on external sites have disappeared). We manually identified a diverse set of 9 major websites which have been sufficiently popular to be representative of mainstream design across time and for which reasonably complete, long-term archives existed. We downloaded all available HTML snapshots for each page, averaging about 4,000 archives per site. We then rendered each HTML page to a PDF using an automated script. Finally, we manually reviewed the PDFs, removing renderings that appeared grossly incorrect (e.g., missing major components). This yielded 13,963 high quality snapshots of nine web pages, summarized in Table <ref type="table" target="#tab_0">2</ref>. Our posters represent a variety of different types of sites, including media (AOL, MSN, Yahoo), financial (Bloomberg), science (SLAC, the Stanford Linear Accelerator Center), technology (Cisco, Sun), government (White House), and entertainment (IMDB). We do not claim that this set of 9 pages is statistically representative of the entire web-it is focused on English corporate and government websites, for example, and a much larger set of sites that were more methodically sampled would be needed to assess its generality, but it nevertheless includes a reasonably diverse set of popular websites, consistent with the goal of taking first steps towards understanding the evolution of web design.</p><p>Our large posters allowed experts to view each page in detail and to compare different years of design; this gave experts both a local and global view of a page's evolution. The posters were hung on a wall, and our experts were encouraged to sketch on the posters directly to help them organize, record,  and articulate their critiques. We archived these marked-up posters after the interviews. An example of a poster is shown in Figure <ref type="figure" target="#fig_0">1</ref>. For each poster, we showed a subset of screenshots for a given website along with the date, spaced 3 months apart. When pages were not available on the required day, we showed the closest page within 7 days, or if no screenshot was available at all for that week, we showed the words "No Data."</p><p>We randomly assigned two or three posters to each expert such that each of the 9 sites was viewed by at least two experts.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Session Procedure</head><p>We began our interaction design criticism sessions by defining our terminology, including a broad explanation of design periods by analogy with art history terms. For each of their assigned websites, we asked the subject expert to critically interpret our poster and to draw on their experience and practices to skillfully identify and group together periods of similar design. We paid close attention to eliciting experts to articulate, reason about, and judge the qualities that were shared by each website design in each period, and then how each period was different from its neighbors. This allowed experts to consider periods as local, independent entities, while also considering their globally dependent nature on other periods. Lastly, we asked our experts to give a descriptive name for each period.</p><p>We also asked follow up questions such as: what makes a design endure, why do certain patterns appear and disappear, how did one period influence the next, do you had a favorite period and why, and predict the future designs for each website. We closed by asking our experts whether they could identify any "global" design patterns or periods that seemed to apply to the broader web and not just to each individual site.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>FINDINGS</head><p>Our study shows that experts identified common themes on how web design has changed over time and the forces that have driven these changes. It also provided insight that might lead to a first step towards a notion of web design periods.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Key Markers of Web Design Periods</head><p>Our experts described web design periods in terms of particular attributes, which we call markers because they serve as useful ways to characterize the differences between other periods. Three specific types of markers came up repeatedly in our sessions: (1) information architecture models, or the ways in which websites afford navigation, (2) visual flavor, or the aesthetic and visual design elements of the website, and (3) the media composition, or the extent to which certain media such as text, images, and video make up a website's content. We now discuss findings for each of these markers in detail.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Information Architecture Models</head><p>We found that many design changes were driven by the changing navigation models that websites emphasized over time.</p><p>In other words, particular elements on websites give cues to users on the best ways to navigate and absorb information. All of our experts mentioned that the types of browsing behavior intended by these elements was a key marker of a site's design period. In fact, W2 felt that information architecture models were the strongest general marker of design periods across websites (i.e., independent of a particular website's company strategy or specific visual style). Participants identified the menus used for navigation and for search as two specific web elements that are critical for conveying information architecture models across nearly any design period. Changes in the relative prominence of these two elements seem to reflect changes in both the nature of website content and user expectations over time.</p><p>The navigation bar is an organized list of the site's main content, and conveys the information architecture model of the website. Nine of our participants mentioned changes in navigation, and five explicitly identified navigation bars as the primary marker for grouping design periods. D2 stated that navigation bars made websites clearer and less wordy. W2 explained the importance of the navigation bar when examining the snapshots of IMDB, a subset of which is shown in Figure <ref type="figure">2</ref> felt the position and orientation of the navigation bar limited its scalability, so that new links could not be easily added, because the height of the bar had to match the height of the photo next to it. Better-designed bars are usually located horizontally either below the main logo or at the bottom of the page, vertically on the left or right sidebar, or in a table near the center of the page. Card-like designs with tabs were common as well, as shown in Figure <ref type="figure">2(c</ref>). Among these variations, six experts (W1, D1, D2, D3, U1, U2) preferred the left sidebar, while the center was the the least preferred position of navigation because it was easily overlooked. We can see this consensus of the experts is also widely used in current web designs.</p><p>Search bars appeared in eight of our nine websites around the year 2000. Experts noticed that after 2010, many websites enlarged the search bar and moved them to a prominent position at the top (e.g., for IMDB in Figure <ref type="figure">2</ref> Other signals of information architecture models were also mentioned by our subjects. Experts suggested that website architectures have over time reduced the content on the main page, simplifying them to emphasize a few key products or messages. A highlight component (e.g., the large image in the 2012 IMDB site of Figure <ref type="figure">2(a)</ref>) is now a common approach to quickly convey the spirit, tone, and main message or product of the website, as explained by D1:</p><p>The main feature (representing their current main product) is highlighted...other information on the main page are (text) links. Those large images (representing the main feature) are designed to be very appealing. You know, we may not read the text but we remember the pictures subconsciously.</p><p>Experts noted that the highlight can take various forms, including a prominent image banner or a group of images without text. Recent designs of AOL and MSN in Figure <ref type="figure" target="#fig_8">5</ref> use an image with a short caption for highlighted news stories, while stories of importance just have text links. flavor we might suspect, experts identified the aesthetic properties of websites as a strong indicator of design periods. Our artist subgroup was quick to notice even minor visual changes of websites over time. Three elements were each mentioned by at least three experts: (1) color scheme, (2) overall layout, and (3) quality or refinement of visual elements.</p><p>Color schemes portray a certain feeling of style and aesthetics to users. For example, flat design <ref type="bibr" target="#b31">[27]</ref>, which makes heavy use of white space and embraces a sense of minimalism, is currently quite popular (as of 2016). Designs in the early 2000s also had flat elements with simple color schemes, but typically did not share the minimalistic sense (e.g., compare 2000 and 2013 for Bloomberg in Figure <ref type="figure">3(a)</ref>). W3, D3, U1, A1, and A3 indicated that color scheme changes were especially important for identifying design periods. W3 even proposed naming design periods after colors; for Bloomberg in Figure <ref type="figure">3</ref>(a), for example, he named 2004 the "Blue period" and 2008 the "Media-consumer black" period. U1 thought colors play an important role in humans' pre-attentive processing, so uniquely colored sections "pop out" immediately. Alternating schemes can help users discriminate between distinct parts of a page, as he explained for MSN in Figure <ref type="figure">3</ref> Layout templates in web design are usually horizontally or vertically oriented. Five experts mentioned that modern websites had obviously better layouts than earlier designs and that a good layout was necessary for an aesthetically pleasing website. U1 thought a good layout kept web page elements and organized even when the page had few solid borders. While overall layout has definitely changed over time, our experts did not explicitly articulate specific criteria of what constitutes a good layout. D2 explained:</p><p>The number of possible web structures is few: horizontal, vertical or some combination of them. The design fashions change and never come back, but web structure [layout] selchanges.</p><p>layouts from early 2000s to the present are especially and do not have much variability. D1 gave one possible reason: the improvement in text alignment technology in layout templates allowed a clean look even when the amount of text information increased.</p><p>Visual element quality refers to the complexity or sophistication of images, videos, text, and other visual page elements. Experts did not view this as vital as other criteria for distinguishing design periods, but several experts did observe that it had improved with time. A1 noted the logo on whitehouse.gov had subtly changed over time (Figure <ref type="figure" target="#fig_6">4</ref>), with later designs being higher-resolution and more sophisticated.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Media Composition</head><p>Text, images, and videos are used to disseminate information on a web page, and the proportions and compositions of these changed over time. All experts noted that web developers in the early 2000s used text-heavy designs on the main page, whereas modern developers believe wordy pages lose users. D1 used the Cisco page (Figure <ref type="figure">3(c)</ref>) as an example:</p><p>[Design in early 2000s] only provides a bunch of links, there is actually no information on the page. Then later, they use some pictures, icons, and something appealing to users. And the 2008 Cisco design is not much different from 2004, having the same links but using less words. When we compare these two, the 2004 one has lots of information here [the lower part the page], but users may be confused by the abundant text.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>D2 noted that hyperlinks have been partially replaced by imand videos:</head><p>Now there are more videos. </p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Explaining Design Periods</head><p>As described in the last section, our interaction design criticism sessions revealed that people identified information architecture models, visual flavor, layout templates, and media composition as key markers of design. Now we describe how our experts explained these markers. In other words, why did web pages change these markers? What led to these design periods? Øritsland and Buur describe how changes in design are due to technological innovations, a company's spirit (rhetoric), and societal trends <ref type="bibr" target="#b29">[25]</ref>. While drawing from these factors as critical reasons for web design markers, our study also suggests other forces at work.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Increased Information Density</head><p>Experts observed that over time, the density of information of websites has increased, which has forced designers to think about how to organize so much information. For example, W1 and D1 pointed out that it was not time consuming for early web users to browse and understand websites because there simply was not much content to trawl through. By the mid-2000's, however, pages had become much more informationrich, and users could easily get lost if pages were not well organized. As a result, the markers of information architecture models and the layout templates evolved to meet such needs. Increasingly powerful search functions can be regarded as responses to this sort of information overload, for example. D3 explained the move from menus to search features: "The mentioned that easy-to-use search components led many to add them around 2000, even for sites that did not need them. Other technological developments have included image formats like SVG for high-resolution and responsive graphics, scripting technologies like JavaScript and Flash, and improved back-ends that enable dynamic, customized pages. Two particular forms of innovation were mentioned: hardware web technology.</p><p>Hardware technology improvements have included both network and display technology, and several experts identified both of these as driving new design periods. Faster networks have enabled transmitting larger files, such as high-resolution images and video, while better displays have led designers to take advantage of their capabilities. U1 explained:</p><p>The better resolution and tonal range makes...modern web pages [look good] even though they have a minimum number of colors. Imagine if we still used the monitors from the 1990s. Those monitors have low resolution and small color space. we browse current web pages from those monitors, [they would] look awful.</p><p>The rise of mobile devices significantly affected design, and mobile devices are now used more than PCs to access the Internet <ref type="bibr" target="#b17">[15,</ref><ref type="bibr" target="#b21">19]</ref>. Responsive designs are widely used to adapt the size and position of UI components to a device's display. Three subjects (D2, U1, U2) said the widespread adoption of sidebars was due to these devices. U2 explained:</p><p>Around 2010, people frequently browse websites from the mobile phone, but the screen of mobile is much smaller than the computer monitor. We use something maybe called "flows" to make the layout for the main content adapt to the devices, and keep a kind of constant size of sidebar on one side of the screen. Users maybe can hide the sidebar in some websites. In this way, users can quickly target the sections they are looking for.</p><p>Web technology refers the tools to design and develop websites. With web technologies constantly evolving, designers and developers have had increasing flexibility in their designs over time. Past research has found that certain innovations in web technology have been directly responsible for popularizing the Internet. For example, the graphical browser in 1993 led to dramatic growth in online use <ref type="bibr" target="#b37">[33]</ref>. Although our experts did not examine the code of websites, they did mention that web technologies were likely the cause of certain changes, including visual elements such as typeface and image quality. When asked to identify design periods, W2 said:</p><p>To me, [web technology] is the real distinction. I cannot say just by looking at the screenshots of the websites. That is not enough. We should review the HTML code. But we still tell some of them from the poster. Back to 2000, they are table-based. And in 2010, they are CSS-based.</p><p>Web techniques also made websites faster and more dynamic. For example, D1 pointed out that the use of animations has evolved over time. Animation became common with the adoption of GIFs and Flash, but after 2012, HTML5 animations gradually replaced them due to their lighter-weight code and higher quality. Another example is Ajax, which pre-fetches content and gives websites a dynamic feeling. It can update information (e.g., hourly top 10 articles) in dynamic components without reloading static visual components, which brings a smoother experience for web users.</p><p>Lastly, new practices of quickly prototyping and designing websites have had an influence. D1, D2 and D3 mentioned their use of web templates, which prescribe current visual flavors and information architecture models. Popular templates have had a direct influence on propagating particular markers of web design across many domains.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Company Strategies</head><p>The way in which information is presented by a company is a powerful symbol [16] of its progressiveness and rhetoric. W1, W2, D1, and D2 noted that changes in design period markers could be attributed to the company wishing to convey a certain spirit. MSN was brought up as one particular example. Before 1998, msn.com was a domain operated by Microsoft as an online service provider. When msn.com switched to being used by Microsoft's Interactive Media Group, its content switched to be more media-related, and this was reflected in its visual style and layout (see Figure <ref type="figure">3(b)</ref>). As we look back at the designs across MSN's history, D2 stated that we found its visual flavor reflected the visual flavor of Microsoft's products over that time. In other words, the design periods of msn.com are intertwined with the user interface design of Microsoft's software products.</p><p>More broadly, the information organization of a web page often serves a marketing purpose. For example, web pages put currently promoted products in a prominent position, and if the company has many products, the main page has a more complex layout. The website owner may also change the layout of the web page to suit third party advertisements. In the 2000s, many websites put their advertisements on large floating windows, which web users could not miss. addition, mentioned the use of the left sidebar as a "dark pattern" [10]:</p><p>Now we mostly stick the navigation bar on the left, not having to be static [i.e., so the navigation can be hidden], and put the main story on the right side. Because most web users are right-handed, users prefer keeping their mouse at the right side of the page. Then users have higher possibility to click highlight [the links in the right main part of the pages, e.g., advertisements]. Also, if they want to get the navigation, move mouse directly to it, which is easy.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Fashions</head><p>Design fashions changes the visual flavor of websites on a large scale. W1, D1, and D2 all mentioned that since the late 2000s, many websites have had a common layout from top to bottom: a horizontal navigation bar, a large banner, the main content of the page, and a footer (e.g., the 2012 Cisco design in Figure <ref type="figure">3(c)</ref>). Several experts mentioned that this horizontallydominant layout avoids the need for users to scroll vertically in order to access the most important content of the page. D1 worked in a IT consultancy company around 2010, and mentioned that his company routinely used this same template to develop the websites for many small companies. Similarly, W1 mentioned the large horizontal banner is very popular and widely used in all kinds of websites.</p><p>Design fashions may also be driven by the widespread use of some popular technological elements. For instance, in 2014 Vishal Gaikar popularized the web element for infinite scroll loading <ref type="bibr" target="#b19">[17]</ref>, and three of our experts (W1, D1, D2) mentioned these elements are now widely used, especially on news websites. As another example, W1 said that in the late 1990s, many websites added search boxes, even though many sites were not complex enough to need them. In his opinion, these elements were added largely to keep up with the current design fashion as opposed to being useful components.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Global Design Periods</head><p>Although our dataset and subject pool are not large or represenenough to develop a holistic "theory" of evolution of the broader web, we nonetheless explored whether our subjects could help suggest rough "global" web design periods. We asked our experts to reflect on the web design periods they noticed across our set of websites and on the broader web, instead of just on the particular sites we showed them. We sought to understand the extent to which design changes may be dependent on the context of particular sites, versus more global changes that are observed on the web at large. Experts noted that one could discern whether websites were on the leading edge of design periods. W1, D1 and D3 thought media websites such as bloomberg.com readily adopted more progressive design periods, while government and education websites lagged behind. For example, in our dataset we found that media websites adopted flat designs an average of about 3 years before other websites (e. Our experts did identify some consistent patterns in the design periods across our websites. It should be emphasized that not all design periods happen at the same time (e.g., some lag as mentioned before), nor do they look identical across websites. For websites of the same genre, global design periods are somewhat more readily identifiable. For example, media websites often quickly leveraged new standard frameworks and web techniques and therefore ended up having similar layouts on their web pages (see Figure <ref type="figure" target="#fig_8">5</ref>).</p><p>We looked for agreement across our subjects on what the major general design periods of the web might be. Eight of our experts thought we could divide periods into four rough categories (using names suggested by experts):</p><p>Rudimentary (U1), Simplicity (U2), or Informational (U3) period. Experts used words like "naive" to describe the designs of the late 1990s and the early 2000s. Pages at that time were functional and informational (text-heavy), and lacked a balanced design. W1 mentioned that websites of the 1990s were arranged like digital versions of the front page of a newspaper, where the structure revolves around "headlines" that are links to other pages, with short "articles" or abstracts on the main page.</p><p>Gradient (U1), Light (W1), or Rise of the Image period. 2000 to 2005, websites seemed to try to formulate and integrate web-specific design principles, and many foundational web elements were introduced during this period. Yet many of our subjects used words like "terriand "overused, garish, colorful backgrounds" (W3) for this period. Four of our subjects thought the image elements aol.com that became popular during this period were just decorative and did not offer any function. Images were often shaded, giving a 3D look. The amount of content sharply increased and made some websites look crowded.</p><p>(U1) or Cinematic (W3) period. period begins around 2007 when Web 2.0 became popular. Basic layouts for websites of different genre were established, which give well-organized layouts for many websites. Five of our experts (W1, D1, D2, D3, U2) thought new web technologies brought large visual changes to web designs in this period. W3 thought the banner became eye-catching and popular in this period (see cisco.com 2008 or 2012 design in Figure <ref type="figure">3(c</ref>)), leading to his "cinematic" term.</p><p>Condensation (U1), Sci-Fi (A2), or Flat (W3) period. This period started around 2011, with an emphasis on refined designs with clear information architecture models. Flat designs are popular and websites make heavy use of various media types (text, image, video, animation). Adaptive UIs and responsive design elements are widely adopted.</p><p>W1 contributed an interesting opinion on the evolution of web design from a pure web designer's perspective:</p><p>The layout [in late 1990s] is sort of weird. It looks like it just wants some things there. I think this form is just when people were learning how to setup layout properly before it becomes actually possible. Around 2005, people start thinking are too many links on the pages and they don't have enough space for them. So they need search. Then they started considering the usability. Some websites used to be very usable websites, but became heavy with some techniques. What are the particular advantages of them [techniques]? So for some they are something that really struck people. So they bring us back and make us think about the answer.</p><p>W1 also mentioned "bringing back" older technologies, and W3 thought it might be similar to something in art history:</p><p>In terms of art history, when a period evolved to another. Again because [designers] were seeking the truth in a different way, they acted against the move that came before.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>DISCUSSION</head><p>Our findings the factors that compose visual complexity found by Reinecke et al. <ref type="bibr" target="#b33">[29]</ref>. That work found that visual was a strong predictor for a website's initial visual appeal. Our markers design periods cover many of the markers that make up Reinecke et al.'s model of visual complexity: ratios of text and non-text areas are related to media composition, and colorfulness and hue are related to visual However, visual complexity does not capture some of the nuances we found in our markers, such as the information architecture model-the tension between search and browse affordances. While colorfulness was found by Reinecke et al. to play a minor role in appeal, our results suggest that it is highly indicative of design periods. course, the relationship between visual appeal and design is complex. Reinecke and Gajos <ref type="bibr" target="#b32">[28]</ref> found that user age influenced perceptions of visual appeal, with older people text-heavy pages. This suggests that visual appeal is not an obdurate measure. As suggested by several of our experts, people tend to like the designs that immediately surround them. This may mean that some websites may avoid more progressive designs because it may be beneficial to portray an image of stability or conservatism.</p><p>with most technology, we find that both technological determinism and the social construction of technology play a key role in website design. New technological innovations like JavaScript bring about new design periods, but shifting societal concerns like changing company spirits or messages also help to shape them.</p><p>When we asked our experts about the utility of our concept of web design periods, some mentioned that they would indeed find some inspiration from the past. D3 described wanting to use shaded navigation bar icons on a web design, but could find many such icons on the modern web. By going back in time, he might discover that shaded icons were popular in the mid 2000s, using those pages as exemplars of such icons. In fact, we found that experts were perhaps already implicitly using their own notion of design periods to predict future designs. For example, D1 predicted that there would be a restoration of different shades of colors in a few years, as a reaction against the flat and minimal designs that are currently popular. D1 thought this kind of design is overused and makes current web designs drab. She especially mentioned that designs with solid borders have advantages:</p><p>As a user, I will be more attracted by the information in a solid frame. Like [sun.com in 2008] puts several pieces of information (like the title) in the right curved block. I will notice that but I won't read all information there. Then [in 2010], it uses solid border for each information. I will be caught, I may quickly scan each of them.</p><p>She thought there should be a renaissance of a design period featuring the visual flavors of solid borders and shading, although it would not be an exact duplication of that past period.</p><p>From here, we might suggest that examining the of design periods would be useful-at what point does a certain marker of design period become tired and in need of change saturation point)?</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>LIMITATIONS AND FUTURE WORK</head><p>We acknowledge that our dataset is small and not statistically representative of the broader web (e.g., no non-English sites), so our study does not lead to comprehensive conclusions about the markers and causes of design evolution. we view the changes, forces, and design periods we suggest here as a starting point for further studies with a broader variety of pages (e.g., non-English, non-western, less popular, shortetc.). Similarly, this preliminary study relied on a small pool of people, and future studies should include a broader set of expertise. For example, although our experts were qualified to interpret aesthetic qualities of websites, most did not have the same depth of critical and socio-cultural-historical analytical skills that a professional art historian or critic would. Future work should include these voices to develop a more systematic theory of web design. Finally, we believe that other critical methods (e.g., analysis and argumentation) would be conducive to the study of web design periods and should be incorporated into follow-up studies.</p><p>One way to make a larger-scale study practical would be to create tools that automatically detect major changes in visual features over time, allowing participants to focus on these change points as opposed to having to examine thousands of daily screenshots for each website. Such a tool may also be useful in its own right; four of our experts (W2, W3, U1 and D3) thought it would useful for web designers to explore historical changes through such a tool, and eight experts beit would have a place in education and research. W3 opined that such a tool would foster a dialogue on the evolution of websites and allow people to view exemplars of design CONCLUSION Similar to artistic domains, we imagine the development of a web design period theory will offer a systematic way to advance the study of historical web designs. Our paper is a first step towards understanding how and why web designs have changed over time. We conducted interaction design sessions in which we asked a diverse group of experts to critically interrogate changes in web design and the forces behind them. We hope that our concept of and initial findings on web design periods may eventually lead to theories and practical tools for understanding how web design changes over time, such as annotated repositories of historical designs that future designers and researchers will be able to explore. </p></div><figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_0"><head>Figure 1 .</head><label>1</label><figDesc>Figure 1. Sample of one of our posters.</figDesc><graphic url="image-1.png" coords="4,120.77,353.74,109.30,169.06" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_1"><head></head><label></label><figDesc>Figure 2. Examples of information architecture models highlighted by our experts: (a) evolution of navigation bars on IMDB over time, (b) SLAC page as of 2000, showing prominent menu of links in the upper right, and (c) examples of card-and grid-based navigation systems.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_2"><head></head><label></label><figDesc>(a). He pointed out that the 2001 design featured very prominent navigation menus that occupied most of the left, top, and right areas of the page. By 2007, the search bar had been moved to a larger, more prominent position at the top of the page. By 2012, most of the navigation menus were hidden, with the search bar occupying an even more prominent position. He explained: The form of the navigation would be the main feature. To me, it changes the periods. You see, [the yellow navigation bar on the top in 2001] is kind of similar with [the bar on top of the 2007 design]. They basically provide the links to the information. And the website removed the navigation at the end [in 2012 design]...Here [the form of navigation] is ...how the website is defined. Our experts described "failed" attempts at navigation bars before 2005. D2 and D3 thought the navigation of SLAC in the early 2000s (shown in Figure 2(b)) was poorly designed. D2</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_3"><head></head><label></label><figDesc>(a)). W2 commented that the search bar has become a crucial design element: I don't care [about] the information on the main page. I used to look at some [of the] "recommended" information pushed to me on YouTube, but now I even don't look at them. When I want to know something, for example, a director or a movie, I go to IMDb and search. So what I expect is, the website can give me the information that I search for and then I browse after that, not before. D2, who worked as a web developer from 2008 to 2014, shared his first-hand knowledge on the prevalence of search bars. He noted how web templates that were widely used by companies then generally had a Google search bar on the top. D3 shared his view that searching has evolved into a dominant manner of finding information, necessitating that web designers emphasize search bars over navigation: [In 2000], people have no idea how to look up information so you should provide a super nice structure. But [in late 2000s], you don't care about structure anymore, and you only search for the information you are looking for. So those navigation bars become less important, and search becomes a thing.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_4"><head></head><label></label><figDesc>(b): I think the key factor to divide the period is how the website is colored, what kind of color schemes it uses. [In 2004] you can see the blue and green, and [in 2011] you can see it completely flat. The color really easily catches people's attention. Color is not the emphasis; the content is the emphasis. Color may highlight the borders and add emphasis. That's why the color is important.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_5"><head></head><label></label><figDesc>cisco.com Figure 3. Some examples of the evolution of visual flavor highlighted by our experts, including (a) bloomberg, (b) msn, and (c) cisco. menus implicitly are structured as a tree. It can be a long path from the main page to my destination page." Technological Innovation However, information density does not fully explain the rise of search bars, which became popular in the early 2000s even among small websites. Eight of our experts identified innovations in web technologies as a key driver of change.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_6"><head>Figure 4 .</head><label>4</label><figDesc>Figure 4. Progression of the whitehouse.gov logo from 1999-2015.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_7"><head></head><label></label><figDesc>g., AOL in 2010, Bloomberg in 2009, MSN in 2010, but Cisco in 2015, SLAC in 2009, and House in 2014).</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_8"><head>Figure 5 .</head><label>5</label><figDesc>Comparison of msn.com on December 22, 2012 (left) with aol.com (right) on December 9, 2012. Although msn.com is columndominant and aol.com is row-dominant, they present similar visual experiences compared to the websites in other categories such as IT services.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_9"><head></head><label></label><figDesc>This work was supported in part by the National Science Foundation through CAREER grant IIS-1253549. 1. 2016. The Buxton Collection. http://research.microsoft.com/en-us/um/people/ bibuxton/buxtoncollection/default.aspx. (2016).</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_0"><head>Table 2 .</head><label>2</label><figDesc>Snapshots collected for our posters.</figDesc><table><row><cell>First use of</cell></row></table></figure>
+		</body>
+		<back>
+			<div type="references">
+
+				<listBibl>
+
+<biblStruct xml:id="b0">
+	<monogr>
+		<title level="m" type="main">Internet Archive: Wayback Machine</title>
+		<imprint>
+			<date type="published" when="2016">2016. 2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b1">
+	<monogr>
+		<title level="m" type="main">The Definition Art -The Stanford Encyclopedia of Philosophy</title>
+		<author>
+			<persName><forename type="first">Thomas</forename><surname>Adajian</surname></persName>
+		</author>
+		<ptr target="http://plato.stanford.edu/archives/sum2016/entries/art-definition/" />
+		<imprint>
+			<date type="published" when="2016">2016. 2016</date>
+		</imprint>
+	</monogr>
+	<note>Online; accessed 19-September-2016</note>
+</biblStruct>
+
+<biblStruct xml:id="b2">
+	<analytic>
+		<title level="a" type="main">Interaction criticism: An introduction to the practice</title>
+		<author>
+			<persName><forename type="first">Jeffrey</forename><surname>Bardzell</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Interacting with</title>
+		<imprint>
+			<biblScope unit="volume">23</biblScope>
+			<biblScope unit="page" from="604" to="621" />
+			<date type="published" when="2011-11">2011. Nov. 2011</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b3">
+	<monogr>
+		<title/>
+		<idno type="DOI">10.1016/j.intcom.2011.07.001</idno>
+		<ptr target="http://dx.doi.org/10.1016/j.intcom.2011.07.001" />
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b4">
+	<analytic>
+		<title/>
+		<author>
+			<persName><forename type="first">Jeffrey</forename><surname>Bardzell</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Shaowen</forename><surname>Bardzell</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">HCI. Synthesis Lectures on Human-Centered</title>
+		<imprint>
+			<biblScope unit="volume">8</biblScope>
+			<biblScope unit="issue">4</biblScope>
+			<biblScope unit="page" from="1" to="185" />
+			<date type="published" when="2015-09">2015. Sept. 2015</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b5">
+	<monogr>
+		<title/>
+		<idno type="DOI">10.2200/S00664ED1V01Y201508HCI031</idno>
+		<ptr target="http://dx.doi.org/10.2200/S00664ED1V01Y201508HCI031" />
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b6">
+	<monogr>
+		<title level="m" type="main">Worlds (25th anniversary</title>
+		<author>
+			<persName><forename type="first">Howard</forename><forename type="middle">S</forename><surname>Becker</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2008">2008</date>
+			<publisher>University of California Press</publisher>
+			<pubPlace>Berkeley, CA, USA</pubPlace>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b7">
+	<analytic>
+		<title level="a" type="main">Criticism As an Approach to Interface Aesthetics</title>
+		<author>
+			<persName><forename type="first">W</forename><surname>Olav</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Søren</forename><surname>Bertelsen</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Pold</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the Nordic Conference on Human-computer Interaction &apos;04)</title>
+				<meeting>the Nordic Conference on Human-computer Interaction &apos;04)<address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>ACM</publisher>
+			<date type="published" when="2004">2004</date>
+			<biblScope unit="page" from="23" to="32" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b8">
+	<monogr>
+		<title/>
+		<idno type="DOI">10.1145/1028014.1028018</idno>
+		<ptr target="http://dx.doi.org/10.1145/1028014.1028018" />
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b9">
+	<monogr>
+		<title level="m" type="main">The social construction of fluorescent lighting, or how an artifact was invented in its diffusion stage</title>
+		<author>
+			<persName><forename type="first">E</forename><surname>Wiebe</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Bijker</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="1992">1992</date>
+			<publisher>MIT Press</publisher>
+			<pubPlace>Massachusetts</pubPlace>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b10">
+	<analytic>
+		<title level="a" type="main">The Logic of Annotated Portfolios: Communicating the Value of &apos;Research Through Design</title>
+		<author>
+			<persName><forename type="first">John</forename><surname>Bowers</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2317956.2317968</idno>
+		<ptr target="http://dx.doi.org/10.1145/2317956.2317968" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the Designing Interactive Systems Conference (DIS &apos;12)</title>
+				<meeting>the Designing Interactive Systems Conference (DIS &apos;12)<address><addrLine>New York, NY, USA, DOI</addrLine></address></meeting>
+		<imprint>
+			<publisher>ACM</publisher>
+			<date type="published" when="2012">2012</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b11">
+	<monogr>
+		<title level="m" type="main">Dark Patterns: fighting user deception worldwide</title>
+		<author>
+			<persName><forename type="first">Harry</forename><surname>Brignull</surname></persName>
+		</author>
+		<ptr target="http://darkpatterns.org/." />
+		<imprint>
+			<date type="published" when="2016">2016. 2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b12">
+	<analytic>
+		<title level="a" type="main">A touching story: A personal perspective on the history of touch interfaces past and future</title>
+		<author>
+			<persName><forename type="first">Bill</forename><surname>Buxton</surname></persName>
+		</author>
+		<idno type="DOI">10.1889/1.3500488/abstract</idno>
+		<ptr target="onlinelibrary.wiley.com/doi/10.1889/1.3500488/abstract" />
+	</analytic>
+	<monogr>
+		<title level="m">SID Symposium Digest of Technical Papers</title>
+				<imprint>
+			<publisher>Wiley Online Library</publisher>
+			<date type="published" when="2010">2010</date>
+			<biblScope unit="volume">41</biblScope>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b13">
+	<monogr>
+		<title level="m" type="main">Readings in Information Visualization: Using Vision to Think</title>
+		<author>
+			<persName><forename type="first">K</forename><surname>Stuart</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jock</forename><surname>Card</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ben</forename><surname>Mackinlay</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Shneiderman</surname></persName>
+		</author>
+		<imprint>
+			<publisher>Morgan Kaufmann</publisher>
+			<pubPlace>San Francisco, Calif</pubPlace>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b14">
+	<analytic>
+		<title level="a" type="main">Visualizing the Evolution of Web Ecologies</title>
+		<author>
+			<persName><forename type="first">Ed</forename><forename type="middle">H</forename><surname>Chi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">James</forename><surname>Pitkow</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jock</forename><surname>Mackinlay</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Peter</forename><surname>Pirolli</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Rich</forename><surname>Gossweiler</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Stuart</forename><forename type="middle">K</forename><surname>Card</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the Conference on Human Factors in Computing (CHI &apos;98)</title>
+				<meeting>the Conference on Human Factors in Computing (CHI &apos;98)<address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>ACM Press/Addison-Wesley Publishing Co</publisher>
+			<date type="published" when="1998">1998</date>
+			<biblScope unit="page" from="400" to="407" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b15">
+	<monogr>
+		<title/>
+		<idno type="DOI">10.1145/274644.274699</idno>
+		<ptr target="http://dx.doi.org/10.1145/274644.274699" />
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b16">
+	<analytic>
+		<title level="a" type="main">The impact of cultural diversity on web site design</title>
+		<author>
+			<persName><forename type="first">Jack</forename><surname>Cook</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mike</forename><surname>Finlayson</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Management Journal</title>
+		<imprint>
+			<biblScope unit="volume">70</biblScope>
+			<biblScope unit="issue">3</biblScope>
+			<biblScope unit="page" from="15" to="23" />
+			<date type="published" when="2005-07">2005. July 2005</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b17">
+	<analytic>
+		<title level="a" type="main">Reform, Economic Growth, and the Digital Divide</title>
+		<author>
+			<persName><forename type="first">Somik</forename><surname>Dasgupta</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">David</forename><surname>Lall</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">;</forename><surname>Wheeler</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Martha</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">James G</forename><surname>Feldman</surname></persName>
+		</author>
+		<author>
+			<persName><surname>March</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Organizations as Signal and Symbol</title>
+				<imprint>
+			<date type="published" when="1981">2001. 1981</date>
+			<biblScope unit="volume">2567</biblScope>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b18">
+	<analytic>
+		<title/>
+	</analytic>
+	<monogr>
+		<title level="j">Administrative Science Quarterly</title>
+		<imprint>
+			<biblScope unit="volume">26</biblScope>
+			<biblScope unit="page" from="171" to="186" />
+			<date type="published" when="1981">1981</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b19">
+	<monogr>
+		<title level="m" type="main">The 10 Hottest Web Design Trends</title>
+		<author>
+			<persName><forename type="first">Vishal</forename><surname>Gaikar</surname></persName>
+		</author>
+		<ptr target="http://www.tricksmachine.com/2014/07/the-10-hottest-web-design-trends-2014.html" />
+		<imprint>
+			<date type="published" when="2014">2014. 2014. 2014</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b20">
+	<monogr>
+		<title level="m" type="main">Annotated Portfolios</title>
+		<author>
+			<persName><forename type="first">Bill</forename><surname>Gaver</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">John</forename><surname>Bowers</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2012-07">2012. July + August (2012</date>
+			<biblScope unit="page" from="40" to="49" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b21">
+	<monogr>
+		<title level="m" type="main">GSM and UMTS: the Creation of Global Mobile Communication</title>
+		<author>
+			<persName><forename type="first">Friedhelm</forename><surname>Hillebrand</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2002">2002</date>
+			<publisher>John Wiley &amp; Sons, Inc</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b22">
+	<analytic>
+		<title level="a" type="main">Users as Agents of Technological Change: The Social Construction of the Automobile in the Rural United States</title>
+		<author>
+			<persName><forename type="first">Ronald</forename><surname>Kline</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Trevor</forename><surname>Pinch</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Technology and Culture</title>
+		<imprint>
+			<biblScope unit="volume">37</biblScope>
+			<biblScope unit="page" from="763" to="795" />
+			<date type="published" when="1996-10">1996. Oct. 1996</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b23">
+	<analytic>
+		<title level="a" type="main">Interactionist and the promise of Ubicomp, or, how to put your box in the world without putting the world in your box</title>
+		<author>
+			<persName><forename type="first">Lucian</forename><surname>Leahu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Phoebe</forename><surname>Sengers</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Michael</forename><surname>Mateas</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the International Conference on Ubiquitous Computing (UBICOMP &apos;08)</title>
+				<meeting>the International Conference on Ubiquitous Computing (UBICOMP &apos;08)<address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>ACM Press</publisher>
+			<date type="published" when="2008">2008</date>
+			<biblScope unit="page" from="134" to="143" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b24">
+	<monogr>
+		<title/>
+		<idno type="DOI">10.1145/1409635.1409654</idno>
+		<ptr target="http://dx.doi.org/10.1145/1409635.1409654" />
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b25">
+	<monogr>
+		<title level="m" type="main">Design discourse: History, Theory, Criticism</title>
+		<author>
+			<persName><surname>Victor Margolin</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="1989">1989</date>
+			<publisher>University of Chicago Press</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b26">
+	<monogr>
+		<title level="m" type="main">History of Graphic Design</title>
+		<author>
+			<persName><forename type="first">B</forename><surname>Philip</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Alston</forename><forename type="middle">W</forename><surname>Meggs</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Purvis</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2016">2016</date>
+			<publisher>John Wiley &amp; Sons</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b27">
+	<analytic>
+		<title level="a" type="main">Getting Access to What Goes on in People&apos;s Heads?: Reflections on the Think-aloud Technique</title>
+		<author>
+			<persName><forename type="first">Janni</forename><surname>Nielsen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Torkil</forename><surname>Clemmensen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Carsten</forename><surname>Yssing</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the Second Nordic Conference on Human-computer Interaction (NordiCHI &apos;02)</title>
+				<meeting>the Second Nordic Conference on Human-computer Interaction (NordiCHI &apos;02)<address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>ACM</publisher>
+			<date type="published" when="2002">2002</date>
+			<biblScope unit="page" from="101" to="110" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b28">
+	<monogr>
+		<title/>
+		<idno type="DOI">10.1145/572020.572033</idno>
+		<ptr target="http://dx.doi.org/10.1145/572020.572033" />
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b29">
+	<analytic>
+		<title level="a" type="main">Taking the Best from a Company History -Designing with Styles</title>
+		<author>
+			<persName><forename type="first">Are</forename><surname>Trond</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jacob</forename><surname>Øritsland</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Buur</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/347642.347658</idno>
+		<ptr target="http://dx.doi.org/10.1145/347642.347658" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 3rd Conference Designing Interactive Systems: Processes, Practices, Methods, and Techniques (DIS &apos;00)</title>
+				<meeting>the 3rd Conference Designing Interactive Systems: Processes, Practices, Methods, and Techniques (DIS &apos;00)<address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>ACM</publisher>
+			<date type="published" when="2000">2000</date>
+			<biblScope unit="page" from="27" to="38" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b30">
+	<analytic>
+		<title level="a" type="main">The Social Construction of Facts and Artifacts: Or How the Sociology of Science and the Sociology of Technology Benefit Each Other</title>
+		<author>
+			<persName><forename type="first">Trevor</forename><forename type="middle">J</forename><surname>Pinch</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Wiebe</forename><forename type="middle">E</forename><surname>Bijker</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">The Social Construction of Technological Systems: New Directions in the Sociology and History of Technology</title>
+				<imprint>
+			<publisher>MIT Press</publisher>
+			<date type="published" when="1987">1987</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b31">
+	<monogr>
+		<title level="m" type="main">Creating Flat Design Websites</title>
+		<author>
+			<persName><forename type="first">António</forename><surname>Pratas</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2014">2014</date>
+			<publisher>Packt Publishing</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b32">
+	<analytic>
+		<title level="a" type="main">Quantifying Visual Around the World</title>
+		<author>
+			<persName><forename type="first">Katharina</forename><surname>Reinecke</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Krzysztof</forename><forename type="middle">Z</forename><surname>Gajos</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2556288.2557052</idno>
+		<ptr target="http://dx.doi.org/10.1145/2556288.2557052" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the SIGCHI Conference on Human Factors in Computing Systems (CHI &apos;14)</title>
+				<meeting>the SIGCHI Conference on Human Factors in Computing Systems (CHI &apos;14)<address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<date type="published" when="2014">2014</date>
+			<biblScope unit="page" from="11" to="20" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b33">
+	<analytic>
+		<title level="a" type="main">Predicting Users&apos; First Impressions of Website Aesthetics with a Quantification of Visual Complexity and Colorfulness</title>
+		<author>
+			<persName><forename type="first">Katharina</forename><surname>Reinecke</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Tom</forename><surname>Yeh</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Luke</forename><surname>Miratrix</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Rahmatri</forename><surname>Mardiko</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yuechen</forename><surname>Zhao</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jenny</forename><surname>Liu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Krzysztof</forename><forename type="middle">Z</forename><surname>Gajos</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2470654.2481281</idno>
+		<ptr target="http://dx.doi.org/10.1145/2470654.2481281" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the SIGCHI Conference on Human Factors in Computing (CHI &apos;13)</title>
+				<meeting>the SIGCHI Conference on Human Factors in Computing (CHI &apos;13)<address><addrLine>New York, NY, USA, DOI</addrLine></address></meeting>
+		<imprint>
+			<publisher>ACM</publisher>
+			<date type="published" when="2013">2013</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b34">
+	<analytic>
+		<title level="a" type="main">Aesthetics and credibility in web site design</title>
+		<author>
+			<persName><forename type="first">David</forename><surname>Robins</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jason</forename><surname>Holmes</surname></persName>
+		</author>
+		<idno type="DOI">10.1016/j.ipm.2007.02.003</idno>
+		<ptr target="http://dx.doi.org/10.1016/j.ipm.2007.02.003" />
+	</analytic>
+	<monogr>
+		<title level="j">Information Processing &amp; Management</title>
+		<imprint>
+			<biblScope unit="volume">44</biblScope>
+			<biblScope unit="page" from="386" to="399" />
+			<date type="published" when="2008-01">2008. Jan. 2008</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b35">
+	<monogr>
+		<author>
+			<persName><forename type="first">Charles</forename><surname>Rosen</surname></persName>
+		</author>
+		<title level="m">The Classical Style: Haydn, Mozart, Beethoven</title>
+				<meeting><address><addrLine>New York</addrLine></address></meeting>
+		<imprint>
+			<publisher>W. W. Norton &amp; Company</publisher>
+			<date type="published" when="1998">1998a</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b36">
+	<monogr>
+		<title level="m" type="main">The Romantic Generation</title>
+		<author>
+			<persName><forename type="first">Charles</forename><surname>Rosen</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="1998">1998b</date>
+			<publisher>fifth Harvard University Press</publisher>
+			<pubPlace>Cambridge, MA, USA</pubPlace>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b37">
+	<monogr>
+		<title level="m" type="main">Mosaic and the World Wide Web</title>
+		<author>
+			<persName><forename type="first">Ronald</forename><forename type="middle">J</forename><surname>Vetter</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Chris</forename><surname>Spell</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Charles</forename><surname>Ward</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="1994">1994. 1994</date>
+			<biblScope unit="volume">27</biblScope>
+			<biblScope unit="page" from="49" to="57" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b38">
+	<analytic>
+		<title level="a" type="main">Visualizing Email Content: Portraying Relationships from Conversational Histories</title>
+		<author>
+			<persName><forename type="first">Fernanda</forename><forename type="middle">B</forename><surname>Viégas</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Scott</forename><surname>Golder</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Judith</forename><surname>Donath</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the SIGCHI Conference on Human Factors in Computing Systems (CHI &apos;06)</title>
+				<meeting>the SIGCHI Conference on Human Factors in Computing Systems (CHI &apos;06)<address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>ACM</publisher>
+			<date type="published" when="2006">2006</date>
+			<biblScope unit="page" from="979" to="988" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b39">
+	<monogr>
+		<title/>
+		<idno type="DOI">10.1145/1124772.1124919</idno>
+		<ptr target="http://dx.doi.org/10.1145/1124772.1124919" />
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b40">
+	<analytic>
+		<title level="a" type="main">Studying Cooperation and Conflict Between Authors with History Flow Visualizations</title>
+		<author>
+			<persName><forename type="first">Fernanda</forename><forename type="middle">B</forename><surname>Viégas</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Martin</forename><surname>Wattenberg</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kushal</forename><surname>Dave</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/985692.985765</idno>
+		<ptr target="http://dx.doi.org/10.1145/985692.985765" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the SIGCHI Conference on Human Factors in Systems (CHI &apos;04)</title>
+				<meeting>the SIGCHI Conference on Human Factors in Systems (CHI &apos;04)<address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>ACM</publisher>
+			<date type="published" when="2004">2004</date>
+			<biblScope unit="page" from="575" to="582" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b41">
+	<monogr>
+		<title level="m" type="main">Learning from Strangers: The Art and Method of Qualitative Interview Studies</title>
+		<author>
+			<persName><forename type="first">Robert</forename><surname>Stuart Weiss</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="1995">1995</date>
+			<publisher>Simon and Schuster</publisher>
+			<pubPlace>New York</pubPlace>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b42">
+	<analytic>
+		<title level="a" type="main">What Makes a Prototype Novel?: A Knowledge Contribution Concern for Interaction Design Research</title>
+		<author>
+			<persName><forename type="first">Mikael</forename><surname>Wiberg</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Erik</forename><surname>Stolterman</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the Nordic Conference on Human-Computer Interaction: Fun, Fast, Foundational (NordiCHI &apos;14)</title>
+				<meeting>the Nordic Conference on Human-Computer Interaction: Fun, Fast, Foundational (NordiCHI &apos;14)<address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>ACM</publisher>
+			<date type="published" when="2014">2014</date>
+			<biblScope unit="page" from="531" to="540" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b43">
+	<monogr>
+		<title/>
+		<idno type="DOI">10.1145/2639189.2639487</idno>
+		<ptr target="http://dx.doi.org/10.1145/2639189.2639487" />
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b44">
+	<analytic>
+		<title level="a" type="main">Configuring the User: the Case of Trials</title>
+		<author>
+			<persName><forename type="first">Steve</forename><surname>Woolgar</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">The Sociological Review</title>
+		<imprint>
+			<biblScope unit="volume">38</biblScope>
+			<biblScope unit="page" from="58" to="99" />
+			<date type="published" when="1990">1990. 1990</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b45">
+	<analytic>
+		<title level="a" type="main">Historical Analysis: Using the Past to Design the</title>
+		<author>
+			<persName><forename type="first">Susan</forename><surname>Wyche</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Phoebe</forename><surname>Sengers</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Rebecca</forename><forename type="middle">E</forename><surname>Grinter</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the International Conference on Computing (UBICOMP &apos;06)</title>
+				<meeting>the International Conference on Computing (UBICOMP &apos;06)</meeting>
+		<imprint>
+			<publisher>Springer-Verlag</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b46">
+	<monogr>
+		<title/>
+		<author>
+			<persName><surname>Berlin</surname></persName>
+		</author>
+		<idno type="DOI">10.1007/11853565_3</idno>
+		<ptr target="http://dx.doi.org/10.1007/11853565_3" />
+		<imprint>
+			<biblScope unit="page" from="35" to="51" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+				</listBibl>
+			</div>
+		</back>
+	</text>
+</TEI>

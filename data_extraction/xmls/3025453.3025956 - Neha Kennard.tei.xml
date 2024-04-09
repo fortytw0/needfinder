@@ -1,0 +1,1635 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xml:space="preserve" xmlns="http://www.tei-c.org/ns/1.0" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.com/kermitt2/grobid/master/grobid-home/schemas/xsd/Grobid.xsd"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+	<teiHeader xml:lang="en">
+		<fileDesc>
+			<titleStmt>
+				<title level="a" type="main">&quot;People Are Either Too Fake or Too Real&quot;: Opportunities and Challenges in Tie-Based Anonymity</title>
+			</titleStmt>
+			<publicationStmt>
+				<publisher/>
+				<availability status="unknown"><licence/></availability>
+			</publicationStmt>
+			<sourceDesc>
+				<biblStruct>
+					<analytic>
+						<author>
+							<persName><forename type="first">Xiao</forename><surname>Ma</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="institution" key="instit1">Jacobs Institute</orgName>
+								<orgName type="institution" key="instit2">Cornell Tech New York</orgName>
+								<address>
+									<region>NY</region>
+									<country key="US">USA</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Nazanin</forename><surname>Andalibi</surname></persName>
+							<affiliation key="aff1">
+								<orgName type="department">College of Computing and Informatics</orgName>
+								<orgName type="institution">Drexel University Philadelphia</orgName>
+								<address>
+									<region>PA</region>
+									<country key="US">USA</country>
+								</address>
+							</affiliation>
+						</author>
+						<author role="corresp">
+							<persName><forename type="first">Louise</forename><surname>Barkhuus</surname></persName>
+							<email>barkhuus@itu.dk</email>
+							<affiliation key="aff2">
+								<orgName type="institution">The IT University of Copenhagen Copenhagen</orgName>
+								<address>
+									<country key="DK">Denmark</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Mor</forename><surname>Naaman</surname></persName>
+							<affiliation key="aff3">
+								<orgName type="institution" key="instit1">Jacobs Institute</orgName>
+								<orgName type="institution" key="instit2">Cornell Tech New York</orgName>
+								<address>
+									<region>NY</region>
+									<country key="US">USA</country>
+								</address>
+							</affiliation>
+						</author>
+						<title level="a" type="main">&quot;People Are Either Too Fake or Too Real&quot;: Opportunities and Challenges in Tie-Based Anonymity</title>
+					</analytic>
+					<monogr>
+						<imprint>
+							<date/>
+						</imprint>
+					</monogr>
+					<idno type="DOI">10.1145/3025453.3025956</idno>
+				</biblStruct>
+			</sourceDesc>
+		</fileDesc>
+		<encodingDesc>
+			<appInfo>
+				<application version="0.7.1" ident="GROBID" when="2022-07-22T05:01+0000">
+					<desc>GROBID - A machine learning software for extracting information from scholarly documents</desc>
+					<ref target="https://github.com/kermitt2/grobid"/>
+				</application>
+			</appInfo>
+		</encodingDesc>
+		<profileDesc>
+			<textClass>
+				<keywords>
+					<term>Anonymity</term>
+					<term>social media</term>
+					<term>self-disclosure</term>
+					<term>CMC</term>
+					<term>Secret</term>
+					<term>Wumii</term>
+					<term>Mimi K.4.3 Computer-supported collaborative work INTRODUCTION</term>
+				</keywords>
+			</textClass>
+			<abstract>
+<div xmlns="http://www.tei-c.org/ns/1.0"><p>In recent years, several mobile applications allowed individuals to anonymously share information with friends and contacts, without any persistent identity marker. The functions of these "tie-based" anonymity services may be notably different than other social media services. We use semi-structured interviews to qualitatively examine motivations, practices and perceptions in two tie-based anonymity apps: Secret (now defunct, in the US) and Mimi (in China). Among the findings, we show that: (1) while users are more comfortable in selfdisclosure, they still have specific practices and strategies to avoid or allow identification; (2) attempts for de-identification of others are prevalent and often elaborate; and (3) participants come to expect both negativity and support in response to posts. Our findings highlight unique opportunities and potential benefits for tie-based anonymity apps, including serving disclosure needs and social probing. Still, challenges for making such applications successful, for example the prevalence of negativity and bullying, are substantial.</p></div>
+			</abstract>
+		</profileDesc>
+	</teiHeader>
+	<text xml:lang="en">
+		<body>
+<div xmlns="http://www.tei-c.org/ns/1.0"><p>affected social interactions and dynamics in offline and online environments <ref type="bibr" target="#b11">[11,</ref><ref type="bibr" target="#b30">27]</ref>. Anonymity allows people to feel less constrained by the expectations of their everyday identities <ref type="bibr" target="#b2">[3,</ref><ref type="bibr" target="#b28">25]</ref>, which in turn allows more candid and honest self-expressions <ref type="bibr">[1,</ref><ref type="bibr" target="#b52">43]</ref>. Anonymity also leads users to disclose more information <ref type="bibr" target="#b64">[52]</ref>, which may result in positive emotional outcomes for the person disclosing <ref type="bibr" target="#b55">[45]</ref>. On the other hand, the lack of attribution and responsibility in anonymous environments can encourage malicious behaviors such as trolling <ref type="bibr">[33]</ref> and cyberbullying <ref type="bibr" target="#b4">[5,</ref><ref type="bibr" target="#b5">6,</ref><ref type="bibr" target="#b41">34]</ref>. It is no wonder that society in general, and HCI researchers in particular, have been fascinated with the topic of anonymity.</p><p>While early Internet platforms traditionally defaulted to anonymity or pseudonymity, the last decade has witnessed a "real-name", complete-identity push by some social media platforms like Facebook, Google+, and LinkedIn. Over the last few years, though, a number of new systems have emerged that adopt a new model of anonymity that we call relation-based anonymity. These applications often build on mobile device affordances such as persistent user identification and metadata such as location, as well as information about one's social ties through linkage to real-name social media platforms.</p><p>Most notably, relation-based anonymous applications such as Secret, Mimi, Whisper, Rumr and Yik Yak all provide mobile services to anonymously share content with people related to them, for example by physical proximity (proximity-based) or social affinity (tie-based) <ref type="bibr" target="#b45">[37]</ref>. Secret, now defunct, was a tie-based mobile application when first launched in 2013: it allowed users to "share with friends, anonymously". Yik Yak, on the other hand, adopted the proximity-based model that allows users to see anonymous posts within a 10-mile radius or within a given university campus. Notably, in all these services, individual posts by the same contributor cannot be linked to each other 1 . The combination of relationship and lack of persistent identity resulted in this new and interesting model of anonymity, and presents a wide set of new research questions within HCI.</p><p>While HCI research has extensively studied the topic of anonymity, we here extend that literature by providing a qualitative examination of tie-based anonymous applications. Past HCI research includes broad examinations of anonymity perceptions and practices across multiple services and systems (e.g., <ref type="bibr">[28,</ref><ref type="bibr" target="#b54">44]</ref>), as well as studies of anonymity on specific platforms <ref type="bibr" target="#b33">[29]</ref>. In the latter category, HCI research has examined various platforms, including for instance anonymity on social media <ref type="bibr" target="#b12">[12,</ref><ref type="bibr">28]</ref>; fully anonymous persistent-identity topic-based forums <ref type="bibr">[26,</ref><ref type="bibr" target="#b49">40,</ref><ref type="bibr" target="#b58">47,</ref><ref type="bibr" target="#b71">59]</ref>; community ad-hoc discussion threads <ref type="bibr">[1,</ref><ref type="bibr">30,</ref><ref type="bibr" target="#b36">31,</ref><ref type="bibr" target="#b43">35]</ref>; proximitybased anonymity services <ref type="bibr" target="#b33">[29]</ref>; platforms that allow selective anonymity such as Ask.fm <ref type="bibr">[18]</ref>; and anonymity in open collaboration projects such as Wikipedia <ref type="bibr">[20]</ref>. Most of these platforms feature anonymity models significantly different from our model of interest here, likely resulting in different dynamics and affordances than tie-based anonymity services. The fact that contributors are aware that their readers are within their friend (and friend-of-friend) circle, provides a different foundation than, for example, pseudononymous social media.</p><p>To explore people's practices and perceptions around this new anonymity model, we posed the following research questions:</p><p>RQ1. What type of interactions do tie-based anonymous social networks afford according to regular users? RQ2. What benefits and affordances do users of tie-based anonymous social networks experience?</p><p>RQ3. What are the perceived drawbacks and negative experiences by users of tie-based anonymous social networks?</p><p>To this end, we conducted a qualitative interview study with users of two apps: the US-based (and now defunct) Secret, and the China-based Mimi (now known as Wumii 2 ). We conducted semi-structured interviews with users of these applications, and followed up with interviewees seven months later, after a period of significant change in both apps. In particular, during that period, Secret had changed from a tie-based to a proximity-based anonymous sharing model, and subsequently (after we concluded our research) shut down.</p><p>We present our results organized around five key themes. First, we present participants' motivations and general practices in using these services. Second, we illustrate how identity management does play a role, even within these anonymous, no-persistent-identity applications. Third, we discuss participants' widely used de-anonymization activities where they attempted to expose the identity of others on these services. Fourth, we show how the services provided some degree of intimacy and social support. In a fifth theme we consider the negativity and bullying aspects of these services. In addition to these themes, we consider the much-reduced use of the services after a period of six to seven months and the reasons for the usage drop-off. Finally, the discussion section addresses a key goal of this work: providing an overview of the opportunities and challenges of tie-based applications exposed by this research, to inform the design of future platforms and services that support this model.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>BACKGROUND AND RELATED WORK</head><p>The HCI community has long been interested in anonymous platforms and services, and how identity practices affect community and social dynamics. In particular, we discuss various types or models of anonymity that were studied in the field, including persistent identity systems, anonymity in adhoc discussion threads and mixed anonymity models. Before we expand on the specific types of anonymity, we briefly review literature on self-disclosure.</p><p>Self-disclosure in social network environments can be seen as driven by an extended functional process <ref type="bibr" target="#b10">[10]</ref> that takes into account audience perceptions and identity representation, balancing benefits and risks. People try to maximize the rewards brought by self-disclosure (e.g., social validation and self-expression) <ref type="bibr" target="#b8">[9,</ref><ref type="bibr" target="#b14">14]</ref> and minimize the risks (e.g., concerns about sensitive information shared with third parties) <ref type="bibr" target="#b10">[10,</ref><ref type="bibr" target="#b16">16]</ref>. Under the condition of anonymity, people have been found to disclose personal information more freely, potentially because they feel less constrained by the expectations of others or perceive less associated risks of social sanction <ref type="bibr" target="#b2">[3,</ref><ref type="bibr" target="#b28">25]</ref>. Anonymity also allows people to share sensitive intimate narratives, and seek and provide support in stigmatized contexts such as sexual abuse or mental illness [1,2], and explore aspects of their identity that otherwise would have been impossible <ref type="bibr" target="#b12">[12,</ref><ref type="bibr">56]</ref>. Most recently, an interview study of adolescents who use Ask.fm-a platform that allows selective anonymity-found that by strategically using selective anonymity, young people can build from social processes and work towards key developmental goals <ref type="bibr">[18]</ref>. Particularly, this study argues that selective anonymity allows for higher levels of perceived authenticity, bypassing social expectations, learning about one's self, managing identity, and initiating and growing relationships <ref type="bibr">[18]</ref>.</p><p>On the other hand, the lack of attribution and responsibility associated with anonymity can also encourage malicious behaviors such as trolling, hostile commenting [33], deception [24], and cyberbullying <ref type="bibr" target="#b4">[5,</ref><ref type="bibr" target="#b5">6,</ref><ref type="bibr" target="#b41">34]</ref>. Research suggests, for example, that lack of eye contact is a contributing factor to disinhibition and one of the reasons for online negativity <ref type="bibr">[33]</ref>, where other research points out that positive attitudes towards cyber-bullying increase later tendencies of this behavior in anonymous fora <ref type="bibr" target="#b5">[6]</ref>.</p><p>Next, we briefly report on the different models of anonymous platforms and services that have been studied in HCI, including recent research on relation-based anonymous platforms.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Models and Dynamics of Anonymous Services</head><p>One model of anonymity is persistent identity systemsservices in which the identity of the poster may be unknown to others but still consistent from one post to another. This includes network-based systems like Twitter, where the posters can choose whether to use their "real name" or not, as well as</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Behavior in Online Communities</head><p>CHI 2017, May 6-11, 2017, Denver, CO, USA topic-based systems (e.g., online forums, discussion groups, etc.) where participants have a persistent identity that may be pseudonymous. Previous studies on topic-based anonymous platforms for example, looked into how identity design impact communication dynamics on the platform <ref type="bibr">[17]</ref>. Research has also addressed social support, most often through topicbased anonymous forums, from early studies of interaction practices on forums <ref type="bibr" target="#b58">[47]</ref> to more recent studies of limitations to online medical support <ref type="bibr">[26,</ref><ref type="bibr" target="#b71">59]</ref>. Many of these studies illustrate that the anonymity within these forums affords more self-disclosure and emotional support <ref type="bibr" target="#b30">[27]</ref>. At the same time, the posting dynamics there express higher accountability and somewhat more risk than the more ephemeral anonymity services.</p><p>Most systems with non-persistent identities are contentbased, for example 4chan, Reddit and others. As one 4chan study showed <ref type="bibr" target="#b11">[11]</ref>, 90% of the posts made in the network are anonymous and cannot be linked to other submissions by the same individual. Such submissions arguably allow individuals to express themselves more freely, but result in increased negativity or need for moderation <ref type="bibr" target="#b37">[32]</ref>. A significant issue in anonymous systems with non-persistent identities is the issue of source evaluation and credibility; in 4chan, the /b/ community uses shared context expressed in language and images that helps established credibility <ref type="bibr" target="#b11">[11]</ref>. Trammell goes further to argue that the validation and approval practices on 4chan make it equivalent in some ways to a persistent user identity community <ref type="bibr">[55]</ref>.</p><p>A few recent examples mixed anonymity models by bridging persistent-and ephemeral-identity platforms. Recent research points out how "throwaway accounts" on otherwise single-identity pseudonymous social media forums enable users to switch identity temporarily <ref type="bibr" target="#b43">[35]</ref> to be able to disclose particular information without repercussion. For instance, Andalibi et al. discuss the nuances of anonymity and suggest that sexual abuse survivors are more likely to use the anonymity afforded by throwaway accounts to disclose their experiences and seek support, and men are more likely to do so due to more stigma in the context of abuse <ref type="bibr">[1]</ref>. Another recent study <ref type="bibr" target="#b12">[12]</ref> looked at the support seeking and response behavior in a mixed anonymous/real-name forum: Facebook confessions boards. On these systems, people post anonymously (via a mediator) but receive replies by identifiable Facebook users. This dynamic lead to little negativity and an appropriate forum for discussing taboo topics and stigmatized identities <ref type="bibr" target="#b12">[12]</ref>.</p><p>As services that support a relation-based anonymity model are quite new, only recently research had started examining these platforms. Kang et al. conducted a qualitative study of users of these new services and emphasized how important it was for their participants to get social validation even from anonymous strangers, echoing early research on Usenet <ref type="bibr" target="#b33">[29]</ref>. However, only four of their eighteen participants were Secret users, and the remaining were Whisper and Yik Yak users, services that rely on a proximity relation rather then a set of existing social connections (i.e., being connected through other social networks) <ref type="bibr" target="#b33">[29]</ref>. Other recent studies have quan-titatively examined data from the proximity-based anonymity service Whisper: One study compared Whisper's and Twitter's different anonymity models and found that users use anonymity to express their wants, needs, and wishes <ref type="bibr" target="#b15">[15]</ref>. Another empirical study using 24 million posts on Whisper looked into structures of user interaction, user engagement, and network stickiness <ref type="bibr" target="#b70">[58]</ref>.</p><p>To summarize, in this paper we investigate tie-based anonymity services, where the perceived affordances, benefits and risks of participation are different than those of more traditional social media services, including anonymous ones.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>TIE-BASED ANONYMOUS SOCIAL APPS</head><p>The tie-based anonymous social applications have several characteristics that set them apart from previous anonymous chat rooms and forums. Where traditional online forums and chat rooms are most often topic-based and support forumwide identity, ephemeral identity systems make use of some sort of relationship between poster and reader, such as proximity or existing digital social ties. In this work we focus on the unique category of tie-based anonymous applications, where the anonymous application uses data from another social network where social ties are articulated, for example Facebook, or the phone's address book. With this social network information available to the application, it can mark content as posted by "friend" or "friend of friend"-based on a match done by the application but not exposed to the user.</p><p>Secret, available from December 2013 to April 2015, was a mobile application that allowed users to share information anonymously with Facebook friends and friends listed in the user's telephone contacts. Based on the friends list, the app displayed a stream of posts shared by the user's friends, friends of friends, as well as popular posts by nonfriends. Users would see a list of reverse chronologically ordered posts that include text on top of a solid background or attached picture, with the source identified as "friend" or "friend of friend" when appropriate. In addition to these posts, users could also view popular posts using the "Explore" tab on the application, providing a list of popular and nearby posts by non-friends.</p><p>In this version of Secret, users could "like" any post by clicking on the heart-shaped button but only comment on posts from their friends or friends of friends. Comments were anonymous as well, and commenting users were assigned a colored icon consistent within the context of a single post. As a result, there was no built-in mechanism to identify posts or comments made by the same user beyond a single post and discussion thread.</p><p>The Secret app changed functionality and look during its lifetime and our study. In December 2014, the app transitioned from tie-based to proximity-based model. Like the popular app Yik Yak, Secret showed anonymous posts from people nearby, rather than from friends. In April 2015, shortly after our last follow-up interview, Secret had shut down.</p><p>A Chinese app called Mimi ("secret" in Chinese) was launched in late March 2014. The Mimi app is very similar to the earlier version of Secret, to the point of being considered a clone. Despite this similarity, Mimi did include additional functions such as private messaging, allowing users to send direct messages to the original author of a post. At the time of writing, Mimi is still available and active under the name Wumii. It is important to note that we included Mimi in the study to increase the generalizability of our findings, rather than to explicitly study cultural differences.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>METHOD</head><p>Our study was based on in-depth, semi-structured interviews with users of Secret and Mimi, conducted in August and September 2014, with follow-up interviews six to seven months later. Our aim was to investigate uses and practices around the applications, as well as attitudes towards content and anonymity in these new tie-based platforms. We asked questions about participants' current experiences within and around these applications, with the goal of documenting examples of posts and reactions to these posts. We asked about types of content and types of interactions taking place as well as how they thought anonymity affected their interactions on the platform. Seven months after the first round of interviews, we followed up with a subset of participants via short interviews or email correspondence (we approached all but only a subset responded). By then, Secret had changed the posting mechanism to focus on showing nearby posts ("proximity-based"). The second-round interviews focused on the changes to the participants' practices through the past seven months, in particular given the changes to the app in the case of Secret.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Participants</head><p>We interviewed 15 participants: six users of the Chinese app Mimi (three men, three women) and nine users (six men, three women) of the US-based app Secret. Participants' ages ranged from 21 to 27 for Mimi, and 22 to 37 for Secret. Participants held a diverse set of jobs, from pre-school teacher and digital manager to advertisement agent and public relations. The Chinese participants all lived in China and Secret users were located in the US. To recruit the participants, we posted fliers at coffee shops in a major American metropolitan area, performed snowball sampling through social networking sites, and approached users who posted about these apps on Twitter and the Chinese-language weChat (through direct messaging and forwarding recruiting messages). The interviews with the Chinese participants were conducted with a Chinese interviewer (one of the authors, a native Chinese speaker) in Chinese and were translated to English by the same person. Participants had to have used the applications for at least two weeks at the time of the interview; most had used it for several months when we conducted the first round of interviews. The first round of interviews lasted 30-60 minutes. The participants were compensated $20 for their time.</p><p>All interviews were conducted over the phone due to geographical distance.</p><p>When approaching the participants again seven months later, we were able to conduct follow-up interviews with five of the Secret users, and received five written responses from the Mimi users. For the remaining four Secret users, three did not respond and one declined to be interviewed again. The second round interviews with Secret users lasted 10-40 minutes depending on if they still used the application or not; from the participants who responded, only one was still using the application, four were not, but all reported using the app for months after the first interview. As the Mimi app did not change as significantly, we limited the interaction with the Mimi participants to an email inquiry where we asked if and how they were still using the application. In Mimi's case, two participants were still using the application, but four were not, citing that they have used it for a number of months after the first round of interviews.</p><p>The recruitment process and study protocol were reviewed and approved for the inclusion of human subjects by an Academic Institutional Review Board (Protocol #1406004763).</p><p>All the names of our participants were anonymized for analysis. In the results we identify quotes with a code indicating the app used, gender and age of the participant. For example, SF36 is a Secret user, female, who was 36 years old.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Analysis</head><p>The analysis of the data was conducted through qualitative categorization and thematic analysis. After the interviews were transcribed and translated into English (when needed), one researcher independently coded all interviews for major categories. Then a second researcher conducted more detailed analysis using sub-categorization and constant comparison <ref type="bibr" target="#b65">[53]</ref>. Based on our research questions, we then highlighted relevant mentions in the transcripts, and grouped these categories into major sub-categories iteratively. Comparing the original categories and the sub-categories to each research question, we determined the most important findings that we elaborate on in the following sections. The follow-up interviews were coded and analyzed later but in close connection to the corresponding original interview.</p><p>Due to the similarities in terms of functionality of the Chinese app Mimi and the majorly US-based app Secret, we analyzed the two sets of interviews collectively. Our interest was not in cultural differences per se, but rather to sample across two cultures. We closely watched out for potential cultural differences emerging from the interviews. In the end, we only observed minor differences. We therefore continue to describe our findings collectively, and only point out the few subtle cultural differences in the later part of the paper.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>RESULTS</head><p>We now discuss the results from the first set of interviews.</p><p>After briefly describing the general motivations and uses of the two services, we explore five themes: Motivations and general uses; the need for identity management in this type of anonymous social media; the de-anonymization that in fact took place; how the app fostered intimacy, support and encouragement; and finally, how users dealt with conflicts inside the app.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Motivations and Uses</head><p>This first set of findings echos and enforces the findings of  <ref type="bibr" target="#b33">[29]</ref>. We report on these findings briefly below, to focus on angles and findings specific to tie-based platforms which were not highlighted in earlier research.</p><p>One major motivating factor participants cited for using the apps was entertainment: five participants mentioned checking the app when bored as a kind of distraction and mostly glanced over it for locating humorous and funny posts. Several of the participants indicated that posting to these apps allowed them to avoid complications from their friends while still gaining the benefits from social interaction and validation. One participant reported posting a secret that received around ten likes: "I met my ex boyfriend a few days ago. I got an email from him just now. I deleted it, without reading" [MF24]. One of the reasons she did not post a particular post on her real-name social networks was that she only wanted to post to release her feelings but did not want anyone to know it was her. Posting under real-name would have led to her friends asking what happened and to "overthink". These statements illustrate previous findings on the benefits of self-disclosure <ref type="bibr" target="#b16">[16,</ref><ref type="bibr" target="#b55">45]</ref> and earlier findings in the study of Kang et al. <ref type="bibr" target="#b33">[29]</ref>. We return to this theme in the discussion.</p><p>Motivations for recurring use grew together with the size of the participant's Secret network. Some participants commented on how the size of their network determined the visibility and readership of posts, and hence significantly affected their experience on the platform (and the motivation for using the app). As one participant put it, "If you don't have a lot of friends, your post is only getting read by however many people in that circle. . . " [SF36]. The enjoyment of consumption was also limited with a smaller network, for example: "[In the beginning] I would go on maybe once a week just because there wasn't very many updated posts for me to see, so there wasn't much action happening" [SM24]. While the value of the network grew with the size of it, it was not simple to "recruit" friends to use the app, precisely due to the app's anonymous nature, but participants still reported occasionally asking their friends if they were using the app or not.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Identity Management</head><p>Six of the participants explicitly stated that the reduced need for identity management was something that made the application in question different. . Participants reported that the ephemeral identity on the Secret app helped them to not be concerned about identity management since there was no pressure to live up to their "real self" as represented on other social media. This freedom did not necessarily mean that the users presented a false image. SF24, for example, explained how she felt she was representing her true self on Secret: "I think I've never pretended to [. . . ] be anything that I wasn't or anyone that I wasn't, and I feel like I guess I'm the most myself on Secret".</p><p>Interestingly, identity considerations still applied in some cases as participants used the text of the post to hint at, or further obscure, their identity. Interviewees reported crafting their posts carefully, based on their desired audiences: sometimes explicitly targeting their friends or expecting friends to be able to identify them, and at other times making sure to avoid identification by friends. One participant for example explained "when I'm feeling depressed [. . . ] I don't want people to know who I am, so I intentionally hide my speech habits. For [other types] I don't really care so I don't change anything in particular" [MF22]. In doing that, these participants took full advantage of the non-persistent nature of identities where different posts cannot be associated with the same author: "If you present yourself as the same in your daily life, like funny or hilarious, [. . . ] it's very easy for friends to guess who this is; but if you post something that no one knows about, they couldn't guess who that is, even if you post a lot of secrets" [MF24]. In summary, participants were articulate about identity management still being important to a certain degree, perhaps because they were aware of the possible process of de-anonymization, a practice we discuss next.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>De-Anonymization</head><p>We identified two types of "identity hacking" that participants were aware of. We name them "hard-hacking" (i.e., using technical approaches) and "soft-hacking" (de-anonymization via social engineering and manual procedures). Most participants had no concern for hard-hacking, saying for example: "I've read their articles about how they sort of anonymize things, and so I feel very comfortable with sort of the technical aspects behind things, and how they set up their system" [SM24]. However, eight participants reported concerns or at least an awareness of "soft hacking", for example saying that "some friends could easily figure things out by thinking about it for more than half a second" [SM24].</p><p>Actual practices of soft-hacking by participants were prevalent as well. Seven of the participants expressed how it was the fun" or to figure out who was the poster of an item. They used guessing, their knowledge of their friends, or language and speech cues to do so. A participant he "knew exactly who it was because six months prior. . . , my friend said the exact same quote to me. . . " Participants also practiced de-anonymization, with fairly sophisticated practical methods. Participants reported, for example:</p><p>(1) trying to figure out who in their contact list was using the app; (2) sharing screenshots to others via text messaging or other social media; (3) comparing (and triangulating) friend lists with other friends who used the app. In contrast, several participants were not motivated, saying that it's not very difficult to identify who posted the secret, no one has the extra time to actually do this, and nobody would believe it anyway" [MM21]. When asked if there were any differences between a post from a "friend" or a "friend of a friend", responded:"Of course, I definitely care more about my posts [. . . ] If it's something shocking from a friend, I am definitely interested in figuring out who that was."</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Intimacy, Support and Encouragement</head><p>As noted above, participants certainly observed and reported posting more intimate content, due to the disinhibition effect of anonymous platforms <ref type="bibr" target="#b66">[54]</ref>. Moreover, participants understood (and often reported witnessing) the benefits of such disclosures. One participant for example commented: things that people are too shy to discuss in real life but truly want to know more about, not involving attacking others, are beneficial" Others said that they would not share the posted content with friends in person if they were worried about being judged. Relatedly, one user described the sharing as "almost like gossiping without the negative effects of it landing specifically on someone. . . " of the participants described finding encouragement and validation for the sentiment shared on Secret or Mimi, for or for others. One participant for example reported that she posted on Secret about being afraid to go to the gynecologist because of a past sexual assault, something she could not talk openly about. She received several comand said: "I think most of them were friends, and they said something encouraging along the lines of 'it's important for your health, and I'm really sorry that that all happened.</p><p>here for you if you reach out to somebody to go with you.' Just trying to help, ease my fear, more or less." also received more likes than comments, and attributed that don't really know what to say, but they're just trying show support or affirmation of some kind" A more subtle benefit of the tie-based anonymity was a better understanding of attitudes and opinions among one's social ties, or at least a perception of such understanding. In eight of the interviews, participants reported that they were able to gain a better understanding of their collective group of friends, which in effect influenced their face-to-face social behavior. One participant told us how he had no idea that some of his friends were in fact questioning their sexual ori-"For example, [. . . ] I had no idea that some people in my friend network questioned their sexual orientation. And afraid to talk about it in person, but they're okay with talking about it in sort of this anonymous aspect. [. . . ] so I think it's great for me to understand my group of friends better as a whole and maybe next time when I'm in a social gathering, I won't make any comments about people's sexual orientation or anything like that. Big [. . . ] friendship stratdecisions on my end"</p><p>Sometimes, the experienced benefit was to learn about an agreement with others within the anonymous tie-based network. Some very popular posts had a shared sentiment of surprising recognition, for example as described by one par-"[. . . ] you can find someone who says some random things, and you'll realize [. . . ] (s)he feels the same or is also this! This is very interesting and very unique" Another participant reported that one of his posts got three thousand likes and four hundred comments in a few days, saying it really must have "struck a chord" [SM27]; he reported receiving comments like "yep, I do the same thing."</p><p>People reported being motivated to explicitly provide support. One participant for example said that "if it can help others, giving one or two sentences and be the audience of that person's thoughts wouldn't be a bad thing. After all, they are friends, or your friends of friends. If someone has problems, it's nice if you can comfort or cheer them up a bit" On the other hand, this knowledge of ties, even remote, can make negative comments even more hurtful. One user reported stopping posting secrets after receiving very negative from several of her quite emotional posts, a topic we now turn to.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Debates, Conflicts and Bullying</head><p>As may be expected, postings and comments on these services often lead to debate and conflict. Participants reported that highly contentious topics could lead to non-supportive judging comments: "[. . . ] these battles [can be really] drawn out and obnoxious to a certain point because both of are just on such extremes that no one was really having a Another participant described: "When there are different opinions on certain things, and some people are just not very tactful in the way they say things. So if somebody posts something about being cheated on, then there will be commenters who will come in and say, 'oh you always deserve a second chance', and some others would say 'no, once a cheater, always a cheater'. And then some of the commenters will fight back and forth about their opinions."</p><p>Although participants did not admit to bullying or directly contributing to conflicts, as expected with a fairly selfselected set of participants, some confessed commenting in an impulsive way, saying things they did really mean. One participant explicitly admitted commenting when he was not in a good mood. though, pants often claimed that they defended attacked posters from their attackers, and that they reported or called out offenders when inappropriate content was posted.</p><p>were exposed to and well aware of negativity in these apps, and were often unsurprised when it occurred, the anonymity dynamics. "Whenever you don't have to be held accountable, I think, unfortunately that there are other people who will use that to hurt people. [. . . ] You tend to lean towards doing something that you probably wouldn't if you could be held accountable" This behavior is often referred to as "trolling" behavior, such as degrading and objectionable comments in response to others' content. Participants were all well aware of trolling on these services, with thirteen of them mentioning the negative characteristics of some of the posts. One participant for example told us about comments that "say really nasty, negative</p><p>[SF36]. Another participant specifically mentioned threads bashing an identified person on Secret: "It's like a wreck. . . it's a disaster when you look because you just believe that people are this terrible" [SF22]. Particireported flagging and reporting posts and comments, as well as calling out people within the social network.</p><p>Finally, the negativity on the platforms can lead to decreased engagement and disclosure through the platform. According to one participant, "Most of the times there were rumors, scandals, made up stories and especially this abusing others or something like that. We say in Chinese 'negative energy'. It makes people frustrated and disappointed sometimes. [. . . ] So yes after one or two uncomfortable experience I chose not post on Mimi" [MF21].</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Revisiting: Persistence of Use and Changes in App Func-</head><p>As we mentioned earlier, we contacted participants for a second interview during a period between six to seven months the first interview. We were primarily interested in changes to the the participants' practices during the past months, particularly in respect to the changes in the applications. This allowed us to get a longer term perspective of use of tie-based anonymous applications. Between the first and the second interview, the Secret app had gone through significant changes: it transformed into a primarily proximitybased app (much like Yik Yak). Mimi, on the other hand, kept the original tie-based concept, but had added a few new features, such as eliminating the option to see if a post came from friends or friends of friends.</p><p>For the second round of interviews, all of the Secret participants reported a radical change of content over the last months where bullying and name calling had become prominent alongside adult content, reinforcing the findings of Kang et al. <ref type="bibr" target="#b33">[29]</ref> with longitudinal evidence. One participant mused that it was "a sad commentary about humanity that as soon as we get to be anonymous we abuse it" [SM37]. Participants reported increased abusive and bullying behavior on the app, and one recalled a heated conflict within her own circle of friends that had taken place interviews. Several participants reported incidents involving posters identifyothers within the posts. Only one of the five participants we talked to was still using Secret; the other four particureported the reason for having left to be the negative and bullying postings. One participant described how she kept seeing her friends post unpleasant content, starting to specifiname others and how, even if she called them out on it, they continued. She said she gradually stopped using Secret until one day she just simply deleted the application from her Two of the participants mentioned they were initially enthusiastic to have the app change its feed logic to not only but also letting them peek at other cities. A participant who were still using the app, for example said that there is more on the app, there weren't much, [I] got before. Now it is much better and allows us to chat it makes it a lot more interesting. I just think the entire concept behind Secret. .</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>. now I can see what people are</head><p>[SF36]. She felt that the New York and the San Francisco feed were more interesting than her local Miami feed, which seemed a bit "childish."</p><p>One of the main changes in the Mimi app was that the app no longer showed explicitly whether posters were friends, or just friends of friends, thus making de-identification more difficult. All but two of our six participants reported having given up using the app with different reasons: Two felt the application did not provide enough content and entertainment. Two others tied their disengagement to the anonymity change: not being able to distinguish between friends and friends of friends, the de-anonymization was limited and the was not as fun.</p><p>Before our discussion, we note a few cultural differences in relation to tie-based anonymity systems-differences that were not readily apparent from our study. As an investigation into this topic, we included Chinese and US participants in order to be comprehensive rather than to be comparative. Indeed, we analyzed the data with an eye for differences in how the themes were expressed by participants of different cultures but no such differences emerged. Of course, the fact that the Mimi app is still active, versus the disappearance (and preceding adaptation) of Secret from the US market, may by itself suggest cultural differences, but these are a matter of another, more targeted investigation.</p><p>We now turn to our discussion where we highlight opportunities and challenges for tie-based anonymity applications. We use these opportunities and challenges to motivate several ideas and implications for future tie-based anonymity platforms. We acknowledge that some of the opportunities we identified can be problematic depending on the specific implementation, and that finding ways to design for the tradeoffs between the benefits and risks of tie-based anonymity is a fruitful area for work.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Opportunity: Self-disclosure</head><p>Based on our findings, we believe the self-disclosure opportunities with tie-based anonymity goes beyond what is afforded by other anonymous services, particularly due to the connecfriends.</p><p>recognized by past research on self-disclosure, the disclosure itself may provide significant benefits <ref type="bibr" target="#b16">[16,</ref><ref type="bibr" target="#b55">45]</ref>. As is also known, under the condition of anonymity, users tend to disclose more, a phenomena known as the disinhibition effect <ref type="bibr" target="#b66">[54]</ref>, which we also identified in our participants' remarks. Furthermore, our interviews suggest that free from identification concerns, participants perceive less associated of social sanction or issues of self-representation, similar to earlier findings <ref type="bibr" target="#b2">[3,</ref><ref type="bibr" target="#b28">25]</ref>. As is the case for other anonymous systems <ref type="bibr" target="#b12">[12,</ref><ref type="bibr" target="#b33">29]</ref>, tie-based systems thus allow greater self-disclosure than other social applications, as well as provide grounds for self-expression and relief.</p><p>The core value, we believe, lies in the potential reward for in tie-based applications, which is potentially substantial than in other anonymous applications. Selfdisclosure is a function of both risk and reward <ref type="bibr" target="#b10">[10,</ref><ref type="bibr">41]</ref> where rewards may include, for example, social validation and self-expression <ref type="bibr" target="#b14">[14]</ref>. As mentioned above, the opportunity for self-disclosure in tie-based anonymity applications strengthened through the reduced risks of being identified. Importantly, it is also strengthened through the heightened reward (compared to other anonymous platforms) given that the post is likely to be seen by a subset of one's social ties; despite trends of negativity and mean behavior, participants reported being able to receive support and encouragement based on their disclosure. In other words, while anonymity in general allows people to explore aspects of their identity that otherwise would have been impossible <ref type="bibr" target="#b49">[40,</ref><ref type="bibr">56]</ref>, tie-based allow one to do that the context of their social ties. Or, in Goffman's terms <ref type="bibr">[22]</ref>, tie-based anonymity may allow backstage-like performance in a front stage-like context.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Opportunity: Extending Social Behavior</head><p>Beyond self-disclosure, our findings highlight an opportunity extending social behavior through tie-based anonymity services, providing social affordances that go beyond identifiable media and other types of anonymous systems. It was clear from our participants that they, or others on these tie-based services, were engaging in social behavior and extracted social insights about their social ties in a way that is not readily attainable from other services or classic social net-First, the opportunity to perform social probing, with little risk, and in the context of friends, is a powerful and unique affordance of tie-based anonymous services. Our findings suggest that users can go beyond self-disclosure to post messages, whether true or false, that are intended to elicit reactions or "test the waters" with their group of social ties. This opportunity is available in anonymized settings, where an individual is not at risk by posting the information, and by replying to it with honest attitudes. Furthermore, only in tie-based anonymized settings people can post such message to get feedback from and exposure to friends and social ties. Prior work on identity transition has similarly found a need for people to be able to test out aspects of their identities that they may feel vulnerable about in online spaces <ref type="bibr" target="#b25">[23]</ref>. In doing such posting, it may fill a social probing role similar to one of humor <ref type="bibr" target="#b19">[19]</ref>; relatedly, tie-based applications allow radical ideas to be tested in social settings. Even here, the expression can take a slant that is sometimes playful and more tentative.</p><p>Second, and relatedly, is the opportunity for an individual user of tie-based anonymous services to develop a better understanding of their group of friends and social ties using information shared on the application, even without explicit probing activities. Some participants in our study hinted at a potential for a better window into their friends' attitudes, opinions, and perhaps even actions due to the properties of the tie-based services, aligned with the fundamental human need to belong <ref type="bibr" target="#b6">[7]</ref>. Note that these impressions may or may not be warranted (e.g., as only a minority of most participants' friends were active on these services), and the understanding may not even be accurate (e.g., as participants themselves noted, information may be untrue). Nevertheless, the opportunity to be-or merely to feel-more informed about one's social ties is significant. We emphasize that this affordance is unique to tie-based systems. Social information processing theory <ref type="bibr" target="#b69">[57]</ref> has long considered how people slowly develop mutual impressions and understanding over computermediated communication. Here, the learning is not about specific connection, and definitely not an identified one, but rather about a set of social ties. A critical difference from other types of anonymous groups is the tie-based setup, where each individual is connected to their own social ties, as opposed to the topic-and content-based, or location-based anonymous groups or communities in other anonymity mod-</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Opportunity: Anonymity at Will</head><p>Finally, an opportunity that has yet to be widely utilized within social networks is the new mechanism for "anonymity at will". We saw from our interviews the users' ability to construct their posts in relation to who would be reading them, thus providing the level of anonymity that they wanted each post to have. Sometimes they were able to be completely anonymous, but they felt they could craft posts to signal identity to some subset of readers or all. Ellison et al. suggest that particularly for adolescents, being able to selectively engage in anonymous interactions with a group of known peers has, key implications for identity and social development <ref type="bibr">[18]</ref>.</p><p>Social steganography <ref type="bibr" target="#b48">[39]</ref> refers to a practice of hiding secret messages in plain sight, where unwanted parties are not aware of their existence, or are unable to penetrate their actual meaning. This sharing practice is not uncommon in other social media, where for example location is revealed but only to the level of detail that an inside circle of friends would under-stand <ref type="bibr" target="#b3">[4,</ref><ref type="bibr">36]</ref>, or posts are "coded" through culturally specific references, inside jokes and <ref type="bibr">[13]</ref>.</p><p>In a slightly different way, tie-based anonymity services create new avenues for people to transmit sensitive messages to friends: here the content is exposed but the identity of the poster may be only known to some specific target set of through the crafting of the message. We term practice "identity steganography". As such, any new avenue for communication could serve an important social role <ref type="bibr">[13]</ref>. For example, users can use identity steganography seek social support while preserving privacy, especially in tie-based anonymity as friends who have the relevant context may know the identity of the original poster and reach out We discussed opportunities and potential benefits, but of course, there are darker sides to tie-based anonymity. Next, we discuss some of the key challenges.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Challenge: Negativity and Bullying</head><p>As is the case in other anonymous platforms, negativity and bullying are a significant challenge. Throughout the life of anonymous or pseudo-anonymous networks (i.e., site-wide user names, nick-name based networks), "trolling" can significantly curb participation and constructive contributions <ref type="bibr">[33,</ref> Participants in our study also described widespread neggetting even worse later on in the lifetime of the Secret application. This negativity increase could potentially be due to the fact that anonymity accentuate the interchangeability of group members, making trolling behavior "catch on" and converge to become the social norm <ref type="bibr" target="#b56">[46]</ref>. While our results do not explicitly hint at that, there is a further risk of particular forms of abuse when the negativity is expressed by a friend, from the comfort of their anonymity cover. As shown our findings and by Kang et al. <ref type="bibr" target="#b33">[29]</ref>, this negative behavior is likely the reason for a decline of the use of these applications over time.</p><p>participants reported "flagging" certain posts and otherwise trying to prevent abuse in the platform, this issue remains a challenge for services that would require significant resources to address. A sliver of hope lies in the fact that in mobile-based applications (which relation-and tie-based anonymity services tend to be), a robust user identifier is available to the service (i.e., an identifier of the mobile device used to access the app) and it is hard for users to create a new access avenue. This feature makes banning users, at least theoretically, more plausible than for other anonymous serfor example on the Web. However, given the amount of potential interactions, moderating, flagging and banning content is likely to remain a challenge for any popular tie-based platform.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Challenge: Rumors and Gossip</head><p>Beyond negativity, the lack of accountability also transforms tie-based anonymous services into places where rumor and gossip can be spread easily. Through our interviews we also uncovered a general perception by our participants that the two secret apps were rife with rumors and gossip. It has been long argued that gossip has a social function <ref type="bibr" target="#b23">[21,</ref><ref type="bibr">42]</ref>; gossip provides ways of making sense to help us cope with uncertainty and anxiety <ref type="bibr" target="#b60">[49,</ref><ref type="bibr" target="#b62">50]</ref>, and can serve to convey information about the society and culture [8, Interestingly, "gostends to have an 'inner-circleness' about it, in that is customarily passed between people who have a common history or shared interests" <ref type="bibr" target="#b63">[51]</ref>, aligning gossip outcomes well tie-based anonymous applications.</p><p>the other hand, social psychology defines rumors as "a statement whose truth-value is unverifiable or deliberately false" <ref type="bibr">[48]</ref>. Rumors thrive in secret environments, and often has significant negative outcomes <ref type="bibr" target="#b62">[50]</ref>. The of trolling the spread of rumors on social media platforms has been substantial. Even with real-name or persistent identity on social media, where one can verify or identify the source of information, rumor practices is an open issue and an active research area <ref type="bibr">[48]</ref>. In tie-based anonymous applications, this evaluation is much harder or impossible. Even worse, individuals run little risk in spreading rumors on these platforms. Participants felt that to be engaging, the content needed to believable but as we pointed out above, the tie-based services often offered content that was "too fake or too real". The uncertainly, and inability to evaluate content, could be a challenge for adoption and continued use.</p><p>Adding to the challenge is the fact that due to the unverifiable nature of rumors, hurtful rumors and gossiping may be harder to moderate than negativity and bullying, which are often immediately identifiable.</p><p>Challenge: Critical Mass challenge for any social media application is critical mass and adoption <ref type="bibr" target="#b47">[38]</ref>. Many social media services rely on known ties and existing social networks for diffusion, for example via mechanisms to invite friends to join. To have enough compelling content from one's friend, tie-based anonymity services also need to reach scale in adoption. This presents a significant challenge for these systems, as they cannot rely on traditional diffusion techniques: an individual canreveal their own identity to invite people to join the service. Of course, due to the anonymity and lack of persistent identity, one cannot create ties directly on these platforms eias one would for example on Facebook or Twitter. As a result, tie-based anonymous platforms could find it hard to grow the network, and hence limit the available tie-based content and audience for any single user. This challenge had direct impact on the participants in our study, whom could not get enough content to keep them entertained and engaged in the apps. While proximity-based anonymous services could simply expand content by extending the radius of posts, in tie-based services it is unclear whether the context (i.e., social radius) can be extended meaningfully (one might not care to read updates from a friend-of-friend-of-friend). in all, the ability to directly invite one's friends or create new ties on a tie-based anonymity service, the availof content on the platform would be quite sparse.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Implications</head><p>We provide several design implications and considerations for providing tie-based anonymity services. Importantly, of these suggestions are for stand-alone tie-based services, but instead argue for inclusion of similar features in other social media platforms.</p><p>Anonymity flashes. One way to allow for the benefits listed while perhaps circumventing some of the challenges is to directly build tie-based anonymity features into the experience of identity-based social network services like Twitter or Facebook. For example, Facebook allow users to post one anonymous post per day (an "anonymous flash") that would be broadcast-without attribution-to the user's network. Deep integration into such social network service can allow comments and replies to the post to be identified (for instance as described in <ref type="bibr" target="#b12">[12]</ref>) or similarly anonymous, each option provides different benefits.</p><p>Guessing game. Given the magnitude of de-anonymization attempts, tie-based services or functions may consider including a formal mechanism where, via private messages, individuals can be queried and admit (or perhaps prove) that they posted any specific content item ("Alice, is that you?" queries Bob). In "pure" tie-based anonymity services even the fact that individuals participate in the system is obscure, which would make such mechanism difficult to implement. However, such mechanism would be easier to implement if the tie-based system is integrated into a persistent identity platform like Twitter or Facebook.</p><p>Minimize de-identification risks. To make it harder for users to engage in "contact list hacking", future applications should make permanent the app content shown to the user, and not dependent on the user's current set of followees. In other words, once a user sees a post, it always remains on their list, preventing the option of hacking your contact list by removing contacts one-by-one to figure out who made one post.</p><p>Curbing negativity. Given that anonymity and loose social norms can quickly cause tie-based anonymity services degenerate into a hostile and negative environment, it is critical to offer more comprehensive support to battling this type of content. Immediate flagged content removal (deletethen-verify) and other more proactive techniques may be a better approach. One can perhaps consider that users posting negative comments slowly lose their privileges (e.g., their anonymity) on the service, essentially circumventing outright banning but limiting the opportunity for negative postings by any one user. Note that the main enablers of these tie-based systems-the fact that they are tied to a specific ID, often a mobile phone identifier, and even when it is not exposed in the be useful for banning and restricting users, compared to other anonymous services like news commentor online forums.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>CONCLUSION</head><p>In this paper we provided a qualitative in-depth examination of user practices in tie-based anonymity services, and showed why the affordances provided by these services form a new model of anonymity in computer-mediated communication. Such tie-based systems offer opportunities for self-disclosure are not available in "real-name" networks or persistent-identity anonymous networks. Furthermore, these services provide an environment where people can test the waters with their friends, exploring attitudes and possible reactions for complicated situations in their lives. We also highlighted a set of challenges for tie-based anonymity systems. Without having to rule whether tie-based anonymity services have any merit or potential for broad appeal and mass adoption as stand-alone applications, we believe our design considerations may be useful for providing the benefits of such services in the future in various settings.</p></div><figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_2"><head></head><label></label><figDesc>One person for example reported that "on social networks where people know your identity, [. . . ] you will have a drive to construct your self-image, and intentionally post things that are beneficial [. . . ], that adds to your high-end image construction" [MM21]. Other participants differentiated the identity aspects of Secret from other anonymous services: "on [other anonymous social media],</figDesc><table /><note>you have an identity on the entire site, or multiple identities if you're logging in with multiple accounts. But no matter what you do [there], no matter what the thread is, it's the same identity" [SF22]</note></figure>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="1">In March 2016 (two years after launch), Yik Yak introduced "handles"-permanent pseudonyms that users can choose to post with.</note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="2">https://www.wumii.org/</note>
+		</body>
+		<back>
+
+			<div type="acknowledgement">
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>ACKNOWLEDGMENTS</head><p>This research was funded by AOL through the Connected Experience Lab. We would like to thank Raz Schwartz and</p></div>
+			</div>
+
+			<div type="references">
+
+				<listBibl>
+
+<biblStruct xml:id="b0">
+	<analytic>
+		<title level="a" type="main">Understanding media disclosures of sexual abuse through the lenses of support seeking and anonymity</title>
+		<author>
+			<persName><forename type="first">Funda</forename><surname>Kivran</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">;</forename><surname>Oliver L Haimson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Munmun</forename><forename type="middle">De</forename><surname>Choudhury</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Andrea</forename><surname>Forte</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2858036.2858096</idno>
+		<ptr target="http://dx.doi.org/10.1145/2858036.2858096" />
+	</analytic>
+	<monogr>
+		<title level="m">Swaine for conducting interviews with Secret users, as well as all the participants for their time. Nazanin Andalibi</title>
+				<meeting><address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>ACM</publisher>
+			<date type="published" when="2016">2016</date>
+			<biblScope unit="page" from="3906" to="3918" />
+		</imprint>
+	</monogr>
+	<note>Proceedings of the 2016 CHI Conference on Human Factors in Systems (CHI &apos;16)</note>
+</biblStruct>
+
+<biblStruct xml:id="b1">
+	<analytic>
+		<title level="a" type="main">Sensitive self-disclosures, responses, and social support on Instagram: The case of #depression</title>
+		<author>
+			<persName><forename type="first">Nazanin</forename><surname>Andalibi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Pinar</forename><surname>Ozturk</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Andrea</forename><surname>Forte</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 20th ACM Conference on Computer-Supported Cooperative Work &amp; Social Computing (CSCW &apos;17)</title>
+				<meeting>the 20th ACM Conference on Computer-Supported Cooperative Work &amp; Social Computing (CSCW &apos;17)<address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>ACM</publisher>
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b2">
+	<analytic>
+		<title level="a" type="main">Can you see the real me? Activation and expression of the &quot;true self&quot; on the Internet</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>John</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Bargh</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><forename type="middle">A</forename><surname>Katelyn</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Grainne M</forename><surname>Mckenna</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Fitzsimons</surname></persName>
+		</author>
+		<idno type="DOI">10.1111/1540-4560.00247</idno>
+		<ptr target="http://dx.doi.org/10.1111/1540-4560.00247" />
+	</analytic>
+	<monogr>
+		<title level="j">Journal of Social Issues</title>
+		<imprint>
+			<biblScope unit="volume">58</biblScope>
+			<biblScope unit="page" from="33" to="48" />
+			<date type="published" when="2002">2002. 2002</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b3">
+	<analytic>
+		<title level="a" type="main">Student socialization in the age of facebook</title>
+		<author>
+			<persName><forename type="first">Louise</forename><surname>Barkhuus</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Juliana</forename><surname>Tashiro</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/1753326.1753347</idno>
+		<ptr target="http://dx.doi.org/10.1145/1753326.1753347" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the SIGCHI Conference on Human Factors in Computing Systems (CHI &apos;10)</title>
+				<meeting>the SIGCHI Conference on Human Factors in Computing Systems (CHI &apos;10)<address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>ACM</publisher>
+			<date type="published" when="2010">2010</date>
+			<biblScope unit="page" from="133" to="142" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b4">
+	<analytic>
+		<title level="a" type="main">Attacking others online: The formation of cyberbullying in late adolescence</title>
+		<author>
+			<persName><forename type="first">P</forename><surname>Christopher</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Douglas A</forename><surname>Barlett</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Gentile</surname></persName>
+		</author>
+		<idno type="DOI">10.1037/a0028113</idno>
+		<ptr target="http://dx.doi.org/10.1037/a0028113" />
+	</analytic>
+	<monogr>
+		<title level="j">Psychology of Popular Media Culture</title>
+		<imprint>
+			<biblScope unit="volume">1</biblScope>
+			<biblScope unit="page" from="123" to="135" />
+			<date type="published" when="2012">2012. 2012</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b5">
+	<analytic>
+		<title level="a" type="main">Predicting cyberbullying from anonymity</title>
+		<author>
+			<persName><forename type="first">P</forename><surname>Christopher</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Barlett</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Douglas</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Chelsea</forename><surname>Gentile</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Chew</surname></persName>
+		</author>
+		<idno type="DOI">10.1037/ppm0000055</idno>
+		<ptr target="http://dx.doi.org/10.1037/ppm0000055" />
+	</analytic>
+	<monogr>
+		<title level="j">Psychology of Popular Media Culture</title>
+		<imprint>
+			<biblScope unit="volume">5</biblScope>
+			<biblScope unit="page" from="171" to="180" />
+			<date type="published" when="2014">2014. 2014</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b6">
+	<analytic>
+		<title level="a" type="main">The need belong: desire for interpersonal attachments as a Behavior in Online CHI</title>
+		<author>
+			<persName><forename type="first">F</forename><surname>Roy</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Baumeister</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Leary</surname></persName>
+		</author>
+		<idno type="DOI">10.1037/0033-2909.117.3.497</idno>
+		<ptr target="http://dx.doi.org/10.1037/0033-2909.117.3.497" />
+	</analytic>
+	<monogr>
+		<title level="j">Psychological Bulletin</title>
+		<imprint>
+			<biblScope unit="volume">117</biblScope>
+			<biblScope unit="page" from="497" to="529" />
+			<date type="published" when="1995">1995. 2017. May 6-11, 2017. 1995</date>
+		</imprint>
+	</monogr>
+	<note>fundamental human motivation</note>
+</biblStruct>
+
+<biblStruct xml:id="b7">
+	<analytic>
+		<title level="a" type="main">Gossip as cultural learning</title>
+		<author>
+			<persName><forename type="first">F</forename><surname>Roy</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Liqing</forename><surname>Baumeister</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kathleen</forename><forename type="middle">D</forename><surname>Zhang</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Vohs</surname></persName>
+		</author>
+		<idno type="DOI">10.1037/1089-2680.8.2.111</idno>
+		<ptr target="http://dx.doi.org/10.1037/1089-2680.8.2.111" />
+	</analytic>
+	<monogr>
+		<title level="j">Review of General Psychology</title>
+		<imprint>
+			<biblScope unit="volume">8</biblScope>
+			<date type="published" when="2004">2004. 2004</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b8">
+	<analytic>
+		<title level="a" type="main">Public intimacy: Disclosure interpretation and social judgments on Facebook</title>
+		<author>
+			<persName><forename type="first">N</forename><surname>Natalya</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Bazarova</surname></persName>
+		</author>
+		<idno type="DOI">10.1111/j.1460-2466.2012.01664.x</idno>
+		<idno>DOI:http:</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Journal of Communication</title>
+		<imprint>
+			<biblScope unit="volume">62</biblScope>
+			<biblScope unit="page" from="815" to="832" />
+			<date type="published" when="2012">2012. 2012</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b9">
+	<monogr>
+		<title/>
+		<idno type="DOI">10.1111/j.1460-2466.2012.01664.x</idno>
+		<ptr target="//dx.doi.org/10.1111/j.1460-2466.2012.01664.x" />
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b10">
+	<analytic>
+		<title level="a" type="main">Self-disclosure in social media: Extending the functional approach to disclosure motivations and characteristics on social network sites</title>
+		<author>
+			<persName><forename type="first">N</forename><surname>Natalya</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yoon</forename><surname>Bazarova</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Choi</surname></persName>
+		</author>
+		<idno type="DOI">10.1111/jcom.12106</idno>
+		<ptr target="http://dx.doi.org/10.1111/jcom.12106" />
+	</analytic>
+	<monogr>
+		<title level="j">Journal of Communication</title>
+		<imprint>
+			<biblScope unit="volume">64</biblScope>
+			<biblScope unit="page" from="635" to="657" />
+			<date type="published" when="2014">2014. 2014</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b11">
+	<analytic>
+		<title level="a" type="main">4chan and/b: An analysis of anonymity and ephemerality in a large online community</title>
+		<author>
+			<persName><forename type="first">Andrés</forename><surname>Michael S Bernstein</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Drew</forename><surname>Monroy-Hernández</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Paul</forename><surname>Harry</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Katrina</forename><surname>André</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Gregory G</forename><surname>Panovich</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Vargas</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 5th International AAAI Conference on Weblogs and Social Media (ICWSM &apos;11)</title>
+				<meeting>the 5th International AAAI Conference on Weblogs and Social Media (ICWSM &apos;11)</meeting>
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b12">
+	<analytic>
+		<title level="a" type="main">Is it weird to still be a virgin&quot;: Anonymous, locally targeted questions on Facebook boards</title>
+		<author>
+			<persName><forename type="first">Jeremy</forename><surname>Birnholtz</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Nicholas</forename><forename type="middle">Aaron</forename></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ross</forename><surname>Merola</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Arindam</forename><surname>Paul</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2702123.2702410</idno>
+		<ptr target="http://dx.doi.org/10.1145/2702123.2702410" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 33rd Annual ACM Conference on Human Factors in Computing (CHI &apos;15)</title>
+				<meeting>the 33rd Annual ACM Conference on Human Factors in Computing (CHI &apos;15)<address><addrLine>New York, NY, USA, DOI</addrLine></address></meeting>
+		<imprint>
+			<publisher>ACM</publisher>
+			<date type="published" when="2015">2015</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b13">
+	<monogr>
+		<title level="m" type="main">It&apos;s complicated: The social lives of networked teens</title>
+		<imprint>
+			<date type="published" when="2014">2014</date>
+			<publisher>Yale University Press</publisher>
+			<biblScope unit="page">13</biblScope>
+		</imprint>
+	</monogr>
+	<note>danah boyd</note>
+</biblStruct>
+
+<biblStruct xml:id="b14">
+	<analytic>
+		<title level="a" type="main">Self-disclosure and liking: A meta-analytic review</title>
+		<author>
+			<persName><forename type="first">L</forename><surname>Nancy</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Lynn</forename><forename type="middle">Carol</forename><surname>Collins</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Miller</surname></persName>
+		</author>
+		<idno type="DOI">10.1037/0033-2909.116.3.457</idno>
+		<ptr target="http://dx.doi.org/10.1037/0033-2909.116.3.457" />
+	</analytic>
+	<monogr>
+		<title level="j">Bulletin</title>
+		<imprint>
+			<biblScope unit="volume">116</biblScope>
+			<biblScope unit="page" from="457" to="475" />
+			<date type="published" when="1994">1994. 1994</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b15">
+	<analytic>
+		<title level="a" type="main">The shades of anonymity: Characterizing anonymous social media content</title>
+		<author>
+			<persName><forename type="first">Denzil</forename><surname>Correa</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Leandro</forename><forename type="middle">Araújo</forename><surname>Silva</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mainack</forename><surname>Mondal</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Fabrício</forename><surname>Benevenuto</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Krishna</forename><forename type="middle">P</forename><surname>Gummadi</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 9th International AAAI Conference on Weblogs and Social (ICWSM &apos;15)</title>
+				<meeting>the 9th International AAAI Conference on Weblogs and Social (ICWSM &apos;15)</meeting>
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b16">
+	<monogr>
+		<title level="m" type="main">Self-disclosure and starting a close Handbook of Relationship</title>
+		<author>
+			<persName><forename type="first">J</forename><surname>Valerian</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Barbara</forename><forename type="middle">A</forename><surname>Derlega</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kathryn</forename><surname>Winstead</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Greene</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="1997">1997. 1997</date>
+			<biblScope unit="page" from="153" to="174" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b17">
+	<analytic>
+		<title level="a" type="main">Identity and deception in the community</title>
+		<author>
+			<persName><forename type="first">S</forename><surname>Judith</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Donath</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Communities in Cyberspace</title>
+				<imprint>
+			<date type="published" when="1999">1999</date>
+			<biblScope unit="page" from="29" to="59" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b18">
+	<analytic>
+		<title level="a" type="main">The question exists, but you don&apos;t with it</title>
+		<author>
+			<persName><forename type="first">B</forename><surname>Nicole</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Lindsay</forename><surname>Ellison</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Cliff</forename><surname>Blackwell</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Penny</forename><surname>Lampe</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Trieu</surname></persName>
+		</author>
+		<idno type="DOI">10.1177/2056305116670673</idno>
+		<ptr target="http://dx.doi.org/10.1177/2056305116670673" />
+	</analytic>
+	<monogr>
+		<title level="m">Strategic anonymity in the social lives of Social Media + Society</title>
+				<imprint>
+			<date type="published" when="2016">2016. 2016</date>
+			<biblScope unit="volume">2</biblScope>
+			<biblScope unit="page">4</biblScope>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b19">
+	<monogr>
+		<title level="m" type="main">Humour and In The Handbook of Communication Skills</title>
+		<author>
+			<persName><forename type="first">C</forename><surname>Hugh</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Foot</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="1997">May McCreaddie. 1997</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b20">
+	<monogr>
+		<title/>
+		<author>
+			<persName><surname>Routledge</surname></persName>
+		</author>
+		<imprint>
+			<biblScope unit="page" from="259" to="285" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b21">
+	<monogr>
+		<title/>
+		<author>
+			<persName><forename type="first">Andrea</forename><surname>Forte</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Nazanin</forename><surname>Andalibi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Rachel</forename><surname>Greenstadt</surname></persName>
+		</author>
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b22">
+	<analytic>
+		<title level="a" type="main">Privacy, anonymity, and perceived risk in open collaboration: A study of Tor users and Wikipedians</title>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 20th ACM Conference on Cooperative Work &amp; Social Computing (CSCW &apos;17)</title>
+				<meeting>the 20th ACM Conference on Cooperative Work &amp; Social Computing (CSCW &apos;17)<address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>ACM</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b23">
+	<analytic>
+		<title level="a" type="main">Papers in honor of Melville J. Herskovits: Gossip and scandal</title>
+		<author>
+			<persName><forename type="first">Max</forename><surname>Gluckman</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Current Anthropology</title>
+		<imprint>
+			<biblScope unit="volume">4</biblScope>
+			<biblScope unit="page" from="307" to="316" />
+			<date type="published" when="1963">1963. 1963</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b24">
+	<monogr>
+		<title level="m" type="main">The presentation of self in everyday life</title>
+		<author>
+			<persName><forename type="first">Erving</forename><surname>Goffman</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="1959">1959. 1959</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b25">
+	<analytic>
+		<title level="a" type="main">Online inspiration and exploration for identity reinvention</title>
+		<author>
+			<persName><forename type="first">Anne</forename><forename type="middle">E</forename><surname>Oliver L Haimson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Edward</forename><forename type="middle">F</forename><surname>Bowser</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Elizabeth</forename><forename type="middle">F</forename><surname>Melcer</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Churchill</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2702123.2702270</idno>
+		<ptr target="http://dx.doi.org/10.1145/2702123.2702270" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 33rd Annual ACM Conference on Human Factors in Systems (CHI &apos;15)</title>
+				<meeting>the 33rd Annual ACM Conference on Human Factors in Systems (CHI &apos;15)<address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>ACM</publisher>
+			<date type="published" when="2015">2015</date>
+			<biblScope unit="page" from="3809" to="3818" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b26">
+	<analytic>
+		<title level="a" type="main">Deception and design: The impact of communication technology on lying behavior</title>
+		<author>
+			<persName><forename type="first">T</forename><surname>Jeffrey</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jennifer</forename><surname>Hancock</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Thompson</forename><surname>Thom-Santelli</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Ritchie</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">SIGCHI Conference on Human Factors in Computing Systems (CHI &apos;04)</title>
+				<meeting><address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>ACM</publisher>
+			<date type="published" when="2004">2004</date>
+			<biblScope unit="page" from="129" to="134" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b27">
+	<monogr>
+		<title/>
+		<idno type="DOI">10.1145/985692.985709</idno>
+		<ptr target="http://dx.doi.org/10.1145/985692.985709" />
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b28">
+	<monogr>
+		<title level="m" type="main">The effects of anonymity on self-disclosure in blogs: An application of the online disinhibition effect</title>
+		<author>
+			<persName><forename type="first">E</forename><surname>Erin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Marcia</forename><forename type="middle">K</forename><surname>Hollenbaugh</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Everett</surname></persName>
+		</author>
+		<idno type="DOI">10.1111/jcc4.12008</idno>
+		<ptr target="http://dx.doi.org/10.1111/jcc4.12008" />
+		<imprint>
+			<date type="published" when="2013">2013. 2013</date>
+			<biblScope unit="volume">18</biblScope>
+			<biblScope unit="page" from="283" to="302" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b29">
+	<analytic>
+		<title level="a" type="main">Clinical questions in online health The case of &quot;see your doctor&quot; threads</title>
+		<author>
+			<persName><forename type="first">Jina</forename><surname>Huh</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 18th ACM Conference on Computer Supported Cooperative Work &amp; Social Computing (CSCW &apos;15)</title>
+				<meeting>the 18th ACM Conference on Computer Supported Cooperative Work &amp; Social Computing (CSCW &apos;15)<address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>ACM</publisher>
+			<date type="published" when="2015">2015</date>
+			<biblScope unit="page" from="1488" to="1499" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b30">
+	<analytic>
+		<title level="a" type="main">Tackling dilemmas in supporting &apos;the whole person&apos; in online communities</title>
+		<author>
+			<persName><forename type="first">Jina</forename><surname>Huh</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Rupa</forename><surname>Patel</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Wanda</forename><surname>Pratt</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the SIGCHI Conference on Human Factors in Computing Systems &apos;12)</title>
+				<meeting>the SIGCHI Conference on Human Factors in Computing Systems &apos;12)<address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>ACM</publisher>
+			<date type="published" when="2012">2012</date>
+			<biblScope unit="page" from="923" to="926" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b31">
+	<monogr>
+		<title/>
+		<idno type="DOI">10.1145/2207676.2208535</idno>
+		<ptr target="http://dx.doi.org/10.1145/2207676.2208535" />
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b32">
+	<analytic>
+		<title level="a" type="main">Why do people seek anonymity on the Internet?: Informing policy and design</title>
+		<author>
+			<persName><forename type="first">Ruogu</forename><surname>Kang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Stephanie</forename><surname>Brown</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sara</forename><surname>Kiesler</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2470654.2481368</idno>
+		<ptr target="http://dx.doi.org/10.1145/2470654.2481368" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the SIGCHI Conference on Human Factors in Computing Systems (CHI &apos;13)</title>
+				<meeting>the SIGCHI Conference on Human Factors in Computing Systems (CHI &apos;13)<address><addrLine>New York, NY, USA, DOI</addrLine></address></meeting>
+		<imprint>
+			<publisher>ACM</publisher>
+			<date type="published" when="2013">2013</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b33">
+	<analytic>
+		<title level="a" type="main">Strangers on your phone: Why people use anonymous communication applications</title>
+		<author>
+			<persName><forename type="first">Ruogu</forename><surname>Kang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Laura</forename><surname>Dabbish</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Katherine</forename><surname>Sutton</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 19th ACM Conference on Computer-Supported Cooperative Work &amp; Social Computing &apos;16)</title>
+				<meeting>the 19th ACM Conference on Computer-Supported Cooperative Work &amp; Social Computing &apos;16)<address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<biblScope unit="page" from="359" to="370" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b34">
+	<monogr>
+		<title/>
+		<idno type="DOI">10.1145/2818048.2820081</idno>
+		<ptr target="http://dx.doi.org/10.1145/2818048.2820081" />
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b35">
+	<analytic>
+		<title level="a" type="main">User unknown: 4chan, anonymity contingency</title>
+		<author>
+			<persName><forename type="first">Lee</forename><surname>Knuttila</surname></persName>
+		</author>
+		<idno type="DOI">10.5210/fm.v16i10.3665</idno>
+		<ptr target="http://dx.doi.org/10.5210/fm.v16i10.3665" />
+	</analytic>
+	<monogr>
+		<title level="j">First Monday</title>
+		<imprint>
+			<biblScope unit="volume">16</biblScope>
+			<biblScope unit="page">10</biblScope>
+			<date type="published" when="2011">2011. 2011</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b36">
+	<analytic>
+		<title level="a" type="main">Follow the (slash) dot: Effects of feedback on new members in an online</title>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2005 International ACM SIGGROUP Conference on Supporting Group Work (GROUP &apos;05)</title>
+				<meeting>the 2005 International ACM SIGGROUP Conference on Supporting Group Work (GROUP &apos;05)<address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>ACM</publisher>
+			<date type="published" when="2005">2005</date>
+			<biblScope unit="page" from="11" to="20" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b37">
+	<analytic>
+		<title level="a" type="main">Slash(dot) and burn: Distributed moderation in a large online conversation space</title>
+		<author>
+			<persName><forename type="first">Cliff</forename><surname>Lampe</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Paul</forename><surname>Resnick</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the SIGCHI Conference on Human Factors in Computing Systems &apos;04)</title>
+				<meeting>the SIGCHI Conference on Human Factors in Computing Systems &apos;04)<address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>ACM</publisher>
+			<date type="published" when="2004">2004</date>
+			<biblScope unit="page" from="543" to="550" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b38">
+	<monogr>
+		<title/>
+		<idno type="DOI">10.1145/985692.985761</idno>
+		<ptr target="http://dx.doi.org/10.1145/985692.985761" />
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b39">
+	<analytic>
+		<title level="a" type="main">Effects of anonymity, invisibility, and lack of eye-contact on toxic disinhibition</title>
+		<author>
+			<persName><forename type="first">Noam</forename><surname>Lapidot</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">-</forename><surname>Lefler</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Azy</forename><surname>Barak</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Computers in Human Behavior</title>
+		<imprint>
+			<biblScope unit="volume">28</biblScope>
+			<biblScope unit="page" from="434" to="443" />
+			<date type="published" when="2012">2012. 2012</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b40">
+	<monogr>
+		<title/>
+		<idno type="DOI">10.1016/j.chb.2011.10.014</idno>
+		<ptr target="http://dx.doi.org/10.1016/j.chb.2011.10.014" />
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b41">
+	<analytic>
+		<title level="a" type="main">The changing face of bullying: An empirical comparison between traditional and internet bullying and</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Danielle</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jennifer</forename><forename type="middle">D</forename><surname>Law</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Shelley</forename><surname>Shapka</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Hymel</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Brent</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Terry</forename><surname>Olson</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Waterhouse</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Computers in Human Behavior</title>
+		<imprint>
+			<biblScope unit="volume">28</biblScope>
+			<biblScope unit="page" from="226" to="232" />
+			<date type="published" when="2012">2012. 2012</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b42">
+	<monogr>
+		<title/>
+		<idno type="DOI">10.1016/j.chb.2011.09.004</idno>
+		<ptr target="http://dx.doi.org/10.1016/j.chb.2011.09.004" />
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b43">
+	<analytic>
+		<title level="a" type="main">This is a throwaway account&quot;: technical identities and perceptions of anonymity in a massive online community</title>
+		<author>
+			<persName><forename type="first">Alex</forename><surname>Leavitt</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 18th ACM Conference on Computer Supported Cooperative Work &amp; Social Computing (CSCW &apos;15)</title>
+				<meeting>the 18th ACM Conference on Computer Supported Cooperative Work &amp; Social Computing (CSCW &apos;15)<address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>ACM</publisher>
+			<date type="published" when="2015">2015</date>
+			<biblScope unit="page" from="317" to="327" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b44">
+	<analytic>
+		<title level="a" type="main">Practices of information and secrecy in a rock subculture</title>
+		<author>
+			<persName><forename type="first">Jessica</forename><surname>Lingel</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Aaron</forename><surname>Trammell</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Joe</forename><surname>Sanchez</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mor</forename></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the ACM 2012 on Computer Supported Cooperative Work (CSCW &apos;12)</title>
+				<meeting>the ACM 2012 on Computer Supported Cooperative Work (CSCW &apos;12)<address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>ACM</publisher>
+			<date type="published" when="2012">2012</date>
+			<biblScope unit="page" from="157" to="166" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b45">
+	<analytic>
+		<title level="a" type="main">Anonymity, intimacy and self-disclosure in social</title>
+		<author>
+			<persName><forename type="first">Xiao</forename><surname>Ma</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Jeffery</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mor</forename><surname>Hancock</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Naaman</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">of the 2016 CHI Conference on Factors in Computing Systems (CHI &apos;16)</title>
+				<meeting><address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>ACM</publisher>
+			<date type="published" when="2016">2016</date>
+			<biblScope unit="page" from="3857" to="3869" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b46">
+	<monogr>
+		<title/>
+		<idno type="DOI">10.1145/2858036.2858414</idno>
+		<ptr target="http://dx.doi.org/10.1145/2858036.2858414" />
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b47">
+	<analytic>
+		<title level="a" type="main">Toward a &quot;critical mass&quot; theory of interactive media: Universal access, and diffusion</title>
+		<author>
+			<persName><forename type="first">M</forename></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Lynne</forename><surname>Markus</surname></persName>
+		</author>
+		<idno type="DOI">10.1177/009365087014005003</idno>
+		<ptr target="http://dx.doi.org/10.1177/009365087014005003" />
+	</analytic>
+	<monogr>
+		<title level="j">Communication Research</title>
+		<imprint>
+			<biblScope unit="volume">14</biblScope>
+			<biblScope unit="issue">5</biblScope>
+			<biblScope unit="page" from="491" to="511" />
+			<date type="published" when="1987">1987. 1987</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b48">
+	<monogr>
+		<author>
+			<persName><forename type="first">Alice</forename><forename type="middle">E</forename><surname>Marwick</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Boyd</surname></persName>
+		</author>
+		<ptr target="http://ssrn.com/abstract=1926349" />
+		<title level="m">The drama! Teen conflict, gossip, and bullying in networked publics. A Decade in Internet Time: Symposium on the Dynamics of the Internet and Society. Available from</title>
+				<imprint>
+			<date type="published" when="2011">2011. 2011</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b49">
+	<analytic>
+		<title level="a" type="main">It&apos;s not that I don&apos;t have problems, I&apos;m just not putting them on Facebook: Challenges and opportunities in using online social networks for health</title>
+		<author>
+			<persName><forename type="first">W</forename><surname>Mark</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Debra</forename><surname>Newman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sean</forename><forename type="middle">A</forename><surname>Lauterbach</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Paul</forename><surname>Munson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Margaret</forename><forename type="middle">E</forename><surname>Resnick</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Morris</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/1958824.1958876</idno>
+		<ptr target="http://dx.doi.org/10.1145/1958824.1958876" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the ACM 2011 Conference on Computer Supported Cooperative Work (CSCW &apos;11)</title>
+				<meeting>the ACM 2011 Conference on Computer Supported Cooperative Work (CSCW &apos;11)<address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>ACM</publisher>
+			<date type="published" when="2011">2011</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b50">
+	<analytic>
+		<title level="a" type="main">A disclosure decision model: Determining how and when individuals will</title>
+		<author>
+			<persName><forename type="first">Julia</forename><surname>Omarzu</surname></persName>
+		</author>
+		<idno type="DOI">10.1207/S15327957PSPR0402_05</idno>
+		<ptr target="http://dx.doi.org/10.1207/S15327957PSPR0402_05" />
+	</analytic>
+	<monogr>
+		<title level="j">Personality and Social Psychology Review</title>
+		<imprint>
+			<biblScope unit="volume">2</biblScope>
+			<biblScope unit="page" from="174" to="185" />
+			<date type="published" when="2000">2000. 2000</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b51">
+	<monogr>
+		<title level="m" type="main">What is gossip about? An alternative hypothesis</title>
+		<author>
+			<persName><forename type="first">Robert</forename><surname>Paine</surname></persName>
+		</author>
+		<idno type="DOI">10.2307/2799493</idno>
+		<ptr target="http://dx.doi.org/10.2307/2799493" />
+		<imprint>
+			<date type="published" when="1967">1967. 1967</date>
+			<biblScope unit="volume">2</biblScope>
+			<biblScope unit="page" from="278" to="285" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b52">
+	<analytic>
+		<title/>
+		<author>
+			<persName><forename type="first">Babnett</forename><surname>Pearce</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Stewart</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Sharp</surname></persName>
+		</author>
+		<idno type="DOI">10.1111/j.1460-2466.1973.tb00958.x</idno>
+		<idno>409-425. DOI:http:</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Journal of Communication</title>
+		<imprint>
+			<biblScope unit="volume">23</biblScope>
+			<date type="published" when="1973">1973. 1973</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b53">
+	<monogr>
+		<title/>
+		<idno type="DOI">10.1111/j.1460-2466.1973.tb00958.x</idno>
+		<ptr target="//dx.doi.org/10.1111/j.1460-2466.1973.tb00958.x" />
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b54">
+	<analytic>
+		<title level="a" type="main">On the Internet, nobody knows you&apos;re a dog&quot;: A Twitter case study of anonymity in social networks</title>
+		<author>
+			<persName><forename type="first">Keith</forename><forename type="middle">W</forename><surname>Sai Teja Peddinti</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Justin</forename><surname>Ross</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Cappos</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2660460.2660467</idno>
+		<ptr target="http://dx.doi.org/10.1145/2660460.2660467" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the Second ACM Conference on Online Networks (COSN &apos;14)</title>
+				<meeting>the Second ACM Conference on Online Networks (COSN &apos;14)<address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>ACM</publisher>
+			<date type="published" when="2014">2014</date>
+			<biblScope unit="page" from="83" to="94" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b55">
+	<monogr>
+		<title level="m" type="main">Opening up: The healing power of expressing emotions</title>
+		<author>
+			<persName><forename type="first">W</forename><surname>James</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Pennebaker</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2012">2012</date>
+			<publisher>Guilford Press</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b56">
+	<analytic>
+		<title level="a" type="main">The formation of group norms in computer-mediated communication</title>
+		<author>
+			<persName><forename type="first">T</forename><surname>Postmes</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Spears</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Lea</surname></persName>
+		</author>
+		<idno type="DOI">10.1111/j.1468-2958.2000.tb00761.x</idno>
+		<idno>DOI:http:</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Human Communication Research</title>
+		<imprint>
+			<biblScope unit="volume">26</biblScope>
+			<biblScope unit="issue">3</biblScope>
+			<biblScope unit="page" from="341" to="371" />
+			<date type="published" when="2000">2000. 2000</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b57">
+	<monogr>
+		<title/>
+		<idno type="DOI">10.1111/j.1468-2958.2000.tb00761.x</idno>
+		<ptr target="//dx.doi.org/10.1111/j.1468-2958.2000.tb00761.x" />
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b58">
+	<analytic>
+		<title level="a" type="main">Empathic communities: Balancing emotional and factual communication</title>
+		<author>
+			<persName><forename type="first">Jenny</forename><surname>Preece</surname></persName>
+		</author>
+		<idno type="DOI">10.1016/S0953-5438(98)00056-3</idno>
+		<idno>S0953-5438(98)00056-3</idno>
+		<ptr target="http://dx.doi.org/10.1016/" />
+	</analytic>
+	<monogr>
+		<title level="j">Interacting with Computers</title>
+		<imprint>
+			<biblScope unit="volume">12</biblScope>
+			<biblScope unit="page" from="63" to="77" />
+			<date type="published" when="1999">1999. 1999</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b59">
+	<analytic>
+		<title level="a" type="main">Rumor has it: Identifying in microblogs</title>
+		<author>
+			<persName><forename type="first">Emily</forename><surname>Vahed Qazvinian</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Rosengren</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Qiaozhu</forename><surname>Dragomir R Radev</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Mei</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the Conference on Empirical Methods in Natural Language (EMNLP &apos;11)</title>
+				<meeting>the Conference on Empirical Methods in Natural Language (EMNLP &apos;11)<address><addrLine>Stroudsburg, PA, USA; Denver, CO, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computational Linguistics</publisher>
+			<date type="published" when="2011-05-06">2011. May 6-11, 2017</date>
+		</imprint>
+	</monogr>
+	<note>Behavior in Online CHI 2017</note>
+</biblStruct>
+
+<biblStruct xml:id="b60">
+	<monogr>
+		<title level="m" type="main">Rumor as communication: contextualist approach</title>
+		<author>
+			<persName><surname>Ralph L Rosnow</surname></persName>
+		</author>
+		<idno type="DOI">10.1111/j.1460-2466.1988.tb02033.x</idno>
+		<idno>DOI:http:</idno>
+		<imprint>
+			<date type="published" when="1988">1988. 1988</date>
+			<biblScope unit="volume">38</biblScope>
+			<biblScope unit="page" from="12" to="28" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b61">
+	<monogr>
+		<title/>
+		<idno type="DOI">10.1111/j.1460-2466.1988.tb02033.x</idno>
+		<ptr target="//dx.doi.org/10.1111/j.1460-2466.1988.tb02033.x" />
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b62">
+	<analytic>
+		<title level="a" type="main">Rumor and gossip in interpersonal interaction and beyond: A exchange perspective</title>
+		<author>
+			<persName><surname>Rosnow</surname></persName>
+		</author>
+		<idno type="DOI">10.1037/10365-008</idno>
+		<ptr target="http://dx.doi.org/10.1037/10365-008" />
+	</analytic>
+	<monogr>
+		<title level="m">Behaving badly: Aversive behaviors in interpersonal relationships</title>
+				<editor>
+			<persName><forename type="first">M</forename><surname>Kowalski</surname></persName>
+		</editor>
+		<imprint>
+			<publisher>American Association</publisher>
+			<date type="published" when="2001">2001</date>
+			<biblScope unit="volume">8</biblScope>
+			<biblScope unit="page" from="203" to="232" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b63">
+	<analytic>
+		<title level="a" type="main">Rumor and gossip research</title>
+		<author>
+			<persName><forename type="first">L</forename><surname>Ralph</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Eric</forename><forename type="middle">K</forename><surname>Rosnow</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Foster</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Psychological Science Agenda</title>
+		<imprint>
+			<biblScope unit="volume">19</biblScope>
+			<biblScope unit="page">4</biblScope>
+			<date type="published" when="2005">2005. 2005</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b64">
+	<analytic>
+		<title level="a" type="main">I have to talk to somebody</title>
+		<author>
+			<persName><forename type="first">B</forename><surname>William</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Stiles</surname></persName>
+		</author>
+		<idno type="DOI">10.1007/978-1-4899-3523-6_12</idno>
+		<ptr target="http://dx.doi.org/10.1007/978-1-4899-3523-6_12" />
+	</analytic>
+	<monogr>
+		<title level="m">Self-Disclosure: Theory, Research, and Therapy</title>
+				<imprint>
+			<publisher>Springer US</publisher>
+			<date type="published" when="1987">1987</date>
+			<biblScope unit="page" from="257" to="282" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b65">
+	<monogr>
+		<title/>
+		<author>
+			<persName><forename type="first">Anselm</forename><surname>Strauss</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Juliet M</forename><surname>Corbin</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="1997">1997</date>
+		</imprint>
+	</monogr>
+	<note>theory in practice. Sage</note>
+</biblStruct>
+
+<biblStruct xml:id="b66">
+	<analytic>
+		<title level="a" type="main">The online disinhibition effect</title>
+		<author>
+			<persName><forename type="first">John</forename><surname>Suler</surname></persName>
+		</author>
+		<idno type="DOI">10.1089/1094931041291295</idno>
+		<ptr target="http://dx.doi.org/10.1089/1094931041291295" />
+	</analytic>
+	<monogr>
+		<title level="j">Cyberpsychology &amp; behavior</title>
+		<imprint>
+			<biblScope unit="volume">7</biblScope>
+			<biblScope unit="page" from="321" to="326" />
+			<date type="published" when="2004">2004. 2004</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b67">
+	<analytic>
+		<title level="a" type="main">User investment and behavior policing on 4chan</title>
+		<author>
+			<persName><forename type="first">Matthew</forename><surname>Trammell</surname></persName>
+		</author>
+		<idno type="DOI">10.5210/fm.v19i2.4819</idno>
+		<ptr target="http://dx.doi.org/10.5210/fm.v19i2.4819" />
+	</analytic>
+	<monogr>
+		<title level="j">First Monday</title>
+		<imprint>
+			<biblScope unit="volume">19</biblScope>
+			<date type="published" when="2014">2014. 2014</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b68">
+	<monogr>
+		<title level="m" type="main">Life on the screen: Identity in the age of the Internet</title>
+		<editor>56. Sherry Turkle</editor>
+		<imprint>
+			<date type="published" when="1995">1995</date>
+			<publisher>Simon &amp; Schuster Trade</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b69">
+	<analytic>
+		<title level="a" type="main">Computer-mediated Impersonal, interpersonal, and hyperpersonal interaction</title>
+		<author>
+			<persName><forename type="first">B</forename><surname>Joseph</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Walther</surname></persName>
+		</author>
+		<idno type="DOI">10.1177/009365096023001001</idno>
+		<ptr target="http://dx.doi.org/10.1177/009365096023001001" />
+	</analytic>
+	<monogr>
+		<title level="j">Communication Research</title>
+		<imprint>
+			<biblScope unit="volume">23</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page" from="3" to="43" />
+			<date type="published" when="1996">1996. 1996</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b70">
+	<analytic>
+		<title level="a" type="main">Whispers in the dark: Analysis of an anonymous social network</title>
+		<author>
+			<persName><forename type="first">Gang</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Bolun</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Tianyi</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ana</forename><surname>Nika</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Haitao</forename><surname>Zheng</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ben Y</forename><surname>Zhao</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2663716.2663728</idno>
+		<ptr target="http://dx.doi.org/10.1145/2663716.2663728" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2014 Conference on Internet Measurement Conference (IMC &apos;14)</title>
+				<meeting>the 2014 Conference on Internet Measurement Conference (IMC &apos;14)<address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>ACM</publisher>
+			<date type="published" when="2014">2014</date>
+			<biblScope unit="page" from="137" to="150" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b71">
+	<analytic>
+		<title level="a" type="main">To stay or leave?: The relationship of emotional and informational support to commitment in online health groups</title>
+		<author>
+			<persName><forename type="first">Yi-Chia</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Robert</forename><surname>Kraut</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">John</forename><forename type="middle">M</forename><surname>Levine</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the ACM 2012 on Computer Supported Cooperative Work (CSCW &apos;12)</title>
+				<meeting>the ACM 2012 on Computer Supported Cooperative Work (CSCW &apos;12)<address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>ACM</publisher>
+			<date type="published" when="2012">2012</date>
+			<biblScope unit="page" from="833" to="842" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b72">
+	<analytic>
+		<title level="a" type="main">Gossiping as a way of speaking</title>
+		<author>
+			<persName><forename type="first">Sally</forename><surname>Yerkovich</surname></persName>
+		</author>
+		<idno type="DOI">10.1111/j.1460-2466.1977.tb01817.x</idno>
+		<idno>DOI:http:</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Journal of Communication</title>
+		<imprint>
+			<biblScope unit="volume">27</biblScope>
+			<biblScope unit="page" from="192" to="196" />
+			<date type="published" when="1977">1977. 1977</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b73">
+	<monogr>
+		<title/>
+		<idno type="DOI">10.1111/j.1460-2466.1977.tb01817.x</idno>
+		<ptr target="//dx.doi.org/10.1111/j.1460-2466.1977.tb01817.x" />
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+				</listBibl>
+			</div>
+		</back>
+	</text>
+</TEI>

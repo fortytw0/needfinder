@@ -1,0 +1,1290 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xml:space="preserve" xmlns="http://www.tei-c.org/ns/1.0" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.com/kermitt2/grobid/master/grobid-home/schemas/xsd/Grobid.xsd"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+	<teiHeader xml:lang="en">
+		<fileDesc>
+			<titleStmt>
+				<title level="a" type="main">Visual ODLs: Co-Designing Patient-Generated Observations of Daily Living to Support Data-Driven Conversations in Pediatric Care</title>
+			</titleStmt>
+			<publicationStmt>
+				<publisher/>
+				<availability status="unknown"><licence/></availability>
+			</publicationStmt>
+			<sourceDesc>
+				<biblStruct>
+					<analytic>
+						<author>
+							<persName><forename type="first">Matthew</forename><forename type="middle">K</forename><surname>Hong</surname></persName>
+							<email>mhong@gatech.edu</email>
+							<affiliation key="aff0">
+								<orgName type="department">School of Interactive Computing</orgName>
+								<orgName type="institution">Georgia Institute of Technology</orgName>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Udaya</forename><surname>Lakshmi</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="department">School of Interactive Computing</orgName>
+								<orgName type="institution">Georgia Institute of Technology</orgName>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Thomas</forename><forename type="middle">A</forename><surname>Olson</surname></persName>
+							<email>thomas.olson@choa.org</email>
+							<affiliation key="aff1">
+								<orgName type="laboratory">Aflac Cancer and Blood Disorders Center Children&apos;s Healthcare of Atlanta</orgName>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Lauren</forename><surname>Wilcox</surname></persName>
+							<email>wilcox@gatech.edu</email>
+							<affiliation key="aff0">
+								<orgName type="department">School of Interactive Computing</orgName>
+								<orgName type="institution">Georgia Institute of Technology</orgName>
+							</affiliation>
+						</author>
+						<title level="a" type="main">Visual ODLs: Co-Designing Patient-Generated Observations of Daily Living to Support Data-Driven Conversations in Pediatric Care</title>
+					</analytic>
+					<monogr>
+						<imprint>
+							<date/>
+						</imprint>
+					</monogr>
+					<idno type="DOI">10.1145/3173574.3174050</idno>
+				</biblStruct>
+			</sourceDesc>
+		</fileDesc>
+		<encodingDesc>
+			<appInfo>
+				<application version="0.7.1" ident="GROBID" when="2022-07-22T05:02+0000">
+					<desc>GROBID - A machine learning software for extracting information from scholarly documents</desc>
+					<ref target="https://github.com/kermitt2/grobid"/>
+				</application>
+			</appInfo>
+		</encodingDesc>
+		<profileDesc>
+			<textClass>
+				<keywords>
+					<term>Observations of Daily Living</term>
+					<term>Adolescents</term>
+					<term>Family</term>
+					<term>Communication</term>
+					<term>Patient-Generated Health Data H.5.m. Information interfaces and presentation (e.g., HCI): Miscellaneous</term>
+				</keywords>
+			</textClass>
+			<abstract>
+<div xmlns="http://www.tei-c.org/ns/1.0"><p>Teens with complex chronic illnesses have difficulty understanding and articulating symptoms such as pain and emotional distress. Yet, symptom communication plays a central role in clinical care and illness management. To understand how design can help overcome these challenges, we created a visual library of 72 sketched illustrations, informed by the Observations of Daily Living framework along with insights from 11 clinician interviews. We utilized our library with storyboarding techniques, free-form sketching, and interviews, in co-design sessions with 13 pairs of chronically-ill teens and their parents. We found that teens depicted symptoms as being interwoven with narratives of personal and social identity. Teens and parents were enthusiastic about collaboratively-generated, interactive storyboards as a tracking and communication mechanism, and suggested three ways in which they could aid in communication and coordination with informal and formal caregivers. In this paper, we detail these findings, to guide the design of tools for symptom-tracking and incorporation of patient-generated data into pediatric care.</p></div>
+			</abstract>
+		</profileDesc>
+	</teiHeader>
+	<text xml:lang="en">
+		<body>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>INTRODUCTION</head><p>Many teens with complex chronic illnesses undergo longterm, multi-phase treatment cycles, such as chemotherapy. During such cycles, successful treatment depends in large part on the careful balance between the effectiveness of a therapy and its toxicity to the patient <ref type="bibr" target="#b9">[9]</ref>. Prior work on real-time symptom-tracking suggests that self-monitoring plays an important role in assessing treatment effectiveness, as patients can experience a variety of treatment effects at home-between visits to the clinic <ref type="bibr" target="#b38">[33]</ref>.</p><p>Recognizing, recording, and communicating about these effects is arduous for anyone experiencing them: the process is often burdensome, unguided, and relies on retrospective accounts by the patient <ref type="bibr" target="#b38">[33]</ref>. These complexities are exacerbated for teens: on top of fluctuations in psychological and physical development, already characteristic to their life stage, these young patients often face added emotional distress and cognitive strain resulting from medications and radiation therapy <ref type="bibr" target="#b22">[19]</ref>.</p><p>Ideally, teens' first-person experiences of their illness and responses to therapy are foregrounded in clinical communication. Yet, given the demands already placed on these young patients, parents often monitor and provide reports of the illness experience: contributing critical perspectives and support <ref type="bibr" target="#b39">[34]</ref>. While of great importance, the use of proxy reports alone can skew interpretations of the patient's health while perpetuating communication that is based on approximations <ref type="bibr" target="#b22">[19]</ref>. We do not yet understand how to design collaborative technology to capture and communicate about subjective, felt experiences of teen patients, amid fatigue, distress, and dynamic shifts in autonomy.</p><p>Motivated by this challenge, we turned to research on Patient-Generated Health Data (PGHD) to create a visual library of 72 sketched illustrations, informed by the Observations of Daily Living framework <ref type="bibr" target="#b1">[2]</ref>. The framework provides a useful characterization of the language of PGHD from the patient's perspective. We used our library of ODLs (henceforth called "Visual ODLs") alongside storyboarding, free-form sketching and interviews, to engage teens as design partners <ref type="bibr" target="#b34">[30,</ref><ref type="bibr" target="#b39">34,</ref><ref type="bibr">38,</ref><ref type="bibr" target="#b49">42]</ref> in co-design sessions with patients and their parents, to elicit illness experiences.</p><p>In this paper, we describe how we adapted the ODL framework to create our visual library. We illustrate how we used Visual ODLs in co-design sessions with 13 patient-parent pairs to elicit a rich set of illness experiences to inform pediatric PGHD technology. Our paper further contributes findings that teens depicted symptoms as being interwoven with narratives of personal and social identity-in their storyboarding process, aspects of their identity were inseparably interwoven into their illness narratives. Teens and parents were enthusiastic about collaboratively-generated, digital storyboards as a tracking and communication mechanism. They suggested that visual narratives of this kind could aid in communication and coordination with informal and formal caregivers by: 1. Scaffolding the process of encoding symptoms through richer representations of context surrounding them and depictions of how they affect engagement in activities. 2. Enabling coordinated tracking through digital storyboards in which scenes authored by teens and family members are coalesced. 3. Allowing for fuller expression of important characteristics of symptoms through visual attributes to depict timing, duration, severity, and frequency, and through the integration of digital media to vary the representation of the experience.</p><p>We complement these findings with 11 clinician interviews, and subsequently synthesize patient, parent and clinicians' perspectives to discuss opportunities for co-designing collaborative symptom-tracking technology to support datadriven clinical communication.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>BACKGROUND PGHD and Observations of Daily Living</head><p>Thanks to advances in multi-modal sensing and mobile and ubiquitous computing, research in Patient-Generated Health Data (PGHD) has gained momentum over the recent years, giving rise to new tools that capture patients' health-related data in everyday (non-clinical) contexts <ref type="bibr" target="#b42">[37]</ref>. Despite these advances, several barriers-spanning data capture, transfer, and review-prevent seamless integration of PGHD into clinical communication and practice.</p><p>In Brennan and Casper's lessons learned from Project HealthDesign <ref type="bibr" target="#b2">[3]</ref>, a national PGHD initiative research program, the authors highlight an important problem that patients faced when managing their health outside of the clinical context: "not only were the traditional terminologies of health inadequate to express the phenomena of interest, but the very structure of the terms and the purpose they served in the individuals' lives were markedly different from the signs and symptoms terminology employed by clinicians to denote meaning in health." <ref type="bibr" target="#b1">[2]</ref> Noting this mismatch between the information and communication needs of clinicians and patients, the authors identified two types of PGHD that inform health care: 1) clinician-defined and patient-generated, and 2) patient-defined and patient-generated health data. In their definition, clinician-defined and patient-generated data are assessments that professionals find important, but that must be gathered by the person experiencing daily life to contribute to those assessments. An example of clinician-defined and patientgenerated data includes Patient-Reported Outcomes (PROs), which are gradually being integrated into clinical workflows as standardized instruments to measure and compare treatment outcomes across multiple patients <ref type="bibr">[10]</ref>.</p><p>On the other hand, patient-defined and patient-generated data reflect concepts that are uniquely defined and seen as important by the patient, that can occur dynamically and provide personal indicators of health status <ref type="bibr" target="#b2">[3]</ref>. The authors introduce Observations of Daily Living, which is central to this paper, to provide an organizing framework that describes PGHD reflecting the patient's perspective.</p><p>Three distinct characteristics of ODLs include: status indicators that describe how the patient is feeling (e.g., mood, energy level, appetite), behavioral indicators that describe the behavioral context of the health status or what the patient has done in relation to a particular feeling, and exposures that describe the socio-environmental context. The authors note that ODLs arise within the person's life experience of health while having the flexibility to complement clinician-defined, patient-generated data.</p><p>We asked how ODLs could be used as a foundational language for communicating about experiences, and supporting awareness of those experiences coherently across the domains of both the clinic and everyday life. As such, Visual ODLs can serve as boundary-negotiating artifacts <ref type="bibr" target="#b30">[26,</ref><ref type="bibr">39]</ref> by facilitating three kinds of boundary-negotiating work found to be important in personal health data contexts <ref type="bibr" target="#b6">[7]</ref>. Supporting self-explanation of experience facilitates personal tracking and review, while the collaborative use of Visual ODLs serve to contribute to compilation artifacts, to facilitate sharing and reconciling information among teens and family members. Finally, Visual ODLs can serve as inclusion artifacts to facilitate the discussion of illness experiences with the support of visual aids to support datadriven medical conversations <ref type="bibr" target="#b6">[7]</ref>.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>PGHD and Teens</head><p>Eliciting PGHD effectively from individuals in everyday, naturalistic contexts is an ongoing area of research <ref type="bibr" target="#b27">[24,</ref><ref type="bibr" target="#b38">33]</ref>. Previous work explored real-time tracking of PGHD through active and passive sensing tools as a means to improve patient-provider communication <ref type="bibr" target="#b6">[7,</ref><ref type="bibr" target="#b38">33,</ref><ref type="bibr" target="#b41">36</ref>]. Yet, Hong et al. <ref type="bibr" target="#b22">[19]</ref> found that teen patients and their parents faced significant difficulty tracking symptoms and reporting them to clinical caregivers-not due to a lack of communication channels but from an inability to capture and articulate patients' experiences as they unfolded in daily life.</p><p>However, eliciting experiential data from teens is a challenging task: most teens are still developing the necessary literacy and conversational skills required to articulate unfamiliar physical sensations and emotions <ref type="bibr" target="#b0">[1]</ref>. In parallel, toxic effects of treatment could compromise cognitive function, which in turn interferes with the patients' ability to express these experiences <ref type="bibr" target="#b9">[9]</ref>. This has significant implications for interaction design researchers employing interview techniques that rely on verbal cues and patients' recall of illness experiences. Poole and Peyton stated that many researchers experience difficulty extracting insights from teens through qualitative open-ended questions, in part because they have difficulty articulating responses <ref type="bibr" target="#b40">[35]</ref>.</p><p>The Need for Co-Design Teens' participation in formative studies for requirements gathering can be aided by visual artifacts to scaffold their articulation of their experiences <ref type="bibr" target="#b13">[12,</ref><ref type="bibr" target="#b20">17]</ref>. Co-design techniques such as storyboarding can facilitate the process of eliciting child-led narratives and design feedback <ref type="bibr" target="#b16">[13,</ref><ref type="bibr" target="#b32">28]</ref>.</p><p>Comic-boarding [32] and fictional inquiry <ref type="bibr" target="#b12">[11]</ref> have been used with children to scaffold the ideation process, through visual illustrations that provide context and ideas from which children can extrapolate <ref type="bibr" target="#b21">[18]</ref>. We similarly aim to establish this scaffold through visual representations of ODLs and scenarios to frame the storyboard narratives.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>TWO-PHASE STUDY Study Setting and Participants</head><p>With IRB approval, we conducted our study at a large tertiary pediatric hospital, at Children's Healthcare of Atlanta (CHOA), in two Cancer and Blood Disorders Centers (one urban, one suburban) from March-September 2017.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Clinicians Interviews</head><p>We conducted individual semi-structured interviews with 11 clinicians (9 oncologists and 2 nurse practitioners) to understand how to design symptom monitoring technology for complex chronic illness treatment in ways that support the pediatric care workflow. Clinical experience ranged from 3 to 27 years (median=20).</p><p>To elicit as much domain knowledge as possible about symptoms relevant to their practice, we used the Pediatric Memorial Symptom Assessment Scale (pMSAS) <ref type="bibr" target="#b7">[8]</ref>, a 30item patient-rated and validated instrument developed for teen cancer patients aged 10-18, to elicit clinician expert knowledge and their relevant experiences treating cancer patients. pMSAS measures multidimensional aspects of cancer-related symptoms ranging from physical to psychological and global symptom distress.</p><p>We used pMSAS to draw out clinician perspectives on their communication with patients, with the most common symptoms to track for our target patient population (e.g., solid tumor, leukemia and lymphoma patients). In addition to symptoms, we also inquired about seven behaviors (ranging from physical activity to sexual activity) that clinicians would like to track in their patients.</p><p>Questions covered times that clinicians encouraged symptom tracking, types of symptoms and behaviors that are considered important, how symptoms are currently selfreported in practice, appropriate timing for symptom tracking during the illness and care trajectory, and strategies for reconciling conflicting reports.</p><p>Interviews lasted 20-30 minutes and each was audio recorded and transcribed for analysis. Two researchers conducted analysis using inductive coding to iteratively generate themes until no new themes emerged.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Clinician Interview Findings Patient experiences of interest to clinicians</head><p>From the list of 30 symptoms presented in pMSAS, we found that the symptoms most important for decisionmaking included: physical (lack of appetite, lack of energy, pain, constipation, vomiting, mouth sores, nausea, numbness in hands/feet) and psychological (sadness, worry, difficulty sleeping) symptoms, as well as behaviors (physical activity, nutrition, medication tracking, and sleep duration).</p><p>When asked about specifics of these symptoms, clinicians told us that it is important to know how symptoms affect the patients' quality of life <ref type="bibr" target="#b39">[34]</ref>. We also found that most symptoms are evaluated in a descriptive manner. When asked about the potential role that symptom tracking could play in complex chronic care, all clinicians agreed that patients' self-reports of symptomatic experience would not necessarily impact major treatment decisions (e.g., chemotherapy dosage), but would help them make decisions for supportive care to alleviate secondary effects of the treatment. Clinicians are focused on attending to acute signs of treatment outcomes (e.g., blood cell counts) and parents call in when their child is experiencing critical symptoms (e.g., high fever). However, both clinicians and parents can overlook non-critical factors usually occurring between visits that can still have long-term implications for treatment.</p><p>"The critical things that may make them sick acutely, once again, families will let us know. [...] I think it's more the dwindling weight, the not doing physical activities, withdrawing from the world, those are the things that are harder for us to track because they can be more gradual." -C1</p><p>For example, psychological symptoms are often overlooked, but very important to track because it interferes with the patients' propensity to comply with treatment.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>"Sadness, worry, and difficulty sleeping […] are things that if we don't intervene early can become a problem, and lead to not wanting to take your meds, not showing up for your appointments, those kind of things."-C3</head><p>We found that doctors sometimes find it difficult to get quality of life input from patient families. Patients and family members' perceive doctors in oncology clinics as specialists treating "just the disease." C2 stated how school attendance and performance is important to know to gauge treatment effects on the teen's attention and concentration, but families don't discuss the subject with them. This could be attributed to the parents' worry of burdening the doctor with extraneous details away from the clinician's focus on treating their child's "illness."</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Reconciling conflicting perspectives</head><p>When we asked how clinicians reconcile when teens and parents give discrepant reports for observable symptoms (e.g., vomiting) two clinicians (C1, C7) told us they would opt for the "worst case" to avoid misdiagnosis. C7 men-tioned that parents over-report and patients under-report, so in the end, parental reports are heard more in the clinic.</p><p>Although most clinicians understand that patient reports should carry more weight, some clinicians (C3, C4, C8) told us they have difficulty deciding who to trust and would rely on cues such as mood and personality to make evaluations on an individual family basis. For example, C3 told us she would at times trust the parents' report more when the child seems to be emotionally unstable.</p><p>One strategy that clinicians use for reconciliation is to triangulate between parent reports, teen reports, and clinical data. C8 stated that she uses "objective data such as protein scores and weight" obtained under their supervision, to resolve conflicting reports about nutrition intake-a common point of contention. Still, we found that clinicians were receptive to the idea of collaborative tracking among patients and parents. C10 especially elaborated on what this means for tracking nutrition intake. Patients were currently undergoing treatment (n=8) or had been treated within the last three months. Further inclusion criteria included the mental capability to participate in the study (as determined by a supervising physician), and the ability to speak English.</p><p>To better understand teens' illness experiences while receiving treatment, we conducted semi-structured interviews with all participants using storyboarding with scaffolding that included the use of Visual ODLs. The goal for the codesign sessions was to understand how a digital storyboarding tool with Visual ODLs could be designed to enable tracking of symptoms and everyday illness experiences-to support personal review and communication between the patient and their family members as well as with clinicians.</p><p>In the next section, we first introduce Visual ODLs and then detail the use of Visual ODLs with storyboarding techniques to build patient narratives of illness experiences.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Visual ODL Library</head><p>We took guidance from Brennan and Casper's conceptual organization of ODLs <ref type="bibr" target="#b1">[2]</ref> and technology probes <ref type="bibr" target="#b23">[20]</ref> to construct a total of 72 pictograms, or sketched illustrations of illness-related experiences, that represent people (4), places <ref type="bibr" target="#b16">(13)</ref>, activities <ref type="bibr" target="#b25">(22)</ref>, symptoms <ref type="bibr" target="#b16">(13)</ref>, mood <ref type="bibr" target="#b6">(7)</ref>, tools <ref type="bibr" target="#b7">(8)</ref>, descriptors <ref type="bibr" target="#b4">(5)</ref> We derived activities by expanding on Activities of Daily Living (ADL) <ref type="bibr" target="#b25">[22]</ref>. These ADLs include:</p><p>• Six basic activities of daily living (e.g., eating, bathing, dressing, toileting, locomotion)</p><p>• Everyday tasks (e.g., house chores, walking the dog)</p><p>• Self-care activities (e.g., taking medications, taking time alone)</p><p>We expanded on this set by incorporating activities found to be important through clinician interviews, along with activities common to the teenage lifestyle.</p><p>• Quality of life (e.g., sleep quality, socializing)</p><p>• Lifestyle-related activities (e.g., going to school, listening to music, using social media, playing video games, playing sports)</p><p>Similarly, we included many varieties of social (people) (e.g. alone, with parent, with friend, etc.) and environmental contexts (places) to ensure coverage (e.g., bedroom, bathroom, classroom, etc.). However, by using participant narration along with Visual ODLs, we could (and did) flexibly sketch frames missing from our library.</p><p>Descriptors indicated certain temporal patterns (e.g., occurring overnight, for several days, etc.) or syntax (e.g., can't do) that describe how the individual status and behavioral indicators manifested. Finally, tools described a set of media technologies (e.g., photo, video, chart, seen in Figure <ref type="figure" target="#fig_0">1</ref>) that the teen could bring into the storyboard, to indicate that they wished to capture or communicate an ODL using the tool. While patients in our study did not use those tools to produce content for the design sessions, they marked "placeholders" in their storyboards to indicate where they would have liked to use them alongside sketched ODLs.</p><p>In summary, Visual ODLs describe a visual language of patient experiences, encompassing its vocabulary, grammar, and mechanism of expression that enables the patient's comprehension and communication of captured observations and felt illness experiences. By providing a visual language, we leveraged teen's familiarity and favorable attitude towards using a visual conversational medium while capitalizing on their recognition (thereby lessening cognitive burden). By creating design artifacts with this form of ODLs, researchers can use them to draw out and collaboratively reconstruct illness experiences with family caregivers in co-design sessions.</p><p>* http://www.hx.gatech.edu/visualodls</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Co-Design Sessions with Semi-Structured Interviews</head><p>After obtaining assent and consent from patient families, we explained the storyboarding study procedure and asked patients to review the full list of Visual ODLs. Interviews were conducted in isolated rooms or open spaces depending on the patient's reason for visit. Some patients participated in the interview while receiving intravenous treatment (e.g., chemotherapy). For others, interviews were interrupted at times when clinicians came in for a physical exam. All interviews lasted 30-45 minutes and were audio-recorded.</p><p>Using a blank 4 x 3 panel storyboard template as a foundation, we presented four scenarios to draw out illness-related experiences and preferences regarding the imagined use of the technology for four scenarios (see Figure <ref type="figure" target="#fig_1">2</ref>). Contrary to other storyboard scaffolding approaches <ref type="bibr" target="#b12">[11,</ref><ref type="bibr">32]</ref> that start with a few pre-selected image panels to generate ideas, we chose to scaffold the storytelling process from the end by adding the visual illustrations corresponding to each scenario, in the last panel of the storyboard. End frames were replaced sequentially with each new scenario. Providing this scaffolding for the storytelling process focused on codesigning the beginning and intermittent processes, allowing flexibility to ideate in-between and within Visual ODLs leading up to the resulting scenario of use.</p><p>While walking through each scenario, we asked participants to narrate their daily experiences while undergoing treatment. The researcher quickly generated sketches with guidance from the patient when the ODL did not exist in our library. We kept interview topics consistent across patient families while adapting question phrasing to each. Topics addressed 1) challenges communicating illness experiences, 2) preferences regarding the use of media technology to capture experiences, 3) opportune moments (researcher placed circular stickers corresponding to the scene) to engage with symptom-tracking technology, and 4) patient and parent attitudes regarding the imagined use of technology (outlined in Figure <ref type="figure" target="#fig_0">1</ref>). At the end of each scenario, the researcher used a camera to capture the resulting storyboard.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Analysis</head><p>All audio recordings were transcribed verbatim. Our analysis employed a mixed deductive and inductive coding process <ref type="bibr" target="#b17">[14]</ref>. Starting with a top-down approach guided by Brennan and Casper's ODL framework <ref type="bibr" target="#b1">[2]</ref>, two researchers attached codes to instances of status indictors, behavioral indicators and exposures while noting emergent themes through bottom-up coding. Researchers reached consensus on a list of sub-themes through subsequent debriefings, then iteratively coded the transcripts until no new themes emerged. Emergent themes each corresponded to specific scenarios.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>FINDINGS</head><p>Below we organize our findings by scenarios: I, II &amp; III, and IV. For each scenario, we highlight relevant excerpts from interviews as well as images of patient-generated storyboards with Visual ODLs. We use the labels 'T' and 'P' to refer to teens and parents, respectively. Matching numbers indicate a study pair (e.g., T2 and P2).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Scenario I: Personal Review</head><p>To introduce teen patients to ODLs, the first co-design scenario focused on outlining everyday experiences using Visual ODLs. Through this scenario, we established routine activities and learned how symptoms and other aspects of the illness experience unfolded with respect to them.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Understanding everyday experiences with Visual ODLs</head><p>For all patients undergoing treatment, we found consistency in their day-to-day experience in terms of both structured and unstructured activities that became routines. After constructing one day in a storyboard, T6 remarked, "Truly this is my typical day because after chemo, that's basically what I do all the time." However, for these patients, symptoms presented themselves unpredictably. T11 illustrated this when commenting, "Sometimes you'll be in pain. Sometimes you'll be nauseous, sometimes tired. Some days it'll all hit you at once."</p><p>Our most interesting insights came from patients' reflections on their narrated experiences expressed as Visual ODLs on the storyboard. We found that the Visual ODLs enabled expression of symptoms by 1) enabling the inclusion of surrounding context to better articulate them, and 2) scaffolding how they affected the teen's ability to engage in daily activities. For example, most patients (T2-T13) described their symptoms first in relation to activities and surrounding physical context, drawing attention to how the symptoms affected routine activities (e.g., eating, locomotion and sleep). T12 associated the need to take pills with sadness: "Feeling sad, probably, at the same time as the initial [pain]-and then during-when I'm taking the pills" (Figure <ref type="figure" target="#fig_1">2</ref>).</p><p>We further discovered that teens' understanding and encoding of these associations involved noting the timing, such as onset and duration, frequency, intensity or impediment of specific activities. The visual cues denoting such descriptors aided this process, by providing the grammar for characterizing how the ODLs manifested in routine actions. For example, T9 mentioned using the "can't do" descriptor to indicate how the mouth sores disturbed his sleep, "That could add more detail to 'can't sleep'-the 'can't do' part."</p><p>In addition, focusing on details about how the status and behavioral indicators interacted helped teens identify patterns of their lived experience (T1, T4, T8-11, T13 We found that being able to understand these relationships in better detail was particularly important and motivating for teens as it could help them discover behavioral quirks to alleviate unwanted symptoms. As T8 put it, "I think just to be able to document when I'm not feeling good and how I feel, and then be able to relate from past times and then see what I did to make myself feel better, and to be able to do that again, and then trying to I guess test out things that will make me happy, even if I'm not feeling good."</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Opportune moments to contribute ODL data</head><p>Of course, collecting data from chronically ill teens is not an easy task. To better understand when and how to engage teens in entering their illness experience, we asked about opportune moments to log daily ODL data.</p><p>We found that most teens preferred to contribute ODL data in association with an activity. They tied these times to their daily routine indicating a time of day such as before going to bed (T6-8, T10, T12), upon waking up (T4, T8, T10, T11), while using the phone (T5, T10, T13), eating lunch (T4), and taking medication (T6).</p><p>On the other hand, three teens (T4, T9, T11) said they would enter data immediately after experiencing a symptom. Qualitative analyses revealed that teens are most likely to be available on their mobile phone or would be reminded to enter their story in the vicinity of said activities. For instance, T6 said that coupling moments of data entry with self-care activities such as taking pills would remind him to use the storyboard: "maybe when I go to bed to take my medicine. Yeah. Taking pills and stuff. It would remind me its 8:00pm-time to take meds. Then go to bed." T5 appreciated having a visual vocabulary, mentioning that she would choose an activity that could provide more psychological comfort in response to a symptom rather than making an effort to log data about her experience.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>"If I have energy to listen to music and draw or enter in more stuff about how shitty I'm feeling, then I'm probably going to want to listen to music and draw. So if there were an easy template [referring to</head><p>Visual ODLs] that I could fill in, [I could] grow accustomed to using [it] rather than having to express it using my brain power. Sometimes words are not so easy to find, I feel scatterbrained. So it would be easier if there were suggestions already there."</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Scenario II &amp; III: Communication with Family Members</head><p>Our second and third scenarios pursued insights into how family members could work together to contribute their observations of the patient's experience. In reporting the findings, we combine and highlight findings from both colocated (II) and remote communication (III) scenarios.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Conflicting observations</head><p>Overall, parents became involved in the co-design process to contribute their own observations and perspectives.</p><p>When we asked what each teen and parent understand best about the patient experience, teens focused on describing personally felt experiences (both physical and emotional) along with how they affected activities that they valued. In contrast, parents filled in "meta-level" details such as time, location, or frequency of events. T9 illustrated this point, "I think, I believe she would be able to help out with those things. <ref type="bibr">But</ref>  </p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Tensions around adherence</head><p>In addition to understanding physical and emotional experiences, another point of contention between parent and teens involved parents reminding their child to adhere to care activities, such as taking pills. P10 raised her concern, especially drawing attention to her daughter's imminent return to college: "as a parent, and she's away at college, I worry she's not taking her medicine when she should be, her pills […] And I know she's busy, so to me it would be helpful if I knew, oh yeah, she just put in that she took it, so I don't have to ask her, you know?"</p><p>Many teens also told us they disliked being reminded to adhere to self-care activities. Interestingly, both parents and teens saw value in using digital storyboarding as a way to log and acknowledge confirmation of self-care tasks. Supporting identification and communication of self-care activities is especially important for teens with chronic illnesses. These patients are reconciling the need for support with the rites of passage associated with the transition to adulthood <ref type="bibr" target="#b40">[35]</ref>, such as being responsible for taking their own medications. Their storyboard revealed how this reconciliation played out in their everyday lives, and how it interacted with aspects of self-identify beyond their illness.</p><p>We also received positive responses toward the imagined use of digital storyboarding technology as a way to collaboratively contribute unique observations of the patient's ill-ness experience. Parental caregivers, who already had prior experience tracking for the patient, were receptive to this idea. P4 told us that she could offer to help generate the list of routine activities for her daughter T4. "We could probably make a list, I mean, of her everyday routine, because she's not in school right now, because it's summer … I don't work, so our focus right now is just her, and getting her through this treatment, so, our life is very boring. So, we could easily map a whole day out." On a related note, T13 said that his mother (P13) could help him capture everyday patient experiences through media tools, "I would ask my mom</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>to record me after I'm done sitting down, how I feel when I'm brushing my teeth and how I change and what music does for me, how I feel."</head><p>Perhaps the most important lesson we took away from scenarios II and III is that both patients and the parent participants saw the value of collaborative construction of storyboards as a point of mediation to resolve conflicting perspectives. T9 posited that tracking ODLs could serve as a point of reference to resolve discrepant recollections of an observed experience, "but Before starting the storyboarding process, we first asked teens about existing challenges when communicating with their clinician. Several teens (T5, T7-T10, T13) stated having difficulty talking to clinicians when they needed to recall illness experiences. This included recalling the timing of the onset of symptoms and recalling behavioral triggers. T13 explained, "I was trying to tell her what things that I do that makes my energy go down but I keep forgetting." Other challenges related to discussing severity. T6 mentioned his trouble "communicating with the doctors explaining it's not excruciating pain-it's just a little bit." </p><formula xml:id="formula_0">I</formula></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Expressing symptoms</head><p>Although teens were accustomed to the use of clinical scales, they had difficulty translating felt experience into numbers. Further analyses revealed that teens preferred to express their symptoms in terms of how they affected the ability to engage in everyday activities. Overall, teens showed excitement about the potential for digital storyboarding to support their communication of illness experiences with clinicians. T8 expressed this excitement enthusiastically: "This would be really awesome to have to be able to put down even a tiny detail of just like, this is how I felt this day at this time, that kind of stuff. On this day I was feeling great, but then the next day I started feeling worse…then I had a fever. That kind of stuff."</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Preferences for Integration of Media Technology</head><p>Going from scenarios I to IV, we found that the types of digital media technology teens preferred to use to capture and articulate specific ODLs did not change. However, we learned that their choice of technology varied based on the level of expressiveness required to encode how they wanted to capture and communicate the ODLs. Below, we highlight four ways in which they preferred to communicate ODLs.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Physical symptoms: video</head><p>Video was preferred in cases where there was a need to capture the most complex aspect of the teens' illness experience: 'how' ODLs (e.g., symptoms, activities, environment, etc.) interact with each other. As mentioned earlier, teens (T5, T7-8, T13) wanted to capture the extent of a physical symptom by recording how it affects a mundane activity such as eating and dressing: T7 indicated his preferences, saying "Videos […] to see how I acted. So you can see where I eat, or when I get dressed."</p><p>Not only did teens see video as a tool for capturing and expressing the illness experience, they also anticipated that videos would be more engaging for clinicians. T5 was optimistic about the potential for video to foster positive patient-clinician interactions, "Next time I come in, the nurses will be like, 'that was such a cool video […] of your foot!'"</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Mood: sketches, photos, and charts</head><p>Preferences for capturing emotion, a highly subjective and complex experience, were mixed. Through storyboarding, teens indicated that everyday visual depictions of facial expressions could be a better way relate their mood to clinicians. Among those who responded, many teens (T3, T5-6, T9) preferred to use sketches from our Visual ODL library, and photos (T2, T7) to show their own facial expressions. Yet we found some teens (T3, T7) also needed to use other tools in combination to express different aspects of their mood, such as the use of charts to indicate fluctuating emotions over several days. T7 expressed this sentiment: "I mean probably a chart. Chart along with the phone. You see my highs and lows […] mood swings happen almost every day."</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Reminding and journaling: voice recording</head><p>Audio or voice recording was seen as a reminder and journaling tool to aid the patients' experiencing cognitive difficulties and fatigue. Some teens (T5, T13) chose to record their voice as a way to make journal entries instead of writing and to aid their memory (T1, T6, T13 Through the first scenario, we learned that patients undergoing treatment have highly personal and individualized routines for everyday activities. While daily entries could be a burden, encoding routines in advance could scaffold the capture of data related to activities and lessen the burden of data collection. For example, T5 suggested that ODLs could be used to construct a baseline routine. "Like if you give an update and then you went in the next day, there could be a last time option."</p><p>The frequent placement of symptoms with activities in our design sessions suggests that there are opportunities to leverage the highly-structured, routine nature of teens' daily lives in storyboarding technology. There is a current emphasis on tracking personal health based on a broad interpretation of activities (e.g., physical activity, sleeping) <ref type="bibr" target="#b5">[6]</ref>. We found that patients were able to relate better to micro-level activities such as getting in-and-out of bed, brushing their teeth or reaching for a showerhead. Micro-level activity routines, authored by the user in advance, could reduce the burden of daily logging. These activities can also serve as triggers to help recognize unpredictable symptoms. Establishing daily routines could be used both for manual and semi-automated tracking <ref type="bibr" target="#b4">[5]</ref> to elicit data at opportune moments. For instance, given prior knowledge that nausea and fatigue are both experienced as a symptom cluster † when the patient brushes their teeth, a system could prioritize the suggestion of those symptoms when the patient is engaged in that activity.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Family Informatics: Collaborative Re-construction of the Patient's Illness Experience</head><p>The HCI and Health Informatics communities have contributed much to the growing body of PGHD research <ref type="bibr" target="#b42">[37]</ref>. Yet, work considering the family as a unit for the design of technology is still emerging <ref type="bibr" target="#b39">[34]</ref>. Symptoms are highly individual, often subjective experiences (e.g., nausea and fatigue). Tracking the direct, felt experience is important, and tools should elicit input from both patients and family caregivers <ref type="bibr" target="#b3">[4,</ref><ref type="bibr" target="#b22">19]</ref>. Pina et al. found that families preferred to consider both caregivers and children as trackers, and to distribute the burden of tracking among the family <ref type="bibr" target="#b39">[34]</ref>.</p><p>In our study, family members as well as clinicians found value in the use of collaborative digital storyboarding to resolve and reconcile different perspectives. Both teens and parents in our study were aware that when accounting for symptoms, both perspectives, though different, are valuable. T9's remark (Scenarios II &amp; III) suggested that patients understand they are the "experiencer" of their own subjective feelings (e.g., pain, emotion, etc.) while parental caregivers mentioned tracking "objective" details (e.g., time, location, frequency, etc.) of symptoms. In this case, digital storyboarding tools that make use of Visual ODLs could support collaborative work among family members by providing distinct roles for each stakeholder.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Visual ODLs in Clinical Care</head><p>Several barriers must be overcome to integrate Visual ODLs into clinical care <ref type="bibr" target="#b48">[41]</ref>. Recently, several studies have identified and classified factors that contribute to barriers in data-driven clinical communication <ref type="bibr" target="#b6">[7,</ref><ref type="bibr" target="#b26">23,</ref><ref type="bibr" target="#b37">31,</ref><ref type="bibr" target="#b41">36,</ref><ref type="bibr" target="#b48">41]</ref>. Common themes in these studies include clinicians' concern for the reliability of patient-captured data and its interoperability with clinicians' existing practice.</p><p>If primarily used outside of clinical care, symptom-tracking technology can facilitate greater awareness of illness experiences and support verbal reports in the clinic <ref type="bibr" target="#b38">[33]</ref>. This ability alone is valuable: patients undergoing complex treatments such as chemotherapy can suffer from cognitive impairments (referred to as having a 'chemo-brain' <ref type="bibr" target="#b24">[21]</ref>). In the clinic, a tracking tool could support weekly and monthly † Symptom clusters describe the co-occurrence of a specific set of symptoms for a given illness or effects of treatment <ref type="bibr" target="#b28">[25]</ref>.</p><p>reports indicating the most frequent, the most severe, or the most disruptive symptoms, and could be designed to allow for searching by these criteria-a capability that we plan to explore in future work.</p><p>Reviewing large amounts of patient-generated data could place a burden on clinicians. Lee and Dey's study of sensor-based ODLs describes opportunities to leverage nursing triage assessments to leverage existing practice for data review <ref type="bibr" target="#b31">[27]</ref>. Emerging work in sensing, analysis and visualization could also ease the burden of review for multiple caregivers. Hartzler et al. demonstrated the feasibility of incorporating PGHD into cancer care through visualization techniques <ref type="bibr" target="#b19">[16]</ref>.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>LIMITATIONS AND FUTURE WORK</head><p>Through the co-design process, we learned that using paper to conduct design activities in the clinic was difficult due to limited space, especially when needing room for design artifacts. We used the hospital bed, carts, and any surfaces wide enough to place storyboard materials-our ability to fully capture the patient-narrated experience was limited. This research is also limited in our focus on oncology and hematology-related conditions, which are categorized as complex chronic conditions <ref type="bibr" target="#b18">[15]</ref>. (See <ref type="bibr" target="#b22">[19]</ref> for a description of its relevance to the larger context of our study.) Thus, our findings may not necessarily transfer to types of chronic conditions such as obesity or diabetes.</p><p>With the introduction of PGHD the need to review and incorporate it into health record systems. However, we did not investigate the workflow considerations or operational factors involved in data transmission, clinical handling or response protocols. Though these are beyond the scope of our current study, they are important areas that we plan to investigate in subsequent studies.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>CONCLUSION</head><p>In this paper, we introduce Visual ODLs and examine its use as design artifacts to elicit complexities of symptomrelated communication faced by teens with complex chronic illnesses. Through co-design activities to envision digital storyboarding technology with Visual ODLs, we generated storyboards representing the teens' reconstructions of their felt experiences. The material presence of Visual ODLs provided scaffolds to structure in-depth discussions about how to foster communication with both family and clinical caregivers using patient-defined and patient-generated data.</p><p>Our future work will examine approaches to semiautomated tracking in the space of collaborative construction of Visual ODLs and storyboarding. A central design tension includes the need to reduce the burden placed on a user experiencing illness, while enabling full expressive capabilities to capture and represent their felt experience.</p></div><figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_0"><head>Figure 1 .</head><label>1</label><figDesc>Figure 1. Co-Design Process. For each step in the co-design process (top-to-bottom) we describe the step, show relevant design artifacts from Visual ODLs and storyboard and the involved participants, and provide example data generated from that step in the co-design activity. Teenage patients are shown in blue, parents in purple. Semi-transparency indicates less involvement in an activity.</figDesc><graphic url="image-3.png" coords="4,58.12,76.00,478.32,492.24" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_1"><head>Figure 2 .</head><label>2</label><figDesc>Figure 2. Scenario I. Resultant storyboard of T12, an 18-year-old osteosarcoma patient in treatment.</figDesc><graphic url="image-5.png" coords="6,65.70,525.64,223.44,158.16" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_2"><head>Figure 3 .</head><label>3</label><figDesc>Figure 3. Scenario II. Storyboard of T13, a 15-year-old osteosarcoma patient in treatment.</figDesc><graphic url="image-6.png" coords="8,317.10,62.80,241.20,180.24" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_2"><head></head><label></label><figDesc>⎯all sketches were performed by the first author and appraised for clarity by the co-authors. * In our library, physical symptoms and mood indicate status indicators. Activities indicate behavioral indicators, while people and places indicate exposures. Our set of symptoms was identified from the pMSAS during clinician interviews.</figDesc><table /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_4"><head></head><label></label><figDesc>Teens too, had difficulty expressing emotions in front of their parents, but made use of emotions when storyboarding. T11 told us that emotions are difficult to communicate because his reason for sadness directly involved the absence of his family.</figDesc><table><row><cell>Through analyses of interviews, we found one reason that</cell></row><row><cell>may contribute to conflicting perspectives. Because parents</cell></row><row><cell>had significant difficulty understanding how their child is</cell></row><row><cell>feeling, they relied on subtext, including visual cues such as</cell></row><row><cell>body language or the child's ability or intention to engage in</cell></row><row><cell>everyday mundane activities. For instance, P11 told us that</cell></row><row><cell>he would be able to gauge T11's experiences by reading his</cell></row><row><cell>body language: "his demeanor of his body or body lan-</cell></row><row><cell>guage would tell us ... when he's not feeling good or when</cell></row><row><cell>his counts were low, that we needed to stop watching, when</cell></row><row><cell>to start [keeping] an eye on him, and when he was okay.</cell></row></table><note>I was talking about pain or the symptoms; those would be more of a personal thing because only you really know how much it hurts and all that. It would be harder to explain it to someone else. I think she'd [P9] be better at tracking [the] time [of the symptom] than me."However, these details often led to conflicting views about what actually happened-a consideration for co-design in this domain. For example, T4 and P4 argued over the teens ability to recognize symptoms. P4: "I'm not a doctor or anything, but if she hasn't peed for like eight hours, okay, something's wrong, where she may not think …" with T4 responding, "If I haven't peed in eight hours, I'm going to say something. I'm sorry, I knew this wasn't going to work." " P6 took hints from her son's social activity: "I know when you were bad you didn't talk too much to anybody."While reading body language and behavior helped provide some context, this approach is more applicable to symp-toms and activities that are outwardly observable. For instance, P9 expressed difficulty asking about activities such as toileting that are deemed private, "sometimes I have to ask him, like his bowel habits. He doesn't tell me when he goes to the bathroom what's going on, so I usually have to ask him." Indeed, inferring emotions was most challenging for parents (P4-6, P11-13). As P13 explained, "Sometimes the kids don't want to talk to you. He'll get those times where he's completely silent. […] then sometimes he'll talk to somebody else before he talks with me. He might need time to talk to me." "I'd let them know if I'm hurting. […] I usually don't let them know if I'm sad or whatever. The sad part, I'm not sad about being in the hospital. I'm just sad being away from the rest [of the family]."Despite such difficulty, we found that visual representations could provide an alternative means for teens (T6, T9) to express their emotions. T6 said, "it's a lot easier with the pictures because it shows you how mad you are. A picture will explain how mad, visualize how mad you were, how sick you were, how tired, dizzy or something." P6 also appreciated the need for Visual ODLs: "It'd help me understand if he couldn't express to me.[…]  Someone not going through it-you don't know how they really feel."</note></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_7"><head>: Activities as a Scaffold for Semi- Automated Tracking</head><label></label><figDesc></figDesc><table /><note>). T13 saw this tool as a way to seek psychological support outside of faceto-face contact: "If I record they [psychologists] already would know and they could come and talk to me about those things […] I don't like to always have people in my face and talking to people because it's boring. [...] Basically I get distracted easily. You can't get distracted from your phone because you're always on it." Diet: photoFor some teens (T8-9, T13), taking photos of their meal was the easiest way to keep track of what they ate as well as indicate their appetite. As T8 noted, "Probably just to say what I ate and was I too nauseous to eat. Was I really hungry so I ate a lot, or just snacked all day? [...] I could probably take a picture of the food before and after and list how much I ate."DISCUSSIONBelow, we first situate our findings with respect to prior work in personal and family informatics. We then discuss the integration of Visual ODLs into clinical care.Personal Informatics</note></figure>
+		</body>
+		<back>
+
+			<div type="acknowledgement">
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>ACKNOWLEDGMENTS</head><p>We thank all study participants and the clinic staff. This work was supported by NSF #1652302. </p></div>
+			</div>
+
+			<div type="references">
+
+				<listBibl>
+
+<biblStruct xml:id="b0">
+	<analytic>
+		<title level="a" type="main">Tough Teens: The Methodological Challenges of Interviewing Teenagers as Research Participants</title>
+		<author>
+			<persName><forename type="first">Raewyn</forename><surname>Bassett</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Brenda</forename><forename type="middle">L</forename><surname>Beagan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Svetlana</forename><surname>Ristovski-Slijepcevic</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Gwen</forename><forename type="middle">E</forename><surname>Chapman</surname></persName>
+		</author>
+		<idno type="DOI">10.1177/0743558407310733</idno>
+		<ptr target="http://doi.org/10.1177/0743558407310733" />
+	</analytic>
+	<monogr>
+		<title level="j">Journal of Adolescent Research</title>
+		<imprint>
+			<biblScope unit="volume">23</biblScope>
+			<biblScope unit="page" from="119" to="131" />
+			<date type="published" when="2008">2008</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b1">
+	<analytic>
+		<title level="a" type="main">Observing health in everyday living: ODLs and the care-between-the-care</title>
+		<author>
+			<persName><forename type="first">Patricia</forename><surname>Flatley Brennan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Gail</forename><surname>Casper</surname></persName>
+		</author>
+		<idno type="DOI">10.1007/s00779-014-0805-0</idno>
+		<ptr target="http://doi.org/10.1007/s00779-014-0805-0" />
+	</analytic>
+	<monogr>
+		<title level="j">Personal and Ubiquitous Computing</title>
+		<imprint>
+			<biblScope unit="volume">19</biblScope>
+			<biblScope unit="page" from="3" to="8" />
+			<date type="published" when="2015">2015</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b2">
+	<analytic>
+		<title level="a" type="main">Project HealthDesign: rethinking the power and potential of personal health records</title>
+		<author>
+			<persName><forename type="first">Patricia</forename><surname>Flatley Brennan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Stephen</forename><surname>Downs</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Gail</forename><surname>Casper</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Journal of biomedical informatics</title>
+		<imprint>
+			<biblScope unit="volume">43</biblScope>
+			<biblScope unit="page" from="S3" to="S5" />
+			<date type="published" when="2010">2010</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b3">
+	<analytic>
+		<title level="a" type="main">Caring for caregivers: designing for integrality</title>
+		<author>
+			<persName><forename type="first">Yunan</forename><surname>Chen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Victor</forename><surname>Ngo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sun</forename><forename type="middle">Young</forename><surname>Park</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2013 conference on Computer Supported Cooperative Work</title>
+				<meeting>the 2013 conference on Computer Supported Cooperative Work</meeting>
+		<imprint>
+			<publisher>ACM</publisher>
+			<date type="published" when="2013">2013</date>
+			<biblScope unit="page" from="91" to="102" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b4">
+	<analytic>
+		<title level="a" type="main">Semi-Automated Tracking: A Balanced Approach for Self-Monitoring Applications</title>
+		<author>
+			<persName><forename type="first">Eun</forename><surname>Kyoung Choe</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Saeed</forename><surname>Abdullah</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mashfiqui</forename><surname>Rabbi</surname></persName>
+		</author>
+		<idno type="DOI">10.1109/MPRV.2017.18</idno>
+		<ptr target="http://doi.org/10.1109/MPRV.2017.18" />
+	</analytic>
+	<monogr>
+		<title level="j">IEEE Pervasive Computing</title>
+		<imprint>
+			<biblScope unit="volume">16</biblScope>
+			<biblScope unit="page" from="74" to="84" />
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b5">
+	<analytic>
+		<title level="a" type="main">Understanding quantified-selfers&apos; practices in collecting and exploring personal data</title>
+		<author>
+			<persName><forename type="first">Eun</forename><surname>Kyoung Choe</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Nicole</forename><forename type="middle">B</forename><surname>Lee</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Bongshin</forename><surname>Lee</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2556288.2557372</idno>
+		<ptr target="http://doi.org/10.1145/2556288.2557372" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 32nd annual ACM conference on Human factors in computing systems -CHI &apos;14</title>
+				<meeting>the 32nd annual ACM conference on Human factors in computing systems -CHI &apos;14</meeting>
+		<imprint>
+			<publisher>ACM Press</publisher>
+			<date type="published" when="2014">2014</date>
+			<biblScope unit="page" from="1143" to="1152" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b6">
+	<analytic>
+		<title level="a" type="main">Boundary Negotiating in Personal Informatics: Patient-Provider Collaboration with Patient-Generated Data</title>
+		<author>
+			<persName><forename type="first">Chia-Fang</forename><surname>Chung</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kristin</forename><surname>Dew</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Allison</forename><forename type="middle">M</forename><surname>Cole</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2818048.2819926</idno>
+		<ptr target="http://doi.org/10.1145/2818048.2819926" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 19th ACM Conference on Computer-Supported Cooperative Work &amp; Social Computing -CSCW &apos;16</title>
+				<meeting>the 19th ACM Conference on Computer-Supported Cooperative Work &amp; Social Computing -CSCW &apos;16</meeting>
+		<imprint>
+			<publisher>ACM Press</publisher>
+			<date type="published" when="2016">2016</date>
+			<biblScope unit="page" from="768" to="784" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b7">
+	<analytic>
+		<title level="a" type="main">The Measurement of Symptoms in Children with Cancer</title>
+		<author>
+			<persName><forename type="first">John</forename><forename type="middle">J</forename><surname>Collins</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Maura</forename><forename type="middle">E</forename><surname>Byrnes</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ira</forename><forename type="middle">J</forename><surname>Dunkel</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Journal of Pain and Symptom Management</title>
+		<imprint>
+			<biblScope unit="volume">19</biblScope>
+			<biblScope unit="page" from="363" to="377" />
+			<date type="published" when="2000">2000</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b8">
+	<monogr>
+		<title/>
+		<idno type="DOI">10.1016/S0885-3924(00)00127-5</idno>
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b9">
+	<analytic>
+		<title level="a" type="main">Cytotoxic chemotherapy: clinical aspects</title>
+		<author>
+			<persName><forename type="first">Pippa</forename><forename type="middle">G</forename><surname>Corrie</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Medicine</title>
+		<imprint>
+			<biblScope unit="volume">36</biblScope>
+			<biblScope unit="page" from="24" to="28" />
+			<date type="published" when="2008">2008</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b10">
+	<monogr>
+		<title/>
+		<idno type="DOI">10.1016/j.mpmed.2007.10.01210</idno>
+		<ptr target="http://doi.org/10.1016/j.mpmed.2007.10.01210" />
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b11">
+	<analytic>
+		<title level="a" type="main">Patientreported outcomes: A new era in clinical research</title>
+		<author>
+			<persName><forename type="first">Surulivel</forename><surname>Prasanna R Deshpande</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Lakshmi</forename><surname>Rajan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C P Abdul</forename><surname>Sudeepthi</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Nazir</surname></persName>
+		</author>
+		<idno type="DOI">10.4103/2229-3485.86879</idno>
+		<ptr target="http://doi.org/10.4103/2229-3485.86879" />
+	</analytic>
+	<monogr>
+		<title level="j">Perspectives in clinical research</title>
+		<imprint>
+			<biblScope unit="volume">2</biblScope>
+			<biblScope unit="issue">4</biblScope>
+			<biblScope unit="page" from="137" to="144" />
+			<date type="published" when="2011">2011</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b12">
+	<analytic>
+		<title level="a" type="main">Fictional Inquiry-design collaboration in a shared narrative space</title>
+		<author>
+			<persName><forename type="first">Christian</forename><surname>Dindler</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ole</forename><surname>Sejer Iversen</surname></persName>
+		</author>
+		<idno type="DOI">10.1080/15710880701500187</idno>
+		<ptr target="http://doi.org/10.1080/15710880701500187" />
+	</analytic>
+	<monogr>
+		<title level="j">CoDesign</title>
+		<imprint>
+			<biblScope unit="volume">3</biblScope>
+			<biblScope unit="page" from="213" to="234" />
+			<date type="published" when="2007">2007</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b13">
+	<monogr>
+		<title/>
+		<author>
+			<persName><forename type="first">Sarah</forename><forename type="middle">E</forename><surname>Drew</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Rony</forename><forename type="middle">E</forename><surname>Duncan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Susan</forename><forename type="middle">M</forename></persName>
+		</author>
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b14">
+	<analytic>
+		<title level="a" type="main">Visual Storytelling: A Beneficial But Challenging Method for Health Research With Young People</title>
+		<author>
+			<persName><surname>Sawyer</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Qualitative Health Research</title>
+		<imprint>
+			<biblScope unit="volume">20</biblScope>
+			<biblScope unit="page" from="1677" to="1688" />
+			<date type="published" when="2010">2010</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b15">
+	<monogr>
+		<title/>
+		<idno type="DOI">10.1177/1049732310377455</idno>
+		<ptr target="http://doi.org/10.1177/1049732310377455" />
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b16">
+	<analytic>
+		<title level="a" type="main">Methods and Techniques for Involving Children in the Design of New Technology for Children. Foundations and Trends® in Human</title>
+		<author>
+			<persName><forename type="first">Jerry</forename><forename type="middle">Alan</forename><surname>Fails</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mona</forename><forename type="middle">Leigh</forename><surname>Guha</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Allison</forename><surname>Druin</surname></persName>
+		</author>
+		<idno type="DOI">10.1561/1100000018</idno>
+		<ptr target="http://doi.org/10.1561/1100000018" />
+	</analytic>
+	<monogr>
+		<title level="j">Computer Interaction</title>
+		<imprint>
+			<biblScope unit="volume">6</biblScope>
+			<biblScope unit="page" from="85" to="166" />
+			<date type="published" when="2012">2012</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b17">
+	<analytic>
+		<title level="a" type="main">Demonstrating Rigor Using Thematic Analysis: A Hybrid Approach of Inductive and Deductive Coding and Theme Development</title>
+		<author>
+			<persName><forename type="first">Jennifer</forename><surname>Fereday</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Eimear</forename><surname>Muir-Cochrane</surname></persName>
+		</author>
+		<idno type="DOI">10.1177/160940690600500107</idno>
+		<ptr target="http://doi.org/10.1177/160940690600500107" />
+	</analytic>
+	<monogr>
+		<title level="j">International Journal of Qualitative Methods</title>
+		<imprint>
+			<biblScope unit="volume">5</biblScope>
+			<biblScope unit="page" from="80" to="92" />
+			<date type="published" when="2006">2006</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b18">
+	<analytic>
+		<title level="a" type="main">Deaths attributed to pediatric complex chronic conditions: national trends and implications for supportive care services</title>
+		<author>
+			<persName><forename type="first">Chris</forename><surname>Feudtner</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Ross</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Gerri</forename><surname>Hays</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Russell</forename><surname>Haynes</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">John</forename><forename type="middle">M</forename><surname>Geyer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Thomas</forename><forename type="middle">D</forename><surname>Neff</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Koepsell</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Pediatrics</title>
+		<imprint>
+			<biblScope unit="volume">107</biblScope>
+			<biblScope unit="page" from="e99" to="e99" />
+			<date type="published" when="2001">2001</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b19">
+	<analytic>
+		<title level="a" type="main">Design and feasibility of integrating personalized PRO dashboards into prostate cancer care</title>
+		<author>
+			<persName><forename type="first">L</forename><surname>Andrea</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jason</forename><forename type="middle">P</forename><surname>Hartzler</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Izard</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sean</forename><forename type="middle">P</forename><surname>Bruce L Dalkin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">John L</forename><surname>Mikles</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Gore</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Journal of the American Medical Informatics Association</title>
+		<imprint>
+			<biblScope unit="page">101</biblScope>
+			<date type="published" when="2015">2015</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b20">
+	<analytic>
+		<title level="a" type="main">Novel methods to collect meaningful data from adolescents for the development of health interventions</title>
+		<author>
+			<persName><forename type="first">Kimberly</forename><surname>Hieftje</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Lynn</forename><forename type="middle">E</forename><surname>Lindsay R Duncan</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Fiellin</surname></persName>
+		</author>
+		<idno type="DOI">10.1177/1524839914521211</idno>
+		<ptr target="http://doi.org/10.1177/1524839914521211" />
+	</analytic>
+	<monogr>
+		<title level="j">Health promotion practice</title>
+		<imprint>
+			<biblScope unit="volume">15</biblScope>
+			<biblScope unit="page" from="714" to="722" />
+			<date type="published" when="2014">2014</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b21">
+	<analytic>
+		<title level="a" type="main">Co-Designing with Preschoolers Using Fictional Inquiry and Comicboarding</title>
+		<author>
+			<persName><forename type="first">Alexis</forename><surname>Hiniker</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kiley</forename><surname>Sobel</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Bongshin</forename><surname>Lee</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3025453.3025588</idno>
+		<ptr target="http://doi.org/10.1145/3025453.3025588" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2017 CHI Conference on Human Factors in Computing Systems -CHI &apos;17</title>
+				<meeting>the 2017 CHI Conference on Human Factors in Computing Systems -CHI &apos;17</meeting>
+		<imprint>
+			<publisher>ACM Press</publisher>
+			<date type="published" when="2017">2017</date>
+			<biblScope unit="page" from="5767" to="5772" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b22">
+	<analytic>
+		<title level="a" type="main">Care Partnerships: Toward Technology to Support Teens&apos; Participation in Their Health Care</title>
+		<author>
+			<persName><forename type="first">K</forename><surname>Matthew</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Lauren</forename><surname>Hong</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Daniel</forename><surname>Wilcox</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Machado</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Thomas</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Stephen</forename><forename type="middle">F</forename><surname>Olson</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Simoneaux</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2858036.2858508</idno>
+		<ptr target="http://doi.org/http://dx.doi.org/10.1145/2858036.2858508" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 34th annual ACM Conference on Human Factors in Computing Systems</title>
+				<meeting>the 34th annual ACM Conference on Human Factors in Computing Systems</meeting>
+		<imprint>
+			<date type="published" when="2016">2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b23">
+	<analytic>
+		<title level="a" type="main">Technology probes: inspiring design for and with families</title>
+		<author>
+			<persName><forename type="first">Hilary</forename><surname>Hutchinson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Heiko</forename><surname>Hansen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Nicolas</forename><surname>Roussel</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/642611.642616</idno>
+		<ptr target="http://doi.org/10.1145/642611.642616" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the conference on Human factors in computing systems -CHI &apos;03</title>
+				<meeting>the conference on Human factors in computing systems -CHI &apos;03</meeting>
+		<imprint>
+			<publisher>ACM Press</publisher>
+			<date type="published" when="2003">2003</date>
+			<biblScope unit="page">17</biblScope>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b24">
+	<analytic>
+		<title level="a" type="main">A metaanalysis of studies of the effects of cancer chemotherapy on various domains of cognitive function</title>
+		<author>
+			<persName><forename type="first">Catherine</forename><forename type="middle">E</forename><surname>Jansen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Christine</forename><surname>Miaskowski</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Marylin</forename><surname>Dodd</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Glenna</forename><surname>Dowling</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Joel</forename><surname>Kramer</surname></persName>
+		</author>
+		<idno type="DOI">10.1002/cncr.21469</idno>
+		<ptr target="http://doi.org/10.1002/cncr.21469" />
+	</analytic>
+	<monogr>
+		<title level="j">Cancer</title>
+		<imprint>
+			<biblScope unit="volume">104</biblScope>
+			<biblScope unit="page" from="2222" to="2233" />
+			<date type="published" when="2005">2005</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b25">
+	<analytic>
+		<title level="a" type="main">Studies of illness in the aged: the index of ADL: a standardized measure of biological and psychosocial function</title>
+		<author>
+			<persName><forename type="first">Sidney</forename><surname>Katz</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Amasa</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Roland</forename><forename type="middle">W</forename><surname>Ford</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Moskowitz</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Beverly</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Marjorie</forename><forename type="middle">W</forename><surname>Jackson</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Jaffe</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Jama</title>
+		<imprint>
+			<biblScope unit="volume">185</biblScope>
+			<biblScope unit="page" from="914" to="919" />
+			<date type="published" when="1963">1963</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b26">
+	<analytic>
+		<title level="a" type="main">Prescribing 10,000 Steps Like Aspirin: Designing a Novel Interface for Data-Driven Medical Consultations</title>
+		<author>
+			<persName><forename type="first">Yoojung</forename><surname>Kim</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Eunyoung</forename><surname>Heo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Hyunjeong</forename><surname>Lee</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3025453.3025570</idno>
+		<ptr target="http://doi.org/10.1145/3025453.3025570" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2017 CHI Conference on Human Factors in Computing Systems -CHI &apos;17</title>
+				<meeting>the 2017 CHI Conference on Human Factors in Computing Systems -CHI &apos;17</meeting>
+		<imprint>
+			<publisher>ACM Press</publisher>
+			<date type="published" when="2017">2017</date>
+			<biblScope unit="page" from="5787" to="5799" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b27">
+	<analytic>
+		<title level="a" type="main">Blowing in the wind: unanchored patient information work during cancer care</title>
+		<author>
+			<persName><forename type="first">Predrag</forename><surname>Klasnja</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Andrea</forename><forename type="middle">Civan</forename><surname>Hartzler</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Kent</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Wanda</forename><surname>Unruh</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Pratt</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the SIGCHI Conference on Human Factors in Computing Systems</title>
+				<meeting>the SIGCHI Conference on Human Factors in Computing Systems</meeting>
+		<imprint>
+			<date type="published" when="2010">2010</date>
+			<biblScope unit="page" from="193" to="202" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b28">
+	<analytic>
+		<title level="a" type="main">Cancer Symptom Cluster Management</title>
+		<author>
+			<persName><forename type="first">Kristine</forename><forename type="middle">L</forename><surname>Kwekkeboom</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Seminars in Oncology Nursing</title>
+		<imprint>
+			<biblScope unit="volume">32</biblScope>
+			<biblScope unit="page" from="373" to="382" />
+			<date type="published" when="2016">2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b29">
+	<monogr>
+		<title/>
+		<idno type="DOI">10.1016/j.soncn.2016.08.004</idno>
+		<ptr target="http://doi.org/10.1016/j.soncn.2016.08.004" />
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b30">
+	<analytic>
+		<title level="a" type="main">Boundary Negotiating Artifacts: Unbinding the Routine of Boundary Objects and Embracing Chaos in Collaborative Work</title>
+		<author>
+			<persName><forename type="first">Charlotte</forename><forename type="middle">P</forename><surname>Lee</surname></persName>
+		</author>
+		<idno type="DOI">10.1007/s10606-007-9044-5</idno>
+		<ptr target="http://doi.org/10.1007/s10606-007-9044-5" />
+	</analytic>
+	<monogr>
+		<title level="j">Computer Supported Cooperative Work</title>
+		<imprint>
+			<biblScope unit="volume">16</biblScope>
+			<biblScope unit="page" from="307" to="339" />
+			<date type="published" when="2007">2007</date>
+			<publisher>CSCW</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b31">
+	<analytic>
+		<title level="a" type="main">Sensorbased observations of daily living for aging in place</title>
+		<author>
+			<persName><forename type="first">L</forename><surname>Matthew</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Anind</forename><forename type="middle">K</forename><surname>Lee</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Dey</surname></persName>
+		</author>
+		<idno type="DOI">10.1007/s00779-014-0810-3</idno>
+		<ptr target="http://doi.org/10.1007/s00779-014-0810-3" />
+	</analytic>
+	<monogr>
+		<title level="j">Personal and Ubiquitous Computing</title>
+		<imprint>
+			<biblScope unit="volume">19</biblScope>
+			<biblScope unit="page" from="27" to="43" />
+			<date type="published" when="2015">2015</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b32">
+	<analytic>
+		<title level="a" type="main">Participatory design workshops with children with cancer</title>
+		<author>
+			<persName><forename type="first">Susanne</forename><surname>Lindberg</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Susanne</forename></persName>
+		</author>
+		<idno type="DOI">10.1145/2485760.2485840</idno>
+		<ptr target="http://doi.org/10.1145/2485760.2485840" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 12th International Conference on Interaction Design and Children -IDC &apos;13</title>
+				<meeting>the 12th International Conference on Interaction Design and Children -IDC &apos;13</meeting>
+		<imprint>
+			<publisher>ACM Press</publisher>
+			<date type="published" when="2013">2013</date>
+			<biblScope unit="page" from="332" to="335" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b33">
+	<analytic>
+		<title level="a" type="main">Pediatric Patient-Reported Outcome Instruments for Research to Support Medical Product Labeling: Report of the ISPOR PRO Good Research Practices for the Assessment of Children and Adolescents Task Force</title>
+		<author>
+			<persName><forename type="first">Louis</forename><forename type="middle">S</forename><surname>Matza</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Donald</forename><forename type="middle">L</forename><surname>Patrick</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Anne</forename><forename type="middle">W</forename><surname>Riley</surname></persName>
+		</author>
+		<idno type="DOI">10.1016/j.jval.2013.04.004</idno>
+		<ptr target="http://doi.org/10.1016/j.jval.2013.04.004" />
+	</analytic>
+	<monogr>
+		<title level="j">Value in Health</title>
+		<imprint>
+			<biblScope unit="volume">16</biblScope>
+			<biblScope unit="page" from="461" to="479" />
+			<date type="published" when="2013">2013</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b34">
+	<analytic>
+		<title/>
+		<author>
+			<persName><forename type="first">Gillian</forename><forename type="middle">M</forename><surname>Mccarthy</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Edgar</forename><forename type="middle">R</forename><surname>Rodriguez Ramírez</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Brian</forename><forename type="middle">J</forename><surname>Robinson</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Participatory Design to Address Stigma with Adolescents with Type</title>
+		<imprint>
+			<biblScope unit="volume">1</biblScope>
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b35">
+	<analytic>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2017 Conference on Designing Interactive Systems -DIS &apos;17</title>
+				<meeting>the 2017 Conference on Designing Interactive Systems -DIS &apos;17</meeting>
+		<imprint>
+			<publisher>ACM Press</publisher>
+			<biblScope unit="page" from="83" to="94" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b36">
+	<monogr>
+		<title/>
+		<idno type="DOI">10.1145/3064663.3064740</idno>
+		<ptr target="http://doi.org/10.1145/3064663.3064740" />
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b37">
+	<analytic>
+		<title level="a" type="main">Comicboarding: using comics as proxies for participatory design with children</title>
+		<author>
+			<persName><forename type="first">Helena</forename><forename type="middle">M</forename><surname>Mentis</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Anita</forename><surname>Komlodi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Katrina</forename><surname>Schrader</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3025453.302558932</idno>
+		<ptr target="http://doi.org/10.1145/1240624.1240832" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2017 CHI Conference on Human Factors in Computing Systems -CHI &apos;17</title>
+				<editor>
+			<persName><forename type="first">Neema</forename><surname>Moraveji</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">Jason</forename><surname>Li</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">Jiarong</forename><surname>Ding</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">O'</forename><surname>Patrick</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">Suze</forename><surname>Kelley</surname></persName>
+		</editor>
+		<editor>
+			<persName><surname>Woolf</surname></persName>
+		</editor>
+		<meeting>the 2017 CHI Conference on Human Factors in Computing Systems -CHI &apos;17</meeting>
+		<imprint>
+			<publisher>ACM Press</publisher>
+			<date type="published" when="2007">2017. 2007</date>
+			<biblScope unit="page">1371</biblScope>
+		</imprint>
+	</monogr>
+	<note>Proceedings of the SIGCHI conference on Human factors in computing systems -CHI &apos;07</note>
+</biblStruct>
+
+<biblStruct xml:id="b38">
+	<analytic>
+		<title level="a" type="main">Probing the benefits of real-time tracking during cancer care</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Rupa</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Predrag</forename><surname>Patel</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Andrea</forename><surname>Klasnja</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kenton</forename><forename type="middle">T</forename><surname>Hartzler</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Wanda</forename><surname>Unruh</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Pratt</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">AMIA Annual Symposium Proceedings</title>
+				<imprint>
+			<date type="published" when="2012">2012</date>
+			<biblScope unit="page">1340</biblScope>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b39">
+	<analytic>
+		<title level="a" type="main">From Personal Informatics to Family Informatics: Understanding Family Practices around Health Monitoring</title>
+		<author>
+			<persName><forename type="first">Laura</forename><forename type="middle">R</forename><surname>Pina</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sang-Wha</forename><surname>Sien</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Teresa</forename><surname>Ward</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2998181.2998362</idno>
+		<ptr target="http://doi.org/10.1145/2998181.2998362" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2017 ACM Conference on Computer Supported Cooperative Work and Social Computing -CSCW &apos;17</title>
+				<meeting>the 2017 ACM Conference on Computer Supported Cooperative Work and Social Computing -CSCW &apos;17</meeting>
+		<imprint>
+			<publisher>ACM Press</publisher>
+			<date type="published" when="2017">2017</date>
+			<biblScope unit="page" from="2300" to="2315" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b40">
+	<analytic>
+		<title level="a" type="main">Interaction design research with adolescents</title>
+		<author>
+			<persName><forename type="first">Erika</forename><forename type="middle">S</forename><surname>Poole</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Tamara</forename><surname>Peyton</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2485760.2485766</idno>
+		<ptr target="http://doi.org/10.1145/2485760.2485766" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 12th International Conference on Interaction Design and Children -IDC &apos;13</title>
+				<meeting>the 12th International Conference on Interaction Design and Children -IDC &apos;13</meeting>
+		<imprint>
+			<publisher>ACM Press</publisher>
+			<date type="published" when="2013">2013</date>
+			<biblScope unit="page" from="211" to="217" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b41">
+	<analytic>
+		<title level="a" type="main">Supporting Patient-Provider Collaboration to Identify Individual Triggers using Food and Symptom Journals</title>
+		<author>
+			<persName><forename type="first">Jessica</forename><surname>Schroeder</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jane</forename><surname>Hoffswell</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Chia-Fang</forename><surname>Chung</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">James</forename><surname>Fogarty</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sean</forename><surname>Munson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jasmine</forename><surname>Zia</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2998181.2998276</idno>
+		<ptr target="http://doi.org/10.1145/2998181.2998276" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2017 ACM Conference on Computer Supported Cooperative Work and Social Computing -CSCW &apos;17</title>
+				<meeting>the 2017 ACM Conference on Computer Supported Cooperative Work and Social Computing -CSCW &apos;17</meeting>
+		<imprint>
+			<publisher>ACM Press</publisher>
+			<date type="published" when="2017">2017</date>
+			<biblScope unit="page" from="1726" to="1739" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b42">
+	<analytic>
+		<title level="a" type="main">Patient-Generated Health Data White Paper: White Paper Prepared for the Office of the National Coordinator for Health it by RTI International</title>
+		<author>
+			<persName><forename type="first">Michael</forename><surname>Shapiro</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Douglas</forename><surname>Johnston</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jonathan</forename><surname>Wald</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Donald</forename><surname>Mon ; Susan Jedeloo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Jos</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Margo</forename><forename type="middle">J</forename><surname>Latour</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Trappenburg</surname></persName>
+		</author>
+		<ptr target="http://www.rti.org/pubs/patientgeneratedhealthdata.pdf38" />
+	</analytic>
+	<monogr>
+		<title level="j">Health Expectations</title>
+		<imprint>
+			<biblScope unit="volume">13</biblScope>
+			<biblScope unit="page" from="95" to="107" />
+			<date type="published" when="2010">2012. June 29. 2017. 2010</date>
+			<publisher>AnneLoes Van Staa</publisher>
+		</imprint>
+	</monogr>
+	<note>Exciting but exhausting: experiences with participatory research with chronically ill adolescents</note>
+</biblStruct>
+
+<biblStruct xml:id="b43">
+	<monogr>
+		<title/>
+		<idno type="DOI">10.1111/j.1369-7625.2009.00574.x39</idno>
+		<ptr target="http://doi.org/10.1111/j.1369-7625.2009.00574.x39" />
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b44">
+	<analytic>
+		<title level="a" type="main">Institutional Ecology, `Translations&apos; and Boundary Objects: Amateurs and Professionals in Berkeley&apos;s Museum of Vertebrate Zoology</title>
+		<author>
+			<persName><forename type="first">S</forename><forename type="middle">L</forename><surname>Star</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">R</forename><surname>Griesemer</surname></persName>
+		</author>
+		<idno type="DOI">10.1177/030631289019003001</idno>
+		<ptr target="http://doi.org/10.1177/030631289019003001" />
+	</analytic>
+	<monogr>
+		<title level="j">Social Studies of Science</title>
+		<imprint>
+			<biblScope unit="volume">19</biblScope>
+			<biblScope unit="page" from="387" to="420" />
+			<date type="published" when="1989">1989</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b45">
+	<monogr>
+		<title/>
+		<author>
+			<persName><forename type="first">W</forename><surname>James</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Michael</forename><surname>Varni</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Paul</forename><forename type="middle">S</forename><surname>Seid</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Kurtin</surname></persName>
+		</author>
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b46">
+	<monogr>
+		<idno>4.0</idno>
+		<title level="m">Reliability and validity of the Pediatric Quality of Life Inventory TM Version</title>
+				<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b47">
+	<analytic>
+		<title level="a" type="main">Generic Core Scales in healthy and patient populations</title>
+	</analytic>
+	<monogr>
+		<title level="j">Medical care</title>
+		<imprint>
+			<biblScope unit="volume">39</biblScope>
+			<biblScope unit="page" from="800" to="812" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b48">
+	<analytic>
+		<title level="a" type="main">Information Quality Challenges of Patient-Generated Data in Clinical Practice</title>
+		<author>
+			<persName><forename type="first">Peter</forename><surname>West</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Max</forename><surname>Van Kleek</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Richard</forename><surname>Giordano</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mark</forename><surname>Weal</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Nigel</forename><surname>Shadbolt</surname></persName>
+		</author>
+		<idno type="DOI">10.3389/fpubh.2017.00284</idno>
+		<ptr target="http://doi.org/10.3389/fpubh.2017.00284" />
+	</analytic>
+	<monogr>
+		<title level="j">Frontiers in public health</title>
+		<imprint>
+			<biblScope unit="volume">5</biblScope>
+			<biblScope unit="page">284</biblScope>
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b49">
+	<monogr>
+		<title level="m" type="main">Co-designing with adolescents. Designing Interactive Technology for Teens Workshop</title>
+		<author>
+			<persName><forename type="first">C</forename><surname>Jason</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Elizabeth</forename><surname>Yip</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mona</forename><forename type="middle">Leigh</forename><surname>Foss</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Guha</surname></persName>
+		</author>
+		<ptr target="http://www.chici.org/ditt2012/papers.html" />
+		<imprint>
+			<date type="published" when="2012">2012</date>
+			<pubPlace>NordiCHI, Copenhagen, Denmark</pubPlace>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+				</listBibl>
+			</div>
+		</back>
+	</text>
+</TEI>

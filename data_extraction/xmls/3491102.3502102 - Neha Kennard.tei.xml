@@ -1,0 +1,1793 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xml:space="preserve" xmlns="http://www.tei-c.org/ns/1.0" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.com/kermitt2/grobid/master/grobid-home/schemas/xsd/Grobid.xsd"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+	<teiHeader xml:lang="en">
+		<fileDesc>
+			<titleStmt>
+				<title level="a" type="main">Symphony: Composing Interactive Interfaces for Machine Learning</title>
+			</titleStmt>
+			<publicationStmt>
+				<publisher/>
+				<availability status="unknown"><licence/></availability>
+			</publicationStmt>
+			<sourceDesc>
+				<biblStruct>
+					<analytic>
+						<author>
+							<persName><forename type="first">Alex</forename><surname>Bäuerle</surname></persName>
+							<email>alex.baeuerle@uni-ulm.de</email>
+						</author>
+						<author>
+							<persName><forename type="first">†</forename><surname>Ángel</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Alexander</forename><surname>Cabrera</surname></persName>
+							<email>cabrera@cmu.edu</email>
+						</author>
+						<author>
+							<persName><forename type="first">Fred</forename><surname>Hohman</surname></persName>
+							<email>fredhohman@apple.com</email>
+						</author>
+						<author>
+							<persName><forename type="first">Megan</forename><surname>Maher</surname></persName>
+							<email>megan_maher@apple.com</email>
+						</author>
+						<author>
+							<persName><forename type="first">David</forename><surname>Koski</surname></persName>
+							<email>dkoski@apple.com</email>
+						</author>
+						<author>
+							<persName><forename type="first">Xavier</forename><surname>Suau</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Titus</forename><surname>Barik</surname></persName>
+							<email>tbarik@apple.com</email>
+						</author>
+						<author>
+							<persName><forename type="first">Dominik</forename><surname>Moritz</surname></persName>
+							<email>domoritz@apple.com</email>
+						</author>
+						<author>
+							<persName><forename type="first">Ángel</forename><forename type="middle">Alexander</forename><surname>Cabrera</surname></persName>
+						</author>
+						<author>
+							<affiliation key="aff0">
+								<orgName type="institution">Ulm University Carnegie Mellon University Apple Ulm</orgName>
+								<address>
+									<settlement>Pittsburgh, Seattle</settlement>
+									<region>PA, WA</region>
+									<country>Germany, USA, USA</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<affiliation key="aff1">
+								<address>
+									<settlement>Cupertino, Cupertino, Barcelona</settlement>
+									<region>CA, CA</region>
+									<country>USA, USA, Spain</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<affiliation key="aff2">
+								<orgName type="institution">Apple Apple Seattle</orgName>
+								<address>
+									<settlement>Pittsburgh</settlement>
+									<region>WA, PA</region>
+									<country>USA, USA</country>
+								</address>
+							</affiliation>
+						</author>
+						<title level="a" type="main">Symphony: Composing Interactive Interfaces for Machine Learning</title>
+					</analytic>
+					<monogr>
+						<imprint>
+							<date/>
+						</imprint>
+					</monogr>
+					<idno type="DOI">10.1145/3491102.3502102</idno>
+				</biblStruct>
+			</sourceDesc>
+		</fileDesc>
+		<encodingDesc>
+			<appInfo>
+				<application version="0.7.1" ident="GROBID" when="2022-07-22T04:57+0000">
+					<desc>GROBID - A machine learning software for extracting information from scholarly documents</desc>
+					<ref target="https://github.com/kermitt2/grobid"/>
+				</application>
+			</appInfo>
+		</encodingDesc>
+		<profileDesc>
+			<textClass>
+				<keywords>
+					<term>Machine learning</term>
+					<term>AI</term>
+					<term>visualization</term>
+					<term>documentation</term>
+					<term>interactive programming</term>
+					<term>computational notebooks</term>
+				</keywords>
+			</textClass>
+			<abstract>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Reports and Dashboards</head><p>Interactive Components for Machine Learning</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Code Environments</head><p>Web-based UIs</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Symphony</head><p>Figure <ref type="figure">1</ref>: Symphony applies techniques from machine learning (ML) documentation, data visualization, and interactive programming to create ML interfaces with interactive, task-specifc components. Diverse ML practitioners can explore their data and analyze their models where they work, both in computational notebooks and in web-based dashboards.</p></div>
+			</abstract>
+		</profileDesc>
+	</teiHeader>
+	<text xml:lang="en">
+		<body>
+<div xmlns="http://www.tei-c.org/ns/1.0"><p>diferent ML practitioners, we designed and implemented Symphony, a framework for composing interactive ML interfaces with task-specifc, data-driven components that can be used across platforms such as computational notebooks and web dashboards. We developed Symphony through participatory design sessions with 10 teams (n=31), and discuss our fndings from deploying Symphony to 3 production ML projects at Apple. Symphony helped ML practitioners discover previously unknown issues like data duplicates and blind spots in models while enabling them to share insights with other stakeholders.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="1">INTRODUCTION</head><p>Successfully deploying machine learning systems in production is a complex, collaborative process that involves a wide range of ML practitioners, from data scientists and engineers to domain experts and product managers. A substantial amount of research has gone into creating ML interfaces for analyzing and sharing insights about ML systems that practitioners can use to better understand and improve deployed ML products. We describe machine learning interfaces as static or interactive artifacts, visualizations, and information that communicate details about ML data and models. ML interfaces include documentation methods (e.g., Model Cards <ref type="bibr" target="#b39">[46]</ref>, Datasheets <ref type="bibr" target="#b16">[17]</ref>), visualization dashboards (e.g., What-if Tool <ref type="bibr" target="#b54">[62]</ref>, ActiVis <ref type="bibr" target="#b27">[33]</ref>, among many others <ref type="bibr" target="#b20">[21]</ref>), and interactive programming widgets (e.g., ipywidgets <ref type="bibr" target="#b26">[32]</ref>, Streamlit <ref type="bibr">[31]</ref>) that give practitioners insights into what their datasets contain and how their models behave. Despite the benefts and breadth of ML interfaces, recent studies have found that they are not as widely used and shared in practice as expected <ref type="bibr" target="#b32">[38,</ref><ref type="bibr" target="#b61">68]</ref>. This underuse can lead to missed data errors and model failures, a lack of shared team understanding of model behavior, and, ultimately, deployed ML systems that may be biased <ref type="bibr" target="#b7">[8]</ref> or unsafe <ref type="bibr" target="#b40">[47]</ref>.</p><p>To understand why ML interfaces are not used more frequently, we interviewed 9 ML practitioners at Apple about their current machine learning practice and workfows. We found that while ML practitioners want to use them, current interfaces have limitations that make them either insufcient or too time consuming to use. One category of ML interfaces are ML documentation methods, such as Model Cards <ref type="bibr" target="#b39">[46]</ref> and Datasheets <ref type="bibr" target="#b16">[17]</ref>, which describe the details and records the provenance of an ML system's data and model. Documentation methods often lack the interactive tools and visualizations necessary for specifc analyses and have to be manually authored and updated separately from where ML development happens. Another category of interfaces, visualization dashboards, consist of multiple coordinated views tailored to specifc domains and tasks. ML practitioners must learn a new platform and wrangle their data into the right format in order to use these bespoke systems, which also require signifcant work to reuse for diferent tasks. Finally, interactive programming widgets can render web-based ML visualizations directly in code environments. However, widgets typically cannot be used outside of the platform in which they were created and often lack complex visualizations required by modern ML models and unstructured data-non-tabular data types such as images, videos, audio, point-clouds, sensor data, etc. Overall, we found that while current ML interfaces work well for specifc tasks and platforms, they are not designed to be reused, explored, and shared by diverse stakeholders in cross-functional ML teams.</p><p>Our formative research showed that ML work requires bespoke visualizations for complex models and data types which work across the diferent platforms ML practitioners use. To address these needs, we combined the afordances of existing ML interfaces to design and implement Symphony, a framework for creating and composing interactive ML interfaces with task-specifc, data-driven visualization components. Symphony supports two popular platforms used by ML practitioners, code environments such as Jupyter notebooks and no-code environments such as web-based UIs (Figure <ref type="figure">1</ref>). Symphony components are JavaScript modules that use custom code or existing libraries to create task-specifc visualizations of structured and unstructured data. Each component is also fully interactive: users can flter, group, or select instances either through a UI toolbar or code. These interactions are reactively synchronized across Symphony components, enabling linked visualizations. Symphony's cross-platform availability enables ML practitioners to use the same components for both exploring and sharing insights about their ML systems (Figure <ref type="figure" target="#fig_0">2</ref>).</p><p>We worked with ML teams at Apple to both design Symphony and apply it to deployed ML projects. To collect the diverse requirements and use cases for ML interfaces, we conducted participatory design sessions with 10 ML teams with a total of 31 ML practitioners. Informed by these sessions, we implemented a set of 11 components supporting a range of diferent models and data types. We then worked with 3 teams from the design sessions to deploy Symphony in their machine learning workfows and ran a think-aloud study with them to qualitatively evaluate Symphony.</p><p>Teams using Symphony with their real-world data and models found surprising insights which they had not previously known, such as duplicate instances, labeling errors, and model blind spots. Participants also described a variety of use cases for Symphony, from creating automated dataset reports to analyzing model performance in computational notebooks. Moreover, participants that did not previously share their analyses also showed interest in using Symphony in their teams to better communicate the state of their ML system with other stakeholders.</p><p>The main contribution of this work is Symphony, a framework for composing interactive ML interfaces with task-specifc, data-driven visualization components. To design Symphony, we conducted formative interviews, participatory design sessions, and case studies on deployed ML workfows with a total of 39 ML practitioners across 15 teams. Symphony enabled ML practitioners to discover signifcant issues like dataset duplicates and model blind spots, and encouraged them to share their insights with other stakeholders. Symphony combines the following principles to improve upon existing ML interfaces:</p><p>• Data-driven ML interfaces derived from and updated with ML data and models. • Task-specifc visualizations for unstructured data and modern machine learning models. • Interactive exploration tools for exploring diferent dimensions of an ML system. • Reusable components that can be used, composed, and shared across diferent platforms. to write and share ML documentation. Second, Symphony components can show complex visualizations and be composed into visual analytics dashboards to help ML practitioners make sense of ML data and models (Section 2.2). Lastly, Symphony components can be used in and exported from interactive programming environments, like computational notebooks, which are often used by ML practitioners (Section 2.3).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2">BACKGROUND AND RELATED WORK</head></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.1">Documenting Data and Models</head><p>A variety of documentation methods exist to help ML practitioners track and communicate details about their data and models. Without knowing what a dataset contains or what a model has learned, teams can inadvertently release AI products with issues like safety concerns and biases <ref type="bibr" target="#b12">[13,</ref><ref type="bibr" target="#b14">15,</ref><ref type="bibr" target="#b46">53,</ref><ref type="bibr" target="#b47">54]</ref>, as seen in numerous deployed systems <ref type="bibr" target="#b7">[8,</ref><ref type="bibr" target="#b18">19,</ref><ref type="bibr" target="#b48">55,</ref><ref type="bibr" target="#b55">63]</ref>. Since machine learning models are a direct result of the data they were trained on, it is important to frst understand the data behind an ML system. Datasheets for Datasets <ref type="bibr" target="#b16">[17]</ref> applies the idea of datasheets in electrical engineering to describe important attributes of a dataset, such as collection methods and intended uses. Similar work has focused on specifc types of data, for example, Data Statements <ref type="bibr" target="#b6">[7]</ref> are tailored to natural language processing datasets. These guidelines describe what should be included in documentation, not how an author can create or share the resulting artifact <ref type="bibr" target="#b32">[38]</ref>. Additionally, these documents are static L A T E X or text documents that are disjoint from the backing data and models and have to be manually updated. Since there is heterogeneity in what information is important for each dataset, Holland et al. <ref type="bibr" target="#b22">[23]</ref> proposed the more general concept of Dataset Nutrition Labels, modular graphs describing diferent aspects of a dataset. Like Symphony, these labels use modular visualizations, however, they focus on simple aggregate visualizations without displaying data samples and do not support platforms where ML practitioners do their work.</p><p>A parallel line of research has focused on documenting machine learning models. Model Cards <ref type="bibr" target="#b39">[46]</ref> and FactSheets <ref type="bibr" target="#b3">[4]</ref> are similar concepts to Datasheets that can include important information and details about machine learning models. These model reports include information ranging from the model type and hyperparameters to aggregate metrics and ethical considerations. Similar to Datasheets, these types of documentation are disjoint from the backing data and do not include interactive visualizations of model details and performance metrics.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.2">Visualization for Machine Learning</head><p>There are a growing number of visualization systems that help ML practitioners make sense of modern ML systems with unstructured datasets and machine learning models <ref type="bibr" target="#b20">[21]</ref>. Visualizations can help ML practitioners in tasks such as auditing models for bias <ref type="bibr" target="#b8">[9]</ref>, understanding the internals of deep learning architectures <ref type="bibr" target="#b21">[22]</ref>, and guiding automatic model selection <ref type="bibr" target="#b9">[10]</ref>. A full review of this literature is out of scope for this work, but we provide a sample of representative systems to highlight the types of visualizations that could be implemented as Symphony components.</p><p>Data science work often starts with and leads back to understanding the backing data. Modern machine learning models and tasks use unstructured data like images and audio that cannot be visualized and explored with tables and histograms. Systems like Know Your Data [28] and Facets [27] are visualization dashboards for exploring unstructured data. Other visual analytics systems process the data further to derive insights like outliers <ref type="bibr" target="#b10">[11]</ref>, biases in a dataset <ref type="bibr">[61]</ref>, or mislabeled data instances <ref type="bibr" target="#b58">[66]</ref>. With a deeper understanding of their data, ML practitioners can more efectively debug and improve their models.</p><p>The models ML practitioners use are often large, complex blackbox models like deep learning systems. Visualization systems like Summit <ref type="bibr" target="#b21">[22]</ref> and Seq2Seq-Vis <ref type="bibr" target="#b50">[57]</ref> can help ML practitioners develop a better mental model of how their machine learning systems work and what they are learning. Another set of systems, including Model Tracker [3], Squares <ref type="bibr" target="#b43">[50]</ref>, AnchorViz <ref type="bibr" target="#b11">[12]</ref>, Con-fusionFlow <ref type="bibr" target="#b19">[20]</ref>, What-if Tool <ref type="bibr" target="#b54">[62]</ref>, and MLCube <ref type="bibr" target="#b28">[34]</ref>, focus on performance analysis and provide diferent views of a model's errors Lastly, there are tools for detecting potential biases <ref type="bibr" target="#b0">[1]</ref> or systematic errors <ref type="bibr" target="#b5">[6,</ref><ref type="bibr" target="#b56">64]</ref> in training data. These various of visualizations can be repackaged as Symphony components, for example, we implement a version of FairVis <ref type="bibr" target="#b8">[9]</ref> as a component for auditing classifers for bias.</p><p>Lastly, there are integrated systems that help ML practitioners both implement and visualize ML models. One of the frst systems describing such an integrated system is Gestalt <ref type="bibr" target="#b41">[48]</ref>, a development environment with visualizations for training and analyzing classifcation models. A subsequent system focused on interactive machine learning is Marcelle <ref type="bibr" target="#b15">[16]</ref>, which uses composable stages and visualizations to create interactive ML interfaces. In contrast to Gestalt and Marcell, Symphony is focused on the analysis stage of ML systems, and includes important features such as cross-platform support, reactivity, and a consistent data API which are not available in Gestalt and Marcelle.</p><p>ML data and model visualizations are often deployed as visual analytics dashboards that are separate from both interactive programming environments that ML practitioners work with and ML documentation shared with other stakeholders. This separation limits who can use visualizations to understand ML data and models. Symphony aims to bridge these worlds by bringing visualizations both into notebooks where data work happens and into the documentation shared with other stakeholders.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.3">Interactive Programming Environments</head><p>ML practitioners often use interactive programming environments for exploring and modeling data since they can interact with and iterate on their ML systems <ref type="bibr" target="#b29">[35]</ref>. These environments are most commonly implemented as computational notebooks like Jupyter <ref type="bibr" target="#b31">[37]</ref>, DataBricks [26], and Observable <ref type="bibr">[29]</ref>. While computational notebooks have extensions for creating interactive visualizations, such as the ipywidgets API <ref type="bibr" target="#b26">[32]</ref> for Jupyter, they are often underused <ref type="bibr" target="#b4">[5]</ref> and hard to share <ref type="bibr" target="#b17">[18,</ref><ref type="bibr" target="#b29">35]</ref>.</p><p>Several libraries exist for interactively visualizing data in notebooks. Graphing libraries such as Altair <ref type="bibr" target="#b51">[58]</ref> and Plotly <ref type="bibr" target="#b25">[30]</ref> allow users to create interactive charts but only support a fnite set of graphs and require users to manually defne what visualizations they want to use. Lux <ref type="bibr" target="#b35">[41]</ref> and B2 <ref type="bibr" target="#b57">[65]</ref> lower the cost of using visualizations in notebooks by automatically providing relevant charts for users' data frames. These approaches help analyze tabular data, but they lack the specifc visual representations needed for machine learning development.</p><p>A separate challenge is sharing visualizations and other notebook outputs outside of the notebook context. Voilà <ref type="bibr" target="#b53">[60]</ref> tackles this challenge directly by exporting full Jupyter notebooks to a hosted website. ML practitioners can use Voilà to share notebooks that contain Symphony components, but it requires a Python kernel to be running and Voilà does not provide any visualizations itself. Two visualization frameworks similar to Symphony, Panel <ref type="bibr" target="#b23">[24]</ref> and Plotly Dash <ref type="bibr" target="#b42">[49]</ref>, use independent components to create visualizations that can be used in both Jupyter notebooks and standalone websites. However, these tools also have limitations for creating complete ML interfaces: Panel visualizations are tied to the Jupyter ecosystem and lack interactivity without a Python backend, while Plotly Dash primarily supports Plotly charts and does not easily extend to custom visualizations. Symphony provides components that are fully interactive in both notebooks and web UIs, and support any JavaScript-based visualization. Additionally, Symphony's shared state synchronizes its components, enabling reactive brushing and linking between views.</p><p>More recent interactive programming environments have moved away from the notebook paradigm. For example, in the Streamlit [31] platform, users write Python scripts using a library that renders interactive components in a separate website. While Streamlit supports interactive components like Jupyter notebooks, it is primarily an environment focused on designing web applications rather than exploratory data science or ML reporting. Exploratory analysis is still often done in notebooks, and Streamlit requires users to learn a new platform. Other platforms are moving away from programming altogether, such as Glinda <ref type="bibr" target="#b13">[14]</ref>, a declarative language that lets ML practitioners describe analysis steps in a domain-specifc language. Glinda does not defne any specifc visualizations, but it could be complemented by Symphony components. Since Symphony components are standalone JavaScript modules, future wrappers could integrate Symphony components into data science environments like Streamlit and Glinda.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3">FORMATIVE INTERVIEWS</head><p>To understand how ML interfaces are used in practice, we conducted 7 semi-structured interviews with 9 participants at Apple. We recruited participants through internal emails and messaging boards and selected participants across a range of diferent roles, including engineers, designers, researchers, and testing roles that work on teams to build and deploy ML systems. Each interview was conducted over a video call and lasted about an hour. First, we asked participants about how they currently create and use different ML interfaces like documentation, visualization dashboards, and widgets. We then asked them what the main limitations and pain points are in current tools and what types of improvements they would fnd helpful. From these need-fnding interviews we identifed the following themes.</p><p>Use cases for ML interfaces. All participants agreed that creating and sharing ML interfaces can help them build more robust and capable ML products. Participants described use cases of ML interfaces in myriad tasks, such as "fagging failures for review, " (P2) "detecting systematic failures, " (P4) and "fairness and bias education. " (P1) Participants also mentioned stages across the entire ML process in which ML interfaces can be useful, from "dataset curation and sharing" (P5) to analysis "after an ML model has been trained, " (P7) or "in all stages" (P1). Consequently, since diferent stakeholders involved in an ML product need specifc views of the data and models, ML interfaces must be fexible enough to support analysis across numerous tasks and domains.</p><p>Ad-hoc tools and analyses. While all participants detailed clear use cases for ML interfaces, they also mentioned limitations preventing them from using existing tools or sharing insights. One participant bluntly stated "right now, we basically have no tools" (P3) for analyzing ML systems. Instead, participants rely on ad-hoc, hand-crafted visualizations for their specifc analyses. For example, one of our participants said their process for looking at instances is to "manually examine icons in a fle explorer." (P9) Another participant "looks at handcrafted summaries of select data subsets" (P4) to do model analysis. Larger teams with more resources may have bespoke tools, such as one participant that "use[s] a team-internal tool to analyze data" (P6). Overall, a lack of adequate tooling leads to ML practitioners using one-of, manual tools or ML teams investing in their own, custom visualization systems.</p><p>Limitations of existing ML interfaces. Participants detailed a variety of technical roadblocks and time-consuming processes preventing them from using existing ML interfaces. Many tools require users to wrangle and export their data into a specifc format before loading it into a custom system or dashboard. However, as one participant stated, "we do not have a lot of time for creating such visualizations:" (P1) ML practitioners simply do not have the bandwidth to do the setup and data wrangling work necessary to use separate systems. ML practitioners' main priority is working on data and models, and "if it takes longer than 5-10 minutes, I am not going to [use an ML interface] immediately" (P6).</p><p>Five participants mentioned explicitly that they do not use ML interfaces because they are not available in the environments where they work, and that "people would want to use easier tools. " (P3) For example, "many data scientists want to explore their data in notebooks" (P2) without having to open a separate system. Additionally, since data and models update frequently, one participant wanted to "start a job with checkboxes and buttons" (P6) and produce a self-updating web UI that they would not have to manually author.</p><p>Lastly, the teams we talked to work with myriad data types, such as video, 3D point cloud, tabular, image, and audio data, and desired bespoke visualizations supporting their analysis needs. One participant mentioned running and visualizing specifc data analyses, and "would want to specify algorithms because our problems are very specialized." (P8) However, current data science tools often only provide visualizations for a limited set of data types and models.</p><p>Lack of communication between stakeholders. As a consequence of limited, isolated interfaces, participants described various challenges for communicating and sharing insights. Since diferent stakeholders prefer diferent environments, such as code-based notebooks or standalone dashboards, it can be challenging to share insights with others. In addition to sharable interfaces, participants also wanted cross-platform support for themselves, as one participant put it, "I would like both an environment for experimentation and always there reliable visualizations. " (P2)</p><p>It can also be difcult to transfer visualizations and fndings between platforms that diferent stakeholders work with. One participant lamented that "I am often not invited to the table until things go wrong, " (P4) and in some teams "designers often times don't have access to data and model results." (P3) In turn, decisions about ML systems are made without all team members having a shared understanding of the current state and limitations of the project. Despite these current limitations, participants thought that "fostering a culture of sharing insights would be great. " (P3)</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4">DESIGN GOALS</head><p>Based on the challenges we identifed in the formative interviews, we found that a successful framework for ML interfaces must fulfll the following:</p><p>Enable data-driven ML interfaces. ML interfaces are often disconnected from an ML system's backing data and model outputs <ref type="bibr" target="#b16">[17,</ref><ref type="bibr" target="#b39">46]</ref>. ML practitioners should be able to create visualizations that are up-to-date and refect an ML systems' current state.</p><p>Support task-specifc visualizations. Specialized visualizations are often needed to make sense of the unstructured data and deep learning models increasingly used in machine learning <ref type="bibr" target="#b44">[51,</ref><ref type="bibr" target="#b52">59]</ref>. ML interfaces should support these task-specifc visualization needs.</p><p>Provide interactive exploration tools. Static ML interfaces only show a fxed subset of the possible analyses stakeholders may need <ref type="bibr" target="#b32">[38]</ref>. Interactive visualizations let diferent stakeholders discover and validate the patterns most relevant to their goals. Make components reusable. Diferent stakeholders explore ML systems in diferent environments, such as computational notebooks and web-based UIs. ML interfaces should be available across environments and reusable for diferent domains and tasks.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5">SYMPHONY: A FRAMEWORK FOR COMPOSING INTERACTIVE INTERFACES FOR MACHINE LEARNING</head><p>Based on these design goals we built Symphony, a framework for composing ML interfaces from interactive visualization components. ML practitioners can explore their data and models using Symphony components in a computational notebook and then combine and transform them into web-based UIs. Symphony consists of three primary features: modular components (Section 5.1), environment wrappers (Section 5.2), and interaction tools (Section 5.3). In the following, we describe the specifc design and implementation choices we made to support these goals.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.1">Modular Components</head><p>The building blocks of Symphony are independent, modular components designed for task-specifc visualizations (Figure <ref type="figure" target="#fig_1">3</ref>  of Symphony components, but visualizations can be written using any JavaScript code or library. JavaScript has a rich ecosystem of libraries and APIs for creating interactive visualizations, like D3 and Three.JS, which can be used to create Symphony components. This fexibility is important for visualizing unstructured ML datasets, something that is not supported by common charting libraries like Matplotlib <ref type="bibr" target="#b24">[25]</ref> or Altair <ref type="bibr" target="#b51">[58]</ref>.</p><p>Each Symphony component is passed three parameters: a metadata table, derived state variables like grouped tables, and references to raw data instances like images. The metadata table contains a row for each instance from which a set of state variables, such as fltered and grouped tables are derived (state variables are described in detail in Section 5.3). Components are also passed a URL from which to fetch raw data samples such as images or audio fles. Symphony controls these three parameters, synchronizing and reactively updating them across components.</p><p>New components can be created using a cookiecutter template that generates all the boilerplate code needed to integrate components with Symphony. In the cookiecutter code, a component developer modifes the front-end JavaScript to create their custom interactive visualization. They can make use of the parameters provided by Symphony to base their visualization on the data provided by a ML practitioner. In the following Subsection we show how these modular, reactive components can then be composed by a Symphony wrapper to be used across diferent platforms.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.2">Platform Wrappers</head><p>The primary goal of using self-contained components is to compose and share them as fexible interfaces across diferent platforms. This is done using Symphony's next main feature, wrappers, which connect components with a particular backing platform. These wrappers have two primary functions -frst, passing data from a platform to Symphony in the correct format, and second, rendering Symphony components in the platform's UI. To support both exploring and sharing ML interfaces, we implemented wrappers for the two platforms most requested in our formative study, Jupyter notebooks and web UIs. These platforms are also representative of the two environments we found to be most used by ML practitioners: programming environments for exploratory analysis and web-based UI interfaces for sharing insights.</p><p>The Python wrapper bundles Symphony components as packages which can be published to a package index like PyPI for use in notebooks and Python scripts. To make Symphony interfaces available in Jupyter notebooks, Symphony's Python wrapper also makes each component an ipywidget <ref type="bibr" target="#b26">[32]</ref>. The ipywidgets API renders web-based widgets in the Jupyter notebook UI and synchronizes its variables with the Python kernel. Data tables like Pandas DataFrames or Apache Arrow tables, along with an endpoint for raw instance fles, can be passed to Symphony's Python wrapper to connect components to the data. The second wrapper we implemented is for standalone, webbased dashboards. To support this, each Symphony component overrides an export function which is used by Symphony to transform selected visualization components from Python code into web-based UIs. Components can be confgured before export to be placed on diferent subpages and arranged within these pages to ft particular use cases, as shown in Figure <ref type="figure" target="#fig_3">5</ref>. These dashboards can be authored in programming environments and then exported as a statically hosted websites. The wrapper for web-based UIs provides an HTML fle which imports components as independent JavaScript (ES6) modules. Since Symphony components are compiled to pure JavaScript fles, the standalone dashboard does not need a dedicated backend and can be hosted on a static fle server. New can be written to include Symphony components in other platforms. For example, we began to explore how we can enable users without programming experience to create Symphony UIs using a drag-and-drop dashboard builder. We have also experimented with integrating Symphony components in other interactive programming environments like Streamlit or Glinda <ref type="bibr" target="#b13">[14]</ref>.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.3">Interactive Exploration Tools</head><p>The fnal key feature of Symphony is a set of tools for interacting with and exploring data. Each component has the same interaction tools, and changes are reactively synchronized between components both in Jupyter notebooks and in web-based UIs. For the web-based UI, state changes are also saved in the URL, allowing stakeholders to share specifc fndings. Symphony's interaction tools were derived both from common interactions described by participants in the formative study and fndings from visualization research <ref type="bibr" target="#b1">[2,</ref><ref type="bibr" target="#b60">67]</ref>. We included a subset of tools that we found to be important for the specifc components we implemented. These tools include data fltering, grouping, and instance selection. Additional interaction tools can be added to Symphony by updating the main Symphony package and platform wrappers with the new tool, which is then available on diferent platforms and synchronized across components. New interaction tools can then be accessed and modifed by individual Symphony components.</p><p>Users have three ways of using Symphony's interaction tools: through a UI toolbar, Symphony components themselves, or code. The UI toolbar (Figure <ref type="figure" target="#fig_2">4</ref>, right) is available both in interactive programming environments (Figure <ref type="figure" target="#fig_0">2</ref>, left) and the web-based dashboards (Figure2, right). We implemented this toolbar as another Symphony component, which is shown alongside each component in Jupyter notebooks for convenient access, and displayed as a consistent sidebar for the web-based dashboard. Apart from the UI toolbar, components not only have direct access to the global Symphony state but can also modify it based on user interaction. For example, individual data samples can be selected from whichever component they are viewed in. Thus, component developers can add custom controls to manipulate Symphony's state. Lastly, ML practitioners may want to make more complex data transformations that cannot be mapped to UI components. For such use cases, Symphony's state can also be directly be manipulated within Python. Whether in a notebook or Python script, users can set and retrieve any of the state variables. In Jupyter notebooks, this allows for fuid interactions between UI and code in the style of Kery et al. <ref type="bibr" target="#b30">[36]</ref>. Additionally, Symphony's state can be extracted from the web-based UI and loaded into Python-based notebooks, making fndings from shared Symphony dashboards available to the ML practitioners in code-based environments. (C) A model analysis dashboard for exploring the performance of an ML system. Users can fnd groups of incorrectly classifed instances in the embedding and drill down into fairness metrics with respect to diferent data subgroups.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="6">PARTICIPATORY SESSIONS</head><p>With the initial Symphony framework, we conducted a series of participatory design sessions to understand the specifc needs ML teams and design and develop an initial set of Symphony components. We conducted 10 sessions where each session had between 1 and 7 people, with a total of 31 people across all sessions. We recruited and contacted teams via internal mailing lists, and the sessions lasted between minutes and an hour. The frst half of each session consisted of a demonstration of a Symphony prototype based on a mock dataset. In the second half of each session, we asked participants to refect on and describe their own work and asked them about what additional features would be necessary to integrate Symphony into their workfows.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="6.1">Expanding Symphony's Technical Capabilities</head><p>From these participatory design sessions, we extracted a set of additional needs and wants for Symphony. Rather than the high-level goals presented in Section 4, the fndings from the participatory design sessions are more technical and tied to the implementation of Symphony.</p><p>While displaying images directly in computational notebook components was greatly appreciated by the participants working in computer vision, the teams working in diferent domains expressed interest in previewing and visualizing other data types. To demonstrate Symphony's ability to support other unstructured types, we made the display of data sample modular and added audio data as an additional supported data type. To visualize other types of data, a developer has to implement a rendering function for the new data which all components can use.</p><p>Some teams work with large models trained on big data, which originally exceeded ability to scale and led to long load times. In response, we implemented pagination for all the components that display raw data. Depending on the data type, the number of samples per page can be adjusted, allowing Symphony to scale to millions of data samples. For even larger datasets, where a ML practitioner wants to load and visualize hundreds of millions of data points, the browser memory becomes a limiting factor for holding the backing metadata table. For these truly large datasets, we suggest users select representative for detailed analysis; however, beyond millions of data instances is described in Figure <ref type="figure">8</ref>.</p><p>Interactive exploration is a powerful analysis technique when developing ML systems. However, ML projects that contain many datasets, compounded when data or models are rapidly changing, participants expressed interest in automatically generating shareable dashboards and reports to support streaming data and automatic model retraining. Apart from providing Symphony as an authoring tool in computational notebooks, ML practitioners can also write Python scripts that consume ML data and model outputs, assemble a selection of components, and create and export a standalone Symphony web UI.  </p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="6.2">Implemented Symphony Components for Data and Model Analysis</head><p>Informed by the feedback and needs expressed the participatory design sessions, we implemented an initial set of 11 components shown in Figure <ref type="figure">6</ref>. These initial components cover various data and model analysis tasks, from fnding potential duplicates in a dataset to auditing models for biases. We created components using the component cookiecutter template described in Figure <ref type="figure" target="#fig_3">5</ref>.1.</p><p>The frst set of components created cover overview descriptions and summaries of an ML dataset. The markdown component (A) lets Symphony replicate existing documentation methods like Datasheets and Model Cards by writing rich text content. Users can follow existing guidelines to document essential information about a dataset or model often overlooked not described. The list component (B) shows a paginated list of data instances, with support for a variety of data types like images and audio. Multiple ML practitioners requested this feature, they currently use fle explorers outside of a notebook or one-of functions to look at individual instances. Distribution charts and counts in the summary component (C) provide a high-level overview of data and can help detect potential biases or skews in a dataset. Lastly, we developed two additional components, a 3D path component (D) and map component (E), for exploring specifc data types like health sensor data and geographic distributions.</p><p>We also implemented a set of components for more complex analysis of unstructured datasets that were important to multiple teams. We frst compute a model embedding from a deep learning model on the provided data instances, from which diferent metrics are calculated. For the frst of these components we use a nearest neighbors algorithm based on cosine distance in embedding space to fnd potential groups of duplicate instances (F), which could impact training performance or the validity of test set accuracy. In the next component, we ft a Mixture of Gaussians model on the embeddings to calculate a familiarity score for each data point. We fnd the most and least familiar instances in a dataset (G) by sorting by familiarity score. Instances with low familiarity scores can be outliers or mislabeled instances, while high familiarity instances can show over-represented types of data. Finally, there is a 2D projection embedding (H) that shows a dimensionality reduced representation of the embeddings. The embedding can be used to fnd various interesting data and model patterns and is especially useful when used to explore insights found in other components.</p><p>The last set of components we implemented focus on analyzing and debugging ML models. The classic confusion matrix component (I) is important for initial debugging of classifcation models. Other classifcation tasks that use data with hierarchical or multi-label data can be explored a hierarchical confusion matrix component (J). We primarily implemented this component for a team in the participatory design sessions that was working on hierarchical classifcation models. Lastly, we built a set of visualizations for analyzing model performance across intersectional subgroups (G) based on a system by Cabrera et al. <ref type="bibr" target="#b8">[9]</ref>. The visualization can help users audit their models for biases, something which multiple product teams were interested in.</p><p>We used three diferent methods for implementing the above Symphony components. Symphony components are Svelte and JavaScript (JS) fles, so authors can create new visualizations with their preferred front-end libraries. For components without existing libraries, we used JavaScript in combination with visualization packages such as Vega and D3. Symphony can also use of-the-shelf JS libraries, for example, we used REGL Scatterplot [42], a WebGL library, to create the projection component. Lastly, since Symphony components are made with Svelte, we can also directly use Svelte components, which is what we did with the Hierarchical Confusion Matrix. These diferent strategies for creating components provide the fexibility to implement custom visualizations while also allowing developers use of-the-shelf libraries and visualizations.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="7">CASE STUDIES ON DEPLOYED ML SYSTEMS</head><p>we evaluated Symphony with ML practitioners and stakeholders working on real-world ML products. We worked with three ML teams at Apple, drawn from the participatory design integrate Symphony with their and ML pipelines. The teams focus on diferent machine dataset creation and labeling, and ML education. To understand the afordances and limitations of Symphony, we conducted think-aloud studies lasting 60 minutes where a member of each team used Symphony to explore a Jupyter notebook and create a web-based dashboard for their data and model. While feld studies like ours excel at capturing how participants actually work, this data has to be collected opportunistically. We believe these case studies capture the target audience of Symphony, cross-functional teams working on modern ML models trained on unstructured data, but may some insights specifc to workfows.</p><p>Before the study, we sent a member of team, the main participant, Jupyter notebook that their and displayed set of Symphony components applicable to their domain and task. The study was split into three main sections. For the frst third of the study, we asked the team to think aloud while the main participant used the notebook and Symphony components to explore the data and model freely. the second part of the study, we asked the main participant to export the Symphony components (using a command in the notebook) to a standalone dashboard and continue exploring in the exported web UI. For the fnal part of the study, we asked team for feedback on Symphony and discussed what types of use cases or limitations they found.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="7.1">Case Study I: Validating and Sharing Data</head><p>Patterns on a Dataset Creation Team</p><p>For the frst case study, we worked with a team that assembles and labels large machine learning datasets. Their datasets are composed of labeled images and videos which they publish to an internal data repository. The team was interested in using Symphony in two ways, frst, using it during dataset creation to detect errors in the data and labels, and second, as a reporting tool to give consumers of the dataset details about the data. Given these requirements, we loaded Symphony with the list (Figure <ref type="figure">6</ref>  The main participant started in the notebook and used multiple components and interaction tools in concert to spot unexpected in their data. They made extensive use of Symphony's toolbar to combine flters and select subsets of data in which they were interested. using the notebook, they commented that "there are a lot of neat things here, frst, the flter carried over, it is so cool to see the data samples and metadata within the notebook. " The synchronized, reactive let them validate insights from the fltered summary charts with the actual raw instance previews in the list view. Next, the main participant moved on to the duplicates and familiarity components, where they found a couple of labeling errors that they suspected existed in their dataset but had not been able to validate previously. transitioning to the standalone dashboard, the frst component they looked at was the projection visualization. They used the projection to fnd a closely clustered of instances where a few highlighted points that the model had misclassifed. In the standalone dashboard, they also dubbed the map visualization "very useful" , especially when sharing reports of their data collection eforts with managers or policymakers.</p><p>Overall, the team found "a lot of value here" when using Symphony. They mentioned that the workfow they would most prefer would be automatically generating shareable reports for every dataset they published: "programmatic generation and live visualizations are awesome, being able to pop these charts into all our READMEs would be amazing. " They saw the standalone dashboard that they created with Symphony as a "great starting point" for analyzing their datasets, and that they could see people use the notebooks for more detailed analysis: "if people want to drill down more, and get exact specifc access, summon the notebook." able to create diferent interfaces with subsets of visualization components was important for them as well, as diferent audiences have diferent needs and they "do not want customers to do the data cleanup" for them.</p><p>The team also identifed usability issues and limitations in Symphony. When initially using the projection component, the main participant was not sure what it showed and thought that "this component would need some introduction, as it has complex controls. " They also requested components, such as heatmaps and other 2D graphs, to do a more detailed analysis of distributions. Lastly, the main limitation for directly using Symphony was not being able to attach the raw data fles to a Symphony interface as their data samples are often not hosted and too large to duplicate.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="7.2">Case Study II: Debugging Training Data on an Accessibility Team</head><p>In the second case study, we worked with a team that ML to make software more accessible. They have a large dataset of icon screenshots for which we assembled a similar set of components to the dataset creation team. We included the summary (Figure <ref type="figure">6</ref> (F)), duplicates (Figure <ref type="figure">6</ref> (A)), familiarity (Figure <ref type="figure">6</ref> (B), and projection (Figure <ref type="figure">6</ref> (H)) components . When exploring the notebook, the participant found the duplicates, familiarity, and scatterplot components to be the most interesting. Since they use an automated approach to collect their data, the participant assumed that there were likely duplicates in the dataset but had protocols to ensure they would not be across the training and testing set. Using the duplicates component, they confrmed that a signifcant number of icons were duplicates, but when they used the grouping interaction to split the data by testing and training they found that a signifcant number of instances were duplicated across the two datasets. The combination of the duplicates visualization and grouping interaction tool helped them discover that they "were cheating learning on samples we test for."</p><p>The participant identifed the problematic duplicates and selected them in the notebook to remove from the test set with a Python command later. Next, the participant explored the familiarity component and found a large number of similar grey icons, based on which they wondered "the model might overft on these samples. " Finally, using the projection visualization, they found a dispersed cluster of instances with diferent labels. When they selected the group, they found that the instances were all PNG images in the test set, while the training set only contained JPEG images. The participant then mentioned they "want to test their model specifcally on PNG images to assess how the model generalized. "</p><p>Overall, the participant mentioned that they would "want to try and this to share insights within the team." Additionally, they found the notebook-based visualizations personally useful to "look into the data, " which they previously done manually using a fle explorer outside of the notebook. They mentioned they would use a computational notebook to explore data, and only use the standalone dashboards to share insights or when they wanted more visualization space. The main feature the team wanted was to combine data and model fndings to understand the impact of data changes: "it would be super helpful to also add models existing components. " While this analysis is possible with existing model analysis components, future components could specifcally combine data and model information.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="7.3">Case Study III: Promoting Data Exploration for ML Novices on an Education Team</head><p>For the fnal case study, we collaborated with a team focused on ML education. They teach courses about ML principles and techniques to engineers, and also teach their audience about data and model analysis tools. They sent us a list of datasets they commonly explore with students from which we selected two representative datasets, one audio dataset for data analysis and one image dataset for model analysis. For the audio dataset we used the same components as in the previous evaluation. To support model analysis for the image dataset, we used the summary (Figure <ref type="figure">6</ref> (F)), hierarchical confusion matrix (Figure <ref type="figure">6</ref> (D)), FairVis (Figure <ref type="figure">6</ref> (K)), and projection (Figure <ref type="figure">6</ref> (H)) components.</p><p>The team was interested in how they could use separate components in concert. They used the cross-fltering and grouping heavily to combine, for example, the projection visualization with the summary component to spot misclassifed samples. They also used the confusion matrix visualization in combination with our fltering tool. For example, they fltered out the correctly classifed data samples from the metadata table to highlight misclassifcations and described the resulting confusion matrix as "a fantastic graphic." They were also intrigued by being able to display a list of data samples in notebooks or a standalone dashboard, as they "constantly tell [their] students to look at a lot of examples" but are currently limited to seeing one or two instance at a time and "just graph things using matplotlib or pillow. "</p><p>Overall, team found Symphony to be a valuable tool for ML tasks and thought it could play a part in one of their lessons, as "promoting looking at data is extremely important. " They remarked that "in Python, its very easy to ignore the data, anything you can do to bring the data to the forefront is great." Thus, they wanted to use Symphony during their courses in multiple ways, namely using the "notebook for generating interfaces, then exporting them to teach a group such that they can open the website and everyone explore on their own or follow my instructions. " This way, they hoped that "[students] can play with it and experiment talk about how to communicate results for ML models. " They also particularly liked the option to assemble visualizations, for example when their students learn how to "communicate fndings to executives" "graphing the relevant, and hiding the irrelevant. "</p><p>for limitations, they wanted to be able to unlink the state of diferent components to experiment with them independently. They also mentioned that they would like to load more data types than just the currently implemented audio, images, and tabular data, namely text data. While this is not possible right now, Symphony could be extended to more data types by augmenting the data sample adapter we provide.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>LIMITATIONS AND FUTURE WORK</head><p>In both the pilot studies and case studies, we found ways in which Symphony could be further improved.</p><p>components. Symphony components are written using JavaScript code and web-based visualization libraries. Programming these visualizations requires expertise in web development and visualization, which limits who can create new components. Future work could explore ways to lower the barrier to authoring new visualization components. Potential strategies to make component creation more accessible include using grammars for interactive graphics, such as Vega <ref type="bibr" target="#b45">[52]</ref>, or UI-based visualization builders like Tableau <ref type="bibr" target="#b36">[43]</ref>. Additional research would be needed to make these tools more expressive unstructured data and ML models.</p><p>Scaling past millions of data points. Symphony currently loads the backing metadata table used for Symphony into web browser memory. scales to tens of millions of data points, which, while sufcient for many modern ML tasks, does not cover all domains. In our design sessions, we spoke to teams with terabyte-scale metadata tables that do not ft browser memory. Future work explore ways to support this scale while still providing direct interactivity with the underlying data and models. Using an external API or backend for data processing combined with more efcient data queries could support massive data but would limit where the webbased UI could be used.</p><p>Beyond conventional data science platforms. In this work, we implemented Symphony wrappers for computational notebooks, programming environments, and web-based dashboards. While these platforms cover a signifcant portion of where ML work happens, future work could explore how Symphony could be incorporated into other platforms, especially those which are currently isolated from data science work. For example, Symphony interfaces could be included in messaging services, documents, presentations, or issue trackers to further bring the benefts of Symphony to more people. New design studies could be conducted to understand how users in common communication platforms like instant messaging would beneft from and use Symphony components.</p><p>Guided usage of Symphony. ML practitioners can use Symphony for a wide array of ML analyses, from dataset debugging to auditing models for bias. This gamut of uses stands in contrast to more prescriptive approaches like Datsheets <ref type="bibr" target="#b16">[17]</ref>, Model Cards <ref type="bibr" target="#b39">[46]</ref>, and checklists <ref type="bibr" target="#b37">[44]</ref> which defne an ordered list of what an ML interface should show. While ML practitioners can use Symphony for more types of analyses, it does not provide any guidance to users about which components might be the most adequate or useful for a given task. Future work could look at combining Symphonys open-ended, exploratory approach with more prescriptive guidance.</p><p>Scope of case study fndings. Lastly, our case studies were conducted with ML practitioners at a single institution that works on large ML models trained on unstructured data, often using notebooks and visualization dashboards. While we believe these tools and ML development practices exist widely in industry and academia, we recognize some of our fndings may not generalize to other organizations or types of users such as machine learning enthusiasts, hobbyists, or small teams. Further studies could explore Symphony's afordances and drawbacks in these distinct settings.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="9">DISCUSSION</head><p>Symphony provides a common substrate for ML interfaces that enables both exploratory analysis and sharable ML interfaces. By meeting diferent where they work, Symphony empowers each member of an ML team to have direct access and knowledge of the data and models powering an AI product.</p><p>While the case studies described scenarios where ML practitioners work in programming environments and transition to web-based UIs, we also observed in our studies that ML practitioners can beneft going the opposite direction: transitioning from a web-based UI back to a programming environment. When a user fnds an interesting insight in a standalone Symphony dashboard, they can copy their fndings to the programming environments along with state variables like flters and groups. Existing analysis tooling often sufers from an "expressiveness clif", where only a fxed set data manipulations available. Symallows users to return to programming environments where they more fexible analysis tools.</p><p>ML practitioners' desire to use Symphony for exploration could also encourage them to share their insights more frequently. If ML practitioners are using a set of Symphony components for exploratory analysis in a notebook, no additional work is needed for them to export it as a standalone, shareable UI. Participants mentioned the ability to programmatically combine components as a major beneft, allowing them to go from exploration to an interactive, web-based UI without using a diferent tool. Additionally, Symphony interfaces can be redeployed whenever the data and model are updated, supporting ML tasks with streaming data or automatic model retraining.</p><p>By integrating with existing data science platforms, Symphony could also encourage broader use of task-specifc ML visualizations. ML visualization systems are often implemented as one-of web dashboards <ref type="bibr" target="#b0">[1,</ref><ref type="bibr" target="#b8">9,</ref><ref type="bibr" target="#b9">10,</ref><ref type="bibr" target="#b21">22,</ref><ref type="bibr" target="#b33">39,</ref><ref type="bibr" target="#b56">64]</ref> that require users to wrangle and export data into systems separate from where they do ML development. Symphony includes task-specifc visualization components directly in data since platforms like Jupyter notebooks, and the components can consume data from standard data APIs like Pandas Data Frames. In turn, implementing ML visualizations as independent components in a framework like Symphony could increase their use and longevity.</p><p>Beyond helping individuals understand ML systems, Symphony is intended to foster a shared organizational understanding <ref type="bibr" target="#b62">[69]</ref> between stakeholders on an ML team. Symphony interfaces act as boundary objects for large, cross-functional ML teams. Boundary objects are artifacts that are "both plastic enough to adapt to local needs and the constraints of the several parties employing them, yet robust enough to maintain a common identity across sites" <ref type="bibr" target="#b49">[56]</ref>. Symphony can serve as a boundary object for ML teams, providing interfaces that adapt to the diferent needs of stakeholders. At the same time, "The creation and management of boundary objects is a key process in developing and maintaining coherence across intersecting social worlds" <ref type="bibr" target="#b49">[56]</ref>. Symphony aids in this creation and management process, bridging the gap between the intersecting worlds of diferent ML stakeholders such as engineers, designers, and product managers.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="10">CONCLUSION</head><p>In this work, we designed and implemented Symphony, a framework for composing interactive ML interfaces with data-driven, task-specifc visualization components. Symphony's visualizations helped ML teams fnd important issues such as data duplicates and model blind spots. Additionally, We found that by providing ML interfaces in the data science platforms where ML practitioners work, Symphony can encourage ML practitioners to want to use and share insights. With data-driven components that diverse stakeholders across an ML team can use, Symphony fosters a culture of shared ML understanding and encourages the creation of accurate, responsible, and robust AI products.</p></div><figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_0"><head>SymphonyFigure 2 :</head><label>2</label><figDesc>Figure2: A demonstration of Symphony running in both (A) a computational notebook and (B) a web-based UI with the same visualization components and code. In a computational notebook, an ML practitioner passes their data and model outputs directly from Python variables like Pandas Data Frames<ref type="bibr" target="#b38">[45]</ref> to Symphony components. The ML practitioner can then export the components to a self-contained, web-based UI. This example shows Symphony loaded with the CIFAR-10<ref type="bibr" target="#b34">[40]</ref> dataset and a trained image classifcation model. After reading a textual description of the dataset, a user found and selected duplicate car instances which were reactively highlighted in the projection component and the confusion matrix. The user then explored the confusion matrix to determine if the duplicates could be impacting model performance.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_1"><head>Figure 3 :</head><label>3</label><figDesc>Figure 3: The technical overview of the Symphony framework. A dataset and fles are passed into the Symphony wrapper for a particular platform. The wrapper holds the shared state which is reactively updated and modifed either by standardized interaction tools or components themselves.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_2"><head>Figure 4 :</head><label>4</label><figDesc>Figure 4: A list component looking at audio samples from the ESC-50 environmental noise classifcation dataset. The the right has UI elements for the diferent interactions tools in Symphony. (A) has increased the number of instances shown per page, and then fltered to see only car horn noises. They then (C) grouped the "take" feature, and (D) selected a set of interesting instances. In a notebook a user can also set these parameters from code.</figDesc><graphic url="image-12.png" coords="7,55.10,84.99,464.49,200.55" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_3"><head>#Figure 5 :</head><label>5</label><figDesc>Figure 5: Symphony a diverse range of ML Here we show examples of three distinct dashboards: (A) A dataset overview a textual description of the data's origin, distribution plots, and example data instances. ML practitioner can this report to understand what a dataset contains and what tasks they can use it for. (B) A data validation dashboard to help ML practitioners track issues during data collection, such as duplicate or out-of-distribution instances.(C) A model analysis dashboard for exploring the performance of an ML system. Users can fnd groups of incorrectly classifed instances in the embedding and drill down into fairness metrics with respect to diferent data subgroups.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_4"><head>Figure</head><label></label><figDesc>Figure The Symphony components we implemented as a result of the participatory design sessions. (A) Markdown text for data and model details. (B) A paginated list of instances. (C) Distribution charts for metadata columns. (D) 3D path visualizations for sensor and inertial measurement unit (IMU) data. (E) Map for geographic (F) Potential duplicate instances. Familiar and unfamiliar instances dataset. (H) 2D projection for model embeddings. confusion matrix. (J) Confusion matrix for hierarchical classifcation models. (K) Fairness analyses of intersectional subgroups.</figDesc><graphic url="image-23.png" coords="9,158.36,178.47,71.71,55.22" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_5"><head></head><label></label><figDesc>(B)), summary (Figure 6 (C)), duplicates (Figure 6 (F)), familiarity (Figure 6 (G)), projection (Figure 6 (H)), and map (Figure 6 (E)) components.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0"><head></head><label></label><figDesc></figDesc><graphic url="image-2.png" coords="3,196.99,101.03,360.52,201.48" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_0"><head>Tools Data Table &amp; Files Symphony System Wrapper Symphony Input</head><label></label><figDesc></figDesc><table><row><cell>Interaction</cell><cell cols="2">Shared State</cell><cell>Components</cell></row><row><cell>UI Interaction</cell><cell></cell><cell></cell></row><row><cell></cell><cell>Groups</cell><cell>Selection</cell></row><row><cell>Code Interaction</cell><cell></cell><cell></cell></row><row><cell></cell><cell>Filters</cell><cell>Settings</cell></row></table><note>, right).A Symphony component is a JavaScript module that renders a webbased visualization. We use the Svelte 1 web framework as the base</note></figure>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="1">https://svelte.dev</note>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot">'22, April 29-May 5, 2022, New Orleans, LA, USABäuerle and Cabrera, et al.   </note>
+		</body>
+		<back>
+
+			<div type="acknowledgement">
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>ACKNOWLEDGMENTS</head><p>We thank our colleagues at Apple for their time and efort integrating our research with their work. We especially thank Kayur Patel for his guidance and Mary Beth Kery for her generosity reviewing early drafts of this work.</p></div>
+			</div>
+
+			<div type="references">
+
+				<listBibl>
+
+<biblStruct xml:id="b0">
+	<analytic>
+		<title level="a" type="main">Fairsight: Visual analytics for fairness in decision making</title>
+		<author>
+			<persName><forename type="first">Yongsu</forename><surname>Ahn</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yu-Ru</forename><surname>Lin</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">IEEE Transactions on Visualization and Computer Graphics</title>
+		<imprint>
+			<biblScope unit="volume">26</biblScope>
+			<biblScope unit="page" from="1086" to="1095" />
+			<date type="published" when="2019">2019. 2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b1">
+	<analytic>
+		<title level="a" type="main">Low-level components of analytic activity in information visualization</title>
+		<author>
+			<persName><forename type="first">Robert</forename><surname>Amar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">James</forename><surname>Eagan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">John</forename><surname>Stasko</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">IEEE Symposium on Information Visualization, INFO VIS. IEEE</title>
+				<imprint>
+			<date type="published" when="2005">2005</date>
+			<biblScope unit="page" from="111" to="117" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b2">
+	<analytic>
+		<title level="a" type="main">Modeltracker: Redesigning performance analysis tools for machine learning</title>
+		<author>
+			<persName><forename type="first">Saleema</forename><surname>Amershi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Max</forename><surname>Chickering</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Steven</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Bongshin</forename><surname>Drucker</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Patrice</forename><surname>Lee</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jina</forename><surname>Simard</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Suh</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings the 33rd Annual ACM Conference on Human Factors in Computing Systems</title>
+				<meeting>the 33rd Annual ACM Conference on Human Factors in Computing Systems</meeting>
+		<imprint>
+			<date type="published" when="2015">2015</date>
+			<biblScope unit="page" from="337" to="346" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b3">
+	<analytic>
+		<title level="a" type="main">FactSheets: Increasing trust in AI services through supplier&apos;s declarations of conformity</title>
+		<author>
+			<persName><forename type="first">Matthew</forename><surname>Arnold</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Michael</forename><surname>Bellamy</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Stephanie</forename><surname>Hind</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sameep</forename><surname>Houde</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Aleksandra</forename><surname>Mehta</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ravi</forename><surname>Mojsilović</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Nair</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Alexandra</forename><surname>K Natesan Ramamurthy</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">David</forename><surname>Olteanu</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Piorkowski</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">IBM Journal of Research and Development</title>
+		<imprint>
+			<biblScope unit="volume">63</biblScope>
+			<biblScope unit="page" from="6" to="7" />
+			<date type="published" when="2019-04-05">2019. 4/5 (2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b4">
+	<analytic>
+		<title level="a" type="main">The interactive visualization gap in initial exploratory data analysis</title>
+		<author>
+			<persName><forename type="first">Andrea</forename><surname>Batch</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Senior</forename><surname>Elmqvist</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Member</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">IEEE Transactions on Visualization and Computer Graphics</title>
+		<imprint>
+			<biblScope unit="volume">24</biblScope>
+			<biblScope unit="page" from="278" to="287" />
+			<date type="published" when="2018">2018. 2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b5">
+	<analytic>
+		<title level="a" type="main">Classifer-guided visual correction of noisy labels for image classifcation tasks</title>
+		<author>
+			<persName><forename type="first">Alex</forename><surname>Bäuerle</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Heiko</forename><surname>Neumann</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Timo</forename><surname>Ropinski</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Computer Graphics Forum</title>
+				<imprint>
+			<publisher>Wiley Online Library</publisher>
+			<date type="published" when="2020">2020</date>
+			<biblScope unit="volume">39</biblScope>
+			<biblScope unit="page" from="195" to="205" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b6">
+	<analytic>
+		<title level="a" type="main">Data statements for natural language processing: Toward mitigating system bias and enabling better science</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Emily</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Batya</forename><surname>Bender</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Friedman</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Transactions of the Association for Computational Linguistics</title>
+		<imprint>
+			<biblScope unit="volume">6</biblScope>
+			<biblScope unit="page" from="587" to="604" />
+			<date type="published" when="2018">2018. 2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b7">
+	<analytic>
+		<title level="a" type="main">Gender shades: Intersectional accuracy disparities in commercial gender classifcation</title>
+		<author>
+			<persName><forename type="first">Joy</forename><surname>Buolamwini</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Timnit</forename><surname>Gebru</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Conference on Fairness, Accountability and Transparency. PMLR</title>
+				<imprint>
+			<date type="published" when="2018">2018</date>
+			<biblScope unit="page" from="77" to="91" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b8">
+	<analytic>
+		<title level="a" type="main">FairVis: Visual analytics for discovering intersectional bias in machine learning</title>
+		<author>
+			<persName><forename type="first">Alexander</forename><surname>Ángel</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Will</forename><surname>Cabrera</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Fred</forename><surname>Epperson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Minsuk</forename><surname>Hohman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jamie</forename><surname>Kahng</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Duen Horng</forename><surname>Morgenstern</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Chau</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">2019 IEEE Conference on Visual Analytics Science and Technology</title>
+				<imprint>
+			<publisher>IEEE</publisher>
+			<date type="published" when="2019">2019</date>
+			<biblScope unit="page" from="46" to="56" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b9">
+	<analytic>
+		<title level="a" type="main">Ablate, variate, and contemplate: Visual analytics for discovering neural architectures</title>
+		<author>
+			<persName><forename type="first">Dylan</forename><surname>Cashman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Adam</forename><surname>Perer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Remco</forename><surname>Chang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Hendrik</forename><surname>Strobelt</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">IEEE Transactions on Visualization and Computer Graphics</title>
+		<imprint>
+			<biblScope unit="volume">26</biblScope>
+			<biblScope unit="page" from="863" to="873" />
+			<date type="published" when="2019">2019. 2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b10">
+	<analytic>
+		<title level="a" type="main">Oodanalyzer: Interactive analysis of out-of-distribution samples</title>
+		<author>
+			<persName><forename type="first">Changjian</forename><surname>Chen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jun</forename><surname>Yuan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yafeng</forename><surname>Lu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yang</forename><surname>Liu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Hang</forename><surname>Su</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Songtao</forename><surname>Yuan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Shixia</forename><surname>Liu</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">IEEE Transactions on Visualization and Computer Graphics</title>
+		<imprint>
+			<biblScope unit="volume">27</biblScope>
+			<biblScope unit="page" from="3335" to="3349" />
+			<date type="published" when="2020">2020. 2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b11">
+	<analytic>
+		<title level="a" type="main">AnchorViz: Facilitating classifer error discovery through interactive semantic data exploration</title>
+		<author>
+			<persName><forename type="first">Nan-Chen</forename><surname>Chen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jina</forename><surname>Suh</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Johan</forename><surname>Verwey</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Gonzalo</forename><surname>Ramos</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Steven</forename><surname>Drucker</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Patrice</forename><surname>Simard</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">23rd International Conference on Intelligent User Interfaces</title>
+				<imprint>
+			<date type="published" when="2018">2018</date>
+			<biblScope unit="page" from="269" to="280" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b12">
+	<monogr>
+		<title level="m" type="main">Ethics guidelines for trustworthy AI</title>
+		<ptr target="https://digital-strategy.ec.europa.eu/en/library/ethics-guidelines-trustworthy-ai" />
+		<imprint>
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+	<note>European Commission</note>
+</biblStruct>
+
+<biblStruct xml:id="b13">
+	<analytic>
+		<title level="a" type="main">Glinda: data science with live programming, GUIs and a Domain-specifc Language</title>
+		<author>
+			<persName><surname>Robert A Deline</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2021 CHI Conference on Human Factors in Computing Systems</title>
+				<meeting>the 2021 CHI Conference on Human Factors in Computing Systems</meeting>
+		<imprint>
+			<date type="published" when="2021">2021</date>
+			<biblScope unit="page" from="1" to="11" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b14">
+	<analytic>
+		<title level="a" type="main">Establishing the rules for building trustworthy AI</title>
+		<author>
+			<persName><forename type="first">Luciano</forename><surname>Floridi</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Nature Machine Intelligence</title>
+		<imprint>
+			<biblScope unit="volume">1</biblScope>
+			<biblScope unit="page" from="261" to="262" />
+			<date type="published" when="2019">2019. 2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b15">
+	<analytic>
+		<title level="a" type="main">Marcelle: interactive machine learning workfows and</title>
+		<author>
+			<persName><forename type="first">Jules</forename><surname>Françoise</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Baptiste</forename><surname>Caramiaux</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Téo</forename><surname>Sanchez</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">The 34th Annual ACM Symposium on User Interface Software and Technology</title>
+				<imprint>
+			<date type="published" when="2021">2021</date>
+			<biblScope unit="page" from="39" to="53" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b16">
+	<analytic>
+		<title level="a" type="main">Datasheets for datasets</title>
+		<author>
+			<persName><forename type="first">Timnit</forename><surname>Gebru</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jamie</forename><surname>Morgenstern</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Briana</forename><surname>Vecchione</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Wortman</forename><surname>Vaughan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Hanna</forename><surname>Wallach</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Hal</forename><forename type="middle">Daumé</forename><surname>Iii</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kate</forename><surname>Crawford</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">ACM</title>
+		<imprint>
+			<biblScope unit="volume">64</biblScope>
+			<biblScope unit="page" from="86" to="92" />
+			<date type="published" when="2021">2021. 2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b17">
+	<analytic>
+		<title level="a" type="main">Managing messes in computational notebooks</title>
+		<author>
+			<persName><forename type="first">Andrew</forename><surname>Head</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Fred</forename><surname>Hohman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Titus</forename><surname>Barik</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Steven</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Robert</forename><surname>Drucker</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Deline</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings the 2019 CHI Conference on Human Factors in Computing Systems</title>
+				<meeting>the 2019 CHI Conference on Human Factors in Computing Systems</meeting>
+		<imprint>
+			<date type="published" when="2019">2019</date>
+			<biblScope unit="page" from="1" to="12" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b18">
+	<analytic>
+		<title level="a" type="main">Women also snowboard: Overcoming bias in captioning models</title>
+		<author>
+			<persName><forename type="first">Lisa</forename><forename type="middle">Anne</forename><surname>Hendricks</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kaylee</forename><surname>Burns</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kate</forename><surname>Saenko</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Trevor</forename><surname>Darrell</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Anna</forename><surname>Rohrbach</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings the European Conference on Computer Vision</title>
+				<meeting>the European Conference on Computer Vision</meeting>
+		<imprint>
+			<date type="published" when="2018">2018</date>
+			<biblScope unit="page" from="771" to="787" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b19">
+	<monogr>
+		<title level="m" type="main">Confusionfow: A modelagnostic visualization for temporal analysis classifer IEEE Transactions on Visualization and Computer Graphics</title>
+		<author>
+			<persName><forename type="first">Andreas</forename><surname>Hinterreiter</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Peter</forename><surname>Ruch</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Holger</forename><surname>Stitz</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Martin</forename><surname>Ennemoser</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jurgen</forename><surname>Bernard</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Hendrik</forename><surname>Strobelt</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Marc</forename><surname>Streit</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2020">2020. 2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b20">
+	<analytic>
+		<title level="a" type="main">Visual analytics in deep learning: An interrogative survey for the next frontiers</title>
+		<author>
+			<persName><forename type="first">Fred</forename><surname>Hohman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Minsuk</forename><surname>Kahng</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Robert</forename><surname>Pienta</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Duen Horng</forename><surname>Chau</surname></persName>
+		</author>
+		<idno type="DOI">10.1109/TVCG.2018.2843369</idno>
+		<ptr target="https://doi.org/10.1109/TVCG.2018.2843369" />
+	</analytic>
+	<monogr>
+		<title level="j">IEEE Transactions on Visualization and Computer Graphics</title>
+		<imprint>
+			<date type="published" when="2018">2018. 2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b21">
+	<analytic>
+		<title level="a" type="main">Summit: Scaling deep learning interpretability by visualizing activation and attribution summarizations</title>
+		<author>
+			<persName><forename type="first">Fred</forename><surname>Hohman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Haekyu</forename><surname>Park</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Caleb</forename><surname>Robinson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Duen Horng Polo</forename><surname>Chau</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">IEEE Transactions on Visualization and Computer Graphics</title>
+		<imprint>
+			<biblScope unit="volume">26</biblScope>
+			<biblScope unit="page" from="1096" to="1106" />
+			<date type="published" when="2019">2019. 2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b22">
+	<monogr>
+		<author>
+			<persName><forename type="first">Sarah</forename><surname>Holland</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ahmed</forename><surname>Hosny</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sarah</forename><surname>Newman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Joshua</forename><surname>Joseph</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kasia</forename><surname>Chmielinski</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:1805.03677</idno>
+		<title level="m">The dataset nutrition label: A framework to drive higher data quality standards</title>
+				<imprint>
+			<date type="published" when="2018">2018. 2018</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b23">
+	<monogr>
+		<title/>
+		<author>
+			<persName><surname>Holoviz</surname></persName>
+		</author>
+		<ptr target="https://panel.holoviz.org/" />
+		<imprint>
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b24">
+	<analytic>
+		<title level="a" type="main">Matplotlib: A 2D graphics environment</title>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">D</forename><surname>Hunter</surname></persName>
+		</author>
+		<idno type="DOI">10.1109/MCSE.2007.55</idno>
+		<ptr target="https://doi.org/10.1109/MCSE.2007.55" />
+	</analytic>
+	<monogr>
+		<title level="j">Computing in Science &amp; Engineering</title>
+		<imprint>
+			<biblScope unit="volume">9</biblScope>
+			<biblScope unit="page" from="90" to="95" />
+			<date type="published" when="2007">2007. 2007</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b25">
+	<monogr>
+		<title level="m" type="main">Collaborative data science. Montreal</title>
+		<ptr target="https://plot.ly" />
+		<imprint>
+			<date type="published" when="2015">2015</date>
+			<publisher>Plotly Technologies Inc</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b26">
+	<monogr>
+		<title/>
+		<author>
+			<persName><surname>Jupyter</surname></persName>
+		</author>
+		<ptr target="https://ipywidgets.readthedocs.io/en/stable/" />
+		<imprint>
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b27">
+	<analytic>
+		<title level="a" type="main">ActiVis: Visual exploration of industry-scale deep neural network models</title>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Minsuk Kahng</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Aditya</forename><surname>Andrews</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Duen Horng Polo</forename><surname>Kalro</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Chau</surname></persName>
+		</author>
+		<idno type="DOI">10.1109/TVCG.2017.2744718</idno>
+		<ptr target="https://doi.org/10.1109/TVCG.2017.2744718" />
+	</analytic>
+	<monogr>
+		<title level="j">IEEE Transactions on Visualization and Computer Graphics</title>
+		<imprint>
+			<biblScope unit="volume">24</biblScope>
+			<biblScope unit="page" from="88" to="97" />
+			<date type="published" when="2018">2018. 2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b28">
+	<analytic>
+		<title level="a" type="main">Visual exploration of machine learning results using data cube analysis</title>
+		<author>
+			<persName><forename type="first">Minsuk</forename><surname>Kahng</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Dezhi</forename><surname>Fang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Duen Horng</forename><surname>Chau</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2939502.2939503</idno>
+		<ptr target="https://doi.org/10.1145/2939502.2939503" />
+	</analytic>
+	<monogr>
+		<title level="m">HILDA 2016 -Proceedings the Workshop on Human-In-the-Loop Data Analytics</title>
+				<imprint>
+			<date type="published" when="2016">2016. 2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b29">
+	<analytic>
+		<title level="a" type="main">The story in the notebook: Exploratory data science using a literate programming tool</title>
+		<author>
+			<persName><forename type="first">Mary</forename><surname>Beth Kery</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Marissa</forename><surname>Radensky</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mahima</forename><surname>Arya</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Bonnie</forename><forename type="middle">E</forename><surname>John</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Brad</forename><forename type="middle">A</forename><surname>Myers</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings the 2018 CHI Conference on Human Factors in Computing Systems</title>
+				<meeting>the 2018 CHI Conference on Human Factors in Computing Systems</meeting>
+		<imprint>
+			<date type="published" when="2018">2018</date>
+			<biblScope unit="page" from="1" to="11" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b30">
+	<analytic>
+		<title level="a" type="main">Kanit Wongsuphasawat, and Kayur Patel. mage: Fluid moves between code and graphical work in computational notebooks</title>
+		<author>
+			<persName><forename type="first">Mary</forename><surname>Beth Kery</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Donghao</forename><surname>Ren</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Fred</forename><surname>Hohman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Dominik</forename><surname>Moritz</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 33rd Annual ACM Symposium on User Interface Software and Technology</title>
+				<meeting>the 33rd Annual ACM Symposium on User Interface Software and Technology</meeting>
+		<imprint>
+			<biblScope unit="page" from="140" to="151" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b31">
+	<analytic>
+		<title level="a" type="main">Jupyter Notebooks -a publishing format for reproducible putational workfows</title>
+		<author>
+			<persName><forename type="first">Thomas</forename><surname>Kluyver</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Benjamin</forename><surname>Ragan-Kelley</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Brian</forename><surname>Pérez</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Matthias</forename><surname>Granger</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jonathan</forename><surname>Bussonnier</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kyle</forename><surname>Frederic</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jessica</forename><surname>Kelley</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jason</forename><surname>Hamrick</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sylvain</forename><surname>Grout</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Paul</forename><surname>Corlay</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Damián</forename><surname>Ivanov</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Avila</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Positioning and Power in Academic Publishing: Players, Agents and Agendas</title>
+				<editor>
+			<persName><forename type="first">F</forename><surname>Loizides</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">B</forename><surname>Schmidt</surname></persName>
+		</editor>
+		<imprint>
+			<publisher>IOS Press</publisher>
+			<date type="published" when="2016">2016</date>
+			<biblScope unit="page" from="87" to="90" />
+		</imprint>
+	</monogr>
+	<note>Safa Abdalla, and Carol Willing</note>
+</biblStruct>
+
+<biblStruct xml:id="b32">
+	<analytic>
+		<title level="a" type="main">Collaborative practices with structured data: Do tools support what users need</title>
+		<author>
+			<persName><forename type="first">Laura</forename><surname>Koesten</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Emilia</forename><surname>Kacprzak</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jeni</forename><surname>Tennison</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Elena</forename><surname>Simperl</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings the 2019 CHI Conference on Human Factors in Computing Systems</title>
+				<meeting>the 2019 CHI Conference on Human Factors in Computing Systems</meeting>
+		<imprint>
+			<date type="published" when="2019">2019</date>
+			<biblScope unit="page" from="1" to="14" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b33">
+	<analytic>
+		<title level="a" type="main">Interacting with predictions: Visual inspection of black-box machine learning models</title>
+		<author>
+			<persName><forename type="first">Josua</forename><surname>Krause</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Adam</forename><surname>Perer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kenney</forename><surname>Ng</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings the 2016 CHI Conference on Human Factors in Computing Systems</title>
+				<meeting>the 2016 CHI Conference on Human Factors in Computing Systems</meeting>
+		<imprint>
+			<date type="published" when="2016">2016</date>
+			<biblScope unit="page" from="5686" to="5697" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b34">
+	<monogr>
+		<title level="m" type="main">Learning multiple layers of features from tiny images</title>
+		<author>
+			<persName><forename type="first">Alex</forename><surname>Krizhevsky</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Geofrey</forename></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2009">2009. 2009</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b35">
+	<analytic>
+		<title level="a" type="main">Lux: Always-on visualization recommendations for exploratory data science</title>
+		<author>
+			<persName><forename type="first">Doris</forename><surname>Jung-Lin Lee</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Dixin</forename><surname>Tang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kunal</forename><surname>Agarwal</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Thyne</forename><surname>Boonmark</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Caitlyn</forename><surname>Chen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jake</forename><surname>Kang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ujjaini</forename><surname>Mukhopadhyay</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jerry</forename><surname>Song</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Micah</forename><surname>Yong</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Marti</forename><forename type="middle">A</forename><surname>Hearst</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Aditya</forename><forename type="middle">G</forename><surname>Parameswaran</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings the VLDB Endowment</title>
+				<meeting>the VLDB Endowment</meeting>
+		<imprint>
+			<date type="published" when="2022">2022. 2022</date>
+			<biblScope unit="volume">15</biblScope>
+			<biblScope unit="page" from="727" to="738" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b36">
+	<monogr>
+		<ptr target="https://www.tableau.com/" />
+		<title level="m">Tableau Software LLC. 2021. Tableau</title>
+				<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b37">
+	<analytic>
+		<title level="a" type="main">Co-designing checklists to understand organizational challenges and opportunities around fairness in ai</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Michael</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Luke</forename><surname>Madaio</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jennifer</forename><forename type="middle">Wortman</forename><surname>Stark</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Hanna</forename><surname>Vaughan</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Wallach</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings the 2020 CHI Conference on Human Factors in Computing Systems</title>
+				<meeting>the 2020 CHI Conference on Human Factors in Computing Systems</meeting>
+		<imprint>
+			<date type="published" when="2020">2020</date>
+			<biblScope unit="page" from="1" to="14" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b38">
+	<analytic>
+		<title level="a" type="main">Data structures for statistical computing in python</title>
+		<author>
+			<persName><forename type="first">Wes</forename><surname>Mckinney</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings the 9th Python in Science Conference</title>
+				<meeting>the 9th Python in Science Conference<address><addrLine>Austin, TX</addrLine></address></meeting>
+		<imprint>
+			<date type="published" when="2010">2010</date>
+			<biblScope unit="volume">445</biblScope>
+			<biblScope unit="page" from="51" to="56" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b39">
+	<analytic>
+		<title level="a" type="main">Model cards for model reporting</title>
+		<author>
+			<persName><forename type="first">Margaret</forename><surname>Mitchell</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Simone</forename><surname>Wu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Andrew</forename><surname>Zaldivar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Parker</forename><surname>Barnes</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Lucy</forename><surname>Vasserman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ben</forename><surname>Hutchinson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Elena</forename><surname>Spitzer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Inioluwa</forename><surname>Deborah</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Timnit</forename><surname>Gebru</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings the Conference on Fairness, Accountability, and Transparency</title>
+				<meeting>the Conference on Fairness, Accountability, and Transparency</meeting>
+		<imprint>
+			<date type="published" when="2019">2019</date>
+			<biblScope unit="page" from="220" to="229" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b40">
+	<analytic>
+		<title level="a" type="main">Hidden stratifcation causes clinically meaningful failures in machine learning for medical imaging</title>
+		<author>
+			<persName><forename type="first">Luke</forename><surname>Oakden-Rayner</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jared</forename><surname>Dunnmon</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Gustavo</forename><surname>Carneiro</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Christopher</forename><surname>Ré</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings the ACM Conference on Health, Inference, and Learning</title>
+				<meeting>the ACM Conference on Health, Inference, and Learning</meeting>
+		<imprint>
+			<date type="published" when="2020">2020</date>
+			<biblScope unit="page" from="151" to="159" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b41">
+	<analytic>
+		<title level="a" type="main">Gestalt: Integrated support for implementation and in machine learning</title>
+		<author>
+			<persName><forename type="first">Kayur</forename><surname>Patel</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Naomi</forename><surname>Bancroft</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Steven</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">James</forename><surname>Drucker</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Fogarty</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Andrew</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">James</forename><surname>Ko</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Landay</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings the 23nd annual ACM Symposium on User Interface Software and Technology</title>
+				<meeting>the 23nd annual ACM Symposium on User Interface Software and Technology</meeting>
+		<imprint>
+			<date type="published" when="2010">2010</date>
+			<biblScope unit="page" from="37" to="46" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b42">
+	<monogr>
+		<title/>
+		<author>
+			<persName><surname>Plotly</surname></persName>
+		</author>
+		<ptr target="https://plotly.com/dash/" />
+		<imprint>
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b43">
+	<analytic>
+		<title level="a" type="main">Squares: Supporting interactive performance analysis for multiclass classifers</title>
+		<author>
+			<persName><forename type="first">Saleema</forename><surname>Donghao Ren</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Bongshin</forename><surname>Amershi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jina</forename><surname>Lee</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jason</forename><forename type="middle">D</forename><surname>Suh</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Williams</surname></persName>
+		</author>
+		<idno type="DOI">10.1109/TVCG.2016.2598828</idno>
+		<ptr target="https://doi.org/10.1109/TVCG.2016.2598828" />
+	</analytic>
+	<monogr>
+		<title level="j">IEEE Transactions on Visualization and Computer Graphics</title>
+		<imprint>
+			<biblScope unit="volume">23</biblScope>
+			<biblScope unit="page" from="61" to="70" />
+			<date type="published" when="2017">2017. 2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b44">
+	<analytic>
+		<title level="a" type="main">What you see is what you can change: Human-centered learning by interactive visualization</title>
+		<author>
+			<persName><forename type="first">Dominik</forename><surname>Sacha</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Michael</forename><surname>Sedlmair</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Leishi</forename><surname>Zhang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>John</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jaakko</forename><surname>Lee</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Daniel</forename><surname>Peltonen</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Weiskopf</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Stephen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Daniel A</forename><surname>North</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Keim</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Neurocomputing</title>
+		<imprint>
+			<biblScope unit="volume">268</biblScope>
+			<biblScope unit="page" from="164" to="175" />
+			<date type="published" when="2017">2017. 2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b45">
+	<analytic>
+		<title level="a" type="main">Reactive vega: A streaming datafow architecture for declarative interactive visualization</title>
+		<author>
+			<persName><forename type="first">Arvind</forename><surname>Satyanarayan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ryan</forename><surname>Russell</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Hofswell</forename></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jefrey</forename></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">IEEE Transactions on Visualization and Computer Graphics</title>
+		<imprint>
+			<biblScope unit="volume">22</biblScope>
+			<biblScope unit="page" from="659" to="668" />
+			<date type="published" when="2015">2015. 2015</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b46">
+	<analytic>
+		<title level="a" type="main">Bridging the gap between ethics and practice: Guidelines for reliable, safe, and trustworthy Human-Centered AI systems</title>
+		<author>
+			<persName><surname>Shneiderman</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">ACM Transactions on Interactive Intelligent Systems</title>
+		<imprint>
+			<biblScope unit="volume">10</biblScope>
+			<biblScope unit="page" from="1" to="31" />
+			<date type="published" when="2020">2020. 2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b47">
+	<monogr>
+		<title level="m" type="main">Notes from the AI frontier: Tackling bias in AI (and in humans)</title>
+		<author>
+			<persName><forename type="first">Jake</forename><surname>Silberg</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">James</forename><surname>Manyika</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2019-06">2019. June 2019. 2019</date>
+			<publisher>McKinsey Global Institute</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b48">
+	<analytic>
+		<title level="a" type="main">Amazon&apos;s face recognition falsely matched 28 members of congress with mugshots</title>
+		<author>
+			<persName><forename type="first">Jacob</forename><surname>Snow</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">American Civil Liberties Union</title>
+		<imprint>
+			<biblScope unit="volume">28</biblScope>
+			<date type="published" when="2018">2018. 2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b49">
+	<analytic>
+		<title level="a" type="main">Institutional ecology,translations&apos; boundary objects: Amateurs and professionals in Berkeley&apos;s Museum of Vertebrate Zoology</title>
+		<author>
+			<persName><forename type="first">Susan</forename><forename type="middle">Leigh</forename><surname>Star</surname></persName>
+		</author>
+		<author>
+			<persName><surname>James R Griesemer</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Social Studies of Science</title>
+		<imprint>
+			<biblScope unit="volume">19</biblScope>
+			<biblScope unit="page" from="387" to="420" />
+			<date type="published" when="1989">1989. 1989</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b50">
+	<analytic>
+		<title level="a" type="main">Seq2seq-Vis: visual debugging tool for sequence-to-sequence models</title>
+		<author>
+			<persName><forename type="first">Hendrik</forename><surname>Strobelt</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sebastian</forename><surname>Gehrmann</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Michael</forename><surname>Behrisch</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Adam</forename><surname>Perer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Hanspeter</forename><surname>Pfster</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Alexander</forename><forename type="middle">M</forename><surname>Rush</surname></persName>
+		</author>
+		<idno type="DOI">10.1109/TVCG.2018.2865044</idno>
+		<ptr target="https://doi.org/10.1109/TVCG.2018.2865044" />
+	</analytic>
+	<monogr>
+		<title level="m">IEEE Transactions on Visualization and Computer Graphics</title>
+				<imprint>
+			<date type="published" when="2019">2019</date>
+			<biblScope unit="volume">25</biblScope>
+			<biblScope unit="page" from="353" to="363" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b51">
+	<analytic>
+		<title level="a" type="main">Altair: Interactive statistical visualizations for python</title>
+		<author>
+			<persName><forename type="first">Jacob</forename><surname>Vanderplas</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Brian</forename><surname>Granger</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jefrey</forename><surname>Heer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Dominik</forename><surname>Moritz</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kanit</forename><surname>Wongsuphasawat</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Arvind</forename><surname>Satyanarayan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Eitan</forename><surname>Lees</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ilia</forename><surname>Timofeev</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Welsh</forename></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Scott</forename><surname>Sievert</surname></persName>
+		</author>
+		<idno type="DOI">10.21105/joss.01057</idno>
+		<ptr target="https://doi.org/10.21105/joss.01057" />
+	</analytic>
+	<monogr>
+		<title level="j">Journal of Open Source Software</title>
+		<imprint>
+			<biblScope unit="volume">3</biblScope>
+			<biblScope unit="page">1057</biblScope>
+			<date type="published" when="2018">2018. 2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b52">
+	<analytic>
+		<title level="a" type="main">The importance of interpretability and visualization in machine learning for applications in medicine and health care</title>
+		<author>
+			<persName><forename type="first">Alfredo</forename><surname>Vellido</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Neural Computing and Applications</title>
+		<imprint>
+			<biblScope unit="volume">32</biblScope>
+			<biblScope unit="page" from="18069" to="18083" />
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b53">
+	<analytic>
+		<title level="a" type="main">REVISE: A tool for measuring and mitigating bias in visual datasets</title>
+		<author>
+			<persName><forename type="first">Arvind</forename><surname>Voila</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Olga</forename><surname>Narayanan</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Russakovsky</surname></persName>
+		</author>
+		<ptr target="https://github.com/voila-dashboards/voilaAngelinaWang" />
+	</analytic>
+	<monogr>
+		<title level="m">European Conference on Computer Vision</title>
+				<imprint>
+			<publisher>Springer</publisher>
+			<date type="published" when="2020">2021. 2020</date>
+			<biblScope unit="page" from="733" to="751" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b54">
+	<analytic>
+		<title level="a" type="main">The what-if tool: Interactive probing of machine learning models</title>
+		<author>
+			<persName><forename type="first">James</forename><surname>Wexler</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mahima</forename><surname>Pushkarna</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Tolga</forename><surname>Bolukbasi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Martin</forename><surname>Wattenberg</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Fernanda</forename><surname>Viegas</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jimbo</forename><surname>Wilson</surname></persName>
+		</author>
+		<idno type="DOI">10.1109/TVCG.2019.2934619</idno>
+		<ptr target="https://doi.org/10.1109/TVCG.2019.2934619" />
+	</analytic>
+	<monogr>
+		<title level="j">IEEE Transactions on Visualization and Computer Graphics</title>
+		<imprint>
+			<biblScope unit="volume">26</biblScope>
+			<biblScope unit="page" from="56" to="65" />
+			<date type="published" when="2020">2020. 2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b55">
+	<monogr>
+		<author>
+			<persName><forename type="first">Benjamin</forename><surname>Wilson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Judy</forename><surname>Hofman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jamie</forename><surname>Morgenstern</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:1902.11097</idno>
+		<title level="m">Predictive inequity in object detection</title>
+				<imprint>
+			<date type="published" when="2019">2019. 2019</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b56">
+	<analytic>
+		<title level="a" type="main">Errudite: Scalable, reproducible, and testable error analysis</title>
+		<author>
+			<persName><forename type="first">Tongshuang</forename><surname>Wu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Marco</forename><surname>Ribeiro</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jefrey</forename><surname>Heer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Daniel</forename><forename type="middle">S</forename><surname>Weld</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings the 57th Annual Meeting of the Association for Computational Linguistics</title>
+				<meeting>the 57th Annual Meeting of the Association for Computational Linguistics</meeting>
+		<imprint>
+			<date type="published" when="2019">2019</date>
+			<biblScope unit="page" from="747" to="763" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b57">
+	<analytic>
+		<title level="a" type="main">B2: Bridging code and interactive visualization in computational notebooks</title>
+		<author>
+			<persName><forename type="first">Yifan</forename><surname>Joseph</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Hellerstein</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Arvind</forename><surname>Satyanarayan</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings the 33rd Annual ACM Symposium on User Interface Software and Technology</title>
+				<meeting>the 33rd Annual ACM Symposium on User Interface Software and Technology</meeting>
+		<imprint>
+			<date type="published" when="2020">2020</date>
+			<biblScope unit="page" from="152" to="165" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b58">
+	<analytic>
+		<title level="a" type="main">Interactive correction of mislabeled training data</title>
+		<author>
+			<persName><forename type="first">Shouxing</forename><surname>Xiang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Xi</forename><surname>Ye</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jiazhi</forename><surname>Xia</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jing</forename><surname>Wu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yang</forename><surname>Chen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Shixia</forename><surname>Liu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">;</forename><surname>Cabrera</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">2019 IEEE Conference on Bäuerle</title>
+				<imprint>
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b59">
+	<analytic>
+		<title/>
+	</analytic>
+	<monogr>
+		<title level="j">Visual Analytics Science and Technology. IEEE</title>
+		<imprint>
+			<biblScope unit="page" from="57" to="68" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b60">
+	<analytic>
+		<title level="a" type="main">Toward a deeper understanding of the role of interaction in information visualization</title>
+		<author>
+			<persName><forename type="first">Ji</forename><forename type="middle">Soo</forename><surname>Yi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Youn</forename><surname>Kang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">John</forename></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Julie</forename><forename type="middle">A</forename><surname>Jacko</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">IEEE Transactions on Visualization and Computer Graphics</title>
+		<imprint>
+			<biblScope unit="volume">6</biblScope>
+			<biblScope unit="page" from="1224" to="1231" />
+			<date type="published" when="2007">2007. 2007</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b61">
+	<analytic>
+		<title level="a" type="main">Machine learning testing: Survey, landscapes and horizons</title>
+		<author>
+			<persName><forename type="first">J M</forename><surname>Zhang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Harman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Ma</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Liu</surname></persName>
+		</author>
+		<idno type="DOI">10.1109/TSE.2019.2962027</idno>
+		<ptr target="https://doi.org/10.1109/TSE.2019.2962027" />
+	</analytic>
+	<monogr>
+		<title level="j">IEEE Transactions on Software Engineering</title>
+		<imprint>
+			<date type="published" when="2020">2020. 2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b62">
+	<analytic>
+		<title level="a" type="main">Knowledge-sharing dilemmas</title>
+		<author>
+			<persName><forename type="first">Ángel</forename><surname>Cabrera</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Elizabeth</forename><forename type="middle">F</forename><surname>Cabrera</surname></persName>
+		</author>
+		<idno type="DOI">10.1177/0170840602235001</idno>
+		<ptr target="https://doi.org/10.1177/0170840602235001" />
+	</analytic>
+	<monogr>
+		<title level="j">Organization Studies</title>
+		<imprint>
+			<biblScope unit="volume">23</biblScope>
+			<biblScope unit="page" from="687" to="710" />
+			<date type="published" when="2002">2002</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+				</listBibl>
+			</div>
+		</back>
+	</text>
+</TEI>

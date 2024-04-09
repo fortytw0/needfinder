@@ -1,0 +1,1353 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xml:space="preserve" xmlns="http://www.tei-c.org/ns/1.0" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.com/kermitt2/grobid/master/grobid-home/schemas/xsd/Grobid.xsd"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+	<teiHeader xml:lang="en">
+		<fileDesc>
+			<titleStmt>
+				<title level="a" type="main">&quot;A Reasonable Thing to Ask For&quot;: Towards a Unified Voice in Privacy Collective Action</title>
+			</titleStmt>
+			<publicationStmt>
+				<publisher/>
+				<availability status="unknown"><licence/></availability>
+			</publicationStmt>
+			<sourceDesc>
+				<biblStruct>
+					<analytic>
+						<author>
+							<persName><forename type="first">Yuxi</forename><surname>Wu</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="institution">Georgia Institute of Technology Atlanta</orgName>
+								<address>
+									<settlement>Georgia</settlement>
+									<country key="US">USA</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">W</forename><forename type="middle">Keith</forename><surname>Edwards</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="institution">Georgia Institute of Technology Atlanta</orgName>
+								<address>
+									<settlement>Georgia</settlement>
+									<country key="US">USA</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Sauvik</forename><surname>Das</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="institution">Georgia Institute of Technology Atlanta</orgName>
+								<address>
+									<settlement>Georgia</settlement>
+									<country key="US">USA</country>
+								</address>
+							</affiliation>
+						</author>
+						<title level="a" type="main">&quot;A Reasonable Thing to Ask For&quot;: Towards a Unified Voice in Privacy Collective Action</title>
+					</analytic>
+					<monogr>
+						<imprint>
+							<date/>
+						</imprint>
+					</monogr>
+					<idno type="DOI">10.1145/3491102.3517467</idno>
+				</biblStruct>
+			</sourceDesc>
+		</fileDesc>
+		<encodingDesc>
+			<appInfo>
+				<application version="0.7.1" ident="GROBID" when="2022-07-22T05:04+0000">
+					<desc>GROBID - A machine learning software for extracting information from scholarly documents</desc>
+					<ref target="https://github.com/kermitt2/grobid"/>
+				</application>
+			</appInfo>
+		</encodingDesc>
+		<profileDesc>
+			<textClass>
+				<keywords>user privacy, collective action</keywords>
+			</textClass>
+			<abstract>
+<div xmlns="http://www.tei-c.org/ns/1.0"><p>People feel concerned, angry, and powerless when subjected to surveillance, data breaches and other privacy-violating experiences with institutions (PVEIs). Collective action may empower groups of people affected by a PVEI to jointly demand redress, but a necessary first step is for the collective to agree on demands. We designed a sensitizing prototype to explore how to shepherd a collective to generate a unified set of demands for redress in response to a triggering PVEI. We found that collectives can converge on highpriority concerns and demands for redress, and that many of their demands indicated preferences for broad reform. We then gathered a panel of security and privacy experts to react to the collective's demands. Experts were dismissive, preferring incremental measures that cleanly mapped onto existing legal structures. We argue this misalignment may help uphold the power chasm between dataharvesting institutions and the individuals whose personal data they monetize.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>CCS CONCEPTS</head><p>• Security and privacy → Social aspects of security and privacy; • Human-centered computing → Social navigation.</p></div>
+			</abstract>
+		</profileDesc>
+	</teiHeader>
+	<text xml:lang="en">
+		<body>
+<div xmlns="http://www.tei-c.org/ns/1.0"><p>Equifax breach <ref type="bibr" target="#b3">[4,</ref><ref type="bibr" target="#b56">58]</ref>. Yet, a 2019 Pew study found that over 80% of adults in the U.S. believed that they had little or no control over the data that corporations and the government collected, and that it was impossible to go through daily life without having data about themselves collected <ref type="bibr" target="#b8">[10]</ref>. This tension-between workaday people's concerns over PVEIs and their perceived lack of agency to effect change-is indicative of a wider power chasm between dataaggregating institutions and the individual users whose data they collect and monetize.</p><p>How might we bridge this power chasm? One strategy that has been effective in other contexts is channeling the frustration of the dis-empowered masses into collective action-i.e., action taken by multiple people in pursuit of the same goal or collective good <ref type="bibr" target="#b37">[38]</ref>-to demand redress. For example, in the Industrial Revolution, workers unionized, unilaterally agreeing to withhold labor from employers, tilting the balance of power toward workers and resulting in basic mainstays of modern society like minimum wages, the two-day weekend, and an 8-hour work day <ref type="bibr">[55]</ref>. Importantly, prior to these worker victories, legal doctrines reinforced employer property rights over the ability of employees to organize <ref type="bibr" target="#b27">[28]</ref>; regulatory efforts to support worker rights only came after sustained, collective effort. In short, history suggests that we cannot rely on existing legal structures alone to effect change in favor of people and at the expense of powerful institutions; a sustained, united public pressure must come first.</p><p>In the context of privacy, there is some evidence that this sort of collective action can work. For example, a 2017 petition signed by California residents was the origin of today's California Consumer Protection Act (CCPA). However, the CCPA was heavily financed and driven by a small team of three individuals; the collective primarily contributed signatures necessary for a ballot measure rather than substantive policy recommendations <ref type="bibr" target="#b7">[9]</ref>. More attempts at privacy collective action have, thus far, fallen short of effecting real change: for example, a Change.org petition responding to the Cambridge Analytica scandal garnered nearly 180,000 signatures <ref type="bibr" target="#b34">[35]</ref>, but did not result in any material redress. Other vectors for expressing collective frustrations similarly result in little material change, e.g., voicing concerns and sharing information about PVEIs on online forums. This discrepancy begs the question: what causes collective action efforts in privacy to fail, and how can we improve their likelihood of success? Shaw et al. <ref type="bibr" target="#b48">[50]</ref> introduced a five-stage model for computersupported collective action (CSCA) that can help diagnose why CSCA efforts fail: many such efforts fail because they skip over requisite stages in the model. These stages include: (1) Identifying a problem; (2) Generating, debating and selecting solutions; <ref type="bibr" target="#b2">(3)</ref> Coordinating and preparing to take action; (4) Taking action; and, (5) Following up, documenting and assessing action taken. Adapting Shaw et al. 's model to the context of online privacy collective action, Das et al. <ref type="bibr" target="#b15">[17]</ref> note that existing CSCA efforts for privacy often skip stage <ref type="bibr" target="#b1">(2)</ref>: after identifying a problem, e.g., the Cambridge-Analytica scandal (stage 1), typically one or a small group of individuals draft a petition and solicit signatures (stage 3). What's missing is a structured gathering, debate and filtering of ideas from the collective that forms around an issue. Consequently, petitions are often not representative of the collective's concerns, nor do they necessarily represent the best ideas of that collective. In this paper, thus, we build upon Das et al. 's vision of privacy collective actionwhat they call Privacy for the People <ref type="bibr" target="#b15">[17]</ref> -by focusing on how we might design a process that facilitates this structured gathering of ideas (stage 2). Specifically, we explore the following two research questions:</p><p>RQ1 Representation. Viral petitions authored by only a few can demotivate those who might not know or trust the original author(s), and can overshadow other ideas that better represent the collective's demands. How can we mobilize collectives to move from amorphous discontent and anger toward specific, representative privacy demands? RQ2 Stewardship. Existing structures to interpret demands into actionable redress (e.g., filing class-action lawsuits, issuing FTC penalties) often require specialized expertise or access. How do privacy experts view the privacy demands generated by a collective, and how might they be effective stewards for the collective in translating their demands into actionable recourse?</p><p>First, to explore the Representation RQ, we designed a sensitizing concept based on Bernstein's Find-Fix-Verify (FFV) crowd programming pattern <ref type="bibr" target="#b10">[12]</ref>. Sensitizing concepts are exemplary artifacts intended to inspire other designers to new possibilities beyond the specific artifact that was created <ref type="bibr" target="#b11">[13]</ref>, and have been employed in HCI research as probes to explore and evaluate futuristic concepts to synthesize new design knowledge <ref type="bibr" target="#b54">[56]</ref>. We implemented our FFV sensitizing concept as a series of questionnaires designed to guide a collective, presented with an emotionally-resonant user account of a PVEI, to (1) find specific privacy concerns demonstrated in the account, <ref type="bibr" target="#b1">(2)</ref> propose concrete fixes for these concerns, and (3) verify that the proposed fixes address emergent concerns, and prioritize the most compelling fixes. We found compelling evidence that participants emotionally connected with strangers' accounts of PVEIs and easily converged on concerns and demands; however, they had trouble articulating concrete demands for redress. Instead, the collective proposed and voted for broad, systemic changes that would be difficult to formalize without significant access and expertisee.g., "data protection laws" and "rethinking the algorithm".</p><p>To address the Stewardship RQ, we asked a panel of security and privacy (S&amp;P) experts to interpret the collective's concerns and demands. Importantly, our goal here was not to prove or disprove that our sensitizing concept "worked" but to uncover insights into how we might solicit expert stewards to help translate the collective's high-level demands into concrete compensatory or punitive requests for recourse. Unexpectedly, we found a strong tension between what the panel deemed to be appropriate responses and what the collective desired. The panel, while sympathetic to the collective's frustrations, tended to dismiss their demands altogether.</p><p>They either preferred highly-specific, one-off penalties unrelated to the collective's demands-e.g., fines and FTC consent decrees-or expressed that the collective's demands were altogether unrealistic. In short, the collective wanted broad, systemic change but did not have the expertise to translate these desires into specific, actionable demands. The panel expressed little desire to steward the collective, and wanted instead to work within existing legal structures to provide one-off relief and/or punishment that was often unrelated to the collective's demands. This disconnect suggests that S&amp;P experts, however well-meaning, may play a role in upholding the power divide between end-users and institutions, and that there is ample room for future work in aligning the desires of non-expert collectives with the knowledge of experts.</p><p>To summarize, in this paper we contribute:</p><p>(1) A sensitizing exploration, modeled after Bernstein et al.'s Find-Fix-Verify <ref type="bibr" target="#b10">[12]</ref>, of how non-expert collectives might generate representative concerns and demands for redress in response to a PVEI. (2) An assessment of how collective-constructed concerns and demands map onto existing existing mechanisms for redress by a panel of S&amp;P experts spanning industry, academia, government, and law. (3) A discussion of how existing mechanisms for privacy reform can be misaligned with end-user desires, along with recommendations for designing privacy collective action platforms that help alleviate this misalignment.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2">BACKGROUND AND RELATED WORK 2.1 User reactions to PVEIs</head><p>There has been extensive prior work documenting users' reactions to a variety of PVEIs, from discovering their information was a part of a data breach <ref type="bibr" target="#b24">[26,</ref><ref type="bibr" target="#b38">39]</ref>, to learning about new regulations in the news, to perceiving output from recommendation algorithms as being too specific or creepy <ref type="bibr" target="#b50">[52]</ref>. A study of the aftermath of the 2017 Equifax data breach illustrated that while people were aware of the risks resulting from this breach, they tended not to take protective actions because they did not know enough about the breach or because it was cost-prohibitive to do so <ref type="bibr" target="#b56">[58]</ref>. A theme in past work is that despite their worry, fear or anger in response to these PVEIs, users tend not to take further action to protect themselves or react to the institution behind the event. Similarly, people tend to reject security advice or adopting S&amp;P behaviors because of stigmas of doing so as being "overkill" <ref type="bibr" target="#b17">[19,</ref><ref type="bibr" target="#b22">24]</ref>, feeling that it was not their job to feel responsible, since they trusted corporations to protect them from outside threats <ref type="bibr" target="#b46">[47]</ref>. This prior work does not speak to users' sense of responsibility for protecting themselves from corporations, however. And, even if people do not feel empowered to protect their own S&amp;P, they feel responsible for others' <ref type="bibr" target="#b14">[16,</ref><ref type="bibr" target="#b18">20]</ref>. In summary, people feel angry and frustrated about PVEIs, but feel powerless to effect change. Yet, people do feel a sense of accountability towards protecting others' S&amp;P. In this paper, we explore whether harnessing this sense of accountability on a collective scale can offset users' learned helplessness.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.2">Pain points of systems supporting (privacy) collective action</head></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.2.1">Existing systems supporting privacy collective action.</head><p>Online petitions, perhaps best exemplified by all-purpose, all-cause websites like Change.org, MoveOn.org and Care2.com, are commonly used for collective action online, but rarely translate to real-world action. Moreover, the types of people who sign these petitions might not be representative of the broader population: less than 5% of users on Change.org accounted for over half of all signatures, and more than 99% of petitions are never marked as "victorious" <ref type="bibr" target="#b30">[31]</ref>.</p><p>In the context of privacy, when people turn to platforms like Change.org to generate petitions to make demands of institutions after PVEIs, there is no guarantee of recourse. For example, at last count, 243,900 people had signed a petition titled "Don't let EQUIFAX escape liability!", addressed to the Federal Trade Commission, demanding that Equifax, in the wake of their 2017 breach <ref type="bibr" target="#b3">[4]</ref>, be forced to "pay for their greed, even if it drives them into dissolution" <ref type="bibr" target="#b2">[3]</ref>. Four years after the event, people are still signing this petition, suggesting that their anger has not abated over time, and that there have still not been adequate amends made toward those affected.</p><p>There is also little productivity on discussion forums directly related to privacy. For example, on the r/privacy subreddit, Reddit users share privacy-related news and seek advice on privacyenhancing behaviors. However, rarely do posts there result in more than a handful of replies, much less users organizing around their privacy grievances toward a particular institution. One promising movement arose in June 2020, where a Reddit user, fed up with being "watched by cops" in the wake of the protests after the murder of George Floyd, started scraping public records to monitor police officers' on-the-job behaviors in retaliation <ref type="bibr">[6,</ref><ref type="bibr" target="#b5">7]</ref>. This user garnered thousands of upvotes and comments of support, launching a new subreddit (r/DataPolice) with 7000 members dedicated to the cause, as well as a Slack workplace with more than 2000 volunteers who wanted to contribute. However, just six months later, r/DataPolice was already bereft of new posts and comments. Those who signed up inquired about progress updates on the cause's work, to little avail.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>2.2.2</head><p>Computer-supported collective action. Why do so many existing collective systems and platforms for enhanced privacy protections fail? A helpful framework for answering this question is Shaw et al.'s computer-supported collective action (CSCA) <ref type="bibr" target="#b48">[50]</ref>. Shaw describes five key patterns of CSCA that computing systems need to address to successfully support collective action-viz., (1) Identifying a problem, (2) Generating, debating, and selecting solutions, (3) Coordinating for action, (4) Taking action, and (5) Following up and assessing action-and claims that failures in CSCA occur not only within these patterns but also in the transitions between them. Das et al. <ref type="bibr" target="#b15">[17]</ref> outline a vision for an end-to-end system -Privacy for the People (PftP) -that spans Shaw et al.'s CSCA framework for the context of privacy collective action, in particular.</p><p>CSCA and PftP can help diagnose why online petitions, specifically those against large data aggregators, often fail. In the Change.org petition against Equifax, for example, after signing a petition and helping bring attention to a problem, signers had no way to collectively decide which of their concerns were most important to present as a united front. Nor could they debate on the exact mechanics of what solutions they wanted from Equifax, much less unilaterally move to a platform that would facilitate this debate or coordinate further action. In other words, the petition failed at the second stage of CSCA and PftP -the gathering and deliberation of ideas from the collective. However, neither CSCA nor PftP directly operationalize how such a structured gathering of ideas might successfully be collected, debated and filtered.</p><p>Our work builds on Shaw et al.'s CSCA and Das et al.'s PftP by operationalizing and evaluating a specific structured process-that we discuss in detail in Section 4-to gather, debate and filter ideas for redress across a broad collective affected by a PVEI. In so doing, we aim to address the lack of buy-in or representation people have in privacy collective action. We also explore the external resources and scaffolding necessary to make such collective action more realizable.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3">EXPLORATORY INTERVIEW STUDY: IDENTIFYING INCITING INCIDENTS</head><p>Our primary goal was to explore how we might design a system that facilitates the second phase of Shaw et al. 's framework for CSCA in the context of privacy collective action -the systematic gathering, refining and selection of compensatory and punitive demands in the wake of an "inciting" PVEI. We leapfrog Phase 1-the proactive identification of a problem and finding others who care-because responding to PVEIs is inherently reactive: collectives, like those who signed the petition demanding Equifax be held accountable for their data breach, naturally form after, e.g., the publicizing of a data breach or a media exposé. Nevertheless, a necessary precursor to Phase 2 is to find an emotionally resonant inciting PVEI that might motivate a collective to act. To find candidate "inciting" PVEIs for our sensitizing design probe, we started with an exploratory interview study to identify emotionally-resonant PVEIs, hypothesizing that PVEI accounts where individuals articulated specific emotional impact and concrete demands for redress would be good candidates for collective action.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.1">Procedure</head><p>We ran semi-structured interviews with 10 participants over the BlueJeans video conferencing tool due to the COVID-19 pandemic. Our procedure was approved by an IRB. Participants were: located in the United States; active users of Internet-based services and devices; and aged between 18 to 44 years old. Half were women, and half were men. Seven had a formal computer science education or career.</p><p>We first asked participants about experiences where a large institution had handled their personal data in a way that was unexpected or violating. Then, we asked about how the institution could remedy the situation. Many participants struggled to envision themselves making demands of the institutions, so we asked them to imagine themselves in a variety of "power roles" relative to the offending institution: (1) The participant was assigned to design a new competitor institution that had all the features, benefits, and social reach of the initial institution, but with the privacy practices that the participant wanted; (2) the participant was part of a classaction lawsuit by a third-party law firm and was asked to make a statement to the institution about their experiences and demands; and, (3) the participant wielded enough power to create legislation or regulation that would force the violating institution to comply. Then, to unpack the emotional resonance of these PVEIs, we asked participants to describe how they felt about the PVEIs by asking them to select five emotional adjectives adapted from the expanded Positive and Negative Affect Schedule (PANAS-X) <ref type="bibr" target="#b52">[54]</ref>.</p><p>Interviews lasted 30 to 60 minutes, depending on how many experiences participants felt comfortable sharing. Participants were paid 10 USD in gift cards. We promoted the study on our personal Facebook and Twitter accounts. Participants were notified in consent forms that their responses would be used to inform future design opportunities relating to user agency over personal data.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.2">Data analysis</head><p>One member of the research team transcribed the contents of the interviews. Then, through repeated discussions involving the entire research team, we performed reflexive thematic analysis <ref type="bibr" target="#b12">[14]</ref> on the interview contents to categorize the types of PVEIs participants reported and the emotional resonance of those experiences. We also noted patterns in the types of power roles that led participants to come up with specific demands against privacy-violating institutions.</p><p>We further evaluated the types of experiences that people reported, as well as the differences in emotional reaction that these experiences elicited. We considered the types of language participants used to talk about themselves in relation to the corporations, as well as what role they felt they could play in the situations. We organized the PANAS-X adjectives they chose to describe their experiences based on the categories outlined in the original PANAS-X manual: fear, hostility, guilt, sadness, joviality, self-assurance, attentiveness, shyness, fatigue, serenity, and surprise <ref type="bibr" target="#b52">[54]</ref>.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.3">Findings</head><p>Participants reported three broad categories of PVEIs: targeting and personalization, data breaches, and surveillance. Targeting and personalization experiences included feeling harmed by perceived reductive profiling, or being "creeped out" by high levels of specificity in targeting. Participants who mentioned data breaches had been victims of a wide range of breaches: e.g., Yahoo <ref type="bibr" target="#b42">[43]</ref>, Equifax <ref type="bibr" target="#b3">[4]</ref> and OPM <ref type="bibr" target="#b40">[41]</ref> Violated data included personal contact information, passwords, credit card data, and financial history. Participant accounts of surveillance included being concerned that Amazon Alexas or Google Homes were listening, or worried that Facebook was surreptitiously using the microphone on their smartphones to record their conversations and target them with ads. We took participants' concerns at face value, and did not attempt to fact check their concerns; our goal, in this phase of our work, was only to derive a sense of which PVEIs could be emotionally-resonant enough to serve as the basis for a collective action effort.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>3.3.1</head><p>Emotional impact of different PVEIs. The PVEIs that participants shared with us spanned a wide, primarily negative emotional range. Notably, data breaches incited particularly high negative emotions in participants; participants reporting these incidents frequently chose words corresponding with fear (e.g., "nervous", "scared") and hostility (e.g., "disgusted", "angry"). One participant, a victim of multiple simultaneous breaches involving the same sensitive information about him, could not identify where threats were coming from, and felt scared for his friends and family.</p><p>Instances of targeting and personalization that had materially, negatively impacted participants' lives and influenced their Internet usage also elicited strong reactions, e.g., "disgusted" and "frightened". One participant noted that her mother was concerned about getting targeted with inappropriate ads for dating websites even though she was happily married; the participant was at a loss for how to explain the situation to her mother, who was less technicallyeducated. On the other hand, those who generally disliked the level of data collection needed to enable targeted advertisements and personalization conceded that they reaped small benefits from it, mirroring previous work <ref type="bibr" target="#b50">[52]</ref>. They chose words like "amazed" or "surprised" to describe their experiences. Even when they chose negative words, participants felt the consequences of the targeting were not severe enough for them to warrant redress, and blamed themselves for not doing or knowing more. One participant admitted, "I would like to be more informed about it. . . I just really haven't been able to do that yet, and I've already given them so much information. "</p><p>Similarly, those who mentioned surveillance were concerned that their smart home device or smartphone was recording audio, but also felt that they could simply disable microphone permissions, turn off the devices, or get rid of the devices. Several participants felt simultaneously "afraid" of the surveillance and "amazed" at how pervasive it was. One participant noted possible malicious intent behind Google offering free Google Home devices-to collect as much home audio data as possible-and said she warned her friends not to redeem the free devices.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>3.3.2</head><p>Conflicting senses of agency. Regardless of the "power role" we asked participants to imagine themselves in, they struggled to make specific demands of institutions. Participants had deeply-ingrained notions that they were themselves to blame, and were concerned about their lack of alternatives. One participant wondered if they were really allowed to feel violated if they had consented: "I guess I am giving my consent when I sign up for a Google account. Like it's all in the fine print. So I almost feel like I shouldn't feel violated because I'm consenting to these things by using a phone." Others felt they should have simply known better and taken better precautions or not consented, but sometimes didn't do so anyway. In response to this phenomenon, one participant remarked, "That cognitive dissonance makes me sad. "</p><p>This is not to say participants felt completely defeated: they often felt responsible for protecting others, and also found solace in sharing their experiences. However, this pressure of social responsibility made them feel both more frustrated and more powerless about the privacy-violating experiences, because they could not help those with less S&amp;P knowledge navigate these experiences. One participant admitted that even though she was not completely knowledgeable about best S&amp;P practices, she still had to take care of her family: "My family kind of relies on me to keep them safe, so I feel a lot of pressure that way. I know that I'm really not the best at this, but I would like to help keep them safe. " So, while participants often felt helpless to effect change as individuals, their senses of solidarity with and accountability to others could present an opportunity for collective action that is triggered from a personal narrative.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4">THE REPRESENTATION RQ: FIND-FIX-VERIFY</head><p>The exploratory interview study helped us learn about the types of PVEIs that might inspire privacy collective action. Given this set of inciting PVEIs, to address the Representation RQ-How can we mobilize collectives to move from amorphous discontent and anger toward specific, representative privacy demands?-we next employed methods from concept-driven design in HCI research <ref type="bibr" target="#b49">[51]</ref>. Specifically, we designed a collective sense-making process as a "sensitizing concept" that envisions one way privacy collectives might transition from an individual's PVEI to collective-synthesized demands for redress. Sensitizing concepts are exemplary artifacts meant to probe a design space and inspire designers to new possibilities in the space <ref type="bibr" target="#b11">[13]</ref>. Importantly, the utility of a sensitizing concept is not the artifact itself, but the synthesis of new design knowledge from the creation and evaluation of that artifact <ref type="bibr" target="#b54">[56]</ref>.</p><p>Prior art in shepherding collectives towards meaningful creative output informs our approach. ConsiderIt <ref type="bibr" target="#b36">[37]</ref>, for example, a platform for supporting public deliberation, surfaces and summarizes pro/con statements from individuals who are broadly for or against an issue up for public debate. However, ConsiderIt is meant to be used in a consultative manner for policy makers and experts, rather than directly represent collectives. Similarly, Lean Privacy Review <ref type="bibr" target="#b33">[34]</ref> collects users' privacy concerns, but is also meant for S&amp;P practitioners to consult.</p><p>In designing WeDo <ref type="bibr" target="#b55">[57]</ref>-a prototype participatory, end-to-end collective action system built on top of Twitter designed to help transition collectives through Shaw et al. 's five phases of collective action-Zhang et al. found that to improve chances of a collective action campaign at succeeding, it was critical to identify and mobilize clear leaders; otherwise, the campaign could stall without clear direction on next steps. Salehi et al. <ref type="bibr">[49]</ref> similarly identified two challenges-stalling and friction-when designing a collective action platform designed to congregate crowd workers into collectives. Stalling entails a loss of momentum: a collective would form around an issue but, without any tension or clarity in driving towards consensus, would quickly disassemble without acting. Friction entails an impasse in which two or more opposing ideas lead to a break down in civil discourse and progress. To overcome these challenges, the authors recommend design considerations that help structure the collective's labor, e.g., setting clear deadlines for consensus, allowing for decisions to move forward with space for undoing if necessary, encouraging reflection and producing hope. Based on this prior art, we concluded that a collective sense-making process must be carefully scaffolded in order to assure productive forward momentum <ref type="bibr">[49]</ref>.</p><p>Our sensitizing concept provides this scaffolding via three online questionnaires presented to users on Prolific, a platform where people can perform Internet-based tasks for monetary compensation. The questionnaires were modeled after Bernstein et al. 's Find-Fix-Verify (FFV) crowd programming pattern <ref type="bibr" target="#b10">[12]</ref>, which presents a distributed crowd with a high-level open-ended task (e.g., shortening a block of text), and funnels individual crowdworkers' attention to smaller sub-tasks that, in aggregate, accomplish the high-level task. Here, the high-level open-ended task was to take an emotionally resonant account of a PVEI and have a distributed collective converge on a set of core privacy concerns and demands for redress. To that end, our three surveys presented participants with an emotionally resonant account of an inciting PVEI, and then participants had to: (1) find concerns they had with the account, (2) propose concrete fixes for these concerns, and (3) verify that the proposed fixes addressed emergent concerns, and prioritize the most compelling of the proposed fixes, respectively.</p><p>FFV simplifies the complex task of asynchronously distilling a unified set of demands from a distributed collective. The three stages are easily translatable to design requirements, each offering different insights about how to support the collective: whether a collective even cares about others' concerns (Find), whether it can understand and provide support for itself (Fix), and whether it can unite (Verify). While other methods like focus groups provide explanatory insights about consensus-making at a small scale, our goal was to uncover insights that would more directly inform the design of a larger scale system. FFV has been shown to be effective at shepherding groups to produce high-quality outputs for openended creative tasks <ref type="bibr" target="#b10">[12]</ref>.</p><p>At the same time, no amount of guided scaffolding can be successful without an unifying motivation. One failure point of privacy petitions previously mentioned is that they are ad-hoc, or only responsive to immediate events like a singular data breach; such actions tap into a collective identity of all being part of the same breach. However, a given user has been affected by multiple breaches, violating feelings from targeted advertising, and experiences of unwanted surveillance, and they connect to and support each other by sharing these experiences with each other <ref type="bibr" target="#b16">[18,</ref><ref type="bibr" target="#b43">44]</ref>. Users experience unique combinations of PVEIs, the overlaps of which create an even bigger base for collective action. Thus, in the case of end-user privacy, we believe that tapping into collective empathy with other users' personal related experiences, via Bennett and Segerberg's connective action <ref type="bibr" target="#b9">[11]</ref>, is more imperative as a motivation than membership in a single data breach's class of victims.</p><p>In this section, we will examine the results from each phase of our FFV concept, which will help address RQ1. Specifically, we split the problem into two sub-questions:</p><p>• RQ1.1: How do people empathize with and relate to others' PVEIs? • RQ1.2: What external stewardship is necessary to guide collectives toward concrete demands for redress?</p><p>Answering RQ1.1 (Empathy) will shed light on whether an emotionally-resonant inciting PVEI can motivate someone to substantively contribute to a collective effort. Answering RQ1.2 (Scaffolding) will unpack the potential design requirements of an effective platform for orchestrating collectives into jointly composing privacy concerns and demands in response to an inciting PVEI.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.1">Recruitment and overall procedure</head><p>For our FFV sensitizing concept, we picked three PVEI accounts from our exploratory interviews that had the strongest emotional resonance with our participants, hypothesizing that these accounts would be more likely to elicit empathic reactions from the collective. The accounts we selected reflected reactions to specific violations, rather than general opinions on phenomena like the "creepiness" of audio recording or aggregate data collection. The interview participants who provided these three accounts gave high levels of detail in their answers about what specifically made them uncomfortable, and how they wished institutions had responded. Each scenario was comprised of direct quotes from respective individual participant accounts, edited for brevity.</p><p>At each phase, FFV participants were assigned to read one of the three PVEI accounts (henceforth known as either the Equifax data breach scenario, the Instagram profiling scenario, or OPM data breach scenario, respectively). The author of the Equifax data breach scenario described his experience of finding out he was affected by the breach <ref type="bibr" target="#b3">[4]</ref> by checking Equifax's online tool, relaying his frustration at the one year of credit monitoring and small settlement payment Equifax offered in response. The author of the Instagram profiling scenario described seeing recommended posts on Instagram based on perceived profiling of his identity as a gay man, and expressed discomfort with this reductionist targeting. The author of the OPM data breach scenario described how he felt confused and alone when he found out he was affected by the breach [1, 41], and how he wished there had been more direct followup from OPM (the U.S. Office of Personnel Management, which manages the employment data of all federal government employees). The full text of the three accounts that we chose can be found in the appendices.</p><p>Following the original Find-Fix-Verify design <ref type="bibr" target="#b10">[12]</ref>, participants were split into three independent groups across the phases. As with the crowd-powered text-processing system, Soylent, for which the FFV design pattern was originally developed, we felt that differing effort levels in participants could yield incomplete coverage of the concerns in the accounts. Thus, recruiting independent groups for each of the three phases allowed us to limit the amount of effort required from any individual contributor. (For example, if Find and Fix were combined, participants might simply choose concerns that they felt were easiest to address, rather than ones they felt were most concerning.) Recruiting three independent groups could also ensure participation from a greater number and diversity of voices from the collective, and the separate Verify participant pool also provides an independent verification of the best fixes.</p><p>Each phase consisted of a short online questionnaire, each of which we will detail in the following subsection. A diagram showing the overall flow of the FFV process is found in Figure <ref type="figure" target="#fig_0">1</ref>. We recruited three sets of participants (200 for the Find phase, 100 for Fix, and 100 for Verify) on Prolific. Participants were over the age of 18, located in the United States, fluent in English, and active users of Internet-based services like social media, a smartphone, or a smart home device. For each phase, participants took part in a short questionnaire hosted on Qualtrics, taking on average 5 minutes, for which they were compensated 1. <ref type="bibr" target="#b48">50</ref>  We parsed the text responses from each phase manually. To minimize researcher guidance and best mimic the hands-off nature of such a platform in the real world, we did not edit or paraphrase any concern or solution statements. We uncovered emergent patterns in each of the phases through thematic analysis <ref type="bibr" target="#b13">[15]</ref>.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.2">Phase procedures</head><p>In the Find phase, participants were asked to first express their emotional reaction to reading their assigned scenario by selecting two of Ekman's six emotions <ref type="bibr" target="#b20">[22]</ref>-afraid, angry, disgusted, sad, happy, surprised-and explaining why they had chosen those emotions. We presented this question as a space for participants to first vent any feelings or biases directed toward the institutions themselves. Afterwards, we asked participants to identify two specific concerns from the passage that they found most concerning, and explain why.</p><p>In the Fix phase, after reading their assigned scenarios, participants were randomly presented with five concern statements (parsed from the previous stage and respective to their assigned scenario). They were then asked to pick two that they felt should be prioritized. In pilot studies, we found that participants interpreted "prioritize" to mean whatever resonated most with them. Then, for each of the two concerns they chose, we asked participants to pick one entity-out of (a) the offending institution, (b) other people who had been affected by a similar experience, (c) a government agency or regulatory body, or (d) another third party like a law firm or advocacy group-that they felt could take action to address the concern. We then asked them to detail what actions they believed this entity should take. This simplified categorizing participants' responses, and also guided them into thinking about parties outside of only those in the passage they read. Since we also wanted to know about how users viewed their agency in these scenarios, we also asked participants how they felt after completing the survey.</p><p>Finally, in the Verify phase, we carried forward only concerns from the fix phase that had actions where participants had chosen the three entities with the most votes to take action. To further streamline convergence on a few concerns and recommended actions, we restricted the concerns (and corresponding actions) to only those that had gotten at least two votes. This resulted in five to 10 concerns and 10 to 20 actions per scenario. After reading their assigned scenario, participants were, similar to the fix phase, randomly presented with five concerns and asked to choose the two they felt should be prioritized. For each of the concerns they In the Find phase, a set of 200 participants identified concerns they had with a PVEI. In the Fix phase, another set of 100 participants picked the most pressing concerns and proposed demands to address them. In the Verify phase, a third set of 100 participants picked the most pressing remaining concerns, and ranked the corresponding demands from the previous phase. picked, we showed them all of the respective actions that fix-phase participants had authored and asked our verify-stage participants to rank-order the proposed fixes. We asked participants to keep in mind three criteria for ranking: (1) specificity, i.e., whether the action included specific tasks or steps for the entity to take; (2) effectiveness, i.e., how well the action addresses the concern; and (3) desirability, i.e., how much the participant personally wanted the action to be implemented. Equifax data breach concerns. Participants expressed strong disappointment and dismay at the lack of adequate compensation, remediation, and general effort on Equifax's part. Many strongly empathized with the original author's perceptions of being neglected and brushed aside. Participants felt that a year of free credit monitoring offered by Equifax to those affected by the leak was inadequate, as was the class action lump sum payment, and also made value judgments about Equifax's perceived priorities. One participant said, for example: "Nobody really cared about what happened; [Equifax] couldn't be bothered to actually take the time to properly structure payout and examine the issue. It was just a large chunk of money which, honestly, doesn't even really hurt these large corporations all that much. "</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.3">Find: Aggregating user concerns</head><p>Instagram profiling concerns. Participants expressed confusion about Instagram's recommendation algorithm, as well as a lack of control over the posts they saw. Some tried to guess at the mechanisms of the recommendation algorithm, remarking on their perceived problems with how the algorithm works: "The user is not putting every post using the hashtag 'gay' or anything related. Yet the recommended posts do not reflect what hashtags the account primarily uses. " This is not to say that participant conceptions of the Instagram recommendation algorithm were accurate, but rather that the perceived outcome drew negative reactions. Outside of algorithmic concerns, participants also worried about the possibility of context collapse-i.e., how different social contexts like the personal the professional blur together in online environments <ref type="bibr" target="#b19">[21]</ref>-when accidentally displaying not-safe-for-work photos in a work environment. They noted that this experience could restrict how the original author uses Instagram: "This limits when the user can use the application because it may show a NSFW post that he doesn't want someone to think he is looking at [in the workplace]. "</p><p>OPM data breach concerns. While the OPM and Equifax scenarios were similar in that participants felt the punishment for OPM was insufficient, several participants directly cited OPM's status as a governmental agency, holding OPM to a higher standard of security and transparency: "You would think that a government agency would be more equipped and transparent about things that could compromise safety and livelihood. " They also worried that the government could not be held accountable: "The lack of given by a government entity always makes me uncomfortable, because ultimately they are unaccountable to anyone and their actions are hardly scrutinized with any consequence. "</p><p>Findings. Concerns raised in phase were abundant but similar, suggesting that a collective could empathize with an inciting PVEI and rally around common concerns. We found initial answers to both RQ1 sub-questions.</p><p>RQ1.1 Empathy. The strong emotional language participants used to detail their concerns, plus their relation of the accounts to their own experiences, suggests that participants could strongly empathize with accounts of inciting PVEIs.</p><p>For example, participants assigned the Equifax scenario felt anfor the original author and were reminded of their own anger Equifax as a result of the breach. Many strongly empathized with the original author's perceptions of being neglected: a Credit monitoring? This is a company that does not care about people." Some also worried of becoming habituated to learning about data breaches like the Equifax one. For example, one particisaid, "Honestly, I had almost forgotten about the Equifax thing I read this, which sort of scares me too. Large institutions are able to get away with near criminal behavior and we as a public just tend to brush it off after a few years. "</p><p>Participants similarly related the Instagram scenario to their lives, e.g., feeling "frustrated on behalf of a gay friend who uses Instagram". Several directly mentioned the harmful nature of certain stereotypes about gay men: "As someone who's well acquainted with multiple members of the LGBT community, I fully recognize the that all gay people are driven by sexual desires, and that's exactly what Instagram is perpetuating here.... Instagram's algorithm labeled him as 'GAY' and shoved pictures of shirtless men at him. "</p><p>Those assigned the OPM scenario empathized more broadly with the author's feelings of loneliness and confusion in the middle of interpreting legal documents without help, generalizing the author's experiences to other data breaches. One participant related, so many notices over the years about my info being stolen from and there's never any follow-up. Literally never. Is my being sold on the dark web? Did they track down the thief? Did at least improve their security practices? Who the hell knows." Participants also opined about the burden of reacting to a data breach, echoing past work <ref type="bibr" target="#b28">[29]</ref>: "Individuals are left in these situawhere they are given a kind of impossible task. Sure, you can protect yourself, if you have hours and hours of your private time to spend reading fine print, and understanding complex legal things, and sitting on hold and getting transferred, and still not really getting answers. "</p><p>RQ1.2 Scaffolding. There were hints of an answer to RQ1.2 in this phase. Participants often generalized specific concerns into broader statements about the power that institutions have to come out unscathed after negative events. No additional researcher input was necessary to guide participants into these responses, because the scenarios were emotionally resonant in and of themselves. Howdue to the number of concerns brought up-two per participant, 400 total-the next challenge the collective would need to overcome would be converging on a shortlist of actionable priori-4.4 Fix: Proposing demands to concerns 4.4.1 Collective output. Free-text responses from this phase were noticeably less impassioned and detailed than the previous phase. The level of detail in the actions that participants authored also dependent on both which scenario they were assigned and which entity they chose to take action. We also found the entities that most participants believed should take action for each scenario. 51.5% of participants assigned the Equifax scenario believed governmental agency or regulatory body should take action to address the concern; 63.2% assigned the Instagram scenario believed Instagram, itself, should do something; and 51.6% of participants assigned the OPM scenario believed OPM, itself, should act.</p><p>Equifax data breach scenario. Even though a majority of wanted a governmental agency or regulatory body to take the level of specificity in the actions they wrote was low. A large number of people who chose a government action came up with general phrases like "Policies, fines", "Data protection laws", or "Anything that would punish Equifax for what was done"; very described what kind of regulation specifically. On the other hand, participants who chose Equifax to act were very detailed about what they wanted from Equifax. For example, one particiwanted Equifax "to be responsible for any and all identity thefts the next 5 years as well as total cooperation and customer service and complete ownership of the problem. oh and any money made my information goes directly to me as well as a promise that any information sold equals a fine (paid also to the victim) of 50,000 " Instagram profiling scenario. a large majority of participants wanted action from Instagram itself, the specificity of participants' recommended actions varied depending on the concern rather than the entity. Those who prioritized the aforementioned context collapse problem overwhelmingly wanted Instagram to implement an end-user toggle for displaying NSFW photos. Meanwhile, participants concerned with reductive inferences or a conalgorithm tended to provide less specific responses. Several participants wanted Instagram to "fix/update/reconfigure/revamp their algorithm". A significant minority of participants chose anywho'd been affected by a similar experience as the entity that should take action, urging those affected to "petition other parties the service being used to not be reduced to a gay person, as their lived experiences may have more sway than a bunch of individual complaints. "</p><p>OPM data breach scenario. defined OPM itself and the enof "governmental agencies or regulatory bodies" to be distinct, even though OPM is a governmental agency itself. One participant wrote extensively that they wanted another governmental "To fully investigate the breach, publish the investigation in understood prose, and follow up with every individual who had personal information compromised. The follow up should include how the breach occurred and how it's being corrected, well as very specific information on how the breach could affect the individual and steps to take if it did (such as fraudulent charges, social security number, etc) so that the affected individuals have a starting place to fix their lives and Broadly, participants kept in mind the long term of the OPM breach. One participant mused, "If they someone in this position, it's their responsibility to make sure it doesn't have catastrophic effects. The leak may be brief, but people can easily hold onto the info for later use. "</p><p>4.4.2 Findings. RQ1.1 Empathy. We uncovered three themes in how participants felt after proposing fixes to emergent concerns: heightened greater alertness about the concerns raised, and resignation at the chance to voice their demands. Several participants felt frustrated that their contributions would be fruitless. For example, one participant said they felt "like nothing is going to the problem is bigger than one company and some data mining. It's difficult to say there should be government oversight when all know the government doing the exact same thing and we're most likely vulnerable there, too. " Similarly, another participant said they felt "more outraged? I feel like, I just realized that they #1 made money me (they should give it to me), #2 they don't have to help with the fact that they ruined my life (they should take care me), and they still didn't come clean do it again there should be a fine.)" felt that their participation reintroduced previous concerns highlighted in the inciting PVEI. For example, one participant "I feel a bit better [about contributing a demand], but the guy that had his information leaked was right. I totally forgot about the equifax thing until I read that [the inciting PVEI] again." noted after completing the fix phase, feel like I got the chance to better organize my opinion on these concerns and have a more solid stance on the issue. " Others felt more empowered: "I feel that I ought to get more involved in local politics to express my views more freely. "</p><p>were not completely satisfied, though: "I feel a little bit that I got [my opinion] out, but I would prefer to see actions to this being taken/being held accountable before I let this issue go to rest. "</p><p>Even without being asked about the likelihood that their demands would be realized, though, participants felt pessimistic about their prospects. As one participant said, feel like my opinions were and easily executable but will not bear any weight on how actually treat breaches." In other words, some particifelt that: (i) powerful institutions that have the ability to effect will not listen; and, (ii) that they, themselves, have no power against these institutions. This belief, in turn, could have a negative motivational effect on their participation.</p><p>RQ1.2 Scaffolding. In a naive reading of the question, our strict rules for advancing concerns and demands to specific entities easily drilled down on numerically fewer concerns and demands. And were indeed specific entities that participants wanted to take action more than others: for the Equifax data breach, a government agency or regulatory body; for the Instagram profiling scenario, Instagram itself; and for the OPM data breach, OPM itself. Carrying forward only the concerns and demands that (1) involved these respectively and (2) had been picked by at least two participants sufficiently reduced the number of choices to a manageable amount for the next stage's participants. A limitation of this approach is that participants in the verify phase would only see a of proposed fixes. The best proposed fixes might not always associated with the most popular entity of whom the collective wishes to make demands. However, without prioritization, the colattention would be spread too thin. We elected to prioritize popularity so that the process could be, in theory, entirely self-contained, deterministic, and not requiring moderator input.</p><p>Content-wise, participants were better at providing detailed actions for Equifax and OPM to take, such as specifying exact amounts for compensation or step-by-step timelines for them to communiwith people affected in the breaches. On the other hand, they struggled to generalize these demands into regulations that would scenarios like the inciting PVEI from recurring in the future, because average users do not have extensive knowledge of what could go into S&amp;P regulations. In the same vein, participants might be good at identifying themes of concern-take, for example, participants in the Instagram profiling scenario wanting Instagram to "modify their algorithm"-but may require expert stewardship translate these desires into actionable demands.</p><p>4.5 Verify: prioritizing demands 4.5.1 Collective output. For each scenario, we gathered the two that received the highest share of votes, as well as the two top-ranked actions for those concerns. Complete results are in 2. For the Equifax data breach scenario, participants were most concerned with a lack of existing regulation that could hold Equifax accountable and prevent similar future incidents at other institutions. To address this, participants wanted legislation in place that would set security standards, harsher punishment for Equifax to pay more in reparations to those affected, along with investigations who was involved with and responsible for the breach. For the Instagram profiling scenario, participants most disliked the lack of transparency around Instagram's recommendation algorithms. Participants wanted Instagram to update their algorithm to better their expectations: specifically, basing recommendations on what a user posts rather than inferences about their identity. They also wanted a formal apology from Instagram. In response to the OPM data breach scenario, participants prioritized clear communication from OPM, and were concerned that the author of the account did not know what specifically had been "messed with. " To address these concerns, they wanted explicit disclosures about the nature and extent of the data breach, detailed plans for compensation, and general transparency from OPM.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.5.2">Findings.</head><p>In this phase, we did not solicit answers from participants about their emotional motivation, but rather aimed to converge on the most popular demands, i.e., answering (Scaffolding).</p><p>We started from 400 concerns across the three scenarios. Fixphase participants assigned accountable entities and demands to these concerns. We first isolated only concerns from the most popular entities, resulting in 110 concerns and demands; we further advanced only concerns that had at the 23 concerns and 49 demands in the verify phase. Verify-phase participants then condensed these further into 6 concerns and 12 demands. The collective effectively synthesized a total of 400 condown to six. (Again, a diagram of this FFV process can be in Figure <ref type="figure" target="#fig_0">1</ref>.) Since participants were faced with a limited set Wu et al.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Concern Rank 1 Solution Rank 2 Solution</head><p>Equifax can a company continue operation as after such a security event? How does our legislation let something as serious as its citizens' identities being leaked pass without reform? I feel the entire situation described was a high level case lunacy, and I feel I'm probably not the only one who feels that way. " "Regulations and legislation addressing the larger issues that allowed the breach and mistreatment of customers to happen in the first place. Coming down hard on Equifax and requiring them to increase security and paying to those they harmed. "</p><p>would want to see an investigation into the persons who perpetrated the act as well as the security measures that should have been taken. I would like to know why the data wasn't so secure. " was no clarity on what has changed to prevent the same thing happening in the future, so this will continue to happen and we will suffor it. "</p><p>want the government to try to set better standards and regulations to prevent something like this happening again and to minimize the damage if it happens again" and/or regulations to prevent this type of data breach from happening again. " Instagram directly opposes the idea of an algorithm that Instagram uses to recommend posts. Logically, if most of his posts are about baking and cooking, that would be what his recommendations fill up with. However, the recommended posts have nothing to do with that. " their supposed algorithms so that recommended posts are related to most of the content posted by the person. " on their algorithm and address why this is happening with a formal apology" "I would guess there is an algorithm to blame. But one should have to deal with that reducof identity. "</p><p>"I would like them to make sure the algorithm is fixed to work better and see if they are reor the consumer. Being more transparent about how the algorithm works could help. "</p><p>would want them to improve their algorithm so that this does not continue to happen to this man, or anyone else. " would want OPM to be thorough and transin their communications. It is their responsibility to inform the people affected with pertinent information" employer should be mandated by law to make specific disclosures about the nature and extent of the data breach and should be required to pay for an independent review of its IT security policy and procedures" a large data breach like this, I would expect the company to detail out to all users of their service how they have updated their security protocols, and how they plan on making things right and better for me and the pain that I was sent through because of their mistake. " would be detailing out all of their mistakes and processes to rectify these mistakes. Detailing plans for compensation and timeline for this. Additional regulatory process in place that would catch future issues like this. " would want OPM to revise their data security and communicate any changes to all customers. They owe people an apology and a better compensation that the 5 year protection plan that people didn't ask for. "</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>2:</head><p>The final output of concerns and demands voted on by participants in the Verify phase. choices, they could converge on a small set of popular concerns and demands. Both the most popular concerns and most popular from the end of this stage were specific and impassioned. we did not solicit any free-text responses from participants in this phase, we can surmise that participants heeded our instructions and took into consideration the specificity, effectiveness, and desirability of the demands based on the demands they ultimately selected. Indeed, demands containing low-effort text such as "Investigations and policies to prevent" (Equifax data breach scenario), "Improve their software" (Instagram profiling scenario), and "Be (OPM data breach scenario) did not receive many votes. Overall, the compensatory demands that participants selected the desire for broad, systemic changes but were low on implementation details. Indeed, participants wanted regulatory reform or algorithmic changes, but, unsurprisingly, could not (or did not) specifically articulate what would would go into these regulations or what changes to make. Note that this lack of specificity be because of the lack of expert knowledge, but it could also because we recruited participants to complete a short compensurvey. In practice, self-motivated, self-organized collectives also be more motivated to be detailed in their responses. Still, bridge this gap, we might consider enrolling S&amp;P experts to act stewards for the collective-i.e., to interpret or translate the collective's into actionable steps for the real world. We explore this possibility with an expert panel.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5">THE STEWARDSHIP RQ: EXPERT PANEL</head><p>Participants who used our FFV prototype, henceforth known as "participants" "the collective", converged on a few salient concerns and demands for redress. However, to effect real change, these demands must be presented clearly to the institutions accountable for compensatory action (be it a regulatory body or the offending institution itself). Our next research question (RQ2), thus, on understanding the role of experts in representing and guiding the collective: How do privacy experts view the privacy demands generated by a collective, and how might they be effective stewards for the collective in translating their demands into actionable recourse? To answer this question, we asked a panel of security and privacy (S&amp;P) experts to evaluate the collective's top-ranked concerns and solutions.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.1">Procedure and recruitment</head><p>We recruited eight non-compensated experts in privacy and security whose expertise and experience academia, government, law, and industry, by reaching out to them directly through Twitter, and LinkedIn. We reached out to five more experts, but, as might be expected, many experts were and unable to commit. Demographic details of those who participated are found Table <ref type="table" target="#tab_1">3</ref>. All experts had completed at least a bachelor's degree in computer science, and all were based in the United States.</p><p>Three experts participated in a 30-minute interview conducted BlueJeans, and five filled out a survey of free-text responses on Qualtrics. We offered all experts the opportunity parin the interview, but most preferred the asynchronous questionnaire. Experts were assigned the set of top-ranked demands from Table <ref type="table">2</ref> for the scenario most closely aligned with their pertise and asked to translate those demands into tangible tasks entities in the real world, as well as assess the impact of these They were also asked if they agreed with the rankings that the verify-phase participants had decided on, and whether they thought there were more appropriate solutions. </p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Findings</head><p>responses can be broken down into two themes: (i) alignment (ii) misalignment between experts and the collective. First, both and the collective recognized the harmful effects of the described in the three scenarios: for the most part, experts with the collective's sense of helplessness, even if they more informed about the technicalities behind data breaches and algorithmic personalization. Second, experts dismissed the punitive demands our participants wanted offending institutions to take. For example, experts felt that quantifying harm and attributing blame in these scenarios would be difficult and unrealistic, and that the collective-generated demands could result in unintended negative consequences.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.2.1">Expert-collective</head><p>The panel agreed that several participant concerns and demands were pressing address and appropriate to enact, respectively.</p><p>For the Equifax scenario, while of the panel felt that generlaws and regulations would be too slow to implement, felt that FTC consent decrees, where an institution would be legally to abide by certain terms and regulations or pay a heavy penalty, could help ensure good behavior from the institution for a set period of time. Some agreed that setting federal-level legal standards security best practices and strict punishments for noncompliance would help prevent this from happening in the future. Other experts were less optimistic that these standards could be established in a manner that benefits consumers: meaningful regulatory reform is unlikely to happen as long the interest of policymakers and corporate are deeply intertwined. " The Instagram profiling scenario drew mixed reactions across panel. While they largely agreed that the experience that the author of the account had was unfortunate, the panel also expressed that it was unlikely to be intentional on Instagram's part and tried guess at possible explanations that led to the PVEI described in the scenario. E4 surmised that while the author might not search for pictures of half-naked gay men himself, Instagram might infer that his identity is similar on average to other people who do want this behavior. E1 was curious if the author had searched for these once but had simply forgotten. The OPM data breach also drew mixed reactions. E1, who was also affected in the same breach, suggested that all of the solutions that people were demanding from OPM-transparent communications about who is affected, plans for compensation, strategies for rectifying the mistake-had likely already been implemented.</p><p>argued that it the responsibility of the author of the inciting PVEI to keep up-to-date with the communications that OPM sent out in the aftermath. E2 rebutted: information might but people are not necessarily seeking it out, or it's not directly presented to them in ways that are actually meaningful to them. I'm there's like a 50-page report out there about what went wrong, but most people won't see that or look at that. " stewards may be helpful, thus, in not just refining demands but also in pointing collectives towards sources of information that may help address their concerns.</p><p>In the panel sympathized with the powerlessness that the collective felt with regard to the two data breach scenarios. E2 mentioned that because Equifax did not require consumer consent collect their data, and it impossible for federal employees to avoid interacting with OPM, people could not speak out or demand more transparency from either institution. added, "OPM is basically your employer or entity that manages your employee data. what are you going to because of this breach? It's like they have a heightened interest in being more transparent or forthright. " E7 suggested that users could file complaints with the FTC, but admitted that this was only for the "highly motivated... I that's a lot of burden on consumers when they already have limited time and emotional distress to deal with, but unfortunately, that's the reality we need to work with. " 5.2.2 Expert-collective misalignment: Unknown harms and uninconsequences. While experts were sympathetic to the collective's anger and frustration, they also dismissed the collectivegenerated demands as infeasible or having the potential to cause unintended negative effects. For example, one peripheral demand both the Equifax and OPM breaches was providing compensation for victims. Experts felt that calculating a specific amount to pay in damages would be difficult: from a legal standpoint, compensation must be commensurate with tangible, proven harm, but extent of the harm caused by both breaches is both unknown and ongoing. Experts also felt it would be too difficult to attribute harm that victims endured directly to Equifax or OPM because the breach happened due to negligence and not malicious intent. Similarly, in the Instagram scenario, experts noted that because there was no evidence Instagram directly intended to make the author of the account feel targeted or marginalized, there was little to be had. The panel also noted that collective-requested solutions may have undesirable and unintended consequences. For example, in Instagram profiling scenario, FFV participants wanted a "formal apology" from Instagram to the author of the account. The panel felt that there were a things that could inhibit Instagram from doing so: (1) There would have to be a specific line of communication between Instagram and the author; (2) would have to issue equivalent apologies every time something this happened. offered a worst case formal apology solution: to up with all the feedback and adverse effects of algorithmic profiling, Instagram might even resort to algorithmically predicting ahead of time if users will negatively react to a targeted post.</p><p>The collective also wanted Instagram to modify their algorithm to recommend posts only based on what users post, rather than based on Instagram's inferences of user identities. E4 felt that this could have negative effects: "What people like to read and people like to post are very, very different. Doing this <ref type="bibr">[solution]</ref> means I am limited to seeing the things I can talk about. I think this be a pretty dangerous thing. But on a more innocuous level, I like read recipes, but I don't like to post them because nobody wants to eat my food." E8 added that even if such changes could work, their effects would not be permanent: "Realistically, those algorithms are tuned for and if proposed changes would result in a in that metric I'd expect that, over time, the same issue would resurface again. " E5 said bluntly, "I am not quite sure how willing a designer will be to so drastically modify their ".</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.2.3">Summary.</head><p>Our for understanding the role of experts in guiding the The expert panel empathized with the collective's frustration and desire broad change, but only dismissed demands as unrealistic rather than conceive of alternative approaches that might still capture the spirit of participants' demands. We hypothesize that this dismissal was partially due to the panel's depth of knowledge about the existing legal and technical structures that could be utilized to change: the panel discussed how realizing collective demands would be difficult to implement (e.g., quantifying harm for reparations) or could have negative consequences (e.g., facilitating filter bubbles). Instead, the panel tended to favor incremental reform or punitive measures compatible with existing legal structures or even inaction, in spite of the emotionally resonant frustration underlying concerns with the inciting PVEIs. Indeed, we observed panel defending the offending institution and/or absolving it responsibility owing to a presumption of good intentions. This between people and experts could contribute to peoimpression that they are unable to effect change, despite their privacy concerns <ref type="bibr" target="#b8">[10]</ref>.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="6">DISCUSSION</head><p>there is a wide power chasm between individuals and the harvesting institutions who collect, process and monetize their personal data. With our FFV sensitizing concept, we envisioned a future in which people can come together with one unifying voice to demand change when these institutions commit egregious privacy violations. Such a future is not necessarily far-fetched: as we found in our evaluation of our concept, a collective can empathize and advocate for strangers and rapidly converge on a small set of and compensatory action; however, they require expert stewardship to translate their desires for broad, systemic change into actionable steps. On the other hand, S&amp;P experts, while sympathetic to the sentiment of the collective, were generally pessimistic the collective's desire for systemic change. They preferred, instead, working within the system for incremental reform.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="6.1">Towards a platform that facilitates grassroots privacy collective action</head><p>Prior work by Shaw has unpacked models of online collective action and proposed stages of computer-supported collective action (CSCA) that align with our findings. Our artifact focuses primarily the second stage-Generate and debate ideas-of Shaw's model, but also speaks to the first stage-Identifying a problem. However, are still three other phases in the model: coordinating and preparing to take action, actually taking the action, and reflection the action is taken. Das et al. scoped out a vision for future work spanning all the CSCA phases in the context of end-user <ref type="bibr" target="#b15">[17]</ref>, and Vincent et al. proposed a framework for some of the types of actions that users can take as leverage against privacyviolating institutions <ref type="bibr" target="#b51">[53]</ref>. Some tools for facilitating subversive collective action already exist, but are not yet directly integrated into broader, coordinated efforts: e.g., AdNauseum <ref type="bibr" target="#b29">[30]</ref> aims to protect users from tracking advertisers by silently clicking on blocked ads to send noisy data back to advertisers; similarly, TrackMeNot sends "ghost queries" to search engines to obfuscate users' actual searches <ref type="bibr" target="#b41">[42]</ref>. We thus envision a rich future design landscape that includes systems or processes that help people coorin a more sophisticated manner than a series of surveys; that people to effectively take leveraging action against PVEIs; and that clearly communicate the progress that they have made.</p><p>open question for future work is how to move from our sensitizing FFV to a self-contained system through which collectives can effectively act in the real world. From our sensitizing concept, we saw the utility of canvassing collectives to take an inciting PVEI and giving them a platform to collectively compose demands for</p><p>Participants felt clearer about their own stances on PVEIs being asked to extract concerns from them, more alert about PVEIs in their own lives, and more incensed to take action of own. We also witnessed a shared sense of social responsibility that people had for injustices faced by strangers.</p><p>Work by Abebe <ref type="bibr" target="#b6">[8]</ref> has also examined broader trends of the of computing in social change, which can be used to understand the potential for future online platforms for collective action.</p><p>specifically, our work fits several roles of computing in social change categorized by Abebe <ref type="bibr" target="#b6">[8]</ref>. Using Abebe's terms, as a diagnostic, a future platform that allows users to voice their concerns about institutional privacy violations would help us measure and understand what the public wants. As a formalizer, such a platform can concretize these concerns via collective-powered sensemaking, it through voting, external governance, or sophisticated topic modelling. As a rebuttal, it highlights the growing gap between individual users and institutional priorities. And as it glaring tensions of reform versus revolution, with security experts who have a stake in upholding existing institutions on one side, and users on the other, respectively.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="6.2">Reformist vs. non-reformist</head><p>The philosopher Andre Gorz made a distinction between reformist and non-reformist reforms <ref type="bibr" target="#b26">[27]</ref>. Reformist reform is the incremental updating of existing structures and is pursued with no intention of ultimately modifying the structure of society and institutions, and instead aims to keep a calm status quo. Many the raised by experts, which included FTC consent decrees, heavier fines, and federal best-practice standards, fall into the broad category of reform. Such solutions bolster the punitive power of existing regulatory institutions (e.g., the FTC) or encourage institutions are responsible for PVEIs to develop methods to circumvent (e.g., Equifax), rather than tip the power imbalance in favor of the people.</p><p>Non-reformist reform, in contrast, challenges entrenched power structures. It originates "not in terms of what is possible within the framework of a given system and administration, but in view of what should be made possible in terms of human needs and <ref type="bibr" target="#b26">[27]</ref>. As an example, some participants (and even one were deeply unhappy with the lack of consent to financial surveillance by and worried that lack of regulation meant that other corporations could also misbehave with little recourse. response, they wished for reparations bequeathed directly to who were affected, rather than fines collected by a governentity. In short, even if they personally held grander desires for systemic change in privacy, experts' assessments of collective demands suggests that while the people want non-reformist reform, experts view only reformist reform as tenable.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="6.3">The role of experts</head><p>Perhaps owing to this disconnect, some experts explicitly said they not want to get involved with stewarding collectives or intertheir desires owing to the perceived lack of knowledge had about "how the world works". Others had trouble outside of the context of existing frameworks of heavy fines or legal settlements. Our findings illustrated a misalignment between non-expert end-users and S&amp;P experts in their demands for how institutions can collect and manage personal data. Many S&amp;P are themselves embedded in institutions that are responfor PVEIs, even if their goal is to effect change from within.</p><p>are experts precisely because of their in-depth knowledge of existing systems. Perhaps due to their immersion in these inwe found that the experts we interviewed tended to be more dismissive of general demands for sweeping action or large Rahwan argues, however, it is impossible for any one person be fully informed on all aspects of some policy question: public opinion, which shapes social norms and morals, should be used as a on the "sovereign force" of experts, and influence the metrics by which expert performance is evaluated <ref type="bibr" target="#b44">[45]</ref>. Extending calls from prior work on the privilege that researchers hold in designing for vulnerable populations <ref type="bibr" target="#b21">[23,</ref><ref type="bibr" target="#b39">40]</ref>, we implore S&amp;P experts who work on improving user privacy protections to consider the role play in bolstering the power chasm between institutions and the individuals whose personal data they exploit.</p><p>we working towards reform or revolution-and how does that orientation align with the objectives of those for whom we or design? We, the authors of this paper, recognize our role in upholding this power chasm as "S&amp;P experts" ourselves. avenue future work might explore is developing a scaffolded like the one we explored for collective demand generation here-that opens a line of communication between expert stewards and the collective to facilitate collaborative refinement of This line needs to be a constant dialogue with devotion to repair and maintenance <ref type="bibr" target="#b31">[32]</ref>, rather than a one-off panel of experts. At the same time, in the same flavor as Irani and Silberman <ref type="bibr" target="#b32">[33]</ref>, being able to synthesize and funnel end-user privacy concerns into regulatory frameworks will not make us (and other experts) design saviors of user privacy; the experiences of end-users themselves, and the work they contribute to collective movements, must remain the driving force of action.</p><p>Feminist ethicist Carol Gilligan also distinguishes an "Ethics of Justice" (EoJ) from an "Ethics of Care" (EoC) <ref type="bibr" target="#b23">[25]</ref>. Dominant groups tend to prefer an EoJ, which focuses on generalizable standards, impartiality, and a respect for Western democratic ideals. In contrast, an EoC system emphasizes benevolence and the importance of a response to the individual. The panel-in their emphasis on fitting collective demands within existing legal and technical structuresdemonstrated alignment with a dominant EoJ. But perhaps what affected by PVEIs need is for S&amp;P experts to adopt an EoC: know that what they want is unrealistic, yet they want to be heard and they want change.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="6.4">Limitations</head><p>Our expert panel, though varied in background and industry, was of only eight experts, all of whom were based in the United States. We juxtapose the diversity of their experiences against their near unilateral preference for working within existing institustructures and against more sweeping action. However, we acknowledge that cultural norms around privacy regulations differ the world; future work could explore differences in how respond to populist calls for systemic changes based on the regulatory contexts in which they operate.</p><p>we ran only three scenarios through our FFV artifact, and these scenarios do not represent all the ways participants have identified concerns or proposed demands. However, the emotionally-charged responses we did get from these scenarios support the argument that users lack representation as collectives against institutions. Finally, the use of Prolific itself could present limitations. For since our participants were paid, they do not necessarily rehow a grassroots collective would act in the real world. And, while there have not been studies specifically comparing Prolific users' security attitudes with "average" users, prior work on the of users on Amazon Mechanical Turk (MTurk), similar crowd work platform, has shown mixed results. For example, Kang et al. <ref type="bibr" target="#b35">[36]</ref> found that MTurk users have higher privacy and were better-educated about S&amp;P than the larger U.S. public. In contrast, Redmiles et al. <ref type="bibr" target="#b45">[46]</ref> found that MTurk users fairly representative of the U.S. population in S&amp;P experiences and education.</p><p>In this paper, we explore how to design a system that facilitates privacy collective action by collectives affected by PVEIs generate a unified set of demands for redress. Specifically, we employed a three-stage set of online questionnaires, inspired by the Find-Fix-Verify programming pattern <ref type="bibr" target="#b10">[12]</ref>, a sensitizing concept to explore how non-expert collectives can generate concerns and compensatory demands in response triggering PVEI.</p><p>then presented the results of this artifact to a panel S&amp;P experts, whose responses helped us not only assess the collective's demands, but also uncover insights into how experts might better steward collectives towards effecting enduring change in privacy practices.Finally, we discussed how our results fit into existing paradigms of computing for social change, and how even wellmeaning experts might serve as hurdles to further institutional privacy change. People are frustrated with how their personal data collected, processed and monetized, but may not have the knowlto effect meaningful change. Experts have that knowledge, can be dismissive of those for whom they should advocate. A between expert stewards and the crowds of non-experts fed-up with existing privacy protections could be the foundation broader change that helps shift power over personal data to the people.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>A INCITING PVEIS A.1 Equifax data breach scenario</head><p>"In 2017, a large chunk of my personal info was leaked by Equifax.</p><p>included my name, date of birth, Social Security number, adand other small things that I might not even know about. I heard in the news that millions and millions of people, many of whom didn't even know Equifax had this info about them, their data leaked. I had to find out through this online tool that was one of those people.</p><p>Equifax kind of just said, 'This happened', and then offered a of credit monitoring. That doesn't cover the damage or the that my info was being collected in the first place, much less mishandled. They didn't really address the mishandling. I thought, "If millions of people have had their information leaked, they've gotta fix something -regulation, laws, whatever. You can't just work like that. " So I didn't do anything about it.</p><p>guess if you participate in the modern world -buying a car, a house, anything -you end up consenting to being tracked. Instead there was a year of credit monitoring and a settlement. The total wasn't based on all the millions of people who were actually it was just some big capped chunk of money. It wasn't about things for the people who were affected but about dealing the maximum punishment to Equifax. Nothing was made better for us. " A.3 OPM data breach scenario "When OPM (Office of Personnel Management of the United States lost a ton of people's personal info, I was affected. I was younger when it happened so I didn't realize the gravity of the situation, and they didn't really explain it well either-they just like, 'Hey, this little slip-up happened, so we're gonna identity theft protection for you for the next 5 years.' At time, I thought, 'Oh, how nice of them.' I didn't realize how much it could impact me, and thankfully nothing major happened, but I was stupid. I was just by myself, trying to interpret federal bureaucracy.</p><p>My identity does get a lot of pokes and prods because I work for the government, but any time I get a new alert from that ID theft protection service it's still heart-pounding. One time I didn't sleep for two nights a row because I couldn't figure out why there was a new alert. I was terrified every time I got a new email from them. While their service keeps track of your stuff it doesn't give</p></div><figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_0"><head>Figure 1 :</head><label>1</label><figDesc>Figure1: The Find-Fix-Verify process for an inciting PVEI. In the Find phase, a set of 200 participants identified concerns they had with a PVEI. In the Fix phase, another set of 100 participants picked the most pressing concerns and proposed demands to address them. In the Verify phase, a third set of 100 participants picked the most pressing remaining concerns, and ranked the corresponding demands from the previous phase.</figDesc><graphic url="image-1.png" coords="7,53.80,83.68,504.42,252.00" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_1"><head>4. 3 . 1</head><label>31</label><figDesc>Collective output. Participants indicated negative emotional reactions across the board in reaction to reading the accounts. 69% of Equifax-assigned participants felt angry or disgusted; 56% of Instagram-assigned participants felt sad or disgusted; and 45% of OPM-assigned participants felt angry or afraid.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_2"><head></head><label></label><figDesc>OPM fact that [OPM] didn't explain what happened is terrible. I would want to know why my info got messed with, what exactly got messed with, what problems I can expect, what I can do to save myself. "</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_3"><head>A. 2</head><label>2</label><figDesc>profiling scenario I go to search for someone on Instagram, it gives you rec-Instagram posts. In their recommendations I'm accosted by, like, 98% pictures of buff, half-naked men. a gay man. I'm married to a gay man. So, sure, I get it. But of my posts about baking and cooking and I primarily even use hashtags related to those things in my posts. Maybe a couple posts with '#husband' or whatever, but... I mean, why? It's kind of as if Instagram's only idea of me is that I'm a gay man so should like these pictures of half-naked dudes. Sometimes, when I'm at work and want to show pictures of my and nieces to my coworkers, I'll open up Instagram and go the search page, and then I'm bombarded with all these images are inappropriate for work and that I didn't even ask for. It's embarrassing! I open up the search page, I wonder, 'Why was I reduced to this?' It's a terrible thing to interact with. Me being gay is not defining category. I love to cook; I love science; I love playing games. I wonder, if I look into their algorithm, next to my name it just says 'GAY' in big rainbow letters. "</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_0"><head>Table 1 :</head><label>1</label><figDesc>USD on the Prolific platform (the equivalent of 18 USD per hour). Participants had a mean Prolific score of 99.7. Demographics of the participants across the three phases can be found in Table1. Demographics of Find-Fix-Verify participants. Three separate, non-overlapping sets of participants were recruited, one for each phase.</figDesc><table><row><cell>Phase</cell><cell cols="5">% Women % Men % Other Mean Age Std.Dev.</cell></row><row><cell>Find</cell><cell>47.0</cell><cell>52.5</cell><cell>0.5</cell><cell>29.96</cell><cell>9.99</cell></row><row><cell>Fix</cell><cell>61.0</cell><cell>38.0</cell><cell>1.0</cell><cell>29.87</cell><cell>9.97</cell></row><row><cell>Verify</cell><cell>48.0</cell><cell>52.0</cell><cell>0.0</cell><cell>30.62</cell><cell>10.06</cell></row><row><cell>All Phases</cell><cell>50.8</cell><cell>48.8</cell><cell>0.4</cell><cell>30.10</cell><cell>9.98</cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_1"><head>Table 3 :</head><label>3</label><figDesc>Demographics of experts. A = academia, I = industry, = government, L = law. *E4 did not wish to be identified.</figDesc><table><row><cell></cell><cell>Gender</cell><cell>Age</cell><cell>S&amp;P Experience</cell></row><row><cell>E1</cell><cell cols="2">Female 45-54</cell><cell>A, I, G, L</cell></row><row><cell>E2</cell><cell>Male</cell><cell>35-44</cell><cell>A</cell></row><row><cell>E3</cell><cell cols="2">Female 45-54</cell><cell>A, I, G</cell></row><row><cell>E4</cell><cell>*</cell><cell>*</cell><cell>I</cell></row><row><cell>E5</cell><cell>Male</cell><cell>25-34</cell><cell>A</cell></row><row><cell>E6</cell><cell cols="2">Female 25-34</cell><cell>A, I</cell></row><row><cell>E7</cell><cell cols="2">Female 25-34</cell><cell>A, I</cell></row><row><cell>E8</cell><cell>Male</cell><cell>35-44</cell><cell>I</cell></row></table></figure>
+		</body>
+		<back>
+
+			<div type="acknowledgement">
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>ACKNOWLEDGMENTS</head><p>This work was generously supported, in part, by NSF Grant #1755625. Conversations with Peter Swire and DeBrae Kennedy-Mayo helped some of our framing of this work. We thank our expert panwho agreed to provide their perspectives without compensa-We also thank our anonymous reviewers for being generous with their time and helping us improve the paper.</p></div>
+			</div>
+
+			<div type="annex">
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>B.2 Fix Phase Questionnaire</head><p>(1) following passage contains an actual American adult's account of their experiences. Please read it carefully. {Randomly display one of three PVEIs} In response to this account, XX% of people previously surveyed felt {emotion 1} or {emotion 2}. (3) Some previously surveyed people also up the following concerns about {institution} in the above account. Please select two that you believe should be prioritized the most.</p><p>• Random find-phase concern A (3) In response to the concerns that you just saw, some other surveyed people prescribed actions that they be-OPM could take to address them. You'll be asked to evaluate some of these actions. Keep in mind the following criteria to evaluate the prescribed (a) Specificity. Does the action include specific tasks or steps OPM to take? (b) Effectiveness. How well does the action address the con-(c) Desirability. How much would you like this action to be (4) You selected the following concern to prioritize the most: concern A}. (5) Please rank the following actions that others have prescribed for {entity} to take to address this concern, with rank 1 being best. You can do so by moving your cursor over the choices and dragging and dropping them. Please keep in mind the specificity, effectiveness, and desirability of the • Entity action A for chosen concern A • Entity action B for chosen concern A • Entity action C for chosen concern A • Entity action D for chosen concern A (6) You selected the following concern to prioritize the most: concern B}. (7) Please rank the following actions that others have prescribed for {entity} to take to address this concern, with rank 1 being best. You can do so by moving your cursor over the choices and dragging and dropping them. Please keep in mind the specificity, effectiveness, and desirability of the • Entity action A for chosen concern B • Entity action B for chosen concern B • Entity action C for chosen concern B</p></div>			</div>
+			<div type="references">
+
+				<listBibl>
+
+<biblStruct xml:id="b0">
+	<analytic>
+		<title/>
+		<author>
+			<persName><surname>Cybersecurity Resource</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Center</surname></persName>
+		</author>
+		<ptr target="https://www.opm.gov/cybersecurity/cybersecurity-incidents/" />
+	</analytic>
+	<monogr>
+		<title level="s">Cybersecurity Incidents. U.S. Office of Personnel Management</title>
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b1">
+	<monogr>
+		<ptr target="https://optin.stopwatching.us/" />
+		<title level="m">Stop Watching Us. StopWatching.Us</title>
+				<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b2">
+	<monogr>
+		<title level="m" type="main">Don&apos;t let EQUIFAX escape liability! Change</title>
+		<ptr target="https://www.change.org/p/don-t-let-equifax-escape-liability" />
+		<imprint>
+			<date type="published" when="2017">2017. 2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b3">
+	<analytic>
+		<title level="a" type="main">Equifax Releases on Incident</title>
+		<ptr target="https://investor.equifax.com/news-and-events/press-releases/" />
+	</analytic>
+	<monogr>
+		<title level="j">Announces Personnel Changes. Equifax</title>
+		<imprint>
+			<date type="published" when="2017-09">2017. Sep 2017. 2017/09-15-2017-224018832</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b4">
+	<monogr>
+		<title level="m" type="main">privacy -I think I accidentally started a movement -Policing the Police by scraping court data</title>
+		<ptr target="https://www.reddit.com/r/privacy/comments/gr11aw/i_think_i_accidentally_started_a_movement/" />
+		<imprint>
+			<date type="published" when="2020">2020. 2020</date>
+		</imprint>
+	</monogr>
+	<note>Restore the Fourth -Opposing unconstitutional mass government surveillance</note>
+</biblStruct>
+
+<biblStruct xml:id="b5">
+	<monogr>
+		<title level="m" type="main">2020. r/privacy -If cops can watch us, we should watch them. I scraped court records to find dirty cops</title>
+		<ptr target="https://www.reddit.com/r/privacy/comments/gm8xfq/if_cops_can_watch_us_we_should_watch_them_i/" />
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b6">
+	<analytic>
+		<title level="a" type="main">Roles for computing in social change</title>
+		<author>
+			<persName><forename type="first">Rediet</forename><surname>Abebe</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Solon</forename><surname>Barocas</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jon</forename><surname>Kleinberg</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Karen</forename><surname>Levy</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Manish</forename><surname>David G Robinson</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2020 Conference on Fairness</title>
+				<meeting>the 2020 Conference on Fairness</meeting>
+		<imprint>
+			<date type="published" when="2020">2020</date>
+			<biblScope unit="page" from="252" to="260" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b7">
+	<analytic>
+		<title level="a" type="main">California Strict Internet Privacy Law With Implications For The Country</title>
+		<author>
+			<persName><forename type="first">Ben</forename><surname>Adler</surname></persName>
+		</author>
+		<ptr target="https://www.npr.org/2018/06/29/624336039/california-passes-strict-internet-privacy-law-with-implications-for-the" />
+	</analytic>
+	<monogr>
+		<title level="j">NPR</title>
+		<imprint>
+			<date>Jun</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b8">
+	<analytic>
+		<title level="a" type="main">Americans and Privacy: Concerned, Confused and Feeling Lack of Control Over Their Personal Information</title>
+		<author>
+			<persName><forename type="first">Rainie</forename><surname>Auxier</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Anderson</forename></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Andrew</forename><surname>Perrin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Madhu</forename><surname>Kumar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Erica</forename><surname>Turner</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Pew Research Center</title>
+		<imprint>
+			<date type="published" when="2019-11">2019. Nov 2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b9">
+	<analytic>
+		<title level="a" type="main">The logic of connective action: Digital media and the personalization of contentious politics</title>
+		<author>
+			<persName><forename type="first">Lance</forename><surname>Bennett</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Alexandra</forename><surname>Segerberg</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">communication &amp; society</title>
+		<imprint>
+			<biblScope unit="volume">15</biblScope>
+			<biblScope unit="page" from="739" to="768" />
+			<date type="published" when="2012">2012. 2012</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b10">
+	<analytic>
+		<title level="a" type="main">Soylent: a word processor with a crowd inside</title>
+		<author>
+			<persName><forename type="first">Greg</forename><surname>Michael S Bernstein</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Little</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Robert</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Björn</forename><surname>Miller</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Hartmann</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Mark</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">David</forename><surname>David R Karger</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Katrina</forename><surname>Crowell</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Panovich</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 23nd annual ACM symposium on User interface software and technology</title>
+				<meeting>the 23nd annual ACM symposium on User interface software and technology</meeting>
+		<imprint>
+			<date type="published" when="2010">2010</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b11">
+	<analytic>
+		<title level="a" type="main">Grounded theory and sensitizing concepts</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Glenn</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Bowen</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">journal of qualitative methods</title>
+		<imprint>
+			<biblScope unit="volume">5</biblScope>
+			<biblScope unit="issue">3</biblScope>
+			<biblScope unit="page" from="12" to="23" />
+			<date type="published" when="2006">2006. 2006</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b12">
+	<analytic>
+		<title level="a" type="main">Reflecting on reflexive thematic analysis</title>
+		<author>
+			<persName><forename type="first">Virginia</forename><surname>Braun</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Victoria</forename><surname>Clarke</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Qualitative Research in Sport, Exercise and Health</title>
+		<imprint>
+			<biblScope unit="volume">4</biblScope>
+			<biblScope unit="page" from="589" to="597" />
+			<date type="published" when="2019">2019. 2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b13">
+	<monogr>
+		<author>
+			<persName><forename type="first">Victoria</forename><surname>Clarke</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Virginia</forename><surname>Braun</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Nikki</forename><surname>Hayfield</surname></persName>
+		</author>
+		<title level="m">Thematic analysis. Qualitative psychology: A practical guide to research methods</title>
+				<imprint>
+			<date type="published" when="2015">2015</date>
+			<biblScope unit="page" from="222" to="248" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b14">
+	<analytic>
+		<title level="a" type="main">A typology of perceived for end-user security and privacy behaviors</title>
+		<author>
+			<persName><forename type="first">Laura</forename><forename type="middle">A</forename><surname>Das</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jason</forename><forename type="middle">I</forename><surname>Dabbish</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Hong</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Fifteenth Symposium on Usable Privacy and Security</title>
+				<imprint>
+			<date type="published" when="2019">2019. 2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b15">
+	<analytic>
+		<title level="a" type="main">Privacy for the People? Exploring Collective Action as a Mechanism Shift Power to Consumers in End-User Privacy</title>
+		<author>
+			<persName><forename type="first">W</forename><surname>Das</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Debrae</forename><surname>Keith Edwards</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Peter</forename><surname>Kennedy-Mayo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yuxi</forename><surname>Swire</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">IEEE Security &amp; Privacy</title>
+		<imprint>
+			<biblScope unit="volume">19</biblScope>
+			<biblScope unit="page" from="66" to="70" />
+			<date type="published" when="2021">2021. 2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b16">
+	<analytic>
+		<title level="a" type="main">The effect of social influence on security sensitivity</title>
+		<author>
+			<persName><forename type="first">Sauvik</forename><surname>Das</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Tiffany Hyun-Jin</forename><surname>Kim</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Laura</forename><forename type="middle">A</forename><surname>Dabbish</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jason</forename><forename type="middle">I</forename><surname>Hong</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">10th Symposium On Usable Privacy and Security</title>
+				<imprint>
+			<date type="published" when="2014">2014. 2014</date>
+			<biblScope unit="page" from="143" to="157" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b17">
+	<analytic>
+		<title level="a" type="main">The role of social influence in security feature adoption</title>
+		<author>
+			<persName><forename type="first">Adam</forename><forename type="middle">Di</forename><surname>Das</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Laura</forename><forename type="middle">A</forename><surname>Kramer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jason</forename><forename type="middle">I</forename><surname>Dabbish</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Hong</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 18th ACM on computer supported cooperative work &amp; social computing</title>
+				<meeting>the 18th ACM on computer supported cooperative work &amp; social computing</meeting>
+		<imprint>
+			<date type="published" when="2015">2015</date>
+			<biblScope unit="page" from="1416" to="1426" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b18">
+	<analytic>
+		<title level="a" type="main">Breaking! A of Security and Privacy News and How It&apos;s Shared</title>
+		<author>
+			<persName><forename type="first">Sauvik</forename><surname>Das</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Joanne</forename><surname>Lo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Laura</forename><surname>Dabbish</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jason</forename><forename type="middle">I</forename><surname>Hong</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2018 CHI Conference on Human Factors in Computing Systems</title>
+				<meeting>the 2018 CHI Conference on Human Factors in Computing Systems</meeting>
+		<imprint>
+			<date type="published" when="2018">2018</date>
+			<biblScope unit="page" from="1" to="12" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b19">
+	<monogr>
+		<title level="m" type="main">Context collapse: Theorizing context and collisions. Information, communication &amp; society</title>
+		<author>
+			<persName><forename type="first">L</forename><surname>Jenny</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Nathan</forename><surname>Davis</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Jurgenson</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2014">2014. 2014</date>
+			<biblScope unit="volume">17</biblScope>
+			<biblScope unit="page" from="476" to="485" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b20">
+	<monogr>
+		<title level="m" type="main">Basic emotions. Handbook of cognition and emotion</title>
+		<author>
+			<persName><forename type="first">Paul</forename><surname>Ekman</surname></persName>
+		</author>
+		<imprint>
+			<biblScope unit="volume">98</biblScope>
+			<biblScope unit="page">16</biblScope>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b21">
+	<analytic>
+		<title level="a" type="main">Is my phone hacked</title>
+		<author>
+			<persName><forename type="first">Sam</forename><surname>Freed</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Emily</forename><surname>Havron</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Andrea</forename><surname>Tseng</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Rahul</forename><surname>Gallardo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ristenpart</forename><surname>Chatterjee</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Nicola</forename><surname>Dell</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Analyzing Clinical Computer Security Interventions with Survivors of Intimate Partner Proceedings of the ACM on Human-Computer Interaction CSCW</title>
+				<imprint>
+			<date type="published" when="2019">2019. 2019</date>
+			<biblScope unit="page" from="1" to="24" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b22">
+	<analytic>
+		<title level="a" type="main">Password management strategies for accounts</title>
+		<author>
+			<persName><forename type="first">Shirley</forename><surname>Gaw</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Edward W Felten</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the second symposium on Usable privacy and</title>
+				<meeting>the second symposium on Usable privacy and</meeting>
+		<imprint>
+			<date type="published" when="2006">2006</date>
+			<biblScope unit="page" from="44" to="55" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b23">
+	<monogr>
+		<title level="m" type="main">1993. a different voice: Psychological theory and women&apos;s devel</title>
+		<author>
+			<persName><forename type="first">Carol</forename><surname>Gilligan</surname></persName>
+		</author>
+		<imprint>
+			<publisher>Harvard University Press</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b24">
+	<analytic>
+		<title level="a" type="main">What was that site doing with my Facebook Designing Password-Reuse Notifications</title>
+		<author>
+			<persName><forename type="first">Maximilian</forename><surname>Golla</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Miranda</forename><surname>Wei</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Juliette</forename><surname>Hainline</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Lydia</forename><surname>Filipe</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Markus</forename><surname>Dürmuth</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Redmiles</forename></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Blase</forename><surname>Ur</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the</title>
+				<meeting>the</meeting>
+		<imprint>
+			<date type="published" when="2018">2018. 2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b25">
+	<monogr>
+		<title level="m">ACM SIGSAC Conference on Computer and Communications Security</title>
+				<imprint>
+			<biblScope unit="page" from="1549" to="1566" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b26">
+	<monogr>
+		<title level="m" type="main">1967. for Labor: A Radical Proposal</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Gorz</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">V</forename><surname>Nicolaus</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">V</forename><forename type="middle">O</forename><surname>Ortiz</surname></persName>
+		</author>
+		<author>
+			<persName><surname>González</surname></persName>
+		</author>
+		<ptr target="https://books.google.com/books?id=IPtAAAAAIAAJ" />
+		<imprint>
+			<publisher>Beacon Press</publisher>
+			<pubPlace>Boston</pubPlace>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b27">
+	<analytic>
+		<title level="a" type="main">Labor unions and the Sherman Act: rethinking labor&apos;s nonstatutory exemption</title>
+		<author>
+			<persName><forename type="first">L</forename><surname>Greenslade</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Loy. LAL Rev</title>
+		<imprint>
+			<biblScope unit="volume">22</biblScope>
+			<biblScope unit="page">151</biblScope>
+			<date type="published" when="1988">1988. 1988</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b28">
+	<analytic>
+		<title level="a" type="main">So long, and no thanks for the externalities: the rational rejection of security advice by users</title>
+		<author>
+			<persName><forename type="first">Cormac</forename><surname>Herley</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2009 workshop on New paradigms workshop</title>
+				<meeting>the 2009 workshop on New paradigms workshop</meeting>
+		<imprint>
+			<date type="published" when="2009">2009</date>
+			<biblScope unit="page" from="133" to="144" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b29">
+	<analytic>
+		<title level="a" type="main">Engineering Privacy and Protest: Case Study of AdNauseam</title>
+		<author>
+			<persName><forename type="first">C</forename><surname>Daniel</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Helen</forename><surname>Howe</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Nissenbaum</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">SP</title>
+				<imprint>
+			<date type="published" when="2017">2017</date>
+			<biblScope unit="page" from="57" to="64" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b30">
+	<analytic>
+		<title level="a" type="main">2015. activists are both born and made: An analysis of users on Change.org</title>
+		<author>
+			<persName><forename type="first">Shih-Wen</forename><surname>Huang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Minhyang</forename><surname>Suh</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Benjamin</forename><forename type="middle">Mako</forename><surname>Hill</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Gary</forename><surname>Hsieh</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">of the 33rd annual ACM conference on human factors in computing systems</title>
+				<imprint>
+			<biblScope unit="page" from="211" to="220" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b31">
+	<analytic>
+		<title level="a" type="main">From critical design to critical infrastructure: from turkopticon</title>
+		<author>
+			<persName><forename type="first">Lilly</forename><surname>Irani</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Six Silberman</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Interactions</title>
+		<imprint>
+			<biblScope unit="volume">21</biblScope>
+			<biblScope unit="page" from="32" to="35" />
+			<date type="published" when="2014">2014. 2014</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b32">
+	<analytic>
+		<title level="a" type="main">Stories We Tell About Labor: Turkopticon the Trouble with&quot; Design</title>
+		<author>
+			<persName><forename type="first">C</forename><surname>Irani</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Six Silberman</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2016 CHI conference on human in computing systems</title>
+				<meeting>the 2016 CHI conference on human in computing systems</meeting>
+		<imprint>
+			<date type="published" when="2016">2016</date>
+			<biblScope unit="page" from="4573" to="4586" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b33">
+	<analytic>
+		<title level="a" type="main">Lean Privacy Review: Collecting Users&apos; Privacy Concerns of Data Practices at Low Cost</title>
+		<author>
+			<persName><forename type="first">Haojian</forename><surname>Jin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Hong</forename><surname>Shen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mayank</forename><surname>Jain</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Swarun</forename><surname>Kumar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jason</forename><forename type="middle">I</forename><surname>Hong</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3463910</idno>
+		<ptr target="https://doi.org/10.1145/3463910" />
+	</analytic>
+	<monogr>
+		<title level="j">ACM Trans. Comput.-Hum. Interact</title>
+		<imprint>
+			<biblScope unit="volume">28</biblScope>
+			<date type="published" when="2021-08">2021. aug 2021</date>
+		</imprint>
+	</monogr>
+	<note>Article</note>
+</biblStruct>
+
+<biblStruct xml:id="b34">
+	<monogr>
+		<title level="m" type="main">Tell Facebook: Our Data is our Property #OwnYourData</title>
+		<author>
+			<persName><surname>Kaiser</surname></persName>
+		</author>
+		<ptr target="https://www.change.org/p/tell-facebook-our-data-is-our-property-ownyourdata" />
+		<imprint>
+			<date type="published" when="2017">2017. 2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b35">
+	<analytic>
+		<title level="a" type="main">Privacy attitudes of mechanical turk workers and the us public</title>
+		<author>
+			<persName><forename type="first">Ruogu</forename><surname>Kang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Stephanie</forename><surname>Brown</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Laura</forename><surname>Dabbish</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sara</forename><surname>Kiesler</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Symposium On Usable Privacy and Security</title>
+				<imprint>
+			<date type="published" when="2014">2014. 2014</date>
+			<biblScope unit="page" from="37" to="49" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b36">
+	<analytic>
+		<title level="a" type="main">Supporting reflective public thought with considerit</title>
+		<author>
+			<persName><forename type="first">Travis</forename><surname>Kriplean</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jonathan</forename><surname>Morgan</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">of ACM 2012 conference on Computer Supported Cooperative Work</title>
+				<imprint>
+			<date type="published" when="2012">2012</date>
+			<biblScope unit="page" from="265" to="274" />
+		</imprint>
+	</monogr>
+	<note>Deen Freelon, Alan Borning, and Lance Bennett</note>
+</biblStruct>
+
+<biblStruct xml:id="b37">
+	<monogr>
+		<title/>
+		<author>
+			<persName><forename type="first">Pamela</forename><surname>Marwell</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Oliver</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="1993">1993</date>
+			<publisher>Cambridge University Press</publisher>
+			<pubPlace>i-iv</pubPlace>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b38">
+	<analytic>
+		<title level="a" type="main">Now I&apos;m a bit Individuals&apos; Awareness, Perception, and Responses to Data Breaches that Affected Them</title>
+		<author>
+			<persName><forename type="first">Yixin</forename><surname>Mayer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Florian</forename><surname>Zou</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Adam</forename><surname>Schaub</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Aviv</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">30th {USENIX} Security Symposium</title>
+				<imprint>
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+	<note>{USENIX} Security 21</note>
+</biblStruct>
+
+<biblStruct xml:id="b39">
+	<analytic>
+		<title level="a" type="main">Privacy and Power: Acknowledging the Importance of Privacy Research and Design for Vulnerable</title>
+		<author>
+			<persName><forename type="first">Nora</forename><surname>Mcdonald</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Karla</forename><surname>Morgan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">G</forename><surname>Ames</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Nicola</forename><surname>Dell</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Elizabeth</forename><forename type="middle">Manya</forename><surname>Sleeper</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Pamela</forename><forename type="middle">J</forename><surname>Wisniewski</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Extended Abstracts of the 2020 CHI Conference on Human Factors Computing Systems</title>
+				<imprint>
+			<date type="published" when="2020">2020</date>
+			<biblScope unit="page" from="1" to="8" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b40">
+	<analytic>
+		<title level="a" type="main">Hacks of OPM databases compromised 22.1 million people, federal authorities say</title>
+		<author>
+			<persName><forename type="first">Ellen</forename><surname>Nakashima</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Washington Post</title>
+		<imprint>
+			<date type="published" when="2019-04">2019. Apr 2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b41">
+	<monogr>
+		<title level="m" type="main">TrackMeNot: Resisting surveillance in web search</title>
+		<author>
+			<persName><forename type="first">Helen</forename><surname>Nissenbaum</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Howe</forename><surname>Daniel</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2009">2009. 2009</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b42">
+	<monogr>
+		<title level="m" type="main">Yahoo Says Hackers Stole Data on 500 Million Users in 2014. The New York Times</title>
+		<author>
+			<persName><forename type="first">Nicole</forename><surname>Perlroth</surname></persName>
+		</author>
+		<ptr target="https://www.nytimes.com/2016/09/23/technology/yahoo-hackers.html" />
+		<imprint>
+			<date type="published" when="2016-09">2016. Sep 2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b43">
+	<analytic>
+		<title level="a" type="main">Stories as informal lessons about security</title>
+		<author>
+			<persName><forename type="first">Rick</forename><surname>Rader</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Brandon</forename><surname>Wash</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Brooks</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the Eighth Symposium on Usable Privacy and</title>
+				<meeting>the Eighth Symposium on Usable Privacy and</meeting>
+		<imprint>
+			<date type="published" when="2012">2012</date>
+			<biblScope unit="page" from="1" to="17" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b44">
+	<analytic>
+		<title level="a" type="main">Society-in-the-loop: programming the algorithmic social</title>
+		<author>
+			<persName><forename type="first">Iyad</forename><surname>Rahwan</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Ethics and Information Technology</title>
+		<imprint>
+			<biblScope unit="volume">20</biblScope>
+			<biblScope unit="page" from="5" to="14" />
+			<date type="published" when="2018">2018. 2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b45">
+	<analytic>
+		<title level="a" type="main">How well do my generalize? comparing security and privacy survey results from mturk, web, and telephone samples</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Redmiles</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sean</forename><surname>Kross</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Michelle</forename><forename type="middle">L</forename><surname>Mazurek</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">IEEE Symposium on Security and Privacy (SP)</title>
+				<imprint>
+			<publisher>IEEE</publisher>
+			<date type="published" when="2019">2019</date>
+			<biblScope unit="page" from="1326" to="1343" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b46">
+	<analytic>
+		<title level="a" type="main">I think trying to tell me something: Advice sources and selection for digital security</title>
+		<author>
+			<persName><forename type="first">Amelia</forename><forename type="middle">R</forename><surname>Elissa M Redmiles</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Michelle</forename><forename type="middle">L</forename><surname>Malone</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Mazurek</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">IEEE Symposium on Security and Privacy (SP)</title>
+				<imprint>
+			<publisher>IEEE</publisher>
+			<date type="published" when="2016">2016</date>
+			<biblScope unit="page" from="272" to="288" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b47">
+	<analytic>
+		<title level="a" type="main">We are dynamo: Overcoming stalling and friction in collective action for crowd workers</title>
+		<author>
+			<persName><forename type="first">Ewen</forename><surname>Rusbridger</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">;</forename><surname>Macaskill</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Lilly</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Irani</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Michael</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ali</forename><surname>Bernstein</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Eva</forename><surname>Alkhatib</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Milland</forename><surname>Ogbe</surname></persName>
+		</author>
+		<ptr target="https://www.theguardian.com/world/2014/jul/18/-sp-edward-snowden-nsa-whistleblower-interview-transcriptNiloufarSalehi" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 33rd annual conference on human factors in computing systems</title>
+				<meeting>the 33rd annual conference on human factors in computing systems</meeting>
+		<imprint>
+			<date type="published" when="2014-07">2014. Jul 2014. 2015</date>
+			<biblScope unit="page" from="1621" to="1630" />
+		</imprint>
+	</monogr>
+	<note>Edward Snowden interview: the edited transcript</note>
+</biblStruct>
+
+<biblStruct xml:id="b48">
+	<monogr>
+		<title level="m" type="main">Computer supported collective action</title>
+		<author>
+			<persName><forename type="first">Zhang</forename><surname>Shaw</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Andrés</forename><surname>Monroy-Hernández</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sean</forename><surname>Munson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Benjamin</forename><forename type="middle">Mako</forename><surname>Hill</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Elizabeth</forename><surname>Gerber</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Peter</forename><surname>Kinnaird</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Patrick</forename><surname>Minder</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2014">2014. 2014</date>
+			<biblScope unit="volume">21</biblScope>
+			<biblScope unit="page" from="74" to="77" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b49">
+	<analytic>
+		<title level="a" type="main">Concept-driven interaction design Human</title>
+		<author>
+			<persName><forename type="first">Erik</forename><surname>Stolterman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mikael</forename><surname>Wiberg</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Computer Interaction</title>
+		<imprint>
+			<biblScope unit="volume">25</biblScope>
+			<biblScope unit="page" from="95" to="118" />
+			<date type="published" when="2010">2010. 2010</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b50">
+	<analytic>
+		<title level="a" type="main">Smart, useful, scary, creepy: perceptions of online behavioral advertising</title>
+		<author>
+			<persName><forename type="first">Pedro</forename><forename type="middle">Giovanni</forename><surname>Ur</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Lorrie</forename><forename type="middle">Faith</forename><surname>Leon</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Richard</forename><surname>Cranor</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yang</forename><surname>Shay</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Wang</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">proceedings of the eighth symposium on usable privacy and security</title>
+				<meeting>the eighth symposium on usable privacy and security</meeting>
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b51">
+	<analytic>
+		<title level="a" type="main">Leverage: A Framework for Empowering the Public in its Relationship with Technology Companies</title>
+		<author>
+			<persName><forename type="first">Hanlin</forename><surname>Vincent</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Nicole</forename><surname>Li</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Stevie</forename><surname>Tilly</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Brent</forename><surname>Chancellor</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Hecht</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2021 ACM Conference on Fairness, and Transparency</title>
+				<meeting>the 2021 ACM Conference on Fairness, and Transparency</meeting>
+		<imprint>
+			<date type="published" when="2021">2021</date>
+			<biblScope unit="page" from="215" to="227" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b52">
+	<monogr>
+		<title level="m" type="main">The PANAS-X: Manual for the positive and negative affect schedule, expanded form</title>
+		<author>
+			<persName><forename type="first">Lee</forename><forename type="middle">Anna</forename><surname>Watson</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Clark</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="1999">1999. 1999</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b53">
+	<monogr>
+		<title level="m" type="main">The history of trade unionism</title>
+		<author>
+			<persName><forename type="first">Beatrice</forename><surname>Webb</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Webb</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="1920">1920</date>
+			<pubPlace>Longmans, Green</pubPlace>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b54">
+	<analytic>
+		<title level="a" type="main">Mapping machine learning advances from hci research to reveal starting places for design innovation</title>
+		<author>
+			<persName><forename type="first">Qian</forename><surname>Yang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Nikola</forename><surname>Banovic</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">John</forename><surname>Zimmerman</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2018 CHI Conference on Human Factors in Computing Systems</title>
+				<meeting>the 2018 CHI Conference on Human Factors in Computing Systems</meeting>
+		<imprint>
+			<date type="published" when="2018">2018</date>
+			<biblScope unit="page" from="1" to="11" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b55">
+	<analytic>
+		<title level="a" type="main">WeDo: end-to-end computer supported collective action</title>
+		<author>
+			<persName><forename type="first">Haoqi</forename><surname>Zhang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Andrés</forename><surname>Monroy-Hernández</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Aaron</forename><surname>Shaw</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sean</forename><surname>Munson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Elizabeth</forename><surname>Gerber</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Benjamin</forename><surname>Hill</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Peter</forename><surname>Shelly</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Patrick</forename><surname>Minder</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the International AAAI Conference on Web and Social Media</title>
+				<meeting>the International AAAI Conference on Web and Social Media</meeting>
+		<imprint>
+			<date type="published" when="2014">2014</date>
+			<biblScope unit="volume">8</biblScope>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b56">
+	<analytic>
+		<title level="a" type="main">I&apos;ve Nothing to Lose&quot;: Consumers&apos; Risk Perceptions and Protective Actions after the Equifax Data Breach</title>
+		<author>
+			<persName><forename type="first">Yixin</forename><surname>Zou</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Abraham</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Austin</forename><surname>Mhaidli</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Florian</forename><surname>Mccall</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Schaub</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Symposium on Usable Privacy and Security</title>
+				<imprint>
+			<date type="published" when="2018">2018. 2018</date>
+			<biblScope unit="page" from="197" to="216" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+				</listBibl>
+			</div>
+		</back>
+	</text>
+</TEI>

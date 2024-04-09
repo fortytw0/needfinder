@@ -1,0 +1,1961 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xml:space="preserve" xmlns="http://www.tei-c.org/ns/1.0" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.com/kermitt2/grobid/master/grobid-home/schemas/xsd/Grobid.xsd"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+	<teiHeader xml:lang="en">
+		<fileDesc>
+			<titleStmt>
+				<title level="a" type="main">Visualization Accessibility in the Wild: Challenges Faced by Visualization Designers</title>
+			</titleStmt>
+			<publicationStmt>
+				<publisher/>
+				<availability status="unknown"><licence/></availability>
+			</publicationStmt>
+			<sourceDesc>
+				<biblStruct>
+					<analytic>
+						<author>
+							<persName><forename type="first">Shakila</forename><forename type="middle">Cherise</forename><surname>Joyner</surname></persName>
+							<email>joynersh@bc.edu</email>
+						</author>
+						<author>
+							<persName><forename type="first">Amalia</forename><surname>Riegelhuth</surname></persName>
+							<email>amaliariegelhuth@gmail.com</email>
+						</author>
+						<author>
+							<persName><forename type="first">Kathleen</forename><surname>Garrity</surname></persName>
+							<email>kathleen.garrity223@gmail.com</email>
+						</author>
+						<author>
+							<persName><forename type="first">Yea-Seul</forename><surname>Kim</surname></persName>
+							<email>yeaseul.kim@cs.wisc.edu</email>
+						</author>
+						<author>
+							<persName><forename type="first">Nam</forename><surname>Wook</surname></persName>
+							<email>nam.wook.kim@bc.edu</email>
+						</author>
+						<author>
+							<persName><surname>Visualization</surname></persName>
+						</author>
+						<author>
+							<affiliation key="aff0">
+								<orgName type="institution">Boston College Chestnut Hill</orgName>
+								<address>
+									<region>Massachusetts</region>
+									<country key="US">USA</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<affiliation key="aff1">
+								<orgName type="institution">Boston College Chestnut Hill</orgName>
+								<address>
+									<region>Massachusetts</region>
+									<country key="US">USA</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<affiliation key="aff2">
+								<orgName type="institution">Boston College Chestnut Hill</orgName>
+								<address>
+									<region>Massachusetts</region>
+									<country key="US">USA</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<affiliation key="aff3">
+								<address>
+									<country key="US">USA</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<affiliation key="aff4">
+								<address>
+									<country key="US">USA</country>
+								</address>
+							</affiliation>
+						</author>
+						<title level="a" type="main">Visualization Accessibility in the Wild: Challenges Faced by Visualization Designers</title>
+					</analytic>
+					<monogr>
+						<imprint>
+							<date/>
+						</imprint>
+					</monogr>
+					<idno type="DOI">10.1145/3491102.3517630</idno>
+				</biblStruct>
+			</sourceDesc>
+		</fileDesc>
+		<encodingDesc>
+			<appInfo>
+				<application version="0.7.1" ident="GROBID" when="2022-07-22T05:05+0000">
+					<desc>GROBID - A machine learning software for extracting information from scholarly documents</desc>
+					<ref target="https://github.com/kermitt2/grobid"/>
+				</application>
+			</appInfo>
+		</encodingDesc>
+		<profileDesc>
+			<textClass>
+				<keywords>
+					<term>inclusive design</term>
+					<term>data visualization</term>
+					<term>visual impairment</term>
+					<term>a11y</term>
+				</keywords>
+			</textClass>
+			<abstract>
+<div xmlns="http://www.tei-c.org/ns/1.0"><p>Data visualizations are now widely used across many disciplines. However, many of them are not easily accessible for visually impaired people. In this work, we use three-staged mixed methods to understand the current practice of accessible visualization design for visually impaired people. We analyzed 95 visualizations from various venues to inspect how they are made inaccessible. To understand the rationale and context behind the design choices, we also conducted surveys with 144 practitioners in the U.S. and follow-up interviews with ten selected survey participants. Our findings include the difficulties of handling modern complex and interactive visualizations and the lack of accessibility support from visualization tools in addition to personal and organizational factors making it challenging to perform accessible design practices.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>CCS CONCEPTS</head><p>• Human-centered computing → Accessibility design and evaluation methods.</p></div>
+			</abstract>
+		</profileDesc>
+	</teiHeader>
+	<text xml:lang="en">
+		<body>
+<div xmlns="http://www.tei-c.org/ns/1.0"><p>outlets and government agencies use charts and graphs to communicate important information about our society, helping people make decisions on finances, health, and other everyday activities. The power of data visualizations is leveraging visual perception, which offers preattentive information processing not readily available in different modalities. Driven by decades of research in developing new tools and techniques, visualization designers are now creating increasingly complicated visualizations with intricate encodings and interactions. Often, these visualizations in the wild are hardly accessible for visually impaired people, and the complexity of the visualization exacerbates the accessibility problems.</p><p>Serving the diverse audiences of data visualizations has recently been recognized as a significant societal problem with the increased popularity of visualizations across disciplines <ref type="bibr" target="#b45">[48]</ref>. While people may have trouble accessing visualizations due to various reasons such as limited availability of computers or mobile devices, cognitive and learning difficulties, and motor impairments, visually impaired people are most directly impacted by the inaccessibility of data visualizations. People with visual impairment make up more than 3% of the global population, including people who are blind or have low vision <ref type="bibr" target="#b11">[11]</ref>. These conditions are different from color vision deficiency addressed through an accessible color palette <ref type="bibr" target="#b46">[49]</ref>. Blind and low vision people face more significant challenges in interpreting and manipulating data visualizations and other related tools due to the absence or severe deterioration of vision. A typical practice for accessible visualizations is to provide alternative text or a data table that may not work well beyond simple charts and may not support analytical tasks <ref type="bibr" target="#b53">[56]</ref>.</p><p>Accessibility has long been investigated for traditional graphical content like maps and diagrams <ref type="bibr" target="#b34">[37,</ref><ref type="bibr" target="#b42">45,</ref><ref type="bibr" target="#b59">63,</ref><ref type="bibr" target="#b63">68]</ref>. However, these traditional graphics do not recognize data access as a main problem <ref type="bibr" target="#b46">[49]</ref>. Moreover, data visualizations pose unique challenges due to their data-driven content and structure, such as a multitude of data points laid out in interactively coordinated views. Although not extensive, several past research endeavors specifically investigated visualization accessibility for visually impaired people, summarized in a recent survey <ref type="bibr" target="#b38">[42]</ref>. A category of work develops new techniques and devices for accessible visualizations, leveraging non-vision modalities such as braille, haptics, tactile graphic, sonification, and speech <ref type="bibr" target="#b0">[1,</ref><ref type="bibr" target="#b23">23,</ref><ref type="bibr">29,</ref><ref type="bibr" target="#b52">55,</ref><ref type="bibr" target="#b68">72]</ref>. The other type of work focuses on understanding the needs of visually impaired people through empirical studies including comparing different charts and sensory modalities <ref type="bibr" target="#b50">[53,</ref><ref type="bibr" target="#b70">74]</ref> or examining how they interact with them <ref type="bibr" target="#b21">[21,</ref><ref type="bibr">30,</ref><ref type="bibr" target="#b36">40]</ref>. Nonetheless, many existing studies are limited to simple charts with a few data points and static visualizations. It is unclear whether they are kept up to date with the latest development in the visualization field. More importantly, they did not address the need of visualization creators who are supposed to make accessible visualizations.</p><p>In this research, we investigate the current practice of accessible visualization design for visually impaired people. Our two main research questions include 1) how visualizations in the wild are made accessible if at all and 2) what makes it challenging for practitioners to create accessible visualizations for visually impaired people. We employed a three-stage mixed-methods design to tackle these questions.</p><p>In the first phase, we collected and analyzed the accessibility practices of existing visualizations, evaluating how they are made accessible through screen readers. We collected the visualizations from diverse sectors, including news media and government. Three sighted researchers inspected each case in detail by running it through screen readers, and conducted an iterative open coding process to derive recurring themes and concepts. We divided the analysis dimensions we identified into visualization and accessibility dimensions.</p><p>To mimic the broad spectrum of accessible visualization design space, we balanced the distributions of the visualization dimensions when we collected the visualizations, including sector, chart type, chart format (e.g., &lt;img&gt;, &lt;svg&gt;), data complexity, and interactions. The accessibility dimensions, which we derived while analyzing, include an alternative text method used, interactions available through screen readers, chart existence and type notification, chart overview, data details, contextualization, and overall informative value.</p><p>Overall, through screen-reader usage, the informative value of most visualizations was low. Most visualizations neither convey the type of the chart nor provide underlying data details. Many interactions available to sighted users were not available through screen readers. In general, government and non-profit organizations retained original interactions relatively well, and also provided data tables relatively frequently. News media visualizations typically provide more informative overviews. The interactive visualizations are typically written in &lt;svg&gt;, while they rarely leverage the advanced accessibility feature (i.e., aria) to make the underlying content easily navigable. The surrounding text often alleviated the inaccessibility of the chart, by redundantly conveying the same information.</p><p>In the second phase, we conducted a survey with visualization practitioners in the U.S. to gain insights behind the observed patterns in the first phase. We asked about their awareness of and experience with visualization accessibility for visually impaired users. We collected 144 responses from diverse people including designers, scientists, and journalists. They work in small to large organizations with varying levels of visualization responsibilities.</p><p>The respondents indicated they use diverse tools and technologies to create visualizations including programming (e.g., &lt;svg&gt;) to visualization tools such as Excel (14%) and Tableau (13%). Most respondents reported having basic knowledge (43%) or familiarity with web accessibility (31%), while most of them have no to little experience (62%) in making visualizations accessible for visually impaired people. About one-third of the respondents said accessibility is not a topic at their workplace (30%). Many of them said they themselves are responsible for providing accessibility for the products they develop (42%). Although many think their visualizations are not very accessible (38%) or just do not know how accessible they are (23%), most respondents agreed on the value of visualization accessibility and that providing it is worth the effort (&gt;50%). The respondents stated that it is okay to not provide accessibility if the associated text conveys the same information (41%), while some others said it is never okay (29%). The most common purpose of using web accessibility features was to convey the general message of the visualization (28%). However, this trend is largely driven by practitioners with no to little experience in visualization accessibility (35%). Amongst experienced practitioners supporting insights into underlying data (33%) and ensuring equal engagement for users irrespective of their visual status (25%) were more frequently listed as main purposes. The experienced practitioners also reported having more accessible visualizations and using a broader variety of strategies to provide accessibility.</p><p>Finally, in the third phase, we conducted semi-structured interviews with ten visualization practitioners. We recorded the interviews and performed a thematic analysis. We first assigned themes inspired by our research questions to the interview transcripts and then identified emerging codes. After coding, we used these annotations for close reading of the transcript passages and summarizing of statements assigned to the codes. The interview showed that practitioners differ, especially regarding the user groups they consider, ranging from one focusing only on colorblind users to others including low vision and blind users. We further uncover a problematic grey zone. Some practitioners adhere to accessibility standards but may not provide efficient accessibility that meets user needs. Amongst other factors, a lack of expertise, a lack of robustness of visualization tools (e.g., unsatisfactory support of keyboard navigation), and insufficient feedback on the quality of their accessibility practices play into this. Furthermore, participants reported on hurdles that stand in the way of more widespread accessibility. These include a lack of awareness amongst visualization practitioners, an unsupportive environment and infrastructure at the workplace, and insufficient provision of resources such as time, budget, training, and expertise. While novices in visualization accessibility describe being overwhelmed by making complex or interactive visualizations accessible, practitioners with more experience frame this challenge as a design task for which systematic solutions exist. Lastly, practitioners envisioned tools and features that could support them in their workflow. Most commonly, this was real-time in-browser feedback pointing out accessibility issues and simulating users' experience with different needs.</p><p>Our work advances the understanding of the accessible design practice for the visually impaired in light of recent advanced visualizations and the challenges of visualization creators. More specifically, this paper makes the following contributions:</p><p>• The analysis of the visualizations collected in the wild to surface existing accessibility considerations • The analysis of the survey showing how practitioners position themselves in regards to visualization accessibility</p><p>• The findings from the interviews that shed light on practitioners' visualization design process, working definition of accessibility, and motivators and hurdles for providing accessibility</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2">RELATED WORK</head><p>We provide a background on web accessibility for visually impaired people and examine prior work on analyzing web content accessibility. We review the current status of visualization accessibility and articulate where our work lies.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.1">Web Accessibility for Visually Impaired People</head><p>Alternative text, commonly referred to as alt text, has been a de facto method for web accessibility. The alt attribute was first introduced in HTML 2.0 and used inside &lt;img&gt; tag to provide an image description for screen readers. If it is necessary to provide a longer description, the longdesc attribute is used in addition to the alt attribute. WCAG (Web Content Accessibility Guidelines) provide guidelines for creating useful alt attribute content for images <ref type="bibr" target="#b62">[67]</ref>. For complex images including graphs and charts, the WCAG suggests providing both a short alt text that briefly describes the chart as well as a long description that substitutes the chart and provides the same content and functionality <ref type="bibr">[39]</ref>.</p><p>Although not specifically designed for accessibility, HTML5 semantic tags, including &lt;figure&gt; and &lt;figcaption&gt;, can convey the structure and role of web content helpful for accessible navigation. Recently, interactive and dynamic web applications are increasingly common. To improve the accessibility of such rich web content, ARIA (Accessible Rich Internet Applications) has recently become a W3C (World Wide Web Consortium) recommendation.</p><p>For instance, a developer can assign a role and aria-label to any element in an HTML document (e.g., a data point represented via &lt;div&gt;) that is dynamically changing based on user input. More specific ARIA specs for SVG-based charts <ref type="bibr" target="#b18">[18]</ref> are currently being proposed, such as roles (e.g., graphics-legend) and attributes (e.g., aria-datatype and aria-datascales). Proprietary tools that are often embedded in web pages (e.g., Microsoft Power BI <ref type="bibr" target="#b47">[50]</ref> and Tableau Dashboards [59] ) follow the WCAG standards, while it is still not clear if the final outcome is accessible for visually impaired users.</p><p>Screen readers are widely used and affordable assistive technologies that can read the alternative text markup. While third-party screen readers such as JAWS and the free of cost software NVDA have been available for a long time, recent devices and platforms provide their own screen readers without any cost, such as TalkBack for Android, Voice Over for macOS &amp; iOS, Narrator for Windows. These screen readers provide similar features by using keyboard shortcuts to navigate web content. Screen readers use speech as the main output modality and thus are limited to sequential information processing. Since the web content is visually spatial, the limited processing capability leads to a higher cognitive load <ref type="bibr" target="#b10">[10]</ref>. In addition, the many keyboard commands for operating screen readers make them challenging to master <ref type="bibr" target="#b56">[60]</ref>. However, it is reported that common frustrations of using screen readers typically arise from the web content rather than the assistive technology's limitations.</p><p>They include confusing and complex page layouts, poorly labeled forms, absence of alt text for images, and misleading links <ref type="bibr" target="#b5">[5,</ref><ref type="bibr" target="#b43">46]</ref>. Previous studies indicated that visually impaired people employ various strategies to cope with these problematic situations <ref type="bibr" target="#b10">[10,</ref><ref type="bibr" target="#b61">66]</ref>. Examples include proactive probing, increasing speech rate, fast tabbing to skip inaccessible content, inferring roles of controls, and finally asking for assistance or giving up <ref type="bibr" target="#b10">[10,</ref><ref type="bibr" target="#b61">66]</ref>. Interestingly, the most common strategy for coping with dynamic content was evading it completely <ref type="bibr" target="#b6">[6]</ref>. However, this is not because users are not interested in the dynamic content but because the content is typically inaccessible <ref type="bibr" target="#b38">[42]</ref>.</p><p>The previous research on alternative text and screen readers informed our analysis framework for evaluating visualization accessibility on the web. We run over data visualization articles using screen readers and also inspect the underlying HTML/SVG code to see if and how alternative texts are provided. Other accessible output and technologies such as non-speech audio and braille displays provide complementary benefits that alternative text and screen readers cannot provide. However, they are still costly and not universally used, and we leave those for future work.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.2">Evaluating Web Content Accessibility</head><p>The web is constantly and rapidly evolving, introducing new media content and platforms such as complex images and social networks. Ever since the first WCAG specification was available in 1999, existing studies have investigated how well web content is made accessible. For instance, Bigham et al. analyzed web pages from various venues and found that government organization websites have a higher percentage of labeled images than other high-traffic websites <ref type="bibr" target="#b7">[7]</ref>. On the other hand, Johnson and Castro <ref type="bibr">[25]</ref> recently reported that about one-third of the U.S. government websites still need to improve their accessibility based on automated accessibility testing <ref type="bibr" target="#b20">[20]</ref>; common issues include absent, inaccurate, repetitive, and confusing captions. Similarly, Goodwin et al. compared the web accessibility of national websites from the United Nations and found that implementing antidisability discrimination laws might help ensure accessibility <ref type="bibr" target="#b30">[31]</ref>. Using the Internet Archive's Wayback Machine <ref type="bibr" target="#b2">[3]</ref>, Hackett et al. studied how web accessibility changed over time, finding that the increased technology complexity raises the accessibility barriers <ref type="bibr" target="#b32">[35]</ref>. In addition to the general web content accessibility, other studies investigate the accessibility of content on social network sites <ref type="bibr" target="#b13">[13,</ref><ref type="bibr" target="#b26">26,</ref><ref type="bibr">27,</ref><ref type="bibr" target="#b49">52,</ref><ref type="bibr" target="#b54">57,</ref><ref type="bibr" target="#b57">61]</ref>, productivity tools <ref type="bibr" target="#b12">[12,</ref><ref type="bibr">19,</ref><ref type="bibr" target="#b69">73]</ref>, and COVID dashboard web pages <ref type="bibr" target="#b53">[56]</ref>. Most of these analysis studies use surveys and observations to collect experiential feedback from visually impaired users <ref type="bibr">[19,</ref><ref type="bibr">27,</ref><ref type="bibr" target="#b53">56,</ref><ref type="bibr" target="#b54">57,</ref><ref type="bibr" target="#b57">61,</ref><ref type="bibr" target="#b69">73]</ref>. Others analyze image descriptions and content structures <ref type="bibr" target="#b7">[7,</ref><ref type="bibr" target="#b26">26,</ref><ref type="bibr" target="#b32">35,</ref><ref type="bibr" target="#b49">52]</ref> and perform simulations through screen readers <ref type="bibr" target="#b12">[12]</ref>. Some studies investigate ways to derive quality metrics as an effort to derive an objective, comparative evaluation framework <ref type="bibr" target="#b1">[2,</ref><ref type="bibr">65]</ref>, such as using WCAG <ref type="bibr" target="#b62">[67]</ref> as a basis.</p><p>While previous research examines regular images, we specifically focus on the accessibility of data visualizations. Data visualizations are systematically generated from data and are often interactive and dynamic, coordinating multiple views based on user input. Such differences afford different ways of writing alternative text and supporting navigation <ref type="bibr">[32]</ref>. We do not consider non-data maps and diagrams as visualizations and exclude them from our accessibility analysis. Moreover, our work goes beyond static image-based visualizations by examining more advanced and interactive visualizations. Also, rather than simply evaluating alternative text content, we analyzed detailed visualization accessibility dimensions, including the accessibility of underlying data details and the relationship with the surrounding text.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.3">Visualization Accessibility for Visually Impaired People</head><p>Visually impaired people nowadays frequently encounter datadriven media <ref type="bibr" target="#b53">[56]</ref>, contributing to the expanded user base of data visualizations beyond scientists and analysts <ref type="bibr" target="#b45">[48]</ref>. However, accessibility for people with visual impairment, as well as other disabilities, is relatively less explored in the visualization research community thus far <ref type="bibr" target="#b46">[49]</ref>. Recently, Kim et al. provided an overview of visualization accessibility research from 1999 to 2020 <ref type="bibr" target="#b38">[42]</ref>. They derive seven key dimensions of visualization accessibility-user, task, chart type, interaction, information granularity, sensory modality, and assistive technology-and put together a preliminary model for accessible visualization design consisting of four stages: 1) notifying existence, 2) providing an overview, 3) offering details on request, and 4) bringing context when needed. Practitioners have also recognized the increasing importance of visualization accessibility and developed an extended version of accessibility guidelines specifically for data visualizations, dubbed Chartability [32], and maintain relevant resources <ref type="bibr">[33]</ref>.</p><p>A variety of assistive technologies and sensory modalities have been explored, such as touch-enabled tablets <ref type="bibr" target="#b17">[17,</ref><ref type="bibr" target="#b44">47]</ref>, tactile graphics <ref type="bibr">[44,</ref><ref type="bibr" target="#b70">74]</ref>, and data sonification <ref type="bibr">[16,</ref><ref type="bibr" target="#b50">53]</ref>. Among those, screen readers were the most common assistive technology due to their availability <ref type="bibr" target="#b15">[15,</ref><ref type="bibr" target="#b28">28,</ref><ref type="bibr" target="#b52">55]</ref>. On the other hand, several other studies investigate novel multi-modal interactions, overcoming the limitations of screen readers or a single modality. For instance, Robo-Graphics combines a touch tablet with tactile overlays and small mobile robots <ref type="bibr" target="#b31">[34]</ref>, while GraVVITAS integrates the speech modality with multi-touch, haptic feedback <ref type="bibr">[29]</ref>. Although most research focuses on tackling one or a few specific charts (e.g., bar and line charts), several studies have developed scalable frameworks producing accessible visualizations. For instance, ASVG augments SVG with additional metadata (i.e., intention tree) encoding underlying data semantics (e.g., data values, trends, maximum, minimum, etc.) <ref type="bibr" target="#b68">[72]</ref>. Godfrey et al. provide a similar system in the R statistical environment, using a library of external tools to support metadata annotation, interactive navigation, and braille and speech output <ref type="bibr" target="#b28">[28]</ref>. EvoGraphs <ref type="bibr" target="#b52">[55]</ref> is another example that accepts a chart spec and produces a corresponding accessible chart. Similarly, efforts have also been made for APIs. These include Vega-lite <ref type="bibr" target="#b60">[64]</ref> and Highcharts <ref type="bibr" target="#b35">[38]</ref> which have done extensive work to make visualizations more accessible for people with vision impairments and who provide comprehensive accessibility API modules. iGraph-Lite also provides a generalizable navigation architecture, although only demonstrated for a line chart <ref type="bibr" target="#b23">[23]</ref>. In these tools, textual information is embedded in the chart output that screen readers can read.</p><p>While less available compared to systems research, empirical studies investigated how visually impaired people interact with data visualizations. Many of them explore the experience of tactile graphs, such as identifying suitable textures <ref type="bibr" target="#b66">[70]</ref>, comparing different charts and design variations <ref type="bibr" target="#b21">[21,</ref><ref type="bibr" target="#b70">74]</ref>, and comparing against other sensory modalities such as audio <ref type="bibr">[30,</ref><ref type="bibr" target="#b67">71]</ref>. A majority of other studies examined non-speech modality <ref type="bibr" target="#b0">[1,</ref><ref type="bibr" target="#b58">62,</ref><ref type="bibr" target="#b64">69]</ref>, while one compares that to speech modality <ref type="bibr" target="#b50">[53]</ref>. For chart descriptions, Ault et al. provide guidelines for describing charts <ref type="bibr">[4]</ref>, while the recent study by Jung et al. offers a more comprehensive set of recommendations for alternative text <ref type="bibr" target="#b36">[40]</ref> by analyzing the figure captions of academic publications and interviewing visually impaired people. Siu et al. recently noted that simply offering alt text and tables does not support data-oriented tasks well, necessitating the further need to utilize the capability of screen readers (e.g., facilitating jumping between different parts of the graph) <ref type="bibr" target="#b53">[56]</ref>.</p><p>While most prior studies are focused on studying the experiences of visualization readers (i.e., visually impaired people), our goal in this work is to understand the needs and wants of visualization creators who are responsible for making visualizations accessible for visually impaired readers. Thus, we conducted surveys and interviews with visualization practitioners, asking about their awareness, attitude, and struggles.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3">ANALYZING VISUALIZATION ACCESSIBILITY PRACTICES IN THE WILD</head><p>As a first step to understanding the challenges of visualization accessibility, we aim to inspect the current state of accessibility practices in existing visualizations in the wild. We are interested in how visualizations are made accessible to visually impaired users across different venues, what practices are employed to handle the varying levels of interactivity and data complexity, and how contextual information surrounding a visualization supports accessibility.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.1">Data Collection</head><p>Our goal was to curate a sample that best reflects the heterogeneous spectrum of visualizations and the range of approaches taken for making them accessible. Our annotated set of examples of accessibility practices found in the wild is open to access in the supplemental material. We adapted the list of source sectors from Borkin et al. <ref type="bibr">[9]</ref> who composed an extensive in-the-wild set of visualizations of different types and from different sources. We manually gathered visualizations from government websites, news media, scientific journals &amp; academic publications, and non-profit organizations &amp; blogs. Thereby we mimic the broad range of topics users may come across on the web. These visualizations were typically embedded in articles or parts of dashboards. Considering the fast-evolving web technology, we limited our collection to visualizations published after 2014. We excluded non-data-driven graphics such as infographics and graphical diagrams. We collected an initial set of 65 visualizations and coded them based on venues (e.g., news media, government websites), data complexity, interactivity, format (e.g., &lt;img&gt;, &lt;svg&gt;, &lt;canvas&gt;), and chart type. We further collected additional visualizations to improve the initial set in regards to those category dimensions. We aimed to achieve a similar distribution of venue sector and chart type in Borkin et al <ref type="bibr">[9]</ref>, while also including a variety of intricate modern visualizations with rich data, advanced encodings, and interactive elements created in different formats. Adding these examples in addition to standard and static visualizations resulted in a comprehensive set of 95 visualizations.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.2">Method</head><p>To analyze the accessibility practices of the visualizations collected, we employed a systematic coding process adopted from grounded theory <ref type="bibr" target="#b55">[58]</ref> and qualitative content analysis <ref type="bibr" target="#b14">[14,</ref><ref type="bibr" target="#b37">41]</ref>. We created a codebook with initial code categories and their definitions inspired by the accessibility model from Kim et al. that outlines different stages of accessibility <ref type="bibr" target="#b38">[42]</ref>. These included venue, chart type, interactivity, and format. Three researchers inductively and collaboratively expanded the codebook with additional categories that emerged from the analysis of a few visualization examples. They deductively and independently applied the codes to the remaining examples. Throughout the process, conflicts were resolved through discussion. The codebook was updated if needed, fostering consistent coding between the researchers. For cases where no consensus could be reached, a senior researcher was consulted. The senior researcher finally inspected all visualizations to confirm the consistency and validity of the final categories and codes.</p><p>To evaluate each case, we used screen readers to inspect what information is available through the speech output and how the information can be navigated using keyboard shortcuts. We also inspected the underlying source code. Moreover, we evaluate not only the target visualization but also contextual information surrounding it (i.e., text, caption, table), considering that they all are used to communicate relevant information on the visualization and its underlying data to screen reader users. We additionally checked whether or not each venue published an accessibility statement. These serve as summaries outlining what the organization has done to make its websites accessible for people with disabilities, and how their website has tried to adhere to current standards.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.3">Results</head><p>We separated the dimensions we used and identified from the analysis into visualization dimensions and accessibility dimensions. The visualization dimensions are those we balanced during the data collection, while the accessibility dimensions are the ones we derived through the coding process. After analyzing each type of dimension, we inspected how the visualization dimensions relate to the accessibility dimensions. <ref type="table" target="#tab_0">1</ref> shows the overview of visualization dimensions: sector venues, chart types, chart formats, data complexity, and available interactions for sighted users. From these, we further deduce additional dimensions, such as whether a visualization is interactive, involves multiple views, and is basic or advanced (see Table <ref type="table" target="#tab_1">2</ref>). We consider bar, line, and pie graphs as basic charts and treat other ones as advanced ones, including scatter plots. We also tagged if any external tool was used (e.g., Tableau) and categorized the role of the visualization in the whole article (e.g., is it the main content?). A majority of articles (87%) we selected were published after the latest WCAG guidelines had been published in 2018.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.3.1">Overview of Visualization Dimensions. Table</head><p>News media takes up a majority of sector venues in our collection (49/95), while government and non-profit organizations (NPOs) are also frequent (28/95). Example news media sources include Financial Times, Pew Research Center, New York Times, and Vox. The government and non-profit categories include WHO and OECD, WebAIM, and Wikipedia. Our collection also contains visualizations from individual blogs (10/95) and science articles (8/95) to reflect the composition of various visualization articles in the wild. The blog articles are written by private companies and individuals, while the science category includes articles from Nature and Science.</p><p>To reflect the distribution of chart types in the wild, we referred to the in-the-wild visualization collection by Borkin et al. As a result, our distribution generally follows a similar trend, with a majority of charts being standard ones, including line charts (32/95), bar charts (26/95), and maps (15/95). Scatter plots (8/95 and their variants, such as bubble charts (7/95), are also common. Overall, there are 56 basic and 39 advanced charts. When we look at the format, most charts use &lt;img&gt; (50/95) and SVG (37/95). A few charts use HTML tags (4) and canvas (4). Eleven of these charts have multiple views that are often coordinated through interactions. Seven charts use external tools, including Tableau (4), Power BI (1), Highcharts (1), and Flourish <ref type="bibr" target="#b0">(1)</ref>.</p><p>In most cases, visualizations play an additional role ( <ref type="formula">40</ref>), providing information not available in other surrounding elements. For instance, the text may only mention a few specific data points, while the chart shows a bigger picture with all trends and enables comparisons. In other cases, they play supporting roles (29), summarizing the same information provided elsewhere in the accompanying article. There are 26 cases where visualizations are the main content, such as dashboards.</p><p>To approximate the underlying data complexity, we counted the number of marks visible and classified them into three categories: high (&gt; more than 30 marks), medium (8-30 marks), low (less than eight marks) <ref type="bibr" target="#b48">[51]</ref>. We later used this dimension to see how the complexity impacts overall accessibility (see Section 3.3.3). Although other visual encoding variables exist, such as color and size, the number of marks was a good approximation for the overall complexity of a visualization. To make all data accessible, screen readers should at least describe each data point behind each mark. The proportions of data complexity categories are comparable: low (34/95), medium (19/95), and high (42/95), reflecting our intention to include modern complex visualizations.</p><p>Most visualizations are still static (55/95). Nevertheless, a significant portion of interactive visualizations is included as well (40/95).</p><p>We categorized what interactions are available for sighted users based on the taxonomy by <ref type="bibr">Heer &amp; Shneiderman [36]</ref>. Selecting (34/95), filtering (17/95), and sharing (9/95) are the most common interactions. An example of selecting interaction includes hovering to reveal a tooltip, while sharing is mainly exporting data. Typical filtering is through user interface elements such as checkboxes and dropdown menus, while other advanced interactions involved encoding different types of charts (7/95), coordinating more than one chart view (7/95), navigating content such as zooming (5/95), and recording a visualization snapshot (2/95). Table <ref type="table" target="#tab_5">4</ref> shows the frequencies of properties within the dimensions.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.3.2">Overall Quality by Accessibility Dimensions.</head><p>For the alternative text method, many charts take advantage of HTML elements (42/95) that are accessible to both sighted users and visually impaired. These HTML elements are mostly headers (e.g., &lt;h1&gt;-&lt;h6&gt;) and subtitles and other explanations (e.g., &lt;p&gt;).</p><p>The alt attribute for &lt;img&gt; (31/95) is also commonly used, while aria (7/95) is rarely used. We also observed &lt;figcaption&gt; (13/95), &lt;text&gt; in SVG (4/95), and the title attribute in &lt;img&gt; (2/95) that are visible as tooltips. &lt;text&gt; are typically data labels, while the common use case of aria is using aria-describedby to refer to a separate caption. While we expected that aria might be used to improve the accessibility of SVG (e.g., aria-label for a data value or axis), that is not the case in our collection. Among the 40 visualizations with interactions, 18 interactions are completely inaccessible through screen readers. Seventeen cases only partially retain original interactions in screen readers. Five out of the 40 visualizations fully retain interactions in screen readers. We identified two aspects that accompanied the retention of interactivity: the degree of interactivity and the interaction type. In cases where full interactivity is provided, the degree of interactivity is kept relatively simple compared to others. For example, four of the five cases had single interactions (navigate, select, filter), while the other one had both select and sort. Among all interaction types, record and sort are fully accessible for both sighted users and screen reader users alike as these two interactions are implemented using typical HTML buttons. In other words, if interactions are implemented in standard user interface elements (e.g., &lt;input&gt;), they mostly remain accessible for screen readers as well.</p><p>The existence and type dimension indicate whether the user is informed of the chart or its type at any point. This information is important in order to construct a mental model of the visualization. More than half of the web pages (55/95) do not notify the existence of the chart or the chart type. The notification of existence and chart type is typically available in the first few words of an alternative text (e.g., "Graph showing ... ", "Line chart of... "). In some other cases, they are hidden somewhere in the surrounding text, which is not easily accessible. At times, screen readers can catch the mentions of underlying visual mark types such as "lines" and "bars", but this may not be enough to convey the chart type (9/95).</p><p>The overview dimension refers to the first description that a screen reader reads when encountering the chart. The overview can support users in deciding whether they want to further engage with a visualization and is often the title or the alt text. Fifteen articles do not describe the chart, effectively making it a "phantom visualization", meaning that it is not perceivable through non-visual access. We observed three different types of overview: non-descriptive, descriptive, and informative. Examples are provided in Figure <ref type="figure" target="#fig_0">1</ref>. A descriptive overview typically explains the visual encoding of the chart, such as axes and data labels (54/95), while non-descriptive ones typically include unrelated or unhelpful text for understanding the chart (e.g., a caption like "credits: ..." or a simple title like "Presidential Election Interactive Map") (11/95). On the other hand, an informative overview provides a trend or message of the chart (15/95). While the message can be useful at times, providing it without access to the underlying data might incite a biased conclusion <ref type="bibr">[43]</ref> or feelings of being manipulated or patronized for visually impaired people.</p><p>The data detail dimension indicates how the underlying data of the chart is accessible. More than half of the charts leave their underlying data inaccessible (54/95). Sometimes, an alternative text mentions a few selected data points (15/95). Occasionally, all data points are read out through screen readers (15/95), although this is mostly for simple charts with a few data points. <ref type="bibr" target="#b14">14</ref>  </p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>No</head><p>No description is read. The chart is not perceivable in a non-visual way.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Non-descriptive</head><p>The description is not descriptive at all.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Descriptive</head><p>The description explains the chart content such as axes.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Informative</head><p>The description gives trends of the data and conveys a message.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Data Detail</head><p>Measures if someone can access the underlying data through the screen reader.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>None</head><p>No data points are readout.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Selected</head><p>At least one data point is read out while interacting with the chart (e.g., max). </p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Supporting Context</head><p>In the surrounding paragraphs, there is a mention of information related to the chart.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Informative Value</head><p>Evaluates the information provided by all elements that can be picked up by the screen reader.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Low</head><p>It does not go beyond basic elements of the chart. The purpose of the chart is not clear.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Selective</head><p>There is some mention of a trend but it does not capture the whole value of the chart.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Comprehensive</head><p>It captures the whole message and all the trends of the chart, as well as its purpose. On the other hand, screen readers often read chart elements such as marks and axes without the possibility to gain context (21/95). This can leave the user confused and also overwhelmed if the screen readers pick up too many data points and tick labels. This is usually common with SVGs as they have underlying elements available.</p><p>Although providing access to underlying data is desirable, it would be necessary to orient the user where they are located in the chart. The informative value dimension evaluates the information provided by all elements that can be picked up by the screen reader, including the alt text, other visible and surrounding texts, and tables. This dimension is to assess if the informative value of the graph comes across through the screen reader. Visualizations with low informative values (45/95) have no mention of the reason why the chart was provided in the first place. They do not go beyond describing the very basic elements of the chart and provide no information on the underlying structure. Selective information value (28/95) does slightly better, mentioning some aspects of the chart. Comprehensive value (22/95) indicates that screen readers can pick up the core value of the chart, including all trends in the chart and why it is used on the web page. However, the comprehensive value does not necessarily indicate the full accessibility of the chart (e.g., interactions or complete data may still not be accessible).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.3.3">Relationship between Visualization and Accessibility Dimensions.</head><p>We inspected how the visualization dimensions relate to the accessibility dimensions to identify prominent patterns. We investigated: how visualization accessibility is approached in each sector and how the complexity and interactivity of the chart impact accessibility.</p><p>Government (Gov) and non-profit organizations (NPOs) demonstrated similar approaches. For instance, Gov (11/17) and NPOs (4/11) support the chart existence and type notification relatively frequently, compared to news media (10/49). Gov (10/19) and NPOs (9/12) also provide underlying data details (e.g., tables) more frequently. Only one out of 49 news media charts provides a data table, while none of the science charts provide underlying data details. On the other hand, news media offer more informative overviews (13/49), while Gov (12/17) and NPOs (11/11) focus on descriptive overviews. While sample sizes are small, the informative value of blogs (7/10) and science sectors (7/8) is generally low.</p><p>We also observed differences in low-complexity and highcomplexity charts. The low-complexity charts are mostly images (27/34) and also have less diverse interactions (only three interaction types: filter, select, navigate). They use alt attributes for alternative text quite frequently (19/34). Even though less complex, they have informative overviews (10/34) and comprehensive informative values (14/34) relatively often. However, they rarely provide data tables (1/34). Instead, they often make all data values available since the number of data points is not high (8/34). High-complexity charts use SVGs more frequently (27/42). They typically do not use alt attributes for alternative text (3/42) and have no informative overviews (0/42). Instead, they provide underlying tables more frequently <ref type="bibr">(12/42)</ref>. Still seldom are they of comprehensive informative value (6/42). Another issue is that high-complexity charts have many uninformative marks or axes (16/42), compared to low-complexity ones (1/34).</p><p>Our analysis revealed differences in accessibility between static and interactive charts. Contrary to general recommendations, most interactive charts do not leverage the aria functionality but rather rely on nearby HTML elements for the alternative text (29/40), such as using h1 and &lt;p&gt;. As expected, uninformative marks/axes are recurring issues with interactive charts leveraging SVG and HTML, exposing the underlying elements (17/40). In fact, 90% (36/40) of the interactive charts used SVG and HTML, while 91% (50/55) of the static charts were images. Interestingly, interactive charts (13/40) provide data tables more frequently than static charts (1/55). However, static charts provide informative overviews (15/55) more frequently than interactive ones (0/40). One possible explanation for these differences is that interactive charts are more frequently main </p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Statement Analysis</head><p>60% of the venues we analyzed had published accessibility statements. 55% of them explicitly mention accessibility measures for visually impaired users but none of the accessibility statements we collected specifically mentioned making data visualizations accessible.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.5">Takeaways</head><p>The results indicate that accessibility for many in-the-wild charts is provided inconsistently for visually impaired users. The informative value of visualizations for screen reader users is typically low and further underlying data is seldom exposed. This raises the question of if designers consider providing insight into the data to be important or prioritize communicating other information. Challenges seem to lie in complex and interactive charts that are typically written in SVG. SVG has the capability to enable the navigation of data compared to static images. However, most existing charts did not leverage advanced accessibility features to the fullest extent such as the aria attributes. Simply providing underlying tables does not sufficiently address accessibility. Directly leveraging the chart structure would be still better than navigating the tables. While we did find that some can be retained if are kept relatively simple and are implemented using standard user interface elements, it remains still unclear how to support efficient engagement with highly interactive and complex charts using screen readers. We often observed phantom visualizations which not perceivable for screen reader users at all. What remains is whether these are unintentional omissions or deliberate attempts to avoid inaccessible charts that hamper web experience. Government and non-profit sectors seem to support accessibility more consistently than private sectors. It would be interesting to dig deeper into the cause of these differences, such as whether they enforce stricter internal rules for web accessibility <ref type="bibr" target="#b30">[31]</ref>.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4">UNDERSTANDING PRACTITIONERS' AWARENESS AND EXPERIENCE</head><p>We conducted an online survey with visualization practitioners to understand the rationale behind the design choices we observed the first phase. Questions that were left unanswered in Section 3 include: what is the rationale behind phantom visualizations? Between conveying insights into data and providing more general information, e.g., on the message of a visualization, what are practitioners' priorities? And what are the differences in the importance accessibility in different sectors? We were also interested in learning about how designers position themselves regarding visualization accessibility and what role their experience in visualization plays.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>An Online Survey with Visualization Practitioners</head><p>recruited visualization designers in the U.S. through social medata visualization forums, personal networks, and invitation emails. Participation was voluntary. Thus, the sample may show volunteer bias, that people who are interested in the topic or to exhibit pro-social behavior may be more likely to volun-To diversify our sample we actively encouraged both novices experts on the topic to share their perspectives. To achieve this, introduced accessibility as a challenge that could be addressed in a non-uniform manner among practitioners. The survey took approximately 10 minutes. Respondents did not receive compensation. After giving their informed consent, participants were asked about their background (e.g., age, experience, etc.), their (e.g. "How much experience do you have in making data visualizations accessible for people with visual impairments?"), and their design practices (e.g. "What strategy do you typically follow to make sure that the content/products you create are accessible?"). Participants could skip any question they did not feel comfortable answering. All survey questions can be found in the supplemental</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.2">Respondents</head><p>We collected a total of 144 responses (Gender: male=58% female=36% non-binary=4% others: 2%; Age: 21-29=35%, 30-39=44%, 40-49=15%, 50-59:4%, others=2%; Ethnicity: White=64%, Asian=12%, Black=8%, Hispanic=5%, Multiracial=4%, Native American=1%, others=5%). In terms of professional backgrounds, respondents identify themselves (multiple selections allowed) as visualization designers or developers (38%), data scientists (37%), people who hold positions in organization with some visualization job responsibilities (36%), roles that include academics/teachers (22%), students (10%), data journalists (10%), and hobbyists (7%).</p><p>Most of our work in the private sector (46%), academia and research or in the sector non-profit and journalism A of were their early-to-mid career years%=11%, 2-4=26%, 5-7 years=32%), while some had more than 8 years of experience (8-10=14%, &gt;11 years=17%). Their primary purposes making visuwere communicate data (30% and 26% respectively), while research, education, were also of purposes (22%, and 7% respectively). More than of respondents work in with more than 500 (55%), while others organizations 20-99=18%, &lt;20=9%, one person=6%). About 22% of said data visualization is main job, while 32% them said it is important but not the main job. Others said it is several other things they (35%) or only a part respondents were (91%), while only few respondents have color blindness (6%), low vision (1%), and blindness (1%).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Results</head></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.3.1">Participants' awareness of visualization accessibility.</head><p>To learn about participants' awareness of accessibility, we asked familthey are with web accessibility and the features and characteristics that make web content accessible. Answer options and reare shown in Figure <ref type="figure">2</ref>(b). Most respondents reported having at basic knowledge (43%) or intermediate level of expertise being familiar with web accessibility and the relevant features (31%). Othwere novices on the topic, as they reported having heard about but not knowing much about it (15%) or not being familiar at all (4%). the other hand, 7% of the respondents identify themselves as experts. When asked about their experience with making visualization accessible to users with visual impairment, more than one-third of respondents indicated that they are novices that do not have any experience at all (35%) or at a basic level with only little experience (27%). 30% of the respondents place themselves on an intermediate level having some 6% experts. 2% do not know their level of experience.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>4.3.2</head><p>The accessibility workplace. Regarding how is supported at their workplace, stated as they know, accessibility is a topic at their workplace.</p><p>no one said that they are not supposed to spend time, and resources on web accessibility. Twenty-seven percent of the respondents said they do not have accessibility guidelines, but it is considered important (e.g., topic in meetings, hiring, planning On the other hand, 18% of the respondents said that they do have accessibility guidelines, but it does not matter too much they do not always follow them. Lastly, 24% of them noted that accessibility is essential; e.g., they have accessibility guidelines and are held responsible for following them.</p><p>inspected the support for accessibility across different sectors. In the public sector, including government organizations, 58% said that accessibility guidelines are in place at their workplace. Furthermore, 21% of the participants said that accessibility is very and they are held responsible for following them. On the other hand, 36% of journalist participants said that guidelines are in place at their organization, although only 9% said that the guideare being enforced. In the private sector, 47% reported having guidelines, and 35% said the guidelines are enforced. Participants working in NPOs mostly said that they do not have guidelines, but accessibility is still discussed as an important topic (73%).</p><p>asked is responsible for providing accessibility, of the respondents said that anyone needing assistance is exto apply their own tools and methods to support accessibil-Another 42% of them acknowledged that they themselves are responsible for providing accessibility for the websites/products develop. Around 8% of the respondents said that another coworker/their employer is responsible for ensuring accessibility to all websites/products, including the ones they develop. Furtheranother 8% of them said they have a dedicated accessibility overseeing the quality of accessibility. Lastly, about 40% the respondents said they were unsure who is responsible for ensuring accessibility.</p><p>We asked how accessible they think their visualizations for people with visual impairments. Answer options and are shown in Figure <ref type="figure">2</ref>(a). About 38% of the respondents that they are typically not accessible at all (10%) or not very accessible (28%), while 23% said they do not know. Around 32% of the respondents said their visualizations are mostly accessible at least to some extent, and another 6% said that their visualizations are very accessible. A closer look at the respondents who said that they do not know the level of accessibility of their visualizations shows that 91% of those have no to little experience with accessible</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.3.3">Designers' valuation of visualization accessibility. To learn about the value practitioners place on visualization accessibility, we</head><p>important they would say it is that people with viimpairments can access data visualizations on the web. One respondent (1%) noted that it is not important in general as visually impaired users do not need access to visualizations. Three respondents (2%) similarly said it is often not that important that visually impaired users can access visualizations, while 18% said are unsure. However, still, a majority of the respondents think that it is vital in many cases (22%) or very important (56%) that impaired users can access visualizations. We asked the 94 participants with experience in providing accesfeatures about the trade-off between the time &amp; effort the importance of making visualizations accessible to visuimpaired users. Figure <ref type="figure">2(</ref>c) shows answer options and results.</p><p>respondents said it is very much worth the effort (47%), quite worth the effort (30%), and somewhat worth the effort (18%). None the respondents said it is not worth the effort at all, although 5% said it is rather not worth the effort. To provide basic info existence, encoding).</p><p>To convey of the visualization.</p><p>To provide detailed insights into the data.</p><p>To enable the same experience as sighted users.</p><p>What's the purpose of accessibility features? 4.3.4 Designers' accessibility practices. The respondents indicated that they use diverse and technologies to make data visualizations on the web. About 40% of the times creating custom (e.g., &lt;canvas&gt;, &lt;image&gt;, &lt;svg&gt;) was selected. Respondents also said they use external tools such as Excel (14%), Tableau (13%), Power BI (8%), Datawrapper (5%), and Flourish (3%).</p><p>not provided as an option, many respondents indicated they use R.</p><p>31% of the 89 practitioners with no to little experience do not provide accessibility features to their creations at all. Only 2% of practitioners with more experience stated this. Instead, when asked which accessibility strategies they follow, the 52 more experienced practitioners frequently presented extensive lists. Besides applying their own knowledge (94% of practitioners with experience), they refer to WCAG (50%), follow company-internal guidelines (37%), use software to check for accessibility issues (57%), and by their visualization tools the other hand, 44 of the 89 participants who have no to little experience in making visualizations accessible still own knowledge (49%), some at times reference company guidelines (15%), WCG (19%), use tools to check for accessibility (20%) or visualization tools that automatically provide features (16%).</p><p>When asked about the purpose of using accessibility features such as alt, and other text descriptions. We also observed differences between experts and novices. Among the 89 practitioners with no to little experience 29% do not provide such features, 22% do so in order to provide the basic information, 35% to convey the general message, 8% to give insights into data, and 6% to ensure equal engagement for users with or without visual impairment. Whereas amongst the 52 more experienced practition-6% do not provide such features, 17% do so to provide the basic 19% to communicate the general message, 33% to allow insights into underlying data, and 25% to ensure equal engagement irrespective of visual status. Among all participants, the most commonly stated intention when attempting to provide accessibility through textual descriptions is to communicate the message of the visualization (28%) or even just the basic information (20%) and not so much to convey important data values and data relations (17%) (see Figure <ref type="figure">2(d)</ref>). This is in agreement with the lack of data insights observed in Section 3. specifically asked about target audiences they have in mind when adding accessibility features. About 28% of respondents said they target blind users, while 18% said their goal is support low vision people. Other respondents stated that they use such features for other reasons (13%), such as using the alt attribute replace the image if the web page is not rendered properly, or for other impairments such as hearing, motor, or cognitive impairments (2%). Most participants did not have a specific target audience in (39%). Finally, we asked about when it is okay not to provide accessibility for a visualization. Almost one-third of the respondents "never", irrespective of whether they had more or less ex-(31% of 52 and 29% of 89, respectively). Others said when the associated text provides the same information (41%), the visualization is too complex (22%), and the majority of the target audience is sighted (14%). Respondents also said it is unnecessary when the visualization is not too important (14%) or if it is not a requirement (17%). Only 6% said it is not necessary for visuin general. Thus, about 71% of all participants could think of reasons to withhold accessibility features which may occurrences of phantom visualizations observed in Section 3.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Takeaways</head><p>The survey results provide valuable insights into the practitioners' awareness, thoughts, and workplace practice. They agree that visualization accessibility for visually impaired users is important, although most do not have much experience in making accessible vifound that decide not to provide accessibility features, although it is unclear they expect this to benefit visually impaired users. We also differences between practitioners with more experience in visualization accessibility and novices. It was mostly people with less experience that placed little value on conveying underlying data. This sparks interest in exploring practitioners' mental models of an accessible visualization, which we investigate in more detail in the next section. The results also reiterate the finding in the content analysis that accessibility is supported differently across Moreover, our survey results indicated the lack of support the diffusion of responsibility at the workplace, which we take deeper look at in the next section. Many of the respondents said they use existing visualization tools, pointing to the importance of accessibility support from the tools.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5">UNDERSTANDING CHALLENGES IN ACCESSIBLE DESIGN PRACTICE</head><p>We conducted follow-up interviews with selected participants to further understand the rationale and behind the accessibility practices we observed in Section 3 and Section 4. Open questions from our previous studies were: What are practitioners' intentions for visualization accessibility? Why may practitioners decide not to provide features? what does organizational support look like? In addition, we were interested in understanding practitioners' difficulties and their ideas on how to overcome these challenges.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.1">Interviews with Visualization Practitioners</head><p>selected from a sub-pool of survey respondents who had offered their participation. We aimed to include particia broad spectrum of experience (i.e., novice to experienced and across different industry sectors) of different genders, ages, and races. We conducted ten semi-structured remote interviews of 30 to 45 minutes in which we asked questions on the context behind the survey responses and specific challenges in ensuring accessibility in practice. The full interview can be supplemental material. We each participant with a $50 Amazon gift card.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Data</head><p>interview was by researcher and conducted with one individually. We recorded and transcribed interviews. to three researchers took notes during the interview sessions. After the interviews, we consolidated verbatim transcripts and all interview notes into a summarized transcript. The researchers initially collaboratively annotated the summarized transcripts in a top-down manner using pre-defined themes inspired by the requestions and interview guide for this study. They refined the themes throughout the process based on concepts emerging from the transcripts and constructed a codebook. The themes included "stages of the design process", "understanding of accessibility", "accessibility practices and features", "personal valuation", tools", and "organizational support". In an iterative coding process, one researcher then assigned the themes to the summatranscripts and identified lower-level codes. For example, a quote assigned to the higher-level theme "relevant tools" was furcoded for "issues with tool", "support from tool" and "request". We then used these annotations for close reading of the transcript passages associated with each theme, to summarize the statements assigned to codes.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.3">Results</head></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.3.1">Personal Experience</head><p>What participants' backgrounds experiences? Table <ref type="table">5</ref> the ten interviewees and their backgrounds. particiself-identified as the other as male.</p><p>Asian Islander, self-identified as Black or eight as White Caucasian. youngest participant was between 21 and 29 years of age and two oldest participants were between 40 and 49 years of age.</p><p>worked in fields such the prisector, journalism, or research and had various occupational including data journalists, data scientists, visualization deand developers. They reported engaging with creators, by features for visualization softor through other responsibilities. These on visualization as hobbyists and managing resources or project groups to promote visualization accessibility within their company. The visualizations they create vary in types and complexity, including both static and interactive charts. Their visualizations span a broad spectrum of use cases such as exploratory visualizations and dashboards but also narrative visualizations such as those found in data-driven articles and other web applications. The participants have experience in creating visualizations for many different target audiences, such as internal reports, the members of large institutions or specific companies, and the general public.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Visualization Design Process.</head><p>What are the common steps in the design process? We observed common steps that creators follow within their design process.</p><p>they choose raw data to be visualized or are tasked with creating a visualization for clients, they first familiarize themselves with the material. The familiarization process includes gathering detailed requirements or trying out different visualizations to find how to represent the data graphically. Two of our intervieexplained that they have company-wide standards to follow (e.g., particular aesthetics to communicate brands). Almost all go through rounds of feedback and review through senior colleagues, colleagues from adjoining departments such as researchers and editors, as well as business partners and clients.</p><p>How do they consider accessibility in the design process? How accessibility is considered in the design process is highly inconsistent, both across participants and within individual design For example, one participant (P2) stated that they do not incorporate accessibility for the visualizations they create as they do not feel responsible. Others typically provide limited accessibility for internal visualizations (e.g., only use adequate color palettes) and may put more thought into accessibility for a public audience. P3 and P9 such an approach and shared that if necessary for public projects, they could consult accessibility experts. P3 has a disability resource center at their organization, and P9 has a colleague who has more experience with visualization accessibility that could give advice. On the other hand, two participants said providing accesfeatures is a standard step in their design process, such as descriptive alternative text. However, even for those participants, thoroughly providing accessibility beyond the minimum requirements is an afterthought. One of these practitioners stated that, as they produce visualizations for the government, any final product published must conform to official accessibility standards would additionally be reviewed by external experts.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.3.3">Defining Accessibility.</head><p>How do they define accessibility in their own terms? described term accessibility is so broad that a lot of people don't know that means". We asked for interviewees' personal definitions  encountered two aspects most have in common. Most frequently, the participants highlight the goal of communicating the same information to anyone. Secondly, they describe that interacting with the visualization should be supported, saying that engaging with the data or drawing conclusions should also be possible for those who use assistive technology. More specifically, anything that can be done with a mouse should be achievable with an alternate device.</p><p>Who are their target audiences? Most respondents focus on one more of three user groups with specific vision-related needs. The first group includes people with less than average visual acuity or color vision deficiency who need more inclusive color palettes or benefit from magnification. The second group comprises low vision who due to more severe deterioration of vision can leverage only some residual vision and thus may use assistive technology for support. The third group includes blind users who seek nonvisual access, e.g., through audio-based keyboard navigation. P10 pointed out other aspects of accessibility, including different locations, infrastructure, and devices. P7 did not have a target user but instead followed core accessibility heuristic principles to include with a broad spectrum of experiences. P6 corroborated this thought, explaining that when designing visualization software, it is important to give visualization designers the tools that allow them to cater to any audience they choose, including people with abilities.</p><p>How do they provide accessibility for visually impaired users? lowing the findings from our content analysis, participants focus on screen reader access and keyboard navigation when incorporating accessibility. Participants did not use other modalities such as sonification. Most focus on providing textual descriptions, accurate labels, and a logical structure for a meaningful auditory experience. Furthermore, the approaches of constructing textual descriptions mirror findings from prior research <ref type="bibr" target="#b36">[40]</ref>. In general, respondents describe multiple levels of information that can be communicated, including a high-level summary of the visualization, stating key and patterns on an intermediate level, and naming low-level elements such as the chart type. P7 described multiple intricate linguistic considerations: the omission of punctuation, the overall reduction of words, and consistent and easily understandable These approaches aim to provide a smoother screen reader experience and minimize cognitive effort by reducing demands on working memory.</p><p>Participants also elaborated on supporting meaningful keyboard navigation. They spoke about providing labels for main chart elements and arranging HTML elements and their labels in a logical (e.g., the screen reader reads out elements from top to bottom and left to right). They also mentioned grouping elements into to avoid overload (e.g., not more than 20 elements). Another employed approach is providing data tables. Again, they need to carefully consider the order and amount of elements to allow for efficient navigation. Another pitfall P3 pointed out is data privacy, prohibiting sharing the entire data publicly. Frequently used features that we had not investigated in our content analysis were color palettes (e.g., adequate contrast) and large enough font How do they handle complex visualizations? The way practitioners deal with more complex visualizations shows the tension between the desire to create advanced visualizations with many data and their accessibility. P6 explained how this already begins with the issues visualization software faces when handling a large number of items. They generally have a progressive loading scheme of elements to maintain performance speed, although this may interfere with some accessibility requirements of having the complete set of elements immediately available upon opening the page. Especially practitioners with less experience in accessibility reported struggles with complex visualizations. Some of them explained that they might try to make a complex visualization but will "give up" if it becomes too burdensome. One participant admitted that their most complex visualizations are not accessible. Another participant concluded that they would not simcomplex visualization only because they did not know how to make it accessible. This reflects the standing of accessibility as an afterthought, instead of an indispensable component. On the other accessibility experts seem more ready to take on this challenge. voiced that it is always possible to provide a description, even if may require more time breaking down into smaller subsets and explaining each fragment.</p><p>How do they handle interactive visualizations? Regarding interactive visualizations, participants' difficulties revolve the two of where both interface element and the result of the interaction are accessible. Regarding the first aspect, multiple participants explained that it is unclear how to support mouse-driven capabilities such as click, drag, hover, and navigating complex data structures through a keyboard interface. One of the visualization experts presented an elaborate solution to the limited semantic support of SVG. For instance, interactive and feedback that is inherent to SVG elements can be accessed by screen readers if assigning aria-roles to SVG elements.</p><p>Other issues relate to the second aspect of functional interactivity, the communication of the result of the interaction. P10 explained that providing summaries and data tables is a viable accessibility for static charts. However, they do not know of a satisfactory solution for exploratory visualizations with dynamic data sets that updated based on user selection. For instance, P6 mentioned cross-filtering across multiple views as a challenging accessibility e.g., how can we indicate a change in the view using a non-visual cue? Other participants reported similar issues about interactive spatial visualizations like maps. Adding labels to each map that a screen reader reads would effectively equal a data table, losing the original spatial interactivity. One suggestion from participants was to expose interactions into standard accessible user interface elements such as a dropdown menu to supplement within the visualizations.</p><p>When should visualization accessibility be provided? participants described that they do not think that visualization is of interest for visually impaired users. Still, all acknowledged that there is a demand for making the underlying data accessible. One participant recalled that other colleagues justify a lack of accessibility features with the overall intention of providing a smoother for screen reader users. This practice would correspond a deliberate creation of phantom visualization. However, none of our interviewees confirmed this practice of consciously withholding accessibility features. We asked participants for times when they had not provided any accessibility features. The only occasions interviewees actively decided not to incorporate accessibility related to the project requirement, e.g., within an application at a purely sighted audience or if the client specified it due budget or time restraints. More frequently cited reasons for why designers did not provide accessibility were unconscious lapses and omissions due to a lack of awareness.</p><p>Lastly, respondents mentioned insufficient support in the tools and technologies used. One participant described that "One of the biggest frustrations web developers have is the lack of a holistic of accessibility. (...) Did I get it, and how do I know?!" designers seemed to be moving within a grey zone between conformance to standards and effective accessibility. "I'm not sure if I'm considering the specific needs of these users. I am guessing this is what their experience is, but I haven't met them, yet haven't seen them on the site." P3 described having a disability resources center that promotes accessibility across all areas of the organization. This is a valuable resource as the resource center would also test the accessibility of their products. One of the most commonly voiced needs was an excellent single resource to educate on the challenges of accessible visualizations, including a concise overview of guidelines and requirements specific to visualization design.</p><p>How much effort does it take to ensure accessibility? One participant explains that sometimes more theoretical considerations are required before approaches can be implemented. It might be the case if a project is complex and standard accessibility are insufficient or hard to apply. They say that, in those cases, it can take multiple days to a week to make a product accessible. At the same time, others noted that applying routine features such as alternative text and choosing color palettes does not take as much time. Extra training may be necessary initially, but practice and consistency can speed up the process. Another relevant factor is the creators' valuation of accessibility. P7 said that it should not take any extra time to incorporate accessibility because it be an indispensable part of visualization by default. They compared saving time for sacrificing accessibility with "cheating and making things that aren't viable products." The extent to which a creator wants to provide accessibility will also determine the time takes. P10 explained, "It's one of the 85 -15 things. You get to of what's required in 15% of the time, and then the last 15% takes 85% of the time. " Multiple participants reported that applying accessibility features adds about 15% to 30% to the overall workload. Overall we found that the time it takes designers to add accessibility features varies greatly and depends on multiple factors, showing that accessibility is, as P3 put it, "also a matter of time and who is to pay for it".</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.3.4">Motivators and Hurdles for Accessibility.</head><p>What role does personal valuation play in visualization accessibilout of the ten people we talked to described some personal association towards providing widespread access that made them value visualization accessibility. Many empathized with visuimpaired users as they or someone they knew needed special assistance in other situations. Others simply saw it as their human responsibility to support equality through equal access in any domain of life. P5 commented, I think it is the right thing to do". In the context of visualization accessibility, this is amplified of their significant role in communicating information. As P8 put it, "People who are in a position of spreading information or sharing knowledge or expertise should try to structure things so that it is as accessible as possible to as wide a range of types of people or types of thinking as possible. (...) I think it's unfair that can message in only reaches audience and then that target audience has an unfair or audiences have an unfair disadvantage. " Furthermore, to many, incorporating accessibility is a part of doing their job right. P3 said, "Good design is universal design.", while P10 elaborated on this, stating that "making sure that our navigation and the information is clear to someone using assistive technology, always helps the design, it makes it clear to people who have full vision and use the site with a mouse and their eyes as well. Having everything labeled just helps everyone they're seeing or listening to. " However, this personal valuamust be proceeded by awareness, which, as our participants described, is not yet as widespread. P8 commented, "I think one challenge, globally, is making people of accessibility and making people care about accessibility. If you don't even know about it, you're not gonna do anything". P5 similarly stated, "The first of making people aware of why it's important, is something that will have a big impact. If can make them care about it, then it's going to be a lot easier to get people to do the things that make things more accessible for more people. "</p><p>What role does the organization play in visualization accessibility? Organizations benefit from accessibility as they can attract broader audience and fulfill legal and moral obligations. However, P5 described that there is lots of talk about but not a lot of repercussions if standards of accessibility are not reached. Accessibility is often still more a recommendation at the is not well enough supported. Some participants experience back push when wanting to incorporate accessibility. P2 said, "I would say it's not necessarily a priority at my job, and I think spending a lot of time making a visualization accessible or thinking about it wouldn't be as highly valued. To emphasize accessibility, would have to push for a big change in terms of changing the standard color palette for our brand or push back against what have decided looks good. " To foster accessibility at their workplace, P5 argued that setting examples would help others learn best practices, while P2 commented on the need for having company-wide accessibility guidelines. The story of P6 supported this idea. P6 initially considered accessibility one of the minor but soon they realized how it improves the experience for and now they see it as more important. Another institutional issue was the insufficient provision of resources. One participant complained about the lack of centralized and wished for more software packages, tools, expertise, and feedback to make more accessible visualizations. The particsaid, "if I needed the IT group to test a visualization with screen reader, they could not do that for me", highlighting the potential value of support from a dedicated accessibility team and specialists. Other participants also mentioned the necessity of accessibility training to make company-wide changes.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>What role do visualization tools play in accessibility?</head><p>participants expressed dissatisfaction about the accessibility of the created by the tools they use. They noted unsatisfacsupport of interactions such as hovering or inefficient keyboard navigation. They commented, "If these tools do anything at all, they the bare minimum and often make it a worse experience. Some think of it as meeting a certain level of compliance. You have all your boxes checked and still have a bad visualization experience. "</p><p>Most frequently, participants wished for a feature that gives them clarity and oversight in their design process through real-time feedback. P8 described it as "A browser-based tool or add-on that would enable you to both simulate various accessibility challenges and can help structure how to go through your work check. " Similarly, P7 said, "I wish that in the developer tools in a when you open up the console or using the element inspecyou could click something, and then see what different screen readers would read." Participants also suggested features for the earliest stages of the design process, such as prompting questions asking to enter the goal and main trends of the visualization or automated annotation of chart elements. Three interviewees out that many problems could be solved if the end-users more control over how a visualization is presented. This could through on-demand requests, such as choosing different levels of for a description or different types and levels of redundancy for visual marks. Others also commented on personalization, "If you could set your default preferences and then anytime you access a visualization it's going to bring it up in a way that's most usable to you, that would be really good. ".</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Takeaway</head><p>The interviews provided richer and multifaceted insights behind the accessibility design practices observed in the wild. First, we observed various views on accessibility. While participants agree on the overall goal of communicating the same information, they differ in who they consider as target audiences and the approaches to address their specific needs. A different understanding of what means can lead to the mere "checking off boxes" to follow standards without actually providing efficient accessibility to visually impaired users. An example is the provision of tables, which may be a helpful feature, but without careful consideration of the complexity of data, it will not offer a meaningful experience. This the need for spreading more specific yet consistent and illustrative guidelines for practitioners beyond the generic ones such as WCAG, that explain the practical implications of design choices for visualizations. Experts in visualization accessibility describe more favorable mindsets towards accessibility than practitioners with less experience. They frame accessibility challenges not so much as unsolvable problems but more as design tasks that are regaspects of creating a visualization. They are willing to expend time and effort and apply intricate and creative solutions to foster accessibility. The interviews also highlighted multiple hurdles that may still hinder accessibility. For instance, even after designers are of the need and value for providing accessibility, they still face difficulties related to the limitations of the tools they use and resource constraints by their organizations and clients.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>DISCUSSION</head></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Three layers of uncertainty affecting</head><p>Our research has identified uncertainty of the evaluation and execution of accessibility as a common issue for visually impaired browsing the web. This uncertainty affects users as they can't sure of whether the information they seek on a website does exist, is not made accessible, or could be retrieved with more persistent effort <ref type="bibr" target="#b8">[8]</ref>. Our findings suggest that uncertainty also extends to visualization designers. We shed light on a sequence of layers affecting practitioners. On a personal level, there is significant uncertainty regarding when user needs are met sufficiently. Our findings remind us that data visualization might not be the main part of their job for most practitioners. While some creators may have some of web accessibility, many do not have experience with visualization accessibility and frequently cannot assess how accessible their visualizations are. To address these issues, visualization accessibility must become a concept linked to the idea of a viable data visualization. For instance, it could be implemented into the curriculum of data visualization classes and introduced to visualization alongside other basic visualization principles.</p><p>an operational level, there is uncertainty on how to use the tools effectively. This is especially the case when it comes to complex and interactive visualizations. Designers may wish to provide a certain accessibility feature but do not know how to it. Participants also expressed the need for training and expert their could provide these community efforts.</p><p>On an organizational level, there is often uncertainty on the expectations and responsibilities and the time and resources that can be allocated to making visualizations accessible. Accessibility was not a topic at the workplaces of many participants. Our viewees explained that decision-makers in higher positions need to set in motion changes for company-wide improvements. It remains unclear people on higher levels of the organizational hierarchy understand it as their responsibility to address accessibility or if the diffusion of responsibility persists and they see it as a design choice that they expect others to consider. decision-makers and their views should be identified to compose that benefit</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Organizational support for visualization accessibility</head><p>Restraints in resources such as time, budget, guidelines, and other support are known factors hindering practitioners from providing <ref type="bibr" target="#b22">[22]</ref>. Our findings show how these issues accumulate when it comes to data visualizations. results point towards the vital role the organization plays. We found between sectors similar reported in the accessibility literature <ref type="bibr" target="#b7">[7]</ref>, with government organizations providing accessibility guidelines consistently. Guidelines that all members of an organization must adhere to may encourage more diligent implementation of Our work highlights distinctive features of visualization accessibility and points out that these are not accounted for in company accessibility statements. Features that set visualizations apart from other web content, including the relevance of underlying data and ensuring equal engagement through interactive components, are not considered enough. Company design guidelines and accessibility statements should incorporate elements such as definitions, expectations, and references specific for visualization accessibility. also noticed differences in the resources allocated towards accessibility depending on the size of the organization. This may lead to tension between practitioners' personal motivation to make accessible visualizations, other job responsibilities, and support from the organization. While smaller companies with fewer resources not make their employees feel appreciated when spending time on accessibility, larger institutions can offer services such as disability teams that introduce software, training, and expertise on accessibility. We found that practitioners with more expertise the topic with more strategies and a favorable mindset and create more accessible visualizations. Accessible visualizations also often described as 'better, ' more robust, and understandable sighted users as well. It would be interesting to further explore the overall value of accessible data visualizations, e.g., reflecting an organization's quality or trustworthiness.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="6.3">Accessibility guidelines for advanced visualizations and visualization tools</head><p>Our findings showed that data-dense and interactive visualizations pose challenges for accessibility. Often designers seek to resolve these by providing alternative text, data tables, and contextual information surrounding the visualizations. However, in the interviews, participants explained that they do not always know or have the time to make very complex visualizations accessible. While the WCAG provides relatively well-established guidelines and instrucfor simpler static charts [39], many practitioners still long for technical guidelines for handling dynamic data visualizations with multiple layers of graphical content. In theory, ARIA features could be used to support efficient navigation, but as our data colreflects, they are not applied widely. Existing efforts within the visualization accessibility community such as Chartability <ref type="bibr">[32]</ref> providing heuristics and tests to evaluate interactive visualizations, and other instructions and guides shared by individuals (e.g. <ref type="bibr" target="#b24">[24]</ref>) still remain less known. Guidelines either not being applicable to advanced visualizations, unknown to practitioners, or lacking practical demonstrations and examples remains a problem in itself. We encourage future research to take on this challenge of complementing and amplifying existing guidelines. Given that there may be many possible ways to navigate through dynamic data, it would be valuable to conduct empirical studies to find out what navigation order makes the screen reader experience more meaningful.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="6.4">Accessibility support from visualization creation tools</head><p>The surveys and interviews indicated that practitioners often rely on external tools to create visualizations. Therefore, the outcome visualizations are limited by the capability of the tools. It may be true that a majority of visualization creators who are not familiar with computer programming are users of these tools. While not we had some examples in our collection that use Power BI, Tableau, Highcharts, and Flourish. Highcharts provide a separate module that the developer can configure to provide an optimized reader experience <ref type="bibr" target="#b35">[38]</ref>. Other than Highcharts, tools did not seem to support screen readers well, while more in-depth research would be necessary to evaluate the accessibility of existing visualization tools. Ideally, the visualization tools should automatically add accessibility while the designer can focus on creating visualizations. Like Highcharts, the designer should be able to customize the default accessibility support to meet their target audiences (e.g., skipping the complex data content). As the pointed out, testing the screen reader experience of their visualizations during the design process would be valuable.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="6.5">The phenomenon of phantom visualizations</head><p>A number of visualizations in our collection "phantom vi-That is, they are not at all perceivable through the screen reader. This supports recent by Sharif et al. similarly observed a frequent of visualizations that cannot be detected by screen readers <ref type="bibr" target="#b51">[54]</ref>. We further investigated this phenomenon to see what the underlying design rationale is. Our analysis did not find any accessible signals communicating the importance or relevance of the phantom visualizations in the surrounding texts. The phantom visualizations might reflect a conscious design choice, signaling screen reader users to move on instead of further engaging with the visualization. Indeed, our surshowed that a big part of practitioners sees justifications for phantom visualizations in certain situations. However, it may still be desirable to provide options for visually impaired users to ensure information equality. Future research may investigate what an cue for the relevancy of a visualization is. Perhaps even considering currently underused modalities such as sonification.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="6.6">Limitations</head><p>In our content analysis, the sighted coders examined information coming through screen readers. This inspection might be different from the natural reading experience of visually impaired users.</p><p>the focus of this work was to inspect the procedures and communicative signals designers use to incorporate accessibility.</p><p>those that took the time to participate in our survey were already more interested in accessibility than others. This may lead to the underrepresentation of people against or not interested in accessibility. Thus, the actual state of accessibility practice might even less favorable than what our results depicted. The expeand skills of the respondents were still diverse, however, and the results should allow valuable insights into the mindsets of those practitioners that would at least to some extent willing to promote accessibility.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="7">CONCLUSION</head><p>We report on our analysis of visualization accessibility practices in the wild, our survey on designers' attitudes towards it, and a series of interviews on practitioners' challenges behind their practices. Our work provides insights into the thoughts and struggles of "visualization creators". Furthermore, it points out what hinders widespread visualization accessibility for visually users. We hope that these findings will be helpful for future researchers to address the needs of visualization practitioners, such as building better guidelines and tools to ensure accessibility for visually impaired users.</p></div><figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_0"><head>1 :</head><label>1</label><figDesc>Illustrative example chart with different overview types. (a) Phantom visualization: The visualization is an image, and overview is not embedded in the alt-text leaving the graph non-perceivable through the screen reader. (b) Non-descriptive: contains on the content the graph. (c) Descriptive: The overview contains the axes and data labels. Informative: The overview contains the overall trend and main message of the chart. such as dashboards (21/40), while static charts support existing text content (24/55).</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_1"><head></head><label></label><figDesc>provide such features.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_2"><head></head><label></label><figDesc>Example survey questions. (a) Most respondents do not know how accessible their visualizations are (b) They mostly only basic knowledge about web accessibility (c) Most of them think that it is worth the effort to make visualization (d) Many think the purpose of web accessibility features is to convey the main message of the visualization.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_3"><head>5 :</head><label>5</label><figDesc>Overview of Interview Participants. Columns show participants' roles as AT = Academic/Teacher, DJ = Journalist, = Data Scientist, DVH = Data visualization hobbyist, SDVJ = Position in an organization with some data visualization STU = Student, VDe Developer/Visualization Designer; their of experience experience web and experience with visualization accessibility; and organization size.</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_0"><head>Table 1 :</head><label>1</label><figDesc>Table  3shows an overview of the accessibility dimensions we identified and Overview and Frequencies (n=95) of Visualization Dimensions</figDesc><table><row><cell>Sector</cell><cell></cell><cell cols="2">Chart Type</cell><cell></cell><cell cols="2">Chart Format</cell><cell cols="3">Data Complexity</cell><cell>Interaction</cell></row><row><cell cols="2">News Media 49</cell><cell>Line</cell><cell></cell><cell>32</cell><cell>Image</cell><cell>50</cell><cell>High</cell><cell>42</cell><cell></cell><cell>No</cell><cell>55</cell></row><row><cell cols="2">Government 17</cell><cell>Bar</cell><cell></cell><cell>26</cell><cell>SVG</cell><cell>37</cell><cell>Low</cell><cell>34</cell><cell></cell><cell>Select</cell><cell>34</cell></row><row><cell cols="2">Non Profit 11</cell><cell>Map</cell><cell></cell><cell>15</cell><cell>HTML</cell><cell>4</cell><cell cols="2">Medium 19</cell><cell></cell><cell>Filter</cell><cell>17</cell></row><row><cell>Blog</cell><cell>10</cell><cell>Point</cell><cell></cell><cell>8</cell><cell cols="2">Canvas 4</cell><cell></cell><cell></cell><cell></cell><cell>Share</cell><cell>9</cell></row><row><cell>Science</cell><cell>8</cell><cell>Circle</cell><cell></cell><cell>7</cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell>Visualize</cell><cell>7</cell></row><row><cell></cell><cell></cell><cell cols="2">Distribution</cell><cell>3</cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell>Coordinate 7</cell></row><row><cell></cell><cell></cell><cell cols="2">Diagram</cell><cell>3</cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell>Navigate</cell><cell>5</cell></row><row><cell></cell><cell></cell><cell>Area</cell><cell></cell><cell>3</cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell>Sort</cell><cell>2</cell></row><row><cell></cell><cell></cell><cell cols="2">Grid &amp; Matrix</cell><cell>2</cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell>Record</cell><cell>2</cell></row><row><cell></cell><cell></cell><cell cols="3">Tree &amp; Network 1</cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell></row><row><cell cols="4">Is Advanced Chart Is Multi-View</cell><cell cols="2">Is Interactive</cell><cell cols="2">Tool Used</cell><cell></cell><cell cols="2">Purpose</cell></row><row><cell>No</cell><cell>56</cell><cell>No</cell><cell>84</cell><cell>No</cell><cell>55</cell><cell cols="2">Tableau</cell><cell>4</cell><cell cols="2">Additional</cell><cell>40</cell></row><row><cell cols="2">Yes 39</cell><cell cols="2">Yes 11</cell><cell cols="2">Yes 40</cell><cell cols="2">Power BI</cell><cell>1</cell><cell cols="2">Supporting</cell><cell>29</cell></row><row><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell cols="3">Highcharts 1</cell><cell cols="2">Main Content 26</cell></row><row><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell cols="2">Flourish</cell><cell>1</cell><cell></cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_1"><head>Table 2 :</head><label>2</label><figDesc>Overview and Frequencies (n=95) of Deduced Visualization Dimensions</figDesc><table /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_2"><head></head><label></label><figDesc>out of 54 charts provide separate tables for accessing the whole data navigable by screen readers. However, since the raw data table is not the same as the original visualization in terms of structure, users may not extract</figDesc><table><row><cell>Dimension</cell><cell>Dimension Meaning</cell><cell>Property</cell><cell>Property Meaning</cell></row><row><cell>Accessibility</cell><cell>Whether the venue published</cell><cell></cell><cell></cell></row><row><cell>Statement</cell><cell>an accessibility statement.</cell><cell></cell><cell></cell></row><row><cell>Alternative Text</cell><cell>The types of elements used to</cell><cell>See Section 2.1</cell><cell></cell></row><row><cell>Method</cell><cell>convey the alternative text.</cell><cell></cell><cell></cell></row><row><cell>Interaction via</cell><cell>The types of interactions</cell><cell>See Heer &amp; Shnei-</cell><cell></cell></row><row><cell>Screen Reader</cell><cell>available through the screen</cell><cell>derman [36]</cell><cell></cell></row><row><cell></cell><cell>reader.</cell><cell></cell><cell></cell></row><row><cell>Existence</cell><cell>Measures if at any point the</cell><cell>No</cell><cell>It is never made clear that the user is dealing</cell></row><row><cell></cell><cell>user will be informed that</cell><cell></cell><cell>with a visualization.</cell></row><row><cell></cell><cell>they are dealing with a chart.</cell><cell>Somewhat</cell><cell>Screen reader reads out terms that hint at</cell></row><row><cell></cell><cell></cell><cell></cell><cell>the type (e.g. "lines", "bars").</cell></row><row><cell></cell><cell></cell><cell>Existence</cell><cell>Screen reader reads out a general word like</cell></row><row><cell></cell><cell></cell><cell></cell><cell>chart/graph/visualization.</cell></row><row><cell></cell><cell></cell><cell>Type</cell><cell>Screen reader at any point reads aloud the</cell></row><row><cell></cell><cell></cell><cell></cell><cell>type of the visualization.</cell></row><row><cell>Overview</cell><cell>Refers to the first description</cell><cell></cell><cell></cell></row><row><cell></cell><cell>the screen reader reads out</cell><cell></cell><cell></cell></row><row><cell></cell><cell>when encountering the chart.</cell><cell></cell><cell></cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_3"><head>Table The</head><label>The</label><figDesc></figDesc><table><row><cell></cell><cell></cell><cell>underlying data table is provided.</cell></row><row><cell></cell><cell>All</cell><cell>Every data point is read out while interacting</cell></row><row><cell></cell><cell></cell><cell>with the chart.</cell></row><row><cell>Contextualization Evaluates how the</cell><cell>No</cell><cell>None of the below apply.</cell></row><row><cell>orientation within the chart and the context is supported.</cell><cell>Uninformative Marks/Axes</cell><cell>Screen reader reads aloud data values or axes of the chart without context.</cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_4"><head>Table 3 :</head><label>3</label><figDesc>Description of the Accessibility DimensionsContextualization refers to how orientation within the chart and its context is supported for screen readers. Many articles provide supporting context describing the chart (47/95), although it might not explicitly refer to the chart. This supporting text is helpful,</figDesc><table><row><cell cols="2">AltTextMethod</cell><cell cols="2">InteractionScreenReader</cell><cell>InformativeValue</cell><cell></cell><cell cols="2">HasAccStatement</cell></row><row><cell>HTML</cell><cell>42</cell><cell>No</cell><cell>18</cell><cell>Low</cell><cell>45</cell><cell>Yes</cell><cell>49</cell></row><row><cell>img:alt</cell><cell>31</cell><cell>Filter</cell><cell>9</cell><cell>Selective</cell><cell>28</cell><cell>No</cell><cell>46</cell></row><row><cell>No</cell><cell>20</cell><cell>Share</cell><cell>7</cell><cell cols="2">Comprehensive 22</cell><cell></cell><cell></cell></row><row><cell cols="2">figcaption 13</cell><cell>Select</cell><cell>3</cell><cell></cell><cell></cell><cell></cell><cell></cell></row><row><cell>aria-</cell><cell>7</cell><cell>Visualize</cell><cell>3</cell><cell></cell><cell></cell><cell></cell><cell></cell></row><row><cell>&lt;text&gt;</cell><cell>4</cell><cell>Sort</cell><cell>2</cell><cell></cell><cell></cell><cell></cell><cell></cell></row><row><cell>img:title</cell><cell>2</cell><cell>Navigate</cell><cell>2</cell><cell></cell><cell></cell><cell></cell><cell></cell></row><row><cell></cell><cell></cell><cell>Record</cell><cell>2</cell><cell></cell><cell></cell><cell></cell><cell></cell></row><row><cell cols="2">ExistenceType</cell><cell>Overview</cell><cell></cell><cell>DataDetail</cell><cell></cell><cell cols="2">Contextualization</cell></row><row><cell>No Existence</cell><cell>55 19</cell><cell>Descriptive No</cell><cell>54 15</cell><cell>None All</cell><cell>54 15</cell><cell>Supporting Context</cell><cell>47</cell></row><row><cell>Type</cell><cell>12</cell><cell>Informative</cell><cell>15</cell><cell>Selected</cell><cell>15</cell><cell>No</cell><cell>36</cell></row><row><cell>Somewhat</cell><cell>9</cell><cell cols="2">Non-descriptive 11</cell><cell>Table</cell><cell>14</cell><cell>Uninfor</cell><cell></cell></row><row><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell>mative</cell><cell></cell></row><row><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell>Marks/Axes</cell><cell></cell></row></table><note>the same meaning out of it. These results suggest that conveying the underlying data may not be the main intention of practitioners when making visualizations accessible.</note></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_5"><head>Table 4 :</head><label>4</label><figDesc>Overview and Frequencies (n=95) of Accessibility Dimensions particularly when the corresponding chart is not very accessible.</figDesc><table /></figure>
+		</body>
+		<back>
+			<div type="references">
+
+				<listBibl>
+
+<biblStruct xml:id="b0">
+	<analytic>
+		<title level="a" type="main">User Experience Design for Diverse Interaction Platforms and Environments</title>
+		<author>
+			<persName><forename type="first">Cengiz</forename><surname>Acartürk</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Özge</forename><surname>Alaçam</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Christopher</forename><surname>Habel</surname></persName>
+		</author>
+		<idno type="DOI">10.1007/978-3-319-07626-3_34</idno>
+		<ptr target="https://doi.org/10.1007/978-" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the Third International Conference on Design, User Experience, and Usability</title>
+				<meeting>the Third International Conference on Design, User Experience, and Usability<address><addrLine>Berlin, Heidelberg</addrLine></address></meeting>
+		<imprint>
+			<publisher>Springer-Verlag</publisher>
+			<date type="published" when="2014">2014</date>
+			<biblScope unit="volume">8518</biblScope>
+			<biblScope unit="page" from="373" to="382" />
+		</imprint>
+	</monogr>
+	<note>Developing a Verbal Assistance System for Line Graph Comprehension</note>
+</biblStruct>
+
+<biblStruct xml:id="b1">
+	<analytic>
+		<title level="a" type="main">A Heuristic Method to Evaluate Web Accessibility for Users With Low</title>
+		<author>
+			<persName><forename type="first">Patricia</forename><surname>Acosta-Vargas</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Luis</forename><forename type="middle">Antonio</forename><surname>Salvador-Ullauri</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sergio</forename><surname>Luján-Mora</surname></persName>
+		</author>
+		<idno type="DOI">10.1109/ACCESS.2019.2939068</idno>
+		<ptr target="https://doi.org/10.1109/ACCESS.2019.2939068" />
+	</analytic>
+	<monogr>
+		<title level="j">IEEE Access</title>
+		<imprint>
+			<biblScope unit="volume">7</biblScope>
+			<biblScope unit="page" from="125634" to="125648" />
+			<date type="published" when="2019">2019. 2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b2">
+	<monogr>
+		<title level="m" type="main">Internet Archive</title>
+		<imprint/>
+	</monogr>
+	<note>n.d.</note>
+</biblStruct>
+
+<biblStruct xml:id="b3">
+	<monogr>
+		<title/>
+		<author>
+			<persName><forename type="first">Wayback</forename><surname>Machine</surname></persName>
+		</author>
+		<ptr target="https://archive.org/web/.Online" />
+		<imprint>
+			<date type="published" when="2021-08">August 2021</date>
+			<biblScope unit="volume">23</biblScope>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b4">
+	<analytic>
+		<title level="a" type="main">Evalof Long Descriptions of Statistical Graphics for Blind and Low Vision Users</title>
+		<author>
+			<persName><forename type="first">K</forename><surname>Ault</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">W</forename><surname>Deloge</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><forename type="middle">W</forename><surname>Lapp</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><forename type="middle">J</forename><surname>Morgan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">R</forename><surname>Barnett</surname></persName>
+		</author>
+		<idno type="DOI">10.5555/646269.684495</idno>
+		<ptr target="https://doi.org/10.5555/646269.684495" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 8th International Conference on Computers Helping People with Special Needs (ICCHP &apos;02)</title>
+				<meeting>the 8th International Conference on Computers Helping People with Special Needs (ICCHP &apos;02)<address><addrLine>Berlin, Heidelberg</addrLine></address></meeting>
+		<imprint>
+			<publisher>Springer-Verlag</publisher>
+			<date type="published" when="2002">2002</date>
+			<biblScope unit="page" from="517" to="526" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b5">
+	<analytic>
+		<title level="a" type="main">Understanding blind users&apos; Web accessibility and usability problems</title>
+		<author>
+			<persName><forename type="first">Rakesh</forename><surname>Babu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Rahul</forename><surname>Singh</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jai</forename><surname>Ganesh</surname></persName>
+		</author>
+		<idno type="DOI">10.12691/ajis-2-2-2</idno>
+		<ptr target="https://doi.org/10.12691/ajis-2-2-2" />
+	</analytic>
+	<monogr>
+		<title level="j">AIS Transactions on Human-Computer Interaction</title>
+		<imprint>
+			<biblScope unit="volume">2</biblScope>
+			<biblScope unit="issue">3</biblScope>
+			<biblScope unit="page" from="73" to="94" />
+			<date type="published" when="2010">2010. 2010</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b6">
+	<analytic>
+		<title level="a" type="main">WebinSitu: A Comparative Analysis of Blind and Sighted Browsing Behavior</title>
+		<author>
+			<persName><forename type="first">P</forename><surname>Bigham</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Anna</forename><forename type="middle">C</forename><surname>Cavender</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jeremy</forename><forename type="middle">T</forename><surname>Brudvik</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jacob</forename><forename type="middle">O</forename><surname>Wobbrock</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Ladner</surname></persName>
+		</author>
+		<idno>ASSETS &apos;07. 2417</idno>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 9th International ACM SIGACCESS Conference on Computers and Accessibility</title>
+				<meeting>the 9th International ACM SIGACCESS Conference on Computers and Accessibility</meeting>
+		<imprint>
+			<date type="published" when="2007">2007</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b7">
+	<analytic>
+		<title level="a" type="main">WebInSight: making web images accessible</title>
+		<author>
+			<persName><forename type="first">P</forename><surname>Bigham</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Ryan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Richard</forename><forename type="middle">E</forename><surname>Kaminsky</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Oscar</forename><forename type="middle">M</forename><surname>Ladner</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Gordon</forename><forename type="middle">L</forename><surname>Danielsson</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Hempton</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">of the 8th International ACM SIGACCESS Conference on Computers and Accessibility</title>
+				<imprint>
+			<date type="published" when="2006">2006</date>
+			<biblScope unit="page" from="181" to="188" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b8">
+	<analytic>
+		<title level="a" type="main">The Effects of &quot;Not Knowing You Don&apos;t Know&quot; on Web Accessibility for Blind Web Users</title>
+		<author>
+			<persName><forename type="first">P</forename><surname>Bigham</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Irene</forename><surname>Lin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Saiph</forename><surname>Savage</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3132525.3132533</idno>
+		<ptr target="https://doi.org/10.1145/3132525.3132533" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 19th International ACM SIGACCESS Conference on Computers and Accessi</title>
+				<meeting>the 19th International ACM SIGACCESS Conference on Computers and Accessi<address><addrLine>Baltimore, Maryland, USA; New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<date type="published" when="2017">2017</date>
+			<biblScope unit="page" from="101" to="109" />
+		</imprint>
+	</monogr>
+	<note>ASSETS &apos;17). Association for Computing Machinery</note>
+</biblStruct>
+
+<biblStruct xml:id="b9">
+	<analytic>
+		<title level="a" type="main">Beyond memorability: Visualization recognition and recall</title>
+		<author>
+			<persName><forename type="first">Zoya</forename><surname>Michelle A Borkin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Nam</forename><forename type="middle">Wook</forename><surname>Bylinskii</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Constance</forename><forename type="middle">May</forename><surname>Kim</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Bainbridge</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Daniel</forename><surname>Yeh</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Hanspeter</forename><surname>Borkin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Aude</forename><surname>Pfister</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Oliva</surname></persName>
+		</author>
+		<idno type="DOI">10.1109/TVCG.2015.2467732</idno>
+		<ptr target="https://doi.org/10.1109/TVCG.2015.2467732" />
+	</analytic>
+	<monogr>
+		<title level="j">IEEE transactions on visualization and computer graphics</title>
+		<imprint>
+			<biblScope unit="volume">22</biblScope>
+			<biblScope unit="page" from="519" to="528" />
+			<date type="published" when="2015">2015. 2015</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b10">
+	<analytic>
+		<title level="a" type="main">More than Meets the Eye: A Survey of Browsing Strategies</title>
+		<author>
+			<persName><forename type="first">Yevgen</forename><surname>Borodin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jeffrey</forename><forename type="middle">P</forename><surname>Bigham</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Glenn</forename><surname>Dausch</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">V</forename><surname>Ramakrishnan</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/1805986.1806005</idno>
+		<idno>W4A &apos;10</idno>
+		<ptr target="https://doi.org/10.1145/1805986.1806005" />
+	</analytic>
+	<monogr>
+		<title level="m">of the 2010 International Cross Disciplinary Conference on Web Accessibility (W4A)</title>
+				<meeting><address><addrLine>Raleigh, North Carolina; New York, NY, USA, Article</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computing Machinery</publisher>
+			<date type="published" when="2010">2010</date>
+			<biblScope unit="volume">13</biblScope>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b11">
+	<analytic>
+		<title level="a" type="main">Magnitude, trends, projections of the global prevalence of blindness and and vision impairment: a systematic review and meta-analysis</title>
+		<author>
+			<persName><forename type="first">R</forename><forename type="middle">A</forename><surname>Rupert</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Bourne</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Tasanee</forename><surname>Seth R Flaxman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">V</forename><surname>Maria</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Aditi</forename><surname>Cicinelli</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Das</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Jost</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jill</forename><surname>Jonas</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Keeffe</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>John</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Janet</forename><surname>Kempen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Hans</forename><surname>Leasher</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Limburg</surname></persName>
+		</author>
+		<idno type="DOI">10.1016/S2214-109X(17)30293-0</idno>
+		<ptr target="https://doi.org/10.1016/S2214-109X(17)30293-0" />
+	</analytic>
+	<monogr>
+		<title level="j">The Lancet Global</title>
+		<imprint>
+			<biblScope unit="volume">5</biblScope>
+			<biblScope unit="page" from="e888" to="e897" />
+			<date type="published" when="2017">2017. 2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b12">
+	<analytic>
+		<title level="a" type="main">Accessing Google docs via screen reader</title>
+		<author>
+			<persName><forename type="first">Maria</forename><forename type="middle">Claudia</forename><surname>Buzzi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Marina</forename><surname>Buzzi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Barbara</forename><surname>Leporini</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Giulio</forename><surname>Mori</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Vic-Mr</forename><surname>Penichet</surname></persName>
+		</author>
+		<idno type="DOI">10.1007/978-3-642-14097-6_17</idno>
+		<ptr target="https://doi.org/10.1007/978-3-642-14097-6_17" />
+	</analytic>
+	<monogr>
+		<title level="m">International Conference on Computers for Handicapped Persons</title>
+				<imprint>
+			<publisher>Springer</publisher>
+			<date type="published" when="2010">2010</date>
+			<biblScope unit="page" from="92" to="99" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b13">
+	<monogr>
+		<title level="m" type="main">The goal of this talk for csv,conf,v6 was to our findings after scraping the alternative (alt) text from data visualization shared as part of the TidyTuesday online learning community</title>
+		<author>
+			<persName><forename type="first">Silvia</forename><surname>Canelón</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Elizabeth</forename><surname>Hare</surname></persName>
+		</author>
+		<idno type="DOI">10.5281/zenodo.4743271</idno>
+		<ptr target="https://github.com/spcanelon/csvConf2021" />
+		<imprint>
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+	<note>Revealing Room for Improvement in Accessibility within a Social Media Data Visualization Learning Community</note>
+</biblStruct>
+
+<biblStruct xml:id="b14">
+	<analytic>
+		<title level="a" type="main">Reducing confusion about grounded theory and qualitative content analysis: Similarities and differences</title>
+		<author>
+			<persName><forename type="first">Young</forename><surname>Cho</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Eun-Hee</forename><surname>Lee</surname></persName>
+		</author>
+		<idno type="DOI">10.46743/2160-3715/2014.1028</idno>
+		<ptr target="https://doi.org/10.46743/2160-3715/2014.1028" />
+	</analytic>
+	<monogr>
+		<title level="j">Qualitative Report</title>
+		<imprint>
+			<biblScope unit="volume">19</biblScope>
+			<biblScope unit="page">32</biblScope>
+			<date type="published" when="2014">2014. 2014</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b15">
+	<monogr>
+		<author>
+			<persName><forename type="first">Jinho</forename><surname>Choi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sanghun</forename><surname>Jung</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Deok Gun</forename><surname>Park</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jaegul</forename><surname>Choo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Niklas</forename><surname>Elmqvist</surname></persName>
+		</author>
+		<idno type="DOI">10.1111/cgf.13686</idno>
+		<ptr target="https://doi.org/10.1111/cgf.13686" />
+		<title level="m">Visualizing for the Non-Visual: Enabling the Visually Impaired to Use In Computer Graphics Forum</title>
+				<imprint>
+			<publisher>Wiley Online Library</publisher>
+			<date type="published" when="2019">2019</date>
+			<biblScope unit="volume">38</biblScope>
+			<biblScope unit="page">249</biblScope>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b16">
+	<monogr>
+		<title level="m" type="main">Digitizer Auditory Graph: Making Graphs Accessible to the Visually Impaired</title>
+		<author>
+			<persName><forename type="first">H</forename><surname>Stephen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Bruce</forename><forename type="middle">N</forename><surname>Choi</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Walker</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/1753846.1753999</idno>
+		<ptr target="https://doi.org/10.1145/1753846.1753999" />
+		<imprint>
+			<date type="published" when="2010">2010</date>
+			<publisher>Association for Computing Machinery</publisher>
+			<biblScope unit="page" from="3445" to="3450" />
+			<pubPlace>York, NY, USA</pubPlace>
+		</imprint>
+	</monogr>
+	<note>10 Extended Abstracts on Human Factors in Computing Systems</note>
+</biblStruct>
+
+<biblStruct xml:id="b17">
+	<analytic>
+		<title level="a" type="main">Teaching Graphs to Visually Impaired Students Using an Active Auditory Interface</title>
+		<author>
+			<persName><forename type="first">Robert</forename><forename type="middle">F</forename><surname>Cohen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Arthur</forename><surname>Meacham</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Joelle</forename><surname>Skaff</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/1124706.1121428</idno>
+		<ptr target="https://doi.org/10.1145/1124706.1121428" />
+	</analytic>
+	<monogr>
+		<title level="j">Bull</title>
+		<imprint>
+			<biblScope unit="volume">38</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page" from="279" to="282" />
+			<date type="published" when="2006-03">2006. mar 2006</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b18">
+	<analytic>
+		<title level="a" type="main">World Wide Web Consortium</title>
+		<ptr target="https://www.w3.Online" />
+	</analytic>
+	<monogr>
+		<title level="m">SVG Accessibility</title>
+				<imprint>
+			<date type="published" when="2021-08">August 2021</date>
+			<biblScope unit="page">23</biblScope>
+		</imprint>
+	</monogr>
+	<note>n.d.</note>
+</biblStruct>
+
+<biblStruct xml:id="b19">
+	<analytic>
+		<title level="a" type="main">It Doesn&apos;t Win You Friends&quot;: Understanding Accessibility in Collaborative Writing for People with Impairments</title>
+		<author>
+			<persName><forename type="first">Darren</forename><surname>Das</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Anne</forename><forename type="middle">Marie</forename><surname>Gergle</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Piper</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3359293</idno>
+		<ptr target="https://doi.org/10.1145/3359293" />
+	</analytic>
+	<monogr>
+		<title level="j">Proc. ACM Hum.-Comput. Interact</title>
+		<imprint>
+			<biblScope unit="volume">3</biblScope>
+			<date type="published" when="2019-11">2019. Article 191. nov 2019</date>
+			<publisher>CSCW</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b20">
+	<monogr>
+		<author>
+			<persName><surname>Deque</surname></persName>
+		</author>
+		<ptr target="https://www.deque.Online" />
+		<title level="m">axe™ -The Standard in Accessibility Testing</title>
+				<imprint>
+			<date type="published" when="2021-08">August 2021</date>
+			<biblScope unit="page">23</biblScope>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b21">
+	<analytic>
+		<title level="a" type="main">A user study to evaluate tactile charts with blind and visually impaired people</title>
+		<author>
+			<persName><forename type="first">Gerhard</forename><surname>Engel</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Weber</surname></persName>
+		</author>
+		<idno type="DOI">10.1007/978-3-319-94274-2_24</idno>
+		<ptr target="https://doi.org/10.1007/978-3-319-94274-2_24" />
+	</analytic>
+	<monogr>
+		<title level="m">International Conference on Computers Helping People with Special Needs</title>
+				<imprint>
+			<publisher>Springer</publisher>
+			<date type="published" when="2018">2018</date>
+			<biblScope unit="page" from="177" to="184" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b22">
+	<analytic>
+		<title level="a" type="main">Practitioner Barriers to Diffusion and Implementation of Web Accessibility</title>
+		<author>
+			<persName><forename type="first">Glen</forename><surname>Farrelly</surname></persName>
+		</author>
+		<idno type="DOI">10.3233/TAD-2011-0329</idno>
+		<ptr target="https://doi.org/10.3233/TAD-2011-0329" />
+	</analytic>
+	<monogr>
+		<title level="j">Technology and Disability</title>
+		<imprint>
+			<biblScope unit="volume">23</biblScope>
+			<biblScope unit="page" from="223" to="232" />
+			<date type="published" when="2011-01">2011. 01 2011</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b23">
+	<analytic>
+		<title level="a" type="main">Evaluating a Tool for Improving Accessibility to Charts and Graphs</title>
+		<author>
+			<persName><forename type="first">Leo</forename><surname>Ferres</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Gitte</forename><surname>Lindgaard</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Livia</forename><surname>Sumegi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Bruce</forename><surname>Tsuji</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2533682.2533683</idno>
+		<ptr target="https://doi.org/10.1145/2533682.2533683" />
+	</analytic>
+	<monogr>
+		<title level="j">ACM Trans. Comput.-Hum. Interact</title>
+		<imprint>
+			<biblScope unit="volume">20</biblScope>
+			<date type="published" when="2013">2013. 28 2013</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b24">
+	<monogr>
+		<title/>
+		<author>
+			<persName><forename type="first">Sarah</forename><forename type="middle">L</forename><surname>Fossheim</surname></persName>
+		</author>
+		<imprint/>
+	</monogr>
+	<note>n.d.</note>
+</biblStruct>
+
+<biblStruct xml:id="b25">
+	<monogr>
+		<title level="m" type="main">How (not) to make accessible data visualizations, illustrated by the US presidential election</title>
+		<ptr target="https://itif.org/publications/2021/06/03/improving-accessibility-federal-government-websites" />
+		<imprint>
+			<date type="published" when="2022-12">December 2022</date>
+			<biblScope unit="volume">23</biblScope>
+			<biblScope unit="page">2021</biblScope>
+		</imprint>
+	</monogr>
+	<note>Improving Accesof Federal Government Websites</note>
+</biblStruct>
+
+<biblStruct xml:id="b26">
+	<analytic>
+		<title level="a" type="main">It&apos;s almost like they&apos;re trying to it&quot;: How User-Provided Image Descriptions Have Failed to Make Twitter Accessible</title>
+		<author>
+			<persName><forename type="first">Cole</forename><surname>Gleason</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Patrick</forename><surname>Carrington</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Cameron</forename><surname>Cassidy</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Meredith</forename><forename type="middle">Ringel</forename><surname>Morris</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Kitani</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jeffrey</forename><forename type="middle">P</forename><surname>Bigham</surname></persName>
+		</author>
+		<ptr target="https://www.microsoft.com/en-us/research/publication/its-almost-like-theyre-trying-to-hide-it-how-user-provided-image-descriptions-have-failed-to-make-twiter-accessible/" />
+	</analytic>
+	<monogr>
+		<title level="m">The Web Conference. ACM</title>
+				<imprint>
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b27">
+	<analytic>
+		<title level="a" type="main">Making memes accessible</title>
+		<author>
+			<persName><forename type="first">Cole</forename><surname>Gleason</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Amy</forename><surname>Pavel</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Xingyu</forename><surname>Liu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Patrick</forename><surname>Carrington</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Lydia</forename><forename type="middle">B</forename><surname>Chilton</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jeffrey</forename><forename type="middle">P</forename><surname>Bigham</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3308561.3353792</idno>
+		<ptr target="https://doi.org/10.1145/3308561.3353792" />
+	</analytic>
+	<monogr>
+		<title level="m">The 21st International ACM SIGACCESS Conference on Computers and Accessibility</title>
+				<imprint>
+			<date type="published" when="2019">2019</date>
+			<biblScope unit="page" from="367" to="376" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b28">
+	<analytic>
+		<title level="a" type="main">International Conference on Computers Helping People with Special Needs</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Jonathan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Godfrey</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Paul</forename><surname>Murrell</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Volker</forename><surname>Sorge</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">;</forename><surname>Cagatay</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kim</forename><surname>Marriott</surname></persName>
+		</author>
+		<idno type="DOI">10.5555/2042053.2042060</idno>
+		<ptr target="https://doi.org/10.5555/2042053.2042060" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 13th IFIP TC 13 International Conference on Human-Computer Interaction Volume Part I</title>
+				<meeting>the 13th IFIP TC 13 International Conference on Human-Computer Interaction Volume Part I<address><addrLine>Lisbon, Portugal; Berlin, Heidelberg</addrLine></address></meeting>
+		<imprint>
+			<publisher>Springer-Verlag</publisher>
+			<date type="published" when="2011">2018. 2011</date>
+			<biblScope unit="page" from="30" to="48" />
+		</imprint>
+	</monogr>
+	<note>GraVVITAS: Generic Multi-Touch Presentation of Accessible Graphics</note>
+</biblStruct>
+
+<biblStruct xml:id="b29">
+	<analytic>
+		<title level="a" type="main">Usability of Accessible Charts</title>
+		<author>
+			<persName><forename type="first">Cagatay</forename><surname>Goncu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kim</forename><surname>Marriott</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">John</forename><surname>Hurst</surname></persName>
+		</author>
+		<idno type="DOI">10.5555/1884734.1884758</idno>
+		<ptr target="https://doi.org/10.5555/1884734.1884758" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 6th International Conference on Diagrammatic Representation and Inference</title>
+				<meeting>the 6th International Conference on Diagrammatic Representation and Inference<address><addrLine>Portland, OR, USA; Berlin, Heidelberg</addrLine></address></meeting>
+		<imprint>
+			<publisher>Springer-Verlag</publisher>
+			<date type="published" when="2010">2010</date>
+			<biblScope unit="page" from="167" to="181" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b30">
+	<analytic>
+		<title level="a" type="main">Global web accessibility analysis of national government portals and ministry web sites</title>
+		<author>
+			<persName><forename type="first">Morten</forename><surname>Goodwin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Deniz</forename><surname>Susar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Annika</forename><surname>Nietzio</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mikael</forename><surname>Snaprud</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Jensen</surname></persName>
+		</author>
+		<idno type="DOI">10.1080/19331681.2010.508011</idno>
+		<ptr target="https://doi.org/10.1080/19331681.2010.508011" />
+	</analytic>
+	<monogr>
+		<title level="j">Journal of Information Technology &amp; Politics</title>
+		<imprint>
+			<biblScope unit="volume">8</biblScope>
+			<biblScope unit="page" from="41" to="67" />
+			<date type="published" when="2011">2011. 2011</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b31">
+	<analytic>
+		<title level="a" type="main">RoboGraphics: Dynamic Tactile Graphics Powered by Mobile Robots</title>
+		<author>
+			<persName><forename type="first">Darren</forename><surname>Guinness</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Annika</forename><surname>Muehlbradt</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Daniel</forename><surname>Szafir</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Shaun</forename><forename type="middle">K</forename><surname>Kane</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3308561.3353804</idno>
+		<ptr target="https://doi.org/10.1145/3308561.3353804" />
+	</analytic>
+	<monogr>
+		<title level="m">21st International SIGACCESS Conference on Computers and Accessibility</title>
+				<imprint>
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b32">
+	<analytic>
+		<title level="a" type="main">Accessibility Internet Websites through Time</title>
+		<author>
+			<persName><forename type="first">Stephanie</forename><surname>Hackett</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Bambang</forename><surname>Parmanto</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Xiaoming</forename><surname>Zeng</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/1028630.1028638</idno>
+		<ptr target="https://doi.org/10.1145/1028630.1028638" />
+	</analytic>
+	<monogr>
+		<title level="m">of the 6th International ACM Conference on Computers and Accessibility</title>
+				<meeting><address><addrLine>Atlanta, GA, USA; New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<date type="published" when="2003">2003</date>
+			<biblScope unit="page" from="32" to="39" />
+		</imprint>
+	</monogr>
+	<note>Assets &apos;04). for Computing Machinery</note>
+</biblStruct>
+
+<biblStruct xml:id="b33">
+	<analytic>
+		<title level="a" type="main">Interactive Dynamics for Visual Anal</title>
+		<author>
+			<persName><forename type="first">Jeffrey</forename><surname>Heer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ben</forename><surname>Shneiderman</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2133806.2133821</idno>
+		<ptr target="https://doi.org/10.1145/2133806.2133821" />
+	</analytic>
+	<monogr>
+		<title level="j">Commun. ACM</title>
+		<imprint>
+			<biblScope unit="volume">55</biblScope>
+			<biblScope unit="page" from="45" to="54" />
+			<date type="published" when="2012-04">2012. apr 2012</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b34">
+	<monogr>
+		<title level="m" type="main">Accessible Web Maps for Visually Impaired Users: Recommendations and Example Solutions. Cartographic Perspectives</title>
+		<author>
+			<persName><forename type="first">Fritz</forename><surname>Hennig</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Wolfgang</forename><forename type="middle">W</forename><surname>Zobl</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Wasserburger</surname></persName>
+		</author>
+		<idno type="DOI">10.14714/CP88.1391</idno>
+		<ptr target="https://doi.org/10.14714/CP88.1391" />
+		<imprint>
+			<date type="published" when="2017-11">2017. Nov. 2017</date>
+			<biblScope unit="page" from="6" to="27" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b35">
+	<analytic>
+		<title level="a" type="main">Accessibility Initiative</title>
+		<author>
+			<persName><surname>Highcharts</surname></persName>
+		</author>
+		<ptr target="https://www.w3.org/WAI/tutorials/images/complex/.Online;accessed23August" />
+	</analytic>
+	<monogr>
+		<title level="m">Web Accessibility Tutorial: Complex Images</title>
+				<imprint>
+			<date type="published" when="2021-08">August 2021</date>
+		</imprint>
+	</monogr>
+	<note>Accessibility module</note>
+</biblStruct>
+
+<biblStruct xml:id="b36">
+	<analytic>
+		<title level="a" type="main">Communicating Visualizations without Visuals: Investigation of Visualization Alternative Text for People with Visual Impairments</title>
+		<author>
+			<persName><forename type="first">S</forename><surname>Jung</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Mehta</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Kulkarni</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Zhao</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Kim</surname></persName>
+		</author>
+		<idno type="DOI">10.1109/TVCG.2021.3114846</idno>
+		<ptr target="https://doi.org/10.1109/TVCG.2021" />
+	</analytic>
+	<monogr>
+		<title level="j">IEEE Transactions on Visualization &amp; Computer Graphics</title>
+		<imprint>
+			<biblScope unit="volume">28</biblScope>
+			<biblScope unit="page" from="1095" to="1105" />
+			<date type="published" when="2022-01">2022. jan 2022</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b37">
+	<monogr>
+		<title level="m" type="main">Applying Content Analysis to Web-based CIT 18</title>
+		<author>
+			<persName><forename type="first">Inhwa</forename><surname>Kim</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jasna</forename><surname>Kuljis</surname></persName>
+		</author>
+		<idno type="DOI">10.2498/cit.1001924</idno>
+		<ptr target="https://doi.org/10.2498/cit.1001924" />
+		<imprint>
+			<date type="published" when="2010-01">2010. 01 2010</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b38">
+	<analytic>
+		<title level="a" type="main">Accessible visualization: space, opportunities, and challenges</title>
+		<author>
+			<persName><surname>Nw Kim</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Joyner</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Riegelhuth</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Kim</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Computer Graphics Forum</title>
+				<imprint>
+			<date type="published" when="2021">2021</date>
+			<biblScope unit="volume">40</biblScope>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b39">
+	<monogr>
+		<title/>
+		<author>
+			<persName><surname>Wiley Online Library</surname></persName>
+		</author>
+		<idno type="DOI">10.1111/cgf.14298</idno>
+		<ptr target="https://doi.org/10.1111/cgf.14298" />
+		<imprint>
+			<biblScope unit="page" from="173" to="188" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b40">
+	<monogr>
+		<author>
+			<persName><forename type="first">Ha-Kyung</forename><surname>Kong</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Zhicheng</forename><surname>Liu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Karrie</forename><surname>Karahalios</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3173574.3174012</idno>
+		<ptr target="https://doi.org/10.1145/3173574.3174012" />
+		<title level="m">and Slants in Titles of Visualizations on Controversial Topics</title>
+				<meeting><address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computing Machinery</publisher>
+			<date type="published" when="2018">2018</date>
+			<biblScope unit="page" from="1" to="12" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b41">
+	<analytic>
+		<title level="a" type="main">Automating Tactile Graphics Translation</title>
+		<author>
+			<persName><forename type="first">E</forename><surname>Ladner</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Melody</forename><forename type="middle">Y</forename><surname>Ivory</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Rajesh</forename><surname>Rao</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sheryl</forename><surname>Burgstahler</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Dan</forename><surname>Comden</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sangyun</forename><surname>Hahn</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Matthew</forename><surname>Renzelmann</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Satria</forename><surname>Krisnandi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mahalakshmi</forename><surname>Ramasamy</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Beverly</forename><surname>Slabosky</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Andrew</forename><surname>Martin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Amelia</forename><surname>Lacenski</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Stuart</forename><surname>Olsen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Dmitri</forename><surname>Groce</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/1090785.1090814</idno>
+		<ptr target="https://doi.org/10.1145/1090785.1090814" />
+	</analytic>
+	<monogr>
+		<title level="m">of the 7th International ACM SIGACCESS Conference on Computers and Accessibility</title>
+				<meeting><address><addrLine>Baltimore, MD, USA; New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computing Machinery</publisher>
+			<date type="published" when="2005">2005</date>
+			<biblScope unit="page" from="150" to="157" />
+		</imprint>
+	</monogr>
+	<note>Assets &apos;05)</note>
+</biblStruct>
+
+<biblStruct xml:id="b42">
+	<analytic>
+		<title level="a" type="main">The Design of Tactile Thematic Symbols</title>
+		<author>
+			<persName><forename type="first">Megan</forename><forename type="middle">M</forename><surname>Lawrence</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Amy</forename><forename type="middle">K</forename><surname>Lobben</surname></persName>
+		</author>
+		<idno type="DOI">10.1177/0145482X1110501014</idno>
+		<ptr target="https://doi.org/10.1177/0145482X1110501014" />
+	</analytic>
+	<monogr>
+		<title level="j">Journal of Visual Impairment &amp; Blindness</title>
+		<imprint>
+			<biblScope unit="volume">105</biblScope>
+			<biblScope unit="page" from="681" to="691" />
+			<date type="published" when="2011">2011. 2011</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b43">
+	<analytic>
+		<title level="a" type="main">What screen reader users on the web: A study of 100 blind users</title>
+		<author>
+			<persName><forename type="first">Jonathan</forename><surname>Lazar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Aaron</forename><surname>Allen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jason</forename><surname>Kleinman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Chris</forename><surname>Malarkey</surname></persName>
+		</author>
+		<idno type="DOI">10.1080/10447310709336964</idno>
+		<ptr target="https://doi.org/10.1080/10447310709336964" />
+	</analytic>
+	<monogr>
+		<title level="j">International Journal of human-computer interaction</title>
+		<imprint>
+			<biblScope unit="volume">22</biblScope>
+			<biblScope unit="page" from="247" to="269" />
+			<date type="published" when="2007">2007. 2007</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b44">
+	<analytic>
+		<title level="a" type="main">Development and Evaluation of Two Prototypes for Providing Weather Map Data to Blind Users through Sonification</title>
+		<author>
+			<persName><forename type="first">Suranjan</forename><surname>Lazar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Dustin</forename><surname>Chakraborty</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Robert</forename><surname>Carroll</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Bryan Sizeand Haley</forename><surname>Weir</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Henderson</surname></persName>
+		</author>
+		<idno type="DOI">10.5555/2817919.2817921</idno>
+		<ptr target="https://doi.org/10.5555/2817919.2817921" />
+	</analytic>
+	<monogr>
+		<title level="j">J. Usability Studies</title>
+		<imprint>
+			<biblScope unit="volume">8</biblScope>
+			<biblScope unit="issue">4</biblScope>
+			<biblScope unit="page" from="93" to="110" />
+			<date type="published" when="2013-08">2013. aug 2013</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b45">
+	<analytic>
+		<title level="a" type="main">Reaching Broader Audiences With Data IEEE</title>
+		<author>
+			<persName><forename type="first">Eun</forename><forename type="middle">Kyoung</forename><surname>Lee</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Petra</forename><surname>Choe</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kim</forename><surname>Isenberg</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">John</forename><surname>Marriott</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Theresa-Marie</forename><surname>Stasko</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Rhyne</surname></persName>
+		</author>
+		<idno type="DOI">10.1109/MCG.2020.2968244</idno>
+		<ptr target="https://doi.org/10.1109/MCG.2020.2968244" />
+	</analytic>
+	<monogr>
+		<title level="j">Comput. Graph. Appl</title>
+		<imprint>
+			<biblScope unit="volume">40</biblScope>
+			<biblScope unit="issue">2</biblScope>
+			<biblScope unit="page" from="82" to="90" />
+			<date type="published" when="2020-03">2020. mar 2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b46">
+	<monogr>
+		<title level="m" type="main">Inclusive data visualization for people with disabilities: a call to action</title>
+		<author>
+			<persName><forename type="first">Kim</forename><surname>Marriott</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Bongshin</forename><surname>Lee</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Matthew</forename><surname>Butler 0002</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ed</forename><surname>Cutrell</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kirsten</forename><surname>Ellis</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Marti</forename><surname>Ca-Goncu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kathleen</forename><surname>Hearst</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Danielle</forename><forename type="middle">Albers</forename><surname>Mccoy</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Szafir</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3457875</idno>
+		<ptr target="https://doi.org/10.1145/3457875" />
+		<imprint>
+			<date type="published" when="2021">2021. 2021</date>
+			<biblScope unit="volume">28</biblScope>
+			<biblScope unit="page" from="47" to="51" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b47">
+	<monogr>
+		<title level="m" type="main">Overview of accessibility in Power BI</title>
+		<ptr target="https://docs.microsoft.accessed23" />
+		<imprint>
+			<date type="published" when="2021-08">August 2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b48">
+	<analytic>
+		<title level="a" type="main">The magical number seven plus or minus two: some limits on our capacity for processing information</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Miller</surname></persName>
+		</author>
+		<idno type="DOI">10.1037/h0043158</idno>
+		<ptr target="https://doi.org/10.1037/h0043158" />
+	</analytic>
+	<monogr>
+		<title level="j">Psychological review</title>
+		<imprint>
+			<biblScope unit="volume">63</biblScope>
+			<biblScope unit="issue">2</biblScope>
+			<biblScope unit="page" from="81" to="97" />
+			<date type="published" when="1956">1956. 1956</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b49">
+	<analytic>
+		<title level="a" type="main">With Most of It Being Pictures Now, I Rarely Use It&quot;: Understanding Twitter&apos;s Evolving Accessibility to Blind Users</title>
+		<author>
+			<persName><forename type="first">Ringel</forename><surname>Morris</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Annuska</forename><surname>Zolyomi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Catherine</forename><surname>Yao</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sina</forename><surname>Bahram</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Jeffrey</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Shaun</forename><forename type="middle">K</forename><surname>Kane</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2858036.2858116</idno>
+		<ptr target="https://doi.org/10.1145/2858036.2858116" />
+	</analytic>
+	<monogr>
+		<title level="m">of the 2016 CHI Conference on Human Factors in Computing Systems Jose</title>
+				<meeting><address><addrLine>California, USA; New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computing Machinery</publisher>
+			<date type="published" when="2016">2016</date>
+			<biblScope unit="page" from="5506" to="5516" />
+		</imprint>
+	</monogr>
+	<note>CHI &apos;16)</note>
+</biblStruct>
+
+<biblStruct xml:id="b50">
+	<analytic>
+		<title level="a" type="main">Comparing User Performance on Parallel-Tone, Parallel-Speech, Serial-Tone and Serial-Speech Auditory Graphs</title>
+		<author>
+			<persName><forename type="first">Prabodh</forename><surname>Sakhardande</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Anirudha</forename><surname>Joshi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Charudatta</forename><surname>Jadhav</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Manjiri</forename><surname>Joshi</surname></persName>
+		</author>
+		<idno type="DOI">10.1007/978-3-030-29381-9_16</idno>
+		<ptr target="https://doi.org/10.1007/978-3-030-29381-9_16" />
+	</analytic>
+	<monogr>
+		<title level="m">IFIP Conference on Human-Computer Interaction</title>
+				<meeting><address><addrLine>Berlin, Heidelberg</addrLine></address></meeting>
+		<imprint>
+			<publisher>Springer-Verlag</publisher>
+			<date type="published" when="2019">2019</date>
+			<biblScope unit="page" from="247" to="266" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b51">
+	<monogr>
+		<title level="m" type="main">Screen-Reader Users&apos; Experiences with Online Data Visualizations. for Computing Machinery</title>
+		<author>
+			<persName><forename type="first">Ather</forename><surname>Sharif</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Shivani</forename><surname>Sanjana</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jacob</forename><forename type="middle">O</forename><surname>Chintalapati</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Katharina</forename><surname>Wobbrock</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Reinecke</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3441852.3471202</idno>
+		<ptr target="https://doi.org/10.1145/3441852.3471202" />
+		<imprint>
+			<date type="published" when="2021">2021</date>
+			<pubPlace>New York, NY, USA</pubPlace>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b52">
+	<analytic>
+		<title level="a" type="main">evoGraphs -A jQuery plugin to create web accessible graphs</title>
+		<author>
+			<persName><forename type="first">Babak</forename><surname>Sharif</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Forouraghi</surname></persName>
+		</author>
+		<idno type="DOI">10.1109/CCNC.2018.8319239</idno>
+		<ptr target="https://doi.org/10.1109/CCNC.2018.8319239" />
+	</analytic>
+	<monogr>
+		<title level="m">15th IEEE Annual Consumer Communications Networking Conference (CCNC). 1-4</title>
+				<imprint>
+			<date type="published" when="2018">2018. 2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b53">
+	<analytic>
+		<title level="a" type="main">COVID-19 Highlights the Issues Facing and Visually Impaired People in Accessing Data on the Web</title>
+		<author>
+			<persName><forename type="first">F</forename><surname>Danyang Fan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S-H</forename><surname>Gene</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Hrishikesh</forename><forename type="middle">V</forename><surname>Kim</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Xavier</forename><surname>Rao</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Vazquez</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sean</forename><surname>Sile O'modhrain</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Follmer</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3430263.3452432</idno>
+		<ptr target="https://doi.org/10.1145/3430263.3452432" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 18th International Web for All Conference Slovenia) (W4A &apos;21). for Computing Machinery</title>
+				<meeting>the 18th International Web for All Conference Slovenia) (W4A &apos;21). for Computing Machinery<address><addrLine>New York, NY, USA, Article</addrLine></address></meeting>
+		<imprint>
+			<date type="published" when="2021">2021</date>
+			<biblScope unit="volume">11</biblScope>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b54">
+	<analytic>
+		<title level="a" type="main">What People with Vision Impairments Want in Image Descriptions</title>
+		<author>
+			<persName><forename type="first">Abigale</forename><surname>Stangl</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Meredith</forename><forename type="middle">Ringel</forename><surname>Morris</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Danna</forename><surname>Gurari</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3313831.3376404</idno>
+		<ptr target="https://doi.org/10.1145/3313831.3376404" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2020 CHI Conference on Human Factors Computing Systems. 1-13</title>
+				<meeting>the 2020 CHI Conference on Human Factors Computing Systems. 1-13</meeting>
+		<imprint/>
+	</monogr>
+	<note>Person, Shoes, Is the Person Naked?</note>
+</biblStruct>
+
+<biblStruct xml:id="b55">
+	<monogr>
+		<title level="m" type="main">Grounded Theory in Practice</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Strauss</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">M</forename><surname>Corbin</surname></persName>
+		</author>
+		<ptr target="https://help.tableau.com/current/Online;accessed23August" />
+		<imprint>
+			<date type="published" when="1997">1997</date>
+			<publisher>SAGE Publications</publisher>
+		</imprint>
+	</monogr>
+	<note>n.d.]. Build Accessible Dashboards</note>
+</biblStruct>
+
+<biblStruct xml:id="b56">
+	<monogr>
+		<title level="m" type="main">Guidelines for accessible and usable web sites: Observing users who work with screen readers</title>
+		<author>
+			<persName><forename type="first">Mary</forename><surname>Frances Theofanos</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Janice</forename><surname>Redish</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2003">2003. 2003</date>
+			<biblScope unit="volume">10</biblScope>
+			<biblScope unit="page" from="38" to="51" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b57">
+	<analytic>
+		<title level="a" type="main">Emoji Accessibility for Visually Impaired People</title>
+		<author>
+			<persName><forename type="first">W</forename><surname>Garreth</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Benjamin</forename><forename type="middle">M</forename><surname>Tigwell</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Rachel</forename><surname>Gorman</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Menzies</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3313831.3376267</idno>
+		<ptr target="https://doi.org/10.1145/3313831.3376267" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2020 CHI Conference on Human Factors in Computing Systems</title>
+				<meeting>the 2020 CHI Conference on Human Factors in Computing Systems<address><addrLine>York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computing Machinery</publisher>
+			<date type="published" when="2020">2020</date>
+			<biblScope unit="page" from="1" to="14" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b58">
+	<analytic>
+		<title level="a" type="main">Exploring Auditory Graphing Software in the Classroom: The Effect of Auditory Graphs on the Classroom Environment</title>
+		<author>
+			<persName><forename type="first">J</forename><surname>Tomlinson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jared</forename><surname>Batterman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yee</forename><forename type="middle">Chieh</forename><surname>Chew</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ashley</forename><surname>Henry</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Walker</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2994606</idno>
+		<ptr target="https://doi.org/10.1145/2994606" />
+	</analytic>
+	<monogr>
+		<title level="j">ACM Trans. Access. Comput</title>
+		<imprint>
+			<biblScope unit="volume">9</biblScope>
+			<biblScope unit="issue">3</biblScope>
+			<date type="published" when="2016-11">2016. nov 2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b59">
+	<analytic>
+		<title level="a" type="main">Approaches for diagrams accessibility for blind people: a systematic review</title>
+		<author>
+			<persName><forename type="first">Márcio Josué</forename></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ramos</forename><surname>Torres</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Regina</forename><surname>Barwaldt</surname></persName>
+		</author>
+		<idno type="DOI">10.1109/FIE43999.2019.9028522</idno>
+		<ptr target="https://doi.org/10.1109/FIE43999.2019.9028522" />
+	</analytic>
+	<monogr>
+		<title level="j">IEEE Frontiers in Education Conference (FIE). IEEE</title>
+		<imprint>
+			<biblScope unit="page" from="1" to="7" />
+			<date type="published" when="2019">2019. 2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b60">
+	<analytic>
+		<title level="a" type="main">Automatic web accessibility we are and where we can go</title>
+		<idno type="DOI">10.1016/j.intcom.2011.01.001</idno>
+		<ptr target="https://doi.org/10.1016/j.intcom.2011.01.001" />
+	</analytic>
+	<monogr>
+		<title level="j">with Computers</title>
+		<imprint>
+			<biblScope unit="volume">23</biblScope>
+			<biblScope unit="page" from="137" to="155" />
+			<date type="published" when="2011">2011. 2011</date>
+		</imprint>
+	</monogr>
+	<note>Online; accessed 01 December and Giorgio Brajnik</note>
+</biblStruct>
+
+<biblStruct xml:id="b61">
+	<analytic>
+		<title level="a" type="main">Coping Tactics Employed by Visually Disabled Users on the Web</title>
+		<author>
+			<persName><forename type="first">Markel</forename><surname>Vigo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Simon</forename><surname>Harper</surname></persName>
+		</author>
+		<idno type="DOI">10.1016/j.ijhcs.2013.08.002</idno>
+		<ptr target="https://doi.org/10.1016/j.ijhcs.2013.08.002" />
+	</analytic>
+	<monogr>
+		<title level="j">Int. J. Hum.-Comput. Stud</title>
+		<imprint>
+			<biblScope unit="volume">71</biblScope>
+			<biblScope unit="issue">11</biblScope>
+			<biblScope unit="page" from="1013" to="1025" />
+			<date type="published" when="2013-11">2013. nov 2013</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b62">
+	<monogr>
+		<ptr target="https://www.w3.org/WAI/alt/.accessed23" />
+		<title level="m">Resources on Alternative Text for Images</title>
+				<imprint>
+			<date type="published" when="2021-08">August 2021</date>
+			<biblScope unit="page">W3C</biblScope>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b63">
+	<analytic>
+		<title level="a" type="main">The Information of Tactile Maps: A Comparison of Maps Printed with the Use of Different Techniques</title>
+		<author>
+			<persName><forename type="first">Albina</forename><surname>Mościcka</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Marta</forename><surname>Kuźma</surname></persName>
+		</author>
+		<idno type="DOI">10.1080/00087041.2020.1721765</idno>
+		<ptr target="https://doi.org/10.1080/00087041.2020.1721765" />
+	</analytic>
+	<monogr>
+		<title level="j">The Cartographic Journal</title>
+		<imprint>
+			<biblScope unit="volume">0</biblScope>
+			<biblScope unit="page" from="1" to="12" />
+			<date type="published" when="2020">2020. 2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b64">
+	<monogr>
+		<title level="m" type="main">Universal Design of Auditory Graphs: A Comparison of Sonification Mappings for Visually Impaired and Sighted Listeners</title>
+		<author>
+			<persName><forename type="first">B</forename><forename type="middle">N</forename><surname>Walker</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><forename type="middle">M</forename><surname>Mauney</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2010">2010</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b65">
+	<analytic>
+		<title/>
+		<idno type="DOI">10.1145/1714458.1714459</idno>
+		<ptr target="https://doi.org/" />
+	</analytic>
+	<monogr>
+		<title level="j">ACM Trans. Comput. 3, Article</title>
+		<imprint>
+			<biblScope unit="volume">12</biblScope>
+			<date type="published" when="2010-03">mar 2010</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b66">
+	<analytic>
+		<title level="a" type="main">Textures suitable for tactile bar charts on capsule paper</title>
+		<author>
+			<persName><forename type="first">Naoki</forename><surname>Watanabe</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Inaba</surname></persName>
+		</author>
+		<idno type="DOI">10.18974/tvrsj.23.1_13</idno>
+		<ptr target="https://doi.org/10.18974/tvrsj.23.1_13" />
+	</analytic>
+	<monogr>
+		<title level="j">Transactions of the Virtual Reality Society of Japan</title>
+		<imprint>
+			<biblScope unit="volume">23</biblScope>
+			<biblScope unit="page" from="13" to="20" />
+			<date type="published" when="2018">2018. 2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b67">
+	<analytic>
+		<title level="a" type="main">Effectiveness of tactile scatter plots: comparison of non-visual data representations</title>
+		<author>
+			<persName><forename type="first">Tetsuya</forename><surname>Watanabe</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Hikaru</forename><surname>Mizukami</surname></persName>
+		</author>
+		<idno type="DOI">10.1007/978-3-319-94277-3_97</idno>
+		<ptr target="https://doi.org/10.1007/978-3-319-94277-3_97" />
+	</analytic>
+	<monogr>
+		<title level="m">International Conference on Computers Helping People with Needs</title>
+				<imprint>
+			<publisher>Springer</publisher>
+			<date type="published" when="2018">2018</date>
+			<biblScope unit="page" from="628" to="635" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b68">
+	<analytic>
+		<title level="a" type="main">ASVG-Accessible Scalable Vector Graphics: intention to make charts more accessible and usable</title>
+		<author>
+			<persName><forename type="first">Gerald</forename><forename type="middle">Tobias</forename><surname>Weninger</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Olaf</forename><surname>Drümmer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Klaus</forename><surname>Miesen</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Journal of assistive technologies</title>
+		<imprint>
+			<date type="published" when="2015">2015</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b69">
+	<analytic>
+		<title level="a" type="main">A Survey of Blind Users on the Usability of Email Applications</title>
+		<author>
+			<persName><forename type="first">Brian</forename><surname>Wentz</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Harry</forename><surname>Hochheiser</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jonathan</forename><surname>Lazar</surname></persName>
+		</author>
+		<idno type="DOI">10.1007/s10209-012-0285-9</idno>
+		<ptr target="https://doi.org/10.1007/s10209-012-0285-9" />
+	</analytic>
+	<monogr>
+		<title level="j">Univers. Access Inf. Soc</title>
+		<imprint>
+			<biblScope unit="volume">12</biblScope>
+			<biblScope unit="issue">3</biblScope>
+			<biblScope unit="page" from="327" to="336" />
+			<date type="published" when="2013-08">2013. aug 2013</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b70">
+	<analytic>
+		<title level="a" type="main">Cagatay Goncu, and Leona Hol-2020. Tactile presentation of network data: Text, matrix or diagram</title>
+		<author>
+			<persName><forename type="first">Yalong</forename><surname>Yang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kim</forename><surname>Marriott</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Matthew</forename><surname>Butler</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3313831.3376367</idno>
+		<ptr target="https://doi.org/10.1145/3313831.3376367" />
+	</analytic>
+	<monogr>
+		<title level="m">CHI Conference on Human Factors in Computing Systems. 1-12</title>
+				<imprint/>
+	</monogr>
+</biblStruct>
+
+				</listBibl>
+			</div>
+		</back>
+	</text>
+</TEI>

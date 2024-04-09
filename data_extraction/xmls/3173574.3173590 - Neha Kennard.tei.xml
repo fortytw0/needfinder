@@ -1,0 +1,1665 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xml:space="preserve" xmlns="http://www.tei-c.org/ns/1.0" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.com/kermitt2/grobid/master/grobid-home/schemas/xsd/Grobid.xsd"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+	<teiHeader xml:lang="en">
+		<fileDesc>
+			<titleStmt>
+				<title level="a" type="main">The Illusion of Control: Placebo Effects of Control Settings</title>
+			</titleStmt>
+			<publicationStmt>
+				<publisher/>
+				<availability status="unknown"><licence/></availability>
+			</publicationStmt>
+			<sourceDesc>
+				<biblStruct>
+					<analytic>
+						<author>
+							<persName><forename type="first">Kristen</forename><surname>Vaccaro</surname></persName>
+							<email>kvaccaro@illinois.edu</email>
+							<affiliation key="aff0">
+								<orgName type="institution">University of Illinois</orgName>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Dylan</forename><surname>Huang</surname></persName>
+							<email>dphuang2@illinois.edu</email>
+							<affiliation key="aff0">
+								<orgName type="institution">University of Illinois</orgName>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Motahhare</forename><surname>Eslami</surname></persName>
+							<email>eslami2@illinois.edu</email>
+							<affiliation key="aff0">
+								<orgName type="institution">University of Illinois</orgName>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Christian</forename><surname>Sandvig</surname></persName>
+							<email>csandvig@umich.edu</email>
+							<affiliation key="aff1">
+								<orgName type="institution">University of Michigan</orgName>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Kevin</forename><surname>Hamilton</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="institution">University of Illinois</orgName>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Karrie</forename><surname>Karahalios</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="institution">University of Illinois</orgName>
+							</affiliation>
+							<affiliation key="aff2">
+								<orgName type="department">Adobe Research</orgName>
+							</affiliation>
+						</author>
+						<title level="a" type="main">The Illusion of Control: Placebo Effects of Control Settings</title>
+					</analytic>
+					<monogr>
+						<imprint>
+							<date/>
+						</imprint>
+					</monogr>
+					<idno type="DOI">10.1145/3173574.3173590</idno>
+				</biblStruct>
+			</sourceDesc>
+		</fileDesc>
+		<encodingDesc>
+			<appInfo>
+				<application version="0.7.1" ident="GROBID" when="2022-07-22T04:57+0000">
+					<desc>GROBID - A machine learning software for extracting information from scholarly documents</desc>
+					<ref target="https://github.com/kermitt2/grobid"/>
+				</application>
+			</appInfo>
+		</encodingDesc>
+		<profileDesc>
+			<textClass>
+				<keywords>
+					<term>H.5.m. Information Interfaces and Presentation (e.g. HCI): Miscellaneous Social media</term>
+					<term>sensemaking</term>
+					<term>control settings</term>
+					<term>placebo effect</term>
+				</keywords>
+			</textClass>
+			<abstract/>
+		</profileDesc>
+	</teiHeader>
+	<text xml:lang="en">
+		<body>
+<div xmlns="http://www.tei-c.org/ns/1.0"><p>The popularity also seemed to be working as much as it is, because I'm seeing content that seems highly either re-shared or liked. In fact, I'm not seeing anything that has zero for both… (P27) I'm not seeing very much of my friends or people that I went to school with. I see one, but everything else is pretty much a verified account, or an account that has multiple thousand followers… (P28) </p><note type="other">Real</note></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>ABSTRACT</head><p>Algorithmic prioritization is a growing focus for social media users. Control settings are one way for users to adjust the prioritization of their news feeds, but they prioritize feed content in a way that can be difficult to judge objectively. In this work, we study how users engage with difficult-to-validate controls. Via two paired studies using an experimental system -one interview and one online study -we found that control settings functioned as placebos. Viewers felt more satisfied with their feed when controls were present, whether they worked or not. We also examine how people engage in sensemaking around control settings, finding that users often take responsibility for violated expectations -for both real and randomly functioning controls. Finally, we studied how users controlled their social media feeds in the wild. The use of existing social media controls had little impact on user's satisfaction with the feed; instead, users often turned to improvised solutions, like scrolling quickly, to see what they want.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>INTRODUCTION</head><p>Much past work has explored the design of control panels and control settings, particularly in hardware and safety-critical domains (e.g., control panels ranging from washing machines and ovens <ref type="bibr" target="#b14">[14,</ref><ref type="bibr">42]</ref> to aircraft and nuclear reactors <ref type="bibr" target="#b43">[41,</ref><ref type="bibr" target="#b49">46]</ref>). However, surprisingly little has been said about the design and interaction with control settings in graphical user interfaces (with a notable exception of <ref type="bibr" target="#b35">[33]</ref>), beyond traditional user interface design practice and through encouraging sensible general design choices as analogues to such hardware designs <ref type="bibr">[42]</ref>. This gap in knowledge is surprising and problematic as control settings and control panels are omnipresent in people's everyday use of technology.</p><p>Social media platforms have added control settings to increase user satisfaction and feelings of control (particularly around privacy), but also as a general feedback mechanism to increase user engagement <ref type="bibr" target="#b46">[43]</ref>. While personalization of news and social media feeds was proposed early (e.g., Fishwrap and Excite <ref type="bibr" target="#b8">[8,</ref><ref type="bibr">36]</ref>), such news feeds often featured highly manual personalization, for example, choosing to "remove politics." Much of this personalization is now done automatically. While users can provide feedback and control, such changes are often less direct (e.g., "see less like this"), may change only some elements of the feed (rather than more visible changes like removing an entire section) and there may be delays before users see the impact of their choices. In this work, we consider the question of whether and how users validate control settings. Control settings on social media differ from those on traditional applications, because they can be very challenging to judge objectively. A user might know precisely what to expect if they click "add subtitles" on a video service, select a "large" font size on their web browser, or filter a list of products to "less than $50." But social media applications can be much more difficult to interpret. If, for example, a user clicks "Hide post: See fewer posts like this," (as on Facebook), it is not obvious what "posts like this" means or how clicking it will change the user's news feed. When the effectiveness and functionality of social media controls are difficult for users to validate, the question arises: do these controls increase satisfaction because of their operation or because of their mere presence?</p><p>In this paper, we present the results of two experiments exploring this topic. Both use systems that show users their Twitter news feeds with control settings we developed. An interview study offered real and random algorithmic controls to explore user sensemaking (Figure <ref type="figure" target="#fig_0">1</ref>). An online study included an additional no-control-setting condition to test for a placebo effect. Through these studies, we uncover a placebo effect for control settings, where users are more satisfied with a social media news feed when a control setting is present, whether it functions with a real algorithm or simply displays a random subset of the news feed.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>MOTIVATION AND RELATED WORK</head><p>One of the most validated and replicated phenomena is that of placebo effects -that the mere presence of a "cure" (even if it is an inert, non-operational pill) heals people <ref type="bibr" target="#b40">[38]</ref>. Medicine <ref type="bibr" target="#b29">[27]</ref>, psychology <ref type="bibr" target="#b59">[56]</ref>, and even marketing <ref type="bibr" target="#b57">[54]</ref> have well established the strength and power of this effect. While placebo effects are more often controlled for than studied themselves, a placebo can cause "objective (structurally and functionally measurable) changes in physiological functioning" <ref type="bibr" target="#b26">[24]</ref>. While many different theories for the mechanism of the placebo effect exist <ref type="bibr" target="#b26">[24]</ref>, an important factor is that the intervention should not be trivial for the patient to assess. Thus, while many control settings (like a price filter) may be straightforward to evaluate, given the difficulty of objectively judging the functionality of many social media controls, we raise the question of whether they too may function as placebos.</p><p>Such a placebo effect test has rarely been investigated in computing. Researchers have explored the potential of benevolent deception <ref type="bibr" target="#b0">[1]</ref>, either for entertainment <ref type="bibr" target="#b39">[37]</ref> or to help users learn <ref type="bibr" target="#b56">[53]</ref>. However, as far as we know only Springer et al. have directly studied a placebo effect, where users interacted with a supposed "emotion meter" and believed that a completely random system was working well <ref type="bibr" target="#b58">[55]</ref>. This motivates our first research question, where we explore whether there is a placebo effect for control settings, particularly for difficultto-judge algorithmic control settings typical of social media.</p><p>In the remainder of the paper, we frequently refer to these control settings simply as controls, and a control panel as a grouping of such controls.</p><p>RQ1: Is there a placebo effect for control settings -that is, are users more satisfied with a social media feed when a control is present, whether the control works or not?</p><p>Understanding how users make sense of automated systems is important not only to design for accessibility for a range of users during routine operation, but to help users navigate malfunction or unexpected outcomes. Indeed, as Lucy Suchman demonstrated in her classic study at Xerox, design for user experience of system breakdowns -when even the most trusted human-machine relationship weathers difficulty -is often crucial to the creation of humane and lasting systems <ref type="bibr" target="#b60">[57]</ref>. As a result of the important role sensemaking plays in user experience and design, many researchers have explored sensemaking around automated systems, in domains from thermostats and home sensors <ref type="bibr" target="#b61">[58,</ref><ref type="bibr" target="#b68">63]</ref> to self tracking devices <ref type="bibr" target="#b32">[30,</ref><ref type="bibr" target="#b50">47,</ref><ref type="bibr" target="#b69">64]</ref> and other personal data [62] to classification algorithms <ref type="bibr" target="#b33">[31]</ref>.</p><p>Recent work has even begun to explore how users make sense of randomly automated systems that are deceptively presented as functional <ref type="bibr" target="#b58">[55]</ref>. This work (along with others that do not directly test non-functional operations) has shown that users are so likely to trust an algorithmic system that when making sense of the system, they will disregard evidence of failures by taking personal responsibility for them, or assuming an algorithmic omniscience that extends beyond the system <ref type="bibr" target="#b18">[18,</ref><ref type="bibr" target="#b58">55,</ref><ref type="bibr">62]</ref>. In this work, we similarly study how sensemaking processes differ when some control settings function randomly (but are presented as real), in the domain of social media.</p><p>Many researchers have explored sensemaking around social media and news feeds <ref type="bibr" target="#b7">[7,</ref><ref type="bibr" target="#b12">12,</ref><ref type="bibr" target="#b18">18,</ref><ref type="bibr" target="#b21">20,</ref><ref type="bibr" target="#b51">48]</ref>. French and Hancock identified the metaphors people hold for news feeds, from rational assistants to unwanted observers <ref type="bibr" target="#b21">[20]</ref>. Raider and Gray found many users believed social media systems engage in complex reasoning to infer their preferences and show them relevant posts <ref type="bibr" target="#b51">[48]</ref>. Eslami et al. found that, driven by their theories of how news feeds are algorithmically controlled, users engage in complex behaviors like liking and then immediately hiding posts to try to achieve the feed they want <ref type="bibr" target="#b18">[18]</ref>.</p><p>Researchers have also highlighted the significance of experiencing violated expectations on social media. Bucher's interviews with Facebook users revealed that this can lead to a feeling of creepiness <ref type="bibr" target="#b7">[7]</ref>. DeVito et al.'s study of folk theories of algorithmic curation of the Twitter news feed showed that users' resistance to algorithmically curated news feeds is often driven by violated expectations <ref type="bibr" target="#b12">[12]</ref>. In our second research question, we focus on expectation violation with algorithmic controls of social media -additionally studying how (if at all) these responses differ when a control functions randomly:</p><p>RQ2: How do people make sense of controls, particularly when the control functionality violates their expectations?</p><p>Finally, despite the prevalence of control settings on social media, studies of how people are able to find them and how likely they are to use them have primarily occurred within the narrow domain of privacy controls <ref type="bibr" target="#b3">[4,</ref><ref type="bibr" target="#b28">26,</ref><ref type="bibr" target="#b30">28,</ref><ref type="bibr">61,</ref><ref type="bibr">65]</ref>. Numerous researchers have noted that user takeup of privacy controls is low <ref type="bibr" target="#b1">[2,</ref><ref type="bibr" target="#b2">3,</ref><ref type="bibr" target="#b25">23]</ref>. Some have sought to identify why users have difficulty finding and understanding privacy controls <ref type="bibr">[61]</ref>. We seek to explore the use of controls other than privacy control settings. How do participants use Twitter's existing controls? Does control usage (specifically, usage of the follow and un-follow controls central to Twitter's news feed) impact user satisfaction? And when imagining their ideal news feed, how do users envision using controls (if at all) to create it?</p><p>RQ3: How do users currently edit -and envision editingtheir news feed? Does more frequent control use make users more satisfied with their current feed?</p><p>In order to address these research questions, we conducted two experiments, designed to complement each other -one an in-person interview, one online. Both used similar systems, based on a common design that paired the user's own Twitter news feed with control settings they could use to influence the algorithmic composition of their feed. Figure <ref type="figure">2</ref> illustrates the two system designs used for these experiments. In some cases, the controls worked "correctly," updating the news feed to capture one implementation of the concept for the control setting. In others the controls worked "randomly," instead showing a consistent but random subset of the users' news feed. In the online experiment, a third, baseline condition was added, where no control setting was present. Users answered questions about their experience with the controls as well as the resulting feed to help us address these research questions.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>SYSTEM DESIGN</head><p>We conducted two related experiments allowing the user to control their own social media news feed. For each, the user interacted with the control settings (if available) to try to improve their news feed and answered questions about their experience. Popular social network Twitter (330 million monthly active users <ref type="bibr" target="#b63">[60]</ref>) was selected because it allowed us to abide by Terms of Service while accessing users' unfiltered news feeds.</p><p>Figure <ref type="figure">2</ref>(a) illustrates the core features common to both experimental systems: the user login, the news feed and any available controls. Users log in and are shown their own news feed on the left. The number of controls on the right depends on the experiment; the online experiment had a single or no control, the interview experiment had five control settings. When users interact with the controls, their news feed immediately updates. Instant updates enable Schön's reflection-in-actionusers who immediately see the impacts of their choices can better engage in sensemaking around the outcomes <ref type="bibr" target="#b53">[50]</ref>.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Control Settings for Social Media</head><p>Users encounter many types of control settings on social media platforms. While social media controls can be complex and granular, most systems allow a user to control 1) who sees them and 2) who and what they see. The first overlaps with privacy controls, where a user can decide whether they can be discovered, tagged in photos, and whether their content is public. Many control settings also allow the user to control what they see on their own news feed: controls of ads (both whether ads are personalized and the interests and location history those are based on), controls of friends (e.g., follow or friend), more granular controls of what content from friends is seen (e.g., block, mute), and finally controls that both provide feedback but also potentially impact the feed (e.g., like). For this experiment, we designed controls that would be difficult to judge objectively (e.g., popularity) but would revise the feed immediately when a participant modified the control setting. Figure <ref type="figure">2</ref>. Two experiments used similar system designs. The overview (a) shows the core features: a user login, the user's own news feed, and controls. The interview system design (b) featured five controls and sideby-side feeds, while the online system (c) had a single control and feed.</p><p>While few social networks provide controls for the kind of summary features (like popularity) we developed, they often provide access to the results on alternate views like Instagram's "Explore" tab. External tools also provide similar controls <ref type="bibr" target="#b71">[66]</ref>.</p><p>Control settings must also be useful for the particular social media platform that they control. Twitter functions as a social network, but also as a news media site <ref type="bibr" target="#b34">[32]</ref>. To capture both of these aspects, we developed control settings for accounts but also for tweet content. Controls were roughly split between tweet content (sentiment, popularity) and accounts (poster frequency, closeness and celebrity). With these controls, we tried to maximize four factors: 1) Ecological validity: these controls are typical of those found in social media, 2) Value: pilot tests suggested users care about these concepts, 3) Non-triviality: these controls cannot be trivially falsified, unlike some alternatives (e.g., a "media" control that toggles the presence of photos where failures are trivial to detect) and 4) Data support:</p><p>there is data from the platform to support implementation of a working control. While controls for personalized content like "Things you might like" are appealing, the Twitter API does not provide data (e.g., a user's like history) to support it. Controls were iterated on repeatedly to meet these goals.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Real and Random Control Setting Algorithms</head><p>We briefly outline how each control's values were calculated:</p><p>Popularity used a simple metric: the number of times the post was retweeted.</p><p>Sentiment was calculated using LIWC <ref type="bibr" target="#b48">[45]</ref>. Using a positive and negative vocabulary, tweets were scored by the total of number of positive minus negative words.</p><p>Frequency measured how often an account posted, using the average number of times they posted per month, over the length of the account's existence.</p><p>Celebrity measured how famous an account was using its number of followers. The scores increased for users with more than 1000 followers, as the average user (who has posted in the last month) has about 700 <ref type="bibr" target="#b37">[35]</ref>. The score used a log scale: C = max(log(x) − 3, 0) for x followers.</p><p>Closeness approximated tie strength to capture how personally close a user was to the account they followed. This measure was based on features used for Twitter in the WeMeddle system <ref type="bibr" target="#b24">[22]</ref>. Using the current API, we were able to compute a score based on the number of followers, number and sentiment of direct messages, most recent direct message, and how recently the account was followed, where the closeness score increased inversely for number of followers and recency of following.</p><p>The algorithms we developed for these control settings may not be optimal. For example, sentiment might be improved by using other dictionaries <ref type="bibr" target="#b27">[25]</ref> or including more complex features like word length <ref type="bibr" target="#b5">[6]</ref>. However, they captured the concepts well enough, as shown through numerous pilot tests conducted to ensure that the algorithms produced useful results and in the validation phase of the interview experiment.</p><p>Since one of the purposes of the experiments was to understand whether it matters if controls work or not, each control had both a "real" and a "random" algorithm for computing scores.</p><p>For each user, we collected the 800 most recent tweets and all accounts they follow, using the Twitter API. For each tweet or account, we computed values for our controls using these data. Once all non-random values were computed, "random" values were assigned by drawing randomly from this distribution. In this way, non-uniform distributions (e.g., of popularity) could be captured for the random controls.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Interface Details</head><p>Each control setting was presented as a slider (Figure <ref type="figure" target="#fig_0">1b</ref>), with a title (e.g., celebrity) and each end labeled (e.g., unknown and well-known). We provided neither text nor verbal explanations of the function of each control setting. This more closely emulated existing social media systems, where it is left to the user to guess what impact a like, block or even follow will have on their overall news feed and social media experience.</p><p>Each slider used a coarse 5-point granularity, where the ticks formed equally sized bins of accounts or tweets (depending on control type) for the logged in user. Thus the scores for an account would be relative only to the other accounts the user followed, so @MerriamWebster (~500k followers) might be the most well-known celebrity for one user, but a less known celebrity for another following more famous accounts.</p><p>In the face-to-face experiment the user viewed two news feeds side-by-side (Figure <ref type="figure">2b</ref>). One news feed was controlled by the real scores for each control, while the other was controlled by the random scores. The left-right ordering of which feed was controlled by real or random controls was randomized automatically. Seeing both sides update simultaneously helped users compare the changes and engage in reflection-in-action <ref type="bibr" target="#b53">[50]</ref>.</p><p>In the online experiment, on the other hand, the user viewed a single feed, shortened to 10 tweets (Figure <ref type="figure">2c</ref>). As the user interacted with the single control (when a control was present), the news feed would update either using either the real or the random scores for that control type (e.g., popularity). The ordering of when users encountered real, random and no control setting for a given control type were similarly randomized.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>EXPERIMENTAL DESIGN</head><p>We investigated our research questions using a mixed methods approach. We designed two complementary studies, the first a qualitative and quantitative laboratory study conducted face-to-face (the "interview experiment"), and the second a quantitative online experiment. The qualitative portion of the lab study allowed for our sensemaking investigation. In the online study, we scaled our study to a larger number of more geographically diverse participants, using only quantitative survey measures to understand participants' preferences. The online study also included an additional no-control-setting condition as a baseline measure to study the placebo effect.</p><p>Both studies investigated the effects of introducing control settings to a news feed on self-reported user experience. In both studies we experimentally manipulated the independent variable of control settings by varying their presence and function in three possible levels: real controls present, random controls present, and in the online experiment only: no control settings present. We then measured the dependent variables user satisfaction, feelings of control, and in the in-person lab study only: sense-making approach. Dependent variables were measured after each treatment: both studies were posttest-only designs. Different control settings (using the algorithms described above) were employed, but in order to focus on our research questions were not treated as a factor; both experiments are therefore one-way and test the presence and function of control settings, conceptualized as one factor. Experiments are within-subjects, as participants interacted with every condition. Treatment order was counterbalanced by randomization.</p><p>In the interview experiment, we addressed RQ3 by first capturing detailed data via surveys and interview questions on participants' control setting use and their satisfaction with their existing feeds, prior to any experimental intervention.</p><p>We then tested two treatments: real controls and randomly functioning controls. Semi-structured interviews allowed par-  ticipants to share their sensemaking process for each type in an open-ended way and to address RQ2 -how they responded to violated expectations. Finally, the interview experiment included a manipulation check to confirm that the experimental conditions were distinguishable: we told participants that some controls functioned randomly, and participants were asked to distinguish the real settings from the random ones.</p><formula xml:id="formula_0">(a)<label>(b)</label></formula><p>The online experiment supplemented this, specifically testing whether there is a placebo effect for controls, to address RQ1. Since a placebo effect is measured in comparison to a no-intervention baseline (i.e., an inert pill making people healthier than no treatment at all), the online study included an additional baseline "no-control-setting" treatment. The effects of these interventions were measured with Likert scale survey questions that participants answered for each condition. The online experiment also featured a larger, more geographically representative sample than the interview study.</p><p>The two studies were designed to complement each other via a triangulation design using the convergence model <ref type="bibr" target="#b10">[10]</ref>. Qualitative results from the in-person interviews were merged with the quantitative findings of the lab and online experiments in the interpretation stage. While the control panels differ in the number of controls (and number of conditions), both studies provide independent complementary evidence about sensemaking and the placebo effect. In both experiments, the user interacted with controls to "make their favorite version of their news feed for leisurely browsing (e.g., while drinking coffee on a weekend morning)" and answered questions about their experience. We describe each in more detail below.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>INTERVIEW EXPERIMENT</head><p>The interview experiment was designed to study sensemaking practices (RQ2), capture current social media and control use (RQ3), and confirm the real controls worked well enough for users to distinguish them from the randomly functioning ones.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Participants</head><p>Although the interview experiment employed a nonprobability convenience sample, participants were recruited with varied appeals designed to increase demographic diversity. We advertised the study with flyers in public locations (libraries, coffee shops, golf courses, etc.) and with online advertisements (including newsletters, news boards, etc.). The results include interviews with 32 participants (44% male, 6% chose not to answer) from the Champaign-Urbana area. Participants were diverse (19% Black, 19% Asian, 6% Hispanic/Latino, 3% Multiracial and 53% White), though the sample skewed young (59% under 25).</p><p>The selection criteria for participation was reading Twitter at least once per day; most participants reported reading Twitter at least once per day (Figure <ref type="figure" target="#fig_2">3</ref>), though they reported posting to Twitter less frequently. Participants also reported the number of times they used Twitter yesterday and on a typical day in free text. Distributions were quite similar and were collapsed from real values to the groupings reported in Figure <ref type="figure" target="#fig_2">3b</ref>.</p><p>Participants were paid $10/hour for the duration of their interview. The full interview typically ran an hour and a half (M=1 hour 38 min, SD=20 min).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Study Tasks Part I: Pre-Experiment Survey and Feed Exploration</head><p>The first segment of the interview experiment focused on understanding users' current use of social media. After the user logged in, they completed a survey on their current social media usage and control usage on social media. Users were then shown 10 tweets randomly selected from their home timeline and asked to explain why they would or would not want to read each. Next, the main system displayed the most recent tweets from their home timeline (Figure <ref type="figure">2b</ref>) and users pointed out any tweets they especially liked or disliked.</p><p>These tasks served two functions: first, they qualitatively captured how actively each user curates their news feed already. Second, these activities served to surface the participants' preferences and help focus their attention on what they like/dislike and on how they might use the controls in the next stage.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Part II: Control Sensemaking</head><p>The second stage of the experiment focused on understanding how users make sense of controls. Participants saw two news feeds side-by-side (Figure <ref type="figure">2b</ref>), one controlled by the real scores for the controls, the other controlled by the random scores. Comparing left and right as they updated simultaneously helped users think more deeply about the controls.</p><p>Participants first performed the tasks for this segment focusing on the left-hand feed, then repeated the same process focusing on the right-hand feed. The left-right ordering of real and random sides was randomized by the system.</p><p>Participants were asked to use any controls they liked to create their favorite version of their feed for leisurely browsing. The interviewers conducted a semi-structured interview, asking questions as the participants engaged with the controls. When the participant was satisfied with their news feed, they read it for a few minutes, before completing a survey about their experience and satisfaction with the feed they created. Finally, they were asked to explicitly compare the results on the two sides and identify which of the feeds they preferred (left or right) and summarize their thoughts about the controls.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Part III: Validation and Debriefing</head><p>Participants might be as satisfied with random controls as with real ones if the "real" controls were designed badly enough that users found their outcomes indistinguishable from random changes. To address this potential issue, we included a final manipulation check segment in the interview study.</p><p>After users answered questions about their ideal feed, they were debriefed with questions about what they thought the purpose of the study was. They were then told the true purpose of the study. Users were shown a duplicate interface, where the left hand column always updated at random. Users were told that one of the news feeds was updating at random as they chose different controls and were asked to identify which feed was updating at random, again using any controls they liked.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Measures</head><p>The questions in this study were presented 1) in a preexperiment survey, 2) in an after-task feed survey, and 3) as open-ended questions within the semi-structured interview. The pre-experiment survey (given the beginning of the iment in Part I) included demographic questions and questions about participants' typical social media use. The after-task survey was given twice, once after the user had experienced each of the two feeds (real and random) in Part II. In the after-task feed survey, Likert scales assessed the dependent variables, descriptives, and manipulation checks for the quantitative experiment in the lab study. These included: scale of three questions assessed satisfaction with the news feed: I am satisfied with the final news feed I saw for leisurely browsing, I enjoyed browsing this news feed, and I would like to use an interface like this in my day-to-day browsing of Twitter. Feelings of control One question was used as a manipulation check to ensure that users felt more control in the experimental conditions when a control setting was feel in control of my news feed. We assess control with a single item to avoid priming participants to focus on our manipulation.</p><p>While the questions were developed ad hoc for this experiment, they were iterated on to be easily interpreted, unambiguous and to capture a variety of aspects of satisfaction (with the feed, interface, and imagined future use).</p><p>Open-ended questions within the semi-structured interview the length of the experiment, capturing dependent variables, descriptives, and manipulation checks such as:</p><p>Sensemaking approach When the users engaged with the controls, the open-ended questions included: What do you expect with that option?, How do you think it's doing?, What are you paying attention to, to tell whether it's and there anything you're surprised to see? Or that you think is missing? to capture sensemaking and satisfaction. Current control use In addition to questions in the survey, the debriefing included questions about what the user's ideal or "dream" feed would include and you wanted to try to achieve this with Twitter's controls now, would you do so? Identification of random feed Users were asked in the debriefing at the end of the study if they noticed anything in particular about the options they used or the way the feeds changed. In the validation phase, these included directly do you think is updating randomly? How did you work that out? to capture whether (and how) the user identified the "random" feed.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>ONLINE EXPERIMENT</head><p>online experiment supplemented the interview experiment to specifically determine whether there is a placebo effect for controls (RQ1). We added a no-control-setting condition (not present in the interview study), to allow comparisons between real and random controls and a no-control-setting baseline.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Participants</head><p>The online experiment recruited participants from Amazon Mechanical Turk to supplement the interview experiment with more participants and participants from more diverse locations. Although it also employs a non-probability convenience sample, the online experiment includes surveys from 106 participants from 30 states, covering every region of the continental US. Participants (50% male, 1% chose not to answer) ranged between 20 and 78 years old (M = 35, SD = 10).</p><p>The full online experiment was designed to last less than 30 minutes. Participants in this experiment were paid $4, for an approximate rate of $8/hour, though online participants were not individually timed.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Study Tasks</head><p>For the online experiment, the system was significantly simplified; participants interacted with a single control or the baseline no-control-setting condition. They viewed a single feed at a time (Figure <ref type="figure">2c</ref>), rather than two side-by-side feeds as in the interview. For each such feed, participants answered a short survey about their experience with the control and feed.</p><p>After logging in, users were shown a brief demographic survey.</p><p>were then their news feed to the most recent tweets) and a single control. From the full five controls developed for the interview study, the online study focused on only two of the controls: popularity and closeness. These two were selected to capture the measures focused on tweet content (popularity) and those focused on (closeness).</p><p>Each page participants viewed constituted one experimental condition. Each page showed a news feed and a control setting (closeness or popularity), which was then manipulated (real/random/no-control-setting). viewed pages in sets of three focusing on a given control type (Figure <ref type="figure">4</ref>), where each of the three pages showed one of the three experimental conditions (real/random/no-control-setting) in a randomized order. Participants saw each control and condition three times, to address any possible learning effects, for 18 total experiences. Although this could be analyzed as a 2 x 3 full (or partial) factorial design, for clarity we did not treat the control type (popularity vs. closeness) as a factor in this study.</p><p>As in the interview experiment, users were asked to create favorite version of their feed using the controls (if available). The participant was then shown a short survey assessing satisfaction and self-efficacy for each page. The survey questions in this experiment took two formsattention check and dependent measures. One question in each survey was an attention check, common in Mechanical Turk surveys. For example, an attention check might read select the option strongly agree." Of the 18 attention check questions, participants needed to answer 15 correctly or their results were omitted from the analysis. The other four questions on each survey were the same Likert scales assessing satisfaction and feelings of control as were described in the measures section for the interview experiment.</p><p>Interviews were analyzed by the first author using iterative open coding. Survey questions were analyzed statistically in the following way: First, the consistency of user responses was assessed with Cronbach's alpha to test for possible learning effects. Second, the reliability of the scale for satisfaction was assessed using item-total correlation scores. The manipulation and scale results were then analyzed using the Kruskall-Wallis test to account for the ordinal values of the Likert scale results. Finally, if the Kruskall Wallis test indicated an effect, a post hoc Dunn test was used to identify which conditions (real, random or no-control-setting) differed.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>RESULTS</head><p>We identify a placebo effect for control settings, where users are more satisfied with their news feed when a control setting is offered, whether it works or not. Users experienced violated expectations when engaging with both real and random controls, often taking responsibility for system failures. Importantly, we also show that more frequent manipulation of control settings on Twitter did not increase users' satisfaction with their news feed. Instead, users often refered to improvised means of customizing the experience.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>RQ1: Placebo Effect of Control Settings</head><p>We found users were more satisfied with feeds when a control was present, regardless of whether it functioned randomly. In addition, the interview study confirmed that the "real" controls worked well enough for users to distinguish them from ones with a random algorithm, once made aware of this distinction.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>study results</head><p>To address possible learning effects with our experimental system, participants were shown each control and condition pair times. Users answered consistently, with a mean Cronbach alpha of 0.79 (α = 0.71 − 0.89), indicating that users scored a given control type/condition pairing (e.g. popularity/real) similarly each time they encountered it.</p><p>The Kruskall Wallis ANOVA test revealed no effect (H = 0.85, p = 0.36) across the popularity and closeness controls for the question "I feel in control of my news feed." So popuand closeness responses were collapsed for a Kruskaltest comparing the real, random, and no-control-setting conditions for the same question. A strong effect was found = 94.47, p 0.00001), so Dunn post hoc tests were computed for each pair of conditions (Table <ref type="table" target="#tab_3">1</ref>). The scores functioned as a manipulation check, and indicated that users did in fact feel greater control when a control panel was present.</p><p>Item-total correlation scores for the three satisfaction questions confirmed the reliability of the scale (popularity = 0.66 − 0.78, closeness r = 0.73 − 0.86). The satisfaction scale had significant differences between the popularity and closeness (H = 3.92, p = 0.047), where user satisfaction was higher for popularity controls. So popularity and closeness are reported separately. Computing Kruskal-Wallis scores for the three conditions revealed a significant difference for both popularity (H = 33.85, p 0.0001) and closeness = 13.85, p &lt; 0.001). Post-hoc Dunn's tests uncovered effect for real/none and random/none and no significant difference for real/random pairs (Table <ref type="table" target="#tab_3">1</ref>). That is, users were more satisfied and felt more in control when using a system with either real or random controls than no control setting, and furthermore are no less satisfied with random controls.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Interview study results</head><p>were similarly satisfied with both real and random controls in the interview study, but users could identify the randomly-controlled feed once made aware of the distinction.</p><p>Participants completed the same scale in the after-task feed survey after interacting with the real and randomly controlled feeds. Again, we found no significant difference between user satisfaction with the real and random controls (H 1.31, p = 0.25), though this study lacked a no-control-setting baseline.   In addition, when we asked users if they noticed anything about the controls in our debriefing, no participant identified that the controls on one were working randomly. One participant came close, noting, "The right side seemed more like it actually was doing what you picked. The left side was kinda random. Maybe not random, but it wasn't as what I wanted as the right" (P29). It was more common for participants to note one side seemed to work better than the other = 6), but some preferred the randomly-generated news feed that they saw as a less literal interpretation of the concepts: The of participants mentioned some other unrelated feature of the controls, e.g., controls they particularly enjoyed, controls they wished we would add, or sharing concerns about the concept of filtering social media in general (n = 22).</p><p>One concern was that participants might not notice a difference between real and random controls, if the real controls were designed badly. To address this, the validation task asked users to identify which feed was being updated randomly, after being made aware that one feed would do so. Four participants incorrectly identified which feed 28 randomly updating</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>RQ2: Addressing Violated Expectations</head><p>Designing algorithms (particularly machine learning algoto be interpretable by is an active and challenging topic of research <ref type="bibr">[15,</ref><ref type="bibr">34]</ref>. Even the simplest algorithms can be difficult to interpret from their output, particularly if users do not have clear expectations of what the algorithm will do. Even our simple implementations (e.g., popularity measured using retweets), users developed sophisticated theories of what the controls do. While it is outside the scope of this paper to detail the rich folk theories users developed for the controls, we highlight how users addressed violated expectations.</p><p>Past work has shown that even for non-functioning automated systems, users will disregard opposing evidence to believe they are working, even generating excuses for the system, like "I did not give it enough to work with" <ref type="bibr" target="#b58">[55]</ref>. We find similar results, where users developed explanations for unexpected results. Interestingly, this was true for both real and random controls -users also had their expectations violated by the functional settings, and excused them in similar ways. We report the ways users addressed violated expectations in the interview stage, reporting the number of users who expressed a similar statement for the real and randomly functioning controls.</p><p>In fact, one method of addressing violated expectations was substantially more common with the real controls: stating the controls were fighting each other (n real = 10, n rand = 1). As one user described this: I mean, I'm trying to imagine what the sliders do and thinking of how I've maybe created a conflicting environment where I want things that are more popular but less frequent. I don't know, something that's popular because a lot of people retweeted or favorited it or liked it, or whatever they call it now. Maybe that doesn't always match with things that are infrequent, I guess</p><p>The user takes responsibility, in this case, for having created a that is impossible to satisfy.</p><p>Most ways of addressing violated expectations were used for both real and random controls, though often slightly more frequently for random controls. Users often updated their own theory about how the control worked (n real = 15, n rand <ref type="bibr">= 16)</ref> or explained what might be happening (n real = 5, n rand = 11):</p><p>It may just be a function of the tweets it has to sort through that only 'famous' people were tweeting in my feed. Of the people that I follow, only the famous ones were tweeting an hour ago or whatever A few explanations were quite common. Users explained tweets by conditioning their description, like describing someas relatively unknown for a celebrity (n real = 10, n rand = 16). When seeing a comedian in the feed after moving the sentiment control setting to negative, one participant noted, "So for example, it's a comedian but, this comedian pretends like Kim Jong Un from North Korea. So, it's pretty dark humor, a lot of negative things" (P9). Users also noted that different people interpret a result differently (n real = 3, n rand = 8), for example when looking at the results for more well-known celebrities: "Probably, if you're a sports fan -I'm not really a sports fan [...] but then if someone saw this picture, they would have known who this is, but I don't" Some even second guessed their own evaluation of accounts, content or own preferences (n real = 7, n rand = 10): "I feel like they're not really less popular? Maybe they are and I just, I noticed them more than they actually post... Like since I like them I think they post a lot but they really don't" (P2).</p><p>Finally, a number of users took responsibility when the system violated their expectations, either saying it was their fault for not being able to understand the controls ("Are we close? I don't know, I'm horrible at this one!" (P5)) (n real = 2, n = 7), or taking responsibility for doing something outside the system, "Oh, they're still there. I should probably just unfollow them if I don't like them so much" (P15) (n real = 4, n rand = While our results have shown users a control setting is present, we have also discovered that users will take for asking too much of the system, for not being able to understand, for not doing something they should have already -when surprised or dissatisfied with the results, whether the control works or not. We study how this plays out on Twitter now, capturing how participants use some of the existing controls on Twitter and how that impacts their satisfaction with their feed.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>RQ3: Current and Envisioned Use of Twitter's Controls</head><p>We find a wide range in how often people use following controls on Twitter, but more editing does not make people enjoy their feed more. When users address how to be more satisfied with their news feed, they imagine using existing controls, but a number of improvised approaches. Interview results indicated that users typically do use existing controls frequently, but that higher frequency use of controls has little impact on satisfaction with their existing feed.</p><p>Results draw from the interview study's pre-experiment survey on current social media usage. Twitter has an extensive control panel available to users, including fine grained controls that range from muting whole accounts to muting particular words from just notifications from people you don't follow for 24 hours. Our survey focused on use of follow and unfollow controls, which form the core basis of the Twitter news feed.</p><p>Figure <ref type="figure">5</ref> shows participants' current use of Twitter's existing controls for adding and removing followers from the news feed. There is a wide variety of current control use, ranging from daily use to several users who report never removing users once they follow them. Users typically update who they follow by adding followers at least a few times per month.</p><p>To understand how users' control use impacts their satisfaction with their news feed, we use data from the pre-experiment feed exploration. The fraction of 10 randomly selected tweets that users reported wanting to see is used as a measure of their satisfaction with their existing news feed. We find that more frequent control use (curating who the user follows) has no impact on the fraction of tweets the user wants to see, either by adding (r = −0.22, p = 0.22) or removing (r = −0.03, p = 0.86) friends. This suggests that use of existing controls has little impact on users' satisfaction with existing feed.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>How Users Controlling What They See</head><p>We also studied how users controlling what they see. addressing how to be more satisfied with their news feed, users point to existing controls, but also describe many improvised behaviors like scrolling fast or simply choosing different social media platforms to control what they see. These results include data from 1) users' reflections (while using our about how they achieve their goals on Twitter now and 2) an interview question where users described their "dream feed" (i.e., their ideal version of their news feed) and then how they would create it using Twitter. controls. participants did envision using existing controls offered by Twitter to create their dream feed. The most frequently referred to control was following and users (n = 20). Users typically thought of this as quite straightforward. For example to create their dream feed: more accounts. And unfollow the accounts that tweets [sic] a lot. I think that's it" (P19). Users also referred to existing controls including muting or blocking users (n = 4), lists (n = 4), or Twitter's "Show me the best Tweets first" (n = 2).</p><p>Improvised controls. However, many users also described using other Twitter affordances or behaviors to view what they wanted. Several described using the explore tabs (which include search, trending, and moments) to see current and tweets (n = 8), so that their news feed did not need to those: "You can press search and [Twitter] brings you a whole 'nother page. It's like trending stuff on there, and that's usually, that's how I find out most of my news (P29). describe going directly the profile pages of accounts they particularly like or care about to see the full feed (n 4), whether a news account or a personal friend. For example, one user described visiting friends' profiles to "read their tweets directly there, instead of in a feed with anybody else" A few rarely look at their news feed and rely primarily on direct messages from friends to see what they want (n 2). As participant noted, all his friends share tweets. And whether are shared humor or sharing opinions about important "It's like for me. It's geared towards me"</p><p>Finally, a few users who did not envision many opportunities for themselves to create their dream feed, instead used their behavior -scrolling quickly -to avoid tweets they didn't want to see (n = 3). As one described it, Oh, how would I do that now? I think just by scrolling when I see stuff. Or when I see... I said before, 50 retweets in a row, I'm just like "Okay, scroll, scroll scroll, scroll, scroll" the largest group of participants described controlling what they see by the choice of social network itself (n 10). They viewed selecting a social network as a form of controlling who and what they saw, by following different people on different platforms. Several noted that they used platforms for closer friends (e.g., "I don't have them on Snapchat 'cause I'm not a close enough friend" (P3)), but Twitter for more distant friends or celebrities: I don't go on Twitter to look at my friends, so that's Instagram or Snapchat. Twitter is very much to look at the opinions of people that I typically don't know but that have a bigger platform Some tied this to how social norms differ across platforms, "I'm Facebook friends with people I hate and all that. But Twitter, it's more like you have the choice to follow who follow" (P4). Others focused on the core difference in news feed prioritization between social networks ("Sometimes that stuff gets buried [...] 'cause I feel like with Facebook miss a lot" (P11)), tying that to the importance of Twitter news: "I don't usually follow newspapers on Facebook or [... But] for breaking news and stuff I go to Twitter right away" (P9).</p><p>So while users understood the available controls, they described use of a rich set of improvised solutions to be more satisfied with their feeds. This is somewhat surprising, given the extensive control settings that Twitter offers.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>CONCLUSIONS, QUESTIONS, AND NEXT STEPS Trust, Violated Expectations and Ethics of Controls</head><p>In this work, we uncovered a placebo effect for control settings on social media. While this placebo effect might suggest adding non-functional controls -or even just a quick and dirty implementation of the controls eventually desired -to increase user satisfaction, we argue here that we must look deeper.</p><p>Non-functional controls might suffice if social media were solely for entertainment (as was likely the case for most of our participants). However, research has shown that cial media has far greater impact, e.g., on organizing social movements <ref type="bibr" target="#b62">[59]</ref> and news access <ref type="bibr" target="#b55">[52]</ref>. Reliance on a platform such as Twitter in the context of a violent political conflict might bring high stakes to the questions of reliability and trustworthiness of control settings or of the algorithm itself.</p><p>The fact that, in our work, users encountered violated expectations for both the real and the random controls suggests a potential for breakdown of trust even with the real controls. Indeed, Kizilcec shown that when users' expectations are violated, they trust systems less -unless provided some transparency <ref type="bibr" target="#b31">[29]</ref>. While our study did not explicitly measure trust, it is an important factor when considering the impact of such a placebo effect. It is already well-established that users default to considering automated systems trustworthy <ref type="bibr" target="#b16">[16]</ref> and may liable to overtrusting systems <ref type="bibr" target="#b41">[39,</ref><ref type="bibr" target="#b42">40,</ref><ref type="bibr" target="#b52">49]</ref>.</p><p>For controls in particular, the likelihood that users accept has potential negative outcomes, including forming inaccurate representations of important relationships or world events that, when acted upon, lead to misunderstanding, strained relationships, social alienation, or worse <ref type="bibr" target="#b17">[17,</ref><ref type="bibr" target="#b54">51]</ref>. With social media playing a growing role in civic and political life, surely it will become ever more important to establish not only whether these platforms are delivering what they promise, as in the growing area of work on algorithmic accountability, but how they establish trustworthiness for users. Relatedly, explorations of the ethics of misrepresentative control settings might fit well within emerging conversations about the ethics of algorithmic systems <ref type="bibr" target="#b4">[5,</ref><ref type="bibr" target="#b11">11,</ref><ref type="bibr" target="#b13">13,</ref><ref type="bibr">44]</ref>.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Social Context and Platform</head><p>No control setting can exist apart from the system it controls. To complicate our call for transparency in interface design, we reference Matthew Fuller who argues: Whenever an interface promises to make something 'clear' or speaks of allowing something to work in just the simplest way possible, it must first of all be assaulted with questions, yawns and scripts rather than rewarded immediate identification <ref type="bibr" target="#b23">[21]</ref>.</p><p>In our case, for example, we consider the question: what are the control settings not being built? One could argue that a social media platform would never build the control settings people truly want (e.g., removing ads or promoted content). For example, one user noticed the lack of ads on our system, my normal feed [...] honestly on every page there's two or three either sponsored, or it says ad. This took them all out, is amazing" (P31). But since this runs counter to the economic interests of the platform, control settings to remove advertisements seem unlikely.</p><p>As a platform, Twitter is popular, but it differs from other social networks: the default is public posts, following is unidirectional (allowing connections with celebrities) and Twitter important size limitations. This may limit generalization of the results in some important ways. Perhaps use of existing controls would be more closely tied to satisfaction in less fastpaced platforms or ones that focus more on personal friends, presence past work has shown to be important <ref type="bibr" target="#b20">[19]</ref>.</p><p>This study focused on user satisfaction with news feeds without regard for the social and historical context of the user and platform. This raises potential for future study that accounts for such contexts more explicitly -or for the possibility that user satisfaction may be a secondary feature in some contexts.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Rethinking Control Panel Design</head><p>Our work showed the presence of a placebo effect but not its mechanism. Are people more satisfied when a control is present simply because they enjoy exerting control? Or is it the change to their daily feed, and the accompanying sense of surprise or serendipity of what they're seeing, that makes users more satisfied? One user described his news feed goal "I pretty much only wanna see basketball, but then having these little things, of like the most basic thing to know about weather, fashion, business..." (P28). The added spice of such atypical results may be why users enjoyed random controls.</p><p>Understanding the mechanisms that determine this effect will likely also impact what good control setting design practices should look like. However, our study suggests that traditional methods of study (like the cognitive walkthrough) are not sufficient. Particularly as much of the control users have is intertwined with other functionality with important social implications (e.g., the "like" button), it is also an open question how users weigh the desire for control against other important media functions.</p><p>In addition, users' rich set of improvised approaches to seeing what they want raises questions. Given the dexterity users in "inhabit[ing] a stream of multilayered information" on Twitter <ref type="bibr" target="#b9">[9]</ref>, perhaps it should be unsurprising that these approaches exist. Nevertheless, we wonder what it is about manipulation of the news feed through scrolling techniques, patterns of use, or other improvised solutions that seems to bring more satisfaction for users (particularly given the rich set of existing controls). Better understanding of how users employ improvised manipulation of news feeds, and why, could support designers of feed composition algorithms in products that create trust and support long-term use.</p></div><figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_0"><head>Figure 1 .</head><label>1</label><figDesc>Figure 1. Users engage in complex sensemaking around control settings, without discovering that some of the controls display random tweets.</figDesc><graphic url="image-5.png" coords="1,470.54,266.69,68.52,55.78" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_2"><head>Figure 3 .</head><label>3</label><figDesc>Figure 3. Reported Twitter Use. Participants report their overall use (a), reading Twitter frequently, though many post less frequently (if ever). Most reported using Twitter several times yesterday (b).</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_3"><head>RealZ</head><label></label><figDesc>= −0.80 p = 0.43 Z = 2.75 p &lt; .01 Z = 3.55 p &lt; .001</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_5"><head></head><label></label><figDesc>It seemed like right side did exactly what I wanted it to do when I picked a certain filter and left side didn't necessarily do exactly what I wanted it to do but did a better job of kind of inferring what I wanted, in a way (P10).</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_2"><head></head><label></label><figDesc>Closeness4. Online Experiment Design Example. Participants experienced each control type (popularity and closeness) and condition (real, random, no-control-setting), where ordering was within each control type. Participants would experience a series like this three times.</figDesc><table><row><cell cols="2">Popularity</cell><cell></cell><cell></cell><cell></cell><cell></cell></row><row><cell></cell><cell>1</cell><cell></cell><cell>2</cell><cell></cell><cell>3</cell></row><row><cell></cell><cell>Popularity</cell><cell></cell><cell>Popularity</cell><cell></cell><cell></cell></row><row><cell>Feed</cell><cell></cell><cell>Feed</cell><cell></cell><cell>Feed</cell><cell></cell></row><row><cell>Via</cell><cell></cell><cell>Via</cell><cell></cell><cell>With</cell><cell></cell></row><row><cell>Random Scores</cell><cell>Survey</cell><cell>Real Scores</cell><cell>Survey</cell><cell>No Control</cell><cell>Survey</cell></row><row><cell cols="2">Closeness</cell><cell></cell><cell></cell><cell></cell><cell></cell></row><row><cell></cell><cell>4</cell><cell></cell><cell>5</cell><cell></cell><cell>6</cell></row><row><cell></cell><cell>Closeness</cell><cell></cell><cell></cell><cell></cell><cell></cell></row><row><cell>Feed</cell><cell></cell><cell>Feed</cell><cell></cell><cell>Feed</cell><cell></cell></row><row><cell>Via</cell><cell></cell><cell>With</cell><cell></cell><cell>Via</cell><cell></cell></row><row><cell>Real Scores</cell><cell>Survey</cell><cell>No Control</cell><cell>Survey</cell><cell>Random Scores</cell><cell>Survey</cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_3"><head>Table 1 .</head><label>1</label><figDesc>Dunn post hoc test results. Users are more satisfied and feel control when using either real or random controls than no control, but there is no significant difference between real and random controls.</figDesc><table /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_4"><head>CHI 2018 Paper CHI 2018, April 21-26, 2018, Montréal, QC, Canada Paper 16</head><label></label><figDesc></figDesc><table><row><cell>Control Use</cell><cell cols="4">% Users who control who they follow by</cell></row><row><cell></cell><cell>Add</cell><cell>Avg of</cell><cell>Remove</cell><cell>Avg % of</cell></row><row><cell></cell><cell>Users</cell><cell>Tweets Liked</cell><cell>Users</cell><cell>Tweets Liked</cell></row><row><cell>Daily</cell><cell>3%</cell><cell>30%</cell><cell>6%</cell><cell>35%</cell></row><row><cell>Weekly</cell><cell>16</cell><cell>54</cell><cell>̶</cell><cell>-</cell></row><row><cell>Monthly</cell><cell>69</cell><cell>50</cell><cell>31</cell><cell>57</cell></row><row><cell>Yearly</cell><cell>9</cell><cell>56</cell><cell>38</cell><cell>52</cell></row><row><cell>&gt;1/Year</cell><cell>3</cell><cell>80</cell><cell>13</cell><cell>45</cell></row><row><cell>Never</cell><cell>̶</cell><cell>-</cell><cell>13</cell><cell>53</cell></row><row><cell cols="5">Figure 5. Current control and impact on user satisfaction. Most add</cell></row><row><cell cols="5">users at least a few times per month, though they remove less frequently.</cell></row><row><cell cols="5">Updating who they follow has little impact on news feed satisfaction.</cell></row><row><cell cols="5">of Use of Controls on News Feed Satisfaction</cell></row></table></figure>
+		</body>
+		<back>
+
+			<div type="acknowledgement">
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>ACKNOWLEDGEMENTS</head><p>would like to thank Michael Kruepke and Wai-Tat Fu for their helpful discussions of experimental design. This work was supported by NSF grant CHS-1564041.</p></div>
+			</div>
+
+			<div type="references">
+
+				<listBibl>
+
+<biblStruct xml:id="b0">
+	<analytic>
+		<title level="a" type="main">Benevolent deception in human computer interaction</title>
+		<author>
+			<persName><forename type="first">Eytan</forename><surname>Adar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Desney</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jaime</forename><surname>Tan</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Teevan</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2470654.2466246</idno>
+		<ptr target="http://dx.doi.org/10.1145/2470654.2466246" />
+	</analytic>
+	<monogr>
+		<title level="m">Proc. CHI</title>
+				<meeting>CHI</meeting>
+		<imprint>
+			<date type="published" when="2013">2013</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b1">
+	<analytic>
+		<title level="a" type="main">The personalization privacy paradox: an empirical evaluation of information transparency and the willingness to be profiled online for personalization</title>
+		<author>
+			<persName><forename type="first">Naveen</forename><surname>Farag Awad</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Mayuram</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Krishnan</surname></persName>
+		</author>
+		<idno type="DOI">10.2307/25148715</idno>
+		<ptr target="http://dx.doi.org/10.2307/25148715" />
+	</analytic>
+	<monogr>
+		<title level="j">Management Information Systems Quarterly</title>
+		<imprint>
+			<date type="published" when="2006">2006. 2006</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b2">
+	<analytic>
+		<title level="a" type="main">A privacy paradox: Social networking in the United States</title>
+		<author>
+			<persName><forename type="first">B</forename><surname>Susan</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Barnes</surname></persName>
+		</author>
+		<idno type="DOI">10.5210/fm.v11i9.1394</idno>
+		<ptr target="http://dx.doi.org/10.5210/fm.v11i9.1394" />
+	</analytic>
+	<monogr>
+		<title level="j">First Monday</title>
+		<imprint>
+			<biblScope unit="volume">11</biblScope>
+			<biblScope unit="issue">9</biblScope>
+			<date type="published" when="2006">2006. 2006</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b3">
+	<monogr>
+		<title level="m" type="main">Moving Beyond Untagging: Photo Privacy in a Tagged World</title>
+		<author>
+			<persName><forename type="first">Andrew</forename><surname>Besmer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Heather</forename><surname>Richter Lipford</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/1753326.1753560</idno>
+		<ptr target="http://dx.doi.org/10.1145/1753326.1753560" />
+		<imprint>
+			<date type="published" when="2010">2010</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b4">
+	<analytic>
+		<title level="a" type="main">Algorithmic Accountability and Public Reason</title>
+		<author>
+			<persName><forename type="first">Reuben</forename><surname>Binns</surname></persName>
+		</author>
+		<idno type="DOI">10.1007/s13347-017-0263-5</idno>
+		<ptr target="http://dx.doi.org/10.1007/s13347-017-0263-5" />
+	</analytic>
+	<monogr>
+		<title level="j">Philosophy &amp; Technology</title>
+		<imprint>
+			<biblScope unit="page" from="1" to="14" />
+			<date type="published" when="2017">2017. 2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b5">
+	<monogr>
+		<title/>
+		<author>
+			<persName><forename type="first">Samuel</forename><surname>Brody</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Nicholas</forename><surname>Diakopoulos</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2011">2011</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b6">
+	<analytic>
+		<title level="a" type="main">using word lengthening to detect sentiment in microblogs</title>
+		<author>
+			<persName><surname>Cooooooooooooooollllllllllllll!!!!!!!!!!!!!!</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proc. EMNLP</title>
+				<meeting>EMNLP</meeting>
+		<imprint>
+			<publisher>Association for Computational Linguistics</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b7">
+	<monogr>
+		<title level="m" type="main">The Algorithmic Imaginary: the Ordinary Affects of Facebook Algorithms. Information</title>
+		<author>
+			<persName><forename type="first">Taina</forename><surname>Bucher</surname></persName>
+		</author>
+		<idno type="DOI">10.1080/1369118X.2016.1154086</idno>
+		<ptr target="http://dx.doi.org/10.1080/1369118X.2016.1154086" />
+		<imprint>
+			<date type="published" when="2017">2017. 2017</date>
+			<publisher>Communication &amp; Society</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b8">
+	<analytic>
+		<title level="a" type="main">The Fishwrap Personalized News System</title>
+		<author>
+			<persName><forename type="first">Matthew</forename><surname>Chesnais</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jonathan</forename><surname>Mucklo</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Sheena</surname></persName>
+		</author>
+		<idno type="DOI">10.1109/CN.1995.509583</idno>
+		<ptr target="http://dx.doi.org/10.1109/CN.1995.509583" />
+	</analytic>
+	<monogr>
+		<title level="m">Proc. 2nd International Workshop on Community Networking</title>
+				<meeting>2nd International Workshop on Community Networking</meeting>
+		<imprint>
+			<date type="published" when="1995">1995</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b9">
+	<analytic>
+		<title level="a" type="main">Following you: Disciplines of listening in social media</title>
+		<author>
+			<persName><forename type="first">Kate</forename><surname>Crawford</surname></persName>
+		</author>
+		<idno type="DOI">10.1080/10304310903003270</idno>
+		<ptr target="http://dx.doi.org/10.1080/10304310903003270" />
+	</analytic>
+	<monogr>
+		<title level="j">Continuum</title>
+		<imprint>
+			<biblScope unit="volume">23</biblScope>
+			<biblScope unit="page" from="525" to="535" />
+			<date type="published" when="2009">2009. 2009</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b10">
+	<monogr>
+		<title level="m" type="main">Designing and Conducting Mixed Methods Research</title>
+		<author>
+			<persName><forename type="first">W</forename><surname>John</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Vicki L Plano</forename><surname>Creswell</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Clark</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2011">2011. 2011</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b11">
+	<analytic>
+		<title level="a" type="main">The threat of algocracy: reality, resistance and accommodation</title>
+		<author>
+			<persName><forename type="first">John</forename><surname>Danaher</surname></persName>
+		</author>
+		<idno type="DOI">10.1007/s13347-015-0211-1</idno>
+		<ptr target="http://dx.doi.org/10.1007/s13347-015-0211-1" />
+	</analytic>
+	<monogr>
+		<title level="j">Philosophy &amp; Technology</title>
+		<imprint>
+			<biblScope unit="volume">29</biblScope>
+			<biblScope unit="page" from="245" to="268" />
+			<date type="published" when="2016">2016. 2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b12">
+	<analytic>
+		<title level="a" type="main">Algorithms Ruin Everything: #RIPTwitter, Folk Theories, and Resistance Algorithmic Change in Social Media</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Michael</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Darren</forename><surname>Devito</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jeremy</forename><surname>Gergle</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Birnholtz</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3025453.3025659</idno>
+		<ptr target="http://dx.doi.org/10.1145/3025453.3025659" />
+	</analytic>
+	<monogr>
+		<title level="m">Proc. CHI</title>
+				<meeting>CHI</meeting>
+		<imprint>
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b13">
+	<monogr>
+		<title level="m" type="main">Algorithmic Transparency in the News Media</title>
+		<author>
+			<persName><forename type="first">Nicholas</forename><surname>Diakopoulos</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Michael</forename><surname>Koliska</surname></persName>
+		</author>
+		<idno type="DOI">10.1080/21670811.2016.1208053</idno>
+		<ptr target="http://dx.doi.org/10.1080/21670811.2016.1208053" />
+		<imprint>
+			<date type="published" when="2017">2017. 2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b14">
+	<monogr>
+		<title/>
+		<author>
+			<persName><forename type="first">Alan</forename><surname>Dix</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Janet</forename><surname>Finlay</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Gregory</forename></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Russell</forename><surname>Beale</surname></persName>
+		</author>
+		<idno type="DOI">10.1007/978-1-4899-7993-3_192-2</idno>
+		<imprint>
+			<date type="published" when="2004">2004</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b15">
+	<monogr>
+		<title level="m" type="main">Towards a rigorous science of interpretable machine learning</title>
+		<author>
+			<persName><forename type="first">Finale</forename><surname>Doshi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">-</forename><surname>Velez</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Been</forename><surname>Kim</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b16">
+	<analytic>
+		<title level="a" type="main">The Role of Trust Automation Reliance</title>
+		<author>
+			<persName><forename type="first">T</forename><surname>Mary</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Dzindolet</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Scott</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Regina</forename><forename type="middle">A</forename><surname>Peterson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Linda</forename><forename type="middle">G</forename><surname>Pomranky</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Pierce</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Beck</surname></persName>
+		</author>
+		<idno type="DOI">10.1016/S1071-5819(03)00038-7</idno>
+		<idno>S1071-5819(03)00038-7</idno>
+		<ptr target="http://dx.doi.org/10.1016/" />
+	</analytic>
+	<monogr>
+		<title level="j">International Journal of Human-Computer Studies</title>
+		<imprint>
+			<biblScope unit="volume">58</biblScope>
+			<biblScope unit="page" from="697" to="718" />
+			<date type="published" when="2003">2003. 2003</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b17">
+	<analytic>
+		<title level="a" type="main">Friend Grouping Algorithms for Online Social Networks: Preference, Bias, and Implications</title>
+		<author>
+			<persName><forename type="first">Motahhare</forename><surname>Eslami</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Amirhossein</forename><surname>Aleyasen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Karrie</forename><surname>Roshanak Zilouchian Moghaddam</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Karahalios</surname></persName>
+		</author>
+		<idno type="DOI">10.1007/978-3-319-13734-6_3</idno>
+		<ptr target="http://dx.doi.org/10.1007/978-3-319-13734-6_3" />
+	</analytic>
+	<monogr>
+		<title level="m">Proc. SocInfo</title>
+				<meeting>SocInfo</meeting>
+		<imprint>
+			<publisher>Springer</publisher>
+			<date type="published" when="2014">2014</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b18">
+	<monogr>
+		<title/>
+		<author>
+			<persName><forename type="first">Motahhare</forename><surname>Eslami</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Karrie</forename><surname>Karahalios</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Christian</forename><surname>Sandvig</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Aimee</forename><surname>Vaccaro</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Rickman</surname></persName>
+		</author>
+		<imprint>
+			<pubPlace>Kevin Hamilton, and</pubPlace>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b19">
+	<analytic>
+		<title level="a" type="main">First I Like It, Then I Hide It: Folk Theories of Social Feeds</title>
+		<author>
+			<persName><forename type="first">Alex</forename><surname>Kirlik</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2858036.2858494</idno>
+		<ptr target="http://dx.doi.org/10.1145/2858036.2858494" />
+	</analytic>
+	<monogr>
+		<title level="m">Proc. CHI</title>
+				<meeting>CHI</meeting>
+		<imprint>
+			<date type="published" when="2016">2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b20">
+	<analytic>
+		<title level="a" type="main">2015. I always assumed that I wasn&apos;t really that close to [her]: Reasoning about Invisible Algorithms in News Feeds</title>
+		<author>
+			<persName><forename type="first">Motahhare</forename><surname>Eslami</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Aimee</forename><surname>Rickman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kristen</forename><surname>Vaccaro</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Amirhossein</forename><surname>Aleyasen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Andy</forename><surname>Vuong</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Karrie</forename><surname>Karahalios</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kevin</forename><surname>Hamilton</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Christian</forename><surname>Sandvig</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2702123.2702556</idno>
+		<ptr target="http://dx.doi.org/10.1145/2702123.2702556" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 33rd Annual ACM Conference on Human Factors in Computing Systems</title>
+				<meeting>the 33rd Annual ACM Conference on Human Factors in Computing Systems</meeting>
+		<imprint>
+			<publisher>ACM</publisher>
+			<biblScope unit="page" from="153" to="162" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b21">
+	<monogr>
+		<title level="m" type="main">What&apos;s the Folk Reasoning About Cyber-Social Systems</title>
+		<author>
+			<persName><forename type="first">Megan</forename><surname>French</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jeff</forename><surname>Hancock</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b22">
+	<monogr>
+		<title/>
+		<idno type="DOI">10.2139/ssrn.2910571</idno>
+		<ptr target="http://dx.doi.org/10.2139/ssrn.2910571" />
+		<imprint>
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b23">
+	<monogr>
+		<author>
+			<persName><forename type="first">Matthew</forename><surname>Fuller</surname></persName>
+		</author>
+		<title level="m">Behind the Blip: Essays on the Culture of Software. Autonomedia</title>
+				<imprint>
+			<date type="published" when="2003">2003</date>
+			<biblScope unit="page">107</biblScope>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b24">
+	<analytic>
+		<title level="a" type="main">Predicting Tie Strength in a New</title>
+		<author>
+			<persName><forename type="first">Eric</forename><surname>Gilbert</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2145204.2145360</idno>
+		<ptr target="http://dx.doi.org/10.1145/2145204.2145360" />
+	</analytic>
+	<monogr>
+		<title level="m">Proc. CSCW</title>
+				<meeting>CSCW</meeting>
+		<imprint>
+			<date type="published" when="2012">2012</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b25">
+	<analytic>
+		<title level="a" type="main">Explaining the Privacy Paradox with</title>
+		<author>
+			<persName><forename type="first">Eszter</forename><surname>Hargittai</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Alice</forename><surname>Marwick</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Online International Journal of Communication</title>
+		<imprint>
+			<biblScope unit="volume">10</biblScope>
+			<biblScope unit="page">0</biblScope>
+			<date type="published" when="2016">2016. 2016</date>
+		</imprint>
+	</monogr>
+	<note>What Can I Really Do?</note>
+</biblStruct>
+
+<biblStruct xml:id="b26">
+	<monogr>
+		<title level="m" type="main">The placebo effect: An interdisciplinary exploration</title>
+		<author>
+			<persName><forename type="first">Anne</forename><surname>Harrington</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="1999">1999</date>
+			<publisher>Harvard University Press</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b27">
+	<analytic>
+		<title level="a" type="main">Vader: A parsimonious rule-based model for sentiment analysis of social media text</title>
+		<author>
+			<persName><forename type="first">J</forename><surname>Clayton</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Eric</forename><surname>Hutto</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Gilbert</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proc. ICWSM</title>
+				<meeting>ICWSM</meeting>
+		<imprint>
+			<date type="published" when="2014">2014</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b28">
+	<monogr>
+		<author>
+			<persName><forename type="first">Sanjay</forename><surname>Kairam</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mike</forename><surname>Brzozowski</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">David</forename><surname>Huffaker</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ed</forename><surname>Chi</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2207676.2208552</idno>
+		<ptr target="http://dx.doi.org/10.1145/2207676.2208552" />
+		<title level="m">Talking in Circles: Selective Sharing in In Proc. CHI. ACM</title>
+				<imprint>
+			<date type="published" when="2012">2012</date>
+			<biblScope unit="page" from="1065" to="1074" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b29">
+	<monogr>
+		<title level="m" type="main">Components of placebo effect: randomised in with irritable bowel syndrome</title>
+		<author>
+			<persName><forename type="first">J</forename><surname>Ted</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">John</forename><forename type="middle">M</forename><surname>Kaptchuk</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Lisa</forename><forename type="middle">A</forename><surname>Kelley</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Conboy</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Davis</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Eric</forename><forename type="middle">E</forename><surname>Kerr</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Irving</forename><surname>Jacobson</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Kirsch</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Rosa</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Bong</forename><forename type="middle">Hyun</forename><surname>Schyner</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Nam</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Long</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Nguyen</surname></persName>
+		</author>
+		<idno type="DOI">10.1136/bmj.39524.439618.25</idno>
+		<ptr target="http://dx.doi.org/10.1136/bmj.39524.439618.25" />
+		<imprint>
+			<date type="published" when="2008">2008. 2008</date>
+			<biblScope unit="volume">336</biblScope>
+			<biblScope unit="page" from="999" to="1003" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b30">
+	<analytic>
+		<title level="a" type="main">Lorrie Faith Cranor, and Robert W 2009. A nutrition label for privacy</title>
+		<author>
+			<persName><forename type="first">Patrick Gage</forename><surname>Kelley</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Joanna</forename><surname>Bresee</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/1572532.1572538</idno>
+		<ptr target="http://dx.doi.org/10.1145/1572532.1572538" />
+	</analytic>
+	<monogr>
+		<title level="m">Proc. SOUPS. ACM, 4. DOI</title>
+				<meeting>SOUPS. ACM, 4. DOI</meeting>
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b31">
+	<analytic>
+		<title level="a" type="main">How much information?: Effects of transparency on trust in an algorithmic interface</title>
+		<author>
+			<persName><forename type="first">F</forename><surname>René</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Kizilcec</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2858036.2858402</idno>
+		<ptr target="http://dx.doi.org/10.1145/2858036.2858402" />
+	</analytic>
+	<monogr>
+		<title level="m">CHI</title>
+				<imprint>
+			<date type="published" when="2016">2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b32">
+	<analytic>
+		<title level="a" type="main">Dear Learner: Participatory Visualisation of Learning for Sensemaking</title>
+		<author>
+			<persName><forename type="first">Simon</forename><surname>Knight</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Theresa</forename><surname>Anderson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kelly</forename><surname>Tall</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3027385.3029443</idno>
+		<ptr target="http://dx.doi.org/10.1145/3027385.3029443" />
+	</analytic>
+	<monogr>
+		<title level="m">Proc. International Learning Analytics &amp; Knowledge Conference</title>
+				<meeting>International Learning Analytics &amp; Knowledge Conference</meeting>
+		<imprint>
+			<publisher>ACM</publisher>
+			<date type="published" when="2017">2017</date>
+			<biblScope unit="page" from="532" to="533" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b33">
+	<analytic>
+		<title level="a" type="main">Principles of Explanatory Debugging to Personalize Interactive Machine Learning</title>
+		<author>
+			<persName><forename type="first">Todd</forename><surname>Kulesza</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Margaret</forename><surname>Burnett</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Weng-Keen</forename><surname>Wong</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Stumpf</forename></persName>
+		</author>
+		<idno type="DOI">10.1145/2678025.2701399</idno>
+		<ptr target="http://dx.doi.org/10.1145/2678025.2701399" />
+	</analytic>
+	<monogr>
+		<title level="m">Proc. IUI. ACM</title>
+				<meeting>IUI. ACM</meeting>
+		<imprint>
+			<date type="published" when="2015">2015</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b34">
+	<analytic>
+		<title level="a" type="main">What is Twitter, a Social Network or a Media</title>
+		<author>
+			<persName><forename type="first">Haewoon</forename><surname>Kwak</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Changhyun</forename><surname>Lee</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/1772690.1772751</idno>
+		<ptr target="http://dx.doi.org/10.1145/1772690.1772751" />
+	</analytic>
+	<monogr>
+		<title level="m">Proc. WWW</title>
+				<meeting>WWW</meeting>
+		<imprint>
+			<date type="published" when="2010">2010</date>
+		</imprint>
+	</monogr>
+	<note>Hosung Park, and Sue Moon</note>
+</biblStruct>
+
+<biblStruct xml:id="b35">
+	<monogr>
+		<title/>
+		<author>
+			<persName><forename type="first">Clayton</forename><surname>Lewis</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">John</forename><surname>Rieman</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="1993">1993</date>
+		</imprint>
+	</monogr>
+	<note>user interface design</note>
+</biblStruct>
+
+<biblStruct xml:id="b36">
+	<monogr>
+		<author>
+			<persName><surname>Zachary C Lipton</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:1606.03490</idno>
+		<title level="m">The mythos of model interpretability</title>
+				<imprint>
+			<date type="published" when="2016">2016. 2016</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b37">
+	<monogr>
+		<title level="m" type="main">The Average Twitter User Now has 707 Followers. average-twitter-followers-updated</title>
+		<author>
+			<persName><forename type="first">Ryan</forename><surname>Maccarthy</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2016-06">2016. 2016. June 2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b38">
+	<analytic>
+		<title level="a" type="main">Intermediaries personalize information streams</title>
+		<author>
+			<persName><forename type="first">Paul</forename><surname>Maglio</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Rob</forename><surname>Barrett</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/345124.345158</idno>
+		<ptr target="http://dx.doi.org/10.1145/345124.345158" />
+	</analytic>
+	<monogr>
+		<title level="j">Commun. ACM</title>
+		<imprint>
+			<biblScope unit="volume">43</biblScope>
+			<date type="published" when="2000">2000. 2000</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b39">
+	<monogr>
+		<title level="m" type="main">Deception and magic in collaborative interaction</title>
+		<author>
+			<persName><forename type="first">Joe</forename><surname>Marshall</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Steve</forename><surname>Benford</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Tony</forename><surname>Pridmore</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/1753326.1753410</idno>
+		<ptr target="http://dx.doi.org/10.1145/1753326.1753410" />
+		<editor>CHI. ACM. DOI</editor>
+		<imprint>
+			<date type="published" when="2010">2010</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b40">
+	<monogr>
+		<title level="m" type="main">Meaning, Medicine, and the &quot;Placebo Effect</title>
+		<author>
+			<persName><surname>Daniel E Moerman</surname></persName>
+		</author>
+		<idno type="DOI">10.1017/CBO9780511810855</idno>
+		<ptr target="http://dx.doi.org/10.1017/CBO9780511810855" />
+		<imprint>
+			<date type="published" when="2002">2002</date>
+			<publisher>Cambridge University Press</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b41">
+	<analytic>
+		<title level="a" type="main">Trust in automation: Part I. Theoretical issues in the study of trust and human intervention in automated systems</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Bonnie</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Muir</surname></persName>
+		</author>
+		<idno type="DOI">10.1080/00140139408964957</idno>
+		<ptr target="http://dx.doi.org/10.1080/00140139408964957" />
+	</analytic>
+	<monogr>
+		<title level="j">Ergonomics</title>
+		<imprint>
+			<biblScope unit="volume">37</biblScope>
+			<biblScope unit="page" from="1905" to="1922" />
+			<date type="published" when="1994">1994. 1994</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b42">
+	<analytic>
+		<title level="a" type="main">Trust in automation. Part II. Experimental studies of trust and human intervention in a process control simulation</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Bonnie</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Neville</forename><surname>Muir</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Moray</surname></persName>
+		</author>
+		<idno type="DOI">10.1080/00140139608964474</idno>
+		<ptr target="http://dx.doi.org/10.1080/00140139608964474" />
+	</analytic>
+	<monogr>
+		<title level="j">Ergonomics</title>
+		<imprint>
+			<biblScope unit="volume">39</biblScope>
+			<biblScope unit="page" from="429" to="460" />
+			<date type="published" when="1996">1996. 1996</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b43">
+	<analytic>
+		<title level="a" type="main">There is more to monitoring a power plant than meets the eye</title>
+		<author>
+			<persName><forename type="first">J</forename><surname>Randall</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Emilie</forename><forename type="middle">M</forename><surname>Mumaw</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Roth</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Kim</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Catherine</forename><forename type="middle">M</forename><surname>Vicente</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Burns</surname></persName>
+		</author>
+		<idno type="DOI">10.1518/001872000779656651</idno>
+		<ptr target="http://dx.doi.org/10.1518/001872000779656651" />
+	</analytic>
+	<monogr>
+		<title level="j">Human factors</title>
+		<imprint>
+			<biblScope unit="volume">42</biblScope>
+			<biblScope unit="page" from="36" to="55" />
+			<date type="published" when="2000">2000. 2000</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b44">
+	<monogr>
+		<title level="m" type="main">The Design of Everyday</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Donald</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Norman</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2002">2002. 2002</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b45">
+	<monogr>
+		<title/>
+		<idno type="DOI">10.15358/9783800648108</idno>
+		<ptr target="http://dx.doi.org/10.15358/9783800648108" />
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b46">
+	<monogr>
+		<title level="m" type="main">Who Controls Your Facebook Feed. 2016/01/how_facebook_s_news_feed_algorithm_works.html</title>
+		<author>
+			<persName><forename type="first">Will</forename><surname>Oremus</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2016-01">2016. January 2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b47">
+	<analytic>
+		<title level="a" type="main">Restoring transparency to authority</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Frank</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Pasquale</surname></persName>
+		</author>
+		<ptr target="https://ssrn.com/abstract=1762766" />
+	</analytic>
+	<monogr>
+		<title level="j">Journal on Telecommunications and High Technology</title>
+		<imprint>
+			<date type="published" when="2011-02">2011. February 2011</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b48">
+	<monogr>
+		<title level="m" type="main">The development and psychometric properties of LIWC2015</title>
+		<author>
+			<persName><forename type="first">W</forename><surname>James</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Pennebaker</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><surname>Ryan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kayla</forename><surname>Boyd</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Blackburn</forename><surname>Jordan</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2015">2015</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">Technical Report</note>
+</biblStruct>
+
+<biblStruct xml:id="b49">
+	<analytic>
+		<title level="a" type="main">Tiles: A Mixed Reality Authoring Interface</title>
+		<author>
+			<persName><forename type="first">Ivan</forename><surname>Poupyrev</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Desney</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mark</forename><surname>Tan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Hirokazu</forename><surname>Billinghurst</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Holger</forename><surname>Kato</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Nobuji</forename><surname>Regenbrecht</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Tetsutani</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proc. Interact</title>
+				<meeting>Interact</meeting>
+		<imprint>
+			<date type="published" when="2001">2001</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b50">
+	<analytic>
+		<title level="a" type="main">Enhancing Personal Informatics Through Social Sensemaking</title>
+		<author>
+			<persName><forename type="first">Aare</forename><surname>Puussaar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Adrian</forename><forename type="middle">K</forename><surname>Clear</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Peter</forename><surname>Wright</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3025453.3025804</idno>
+		<ptr target="http://dx.doi.org/10.1145/3025453.3025804" />
+	</analytic>
+	<monogr>
+		<title level="m">Proc. CHI. ACM</title>
+				<meeting>CHI. ACM</meeting>
+		<imprint>
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b51">
+	<analytic>
+		<title level="a" type="main">Understanding User Beliefs About Algorithmic Curation in the Facebook News Feed</title>
+		<author>
+			<persName><forename type="first">Emilee</forename><surname>Rader</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Rebecca</forename><surname>Gray</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2702123.2702174</idno>
+		<ptr target="http://dx.doi.org/10.1145/2702123.2702174" />
+	</analytic>
+	<monogr>
+		<title level="m">Proc. CHI</title>
+				<meeting>CHI</meeting>
+		<imprint>
+			<date type="published" when="2015">2015</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b52">
+	<monogr>
+		<title level="m" type="main">Overtrust of robots in emergency evacuation scenarios. In Interaction (HRI)</title>
+		<author>
+			<persName><forename type="first">Paul</forename><surname>Robinette</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Wenchen</forename><surname>Li</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Robert</forename><surname>Allen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ayanna</forename><forename type="middle">M</forename><surname>Howard</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Alan</forename><forename type="middle">R</forename><surname>Wagner</surname></persName>
+		</author>
+		<idno type="DOI">10.1109/HRI.2016.7451740</idno>
+		<ptr target="http://dx.doi.org/10.1109/HRI.2016.7451740" />
+		<imprint>
+			<date type="published" when="2016">2016</date>
+			<publisher>IEEE</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b53">
+	<monogr>
+		<title level="m" type="main">The Reflective Practitioner: How Professionals Think in Action</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Donald</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Schön</surname></persName>
+		</author>
+		<idno type="DOI">10.1080/07377366.1986.10401080</idno>
+		<ptr target="http://dx.doi.org/10.1080/07377366.1986.10401080" />
+		<imprint>
+			<date type="published" when="1983">1983</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b54">
+	<analytic>
+		<title level="a" type="main">Software defaults as de facto regulation the case of the wireless Information</title>
+		<author>
+			<persName><forename type="first">C</forename><surname>Rajiv</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Christian</forename><surname>Shah</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Sandvig</surname></persName>
+		</author>
+		<idno type="DOI">10.1080/13691180701858836</idno>
+		<ptr target="http://dx.doi.org/10.1080/13691180701858836" />
+	</analytic>
+	<monogr>
+		<title level="j">Community &amp; Society</title>
+		<imprint>
+			<biblScope unit="volume">11</biblScope>
+			<biblScope unit="page" from="25" to="46" />
+			<date type="published" when="2008">2008. 2008</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b55">
+	<monogr>
+		<title level="m" type="main">News Use Across Social Media Platforms 2017. news-use-across-social-media-platforms</title>
+		<author>
+			<persName><forename type="first">Elisa</forename><surname>Shearer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jeffrey</forename><surname>Gottfried</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2017">2017. 2017. 2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b56">
+	<analytic>
+		<title level="a" type="main">A taxonomy of robot deception and its benefits in HRI</title>
+		<author>
+			<persName><forename type="first">Jaeeun</forename><surname>Shim</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Ronald C Arkin</surname></persName>
+		</author>
+		<idno type="DOI">10.1109/SMC.2013.398</idno>
+		<ptr target="http://dx.doi.org/10.1109/SMC.2013.398" />
+	</analytic>
+	<monogr>
+		<title level="m">Systems, Man, Cybernetics (SMC)</title>
+				<imprint>
+			<publisher>IEEE</publisher>
+			<date type="published" when="2013">2013</date>
+			<biblScope unit="page" from="2328" to="2335" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b57">
+	<analytic>
+		<title level="a" type="main">Placebo of Marketing Consumer May Get What they Pay For</title>
+		<author>
+			<persName><forename type="first">Baba</forename><surname>Shiv</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ziv</forename><surname>Carmon</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Dan</forename><surname>Ariely</surname></persName>
+		</author>
+		<idno type="DOI">10.1509/jmkr.2005.42.4.383</idno>
+		<ptr target="http://dx.doi.org/10.1509/jmkr.2005.42.4.383" />
+	</analytic>
+	<monogr>
+		<title level="j">Journal of Marketing Research</title>
+		<imprint>
+			<date type="published" when="2005-11">2005. November 2005</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b58">
+	<analytic>
+		<title level="a" type="main">Dice in the Black Box: User Experiences with an Algorithm</title>
+		<author>
+			<persName><forename type="first">Aaron</forename><surname>Springer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Victoria</forename><surname>Hollis</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Steve</forename><surname>Whittaker</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">AAAI Spring Symposium Series</title>
+				<imprint>
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b59">
+	<analytic>
+		<title level="a" type="main">The Placebo Effect: Dissolving the Expectancy versus Debate</title>
+		<author>
+			<persName><forename type="first">Steve</forename><surname>Stewart</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">-</forename><surname>Williams</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">John</forename><surname>Podd</surname></persName>
+		</author>
+		<idno type="DOI">10.1037/0033-2909.130.2.324</idno>
+		<ptr target="http://dx.doi.org/10.1037/0033-2909.130.2.324" />
+	</analytic>
+	<monogr>
+		<title level="j">Psychological Bulletin</title>
+		<imprint>
+			<biblScope unit="volume">130</biblScope>
+			<biblScope unit="page">324</biblScope>
+			<date type="published" when="2004">2004. 2004</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b60">
+	<monogr>
+		<title level="m" type="main">Plans and situated actions: The problem of human-machine communication</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Lucy</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Suchman</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="1987">1987</date>
+			<publisher>Cambridge university press</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b61">
+	<analytic>
+		<title level="a" type="main">This has to be the cats&quot;: Personal Data Legibility in Networked Sensing Systems</title>
+		<author>
+			<persName><forename type="first">Peter</forename><surname>Tolmie</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Andy</forename><surname>Crabtree</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Tom</forename><surname>Rodden</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">James</forename><surname>Colley</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ewa</forename><surname>Luger</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2818048.2819992</idno>
+		<ptr target="http://dx.doi.org/10.1145/2818048.2819992" />
+	</analytic>
+	<monogr>
+		<title level="m">Proc. CSCW. ACM</title>
+				<meeting>CSCW. ACM</meeting>
+		<imprint>
+			<date type="published" when="2016">2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b62">
+	<monogr>
+		<title level="m" type="main">Twitter and tear The power and fragility of networked protest</title>
+		<author>
+			<persName><forename type="first">Zeynep</forename><surname>Tufekci</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2017">2017</date>
+			<publisher>Yale University Press</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b63">
+	<monogr>
+		<ptr target="http://files.shareholder.com/downloads/AMDA-2F526X/5234607751x0x939175/D7BAFE57-DCBD-42E9-9909-7F587047FCED/Q117_" />
+		<title level="m">Letter to Shareholders</title>
+				<imprint>
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b64">
+	<monogr>
+		<title/>
+		<author>
+			<persName><forename type="middle">Pdf</forename><surname>Shareholder_Letter</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2017-04">April 2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b65">
+	<analytic>
+		<title level="a" type="main">Lorrie Faith Cranor, and of sight, out of mind: Effects of displaying access-control information near the item it controls</title>
+		<author>
+			<persName><forename type="first">Kami</forename><surname>Vaniea</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Lujo</forename><surname>Bauer</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Privacy, Security and Trust</title>
+				<imprint>
+			<publisher>PST</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b66">
+	<analytic>
+		<title/>
+		<idno type="DOI">10.1109/PST.2012.6297929</idno>
+		<ptr target="http://dx.doi.org/10.1109/PST.2012.6297929" />
+	</analytic>
+	<monogr>
+		<title level="j">IEEE</title>
+		<imprint>
+			<biblScope unit="page" from="128" to="136" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b67">
+	<analytic>
+		<title level="a" type="main">Can an Algorithm Know the Real You?: Understanding People&apos;s Reactions to Hyper-personal Analytics Systems</title>
+		<author>
+			<persName><forename type="first">Jeffrey</forename><surname>Warshaw</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Tara</forename><surname>Matthews</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Steve</forename><surname>Whittaker</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Chris</forename><surname>Kau</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mateo</forename><surname>Bengualid</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Barton A</forename><surname>Smith</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2702123.2702274</idno>
+		<ptr target="http://dx.doi.org/10.1145/2702123.2702274" />
+	</analytic>
+	<monogr>
+		<title level="m">Proc. CHI. ACM</title>
+				<meeting>CHI. ACM</meeting>
+		<imprint>
+			<date type="published" when="2015">2015</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b68">
+	<analytic>
+		<title level="a" type="main">Learning from a learning thermostat: lessons for intelligent systems for the home</title>
+		<author>
+			<persName><forename type="first">Rayoung</forename><surname>Yang</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Mark W Newman</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2493432.2493489</idno>
+		<ptr target="http://dx.doi.org/10.1145/2493432.2493489" />
+	</analytic>
+	<monogr>
+		<title level="m">Proc. Ubicomp. ACM</title>
+				<meeting>Ubicomp. ACM</meeting>
+		<imprint>
+			<date type="published" when="2013">2013</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b69">
+	<analytic>
+		<title level="a" type="main">When fitness trackers don&apos;t &apos;fit&apos;: end-user difficulties in the assessment of personal tracking device accuracy</title>
+		<author>
+			<persName><forename type="first">Rayoung</forename><surname>Yang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Eunice</forename><surname>Shin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">W</forename><surname>Mark</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mark</forename><forename type="middle">S</forename><surname>Newman</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Ackerman</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2750858.2804269</idno>
+		<ptr target="http://dx.doi.org/10.1145/2750858.2804269" />
+	</analytic>
+	<monogr>
+		<title level="m">Proc. Ubicomp. ACM</title>
+				<meeting>Ubicomp. ACM</meeting>
+		<imprint>
+			<date type="published" when="2015">2015</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b70">
+	<monogr>
+		<title level="m" type="main">The many faces of Facebook: Experiencing social media as performance, exhibition, and personal archive</title>
+		<author>
+			<persName><forename type="first">Xuan</forename><surname>Zhao</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Niloufar</forename><surname>Salehi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sasha</forename><surname>Naranjit</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sara</forename><surname>Alwaalan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Stephen</forename><surname>Voida</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Dan</forename><surname>Cosley</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2470654.2470656</idno>
+		<ptr target="http://dx.doi.org/10.1145/2470654.2470656" />
+		<editor>CHI. ACM. DOI</editor>
+		<imprint>
+			<date type="published" when="2013">2013</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b71">
+	<monogr>
+		<title level="m" type="main">Who Filters Your News? Why built gobo</title>
+		<author>
+			<persName><forename type="first">Ethan</forename><surname>Zuckerman</surname></persName>
+		</author>
+		<ptr target="https://medium.com/mit-media-lab" />
+		<imprint>
+			<date type="published" when="2017">2017. 2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+				</listBibl>
+			</div>
+		</back>
+	</text>
+</TEI>

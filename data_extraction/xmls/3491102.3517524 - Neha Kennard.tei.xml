@@ -1,0 +1,2236 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xml:space="preserve" xmlns="http://www.tei-c.org/ns/1.0" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.com/kermitt2/grobid/master/grobid-home/schemas/xsd/Grobid.xsd"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+	<teiHeader xml:lang="en">
+		<fileDesc>
+			<titleStmt>
+				<title level="a" type="main">&quot;Brush it Of&quot;: How Women Workers Manage and Cope with Bias and Harassment in Gender-agnostic Gig Platforms</title>
+			</titleStmt>
+			<publicationStmt>
+				<publisher/>
+				<availability status="unknown"><licence/></availability>
+			</publicationStmt>
+			<sourceDesc>
+				<biblStruct>
+					<analytic>
+						<author>
+							<persName><forename type="first">Ning</forename><forename type="middle">F</forename><surname>Ma</surname></persName>
+							<email>ning.ma@ubc.ca</email>
+						</author>
+						<author>
+							<persName><forename type="first">Veronica</forename><forename type="middle">A</forename><surname>Rivera</surname></persName>
+							<email>veariver@ucsc.edu</email>
+						</author>
+						<author>
+							<persName><forename type="first">Zheng</forename><surname>Yao</surname></persName>
+						</author>
+						<author>
+							<persName><forename type="first">Dongwook</forename><forename type="middle">2022</forename><surname>Yoon</surname></persName>
+							<email>yoon@cs.ubc.ca</email>
+						</author>
+						<author>
+							<affiliation key="aff0">
+								<orgName type="institution">University of British Columbia Vancouver</orgName>
+								<address>
+									<settlement>Yao</settlement>
+									<region>BC</region>
+									<country>Canada Zheng</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<affiliation key="aff1">
+								<orgName type="institution">Carnegie Mellon University Pittsburgh</orgName>
+								<address>
+									<region>PA</region>
+									<country key="US">USA</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<affiliation key="aff2">
+								<orgName type="institution">UC Santa Cruz Santa Cruz</orgName>
+								<address>
+									<region>CA</region>
+									<country key="US">USA</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<affiliation key="aff3">
+								<orgName type="institution">University of British Columbia Vancouver</orgName>
+								<address>
+									<region>BC</region>
+									<country key="CA">Canada</country>
+								</address>
+							</affiliation>
+						</author>
+						<title level="a" type="main">&quot;Brush it Of&quot;: How Women Workers Manage and Cope with Bias and Harassment in Gender-agnostic Gig Platforms</title>
+					</analytic>
+					<monogr>
+						<imprint>
+							<date/>
+						</imprint>
+					</monogr>
+					<idno type="DOI">10.1145/3491102.3517524</idno>
+				</biblStruct>
+			</sourceDesc>
+		</fileDesc>
+		<encodingDesc>
+			<appInfo>
+				<application version="0.7.1" ident="GROBID" when="2022-07-22T05:02+0000">
+					<desc>GROBID - A machine learning software for extracting information from scholarly documents</desc>
+					<ref target="https://github.com/kermitt2/grobid"/>
+				</application>
+			</appInfo>
+		</encodingDesc>
+		<profileDesc>
+			<textClass>
+				<keywords>
+					<term>Gig work</term>
+					<term>Gender</term>
+					<term>Women</term>
+					<term>Labor</term>
+					<term>Bias</term>
+					<term>Harassment</term>
+					<term>Uber</term>
+					<term>TaskRabbit</term>
+					<term>DoorDash</term>
+				</keywords>
+			</textClass>
+			<abstract>
+<div xmlns="http://www.tei-c.org/ns/1.0"><p>Women make up approximately half of the workforce in ridehailing, food delivery, and home service platforms in North America. While studies have reported that gig workers face bias, harassment, and a gender pay gap, we have limited understanding of women's perspectives of these issues and their coping mechanisms. We interviewed 20 women gig workers to hear their unique experiences with these challenges. We found that gig platforms are gender-agnostic, meaning they do not acknowledge women's experiences and the value they bring. By not enforcing anti-harassment policies in design, gig platforms also leave women workers vulnerable to bias and harassment. Due to the lack of support for immediate actions and in fear of losing access to work, women workers "brush of" harassment. In addition, the platforms' dispatching and recommendation mechanisms do not acknowledge women's contributions in perceived safety for customers and social support for peer workers.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>CCS CONCEPTS</head><p>• Social and professional topics → Employment issues; Women; • Human-centered computing → Empirical studies in collaborative and social computing.</p></div>
+			</abstract>
+		</profileDesc>
+	</teiHeader>
+	<text xml:lang="en">
+		<body>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="1">INTRODUCTION</head><p>Millions of people have joined gig platforms as their primary or secondary work in the last decade <ref type="bibr">[2,</ref><ref type="bibr" target="#b95">99]</ref>. Platforms facilitate a large scale of service exchanges through algorithmically mediated dispatching and recommendation mechanisms <ref type="bibr" target="#b36">[40,</ref><ref type="bibr" target="#b56">60]</ref>, and manage workers using automated peer evaluation systems <ref type="bibr" target="#b73">[77]</ref>. Gig platforms' low entry barrier and perceived fexibility in scheduling and work locations <ref type="bibr" target="#b74">[78]</ref> may provide opportunities for some. Yet, there are drawbacks. Platforms do not recognize workers' varied social contexts in making management decisions <ref type="bibr" target="#b44">[48,</ref><ref type="bibr" target="#b59">63,</ref><ref type="bibr" target="#b62">66]</ref>, and workers face information and power asymmetries <ref type="bibr" target="#b74">[78]</ref>. These factors contribute to workers' experiences and challenges. Furthermore, workers' social contexts are invisible to platform mechanisms that manage work, resulting in marginalization of workers <ref type="bibr" target="#b33">[37]</ref>.</p><p>Across gig industries such as ride-hailing (e.g., Uber), food delivery (e.g., DoorDash), and home services (e.g., TaskRabbit), women make up approximately half of the gig workforce in North America <ref type="bibr">[2,</ref><ref type="bibr" target="#b95">99]</ref>. In human-computer interaction (HCI), women gig workers' experiences have often been studied under the guise of workers, without specifcally attending to a particular gender. Women have historically been marginalized in social interactions, where they are targeted for harassment in public places <ref type="bibr" target="#b31">[35,</ref><ref type="bibr" target="#b57">61]</ref>, face gender stereotypes <ref type="bibr" target="#b26">[30,</ref><ref type="bibr" target="#b27">31,</ref><ref type="bibr" target="#b52">56]</ref>, and are perceived to be physically vulnerable <ref type="bibr" target="#b28">[32,</ref><ref type="bibr" target="#b31">35]</ref>. In ofine organizations, women face a gender pay gap <ref type="bibr" target="#b22">[26]</ref>, workplace harassment <ref type="bibr" target="#b71">[75]</ref>, and lack of career growth opportunities <ref type="bibr" target="#b12">[15]</ref> among other challenges. At the same time, gig platforms seem to provide an alternative for women to gain access to work that has a low entry barrier, and fexible schedules that allow them to accommodate their other responsibilities, such as care taking <ref type="bibr" target="#b40">[44,</ref><ref type="bibr" target="#b49">53]</ref>. Yet, it is uncertain how women gig workers navigate these opportunities and potential risks in interactions.</p><p>Despite the high participation of women in gig work, few studies have exclusively focused on women's experiences in gig platforms that support ride-hailing, food delivery, and home services. Prior research centered around these gig platforms has highlighted how algorithmic management results in bias <ref type="bibr" target="#b36">[40]</ref>, harassment <ref type="bibr" target="#b37">[41]</ref> and safety <ref type="bibr" target="#b4">[7]</ref> issues for workers. These issues are all pertinent to women, although they have been studied in a gender neutral manner. Our work looks into women's unique challenges experiencing these issues, and how they cope with them given their unique social contexts and gender implications.</p><p>Recently, research on gig platforms has studied women's working conditions, focusing on the pay gap in ride-hailing <ref type="bibr">[25]</ref> and online freelancing <ref type="bibr" target="#b30">[34]</ref>. However, due to the quantitative nature of this work in identifying the cause of the pay gap, there is limited knowledge on women's perspectives, or their side of the story, regarding these challenges. For instance, Cook et al. concluded that the gender pay gap in ride-hailing is largely caused by women's preferences in driving speed and location, which eventually results in less "experience on the platform (working-by-doing)" than men <ref type="bibr">[25]</ref>. This seems to suggest that the pay gap is caused by women themselves. Our work aims to present reasons that lead to women's work practices and the factors that contribute to their experiences.</p><p>With these considerations, we set out to investigate what are women's unique experiences and challenges in gig platforms? We interviewed 20 self-identifed women gig workers who work in ridehailing, food delivery, and home service platforms in North America. We analyzed our interviews through the lens of critical <ref type="bibr" target="#b11">[14,</ref><ref type="bibr" target="#b67">71]</ref> and gender theories <ref type="bibr" target="#b17">[20]</ref>, and feminist methodologies in HCI <ref type="bibr" target="#b10">[13]</ref>. We found that gig platforms leave women workers vulnerable to bias and harassment by not attending to their gendered experiences. By not enforcing anti-harassment policies in design, gig platforms leave women workers vulnerable to bias and harassment. Due to the lack of support for immediate actions and in fear of losing access to work, women workers "brush of" harassment. In addition, the platforms' dispatching and recommendation mechanisms do not acknowledge women's contributions in perceived safety and social support for customers and peer workers. As a result, women feel unsupported in gaining access to work and at a fnancial disadvantage.</p><p>From this, we argue that gig platforms are gender-agnostic, meaning that platforms' designs treat men workers' experiences as the norm and are blind to women's realities. Even though gig platforms may not actively discriminate gender, by being gender-agnostic they are insensitive towards existing gender inequities in sociotechnical infrastructure. This leads to designs that marginalize women by perpetuating bias and harassment. When algorithms exercise management decisions (e.g., dispatching) in a platform that does not recognize women's realities, they create unfair outcomes for women. We discuss in detail why gender-agnostic platform design is problematic through women's perspective, and draw comparisons between women in gig platforms and those in traditional organizations. Our work adds to existing discussions of how platforms fail to attend to workers' interests <ref type="bibr" target="#b45">[49,</ref><ref type="bibr" target="#b74">78]</ref>. We do this by highlighting the disproportionate risk women face as a consequence of gender-agnostic platforms, and how such platforms marginalize women.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2">RELATED WORK 2.1 Studying Women Workers with Critical and Gender Perspectives</head><p>2.1.1 Male-default values in sociotechnical constructs. Research in HCI has used critical theory to analyze social constructs for minority groups, such as women <ref type="bibr" target="#b11">[14]</ref> and people of color <ref type="bibr" target="#b67">[71]</ref>. Rooted in social philosophy, critical theory motivates refective critique about current socioeconomic dynamics, especially power structures in computing systems <ref type="bibr" target="#b14">[17]</ref>. In these analyses, scholars have highlighted the male default bias in forming cultural understandings of social constructs, drawing conclusions about "people" or "humans"soley from male subjects <ref type="bibr" target="#b68">[72,</ref><ref type="bibr" target="#b80">84]</ref>. This male-default value permeates social systems used in online representation, work, and social interactions <ref type="bibr" target="#b68">[72,</ref><ref type="bibr" target="#b87">91]</ref>. This "male default" bias is exclusionary. It dismisses women's experiences and contributes to gender stereotypes <ref type="bibr" target="#b79">[83,</ref><ref type="bibr" target="#b80">84]</ref>. HCI scholars have called for studying socially embedded subjects using a feminist perspective <ref type="bibr" target="#b23">[27]</ref>. This includes employing moral objectives such as improving human quality of life and fghting against oppressive social structures <ref type="bibr" target="#b9">[12]</ref>. Feminist HCI critically engages with the construction of knowledge around a certain subject feld and how value is determined in the construct <ref type="bibr" target="#b10">[13]</ref>. A salient application of feminist HCI approaches is designing inclusive social computing systems <ref type="bibr" target="#b66">[70,</ref><ref type="bibr" target="#b67">71]</ref>. Therefore, we adopt feminist HCI as a critical perspective to study gender in the narrow context of women workers. In our work, we challenge the existing construct of gig work and surface the overlooked values in male dominant gig workplaces. As we argue what constitutes as labor for women gig workers, we use feminist theory as a lens to highlight the material and immaterial labor <ref type="bibr" target="#b55">[59]</ref> performed by women gig workers. When discussing gender, we adopt the understanding that gender is beyond one's identity. The actions "performed" by the individual are also considered gendered <ref type="bibr" target="#b17">[20,</ref><ref type="bibr" target="#b76">80]</ref>. This means that gender identity often afects the actions and consequences women engage with, leading to unique situations they must confront.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.1.2">Value mechanisms in genderless workplaces.</head><p>Labor scholars have long been concerned with workplace relationships and management rules, noting how organizational rules can both enable and constrain worker autonomy. More recently, labor research has warned about an increasingly changing market, transitioning from hierarchical organizations to distributed gig platforms <ref type="bibr" target="#b90">[94]</ref>. With this comes more fexible work arrangements and loss of stability and predictability of work <ref type="bibr" target="#b7">[10]</ref>. Workplaces are not neutral or natural <ref type="bibr" target="#b88">[92,</ref><ref type="bibr" target="#b89">93]</ref>. In management literature, scholars have taken critical perspectives and called for a gendered view of workplaces, and rejected the assumption that organizations have no gender, or that work is disembodied <ref type="bibr" target="#b3">[6]</ref>. Gendered actions in organizations are often power laden. People who practice gender are practicing power without refexivity. <ref type="bibr" target="#b63">[67]</ref>. This research has highlighted the importance of recognizing workers' contexts and the need for attending to workers' situated realities since work is socially embedded <ref type="bibr" target="#b8">[11,</ref><ref type="bibr" target="#b18">21,</ref><ref type="bibr" target="#b82">86]</ref>; workers are social actors within the workplace <ref type="bibr" target="#b53">[57]</ref>. This is particularly important in motivating later research that attends to worker agency, and how technology design may be alienating when organizations use external standards to enforce workplace arrangements in a top-down manner <ref type="bibr" target="#b18">[21]</ref>. Research in HCI has used feminist lenses to interpret workers' experiences in gig platforms. For instance, Raval et al. studied how ride-hailing drivers' work constitutes emotional, physical, and temporal labor. The authors argued for a diversifcation of what is recognized as labor beyond material forms in a capitalistic tradition <ref type="bibr" target="#b69">[73]</ref>. Our work looks to expand existing discussions of value mechanisms within gig work from a gendered perspective.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.2">The Dynamics of Algorithmic Management and its Limitations in Gig Platforms</head><p>An important perspective in understanding gig platforms is the framing of algorithmic management, which is widely adopted by scholars who study location-based <ref type="bibr" target="#b34">[38,</ref><ref type="bibr" target="#b56">60]</ref> and online gig work <ref type="bibr" target="#b44">[48]</ref>. Prior work has looked at the mechanisms of algorithmic management systems within ride-hailing and food delivery platforms <ref type="bibr" target="#b34">[38,</ref><ref type="bibr" target="#b42">46,</ref><ref type="bibr" target="#b77">81]</ref>, online freelance platforms <ref type="bibr" target="#b16">[19]</ref>, and compared them with more standard work settings <ref type="bibr" target="#b43">[47,</ref><ref type="bibr" target="#b50">54]</ref>. This work has focused on understanding the relationship among workers, customers, and algorithms, where platforms facilitate service exchanges through automated worker evaluation and reputation <ref type="bibr" target="#b46">[50]</ref>, active time <ref type="bibr" target="#b48">[52,</ref><ref type="bibr" target="#b93">97]</ref> and location <ref type="bibr" target="#b73">[77]</ref>, to match workers with customers, and generate worker rankings <ref type="bibr" target="#b44">[48]</ref>. Such mechanisms result in workers' varied experiences <ref type="bibr" target="#b32">[36,</ref><ref type="bibr" target="#b59">63]</ref> and wellbeing <ref type="bibr" target="#b24">[28,</ref><ref type="bibr" target="#b91">95]</ref>. Some of these defning features are rating and reputation systems that are used to evaluate workers and assign jobs, such as star rating systems. The power imbalances inherent in this onesize-fts-all approach to worker evaluation results in low pay, social isolation, overwork, sleep deprivation, and exhaustion <ref type="bibr" target="#b91">[95]</ref>. For example, assignment algorithms on ride-hailing apps penalize workers for rejecting rides regardless of the reason, and rating systems are extremely unforgiving when deactivating workers <ref type="bibr" target="#b56">[60]</ref>. Some platforms force workers to commit to schedules in advance and pressure them to accept jobs with minimal information <ref type="bibr" target="#b34">[38]</ref>.</p><p>As evidenced by prior research, algorithmic management systems have a clear and signifcant impact on workers' well-being. Algorithmic management impacts workers' autonomy and the notion of fexibility that makes gig work attractive in the frst place. For instance researchers have argued that algorithmic management systems constrain workers' freedoms by regulating their time and activities <ref type="bibr" target="#b34">[38]</ref>. Platforms often incentivize and push workers to work at particular times to regulate the supply of workers <ref type="bibr" target="#b42">[46,</ref><ref type="bibr" target="#b78">82]</ref>. One way platforms do this is by changing the amount of money workers can make at any given time <ref type="bibr" target="#b34">[38]</ref>. Other work has found that algorithmic management can stymie workers' future career progression <ref type="bibr" target="#b25">[29]</ref>, despite many gig workers actually joining gig work as a frst step towards their career goals beyond platform work <ref type="bibr" target="#b72">[76]</ref>. The rigid structure imposed by algorithmic management makes it difcult for workers to develop transferable skills <ref type="bibr" target="#b25">[29]</ref>. Algorithmic management systems also force workers to engage in additional unpaid work, otherwise known as invisible labor <ref type="bibr" target="#b16">[19]</ref>. For example, workers may provide free work samples, set lower rates, and engage in practices to keep their emotions in check <ref type="bibr" target="#b16">[19]</ref> to try to please customers and receive higher ratings. Invisible work adds additional time constraints to workers' schedules, making gig work's promise of fexible scheduling even more illusionary.</p><p>Discussions of the impact of algorithmic management on workers' well-being and the illusion of fexibility have not sufciently acknowledged the role of gender identity. This has the efect of potentially collapsing women workers to workers. Algorithmic management is a sociotechnical concept; power dynamics and social biases have an efect on the continously evolving relationship between workers, customers, and algorithms <ref type="bibr" target="#b43">[47]</ref>. The promise of fexibility makes gig work attractive to women workers <ref type="bibr" target="#b40">[44,</ref><ref type="bibr" target="#b49">53]</ref> as it allows them to more easily balance work with their family responsibilities <ref type="bibr" target="#b6">[9]</ref>. However, unpredictable work patterns and lack of benefts such as healthcare, can have a greater impact on women who often face the brunt of childcare <ref type="bibr" target="#b29">[33]</ref>. Our work set out to examine how algorithmic management and its perceived fexibility afect women's experiences in gig workplaces.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.3">Women in Gig Workplaces</head><p>Recently, there has been some research studying how algorithmic management and power dynamics further afect gig workers from marginalized and underrepresented groups, particularly women and those in the Global South. Beauty work -traditionally performed in ofine settings -has been a focus of recent research in this area. Researchers have looked at how platforms are changing the way beauty work is carried out by women workers <ref type="bibr" target="#b70">[74]</ref>, and how platforms are used to surveil and control women <ref type="bibr" target="#b5">[8]</ref>. Similar studies have focused on the experiences of care workers and how platforms exacerbate the existing inequalities careworkers face <ref type="bibr" target="#b85">[89]</ref>. Although we commend how this work sheds light on women's perspectives, this research focuses on feminized labor. Our work looks at women's experiences in gig work where men dominate, such as ride-hailing <ref type="bibr" target="#b20">[23,</ref><ref type="bibr">25]</ref>. In these areas, women's voices are prone to be silenced, and their realities easily overlooked.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>2.3.1</head><p>Women face bias and harassment in (gig) workplaces. As a result of male dominated social construct, women have historically faced limited opportunities for career growth <ref type="bibr" target="#b12">[15]</ref>, and greater bias <ref type="bibr" target="#b26">[30,</ref><ref type="bibr" target="#b52">56]</ref> and harassment <ref type="bibr" target="#b28">[32,</ref><ref type="bibr" target="#b57">61]</ref> risks in public places. Gender discrimination towards women has permeated workplaces, where bias and harassment persist <ref type="bibr" target="#b13">[16,</ref><ref type="bibr" target="#b65">69]</ref>. For example, women gig workers face a gender pay gap <ref type="bibr">[25,</ref><ref type="bibr" target="#b30">34]</ref> similar to the gender pay gap that exists in more traditional forms of work. In traditional workplaces women are often the victims of repeated sexual remarks, unwanted physical touching, and pressure for dates. This is especially true for women who work in male-dominated and/or service oriented industries, as truckers <ref type="bibr" target="#b86">[90]</ref>, waitresses <ref type="bibr" target="#b39">[43]</ref>, hotel workers <ref type="bibr" target="#b35">[39]</ref> and taxi drivers <ref type="bibr" target="#b51">[55]</ref>. Job-related sexual harassment could lead to severe consequences such as job loss, psychological harm, and decreased morale and job satisfaction <ref type="bibr" target="#b38">[42,</ref><ref type="bibr" target="#b51">55]</ref>.</p><p>As a workplace, gig platforms support service transactions between workers and customers, which requires women to engage in high levels of social interaction. Prior work has found that women face harassment while doing gig work due to platform management strategies <ref type="bibr" target="#b61">[65]</ref>. At the same time, platforms also invite biased treatment of workers, including women <ref type="bibr" target="#b36">[40,</ref><ref type="bibr" target="#b37">41]</ref>. Research in HCI has explained these conditions stem from the lack of intentional platform designs to mediate customer behaviors <ref type="bibr" target="#b60">[64]</ref>, acknowledging both workers and customers face these challenges <ref type="bibr" target="#b37">[41]</ref>. Customers' behavior has important efects on workers' safety. Workers, especially women, can face safety risks from aggregated harassment or customer intoxication <ref type="bibr" target="#b4">[7]</ref>. As a response, workers engage in a myriad of practices to stay safe, including carrying weapons, recording interactions <ref type="bibr" target="#b4">[7]</ref>, and unfortunately, sometimes avoiding certain areas of the city <ref type="bibr" target="#b83">[87]</ref>. Yet, workers continuously face pressure from platforms to forgo their own safety interests to maintain their reputation or increase earnings <ref type="bibr" target="#b84">[88]</ref>, and many are frustrated by the entitlement displayed by male customers <ref type="bibr" target="#b64">[68]</ref>. Our work characterizes the mechanisms by which platforms perpetuate bias and harassment, while taking into account women's experiences and unique perspectives. Prior work, such as research that tries to explain the gender pay gap in gig work <ref type="bibr">[25,</ref><ref type="bibr" target="#b30">34]</ref>, does not sufciently contextualize the factors that lead to the pay gap. Our work seeks to provide a more nuanced explanation of the decisions and tradeofs women workers need to make when managing bias and harassment.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3">METHODS</head></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.1">Participants</head><p>We conducted semi-structured interviews with 20 women gig workers across ride-hailing (Uber, Lyft), food delivery (DoorDash, Grub-Hub, UberEats, Postmates), and home-service platforms (TaskRabbit) 1 . These gig platforms were selected because their worker pool signifcantly consists of men [2, 25, 99], such as in ride-hailing and food delivery, or because they are gender-segregated <ref type="bibr" target="#b20">[23]</ref>, such as in home service work, where we suspect that women's experiences may be marginalized. At the time of analysis, we dropped one participant due to credibility concerns. Specifcally, this participant had participated in one of our previous studies and provided information that was inconsistent with the information provided previously. The 20 participants included in the analysis were 19 -61+ years of age and had spent 9 months -6 years working on the platform at the time of the interview. They reported working 8 -80+ total hours per week across all platforms they are on. Twelve participants self-identifed as white, four as Black/African-American, one as Asian/Pacifc Islander, and two preferred not to disclose their race. Five participants worked as drivers, six as couriers, and seven as taskers. Two participants worked as both a driver and courier. All participants worked for gig platforms in either the United States or Canada. Participant information is provided in Table <ref type="table" target="#tab_0">1</ref>.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.2">Data Collection and Analysis</head><p>3.2.1 Recruitment and Data Collection. We recruited ride-hailing and food delivery participants by advertising our study on various social media groups for these workers. Home service workers were hired through TaskRabbit. We invited taskers who work on a range of task types including delivery, cleaning, personal assistant, furniture assembly, and home repair. Participants were frst asked to complete a short survey to obtain demographic information (presented in Table <ref type="table" target="#tab_0">1</ref>). From that data we invited participants to an interview. For the interviews we prioritized workers who have a longer working history and have completed more total transactions on the platforms they are on. Since we were interested in understanding how workers respond to and cope with bias and harassment, we expected that workers with more experience on the platforms may have experienced more bias and harassment.</p><p>The two investigators conducted interviews via Zoom between April 2021 and July 2021. Interviews focused on understanding workers' unique experiences as women, how their gender identity shapes their experiences working in gig platforms, and how they respond to and cope with bias and harassment. We included questions that asked about workers' experiences with safety, bias 1 Throughout this paper we refer to food delivery workers as couriers and home service workers as taskers.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Name</head><p>Gig and harassment, customer interactions, and how these experiences shape their work practices. Each interview lasted between 35 -95 minutes. To thank participants for their time, we paid them $25 -$50 USD or the equivalent amount in CAD for those based in Canada. All interviews were recorded by Zoom and manually transcribed by the two investigators.</p><p>In this process, we deductively excluded some extraneous content that did not speak to our research questions such as time stamps, rapport building, and logistics (introductions of ourselves and collecting payment information, etc.). The total number of sentences that were excluded from our transcripts is less than 10% of our data.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.2.2">Analysis.</head><p>We analyzed the interviews using inductive and deductive thematic analysis <ref type="bibr" target="#b15">[18]</ref>. Our analysis is also informed by feminist theories on sociotechnical systems <ref type="bibr" target="#b9">[12]</ref> and critical gender theories <ref type="bibr" target="#b17">[20,</ref><ref type="bibr" target="#b67">71]</ref>. We developed the initial round of codes using open coding <ref type="bibr" target="#b19">[22]</ref>. These codes were migrated to an online collaborative whiteboard 2 and were coded into diferent categories using axial coding <ref type="bibr" target="#b19">[22]</ref>. Based on these categories, we developed second level codes by grouping initial codes into higher level categories. For instance, some of the initial codes were " night shifts", "dress code", "fexibility is important". These codes were later merged into higher level categories such as "platform masculinity" and "impression management". While merging codes to the next level inductively, we also deductively excluded some codes that did not relate to other themes (e.g., college student). The data collection and analysis was done in batches of 9, 8 and 4 participants. We ended up with 396 independent codes and 16 categories (which we developed into 8 themes) as they grew stable in the frst 16 participants' interviews. In the last 4 interviews, only 11 new codes emerged. We ft these codes in the existing categories, but new themes did not arise. Throughout this process, the leading authors met several times each week between May 2021 and July 2021 to discuss the codes and developing themes. All authors also met weekly to discuss the appropriateness of the developed themes. Based on these discussions, we iteratively wrote several memos <ref type="bibr" target="#b19">[22]</ref> which eventually developed into the key insights in our fndings. Our study protocol was approved by our institution's ethics review board.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.3">Positionality Statement</head><p>When presenting the fndings and interpreting the data, we acknowledge our own gender, social privilege, and cultural background as potential areas of bias. This includes when interpreting participants' experience that are intersectional, we focused on the implications rooted from being a woman, and may not have adequately acknowledged their racial background. Even though all authors are non-white, this may have introduced biases where gender was seen as the primary cause of contention over race. Similarly, we omitted fndings where women reported being marginalized by other women, such as experiencing more false reports and prejudice from women customers. From our own experience, we think this could stem from women workers' own gender bias against women. For instance, customers of all genders may view women as easy targets. As such, we did not report sufciently on gender biases exercised among women, partly due to the majority of authors being women and our own level of sensitivity to bias among women. Lastly, we believe there are physical diferences between men and women. This may have contributed to our perspectives on masculine qualities and how they beneft some workers.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4">FINDINGS</head><p>Our interviews show that gig platforms are gender-agnostic to women's experiences. As a result, women are left vulnerable to bias and harassment. Facing these challenges, women "brush of" and de-escalate the situation, instead of using the panic buttons built into in the platform. We also found that women workers provide unique value to gig platforms, such as perceived safety and emotional support for customers and other workers. Yet, these contributions go unrecognized by platforms and are not taken into account in existing dispatching and recommendation mechanisms. These contribute to women feeling unsupported and being at a fnancial disadvantage. Interestingly, we also found that masculine qualities, such as physical strength, are rewarded with increased fnancial and physical security.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.1">Lack of Gendered Design Leaves Women Vulnerable to Harassment</head><p>We found that the lack of gender specifc designs in platform policy and work infrastructure leaves women workers vulnerable to bias and harassment when interacting with customers. Women workers' experiences with bias and harassment, and their ability to react to such situations, are also mediated existing platform power asymmetries between customers and workers <ref type="bibr" target="#b74">[78]</ref>.</p><p>4.1.1 "Nothing. Absolutely nothing!": Lack of gendered policy and infrastructure leaves women vulnerable. Previous work has reported rampant bias <ref type="bibr" target="#b36">[40,</ref><ref type="bibr" target="#b37">41]</ref>, harassment <ref type="bibr" target="#b61">[65]</ref>, and safety <ref type="bibr" target="#b4">[7]</ref> incidents experienced by gig workers. Yet, platforms have done little to address these issues. One example is lack of workplace standards.</p><p>Even though this afects all workers, women fnd lack of workplace standards particularly precarious. In service interactions, gender stereotypes such as women being physically non-threatening and having risk adverse tendencies make customers believe they are less professional, and easy to challenge and target (Annette, Penny). As a result, women workers face disorderly customer behaviors such as false cheating accusations. Tifany shared how she was treated as an easy target and her professionalism questioned by customers due to being a woman. Women delivery workers suspect that safety and harassment related incidents happen to them more often than men. For instance, Eileen gave an example of how she thinks that harassment incidents have happened to her because of her nonthreatening nature as a woman.</p><formula xml:id="formula_0">"</formula><p>"People have been following me to my house to yell at me for my poor driving now that I am a female. And I believe that is because I am regarded as no threat. ... Would someone ever do this if I was a guy? I don't think so. " (Eileen, courier)</p><p>The current management mechanisms of gig platforms are agnostic to women's needs to work in a safe environment and be treated fairly by customers. This is caused by assuming that workers do not require designs that acknowledge their gendered realities. Several women (Tifany, Penny), said that platforms do not take efective measures to ensure their safety. When customers show signs of being a physical threat or exhibit other disorderly behaviors, women have to deal with them on their own. "They don't teach you how to use the APP they don't teach you customer service they don't teach you about laws on the road. They don't teach you about safe practices or best practices, nothing, absolutely nothing, so you wing it. " (Penny, driver)</p><p>To clarify, this quote should not be misinterpreted as if Penny needs more training for doing her job well; she has been a ride-hailing driver since 2015 and works about 45 hours per week. Rather, she needs a "written law" to refer to when defending herself in customer interactions. Without such a guideline she is defenseless when customers question her decisions as a woman. This is particularly the case with her notion of "customer service. " It is unclear when it is okay to cancel a ride, or ask someone to step out of the car. When women form practices of their own to defend themselves in customer interactions, without platform endorsement, their decisions are often challenged by customers. From our data, we learned that women are in dire need of guidelines to protect themselves from a range of situations that arise when interacting with customers. Comparing ride-hailing to the taxi industry, the taxi industry usually has relatively better guidelines for workers to refer to, and procedures to follow when a customer is perceived as a threat. Workers can lean on such guidelines when making judgements and taking actions. In many cases, this may prevent situations from escalating.</p><p>4.1.2 Women "brush of" harassment as platforms fail to support immediate actions. Due to the of gendered policy and infrastructure in gig platforms, women workers fnd it difcult to stand up for themselves when facing bias and harassment in interactions with customers. Previous work in HCI has studied women's safety in public spaces and the efcacy of panic buttons for women in public space <ref type="bibr" target="#b47">[51]</ref>. As an attempt to aid workers' and customers' safety, several platforms also introduced their own versions of panic buttons <ref type="bibr">[1,</ref><ref type="bibr" target="#b21">24]</ref>. However, to the reception of panic buttons for women in public space <ref type="bibr" target="#b47">[51]</ref>, women gig workers do not feel panic buttons attend to their needs efectively when they experience When interacting with potential risks in gig workplaces, women need to be alert and quick to recognize upcoming harassment. Their goal is to de-escalate the situation quickly, instead of reacting after the fact. "...[hitting the panic button] that's not where my mind goes. My mind goes, get out now. Maybe after the fact once I've found myself in a safe situation I would think of it [panic button], but not in the heat of the moment, no. " (Jody, courier) By the time hitting the panic button takes efect and a police ofcer arrives, the damage has most likely already happened. In these cases, the panic button is akin to an error report option, not a harassment prevention mechanism. This explains why Jody's frst thought when facing harassment would not be to use the panic button.</p><p>In reality, when women gig workers experience harassment, they often have to de-escalate the situation by brushing of unwanted attention, playing along, or deciding to"joke it of"(Cindy). Annette, an Uber driver, referred to these de-escalation mechanisms as "delay and defect". "I had a guy refuse to exit my vehicle unless I kissed him...I delayed and defect <ref type="bibr">[ed]</ref>. I was dropping him of at another bar so I told him that after I was done with my shift I'd meet up with him and he agreed to that. Of course I never went freaking back. But he agreed to that so he exited the vehicle and I was able to leave." (Annette, driver)</p><p>In this situation Annette played along with the customer to get him to leave her vehicle. Although the situation may merit a stronger reaction, Annette did not force him to leave her vehicle or actively fght his unwanted advances. Instead she made the decision to "delay and defect" to avoid further endangerment of her safety, knowing that there are no other possible actions supported by the platform. Similarly, Jennifer described how she feels forced to put up with bias and harassment in her interactions with passengers because she would not feel safe speaking up as a woman.</p><p>"is it worth it? Is it worth your life to speak up right now? And most of the time it's not, so you just don't." (Jennifer, driver) For women like Annette and Jennifer, oftentimes de-escalating ongoing harassment is the only viable strategy to stay safe.</p><p>4.1.3 Women's self-defense decisions are compromised by ratingbased assignment mechanisms. The women we spoke with emphasized that brushing of bias and harassment is not how they would ideally handle these situations in the "real world" outside gig platforms. This suggests that their identity as workers on gig platforms plays a big part in how they react. While working in gig platforms, women need to prioritize their goal to generate income by maintaining a good standing in the platform's evaluation mechanism. This requires them to keep the customers happy.</p><p>"At the end of the day you are dealing with something that you might not necessarily do in the real world ... as long as you still give a fve-star, there's compensation that comes with it. ... certain situations it's just not worth standing up for yourself because if you do, and they give you a bad rating, it's not like Uber reaches out to you to get clarifcation on the issue." (Jennifer, driver)</p><p>The rating-based work assignment mechanisms <ref type="bibr" target="#b37">[41,</ref><ref type="bibr" target="#b56">60]</ref> compromise women's ability to stand up to bias and harassment. Additionally, several women mentioned that the lack of recourse following deactivation forces them to shoulder the consequence of an abusive interaction. For instance, Annette described how her livelihood with Uber was afected after she decided to say something to a male passenger who kept touching her.</p><p>"I told him if you do it again you are going to get out here. ...unfortunately that person ended up giving me a low rating which afects any promotions I can get and even my standing with Uber. They can take me of the platform because of that. And there is little to no rebuttal that I have. " (Annette, driver) From these testimonies, we see women's fear of losing access to work leading their inaction/passive resentment of harassment and safety risks. At the same time, when they do speak up for themselves, they risk losing access to work as the platform's algorithm would punish them with lower ratings.</p><p>Lost access to work does not only come from platform deactivation, but also from time spent recovering a traumatic experience, such as harassment. Any human being would be emotionally afected in the hours or days following such an incident. When a worker decides to take time of to gather themselves before facing a customer again, they are fnancially responsible for the lost work time. There is no platform support for this aspect of workers' well-being. Women who depend on gig platforms for a living may have to keep working in distress with no time to recover. bothers me, yes. I have a choice of losing it and getting angry and taking time to gather myself to the point where I can work again or I can take it in a diferent route and just realize okay, you got this person here for fve minutes and then they're getting out of your car and you will never see them again ... " (Penny, driver)</p><p>Admittedly, not all women would continue working after a harassment incident. We see that such decisions are made based on women's fnancial dependency <ref type="bibr" target="#b59">[63,</ref><ref type="bibr" target="#b77">81]</ref> on the platform. Platforms' reward mechanism forces women to trade their safety and emotional wellbeing for an opportunity to make money. While women who are less fnancially dependent on the platform might be able to aford to stand up for themselves (Ashley) and willingly stop working after certain hours to avoid safety risks (Natasha, Sheryl), more fnancially-dependent women (Cindy, Jennifer, Annette, and Tifany) have had to make decisions similar to Penny's at various points of their gig career.</p><p>In this subsection, we discussed the ways in which women gig workers are marginalized by gender-agnostic platform designs. This is refected in the lack of gendered policy and infrastructure that leave women vulnerable to harassment and unfair treatment from customers. Without efective guidelines and mechanisms to support women in defending themselves, women have to brush of harassment and de-escalate the situation to protect themselves from further endangerment and maintain access to work.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.2">Dispatching &amp; Recommendation Algorithms Do Not Acknowledge Women's Value &amp; Contributions</head><p>We found that women gig workers bring unique value to service interactions with customers and the gig worker community, but platforms do not acknowledge the value of their contributions. Women engage in activities that platforms do not consider work. Therefore, platforms' algorithms do not reward women for this labor with greater access to work, or work with higher earning potential.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>4.2.1</head><p>Women provide perceived safety for customers and social support for other workers. Women workers shared stories of how they are able to cater to certain customers by providing a sense of comfort and safety. They explained that for various reasons, some customers prefer to interact with women workers. In these situations they may have an advantage over men workers. For example, some ride-hailing drivers (Tifany) explained that women passengers often feel uncomfortable riding with men drivers, and express relief when their driver is another woman. We heard similar stories from taskers, especially those who perform male-dominant tasks such as handy work. For instance, Ella described that 90-95% of the people who hire her are women. Speculating on why her service is preferred over men's, she explained that she gets hired by "...women who live alone, women who don't like creepy men coming to their apartments, women who can't get their husbands to do anything, and women who want to support other women. " (Ella, tasker)</p><p>These experiences suggest there is a preference for women gig workers among a certain group of customers, oftentimes other women.</p><p>Women also provide social support in online worker communities such as forums, subreddits and Facebook worker groups. Due to the lack of training and support from the platforms, online worker communities are an essential part of how workers learn and form their own practices, and seek social support <ref type="bibr" target="#b56">[60,</ref><ref type="bibr" target="#b60">64]</ref>. However, worker communities do not always provide a supportive environment, as negativity and aggressive behavior are common in these spaces <ref type="bibr" target="#b92">[96]</ref>. As a result, women workers feel to speak in online worker communities. They see these spaces as negative, apathetic, toxic, and led by men workers. They believe a 'women only' platform would be much more positive and supportive.</p><p>"women are more tuned to be talking about the human aspect than men...and it would be great if there were enough women who are delivery drivers to actually have a forum like that. There wouldn't be so much complaining over things that you have no control over...gig work as a whole has a very patriarchal, masculinity feel. " (Jody, courier) Several women expressed that they do not speak in online forums to avoid the negativity. Instead they are just long term 'lurkers' (Natasha) of the space.</p><p>However, they do feel obligated to speak when they see a fellow woman gig worker is in need of either informational or emotional support.</p><p>"I once saw someone who identifed as a woman actually posting that can they use a fake name, and of people were commenting if you're too scared to use your real name you shouldn't use this platform and just all of this kind of really dismissive responses. That's like an example that I really felt like obligated to share with them that, yeah you can use a fake name i've done it and it's fne just do it. " (Natasha, courier) Even when women do not actively participate in online discussions, they will step up when they feel it is necessary. Natasha also shared that one of the few instances when she spoke up was to make another woman worker feel validated when the others in the community were not being supportive.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>4.2.2</head><p>Gender-agnostic management mechanisms harm women workers. Gig platforms' gender-agnostic management mechanisms do not acknowledge and value the impact of women's contributions. In addition, they cause physical and fnancial harm to women workers.</p><p>As discussed in 4.1 platforms provide little to no support for women workers' safety, despite women workers' signifcant contributions to customers' safety. In the aforementioned section, we noted two concrete ways in which gig platforms fail to acknowledge safety concerns among women drivers and couriers: lack of gendered guidelines, and lack of efcacy of emergency alert features such as panic buttons.</p><p>We found that the threat of harassment extends to online spaces as well, where women workers face risk of online harassment when they speak up to support other workers. They often face backlash from workers who disagree with their beliefs or do not want them to speak for the community. For instance, Penny is an active member of a worker union and feels strongly about advocating for workers' rights. In speaking up about workers' issues on social media, she was verbally attacked by a male worker for being a white woman.</p><p>"The frst one that comes to mind is because I was not a brown man. Okay, it was a brown man who attacked me in a threatening message through Facebook and it was paragraphs long disparaging me for speaking up because I don't represent the majority of uber drivers. " (Penny, driver) Examples such as this one suggest why some women may be reluctant to be involved in online worker communities. Yet women's involvement benefts online worker communities, and gig work as a whole. Prior work has shown evidence that online worker communities play an important role in formulating workers' collective knowledge and work standards <ref type="bibr" target="#b41">[45,</ref><ref type="bibr" target="#b75">79]</ref>. Women take on the responsibility of supporting other workers and creating a safe workplace environment. Yet their contributions are unacknowledged by platforms, potentially not even being considered work. In traditional workplaces, human resource professionals perform this type of work, backed by allocated budgets.</p><p>Finally, platforms do not support women workers in fnancially capitalizing on their position in the gig marketplace. For instance, even though Ella often gets hired by other women who feel more comfortable with a woman worker in their homes, she feels that overall she does not get as many job requests as her male worker friends. Ella said that despite her years of experience doing TaskRabbit jobs and being a worker with "elite" status, she never appears on the frst page of workers displayed to customers. She feels it would be benefcial to her and other women workers if customers could search for workers by gender, a feature that is currently unavailable on TaskRabbit's platform.</p><p>"I wrote to TaskRabbit a couple times and said, what's going on? How come I'm not getting anything?...There are a lot of problems with the apps, you never know if you are showing up...I asked them [TaskRabbit] if they could have an option that would allow people to search for women because everybody's like, oh a woman! I'm so glad to meet you! This is so exciting that you are a woman. What, like if they had that option they would be sexist against men or something? I don't think anybody has a hard time fnding a guy. " (Ella, Tasker) Women workers feel that their work is unacknowledged and wish that the platform would recognize their contributions with increased fnancial support. On TaskRabbit, we saw gender-agnostic management mechanisms taken one step further, verging on being discriminatory. Despite women workers' care work contributing to the comfort and safety of customers and other workers, TaskRabbit devalues women's work in how it decides to allocate bonuses. One worker who does personal assistant jobs and organization tasks explained that TaskRabbit will sometimes ofer bonuses to workers for completing a pre-specifed number of tasks that month. She expressed frustration that it is always people doing the maledominant roles such as fxing furniture and moving heavy items that get the reward. The reward is not ofered for the types of tasks she does.</p><p>"One thing that is against women is they have these things where in a week if you do a certain amount of tasks you get an extra $80-$160. I've only seen it be specifcally for men-done tasks like moving, heavy lifting. Women can do these tasks, but it's predominantly men. It's never ofered for delivery or organizational tasks. I feel like I'm missing out on the opportunity to make the extra money. They should be including women on that. The societal standards and norms are being brought in. " (Vivian, Tasker)</p><p>Overall, failing to acknowledge and support women workers' contributions negatively afects their safety and fnancial well-being. This may further contribute to gender inequalities in gig workplaces. Past research has shown that women earn less than men in various types of gig work including ridesharing [25] and online freelancing <ref type="bibr" target="#b30">[34]</ref>. By taking women workers' contributions for granted, platforms are reinforcing these gender dynamics around care work and the value of women's labor in the gig economy. Additionally, platforms do not seem to understand what features, tools, and resources women need to feel supported and valued for their contributions to the entire ecosystem.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.3">Masculine Qualities are Rewarded Through Increased Financial and Physical Security in Gig Work</head><p>In a quote in 4.2.2 Vivian observed that societal norms and standards are brought into the gig ecosystem. We saw this pattern in the advantages of physical strength and masculine traits. Women who have had experience in male dominant environments and are confdent in their physical abilities may have an advantage over other women on gig platforms. This fnding was especially prevalent among Taskers, where we could note this distinction between tasks that are more dominated by women (e.g. cleaning, personal assistant, organization), and those more dominated by men (e.g. furniture assembly, heavy lifting, handy work). Experience in male dominant environments outside gig work gave women a sense of confdence to take on "men" tasks, which are also often the ones that pay the most.</p><p>"I was in the military so I was kind of forced to have to talk to people, so I'm comfortable kind of anywhere ... I was a tomboy growing up, played all the sports, growing up with by brothers, my cousins, my uncles, I was always around guys ... once I got into the military that was a continuation of my childhood...this [the military] was not anything weird to me, whereas a lot of girls struggled...they thought they could get ahead or get noticed by playing the woman card against these men...even getting into TaskRabbit and not intentionally being like I'll pick furniture assembly because I know a lot of girls don't do it, it's just what I know ." (Yvonne, tasker)</p><p>In this case, the sense of "I know how to handle myself around guys" goes a long way for taskers when deciding which job to take. Workers who are confdent in their physical abilities may be more likely to choose the tasks that pay the highest wages. On the contrary those who are less confdent in their physical strength may refrain from completing those types of jobs even if they wish they could do them. For instance, Emma completes primarily house cleaning and personal assistant tasks on TaskRabbit. She wants to sign up for handy work, but lacks confdence in her physical abilities to get the job done.</p><p>"There are some tasks on there that I would like to sign up for. Ikea assembly, furniture assembly, mounting things, and house chore... But I just worry as a female like sometimes that stuf is heavy so I don't want to get there and then I can't move this, can't move that. And you have to think about putting a strain on your body. So I never really signed up for those. But those are like the number one skills, and people make so much money doing furniture assembly, moving, and maintenance stuf around the house. Men get paid a lot." (Emma, tasker) Confdence in male dominant environments also gives some workers greater ability to stand up for themselves when they are harassed or disrespected by customers. Many of the women we spoke with have faced uncomfortable encounters with customers that are borderline harassment or situations where they felt pressured by their conduct. Yet, Constance, an ex-rugby player, is reassured by her physical strength and prior experience in handling these situations.</p><p>"I was working in this apartment that was pretty small and he just happened to be standing very close to me, which made me very very uncomfortable. I didn't necessarily feel unsafe because I know I could handle myself,...In college I played rugby for four years I've tackled some pretty large and tall people so I defnitely could manage myself so I have no doubt that I could get myself out of that situation or at least try which makes me feel safer ...but if I didn't have the background that I have, if I were a smaller woman, it would have been very uncomfortable to have a man six inches away from me the entire time while I was working." (Constance, tasker) When faced with a potentially threatening situation, Constance knew the risk and planned for the worst. She knew that if needed, she could get into a physical altercation with the customer to defend herself. But not every woman has the same confdence as Yvonne and Constance, as most are not ex-military or ex-rugby examples suggest that for a woman worker to succeed or reach their income goals, they have to identify with strong confdence in their physical abilities in both doing the work and ensuring their safety.</p><p>In this section, we have shown that gig platforms are genderagnostic through their lack of gendered policy 4.1, misunderstanding of the safety needs of women 4.1, and devaluing of women workers' contributions 4.2. In particular, the safety and care work that women provide to customers and gig worker communities go unacknowledged, but masculine qualities such as physical strength are rewarded through increased fnancial and physical security. In the discussion section that follows, we will outline directions to guide various stakeholders in making gig work better for women workers.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5">DISCUSSION</head><p>Our fndings reveal stories of women workers who perceive platforms as complicit in marginalizing their experiences, due to the lack of designs to enforce gendered policies to protect them from bias and harassment. When faced with harassment and safety risks, women bush of harassment to avoid further endangerment and maintain access to work, as platforms fail to take immediate actions. At the same time, gig platforms do not acknowledge women's unique value in providing perceived safety to customers and social support to peer workers. Gig platforms reward masculine qualities, such as physical strength. This may encourage women to adopt such identities to be rewarded fnancially by platform management mechanisms. As such, we argue that these platform mechanisms are gender-agnostic; they do not attend to women's value and vulnerabilities when making management decisions. We incorporate feminist methodologies <ref type="bibr" target="#b10">[13,</ref><ref type="bibr" target="#b54">58]</ref> to discuss how women's stories inspire the design of gig platforms that attend to gendered experiences.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.1">How are Women's Experiences in Gig</head><p>Platforms Diferent from those of Traditional Organizations?</p><p>Women are expected perform a sheer amount of invisible labor that benefts gig platforms, such as helping customers feel safe, and creating a welcoming online worker community. Research has discussed the detriment of invisible labor to gig workers in ridehailing <ref type="bibr" target="#b69">[73]</ref> and micro-tasking <ref type="bibr" target="#b33">[37,</ref><ref type="bibr" target="#b93">97]</ref> platforms, largely as a result of algorithmic management <ref type="bibr" target="#b56">[60]</ref>. This research problematizes the nature of invisible work and how platforms' value mechanisms are blind to these activities, are essential to service transactions <ref type="bibr" target="#b33">[37,</ref><ref type="bibr" target="#b69">73,</ref><ref type="bibr" target="#b93">97]</ref>. Our work presents the unique ways in which women perform invisible work to cope with bias and harassment, emotional support to customers and peer workers, and attend to their gender in order to succeed. These realities extend the current understanding of invisible labor, and articulate nuances that could help further explain other challenges such as the gender pay gap in gig platforms <ref type="bibr">[25]</ref>. Our fndings suggest that the less women incorporate feminine notions of gender identity in their work, the more likely it is for platform algorithms reward them with more work (Yvonne), better paying work (Emma), and better interactions with customers (Constance). This is similar to women's experiences in traditional organizations <ref type="bibr" target="#b58">[62]</ref>. So, how do gig platforms disenfranchise women diferently than more standard workplaces? algorithmic management, platforms enable a systematic way of not acknowledging the challenges and disadvantages that are disproportionately experienced by women. This is diferent than being managed by a human. A human manager may discriminate a woman worker, but such discrimination is often case by case, and could be disputed more robustly. When platforms normalize the lack of protection or designs for women, they signal to customers that women workers are easy targets for exploitation. This emboldens some customers to exploit women workers by harassing them and issuing false reports. Additionally, platforms do not consider these added risks for women when evaluating their ratings or resolving disputes. This disadvantages women by limiting their access to quality work. Women who depend on the platform for a living are more likely to conform to this exploitation by compromising in service exchanges and brushing of harassment. Platforms then perpetuate these biases and harms, pushing disproportionate risk onto women that eventually compromises their ability to obtain equal treatment and pay. Safety is a prime example where platforms beneft from women's labor. Women provide perceived safety. Yet platforms do not adequately provide workers the same sense of safety or acknowledge their value. These realities, although not exclusive to women, are experienced by women disproportionately due stereotypes of women's roles in social interactions (e.g., being more communal and having less agency) <ref type="bibr" target="#b26">[30,</ref><ref type="bibr" target="#b27">31]</ref>. The platform enforces unwritten requirements social interactions, without designing mechanisms that acknowledge them.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>5.</head><p>1.1 A pluralistic way of acknowledging women's unique value and challenges. We provide several recommendations for platform designs to acknowledge women's unique value and the challenges they face in gig platforms. Platforms' design should acknowledge value beyond transaction and productivity focused mechanisms by including social values derived from worker-customer interactions <ref type="bibr" target="#b10">[13]</ref>. Platforms already have mechanisms to document social values. For instance, drivers and couriers receive badges or keyword feedback from customers to augment star ratings. However, this documentation of workers' performance does not efectively translate to acknowledgements from platform; there is no current feature where platforms use this documentation to improve workers' ability to access work or make money. Platforms could use these badges and positive feedback to support women's physical safety. For instance, ride-hailing and food delivery could use them to women some priority for the day, time, hours, and locations they want to work when they have more badges and positive feedback from customers. This could enable to have priority in selecting the work environment that would make them feel safest.</p><p>To acknowledge the risks women face, and to better care for women workers during a safety incident, platforms should implement mechanisms to document workers' physical and emotional wellness <ref type="bibr" target="#b94">[98]</ref>, and prompt women to take breaks as necessary. For instance, platforms should normalize paid sick leaves ranging from short breaks to days of work, when women report an incident that has afected their physical or mental state. This social sensing mechanism could act as a tool to legitimize women's request for paid leaves (e.g., showing higher than usual heart rates, during menstruation).</p><p>Given that women's voices are often marginalized in worker communities <ref type="bibr" target="#b92">[96]</ref>, platforms, worker organizations, and online community leaders should make sure that women's experiences are acknowledged when making design decisions. For instance, when conducting user studies, platform researchers should pay attention to the number of women participants they recruit, and in certain studies, prioritize women workers to capture more marginalized experiences. Worker organizations and unions should invest in helping women's voices be heard in both women and men worker communities. For instance, they may consider electing women leaders, and educating men gig workers how to support women colleagues as allies. HCI researchers could design tools with community moderators to audit conversations in worker communities that are insensitive towards women's experience.</p><p>Last but not least, platforms cannot change their value mechanism without departing from the proft driven, shareholder-centric business model <ref type="bibr" target="#b60">[64,</ref><ref type="bibr" target="#b81">85]</ref>. Our data showed that some women gig workers channeled confdence from their past experiences in the military (Yvonne) and playing rugby (Constance) for their work. Future platforms, non-proft organizations, and researchers should expand the defnition of "work" in gig platforms to acknowledge what women bring to the table, instead of suggesting they conform to masculine standards. This requires algorithms to work with human managers to carry out transactions, while considering individual experiences and their impact on work. Future work should consider the efect of humans working collaboratively with algorithms to facilitate work assignments and recommendations, allowing social contexts to make adjustments to algorithms.</p><p>Problematizing Gender-Agnostic Platform Designs (So What?)</p><p>Our work highlights the challenges women face due to genderagnostic platform designs and algorithmic management mechanisms. This results in further marginalization of women. Prior work described how gig platforms employ algorithmic management <ref type="bibr" target="#b56">[60]</ref> to match workers and customers. As a result of algorithmic management, workers face large amounts of bias, harassment, and safety issues <ref type="bibr" target="#b4">[7,</ref><ref type="bibr" target="#b37">41,</ref><ref type="bibr" target="#b83">87]</ref>, as well as invisible labor <ref type="bibr" target="#b69">[73]</ref>. Our work adds women's frst-hand experiences and perspectives the harassment and safety issues they've faced to these discussions. Additionally, our work presents new fndings related to how women are undervalued despite their contributions to gig work. When platforms do not support women in managing gendered experiences such as harassment, women end up having reduced work hours, lower customer ratings, and are forced to avoid working in certain locations. Because of sociodemographic power dynamics, these consequences may be more dire for women workers than for men workers. These practices become the determinants for platforms' algorithms to provide women with less and lower quality work, and deactivate them unfairly. The coalescing of platform designs, women's experiences, and algorithmic management acts as a downward cycle to marginalize women within the platform. Therefore, platforms are not "gender-agnostic" by explicitly discriminating gender in their algorithms, but ignoring the social interactions that contribute to gendered experiences. These gendered experiences are then fed to platforms' underlying algorithms, resulting in marginalization.</p><p>However, we are not suggesting platforms should simply identify workers' gender and instate gender mechanisms to elevate women based on their identity. Feminist HCI suggests that platform designs should abandon the single, totalizing, and universal way <ref type="bibr" target="#b9">[12]</ref> of measuring work. This includes both sides of the spectrum: disregarding gender in platform design and gender-based algorithmic decision making. Alternatively, platforms should focus on the service interactions women experience, and adopt more diverse perspectives acknowledge women's eforts in maintaining the workplace. In particular, platforms should draw on women's lived experiences design mechanisms to support them in preventing and reacting to abusive situations. These designs would acknowledge women workers' unique value and contribution in the evaluation mechanism. In other words, platforms should not design for a specifc gender, but for gendered realities. In the following paragraphs, we discuss the ways in which gender-agnostic platforms marginalize women workers, and how we propose to tackle these design faws.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>5.</head><p>2.1 Platform mechanisms to enforce safety guidelines. We identify several areas for platform designs to enforce policies that address women's experiences around harassment and marginalization, and acknowledge their contributions to the gig economy. Firstly, platforms lack clear standards in defning the boundaries of service relationships and how workers should be treated by customers. Such lack of standards and worker training results in customers treating women workers diferently than men workers. Further, platforms do not provide guidelines for workers who experience harassment in service interactions. Although such guidelines do not have to be specifcally for women, our fndings show more structure could support women workers in signifcant ways. platforms only provide "tips" related to safety, bias and harassment <ref type="bibr" target="#b0">[3]</ref><ref type="bibr" target="#b1">[4]</ref><ref type="bibr" target="#b2">[5]</ref>. Yet, women may likely still have a hard time enforcing them when they are not taken seriously by customers (Tifany, Annette, Penny).</p><p>Platforms should take a more proactive stance and design mechanisms to enforce these guidelines. For instance, granting women the right to stop providing service and equipping them with tools to document and report incidents. Currently in ride-hailing, documenting and reporting is done manually and requires workers to submit camera footage and initiate a case review <ref type="bibr" target="#b2">[5]</ref>. This process holds women workers responsible for their experiences. Platforms should take the responsibility of auditing interactions. When providing tools and clear guidelines, platforms can delegate women workers to chaperon this responsibility with clear ways to compensate and reward them. For instance, platforms can hold sexual ofenders accountable by including customer "behavior rating" prompts such as "makes workers feel comfortable and safe", or in contrast, "makes workers feel uncomfortable", and "jeopardizes workers' safety". These badges should appear in customers' profle and be shown to workers when they decide to accept/decline the job, giving women more opportunity to assess the risk. Customers that have been given multiple warning badges or negative reviews by diferent workers should be auto-banned from the platform. Such a punitive design will not only alleviate repeated ofense to an extent, but also balance the current power asymmetries <ref type="bibr" target="#b74">[78]</ref> between customers and workers. At minimum, when a harassment incident is reported, platforms should be able to lawfully fne the perpetrator and use this to provide some kind of restitution payment to the victim. This will allow women workers to recover from emotional and physical injury without worrying about fnancial loss. Consequently, this may prevent distressed workers on the job, who could compromise service quality or become a public safety hazard for others.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>5.2.2</head><p>Women need support for safety in public spaces. Women's safety in public spaces afects their mobility and results in marginalized fnancial outcomes <ref type="bibr" target="#b47">[51]</ref>. As gig workers, safety in public spaces can further afect women's decision in selecting work locations <ref type="bibr" target="#b4">[7]</ref>. Finding safe areas to work and rest during breaks is important for women to be able to provide consistent service and generate income. We saw that one challenge women face is being able to fnd a safe area to rest (Cindy). To address this, cities and towns should work with HCI researchers to support women in fnding safe gathering places in between work, where they can rest, use the restroom, and take meal breaks. For instance, it would be optimal to have designated areas for women gig workers in parks, local department stores, and parking lots. Especially in suburbs, where there is limited public infrastructure, women should be able to identify women worker friendly gas stations and re-charging areas. States' policies could also negotiate with local businesses, incentivizing them to provide service to gig workers in exchange for tax deduction.</p><p>On the other hand, many women choose to avoid working in certain areas or during certain times of the day to stay safe. Prior work has critically highlighted the redlining phenomenon in ride-hailing <ref type="bibr" target="#b83">[87]</ref>, which results in workers discriminating certain neighborhoods. We also saw this as a common practice among women gig workers (Sheryl, Natasha) with safety concerns. However, women were hesitant to discriminate neighborhoods, even when they knew the risks posed (Cindy). We urge researchers and policy makers to provide solutions for this difcult situation. Women gig workers should not be responsible for choosing between staying safe and contributing to redlining.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="6">LIMITATIONS AND FUTURE WORK</head><p>Our fndings are based on a limited set of participants located in North America. Their experiences and perspectives are based on the social experiences of women in a male dominant, multicultural background. The women we interviewed are from African-American, Asian, and European backgrounds. Their perspectives overlap, but cannot capture the experiences of women outside of North America. For instance, we believe that the harassment and safety related experiences our participants have faced may resonate with women in India <ref type="bibr" target="#b5">[8,</ref><ref type="bibr" target="#b47">51]</ref>, but our work does not capture the social that afect women gig workers' experiences in India. Another limitation of our study is our lack of access to women who are no longer active in gig platforms. Therefore, our fndings could be compromised by survivorship bias, which may limit us in capturing women's hardship to its full extent.</p><p>Our work identifed the mechanisms by which platforms fail to acknowledge women's experiences, suggesting one way in which women gig workers are marginalized. We came across stories where women shared experiences that may have been mediated by other demographic factors such as race and socioeconomic status. We encourage future work to investigate the impact of intersectional identities on gig workers' experiences. Future studies should also look into the social mechanisms that leads to marginalization of women gig workers in more diverse social and political contexts, such as in Muslim countries and among immigrant workers.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="7">CONCLUSION</head><p>We conducted interviews with 20 women gig workers across ridehailing, food delivery, and home service platforms to investigate the question: what are women's unique experiences and challenges in gig platforms? Informed by feminist theories on sociotechnical systems and critical gender theories we found gig platforms contribute to women's experiences of bias and harassment and dismiss women's contributions. We found that gig platforms are genderagnostic by not acknowledging women's experiences and the value they bring. By not enforcing anti-harassment policies their design, gig platforms leave women workers vulnerable to bias and harassment. Lacking immediate support and fearing loss of access to work, women workers "brush of" harassment. In addition, the platforms' dispatching and recommendation mechanisms do not acknowledge women's contributions in perceived safety and social support for customers and peer workers. Drawing on our participants' stories, we provide design implications to guide platforms and policy makers in designing gig platforms and regulation that attend to gendered experiences.</p></div><figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_0"><head>Table 1 :</head><label>1</label><figDesc>Self-Reported participant demographics for the 20 participants included in our analysis. All names are pseudonyms.</figDesc><table><row><cell></cell><cell>Type</cell><cell>Age</cell><cell>Race</cell><cell>Hours Per Week</cell><cell>Experience</cell></row><row><cell>Alison</cell><cell>Driver &amp; Courier</cell><cell>31-45</cell><cell>Black/African-American</cell><cell>36</cell><cell>3 yrs</cell></row><row><cell>Amelia</cell><cell>Tasker</cell><cell>19-30</cell><cell>White</cell><cell>10</cell><cell>1 yr</cell></row><row><cell>Angela</cell><cell>Courier</cell><cell>31-45</cell><cell>N/A</cell><cell>20-60</cell><cell>3 yrs</cell></row><row><cell>Annette</cell><cell>Driver</cell><cell>31-45</cell><cell>White</cell><cell>20</cell><cell>3 yrs</cell></row><row><cell>Ashley</cell><cell>Driver</cell><cell>61+</cell><cell>White</cell><cell>quit</cell><cell>5 yrs</cell></row><row><cell>Cindy</cell><cell>Driver &amp; Courier</cell><cell>46-60</cell><cell>White</cell><cell>80+</cell><cell>6 yrs</cell></row><row><cell cols="2">Constance Tasker</cell><cell>19-30</cell><cell>Asian/Pacifc Islander</cell><cell>16</cell><cell>9 mos</cell></row><row><cell>Eileen</cell><cell>Courier</cell><cell>19-30</cell><cell>White</cell><cell>30-40</cell><cell>1.5 yrs</cell></row><row><cell>Ella</cell><cell>Tasker</cell><cell>46-60</cell><cell>White</cell><cell>15</cell><cell>3.5 yrs</cell></row><row><cell>Emma</cell><cell>Tasker</cell><cell>31-45</cell><cell>Black/African-American</cell><cell>30</cell><cell>2 yrs</cell></row><row><cell>Hope</cell><cell>Courier</cell><cell>31-45</cell><cell>N/A</cell><cell>20-30</cell><cell>3-4 yrs</cell></row><row><cell>Jennifer</cell><cell>Driver</cell><cell>31-45</cell><cell>Black/African-American</cell><cell>20</cell><cell>4 yrs</cell></row><row><cell>Jody</cell><cell>Courier</cell><cell>19-30</cell><cell>White</cell><cell>35</cell><cell>1.5 yrs</cell></row><row><cell>Kayla</cell><cell>Tasker</cell><cell>46-60</cell><cell>White</cell><cell>8</cell><cell>5 yrs</cell></row><row><cell>Natasha</cell><cell>Courier</cell><cell>19-30</cell><cell>White</cell><cell>10-20</cell><cell>1.5 yrs</cell></row><row><cell>Penny</cell><cell>Driver</cell><cell>46-60</cell><cell>White</cell><cell>45</cell><cell>6 yrs</cell></row><row><cell>Sheryl</cell><cell>Courier</cell><cell>61+</cell><cell>White</cell><cell>40</cell><cell>2 yrs</cell></row><row><cell>Tifany</cell><cell>Driver</cell><cell>46-60</cell><cell>White</cell><cell>25+</cell><cell>6 yrs</cell></row><row><cell>Vivian</cell><cell>Tasker</cell><cell>19-30</cell><cell>White</cell><cell>20</cell><cell>1.5 yrs</cell></row><row><cell>Yvonne</cell><cell>Tasker</cell><cell>31-45</cell><cell>Black/African-American</cell><cell>15</cell><cell>4 yrs</cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_1"><head></head><label></label><figDesc>With older guys basically when you [as a passenger] get in the car and you're a female you don't jerk around with them the same way, because you know they're kind of serious and they know what's what. But if you're a female driver, they[passengers] just fgured that they can get away with more either bad behavior or saying that somehow you cheated, and they can get their credit that they could get money that's a big thing that they all try to do. " (Tifany, driver)</figDesc><table /></figure>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="2"> miro.com   </note>
+		</body>
+		<back>
+
+			<div type="acknowledgement">
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>ACKNOWLEDGMENTS</head><p>This work was supported by the NSERC Discovery Grant and CRE-ATE programs. We thank the participants who shared their stories with us, and without whom this work would not have been possible. We also thank the anonymous reviewers for their insightful feedback that greatly improved our work.</p></div>
+			</div>
+
+			<div type="references">
+
+				<listBibl>
+
+<biblStruct xml:id="b0">
+	<monogr>
+		<title level="m" type="main">Uber&apos;s community guidelines | following the Law | Uber</title>
+		<ptr target="https://www.uber.com/us/en/safety/uber-community-guidelines/follow-law/" />
+		<imprint>
+			<date type="published" when="2022">2022</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b1">
+	<monogr>
+		<title level="m" type="main">Uber&apos;s community guidelines | respect everyone | uber</title>
+		<ptr target="https://www.uber.com/us/en/safety/uber-community-guidelines/respect/" />
+		<imprint>
+			<date type="published" when="2022">2022</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b2">
+	<monogr>
+		<title level="m" type="main">Uber&apos;s community guidelines | safety | uber</title>
+		<ptr target="https://www.uber.com/us/en/safety/uber-community-guidelines/keep-safe/" />
+		<imprint>
+			<date type="published" when="2022">2022</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b3">
+	<analytic>
+		<title level="a" type="main">Hierarchies, jobs, bodies: A theory of gendered organizations</title>
+		<author>
+			<persName><forename type="first">Joan</forename><surname>Acker</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Gender &amp; society</title>
+		<imprint>
+			<biblScope unit="volume">4</biblScope>
+			<biblScope unit="page" from="139" to="158" />
+			<date type="published" when="1990">1990. 1990</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b4">
+	<analytic>
+		<title level="a" type="main">Individual and Collaborative Behaviors of Rideshare Drivers in Protecting Their Safety</title>
+		<author>
+			<persName><forename type="first">Yousef</forename><surname>Almoqbel</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Donghee Yvette Wohn</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Proc. ACM Hum.-Comput. Interact</title>
+		<imprint>
+			<biblScope unit="volume">3</biblScope>
+			<biblScope unit="page">217</biblScope>
+			<date type="published" when="2019-11">2019. Nov. 2019</date>
+			<publisher>CSCW</publisher>
+		</imprint>
+	</monogr>
+	<note>21 pages</note>
+</biblStruct>
+
+<biblStruct xml:id="b5">
+	<analytic>
+		<title level="a" type="main">Watched, but Moving: Platformization of Beauty Work and Its Gendered Mechanisms of Control</title>
+		<author>
+			<persName><forename type="first">Joyojeet</forename><surname>Ira Anjali Anwar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Julie</forename><surname>Pal</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Hui</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3432949</idno>
+		<ptr target="https://doi.org/10.1145/3432949" />
+	</analytic>
+	<monogr>
+		<title level="j">Proc. ACM Hum.-Comput</title>
+		<imprint>
+			<biblScope unit="volume">20</biblScope>
+			<date type="published" when="2021-01">2021. Jan. 2021</date>
+		</imprint>
+	</monogr>
+	<note>Interact. 4, CSCW3, Article 250</note>
+</biblStruct>
+
+<biblStruct xml:id="b6">
+	<analytic>
+		<title level="a" type="main">Between a rock and a hard place: Freedom, fexibility, precarity and vulnerability in the gig economy in Africa</title>
+		<author>
+			<persName><forename type="first">Mohammad</forename><surname>Amir</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Anwar</forename></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mark</forename><surname>Graham</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Competition &amp; Change</title>
+		<imprint>
+			<biblScope unit="volume">25</biblScope>
+			<biblScope unit="page" from="237" to="258" />
+			<date type="published" when="2021">2021. 2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b7">
+	<analytic>
+		<title level="a" type="main">Precarious, informalizing, and fexible work: Transforming concepts and understandings</title>
+		<author>
+			<persName><forename type="first">Dennis</forename><surname>Arnold</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><surname>Joseph</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Bongiovi</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">American Behavioral Scientist</title>
+		<imprint>
+			<biblScope unit="volume">57</biblScope>
+			<biblScope unit="page" from="289" to="308" />
+			<date type="published" when="2013">2013. 2013</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b8">
+	<monogr>
+		<title level="m" type="main">Situating workplace studies within the human-computer interaction feld. Workplace studies: Recovering work practice and informing system design</title>
+		<author>
+			<persName><surname>Bannon</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2000">2000. 2000</date>
+			<biblScope unit="page">230</biblScope>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b9">
+	<analytic>
+		<title level="a" type="main">Feminist HCI: taking stock and outlining an agenda for design</title>
+		<author>
+			<persName><forename type="first">Shaowen</forename><surname>Bardzell</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings the SIGCHI conference on human factors in computing systems</title>
+				<meeting>the SIGCHI conference on human factors in computing systems</meeting>
+		<imprint>
+			<date type="published" when="2010">2010</date>
+			<biblScope unit="page" from="1301" to="1310" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b10">
+	<analytic>
+		<title level="a" type="main">Towards a feminist HCI methodology: social science, feminism, and HCI</title>
+		<author>
+			<persName><forename type="first">Shaowen</forename><surname>Bardzell</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jefrey</forename><surname>Bardzell</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings the SIGCHI conference on human factors in computing systems</title>
+				<meeting>the SIGCHI conference on human factors in computing systems</meeting>
+		<imprint>
+			<date type="published" when="2011">2011</date>
+			<biblScope unit="page" from="675" to="684" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b11">
+	<analytic>
+		<title level="a" type="main">Critical design and critical theory: the challenge of designing for provocation</title>
+		<author>
+			<persName><forename type="first">Shaowen</forename><surname>Bardzell</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jefrey</forename><surname>Bardzell</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jodi</forename><surname>Forlizzi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">John</forename><surname>Zimmerman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">John</forename><surname>Antanitis</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings the Designing Interactive Systems Conference</title>
+				<meeting>the Designing Interactive Systems Conference</meeting>
+		<imprint>
+			<date type="published" when="2012">2012</date>
+			<biblScope unit="page" from="288" to="297" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b12">
+	<analytic>
+		<title level="a" type="main">Attitudes towards work and family roles and their implications for career growth of women: A report from India</title>
+		<author>
+			<persName><forename type="first">Deepti</forename><surname>Bhatnagar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ujvala</forename><surname>Rajadhyaksha</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Sex Roles</title>
+		<imprint>
+			<biblScope unit="volume">45</biblScope>
+			<biblScope unit="page" from="549" to="565" />
+			<date type="published" when="2001">2001. 2001</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b13">
+	<analytic>
+		<title level="a" type="main">Gender discrimination at work: Connecting gender stereotypes, institutional policies, and gender composition of workplace</title>
+		<author>
+			<persName><forename type="first">Donna</forename><surname>Bobbitt-Zeher</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Gender &amp; Society</title>
+		<imprint>
+			<biblScope unit="volume">25</biblScope>
+			<biblScope unit="page" from="764" to="786" />
+			<date type="published" when="2011">2011. 2011</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b14">
+	<monogr>
+		<title level="m" type="main">Critical theory</title>
+		<author>
+			<persName><forename type="first">James</forename><surname>Bohman</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2005">2005. 2005</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b15">
+	<analytic>
+		<title level="a" type="main">Using thematic analysis in psychology</title>
+		<author>
+			<persName><forename type="first">Virginia</forename><surname>Braun</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Victoria</forename><surname>Clarke</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Qualitative research in psychology</title>
+		<imprint>
+			<biblScope unit="volume">3</biblScope>
+			<biblScope unit="issue">2</biblScope>
+			<biblScope unit="page" from="77" to="101" />
+			<date type="published" when="2006">2006. 2006</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b16">
+	<analytic>
+		<title level="a" type="main">Pacifying the algorithm-Anticipatory compliance in the face of algorithmic management in the gig economy</title>
+		<author>
+			<persName><surname>Eliane Léontine</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Peter</forename><forename type="middle">Kalum</forename><surname>Bucher</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Matthias</forename><surname>Schou</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Waldkirch</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Organization</title>
+		<imprint>
+			<biblScope unit="volume">28</biblScope>
+			<biblScope unit="page" from="44" to="67" />
+			<date type="published" when="2021">2021. 2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b17">
+	<analytic>
+		<title level="a" type="main">Performative acts and gender constitution: An essay in phenomenology and feminist theory</title>
+		<author>
+			<persName><forename type="first">Judith</forename><surname>Butler</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Theatre journal</title>
+		<imprint>
+			<biblScope unit="volume">40</biblScope>
+			<biblScope unit="page" from="519" to="531" />
+			<date type="published" when="1988">1988. 1988</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b18">
+	<analytic>
+		<title level="a" type="main">Studies of Work and the Workplace in HCI: Concepts and Techniques</title>
+		<author>
+			<persName><forename type="first">Graham</forename><surname>Button</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Wes</forename><surname>Sharrock</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Synthesis Lectures on Human-Centered Informatics</title>
+		<imprint>
+			<biblScope unit="volume">2</biblScope>
+			<biblScope unit="page" from="1" to="96" />
+			<date type="published" when="2009">2009. 2009</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b19">
+	<monogr>
+		<author>
+			<persName><forename type="first">Kathy</forename><surname>Charmaz</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Smith</surname></persName>
+		</author>
+		<title level="m">Grounded theory. Qualitative psychology: A practical guide to research methods</title>
+				<imprint>
+			<date type="published" when="2003">2003. 2003</date>
+			<biblScope unit="volume">2</biblScope>
+			<biblScope unit="page" from="81" to="110" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b20">
+	<analytic>
+		<title level="a" type="main">Gender in the gig economy: Men and women using digital platforms to secure work in Australia</title>
+		<author>
+			<persName><forename type="first">Brendan</forename><surname>Churchill</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Lyn</forename><surname>Craig</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Journal of Sociology</title>
+		<imprint>
+			<biblScope unit="volume">55</biblScope>
+			<biblScope unit="page" from="741" to="761" />
+			<date type="published" when="2019">2019. 2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b21">
+	<analytic>
+		<title level="a" type="main">The gender earnings gap in the gig economy: Evidence from over a million rideshare drivers</title>
+		<author>
+			<persName><forename type="first">Mitchell</forename><surname>Clark</surname></persName>
+		</author>
+		<ptr target="https://www.theverge.com/2021/11/4/22763690/doordash-CodyCook" />
+	</analytic>
+	<monogr>
+		<title level="j">National Bureau of Economic Research</title>
+		<imprint>
+			<date type="published" when="2018">2021. 2018</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">Technical Report</note>
+	<note>DoorDash adds in-app safety features, but couriers need more protection</note>
+</biblStruct>
+
+<biblStruct xml:id="b22">
+	<monogr>
+		<title/>
+		<author>
+			<persName><forename type="first">Judy</forename><surname>Goldberg Dey</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Catherine</forename><surname>Hill</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2007">2007</date>
+		</imprint>
+	</monogr>
+	<note>Behind the pay gap. ERIC</note>
+</biblStruct>
+
+<biblStruct xml:id="b23">
+	<analytic>
+		<title level="a" type="main">Exploring the representation of women perspectives technologies</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Susan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Andrea</forename><surname>Dray</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Peer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Anke</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Anicia</forename><surname>Brock</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Shaowen</forename><surname>Peters</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Margaret</forename><surname>Bardzell</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Elizabeth</forename><surname>Burnett</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Erika</forename><surname>Churchill</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Poole</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Busse</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">CHI&apos;13 Extended Abstracts on Human Factors in Computing Systems</title>
+				<imprint>
+			<date type="published" when="2013">2013</date>
+			<biblScope unit="page" from="2447" to="2454" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b24">
+	<analytic>
+		<title level="a" type="main">Algorithmic management and app-work in the gig economy: A research agenda for employment relations and HRM</title>
+		<author>
+			<persName><forename type="first">James</forename><surname>Duggan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ultan</forename><surname>Sherman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ronan</forename><surname>Carbery</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Anthony</forename><surname>Mcdonnell</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Human Resource Management Journal</title>
+		<imprint>
+			<biblScope unit="volume">30</biblScope>
+			<biblScope unit="page" from="114" to="132" />
+			<date type="published" when="2020">2020. 2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b25">
+	<analytic>
+		<title level="a" type="main">Boundaryless careers and algorithmic constraints in the gig economy</title>
+		<author>
+			<persName><forename type="first">James</forename><surname>Duggan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ultan</forename><surname>Sherman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ronan</forename><surname>Carbery</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Anthony</forename><surname>Mcdonnell</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">The International Journal of Human Resource Management</title>
+		<imprint>
+			<biblScope unit="page" from="1" to="31" />
+			<date type="published" when="2021">2021. 2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b26">
+	<analytic>
+		<title level="a" type="main">Gender stereotypes and attitudes toward women and men</title>
+		<author>
+			<persName><forename type="first">H</forename><surname>Alice</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Antonio</forename><surname>Eagly</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Mladinic</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Personality and social psychology bulletin</title>
+		<imprint>
+			<biblScope unit="volume">15</biblScope>
+			<biblScope unit="page">4</biblScope>
+		</imprint>
+	</monogr>
+	<note>n.d.</note>
+</biblStruct>
+
+<biblStruct xml:id="b27">
+	<analytic>
+		<title level="a" type="main">Gender stereotypes stem from the distribution of women and men into social roles</title>
+		<author>
+			<persName><forename type="first">H</forename><surname>Alice</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Valerie</forename><forename type="middle">J</forename><surname>Eagly</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Stefen</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Journal of personality and social psychology</title>
+		<imprint>
+			<biblScope unit="volume">46</biblScope>
+			<biblScope unit="page">735</biblScope>
+			<date type="published" when="1984">1984. 1984</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b28">
+	<analytic>
+		<title level="a" type="main">Psychologically resilient, but physically vulnerable? Exploring the psychosocial determinants of African American women&apos;s mental and physical health</title>
+		<author>
+			<persName><forename type="first">Lacee</forename><forename type="middle">A</forename><surname>Christy L Erving</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yvonne</forename><surname>Satcher</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Chen</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Sociology of Race and Ethnicity</title>
+		<imprint>
+			<biblScope unit="volume">7</biblScope>
+			<biblScope unit="page" from="116" to="133" />
+			<date type="published" when="2021">2021. 2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b29">
+	<monogr>
+		<title level="m" type="main">Gender inequality in the Gig Economy</title>
+		<author>
+			<persName><forename type="first">Erica</forename><surname>Fletcher</surname></persName>
+		</author>
+		<ptr target="https://autonomy.work/portfolio/fetcher-gig-economy/" />
+		<imprint>
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b30">
+	<analytic>
+		<title level="a" type="main">Women (Still) Ask For Less: Gender Diferences in Hourly Rate in an Online Labor Marketplace</title>
+		<author>
+			<persName><forename type="first">Eureka</forename><surname>Foong</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Nicholas</forename><surname>Vincent</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Brent</forename><surname>Hecht</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Elizabeth</forename><forename type="middle">M</forename><surname>Gerber</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3274322</idno>
+		<ptr target="https://doi.org/10.1145/3274322" />
+	</analytic>
+	<monogr>
+		<title level="j">Proc. ACM Hum.-Comput. Interact</title>
+		<imprint>
+			<biblScope unit="volume">2</biblScope>
+			<biblScope unit="page">53</biblScope>
+			<date type="published" when="2018-11">2018. Nov. 2018</date>
+			<publisher>CSCW</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b31">
+	<monogr>
+		<title level="m" type="main">Passing by: Gender and public harassment</title>
+		<author>
+			<persName><forename type="first">Carol</forename><forename type="middle">Brooks</forename><surname>Gardner</surname></persName>
+		</author>
+		<imprint>
+			<publisher>Univ of California Press</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b32">
+	<analytic>
+		<title level="a" type="main">Digital labour and development: impacts of global digital labour platforms and the gig economy on worker livelihoods</title>
+		<author>
+			<persName><forename type="first">Mark</forename><surname>Graham</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Isis</forename><surname>Hjorth</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Vili</forename><surname>Lehdonvirta</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">European review of labour and research</title>
+		<imprint>
+			<biblScope unit="volume">23</biblScope>
+			<biblScope unit="issue">2</biblScope>
+			<biblScope unit="page" from="135" to="162" />
+			<date type="published" when="2017">2017. 2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b33">
+	<monogr>
+		<title level="m" type="main">Ghost work: How to stop Silicon Valley from building a new global underclass</title>
+		<author>
+			<persName><forename type="first">L</forename><surname>Mary</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Siddharth</forename><surname>Gray</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Suri</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2019">2019</date>
+			<publisher>Eamon Dolan Books</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b34">
+	<analytic>
+		<title level="a" type="main">Algorithmic control in platform food delivery work</title>
+		<author>
+			<persName><forename type="first">Kathleen</forename><surname>Griesbach</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Adam</forename><surname>Reich</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Luke</forename><surname>Elliott-Negri</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ruth</forename><surname>Milkman</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Socius</title>
+		<imprint>
+			<biblScope unit="volume">5</biblScope>
+			<biblScope unit="page">2378023119870041</biblScope>
+			<date type="published" when="2019">2019. 2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b35">
+	<analytic>
+		<title level="a" type="main">No, we don&apos;t provide that service&apos;: the harassment of hotel employees by customers</title>
+		<author>
+			<persName><forename type="first">Yvonne</forename><surname>Guerrier</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Adib</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Work, employment society</title>
+		<imprint>
+			<biblScope unit="volume">14</biblScope>
+			<biblScope unit="page" from="689" to="705" />
+			<date type="published" when="2000">2000. 2000</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b36">
+	<analytic>
+		<title level="a" type="main">Bias in online freelance marketplaces: Evidence from taskrabbit and fverr</title>
+		<author>
+			<persName><forename type="first">Anikó</forename><surname>Hannák</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Claudia</forename><forename type="middle">David</forename><surname>Garcia</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Alan</forename><surname>Mislove</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Markus</forename><surname>Strohmaier</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Christo</forename><surname>Wilson</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2017 ACM conference on computer supported cooperative work and social computing</title>
+				<meeting>the 2017 ACM conference on computer supported cooperative work and social computing</meeting>
+		<imprint>
+			<date type="published" when="2017">2017</date>
+			<biblScope unit="page" from="1914" to="1933" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b37">
+	<monogr>
+		<author>
+			<persName><surname>Benjamin V Hanrahan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Ning</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Chien Wen</forename><surname>Ma</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Yuan</surname></persName>
+		</author>
+		<title level="m">The roots of bias on Uber</title>
+				<imprint>
+			<publisher>ECSCW</publisher>
+			<date type="published" when="2018">2018. 2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b38">
+	<analytic>
+		<title level="a" type="main">The impact of sexual harassment on depressive symptoms during the early occupational career</title>
+		<author>
+			<persName><forename type="first">N</forename><surname>Jason</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jeremy</forename><surname>Houle</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Staf</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">T</forename><surname>Jeylan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Christopher</forename><surname>Mortimer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Amy</forename><surname>Uggen</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Blackstone</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Society and mental health</title>
+		<imprint>
+			<biblScope unit="volume">1</biblScope>
+			<biblScope unit="page" from="89" to="105" />
+			<date type="published" when="2011">2011. 2011</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b39">
+	<analytic>
+		<title level="a" type="main">It is part of the job: Waitresses and nurses defne sexual harassment</title>
+		<author>
+			<persName><forename type="first">C</forename><surname>Lisa</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Huebner</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Sociological Viewpoints</title>
+		<imprint>
+			<biblScope unit="volume">24</biblScope>
+			<biblScope unit="page">75</biblScope>
+			<date type="published" when="2008">2008. 2008</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b40">
+	<monogr>
+		<title level="m" type="main">Women in the gig economy: paid work</title>
+		<author>
+			<persName><forename type="first">Abigail</forename><surname>Hunt</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Emma</forename><surname>Samman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sherry</forename><surname>Tapfuma</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Grace</forename><surname>Mwaura</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Rhoda</forename><surname>Omenya</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kay</forename><surname>Kim</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sara</forename><surname>Stevano</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Aida</forename><surname>Roumer</surname></persName>
+		</author>
+		<editor>Kenya and South Africa.</editor>
+		<imprint>
+			<date type="published" when="2019">2019. 2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b41">
+	<analytic>
+		<title level="a" type="main">Turkopticon: Interrupting worker invisibility in amazon mechanical turk</title>
+		<author>
+			<persName><forename type="first">C</forename><surname>Lilly</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Irani</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Six Silberman</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings the SIGCHI conference on human factors in computing systems</title>
+				<meeting>the SIGCHI conference on human factors in computing systems</meeting>
+		<imprint>
+			<date type="published" when="2013">2013</date>
+			<biblScope unit="page" from="611" to="620" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b42">
+	<monogr>
+		<title level="m" type="main">Foodora and Deliveroo: The App as a Boss? Control and autonomy in app-based management -the case of food delivery riders</title>
+		<author>
+			<persName><forename type="first">Mirela</forename><surname>Ivanova</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Joanna</forename><surname>Bronowicka</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Eva</forename><surname>Kocher</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Anne</forename><surname>Degner</surname></persName>
+		</author>
+		<ptr target="https://EconPapers.repec.org/RePEc:zbw:hbsfof" />
+		<imprint>
+			<date type="published" when="2018">2018</date>
+			<biblScope unit="volume">107</biblScope>
+			<biblScope unit="page">107</biblScope>
+			<pubPlace>Düsseldorf</pubPlace>
+		</imprint>
+	</monogr>
+	<note type="report_type">Hans-Böckler-Stiftung</note>
+</biblStruct>
+
+<biblStruct xml:id="b43">
+	<analytic>
+		<title level="a" type="main">Algorithmic management in a work context</title>
+		<author>
+			<persName><forename type="first">Gemma</forename><surname>Mohammad Hossein Jarrahi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Min</forename><forename type="middle">Kyung</forename><surname>Newlands</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Christine</forename><forename type="middle">T</forename><surname>Lee</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Eliscia</forename><surname>Wolf</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Will</forename><surname>Kinder</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Sutherland</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Big Data &amp; Society</title>
+		<imprint>
+			<biblScope unit="volume">8</biblScope>
+			<biblScope unit="page">20539517211020332</biblScope>
+			<date type="published" when="2021">2021. 2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b44">
+	<analytic>
+		<title level="a" type="main">Algorithmic management and algorithmic competencies: Understanding and appropriating algorithms in gig work</title>
+		<author>
+			<persName><forename type="first">Jarrahi</forename><surname>Mohammad Hossein</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Will</forename><surname>Sutherland</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">International Conference on Information</title>
+				<imprint>
+			<publisher>Springer</publisher>
+			<date type="published" when="2019">2019</date>
+			<biblScope unit="page" from="578" to="589" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b45">
+	<analytic>
+		<title level="a" type="main">Platformic management, boundary resources for gig work, and worker autonomy</title>
+		<author>
+			<persName><forename type="first">Will</forename><surname>Mohammad Hossein Jarrahi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sarah</forename><forename type="middle">Beth</forename><surname>Sutherland</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Steve</forename><surname>Nelson</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Sawyer</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Computer supported cooperative work (CSCW)</title>
+		<imprint>
+			<biblScope unit="volume">29</biblScope>
+			<biblScope unit="page" from="153" to="189" />
+			<date type="published" when="2020">2020. 2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b46">
+	<analytic>
+		<title level="a" type="main">Algorithmic anxiety and coping strategies of Airbnb hosts</title>
+		<author>
+			<persName><forename type="first">Shagun</forename><surname>Jhaver</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yoni</forename><surname>Karpfen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Judd</forename><surname>Antin</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2018 CHI Conference on Human Factors in Computing Systems</title>
+				<meeting>the 2018 CHI Conference on Human Factors in Computing Systems</meeting>
+		<imprint>
+			<date type="published" when="2018">2018</date>
+			<biblScope unit="page" from="1" to="12" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b47">
+	<monogr>
+		<title level="m" type="main">Women&apos;s Safety in Public Spaces: Examining the Efcacy of Panic Buttons in New Delhi</title>
+		<author>
+			<persName><forename type="first">Naveena</forename><surname>Karusala</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Neha</forename><surname>Kumar</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3025453.3025532</idno>
+		<imprint>
+			<date type="published" when="2017">2017</date>
+			<publisher>Association for Computing Machinery</publisher>
+			<biblScope unit="page">3025532</biblScope>
+			<pubPlace>New York, NY, USA</pubPlace>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b48">
+	<analytic>
+		<title level="a" type="main">Sociality, Tempo &amp; Flow: Learning from Namibian Ridesharing</title>
+		<author>
+			<persName><forename type="first">Joseph</forename><surname>Kasera</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">O'</forename><surname>Jacki</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Nicola</forename><forename type="middle">J</forename><surname>Neill</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Bidwell</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the First African Conference on Human Computer Interaction</title>
+				<meeting>the First African Conference on Human Computer Interaction</meeting>
+		<imprint>
+			<date type="published" when="2016">2016</date>
+			<biblScope unit="page" from="36" to="47" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b49">
+	<analytic>
+		<title level="a" type="main">Gender and the Gig A Qualitative Study of Gig Platforms for Women Workers. Observer Research Foundatio</title>
+	</analytic>
+	<monogr>
+		<title level="m">Ria 2020</title>
+				<imprint>
+			<date type="published" when="2020">2020</date>
+			<biblScope unit="volume">359</biblScope>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b50">
+	<analytic>
+		<title level="a" type="main">Algorithms at work: The contested terrain of control</title>
+		<author>
+			<persName><forename type="first">C</forename><surname>Katherine</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Melissa</forename><forename type="middle">A</forename><surname>Kellogg</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Angele</forename><surname>Valentine</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Christin</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Academy of Management Annals</title>
+		<imprint>
+			<biblScope unit="volume">14</biblScope>
+			<biblScope unit="page" from="366" to="410" />
+			<date type="published" when="2020">2020. 2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b51">
+	<analytic>
+		<title level="a" type="main">Sisters on slippery wheels: women taxi drivers in South Africa</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Meshack</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Khosa</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Transformation</title>
+		<imprint>
+			<biblScope unit="volume">33</biblScope>
+			<date type="published" when="1997">1997. 1997</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b52">
+	<analytic>
+		<title level="a" type="main">Not competent enough to know the diference? Gender stereotypes about women&apos;s ease of being misled predict negotiator deception</title>
+		<author>
+			<persName><forename type="first">J</forename><surname>Laura</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jessica</forename><forename type="middle">A</forename><surname>Kray</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Alex B Van</forename><surname>Kennedy</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Zant</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Organizational Behavior and Human Decision Processes</title>
+		<imprint>
+			<biblScope unit="volume">125</biblScope>
+			<biblScope unit="page" from="61" to="72" />
+			<date type="published" when="2014">2014. 2014</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b53">
+	<analytic>
+		<title level="a" type="main">Notes on the theory of the actor-network: Ordering, strategy, and heterogeneity</title>
+		<author>
+			<persName><forename type="first">John</forename><surname>Law</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Systems practice</title>
+		<imprint>
+			<biblScope unit="volume">5</biblScope>
+			<biblScope unit="page" from="379" to="393" />
+			<date type="published" when="1992">1992. 1992</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b54">
+	<monogr>
+		<title level="m" type="main">Parting the Red Sea: Sociotechnical Systems and Lived Experiences of Menopause</title>
+		<author>
+			<persName><forename type="first">Amanda</forename><surname>Lazar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Norman</forename><forename type="middle">Makoto</forename><surname>Su</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jefrey</forename><surname>Bardzell</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Shaowen</forename><surname>Bardzell</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3290605.3300710</idno>
+		<ptr target="https://doi.org/10.1145/3290605.3300710" />
+		<imprint>
+			<date type="published" when="2019">2019</date>
+			<publisher>Association for Computing Machinery</publisher>
+			<biblScope unit="page" from="1" to="16" />
+			<pubPlace>New York, NY, USA</pubPlace>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b55">
+	<monogr>
+		<title level="m" type="main">Immaterial labor. Radical thought in Italy: A potential politics</title>
+		<author>
+			<persName><forename type="first">Maurizio</forename><surname>Lazzarato</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="1996">1996. 1996. 1996</date>
+			<biblScope unit="page" from="133" to="147" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b56">
+	<analytic>
+		<title level="a" type="main">Working with machines: The impact of algorithmic and data-driven management on human workers</title>
+		<author>
+			<persName><forename type="first">Min</forename><forename type="middle">Kyung</forename><surname>Lee</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Daniel</forename><surname>Kusbit</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Evan</forename><surname>Metsky</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Laura</forename><surname>Dabbish</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings the 33rd annual ACM conference on human factors in computing systems</title>
+				<meeting>the 33rd annual ACM conference on human factors in computing systems</meeting>
+		<imprint>
+			<date type="published" when="2015">2015</date>
+			<biblScope unit="page" from="1603" to="1612" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b57">
+	<analytic>
+		<title level="a" type="main">Sexual harassment in public places: Experiences of Canadian women</title>
+		<author>
+			<persName><forename type="first">Rhonda</forename><surname>Lenton</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">D</forename><surname>Michael</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">John</forename><surname>Smith</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Norman</forename><surname>Fox</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Morra</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Canadian Review of Sociology/Revue canadienne de sociologie</title>
+		<imprint>
+			<biblScope unit="volume">36</biblScope>
+			<biblScope unit="page" from="517" to="540" />
+			<date type="published" when="1999">1999. 1999</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b58">
+	<analytic>
+		<title level="a" type="main">Occupational feminization and pay: Assessing causal dynamics using 1950-2000 US census data</title>
+		<author>
+			<persName><forename type="first">Asaf</forename><surname>Levanon</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Paula</forename><surname>England</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Paul</forename><surname>Allison</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Social Forces</title>
+		<imprint>
+			<biblScope unit="volume">88</biblScope>
+			<biblScope unit="page" from="865" to="891" />
+			<date type="published" when="2009">2009. 2009</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b59">
+	<analytic>
+		<title level="a" type="main">Part-Time Ride-Sharing: Recognizing the Context in which Drivers Ride-Share and its Impact on Platform Use</title>
+		<author>
+			<persName><forename type="first">F</forename><surname>Ning</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Ma</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">V</forename><surname>Benjamin</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Hanrahan</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Proceedings the ACM on Human-Computer Interaction</title>
+		<imprint>
+			<biblScope unit="volume">3</biblScope>
+			<biblScope unit="page" from="1" to="17" />
+			<date type="published" when="2019">2019. 2019</date>
+		</imprint>
+	</monogr>
+	<note>GROUP</note>
+</biblStruct>
+
+<biblStruct xml:id="b60">
+	<analytic>
+		<title level="a" type="main">Using stakeholder theory to examine drivers&apos; Stake in Uber</title>
+		<author>
+			<persName><forename type="first">F</forename><surname>Ning</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Ma</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Moojan</forename><surname>Chien Wen Yuan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Benjamin V</forename><surname>Ghafurian</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Hanrahan</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings the 2018 CHI Conference on Human Factors in Computing Systems</title>
+				<meeting>the 2018 CHI Conference on Human Factors in Computing Systems</meeting>
+		<imprint>
+			<date type="published" when="2018">2018</date>
+			<biblScope unit="page" from="1" to="12" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b61">
+	<analytic>
+		<title level="a" type="main">Platform design as a managerial act: Analyzing sexual harassment in the gig economy</title>
+		<author>
+			<persName><forename type="first">Michael</forename><surname>Mafe</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Allison</forename><surname>Elias</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">LERA For Libraries</title>
+		<imprint>
+			<biblScope unit="volume">23</biblScope>
+			<date type="published" when="2019">2019. 2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b62">
+	<analytic>
+		<title level="a" type="main">Being a turker</title>
+		<author>
+			<persName><forename type="first">David</forename><surname>Martin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">V</forename><surname>Benjamin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jacki O'</forename><surname>Hanrahan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Neha</forename><surname>Neill</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Gupta</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings the 17th ACM conference on Computer supported cooperative work &amp; social computing</title>
+				<meeting>the 17th ACM conference on Computer supported cooperative work &amp; social computing</meeting>
+		<imprint>
+			<date type="published" when="2014">2014</date>
+			<biblScope unit="page" from="224" to="235" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b63">
+	<monogr>
+		<title level="m" type="main">Practising gender at work: Further thoughts on refexivity. Gender, work &amp; organization</title>
+		<author>
+			<persName><forename type="first">Patricia</forename><forename type="middle">Yancey</forename><surname>Martin</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2006">2006. 2006</date>
+			<biblScope unit="volume">13</biblScope>
+			<biblScope unit="page" from="254" to="276" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b64">
+	<analytic>
+		<title level="a" type="main">Gender, Class, and the Gig Economy: The Case of Platform-Based Food Delivery</title>
+		<author>
+			<persName><forename type="first">Ruth</forename><surname>Milkman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Luke</forename><surname>Elliott-Negri</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kathleen</forename><surname>Griesbach</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Adam</forename><surname>Reich</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Critical Sociology</title>
+		<imprint>
+			<biblScope unit="volume">47</biblScope>
+			<biblScope unit="page" from="357" to="372" />
+			<date type="published" when="2021">2021. 2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b65">
+	<analytic>
+		<title level="a" type="main">Sexual harassment in contemporary workplaces: Contextualizing structural vulnerabilities</title>
+		<author>
+			<persName><forename type="first">Krista</forename><surname>Lynn Minnotte</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Elizabeth</forename><forename type="middle">M</forename><surname>Legerski</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Sociology Compass</title>
+		<imprint>
+			<biblScope unit="volume">13</biblScope>
+			<biblScope unit="page">e12755</biblScope>
+			<date type="published" when="2019">2019. 2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b66">
+	<analytic>
+		<title level="a" type="main">Diagnosing bias in the gender representation of HCI research participants: how it happens and where we are</title>
+		<author>
+			<persName><forename type="first">Anna</forename><surname>Ofenwanger</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Alan</forename><forename type="middle">John</forename><surname>Milligan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Minsuk</forename><surname>Chang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Julia</forename><surname>Bullard</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Dongwook</forename><surname>Yoon</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings the 2021 CHI Conference on Human Factors in Computing Systems</title>
+				<meeting>the 2021 CHI Conference on Human Factors in Computing Systems</meeting>
+		<imprint>
+			<date type="published" when="2021">2021</date>
+			<biblScope unit="page" from="1" to="18" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b67">
+	<analytic>
+		<title level="a" type="main">Critical race theory for HCI</title>
+		<author>
+			<persName><forename type="first">Angela</forename><forename type="middle">Dr</forename><surname>Ihudiya Finda Ogbonnaya-Ogburu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Alexandra</forename><surname>Smith</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kentaro</forename><surname>To</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Toyama</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings the 2020 CHI Conference on Human Factors in Computing Systems</title>
+				<meeting>the 2020 CHI Conference on Human Factors in Computing Systems</meeting>
+		<imprint>
+			<date type="published" when="2020">2020</date>
+			<biblScope unit="page" from="1" to="16" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b68">
+	<monogr>
+		<title level="m" type="main">Invisible women: exposing data bias in a world designed for men</title>
+		<author>
+			<persName><forename type="first">Caroline</forename><forename type="middle">Criado</forename><surname>Perez</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Pushpanjali</forename><surname>Jha</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2020">2020. 2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b69">
+	<analytic>
+		<title level="a" type="main">Standing out from the crowd: Emotional labor, body labor, and temporal labor in ridesharing</title>
+		<author>
+			<persName><forename type="first">Noopur</forename><surname>Raval</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Paul</forename><surname>Dourish</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings the 19th ACM Conference on Computer-Supported Cooperative Work &amp; Social Computing</title>
+				<meeting>the 19th ACM Conference on Computer-Supported Cooperative Work &amp; Social Computing</meeting>
+		<imprint>
+			<date type="published" when="2016">2016</date>
+			<biblScope unit="page" from="97" to="107" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b70">
+	<analytic>
+		<title level="a" type="main">Making a &quot;Pro&quot;: &apos;Professionalism&apos; after Platforms in Beauty-Work</title>
+		<author>
+			<persName><forename type="first">Noopur</forename><surname>Raval</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Joyojeet</forename><surname>Pal</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proc. ACM Hum.-Comput. Interact. 3, CSCW, Article 175</title>
+				<meeting>ACM Hum.-Comput. Interact. 3, CSCW, Article 175</meeting>
+		<imprint>
+			<date type="published" when="2019-11">2019. Nov. 2019</date>
+			<biblScope unit="page">17</biblScope>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b71">
+	<analytic>
+		<title level="a" type="main">Once, twice, or three times as harmful? Ethnic harassment, gender harassment, and generalized workplace harassment</title>
+		<author>
+			<persName><forename type="first">L</forename><surname>Jana</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Lisa</forename><forename type="middle">H</forename><surname>Raver</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Nishii</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Journal of Applied Psychology</title>
+		<imprint>
+			<biblScope unit="volume">95</biblScope>
+			<biblScope unit="page">236</biblScope>
+			<date type="published" when="2010">2010. 2010</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b72">
+	<analytic>
+		<title level="a" type="main">2021. I Want to, but First I Need to: Understanding Crowdworkers&apos; Career Goals, Challenges, and Tensions</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Veronica</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">David T</forename><surname>Rivera</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Lee</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Proceedings of the ACM on Human-Computer Interaction</title>
+		<imprint>
+			<biblScope unit="volume">5</biblScope>
+			<biblScope unit="page" from="1" to="22" />
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b73">
+	<monogr>
+		<title level="m" type="main">Uberland: How algorithms are rewriting the rules of work</title>
+		<author>
+			<persName><forename type="first">Alex</forename><surname>Rosenblat</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2018">2018</date>
+			<publisher>Univ of California Press</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b74">
+	<analytic>
+		<title level="a" type="main">Algorithmic labor and information asymmetries: A case study of Uber&apos;s drivers</title>
+		<author>
+			<persName><forename type="first">Alex</forename><surname>Rosenblat</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Luke</forename><surname>Stark</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">International journal of communication</title>
+		<imprint>
+			<biblScope unit="volume">10</biblScope>
+			<biblScope unit="page">27</biblScope>
+			<date type="published" when="2016">2016. 2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b75">
+	<analytic>
+		<title level="a" type="main">We are dynamo: Overcoming and friction in collective action for crowd workers</title>
+		<author>
+			<persName><forename type="first">Niloufar</forename><surname>Salehi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Lilly</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Irani</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Michael</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ali</forename><surname>Bernstein</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Eva</forename><surname>Alkhatib</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kristy</forename><surname>Ogbe</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Milland</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings the 33rd annual ACM conference on human factors in computing systems</title>
+				<meeting>the 33rd annual ACM conference on human factors in computing systems</meeting>
+		<imprint>
+			<date type="published" when="2015">2015</date>
+			<biblScope unit="page" from="1621" to="1630" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b76">
+	<monogr>
+		<title level="m" type="main">On Judith butler and performativity. Sexualities and communication in everyday A reader</title>
+		<author>
+			<persName><forename type="first">Sara</forename><surname>Salih</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2007">2007. 2007</date>
+			<biblScope unit="page" from="55" to="68" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b77">
+	<analytic>
+		<title level="a" type="main">Dependence and precarity in the platform economy</title>
+		<author>
+			<persName><forename type="first">B</forename><surname>Juliet</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">William</forename><surname>Schor</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mehmet</forename><surname>Attwood-Charles</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Isak</forename><surname>Cansoy</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Robert</forename><surname>Ladegaard</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Wengronowitz</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Theory and Society</title>
+		<imprint>
+			<biblScope unit="volume">49</biblScope>
+			<date type="published" when="2020">2020. 2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b78">
+	<analytic>
+		<title level="a" type="main">Delivery Work and the Experience of Social Isolation</title>
+		<author>
+			<persName><forename type="first">Bhavani</forename><surname>Seetharaman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Joyojeet</forename><surname>Pal</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Julie</forename><surname>Hui</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3449138</idno>
+		<ptr target="https://doi.org/10.1145/3449138" />
+	</analytic>
+	<monogr>
+		<title level="j">Proc. ACM Hum.-Comput</title>
+		<imprint>
+			<biblScope unit="volume">17</biblScope>
+			<date type="published" when="2021-04">2021. April 2021</date>
+		</imprint>
+	</monogr>
+	<note>Interact. 5, CSCW1, Article 64</note>
+</biblStruct>
+
+<biblStruct xml:id="b79">
+	<analytic>
+		<title level="a" type="main">Female librarians and male computer programmers? Gender bias in occupational images on digital media platforms</title>
+		<author>
+			<persName><forename type="first">K</forename><surname>Vivek</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mary</forename><surname>Singh</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Raj</forename><surname>Chayko</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Diana</forename><surname>Inamdar</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Floegel</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Journal of the Association for Information Science and Technology</title>
+		<imprint>
+			<biblScope unit="volume">71</biblScope>
+			<biblScope unit="page" from="1281" to="1294" />
+			<date type="published" when="2020">2020. 2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b80">
+	<monogr>
+		<title level="m" type="main">Woman the gatherer: male bias in anthropology</title>
+		<author>
+			<persName><forename type="first">Sally</forename><surname>Slocum</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="1975">1975. 1975</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b81">
+	<monogr>
+		<title level="m" type="main">Platform capitalism</title>
+		<imprint>
+			<date type="published" when="2017">2017</date>
+			<publisher>John Wiley &amp; Sons</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b82">
+	<monogr>
+		<title level="m" type="main">Plans and situated actions: The problem of human-machine communication</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Lucy</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Suchman</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="1987">1987</date>
+			<publisher>Cambridge university press</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b83">
+	<analytic>
+		<title level="a" type="main">Avoiding the South Side and the Suburbs: The Geography of Mobile Crowdsourcing</title>
+		<author>
+			<persName><forename type="first">Jacob</forename><surname>Thebault</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">-</forename><surname>Spieker</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Loren</forename><forename type="middle">G</forename><surname>Terveen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Brent</forename><surname>Hecht</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2675133.2675278</idno>
+		<ptr target="https://doi.org/10.1145/2675133.2675278" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings the 18th ACM Conference on Computer Supported Cooperative Work &amp; Social Computing</title>
+				<meeting>the 18th ACM Conference on Computer Supported Cooperative Work &amp; Social Computing<address><addrLine>Vancouver, BC, Canada; New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computing Machinery</publisher>
+			<date type="published" when="2015">2015</date>
+		</imprint>
+	</monogr>
+	<note>CSCW &apos;15)</note>
+</biblStruct>
+
+<biblStruct xml:id="b84">
+	<analytic>
+		<title level="a" type="main">Beyond disruption: How tech shapes labor across domestic work &amp; ridehailing</title>
+		<author>
+			<persName><forename type="first">Julia</forename><surname>Ticona</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">31st Annual Meeting. SASE</title>
+				<imprint>
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b85">
+	<analytic>
+		<title level="a" type="main">Trusted strangers: Carework platforms&apos; cultural entrepreneurship in the on-demand economy</title>
+		<author>
+			<persName><forename type="first">Julia</forename><surname>Ticona</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Alexandra</forename><surname>Mateescu</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">New Media &amp; Society</title>
+		<imprint>
+			<biblScope unit="volume">20</biblScope>
+			<biblScope unit="page" from="4384" to="4404" />
+			<date type="published" when="2018">2018. 2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b86">
+	<monogr>
+		<title level="m" type="main">The big rig: Trucking and the decline of the American dream</title>
+		<author>
+			<persName><forename type="first">Steve</forename><surname>Viscelli</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2016">2016</date>
+			<publisher>Univ of California Press</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b87">
+	<analytic>
+		<title level="a" type="main">It&apos;s a man&apos;s Wikipedia? Assessing gender inequality in an online encyclopedia</title>
+		<author>
+			<persName><forename type="first">Claudia</forename><surname>Wagner</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">David</forename><surname>Garcia</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mohsen</forename><surname>Jadidi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Markus</forename><surname>Strohmaier</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Ninth AAAI conference on web and social media</title>
+				<imprint>
+			<date type="published" when="2015">2015</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b88">
+	<monogr>
+		<author>
+			<persName><forename type="first">Beatrice</forename><surname>Webb</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Beatrice</forename><forename type="middle">Potter</forename><surname>Webb</surname></persName>
+		</author>
+		<title level="m">My apprenticeship</title>
+				<imprint>
+			<publisher>Cambridge University Press</publisher>
+			<date type="published" when="1926">1926</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b89">
+	<analytic>
+		<title level="a" type="main">The economic theory of a legal minimum wage</title>
+		<author>
+			<persName><forename type="first">Sidney</forename><surname>Webb</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Journal of Political Economy</title>
+		<imprint>
+			<biblScope unit="volume">20</biblScope>
+			<biblScope unit="page" from="973" to="998" />
+			<date type="published" when="1912">1912. 1912</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b90">
+	<monogr>
+		<title level="m" type="main">The fssured workplace</title>
+		<author>
+			<persName><forename type="first">David</forename><surname>Weil</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2014">2014</date>
+			<publisher>Harvard University Press</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b91">
+	<analytic>
+		<title level="a" type="main">Good gig, bad gig: autonomy and algorithmic control in the global gig economy</title>
+		<author>
+			<persName><forename type="first">Alex J</forename><surname>Wood</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mark</forename><surname>Graham</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Vili</forename><surname>Lehdonvirta</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Isis</forename><surname>Hjorth</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Work, Employment and Society</title>
+		<imprint>
+			<biblScope unit="volume">33</biblScope>
+			<biblScope unit="page" from="56" to="75" />
+			<date type="published" when="2019">2019. 2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b92">
+	<analytic>
+		<title level="a" type="main">Together But Alone: Atomization and Peer Support among Gig Workers</title>
+		<author>
+			<persName><forename type="first">Zheng</forename><surname>Yao</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Silas</forename><surname>Weden</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Lea</forename><surname>Emerlyn</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Haiyi</forename><surname>Zhu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Robert</forename><forename type="middle">E</forename><surname>Kraut</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Proc. ACM Hum.-Comput. Interact</title>
+		<imprint>
+			<biblScope unit="volume">5</biblScope>
+			<biblScope unit="page">29</biblScope>
+			<date type="published" when="2021-10">2021. Oct. 2021</date>
+			<publisher>CSCW</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b93">
+	<analytic>
+		<title level="a" type="main">Running out of time: The impact and value of fexibility in on-demand crowdwork</title>
+		<author>
+			<persName><forename type="first">Ming</forename><surname>Yin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Siddharth</forename><surname>Suri</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mary</forename><forename type="middle">L</forename><surname>Gray</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings the 2018 CHI conference on human factors in computing systems</title>
+				<meeting>the 2018 CHI conference on human factors in computing systems</meeting>
+		<imprint>
+			<date type="published" when="2018">2018</date>
+			<biblScope unit="page" from="1" to="11" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b94">
+	<analytic>
+		<title level="a" type="main">Go Gig Go Home: Enabling Social Sensing to Share Personal Data with Intimate Partner for the Health and Wellbeing of Long-Hour workers</title>
+		<author>
+			<persName><forename type="first">Chuang-Wen</forename><surname>You</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Nanyi</forename><surname>Chien Wen Yuan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Min-Wei</forename><surname>Bi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Po-Chun</forename><surname>Hung</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Hao-Chuan</forename><surname>Huang</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Wang</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2021 CHI Conference on Human Factors in Computing Systems</title>
+				<meeting>the 2021 CHI Conference on Human Factors in Computing Systems</meeting>
+		<imprint>
+			<date type="published" when="2021">2021</date>
+			<biblScope unit="page" from="1" to="16" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b95">
+	<monogr>
+		<title level="m" type="main">Understanding the nature and experience of gig work in Canada</title>
+		<author>
+			<persName><forename type="first">Elle</forename><surname>Ziegler</surname></persName>
+		</author>
+		<ptr target="https://fsc-ccf.ca/research/understanding-the-nature-and-experience-of-gig-work-in-canada/" />
+		<imprint>
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+				</listBibl>
+			</div>
+		</back>
+	</text>
+</TEI>

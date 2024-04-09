@@ -1,0 +1,2001 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xml:space="preserve" xmlns="http://www.tei-c.org/ns/1.0" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.com/kermitt2/grobid/master/grobid-home/schemas/xsd/Grobid.xsd"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+	<teiHeader xml:lang="en">
+		<fileDesc>
+			<titleStmt>
+				<title level="a" type="main">The Deskilling of Domain Expertise in AI Development</title>
+			</titleStmt>
+			<publicationStmt>
+				<publisher/>
+				<availability status="unknown"><licence/></availability>
+			</publicationStmt>
+			<sourceDesc>
+				<biblStruct>
+					<analytic>
+						<author role="corresp">
+							<persName><forename type="first">Nithya</forename><surname>Sambasivan</surname></persName>
+							<email>nithyas@gmail.com</email>
+							<affiliation key="aff0">
+								<address>
+									<settlement>San Francisco</settlement>
+									<region>CA</region>
+									<country key="US">USA</country>
+								</address>
+							</affiliation>
+							<affiliation key="aff1">
+								<orgName type="institution">Georgetown University D.C</orgName>
+								<address>
+									<country key="US">USA</country>
+								</address>
+							</affiliation>
+						</author>
+						<title level="a" type="main">The Deskilling of Domain Expertise in AI Development</title>
+					</analytic>
+					<monogr>
+						<imprint>
+							<date/>
+						</imprint>
+					</monogr>
+					<idno type="DOI">10.1145/3491102.3517578</idno>
+				</biblStruct>
+			</sourceDesc>
+		</fileDesc>
+		<encodingDesc>
+			<appInfo>
+				<application version="0.7.1" ident="GROBID" when="2022-07-22T04:59+0000">
+					<desc>GROBID - A machine learning software for extracting information from scholarly documents</desc>
+					<ref target="https://github.com/kermitt2/grobid"/>
+				</application>
+			</appInfo>
+		</encodingDesc>
+		<profileDesc>
+			<textClass>
+				<keywords>
+					<term>ML</term>
+					<term>labour studies</term>
+					<term>deskilling</term>
+					<term>Taylorism</term>
+					<term>field workers</term>
+					<term>data quality</term>
+					<term>data collection</term>
+					<term>domain expertise</term>
+				</keywords>
+			</textClass>
+			<abstract>
+<div xmlns="http://www.tei-c.org/ns/1.0"><p>Field workers, like farmers and radiologists, play a crucial role in dataset collection for AI models in low-resource settings. However, we know little about how field workers' expertise is leveraged in dataset and model development. Based on 68 interviews with AI developers building for low-resource contexts, we find that developers reduced field workers to data collectors. Attributing poor data quality to worker practices, developers conceived of workers as corrupt, lazy, non-compliant, and as datasets themselves, pursuing surveillance and gamification to discipline workers to collect better quality data. Even though models sought to emulate the expertise of field workers, AI developers treated workers as non-essential and deskilled their expertise in service of building machine intelligence. We make the case for why field workers should be recognised as domain experts and re-imagine domain expertise as an essential partnership for AI development.</p></div>
+			</abstract>
+		</profileDesc>
+	</teiHeader>
+	<text xml:lang="en">
+		<body>
+<div xmlns="http://www.tei-c.org/ns/1.0"><p>one of the fundamental hurdles to building and deploying models <ref type="bibr" target="#b43">[44,</ref><ref type="bibr" target="#b74">76,</ref><ref type="bibr" target="#b83">85]</ref>. Readily available datasets are often lacking in lowresource areas, in contrast to academic or enterprise settings <ref type="bibr" target="#b43">[44]</ref>.</p><p>To address this lack of data problem, developers rely on the labour of field workers, such as agricultural extension workers and community health workers, to create AI/ML datasets to train models <ref type="bibr" target="#b74">[76]</ref>. AI developers in low-resource contexts often take on bootstrapping and maintenance labour that is under-appreciated in conventional AI research, such as partnering with institutions and working with infrastructural constraints <ref type="bibr" target="#b74">[76]</ref>. While AI developers rely on several human intermediaries to build the datasets, we do not yet understand how they contend with these human intermediaries.</p><p>The disregard for domain expertise in model building is wellknown in AI, e.g., <ref type="bibr" target="#b16">[17]</ref>. Statements like "every time I fire a linguist, the performance of the speech recognizer goes up" (attributed to NLP researcher Frederick Jelenik) <ref type="bibr" target="#b34">[35]</ref> reflect how human experts are not fully integrated and recognised as a part of the technical AI pipeline. More generally, it is indeed a well-recognised problem that computer scientists and engineers often do not recognise the expertise of workers, despite their crucial contributions <ref type="bibr" target="#b33">[34,</ref><ref type="bibr" target="#b77">79]</ref>. AI models in low-resource areas are highly dependant upon the critical labour of field workers for dataset creation and deployments. Despite their skills and domain expertise that takes years to build, field workers have been reported to perform low-waged, arduous, and burdensome work for AI data collection <ref type="bibr" target="#b40">[41,</ref><ref type="bibr" target="#b54">56]</ref>. A wider body of work in Crowdwork and Human Computation has focused on centering the invisible AI/ML labourer, such as annotators and content moderators <ref type="bibr" target="#b14">[15,</ref><ref type="bibr" target="#b20">21,</ref><ref type="bibr" target="#b29">30,</ref><ref type="bibr" target="#b30">31,</ref><ref type="bibr" target="#b38">39,</ref><ref type="bibr" target="#b50">52]</ref>. In contrast to these previous studies, where the focus is on visibilizing the labour of computational workers who are directly recruited and compensated for their work (albeit often inadequately), our paper focuses on field workers who are recruited indirectly and invisibly through partner organizations for AI dataset collection, often for no additional compensation for dataset collection. The field workers typically take decades to build expertise in their respective socio-economic areas, such as rearing crops, delivering health care, protecting endangered species, and so on, with deeply embedded relations in their communities and phenomena. Importantly, we empirically know little about how this hard-earned expertise of field workers is seen by the AI practitioners who build and deploy these systems. Given that models seek to emulate and aggregate local expertise, to what extent is the worker's expertise acknowledged, engaged with, or credited by the AI developer? Such an endeavour goes beyond mere inclusion of labourers, and into examining the particular ways in which labourers fit into the mental models of practitioners, who exert power and make consequential decisions while building AI models.</p><p>In this paper, we fill this crucial gap by 'studying up' how AI developers conceive of and manage the expertise of field workers in dataset and model building. We draw from 68 interviews with AI practitioners building models for low-resource communities in India, Sub-Saharan Africa, and the United States. We find that developers viewed field workers only as data collectors, and disregarded their field expertise. Importantly, we find that AI developers attributed poor data quality to poor work practices of field workers. We present four conceptions of field workers as held by developers: workers as corrupt, lazy, non-compliant, and as the dataset itself. The vast majority of developers did not appear to compensate field workers for surplus data labour, provide disclosure or training on models or downstream use cases that workers were contributing towards, and meaningfully attribute credit to field workers for their contributions to model outcomes. Despite the limited engagement and understanding of field workers, developers reported creating several disciplinary interventions to influence field workers to collect better quality data, in the form of surveillance, gamification, cross-verification, and pre-processing fixes. Our focus is not on verifying the validity of developer views of field workers, but on reporting the existence and prevalence of these views, which are sometimes actioned upon as punitive interventions that can be detrimental to the well-being of field workers. We also found that even though a few AI developers were reflexive, they felt constrained and attested to their own lack of agency in addressing the limits of the AI pipeline.</p><p>We argue that field workers should be accurately viewed as domain experts with special knowledge and mastery in their local contexts. The AI development apparatus in low-resource areas deskills 1 and invisibilises the domain expertise of field workers. Even though the models in our study sought to emulate and improve over the expertise of field workers, their expertise was treated as non-essential knowledge by AI developers. The worker's knowledge, networks, and capabilities were viewed as assets for dataset collection, rather than necessary expertise for system building. Developers held reductionist assumptions about the expertise of field workers, enrolling them as invisible data collectors that most did not have any direct contact with. AI developers, who were experts in their technical fields but not in the application-domains, e.g., a developer building a cancer prediction model, will inevitably leave gaps when domain experts are excluded from the model that seeks to learn their knowledge (through datasets). But if we consider the domain expertise of field workers as an essential partnership throughout the AI pipeline, we can see new possibilities for collecting, modelling, and scaling knowledge. Domain experts can contribute to critical questions that can impact model behaviours: What exactly are we modelling? What assumptions are appropriate? What features should be included in the model? What are we trying to predict? How will we know? While machine intelligence could be more effective, accurate, or faster at the work, the domain experts are not always consulted enough to be able to evaluate such claims. When we recognise field workers as domain experts in the 1 Deskilling, first coined by sociologist Harry Braverman in 1974, occurs when sophisticated technologies are introduced that no longer require workers to have formerly necessary skills <ref type="bibr" target="#b6">[7]</ref>. Deskilling of work has been observed throughout the history of technology and industry, notably among professions like skilled craftsmen <ref type="bibr" target="#b87">[88]</ref>, nurses <ref type="bibr" target="#b66">[68]</ref> and farmers <ref type="bibr" target="#b23">[24]</ref>; deskilling has also been discussed in the context of job losses from automation <ref type="bibr" target="#b25">[26]</ref> first place, the problem of poor quality data can then be read differently as contingent and practical challenges in workflows of data collection, and the design solutions might be oriented towards solving these practical problems, rather than manifesting as extractive and punitive solutions.</p><p>Our discussion re-imagines how we can shift to viewing field workers as full-range domain experts in their communities and contexts. We identify pragmatic ways to co-create datasets, algorithms, and evaluation metrics with domain experts. We call for reflection on normative assumptions in AI, such as how the AI/ML pipeline is imagined, and whose expertise counts. We press upon AI developers the need to move away from control and influence of field workers to collect better or more data, to embrace more participatory stances. We present opportunities to recognise the untapped and hidden labour of field workers in AI development.</p><p>Our paper makes two main contributions. First, we present empirical evidence for how AI developers building models for lowresource areas do not see the domain expertise of field workers that power their datasets, based on their limited conceptions of workers and the disciplinary interventions they create to manage data collection practices. We make the case that AI development in low-resource areas deskills the expertise of field workers involved. Second, we present various implications for recognising, respecting, and rewarding domain expertise in the development of machine intelligence in low-resource areas.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2">RELATED WORK 2.1 Deskilling and expertise in automation</head><p>The workers of ML and AI are divided between the "coding elite" <ref type="bibr" target="#b9">[10]</ref> who do the innovative work and the "cybertariat" [36], who does the "menial work" of building data that feed or train the algorithms <ref type="bibr" target="#b37">[38]</ref>. This classificatory struggle of what constitutes expertise has social origins with material consequences. Labour theorists have blamed the rise of capitalism with the associated phenomenon of "Taylorism" and the use of novel technologies of production in deskilling labour. ultimately resulting in shifting power to capital over labour <ref type="bibr" target="#b6">[7]</ref>. Deskilling is a reduction in the skills and knowledge needed to do a job when automation degrades human work. Others have argued taking a long term view beginning with preindustrialism and ending with AI, technology has played a positive as well as a negative role <ref type="bibr" target="#b24">[25]</ref>. The extent of deskilling's scope in explaining capitalist development has been criticized extensively <ref type="bibr" target="#b3">[4]</ref>.</p><p>However, to the extent automation in work processes results in integrating knowledge into labour displacing machines, a deskilling occurs with workers being further relegated to menial tasks <ref type="bibr" target="#b95">[96]</ref>. As a result, to make workers accountable, strategies to build better pricing mechanisms [77], and increasingly surveillance and control of workers is often seen as necessary by management <ref type="bibr" target="#b95">[96]</ref> [47] <ref type="bibr" target="#b85">[86]</ref> which have historically met with conflict and worker resistance <ref type="bibr">[9]</ref>. Information and data-based work processes that include work on AI, makes work visible to employers that Zuboff calls "informating" <ref type="bibr" target="#b95">[96]</ref>. Automating these process have also allowed for tools to be built to empower workers <ref type="bibr" target="#b39">[40]</ref>  <ref type="bibr" target="#b68">[70]</ref>. Another strand of research focuses on forecasting of job losses from computerised automation <ref type="bibr" target="#b32">[33,</ref><ref type="bibr">48,</ref><ref type="bibr" target="#b63">65]</ref>. Frey and Osborne predicted professions like lawyers, doctors and accountants were being broken down into their component parts via the increasing use of algorithms allowed apps to create online self-help services and provide a diagnosis <ref type="bibr" target="#b25">[26]</ref>.</p><p>James C. Scott used the Greek phrase mẽtis for local expert knowledge, to represent "a wide array of practical skills and acquired intelligence responding to a constantly changing natural and human environment." <ref type="bibr" target="#b72">[74]</ref> Lave and Wenger located expertise not in local knowledge but in communities of practice through "legitimate peripheral participation" <ref type="bibr" target="#b44">[45]</ref>. Local experts develop expertise through a "shared repertoire of resources: experiences, stories, tools, ways of addressing recurring problems-this takes time and sustained interaction" <ref type="bibr" target="#b89">[90]</ref>. While Scott was focused on how "high modernist" actions fail because of the impossibility of tapping into mẽtis, Denton was optimistic about the possibility of algorithms tapping into local expertise, he writes, "a trained neural network is still essentially a mẽtis solution, turning a body of experience (training data) into a specialized knowledge of a problem domain 2 . But the local knowledge of image classification has been offloaded from the experts to the machines. This is a real shift" <ref type="bibr" target="#b15">[16]</ref>. But this transfer of expertise from humans to machines is not straightforward. Ackerman et al. review the CSCW literature on organizational knowledge sharing and explore the shift from the repository model of knowledge sharing to tacit knowledge sharing <ref type="bibr" target="#b0">[1]</ref>. Studies that have examined knowledge sharing in 'expert systems' has recognised the importance of socio-political considerations [66] <ref type="bibr" target="#b19">[20]</ref> as well as the limits of knowledge sharing between communities of practice <ref type="bibr" target="#b18">[19]</ref>.</p><p>We take a step back and critically examine the labour process of building expertise in these algorithmic systems. In particular, we focus on the politics of recognition of expertise and its consequences. Our paper makes the case for how and why deskilling occurs in AI development, and how the expertise of field workers is reduced by typecasting them as data collectors in service of building uber-expert models. Our work adds to the focus on AI labour practice by turning the gaze on the "coding elite" and examining their perspectives.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.2">Invisible computational labour</head><p>Under-recognized and invisible labour is a persistent challenge in computing, widely studied in the context of technology-mediated work situations <ref type="bibr" target="#b52">[54,</ref><ref type="bibr" target="#b76">78,</ref><ref type="bibr" target="#b77">79]</ref>. The first computers were human beings, often women, who were often rendered invisible <ref type="bibr" target="#b31">[32,</ref><ref type="bibr" target="#b33">34]</ref>. Recent studies have pointed to the invisible agency of humans or "ghost work" <ref type="bibr" target="#b30">[31]</ref> in algorithmic automation <ref type="bibr" target="#b59">[61]</ref>. Critical data scholars have shown that data is never "raw" <ref type="bibr" target="#b28">[29]</ref> and have shown how undervalued human labour, powers these hyper visible AI models with a focus skewed towards algorithmic work (e.g., heteromation ( <ref type="bibr" target="#b20">[21]</ref>; fauxtomation ( <ref type="bibr" target="#b80">[82]</ref>). Recent scholarship has examined how frontline health workers in India navigate data collection amidst the multiple demands placed on them <ref type="bibr" target="#b40">[41,</ref><ref type="bibr" target="#b56">58,</ref><ref type="bibr" target="#b81">83]</ref> and the tensions that arise across workers and developers, calling for greater attention to worker agency, comfort levels, and training <ref type="bibr" target="#b56">[58]</ref>, transparency and accountability <ref type="bibr" target="#b81">[83]</ref>, and pointing to how solidarity is practiced among the workers themselves in advocating for marginalised groups <ref type="bibr" target="#b40">[41]</ref>. Prior work has also examined how mental models of 2 Thanks to Meghan Mandi for pointing this connection out AI intermediaries who work with marginalized citizens critically impact outcomes <ref type="bibr" target="#b54">[56]</ref>.</p><p>Researchers point to the need to bring the labourers back in and to critically examine the labour process in producing AI models <ref type="bibr" target="#b14">[15,</ref><ref type="bibr" target="#b20">21,</ref><ref type="bibr" target="#b30">31,</ref><ref type="bibr" target="#b38">39,</ref><ref type="bibr" target="#b50">52,</ref><ref type="bibr" target="#b88">89]</ref>. Examining data work is critical not just for its intrinsic value, but also for downstream "data cascades" as introduced by Sambasivan et al. <ref type="bibr" target="#b70">[72]</ref> which negatively impact model outcomes. Data work is also important for injecting flexibility in "street-level algorithms" to overcome the limits of algorithmic expertise <ref type="bibr" target="#b2">[3]</ref> as well as to more deeply integrate into prioritizing local ethics as opposed to relying on statistical rationality <ref type="bibr" target="#b79">[81]</ref> .</p><p>Studies have sought to recognize the complexity and intricacies involved in building datasets. For example, Møller et al. <ref type="bibr" target="#b50">[52]</ref> discuss how the data work of clerical hospital workers is complex and requires a significant amount of domain expertise in navigating ethical quandries <ref type="bibr" target="#b50">[52]</ref>. Studies have shown how this data labour is often not recognized (the work on Mechanical Turkers by Martin et al. <ref type="bibr" target="#b47">[49]</ref>, data annotators by Wang et al. <ref type="bibr" target="#b88">[89]</ref>, and frontline health workers by Ismail and Kumar <ref type="bibr" target="#b40">[41]</ref>) and Thakkar et al. <ref type="bibr" target="#b81">[83]</ref>).</p><p>It is important to understand why domain expertise is not recognized by AI developers. Suchman showed how engineers underestimated the difficulties of what the secretaries did <ref type="bibr">[80]</ref>. Our research fills a crucial gap of detailing the perspectives of the developers of AI models, and how they imagine and characterise expertise, recruit labourers, and manage their labour to build models.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.3">Poor quality data in low-resource areas</head><p>Data access and quality is a significant challenge in low-resource contexts, due to the lack of critical human and institutional capacity for creating modern data pipelines <ref type="bibr" target="#b58">[60]</ref>  <ref type="bibr">[14, 63][8]</ref>. An active area of research is focused on coping with limited datasets through technical solutions, including dimensionality reduction [95] and data augmentation <ref type="bibr" target="#b21">[22]</ref>.</p><p>It is standard practice for AI developers to work with local field partners to create datasets <ref type="bibr" target="#b43">[44,</ref><ref type="bibr" target="#b74">76,</ref><ref type="bibr" target="#b83">85]</ref> building on the past two decades of ICTD, GIS, and other data-driven systems building in low-resource areas (e.g., see <ref type="bibr" target="#b11">[12,</ref><ref type="bibr" target="#b17">18,</ref><ref type="bibr" target="#b26">27,</ref><ref type="bibr" target="#b58">60,</ref><ref type="bibr" target="#b61">63]</ref>. The onus of data collection thus falls on local experts, such as community health workers and nurses, whose primary jobs, such as providing patient care, are often orthogonal to dataset collection. Even so, such local experts are required to perform these tasks anyway <ref type="bibr" target="#b70">[72]</ref>. Prior research has documented how dataset collection exacerbates the lack of agency of field workers <ref type="bibr" target="#b40">[41]</ref>, done with inadequate training <ref type="bibr" target="#b11">[12,</ref><ref type="bibr" target="#b53">55,</ref><ref type="bibr" target="#b56">58,</ref><ref type="bibr" target="#b61">63]</ref>, or mismatched incentives <ref type="bibr" target="#b11">[12,</ref><ref type="bibr" target="#b70">72,</ref><ref type="bibr" target="#b86">87]</ref>.</p><p>Dealing with limited datasets in low-resource areas is challenging, as training datasets can be small, biased, and non-generalisable <ref type="bibr" target="#b74">[76]</ref>, with practitioners in these settings often running into inconsistent, poorly recorded, incorrectly formatted, missing, and fabricated data <ref type="bibr" target="#b60">[62,</ref><ref type="bibr" target="#b61">63,</ref><ref type="bibr" target="#b74">76]</ref>. Additionally, factors like competing organisational agendas, misaligned dataset needs for program management vs. model building, changing requirements, lack of structured forms, and the heavy reliance on paper in low-resource areas can negatively impact the quality of datasets <ref type="bibr" target="#b13">[14,</ref><ref type="bibr" target="#b27">28,</ref><ref type="bibr" target="#b43">44,</ref><ref type="bibr" target="#b61">63]</ref>. Our paper establishes a direct, causal, and active link held by developers that workers are to be blamed for poor data quality, through their conceptions of labourers and interventions they create to control the work of workers. Our research provides evidence for the widespread nature of these beliefs in our globally-distributed sample of AI developers.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3">METHOD</head><p>Our research methods were chosen to provide a detailed understanding of the goals, labour enrolment, and labour processes of AI developers building for various low-resource contexts around the world. We "studied up" <ref type="bibr" target="#b51">[53]</ref> AI developers and researchers to gain a nuanced picture of their animating visions and the ground realities of model development, from their vantage points as creators and builders of the systems. Consequentially, the scope of our study is limited to accounts from system builders, not field workers (see Limitations). AI developers provided us with reflexive accounts of their own roles, choice of algorithms, and labour arrangements. We empirically report on the viewpoints and practices of developers in working on AI projects that enrolled field workers. Our research used a qualitative approach of semi-structured interviews and an inductive analysis. Our interview data collection was done in two phases; the first phase between May and July 2020, and the second phase between April and August 2021, with analysis and synthesis done in between and after. We conducted interviews with 68 AI developers working in low-resource areas.</p><p>As a disclosure of postionality, we do not seek to endorse the claims and views of these AI developers, but are concerned with understanding their perceptions and strategies with field workers, as builders of these AI systems. As we make explicit in our Introduction and Discussion, the authors' perspectives are critical of views and practices that largely dehumanise field workers and reduce them to invisible data labourers. We go on to provide practical, structural and intellectual suggestions for recognizing the domain experts of field workers throughout the AI pipeline.</p><p>Recruitment and moderation. We recruited participants through a combination of developer communities, distribution lists, professional networks, and personal contacts, using snowball and purposive sampling <ref type="bibr" target="#b57">[59]</ref> that was iterative until saturation. All participants were directly involved in building models for lowresource contexts. We limited our sample to AI applications in high stakes applications, a common pairing in low-resource settings. Participants played technical roles, as engineering leads, founders, developers, and program managers, and were directly involved in developing systems. Interviews were conducted using video conferencing, due to COVID-19 travel limitations. These interviews were focused on identifying project visions, understanding the data pipelines, labour enrolment and processes, data quality challenges, challenges and approaches in low-resource development, developer conceptions of labour, value conflicts, and interventions. We conducted all interviews in English (preferred language of participants). Each participant received a thank you gift in the form of a gift card. Amounts were localised in consultation with regional experts, based on purchasing power parity and non-coercion (100 USD for the US, 27 USD for India, 35 USD for East and West African countries). Due to workplace restrictions, we were not able to compensate government employees. Each session focused on the participant's experiences, practices, and challenges in AI development and lasted 60 to 75 minutes each. Interview notes were recorded in the form of field notes or video recordings, transcribed within 24 hours of each interview.</p><p>We intentionally sampled AI developers building for lowresource communities in various countries, in order to gain diversity of experiences and contextual factors that affect data quality. AI developers were located in, or worked primarily on projects based in, India <ref type="bibr" target="#b31">(32)</ref>, the US <ref type="bibr" target="#b21">(22)</ref>, Nigeria <ref type="bibr" target="#b9">(10)</ref>, Kenya (2), Uganda (1), and Ghana (1). We interviewed 55 male and 13 female AI developers. Participants were employed in startups <ref type="bibr" target="#b27">(28)</ref>, large companies <ref type="bibr" target="#b23">(24)</ref>, academia <ref type="bibr" target="#b11">(12)</ref>, and non-profits (4). All projects depended on field workers enrolment for dataset collection and labelling; 40 projects depended priarily on data collected by field workers solely, where 30 projects also utilised sensor data, end-user data, open datasets, crowd-sourced and client data. Examples of field workers include community health workers, agricultural extension workers, radiologists, and truck drivers. Refer to Table <ref type="table" target="#tab_0">1</ref> for details on participant demographics.</p><p>Co-authors of this paper have partnered with marginalised communities in technology design for nearly thirty years. Our positionalities are shaped by our disciplinary commitments to HCI, ICTD, and Technology Policy.</p><p>Analysis. Using inductive analysis <ref type="bibr" target="#b82">[84]</ref>, the two co-authors independently read all units multiple times, and categories (unit of analysis) were initially identified by each researcher, together with a description and examples of each category, until a saturation point was reached. Our upper level categories were guided by the evaluation aims, comprising (1) project vision and problem selection; (2) trade-offs with using AI; (3) defining the right dataset; (4) human factors in dataset collection; (5) labour quantity and quality enrolled; (6) developer involvement of experts; (7) views on field workers; <ref type="bibr" target="#b7">(8)</ref> strategies and interventions to manage data quality; (9) challenges in low-resource AI development; and <ref type="bibr" target="#b9">(10)</ref> reflexive accounts on blindspots and retrospectives. The categories were iteratively refined through group discussions with meeting, diverging, and synthesizing during the analysis phase. Further iterations resulted in the formation of lower-level categories such as "strategies: monitoring". These categories were consolidated into two top-level categories of developer conceptions of field workers and interventions created, as well as 14 nested categories, which included skill, partnership, and incentives.</p><p>Research ethics. We took intentional care to create a research ethics protocol to protect respondent privacy and safety, especially due to the sensitive nature of our inquiry. During recruitment, participants were informed of the purpose of the study, the question categories, and researcher affiliations. Participants signed informed consent acknowledging their awareness of the study purpose and researcher affiliation prior to the interview. At the beginning of each interview, the moderator additionally obtained verbal consent. We stored all data in a private Google Drive folder, with access limited to our team. To protect participant identity, we deleted all personally identifiable information in research files. We redacted identifiable details when quoting participants. We acknowledge that the above is our interpretation of research ethics, which may not be universal.</p><p>Limitations and future work. Our work is a snapshot of AI designers and their perspectives through semi-structured interviews. To fully understand the extent of deskilling, we would need All interviews and analysis were conducted over video and phone, due to the COVID-19 pandemic. As a result of travel restrictions, we were unable to conduct any observational research of field workers interactions that would have otherwise been possible. However, we feel that the self-reported conceptions and interventions have validity, and sufficient rigour and care was applied in covering the themes through multiple questions and solicitation of examples. Gender distribution in our study is reflective of the AI industry's disparities [91] and sampling limitations.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4">FINDINGS</head><p>All AI projects in our study aimed to use models to scale up deficits of resources, in various social, economic, and ecological domains. Developers typically described their visions of introducing algorithms with an efficiency function of improved time, speed, or accuracy, or reduced cost when compared to the status quo of humans. All project visions were motivated by how models could make services instantly and widely available, considering the specific deficits of low-resource contexts. For example, models were seen as impactful interventions that could recognise patterns which were previously limited to only some experts, identify critical conditions in a few seconds instead of the status-quo of weeks, and identify high-risk targets to intervene on which cognitively overburdened field workers were unable to identify. Domain expertise was viewed by developers as a scarce, limited resource which models could train on and scale up. As P23 said, "you're trying to transition all the knowledge from a human brain [agricultural worker] to machine so that you can start to have a very good repeatability of how somebody does the procurement of the produce. " In some cases, models were justified based on anecdotal or small data, despite the fact that models require moderate to high scale operations of labour and infrastructure, e.g., P59 spoke of their crop disease model, "we did a survey of 25-30 field workers and only 2 could identify pests." Once the projects were initiated, the field worker played an important role in creating the datasets for training models. Below, we classify how AI developers perceived and discussed field workers.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.1">Reduction of field workers to data collectors</head><p>Field workers had existing responsibilities, and dataset collection was often orthogonal and surplus labour, except in five cases where workers were recruited independently and compensated. Developers entered into partnerships with field organisations, mostly governmental or non-profit institutions, to provide field and logistical support for model building and deployment. The field workers were typically employees or sub-contractors of the partner organisations in pre-existing roles, e.g., school teachers, community health workers, and agricultural extension workers. field workers were auto-enrolled into data collection responsibilities, but these were double duties as primary objectives like rearing crops, delivering healthcare, or protecting endangered species still needed to be fulfilled. (The arrangement we report of is in contrast to crowd work and human computation studies, where computational workers are directly recruited and compensated, however inadequately, for AI/ML dataset tasks e.g., <ref type="bibr" target="#b12">[13]</ref>.) Field workers in our study were health workers, nurses and doctors; farmers; school teachers; forest guards; diagnostic machine operators; taxi drivers; traffic police; oceanologists; and voluntary, pro-bono contributors. In nearly all cases (barring five), developers did not report compensating labourers; in all cases, the work of dataset collection was supplementary to the labourer's primary work. Despite the direct impact of a field workers expertise and work practices on data quality, developers normatively did not engage with field workers in any capacity, including field visits during data collection or soliciting their inputs on systems. Most developers spoke of field workers using language of low-level computational tasks, such as 'counting', 'clicking', 'sorting', 'recording', or 'collecting'. Developers often spoke of the need for building good relationships with field workers, but pointed to time, budget, or organisational constraints as obstacles coming in the way of having direct interactions with field workers and recognising their expertise. As P54 explained, "We end up talking to very senior people of the project who know a lot, but not the person creating the dataset. It would have been helpful to get from the health workers directly. That never happens." Only in a handful of cases (refer to Engagement under Strategies) did developers directly engage with field workers and solicit their knowledge and expertise, train them, or engage them in problem specification. Contrarily, a vast majority of developers interfaced and built relationships with the leaders and senior staff of the partner organisations, elite scientists, and bureaucrats. Inputs from these senior and elite stakeholders impacted problem formulation and the interventions we describe later in Incentives. Instructions and tools were handed off to the senior parties, to trickle down to field workers.</p><p>A vast majority of developers typecast field workers as data collectors. With the absence of direct interactions with field workers in most cases, the work of a field worker was primarily read through their dataset artefacts. Errors and aberrations in the dataset were reported to be a source of frustration for developers. Below, we describe the various ways in which developers conceived field workers-undergirding these conceptions is an equivalence assigned by developers to the roles of field workers and data collectors. Field workers were perceived to 'come in the way' of the worthwhile model development efforts of developers. Developers undertook various strategies to manage work practices of field workers, which we describe in the next section.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.2">Conceptions of field workers as held by developers</head><p>The field worker as corrupt Developers in our study frequently described field workers as morally corrupt, irresponsible, and fraudulent, when speaking of their work practices. The corruption conception was primarily ascribed by developers to field workers creating datasets with specific indicators like repeated values (e.g., 100's of rows with same values) and expected values (e.g., ideal blood pressures), i.e., the datasets will filled and complete, but suspiciously ideal, a possible means of "gaming the system" (P65). Field workers were reported to falsify data entries for the purpose of passing manual or automated checks and acquiring remuneration. In some cases, developers first spoke of field worker corruption, and later acknowledged the tiresome effort involved in data collection. We remind that reader that our focus is on reporting developer views as-is, not concerning with these labels are accurate or valid for field workers. As we show in Interventions, many of these views are actioned upon in the form of interventions and processes introduced to the field workers by developers.</p><p>A common assumption among developers was that the field worker was deceiving and falsely passing off 'easy' work as 'real' work, abandoning the responsibilities they owed towards good data collection and model building. P17 working in Health AI explained how corruption occurred in data entry due to evaluation and incentive structures for data collection. "[...]These surveyors get paid based on how many people they survey, so they will sit down underneath a tree and fill out form after form, because it's faster than to go and actually sit down and talk with people [...] The surveyors themselves are falsifying the data because of incentives. " -P17, Health AI. . In a few cases, developers labelled field workers as corrupt even if external constraints may have impacted data collection, e.g., P26 spoke of "fudged data" coming from field workers entering average utility values if household residents were away, while reading electricity meters. Many developers spoke of data collection as a net good, expressing that the value of datasets was similarly valenced among all actors. (It is worth noting that prior studies demonstrate that field workers are often unaware of what and why they collect the datasets for <ref type="bibr" target="#b5">[6,</ref><ref type="bibr" target="#b40">41,</ref><ref type="bibr" target="#b54">56]</ref>.)</p><p>False data entries were reported to sabotage algorithm performance and robustness, due to the fact that models learned from incorrect entries that were not representative of the real world 3 . The concern for many developers was the possible occurrence of false positives and negatives due to false data, which can have enormous repercussions in low-resource contexts. Incorrect predictions in high-stakes domains were reported to be in the form of human, animal, and economic costs, e.g., P55 working on healthcare models spoke of how false positives in Tuberculosis could wrongly route limited human resources in the backdrop of poor road and hospital infrastructure, and missing daily wages. False negatives were also reported to bear costs, as missed predictions were reported to sometimes mean life or death choices, e.g., in time-sensitive, high-stakes predictions like advanced disease progression. A few developers spoke of 'corrupt' field workers as cunning and exploitative, sabotaging the model outcomes through wrong data. As P22, building a healthcare model spoke of ASHA (community health) workers, "When I launched this product the first time [...] suddenly I was not getting fetal information for some pregnant woman. My doctor was telling me why this fetal information is missing here, maybe the baby was aborted. We rushed to the tribal village and interviewed the woman. The woman said, 'no health worker reached my home. Without coming here, how were they able to enter the data digitally'? Later we found out what this ASHA worker was doing with colleagues, collecting their data representing the pregnant mother. Then we understood that ASHA workers are very 'smart'".</p><p>Since corruption among field workers was reported to manifest as ideal data values, this class was relatively straightforward to detect, and hence identify offending field workers. Eyeballing, analysis tools, and AI models were used to detect these data entries. The value assignment of corruption to field workers was sometimes used as a rationale to build new models that automated out field workers, e.g., building a computer vision AI model that is mandatory for a community health worker for in health measurements, job, motivated by the suspicion that the worker's manual data entries are fake. In some cases, field workers required to provide cross-verification and documentation, e.g., physical presence at the location, audio capture cross-verification, and observation notes. We discuss these strategies in greater detail</p><p>Interventions.</p><p>The field worker as lazy Some developers described field workers as incompetent, stubborn, sluggish by gathering data without sufficient care. Incompatible workflows, poor technical literacy, and obstacles in the data capture environment were cited as reasons for attributing inconvenience to field workers. Data collectors of datasets with missing flawed entries, and irregular entries were viewed as lazy. For example, image datasets often require ideal conditions during data capture, because models cannot typically handle high noise levels in the training datasets. In P59's case, working on agriculture and healthcare, the mandatory AI/ML requirement of white backgrounds in photographs captured in hospital or farm environments was physically impossible, due to the non-availability of white papers in farms, as well as the heterogeneous aesthetics in Indian settings, often painted with bright background colours.</p><p>developers reported how informal practices of field workers in collision with the AI/ML data entry requirements that were rather rigid in periodicity, location, and documentation-heavy.</p><p>several developers acknowledged the difficulties faced by field workers in capturing the myriad fields of a dataset while attendto primary responsibilities, a few switched to pre-processing to deal with data capture difficulties (described in Interventions). Field were generally seen as cumbersome problems to be dealt with in AI/ML model development. Take the case of P45, building a for crop yield detection, where farmers were required to collect 140 columns for every data entry row on a spreadsheet, yielding thousands of such data entries-done on a pro-bono basis, at the end of the day. Compliant farmers who entered well-labelled values were viewed as 'good' and 'professional' (P45), versus 'challenging' farmers who missed, delayed, or entered imperfect entries.</p><p>Field workers were seen as introducing human error in datasets, via workflows conflicts, forgetfulness, and non-diligence. However, the errors were often seen as costly and intentional aberrations, rather than mistakes. P69, building a health model, described how they perceived some frontline health workers to be lazy, "Sometimes health workers come with data that might look suspicious. For examonce they observed all BP measurements as 80/120. So the NGO to investigate why. It could be because the health field worker was lazy or they did not have a BP machine and so they entered the typical The developer further described how public health doctors were later mandated to give feedback on patient data-a perceived productivity improvement over the 'slacking off' prior to their AI/ML model, "90% of doctors never do the work, they don't even go to the PHC (clinic). Now we are making them do the work." Some developers pointed to a lack of care on part of the field worker when entering data fields impacted by contextual peculiarities, such as changing phone numbers and shared devices (a phenomenon common to many regions of the Global South, as seen in <ref type="bibr" target="#b69">[71]</ref>). P65 described the traditional norms, such as shared devices, as being inconvenient, "5 people might use the same phone. People change SIM cards. How do you know it is the same person? Ownership of phones is important. This is traditional mindset that is harder to change." Field workers were also reported to their own phone numbers and for requirements in data entry, when unable to or uninterested in comprehensively speaking with clients. Such were reported to be problematic for model training. In a few cases, practitioners themselves resorted to data collection in the field, as field workers were not compliant and did not see the value of models; thus, becoming a major inconvenience to developers. As P32 described, "We have to go collect the data, because most of the farmers do not see the importance. They don't know that we are trying to help them." We underscore that P32's connotation was that their model carried tangible value for the field worker's community.</p><p>the field worker was not seeing this value-a perception by some developers in our study. The field worker as non-compliant Some developers spoke of field workers as non-compliant actors, workflows and practices conflicted with the precision and required to build useful datasets. Developers reflected a sensory and mechanistic imagination of measuring the real world through recording devices, e.g., capturing images, recorded sounds, location, or clicked buttons. AI/ML data entry required periodic, standardized, and precise entries, such as capturing photographs of crops with ideal contrast levels and against clean backgrounds, or tracking exact river contours with GPS coordinates.</p><p>dataset collection requirements were reported to be ofin conflict with field worker workflows that were more informal, contingent, and situational in nature. For example, P27 reported forest guards forgot to reset their GPS every 5 minutes; instead, recording every one hour, the dataset became inaccurate and unfit for training their model. Developers that conceived of field workers as non-compliant often attributed distortions in data quality and accuracy, such as blurry images or noisy sound captures, to workers. The majority of developers appeared to understand the complex of humans using recording devices only well into the AI project development, and often by accident. Developers attributed the delayed insight to the fact that data collection was mediated through partners and middle-men. They also attributed it to the fact that these partners and middle-men typically had no prior interaction with field workers. P44 described how they learned about the influence of a medical machine operator on dataset quality only at an advanced stage of model development, pointing to the of data quality training, "When we collected the data, didn't have a lot of background on how the data was collected. realized that the quality of the image at the O center was much Obviously it was a trained staff. It was a massive revelation us, how an operator can influence this entire screening effort. If the nurse/operator is not trained, dataset suffers." Another example from P21, who discovered that 25-30% of their fetal cardio recordings from doctors were less than ten minutes long. P21 later worked with doctors to explain the value of the expected procedure to record data. The projects falling this category sought to typically field workers to collect and label datasets for models that eventually aimed to diminish or scale their roles. The data collection requirements in this category new and additional workto collect the data, e.g., scan identity documents, traverse a forest to collect GPS data, and other tasks seemingly irrelevant to the field worker's primary objectives. The datasets discussed here were reported to be the hardest to fudge because they required hard evidence, i.e., either there is a location on the map, or there is not. As P67 building a GIS model put it, "Fudging GIS data very difficult. In surveys it is easy to fake data. But here, unless are physically at the space to collect the data, you cannot fake it." few developers discussed how some of the field workers were concerned about potential job losses due to the models being built; in a couple of instances, field workers had organized protests to their voices against the AI models. Developers spoke in our of how these protests were a 'misunderstanding', ''personally driven', and 'politically motivated', indicating that workers attempted to sabotage their model building efforts.</p><p>The field worker as the dataset itself human work was not recognised in dataset collection, develspoke of labour as the dataset itself, in the form of outcomes and outputs. In this category, complete, datasets were the starting point of developer world view of AI/ML pipelines, i.e., developers did not even speak of the initial labour of the field worker in collecting the dataset. In contrast, the remaining interviews show that collecting and building datasets was a monumental task involving field partners, infrastructure setup, special software, and regulatory requirements. Some developers did not concern themselves with dataset collection because it was deemed 'non-technical', instead to NGOs, field partners and program managers. response, despite their role as a program manager in-charge of dataset collection, is telling of how engaging with field workers was considered outside of the scope of AI/ML, "My work is limited to technical challenges. I have never stopped to talk to the human To wonder how this (data collection) has made them feel.". Many AI were far more comfortable speaking about missing, null, or inaccurate values over the human aspects of the data collection, even in projects with deep layers of human-mediated data collection. For example, P13 used the language of data discrepancies than human labour, "It had a lot of missing data as well. There are some data points for which the dates don't match."</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.3">Interventions to manage data quality of field workers</head><p>In the final part of our results, we describe the various strategies by developers to improve the quality and quantity of data entries from field workers. The majority of interventions aimed to control or bypass field workers. In a handful of cases, interventions were empathetic towards the agency of the field workers, which also report below. Developers reported that the management techniques, including monitoring, helped improve the data quality in many cases (albeit by possibly introducing an environment of coercion, and extraction).</p><p>Surveillance Developers outlined various monitoring approaches aimed at imdata entries in the field. field workers were reported to be continuously monitoring field workers via their personally identifiable data entries, at times, in combination with other sources like audio, location, and video snooping. Computational metaphors like sorting, assigning scores, stack ranking, and penalties were used in some interviews. For example, P18 spoke of assigning a probabilistic data quality score for live entries of field workers, "some kind of a of a data quality score, which is looking at the data collected by worker. They'll assess if this data is good or bad quality on a score, on 0-1". In a few cases, poor performers were identified by with data entries of other field workers. Non-compliant non-performing field workers were notified directly, via motivational messages or reminders (we describe this technique in detail in Incentives). Supervisors and field officers were also alerted to take action on field workers, in some cases.</p><p>More complex and sophisticated forms of monitoring were rein a few cases. P17 reported looking into a service that collected audio recordings of field workers "while this person is giving this interview and then do some deep learning techniques to the audio quality with survey results to rate the surveyor. How clear are their questions? How much are they understanding the results? Make connections between survey fatigue and inaccuracies and consistency of the surveyor." Whether field workers were aware these interventions being deployed on them was variable. P18 how monitoring field workers improved the data quality, "On a high level I can tell you that there are some known good healthfield workers, because they're monitored, they're not completely their own. We can treat healthcare data from those field workers as good." other cases, field workers did not appear to be aware, or developer was far removed from the field worker and was not of consent procedures. Prior work shows that surveillance affects employee well-being, productivity and motivation <ref type="bibr" target="#b4">[5]</ref>; indeed, our findings underscore the shifting of risks of and costs from to field workers <ref type="bibr" target="#b67">[69]</ref> and creating orthogonal, additional for the same or no pay. Automation learnings and field insight led to pre-processing and fixes in some projects. Many developers reported making adjustments and fixes to data collection forms after receiving feedback from field partners, e.g., making some fields mandatory, providing multiple choice options, decreasing the required radius travel, and so on. In a few cases, pre-processing algorithms were to reduce the burden of perfect audio or image capture the field worker. In P59's case, a fix was written to process photos of pests from farms, dealing with the issue of non-availability of paper in farming areas. Other fixes included algorithms to deal with noise, blurriness, and duplications, at the time of data entry itself. Developers also described introducing techniques to seamlessly data entries over low memory, poor connectivity, and poor resolution cameras in devices used by field workers. For example, 24, and 25 reported a fix they wrote to deal with the issue of variations in lighting and camera quality impacting the model predictions.</p><p>Despite the above examples easing the workload and usability among field workers, automation also had a dual use of bypassing field workers and their agency. A few developers revealed how automated gathering of ground truth was increasingly used as a proxy that eliminated the field worker's human entries. Automation was sometimes used override or bypass the field worker, e.g., in the case where a developer created a wearable for automatic data collection to be directly worn by pregnant mothers, and the field worker performed the role of a network transporting the data from patient to their tablet. The intervention was reported to be created to manage fudged data, for field workers to be "really visiting their (patient) homes".</p><p>Incentives and In some cases, intrinsic extrinsic incentives were deployed to field workers to motivate performance and recognize good Many developers turned to tactics like points, leaderboards, and positive or congratulatory messages calls to improve field worker goodwill and motivation. In a few cases, developers reported making payments to field workers for data collection. Some spoke of wanting to make payments to field workers "In the future" (P26). Developers with various payout amounts and frequencies, aiming to balance quality of data entries with field worker satisfaction. P14 reported moving from a monthly incentive to a weekly format for incentive payments, pointing to how cash flows are limited among drivers. P51 described how incentives led to skews in distribution, "they stopped farming and started focusing on the data. So they brought in thousands of images in a day, it skewed the region" In a few cases, developers were successfully able to tie the project needs to the resources of the institutions or state bodies, which greatly eased their reach and access. For example, P22 able to peg the health worker performance to a state body, leading to payment, promotion, or recognition the district officers in monthly meetings. P37 articulated the value of with similarly motivated institutions. "It's important that the work is the goal too. We need a hands-on research person like him because we are not always there." Nonetheless, incentives were largely automated (e.g., motivational SMS) or tied to senior field partners, with the of a couple of developers that worked with field workers directly to determine amounts and make payments. A few developers discussed the goodwill of communities to help out the AI developers, both as a lucky outcome ("inherent advantage of coming [an elite institution] got the goodwill of people working with Even the patients gave consent, we did not give any incentive to (P21) and as a manipulative tactic used by other developers, spoke of how college students, in their desire to gain street and career experience, were motivated to contribute toopen data collection efforts pro-bono, even with only partial understanding of the uses of the data they collected. engagement a minority set of cases, developers directly engaged with field workers in their dataset development. By and large, even among those following engagement strategies, we did not encounter inof field workers being spoken of as experts, except when reporting on interactions with professionals such as agricultural scientists or oncologists. Some developers bemoaned that they should reached out to 'untapped' expertise in field workers, in retrobut their perceived technical limits of their jobs kept them establishing contact. P54's view is reflective of this stance, "I'm sure what people who are collecting the data expect this data to [know] why it's important to flag something, cannot put arbitrary I'm not sure if that connection happens, if they know how fruitful their work is, not just a checklist, but will go into a learning framework, predict something really important for patients." the time, a few developers did engage with field workers at varstages. P50 reported how until speaking with a field worker in the region, "and they told us not to rely on that dataset, we were predicting all kinds of weird species".</p><p>A few developers conducted data literacy camps and educated workers on the value of the models. For example, P14, building an air quality prediction model that engaged informal transport (boda bodas) to collect air pollution readings. P14 organised a workshop with medical doctors on air quality and health for the drivers to attend, which helped build trust. P14 reported, "The riders more important, asked questions and got to know more about the They feel like they're experts amongst the community. They felt empowered." After observing gynaecologists and explaining the value of longer ultrasound recordings, P21 determined that field led to improvements in data quality. A few developers discussed how communicating the impact of data quality collected by field workers on technical outcomes like accuracy and performance was challenging. As P51 reported, "If you think of impact in AI, it be I created a new algorithm, published a paper, is it exciting It improved a body of knowledge. But for the small farmer it does not prove impact if I increase the accuracy 80-85%." Explaining potential application outcomes was considered more comprehensible for field workers, e.g., explaining how models can have an impact on disposable income, better health, or kids staying school, but showing those impacts was reported to be challengespecially for models still in development. The low-resource and high-stakes nature of models in our study meant that the tanimpact after deployment took a few years to manifest. A few developers made visits to sites of field workers, to demonstrate the intangible value of their data collection, such as P7 and their team of medical students who visited nurses doing data collection, "most thing is to just be a visitor and see if a sensor was actually off, like an oxygen clip on the finger. Just paying a visit, letting them that we care about these things. Showing these signals to the nurses on the interface [and demonstrating the importance]."</p><p>reported engaging with field workers much more when the downstream beneficiaries of their models were end-users, training nurses to collect patient data in hospitals. In a few cases, the users themselves were data contributors, for maternal wearables collecting pregnant women's data in trial settings. User consent, education, and compliance was seriously regarded, citing institutional and regulatory requirements. For example, P10, P11 and P12 who were building a wearable sensor for a health model, training sessions for every data collector on usability, troubleshooting, and proper positions.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5">DISCUSSION</head><p>find that in their search for building reliable datasets, AI develreduced field workers employed to provide socio-economic (e.g., community health worker to track COVID-19 incidence and administer vaccines), to a data collector. The field workers were tapped additional and often monotonous labour of dataset such as quantising, counting, sorting, tagging, clicking, and recording phenomena in the real world. workers deskilled and they were recruited as menial data collectors with no expertise. People's Archive of Rural India reported in 2020, overburdened ASHA health) workers in India are tasked with a mind-boggling array of 720 tasks, including data tasks <ref type="bibr" target="#b5">[6]</ref>. Models emulated and improved over expertise of field workers, but the expertise-which takes many years to build-was only seen as an instrumental tool for collecting datasets, and largely excluded from model development.</p><p>reported that many field workers ignored, fudged, and sabotaged data collection, producing data that was indiscernible or unsatisfactory for models. Correspondingly, developers attribthe problem of poor data sets to poor work practices of field workers. Unfortunately, these refractory images of workers were commonly held among developers, even though most developers had no firsthand understanding of worker practices or contact with workers. Instead, worker outputs were read through their dataset artifacts. Through various interventions, developers attempted to influence what they perceived as incompetent, lazy, corrupt pracof data collectors to improve data quality. Indeed, the data collection issues like fudging and sabotage are commonplace in with field workers in low-resource areas, but it is possible to interpret these acts as worker resistance to their exploitative conditions of work, and not as incompetance and on part of workers (as seen by developers)-modifying James C. Scott's memorable phrase, 'weapons of the data collector' <ref type="bibr" target="#b73">[75]</ref>. We call for more research field workers' perceptions and their experiences in being drafted into building AI systems to understand this problem better. Below, we discuss considerations and open questions for recognizing field workers as domain experts, and for practitioners to include field workers in problem formulation and building datasets and models, and propoe structural changes to recognise domain expertise in the field of AI/ML.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.1">What counts as expertise? expertise counts?</head><p>Developers in our study animated their model building with viof producing new forms of scalable expertise to fix socioeconomic problems (similar to high-modernist visions in Scott's <ref type="bibr" target="#b72">[74]</ref>). Field workers were needed solely as computational resources, whereas the elite status of AI system building was restricted to the developers, leaders of partner organisations, celebrity scientists, and bureaucrats, and the machine intelligence itself (see Ivan Illich for more experts and gate-keeping [37]). A spectre of paucity was often maintained, which perpetuated the demand for AI For example, farmers were viewed as recording devices, whereas heads of agricultural organisations viewed as partners occupying a certain cultural legitimacy and authority. Discounting expertise of "data collectors" is not limited to our study, being well-documented throughout the history of computing, e.g., in how women technologists <ref type="bibr" target="#b33">[34]</ref>, business process outsourcing workers <ref type="bibr" target="#b55">[57]</ref>, data workers <ref type="bibr" target="#b50">[52,</ref><ref type="bibr" target="#b88">89]</ref>, and crowd workers <ref type="bibr" target="#b20">[21,</ref><ref type="bibr" target="#b38">39]</ref> been perceived as low-cost, unskilled workers, despite performing valuable services. It is also the case that there has not much thought given to who is recruited as a data collector. Field workers were automatically drafted into the surplus labour of data collection when heads of organisations signed contracts and started partnerships with developers. Finally, in contrast to their of field workers as data collectors, developers spoke reverentially of end-users, taking seriously user design considerations such as usability, languages, transparency, and explainability (owing in part to policy and market value of user loyalty).</p><p>We make the case that the mastery and tacit knowledge of communities and contexts held by field workers need to be accurately as domain expertise by AI developers. The domain expertise can serve as an essential partnership throughout the AI pipeline. Such collaborative partnerships were exceptional in our study, underscoring why we need more sustained and structural shifts in the field of AI/ML to make recognition for domain expertise of field a part and parcel of 'doing AI in low-resource areas'. Recthe expertise of field workers is not merely about ethics; it successfully sets up the AI engineering fundamentals of getting consistently good quality data, timely feedback on deployments, and confidence in building solutions. Recognizing expertise further demystifies what AI is, who is involved in doing AI, and whose labour counts as AI development. A crucial step in this direction for developers to engage directly with field workers, instead of with organisation leaders and hearing secondhand narratives about workers. As Lucy Suchman points out, "work has a to disappear at a distance, such that the further removed we from the work of others, the more simplified, often stereotyped, view of their work becomes" <ref type="bibr" target="#b77">[79]</ref>.</p><p>workers could be involved right from the problem formulation stage, to accurately characterise the problem to be solved, assumptions about models, and identifying outcomes salient for predictions and classification tasks together. Partnership at this stage can be enormously beneficial in setting the foundation for the project, aiding more accurate and relevant problem formulation, in the case of P27, who formulated a more impactful poaching prediction problem with wildlife experts. Dataset parameters, such data fields, survey volume, and answer ranges, can be jointly identified, based on feature requirements and field norms. Observing the workflows and practices of field workers can help contextually dataset tasks. For example, P14 visited boda boda (motorcycle drivers and rode along as they collected air quality data, identiseveral obstacles to dataset collection and the need for better incentives. Although a few practitioners in our study recognized untapped expertise of field workers, we need a sustained effort to broaden such collaborations.</p><p>A general maxim in current AI praxis is that the more data we the better performing the model will be. However, defining tasks without an understanding of the everyday realities of field workers can miss out on valuable indicators that could be Developers should inform field workers about the downstream use of these datasets, the types of use cases and users imagined, and the impact aspired for, in the case of P64, who visited hospital nurses and assured them of the importance of work. Field workers may need dataset collection training to understand goals, troubleshoot, handle response ambiguity, and so on. Developers could benefit from serving as instructors of training programs, and receive feedback on their data procedures.</p><p>During model development, developers should involve field workers in identifying modelling goals, features, and measurement criteria. Field workers can enable 'online learning' in low-resource settings, by creating feedback loops between model outcomes and the and help evaluate whether pilot results are accurate and valid the Indeed, partnership in data and model building can help identify alleviate algorithmic bias, data cascades, and unintended outcomes that typically remain latent and for long time periods <ref type="bibr" target="#b41">[42,</ref><ref type="bibr" target="#b45">46,</ref><ref type="bibr" target="#b70">72]</ref>. Understandably what drives metrics currently is driven by concerns of machine-beatshuman efficiency, cost, and outperforming the industry standard, which often relies on the expertise of AI developers. We need to rely on the expertise of field workers to identify appropriate metrics to evaluate claims relevant to the affected communities and phenomena. regulations permit compensation for AI labour, pay needs to be fair and commensurate to contributions to AI systems.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.2">When to intervene? How to intervene?</head><p>We found that management of poor data collection practices generated a whole class of algorithmic fixes for AI/ML developers. Pre-processing algorithms and regular expression checks in form filling allowed developers to handle heterogeneity in environments and field workers. These techniques were arguably the most mutually beneficial by reducing human drudgery and improving data At the same time, entire models were developed to predict data outliers and corresponding field workers who appeared to violate certain heuristics of data entry, such as those entering or repeated values. For example, newborn birth weight entries by field workers can be tested by a constraints check on inputted values, automatically flagging non-compliant field workers. This information can be asymmetrically shared with higher-up supervisors or used in sending gamified messages to the field workers to do better at data collection, thus worsening oppression and extraction. Currently, what gets automated depends solely the preoccupation of AI developers' concerns and personal valwhich can be limiting and even dangerous for domain experts and communities. For example, most developers in our study did not consider relieving field workers' concerns a legitimate need AI; instead their primary objective was to introduce a model where there was a good quality dataset and a rhetorically defensible cause. However, many of these AI interventions did not appear to fundamentally address the root problem and instead appeared to create new forms of displacement and extraction-we invite more empirical evaluations here. Instead of understanding the difficulties encountered in the data collection processes by confield workers, AI developers sought to develop behavioral nudges and interventions to discipline and control field workers.</p><p>Behavioural tricks like gamification and monitoring can introduce fear and resentment among workers <ref type="bibr" target="#b48">[50]</ref>. emergence of interdisciplinary research across AI and behavioural science aims at influencing human behaviour through nudges, rewards, gamification, personalisation, and segmentation <ref type="bibr" target="#b62">[64]</ref>. In this way, algorithms are seen as contested instruments of control that carry specific ideological preferences <ref type="bibr" target="#b91">[92]</ref>, which are often created and implemented based on the interests of powerful <ref type="bibr" target="#b42">[43,</ref><ref type="bibr" target="#b86">87]</ref>. If developers consider the task of data collection as a challenging important to solve, rather than an that blocks the model building stage, it would result in an attitude change in they see the work of field workers. Rather than trying to create techniques to gamify, monitor and somehow persuade field workers do work, if AI developers actually considered data collection as work (data work is broadly under-recognized in AI, see <ref type="bibr" target="#b70">[72]</ref>), possibilities to figure out which aspect of the work can be meaningfully automated can be sought out.</p><p>of motivating an overworked health worker to do more for dataset collection, one might ask how to help them achieve their goals better: prioritise their numerous visits, better capture of in-situ knowledge, allocate limited medical resources better, and build visibility into their contributions. Indeed, this is one way realize the shared goals of both the AI developer and field workers on human development in low-resource areas. As an example, Digital Green <ref type="bibr" target="#b26">[27]</ref> recognised and tapped into the expertise of farmand turned them into producers of expert videos, and found appropriate ways to scale up that knowledge. Farmers were motivated to learn from other farmers, as well as from other agricultural scientists, and a meaningful interaction with digital technology led to the possibility of skilling of their expertise.</p><p>The process of building AI models is power-laden with consequences that may undermine the AI enterprise. this experiment, where the tables are turned and the field workdecide to monitor the work of AI developers. It would be an unthinkable scenario; apart from the power asymmetry, we imvalue and trust the work done by the AI developer. Why should the current hegemonic arrangement of AI experts monitoring field workers makes sense? This is because, to borrow from James Ferguson, data collection in AI operates as an 'anti-politics <ref type="bibr" target="#b22">[23]</ref>, making political decisions about what constitutes expertise and creating 'technical solutions to technical problems' through management interventions to influence field workers to collect good quality data.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.3">How can domain expertise be made legible?</head><p>untapped expertise of field workers we describe is not an exception or error; it is intricately tied to any AI development in settings <ref type="bibr">[73]</ref>. In contrast, the standard AI/ML pipeline often begins with an existing or available dataset-an assumption shaped by institutional and resource endowments and prior histoof the West. We need to recognise that expertise is required all stages of the pipeline, not just by the developer at the model development stage. In particular, we call for the need to make legithe labour of field workers in the early stages of the pipeline, work that remains below the API fold. The field of AI/ML does not currently have language, standards, requirements, or measurements for discussing the recognition of domain expertise. These shifts cannot be left to the whims and values of individual research and instead need broader changes and oversight in the field. Some shifts can come from releasing disclosures that go befact sheets that are typically focused on a technical view of data quality, transparency, and bias <ref type="bibr" target="#b49">[51]</ref>. We need to find ways to disclose the provenance, type, and amount of labour that went into building powerful AI systems, similar to impact statements that are now standard in AI conferences <ref type="bibr" target="#b10">[11]</ref>. In addition to fair compensation, field worker's contribution to the algorithm can be made visible in many ways, including co-authorships, listing contributors publicly, joint releases, and the field workers in high visibility events. Indeed, attribution raises questions of fairness, politics, and decoloniality, as whose knowledge is considered attributable and whose is imperative expand the parameters of what gets measured seen, in order to fully comprehend the effects of these AI sys-Developers talked to us about how they could create new expertise in algorithms that saves human lives, tiger lives, farm money and so on, all of which they were keen to assess the impact of. Vision statements and impact metrics of projects in our study were shaped by prevailing economic impact assessments of AI systems; these assessments are coloured by conventional pipeline-thinking, where algorithms are dropped into social settings and their before-after effects are measured, the number lives saved by the algorithm <ref type="bibr" target="#b92">[93]</ref>. Missing in these variables and constructs is the measurement of the hidden labour of field workers (among others, including data annotators and content moderators) in enabling the systems. As mentioned earlier, data in low-resource is not a given; it comes into existence often via the labour of the field workers.An excellent development is the work done by the Indian Federation Of App-Based Transport Workers to resort to social media to raise awareness of rights of "gig workers" to fair credit. Thus, we make the case to focus not just on the narrow goals of model outcomes, but also on the effects on humans who are all part of the AI enterprise. More research is needed to understand the longer-term implications of labour and expertise re-distribution in AI. Deployments consider these as interventions that require the labour of field workers to come into existence and become sustainable. Ultimately, our direct to AI developers is to embody a reflexivity to their practice, Philip Agre called a "critical technical practice" with "one foot planted in the craft work of design and the other foot planted in the reflexive work critique" <ref type="bibr" target="#b1">[2]</ref>.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="6">CONCLUSION</head><p>AI development apparatus in low-resource areas largely deskills and the domain expertise of field workers. workers are indispensable contributors to collecting datasets for AI modin low-resource settings, but often were not recognized for their by AI/ML developers. In our research study with 68 globally-distributed AI/ML developers building models for lowresource communities, we find field e.g., forest guards farmers, are treated as data workers in service of the machine. developers demonstrated a belief that 'bad data' came from poor data collection practices of field in the following as corrupt, lazy, non-compliant, untapped expert and data itself. Correspondingly, AI developers often sought to to discipline and control the work practices of labourers in dataset collection. The worker was viewed as a data worker, reducing their embedded domain expertise into counting and clicking for ML datasets, dethe labourers not being aware of why, what, or how their work was impacting AI/ML models, or being able to consent or object to process. Thus, AI development in low-resource areas appears to deskill the domain expertise of field workers, despite models seekto improve over their expertise in the form of datasets. Field appeared to resist these designs by falsifying or producing incomplete data. Our research results provide novel and crucial insight into how AI development practices function as a deskilling in low-resource contexts. We press upon the HCI community the need for questioning what expertise is, by partnering and recognising the local expertise of field workers, formulating better problems that improve worker agency rather than seeking to control, and to fairly account for field workers contributions to models.</p></div><figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_0"><head>Table 1 :</head><label>1</label><figDesc></figDesc><table><row><cell>Field workers</cell><cell>Health workers (nurses, community health workers, radiologists, oncologists, gynaecologists, general</cell></row><row><cell></cell><cell>practitioners, machine operators): (23),</cell></row><row><cell></cell><cell>Agricultural workers (agricultural extension workers, farmers, district-level scientists): (5),</cell></row><row><cell></cell><cell>Ecological and environmental workers (wildlife patrollers, oceanologists): (7),</cell></row><row><cell></cell><cell>Transportation workers (truck drivers, boda-boda drivers): (2),</cell></row><row><cell></cell><cell>Education workers (teachers, teaching assistants): (1),</cell></row><row><cell></cell><cell>Data from additional sources (sensor data, open data, user data, pre-existing data, crowd-sourcing): (30)</cell></row></table><note>Type CountRoles AI Engineer<ref type="bibr" target="#b18">(19)</ref>, Startup Founder<ref type="bibr" target="#b17">(18)</ref>, Professor<ref type="bibr" target="#b11">(12)</ref>, Data Scientist<ref type="bibr" target="#b7">(8)</ref>, Research Scientist<ref type="bibr" target="#b6">(7)</ref>, Program Manager<ref type="bibr" target="#b4">(5)</ref> Location India<ref type="bibr" target="#b31">(32)</ref>, US<ref type="bibr" target="#b21">(22)</ref>, Nigeria<ref type="bibr" target="#b9">(10)</ref>, Kenya (2), Ghana (1), Uganda(1)Gender Male (55), Female(13)Organisation Startup (28), Large company<ref type="bibr" target="#b23">(24)</ref>, Academia (12), Non-profits (4)AI applicationHealth<ref type="bibr" target="#b26">(27)</ref> , Agriculture<ref type="bibr" target="#b10">(11)</ref>, Climate and environment<ref type="bibr" target="#b9">(10)</ref>, Finance<ref type="bibr" target="#b6">(7)</ref>, Public safety (4), Wildlife conservation (2), Aquaculture (2), Education (2), Employment (1), Robotics (1), Fairness in ML (1) Summary of participant demographics to examine work practices over a period time and by direct observation. Our work can also be extended by interviewing field workers and intermediaries to understand their perspectives on the challenges of data and model building. Our paper's focus was to understand the perceptions of how data workers were perceived by developers. It should be clear that our work does not concern itself with verifying the veracity of the judgements of the AI developers; rather, our focus is on reporting the very existence of these views and biases, and subsequent enactment of disciplinary interventions on field workers by developers, despite the seminal contributions of workers to AI systems (often for free or with limited consent and transparency). Our concern is to understand the mental models of how developers view these essential field workers in their algorithm development. Future work can address this research limitation by triangulating and understanding the experiences of field workers. However, we believe that solely understanding the mental models of the developers is a standalone contribution. Future work can include systematically measuring the various effects of including domain expertise on model development and deployment. Another area for future research is to study the processes of inclusion of human intermediaries for AI projects in well-resourced areas.</note></figure>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot" n="3">Fictitious data leading to high costs has been observed elsewhere e.g., tens of thousands of fabricated phone numbers and addresses were found in COVID-19 tests during the Khumb Mela in 2021, which is widely believed to have led to a Delta surge<ref type="bibr" target="#b93">[94]</ref>.</note>
+		</body>
+		<back>
+
+			<div type="acknowledgement">
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>ACKNOWLEDGMENTS</head><p>We are grateful to the various AI practitioners who took part in our study and generously shared their AI development experiences with us. Our thanks to Hannah Highfill, Diana Akrong, and Shivani Kapania for contributing to the research interviews.</p></div>
+			</div>
+
+			<div type="references">
+
+				<listBibl>
+
+<biblStruct xml:id="b0">
+	<analytic>
+		<title level="a" type="main">Sharing knowledge and expertise: The CSCW view of knowledge management</title>
+		<author>
+			<persName><forename type="first">S</forename><surname>Ackerman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Juri</forename><surname>Dachtera</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Volkmar</forename><surname>Pipek</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Volker</forename><surname>Wulf</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Supported Cooperative Work (CSCW)</title>
+				<imprint>
+			<date type="published" when="2013">2013. 2013</date>
+			<biblScope unit="page" from="531" to="573" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b1">
+	<monogr>
+		<title level="m" type="main">Lessons learned in trying to reform AI. science, systems, and cooperative work: Beyond the Great Divide</title>
+		<author>
+			<persName><forename type="first">E</forename><surname>Agre</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="1997">1997. 1997</date>
+			<biblScope unit="volume">131</biblScope>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b2">
+	<analytic>
+		<title level="a" type="main">Street-level algorithms: A theory at the gaps between policy and decisions</title>
+		<author>
+			<persName><forename type="first">Alkhatib</forename></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Michael</forename><surname>Bernstein</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2019 CHI Conference on Human Factors in Computing Systems</title>
+				<meeting>the 2019 CHI Conference on Human Factors in Computing Systems</meeting>
+		<imprint>
+			<date type="published" when="2019">2019</date>
+			<biblScope unit="page" from="1" to="13" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b3">
+	<analytic>
+		<title level="a" type="main">The deskilling controversy</title>
+		<author>
+			<persName><forename type="first">Paul</forename><surname>Attewell</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Work and occupations</title>
+		<imprint>
+			<biblScope unit="volume">14</biblScope>
+			<biblScope unit="page" from="323" to="346" />
+			<date type="published" when="1987">1987. 1987</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b4">
+	<analytic>
+		<title level="a" type="main">Workplace surveillance: An overview</title>
+		<author>
+			<persName><forename type="first">Kirstie</forename><surname>Ball</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Labor History</title>
+		<imprint>
+			<biblScope unit="volume">51</biblScope>
+			<biblScope unit="page" from="87" to="106" />
+			<date type="published" when="2010">2010. 2010</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b5">
+	<monogr>
+		<title level="m" type="main">Counting cows, not rural health indicators</title>
+		<author>
+			<persName><forename type="first">Anubha</forename><surname>Bhonsle</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Pallavi</forename><surname>Prasad</surname></persName>
+		</author>
+		<idno>08/02/2021</idno>
+		<ptr target="https://ruralindiaonline.org/articles/counting-cows-not-rural-health" />
+		<imprint>
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b6">
+	<monogr>
+		<title level="m" type="main">Labor and monopoly capital: The degradation of work in the twentieth century</title>
+		<author>
+			<persName><forename type="first">Harry</forename><surname>Braverman</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="1998">1998</date>
+			<publisher>NYU Press</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b7">
+	<monogr>
+		<title level="m" type="main">The social life of information: Updated, with a new preface</title>
+		<author>
+			<persName><forename type="first">Seely</forename><surname>Brown</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Paul</forename><surname>Duguid</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2017">2017</date>
+			<publisher>Harvard Business Review Press</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b8">
+	<monogr>
+		<title level="m" type="main">The politics of production</title>
+		<author>
+			<persName><forename type="first">Michael</forename><surname>Burawoy</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="1990">1990</date>
+		</imprint>
+	</monogr>
+	<note>Verso London</note>
+</biblStruct>
+
+<biblStruct xml:id="b9">
+	<analytic>
+		<title level="a" type="main">The Society of Algorithms</title>
+		<author>
+			<persName><forename type="first">Jenna</forename><surname>Burrell</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Marion</forename><surname>Fourcade</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Annual Review of Sociology</title>
+		<imprint>
+			<biblScope unit="volume">47</biblScope>
+			<date type="published" when="2020">2020. 2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b10">
+	<analytic>
+		<title level="a" type="main">Prestigious AI meeting takes steps to improve ethics research</title>
+		<author>
+			<persName><surname>Castelvecchi</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Nature</title>
+		<imprint>
+			<biblScope unit="page" from="12" to="13" />
+			<date type="published" when="2021">2021. 2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b11">
+	<monogr>
+		<author>
+			<persName><forename type="first">Kuang</forename><surname>Chen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Joseph</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Tapan S</forename><surname>Hellerstein</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Parikh</surname></persName>
+		</author>
+		<title level="m">Data in the First In CIDR. Citeseer</title>
+				<imprint>
+			<date type="published" when="2011">2011</date>
+			<biblScope unit="page" from="203" to="206" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b12">
+	<analytic>
+		<title level="a" type="main">Technical perspective: Humans and computers working together on hard tasks</title>
+		<author>
+			<persName><forename type="first">H</forename><surname>Chi</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Commun. ACM</title>
+		<imprint>
+			<biblScope unit="volume">60</biblScope>
+			<biblScope unit="page" from="92" to="92" />
+			<date type="published" when="2017">2017. 2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b13">
+	<monogr>
+		<author>
+			<persName><forename type="first">Trevor</forename><surname>Dell</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Neha</forename><surname>Perrier</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mitchell</forename><surname>Kumar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Rachel</forename><surname>Lee</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Gae-Borriello</forename><surname>Powers</surname></persName>
+		</author>
+		<title level="m">Digital Workflows in Global Development Organizations. of the 18th ACM Conference on Computer Supported Cooperative Work &amp; Social Computing</title>
+				<imprint>
+			<date type="published" when="2015">2015</date>
+			<biblScope unit="page" from="1659" to="1669" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b14">
+	<monogr>
+		<author>
+			<persName><forename type="first">Emily</forename><surname>Denton</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Alex</forename><surname>Hanna</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Razvan</forename><surname>Amironesei</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Andrew</forename><surname>Smart</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Hilary</forename><surname>Nicole</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Morgan</forename><forename type="middle">Klaus</forename><surname>Scheuerman</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2007.07399</idno>
+		<title level="m">Contesting benchmark machine datasets</title>
+				<imprint>
+			<date type="published" when="2020">2020. 2020</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b15">
+	<monogr>
+		<title level="m" type="main">Seeing like a statistical learning algorithm</title>
+		<author>
+			<persName><forename type="first">Tom</forename><surname>Denton</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2016">2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b16">
+	<analytic>
+		<title level="a" type="main">Pluralistic</title>
+		<author>
+			<persName><forename type="first">Cory</forename><surname>Doctorow</surname></persName>
+		</author>
+		<ptr target="https://pluralistic.net/2021/08/19/failure-cascades/#dirty-data" />
+	</analytic>
+	<monogr>
+		<title level="m">Daily links from Cory Doctorow</title>
+				<imprint>
+			<date type="published" when="2021-08">2021. Aug 2021</date>
+		</imprint>
+	</monogr>
+	<note>Accessed on 09/01/2021</note>
+</biblStruct>
+
+<biblStruct xml:id="b17">
+	<analytic>
+		<title level="a" type="main">Stages of design in technology for global development</title>
+		<author>
+			<persName><forename type="first">Jonathan</forename><surname>Donner</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Rikin</forename><surname>Gandhi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Paul</forename><surname>Javid</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Indrani</forename><surname>Medhi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Aishwarya</forename><surname>Ratan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kentaro</forename><surname>Toyama</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Rajesh</forename><surname>Veeraraghavan</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Computer</title>
+		<imprint>
+			<biblScope unit="volume">41</biblScope>
+			<biblScope unit="page" from="34" to="41" />
+			<date type="published" when="2008">2008. 2008</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b18">
+	<monogr>
+		<title level="m" type="main">Paul art of knowing&apos;: social tacit dimensions of knowledge and the limits of the community of practice</title>
+		<imprint>
+			<publisher>Brill Sense</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b19">
+	<analytic>
+		<title level="a" type="main">Searching for expertise</title>
+		<author>
+			<persName><forename type="first">Kate</forename><surname>Ehrlich</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Shami</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the Conference on Human factors in Computing Systems</title>
+				<meeting>the Conference on Human factors in Computing Systems</meeting>
+		<imprint>
+			<date type="published" when="2008">2008</date>
+			<biblScope unit="page" from="1093" to="1096" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b20">
+	<monogr>
+		<title level="m" type="main">Heteromation and its (dis) contents: The invisible division of labor between and machines</title>
+		<author>
+			<persName><forename type="first">Hamid</forename><surname>Ekbia</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Bonnie</forename><surname>Nardi</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2014">2014. 2014</date>
+			<pubPlace>First Monday</pubPlace>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b21">
+	<monogr>
+		<title level="m" type="main">Data augmentation for low-resource neural translation</title>
+		<author>
+			<persName><forename type="first">Marzieh</forename><surname>Fadaee</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:1705.00440</idno>
+		<imprint>
+			<date type="published" when="2017">2017. 2017</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b22">
+	<analytic>
+		<title level="a" type="main">The anti-politics machine:&apos;development&apos;, depoliticization and bureaucratic power in Lesotho</title>
+		<author>
+			<persName><forename type="first">Ferguson</forename></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">CUP Archive</title>
+		<imprint>
+			<date type="published" when="1990">1990</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b23">
+	<analytic>
+		<title level="a" type="main">Farmers deskilled: Hybrid corn and farmers&apos; work</title>
+		<author>
+			<persName><forename type="first">Deborah</forename><surname>Fitzgerald</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Technology and Culture</title>
+		<imprint>
+			<biblScope unit="volume">34</biblScope>
+			<biblScope unit="page" from="324" to="343" />
+			<date type="published" when="1993">1993. 1993</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b24">
+	<monogr>
+		<title level="m" type="main">The technology trap</title>
+		<author>
+			<persName><forename type="first">Carl Benedikt</forename><surname>Frey</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2019">2019</date>
+			<publisher>Princeton University Press</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b25">
+	<monogr>
+		<title level="m" type="main">The future of employment: How susceptible are jobs to computerisation? forecasting and social change</title>
+		<author>
+			<persName><forename type="first">Benedikt</forename><surname>Frey</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Michael</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Osborne</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2017">2017. 2017</date>
+			<biblScope unit="volume">114</biblScope>
+			<biblScope unit="page" from="254" to="280" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b26">
+	<analytic>
+		<title level="a" type="main">Digital green: Participatory video for agricultural extension</title>
+		<author>
+			<persName><forename type="first">Rikin</forename><surname>Gandhi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Rajesh</forename><surname>Veeraraghavan</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">International conference on information and communication technologies and development</title>
+				<imprint>
+			<date type="published" when="2007">2007</date>
+			<biblScope unit="page" from="1" to="10" />
+		</imprint>
+	</monogr>
+	<note>Kentaro Toyama, and Vanaja Ramprasad</note>
+</biblStruct>
+
+<biblStruct xml:id="b27">
+	<analytic>
+		<title level="a" type="main">The persistence of paper: a case study in microfinance from Ghana</title>
+		<author>
+			<persName><forename type="first">Jay</forename><surname>Ghosh</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Joy</forename><surname>Chen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Azza</forename><surname>Ming</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Abouzied</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the Seventh International Conference on Information and Communication Technologies and</title>
+				<meeting>the Seventh International Conference on Information and Communication Technologies and</meeting>
+		<imprint>
+			<date type="published" when="2015">2015</date>
+			<biblScope unit="page" from="1" to="10" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b28">
+	<monogr>
+		<title level="m" type="main">Raw data is an oxymoron</title>
+		<author>
+			<persName><forename type="first">Lisa</forename><surname>Gitelman</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2013">2013</date>
+			<publisher>MIT press</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b29">
+	<analytic>
+		<title level="a" type="main">Towards a fairer platform economy: Introducing the fairwork foundation</title>
+		<author>
+			<persName><forename type="first">Graham</forename></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jamie</forename><surname>Woodcock</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Alternate Routes</title>
+		<imprint>
+			<biblScope unit="volume">29</biblScope>
+			<date type="published" when="2018">2018. 2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b30">
+	<monogr>
+		<title level="m" type="main">Ghost work: How to stop Silicon Valley from building a new global underclass</title>
+		<author>
+			<persName><forename type="first">L</forename><surname>Mary</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Siddharth</forename><surname>Gray</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Suri</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2019">2019</date>
+			<publisher>Eamon Dolan Books</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b31">
+	<monogr>
+		<title level="m" type="main">When computers were human</title>
+		<author>
+			<persName><forename type="first">Grier</forename><surname>David Alan</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2013">2013</date>
+			<publisher>Princeton University Press</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b32">
+	<monogr>
+		<ptr target="http://www.worldbank.org/en/topic/competitiveness/publication/trouble-in-the-making-the-future-of-manufacturing-led-development" />
+		<title level="m">Trouble in the Making? The Future of Manufacturing-Led Development</title>
+				<imprint>
+			<date type="published" when="2017">2017</date>
+		</imprint>
+		<respStmt>
+			<orgName>World Bank Group</orgName>
+		</respStmt>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b33">
+	<monogr>
+		<title level="m" type="main">Programmed inequality: How Britain discarded women technoloand lost its edge in computing</title>
+		<imprint>
+			<date type="published" when="2017">Mar Hicks. 2017</date>
+			<publisher>MIT Press</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b34">
+	<analytic>
+		<title level="a" type="main">Every time I fire a linguist, my performance goes up, and other myths of the statistical natural language processing revolution</title>
+		<author>
+			<persName><surname>Hirschberg</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Fifteenth National Conference on Artificial Intelligence (AAAI-98)</title>
+				<imprint>
+			<date type="published" when="1998">1998</date>
+		</imprint>
+	</monogr>
+	<note>Invited</note>
+</biblStruct>
+
+<biblStruct xml:id="b35">
+	<monogr>
+		<title level="m" type="main">Labor in the global digital economy: The cybertariat comes of</title>
+		<author>
+			<persName><forename type="first">Ursula</forename><surname>Huws</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2014">2014</date>
+			<publisher>NYU Press</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b36">
+	<monogr>
+		<author>
+			<persName><forename type="first">Ivan</forename><surname>Illich</surname></persName>
+		</author>
+		<title level="m">Medical nemesis. Citeseer</title>
+				<imprint>
+			<date type="published" when="1975">1975</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b37">
+	<analytic>
+		<title level="a" type="main">The cultural work of microwork</title>
+		<author>
+			<persName><forename type="first">Lilly</forename><surname>Irani</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">New Media &amp; Society</title>
+		<imprint>
+			<biblScope unit="volume">17</biblScope>
+			<biblScope unit="page" from="720" to="739" />
+			<date type="published" when="2015">2015. 2015</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b38">
+	<analytic>
+		<title level="a" type="main">Justice for Data Janitors</title>
+		<author>
+			<persName><forename type="first">Lilly</forename><surname>Irani</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Think in Public</title>
+				<imprint>
+			<publisher>Columbia Press</publisher>
+			<date type="published" when="2019">2019</date>
+			<biblScope unit="page" from="23" to="40" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b39">
+	<analytic>
+		<title level="a" type="main">Interrupting worker invisibility in amazon mechanical turk</title>
+		<author>
+			<persName><forename type="first">C</forename><surname>Lilly</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Irani</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Six Silberman</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the SIGCHI conference on human factors in computing systems</title>
+				<meeting>the SIGCHI conference on human factors in computing systems</meeting>
+		<imprint>
+			<date type="published" when="2013">2013</date>
+			<biblScope unit="page" from="611" to="620" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b40">
+	<analytic>
+		<title level="a" type="main">Engaging solidarity in data collection practices health</title>
+		<author>
+			<persName><forename type="first">Azra</forename><surname>Ismail</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Neha</forename><surname>Kumar</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Proceedings of the ACM on Human-Computer Interaction CSCW</title>
+		<imprint>
+			<biblScope unit="page" from="1" to="24" />
+			<date type="published" when="2018">2018. 2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b41">
+	<analytic>
+		<title level="a" type="main">Residual unfairness in fair machine learning from prejudiced data</title>
+		<author>
+			<persName><forename type="first">Nathan</forename><surname>Kallus</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Angela</forename><surname>Zhou</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">International Conference on Machine Learning. PMLR</title>
+				<imprint>
+			<date type="published" when="2018">2018</date>
+			<biblScope unit="page" from="2439" to="2448" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b42">
+	<analytic>
+		<title level="a" type="main">Algorithms at work: The new contested terrain of control</title>
+		<author>
+			<persName><forename type="first">C</forename><surname>Katherine</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Melissa</forename><forename type="middle">A</forename><surname>Kellogg</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Angele</forename><surname>Valentine</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Christin</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">of Management Annals</title>
+		<imprint>
+			<biblScope unit="volume">14</biblScope>
+			<biblScope unit="page" from="366" to="410" />
+			<date type="published" when="2020">2020. 2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b43">
+	<monogr>
+		<author>
+			<persName><forename type="first">Meghana</forename><surname>Kshirsagar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Siyu</forename><surname>Robinson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Shahrzad</forename><surname>Yang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ivan</forename><surname>Gholami</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sumit</forename><surname>Klyuzhin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Md</forename><surname>Mukherjee</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Anthony</forename><surname>Nasir</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Felipe</forename><surname>Ortiz</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Oviedo</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2104.11757</idno>
+		<title level="m">Darren Tanner, et al. 2021. Becoming Good AI for Good</title>
+				<imprint>
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+	<note type="report_type">arXiv preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b44">
+	<monogr>
+		<title level="m" type="main">Situated learning: Legitimate peripheral participation</title>
+		<author>
+			<persName><forename type="first">Jean Lave Etienne</forename><surname>Wenger</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="1991">1991</date>
+			<publisher>Cambridge university press</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b45">
+	<analytic>
+		<title level="a" type="main">Delayed impact of fair machine learning</title>
+		<author>
+			<persName><forename type="first">T</forename><surname>Lydia</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sarah</forename><surname>Liu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Esther</forename><surname>Dean</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Max</forename><surname>Rolf</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Moritz</forename><surname>Simchowitz</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Hardt</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">International Conference on Machine Learning. PMLR</title>
+				<imprint>
+			<date type="published" when="2018">2018</date>
+			<biblScope unit="page" from="3150" to="3158" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b46">
+	<monogr>
+		<title level="m" type="main">The electronic eye: the rise of surveillance society-computers and social control in context</title>
+		<author>
+			<persName><forename type="first">David</forename><surname>Lyon</surname></persName>
+		</author>
+		<ptr target="https://www.mckinsey.com/featured-insights/employment-and-growth/technology-" />
+		<imprint>
+			<date type="published" when="2013">2013. 2017</date>
+			<publisher>John Wiley &amp; Sons. Manyika</publisher>
+		</imprint>
+	</monogr>
+	<note>What technology can do for Africa</note>
+</biblStruct>
+
+<biblStruct xml:id="b47">
+	<analytic>
+		<title level="a" type="main">Being a turker</title>
+		<author>
+			<persName><forename type="first">David</forename><surname>Martin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">V</forename><surname>Benjamin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jacki O'</forename><surname>Hanrahan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Neha</forename><surname>Neill</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Gupta</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">of the 17th ACM conference on Computer supported cooperative work &amp; social computing</title>
+				<imprint>
+			<date type="published" when="2014">2014</date>
+			<biblScope unit="page" from="224" to="235" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b48">
+	<monogr>
+		<author>
+			<persName><forename type="first">Alexandra</forename><surname>Mateescu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Aiga</forename><surname>Nguyen</surname></persName>
+		</author>
+		<title level="m">Workplace monitoring and surveil</title>
+				<imprint>
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b49">
+	<analytic>
+		<title level="a" type="main">Model cards for model reporting</title>
+		<author>
+			<persName><forename type="first">Margaret</forename><surname>Mitchell</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Simone</forename><surname>Wu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Andrew</forename><surname>Zaldivar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Parker</forename><surname>Barnes</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Lucy</forename><surname>Vasserman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ben</forename><surname>Hutchinson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Elena</forename><surname>Spitzer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Deborah</forename><surname>Inioluwa</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Timnit</forename><surname>Raji</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Gebru</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the conference on fairness, and transparency</title>
+				<meeting>the conference on fairness, and transparency</meeting>
+		<imprint>
+			<date type="published" when="2019">2019</date>
+			<biblScope unit="page" from="220" to="229" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b50">
+	<monogr>
+		<title level="m" type="main">Who does the work of data?</title>
+		<author>
+			<persName><forename type="first">Holten</forename><surname>Møller</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Claus</forename><surname>Bossen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Kathleen</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Pine</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Gina</forename><surname>Trine Rask Nielsen</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2020">2020. 2020</date>
+			<biblScope unit="volume">27</biblScope>
+			<biblScope unit="page" from="52" to="55" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b51">
+	<monogr>
+		<title level="m" type="main">Up the anthropologist: Perspectives gained from studying up</title>
+		<author>
+			<persName><surname>Nader</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="1972">1972</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b52">
+	<monogr>
+		<title level="m" type="main">A web on the wind: The structure of work</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Nardi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yrjö</forename><surname>Engeström</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="1999">1999. 1999</date>
+			<biblScope unit="volume">8</biblScope>
+			<biblScope unit="page" from="1" to="8" />
+		</imprint>
+	</monogr>
+	<note>supported cooperative work</note>
+</biblStruct>
+
+<biblStruct xml:id="b53">
+	<analytic>
+		<title level="a" type="main">Role development of community health workers: an examination of selection and training processes in the intervention literature</title>
+		<author>
+			<persName><forename type="first">J</forename><surname>O'brien</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Allison</forename><forename type="middle">P</forename><surname>Squires</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Rebecca</forename><forename type="middle">A</forename><surname>Bixby</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Steven C</forename><surname>Larson</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">American journal of preventive</title>
+		<imprint>
+			<biblScope unit="volume">37</biblScope>
+			<biblScope unit="page" from="S262" to="S269" />
+			<date type="published" when="2009">2009. 2009</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b54">
+	<analytic>
+		<title level="a" type="main">It cannot do all of my work&quot;: Community Health Worker Perceptions of AI-Enabled Mobile Health Applications in Rural India</title>
+		<author>
+			<persName><forename type="first">T</forename><surname>Chinasa</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Srujana</forename><surname>Okolo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Nicola</forename><surname>Kamath</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Aditya</forename><surname>Dell</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Vashistha</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2021 CHI on Human Factors in Computing Systems</title>
+				<meeting>the 2021 CHI on Human Factors in Computing Systems</meeting>
+		<imprint>
+			<date type="published" when="2021">2021</date>
+			<biblScope unit="page" from="1" to="20" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b55">
+	<monogr>
+		<author>
+			<persName><forename type="first">O</forename><surname>Jacki</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">David</forename><surname>Martin</surname></persName>
+		</author>
+		<title level="m">Relationship-based Business Process Crowd-In IFIP Conference on Human-Computer Interaction</title>
+				<imprint>
+			<publisher>Springer</publisher>
+			<date type="published" when="2013">2013</date>
+			<biblScope unit="page" from="429" to="446" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b56">
+	<analytic>
+		<title level="a" type="main">Changing data practices for community health workers: Introducing digital data collection in West Bengal, India</title>
+		<author>
+			<persName><forename type="first">Joyojeet</forename><surname>Pal</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Anjuli</forename><surname>Dasika</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ahmad</forename><surname>Hasan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jackie</forename><surname>Wolf</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Nick</forename><surname>Reid</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Allyson</forename><surname>Vaishnav Purva Yardi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Abram</forename><surname>Mackay</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Bhramar</forename><surname>Wagner</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Mukherjee</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the Ninth International Conference on Information and Communication Technologies</title>
+				<meeting>the Ninth International Conference on Information and Communication Technologies</meeting>
+		<imprint>
+			<date type="published" when="2017">2017</date>
+			<biblScope unit="page" from="1" to="12" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b57">
+	<monogr>
+		<title level="m" type="main">Purposeful sampling for qualitative data collection and analysis in mixed method implementation research. and policy in mental health and mental health services research</title>
+		<author>
+			<persName><forename type="first">Sarah</forename><forename type="middle">M</forename><surname>Lawrence A Palinkas</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Carla</forename><forename type="middle">A</forename><surname>Horwitz</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jennifer</forename><forename type="middle">P</forename><surname>Green</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Naihua</forename><surname>Wisdom</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kimberly</forename><surname>Duan</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Hoagwood</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2015">2015. 2015</date>
+			<biblScope unit="volume">42</biblScope>
+			<biblScope unit="page" from="533" to="544" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b58">
+	<analytic>
+		<title level="a" type="main">Engineering rural development</title>
+		<author>
+			<persName><forename type="first">S</forename><surname>Tapan</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Parikh</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">ACM</title>
+		<imprint>
+			<biblScope unit="volume">52</biblScope>
+			<biblScope unit="page" from="54" to="63" />
+			<date type="published" when="2009">2009. 2009</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b59">
+	<analytic>
+		<title level="a" type="main">Data vision: Learning to see through abstraction</title>
+		<author>
+			<persName><forename type="first">Samir</forename><surname>Passi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Steven</forename><surname>Jackson</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2017 ACM conference on computer supported cooperative work and social computing</title>
+				<meeting>the 2017 ACM conference on computer supported cooperative work and social computing</meeting>
+		<imprint>
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b60">
+	<monogr>
+		<title level="m" type="main">AI for social Learning and planning in the data-to-deployment pipeline</title>
+		<author>
+			<persName><forename type="first">Fei</forename><surname>Perrault</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Arunesh</forename><surname>Fang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Milind</forename><surname>Sinha</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Tambe</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2001.00088</idno>
+		<imprint>
+			<date type="published" when="2019">2019. 2019</date>
+		</imprint>
+	</monogr>
+	<note>preprint</note>
+</biblStruct>
+
+<biblStruct xml:id="b61">
+	<analytic>
+		<title level="a" type="main">Examining the challenges in development data pipeline</title>
+		<author>
+			<persName><forename type="first">Fahad</forename><surname>Pervaiz</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Aditya</forename><surname>Vashistha</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Richard</forename><surname>Anderson</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2nd ACM SIGCAS Conference on Computing and Sustainable Societies</title>
+				<meeting>the 2nd ACM SIGCAS Conference on Computing and Sustainable Societies</meeting>
+		<imprint>
+			<date type="published" when="2019">2019</date>
+			<biblScope unit="page" from="13" to="21" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b62">
+	<monogr>
+		<title level="m" type="main">Behavioural data science</title>
+		<author>
+			<persName><forename type="first">Ganna</forename><surname>Pogrebna</surname></persName>
+		</author>
+		<ptr target="https://www.turing.ac" />
+		<imprint>
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b63">
+	<monogr>
+		<title level="m" type="main">The Future of Work</title>
+		<author>
+			<persName><surname>Pooneh</surname></persName>
+		</author>
+		<ptr target="https://www.wired.com/brandlab/2018/03/the-future-of-work" />
+		<imprint>
+			<date type="published" when="2018-03">March 2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b64">
+	<analytic>
+		<title level="a" type="main">Experts and expertise: social context of expertise</title>
+		<author>
+			<persName><forename type="first">L</forename><surname>Powell</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jonathan</forename><forename type="middle">H</forename><surname>Klein</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Nad</forename><surname>Connell</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 1993 conference on Computer personnel research</title>
+				<meeting>the 1993 conference on Computer personnel research</meeting>
+		<imprint>
+			<date type="published" when="1993">1993</date>
+			<biblScope unit="page" from="362" to="368" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b65">
+	<analytic>
+		<title level="a" type="main">What if I just cite Graciela? Working toward deknowledge through a critical ethnography</title>
+		<author>
+			<persName><forename type="first">Reyes</forename><surname>Cruz</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Inquiry</title>
+		<imprint>
+			<biblScope unit="volume">14</biblScope>
+			<biblScope unit="page" from="651" to="658" />
+			<date type="published" when="2008">2008. 2008</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b66">
+	<analytic>
+		<title level="a" type="main">Technology, deskilling, and nurses: the impact of the changing environment</title>
+		<author>
+			<persName><surname>Ruth G Rinard</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Advances in Nursing Science</title>
+		<imprint>
+			<biblScope unit="volume">18</biblScope>
+			<biblScope unit="page" from="60" to="69" />
+			<date type="published" when="1996">1996. 1996</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b67">
+	<monogr>
+		<title level="m" type="main">Workplace surveillance data &amp; society</title>
+		<author>
+			<persName><forename type="first">T</forename><surname>Rosenblat</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">B</forename><surname>Kneese</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Danah</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2014">2014. 2014</date>
+			<pubPlace>Oaks, CA</pubPlace>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b68">
+	<analytic>
+		<title level="a" type="main">We are dynamo: Overcoming stalling and friction in collecaction for crowd workers</title>
+		<author>
+			<persName><forename type="first">Niloufar</forename><surname>Salehi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Lilly</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Irani</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Michael</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ali</forename><surname>Bernstein</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Eva</forename><surname>Alkhatib</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Milland</forename><surname>Ogbe</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 33rd annual ACM conference on human factors in computing systems</title>
+				<meeting>the 33rd annual ACM conference on human factors in computing systems</meeting>
+		<imprint>
+			<date type="published" when="2015">2015</date>
+			<biblScope unit="page" from="1621" to="1630" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b69">
+	<analytic>
+		<title level="a" type="main">Privacy is not for me, it&apos;s for those rich women&quot;: Performative Privacy Practices on Mobile Phones by Women in South Asia</title>
+		<author>
+			<persName><forename type="first">Garen</forename><surname>Sambasivan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Amna</forename><surname>Checkley</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Nova</forename><surname>Batool</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">David</forename><surname>Ahmed</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Laura</forename><surname>Nemer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Tara</forename><surname>Sanely Gaytán-Lugo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sunny</forename><surname>Matthews</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Elizabeth</forename><surname>Consolvo</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">on Usable Privacy and Security</title>
+				<imprint>
+			<date type="published" when="2018">2018. 2018</date>
+			<biblScope unit="page" from="127" to="142" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b70">
+	<analytic>
+		<title level="a" type="main">Everyone wants to do the model work, not the data work</title>
+		<author>
+			<persName><forename type="first">Nithya</forename><surname>Sambasivan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Shivani</forename><surname>Kapania</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Hannah</forename><surname>Highfill</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Diana</forename><surname>Akrong</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Praveen</forename></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Lora</forename><forename type="middle">M</forename><surname>Aroyo</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3411764.3445518</idno>
+		<ptr target="https://doi.org/10.1145/3411764.3445518" />
+	</analytic>
+	<monogr>
+		<title level="m">Data Cascades in High-Stakes AI. In proceedings of the 2021 CHI Conference on Human Factors in Computing Systems. 1-15</title>
+				<imprint>
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b71">
+	<analytic>
+		<title level="a" type="main">The human infrastructure of ICTD</title>
+		<author>
+			<persName><forename type="first">Nithya</forename><surname>Sambasivan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Thomas</forename><surname>Smyth</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 4th ACM/IEEE international conference on information and technologies and development</title>
+				<meeting>the 4th ACM/IEEE international conference on information and technologies and development</meeting>
+		<imprint>
+			<date type="published" when="2010">2010</date>
+			<biblScope unit="page" from="1" to="9" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b72">
+	<monogr>
+		<title level="m" type="main">Seeing Like a State: How Certain Schemes to Improve the Condition Have Failed</title>
+		<author>
+			<persName><forename type="first">C</forename><surname>Scott</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="1998">1998</date>
+			<publisher>Yale University Press</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b73">
+	<monogr>
+		<title level="m" type="main">Weapons of the Weak</title>
+		<author>
+			<persName><forename type="first">C</forename><surname>James</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Scott</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2008">2008</date>
+			<publisher>Yale University Press</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b74">
+	<analytic>
+		<title/>
+		<author>
+			<persName><forename type="first">Claire</forename><surname>Zheyuan Ryan Shi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Fei</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Fang</surname></persName>
+		</author>
+		<idno type="arXiv">arXiv:2001.01818</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Artificial Intelligence for Social Good: A Survey</title>
+		<imprint>
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+	<note>cs.CY</note>
+</biblStruct>
+
+<biblStruct xml:id="b75">
+	<analytic>
+		<title level="a" type="main">Pricing mechanisms for crowdsourcing markets</title>
+		<author>
+			<persName><forename type="first">Yaron</forename><surname>Singer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Manas</forename><surname>Mittal</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 22nd international conference on World Wide Web</title>
+				<meeting>the 22nd international conference on World Wide Web</meeting>
+		<imprint>
+			<date type="published" when="2013">2013</date>
+			<biblScope unit="page" from="1157" to="1166" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b76">
+	<analytic>
+		<title level="a" type="main">Layers of silence, arenas of voice: ecology of visible and invisible work</title>
+		<author>
+			<persName><forename type="first">Susan</forename><forename type="middle">Leigh</forename><surname>Star</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Anselm</forename><surname>Strauss</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Computer supported cooperative work (CSCW)</title>
+		<imprint>
+			<biblScope unit="volume">1</biblScope>
+			<biblScope unit="page" from="9" to="30" />
+			<date type="published" when="1999">1999. 1999</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b77">
+	<analytic>
+		<title level="a" type="main">Making work visible</title>
+		<author>
+			<persName><surname>Suchman</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Commun. ACM</title>
+		<imprint>
+			<biblScope unit="volume">38</biblScope>
+			<biblScope unit="page" from="56" to="64" />
+			<date type="published" when="1995">1995. 1995</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b78">
+	<monogr>
+		<title level="m" type="main">Human-machine reconfigurations: Plans and situated actions</title>
+		<author>
+			<persName><forename type="first">Lucy</forename><surname>Suchman</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2007">2007</date>
+			<publisher>Cambridge university press</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b79">
+	<analytic>
+		<title level="a" type="main">Chasing Luck: Data-driven Prediction, Faith, Hunch, and Cultural Norms Rural Betting Practices</title>
+	</analytic>
+	<monogr>
+		<title level="m">of the 2021 CHI Conference on Human in Computing Systems</title>
+				<editor>
+			<persName><forename type="first">Sharifa</forename><surname>Sultana</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">Syed Ishtiaque</forename><surname>Md Mobaydul Mozumder</surname></persName>
+		</editor>
+		<editor>
+			<persName><surname>Ahmed</surname></persName>
+		</editor>
+		<imprint>
+			<date type="published" when="2021">2021</date>
+			<biblScope unit="page" from="1" to="17" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b80">
+	<analytic>
+		<title level="a" type="main">The automation charade</title>
+		<author>
+			<persName><forename type="first">Astra</forename><surname>Taylor</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Logic Magazine</title>
+		<imprint>
+			<biblScope unit="volume">5</biblScope>
+			<biblScope unit="page">1</biblScope>
+			<date type="published" when="2018">2018. 2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b81">
+	<analytic>
+		<title level="a" type="main">When is ML data good?: Valuing in Public Health Datafication</title>
+		<author>
+			<persName><forename type="first">Divy</forename><surname>Thakkar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Azra</forename><surname>Ismail</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Alex</forename><surname>Hanna</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Pratyush</forename><surname>Kumar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Nithya</forename><surname>Sambasivan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kumar</forename></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">of the 2022 CHI Conference on Human Factors in Computing Systems</title>
+				<imprint>
+			<date type="published" when="2022">2022</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b82">
+	<analytic>
+		<title level="a" type="main">A general inductive approach for analyzing qualitative data</title>
+		<author>
+			<persName><forename type="first">R</forename><surname>David</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Thomas</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">American journal of evaluation</title>
+		<imprint>
+			<biblScope unit="volume">27</biblScope>
+			<biblScope unit="issue">2</biblScope>
+			<biblScope unit="page" from="237" to="246" />
+			<date type="published" when="2006">2006. 2006</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b83">
+	<monogr>
+		<author>
+			<persName><forename type="first">Nenad</forename><surname>Tomašev</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Julien</forename><surname>Cornebise</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Frank</forename><surname>Hutter</surname></persName>
+		</author>
+		<title level="m">Shakir Mohamed, Angela Piccia-Bec Connelly, Danielle CM Belgrave</title>
+				<meeting><address><addrLine>Daphne Ezer, Fanny Cachat van der</addrLine></address></meeting>
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b84">
+	<analytic>
+		<title level="a" type="main">AI for social good: unlocking the opportunity for positive impact</title>
+		<author>
+			<persName><forename type="first">Frank</forename><surname>Haert</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Mugisha</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Nature Communications</title>
+		<imprint>
+			<biblScope unit="volume">11</biblScope>
+			<biblScope unit="page" from="1" to="6" />
+			<date type="published" when="2020">2020. 2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b85">
+	<analytic>
+		<title level="a" type="main">Dealing with the digital panopticon: the use and subversion of ICT in an Indian bureaucracy</title>
+		<author>
+			<persName><forename type="first">Rajesh</forename><surname>Veeraraghavan</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the Sixth International Conference on Information and Communication Technologies and Development</title>
+				<meeting>the Sixth International Conference on Information and Communication Technologies and Development</meeting>
+		<imprint>
+			<date type="published" when="2013">2013</date>
+			<biblScope unit="volume">1</biblScope>
+			<biblScope unit="page" from="248" to="255" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b86">
+	<analytic>
+		<title level="a" type="main">Cat and Mouse Game: Patching Bureaucratic Work Relations by Patching Technologies</title>
+		<author>
+			<persName><forename type="first">Rajesh</forename><surname>Veeraraghavan</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Proceedings of the ACM on Human-Computer</title>
+		<imprint>
+			<biblScope unit="volume">5</biblScope>
+			<biblScope unit="page" from="1" to="21" />
+			<date type="published" when="2021">2021. 2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b87">
+	<analytic>
+		<title level="a" type="main">Industrial transformation and the of craft: The decomposition of skill in the printing industry</title>
+		<author>
+			<persName><forename type="first">Michael</forename><surname>Wallace</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Arne</forename><forename type="middle">L</forename><surname>Kalleberg</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Sociological Review</title>
+		<imprint>
+			<biblScope unit="page" from="307" to="324" />
+			<date type="published" when="1931">1982. 1931-1978. 1982</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b88">
+	<analytic>
+		<title level="a" type="main">Whose AI Dream? In search of the aspiration in data annotation</title>
+		<author>
+			<persName><forename type="first">Ding</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Shantanu</forename><surname>Prabhat</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Nithya</forename><surname>Sambasivan</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">proceedings of the 2022 CHI Conference on Human Factors in Computing Systems</title>
+				<meeting>the 2022 CHI Conference on Human Factors in Computing Systems</meeting>
+		<imprint>
+			<date type="published" when="2022">2022</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b89">
+	<monogr>
+		<title level="m" type="main">Communities of practice: A brief introduction</title>
+		<author>
+			<persName><forename type="first">Etienne</forename><surname>Wenger</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2011">2011. 2011</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b90">
+	<monogr>
+		<author>
+			<persName><forename type="first">Myers</forename><surname>West</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Meredith</forename><surname>Whittaker</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kate</forename><surname>Crawford</surname></persName>
+		</author>
+		<title level="m">Discriminating Gender, race and power in AI. now Institute</title>
+				<imprint>
+			<date type="published" when="2019">2019. 2019</date>
+			<biblScope unit="page" from="1" to="33" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b91">
+	<monogr>
+		<title level="m" type="main">Do artifacts have politics?</title>
+		<author>
+			<persName><forename type="first">Langdon</forename><surname>Winner</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="1980">1980. 1980</date>
+			<biblScope unit="page" from="121" to="136" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b92">
+	<analytic>
+		<title level="a" type="main">The economic impact of artificial intelligence in health care: systematic review</title>
+		<author>
+			<persName><forename type="first">Josch</forename><surname>Wolff</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Pauling</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Journal of medical Internet research</title>
+		<imprint>
+			<biblScope unit="volume">22</biblScope>
+			<biblScope unit="issue">2</biblScope>
+			<biblScope unit="page">e16866</biblScope>
+			<date type="published" when="2020-01">Jan Baumbach. 2020. 2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b93">
+	<monogr>
+		<title level="m" type="main">Fake Coronavirus Tests May Have Helped Fuel India Outbreaks -The New York Times</title>
+		<author>
+			<persName><forename type="first">Yasir</forename></persName>
+		</author>
+		<ptr target="https://www.nytimes.com/2021/06/15/world/india-fake-coronavirus-covid-tests.html" />
+		<imprint>
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b94">
+	<analytic>
+		<title level="a" type="main">gaussian process for crop yield prediction based on remote sensing data</title>
+		<author>
+			<persName><forename type="first">Xiaocheng</forename><surname>You</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Melvin</forename><surname>Li</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">David</forename><surname>Low</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Stefano</forename><surname>Lobell</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Ermon</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Thirty-First AAAI conference on artificial intelligence</title>
+				<imprint>
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b95">
+	<monogr>
+		<title level="m" type="main">In the age of the smart machine</title>
+		<author>
+			<persName><forename type="first">Shoshana</forename><surname>Zuboff</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="1988">1988. 1988</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+				</listBibl>
+			</div>
+		</back>
+	</text>
+</TEI>

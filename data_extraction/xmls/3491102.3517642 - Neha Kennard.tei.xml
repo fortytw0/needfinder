@@ -1,0 +1,2366 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xml:space="preserve" xmlns="http://www.tei-c.org/ns/1.0" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.com/kermitt2/grobid/master/grobid-home/schemas/xsd/Grobid.xsd"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+	<teiHeader xml:lang="en">
+		<fileDesc>
+			<titleStmt>
+				<title level="a" type="main">The Reward for Luck: Understanding the Efect of Random Reward Mechanisms in Video Games on Player Experience</title>
+			</titleStmt>
+			<publicationStmt>
+				<publisher/>
+				<availability status="unknown"><licence/></availability>
+			</publicationStmt>
+			<sourceDesc>
+				<biblStruct>
+					<analytic>
+						<author>
+							<persName><forename type="first">Michael</forename><surname>Yin</surname></persName>
+							<idno type="ORCID">0000-0003-1164-5229</idno>
+							<affiliation key="aff0">
+								<orgName type="institution">University of University</orgName>
+								<address>
+									<settlement>Canada</settlement>
+									<country key="CA">Canada</country>
+								</address>
+							</affiliation>
+						</author>
+						<title level="a" type="main">The Reward for Luck: Understanding the Efect of Random Reward Mechanisms in Video Games on Player Experience</title>
+					</analytic>
+					<monogr>
+						<imprint>
+							<date/>
+						</imprint>
+					</monogr>
+					<idno type="DOI">10.1145/3491102.3517642</idno>
+				</biblStruct>
+			</sourceDesc>
+		</fileDesc>
+		<encodingDesc>
+			<appInfo>
+				<application version="0.7.1" ident="GROBID" when="2022-07-22T04:59+0000">
+					<desc>GROBID - A machine learning software for extracting information from scholarly documents</desc>
+					<ref target="https://github.com/kermitt2/grobid"/>
+				</application>
+			</appInfo>
+		</encodingDesc>
+		<profileDesc>
+			<textClass>
+				<keywords>
+					<term>video games</term>
+					<term>reward systems</term>
+					<term>player experience</term>
+				</keywords>
+			</textClass>
+			<abstract>
+<div xmlns="http://www.tei-c.org/ns/1.0"><p>Figure 1: Screenshots of RRMs in popular video games: (a) Loot box system (Hextech Chests) in League of Legends (image © Riot Games); (b) Power-up system (Boons system) in Hades (image © Supergiant Games); (c) Randomized loot drop in Maplestory (image © Nexon).</p></div>
+			</abstract>
+		</profileDesc>
+	</teiHeader>
+	<text xml:lang="en">
+		<body>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="1">INTRODUCTION</head><p>Video games have the ability to grant engaging and interactive experiences to its players <ref type="bibr" target="#b20">[23,</ref><ref type="bibr" target="#b32">47,</ref><ref type="bibr" target="#b83">101,</ref><ref type="bibr" target="#b99">119]</ref> -they can evoke a wide range of emotional responses <ref type="bibr" target="#b9">[12,</ref><ref type="bibr" target="#b10">13]</ref> and an even wider range of outcomes <ref type="bibr" target="#b27">[42,</ref><ref type="bibr" target="#b44">62,</ref><ref type="bibr" target="#b84">102]</ref>. With the meteoric rise in popularity of video games, it has become increasingly important to understand how they can impact player emotions and feelings in order to encourage positive player experiences. Thus, researchers have aimed to understand the underlying mechanics of video games that make them fun and emotional, and how these mechanics may tie into basic human motivations. Bartle states that players may subconsciously evaluate video games based on several factors that contribute to engagement and enjoyment <ref type="bibr" target="#b5">[8]</ref>. These factors directly tie into research on player motivations in video games, which has shown that people play video games for various motivational reasons, such as demonstrations of competency and collection of achievements <ref type="bibr" target="#b85">[103,</ref><ref type="bibr" target="#b88">106,</ref><ref type="bibr" target="#b109">130]</ref>. To feed into and amplify these motivations, players typically require some sort of positive feedback, which comes in the form of reward systems. For example, if a player completes a difcult task in a game, they will expect to receive a reward of high value, such as a high score, a rare achievement, or a valuable in-game item.</p><p>Building reward systems is a challenging problem involving a plethora of design considerations. The type of reward received by players (e.g. score-based, item-based, etc.) is largely dependent on the type of game and the goals of the developer. Prior research has investigated game rewards in detail, looking at which factors diferentiate reward systems and how such factors may afect the emotions and motivations evoked within the player, oft leading to taxonomical classifcations based on these factors <ref type="bibr" target="#b45">[63,</ref><ref type="bibr" target="#b50">68,</ref><ref type="bibr" target="#b72">90,</ref><ref type="bibr" target="#b79">97,</ref><ref type="bibr" target="#b80">98]</ref>. For example, having a variety of reward types <ref type="bibr" target="#b78">[96]</ref> or ofering a choice of reward <ref type="bibr" target="#b93">[111]</ref> can have a positive impact on player experience and engagement. Ultimately, good reward systems can help improve the "fow" of the game -the balance of challenge and skill to achieve optimal experiences <ref type="bibr" target="#b26">[41,</ref><ref type="bibr" target="#b60">78,</ref><ref type="bibr" target="#b67">85]</ref>. On the contrary, reward systems with unsuitable, non-player-friendly design decisions can lead to negative public reception and social backlash <ref type="bibr" target="#b87">[105]</ref>.</p><p>One subset of reward systems are Random Reward Mechanisms (RRMs) <ref type="bibr" target="#b75">[93]</ref>. We appropriate Nielsen's defnition of RRMs as reward systems in which a programmed trigger ("eligibility") condition leads to a probabilistic procedure that generates the reward received. As such, the reward initially assumes an unknown, probabilistic state, until it materializes through user interaction into one of many possible rewards. RRMs can take on diferent forms in various games, for example:</p><p>• Killing monsters and receiving randomized loot • Picking up random weapons in battle royales • Attaining random bonuses and items in roguelike games • Obtaining characters or items through gacha systems • Opening loot boxes for cosmetic items Although RRMs have been present in video games for a long time <ref type="bibr" target="#b31">[46]</ref>, they have recently gained increased attention and notoriety as the latter two subsets of the above list have formed some of the largest, rapidly-growing revenue streams in the modern video game industry <ref type="bibr">[122,</ref><ref type="bibr" target="#b112">133]</ref>. However, such RRMs have also garnered signifcant controversy and critique among policymakers, politicians, and researchers for their addictive, gambling-like qualities <ref type="bibr" target="#b7">[10,</ref><ref type="bibr" target="#b13">16,</ref><ref type="bibr" target="#b64">82,</ref><ref type="bibr" target="#b69">87,</ref><ref type="bibr" target="#b113">134]</ref>. Research into such rewards have shown that they are correlated with problematic gambling behavior, resulting in negative feelings of addiction and excessive expenditures of a player's time and money <ref type="bibr" target="#b11">[14,</ref><ref type="bibr" target="#b13">16,</ref><ref type="bibr">80,</ref><ref type="bibr" target="#b91">109]</ref>. The perpetuity of this issue is exacerbated as players themselves do not always perceive virtual RRMs as gambling behavior <ref type="bibr">[118]</ref>. However, not all such RRMs are viewed negatively; for instance, microtransactions in League of Legends have been perceived positively as a "fair" free-toplay model <ref type="bibr" target="#b51">[69]</ref>. The ability for diferent RRMs to generate varying player perceptions sparks further motivation into their study to understand what specifc characteristics elicit certain benefcial experiences and outcomes.</p><p>Despite the fact that RRMs are widely prevalent in present games, there has been a limited amount of academic research on user interaction with these systems. This study aims to understand how users interact with RRMs, placing a specifc focus on how randomness in particular can introduce novel player experiences. Although RRMs can vary greatly in form and function, they are fundamentally similar in that each reward is an outcome of a probabilistic calculation. Every RRM builds upon this basic foundation, with diferences arising in terms of how the RRM is integrated within the core gameplay, what resources are needed to trigger the RRM, what type of visual and audio cues are associated with the reward presentation, etc. We investigate how these factors impact user experience both within the context of the reward process as well as within the game as a whole. We also consider user perception of the social responsibility aspects of RRMs, and what design choices they deem would be crossing the line from gaming to gambling.</p><p>To facilitate our investigation, we frst perform a video analysis study of 35 diferent RRMs from 28 diferent games. Using our fndings, we create an initial classifcation system based on observed diferences in design decisions among the investigated RRMs. We then perform a series of semi-structured interviews involving 14 video game players, each shown a common set of diferent RRMs, with the goal of drawing insights into player attitudes towards RRMs, trade-ofs in their implementation, and the efects of various design decisions on user motivations, engagement, and enjoyment. By understanding user perception and interaction with present RRMs, we then develop design considerations for the generation of user-friendly, engaging, and signifcant RRM systems. Ultimately, the main contributions of this study are 1) the development of a classifcation system for RRMs, 2) empirical fndings on the impact of RRMs on player experience, and 3) methodological considerations for game developers regarding the implementation of RRMs.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2">RELATED WORK</head><p>In developing a classifcation system for RRMs, we frst consider prior methodologies employed in developing taxonomies and classifcations for general video game reward structures. To better contextualize the experiential impact of the randomness aspect of RRMs, we consider the broader impact of uncertainty and unpredictability within games. To better frame our discussion on how RRMs impact player emotions, we look at ways in which the player experience can be infuenced and shaped through multimodal mediums. Lastly, to better understand the rationale behind player perceptions of RRMs, we look at past research into the relationship between video game rewards and human psychological motivators.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.1">Reward Classifcations</head><p>To understand how to build a classifcation system for RRMs, we look at prior research in the feld of general reward classifcations. Wang and Sun proposed an initial classifcation system based on the form of the reward and the mechanics involved, taxonomizing rewards into eight specifc classes -score systems, EXP systems, item granting, resource collections, achievement systems, feedback messages, plot animations, and additional game content -with four contextual dimensions -social value, efect on gameplay, suitability for collection, and time required to earn and receive the reward <ref type="bibr" target="#b45">[63]</ref>. Changes in these dimensions alter the experience in which users interact and relate with the rewards that they receive. Much research in the past has focussed on the second of these dimensions, looking to better understand the motivations and player attitudes towards rewards that are purely cosmetic, i.e. have no pure gameplay value <ref type="bibr" target="#b34">[51,</ref><ref type="bibr" target="#b35">52,</ref><ref type="bibr" target="#b73">91,</ref><ref type="bibr" target="#b100">120]</ref>. Hallford and Hallford developed an alternative reward classifcation system focussed on their motivation and outcomes <ref type="bibr" target="#b42">[60,</ref><ref type="bibr" target="#b79">97]</ref>, classifying each reward into one of rewards of access, rewards of facility, rewards of sustenance, or rewards of glory. This was extended upon by Phillips et al. to include rewards of positive feedback and rewards of sensory feedback <ref type="bibr" target="#b79">[97]</ref>. The motivational factors for rewards have been further explored as a primary classifcation feature. For instance, the concept of intrinsic rewards, where the performance of a task earns a reward that motivates further performance of the task, is in contrast to extrinsic rewards, where the reward signifes the end of the task <ref type="bibr" target="#b81">[99]</ref>. With the aim of illustrating the diference among intrinsic and extrinsic rewards in practice, Miklasz outlines 10 dimensions based on the structure of reward systems to show how real-world reward systems fall under these dimensions <ref type="bibr" target="#b72">[90]</ref>. Overall, research into the efects of diferent reward types and the ways in which certain rewards are shown to the user have shown that even small changes in the scheduling and presentation of rewards can have a large impact on task completion and player enjoyment <ref type="bibr" target="#b63">[81,</ref><ref type="bibr" target="#b93">111]</ref>.</p><p>Many past reward classifcation studies have been based upon the efects of the reward after the user has received it, focussing on the post hoc interactions that a user has with a materialized reward. However, the introduction of a random process that probabilistically selects a materialized reward changes the nature of how users interact with the system before, during, and after the process. Some past research, such as the work of Sato et al. and Ballou et al. <ref type="bibr" target="#b3">[6,</ref><ref type="bibr" target="#b111">132]</ref>, has focussed on classifying random rewards garnered specifcally through monetary resources. Furthermore, although a classifcation system for generalized random rewards has been proposed in the past <ref type="bibr" target="#b75">[93]</ref>, this system focussed largely on reward utility rather than observed design decisions. The importance of classifying such design features within our study is to understand how these observable design decisions, such as visual embellishments, can afect player experience.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.2">Uncertainty and Unpredictability in Games</head><p>To frame our study on the experiential factors of random rewards in video games, we consider past research into the fundamental uncertainty and unpredictability of games. Unpredictability and uncertainty have long been key factors in games and play. For example, shufing a deck of cards or tossing a die are unpredictable, random events that have lasting efects on the outcomes of games <ref type="bibr" target="#b53">[71,</ref><ref type="bibr" target="#b70">88]</ref>. Caillois argued for the inclusion of uncertainty as a key factor for enjoyable play, asserting that certainty results in a less pleasurable experience <ref type="bibr" target="#b15">[18]</ref>. Bogost stated that randomness within games introduces a level of interactivity, as unpredictable consequences lead to a constant stream of player-computer interaction <ref type="bibr" target="#b8">[11]</ref>. Empirical studies have largely supported these claims in showing that unpredictable elements within games can often have benefcial outcomes. For instance, Howard-Jones and Demetriou contrasted the experiential outcomes of a random reward with a deterministic reward with the same expected value <ref type="bibr" target="#b47">[65]</ref>, showing that the random reward led to more intense and contrasting emotions, including frustration and excitement, and was generally preferred by the participants. Researchers have also shown that uncertainty not only afects player emotions, but how players engage with games as well <ref type="bibr" target="#b38">[55,</ref><ref type="bibr" target="#b77">95]</ref>. For instance, a player's personal perception on luck versus chance may infuence the way they make decisions in an unpredictable game environment <ref type="bibr" target="#b38">[55]</ref>.</p><p>Costikyan and Consalvo performed a comprehensive examination of popular games to understand the sources of uncertainty within them <ref type="bibr" target="#b25">[40]</ref>. The authors generated a categorization system for uncertainty, drawing distinctions between performative uncertainty (uncertainty in physical performance), player unpredictability (uncertainty in regards to other players), randomness (uncertainty based on probabilistic chance), and other forms of uncertainty found in games. Johnson performed a comprehensive theoretical overview of unpredictability in games <ref type="bibr" target="#b53">[71]</ref>, presenting a typology based on three areas in which unpredictability may occurwithin the starting conditions, during the course of the game, and during the fnal outcomes. To further concretize the concept of unpredictability and uncertainty, Power et al. found fve constituent factors that defne uncertainty as a concept <ref type="bibr" target="#b82">[100]</ref>. Our study of RRMs ties into several of these factors, for example, external uncertainty -the perception of the game system itself being unpredictable. Ultimately, within this study, we conduct an empirical investigation to extend upon the past theoretical fndings on the experiential impacts of uncertainty, focussing on one element of unpredictability within games in particular -random rewards.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.3">Player Experience in Video Games</head><p>In recent years, there has been an increased number of video games focussing on delivering engaging and emotional experiences to players <ref type="bibr" target="#b0">[1]</ref>. Video games have been described as "structures of feeling" <ref type="bibr" target="#b0">[1]</ref> and "sequences of emotional experiences" <ref type="bibr" target="#b37">[54]</ref>; the ability for video games to generate strong, visceral feelings have been studied in literature, likening them to other traditional forms of art <ref type="bibr" target="#b39">[56,</ref><ref type="bibr" target="#b49">67,</ref><ref type="bibr" target="#b76">94]</ref>. Accordingly, methods by which such engagement and emotions can be developed have been similarly studied. The concept of "emotioneering" explores a vast assortment of techniques that can evoke emotions and immersion for players in video games, including music, sound efects, narrative writing, among others <ref type="bibr" target="#b37">[54]</ref>. As one example, past research has looked at the impact of sound in video games and its importance in contributing to emotional experiences and player engagement <ref type="bibr" target="#b28">[43,</ref><ref type="bibr" target="#b58">76]</ref>. Sound efects can inform the player that something important is happening, and changing the tempo of background music can impact whether the player feels a sense of peace or a sense of action, providing balance and control over user mood states <ref type="bibr" target="#b58">[76]</ref>.</p><p>Wingstedt explored how the interplay of sound and visuals as a whole can create multimodal statements in multimedia experiences <ref type="bibr" target="#b105">[126]</ref>. Visual properties, such as colour and cinematography, can generate efects on user mood and engagement similar to sound <ref type="bibr" target="#b14">[17,</ref><ref type="bibr" target="#b43">61]</ref>. Certain combinations of colours and difering colour palettes can evoke varying emotions and feelings among users in a video game, ranging from fear to serenity, from joy to peace <ref type="bibr" target="#b43">[61]</ref>. Researchers have defned the general term "juiciness" to refer to the positive visual and audial embellishments found in games <ref type="bibr" target="#b54">[72,</ref><ref type="bibr" target="#b55">73,</ref><ref type="bibr" target="#b59">77]</ref>. Research has shown that juicy efects can afect play time, intrinsic motivation, and performance <ref type="bibr" target="#b55">[73,</ref><ref type="bibr">112]</ref>; however, a direct investigation of juicy efects on loot boxes has shown that their player experience efects were generally muted <ref type="bibr" target="#b56">[74]</ref>. Overall, a variety of factors can afect player emotions within games. To assess the wide range of emotional efects that may arise, models have been designed to help developers and researchers better construct and quantify the emotional requirements in video games <ref type="bibr" target="#b16">[19,</ref><ref type="bibr" target="#b17">20]</ref>. In this study, we draw inspiration from past research to investigate how factors such as juiciness afect player emotion, enjoyment, and engagement during RRM processes in video games.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.4">Reward System Motivations and Perceptions</head><p>Investigating the motivations for which people play video games is fundamental to understanding what they expect to get out of the experience, i.e. the rewards that users receive from playing the games. Much research has been done in this subject, extracting several core reasons that underpin player motivation for gaming, including demonstration of competency, exploration of new worlds, socialization with other players, and so on <ref type="bibr" target="#b4">[7,</ref><ref type="bibr" target="#b110">131]</ref>. Past research has framed these motivations under cognitive evaluation theory (CET), emphasizing the importance of the factors of autonomy -the ability for players to voluntarily make choices, explore strategies, and set goals, and competence -the need to feel challenged, demonstrate skills and receive positive feedback, as internally motivating factors within video games <ref type="bibr" target="#b85">[103,</ref><ref type="bibr" target="#b88">106]</ref>. With respect to this positive feedback, video games tend to have reinforcement and reward schedules that can potentially optimize for motivation <ref type="bibr" target="#b68">[86]</ref>.</p><p>Studies have been done into the perception of random rewards, especially those that involve real-world currency (loot boxes in particular). Sakhapov and Brown found that player perception of fairness was largely swayed by transparency -whether the odds for the reward are shown to the player <ref type="bibr" target="#b89">[107]</ref>. They also found that players were not fundamentally against the system of random loot boxes, and occasionally found the process of opening them fun in a balanced system. Johansson and Grönström looked at loot boxes in Counter Strike: Global Ofensive through a perspective of player utility, showing how game companies could use techniques to generate perceived utility for loot box systems <ref type="bibr" target="#b52">[70]</ref>. Nielsen's investigation on RRMs highlighted similarities between certain random rewards and gambling, as well as demonstrated how random rewards may generate artifcially-created value for players <ref type="bibr" target="#b75">[93]</ref>. Overall, we extend upon these past works but place an emphasis on player perspectives and experiences, exploring the interplay between random rewards and the fundamental motivations for playing video games. For instance, we consider how the introduction of abstract factors such as luck and randomness may infuence feelings of autonomy and competency for players.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3">METHODOLOGY 3.1 Material Collection and Video Analysis</head><p>To better understand the diferences and similarities among RRM systems, we performed an initial video analysis study on currently existing RRM systems within present video games. To motivate the selection of a sample of video games among the innumerable games that exist, we revisited our overarching evaluation goal of understanding the efect of diferent RRM systems on (primarily positive) player experience and outcomes. Thus, we aimed to select a sample of video games and associated rewards that promote such experiences. This was accomplished through a series of independent criteria listed below.</p><p>• High number of active daily players -For this criteria, we used Steam as a database for games, and considered games that fell into the top 100 of active daily players on Steam <ref type="bibr">[114]</ref>. We considered active daily players to be a representative metric of the outcomes of high user engagement and sustained engagement over time. • High revenue numbers -For this criteria, we considered games that have grossed over $100 million USD in revenue <ref type="bibr" target="#b102">[123]</ref>. We considered high revenue numbers to be a representative metric of the outcomes of player willingness to spend monetary resources on the game. • High number peak player count -We considered games that have had a peak player count of over 10 million <ref type="bibr" target="#b103">[124,</ref><ref type="bibr" target="#b104">125]</ref>. In contrast to the frst criteria chosen, this is considered to be a representative metric of the outcomes of high short-term engagement and possible virality.</p><p>We recognized that these criteria may be largely infuenced by factors other than RRMs; nonetheless, we use these criteria as basic metrics to select a sample set of games. We strove to select an equal number of games from each of these criteria to generate a diverse set of games and rewards. In addition to these factors, we selected between a mix of games in which the researchers had some prior personal experience with and games that were unfamiliar to the researchers. The games in which the researchers had engaged with before helped provide a baseline of understanding for how RRM systems function in those games and allowed for a reference of comparison for previously unseen systems. In doing so, the researchers brought some aspect of a priori knowledge towards the RRMs, which would help with the subsequent analysis methods. Within each game, we verifed the existence of RRMs. As several games had fundamentally diferent RRM systems, we investigated each of these independently. Overall, we found that 35 RRMs from 28 games provided us with a sufcient number of rewards to investigate; at that point, we found that additional RRMs only minimally increased the variation and provision of new information among the investigated rewards. The full list of RRMs and associated games can be found in this work's supplementary materials.</p><p>A video analysis was performed on each RRM system. Firstly, for each RRM, we extracted a video from before the reward was received until right after. These videos were either extracted from personal playthroughs (when the game was easily accessible) or videos of others' playthroughs found online. Detailed observational notes were taken for each of the videos. We focussed solely on objective, technical characteristics of the reward, such as what the reward was, what animations played when receiving the reward, what the trigger condition was, etc., and excluded any subjective human factors from our analysis, such as player reaction to receiving the reward. As this method would only allow us to understand short-term, singular instances of the reward, the observational notes were further augmented with additional details found on ingame menu screens, ofcial game websites [4, <ref type="bibr" target="#b21">24,</ref><ref type="bibr">48,</ref><ref type="bibr" target="#b33">49,</ref><ref type="bibr" target="#b101">121]</ref>, and dedicated crowdsourced wiki pages <ref type="bibr">[25-32, 34, 36-38, 115]</ref>, which have been shown to be reliable through past research <ref type="bibr" target="#b1">[2,</ref><ref type="bibr" target="#b29">44]</ref>. In addition, notable discussion of reward processes on popular online forums such as Reddit was also noted <ref type="bibr" target="#b2">[3,</ref><ref type="bibr" target="#b86">104,</ref><ref type="bibr" target="#b108">129]</ref>.</p><p>Table <ref type="table">1</ref>: The 9-dimensional fnal representation for RRM grouping and coding. Some dimensions included codes of "Not Applicable" and "Unable to Tell".</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Reward characteristics within the context of the overall game:</head><p>• Genre of game, e.g. frst-person shooter, MOBA, roguelike • Type of reward, e.g. equipment, in-game currency, character cosmetics, a mix of the prior • Efect on gameplay • Reward frequency Integration of RRM system within the game:</p><p>• Trigger condition to receive random reward, e.g. intrinsic (receiving rewards from playing the game) vs extrinsic (receiving rewards without engaging in the core gameplay) • Materialization of random reward into received reward, i.e. the process in which the random reward materializes into one of the possible options and is received by the player • Interaction with received reward Factors involved in the presentation of the reward:</p><p>• Auditory and visual efects for individual rewards • Indicators for the rarity or relative value of individual rewards With a textual representation of 35 RRM systems, we conducted thematic analysis <ref type="bibr" target="#b12">[15]</ref> with the goal of extracting the various factors -the similarities and dissimilarities -between such systems. We leaned towards a deductive approach for thematic analysis, drawing on our knowledge of prior literature and anecdotal understanding of video game rewards in order to guide our analysis process. To perform the analysis, a round of open line-by-line coding was performed on the textual data for each RRM. At this stage, coding labels revolved around the basic observable concepts, such as whether sound efects existed during the reward opening process, whether the reward was a result of monetary, time, or efort expenditure, etc. These initial coding labels were then grouped and categorized to generate the fundamental categorical dimensions of the rewards -aspects such as the the specifc type of reward, their efect on gameplay, their integration into the game, etc. These categories formed the basis for a diverse set of variables within our RRM classifcation system. To distill these into meaningful dimensions for a classifcation system, we performed a round of refnement through a fnal review of these categories; removing redundant ones that were either too narrow and applicable to only a subset of RRM systems or too broad and applicable to all of them. Overall, this resulted in a RRM representation of 9 dimensions (Table <ref type="table">1</ref>). These dimensions formed the classifcation system for RRMs drawn from our observations, based on observed and implicit details.</p><p>A second round of analysis was performed to group these reward dimensions into broader categories based on the impact of the dimension within the game. These categories included the terms "Reward Characteristics Within the Game", "Reward Integration within the Game" and "Reward Presentation". These categories would later give rise to an understanding into the areas in which the reward could impact the player experience, forming some of the basis for subsequent interview questions and fndings.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.2">Interviewee Recruitment</head><p>Potential participants were identifed through personal connections and snowball recruitment. All of the potential interviewees were identifed as people who currently play video games and have current or past experience with RRM systems. We reached out to these participants through online channels of Facebook Messenger, Discord, and email. We used purposive sampling to help further narrow the recruitment of people to those more ingrained in the gaming community, who had a broad range of games experience, and who had greater exposure to a variety of RRMs. Ultimately, we narrowed down our recruitment to 14 video game players (Table <ref type="table" target="#tab_1">2</ref>), with whom we conducted semi-structured interviews through remote video calls.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.3">Interview Protocol</head><p>The goals of the interviews were to understand how the expression of emotional feelings and engagement within players vary with diferent auditory, visual, and other experiential design decisions as well as to convey overall player thoughts about their motivation and autonomy when faced with unpredictable RRM systems under various contexts. Interviews were audio-recorded when permission was granted, and personally identifable information was removed.</p><p>Participants indicated a variety of diferent RRMs they had previously engaged with, coming from a diverse set of games, not all of which were familiar to the researchers. To unify the experience and to ensure that each participant would see a diverse set of RRMs with diferent characteristics, participants were asked to watch video clips from 7 representative RRMs from 7 diferent games. These RRMs were selected based on our prior classifcation system, with the aim of introducing diversity by selecting a subset of RRMs that essentially covered all the coded labels. These RRMs were:  Participants were provided with the context of each of these systems, including information about how frequently the reward occurs, what trigger condition gives rise to the reward, and how the rewards could be used in game. Participants were asked if they had prior experience engaging in any of these selected games. This was noted down to better shape the direction of the interview when discussing these RRMs. For each video clip, users were asked about what aspects they liked and disliked about each reward system and why. A variety of features were discussed, including the impact of auditory and visual characteristics, the integration of the RRM within the game, etc. After watching all of the clips, participants were asked to compare and contrast the RRM implementations, focussing on which dimensions of the RRMs had the most signifcant impact on their overall experience and enjoyment, and how each RRM system afected their motivations and goals within the context of the game. Participants also contributed information and experiences relating to RRMs that they were most personally familiar with. The interview script with the various questions asked can be found in the work's supplementary materials. Overall, each interview was approximately 60 minutes long, and interviewees were compensated $10 CAD per hour for their participation.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.4">Data Analysis</head><p>Each interview was transcribed and then coded using a thematic analysis method in order to extract the common themes among participants <ref type="bibr" target="#b12">[15]</ref>. First, an initial round of line-by-line open-coding was performed in order to summarize and better understand the relevance of each line in the transcription. This was followed by a secondary, more focussed coding round revolving on grouping the initial coded data into fnal codes associated with broader categories and ideas. These fnal codes were then clustered to generate an afnity diagram representing a hierarchical system of information across all the interviewees, which would form the basis for our extracted themes and fndings. Prior knowledge from our initial RRM video analysis study, as well as background research in the area, provided further deductive guidance and motivation for the themes.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4">FINDINGS 4.1 Attitudes towards RRMs</head><p>4.1.1 RRMs and Uniqueness in Playthroughs. Generally, all participants expressed positive attitudes towards certain implementations of RRMs and towards randomness in games in general. One common sentiment was that random rewards added a sense of freshness and uniqueness to gameplay. In games such as RPGs, receiving diferent rewards would force players to adjust their playstyle towards these rewards, so they cannot simply rely on walkthroughs to replicate the behaviour of others. For certain games which rely on replayability, such as battle royales or roguelikes, this sense of freshness provides individuality for each playthrough, as each instance would play out diferently depending on the random rewards the player would get, e.g. "The fun comes from the fact that the playthrough is fresh and unique, especially in roguelikes where you have to have each playthrough not be the same to have that replayability" (P2). In comparison to non-random reward systems, i.e. deterministic rewards, most people expressed an attitude akin to "if everything is very deterministic, it's not very exciting anymore. Introducing some randomness creates fexibility and introduces diversity into the game" (P5). This corroborates the work of Costikyan and Consalvo, who argue that one of uses of randomness within games is to generate asymmetry, which creates diferent ways to play <ref type="bibr" target="#b25">[40]</ref>. Some participants indicated that RRMs evoke a larger spectrum of emotions than deterministic rewards. As the random process inherently allows for a spectrum of diferent possible rewards, some with higher or lower personal or inherent value, the reward result can be a source of both intense disappointment or elation. Past studies in uncertainty have shown similar results -uncertainty can generate a more diverse and emphatic set of emotions within players <ref type="bibr" target="#b47">[65]</ref>. In particular, our studies revealed that players have a heightened sense of anticipation and hope before the reward is presented, tying into past research on how the deferral of eventual rewards can generate increased anticipation <ref type="bibr" target="#b66">[84]</ref>.</p><p>4.1.2 Trade-Of Between Luck and Skill. Participants stated that non-cosmetic random rewards that directly afect gameplay often introduce a trade-of between skill, which users defned as the competency a user has in playing the game, and luck. With random rewards, players who are less skilled can sometimes match up against those who are more skilled if the former receives signifcantly better rewards. Although participants recognized that this may sometimes not be the desired result, especially in more competitive settings, many shared the sentiment that on a casual level it makes the game more fun and less frustrating, especially for the "less-skilled" majority. As one participant expressed, "it makes [Apex Legends] fun since people with diferent skill levels play the game. Right now, a bad player with a good gun can fght it out with a good player with a bad gun, so [RRMs] ofers a chance for it to even out the skill level among multiplayer games" (P1).</p><p>Although random rewards may attenuate the impact of gameplay skill, we noticed that from a diferent perspective, it also introduces a new skill -adaptability, which we defne as the ability to optimally adjust playstyles and decision-making processes based on the received random reward. As such, although RRMs may be perceived as a mechanic involving a trade-of between skill and luck, they can also represent a trade-of between diferent sets of required skills. When discussing the reward of obtaining random loot (i.e. guns) in Apex Legends, one participant indicated that "you have to play accordingly and strategically based on which gun you have, so it allows more creativity" (P7). The ability for players to fexibly adapt their strategy to any of the rewards that are received is a type of novel skill that is unique to games RRMs, necessitated by the fact that users may get any range of rewards with diferent attributes, stats, and features. Another example of adaptability can be seen in the game of poker. In poker, the ability of players to adapt their strategy to each materialized random variable is considered a major contributor to skill level within the game <ref type="bibr" target="#b25">[40]</ref>. Thus, on one hand, for less-skilled players (in terms of gameplay), RRMs can be an important factor to help them keep playing. On the other hand, for skilled players, RRMs assesses their competency in adaptability. Thus, RRMs may elevate players' motivation to play the game, whether they are skilled or not.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.1.3">Player Frustrations Regarding Gameplay-Obstructing RRMs.</head><p>Due to the nature of RRM systems, rewards may have diferent afordances that afect how they can be used in the game. Some participants levied criticism toward the implementation of these RRMs in drastically impacting in-game progression. In certain cases, players perceived they were almost required attain certain rewards through a RRM system in order to gain progression through the game. One pointed to Maplestory as an example of "A game where if you don't pay money or put in a lot of time, you can't play most of the game" (P8). Ultimately, participants disliked implementations of RRMs in which game progress is largely stalled or impeded unless the user can either pay money or put in a perceived proportionate amount of time to "grind" for the necessary optimal rewards. Grinding has been described as the process of continually performing an in-game action until an outcome has been reached. Although grinding can sometimes be viewed as a motivator for gameplay (especially if the action is enjoyable to the player) <ref type="bibr" target="#b46">[64]</ref>, it can also incur feelings of boredom when players view their actions solely as a means towards an end <ref type="bibr" target="#b53">[71]</ref>. An example of grinding can be seen in Maplestory -in order to progress certain questlines, users need to complete the task of collecting a certain number of loot items dropped according to random chance by monsters. One player stated that their mentality when engaging in this sort of grinding was that "you're just hoping the items drop, you're sort of wondering am I just unlucky or am I spending more time than I really should be doing this sort of thing" (P10). This player recognized that systems of grinding for rewards is not unique to RRMs -grinding also can be deterministic (e.g. in Maplestory, certain other questlines require you to kill a specifed number of monsters). However, player ultimately stated that a deterministic system was much preferred over a random one -"I defnitely prefer the deterministic one ... it defnitely just feels a little better to just know that you'll be done once and for all if you do it in a deterministic way" (P10), which corroborates past research on the impact of stochastic rewards <ref type="bibr" target="#b24">[39]</ref>. Overall, the uncertainty in player expenditure of time and efort can make randomized grinding a generally unappealing aspect to players.</p><p>2: Arknights' in-game currency can be purchased by expending real-world money. This in-game currency can eventually be traded in for a "headhunting pull", the game's gacha system that provides players with randomly-drawn operators (in-game usable characters) [35] (image © Hypergryph). 4.1.4 "Simulated Determinism" and Disengagement through Repetition. Another criticism of RRM implementations relates to realworld currency as a trigger condition for the reception of the reward (an example of this from the game Arknights <ref type="bibr" target="#b48">[66]</ref> is shown in Figure <ref type="figure">2</ref>). In the RRMs that were viewed as having non-problematic efects, rewards were largely received through an intrinsic trigger, conditions that trigger automatically through simply playing the core game. In these cases, the reception of the reward is gated by the time and efort to trigger certain programmed game conditions. However, gacha-like implementations, items are received through the extrinsic trigger of paying in-game currency, often exchanged from real-life money. Thus, the concept of time and efort as necessary trade-ofs for the reception of earned rewards is lost -disposable fnancial resources outweigh these factors, which players reacted negatively towards. When players are willing to pay money for rewards, these rewards essentially occur at a continuous schedule so long as the player continually puts in money, leading to a highly repetitive reward process <ref type="bibr" target="#b36">[53]</ref>. As some participants indicated, this allows them to exploit the probabilistic nature of RRMs in order to increase their probabilities of getting their desired, often-rare rewards.</p><p>One participant stated that "I go in with the expectation that I will pull this character, and have a budget for my pulls" (P3). In these cases, players are essentially simulating the reception of a deterministic desired reward through continually triggering random rewards at the cost of money. In these cases, the previously discussed positives of random rewards -diversity in gameplay, adaptation to provided rewards, and excitement from uniqueness -are lost. The same participant stated that when they engage in these systems, they view all other rewards with apathy, and even when they get the desired reward, they may feel "happy, but also unlucky if it took too many tries" (P3). Risking real money puts an overemphasis on the outcome of the RRM <ref type="bibr" target="#b25">[40]</ref>, and when the outcome is undesirable, users tend to react negatively. In addition, due to the continuous trigger of the reward process, the RRM process tended to become stale to users quickly and users tended to disengage from the reward process, e.g. "I feel if I were to open a lot, e.g. like 100 or 300, I would like to skip the animation ... it would get annoying after a while" (P2), "getting so much loot I'm not as excited because it's so repeated" (P9), or simply "it's too much, it's too repetitive (P11). 4.1.5 Perceived Gambling, Entrapment, and Near Miss. Some participants likened RRM systems that allowed the use of real-life money to gambling, and put the blame on companies for exploiting the For example, when recounting their past experience with gacha games, one participant stated that "I'm not a huge fan of the system because they are optimized to make more money, they are designed so that if you don't spend money your progress is a lot more limited. [Companies] have psychological tricks to make you spend more money" (P8). This participant referred to tricks as possible psychological stratagems that encourage harmful playing. From our interviews, we were able to identify two such examples of these tricks -entrapment and near miss <ref type="bibr" target="#b57">[75]</ref>.</p><p>Entrapment is a phenomenon in which players feel obligated to continue investing resources in obtaining a reward, despite constant loss <ref type="bibr" target="#b57">[75]</ref>. Within the context of RRMs involving real-money, entrapment can manifest when players continually purchase rewards with the goal of obtaining a high-rarity one. Xiao and Henderson argue that the "pity system" mechanic prevalent in games may give rise to such efects <ref type="bibr" target="#b107">[128]</ref>. Through our material collection and observation of existing RRM systems, pity systems (systems in which the probability of getting a higher value, and thus more desirable, reward increases with the number of times a user triggers the condition to receive the reward <ref type="bibr">[33,</ref><ref type="bibr" target="#b114">135]</ref>) were found to be most prevalent in RRMs that exchange real-life money for rewards. Although such systems can be seen as player-friendly mechanics that help players achieve their desired results faster at a statistically lower fnancial cost (e.g. "it feels better to pull with a more guarantee at the back of your mind" (P2) and "[a pity system] encourages the player to keep going since they expect they will get something better" (P5)), they also served as temptations for users to spend money for better odds; money users may not otherwise spend in the absence of such a system. At least one player stated that they would likely not spend money on games without pity systems, e.g. "I think you have to have a pity system or else I would get so mad in not getting the item forever that I would actually quit the game" (P14).</p><p>Near miss is a phenomenon in which the player feels that they are close to winning despite a loss, even if this is not necessarily the case <ref type="bibr" target="#b57">[75,</ref><ref type="bibr" target="#b90">108]</ref>. the context of RRMs involving real-money, near misses arise players feel they are close to getting their desired reward, thus being encouraged to pay again for another chance at the reward. An example of such a system is weapon cases in Counter Strike: Global Ofensive. In the presentation of the reward, a virtual roulette wheel showing all possible receivable items spins until it stops at a single weapon. When the user receives an undesired item that is spatially close to a desired item, players feel as though they were close to receiving that item, even though in reality this may not be the case, e.g. "you're just like praying it lands on a spot that is really good, it's like oh, I was so close to getting this purple one" (P6), with purple indicating a rarer and more valuable reward. However, some participants did catch onto this phenomena, e.g. "I don't like how it baits you with "almost" getting rare items" (P3).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Yin and Xiao</head></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.2">RRM Presentation</head><p>4.2.1 Auditory, Visual, and Integration Design Decisions. From our interviews, we found that the auditory and visual features involved in the presentation of RRM rewards played a large part in player enjoyment and engagement of the overall game. Players noted that suitable auditory and visual features were highly dependent on the context of the reward in the game. Participants expressed a desire for a more "juicy" presentation -one that is more visually and auditory stimulating and involves more polished animations and particle efects -if they are putting in a large amount of resources (time, efort, and/or monetary value) in order to trigger the condition for the RRM reward, e.g. "you expect the presentation to be very satisfying, you want a kinda wow, amazing type of visual and audio cue" (P2). Ultimately, this fnding helps contextualize prior research on the relationship between juicy efects and player experience in RRM systems <ref type="bibr" target="#b56">[74]</ref>, showing that the level of juiciness in reward presentation should be commensurate with the resources involved in obtaining the reward in order to have a positive efect.</p><p>However, the presentation experience also depends on how the condition for the RRM is integrated within the core gameplay. One participant stated that "If the gameplay is related to what and how you receive [the reward], it's ideal that it doesn't break the gameplay fow" (P3), demonstrating that an RRM triggered by a core gameplay event, an intrinsic trigger, difers from an RRM triggered by an external event, an extrinsic trigger. Participants indicated that most RRMs should typically match the "pace" (P14) or "fow" (P3) of the game, explaining that frequent RRMs received from intrinsic rewards from playing the game should be presented directly within the game without the need to break the core gameplay session. These rewards tended to feel less signifcant to the user, for example, in regards to the upgrade system in Hades, interviewees stated that "I don't really feel the weight as much" (P3). However, was noted that infrequent, high-efort RRMs can be presented within a separate menu as contrast, as the additional work done by the user (in the form of button clicks) can introduce variety in how rewards are presented and emphasize the importance and value of specifc reward mechanisms.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.2.2">Rewarding Luck.</head><p>Compared to other reward mechanisms, RRMs may take on any range of possible rewards, some significantly better or worse than others. Ultimately, the determining factor in determining where this reward falls on the spectrum comes down to a probabilistic dice roll, where the concept of luck plays a major role. The relative value of the reward provided by the RRM is frequently indicated by "rarity" -a common term across video games typically denoting the value of a reward. In RRMs, high rarity rewards are typically much scarcer, resulting in lower percentage odds of materializing for the user <ref type="bibr" target="#b61">[79,</ref><ref type="bibr" target="#b101">121]</ref>. However, rare are typically much more desirable for the player to obtain, due to the fact that they typically provide better in-game stats, are more aesthetically pleasing, etc. Interview participants tended to express greatly positive sentiments towards obtaining rare items, e.g. "I feel very happy if I get a really rare item" (P7). However, consequence of having tiers of rarity is that lower-rarity rewards are often treated with indiference, despite the fact that they are technically still benefcial rewards provided to the user. When describing the attitude towards lower-rarity rewards, participants typically responded with displeasure, e.g. "if I get something [not as good] I feel worse" (P6), or apathy, e.g. "oh well, unlucky" (P3). A greater disparity in reward value and presentation tended to induce stronger negative emotions for users when receiving lower-valued rewards. Despite this, users still showed a preference for having diferent values of rarities clearly displayed, with the common sentiment being that the elation of infrequently receiving rare rewards heavily outweighed the disappointment or apathy of getting many non-rare ones.</p><p>The rarity of an item is one of the most important factor in RRM rewards. The random aspect of rarity contributes to a heightened feeling of drama and suspense within the player just before receiving the reward <ref type="bibr" target="#b25">[40]</ref>, and additional factors, such as auditory cues and visual efects, work together in tandem to reinforce these feelings. During the interviews, nearly all participants emphasized the need for high-rarity items to be clearly represented to have a stronger emotional impact through the use of special auditory and visual cues. Users mentioned the common standards of colours used across many video games to denote the rarity of items. Gray, blue, purple, gold in order of increasing rarity is a common pattern, with variations existing depending on the game and the number of rarity tiers. For example, gun skins in Apex Legends (Figure <ref type="figure">2</ref>) fall into four rarity tiers and follow the aforementioned colour standard. Users indicated that games should generally follow these existing standards due to the acclimatization of these colours to evoke certain expectations. Participants also mentioned a variety of methods used to present high-rarity items that would increase their positive emotional efect on the user, including "the animation should take longer to build suspense" (P2), "if the reward is very rare, it deserves a better animation" (P5), and "adding delay and baiting the colours of the rarity for the thrill" (P3). Users indicated that the existence or non-existence of juicy visual and audio cues in games can have drastically diferent efects on their emotions, for example, Genshin Impact I feel I got something really good because I can see that it shows that I got something really good. whereas in [League of Legends] they feel all the same, . . . , so I don't really care about the skin I get it's all just whatever (P14).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.2.3">Reward</head><p>Presentation as a Reward. The reward presentation process of RRMs can be seen as a reward in itself. The juiciness of the presentation, in the form of visual efects, animations, sound efects, and music, may be used to generate anticipation and excitement.</p><p>For example, when packs are opened in Apex Legends, players are presented with a short animation in which a robot appears, spins around with multicoloured lights corresponding to the rarity of the items the robot contains, and then drops these randomized items for the user. This process was well received by the interviewees, stated that "it's just visually appealing to look at" (P8), and "you get a fash of light at the beginning, and you're like oh ****, ... it's really exciting you know. " (P5). Similar sentiments were issued for games with high quality animations and polished efects, such as Genshin Impact and Monster Hunter World. Participants indicated that having these juicy animations and efects strongly afected their emotions and anticipation. As a result, the combination of these various factors constituting the reward presentation as a whole can be treated as a reward -an audiovisual experience provided to recognize the player's eforts on top of the received reward. Participants noted that these features feel particularly rewarding when they have put in a large amount of time, efort, or monetary value into obtaining the reward and are thus expecting to receive a highly valuable reward.</p><p>On the contrary, when users invest these factors, and the presentation lacks these juicy factors, it can hinder the user's enjoyment of the reward. In Maplestory, when users complete a "Tower of Oz" run and receive a ring box, the opening of the reward is presented with minimal visual efects and sound efects. As a result, participants reacted negatively, stating that "I think it's pretty bad ... it's not something that is super spectacular, or something that makes you feel really great and stuf" (P1), "It's like another chore" (P13), "don't feel excited to get it" (P9), and that "Wow, this is the most boring opening I've ever seen. It feels like you're doing homework, feels like you're just clicking buttons. There's no visual feedback or visual reward" (P7). In this case, users felt demonstrably worse compared to the expressed sentiments for other RRM reward presentations, noting that this presentation could devalue the received reward for them as well. This illustrates the importance of suitable efects in presenting RRMs, essentially turning the reward process into a reward in itself and generating additional feelings of competence and accomplishment for the player. One participant expressed that they enjoyed high-quality animations during the reward presentation "because it shows appreciation from developers when you get rewards so [the animation is] in a sense a reward for progression" (P1).</p><p>However, even with juicy efects, the way in which these effects are implemented may impact player enjoyment as well; ultimately, users' subjective feelings play a part in impacting their experience. One controversial reward presentation is the opening of weapon cases in Counter Strike: Global Ofensive, which uses a virtual roulette as described previously. Participants were split on whether or not they liked this roulette animation. Some users stated that "I really like how you can see all the possibilities of stuf you can get, and you're just like praying it lands on a spot that is really good" (P14) whereas others stated that "I think it might annoy me" (P8). Participants were almost universally in agreement that this reward presentation was the closest to gambling, with many expressing similarities to slot machines. Although this was mostly seen as a negative aspect, some people stated that they liked it because it was similar to virtual gambling, e.g. "I like it very much ... it's like you go to the casino to play slots" (P5).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5">DISCUSSION</head><p>5.1 Implementing and Designing RRM Systems 5.1.1 Randomness and its Efect on Player Experience. Our fndings indicated that rewards have number of diferent experiential design considerations that must be considered by game developers. It is important to understand the benefts and detriments of having RRM systems versus the direct -nonrandom (deterministic) reward systems -where the same reward is provided to all players upon their trigger condition. As a RRM reward can take on a spectrum of diferent rewards, RRM systems must consider the afordances and consequential player experience provided by all levels of rewards -i.e. how player experience difers when diferent rewards are provided and how players may adapt to diferent rewards. From our fndings, players feel apathy and annoyance when the random process provides them with rewards that lack personal or relative value compared to what they could have received. players obtain perceived rewards, the game designer must consider what subsequent actions a player may take to alleviate these negative emotions. Will players tend to trigger the condition to obtain the reward again (requiring repetition and more time and efort) or will they tend to adapt to what they have and be forced to continue the game (requiring the user to adapt to worse rewards)? The interaction of users with random rewards introduces unique challenges and emotional considerations for game designers to consider.</p><p>In some extreme cases, users may feel as though they must obtain certain rewards order to progress the game in their desired manner. If there are certain aspects or features of the game users cannot access until they obtain the correct reward, we hypothesize from our fndings that users will tend to view this extremely negatively in terms of engagement and enjoyment. Grinding for the sole purpose of receiving a reward is viewed negatively by players, and the process of repeating an action they otherwise would not until they eventually achieve the correct reward can be extremely frustrating and boring 92]. Thus, one proposed design rule is that gameplay features should not be blocked based on the reward that a player gets from a RRM. Game developers should not let the player experience greatly sufer when luck provides players with less valuable rewards from RRMs.</p><p>Our fndings also indicated that the implementation of RRM mechanics heavily places player anticipation and associated positive emotions on the most valuable, highest-rarity rewards provided from the RRM system. Players view all other rewards largely with indiference and apathy, treating them as obstacles or hindrances between them and the higher value rewards. When designing an RRM system, developers should consider whether this emotional trade-of fts within the context of their game -is it worth it for players to feel better receiving scarce good rewards if it means that they must feel worse when receiving the plentiful poor rewards? In some cases, this may depend on the odds in which diferent rewards are randomly manifested. Our interviews have shown that users who continually receive poor rewards start to quickly feel highly negative emotions. Developers should consider whether or not it is worth implementing a system for a player to eventually receiving a good reward, evoking positive emotions and feelings of appreciation in the player, after obtaining multiple poor rewards from an RRM, e.g. through a pity system. Similar to prior recomregarding uncertainty in games <ref type="bibr" target="#b25">[40]</ref>, game developers must ultimately aim to strike a balance between the experiential outcomes of RRM systems based on the experience they aim to induce.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.1.2">Luck versus</head><p>Skill: A Qestion of Fairness. When RRMs directly afect gameplay elements, it was noted that some portion of skill was traded of for luck -a lower-skilled player could match up with a higher-skilled player if the rewards received are objectively favourable towards the lower-skilled player. Although many interview participants indicated that this has many benefts, such as making the game less frustrating for novice players, participants also provided potential drawbacks of this trade-of. These drawbacks were especially evident in competitive multiplayer games, e.g. "it could make some players very mad because luck is random, so if they lose to someone worse because of luck it might make them very uncomfortable or very sad or feel that it is unfair. " (P7). Certain players may feel slighted or annoyed when the factor of luck native to RRMs cause them to lose to perceived worse players. On the other hand, Costikyan argues that many players want to feel that they won through their skill at the game, and not random luck <ref type="bibr" target="#b25">[40]</ref>. Framing these arguments in terms of past research in video game motivation <ref type="bibr" target="#b85">[103,</ref><ref type="bibr" target="#b88">106]</ref>, RRMs may cause players to feel a loss of autonomy because they relinquish some aspect of control in terms of what sort of rewards they get. Furthermore, players may feel slighted because their perceived competence goes unrewarded, to increased frustration and disengagement from the game. Past research in the area has shown that a mismatch in skill levels for competitive games can cause enjoyment to deteriorate for all; attempts to balance the game, while helpful in decreasing the skill gap and increasing enjoyment for certain users, can be controversial when considering perceived <ref type="bibr" target="#b6">[9,</ref><ref type="bibr" target="#b19">22,</ref><ref type="bibr" target="#b97">117]</ref>.</p><p>It was noted that for competitive games with consequences, e.g. esports, factors of luck may undermine the competitive integrity of the game. Many interview participants perceived in these games to be largely detrimental, aligning with the view that competency, the skill of performing the core gameplay of a game, should be the determining factor in who wins in a competitive setting. Although the concept of luck undermining competitiveness is a common view, past research has argued that subtle amounts of luck may in fact enhance competitiveness and add suspense to the results of competitive contests <ref type="bibr" target="#b92">[110]</ref>. In addition, as argued before, unpredictability from random rewards can incite the development of an additional skillset -adaptability, the ability for a player to adjust their strategy based on random variables <ref type="bibr" target="#b25">[40]</ref>. Thus, top players can diferentiate themselves not only through pure gameplay skill, but through adaptability as well. Overall, games that are highly dependent on random rewards have worked as competitive esports in the past [5, 57], yet have also been criticized for this exact factor as well, as developers struggle to balance rewards for both casual and competitive players <ref type="bibr" target="#b65">[83,</ref><ref type="bibr" target="#b95">113]</ref>.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.1.3">Designing for Emotional</head><p>Significance. From our fndings, we recognized that the rewards users receive systems can provide various levels of emotional impact to the player based on 3 key factors:</p><p>• The time required the user to trigger the condition to receive the reward. • The efort required the user to trigger the condition to receive the reward. • The relative value of the received reward.</p><p>As well as one additional optional factor:</p><p>• The equivalent monetary value required receive the reward (depending on whether or not RRM can be achieved through monetary spending).</p><p>For RRMs that require more time, efort, or monetary value in order to receive the reward, users had a tendency to attach more sentimental meaning and signifcance into the reception of the reward. In doing so, they expected the visual and auditory features in the presentation of the reward should be proportional to its signifcance -the presentation should be more juicy. Unique to RRM systems is that, despite the resources that a player puts into receiving the reward, they may still receive a relatively poor reward that they feel is disproportionate to the resources they have put in. From our fndings, we that there is still purpose in having poor rewards that are presented with much less audiovisual fanfare -the contrast they provide makes the reception of higher value rewards feel much more emotional and meaningful to the user. When users receive a rare reward when this contrast exists, they feel as though, in addition to their time and efort, their luck has also fnally been rewarded as well. The contrast and disparity between diferent relative values of rewards from the same RRM system was seen as an overall positive throughout the interviews.</p><p>We also found that the signifcance and personal value of the reward is directly tied to the presentation of the reward, including how the player should navigate to receive their reward (whether they need to navigate to a separate menu) and its juiciness. When the reward process was polished and included added features such as animations and particle efects, positive emotions including appreciation and happiness were induced -the reward process itself was perceived be an added reward on top of the already received reward. Decisions such as having the reward process take place on a menu separate from the core gameplay could provide additional anticipation and excitement to the process, despite inconveniencing the player through executing more button clicks. On the other hand, mismatches between the presentation of the reward and the perceived of the reward introduced negative feelings of annoyance, apathy and boredom.</p><p>To illustrate how these design decisions difer across two distinct RRMs, we contrast the "boon system" in Hades to the "hextech chests system" in League of Legends (Figure <ref type="figure">1</ref>). Hades is a hack-andslash roguelike in which players continually clear rooms and fght bosses at the end of every stage. In many rooms, users are able to obtain boons -upgrades to their character -after clearing them. For this reward, the time and efort required the user to clear the room is relatively low, the condition of clearing a room is tied in intrinsically with the gameplay progression, and users frequently clear many rooms in a single run. On the contrary, League of Legends is a MOBA in which players engage in 5-on-5 games. Users obtain keys and chests by playing games and performing well. They can then use these items on a separate menu to craft new champions, skins, emotes, etc. For this reward, users require substantially more time and efort to obtain the necessary prerequisite items, the condition of unlocking a chest is done on a menu separate to the core gameplay, and the reward is presented much less frequently. Participants expressed drastically diferent expectations between these two reward processes -the hextech chests were viewed more critically in terms of the auditory and visual qualities. On the contrary, when discussing Hades' boon system, users stated that "it doesn't need to look fashy, it's part of the game. " (P8), "it's a diferent mechanic compared to the others . . . because it is so common, it should be faster." (P14), and "I kinda approach it with a diferent mindset, not about satisfaction or coolness, it's just after you see the choices, which one should you choose for your character" (P2).</p><p>Thus, when designing RRMs, it is important to consider the potential perceived signifcance of a reward for the player, which is typically proportional to the resources expended to receive the reward. Diferent amounts of required resources induce diferent expectations within players in regards to reward presentation and reception. The design of the RRM presentation, including the juiciness of the auditory and visual efects, ultimately involve a trade-of between gameplay fow (and the possible introduction of typically non-user friendly design decisions) for a higher emotional impact and higher perceived signifcance. If the design of the RRM presentation fails to match player expectations, players may become frustrated and annoyed, leading to disengagement from the game.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="6">LIMITATIONS</head><p>We identify several methodological limitations within the scope of our study. Firstly, it is not guaranteed that our selection of 28 games and 35 RRMs provided us with enough information to make statements regarding all RRMs. We recognize that some of this derives from the arbitrariness in criteria in game selection. This issue was brought on by the limitations and difculties in gathering summative information across games. Whereas it was simple to fnd a list of the games with the highest player-counts, it proved difcult to fnd lists of games sorted by other experiential aspects, such as player enjoyment of the game. Another limitation in the selection process was that certain games already familiar to the researchers. Although this helped with performing deductive thematic analysis, it also introduced selection bias within the fndings. Overall, a more comprehensive study may use a broader selection of games and rewards within games to better capture a more representative set of RRMs.</p><p>The participants for our interview study tended to skew towards young men. Past research has looked into diferences in gender on perception of luck <ref type="bibr" target="#b30">[45]</ref>, and further research is required to better generalize our fndings towards the representative population of video game players. In addition, the sampling used (personal recruitment and snowball sampling) are cheap and efcient, but sampling bias may cause issues of generalizability to the entire population. Furthermore, our study looks only at the perspective towards RRMs by video game players. Further interviews with other stakeholders involved in the design and implementation of RRMs, such as game designers, could provide deeper insight into the rationale into the value of RRMs, what experience they are designing for players, what kind of emotional expectations do they have for their reward system, etc.</p><p>During our interview study, we had players view RRMs through short clips, however, full context of the game could be provided due to the limited time. Alternative methodologies were considered, for example, having players actually play the games volved to fully capture the context regarding the resources required to achieve the rewards, however, this was decided against due to time and technological constraints. Lastly, although we identifed a classifcation system and developed methodological suggestions for RRM design based on our qualitative fndings, the use of our suggestions in RRM design was not tested quantitatively. To do so, possible statistical tests based on user satisfability and user experience surveys could be done between existing RRM systems and RRM systems improved through our design suggestions in order to demonstrate the applicability of our recommendations.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="7">CONCLUSION</head><p>This work examined how video game players interact and perceive RRMs in video games, with a focus on understanding how RRMs impact the player experience. Through a video analysis of prevalent common RRM systems, an initial classifcation system based on 9 dimensions was developed. Furthermore, an interview study revealed while players may fnd many aspects of the random process engaging and fun, such as its abilities to create fresh experiences in gameplay and to balance out skill levels, certain aspects are found to be frustrating, such as when RRMs inhibit aspects of gameplay. The interviews also revealed users have a negative perception of RRMs that use real-life currency as a trigger condition; these RRMs also create a sense of disengagement for the players, who treat them more as repetitive tasks rather than rewards. The results also revealed the presentation of an RRM reward can play a major part in the the emotional impact that a user experiences when receiving a random reward. Using the fndings, some proposed methodological suggestions were made on how to develop more emotionally-engaging and user-friendly RRM systems.</p></div><figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_0"><head>Figure 3 :</head><label>3</label><figDesc>Figure 3: Rewards in the form of gun skins from opening packs in the game Apex Legends have diferent associated colours and efects depending on their rarity -(a) a common (gray), (b) rare (blue), (c) epic (purple), and (d) legendary (gold) gun skin (image © Electronic Arts).</figDesc><graphic url="image-3.png" coords="9,53.80,83.69,240.24,88.05" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0"><head></head><label></label><figDesc></figDesc><graphic url="image-1.png" coords="1,53.80,192.81,504.41,119.36" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_0"><head>•</head><label></label><figDesc>Hextech Chests from League of Legends [58] • Packs from Apex Legends [50] • Weapon Cases from Counter Strike: Global Ofensive [116]• Tower of Oz Ring Boxes from Maplestory<ref type="bibr" target="#b106">[127]</ref> • Wishes from Genshin Impact<ref type="bibr" target="#b71">[89]</ref> • Quest Rewards from Monster Hunter World<ref type="bibr" target="#b18">[21]</ref> • Boons from Hades<ref type="bibr" target="#b41">[59]</ref> </figDesc><table /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_1"><head>Table 2 :</head><label>2</label><figDesc>Summary of Interviewees</figDesc><table><row><cell cols="4">ID Age Sex Hours Playing Games / Week</cell></row><row><cell>1</cell><cell>24</cell><cell>M</cell><cell>20</cell></row><row><cell>2</cell><cell>24</cell><cell>M</cell><cell>25</cell></row><row><cell>3</cell><cell>23</cell><cell>M</cell><cell>20</cell></row><row><cell>4</cell><cell>23</cell><cell>F</cell><cell>5</cell></row><row><cell>5</cell><cell>24</cell><cell>M</cell><cell>5</cell></row><row><cell>6</cell><cell>20</cell><cell>F</cell><cell>5</cell></row><row><cell>7</cell><cell>23</cell><cell>M</cell><cell>4</cell></row><row><cell>8</cell><cell>23</cell><cell>M</cell><cell>10</cell></row><row><cell>9</cell><cell>24</cell><cell>F</cell><cell>5</cell></row><row><cell cols="2">10 23</cell><cell>F</cell><cell>21</cell></row><row><cell cols="2">11 30</cell><cell>M</cell><cell>16</cell></row><row><cell cols="2">12 24</cell><cell>M</cell><cell>5</cell></row><row><cell cols="2">13 23</cell><cell>F</cell><cell>10</cell></row><row><cell cols="2">14 23</cell><cell>M</cell><cell>20</cell></row></table></figure>
+			<note xmlns="http://www.tei-c.org/ns/1.0" place="foot">'22, April 29-May 5, 2022, New Orleans, LA, USA</note>
+		</body>
+		<back>
+
+			<div type="acknowledgement">
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>ACKNOWLEDGMENTS</head></div>
+			</div>
+
+			<div type="references">
+
+				<listBibl>
+
+<biblStruct xml:id="b0">
+	<monogr>
+		<title level="m" type="main">Playing With Feelings: Video Games and Afect</title>
+		<author>
+			<persName><forename type="first">Aubrey</forename><surname>Anable</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2018">2018</date>
+			<publisher>University of Minnesota Press</publisher>
+			<pubPlace>Minneapolis, MN, USA</pubPlace>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b1">
+	<analytic>
+		<title level="a" type="main">Reputation and Reliability in Collective Goods: The Case of the Online Encyclopedia Wikipedia</title>
+		<author>
+			<persName><forename type="first">Denise</forename><surname>Anthony</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sean</forename><forename type="middle">W</forename><surname>Smith</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Timothy</forename><surname>Williamson</surname></persName>
+		</author>
+		<idno type="DOI">10.1177/1043463109336804</idno>
+		<ptr target="https://doi.org/10.1177/1043463109336804" />
+	</analytic>
+	<monogr>
+		<title level="j">Rationality and Society</title>
+		<imprint>
+			<biblScope unit="volume">21</biblScope>
+			<biblScope unit="page" from="283" to="306" />
+			<date type="published" when="2009">2009. 2009</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b2">
+	<analytic>
+		<idno>arcticfox4. 2019</idno>
+		<ptr target="https://www.ea.com/games/apex-legends/about/frequently-asked-questions" />
+	</analytic>
+	<monogr>
+		<title level="m">Ex Neverwinter Dev Tweets about Loot Boxes. Reddit. Retrieved</title>
+				<imprint>
+			<date>February 16</date>
+			<biblScope unit="volume">16</biblScope>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b3">
+	<monogr>
+		<title level="m" type="main">The Hidden Intricacy of Loot Box Design: A Granular Description of Random Monetized Reward Features</title>
+		<author>
+			<persName><forename type="first">Nick</forename><surname>Ballou</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Charles</forename><surname>Gbadamosi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">David</forename><surname>Zendle</surname></persName>
+		</author>
+		<idno type="DOI">10.31234/osf.io/xeckb</idno>
+		<ptr target="https://doi.org/10.31234/osf.io/xeckb" />
+		<imprint>
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b4">
+	<analytic>
+		<title level="a" type="main">Hearts, Clubs, Diamonds, Spades: Players who Suit MUDs</title>
+		<author>
+			<persName><forename type="first">Richard</forename><surname>Bartle</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Journal of MUD research</title>
+		<imprint>
+			<biblScope unit="volume">1</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<date type="published" when="1996">1996. 1996</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b5">
+	<monogr>
+		<title level="m" type="main">Designing Virtual Worlds. New Riders</title>
+		<author>
+			<persName><forename type="first">Richard</forename><forename type="middle">A</forename><surname>Bartle</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2004">2004</date>
+			<pubPlace>San Francisco, CA, USA</pubPlace>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b6">
+	<analytic>
+		<title level="a" type="main">Target Assistance for Subtly Balancing Competitive Play</title>
+		<author>
+			<persName><forename type="first">Scott</forename><surname>Bateman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Regan</forename><forename type="middle">L</forename><surname>Mandryk</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Tadeusz</forename><surname>Stach</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Carl</forename><surname>Gutwin</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings the SIGCHI Conference on Human Factors in Computing Systems</title>
+				<meeting>the SIGCHI Conference on Human Factors in Computing Systems<address><addrLine>Vancouver, BC, Canada; New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computing Machinery</publisher>
+			<date type="published" when="2011">2011</date>
+			<biblScope unit="page" from="2355" to="2364" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b7">
+	<monogr>
+		<title level="m" type="main">Gaming loot What happened when Belgium banned them? BBC</title>
+		<author>
+			<persName><surname>Bbc</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2019-08-27">2019. August 27. 2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b8">
+	<monogr>
+		<title level="m" type="main">Unit Operations: An Approach to Videogame Criticism</title>
+		<author>
+			<persName><forename type="first">Ian</forename><surname>Bogost</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2008">2008</date>
+			<publisher>MIT Press</publisher>
+			<pubPlace>Cambridge, MA, USA</pubPlace>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b9">
+	<analytic>
+		<title level="a" type="main">It Was Sad But Still Good&quot;: Gratifcations of Emotionally Moving Game Experiences</title>
+		<author>
+			<persName><forename type="first">Julia</forename><forename type="middle">Ayumi</forename><surname>Bopp</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Elisa</forename><forename type="middle">D</forename><surname>Mekler</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Klaus</forename><surname>Opwis</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2702613.2732852</idno>
+		<ptr target="https://doi.org/10.1145/2702613.2732852" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings the 33rd Annual ACM Conference Extended Abstracts on Human Factors in Computing Systems</title>
+				<meeting>the 33rd Annual ACM Conference Extended Abstracts on Human Factors in Computing Systems<address><addrLine>Seoul, Republic of Korea; New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computing Machinery</publisher>
+			<date type="published" when="2015">2015</date>
+			<biblScope unit="page" from="1193" to="1198" />
+		</imprint>
+	</monogr>
+	<note>CHI EA &apos;15)</note>
+</biblStruct>
+
+<biblStruct xml:id="b10">
+	<analytic>
+		<title level="a" type="main">Negative Emotion, Positive Experience? Emotionally Moving Moments in Digital Games</title>
+		<author>
+			<persName><forename type="first">Julia</forename><forename type="middle">Ayumi</forename><surname>Bopp</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Elisa</forename><forename type="middle">D</forename><surname>Mekler</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Klaus</forename><surname>Opwis</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2858036.2858227</idno>
+		<ptr target="https://doi.org/10.1145/2858036.2858227" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2016 CHI Conference on Human Factors in Computing Systems</title>
+				<meeting>the 2016 CHI Conference on Human Factors in Computing Systems<address><addrLine>San Jose, California, USA; New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computing Machinery</publisher>
+			<date type="published" when="2016">2016</date>
+			<biblScope unit="page" from="2996" to="3006" />
+		</imprint>
+	</monogr>
+	<note>CHI &apos;16)</note>
+</biblStruct>
+
+<biblStruct xml:id="b11">
+	<analytic>
+		<title level="a" type="main">Are Loot Boxes Addictive? Analyzing Participant&apos;s Physiological Arousal While Opening a Loot Box</title>
+		<author>
+			<persName><forename type="first">Andrew</forename><surname>Brady</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Garry</forename><surname>Prentice</surname></persName>
+		</author>
+		<idno type="DOI">10.1177/1555412019895359</idno>
+		<ptr target="https://doi.org/10.1177/1555412019895359" />
+	</analytic>
+	<monogr>
+		<title level="j">Games and Culture</title>
+		<imprint>
+			<biblScope unit="volume">16</biblScope>
+			<biblScope unit="page" from="419" to="433" />
+			<date type="published" when="2021">2021. 2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b12">
+	<monogr>
+		<author>
+			<persName><forename type="first">Virginia</forename><surname>Braun</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Victoria</forename><surname>Clarke</surname></persName>
+		</author>
+		<title level="m">Thematic Analysis. American Psychological Association</title>
+				<meeting><address><addrLine>Washington, D.C., USA</addrLine></address></meeting>
+		<imprint>
+			<date type="published" when="2012">2012</date>
+			<biblScope unit="page" from="57" to="71" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b13">
+	<analytic>
+		<title level="a" type="main">Associations Between Loot Box Use, Problematic Gaming and Gambling, and Gambling-Related Cognitions</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Gabriel</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Luke</forename><surname>Brooks</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Clark</surname></persName>
+		</author>
+		<idno type="DOI">10.1016/j.addbeh.2019.04.009</idno>
+		<ptr target="https://doi.org/10.1016/j.addbeh.2019.04.009" />
+	</analytic>
+	<monogr>
+		<title level="j">Addictive Behaviors</title>
+		<imprint>
+			<biblScope unit="volume">96</biblScope>
+			<biblScope unit="page" from="26" to="34" />
+			<date type="published" when="2019">2019. 2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b14">
+	<analytic>
+		<title level="a" type="main">Virtual Cinematography in Games: Investigating the Impact on Player Experience</title>
+		<author>
+			<persName><forename type="first">Paolo</forename><surname>Burelli</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings the 8th International Conference on the Foundations of Digital Games, FDG 2013. Society for the Advancement of the Science of Digital Games</title>
+				<meeting>the 8th International Conference on the Foundations of Digital Games, FDG 2013. Society for the Advancement of the Science of Digital Games</meeting>
+		<imprint>
+			<date type="published" when="2013">2013</date>
+			<biblScope unit="page" from="134" to="141" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b15">
+	<monogr>
+		<title level="m" type="main">Man, Play, and Games</title>
+		<author>
+			<persName><forename type="first">Roger</forename><surname>Caillois</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2001">2001</date>
+			<publisher>University of Illinois Press</publisher>
+			<pubPlace>paign, IL, USA</pubPlace>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b16">
+	<analytic>
+		<title level="a" type="main">Emotional Requirements in Video Games</title>
+		<author>
+			<persName><forename type="first">David</forename><surname>Callele</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Eric</forename><surname>Neufeld</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kevin</forename><surname>Schneider</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">14th IEEE International Requirements Engineering Conference (RE&apos;06)</title>
+				<meeting><address><addrLine>Manhattan, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>IEEE</publisher>
+			<date type="published" when="2006">2006</date>
+			<biblScope unit="page" from="299" to="302" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b17">
+	<analytic>
+		<title level="a" type="main">Eliciting Emotions in Design of Games-a Theory Driven Approach</title>
+		<author>
+			<persName><forename type="first">Alessandro</forename><surname>Canossa</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jeremy</forename><forename type="middle">B</forename><surname>Badler</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Magy</forename><surname>Seif El-Nasr</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Eric</forename><surname>Anderson</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings the 4th Workshop on Emotions and Personality in Personalized Systems co-located with ACM Conference on Recommender Systems</title>
+				<meeting>the 4th Workshop on Emotions and Personality in Personalized Systems co-located with ACM Conference on Recommender Systems<address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computing Machinery</publisher>
+			<date type="published" when="2016">2016. RecSys 2016</date>
+			<biblScope unit="page" from="34" to="42" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b18">
+	<monogr>
+		<title/>
+		<author>
+			<persName><surname>Capcom</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2018">2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b19">
+	<analytic>
+		<title level="a" type="main">Improving Player Balancing in Racing Games</title>
+		<author>
+			<persName><forename type="first">Jared</forename><forename type="middle">E</forename><surname>Cechanowicz</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Carl</forename><surname>Gutwin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Scott</forename><surname>Mandryk</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ian</forename><surname>Stavness</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2658537.2658701</idno>
+		<ptr target="https://doi.org/10.1145/2658537.2658701" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings the First ACM SIGCHI Annual Symposium on Computer-Human Interaction in Play</title>
+				<meeting>the First ACM SIGCHI Annual Symposium on Computer-Human Interaction in Play<address><addrLine>Toronto, Ontario, Canada; New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computing Machinery</publisher>
+			<date type="published" when="2014">2014</date>
+			<biblScope unit="page" from="47" to="56" />
+		</imprint>
+	</monogr>
+	<note>CHI PLAY &apos;14)</note>
+</biblStruct>
+
+<biblStruct xml:id="b20">
+	<analytic>
+		<title level="a" type="main">Engaging primary school children in computational thinking: Designing and developing videogames</title>
+		<author>
+			<persName><forename type="first">Giuseppe</forename><surname>Chiazzese</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Giovanni</forename><surname>Fulantelli</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Vito</forename><surname>Pipitone</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Davide</forename><surname>Taibi</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Knowledge Society</title>
+		<imprint>
+			<biblScope unit="volume">19</biblScope>
+			<biblScope unit="page" from="63" to="81" />
+			<date type="published" when="2018">2018. 2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b21">
+	<monogr>
+		<title level="m" type="main">Random Box Reward Rates</title>
+		<author>
+			<persName><surname>Colonelpanic</surname></persName>
+		</author>
+		<ptr target="https://maplestory.nexon.net/micro-site/36184" />
+		<imprint>
+			<date type="published" when="2018-02-16">2018. February 16</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b22">
+	<monogr>
+		<title level="m" type="main">List of Cartel Pack Contents</title>
+		<ptr target="https://swtor.fandom.com/wiki/List_of_Cartel_Pack_contents" />
+		<imprint>
+			<date type="published" when="2015-02-16">2015. February 16</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b23">
+	<analytic>
+		<title/>
+		<ptr target="https://mrfz.fandom.com/wiki/Originite_Prime" />
+	</analytic>
+	<monogr>
+		<title level="j">Originite Prime. Fandom</title>
+		<imprint>
+			<date>February 16. February 16</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b24">
+	<monogr>
+		<title level="m" type="main">Working Too Much for Too Little: Stochastic Rewards Cause Work Addiction</title>
+		<author>
+			<persName><forename type="first">Brice</forename><surname>Corgnet</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Simon</forename><surname>Gaechter</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Roberto</forename><surname>Hernán-González</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+	<note>IZA Discussion Papers 12992 69 pages</note>
+</biblStruct>
+
+<biblStruct xml:id="b25">
+	<monogr>
+		<title level="m" type="main">Uncertainty in Games</title>
+		<author>
+			<persName><forename type="first">Greg</forename><surname>Costikyan</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2013">2013</date>
+			<publisher>MIT Press</publisher>
+			<pubPlace>Cambridge, MA, USA</pubPlace>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b26">
+	<analytic>
+		<title level="a" type="main">Toward an Understanding of Flow in Video Games</title>
+		<author>
+			<persName><forename type="first">Ben</forename><surname>Cowley</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Darryl</forename><surname>Charles</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Michaela</forename><surname>Black</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ray</forename><surname>Hickey</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Comput. Entertain</title>
+		<imprint>
+			<biblScope unit="volume">6</biblScope>
+			<date type="published" when="2008-07">2008. jul 2008</date>
+		</imprint>
+	</monogr>
+	<note>Article</note>
+</biblStruct>
+
+<biblStruct xml:id="b27">
+	<analytic>
+		<title level="a" type="main">Girls: Associations Between Co-playing Video Games and Behavioral and Family Outcomes</title>
+		<author>
+			<persName><forename type="first">Sarah</forename><forename type="middle">M</forename><surname>Coyne</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Laura</forename><forename type="middle">M</forename><surname>Padilla-Walker</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Laura</forename><surname>Stockdale</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Randal</forename><forename type="middle">D</forename><surname>Day</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Journal of Adolescent Health</title>
+		<imprint>
+			<biblScope unit="volume">49</biblScope>
+			<biblScope unit="page" from="160" to="165" />
+			<date type="published" when="2011">2011. 2011</date>
+		</imprint>
+	</monogr>
+	<note>Game On</note>
+</biblStruct>
+
+<biblStruct xml:id="b28">
+	<analytic>
+		<title level="a" type="main">A Conceptual Afective Design Framework for the Use of Emotions in Computer Game Design</title>
+		<author>
+			<persName><forename type="first">Byl</forename><surname>Penny De</surname></persName>
+		</author>
+		<idno type="DOI">10.5817/CP2015-3-4</idno>
+		<ptr target="https://doi.org/10.5817/CP2015-3-4" />
+	</analytic>
+	<monogr>
+		<title level="j">Cyberpsychology</title>
+		<imprint>
+			<biblScope unit="volume">9</biblScope>
+			<date type="published" when="2015-10">2015. 10 2015</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b29">
+	<analytic>
+		<title level="a" type="main">Assessing Collaboration in a Wiki: The Reliability of University Students&apos; Peer Assessment</title>
+		<author>
+			<persName><surname>Bram De Wever</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Tammy</forename><surname>Keer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Martin</forename><surname>Schellens</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Valcke</surname></persName>
+		</author>
+		<idno type="DOI">10.1016/j.iheduc.2011.07.003</idno>
+		<ptr target="https://doi.org/10.1016/j.iheduc.2011.07.003" />
+	</analytic>
+	<monogr>
+		<title level="j">Internet and Higher Education</title>
+		<imprint>
+			<biblScope unit="volume">14</biblScope>
+			<biblScope unit="page" from="201" to="206" />
+			<date type="published" when="2011-09">2011. 09 2011</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b30">
+	<analytic>
+		<title level="a" type="main">Skill Versus Luck: Field and Laboratory Studies of Male and Female Preferences</title>
+		<author>
+			<persName><forename type="first">Kay</forename><surname>Deaux</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Leonard</forename><surname>White</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Elizabeth</forename><surname>Farris</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Journal of Personality and Social Psychology</title>
+		<imprint>
+			<biblScope unit="volume">32</biblScope>
+			<biblScope unit="page">629</biblScope>
+			<date type="published" when="1975">1975. 1975</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b31">
+	<monogr>
+		<title level="m" type="main">The NetHack DevTeam. 1985. NetHack. The NetHack DevTeam</title>
+		<ptr target="https://www.nethack.org/" />
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b32">
+	<analytic>
+		<title level="a" type="main">Engaging by Design: How Engagement Strategies in Popular Computer and Video Games Can Inform Instructional Design</title>
+		<author>
+			<persName><forename type="first">D</forename><surname>Michele</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Dickey</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Educational Technology Research and Development</title>
+		<imprint>
+			<biblScope unit="volume">53</biblScope>
+			<biblScope unit="page" from="67" to="83" />
+			<date type="published" when="2005">2005. 2005</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b33">
+	<analytic>
+		<title level="a" type="main">Up and Go! Blizzard Entertainment</title>
+		<ptr target="https://www.ea.com/games/apex-legends" />
+	</analytic>
+	<monogr>
+		<title level="j">Apex Legends. Electronic Arts</title>
+		<imprint>
+			<date>February 16</date>
+		</imprint>
+	</monogr>
+	<note>Blizzard Entertainment. 2022. Gear</note>
+</biblStruct>
+
+<biblStruct xml:id="b34">
+	<monogr>
+		<title level="m" type="main">Motivational Factors on Purchase Intention of In-game Hero Skins in MOBA Games. Master&apos;s thesis</title>
+		<author>
+			<persName><forename type="first">Wenqi</forename><surname>Fan</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2019">2019</date>
+		</imprint>
+		<respStmt>
+			<orgName>Northeastern University</orgName>
+		</respStmt>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b35">
+	<monogr>
+		<title level="m" type="main">Are They Really Just Cosmetic? the Impact of Cosmetic Items on Fortnite&apos;s Gameplay and Game Design</title>
+		<author>
+			<persName><forename type="first">John</forename><surname>Joseph Fennimore</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2020">2020</date>
+		</imprint>
+		<respStmt>
+			<orgName>The University of Wisconsin-Milwaukee</orgName>
+		</respStmt>
+	</monogr>
+	<note>Master&apos;s thesis</note>
+</biblStruct>
+
+<biblStruct xml:id="b36">
+	<monogr>
+		<title level="m" type="main">Schedules of Reinforcement. Appleton-Century-Crofts</title>
+		<author>
+			<persName><forename type="first">B</forename><surname>Charles</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Burrhus Frederic</forename><surname>Ferster</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Skinner</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="1957">1957</date>
+			<pubPlace>New York, NY, USA</pubPlace>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b37">
+	<analytic>
+		<title level="a" type="main">Creating Emotion in Games: The Craft and Art of Emo-tioneering™</title>
+		<author>
+			<persName><forename type="first">David</forename><surname>Freeman</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/1027154.1027179</idno>
+		<ptr target="https://doi.org/10.1145/1027154.1027179" />
+	</analytic>
+	<monogr>
+		<title level="j">Comput. Entertain</title>
+		<imprint>
+			<biblScope unit="volume">2</biblScope>
+			<biblScope unit="issue">3</biblScope>
+			<biblScope unit="page">15</biblScope>
+			<date type="published" when="2004-07">2004. jul 2004</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b38">
+	<analytic>
+		<title level="a" type="main">Games of Luck and Games of Chance: The Efect of Luck-Versus Chance-Orientation on Gambling Decisions</title>
+		<author>
+			<persName><forename type="first">Nehemia</forename><surname>Friedland</surname></persName>
+		</author>
+		<idno type="DOI">10.1002/(SICI)1099-0771(199809)11:3&lt;161::AID-BDM296&gt;3.0.CO;2-S</idno>
+		<idno>161-179. 0771</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Journal of Behavioral Decision Making</title>
+		<imprint>
+			<biblScope unit="volume">11</biblScope>
+			<date type="published" when="1998">1998. 1998. 199809</date>
+		</imprint>
+	</monogr>
+	<note>3&lt;161::AID-BDM296&gt;3.0.CO;2-S</note>
+</biblStruct>
+
+<biblStruct xml:id="b39">
+	<monogr>
+		<title level="m" type="main">Developing Friendships and an Awareness of Emotions Using Video Games: Perceptions of Four Young Adults with Autism. Education and Training in Autism and Developmental Disabilities</title>
+		<author>
+			<persName><forename type="first">Jennifer</forename><surname>Gallup</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Barbara</forename><surname>Serianni</surname></persName>
+		</author>
+		<ptr target="https://www.jstor.org/stable/26420384" />
+		<imprint>
+			<date type="published" when="2017">2017. 2017</date>
+			<biblScope unit="volume">52</biblScope>
+			<biblScope unit="page" from="120" to="131" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b40">
+	<analytic>
+		<title level="a" type="main">2022 from championseries-ch2s7/overview Riot Games</title>
+		<ptr target="https://www.leagueofegends" />
+	</analytic>
+	<monogr>
+		<title level="j">League Of Legends. Riot Games</title>
+		<imprint>
+			<date type="published" when="2009-02-16">February 16. 2009</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b41">
+	<monogr>
+		<ptr target="https://www.supergiantgames.com/games/hades/" />
+		<title level="m">Supergiant Games. 2020. Hades (Supergiant Games). Supergiant Games</title>
+				<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b42">
+	<analytic>
+		<title level="a" type="main">Unlocking the Gameworld: The Rewards of Space and Time in Videogames</title>
+		<author>
+			<persName><forename type="first">Alison</forename><surname>Gazzard</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Game Studies</title>
+		<imprint>
+			<biblScope unit="volume">11</biblScope>
+			<biblScope unit="page" from="9" to="13" />
+			<date type="published" when="2011">2011. 2011</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b43">
+	<analytic>
+		<title level="a" type="main">How Color Properties Can Be Used to Elicit Emotions in Video Games</title>
+		<author>
+			<persName><forename type="first">Erik</forename><surname>Geslin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Laurent</forename><surname>Jégou</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Danny</forename><surname>Beaudoin</surname></persName>
+		</author>
+		<idno type="DOI">10.1155/2016/5182768</idno>
+		<ptr target="https://doi.org/10.1155/2016/5182768" />
+	</analytic>
+	<monogr>
+		<title level="j">International Journal of Computer Games Technology</title>
+		<imprint>
+			<biblScope unit="page" from="1" to="9" />
+			<date type="published" when="2016-01">2016. 2016. 01 2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b44">
+	<analytic>
+		<title level="a" type="main">Video Games Do Afect Social Outcomes: A Meta-Analytic Review of the Efects of Violent and Prosocial Video Game Play</title>
+		<author>
+			<persName><forename type="first">Tobias</forename><surname>Greitemeyer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Dirk</forename><forename type="middle">O</forename><surname>Mügge</surname></persName>
+		</author>
+		<idno type="PMID">24458215</idno>
+	</analytic>
+	<monogr>
+		<title level="j">Personality and Social Psychology Bulletin</title>
+		<imprint>
+			<biblScope unit="volume">40</biblScope>
+			<biblScope unit="page" from="578" to="589" />
+			<date type="published" when="2014">2014. 2014</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b45">
+	<analytic>
+		<title level="a" type="main">Game Reward Systems: Gaming Experiences and Social Meanings</title>
+		<author>
+			<persName><forename type="first">Wang</forename><surname>Hao</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sun</forename><surname>Chuen-Tsai</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">DiGRA &apos;11 -Proceedings the 2011 DiGRA International Conference: Think Design Play. DiGRA/Utrecht School of the Arts</title>
+				<imprint>
+			<date type="published" when="2011">2011</date>
+			<biblScope unit="volume">15</biblScope>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b46">
+	<analytic>
+		<title level="a" type="main">Individual Diferences in Motives, Preferences, and Pathology in Video Games: The Gaming Attitudes, Motives, and Experiences Scales (GAMES)</title>
+		<author>
+			<persName><forename type="first">Joseph</forename><surname>Hilgard</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Christopher</forename><surname>Engelhardt</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Bruce</forename><surname>Bartholow</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Frontiers in Psychology</title>
+		<imprint>
+			<biblScope unit="volume">4</biblScope>
+			<date type="published" when="2013">2013. 2013</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b47">
+	<analytic>
+		<title level="a" type="main">Uncertainty and Engagement With Learning Games</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Paul</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Skevi</forename><surname>Howard-Jones</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Demetriou</surname></persName>
+		</author>
+		<idno type="DOI">10.1007/s11251-008-9073-6</idno>
+		<ptr target="https://doi.org/10.1007/s11251-008-9073-6" />
+	</analytic>
+	<monogr>
+		<title level="j">Instructional Science</title>
+		<imprint>
+			<biblScope unit="volume">37</biblScope>
+			<biblScope unit="page" from="519" to="536" />
+			<date type="published" when="2008">2008. 2008</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b48">
+	<monogr>
+		<title level="m" type="main">Arknights</title>
+		<author>
+			<persName><surname>Hypergryph</surname></persName>
+		</author>
+		<ptr target="https://www.arknights.global/" />
+		<imprint>
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b49">
+	<analytic>
+		<title level="a" type="main">Narrative Structures in Computer and Video Games: Part 2: Emotions, Structures, and Archetypes</title>
+		<author>
+			<persName><forename type="first">Barry</forename><surname>Ip</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Games and Culture</title>
+		<imprint>
+			<biblScope unit="volume">6</biblScope>
+			<biblScope unit="page" from="203" to="244" />
+			<date type="published" when="2011">2011. 2011</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b50">
+	<analytic>
+		<title level="a" type="main">The Achievement Machine: Understanding Xbox 360 Achievements in Gaming Practices</title>
+		<author>
+			<persName><forename type="first">Mikael</forename><surname>Jakobsson</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Game Studies</title>
+		<imprint>
+			<biblScope unit="volume">11</biblScope>
+			<biblScope unit="page" from="1" to="22" />
+			<date type="published" when="2011">2011. 2011</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b51">
+	<analytic>
+		<title level="a" type="main">Gaming the Gift: The Afective Economy of League of Legends &apos;Fair&apos; Free-To-Play Model</title>
+		<author>
+			<persName><forename type="first">Josh</forename><surname>Jarrett</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Journal of Consumer Culture</title>
+		<imprint>
+			<biblScope unit="volume">21</biblScope>
+			<biblScope unit="page" from="102" to="119" />
+			<date type="published" when="2021">2021. 2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b52">
+	<monogr>
+		<title level="m" type="main">The Perceived Value of Loot Boxes: A Qualitative Study on the Service Outcome of Loot Boxes</title>
+		<author>
+			<persName><forename type="first">Albin</forename><surname>Johansson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sebastian</forename><surname>Grönström</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b53">
+	<monogr>
+		<title level="m" type="main">The Unpredictability of Gameplay</title>
+		<author>
+			<persName><forename type="first">R</forename><surname>Mark</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Johnson</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2018">2018</date>
+			<publisher>Bloomsbury Publishing</publisher>
+			<pubPlace>New York, NY, USA</pubPlace>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b54">
+	<analytic>
+		<title level="a" type="main">Poster: Good Feedback for Bad Players? A Preliminary Study of &apos;Juicy&apos; Interface Feedback</title>
+		<author>
+			<persName><forename type="first">Jesper</forename><surname>Juul</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Begy</forename><surname>Jason</surname></persName>
+		</author>
+		<ptr target="http://www.digra.org/145807/" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings 1st Joint International Conference of DiGRA and FDG. DiGRA, 1 pages</title>
+				<meeting>1st Joint International Conference of DiGRA and FDG. DiGRA, 1 pages</meeting>
+		<imprint>
+			<date type="published" when="2016">2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b55">
+	<analytic>
+		<title level="a" type="main">The Efects of Juiciness in an</title>
+		<author>
+			<persName><forename type="first">Dominic</forename><surname>Kao</surname></persName>
+		</author>
+		<idno type="DOI">10.1016/j.entcom.2020.100359</idno>
+		<ptr target="https://doi.org/10.1016/j.entcom.2020.100359" />
+	</analytic>
+	<monogr>
+		<title level="j">Action RPG. Entertainment Computing</title>
+		<imprint>
+			<biblScope unit="volume">34</biblScope>
+			<biblScope unit="page">100359</biblScope>
+			<date type="published" when="2020">2020. 2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b56">
+	<analytic>
+		<title level="a" type="main">Infnite Loot Box: A Platform for Simulating Video Game Loot Boxes</title>
+		<author>
+			<persName><forename type="first">Dominic</forename><surname>Kao</surname></persName>
+		</author>
+		<idno type="DOI">10.1109/TG.2019.2913320</idno>
+		<ptr target="https://doi.org/10.1109/TG.2019.2913320" />
+	</analytic>
+	<monogr>
+		<title level="j">IEEE Transactions on Games</title>
+		<imprint>
+			<biblScope unit="volume">12</biblScope>
+			<biblScope unit="page" from="219" to="224" />
+			<date type="published" when="2020">2020. 2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b57">
+	<analytic>
+		<title level="a" type="main">Entrapment and Near Miss: A Comparative Analysis of Psycho-Structural Elements in Gambling Games and Massively Multiplayer Online Role-Playing Games</title>
+		<author>
+			<persName><forename type="first">Faltin</forename><surname>Karlsen</surname></persName>
+		</author>
+		<idno type="DOI">10.1007/s11469-010-9275-4</idno>
+		<ptr target="https://doi.org/10.1007/s11469-010-9275-4" />
+	</analytic>
+	<monogr>
+		<title level="j">International Journal of Mental Health and Addiction</title>
+		<imprint>
+			<biblScope unit="volume">9</biblScope>
+			<biblScope unit="page" from="193" to="207" />
+			<date type="published" when="2011">2011. 2011</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b58">
+	<analytic>
+		<title level="a" type="main">There&apos;s More to Sound Than Meets the Ear: Sound in Interactive Environments</title>
+		<author>
+			<persName><forename type="first">Benjamin</forename><surname>Kenwright</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">IEEE Computer Graphics and Applications</title>
+		<imprint>
+			<biblScope unit="volume">40</biblScope>
+			<biblScope unit="page" from="62" to="70" />
+			<date type="published" when="2020">2020. 2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b59">
+	<analytic>
+		<title level="a" type="main">Good Game Feel: An Empirically Grounded Framework for Juicy Design</title>
+		<author>
+			<persName><forename type="first">Dickinson</forename><surname>Hicks Kieran</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Holopainen</forename><surname>Patrick</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Gerling</forename><surname>Jussi</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Kathrin</surname></persName>
+		</author>
+		<ptr target="http://www.digra.org/wp-content/uploads/digital-library/DIGRA_2018_Paper_35.pdf" />
+	</analytic>
+	<monogr>
+		<title level="m">DiGRA &apos;18 -Proceedings the 2018 DiGRA International Conference: The Game is the Message. DiGRA</title>
+				<imprint>
+			<date type="published" when="2018">2018</date>
+			<biblScope unit="volume">17</biblScope>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b60">
+	<analytic>
+		<title level="a" type="main">The Design Principles for Flow Experience in Educational Games</title>
+		<author>
+			<persName><forename type="first">Kristian</forename><surname>Kiili</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sylvester</forename><surname>Sara De Freitas</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Timo</forename><surname>Arnab</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Lainema</surname></persName>
+		</author>
+		<idno type="DOI">10.1016/j.procs.2012.10.060</idno>
+		<ptr target="https://doi.org/10.1016/j.procs.2012.10.060" />
+	</analytic>
+	<monogr>
+		<title level="m">4th International Conference on Games and Virtual Worlds for Serious Applications (VS-GAMES&apos;12)</title>
+				<imprint>
+			<date type="published" when="2012">2012. 2012</date>
+			<biblScope unit="volume">15</biblScope>
+			<biblScope unit="page" from="78" to="91" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b61">
+	<monogr>
+		<title level="m" type="main">Genshin Impact&apos;s Wish &amp; Banner Pull Rates Explained. Screen Rant</title>
+		<author>
+			<persName><forename type="first">Austin</forename><surname>King</surname></persName>
+		</author>
+		<ptr target="https://screenrant.com/genshin-impact-wish-characters-weapons-banner-pull-rates/" />
+		<imprint>
+			<date>February 18</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b62">
+	<analytic>
+		<title level="a" type="main">Loot Box Engagement and Problem Gambling Among Adolescent Gamers: Findings From a National Survey</title>
+		<author>
+			<persName><forename type="first">Søren</forename><surname>Kristiansen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Majbritt</forename><surname>Severin</surname></persName>
+		</author>
+		<idno type="DOI">10.1016/j.addbeh.2019.106254</idno>
+		<ptr target="https://doi.org/10.1016/j.addbeh.2019.106254" />
+	</analytic>
+	<monogr>
+		<title level="j">Addictive Behaviors</title>
+		<imprint>
+			<biblScope unit="volume">103</biblScope>
+			<biblScope unit="page">106254</biblScope>
+			<date type="published" when="2019">2019. 2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b63">
+	<monogr>
+		<title level="m" type="main">Design Aspects of Scoring Systems in Game. Art and Design Review 05</title>
+		<author>
+			<persName><forename type="first">Chun-I</forename><surname>Lee</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">I-Ping</forename><surname>Chen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Chi-Min</forename><surname>Hsieh</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Chia-Ning</forename><surname>Liao</surname></persName>
+		</author>
+		<idno type="DOI">10.4236/adr.2017.51003</idno>
+		<ptr target="https://doi.org/10.4236/adr.2017.51003" />
+		<imprint>
+			<date type="published" when="2017-01">2017. 01 2017</date>
+			<biblScope unit="page" from="26" to="43" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b64">
+	<analytic>
+		<title level="a" type="main">Unboxing the Issue: The Future of Video Game Loot Boxes in the US</title>
+		<author>
+			<persName><forename type="first">Maddie</forename><surname>Level</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Kansas Law Review</title>
+		<imprint>
+			<biblScope unit="volume">68</biblScope>
+			<date type="published" when="2019">2019. 2019</date>
+		</imprint>
+	</monogr>
+	<note>25 pages</note>
+</biblStruct>
+
+<biblStruct xml:id="b65">
+	<monogr>
+		<title level="m" type="main">Epic Chose Casual Players Over Pros When It Came To Fortnite&apos;s Controversial Changes</title>
+		<author>
+			<persName><forename type="first">Chris</forename><surname>Littlechild</surname></persName>
+		</author>
+		<ptr target="https://www.thegamer.com/epic-chose-casual-players-over-pros-health" />
+		<imprint>
+			<date type="published" when="2019-08-18">2019. August 18</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b66">
+	<analytic>
+		<title level="a" type="main">Anticipation and the Valuation of Delayed Consumption</title>
+		<author>
+			<persName><forename type="first">George</forename><surname>Loewenstein</surname></persName>
+		</author>
+		<ptr target="http://www.jstor.org/stable/2232929" />
+	</analytic>
+	<monogr>
+		<title level="j">The Economic Journal</title>
+		<imprint>
+			<biblScope unit="volume">97</biblScope>
+			<biblScope unit="page" from="666" to="684" />
+			<date type="published" when="1987">1987. 1987</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b67">
+	<monogr>
+		<title level="m" type="main">The Oxford Handbook of Positive Psychology</title>
+		<author>
+			<persName><forename type="first">J</forename><surname>Shane</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Charles</forename><forename type="middle">R</forename><surname>Lopez</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Snyder</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2009">2009</date>
+			<publisher>Oxford University Press</publisher>
+			<pubPlace>Oxford, UK</pubPlace>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b68">
+	<analytic>
+		<title level="a" type="main">Video Game Training and the Reward System</title>
+		<author>
+			<persName><forename type="first">Robert</forename><surname>Lorenz</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Tobias</forename><surname>Gleich</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jürgen</forename><surname>Gallinat</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Simone</forename><surname>Kühn</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Frontiers in Human Neuroscience</title>
+		<imprint>
+			<biblScope unit="volume">9</biblScope>
+			<biblScope unit="page">40</biblScope>
+			<date type="published" when="2015-02">2015. 02 2015</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b69">
+	<analytic>
+		<title level="a" type="main">2019. eSports, Skins and Loot Boxes: Participants, Practices and Problematic Behaviour Associated With Emergent Forms of Gambling</title>
+		<author>
+			<persName><forename type="first">Joseph</forename><surname>Macey</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Juho</forename><surname>Hamari</surname></persName>
+		</author>
+		<idno type="DOI">10.1177/1461444818786216</idno>
+		<ptr target="https://doi.org/10.1177/1461444818786216" />
+	</analytic>
+	<monogr>
+		<title level="j">New Media &amp; Society</title>
+		<imprint>
+			<biblScope unit="volume">21</biblScope>
+			<biblScope unit="page" from="20" to="41" />
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b70">
+	<monogr>
+		<author>
+			<persName><forename type="first">M</forename><surname>Thomas</surname></persName>
+		</author>
+		<title level="m">Beyond Play: A New Approach to Games. Games and Culture</title>
+				<imprint>
+			<date type="published" when="2007">2007. 2007</date>
+			<biblScope unit="volume">2</biblScope>
+			<biblScope unit="page" from="95" to="113" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b71">
+	<monogr>
+		<title level="m" type="main">Genshin Impact</title>
+		<ptr target="https://genshin.hoyoverse.com/en/" />
+		<imprint>
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b72">
+	<monogr>
+		<title level="m" type="main">Intrinsic Rewards in Games and Learning</title>
+		<author>
+			<persName><forename type="first">Kevin</forename><surname>Miklasz</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2020">2020</date>
+			<pubPlace>Pittsburgh, PA, USA</pubPlace>
+		</imprint>
+		<respStmt>
+			<orgName>Carnegie Mellon University</orgName>
+		</respStmt>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b73">
+	<analytic>
+		<title level="a" type="main">Deconstructing Cosmetic Virtual Goods Experiences in Dota 2</title>
+		<author>
+			<persName><forename type="first">Ilya</forename><surname>Musabirov</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Denis</forename><surname>Bulygin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Paul</forename><surname>Okopny</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Alexander</forename><surname>Sirotkin</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings the 2017 CHI Conference on Human Factors in Computing Systems</title>
+				<meeting>the 2017 CHI Conference on Human Factors in Computing Systems<address><addrLine>Denver, Colorado, USA; New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<date type="published" when="2017">2017</date>
+			<biblScope unit="page" from="2054" to="2058" />
+		</imprint>
+	</monogr>
+	<note>CHI &apos;17). Association for Machinery</note>
+</biblStruct>
+
+<biblStruct xml:id="b74">
+	<monogr>
+		<author>
+			<persName><forename type="first">Jerome</forename><surname>Neu</surname></persName>
+		</author>
+		<title level="m">from Within</title>
+				<meeting><address><addrLine>Oxford, UK</addrLine></address></meeting>
+		<imprint>
+			<publisher>Oxford University Press</publisher>
+			<date type="published" when="1998">1998</date>
+			<biblScope unit="page" from="158" to="170" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b75">
+	<analytic>
+		<title level="a" type="main">Are Loot Boxes Gambling? Random Reward Mechanisms in Video Games</title>
+		<author>
+			<persName><forename type="first">Lundedal</forename><surname>Rune Kristian</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Paweł</forename><surname>Nielsen</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Grabarczyk</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Transactions of the Digital Games Research Association</title>
+		<imprint>
+			<biblScope unit="volume">4</biblScope>
+			<date type="published" when="2019">2019. 2019</date>
+		</imprint>
+	</monogr>
+	<note>20 pages</note>
+</biblStruct>
+
+<biblStruct xml:id="b76">
+	<analytic>
+		<title level="a" type="main">Comparing Player Experience in Video Games Played in Virtual Reality or on Desktop Displays: Immersion, Flow, and Positive Emotions</title>
+		<author>
+			<persName><forename type="first">Federica</forename><surname>Pallavicini</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Alessandro</forename><surname>Pepe</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3341215.3355736</idno>
+		<ptr target="https://doi.org/10.1145/3341215.3355736" />
+	</analytic>
+	<monogr>
+		<title level="m">Extended Abstracts of the Annual Symposium on Computer-Human Interaction in Play Companion Extended Abstracts</title>
+				<meeting><address><addrLine>Barcelona, Spain; New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computing Machinery</publisher>
+			<date type="published" when="2019">2019</date>
+			<biblScope unit="page" from="195" to="210" />
+		</imprint>
+	</monogr>
+	<note>CHI PLAY &apos;19 Extended Abstracts)</note>
+</biblStruct>
+
+<biblStruct xml:id="b77">
+	<monogr>
+		<title level="m" type="main">Choice and Uncertainty in Games</title>
+		<author>
+			<persName><forename type="first">Rohit</forename><surname>Parikh</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Çağıl</forename><surname>Taşdemir</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Andreas</forename><surname>Witzel</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2012">2012</date>
+			<publisher>Springer</publisher>
+			<biblScope unit="page" from="244" to="255" />
+			<pubPlace>New York, NY, USA</pubPlace>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b78">
+	<analytic>
+		<title level="a" type="main">The Impact of Rewards and Trait Reward Responsiveness on Player Motivation</title>
+		<author>
+			<persName><forename type="first">Cody</forename><surname>Phillips</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Daniel</forename><surname>Johnson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Madison</forename><surname>Klarkowski</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Melanie</forename><forename type="middle">Jade</forename><surname>White</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Leanne</forename><surname>Hides</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings the 2018 Annual Symposium on Computer-Human Interaction in Play</title>
+				<meeting>the 2018 Annual Symposium on Computer-Human Interaction in Play<address><addrLine>Melbourne, VIC, Australia; New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computing Machinery</publisher>
+			<date type="published" when="2018">2018</date>
+			<biblScope unit="page" from="393" to="404" />
+		</imprint>
+	</monogr>
+	<note>CHI PLAY &apos;18)</note>
+</biblStruct>
+
+<biblStruct xml:id="b79">
+	<analytic>
+		<title level="a" type="main">Videogame Reward Types</title>
+		<author>
+			<persName><forename type="first">Cody</forename><surname>Phillips</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Daniel</forename><surname>Johnson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Peta</forename><surname>Wyeth</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2583008.2583025</idno>
+		<ptr target="https://doi.org/10.1145/2583008.2583025" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings the First International Conference on Gameful Design, Research, and Applications</title>
+				<meeting>the First International Conference on Gameful Design, Research, and Applications<address><addrLine>Toronto, Ontario, Canada; New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computing Machinery</publisher>
+			<date type="published" when="2013">2013</date>
+			<biblScope unit="page" from="103" to="106" />
+		</imprint>
+	</monogr>
+	<note>Gamifcation &apos;13)</note>
+</biblStruct>
+
+<biblStruct xml:id="b80">
+	<analytic>
+		<title level="a" type="main">Redefning Videogame Reward Types</title>
+		<author>
+			<persName><forename type="first">Cody</forename><surname>Phillips</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Daniel</forename><surname>Johnson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Peta</forename><surname>Wyeth</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Leanne</forename><surname>Hides</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Madison</forename><surname>Klarkowski</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings the Annual Meeting of the Australian Special Interest Group for Computer Human Interaction</title>
+				<meeting>the Annual Meeting of the Australian Special Interest Group for Computer Human Interaction<address><addrLine>Parkville, VIC, Australia; New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computing Machinery</publisher>
+			<date type="published" when="2015">2015</date>
+			<biblScope unit="page" from="83" to="91" />
+		</imprint>
+	</monogr>
+	<note>OzCHI &apos;15)</note>
+</biblStruct>
+
+<biblStruct xml:id="b81">
+	<analytic>
+		<title level="a" type="main">Intrinsic and Extrinsic Motivational Orientations: Reward-Induced Changes in Preference for Complexity</title>
+		<author>
+			<persName><forename type="first">Thane</forename><surname>Pittman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jolee</forename><surname>Emery</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ann</forename><surname>Boggiano</surname></persName>
+		</author>
+		<idno type="DOI">10.1037/0022-3514.42.5.789</idno>
+		<ptr target="https://doi.org/10.1037/0022-3514.42.5.789" />
+	</analytic>
+	<monogr>
+		<title level="j">Journal of Personality and Social Psychology</title>
+		<imprint>
+			<biblScope unit="volume">42</biblScope>
+			<biblScope unit="page" from="789" to="797" />
+			<date type="published" when="1982-05">1982. 05 1982</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b82">
+	<analytic>
+		<title level="a" type="main">Lost at the Edge of Uncertainty: Measuring Player Experience in Digital Games</title>
+		<author>
+			<persName><forename type="first">Christopher</forename><surname>Power</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Paul</forename><surname>Cairns</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Alena</forename><surname>Denisova</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Themis</forename><surname>Papaioannou</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ruth</forename><surname>Gultom</surname></persName>
+		</author>
+		<idno type="DOI">10.1080/10447318.2018.1507161</idno>
+		<ptr target="https://doi.org/10.1080/10447318.2018.1507161" />
+	</analytic>
+	<monogr>
+		<title level="j">International Journal of Human-Computer Interaction</title>
+		<imprint>
+			<biblScope unit="volume">35</biblScope>
+			<biblScope unit="page" from="1033" to="1045" />
+			<date type="published" when="2019">2019. 2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b83">
+	<analytic>
+		<title level="a" type="main">Digital Game-Based Learning</title>
+		<author>
+			<persName><forename type="first">Marc</forename><surname>Prensky</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Comput. Entertain</title>
+		<imprint>
+			<biblScope unit="volume">1</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page">21</biblScope>
+			<date type="published" when="2003-10">2003. oct 2003</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b84">
+	<analytic>
+		<title level="a" type="main">Role of Video Games in Improving Health-Related Outcomes A Systematic Review</title>
+		<author>
+			<persName><forename type="first">Brian</forename><forename type="middle">A</forename><surname>Primack</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mary</forename><forename type="middle">V</forename><surname>Carroll</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Megan</forename><forename type="middle">Mary</forename></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Lou</forename><surname>Klem</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Brandy</forename><surname>King</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Michael</forename><surname>Rich</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Chun</forename><forename type="middle">W</forename><surname>Chan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Nayak</forename></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">American Journal of Preventive Medicine</title>
+		<imprint>
+			<biblScope unit="volume">42</biblScope>
+			<biblScope unit="page" from="630" to="638" />
+			<date type="published" when="2012">2012. 2012</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b85">
+	<analytic>
+		<title level="a" type="main">A Motivational Model of Video Game Engagement</title>
+		<author>
+			<persName><forename type="first">Andrew</forename><forename type="middle">K</forename><surname>Przybylski</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Scott</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Richard</forename><forename type="middle">M</forename><surname>Ryan</surname></persName>
+		</author>
+		<idno type="DOI">10.1037/a0019440</idno>
+		<ptr target="https://doi.org/10.1037/a0019440" />
+	</analytic>
+	<monogr>
+		<title level="j">Review of General Psychology</title>
+		<imprint>
+			<biblScope unit="volume">14</biblScope>
+			<biblScope unit="page" from="154" to="166" />
+			<date type="published" when="2010">2010. 2010</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b86">
+	<monogr>
+		<title level="m" type="main">Dota 2 Featured in &quot;How Young Gamers Are Turning Into Gamblers: Loot Box Danger Parents Should Know&quot; Short Documentary</title>
+		<author>
+			<persName><surname>Real-Hayase-Nagatoro</surname></persName>
+		</author>
+		<ptr target="https://www.reddit.com/r/DotA2/comments/p0hy00/dota_2_featured_in_how_young_gamers_are_turning/" />
+		<imprint>
+			<date type="published" when="2021-02-16">2021. February 16</date>
+		</imprint>
+	</monogr>
+	<note>Reddit. Retrieved</note>
+</biblStruct>
+
+<biblStruct xml:id="b87">
+	<monogr>
+		<title level="m" type="main">Destiny 2&apos; Has Been Misleading Players</title>
+		<author>
+			<persName><forename type="first">Adam</forename><surname>Rosenberg</surname></persName>
+		</author>
+		<ptr target="https://mashable.com/article/destiny-2-xp-scaling-bungie-statement" />
+		<imprint>
+			<date type="published" when="2017-08-27">2017. August 27</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b88">
+	<analytic>
+		<title level="a" type="main">The Motivational Pull of Video Games: A Self-Determination Theory Approach</title>
+		<author>
+			<persName><forename type="first">Scott</forename><surname>Richard M Ryan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Andrew</forename><surname>Rigby</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Przybylski</surname></persName>
+		</author>
+		<idno type="DOI">10.1007/s11031-006-9051-8</idno>
+		<ptr target="https://doi.org/10.1007/s11031-006-9051-8" />
+	</analytic>
+	<monogr>
+		<title level="j">Motivation and Emotion</title>
+		<imprint>
+			<biblScope unit="volume">30</biblScope>
+			<biblScope unit="issue">4</biblScope>
+			<biblScope unit="page" from="344" to="360" />
+			<date type="published" when="2006-12">2006. 12 2006</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b89">
+	<analytic>
+		<title level="a" type="main">Players Perception of Loot Boxes</title>
+		<author>
+			<persName><forename type="first">Albert</forename><surname>Sakhapov</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Joseph</forename><forename type="middle">Alexander</forename><surname>Brown</surname></persName>
+		</author>
+		<idno type="DOI">10.1007/978-3-030-65736-9_12</idno>
+		<ptr target="https://doi.org/10.1007/978-3-030-65736-9_12" />
+	</analytic>
+	<monogr>
+		<title level="m">International Conference on Entertainment Computing</title>
+				<meeting><address><addrLine>New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>Springer</publisher>
+			<date type="published" when="2020">2020</date>
+			<biblScope unit="page" from="134" to="141" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b90">
+	<monogr>
+		<author>
+			<persName><forename type="first">Alexander</forename><surname>Sandqvist</surname></persName>
+		</author>
+		<title level="m">Correlations and Similarities between Loot Boxes and Gambling</title>
+				<imprint>
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b91">
+	<analytic>
+		<title level="a" type="main">Long-Term Efects of In-Game Purchases and Event Game Mechanics on Young Mobile Social Game Players in Japan</title>
+		<author>
+			<persName><forename type="first">Akiko</forename><surname>Shibuya</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mizuha</forename><surname>Teramoto</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Akiyo</forename><surname>Shoun</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kumiko</forename><surname>Akiyama</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Simulation &amp; Gaming</title>
+		<imprint>
+			<biblScope unit="volume">50</biblScope>
+			<biblScope unit="page" from="76" to="92" />
+			<date type="published" when="2019">2019. 2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b92">
+	<analytic>
+		<title level="a" type="main">Deserving to Be Lucky: Refections on the Role of Luck and Desert in Sports</title>
+		<author>
+			<persName><forename type="first">Robert</forename><surname>Simon</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Journal of the Philosophy of Sport</title>
+		<imprint>
+			<biblScope unit="volume">34</biblScope>
+			<biblScope unit="page" from="13" to="25" />
+			<date type="published" when="2007">2007. 2007</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b93">
+	<analytic>
+		<title level="a" type="main">Reward Systems in Human Computation Games</title>
+		<author>
+			<persName><forename type="first">Kristin</forename><surname>Siu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mark</forename><forename type="middle">O</forename><surname>Riedl</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings the 2016 Annual Symposium on Computer-Human Interaction in Play</title>
+				<meeting>the 2016 Annual Symposium on Computer-Human Interaction in Play<address><addrLine>Austin, Texas, USA; New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<date type="published" when="2016">2016</date>
+			<biblScope unit="page" from="266" to="275" />
+		</imprint>
+	</monogr>
+	<note>CHI PLAY &apos;16). Association for Computing Yin and Xiao Machinery</note>
+</biblStruct>
+
+<biblStruct xml:id="b94">
+	<analytic>
+		<title level="a" type="main">That Sound&apos;s Juicy! Exploring Juicy Audio Efects in Video Games</title>
+		<author>
+			<persName><forename type="first">H</forename><forename type="middle">K</forename><surname>Jolie</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Erik</forename><forename type="middle">D</forename><surname>Smets</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Van Der Spek</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Entertainment Computing -ICEC 2021</title>
+				<editor>
+			<persName><forename type="first">Jannicke</forename><surname>Baalsrud Hauge</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">Jorge</forename><forename type="middle">C S</forename><surname>Cardoso</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">Licínio</forename><surname>Roque</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">Pedro</forename><forename type="middle">A</forename><surname>Gonzalez-Calero</surname></persName>
+		</editor>
+		<meeting><address><addrLine>Cham</addrLine></address></meeting>
+		<imprint>
+			<publisher>Springer International Publishing</publisher>
+			<date type="published" when="2021">2021</date>
+			<biblScope unit="page" from="319" to="335" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b95">
+	<monogr>
+		<title level="m" type="main">Shroud Thinks Battle Royale Is Too Luck-Based To Be Competitive</title>
+		<author>
+			<persName><forename type="first">Sergio</forename><surname>Solorzano</surname></persName>
+		</author>
+		<ptr target="https://www.thegamer.com/shroud-thinks-battle-royale-too-luck-based/" />
+		<imprint>
+			<date type="published" when="2019-08-18">2019. August 18</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b96">
+	<monogr>
+		<title level="m" type="main">Valve and Hidden Path Entertainment</title>
+		<ptr target="https://store.steampowered.com/app/730/CounterStrike_Global_" />
+		<imprint>
+			<date type="published" when="2012">2012</date>
+		</imprint>
+	</monogr>
+	<note>Counter-Strike: Global Ofensive</note>
+</biblStruct>
+
+<biblStruct xml:id="b97">
+	<analytic>
+		<title level="a" type="main">Now You Can Compete With Anyone: Balancing Players of Diferent Skill Levels in a First-Person Shooter Game</title>
+		<author>
+			<persName><forename type="first">Rodrigo</forename><surname>Vicencio-Moreira</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Regan</forename><forename type="middle">L</forename><surname>Mandryk</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Carl</forename><surname>Gutwin</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2702123.2702242</idno>
+		<ptr target="https://doi.org/10.1145/2702123.2702242" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings the 33rd Annual ACM Conference on Human Factors in Computing Systems</title>
+				<meeting>the 33rd Annual ACM Conference on Human Factors in Computing Systems<address><addrLine>Seoul, Republic of Korea; New York, NY, USA</addrLine></address></meeting>
+		<imprint>
+			<publisher>Association for Computing Machinery</publisher>
+			<date type="published" when="2015">2015</date>
+			<biblScope unit="page" from="2255" to="2264" />
+		</imprint>
+	</monogr>
+	<note>CHI &apos;15)</note>
+</biblStruct>
+
+<biblStruct xml:id="b98">
+	<monogr>
+		<title level="m" type="main">Games Without Frontiers?: Socio-historical Perspectives at the Gaming/Gambling Intersection</title>
+		<author>
+			<persName><forename type="first">Heather</forename><surname>Wardle</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2021">2021</date>
+			<publisher>Palgrave Macmillan</publisher>
+			<pubPlace>London, UK</pubPlace>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b99">
+	<analytic>
+		<title level="a" type="main">Measuring Interactivity in Video Games</title>
+		<author>
+			<persName><forename type="first">René</forename><surname>Weber</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Katharina-Maria</forename><surname>Behr</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Cynthia</forename><surname>Demartino</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Communication Methods and Measures</title>
+		<imprint>
+			<biblScope unit="volume">8</biblScope>
+			<biblScope unit="page" from="79" to="115" />
+			<date type="published" when="2014">2014. 2014</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b100">
+	<monogr>
+		<title level="m" type="main">Do I Look Good In This?: How skilled players look upon cosmetic items in Team Fortress 2 and Dota 2</title>
+		<author>
+			<persName><forename type="first">Johanna</forename><surname>Westerlund</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Alexander</forename><surname>Baxter</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2015">2015</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b101">
+	<analytic>
+		<title level="a" type="main">List of highest-grossing mobile games. Wikimedia Foundation</title>
+		<ptr target="https://en.wikipedia.org/wiki/List_of_highest-grossing_mobile_games" />
+	</analytic>
+	<monogr>
+		<title level="m">Hextech Crafting FAQ. Riot Games. Retrieved</title>
+				<imprint>
+			<date type="published" when="2019-02-16">2019. February 16. August 27</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b102">
+	<monogr>
+		<title level="m" type="main">List of highest-grossing mobile games. Wikimedia Foundation</title>
+		<author>
+			<persName><surname>Wikipedia</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2021-12-09">2021. Dec 9. 2021</date>
+		</imprint>
+	</monogr>
+	<note>from grossing_mobile_games</note>
+</biblStruct>
+
+<biblStruct xml:id="b103">
+	<analytic>
+		<title level="a" type="main">List of most-played mobile games by player count</title>
+		<author>
+			<persName><surname>Wikipedia</surname></persName>
+		</author>
+		<ptr target="https://en.wikipedia.org/wiki/List_of_most-played_mobile_games_by_player_count" />
+	</analytic>
+	<monogr>
+		<title level="j">Wikimedia Foundation</title>
+		<imprint>
+			<date type="published" when="2009">2021. Dec 9</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b104">
+	<monogr>
+		<title level="m" type="main">List of most-played video games by player count. Wikimedia Foundation</title>
+		<author>
+			<persName><surname>Wikipedia</surname></persName>
+		</author>
+		<ptr target="https://en.wikipedia.org/wiki/List_of_most-played_video_games_by_player_count" />
+		<imprint>
+			<date type="published" when="2021-12">2021. Dec 2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b105">
+	<analytic>
+		<title level="a" type="main">Narrative Music, Visuals and Meaning in Film</title>
+		<author>
+			<persName><forename type="first">Johnny</forename><surname>Wingstedt</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sture</forename><surname>Brändström</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Berg</surname></persName>
+		</author>
+		<idno type="DOI">10.1177/1470357210369886</idno>
+		<ptr target="https" />
+	</analytic>
+	<monogr>
+		<title level="j">Visual Communication</title>
+		<imprint>
+			<biblScope unit="volume">9</biblScope>
+			<biblScope unit="page" from="193" to="210" />
+			<date type="published" when="2010">2010. 2010</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b106">
+	<analytic>
+		<title/>
+		<author>
+			<persName><surname>Wizet</surname></persName>
+		</author>
+		<ptr target="https://maplestory.nexon.net/landing" />
+	</analytic>
+	<monogr>
+		<title level="j">Maplestory. Nexon</title>
+		<imprint>
+			<date type="published" when="2003">2003</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b107">
+	<analytic>
+		<title level="a" type="main">Towards an Ethical Game Design Solution to Loot Boxes: a Commentary on King and Delfabbro</title>
+		<author>
+			<persName><forename type="first">Y</forename><surname>Leon</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Laura</forename><forename type="middle">L</forename><surname>Xiao</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Henderson</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">International Journal of Mental Health and Addiction</title>
+		<imprint>
+			<biblScope unit="volume">19</biblScope>
+			<biblScope unit="page" from="177" to="192" />
+			<date type="published" when="2021">2021. 2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b108">
+	<monogr>
+		<title level="m" type="main">Summoning animations</title>
+		<idno>xSaber0022</idno>
+		<imprint>
+			<date type="published" when="2018-02-16">2018. February 16. 2022</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b109">
+	<analytic>
+		<title level="a" type="main">The Labor of Fun: How Video Games Blur the Boundaries of Work and Play</title>
+		<author>
+			<persName><forename type="first">Nick</forename><surname>Yee</surname></persName>
+		</author>
+		<idno type="DOI">10.1177/1555412005281819</idno>
+		<ptr target="https://doi.org/10.1177/1555412005281819" />
+	</analytic>
+	<monogr>
+		<title level="j">Games and Culture</title>
+		<imprint>
+			<biblScope unit="volume">1</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page" from="68" to="71" />
+			<date type="published" when="2006">2006. 2006</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b110">
+	<analytic>
+		<title level="a" type="main">Motivations for Play in Online Games</title>
+		<idno type="DOI">10.1089/cpb.2006.9.772</idno>
+		<idno type="PMID">17201605</idno>
+		<ptr target="https://doi.org/10.1089/cpb.2006.9.772" />
+	</analytic>
+	<monogr>
+		<title level="j">CyberPsychology &amp; Behavior</title>
+		<imprint>
+			<biblScope unit="volume">9</biblScope>
+			<biblScope unit="issue">6</biblScope>
+			<biblScope unit="page" from="772" to="775" />
+			<date type="published" when="2006">2006. 2006</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b111">
+	<analytic>
+		<title level="a" type="main">An Empirical Taxonomy of Monetized Random Reward Mechanisms in Games</title>
+		<author>
+			<persName><forename type="first">Brückner</forename><surname>Sato Yukiko</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kurabayashi</forename><surname>Stefan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Waragai</forename><surname>Shuichi</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Ikumi</surname></persName>
+		</author>
+		<ptr target="http://www.digra.org/wp-content/uploads/digital-library/DiGRA_2020_paper_168.pdf" />
+	</analytic>
+	<monogr>
+		<title level="m">DiGRA &apos;20 -Proceedings the 2020 DiGRA International Conference: Play Everywhere. DiGRA</title>
+				<imprint>
+			<date type="published" when="2020">2020</date>
+			<biblScope unit="volume">20</biblScope>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b112">
+	<analytic>
+		<title level="a" type="main">The Changing Face of Desktop Video Game Monetisation: An Exploration of Exposure to Loot Boxes, Pay to Win, and Cosmetic Microtransactions in the Most-Played Steam Games of</title>
+		<author>
+			<persName><forename type="first">David</forename><surname>Zendle</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Rachel</forename><surname>Meyer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Nick</forename><surname>Ballou</surname></persName>
+		</author>
+		<idno type="DOI">10.1371/journal.pone.0232780</idno>
+		<ptr target="https://doi.org/10.1371/journal.pone.0232780" />
+	</analytic>
+	<monogr>
+		<title level="j">PLOS ONE</title>
+		<imprint>
+			<biblScope unit="volume">15</biblScope>
+			<biblScope unit="page" from="1" to="13" />
+			<date type="published" when="2010">2020. 2010-2019. 05 2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b113">
+	<analytic>
+		<title level="a" type="main">Links Between Problem Gambling and Spending on Booster Packs in Collectible Card Games: A Conceptual Replication of Research on Loot Boxes</title>
+		<author>
+			<persName><forename type="first">David</forename><surname>Zendle</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Lukasz</forename><surname>Walasek</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Paul</forename><surname>Cairns</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Rachel</forename><surname>Meyer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Aaron</forename><surname>Drummond</surname></persName>
+		</author>
+		<idno type="DOI">10.1371/journal.pone.0247855</idno>
+		<ptr target="https://doi.org/10.1371/journal.pone.0247855" />
+	</analytic>
+	<monogr>
+		<title level="j">PLOS ONE</title>
+		<imprint>
+			<biblScope unit="volume">16</biblScope>
+			<biblScope unit="issue">4</biblScope>
+			<biblScope unit="page" from="1" to="17" />
+			<date type="published" when="2021-04">2021. 04 2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b114">
+	<monogr>
+		<title level="m" type="main">Genshin Impact Pity System: What is Pity and How Does it Work? Rock Paper Shotgun</title>
+		<author>
+			<persName><forename type="first">Amelia</forename><surname>Zollner</surname></persName>
+		</author>
+		<ptr target="https://www.rockpapershotgun.com/genshin-impact-pity-system" />
+		<imprint>
+			<date type="published" when="2021-08-29">2021. August 29</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+				</listBibl>
+			</div>
+		</back>
+	</text>
+</TEI>

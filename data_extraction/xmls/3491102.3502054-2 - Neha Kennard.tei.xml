@@ -1,0 +1,1805 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xml:space="preserve" xmlns="http://www.tei-c.org/ns/1.0" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.com/kermitt2/grobid/master/grobid-home/schemas/xsd/Grobid.xsd"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+	<teiHeader xml:lang="en">
+		<fileDesc>
+			<titleStmt>
+				<title level="a" type="main">Mobile-Friendly Content Design for MOOCs: Challenges, Requirements, and Design Opportunities</title>
+			</titleStmt>
+			<publicationStmt>
+				<publisher/>
+				<availability status="unknown"><licence/></availability>
+			</publicationStmt>
+			<sourceDesc>
+				<biblStruct>
+					<analytic>
+						<author>
+							<persName><forename type="first">Jeongyeon</forename><surname>Kim</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="department">School of Computing</orgName>
+								<orgName type="institution">KAIST</orgName>
+								<address>
+									<settlement>Daejeon</settlement>
+									<country key="KR">South Korea</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Meng</forename><surname>Xia</surname></persName>
+							<affiliation key="aff1">
+								<orgName type="department">School of Computing</orgName>
+								<orgName type="institution">KAIST</orgName>
+								<address>
+									<settlement>Daejeon</settlement>
+									<country key="KR">South Korea</country>
+								</address>
+							</affiliation>
+						</author>
+						<author>
+							<persName><forename type="first">Yubin</forename><surname>Choi</surname></persName>
+							<affiliation key="aff2">
+								<orgName type="department">School of Computing</orgName>
+								<orgName type="institution">KAIST</orgName>
+								<address>
+									<settlement>Daejeon</settlement>
+									<country key="KR">South Korea</country>
+								</address>
+							</affiliation>
+						</author>
+						<author role="corresp">
+							<persName><forename type="first">Juho</forename><surname>Kim</surname></persName>
+							<email>juhokim@kaist.ac.kr</email>
+							<affiliation key="aff3">
+								<orgName type="department">School of Computing</orgName>
+								<orgName type="institution">KAIST</orgName>
+								<address>
+									<settlement>Daejeon</settlement>
+									<country key="KR">South Korea</country>
+								</address>
+							</affiliation>
+						</author>
+						<title level="a" type="main">Mobile-Friendly Content Design for MOOCs: Challenges, Requirements, and Design Opportunities</title>
+					</analytic>
+					<monogr>
+						<imprint>
+							<date/>
+						</imprint>
+					</monogr>
+					<idno type="DOI">10.1145/3491102.3502054</idno>
+				</biblStruct>
+			</sourceDesc>
+		</fileDesc>
+		<encodingDesc>
+			<appInfo>
+				<application version="0.7.1" ident="GROBID" when="2022-07-22T04:59+0000">
+					<desc>GROBID - A machine learning software for extracting information from scholarly documents</desc>
+					<ref target="https://github.com/kermitt2/grobid"/>
+				</application>
+			</appInfo>
+		</encodingDesc>
+		<profileDesc>
+			<textClass>
+				<keywords>
+					<term>Mobile Learning</term>
+					<term>MOOCs</term>
+					<term>Video-based Learning</term>
+					<term>Learning Difculty</term>
+					<term>Content Design</term>
+				</keywords>
+			</textClass>
+			<abstract>
+<div xmlns="http://www.tei-c.org/ns/1.0"><p>Most video-based learning content is designed for desktops without considering mobile environments. We (1) investigate the gap between mobile learners' challenges and video engineers' considerations using mixed methods and (2) provide design guidelines for creating mobile-friendly MOOC videos. To uncover learners' challenges, we conducted a survey (n=134) and interviews (n=21), and evaluated the mobile adequacy of current MOOCs by analyzing 41,722 video frames from 101 video lectures. Interview results revealed low readability and situationally-induced impairments as major challenges. The content analysis showed a low guideline compliance rate for key design factors. We then interviewed 11 video production engineers to investigate design factors they mainly consider. The engineers mainly focus on the size and amount of content while lacking consideration for color, complex images, and situationally-induced impairments. Finally, we present and validate guidelines for designing mobile-friendly MOOCs, such as providing adaptive and customizable visual design and context-aware accessibility support.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>CCS CONCEPTS</head><p>• Human-centered computing → Empirical studies in HCI; User studies; Empirical studies in ubiquitous and mobile computing.</p></div>
+			</abstract>
+		</profileDesc>
+	</teiHeader>
+	<text xml:lang="en">
+		<body>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="1">INTRODUCTION</head><p>Mobile learning has gained popularity and has been a key driver in enabling ubiquitous learning <ref type="bibr" target="#b52">[55,</ref><ref type="bibr" target="#b61">64]</ref>. In addition, major online learning and Massive Open Online Courses (MOOC) platforms including edX <ref type="bibr" target="#b18">[19]</ref>, Coursera <ref type="bibr">[38]</ref>, Khan Academy <ref type="bibr" target="#b38">[40]</ref>, and Udemy <ref type="bibr" target="#b39">[41]</ref> provide mobile apps to support learning on mobile devices. Despite the rise in popularity, mobile video-based learning has physical (e.g., small screen size) as well as environmental (e.g., limitations on sensory channels posed by ambient noise and light) <ref type="bibr" target="#b63">[66]</ref> constraints. Existing learning frameworks suggest that tiny font sizes and content-heavy lecture materials on small screens increase learners' cognitive load <ref type="bibr" target="#b45">[47,</ref><ref type="bibr" target="#b68">70,</ref><ref type="bibr" target="#b69">71]</ref> and lower judgments of learning (JOLs) <ref type="bibr" target="#b24">[25,</ref><ref type="bibr" target="#b60">63]</ref>. Meanwhile, situational factors such as ambient noise <ref type="bibr" target="#b74">[76]</ref>, ambient light <ref type="bibr" target="#b20">[21]</ref>, and the mobile state of the learner <ref type="bibr" target="#b20">[21,</ref><ref type="bibr" target="#b63">66]</ref> may saturate mobile learners' visual and auditory channels and cause situationally-induced impairments and disabilities (SIIDs). Prior work revealed that SIIDs might impede learning, deteriorating text legibility <ref type="bibr" target="#b51">[54]</ref>, reading comprehension, and cognitive performance <ref type="bibr" target="#b1">[2]</ref>. Furthermore, most of the existing educational videos have been primarily designed for desktop environments. Although a body of research suggested design guidelines for mobile educational apps and websites <ref type="bibr" target="#b19">[20,</ref><ref type="bibr" target="#b40">42,</ref><ref type="bibr" target="#b50">53,</ref><ref type="bibr" target="#b65">67]</ref>, few studies have contributed guidelines specifc to mobile video-based learning content. Unlike static content, educational videos are temporally dynamic with both audio and visual information, and contain unique design components such as talking-head instructors and real-time handwriting. Also, existing literature mainly focuses on the learner side, leaving how designers currently consider the difculties of the learner side in the design process largely unknown.</p><p>To fll in this gap, we conducted quantitative and qualitative analysis on the visual design of video content that causes readability issues and SIIDs from three perspectives: (1) learners (through surveys and interviews), (2) video content (through content analysis), and (3) video production engineers (through interviews).</p><p>To uncover the challenges learners face in mobile MOOC learning, <ref type="bibr" target="#b0">(1)</ref> we surveyed 134 learners and conducted follow-up interviews with 21 learners. The results revealed two main difculties learners experience with visual content design: readability issues and limitations on sensory channels. We then evaluated whether the current MOOC videos are suitable for mobile learning. Through the content analysis, we diagnosed how severe the problem is, thereby quantifying defciencies of current design and guiding improvement schemes. <ref type="bibr" target="#b1">(2)</ref> We analyzed 41,722 video frames sampled from 168,508 frames in 101 courses from MOOC platforms by applying the known design guidelines. The content analysis results showed a low guideline compliance rate for the key readability design factors (2.79% for font size, 74.20% for the amount of text, 0.94% for the font size of the text in the image, 66.22% for color contrast between text and background). ( <ref type="formula">3</ref>) Finally, we interviewed 11 video production engineers to investigate how they currently consider the learners' challenges. The results showed that readability is the biggest concern, and they focus on the font size and amount of content. Meanwhile, little attention has been paid to complex images and images with text in the design process, which was the major learner-reported difculty. In addition, engineers do not pay signifcant attention to situationally-induced impairments of learners in the design process. The fndings imply a gap between learners' challenges and engineers' design considerations.</p><p>Based on the noticeable fndings from the study of learners, engineers, and video content, we suggest a set of design guidelines for creating mobile-friendly MOOCs. We then validated the suggested guidelines through an evaluation session with video production engineers. The engineers' ratings on each guideline item demonstrated the guideline's clarity and applicability. We further discuss design opportunities for future research, which include providing adaptive and customizable visual design and context-aware accessibility support. The contributions of this paper can be summarized as follows:</p><p>• An identifcation of the gap between learners' challenges and video production engineers' design considerations on mobile MOOC learning • A mixed-methods analysis of mobile MOOC learning experiences encompassing three aspects: learners, MOOC video content, and video production engineers • A set of validated design guidelines for video production engineers and content designers in designing mobile-friendly MOOCs</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2">RELATED WORK</head><p>Here we introduce existing work on (1) content design for educational videos and (2) design guidelines for mobile learning.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.1">Content Design for Educational Videos</head><p>Studies of content design for educational videos mainly lie in two branches: lecture types and visual design elements. First, studies have explored how diferent lecture types afect student engagement <ref type="bibr" target="#b7">[8,</ref><ref type="bibr" target="#b23">24]</ref>. For instance, Guo et al. <ref type="bibr" target="#b23">[24]</ref> analyzed 6.9 million video watching sessions from four courses. They found that talking-head videos and Khan-style tablet drawings are more engaging than slide-based, programming/coding, and classroom recordings.</p><p>Other work highlighted the importance of visual design elements in the learning process, such as text and images. Inappropriate font sizes <ref type="bibr" target="#b45">[47]</ref> impose cognitive load with reduced readability and lower judgments of learning (JOLs) <ref type="bibr" target="#b24">[25,</ref><ref type="bibr" target="#b60">63]</ref>. Besides, an excessive amount of words increases the cognitive load <ref type="bibr" target="#b45">[47,</ref><ref type="bibr" target="#b69">71]</ref> and information overload <ref type="bibr" target="#b0">[1]</ref>. Image elements can also increase the cognitive load by splitting learners' attention when multiple images are presented at once <ref type="bibr" target="#b44">[46,</ref><ref type="bibr" target="#b45">47]</ref> or when the graphics are too complex <ref type="bibr" target="#b26">[27,</ref><ref type="bibr" target="#b72">74]</ref>. Due to the importance of visual designs in a learning context, several studies <ref type="bibr" target="#b13">[14,</ref><ref type="bibr" target="#b70">72]</ref> emphasized readability as a key factor in mobile content design. Also, Cross et al. <ref type="bibr" target="#b14">[15]</ref> used crowdsourcing to improve the legibility of educational videos.</p><p>However, existing literature has only covered content design for instructional videos or mobile learning websites, leaving the intersection area --mobile video-based learning --unexplored. Furthermore, previous work mainly focused on learners' perspectives, not involving content creators' viewpoints or interactions between two groups. To fll in this gap, we investigated challenges, perceptions on current content design, and design opportunities from both perspectives of learners and video production engineers.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="2.2">Design Guidelines for Mobile Learning</head><p>Mobile learners have diferent requirements from desktop users due to the constraints such as limited screen sizes and distracting mobile learning environments. In consideration of these user needs, several studies suggested guidelines for mobile learning applications, such as interface design (e.g., menu, links, and navigation between pages, etc.) <ref type="bibr" target="#b22">[23]</ref> and framework for mobile learning design considering learning contexts <ref type="bibr" target="#b56">[59]</ref>. O'Malley et al. <ref type="bibr" target="#b54">[57]</ref> also presented usability guidelines for mobile learning, which includes segmenting video content into small chunks and giving controls to learners to adjust the pace of learning. Later on, Wang et al. <ref type="bibr" target="#b71">[73]</ref> gave practical recommendations on utilizing caption, icon, and color to guarantee an adequate mobile learning experience. Huber et al. <ref type="bibr" target="#b32">[33]</ref> introduced video interface concepts that are GUI-based and touch-based to enhance mobile video browsing. Meanwhile, other research suggested recommendations for the instructional design of mobile learning. Stanton et al. <ref type="bibr" target="#b66">[68]</ref> investigated how the characteristics of mobile environments are refected in the procedure of designing mobile learning based on Bloom's pedagogy. <ref type="bibr">Mandula et al. [50]</ref> recommended instructional designers to limit the graphic content, shorten the lecture length, and support multimedia content for mobile video learning.</p><p>Nonetheless, existing guidelines and recommendations are limited to educational websites, applications, and instructional design, which calls for design guidelines for visual and audio elements of mobile video-based content. The visual and audio elements are the main factors that afect mobile learning experience since mobile environments pose physical (e.g., limited screen sizes) and contextual (e.g., ambient noise) constraints on visual/auditory channels. Furthermore, validated mobile video learning guideline that considers the transitional characteristic (e.g., temporal mappings with audio) and unique design components (e.g., talking-head instructors, real-time handwritings) of video-based learning content is needed. To that end, our research suggests design guidelines based on empirical evidence and their applicability and utility evaluation from the content creators.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3">STUDY1: LEARNER PERSPECTIVES</head><p>To investigate the difculties of mobile learners when consuming video-based lectures, we conducted surveys and follow-up interviews with mobile MOOC learners.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.1">Survey Study</head><p>3.1.1 Survey Protocol. The survey questions include demographic questions, mobile learning context (e.g., devices, learning platforms, subjects, and situations in which learners take mobile MOOCs), learning behaviors (e.g., how frequent and how long for mobile MOOC lectures), and difculties on visual design elements (e.g., text, image, and color). The question on design elements provides ten multiple-choice options (Table <ref type="table">5</ref> 1st, 2nd column) that are most frequently reported as main visual factors by the existing 25 design guidelines. The 25 guidelines (Table <ref type="table">5</ref>) are selected from the literature, which are the guidelines for visual design elements of educational content. The survey also contains multiple-choice questions about which lecture type causes the difculties in mobile learning. We provided eight lecture types based on an existing taxonomy of video lecture styles <ref type="bibr" target="#b10">[11,</ref><ref type="bibr" target="#b12">13,</ref><ref type="bibr" target="#b15">16,</ref><ref type="bibr" target="#b34">35,</ref><ref type="bibr" target="#b55">58]</ref> as multiple-choice options: animation, recorded classroom, programming/coding, hand-drawing, interview/discussion, screencast, slide-based, and talking-head. We ended the survey with a section for respondents to leave their email if they were open to a follow-up interview. We added the detailed survey questions in the supplementary materials.</p><p>3.1.2 Respondents and Recruitment. We recruited 134 respondents (43 female, 90 male, one prefer not to specify) with ages ranging from 18 to 74 <ref type="bibr">(18-24: 40, 25-34: 73, 35-44: 16, 45-54: 4</ref>, 65-74: 1) from 11 countries (South Korea: 48, Brazil: 25, The United States: 23, India: 22, Others: 16) through Amazon Mechanical Turk (AMT) and advertisement posts on online university communities. We ensured that all respondents had a mobile MOOC learning experience by asking them to upload a mobile screen capture of learning history or certifcate from MOOC platforms.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.2">Interview Study</head></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.2.1">Interviewees.</head><p>To get a deeper understanding of the learners' challenges and requirements in mobile MOOC learning, we followed up with a subset of respondents who left their email addresses in the survey response. We reached out to 56 surveyors by email, and 21 responded (13 male, 8 female). We provided a $10 Amazon gift card as compensation for each interviewee. Their age ranged from 18 to 44 years old. Interviewees were from South Korea <ref type="bibr" target="#b10">(11)</ref>, Brazil (4), the U.S. (3), India (2), and Canada <ref type="bibr" target="#b0">(1)</ref>. We refer to these interviewees as P1 through P21.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.2.2">Interview</head><p>Protocol. We conducted semi-structured interviews remotely using an online communication tool, Zoom, and audiorecorded the interviews under consent. The interviews took 30-40 minutes with four main sections: (1) whether they think the current visual design of MOOCs is suitable for mobile environments; (2) the main visual design elements that have caused difculties in mobile MOOC learning; (3) the lecture types they experienced on mobile devices and challenges of each lecture type; and (4) how they currently deal with the difculties and their features they want to have to mitigate the challenges mentioned above, regardless of technical feasibility. The complete set of questions is included in the supplementary materials.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.2.3">Interview Analysis.</head><p>To analyze learners' challenges caused by visual design elements and types of lectures, we followed an iterative coding process <ref type="bibr" target="#b31">[32]</ref>. The two authors coded three randomly selected interview transcripts from the dataset using the codebook. We then computed Cohen's kappa to access inter-rater reliability. The average Cohen's kappa score across all codes was 0.85 (SD=0.05, ranging from 0.80 to 0.89) with an average of 92.75% agreement. Each of the two authors then coded the remaining interviews independently. After independent coding, they met to discuss in two 1-hour meetings the interpretations, discrepancies until they reached a consensus on the codebook. They adjusted their coded data accordingly.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.3">Survey and Interview Results</head><p>Results show that the mobile phone and tablet PC were the primary device used for mobile learning. 68% of respondents reported using mobile phones, 31% tablet PC, and 1% laptops. In terms of mobile MOOC learning frequency, 33% of respondents replied 3-5 times a week. The learners did mobile learning during their free time (42%) and while commuting (36%). The respondents' experiences cover a wide range of subjects and lecture types. The complete survey results are in the supplementary materials. We analyzed learners' challenges with visual design elements and lecture types in mobile learning environments. The list of challenges and frequencies of responses are presented in Table <ref type="table">5</ref>. The readability issues caused by small font size, dense text, and small text in complex images were primary pain points, followed by challenges related to image elements such as small image sizes and too many images.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="3.3.1">Challenges on Visual Design</head><p>Elements. In general, many interviewees (16 out of 21 in the interview) shared that the visual design of current MOOC content is not suitable for mobile devices (Fig. <ref type="figure" target="#fig_0">1</ref>). We organize the reasons by visual design elements below.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Text Element</head><p>Small Font Size (survey: 63/134, interview: 19/21). The small font size was the most frequently reported pain point in both the interview and the survey. P19 reported that he "relies on the audio instead of trying to read the small fonts" and others (P4, P12, P20) rewatched the content using large-screen devices later. The problem deteriorated further due to the distracting learning environments. For example, P11 stated that "When I'm on the bus, small fonts cause eye fatigue and motion sickness." Meanwhile, the readability issue even causes dropouts. In contrast, interviewees "could bear with small fonts in stable environments such as home or library"(P20) even with the small mobile screens. P17 also mentioned that "I have readability issues when I'm working out, but I don't have any (issue) when I'm home." In other words, learners' preferences and requirements difer depending not only on the screen size but their context and environment.</p><p>The most commonly used solution to address the small font size was zooming in on the video content. However, all of the interviewees pointed out the inconvenience of the current pinchzoom interaction of the video interface of MOOC platforms. Some interviewees (P1, P5, P6, P7, P11, P16, P18) found it irritating to keep zooming in content every scene changes. P11 commented on the inconvenience of adjusting the zoomed area, stating that "It's annoying to move the zoomed area back and forth since zooming always results in part of the content getting cut of." P6, on the other hand, encountered technical issues while using zoom interaction, which resulted in unwanted actions such as exiting full-screen mode and scene transitions. Interviewees wanted element-wise and tapbased zoom interaction, which would allow them to enlarge certain design elements such as textboxes or images without cutting of (P10). They suggested an automatic zoom-in feature that enlarges the current spot on the slide being explained.</p><p>Dense Text (survey: 36/134, interview: 8/21). Several interviewees (P1, P7, P9, P10, P12, P16, P18) complained that text-heavy content on mobile screens makes it difcult for them to concentrate. Because of the dense text, P12 abandoned mobile learning and used a laptop to rewatch the lecture. P16 suggested that "chucking long lines of text can mitigate the problem" and P18 proposed "reducing the amount of text responsively to ft the mobile display." On the other hand, P10 wanted more cues such as highlighting on the current explanation spot since "it's easy to lose the instructor's explanation spot in the lecture material in the distracting mobile environments."</p><p>Inappropriate Text Spacing (survey: 18/134, interview: 4/21). P7 and P20 said that the inappropriate text spacing and line spacing make text harder to read on a mobile device.</p><p>Inappropriate Font Style (survey: 14/134, interview: 0/21). Inappropriate font style was not mentioned by interviewees, while 14 respondents in the survey reported this issue.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Image Element</head><p>Image Containing Text (survey: N/A, interview: 9/21). Since "image containing the text" was not included in multiple-choice options in the survey, we have no such data to report as a survey result. However, nine interviewees stated that the main challenge with images was the small text contained in the images. The font sizes of labels in charts and graphs were often too small to read (P2, P10, P20). P10 complained that he "should rely on the instructor's narration without access to the small labels in the graphs." This happened especially when the images were copied and pasted from the sources such as textbooks without adjusting font sizes.</p><p>Complex Images (survey: 32/134, interview: 7/21). Complex images include graphs, charts, tables, and infographics. P3 mentioned that "complex images with subtle details were not recognizable even if they are presented as full-screen images". They were using  <ref type="bibr" target="#b10">[11,</ref><ref type="bibr" target="#b12">13,</ref><ref type="bibr" target="#b15">16,</ref><ref type="bibr" target="#b34">35,</ref><ref type="bibr" target="#b55">58]</ref>. (Lecture Source and License: Joe Warren, Rajagopal Raghunathan, John Guttag, Anusuya Chinsamy-Turan, Autonomous Robots Lab) pinch-zoom interactions to mitigate the problem. Similar to interviewees' comments on the small font sizes, P10 wanted to use element-wise and tap-based zoom interaction for the complex images.</p><p>Small Image Size (survey: 51/134, interview: 5/21). Similar to interviewees' comments on complex images, some interviewees (P1, P11) complained about the text inside the small images, stating "I had no difculties with simple and straightforward pictures even their sizes are small, but I could not read the text inside the small-sized images." (P1). On the other hand, P3 pointed out that the size of the images was not a problem since most of the complex images are displayed in full-screen mode. However, he needed additional zooming in or cropping for interest in complex images.</p><p>Too many images (survey: 23/134, interview: 3/21). One interviewee found it challenging to know which image is currently being explained by an instructor (P10). P1 stated that he is "easily overwhelmed by many images on small mobile screens compared to desktop environments".</p><p>Color Low Color Contrast (survey: 19/134, interview: 3/21). Some interviewees (P20, P2) encountered readability issues due to the low color contrast between the fonts and background. According to P2, a fancy background with a low color contrast with text, in particular, decreases the readability of the content: "It's hard to read text on fancy graphics such as background using the Chroma Key technique. It might make the lecture more engaging in desktop environments, but readability is more important for me on mobile screens."</p><p>Too Bright Color (survey: 15/134, interview: 2/21). Interviewees explained that bright colors cause eye fatigue when mobile environments have low lighting. P5 and P16 wanted to have a dark mode option for video content.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>3.3.2</head><p>Challenges per Lecture Type. We now report mobile learners' challenges for each lecture type (Fig. <ref type="figure" target="#fig_1">2</ref>). The four major pain points were content-heavy lecture material (in slide-based, programmingcoding), low readability &amp; legibility (in slide-based, screencast, recorded classroom, hand-drawing, programmingcoding), lack of visually organized lecture material (in talking-head, interview/discussion), and the unavailability of following software tutorials or coding practice (in the screencast, programmingcoding).</p><p>Talking-head (survey: 89/134, interview: 3/21). The main pain point of talking-head was a lack of visually organized lecture material such as on-screen text and lecture slides. Some interviewees (P7, P9) preferred to have visual lecture material in mobile learning, particularly when their auditory channel becomes unavailable in noisy environments. P7 additionally stated that "it was hard to get lecture content organized in the head in distracting environments without on-screen lecture material that provides a summary at-a-glance." (P7).</p><p>Although displaying the instructor's talking-head is engaging, picture-in-picture talking-head along with main content "decreases readability limiting space for main content" (P2) and "split attention in already distracting mobile environments" (P17, P18). For this reason, P2 wanted to turn on and of the picture-in-picture talking-head as needed, and P19 suggested toggling feature to switch between lecture types.</p><p>Slide-based (survey: 84/134, interview: 8/21). While the slidebased lecture is a commonly used lecture type in MOOCs, interviewees found it challenging to consume it in mobile environments due to the content-heavy lecture materials, low readability, and limitations on visual channels. The text and images in lecture slides incurred visual load to interviewees in mobile environments. P12 and P14 pointed out that slide-based lectures usually contain more content than other lecture types, such as taking-head. P12 said that "I don't take slide-based courses on mobile phones since it's hard to concentrate on text and images on small screens." P1 and P5 mentioned the readability issues due to the small text in the slides. Furthermore, the distracting mobile environments, especially when interviewees are on the move, limit access to visual lecture materials (P12).</p><p>Hand-drawing (survey: 44/134, interview: 7/21). The main difculty was the legibility of the handwritten text. Some interviewees (P1, P6) explained that the font size of the handwritten text was small, and others (P2, P4, P14, P15, P21) complained about the poor handwriting of the instructor.</p><p>Screencast (survey: 44/134, interview: 4/21). Interviewees found it difcult to follow the screencast lectures for two reasons. First, the shared desktop screens were not readable on mobile devices due to the small UI elements (e.g., mouse pointer, buttons) and tiny text (P7, P18, P21). Second, some interviewees pointed out the unavailability to practice the screencast tutorials using mobile devices. According to P10, "it is hard to take screencast lectures without actual practice on desktops."</p><p>Programming/coding (survey: 55/134, interview: 8/21). Similar to screencasts, programming/coding lectures also had low readability, and interviewees could not practice coding on mobile screens. For example, many interviewees (P2, P7, P14, P15) complained that long code lines were not readable and digestible on small screens. Meanwhile, due to the unavailability of coding practice, some interviewees (P2, P10, P11) did not use mobile devices for the lectures containing coding practices, stating "I use mobile phones for the theoretical part of programming lectures and move to a laptop for the coding part." (P10). P21 mentioned the limited keyboard input as a challenge on mobile coding. Some interviewees suggested providing an interactive code editor embedded in the video content, which enables scrolling on long lines of code (P7) and displaying small chunks of code in a single video frame instead of screencasting the mere code editor (P10).</p><p>Recorded Classroom (survey: 60/134, interview: 3/21). Interviewees avoided taking recorded classroom lectures on mobile devices since it is hard to read chalkboard writings: "the instructor's writing on the chalkboard was not legible" (P3).</p><p>Animation (survey: 63/134, interview: 0/21). Although only two interviewees (P20, P21) have a mobile learning experience with the animation type, they both showed a strong preference for the animation type. P20 found it "most engaging and interesting" and P10 said that "other lecture types such as slide-based type and screencast type should be redesigned to be suitable for mobile devices, but animation type does not need the mobile-specifc version."</p><p>Takeaways. To summarize the survey and interview results, the readability issues were mainly caused by small font size and dense text. In particular, slide-based, hand-drawn, and programming lectures deteriorated readability and legibility problems. On the other hand, learners' situational auditory impairments worsen due to a lack of visually organized learning materials to compensate for the saturated auditory channel, especially in talking-head lectures. Other noticeable fndings include that the inappropriate designs can lead mobile learners to dropouts and learners' requirements in mobile environments vary depending not only on the screen size but their context.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4">STUDY2: CONTENT ANALYSIS</head><p>In this section, we evaluated the mobile adequacy of MOOC videos based on existing visual design guidelines. Through the content analysis, we diagnosed how severe the learners' difculties are and quantifed defciencies of the current design, guiding improvement schemes.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.1">Data Set</head><p>We evaluated 101 MOOCs selected by Class Central, a search engine and review site for MOOCs. We sampled 51 courses based on their popularity and 50 courses from top user reviews <ref type="bibr" target="#b36">[37,</ref><ref type="bibr" target="#b37">39]</ref>. We selected the top 51 and 50 courses from the lists, respectively, except those whose language is not English and to which we had no access (e.g., limited registration period). Two of our authors selected the video frames considering the diversity of the design elements and lecture material. Our fnal set comprises courses from 64 institutions in 19 countries across fve MOOC platforms, Coursera <ref type="bibr" target="#b51">(54)</ref>, edX <ref type="bibr" target="#b24">(25)</ref>, FutureLearn <ref type="bibr" target="#b18">(19)</ref>, Complexity Explorer (2), and an Independent University (University of Urbino). The complete course list is added in the supplementary materials. The 101 sampled courses contain 3,951 video clips with an average length of 8.1 minutes (min = 12 seconds, max = 54.85 minutes, SD = 6.63 minutes). For each video clip, we detected video frames by calculating edge-based diferences to extract unique lecture material <ref type="bibr" target="#b1">[2,</ref><ref type="bibr" target="#b41">43,</ref><ref type="bibr" target="#b77">79]</ref>, ending up with 168,514 frames (M = 1668.5 frames/course, SD = 2599.6). To normalize the number of frames per course, we randomly sampled 500 (1/5 of standard deviation) video frames from each course. For 38 courses containing frames smaller than 500, we used all of the frames without fltering. The average number of frames per course after the normalization was 413, ranging from 31 to 500. In total, we analyzed 41,722 frames.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.2">Evaluated Design Guidelines</head><p>Instead of analyzing all the visual design factors, we selected representative ones based on learners' interview results. In the interview, the top four challenges learners faced in mobile MOOC learning for each category were small font size (19 out of 21 learners), images containing text (9 out of 21), dense text (8 out of 21), and low color contrast (3 out of 21 learners). Besides, the interview showed that learners' perception of diferent visual elements is afected by lecture types. For example, learners sufered from the dense text, mainly in programming/coding lectures. Hence, we analyzed the guideline compliance rate for the four visual design elementsfont size, word count, the font size of the text inside an image, color contrast-across diferent lecture types. For comparison, we estimated the font size in video lectures that are displayed on the most common mobile screen size at the time of analysis: 5.5-inch diagonal size <ref type="bibr" target="#b44">[46,</ref><ref type="bibr" target="#b46">48]</ref>.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.3">Results of Guideline Compliance Analysis</head><p>The overall compliance rates of each design element are shown in Table <ref type="table" target="#tab_0">1</ref>. We present the guideline compliance rate of each design element across diferent lecture types as follows.</p><p>4.3.1 Distribution of Lecture Types. The sampled set covered all eight types of video production. The talking-head (37.8%) was most common followed by slide-based (34.6%), interview-discussion (11.4%), class recording (5.8%), programming/coding (4.7%), screencast (4.3%), hand-drawing (0.8%), and animation(0.5%) among 41,722 frames. </p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.3.2">Font size.</head><p>The suggested body text size in a mobile device is 17pt by the Human Interface Guidelines of Apple <ref type="bibr" target="#b35">[36]</ref>] and 16 pt by Google Material Design Guideline <ref type="bibr" target="#b47">[49]</ref>]. We also considered guidelines for presentation slides that suggest 28 pt <ref type="bibr" target="#b3">[4,</ref><ref type="bibr" target="#b30">31]</ref> as the minimum font size. To evaluate the font size, we unifed the diferent font size units (pt, px, sp) into a point (pt) for ease of comparison. Then we used the Pytesseract OCR engine, which showed reliable accuracy in previous work <ref type="bibr" target="#b33">[34,</ref><ref type="bibr" target="#b76">78,</ref><ref type="bibr" target="#b77">79]</ref>, to detect font sizes. The average font size was 13.9pt (SD=8.57, min=1.14, max=80.50). Adopting Apple and Google's guidelines, 75.5% of the video frames had font sizes smaller than 16pt. Adopting the guidelines for presentation slides, 97.2% of the video frames had font sizes smaller than 28pt.</p><p>We then investigated the guideline compliance rate across eight lecture types (Fig. <ref type="figure" target="#fig_2">3</ref>). Overall, more than 50% of video frames contained font sizes smaller than 16pt except for animation, revealing that font size guidelines are not followed in most lecture types. Especially for programming/coding and screencast lecture type, over 95% of the video frames did not meet the 16pt standard. These results match the learners' survey and interview results: font size was the main pain point across lecture types, particularly for programming/coding and screencast lectures. Using less than 45 words per presentation slide is recommended <ref type="bibr" target="#b4">[5]</ref>, while stricter guidelines advise using less than 20 words per slide <ref type="bibr" target="#b5">[6,</ref><ref type="bibr" target="#b67">69]</ref>. The average of word counts was 46.2 (SD=73.2, min=1, max=2431). Of the sampled frames, 25.8% had more than 20 words, and 15.1% contained more than 45 words. We used the Pytesseract OCR engine to detect the words. The guideline compliance rate across lecture types is shown in Fig. <ref type="figure" target="#fig_3">4</ref>. Programming/coding, screencast, and slide-based were most text-heavy, with 72.1%, 58.8%, and 24.7% of frames having more than 45 words, respectively. This analysis result was parallel with Section 3: dense text was the second most frequently reported pain point by learners, especially for programming/coding, screencast, and slide-based lectures.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.3.4">Font Size of Text Inside</head><p>Images. We evaluated the font size of any text inside images (e.g., graphs, tables, etc.) using the Pytesseract OCR engine. A total of 1,278 video frames had images with text inside them and the mean font size was 11.15pt (SD=6.51pt, min=2.42pt, max=81.65pt). The three lecture types, including talking-head, slide-based, animation, contain images with text from our dataset. Our results show that 95.0% of the frames had font sizes smaller than 16pt, and 99.0% of the frames had font sizes smaller than 28pt. These confrm the fndings in learner interviews: among 11 interviewees who claimed difculties with image elements, 9 of them had problems with the font size of the text inside images. Fig. <ref type="figure" target="#fig_4">5</ref> shows the compliance rate across the three lecture types that contain images with text. More than 85% of fonts from all three lecture types violate the guideline.  Figure <ref type="figure">6</ref>: The guideline compliance rate of color contrast ratio across diferent lecture types. About 70% of color contrast from the slide-based lecture type complies with the guideline while 40% from the handwriting type complies with the guideline with a higher ratio than 7.0:1.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="4.3.5">Color Contrast.</head><p>We calculated the color contrast ratio between the background color and font color of 10,420 video frames that contain text elements in them. 33 frames were excluded for having too low a contrast ratio due to the patterned background or low resolution. We frst extracted color palettes from each text box in video frames and compared the color contrast between the most dominant color value and the second frequent color value. Two types of lectures, including slide-based and handwriting types, out of 8 lecture types contain text boxes with which we can estimate the color contrast ratio. Web Content Accessibility Guidelines (WCAG) <ref type="bibr" target="#b6">[7]</ref> level AA suggests that the contrast ratio should be larger than 4.5:1, while level AAA guideline recommends 7.0:1. The analysis results revealed that about 20% of the sampled frames have a contrast ratio lower than 4.5:1 and 34% lower than 7.0:1. The handwritings have a lower guideline compliance rate (42%) compared to the typed text in slide-based lectures (70%) (Fig. <ref type="figure">6</ref>). The color components can be overlooked compared to other design components such as text and images, having less related guidelines, but the current design calls for careful consideration for color contrast for improved readability.</p><p>The low guideline compliance rates demonstrated that the current design of video lectures is not suitable to be consumed in mobile learning environments. Several lecture types ( programming/coding, screencast, slide-based, and handwriting types) need engineers' attention when considering mobile learning.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5">STUDY3: ENGINEER PERSPECTIVE</head><p>We interviewed 11 video production engineers to investigate considerations and challenges in designing lecture videos for mobile users.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.1">Participants and Recruitment</head><p>We recruited 11 engineers from the U.S. and South Korea via a campus mail list. The participants had 11 years of experience on average and reported their roles as a video editor, video production engineer, and video content designer (Table <ref type="table">2</ref>). Seven participants were university staf with design experience on MOOC content, and one was an independent engineer with experience in editing and publishing video-based learning content. Three of them were working in video production companies. We used a saturation method <ref type="bibr" target="#b2">[3]</ref> to determine the number of participants. We refer to these participants as E1 to E11.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.2">Interview Protocol</head><p>We conducted remote semi-structured interviews using ZOOM and audio-recorded the interview under consent. The interviews took 1.5 hours with four main sections: <ref type="bibr" target="#b0">(1)</ref>  </p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.3">Interview Analysis</head><p>Two of our authors and one external researcher who has rich expein qualitative analysis extracted thematic codes through an open-coding approach <ref type="bibr" target="#b8">[9]</ref>. They separately performed open-coding for the interview responses. We used afnity diagramming to cluster the generated codes <ref type="bibr" target="#b53">[56]</ref> and iterated until we met a consensus over two 1.5 hour-long meetings. Finally, we identifed four themes for challenges in designing mobile-friendly content.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.4">Interview Results</head><p>We report the fndings from the interviews on considerations and challenges of mobile content design.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.4.1">General design process of video lecture content.</head><p>To publish a video lecture, experts from various felds collaborate. The instructor frst shared their lecture materials in slides or documents with the video production team. Then they discuss with the video tion engineers and instructional designers the specifc curriculum, lecture types, and video designs. Based on the discussions, the video production team start flming. Then video production engineers post-process the recordings: designing subtitles, fonts, images, and video efects. The design process goes through many iterations with instructors. After the instructor's fnal confrmation, the videos are posted on the platform.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.4.2">Considerations and challenges in designing content for mobile users.</head><p>Most engineers know that more and more learners are using mobile to learn. Many already consider them as a target user group. Seven out of eleven engineers keep mobile environments in mind during the design process. But due to limited resources and time, lectures are designed for desktops frst.</p><p>Design Considerations Design Element. Much consideration for mobile learners was the readability of content. They simplifed the content design to ft the small screen by reducing the amount of content (e.g., segmenting content in one slide into multiple slides). They also enlarge the size of the content. For example, E7 explained, "Font size is our main concern since it determines the readability in mobile screens. We next adjust the amount of dense text that is not digestible in mobile environments." As for the style, they preferred readable fonts such as sans-serif fonts and used font colors that had high color contrast ratio with the background.</p><p>Lecture Type. The engineers do not specifcally consider mobile environments while the lecture types. They chose the lecture type that is most suitable for the lecture content or preferred by an instructor.</p><p>Situationally-Induced Impairments and Disabilities (SI-IDs). Most of the engineers have not considered the situationallyinduced impairments and disabilities in their design process.</p><p>Guidelines for Mobile Video-Based Learning. When asked about guidelines for mobile learning environments, they responded that there are no design guidelines specifc to mobile environments. They noted that they rely on subjective intuition based on their experiences.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Challenges of Content Design for Mobile Learners</head><p>In particular, we identifed four main challenges for considering mobile devices during the design process. First, their design process in desktop environments makes it challenging to know how the content will look on mobile devices. The diversity of mobile devices deteriorates the problem. For example, E10 said, "In the current design process (on desktops), it's hard to imagine how the content I created will be displayed on very diverse mobile screens including laptops, tablet PCs, and smartphones.". Second, they mentioned the lack of design guidelines for mobile environments. For example, E10 commented, "We currently have guidelines for font size and color contrast. However, they are not mobile-specifc, and more diverse aspects should be considered (in designing for mobile learners).". E2 also mentioned that "It is difcult to measure the readability, so for now, we just rely on the subjective intuition of an individual engineer.". Third, they encounter conficts with instructors. In most cases, the engineers prioritize content readability. A few instructors wanted to use the same ofine class learning materials. Some instructors do not prefer changing the original content design since the fow of the lecture can be disrupted. In this case, the engineers and instructors discuss whether to segment or summarize the dense content. Lastly, the engineers pointed out that it's hard to set the design directions due to a lack of understanding of lecture materials. For example, they fnd it challenging to reduce word while preserving the key information with a limited understanding of the lecture.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.4.3">on learner survey, interview, and content analysis result.</head><p>Learner Survey and Interviews. All of the engineers that it was an expected result that the biggest challenge was the readability issue. Even though they consider readability a high priority, they elaborated that it is difcult to make every content readable on mobile devices due to the challenges of coordination with instructors, considering multiple mobile devices, understanding lecture content, and lack of mobile design guidelines. Several instructors insist on their own design styles that are inappropriate for mobile devices. Furthermore, the engineers are mostly working under tight deadlines and could not aford to create diferent designs for multiple devices or understand the entire lecture content. Meanwhile, the engineers did not expect that the second major difculty was the SIIDs. They mentioned that they could understand that the learners sufer from SIIDs, but have not considered it in their general design process. When asked about the expected of considering SIIDs in the design process, they mentioned the needs for the design guidelines, elaborating that they cannot think of any possible solutions to alleviate SIIDs.</p><p>Content Analysis. The engineers said that both the guideline compliance for font sizes and the amount of text are lower than they expected. example, E2 said, "I expected 30-50% of the current video lectures follow the guideline. I think it can be because most engineers don't have guidelines for mobile content design." In the case of font sizes of text in images, most of them noted that it was an expected result. Some engineers mentioned that the source image provided by an instructor sometimes has poor readability. One participant noted that "The instructors provide us with fgures with too small text in them since they are not professionals in design. We sometimes redesign the fgure based on the provided image, but we should use them as they are in many cases when we have a tough deadline." (E6).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="5.4.4">Communication channels with learners.</head><p>All of the engineers agreed with the need for getting learners' feedback. Some engineers collected user feedback via survey, others communicated with learners through online bulletin boards on MOOC platforms. However, they noted that most students do not respond to surveys, emphasizing the lack of communication channels. In particular, they have difculty refecting feedback on design elements, which requires a complete redesign or reshoot of the video. For instance, they mentioned that it is too costly to reshoot the entire lecture to fx minor issues such as font sizes or content layout. It was due to the video medium's characteristics that it is hard to be edited once it is released or encoded.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>DESIGN GUIDELINES</head><p>In this section, we suggest a set of design guidelines for creating mobile-friendly MOOCs. The guidelines are based on our learner studies and content analysis. In particular, one of the main focuses of our guideline was not to pose additional workloads to video production engineers in following the guidelines since the interviews revealed that they are sufering from time constraints of design tasks. For example, our guideline suggests automation of the design process and encourages support from diverse stakeholders, including instructors and MOOC platform engineers.</p><p>We validated the guidelines through an evaluation session with the video production engineers. We also discuss design opportunities for mobile-friendly MOOCs. Based on the surveys and interviews with learners, we identify three design opportunities: (1) readability support via adaptive and customizable visual design, (2) context-aware accessibility support, and (3) informed lecture selection. We expand on each design opportunity along with design recommendations derived from noticeable fndings and learner suggestions. The summary of fndings (F1-9) and design guidelines (G1-9) on visual design elements are shown in Table <ref type="table">3</ref>.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="6.0.1">Readability Support via Adaptive and Customizable Visual</head><p>Design. Existing design techniques such as responsive web design provide customized views across various mobile devices. However, responsive video design is challenging because of the infexible nature of the video, making it difcult to be edited or deconstructed after release. The lack of support for responsive video design leads to readability issues, in particular, in content-heavy materials (F1, F4). This suggests novel design opportunities for an adaptive and customizable visual design for video content. Specifcally, key is to automatically generate responsive video content and provide customizable design options to ft diverse learners' needs without making separate versions of the content for each device. For instance, Optical Character Recognition (OCR) or edge detection techniques in computer vision can be used to extract in-video elements such as text boxes and images. Once the in-video elements are detected and deconstructed, it becomes easier to adapt them like static content such as websites and ebooks. Then we can enlarge the font size, adjust the layout depending on screen sizes <ref type="bibr" target="#b62">[65,</ref><ref type="bibr" target="#b73">75]</ref> (G1a). Furthermore, the extracted elements can be customized, providing options (e.g., font size, color) for diferent designs to learners to choose from (G1b, G4a, G4b, G8) by adjusting and redesigning the deconstructed elements based on users' preferences on color or size. On the other hand, learners currently use pinch-zoom interactions to alleviate the readability problem (F2, F3). They complained that zooming sometimes results in missing other important content and that pinch interactions cause unwanted actions such as the exit of fullscreen mode. As an alternative, they mentioned tap or long-press interactions. By deconstructing recorded video into design elements, an improved adaptive video content design technique could enable element-wise zoom interaction by magnifying a complete element (e.g., text box, image) without cut-of parts (G2). 6.0.2 Context-Aware Accessibility Support. Mobile learning is distracted by situational factors, so-called Situationally-Induced Impairments and Disabilities (SIIDs) <ref type="bibr" target="#b63">[66,</ref><ref type="bibr" target="#b75">77]</ref>. A design opportunity is to provide context-aware support for addressing SIIDs in mobile video-based learning (G5, G6a). To detect learners' learning contexts, existing detection sensors such as eye trackers or accelerometers can be used <ref type="bibr" target="#b20">[21]</ref>. For example, an audio description for visual lecture material can be provided when learners <ref type="bibr">'</ref>  G9. Provide information on video content design in the lecture selection stage. Improve information scent about mobile-friendliness.</p><p>Learning Platform Design The information scent, for example, (Video production engineers, includes the design guideline the compliance Instructional designers) rate of font sizes or involvement of programming practice.</p><p>Table <ref type="table">3</ref>: Summary of notable fndings and design recommendations on visual design elements to create mobile-friendly MOOCs. *Context-aware learning detects learners' context (e.g., ambient light, mobile state of users) and adapts learning materials to match the context <ref type="bibr" target="#b28">[29]</ref>). **Audio description is a narration added to the soundtrack to describe important visual details that cannot be understood from the main soundtrack alone. An extended audio description that is added to an audiovisual presentation by pausing the video so that there is time to add additional description (https://www.w3.org/WAI/WCAG21/ Understanding/extended-audio-description-prerecorded.html). not fxed on the screen. In particular, our fndings draw a parallel and contradiction with Mayer's Multimedia Learning Theory <ref type="bibr" target="#b48">[51]</ref> at the same time. The learners strongly wanted cues or signals on the currently explained spot due to distraction in mobile environments (F7), corroborating the signaling principle of Multimedia Learning Principles <ref type="bibr" target="#b49">[52]</ref>. They even required adding cues or signals on image elements as well as text elements (G7). On the other hand, our fndings mildly contradict the redundancy principle, which suggests that the same information presented both on-screen and orally interferes with learning <ref type="bibr" target="#b49">[52]</ref>. In mobile environments, learners suffered from the lack of visually organized lecture materials on the screen (F6). For example, when a learner was in noisy environments such as a gym or subway, they wanted redundant on-screen text together with audio narration. In distracting mobile environments, learners' available sensory channels quickly alternate, not allowing consistent use of a single channel. Hence, it is recommended to provide redundant information in both auditory and visual modalities to complement each other (G6b). More theoretical and empirical research is required to validate the impact of these mobile learning techniques on learning efects. 6.0.3 Informed Lecture Selection. As reported in our interview, the illegible and indigestible content may even cause dropouts of mobile learners. Learners express the need for information on mobile adequacy of lecture content at the lecture stage. This points an opportunity to support informed decision-making in lecture selection. Our fndings revealed that visual design elements and lecture types are critical factors that determine the mobile adequacy of the lecture content. Instructors or platform engineers can provide the information (e.g., font size, word count, the existence of coding) on video content design to improve information scent <ref type="bibr" target="#b11">[12]</ref> (G9). Future work can develop a mobile adequacy index or score by investigating the weighted importance of each factor, providing a simple and quantitative measure for mobile adequacy.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="6.1">Design Guidelines on Mobile-Friendly Lecture Types</head><p>The fndings on lecture types from section 3 indicate that each lecture type has diferent challenges and needs to be tailored to mobile learning environments. In particular, several fndings mildly contradicted the general conclusions from the previous work that assumed desktop environments, calling for the need for mobilespecifc design considerations and recommendations. The summary of fndings (F10-14) and design recommendations (G10-14) on lecture types is shown in Table <ref type="table" target="#tab_4">4</ref>.</p><p>Talking-head. Previous research demonstrated that talkinghead videos engaged learners more with personal feelings <ref type="bibr" target="#b23">[24,</ref><ref type="bibr" target="#b29">30]</ref>. On mobile devices, however, easily get lost in talking-head due to the lack of visually organized lecture material (F11). The lack of visual material also caused VIIDs and loss of concentration. Hence, we recommend adding visual lecture materials such as text and images beside the instructor's talking head in post-production editing (G11). Another pain point of talking-head was when the picture-in-picture talking-head is displayed along with main content <ref type="bibr" target="#b42">[44]</ref> (F10). First, the picture-in-picture talking-head split learners' attention in distracting mobile environments. Second, the juxtaposition of the main content and talking-head as a split view limits the space for the main content and decreases the readability of the main content. Therefore, we advise providing an option to turn of the picture-in-picture talking-head display (G10).</p><p>Programming/coding. Prior work introduced the efectiveness of live-coding in learning programming, including the ease of understanding <ref type="bibr" target="#b9">[10,</ref><ref type="bibr" target="#b59">62]</ref> and a decrease in extraneous cognitive load <ref type="bibr" target="#b58">[61]</ref>. However, the programming and screencast were not readable on mobile screens due to small font sizes and an excessive amount of code (F12). We recommend instructional designers encourage instructors to zoom in on the code editor if instructors insist on the live-coding type (G12a). We recommend zooming in on the code editor at opportune times in post-production editing (G12b). On the other hand, some learners wanted to practice coding on mobile (F13). They complained about the unavailability of mobile IDEs and limited keyboard input. To address this problem, we suggest providing lightweight IDEs to practice coding and providing code snippets so that learners do not have to write long lines of code from scratch (G13).</p><p>Hand-drawing. Hand-drawing videos are another recommended lecture type in desktop environments, highly engaging students in desktop environments <ref type="bibr" target="#b16">[17,</ref><ref type="bibr" target="#b23">24]</ref>. However, preferred the hand-drawing type the least in mobile learning environments due to its low legibility (F14). We recommend providing corresponding typewriting (print) to the handwritten materials (G14) <ref type="bibr" target="#b14">[15]</ref>.</p><p>Recorded Classroom. Recorded classroom lectures are also not preferred in mobile environments due to their low legibility and small font sizes (F15). Similar to the hand-drawing type, it is recommended to provide lecture notes in digital text to allow the learners to refer to them as needed (G15).</p><p>Slide-based. Slide-based videos are prone to containing cluttered materials (F16). As suggested by previous work <ref type="bibr" target="#b19">[20,</ref><ref type="bibr" target="#b45">47,</ref><ref type="bibr" target="#b66">68]</ref>, we recommend segmenting long text into small chunks or summarizing the content into several bullet points (G16).</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="6.2">Expert Evaluation of Design Guidelines</head><p>We conducted interviews with 11 video production engineers to investigate the applicability and clarity of our design recommenda-6.2.1 Procedure. At the end of the interview in section 5, we had an expert evaluation session for the design recommendations. The participants were asked to fll out a form that evaluates the items. For each recommendation, we frst confrmed the right target group of the item. Since the content design process of video lectures necessarily involves multiple stakeholders such as platform developers, instructors, and instructional designers, the participants might need collaboration or cooperation between multiple teams to implement the recommendations. The form then asked the participants to provide ratings on clarity, understandability, applicability, actionability, and the easiness to work with the recommendations, on a 5-point semantic diferential scale (e.g., from 'very confusing' to 'very clear'). We inquired about the reasons for the ratings with the following question. We also asked anticipated challenges of applying the recommendations. The participants were then requested to improve the recommendations by editing, adding, and deleting the  suggested items. Lastly, we asked the participants if there is any wanted system or tool for implementing the recommendations.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="6.2.2">Results</head><p>. In this section, we report the video production engineers' feedback on the clarity and applicability of the recommendaexpected of applying the recommendations, and revisions suggested by the engineers. Fig. <ref type="figure" target="#fig_5">7</ref> presents the subjective ratings from video production engineers for each guideline item.</p><p>Related Stakeholders. The engineers reported that most of the guideline items are within the scope of their roles. Meanwhile, some of the items require them to collaborate with other teams. For example, they noted that they need to collaborate with learning platform developers to apply some guidelines, including G1-3, G5, G6, G9, G12, G13, which involve development work for a new video interface or mobile sensor. On the other hand, G14 requires the help of instructors who have a complete understanding of the lecture materials.</p><p>Clarity and Understandability. The mean of the ratings for clarity and understandability was 5.99 and 6.07 out of 7, respectively. engineers wanted to see the working system or prototype which applies the guidelines for new features in the video interface. For example, E1 commented on G2 that "It's hard to imagine how the new video interface (with the element-wise zoom feature) works without the actual system". They reported that the guidelines are clear and easy to understand overall.</p><p>Applicability, Easiness to Use, and Actionability. The mean of the ratings for applicability, easiness to use, and actionability was 5.71, 5.18, and 5.51 out of 7, respectively. G1 and G2, the engineers rated them less applicable (4.43, 5) and easy to work with (4.33, 4.2) compared to other guidelines. They expressed concerns about the spatial relationships between elements. For example, "(For G1) a simple adjustment for font sizes can break the layouts of the content." (E9) and "(For G2) the element-wise zoom can cover the rest of the content and distort the whole layout." (E5). For G4 and G9, the engineers mentioned that they need more precise criteria for decorative visual efects and mobile-friendly design. E2 said that "We will need clear criteria or even experts' advice to determine the mobile-friendliness of the video content".</p><p>The engineers also indicated that G7 and G8 could pose additional workloads. They explained that visual cues need additional graphic work, and creating a dark mode for the whole content can double the workload. Several engineers (E4, E7, and E10) mentioned the possibility of automating the design process to apply these two guidelines. E4, for example, said "It would be efcient if there were some programs that extract text and background from video and convert the color for the dark mode".</p><p>Another problem was the difculty of completely understanding the lecture materials. To apply G11, the engineers "might need close cooperation with instructors, which requires much efort." (E4). Similarly, for G14, they noted that they cannot understand the whole lecture content each time and necessarily need help from instructors to provide correct lecture notes for handwriting.</p><p>Usefulness. The engineers agreed on the need to apply the suggested guidelines to improve the mobile learning experience. Many engineers like the idea of giving options to learners customizing, for example, font sizes (G1) and lecture designs (G4, G10). G10 commented that "(For G10) it's a good idea to provide options to users considering their personal preferences because a single design cannot satisfy every user". Some engineers appreciated the guidelines (G1-4) that can alleviate the readability issues in mobile devices. On the other hand, they valued the guideline for providing information for mobile-friendliness (G9), with one expert commenting that "the information scent can beneft many mobile learners." (E5).</p><p>Revisions. When asked if there is any guideline they want to add, remove, edit, the engineers indicated that G2, G5, and G6 have room for improvement. E5 pointed out that G2 overlaps with G3 in that they both suggest a new zoom interaction. E5 also commented that G5 and G6 need to clarify how the context-aware system should be designed, including details such as the minimum level of noise that requires the context-aware subtitle. The rest of the engineers were satisfed with the current guidelines without further modifcations.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="7">DISCUSSION</head><p>We investigated mobile video-based learning using a mixed-method analysis on learners, MOOC content, and video production engineers. In this section, we discuss extended design implications and future work.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="7.1">Gap between Learners and Engineers</head><p>First, several design factors need to be paid more attention to in the design process. As shown in Table <ref type="table">5</ref>, engineers may be paying relatively little attention to complex images, images containing text, and too bright color. The learners complained about complex images with intricate details and small unreadable text usually accompanied by complex images. We recommend adjusting text design when bringing images containing text from other sources such as textbooks instead of copying and pasting them directly. We also encourage engineers to crop or zoom in on the area of interest in the complex image. Meanwhile, the video production engineers try to make lectures more engaging by adding video efects. However, readability was more critical than engagement for mobile learners. On the other hand, engineers were unaware or had not considered SIIDs in the learning environments, implying the need to extend guidelines, education, or design tools for engineers. Second, some design factors not meet learners' needs despite the engineers' considerations. For example, the small font size was learners' primary pain point, although they were also engineers' main consideration, with a guideline compliance rate of 2.79%. The engineers' challenges resulting in low compliance rates include the difculty in considering diverse mobile screen sizes (e.g., smartphones, tablet PCs, and laptops), not having design guidelines for mobile environments, coordinating with instructors, and deciding design directions limited understanding of the lecture content.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="7.2">Extended Content Analysis</head><p>There is still room for improvement for the content analysis of MOOCs. In analyzing the amount of text in the lectures, we did not distinguish learning critical text from those that are not. In screencast-type lectures, for example, text in software interfaces </p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="7.3">Design Opportunities for Design Tools</head><p>of the challenges of engineers comes from the practical challenges, including lack of design guidelines for mobile environments and difculty of understanding every lecture content under tight deadlines. Based on the fndings, we identify opportunities for design support systems for engineers: (1) A diagnosis or evaluation tool that detects and measures mobile adequacy of lecture material;</p><p>(2) A collaboration tool that supports communication and application of consistent guidelines among multiple engineers; (3) A design tool that automates tedious editing tasks; and (4) A design tool that supports a cross-device design process.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Design Opportunities for Mobile Design Guidelines</head><p>We recognize that multiple teams and stakeholders are involved when applying our guidelines. The video production engineers we have interviewed mentioned learning platform developers and instructors as potential stakeholders of the suggested guidelines. The future work can refect the perspectives broader stakeholders, including instructors, instructional designers, and educational system researchers. Lastly, we recognize our research as an initial attempt to suggest design guidelines for mobile video-based learning. The future work can elaborate the guideline items with detailed criteria such as proper color schemes for dark mode for video content (G8) or measurement for mobile-friendliness of video lectures (G9). We expect our work to provide building blocks for increasing accessibility to learners under various constraints and contexts.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head n="8">CONCLUSION</head><p>We presented the of a mixed-methods analysis on learners, MOOC content, and production engineers, aiming at (1) investigating the discrepancy between learners' challenges and video production engineers' design considerations; and (2) suggesting a set of design recommendations for creating mobile-friendly MOOCs. survey and interview with learners demonstrated major challenges of learners: readability issues and situationallyinduced impairments. The content analysis results showed a low guideline compliance rate for the key readability design factors, revealing that the current content designs are unsuitable for mobile learning. The interview with video production engineers showed that although readability has been concerned, there is a mismatch between learners' challenges and engineers' considerations. Informed by the fndings, we suggest a set of guidelines to design mobile-friendly MOOCs, which includes providing adaptive design, customizable design options, and context-aware accessibility support. We verify the clarity and applicability of our design guidelines through expert evaluation sessions with 11 engineers. Finally, we envision design opportunities for the mobile-friendly design of the lecture content and video interface. </p></div><figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_0"><head>Figure 1 :</head><label>1</label><figDesc>Figure 1: Example of learner-reported challenges from sampled video lectures. (Lecture Source and License: Mike Fitzpatrick, James Freericks, Leonard E. White, Barbara Oakley)</figDesc><graphic url="image-1.png" coords="3,341.98,83.68,192.20,124.61" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_1"><head>Figure 2 :</head><label>2</label><figDesc>Figure 2: Eight lecture types summarized from existing work [11, 13, 16, 35, 58]. (Lecture Source and License: Joe Warren, Rajagopal Raghunathan, John Guttag, Anusuya Chinsamy-Turan, Autonomous Robots Lab)</figDesc><graphic url="image-2.png" coords="4,317.96,83.68,240.25,89.58" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_2"><head>Figure 3 :</head><label>3</label><figDesc>Figure 3: The font size compliance rate across diferent lecture types based upon existing guidelines.</figDesc><graphic url="image-3.png" coords="6,61.69,405.51,226.98,125.31" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_3"><head>Figure 4 :</head><label>4</label><figDesc>Figure 4: The word count compliance rate across diferent lecture types based upon existing guidelines. Programming/coding, screencast, slide-based lectures were the bottom three. 4.3.3 Word count.Using less than 45 words per presentation slide is recommended<ref type="bibr" target="#b4">[5]</ref>, while stricter guidelines advise using less than 20 words per slide<ref type="bibr" target="#b5">[6,</ref><ref type="bibr" target="#b67">69]</ref>. The average of word counts was 46.2 (SD=73.2, min=1, max=2431). Of the sampled frames, 25.8% had more than 20 words, and 15.1% contained more than 45 words. We used the Pytesseract OCR engine to detect the words. The guideline compliance rate across lecture types is shown in Fig.4. Programming/coding, screencast, and slide-based were most text-heavy, with 72.1%, 58.8%, and 24.7% of frames having more than 45 words, respectively. This analysis result was parallel with Section 3: dense text was the second most frequently reported pain point by learners, especially for programming/coding, screencast, and slide-based lectures.</figDesc><graphic url="image-4.png" coords="6,325.85,199.92,226.97,141.75" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_4"><head>Figure 5 :</head><label>5</label><figDesc>Figure 5: The font size compliance rate of text in images across diferent lecture types based upon existing guidelines. The compliance rates are lower than 15% across all three lecture types. low guideline compliance rate indicates that engineers' careful consideration of font size is needed when designing images containing text.</figDesc><graphic url="image-5.png" coords="7,61.69,228.29,226.97,116.58" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_5"><head>Figure 7 :</head><label>7</label><figDesc>Figure 7: Subjective evaluations video production engineers about the clarity, understandability, applicability, easiness to use, and actionability of the suggested guideline items.</figDesc><graphic url="image-7.png" coords="13,86.10,86.51,201.76,427.77" type="bitmap" /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" xml:id="fig_6"><head>(</head><label></label><figDesc>NRF-2020R1C1C1007587). This work was also supported by Institute of Information &amp; communications Technology Planning &amp; Evaluation(IITP) grant funded by the Korea government (MSIT) (No.2021-0-01347,Video Technologies Using Object-Oriented Video Modeling).</figDesc></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_0"><head>Table 1 :</head><label>1</label><figDesc>The extremely The guideline compliance rates of sampled video frames for the three design elements based on existing guidelines.</figDesc><table><row><cell>Design Element</cell><cell cols="2">Existing Guidelines Guideline Compliance Rate</cell></row><row><cell>Font size</cell><cell>above 28pt above 16pt</cell><cell>2.79% 24.5%</cell></row><row><cell>Word count</cell><cell>below 20 words below 40 words</cell><cell>74.2% 84.9%</cell></row><row><cell>Font size of text in images</cell><cell>above 28pt above 16pt</cell><cell>0.94% 5.00%</cell></row><row><cell>Color contrast</cell><cell>above 7 above 4.5</cell><cell>66.2% 80.0%</cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_2"><head></head><label></label><figDesc>eyes are</figDesc><table><row><cell cols="2">Challenge Finding</cell><cell>Guideline</cell><cell>Design Process (Target User Group)</cell></row><row><cell></cell><cell>F1. Learners require</cell><cell>G1. Provide options for diferent font sizes.</cell><cell>Video Content Design</cell></row><row><cell></cell><cell>diferent font sizes</cell><cell>Let users choose their preferred font</cell><cell>(Platform developers,</cell></row><row><cell></cell><cell>depending on screen sizes.</cell><cell>size like PowerPoint font size option.</cell><cell>System researchers)</cell></row><row><cell></cell><cell>F2. Learners' interaction to mitigate readability issues may cut of parts of elements.</cell><cell>G2. Provide element-wise zoom interaction that magnifes the complete element (e.g., text box, image) instead of parts of elements. Enable zooming in the whole content without cut-ofs.</cell><cell>Video Interface Design (Platform developers, System researchers</cell></row><row><cell></cell><cell>F3. Learners' pinch-zoom</cell><cell>G3. Provide alternative zoom methods that can</cell><cell></cell></row><row><cell>Readability Issues</cell><cell>interaction to mitigate readability issues may cause unwanted actions (e.g., scene transition, exit of</cell><cell>prevent unwanted actions. Provide zoom methods such as tap or press, since current pinch-zoom interactions lead to unintended actions such as the exit of</cell><cell>Video Interface Design (Platform developers, System researchers)</cell></row><row><cell></cell><cell>fullscreen mode).</cell><cell>fullscreen mode or scene transitions.</cell><cell></cell></row><row><cell></cell><cell></cell><cell>G4a. Avoid using decorative visual efects</cell><cell></cell></row><row><cell></cell><cell>F4. Decorative video designs (e.g., slide transition efect, fancy background using Chroma Key) can decrease readability.</cell><cell>such as slide animations and fancy backgrounds. G4b. Provide a design option to change decorative visual efects. Provide diferent design modes, for example,</cell><cell>Video Content Design (Video production engineers, Platform developers, System researchers)</cell></row><row><cell></cell><cell></cell><cell>basic mode and decorative mode.</cell><cell></cell></row><row><cell></cell><cell>F5. Ambient light and the</cell><cell></cell><cell>Video Interface Design</cell></row><row><cell></cell><cell>mobile state of the learner</cell><cell>G5. Provide a context-aware* audio description</cell><cell>(Instructors, Platform</cell></row><row><cell></cell><cell>can cause situational visual</cell><cell>or extended audio**.</cell><cell>developers, System</cell></row><row><cell></cell><cell>impairments.</cell><cell></cell><cell>researchers)</cell></row><row><cell></cell><cell></cell><cell>G6a. Provide a context-aware* subtitle.</cell><cell></cell></row><row><cell></cell><cell></cell><cell>Turn on, for example, subtitle automatically</cell><cell></cell></row><row><cell></cell><cell>F6. Noisy mobile</cell><cell>when a learner is in noisy environments.</cell><cell>Video Interface Design</cell></row><row><cell></cell><cell>environments can cause</cell><cell>G6b. Provide on-screen text with audio</cell><cell>(Instructors, Platform</cell></row><row><cell>Situational</cell><cell>situational auditory</cell><cell>narration.</cell><cell>developers, System</cell></row><row><cell>Impairments</cell><cell>impairments.</cell><cell>Display, for example, a summary of the audio</cell><cell>researchers)</cell></row><row><cell></cell><cell></cell><cell>narration in the form of keywords a</cell><cell></cell></row><row><cell></cell><cell></cell><cell>bulleted list.</cell><cell></cell></row><row><cell></cell><cell>F7. Learners easily lose instructor's current explanation spot in on-screen lecture material.</cell><cell>G7.Display cues or signals on the current explanation spot, both for images and text. Visual cues include underlines, highlighting, and arrows.</cell><cell>Video Content Design (Instructors, Video production engineers)</cell></row><row><cell></cell><cell>F8. Low ambient light</cell><cell>G8. Provide dark mode for video content with</cell><cell>Video Content Design</cell></row><row><cell></cell><cell>can cause eye fatigue.</cell><cell>light color text in a dark background.</cell><cell>(Video production engineers)</cell></row><row><cell></cell><cell>F9. Learners have difculty</cell><cell></cell><cell></cell></row><row><cell cols="2">knowing if a lecture of Inaccessible interest is mobile-ready, Information resulting in dropouts due to</cell><cell></cell><cell></cell></row><row><cell></cell><cell>uninformed lecture selection.</cell><cell></cell><cell></cell></row></table></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_4"><head>Table 4 :</head><label>4</label><figDesc>Summary of notable fndings and design recommendations about lecture types to create mobile-friendly MOOCs</figDesc><table /></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_5"><head></head><label></label><figDesc>Table Triangulation of learner-reported difculties, design considerations of video production engineers, and guideline compliance rate of current MOOC content, including ties to existing learning framework. *CL: Cognitive Load, JOLs: Judgements Of Learning, IO: Information Overload, DG: Design Guidelines.(e.g., text in menu bars of Photoshop) is not learning critical and should have diferent weights than the learning critical text elements. Meanwhile, our work did not consider the image elements in the lectures (e.g., charts, diagrams, pictures). Future work on an extended content can use image captioning techniques to estimate the information density of the image elements.</figDesc><table><row><cell>Visual Design Element</cell><cell>Pain Point</cell><cell cols="4">Learners Surveys Interviews Interviews Compliance Rate Engineers Guideline</cell><cell>Prior Work</cell></row><row><cell></cell><cell>Small Font Size</cell><cell>63/134</cell><cell>19/21</cell><cell>✓</cell><cell>2.79%-24.5%</cell><cell>CL [47], JOLs [25, 63],</cell></row><row><cell>Text Element</cell><cell>Dense Text</cell><cell>36/134</cell><cell>8/21</cell><cell>✓</cell><cell>74.2%-84.9%</cell><cell>CL [47, 70, 71], IO [1], DG [22, 26, 31, 36, 45, 47, 49, 60]</cell></row><row><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell>DG [5, 26, 31, 36, 73]</cell></row><row><cell></cell><cell cols="2">Inappropriate Text 18/134</cell><cell>4/21</cell><cell></cell><cell></cell><cell>DG [60]</cell></row><row><cell></cell><cell>Spacing</cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell></row><row><cell></cell><cell>Inappropriate</cell><cell>14/134</cell><cell>0/21</cell><cell></cell><cell></cell><cell>DG [18, 26, 31, 36, 47, 49, 60, 73]</cell></row><row><cell></cell><cell>Font Style</cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell></row><row><cell></cell><cell>Images</cell><cell></cell><cell>9/21</cell><cell></cell><cell>0.94%-5.00%</cell><cell>DG [22, 26, 31, 36, 45, 47, 49, 60]</cell></row><row><cell>Image Element</cell><cell>Complex Images Containing Text</cell><cell>32/134</cell><cell>7/21</cell><cell></cell><cell></cell><cell>CL [27, 46, 74],</cell></row><row><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell>DG [23, 47, 59]</cell></row><row><cell></cell><cell>Small Image Size</cell><cell>51/134</cell><cell>6/21</cell><cell>✓</cell><cell></cell><cell>DG [26, 59]</cell></row><row><cell></cell><cell>Too Many Images</cell><cell></cell><cell>3/21</cell><cell></cell><cell></cell><cell>CL [47], IO [1],</cell></row><row><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell>DG [45, 47]</cell></row><row><cell>Color</cell><cell cols="2">Too Bright Color Low Color Contrast 19/134 15/134</cell><cell>2/21 3/21</cell><cell></cell><cell></cell><cell>DG [28, 31, 36, 60, 73] DG [26, 28, 31, 36, 47, 60,</cell></row></table></figure>
+		</body>
+		<back>
+
+			<div type="acknowledgement">
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>ACKNOWLEDGMENTS</head><p>This work was supported by the National Research Foundation of Korea (NRF) grant funded by the Korea government (MSIT)</p></div>
+			</div>
+
+			<div type="references">
+
+				<listBibl>
+
+<biblStruct xml:id="b0">
+	<monogr>
+		<title level="m" type="main">Using learning to design instruction for mobile learning devices. Mobile learning anytime everywhere</title>
+		<author>
+			<persName><forename type="first">Mohamed</forename><surname>Ally</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2005">2005. 2005</date>
+			<biblScope unit="page" from="5" to="8" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b1">
+	<analytic>
+		<title level="a" type="main">Capturing the efects of context on human performance in mobile computing systems</title>
+		<author>
+			<persName><forename type="first">Leon</forename><surname>Barnard</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ji</forename><forename type="middle">Soo</forename><surname>Yi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Julie</forename><forename type="middle">A</forename><surname>Jacko</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Andrew</forename><surname>Sears</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Personal and Ubiquitous Computing</title>
+		<imprint>
+			<biblScope unit="volume">11</biblScope>
+			<biblScope unit="page" from="81" to="96" />
+			<date type="published" when="2007">2007. 2007</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b2">
+	<monogr>
+		<title level="m" type="main">Social research methods: Qualitative and quantitative approaches</title>
+		<author>
+			<persName><forename type="first">Russell</forename><surname>Bernard</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Harvey</forename><forename type="middle">Russell</forename><surname>Bernard</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2013">2013</date>
+			<pubPlace>Sage</pubPlace>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b3">
+	<analytic>
+		<title level="a" type="main">Learning from online video lectures</title>
+		<author>
+			<persName><forename type="first">David</forename><surname>Brecht</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Journal of Information Technology</title>
+		<imprint>
+			<biblScope unit="volume">11</biblScope>
+			<biblScope unit="page" from="227" to="250" />
+			<date type="published" when="2012">2012. 2012</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b4">
+	<analytic>
+		<title level="a" type="main">Empowering PowerPoint: Slides and teaching efectiveness</title>
+		<author>
+			<persName><forename type="first">Yogini</forename><surname>Brock</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Eli</forename><surname>Joglekar</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Cohen</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Interdisciplinary Journal of Information, Knowledge, and Management</title>
+		<imprint>
+			<biblScope unit="volume">6</biblScope>
+			<biblScope unit="page" from="85" to="94" />
+			<date type="published" when="2011">2011. 2011</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b5">
+	<monogr>
+		<title level="m" type="main">The multimedia principle</title>
+		<author>
+			<persName><forename type="first">R</forename><surname>Kirsten</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Butcher</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2014">2014. 2014</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b6">
+	<monogr>
+		<author>
+			<persName><forename type="first">Ben</forename><surname>Caldwell</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Michael</forename><surname>Cooper</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Loretta</forename><forename type="middle">Guarino</forename><surname>Reid</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Gregg</forename><surname>Vanderheiden</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Wendy</forename><surname>Chisholm</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">John</forename><surname>Slatin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jason</forename><surname>White</surname></persName>
+		</author>
+		<title level="m">Web content accessibility guidelines (WCAG) 2.0. WWW Consortium (W3C)</title>
+				<imprint>
+			<date type="published" when="2008">2008. 2008</date>
+			<biblScope unit="page">290</biblScope>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b7">
+	<analytic>
+		<title level="a" type="main">Content Type Distribution Readability of MOOCs</title>
+		<author>
+			<persName><forename type="first">Nopphon</forename><surname>May Jonson Carlon</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jefrey S</forename><surname>Keerativoranan</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Cross</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the Seventh ACM Conference on Learning@ Scale</title>
+				<meeting>the Seventh ACM Conference on Learning@ Scale</meeting>
+		<imprint>
+			<date type="published" when="2020">2020</date>
+			<biblScope unit="page" from="401" to="404" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b8">
+	<monogr>
+		<title level="m" type="main">Constructing grounded theory: A practical guide through qualitative analysis. sage</title>
+		<author>
+			<persName><forename type="first">Kathy</forename><surname>Charmaz</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2006">2006</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b9">
+	<analytic>
+		<title level="a" type="main">Improv: Teaching programming at scale via live coding</title>
+		<author>
+			<persName><forename type="first">H</forename><surname>Charles</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Philip</forename><forename type="middle">J</forename><surname>Chen</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Guo</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the Sixth</title>
+				<meeting>the Sixth</meeting>
+		<imprint>
+			<date type="published" when="2019">2019. 2019</date>
+			<biblScope unit="page" from="1" to="10" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b10">
+	<analytic>
+		<title level="a" type="main">Efects of lecture video styles on engagement and learning</title>
+		<author>
+			<persName><forename type="first">M</forename><surname>Hung-Tao</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Megan</forename><surname>Chen</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Thomas</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Educational Technology Research and Development</title>
+		<imprint>
+			<biblScope unit="page" from="1" to="18" />
+			<date type="published" when="2020">2020. 2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b11">
+	<analytic>
+		<title level="a" type="main">The scent of a site: A system for analyzing and predicting information scent, usage, and usability of a web site</title>
+		<author>
+			<persName><forename type="first">Ed H Peter</forename><surname>Pirolli</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">James</forename><surname>Pitkow</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings the SIGCHI conference on Human factors in computing systems</title>
+				<meeting>the SIGCHI conference on Human factors in computing systems</meeting>
+		<imprint>
+			<date type="published" when="2000">2000</date>
+			<biblScope unit="page" from="161" to="168" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b12">
+	<analytic>
+		<title level="a" type="main">A taxonomy of asynchronous instructional video styles</title>
+		<author>
+			<persName><forename type="first">Konstantinos</forename><surname>Chorianopoulos</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">International Review of Research in Open and Distributed Learning</title>
+		<imprint>
+			<biblScope unit="volume">19</biblScope>
+			<biblScope unit="page">1</biblScope>
+			<date type="published" when="2018">2018. 2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b13">
+	<monogr>
+		<title level="m" type="main">Digital library services: towards mobile learning</title>
+		<author>
+			<persName><forename type="first">Choy</forename><surname>Fatt Cheong</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2010">2010. 2010</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b14">
+	<analytic>
+		<title level="a" type="main">VidWiki: Enabling the crowd to improve the legibility of online educational videos</title>
+		<author>
+			<persName><forename type="first">Andrew</forename><surname>Cross</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mydhili</forename><surname>Bayyapunedi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Dilip</forename><surname>Ravindran</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Edward</forename><surname>Cutrell</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">William</forename><surname>Thies</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings the 17th ACM conference on Computer supported cooperative work &amp; social computing</title>
+				<meeting>the 17th ACM conference on Computer supported cooperative work &amp; social computing</meeting>
+		<imprint>
+			<date type="published" when="2014">2014</date>
+			<biblScope unit="page" from="1167" to="1175" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b15">
+	<analytic>
+		<title level="a" type="main">Is the efectiveness of lecture capture related to teaching approach or content type?</title>
+		<author>
+			<persName><forename type="first">Jared</forename><surname>Danielson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Vanessa</forename><surname>Preast</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Holly</forename><surname>Bender</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Lesya</forename><surname>Hassall</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Computers &amp; Education</title>
+		<imprint>
+			<biblScope unit="volume">72</biblScope>
+			<biblScope unit="page" from="121" to="131" />
+			<date type="published" when="2014">2014. 2014</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b16">
+	<analytic>
+		<title level="a" type="main">Khan-Style Video Engagement in Undergraduate Engineering: Infuence of Video Duration, Content Type and Course</title>
+		<author>
+			<persName><forename type="first">Sarah</forename><surname>Dart</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings the 31st Annual Conference of the Australasian Association for Engineering Education (AAEE 2020). Engineers Australia</title>
+				<meeting>the 31st Annual Conference of the Australasian Association for Engineering Education (AAEE 2020). Engineers Australia</meeting>
+		<imprint>
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b17">
+	<analytic>
+		<title level="a" type="main">Applying universal design for learning in online courses: Pedagogical and practical considerations</title>
+		<author>
+			<persName><forename type="first">Cindy</forename><forename type="middle">Ann</forename><surname>Dell</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">F</forename><surname>Thomas</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Terry L</forename><surname>Dell</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Blackwell</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Journal of Educators Online</title>
+		<imprint>
+			<biblScope unit="volume">12</biblScope>
+			<biblScope unit="page" from="166" to="192" />
+			<date type="published" when="2015">2015. 2015</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b18">
+	<monogr>
+		<title level="m" type="main">Take edX On The Go</title>
+		<idno>edX Inc. 2021</idno>
+		<ptr target="https://www.edx.org/mobile" />
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b19">
+	<analytic>
+		<title level="a" type="main">Universal instructional design principles for mobile learning</title>
+		<author>
+			<persName><forename type="first">Tanya</forename><surname>Elias</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">International Review of Research in Open and Distributed Learning</title>
+		<imprint>
+			<biblScope unit="volume">71</biblScope>
+			<biblScope unit="page" from="143" to="156" />
+			<date type="published" when="2011">2011. 2011</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b20">
+	<analytic>
+		<title level="a" type="main">WalkType: using accelerometer data to accomodate situational impairments in mobile touch screen text entry</title>
+		<author>
+			<persName><forename type="first">Mayank</forename><surname>Goel</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Leah</forename><surname>Findlater</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jacob</forename><surname>Wobbrock</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings the SIGCHI Conference on Human Factors in Computing Systems</title>
+				<meeting>the SIGCHI Conference on Human Factors in Computing Systems</meeting>
+		<imprint>
+			<date type="published" when="2012">2012</date>
+			<biblScope unit="page" from="2687" to="2696" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b21">
+	<analytic>
+		<title level="a" type="main">Guidelines for handheld mobile device interface design</title>
+		<author>
+			<persName><forename type="first">Jun</forename><surname>Gong</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Peter</forename><surname>Tarasewich</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings DSI 2004 Annual Meeting. Citeseer</title>
+				<meeting>DSI 2004 Annual Meeting. Citeseer</meeting>
+		<imprint>
+			<date type="published" when="2004">2004</date>
+			<biblScope unit="page" from="3751" to="3756" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b22">
+	<analytic>
+		<title level="a" type="main">Guidelines for designing and developcontents for mobile learning</title>
+		<author>
+			<persName><forename type="first">Antonella</forename><surname>Grasso</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Teresa</forename><surname>Roselli</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">IEEE International Workshop on Wireless and Mobile Technologies in Education (WMTE&apos;05)</title>
+				<imprint>
+			<publisher>IEEE</publisher>
+			<date type="published" when="2005">2005</date>
+			<biblScope unit="page" from="123" to="127" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b23">
+	<analytic>
+		<title level="a" type="main">How video production afects student engagement: An empirical study of MOOC videos</title>
+		<author>
+			<persName><forename type="first">J</forename><surname>Philip</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Juho</forename><surname>Guo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Rob</forename><surname>Kim</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Rubin</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings the frst ACM conference on Learning@ scale conference</title>
+				<meeting>the frst ACM conference on Learning@ scale conference</meeting>
+		<imprint>
+			<date type="published" when="2014">2014</date>
+			<biblScope unit="page" from="41" to="50" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b24">
+	<analytic>
+		<title level="a" type="main">Can very small font size enhance memory?</title>
+		<author>
+			<persName><forename type="first">Vered</forename><surname>Halamish</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Memory &amp; cognition</title>
+		<imprint>
+			<biblScope unit="volume">46</biblScope>
+			<biblScope unit="page" from="979" to="993" />
+			<date type="published" when="2018">2018. 2018</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b25">
+	<analytic>
+		<title level="a" type="main">Tips for giving a memorable presentation, Part IV: Using and PowerPoint slides</title>
+		<author>
+			<persName><forename type="first">A</forename><surname>Jay</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Harolds</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Clinical nuclear medicine</title>
+		<imprint>
+			<biblScope unit="volume">37</biblScope>
+			<biblScope unit="page" from="977" to="980" />
+			<date type="published" when="2012">2012. 2012</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b26">
+	<analytic>
+		<title level="a" type="main">Toward a defnition of visual complexity as an implicit measure of cognitive load</title>
+		<author>
+			<persName><forename type="first">Simon</forename><surname>Harper</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Eleni</forename><surname>Michailidou</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Robert</forename><surname>Stevens</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">ACM Transactions on Applied Perception (TAP)</title>
+		<imprint>
+			<biblScope unit="volume">6</biblScope>
+			<biblScope unit="page" from="1" to="18" />
+			<date type="published" when="2009">2009</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b27">
+	<analytic>
+		<title level="a" type="main">Video in online learning</title>
+		<author>
+			<persName><forename type="first">Taralynn</forename><surname>Hartsell</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Steve Chi-Yin</forename><surname>Yuen</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">AACE Journal</title>
+		<imprint>
+			<biblScope unit="volume">14</biblScope>
+			<biblScope unit="issue">1</biblScope>
+			<biblScope unit="page" from="31" to="43" />
+			<date type="published" when="2006">2006. 2006</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b28">
+	<analytic>
+		<title level="a" type="main">A survey of adaptive context-aware learning environments</title>
+		<author>
+			<persName><forename type="first">Aziz</forename><surname>Hasanov</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Teemu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Tae-Sun</forename><surname>Laine</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Chung</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Journal of Ambient Intelligence and Smart Environments</title>
+		<imprint>
+			<biblScope unit="volume">11</biblScope>
+			<biblScope unit="page" from="403" to="428" />
+			<date type="published" when="2019">2019. 2019</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b29">
+	<analytic>
+		<title level="a" type="main">Comparing video styles and study strategies during video-recorded lectures: Efects on secondary school mathematics students&apos; preference and learning</title>
+		<author>
+			<persName><forename type="first">Foon</forename><surname>Khe</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Chung Kwan</forename><surname>Hew</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Lo</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Interactive Learning Environments</title>
+		<imprint>
+			<biblScope unit="volume">28</biblScope>
+			<biblScope unit="page" from="847" to="864" />
+			<date type="published" when="2020">2020. 2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b30">
+	<analytic>
+		<title level="a" type="main">Twelve tips for efective PowerPoint presentations for the technologically challenged</title>
+		<author>
+			<persName><forename type="first">J</forename><surname>Holzl</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Medical Teacher</title>
+		<imprint>
+			<biblScope unit="volume">19</biblScope>
+			<biblScope unit="page" from="175" to="179" />
+			<date type="published" when="1997">1997. 1997</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b31">
+	<analytic>
+		<title level="a" type="main">Reliability in coding open-ended data: Lessons learned from HIV behavioral research</title>
+		<author>
+			<persName><forename type="first">J</forename><surname>Daniel</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Deborah</forename><surname>Hruschka</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Daphne</forename><forename type="middle">Cobb</forename><surname>Schwartz</surname></persName>
+		</author>
+		<author>
+			<persName><surname>St</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Erin</forename><surname>John</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Richard</forename><forename type="middle">A</forename><surname>Picone-Decaro</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">James W</forename><surname>Jenkins</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Carey</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Field methods</title>
+		<imprint>
+			<biblScope unit="volume">16</biblScope>
+			<biblScope unit="page" from="307" to="331" />
+			<date type="published" when="2004">2004. 2004</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b32">
+	<analytic>
+		<title level="a" type="main">Toward more efcient user interfaces for mobile video browsing: an in-depth exploration of the design space</title>
+		<author>
+			<persName><forename type="first">Jochen</forename><surname>Huber</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jürgen</forename><surname>Steimle</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Max</forename><surname>Mühlhäuser</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 18th ACM international conference on Multimedia</title>
+				<meeting>the 18th ACM international conference on Multimedia</meeting>
+		<imprint>
+			<date type="published" when="2010">2010</date>
+			<biblScope unit="page" from="341" to="350" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b33">
+	<analytic>
+		<title level="a" type="main">Counting occurrences of textual words in lecture video frames using apache hadoop framework</title>
+		<author>
+			<persName><forename type="first">Moula</forename><surname>Husain</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Meena</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">K</forename><surname>Akash</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Harish</forename><surname>Sabarad</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Hebballi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Shiddu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sonal</forename><surname>Nagaralli</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Shetty</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">2015 IEEE International Advance Computing Conference (IACC)</title>
+				<imprint>
+			<publisher>IEEE</publisher>
+			<date type="published" when="2015">2015</date>
+			<biblScope unit="page" from="1144" to="1147" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b34">
+	<monogr>
+		<title level="m" type="main">Investigating diferences among the commonly used video lecture styles</title>
+		<author>
+			<persName><forename type="first">Christina</forename><surname>Ilioudi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">N</forename><surname>Michail</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Konstantinos</forename><surname>Giannakos</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Chorianopoulos</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2013">2013. 2013</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b35">
+	<monogr>
+		<title level="m" type="main">Typography (Human Interface Guidelines)</title>
+		<idno>Apple Inc. 2021</idno>
+		<ptr target="https://developer.apple.com/design/human-interface-guidelines/ios/visual-design/typography/" />
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b36">
+	<analytic>
+		<title level="a" type="main">The Best Online Courses of All Time</title>
+		<author>
+			<persName><forename type="first">Classcentral</forename><surname>Inc</surname></persName>
+		</author>
+		<ptr target="https://www.coursera.org/about/mobile" />
+	</analytic>
+	<monogr>
+		<title level="j">Coursera: Download on iOS and Android</title>
+		<imprint>
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b37">
+	<monogr>
+		<title level="m" type="main">The Top 100 Most Popular Free Online Course</title>
+		<author>
+			<persName><forename type="first">Classcentral</forename><surname>Inc</surname></persName>
+		</author>
+		<ptr target="https://www.classcentral.com/report/100-most-popular-online-courses-2021/" />
+		<imprint>
+			<date type="published" when="2021">2021</date>
+		</imprint>
+	</monogr>
+	<note>2021 Edition</note>
+</biblStruct>
+
+<biblStruct xml:id="b38">
+	<analytic>
+		<title/>
+		<ptr target="https://www.khanacademy.org/downloads" />
+	</analytic>
+	<monogr>
+		<title level="j">Khan Academy Inc. 2021. Downloads: Khan Academy</title>
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b39">
+	<monogr>
+		<ptr target="https://www.udemy.com/mobile/" />
+		<title level="m">Udemy Inc. 2021. Learn anywhere with Udemy for iOS and Android</title>
+				<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b40">
+	<analytic>
+		<title level="a" type="main">Design Guidelines for Mobile MOOC Learning-An Empirical Study</title>
+		<author>
+			<persName><forename type="first">Jiyou</forename><surname>Jia</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Bilan</forename><surname>Zhang</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">International Conference on Blended Learning</title>
+				<imprint>
+			<publisher>Springer</publisher>
+			<date type="published" when="2018">2018</date>
+			<biblScope unit="page" from="347" to="356" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b41">
+	<analytic>
+		<title level="a" type="main">Dynamicslide: Exploring the design space of reference-based interaction techniques for slidebased lecture videos</title>
+		<author>
+			<persName><forename type="first">Hyeungshik</forename><surname>Jung</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Valentina</forename><surname>Hijung</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Juho</forename><surname>Shin</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Kim</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings the 2018 Workshop on Multimedia for Accessible Human Computer Interface</title>
+				<meeting>the 2018 Workshop on Multimedia for Accessible Human Computer Interface</meeting>
+		<imprint>
+			<date type="published" when="2018">2018</date>
+			<biblScope unit="page" from="33" to="41" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b42">
+	<analytic>
+		<title level="a" type="main">Showing face in video instruction: efects on information retention, visual attention, and afect</title>
+		<author>
+			<persName><forename type="first">F</forename><surname>René</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kathryn</forename><surname>Kizilcec</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Lalida</forename><surname>Papadopoulos</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Sritanyaratana</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings the SIGCHI conference on human factors in computing systems</title>
+				<meeting>the SIGCHI conference on human factors in computing systems</meeting>
+		<imprint>
+			<date type="published" when="2014">2014</date>
+			<biblScope unit="page" from="2095" to="2102" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b43">
+	<analytic>
+		<title level="a" type="main">Medical school radiology lectures: what are determinants of lecture satisfaction?</title>
+		<author>
+			<persName><forename type="first">Natasha</forename><surname>Larocque</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Stephanie</forename><surname>Kenny</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Matthew Df</forename><surname>Mcinnes</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">American Journal of Roentgenology</title>
+		<imprint>
+			<biblScope unit="volume">204</biblScope>
+			<biblScope unit="page" from="913" to="918" />
+			<date type="published" when="2015">2015. 2015</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b44">
+	<analytic>
+		<title level="a" type="main">Optimizing cognitive load for learning from computer-based science simulations</title>
+		<author>
+			<persName><forename type="first">Hyunjeong</forename><surname>Lee</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jan</forename><forename type="middle">L</forename><surname>Plass</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Bruce D</forename><surname>Homer</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Journal of educational psychology</title>
+		<imprint>
+			<biblScope unit="volume">98</biblScope>
+			<biblScope unit="issue">4</biblScope>
+			<biblScope unit="page">902</biblScope>
+			<date type="published" when="2006">2006. 2006</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b45">
+	<analytic>
+		<title level="a" type="main">Brain friendly teaching-reducing learner&apos;s cognitive load</title>
+		<author>
+			<persName><forename type="first">J</forename><surname>Petra</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Lewis</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Academic radiology</title>
+		<imprint>
+			<biblScope unit="volume">23</biblScope>
+			<biblScope unit="page" from="877" to="880" />
+			<date type="published" when="2016">2016. 2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b46">
+	<monogr>
+		<title level="m" type="main">Viewport, resolution, diagonal screen size and DPI for the most popular smartphones</title>
+		<ptr target="https://deviceatlas.com/blog/viewport-resolution-diagon\al-screen-size-and-dpi-most-popular-smartphones" />
+		<imprint>
+			<date type="published" when="2019">2019</date>
+		</imprint>
+	</monogr>
+	<note>Aflias Technologies Limited</note>
+</biblStruct>
+
+<biblStruct xml:id="b47">
+	<analytic>
+		<title level="a" type="main">A student centric approach for mobile learning video content development and instruction design</title>
+		<author>
+			<persName><forename type="first">Kumar</forename><surname>Mandula</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">V</forename><surname>Srinivasa Rao Meday</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ramu</forename><surname>Muralidharan</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Parupalli</surname></persName>
+		</author>
+		<ptr target="https://material.io/design/typography/the-type-system.html#type-scale" />
+	</analytic>
+	<monogr>
+		<title level="m">2013 15th International Conference on Advanced Communications Technology (ICACT)</title>
+				<editor>
+			<persName><forename type="middle">2021</forename><surname>Llc</surname></persName>
+		</editor>
+		<editor>
+			<persName><surname>Thetypesystem(materialdesign</surname></persName>
+		</editor>
+		<imprint>
+			<publisher>IEEE</publisher>
+			<date type="published" when="2013">2013</date>
+			<biblScope unit="page" from="386" to="390" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b48">
+	<analytic>
+		<title level="a" type="main">Multimedia learning</title>
+		<author>
+			<persName><forename type="first">E</forename><surname>Richard</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Mayer</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Psychology of learning and motivation</title>
+				<imprint>
+			<publisher>Elsevier</publisher>
+			<date type="published" when="2002">2002</date>
+			<biblScope unit="volume">41</biblScope>
+			<biblScope unit="page" from="85" to="139" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b49">
+	<monogr>
+		<title level="m" type="main">Introduction to multimedia learning. The Cambridge handbook of multimedia learning</title>
+		<author>
+			<persName><forename type="first">E</forename><surname>Richard</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Mayer</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2005">2005. 2005</date>
+			<biblScope unit="volume">2</biblScope>
+			<biblScope unit="page" from="1" to="24" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b50">
+	<monogr>
+		<title level="m" type="main">The new landscape of mobile learning: Redesigning education in an app-based world</title>
+		<author>
+			<persName><forename type="first">Charles</forename><surname>Miller</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Aaron</forename><surname>Doering</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2014">2014</date>
+		</imprint>
+	</monogr>
+	<note>Routledge</note>
+</biblStruct>
+
+<biblStruct xml:id="b51">
+	<analytic>
+		<title level="a" type="main">Examining mobile phone text legibility while walking</title>
+		<author>
+			<persName><forename type="first">Terhi</forename><surname>Mustonen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Maria</forename><surname>Olkkonen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jukka</forename><surname>Hakkinen</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">CHI&apos;04 extended abstracts on Human factors in computing systems</title>
+				<imprint>
+			<date type="published" when="2004">2004</date>
+			<biblScope unit="page" from="1243" to="1246" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b52">
+	<analytic>
+		<title level="a" type="main">Mobile learning in Higher education: Unavoidable alternative during COVID-19</title>
+	</analytic>
+	<monogr>
+		<title level="j">Aquademia</title>
+		<editor>Aziz Naciri, Mohamed Amine Baba, Abderrahmane Achbani, and Ahmed Kharbach. 2020</editor>
+		<imprint>
+			<biblScope unit="volume">1</biblScope>
+			<biblScope unit="page">20016</biblScope>
+			<date type="published" when="2020">2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b53">
+	<monogr>
+		<author>
+			<persName><forename type="first">S</forename><surname>Judith</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Wendy</forename><forename type="middle">A</forename><surname>Olson</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Kellogg</surname></persName>
+		</author>
+		<title level="m">Ways of Knowing in HCI</title>
+				<imprint>
+			<publisher>Springer</publisher>
+			<date type="published" when="2014">2014</date>
+			<biblScope unit="volume">2</biblScope>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b54">
+	<monogr>
+		<title level="m" type="main">Guidelines for learning/teaching/tutoring in a mobile environment</title>
+		<author>
+			<persName><forename type="first">Claire</forename><forename type="middle">Giasemi</forename><surname>Vavoula</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Josie</forename><surname>Glew</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mike</forename><surname>Taylor</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Paul</forename><surname>Sharples</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Peter</forename><surname>Lefrere</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Laura</forename><surname>Lonsdale</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jenny</forename><surname>Naismith</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Waycott</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2005">2005. 2005</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b55">
+	<analytic>
+		<title level="a" type="main">Video lecture watching behaviors of learners in online courses</title>
+		<author>
+			<persName><forename type="first">Ozlem</forename><surname>Ozan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yasin</forename><surname>Ozarslan</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Educational Media International</title>
+		<imprint>
+			<biblScope unit="volume">53</biblScope>
+			<biblScope unit="page" from="27" to="41" />
+			<date type="published" when="2016">2016. 2016</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b56">
+	<analytic>
+		<title level="a" type="main">A design requirements framework for mobile learning environments</title>
+		<author>
+			<persName><forename type="first">David</forename><surname>Parsons</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Hokyoung</forename><surname>Ryu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mark</forename><surname>Cranshaw</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">JCP</title>
+		<imprint>
+			<biblScope unit="volume">2</biblScope>
+			<biblScope unit="page" from="1" to="8" />
+			<date type="published" when="2007">2007. 2007</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b57">
+	<monogr>
+		<title level="m" type="main">Design an efective power point presentation. Education for Primary</title>
+		<author>
+			<persName><forename type="first">Lesley</forename><surname>Pugsley</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2010">2010. 2010</date>
+			<biblScope unit="volume">21</biblScope>
+			<biblScope unit="page" from="51" to="53" />
+		</imprint>
+	</monogr>
+	<note>How To</note>
+</biblStruct>
+
+<biblStruct xml:id="b58">
+	<analytic>
+		<title level="a" type="main">Live-coding vs Static Code Examples: Which is better with respect to Student Learning and Cognitive Load</title>
+		<author>
+			<persName><forename type="first">Adalbert</forename><surname>Gerald Soosai Raj</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Pan</forename><surname>Gu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Eda</forename><surname>Zhang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jim</forename><surname>Williams</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jignesh M</forename><surname>Patel</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the Twenty-Second Australasian Computing Education Conference</title>
+				<meeting>the Twenty-Second Australasian Computing Education Conference</meeting>
+		<imprint>
+			<date type="published" when="2020">2020</date>
+			<biblScope unit="page" from="152" to="159" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b59">
+	<analytic>
+		<title level="a" type="main">Role of live-coding in learning introductory programming</title>
+		<author>
+			<persName><forename type="first">Adalbert</forename><surname>Gerald Soosai Raj</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Jignesh</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Richard</forename><surname>Patel</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Erica</forename><forename type="middle">Rosenfeld</forename><surname>Halverson</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Halverson</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings the 18th Koli Calling International Conference on Computing Education Research</title>
+				<meeting>the 18th Koli Calling International Conference on Computing Education Research</meeting>
+		<imprint>
+			<date type="published" when="2018">2018</date>
+			<biblScope unit="page" from="1" to="8" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b60">
+	<analytic>
+		<title level="a" type="main">Memory predictions are infuenced by perceptual information: evidence for metacognitive illusions</title>
+		<author>
+			<persName><forename type="first">G</forename><surname>Matthew</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Alan</forename><forename type="middle">D</forename><surname>Rhodes</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Castel</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Journal of experimental psychology: General</title>
+		<imprint>
+			<biblScope unit="volume">137</biblScope>
+			<biblScope unit="page">615</biblScope>
+			<date type="published" when="2008">2008</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b61">
+	<analytic>
+		<title level="a" type="main">Mobile learning in higher education: Structural equation model for good teaching practices</title>
+		<author>
+			<persName><forename type="first">José-María</forename><surname>Romero-Rodríguez</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Inmaculada</forename><surname>Aznar-Díaz</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Francisco-Javier</forename><surname>Hinojo-Lucena</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Gerardo</forename><surname>Gómez-García</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">IEEE Access</title>
+		<imprint>
+			<biblScope unit="volume">8</biblScope>
+			<biblScope unit="page" from="91761" to="91769" />
+			<date type="published" when="2020">2020. 2020</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b62">
+	<monogr>
+		<title level="m" type="main">iOS Auto Layout Demystifed</title>
+		<author>
+			<persName><forename type="first">Erica</forename><surname>Sadun</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2013">2013</date>
+			<publisher>Addison-Wesley Professional</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b63">
+	<analytic>
+		<title level="a" type="main">Challenges of situational impairments during interaction with mobile devices</title>
+		<author>
+			<persName><forename type="first">Zhanna</forename><surname>Sarsenbayeva</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Niels</forename><surname>Van Berkel</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Chu</forename><surname>Luo</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Vassilis</forename><surname>Kostakos</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jorge</forename><surname>Goncalves</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings the 29th Australian Conference on Computer-Human Interaction</title>
+				<meeting>the 29th Australian Conference on Computer-Human Interaction</meeting>
+		<imprint>
+			<date type="published" when="2017">2017</date>
+			<biblScope unit="page" from="477" to="481" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b64">
+	<monogr>
+		<title/>
+		<author>
+			<persName><forename type="first">Jeongyeon</forename><surname>Kim</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yubin</forename><surname>Choi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Meng</forename><surname>Xia</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Juho</forename><surname>Kim</surname></persName>
+		</author>
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b65">
+	<analytic>
+		<title level="a" type="main">Creating MOOC Guidelines based on best practices</title>
+		<author>
+			<persName><forename type="first">Natalia</forename><surname>Spyropoulou</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Christos</forename><surname>Pierrakeas</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Achilles</forename><surname>Kameas</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Edulearn14 Proceedings</title>
+				<imprint>
+			<date type="published" when="2014">2014. 2014</date>
+			<biblScope unit="page" from="6981" to="6990" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b66">
+	<analytic>
+		<title level="a" type="main">Towards a method for mobile learning design</title>
+		<author>
+			<persName><forename type="first">Genevieve</forename><surname>Stanton</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jacques</forename><surname>Ophof</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings the informing science and information Technology education conference. Informing Science Institute</title>
+				<meeting>the informing science and information Technology education conference. Informing Science Institute</meeting>
+		<imprint>
+			<date type="published" when="2013">2013</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b67">
+	<analytic>
+		<title level="a" type="main">The dos and don&apos;ts PowerPoint presentations</title>
+		<author>
+			<persName><forename type="first">Karen</forename><surname>Stein</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Journal of the American Dietetic Association</title>
+		<imprint>
+			<biblScope unit="volume">106</biblScope>
+			<biblScope unit="issue">11</biblScope>
+			<biblScope unit="page" from="1745" to="1748" />
+			<date type="published" when="2006">2006. 2006</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b68">
+	<analytic>
+		<title level="a" type="main">Cognitive load theory, learning difculty, and instructional design</title>
+		<author>
+			<persName><forename type="first">John</forename><surname>Sweller</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Learning and instruction</title>
+		<imprint>
+			<biblScope unit="volume">4</biblScope>
+			<biblScope unit="page" from="295" to="312" />
+			<date type="published" when="1994">1994. 1994</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b69">
+	<analytic>
+		<title level="a" type="main">Cognitive architecture and instructional design</title>
+		<author>
+			<persName><forename type="first">John</forename><surname>Sweller</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Fred Gwc</forename><surname>Van Merrienboer</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Paas</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Educational psychology review</title>
+		<imprint>
+			<biblScope unit="volume">10</biblScope>
+			<biblScope unit="page" from="251" to="296" />
+			<date type="published" when="1998">1998. 1998</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b70">
+	<analytic>
+		<title level="a" type="main">A measurement model based on usability metrics for mobile learning user interface for children</title>
+		<author>
+			<persName><forename type="first">Fahim</forename><surname>Rabail</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Arif</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">The International Journal of and Educational Technologies in the Digital Media</title>
+		<imprint>
+			<biblScope unit="volume">1</biblScope>
+			<biblScope unit="page" from="16" to="31" />
+			<date type="published" when="2015">2015. 2015</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b71">
+	<analytic>
+		<title level="a" type="main">Message design for mobile learning: Learning theories, human cognition and design</title>
+		<author>
+			<persName><forename type="first">Minjuan</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ruimin</forename><surname>Shen</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">British Journal of Educational Technology</title>
+		<imprint>
+			<biblScope unit="volume">43</biblScope>
+			<biblScope unit="page" from="561" to="575" />
+			<date type="published" when="2012">2012. 2012</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b72">
+	<analytic>
+		<title level="a" type="main">An eyetracking study of website complexity from cognitive load perspective</title>
+		<author>
+			<persName><forename type="first">Qiuzhen</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sa</forename><surname>Yang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Manlu</forename><surname>Liu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Zike</forename><surname>Cao</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Qingguo</forename><surname>Ma</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Decision support systems</title>
+		<imprint>
+			<biblScope unit="volume">62</biblScope>
+			<biblScope unit="page" from="1" to="10" />
+			<date type="published" when="2014">2014. 2014</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b73">
+	<monogr>
+		<title level="m" type="main">Flexbox in CSS</title>
+		<author>
+			<persName><forename type="first">Estelle</forename><surname>Weyl</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2017">2017</date>
+			<publisher>Reilly Media, Inc</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b74">
+	<analytic>
+		<title level="a" type="main">The future of mobile device research in HCI</title>
+		<author>
+			<persName><forename type="first">O</forename><surname>Jacob</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Wobbrock</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">CHI 2006 workshop proceedings: is the next generation of human-computer interaction. Citeseer</title>
+				<imprint>
+			<date type="published" when="2006">2006</date>
+			<biblScope unit="page" from="131" to="134" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b75">
+	<analytic>
+		<title level="a" type="main">Situationally-induced impairments and disabilities</title>
+		<author>
+			<persName><forename type="first">O</forename><surname>Jacob</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Wobbrock</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Web Accessibility</title>
+				<imprint>
+			<publisher>Springer</publisher>
+			<date type="published" when="2019">2019</date>
+			<biblScope unit="page" from="59" to="92" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b76">
+	<analytic>
+		<title level="a" type="main">Automatic lecture video indexing using video OCR technology</title>
+		<author>
+			<persName><forename type="first">Haojin</forename><surname>Yang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Maria</forename><surname>Siebert</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Patrick</forename><surname>Luhne</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Harald</forename><surname>Sack</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Christoph</forename><surname>Meinel</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">2011 IEEE International Symposium on Multimedia. IEEE</title>
+				<imprint>
+			<date type="published" when="2011">2011</date>
+			<biblScope unit="page" from="111" to="116" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b77">
+	<analytic>
+		<title level="a" type="main">A new visual interface searching and navigating slide-based lecture videos</title>
+		<author>
+			<persName><forename type="first">Baoquan</forename><surname>Zhao</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Songhua</forename><surname>Xu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Shujin</forename><surname>Lin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Ruomei</forename><surname>Wang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Xiaonan</forename><surname>Luo</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">2019 IEEE International Conference on Multimedia and Expo (ICME)</title>
+				<imprint>
+			<publisher>IEEE</publisher>
+			<date type="published" when="2019">2019</date>
+			<biblScope unit="page" from="928" to="933" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+				</listBibl>
+			</div>
+		</back>
+	</text>
+</TEI>

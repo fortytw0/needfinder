@@ -1,0 +1,2212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xml:space="preserve" xmlns="http://www.tei-c.org/ns/1.0" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://www.tei-c.org/ns/1.0 https://raw.githubusercontent.com/kermitt2/grobid/master/grobid-home/schemas/xsd/Grobid.xsd"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+	<teiHeader xml:lang="en">
+		<fileDesc>
+			<titleStmt>
+				<title level="a" type="main">Announcing Pregnancy Loss on Facebook: A Decision-Making Framework for Stigmatized Disclosures on Identified Social Network Sites</title>
+			</titleStmt>
+			<publicationStmt>
+				<publisher/>
+				<availability status="unknown"><licence/></availability>
+			</publicationStmt>
+			<sourceDesc>
+				<biblStruct>
+					<analytic>
+						<author>
+							<persName><forename type="first">Nazanin</forename><surname>Andalibi</surname></persName>
+							<affiliation key="aff0">
+								<orgName type="department">College of Computing and Informatics</orgName>
+								<orgName type="institution">Drexel University Philadelphia</orgName>
+								<address>
+									<region>PA</region>
+									<country key="US">USA</country>
+								</address>
+							</affiliation>
+						</author>
+						<author role="corresp">
+							<persName><forename type="first">Andrea</forename><surname>Forte</surname></persName>
+							<email>aforte@drexel.edu</email>
+							<affiliation key="aff0">
+								<orgName type="department">College of Computing and Informatics</orgName>
+								<orgName type="institution">Drexel University Philadelphia</orgName>
+								<address>
+									<region>PA</region>
+									<country key="US">USA</country>
+								</address>
+							</affiliation>
+						</author>
+						<title level="a" type="main">Announcing Pregnancy Loss on Facebook: A Decision-Making Framework for Stigmatized Disclosures on Identified Social Network Sites</title>
+					</analytic>
+					<monogr>
+						<imprint>
+							<date/>
+						</imprint>
+					</monogr>
+					<idno type="DOI">10.1145/3173574.3173732</idno>
+				</biblStruct>
+			</sourceDesc>
+		</fileDesc>
+		<encodingDesc>
+			<appInfo>
+				<application version="0.7.1" ident="GROBID" when="2022-07-22T04:59+0000">
+					<desc>GROBID - A machine learning software for extracting information from scholarly documents</desc>
+					<ref target="https://github.com/kermitt2/grobid"/>
+				</application>
+			</appInfo>
+		</encodingDesc>
+		<profileDesc>
+			<textClass>
+				<keywords>
+					<term>Self-disclosure</term>
+					<term>social support</term>
+					<term>well-being</term>
+					<term>stigma</term>
+					<term>pregnancy loss</term>
+					<term>miscarriage</term>
+					<term>stillbirth</term>
+					<term>prenatal</term>
+					<term>reproductive health</term>
+					<term>women&apos;s health</term>
+					<term>maternal health</term>
+					<term>grief</term>
+					<term>Facebook</term>
+					<term>social media</term>
+					<term>network-level reciprocal disclosure</term>
+					<term>preventive disclosure</term>
+					<term>awareness campaign</term>
+					<term>Pregnancy and Infant Loss Awareness Month H.5.m. Information interfaces and presentation (e.g., HCI): Miscellaneous</term>
+				</keywords>
+			</textClass>
+			<abstract>
+<div xmlns="http://www.tei-c.org/ns/1.0"><p>Pregnancy loss is a common experience that is often not disclosed in spite of potential disclosure benefits such as social support. To understand how and why people disclose pregnancy loss online, we interviewed 27 women in the U.S. who are social media users and had recently experienced pregnancy loss. We developed a decision-making framework explaining pregnancy loss disclosures on identified social network sites (SNS) such as Facebook. We introduce network-level reciprocal disclosure, a theory of how disclosure reciprocity, usually applied to understand dyadic exchanges, can operate at the level of a social network to inform decision-making about stigmatized disclosures in identified SNSs. We find that 1) anonymous disclosures on other sites help facilitate disclosure on identified sites (e.g., Facebook), and 2) awareness campaigns enable sharing about pregnancy loss for many who would not disclose otherwise. Finally, we discuss conceptual and design implications. CAUTION: This paper includes quotes about pregnancy loss.</p></div>
+			</abstract>
+		</profileDesc>
+	</teiHeader>
+	<text xml:lang="en">
+		<body>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>INTRODUCTION</head><p>Announcing exciting news and life transitions is common on social media sites. People joyfully share online announcements of a new dream job, getting married to a beloved partner, or becoming parents. However, when people experience distress or trauma, they may find it difficult to use social media to talk about it or seek support. In some cases, crises (e.g., disease diagnoses, abuse, pregnancy loss) involve stigma and can be prohibitively painful to share with even the closest of friends.</p><p>People often need to socially share stigmatized life events and emotions associated with them <ref type="bibr">[67]</ref>. However, many do not, and sometimes they suffer as a result of this inhibition due to the psychological distress associated with keeping a secret <ref type="bibr">[65]</ref>. Other times, when people do disclose, they face negative consequences such as social rejection or added distress <ref type="bibr">[11]</ref>, particularly when confidants are unsupportive. These risks are real, and when people consider making themselves vulnerable by disclosing sensitive experiences, they must balance benefits with costs. Access to social support is crucial. By sharing stigmatized and distressing experiences and emotions, people can signal this need to others in their social networks, both online and face-to-face.</p><p>Pregnancy loss-here broadly defined as loss due to stillbirth or miscarriage-happens in approximately 20% of recognized pregnancies in the United States; yet 55% of Americans believe it is a rare event <ref type="bibr" target="#b85">[72]</ref>. Pregnancy loss can be isolating, socially stigmatized, traumatizing, associated with negative feelings (e.g., shame, guilt) and depression, and difficult to disclose to others <ref type="bibr">[75]</ref>, but receiving support is dependent on the disclosure of the loss. Moreover, lack of support from others, especially friends, can contribute to a sense of stigma and may increase risk of depression in the wake of a pregnancy loss <ref type="bibr" target="#b89">[76]</ref>.</p><p>The potential for improved well-being through access to social support makes pregnancy loss a productive context for research on designing social computing systems for safe disclosures and support seeking. Because pregnancy loss is common yet perceived as rare, researching social media disclosures in this context can benefit a large number of people. Many individuals do not disclose the loss of a pregnancy, but some do, and little is known about factors that guide these disclosures when they do happen.</p><p>seeking after pregnancy loss. In this paper, we focus on the disclosure experience on Facebook as a primary example of an identified social network site <ref type="bibr">(SNS)</ref>, that is, an SNS where one's identity and one's connections' identities are known. Although we did not set out to focus on any particular SNS for this study, all participants (except one who had stopped using Facebook) discussed Facebook as a site that includes their physical world connections (e.g., family, friends, coworkers). This made Facebook an important potential disclosure and support seeking venue for them. In this paper, we focus on disclosures on Facebook, an identified SNS where people's networks are typically comprised of people they know from physical world contexts <ref type="bibr" target="#b35">[32]</ref>, and where they typically present their physical world names and identities.</p><p>Through analyzing these data, we developed a framework to explain pregnancy loss disclosure decisions on Facebook. Our framework includes six types of decision factors: selfrelated, audience-related, societal, platform and affordancerelated, network-level, and temporal. We find that participation on unidentified (i.e., anonymous or pseudonymous) online platforms (e.g., Reddit) can help people feel more comfortable with disclosing the loss on Facebook. We also find that one-to-many disclosures on Facebook-to one's known social network-is appreciated because it enables avoiding many painful one-to-one disclosures. Importantly, we find that the Pregnancy and Infant Loss Awareness Month social media campaigns provide a socio-technical context within which sharing about pregnancy loss is possible for many who would not have disclosed otherwise, due to reduced perceptions and concerns of stigma. Finally, we introduce the concept of network-level reciprocal disclosure as a novel theoretical construct that can motivate social computing system designs to better facilitate sensitive disclosures and social support exchange.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>RELATED WORK Pregnancy, Pregnancy Loss, and Social Network Sites</head><p>A growing body of HCI scholarship has studied pregnancy, parenthood, and technology. Parents and expecting parents use social media for support or self-expression (e.g., <ref type="bibr" target="#b2">[2,</ref><ref type="bibr" target="#b8">7,</ref><ref type="bibr" target="#b27">24,</ref><ref type="bibr">55,</ref><ref type="bibr" target="#b86">73]</ref>). Apps and interventions also exist to meet these populations' certain needs. For example some allow pregnant women to monitor pregnancies in stages <ref type="bibr">[38]</ref>. Others help new parents of preterm infants track health data <ref type="bibr">[34]</ref>. "Pregnancy ecology" is a proposed paradigm in designing pregnancy apps for use by not only the mother, but also others who play supportive roles <ref type="bibr">[62]</ref>, such as partners and mothers, who are often a woman's most important supporters after having a child <ref type="bibr" target="#b75">[63]</ref>. Studies related to parenthood, motherhood, and pregnancy in HCI have largely focused on pregnancies that do not lead to a loss.</p><p>After a pregnancy loss, many women feel hurt, alone, unworthy, and unloved <ref type="bibr">[84]</ref>, and some experience fear, anxiety, symptoms of PTSD <ref type="bibr" target="#b66">[57]</ref>, and depression <ref type="bibr">[59]</ref>. In addition to psychological distress, the loss also alters family and social relationships; when family members are unsupportive, family communication is often disrupted <ref type="bibr" target="#b16">[15]</ref>. For example, it is rare for someone to say "you will have another spouse" after a spouse dies; yet, it is common to say "you can have another baby" after a pregnancy loss <ref type="bibr" target="#b65">[56]</ref>. The portrayal of pregnancy loss as a non-event can make a bereaved woman feel like an "unperson" in Orwellian terms <ref type="bibr" target="#b12">[12]</ref>. Women's social identities as patient, mother, and full citizen are "spoiled" after a pregnancy loss <ref type="bibr" target="#b12">[12]</ref>, and many feel they can never be "cured" <ref type="bibr" target="#b41">[37]</ref>. Spoiled identities obligate intensified impression management efforts and performances <ref type="bibr" target="#b29">[26]</ref>; unsurprisingly, women who experience a pregnancy loss face a difficult decision when deciding whether, how, and to whom they disclose it.</p><p>During life events that cause sustained psychological distress, access to support is crucial to readjustment <ref type="bibr" target="#b0">[1]</ref>. Those who can find support are four times more likely to find meaning in the loss <ref type="bibr">[58]</ref>. Pregnancy loss survivors sometimes construct narrative stories about their pregnancy and loss, and social support is a factor in narrative reconstruction <ref type="bibr" target="#b41">[37]</ref>. In the U.S. there are no grief rituals for pregnancy loss, and this loss remains largely absent from societal narratives <ref type="bibr" target="#b36">[33]</ref>. Successful identity repair work is a required process for recovery after pregnancy loss <ref type="bibr" target="#b12">[12]</ref>. Being able to disclose the loss is a prerequisite to accessing social support and identity repair work.</p><p>Research on technology use after pregnancy loss is scarce. One study suggested Internet-based interventions could reduce negative mental health effects associated with pregnancy loss (e.g., grief, depression, anxiety, PTSD) <ref type="bibr" target="#b44">[40]</ref>, however, this design area remains largely unexplored. What little research exists about online pregnancy loss disclosure has mainly focused on the practice and benefits of anonymous sharing in online support groups <ref type="bibr" target="#b26">[23]</ref> and has noted the reluctance of many women to share outside of anonymous contexts <ref type="bibr">[41]</ref>. Yet, we see that some women do disclose pregnancy loss on identified SNSs. In this paper, we address this gap to understand the socio-technical factors facilitating disclosures of pregnancy loss on identified SNSs.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Self-Disclosure and Social Network Sites</head><p>Finding social support can be both a motivator and an outcome of Facebook use <ref type="bibr">[27,</ref><ref type="bibr" target="#b46">42,</ref><ref type="bibr" target="#b80">68]</ref>. Access to both weak and strong ties can be a benefit of Facebook use, yet context collapse (i.e., when members of various social networks are flattened into one big group) poses a challenge, especially when people do not want to share information they deem sensitive with their entire Facebook network <ref type="bibr" target="#b57">[50]</ref>. Some employ the "lowest common denominator" strategy by disclosing only what they perceive to be appropriate for all of their network <ref type="bibr">[35]</ref>. When dealing with context collapse on Facebook, individuals need to prevent anticipated identitythreatening situations <ref type="bibr">[44]</ref>, and sometimes they do so using "preventive strategies" to avoid potential unwanted outcomes in the future <ref type="bibr">[43]</ref>. A recent large-scale study of Facebook suggests that people share larger amounts of both positive and negative emotions when their Facebook networks are denser and smaller <ref type="bibr" target="#b15">[14]</ref>.</p><p>Several models have been proposed to understand selfdisclosure in dyadic contexts in non-computer-mediated settings (e.g., <ref type="bibr" target="#b18">[17,</ref><ref type="bibr" target="#b23">21,</ref><ref type="bibr">28,</ref><ref type="bibr" target="#b71">61]</ref>), and some of these models have been applied to disclosure behavior on Facebook. For example, an interview study <ref type="bibr">[82]</ref> about self-disclosure goals on Facebook identified motivations proposed by prior models <ref type="bibr" target="#b23">[21,</ref><ref type="bibr" target="#b71">61]</ref> (i.e., self-expression, self-clarification, social validation, relationship development, social control) and added that people also use the site to keep a "personal record." However, participants in that study viewed Facebook primarily as a place for sharing positive news. A survey study using the same models found that for one-tomany status updates, social validation and self-expression were primary disclosure goals and that Facebook users use different functions for disclosures with different levels of intimacy, depending on their goals <ref type="bibr" target="#b9">[8]</ref>. Intimate public updates (versus private) are perceived as inappropriate and lead to less liking of the poster <ref type="bibr" target="#b11">[10]</ref>, in contrast to research in dyadic contexts, which indicates intimate disclosures often increase the extent to which the discloser is liked <ref type="bibr" target="#b7">[6]</ref>.</p><p>While these studies contribute important knowledge about disclosure goals on Facebook, they do not focus on stigmatized and emotionally difficult experiences. This is important, because the literature in non-computer-mediated contexts tells us that people share negative emotions in safe settings with audiences that are likely to provide supportive feedback <ref type="bibr">[67]</ref>. In particular, when people experience shame and guilt-feelings associated with pregnancy loss [47]-or traumatic life events, emotional disclosure is restrained <ref type="bibr">[67]</ref>. The most traumatic personal experiences are often concealed <ref type="bibr">[45]</ref> for reasons including self-presentation and impression management concerns <ref type="bibr" target="#b28">[25]</ref>. On Facebook, people report sharing more positive emotions than negative compared to face-to-face settings <ref type="bibr">[48,</ref><ref type="bibr">66]</ref>. If and when people do disclose negative experiences in spite of the difficulties, it is important to understand the reasons and socio-technical contexts that facilitate these disclosures.</p><p>Shifting our attention to intimate and sensitive disclosures, research suggests that features of computer-mediated communication such as a lack of non-verbal cues (e.g., <ref type="bibr">[79]</ref>) or increased anonymity <ref type="bibr">[4,</ref><ref type="bibr" target="#b92">78]</ref> can facilitate sensitive disclosures. HCI and social computing scholarship has examined how people use social media when they possess stigmatized identity facets or when they experience life changes that may induce psychological distress. Broadly, this line of research suggests both positive outcomes (e.g., access to support and social capital) and negative outcomes of self-disclosure and SNS use (e.g., negative well-being effects due to unsupportive reactions) <ref type="bibr">[80]</ref>. Several scholars have investigated interactions related to grief of loved ones (e.g., family, friends) on Facebook, suggesting that Facebook enables expansions of public mourning <ref type="bibr">[13]</ref>; similarly, an analysis of Facebook memorial pages suggests that the site is a suitable space for sharing memories and grief with one's friends <ref type="bibr" target="#b58">[51]</ref>. An interview study with people facing significant health concerns found that emotional support, motivation, accountability, and advice were reasons they participated in online spaces such as Facebook and health communities <ref type="bibr" target="#b70">[60]</ref>. Other vulnerable populations, such as transgender individuals find Facebook both a site of stress and support <ref type="bibr">[30]</ref>. For veterans transitioning into civil society, while barriers to disclosure of struggles exist, reenacting camaraderie triggers disclosures <ref type="bibr" target="#b87">[74]</ref>. Groups such as fathers [3] and Low-SES, 1st generation college students <ref type="bibr">[54]</ref> experience barriers to sharing information on Facebook due to positivity bias and fear of judgment or stigma; Disclosure of stressful events on Facebook moderates the link between stress and mental health, enabling young adults to elicit support <ref type="bibr" target="#b104">[87]</ref>. Finally, college students who use Facebook who experience distress, have more self-presentation concerns, yet still sometimes engage in vulnerable selfdisclosures on the site <ref type="bibr">[9]</ref>.</p><p>The literature covers a large range of human experience, including parenthood and loss of loved ones; yet it does not investigate disclosures of loss and grief in stigmatized contexts like pregnancy loss in which the discloser may know of no-one with similar experiences in their network. The work we have reviewed suggests that such disclosures are difficult and accompanied by uncertain outcomes, yet they do happen. Why do some people disclose in settings such as Facebook? How do they decide to disclose and what potential risks and benefits do they perceive?</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>METHODS</head><p>To answer these questions, we designed a phenomenological interview study to investigate how and why women who use social media disclose experiences of pregnancy loss, both in computer-mediated and non-computer-mediated contexts.</p><p>Recruitment. We sent out a brief screening survey on Facebook and Twitter (starting from the authors' networks) as well as flyers posted locally. The online call for participants was widely shared by people outside of the authors' networks. The goal of the screening survey was to find eligible interview participants and yield a strategic sample both in terms of demographics and experiences (e.g., age, used social media, disclosure and non-disclosure on social media). The survey included information about the study and inclusion criteria: having experienced a pregnancy loss during the past two years, being at least 18 years old, using social media, and living in the United States. We did not screen based on gestational stage of loss, as the grief experience is not dependent on it <ref type="bibr" target="#b65">[56]</ref>. The study was open to transgender and non-binary people who had experienced pregnancy loss, but none responded. We asked about social media use and their disclosures of the loss as well as demographic and contact information. The survey was active November 2016-January 2017 and we received a total of 90 responses. Among survey respondents, 36 had not disclosed the loss on any platform, 51 had disclosed on one or more, and three could not recall. Among the 51 who had disclosed on one or more platforms, 41 briefly shared how they did so, out of which 22 had shared about their experience on their Facebook profiles. Those chosen for interviews were contacted via email with study information and a link to an online consent form.</p><p>Participants. We interviewed 27 women. The average age was <ref type="bibr">33.6 (range: 27-42)</ref>. One participant was in a lesbian relationship, and 26 were in relationships with men. Eight participants reported no online disclosures about their loss; 19 reported online disclosures (e.g., Facebook profile, Facebook groups, Reddit, GOMI, Glow, BabyCenter). Of these, 12 had disclosed on their Facebook profiles, one commented on a friend's post and perceived it as disclosure, and 14 disclosed in support groups. Nine participants disclosed in at least two platforms. All participants reported using Facebook at the time of the interview, except one who only used Instagram and Twitter at the time of the study. Participants had experienced losses in various pregnancy stages including stillbirth. No participants reported directly disclosing pregnancy loss on Instagram or Twitter. All participants were raised and lived in the U.S., and were offered a $25 Amazon gift card as a token of appreciation.</p><p>Data collection. We conducted semi-structured interviews, which freed participants to explain their experiences and allowed us to systematically cover important data points. The first author conducted all interviews via participants' preferred method of video or voice call. On average, the interviews lasted for 92.7 minutes (SD = 12.5, range: 62-115). Only audio was recorded and transcribed for analysis. The interviewer began by sharing the study's goals, ensuring participants knew what it entailed, and asking permission to record the conversation. Then the interviewer asked what the participant's life was like when they found out they were pregnant, and what happened next. Follow-up topics included disclosures and non-disclosures of the pregnancy and pregnancy loss in computer-mediated (across platforms) and non-computer-mediated contexts, general use of social media, and reasons and thought processes leading to disclosures and non-disclosures. When possible, we asked for specific examples. In this paper, we only report on themes related to disclosure on Facebook.</p><p>Analysis. The constant comparative method, central to and popularized by grounded theory, drove the data analysis. The first author conducted iterative open coding, "through which categories, their properties, and relationships emerge" [77:66], looking for patterns in the data. Open coding allowed for flexibility and creativity in the codebook development <ref type="bibr">[77]</ref>. Throughout the analysis, the authors discussed, refined, and reviewed the emerging themes.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Limitations</head><p>This study focuses on women in the U.S. and their experiences with pregnancy loss and disclosure. Future research could explore cultural differences in disclosure practices and partners' experiences. In this paper, we focus on factors leading to disclosures on Facebook; in other work, we investigate non-disclosure and other platforms. Similar to many interview studies, the goal of this work is not generalizability; future work could evaluate our findings with larger samples or other populations.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Ethical Considerations</head><p>It was important to us that participants felt their grief and other feelings were respected throughout the interview. We adopted guidelines posed by <ref type="bibr">Kasket [39]</ref> for conducting interviews with bereaved people either remotely or in person, based on earlier guidelines for in-person interviews. These guidelines provide signs of different stress levels that interviewers can respond to. Moreover, because we learned that this study was of importance and value to participants as well as to us, we plan to write a public blog post to share the results with those who have been affected by pregnancy loss and the general public. Sharing results in an accessible format will allow us to contribute back to participants and the population we worked with. The study was approved by our institution's IRB.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>FINDINGS</head><p>Participants ranged widely in disclosure experiences, but a common thread in all but one was discussion of Facebook as an important social platform that they considered as a potential disclosure venue even if they did not ultimately disclose their pregnancy loss there.</p><p>We found that the decision to disclose a pregnancy loss was motivated by six primary types of factors. In the following sections, we explain how each of these factors contributed to disclosure decisions:</p><formula xml:id="formula_0">• self-related • societal • audience-related • temporal • network-level</formula><p>• platform and affordance-related</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Self-Related Factors</head><p>Participants frequently reported that pregnancy loss disclosures on Facebook served as self-help mechanisms for seeking psychological benefits and aid. These included remembrance, taking control of the parenthood narrative, processing the loss, and eliciting support.</p><p>Remembrance. Some participants shared about the loss on social media in order to remember, honor, and acknowledge their experience and their loss. For example, P1 described the decision to announce the loss on Facebook:  <ref type="bibr" target="#b12">[12]</ref>. Some believed that socially acknowledging and sharing the loss would facilitate their grief process, enabling them to approach a "new normal,"</p><formula xml:id="formula_1">"</formula><p>[53] and pursue their goals such as growing their family.</p><p>Eliciting social support. Anxiety and needing support motivated some to disclose the loss on Facebook. As P1 said: "We went on social media and we posted, 'You know, we've been here twice before and we're very scared and we're very worried. And we would just like everyone's thoughts and prayers and support during this pregnancy.' And I think that post got like 300 comments from all of our family and friends." In some cases, the disclosure of the loss on Facebook was not only to gain support in coping with the lost pregnancy, but also about anxiety related to a current pregnancy. This resonates with research suggesting that pregnancies after loss can be healing but can also be anxietyproducing due to fear of another loss <ref type="bibr">[19]</ref>.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Audience-Related Factors</head><p>Audience-related factors were primarily about control: preemptively disclosing the loss in order to avoid unwanted conversations about the lost, future, or current pregnancies, and gaining control over what personal information was known to and discussed by others. These motivations were avoidance-based <ref type="bibr" target="#b18">[17]</ref>, and we use the term preventive disclosure, which has also been used in the context of gay identity disclosures outside of SNSs <ref type="bibr" target="#b17">[16]</ref>. It is also noteworthy that eliciting social support, a "self-related" need and decision factor described above, also depends on the perception of one's audience as a likely source of support.</p><p>Preventive disclosure: avoiding follow-up questions and taking control of information sharing. Some disclosure motivations on Facebook focused on avoidance and taking control. In these cases, people disclosed the loss in an attempt to stop further queries or rumors. As P2 put it: "The posts that we made to Facebook were basically so people... so rumors weren't happening. They were clarifying, 'This is what's happening. We appreciate your support.'" Participants wanted to gain control over what information was shared about them, so they took initiative to share the information themselves.</p><p>Preventive disclosure: avoiding conversations about the lost or future pregnancy and related plans. Some people disclosed the loss on Facebook because they had widely disclosed the pregnancy on Facebook or through other means. Avoiding questions about the lost pregnancy (e.g., "Where are the baby pictures?") or questions about a future pregnancy (e.g., "Don't you want another baby?") were examples of these anticipated questions that led to disclosure of the loss on Facebook for some. For instance, P1 explained: "Because we had made the [pregnancy] announcement, we had to make the announcement that we had lost the baby, to everybody. And that was a really hard position to be in."</p><p>Participants were concerned about others asking them about the progress of the pregnancy either in person or online. As another example, P20 stated that by sharing about the loss on Facebook she wanted to avoid questions about having kids: "You know you always get asked when you have one child, everyone is like, 'When are you going to have another one?' You know like, 'So and so could really use another sibling,' type of thing." Engaging in these conversations about pregnancy was incredibly difficult for some, and thus they tried to avoid such conversations by sharing the information once and for all.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Network-Level Factors</head><p>Network-level factors are related to the composition and structure of one's total (egocentric) social network as articulated on Facebook. We differentiate network-level from subgroup, community, or dyadic relationships that might be performed on the site and that might be the subject of audience-related considerations. We define network-level reciprocal disclosures as disclosures to one's network that are motivated by observing others' disclosures. They do not serve the purpose of strengthening or maintaining any particular relationship because although they may be precipitated by seeing others' posts, they are not in response to those posts. Instead, they are a response to a perceived reduction in stigma. Some disclosures motivated by network-level factors happened in the context of social media awareness campaigns. These campaigns provided additional safety, leading to less perceived stigma, and enabled disclosures that may not have occurred otherwise.</p><p>Inspired by others' pregnancy loss disclosures and responses to them in one's network. Seeing other people post about their loss experiences and the supportive comments associated with those posts made it easier for some to post about their own experience. As P17 shared: "I came to the decision to make it public on Facebook this past week actually, because a good friend of mine, she posted her experience about having a stillbirth. I think that opened up my eyes because I saw that everyone was being very supportive of her. All of my fears about, I don't know, they seemed like silly fears now, I guess, but just not feeling woman enough, feeling like a failure. I feel like she was very brave and to post that because it's such a sensitive personal issue. I think there's a need to make it more visible to the world, so I appreciated her doing that. She really inspired me to post about my miscarriages." Similarly, P18 emphasized that "It's been helpful in general just to see that someone else, my age, that I knew experienced a loss and has been brave enough to talk about it." When others that one knew openly shared about their loss on Facebook, and participants observed responses they perceived as positive, they felt motivated to share their experiences as well.</p><p>Additionally, the Pregnancy and Infant Loss Awareness Month social media campaigns facilitated network-level reciprocal disclosures of pregnancy loss on Facebook. The perception and observation that more people share about loss in the awareness month led some to share about their experiences. For example, P15 said: "I think that, similar to how the pregnancy-related subreddits are a space in which it's appropriate to share information about pregnancy, that awareness month creates a context in which people feel like it's not totally arbitrary. They are participating in something." Awareness campaigns provided a context where some felt that sharing about their experience was legitimized because others were also sharing; they were part of a larger network-level experience.</p><p>Participants described feeling less alone and safer about sharing their own experience after seeing others post. Others' disclosures made them feel like they were not the only people disclosing difficult experiences that made them feel vulnerable, and seeing reactions to others' posts made it easier to gauge their potential audience's reaction.</p><p>Being a source of support for current, past, and future invisible similar others in one's network. Disclosure was not only a network-level reciprocation but also sometimes served to signal openness to future reciprocation by others in the network. Some people disclosed the loss on Facebook because they wanted to be a source of support and hope for connections who may have been, are, or will be in a similar situation. For example, P9, who shared about her experience on Facebook during Pregnancy and Infant Loss Awareness Month, said: "Anybody that I talked to in real life, my mom or my friends or even my husband, I don't feel like it was the kind of support I needed. They tried, I mean they love me, it's not like they weren't trying to help me, but I needed somebody who had been through it and had similar circumstance to feel like they understood… I was putting it out there just in support of anybody who might be experiencing a miscarriage and feel alone, because I felt very alone. Just to extend, not only to let people know that it happened to me and to acknowledge the loss publicly as a way of healing, but also to let anybody know that if they were going thought it themselves and wanted someone to talk to, that I was available for that." The awareness campaign provided a context within which P9 shared about her experience to be a source of support for others, and to let them know that they are not alone.</p><p>Relatedly, P18 framed her disclosure as a beacon for those who might be suffering in the positive glow of others' everyday Facebook posts: "I wanted to be able to provide a personal story since so many people go through the same thing… when I was dealing with it I didn't know anybody. I mean, my mom had had miscarriages and my mother-in-law had but I didn't know anybody my age who had. It would've been nice to be able to relate, because I do think especially on social media there's so much showing of only good things and it sort of feels like everybody else is getting pregnant and having successful pregnancies and you're alone when you're not." Sometimes participants needed forms of support that they believed would only come from someone who had been through a loss as well, or who shared certain characteristics (e.g., age) in addition to the loss experience. Many did not have access to this kind of support when they needed it most themselves, and this lived experience motivated some to share about their loss on Facebook. By doing so, they hoped they could be helpful to others who may feel alone and isolated, like they did at that time -unable to identify others in their network, sometimes with certain characteristics, who had experienced pregnancy loss and who could potentially be supportive.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Societal Factors</head><p>Some participants disclosed their loss experience in an attempt to reduce societal stigma around pregnancy loss, or as a call for political action related to reproductive rights.</p><p>Disclosure as activism: fighting stigma and increasing awareness. Some participants shared about their loss on Facebook to fight the stigma surrounding the experience, and to raise awareness among those who may experience a future pregnancy loss and others. Many felt frustrated by the perception that they were not "supposed to" talk about their experiences, that they should keep pregnancy loss a secret, and that they felt attacked when they disclosed. As P1 put it: "I made a long post after we found out that we lost the baby. I said, 'You know, I have realized that people think that this is for attention, or that they would never post until they knew everything was okay. participants wanted to educate the public about pregnancy loss, raise awareness pregnancy loss and women's reproductive health, stigma, encourage political action. P13 on her experience on "Probably, the scariest post was writing about my and emergency surgery… The first time I wrote about it was in relation to reproductive rights and the idea of a amendment and it was scary. That's the word that keeps coming up to me. It was scary... I don't want people to feel sorry for me but I want them to learn about miscarriage. I want them to learn about these issues. I want them to learn how to support people who are going through them and I want them to take action when there's some policy or legislation can affect women in these ways." The surrounding perceived stigma about pregnancy loss motivated aimed at fighting this stigma activating social networks political action.</p><p>The Pregnancy and Infant Awareness social media campaigns a for disclosures motivated by societal factors. For instance, P2 several loss experiences. She did not share the first loss with many because not shared the pregnancy and sharing loss was challenging. got pregnant again and experienced a after birth, and then got pregnant a time. month provided a context to sharing about her experiences on Facebook. She said: "When the next October came around and it was the awareness month, I thought it's important; this is important information and people need to be aware, so I started sharing. I shared my story on Facebook. By that point a lot more people knew because we were pregnant again. I made a big post on Facebook about our story and how people don't know the statistics, and how important it is for women to know that going in so that they're prepared it feels a the when you had no idea that it would be that common. So made a couple of posts throughout last year about loss awareness… put some of the in there, like one in four." some participants, raising awareness was a major motivator for disclosure and within the context of awareness month media campaigns. While these disclosures often had other motivations such as seeking support, raising awareness was major goal.</p><p>Pregnancy loss an event largely excluded from social and can fracture one's identity and make it difficult to narrate and articulate at bodily, emotional, and social levels Society does not provide a of stories about pregnancy loss, and this makes it challenging for people to make sense of the event <ref type="bibr" target="#b36">[33]</ref>. We find that disclosed on Facebook to actively construct societal narrative. When participants talked about noncomputer-mediated disclosures, societal factors were less salient and did not include the goal of activating one's network to take political and stigma broadly.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Temporal Factors</head><p>The amount of time that had passed since the loss was another factor influencing disclosures on Facebook. As time passed and especially once another pregnancy likely to be carried to term, some participants were more likely to share about the loss on Facebook. For example, P24 reflected: "I think with just more time going by and me not the anxiety of miscarrying again. Even though I know there was a very small chance that something could have gone wrong in the second or third trimester with my baby, we did a bunch of genetic testing since I am over 35 and everything came back looking great. It gave me a huge peace mind. Just with some more time and more confidence in my second pregnancy I just felt more comfortable talking about it." Other times, participants felt that just by the virtue of time passing, they were more comfortable disclosing the loss to others in their life, since they progressed in the healing and grief process. As P9 said: "I had almost nine or ten months since the actual miscarriage, so it wasn't like it was so fresh. I was finally able to talk about it and feel like it would be okay to be out there in Pregnancy loss creates a type of trauma that be managed over time <ref type="bibr">[75]</ref>, and some shared about the loss as part of this management with time a critical factor. It is not uncommon to wait before disclosing difficult experiences; for example disclosures of childhood abuse are delayed Semaan et al. <ref type="bibr" target="#b87">[74]</ref> that transitioning veterans share their struggles on social media after time had passed and call such disclosures "delayed disclosures." While we sometimes observed "delayed passage of time was not always a factor leading to disclosure, in fact inhibited disclosures as participants feared invalidating responses such as those that "they should be the loss by now."</p><p>The Pregnancy Infant Loss Awareness Month social media campaigns sometimes helped make that had been impeded by the passage of time possible. Particularly when one had shared about other topics on social media (i.e., non-intimate and positive), the day campaign helped facilitate disclosures by making fit within the larger narrative of one's Facebook use, and Facebook in general. As P14 said: "Most of what I post on my wall is, hey, my kid just did this cute thing today. I don't actually post a lot about myself. A about a miscarriage not even happening right now, feels like it will be out of place and out of context… an awareness month, October. I feel like in that by next October, I can share, because other people will be, because there's the context of, hey, it's awareness month, so here let me tell you. It gives me that excuse to share or reason to share, as to just out of the blue. I just can't figure out how I would share that out of the blue, so I just don't." Some participants had difficulty finding a meaningful for sharing about pregnancy loss after time had passed; social media awareness campaigns provided that context.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Platform and Affordance-Related Factors</head><p>Socio-technical features of Facebook influenced of pregnancy loss, including both affordances and the ecology of social media that participants used.</p><p>One-to-many disclosure: avoiding many one-to-one disclosures. For participants who had decided to share their loss, broadcast nature of Facebook posts motivated disclosure there they would not have to engage in many individual conversations about the loss. As P2 put it, "The way to tell a lot that something drastic has happened in your life without having that one-on-one conversation over and over and over again is just to put it out and be like, a thing that happened and my entire life is changing.'" Telling others about a loss one-toone difficult participants, as P22 said: "I didn't have bandwidth to call everybody and tell them." Additionally, the size of one's Facebook network a relevant factor when adopting the one-to-many disclosure approach. As P18 mentioned it would reach more people if I were to it on Facebook, I put it on Facebook," compared with Instagram where her audience was smaller.</p><p>The of having individual conversations over and over again was painful and emotionally challenging for most who decided to disclose on Facebook. Prior work in non-sensitive contexts suggests that people being able to "broadcast" content to their Facebook network, and ask questions from them <ref type="bibr" target="#b96">[81,</ref><ref type="bibr" target="#b102">85]</ref>. In sensitive contexts, a recent study <ref type="bibr" target="#b31">[29]</ref> relationship breakups on Facebook found that announcing a breakup on the site was "efficient;" however, their survey data did not provide explanation as to why. Here, we demonstrate that people engage in an intimate disclosure in a one-to-many approach, not just they wanted support in the case <ref type="bibr" target="#b96">[81,</ref><ref type="bibr" target="#b102">85]</ref>, but because they needed to avoid many emotionally charged and difficult communication: need not worry about the feelings. Some it helpful to share the without having to about audience's feelings as they would if they over the phone or in a face-to-face conversation. instance, didn't want to talk to people about it because I want to deal with their feelings about it. I didn't want to feel like I had manage their feelings… That's easier on media because they're not in front of me. I definitely have friends who cried when I told them. I don't want to deal somebody else's tears about it. You don't have to do that on Facebook." In this sense, asynchronous communication made it for the participants to talk about their experience on Facebook to more synchronous settings, and allowed them to take care of their own needs rather than others' difficult times. work suggests asynchronous communication enables more deliberate and lowers the cost of communication for example, there is no need to schedule for <ref type="bibr" target="#b103">[86]</ref>. We identify disclosures as another helpful use of communication modes.</p><p>Anonymous disclosures in other online spaces. For some people, prior participation in more anonymous spaces (e.g., BabyCenter, Reddit) made it possible share on Facebook, where they used their physical world identities and their networks were comprised of connections they knew. Interactions in more anonymous spaces provided participants with feelings of safety and courage -an enabler disclosing to one's known network. their on more anonymous sites people decide exactly what and how share, and reduced anxiety about sharing. instance, P9, who shared about the on Facebook, described using Reddit during the after her loss her comfortable enough to share Facebook later: "I more comfortable putting it out there. If I didn't have Reddit, I don't think I would have coped as well." Similarly, P22 said: "I think that sharing on BabyCenter, in a sense, gave me the courage to do it on I think if I had not shared before, I would not have known what to share, I would've been very worried about it." Anonymous the way for disclosures on This finding extends prior work that suggests people often have an easier time disclosing stigmatized anonymously (e.g., <ref type="bibr">[4,</ref><ref type="bibr" target="#b56">49,</ref><ref type="bibr" target="#b92">78]</ref>). We found that disclosures, while needed, not be sufficient, and may help people who the need to disclose experiences to their social networks in identified contexts as Facebook. This finding indicates the important, distinct, and complementary of disclosures in identified anonymous online spaces.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>DISCUSSION IMPLICATIONS</head><p>on interview data, we a disclosure decisionmaking framework comprised of six major factors that pregnancy loss disclosures on Facebook. decision-making factors are to self, audience, society, passage of time, the platform being used to disclose. Although these decision factors were in the context of loss disclosures on we expect that would motivate decisionabout disclosures of other identity facets or life events in other or future identified social networks, people use their physical world identities connect with others know. We introduce the concept of level reciprocal disclosure to describe broadcast disclosures motivated by or in anticipation others' disclosures, and in response to reduction in -a form of that is largely unique to SNSs. also show that social media awareness campaigns disclosures that may not have materialized on SNSs otherwise, and uncover some of the distinct and of sensitive disclosures anonymous and identified online platforms.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Disclosure Framework</head><p>Our decision-making framework some features of a model proposed by <ref type="bibr">Greene et al. that</ref> explains disclosure decisions in non-computer-mediated dyadic settings <ref type="bibr">Greene et al. that self, other, interpersonal, and</ref> reasons contribute to disclosure decisions. In that model, self-focused reasons are concerned with the psychological and tangible benefits to the discloser (e.g., catharsis, self-clarification, and seeking support). Other-focused reasons refer to the responsibility to inform and desire to educate others. Relationship-focused reasons are concerned with having an intimate and trusting with the disclosure partner. situationalenvironmental reasons refer to the disclosure recipient's availability, whether the recipient demands or whether the recipient involved as the disclosure's subject matter. In our analysis, the self-related theme strongly Greene et al.'s theme. However, elements of other-, relationship-, and situationalenvironmental reasons can be found in our data, our analysis illustrates that these factors are substantially different in the of Facebook than in offline disclosures; as such, we use a different nomenclature. many participants, the societal that can be asserted by like-minded networks politicized the disclosure of pregnancy loss on Facebook. Disclosure as activism the desire to "educate others" as discussed in <ref type="bibr">Greene et al.'s [28]</ref> dyadic disclosure model, to become a public vehicle for widespread social change. This is similar to gay identity disclosures; come out in order to make homosexuality more visible and reduce factors in the dyadic disclosure model focus on relational factors and availability of the intended recipient of disclosure, but in the SNS context, situational and environmental factors are very different, involving features and affordances of social systems as we find.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Network-Level Reciprocal Disclosure</head><p>In dyadic non-computer-mediated communication, reciprocal disclosures happen when one person discloses information, and the other reciprocates with information of a comparable intimacy level. In these contexts, the occurrence reciprocal is one of the most consistent findings disclosure research <ref type="bibr" target="#b25">[22,</ref><ref type="bibr" target="#b52">46]</ref>. From a social exchange perspective, intimate disclosures create an imbalance and to re-establish balance, disclosure partner might disclose something about themselves to reciprocate <ref type="bibr">[5]</ref>. Reciprocity could also be a function of modeling, where the confidant emulates the discloser's behavior due to being unsure about social norms <ref type="bibr">[69]</ref>.</p><p>In present study, participants disclosed their pregnancy loss on Facebook because others in their network had disclosed on Facebook. While these disclosures made by others were one-to-many and not directed at participants, they enabled reciprocal disclosures. We call these disclosures network-level disclosures. By seeing others post, people knew and felt pregnancy loss was not to them; by observing posts that did not receive negative responses, participants felt that sharing about their loss may be appropriate than they originally thought. Even if that was not case, they at least not the only people from the perceived norm of posting about pregnancy loss" on platforms like Facebook. Network-level reciprocal disclosures also enabled people to provide support to potential future within their network. This is a departure from our knowledge about reciprocation, as as online contexts to topics. that happen in online spaces to specific kinds of difficult experiences, (e.g. forums for health addiction recovery sexual abuse [4]) are expected. Network-level reciprocal disclosure relevant collapse, stigma, and that others in one's social network have not something similar conspire to dampen for disclosure. The effects of network-level disclosures are not restricted to a group of selfidentified similar others, whether anonymous, identified, or strangers. instance, Semaan et al. labeled such behaviors "triggering disclosures," and described how a veteran made a difficult disclosure about mental health on her Facebook page after perceiving a reduction in stigma and other veterans, who set aside norms among military post about their struggles <ref type="bibr">[74:396]</ref>. This example of reciprocal disclosure a different disclosure context suggests that concept provide traction for understanding how literature on reciprocity can be used to understand network-level disclosures beyond the pregnancy loss context. work suggests that a pregnant woman's most helpful and important support network during and after pregnancy of family such as a mother or partner Here, we that when pregnancy is lost, many found the most meaningful forms of support came from those who had a similar loss, necessarily their partner or mother. with similar loss experiences within one's network of known ties was helpful, and although support groups and connecting with similar others outside of one's social network could also be helpful, it was deemed insufficient. Participants believed that online who might experience a pregnancy loss would similar support needs could be best met by others their social network. some disclosed their pregnancy loss on Facebook to affect change at the network level (rather than as action at the societal level) and become a source of support for invisible and currently similar others in their network.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Awareness Campaigns as Facilitators of Sensitive Disclosures on SNSs</head><p>Researchers have studied campaigns SNSs in terms of the content people share, have criticized their effectiveness. example, an analysis of tweets about cancer during Awareness found that tweets were of promotional and fundraising nature, than personal <ref type="bibr" target="#b20">[18]</ref>. Other work suggests that awareness social media campaigns can reduce stigma with experiences such as mental illness <ref type="bibr" target="#b84">[71]</ref> and other health topics have the possibility to change knowledge and attitudes at the population-level <ref type="bibr" target="#b84">[71]</ref>.</p><p>We argue that these campaigns can act as disclosure enablers that help alleviate some of the concerns around disclosing content on identified SNSs, by perceived stigma. In the United States, October is Pregnancy and Infant Loss Awareness Month, and October 15 is Pregnancy and Infant Loss Remembrance Day. found that social media encouraged personal stories enabled may not have occurred otherwise. For some, the awareness campaigns contributed to disclosures by network-level, societal, and temporal factors or a combination thereof. Increased posts during campaigns helped feel less alone, comfortable with sharing, and perceive less stigma.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>Implications</head><p>We provide implications for how SNSs and design for network-level reciprocal disclosures. First, systems could enable finding similar others within one's social networks. Sensitive disclosures could be surfaced by newsfeed algorithms when they do happen, particularly to those who are demographically likely to share the This could lead to perceived stigma and reciprocal disclosures at the network-level. Another idea, has similarly been proposed in the context of is to help people see the prevalence of loss in their network by predicting how many in network may have a pregnancy loss (e.g., demographics) by eliciting these data and it in an anonymized or identified form. We are pursuing some of these ideas in design experiments. Furthermore, algorithms during Pregnancy and Infant Loss Awareness month could boost posts with content about pregnancy loss to increase the visibility of this content, thus potentially enabling disclosures for those who would appreciate seeing others' and stories. We acknowledge that with visibility comes potential drawbacks unintended consequences, such as visibility to unsupportive network members. Algorithm designs balance visibility and further work is needed understand the tradeoffs.</p><p>One way Facebook in particular help reduce stigma surrounding pregnancy loss is to add an experienced a pregnancy loss" life event. Facebook allows people to add events" such as getting married or starting new job. feature currently includes options such as "expecting a and "loss of a love one," however it does not acknowledge pregnancy loss as a significant life event. While people can create customized life events, platforms make it easier and perhaps influence social norms by implementing more inclusive design choices.</p><p>We found that sensitive are sometimes only possible on Facebook because of prior disclosures elsewhere. Future work could experiment with a system that allows disclosing to one's Facebook network acknowledge that tie-based anonymous networks with their own challenges <ref type="bibr" target="#b56">[49]</ref>, and that prior such as Rooms (in which Facebook users an anonymous chat space), failed. However, we still see potential for future systems to explore anonymous disclosure support exchange in that mitigate the challenges inherent in identified platforms.</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>CONCLUSION</head><p>This contributes a framework that explains disclosures of pregnancy loss on identified SNSs. This framework includes six types of decision factors: self-related, societal, platform and affordance-related, networktemporal. While pregnancy loss was the focus paper, we suggest that this framework could be to other sensitive disclosures on identified SNSs where people with others they know and use their physical world identities. We encourage researchers to our framework in other contexts. Within our framework, we introduce a theoretical construct, networkreciprocal disclosure, a concept that can motivate social computing system designs to better promote sensitive and social support exchange. we found that prior anonymous online participation facilitated disclosures of pregnancy loss on Facebook, that one-to-many disclosures on Facebook are appreciated because by doing so in distress can avoid many painful one-to-one disclosures, and that social media awareness campaigns prompt motivated by network-level, societal, and temporal factors. Taken together, awareness campaigns, the efficiency of one-to-many disclosures, and for anonymous lower-risk disclosures contribute to women's decisions to disclose pregnancy loss experiences on identified SNSs, which, through the mechanism of reciprocation, creates an increasingly disclosure-friendly context for those who come after.</p></div><figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_0"><head></head><label></label><figDesc>to create a social life for what was lost. Many participants needed to socially honor and remember their loss, and sharing on Facebook was one way of doing so for them.</figDesc><table><row><cell>My husband started crying. And the doctor came in, and he said, 'I'm so sorry. You're right. The baby, her heart stopped last week.' And I said to my husband, 'We were gonna announce [the pregnancy on Facebook].' And he said, 'And we didn't.' And I said, 'It's like no one will know she was here.' So he said, 'I think we should put something on there for her, because people should know she was here, and that she changed our world.Taking control of the parenthood narrative. The lost pregnancy was only part of a story, and many participants reported they wanted to take control of the narrative of their parenthood story and did so by sharing about it with their social network. On sharing on Facebook, P24 said: "I had this pregnancy and I want people to know about it because that little baby was part of my story and I don't want to forget that. I don't regret any of it. I think going through that experience really, really made me appreciate my second pregnancy and just appreciate the whole process and how it's such a little miracle. Without that first pregnancy, I wouldn't have my son now, who is amazing." Pregnancy loss survivors construct narratives about their pregnancy and loss, and social support is a factor in this narrative reconstruction [37]. Socially acknowledging the loss within the context of one's whole journey enabled participants to begin taking control of this narrative.</cell></row></table><note>'" Posting on Facebook was a way of honoring and remembering their baby. Prior work[52]  addressing other kinds of loss suggests that the relationship does not die when a loved one does. In this sense, by sharing about their loss, some participants tried Sharing about the loss as part of the healing process. Additionally, sharing with the social network was part of the grief and healing process for some, whereby they would publicly acknowledge what had happened, not hold on to a secret anymore, and continue processing the loss. As P20 said: "I didn't want it to fester, I feel like it would have festered in that I wouldn't have been able to move on with my life if I didn't get it out there. I felt like I knew since we wanted another baby, I had to get over it, I could get over our loss and continue on and hope we have a healthy pregnancy." Sharing about difficult experiences is a process by which one may engage in identity repair, which is necessary for recovery</note></figure>
+<figure xmlns="http://www.tei-c.org/ns/1.0" type="table" xml:id="tab_1"><head></head><label></label><figDesc>But I never really understood why we do that. Why do we keep it such a secret? Because pain, no matter what, if tell you or I don't tell you. I'm still sad that my baby's gone. my husband is sad that his baby'sWe had plans. We had hopes. And we're not just, we know the birthday of all of them. We know how old they'd right now. We don't forget them, so why shouldn't we share</figDesc><table><row><cell>that? If you're our friend, if you care about us, wouldn't you</cell></row><row><cell>wanna help us? If it was your child that passed away, or</cell></row><row><cell>when your mother or your grandmother or your, a family</cell></row><row><cell>member, passes away, people don't just go, you</cell></row><row><cell>shouldn't talk about that until you're through it.' say,</cell></row><row><cell>can I do? How can I help you?' we acknowledge</cell></row><row><cell>loss, that absence." is an example of</cell></row><row><cell>to challenge and the stigma around</cell></row><row><cell>about pregnancy loss sharing a critical and</cell></row><row><cell>intimate post on Facebook.</cell></row></table></figure>
+		</body>
+		<back>
+
+			<div type="acknowledgement">
+<div xmlns="http://www.tei-c.org/ns/1.0"><p>We conducted 27 semi-structured interviews with women in the U.S. who had experienced pregnancy loss within two years and who used social media, to investigate support</p></div>
+<div xmlns="http://www.tei-c.org/ns/1.0"><head>ACKNOWLEDGMENTS</head><p>We thank the people who confided intimate stories of loss and the many individuals who helped our recruitment efforts. We also grateful to the ACs, reviewers, and</p><p>Haimson for helpful feedback and work. This work was funded by the NSF grant #1253302.</p></div>
+			</div>
+
+			<div type="references">
+
+				<listBibl>
+
+<biblStruct xml:id="b0">
+	<monogr>
+		<author>
+			<persName><forename type="first">Francesca</forename><surname>Fiorella Monti</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Leonardo</forename><forename type="middle">De</forename><surname>Pascalis</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Marcella</forename><surname>Paterlini</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Giovanni</forename><surname>Battista La</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Isaac</forename><surname>Sala</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Blickstein</surname></persName>
+		</author>
+		<title level="m">Psychosocial support for during assisted reproductive technology treatment. Fertility and 95</title>
+				<imprint>
+			<date type="published" when="2011">2011</date>
+			<biblScope unit="volume">2</biblScope>
+			<biblScope unit="page" from="707" to="710" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b1">
+	<monogr>
+		<title/>
+		<idno type="DOI">10.1016/j.fertnstert.2010.06.011</idno>
+		<ptr target="https://doi.org/10.1016/j.fertnstert.2010.06.011" />
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b2">
+	<analytic>
+		<title level="a" type="main">Accessing Social Support and Overcoming Judgment on Social Media among Parents of Children with Special Needs</title>
+		<author>
+			<persName><forename type="first">Tawfiq</forename><surname>Ammari</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Meredith</forename><forename type="middle">Ringel</forename><surname>Morris</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sarita</forename><surname>Schoenebeck</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of ICWSM</title>
+				<meeting>ICWSM</meeting>
+		<imprint>
+			<date type="published" when="2014">2014. 2014</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b3">
+	<monogr>
+		<author>
+			<persName><forename type="first">Tawfiq</forename><surname>Ammari</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sarita</forename><surname>Schoenebeck</surname></persName>
+		</author>
+		<title level="m">Understanding and Supporting Fathers and Fatherhood on Media Proceedings of 33rd</title>
+				<imprint>
+			<date type="published" when="2015">2015</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b4">
+	<analytic>
+		<title level="a" type="main">Understanding Media Disclosures of Sexual Abuse Through the Lenses of Support Seeking and Anonymity</title>
+		<author>
+			<persName><forename type="first">Oliver</forename><forename type="middle">L</forename><surname>Andalibi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Munmun</forename><surname>Haimson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Andrea</forename><surname>De</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Forte</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2016 CHI Conference on Human in Computing Systems &apos;16)</title>
+				<meeting>the 2016 CHI Conference on Human in Computing Systems &apos;16)</meeting>
+		<imprint>
+			<date type="published" when="2016">2016</date>
+			<biblScope unit="page" from="3906" to="3918" />
+		</imprint>
+	</monogr>
+	<note>Annual ACM Conference on Human Factors Computing Systems (CHI &apos;15)</note>
+</biblStruct>
+
+<biblStruct xml:id="b5">
+	<monogr>
+		<title/>
+		<idno type="DOI">10.1145/2858036.2858096</idno>
+		<ptr target="https://doi.org/10.1145/2858036.2858096" />
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b6">
+	<analytic>
+		<title level="a" type="main">In Self-disclosure: Origins, patterns, implications of openness in interpersonal relationships</title>
+		<author>
+			<persName><forename type="first">L</forename><surname>Richard</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Archer</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">J. Chelune). Jossey-Bass</title>
+		<imprint>
+			<date type="published" when="1979">1979</date>
+		</imprint>
+	</monogr>
+	<note>Role of personality and the situation</note>
+</biblStruct>
+
+<biblStruct xml:id="b7">
+	<analytic>
+		<title level="a" type="main">self-disclosure and attraction: Basis for relationship or scarce resource</title>
+		<author>
+			<persName><forename type="first">L</forename><surname>Richard</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Christie</forename><forename type="middle">E</forename><surname>Archer</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Cook</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Social psychology quarterly</title>
+				<imprint>
+			<date type="published" when="1986">1986</date>
+			<biblScope unit="page" from="268" to="272" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b8">
+	<analytic>
+		<title level="a" type="main">Breastfeeding and use of social media among first-time American mothers</title>
+		<author>
+			<persName><forename type="first">V</forename><surname>Ifeyinwa</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Catherine</forename><forename type="middle">M</forename><surname>Asiodu</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Dawn</forename><forename type="middle">E</forename><surname>Waters</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kathryn</forename><forename type="middle">A</forename><surname>Dailey</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Audrey</forename><surname>Lee</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Lyndon</surname></persName>
+		</author>
+		<idno type="DOI">10.1111/1552-6909.12552</idno>
+		<ptr target="https://doi.org/10.1111/1552-6909.12552" />
+	</analytic>
+	<monogr>
+		<title level="j">JOGNN</title>
+		<imprint>
+			<biblScope unit="volume">44</biblScope>
+			<biblScope unit="page" from="268" to="278" />
+			<date type="published" when="2015">2015</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b9">
+	<monogr>
+		<title level="m" type="main">Self-Disclosure in Social Media: Extending the Functional Approach to Disclosure Motivations and Characteristics Social Network Sites</title>
+		<author>
+			<persName><forename type="first">Natalya</forename><forename type="middle">N</forename><surname>Bazarova</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yoon Hyung</forename><surname>Choi</surname></persName>
+		</author>
+		<idno type="DOI">10.1111/jcom.12106</idno>
+		<ptr target="https://doi.org/10.1111/jcom.12106" />
+		<imprint>
+			<date type="published" when="2014">2014</date>
+			<biblScope unit="volume">64</biblScope>
+			<biblScope unit="page" from="635" to="657" />
+		</imprint>
+	</monogr>
+	<note>of Communication</note>
+</biblStruct>
+
+<biblStruct xml:id="b10">
+	<analytic>
+		<title level="a" type="main">Psychological distress and emotional expression on</title>
+		<author>
+			<persName><forename type="first">Natalya</forename><forename type="middle">N</forename><surname>Bazarova</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yoon</forename><surname>Hyung Choi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Janis</forename><surname>Whitlock</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Dan</forename><surname>Cosley</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Victoria</forename><surname>Sosik</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Cyberpsychology, Behavior, and Social Networking</title>
+		<imprint>
+			<biblScope unit="volume">20</biblScope>
+			<biblScope unit="page" from="157" to="163" />
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b11">
+	<analytic>
+		<title level="a" type="main">Managing impressions and on Facebook: Self-presentational and concerns revealed through the analysis of language style</title>
+		<author>
+			<persName><forename type="first">N</forename><surname>Natalya</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jessie</forename><forename type="middle">G</forename><surname>Bazarova</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yoon Hyung</forename><surname>Taft</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Dan</forename><surname>Choi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Cosley ; George</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Stacey</forename><surname>Bonanno</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Kaltman</surname></persName>
+		</author>
+		<idno type="DOI">10.1016/S0272-7358(00</idno>
+		<ptr target="https://doi.org/10.1016/S0272-7358(00" />
+	</analytic>
+	<monogr>
+		<title level="j">Journal of Language and Social</title>
+		<imprint>
+			<biblScope unit="volume">11</biblScope>
+			<biblScope unit="page" from="62" to="63" />
+			<date type="published" when="2001">2012. 2001</date>
+		</imprint>
+	</monogr>
+	<note>Psychology Review</note>
+</biblStruct>
+
+<biblStruct xml:id="b12">
+	<analytic>
+		<title level="a" type="main">and The Spoiling Repair Multiple Social Identities</title>
+		<author>
+			<persName><forename type="first">Lyn</forename><forename type="middle">Rosalind</forename><surname>Crawley</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Samantha</forename><surname>Lomax</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Susan</forename></persName>
+		</author>
+		<idno type="DOI">10.2190/OM.70.2.a</idno>
+		<ptr target="https://doi.org/10.2190/OM.70.2.a" />
+	</analytic>
+	<monogr>
+		<title level="j">OMEGA -of Death and Dying</title>
+		<imprint>
+			<biblScope unit="volume">70</biblScope>
+			<biblScope unit="page" from="143" to="168" />
+			<date type="published" when="2015">2015</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b13">
+	<analytic>
+		<title level="a" type="main">Beyond the Grave: Facebook as a Site for the of Death and Mourning</title>
+		<author>
+			<persName><forename type="first">Jed</forename><forename type="middle">R</forename><surname>Brubaker</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Gillian</forename><forename type="middle">R</forename><surname>Hayes</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Paul</forename><surname>Dourish</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">The Information Society</title>
+		<imprint>
+			<biblScope unit="volume">29</biblScope>
+			<biblScope unit="page" from="152" to="163" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b14">
+	<monogr>
+		<title/>
+		<idno type="DOI">10.1080/01972243.2013.777300</idno>
+		<ptr target="https://doi.org/10.1080/01972243.2013.777300" />
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b15">
+	<analytic>
+		<title level="a" type="main">Once more with feeling: Supportive responses to social sharing on</title>
+		<author>
+			<persName><forename type="first">Mike</forename><surname>Burke</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Develin</surname></persName>
+		</author>
+		<ptr target="http://dl.acm.org/citation.cfm?id=2835199" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of 19th ACM Conference on Computer-Supported Cooperative Work &amp; Social Computing</title>
+				<meeting>19th ACM Conference on Computer-Supported Cooperative Work &amp; Social Computing</meeting>
+		<imprint>
+			<date type="published" when="2016">2016</date>
+			<biblScope unit="page" from="1462" to="1474" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b16">
+	<monogr>
+		<title level="m" type="main">Communication of social support: Messages, interactions, relationships, and community</title>
+		<author>
+			<persName><forename type="first">Terrance</forename><forename type="middle">L</forename><surname>Brant R Burleson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Irwin</forename><forename type="middle">G</forename><surname>Albrecht</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Sarason</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="1994">1994</date>
+			<publisher>Publications, Inc</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b17">
+	<analytic>
+		<title level="a" type="main">Stigma Management and Gay Identity Development</title>
+		<author>
+			<persName><forename type="first">Roy</forename><surname>Cain</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Work; Oxford</title>
+		<imprint>
+			<biblScope unit="volume">36</biblScope>
+			<biblScope unit="page" from="67" to="73" />
+			<date type="published" when="1991">1991</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b18">
+	<analytic>
+		<title level="a" type="main">The processes model: Understanding disclosure and post-disclosure outcomes among people living with a concealable stigmatized identity</title>
+		<author>
+			<persName><forename type="first">Stephenie</forename><forename type="middle">R</forename><surname>Chaudoir</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jeffrey</forename><forename type="middle">D</forename><surname>Fisher</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">bulletin</title>
+		<imprint>
+			<biblScope unit="volume">136</biblScope>
+			<biblScope unit="page" from="236" to="256" />
+			<date type="published" when="2010">2010</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b19">
+	<monogr>
+		<title/>
+		<idno type="DOI">10.1037/a0018193</idno>
+		<ptr target="https://doi.org/10.1037/a0018193" />
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b20">
+	<analytic>
+		<title level="a" type="main">Retweeting in health promotion: of tweets about Breast Cancer Awareness</title>
+		<author>
+			<persName><forename type="first">Jae</forename><forename type="middle">Eun</forename></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Chung</forename></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Computers in Human Behavior</title>
+		<imprint>
+			<biblScope unit="volume">74</biblScope>
+			<biblScope unit="page" from="112" to="119" />
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b21">
+	<analytic>
+		<title level="a" type="main">Support Groups Helping Women Through Pregnancies after Loss</title>
+		<author>
+			<persName><forename type="first">Marsha</forename><forename type="middle">Mason</forename><surname>Côté-Arsenault</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Freije</surname></persName>
+		</author>
+		<idno type="DOI">10.1177/0193945904265817</idno>
+		<ptr target="https://doi.org/10.1177/0193945904265817" />
+	</analytic>
+	<monogr>
+		<title level="j">Western Journal of Nursing Research</title>
+		<imprint>
+			<biblScope unit="volume">26</biblScope>
+			<biblScope unit="page" from="650" to="670" />
+			<date type="published" when="2004">2004</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b22">
+	<analytic>
+		<author>
+			<persName><forename type="first">De</forename><surname>Munmun</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sushovan</forename><surname>Choudhury</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Social Support, and Anonymity. In of the International AAAI Conference on Weblogs and Social Media</title>
+				<imprint>
+			<date type="published" when="2014">2014</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b23">
+	<monogr>
+		<title/>
+		<author>
+			<persName><forename type="first">J</forename><surname>Valerian</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Janusz</forename><surname>Derlega</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Grzelak</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="1979">1979</date>
+		</imprint>
+	</monogr>
+	<note>of self-disclosure</note>
+</biblStruct>
+
+<biblStruct xml:id="b24">
+	<monogr>
+		<title level="m" type="main">Origins, patterns, and implications of openness in relationships</title>
+		<imprint>
+			<biblScope unit="page" from="151" to="176" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b25">
+	<monogr>
+		<title level="m" type="main">Self-disclosure research: through meta-analysis. Interpersonal communication research: Advances through meta</title>
+		<author>
+			<persName><surname>Dindia</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2002">2002</date>
+			<biblScope unit="page" from="169" to="185" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b26">
+	<analytic>
+		<title level="a" type="main">The role of emerging technology in women&apos;s response to pregnancy loss</title>
+		<author>
+			<persName><forename type="first">Pamela</forename><forename type="middle">A</forename><surname>Geller</surname></persName>
+		</author>
+		<idno type="DOI">10.1586/eog.11.80</idno>
+		<ptr target="https://doi.org/10.1586/eog.11.80" />
+	</analytic>
+	<monogr>
+		<title level="j">Expert Review of Obstetrics &amp; Gynecology</title>
+		<imprint>
+			<biblScope unit="volume">1</biblScope>
+			<biblScope unit="page" from="19" to="23" />
+			<date type="published" when="2012">2012</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b27">
+	<analytic>
+		<title level="a" type="main">Digital Motherhood: How Does Technology Help New Mothers?</title>
+		<author>
+			<persName><forename type="first">Lorna</forename><surname>Gibson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Vicki</forename><forename type="middle">L</forename><surname>Hanson</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2470654.2470700</idno>
+		<ptr target="https://doi.org/10.1145/2470654.2470700" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the SIGCHI Conference on Human Factors Computing Systems (CHI &apos;13)</title>
+				<meeting>the SIGCHI Conference on Human Factors Computing Systems (CHI &apos;13)</meeting>
+		<imprint>
+			<date type="published" when="2013">2013</date>
+			<biblScope unit="page" from="313" to="322" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b28">
+	<monogr>
+		<title level="m" type="main">Erving Goffman. 1959. The presentation of self life</title>
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b29">
+	<monogr>
+		<author>
+			<persName><surname>Goffman</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Stigma</surname></persName>
+		</author>
+		<title level="m">notes on the of spoiled identity. Simon &amp; Schuster, New 27. R. Goldner. Self disclosure on social websites and relationship quality in late Dissertation/Thesis</title>
+				<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b30">
+	<analytic>
+		<title level="a" type="main">Self-disclosure in personal relationships</title>
+		<author>
+			<persName><forename type="first">Kathryn</forename><surname>Greene</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Valerian</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Alicia</forename><surname>Derlega</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">The Cambridge handbook of personal relationships</title>
+				<imprint>
+			<date type="published" when="2006">2006</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b31">
+	<monogr>
+		<author>
+			<persName><forename type="first">Nazanin</forename><surname>Oliver L Haimson</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Andalibi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Gillian</forename><forename type="middle">R</forename><surname>Munmun De Choudhury</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Hayes</surname></persName>
+		</author>
+		<idno type="DOI">10.1177/1461444817711402</idno>
+		<ptr target="https://doi.org/10.1177/1461444817711402" />
+		<title level="m">Relationship breakup disclosures and media ideologies on Facebook. Media &amp; Society</title>
+				<imprint>
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b32">
+	<analytic>
+		<title level="a" type="main">Disclosure, Stress, and Support During Gender Transition on</title>
+		<author>
+			<persName><forename type="first">L</forename><surname>Oliver</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jed</forename><forename type="middle">R</forename><surname>Haimson</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Brubaker</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Gillian</forename><forename type="middle">R</forename><surname>Lynn</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Hayes</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 18th ACM Conference Computer Supported Cooperative Work &amp; Social Computing (CSCW &apos;15)</title>
+				<meeting>the 18th ACM Conference Computer Supported Cooperative Work &amp; Social Computing (CSCW &apos;15)</meeting>
+		<imprint>
+			<date type="published" when="2015">2015</date>
+			<biblScope unit="page" from="1176" to="1190" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b33">
+	<monogr>
+		<title/>
+		<idno type="DOI">10.1145/2675133.2675152</idno>
+		<ptr target="https://doi.org/10.1145/2675133.2675152" />
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b34">
+	<monogr>
+		<title level="m" type="main">Using Depression Analytics to Reduce Stigma via Social Media: BlueFriends</title>
+		<author>
+			<persName><forename type="first">L</forename><surname>Oliver</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kathryn</forename><surname>Haimson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Simone</forename><surname>Ringland</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Christine</forename><forename type="middle">T</forename><surname>Simpson</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Wolf</surname></persName>
+		</author>
+		<ptr target="https://www.ideals.illinois.edu/handle/2142/48827" />
+		<imprint>
+			<date type="published" when="2009">2014. August 9</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b35">
+	<analytic>
+		<title level="a" type="main">Social networking sites and our lives</title>
+		<author>
+			<persName><forename type="first">Keith</forename><surname>Hampton</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Lauren</forename><forename type="middle">Sessions</forename><surname>Goulet</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Lee</forename><surname>Rainie</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kristen</forename><surname>Purcell</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Pew Research Center: Internet, Science &amp; Tech</title>
+		<imprint>
+			<date type="published" when="2011-08-03">2011. August 3. 2017</date>
+		</imprint>
+	</monogr>
+	<note>from networking-sites-and-our-lives</note>
+</biblStruct>
+
+<biblStruct xml:id="b36">
+	<analytic>
+		<title level="a" type="main">Making Sense Miscarriage Online</title>
+		<author>
+			<persName><forename type="first">Sarah</forename><surname>Hardy</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Rebecca</forename><surname>Kukla</surname></persName>
+		</author>
+		<idno type="DOI">10.1111/josp.12089</idno>
+		<ptr target="https://doi.org/10.1111/josp.12089" />
+	</analytic>
+	<monogr>
+		<title level="j">of Social Philosophy</title>
+		<imprint>
+			<biblScope unit="volume">46</biblScope>
+			<biblScope unit="page" from="106" to="125" />
+			<date type="published" when="2015">2015</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b37">
+	<monogr>
+		<title/>
+		<author>
+			<persName><forename type="first">Gillian</forename><forename type="middle">R</forename><surname>Hayes</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Karen</forename><forename type="middle">G</forename><surname>Cheng</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">H</forename><surname>Sen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Karen</forename><forename type="middle">P</forename><surname>Hirano</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Marni</forename><forename type="middle">S</forename><surname>Tang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Dianne</forename><forename type="middle">E</forename><surname>Nagel</surname></persName>
+		</author>
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b38">
+	<analytic>
+		<title level="a" type="main">Mobile Capture and Access Tool for the Support of Preterm Infants and Their Caregivers</title>
+		<idno type="DOI">10.1145/2617574</idno>
+		<idno>3: 19:1-19:28</idno>
+		<ptr target="https://doi.org/10.1145/2617574" />
+	</analytic>
+	<monogr>
+		<title level="j">Trans. Comput.-Hum. Interact</title>
+		<imprint>
+			<biblScope unit="volume">21</biblScope>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b39">
+	<analytic>
+		<title level="a" type="main">The presentation of self in the age of social media: Distinguishing performances and online</title>
+		<author>
+			<persName><forename type="first">Bernie</forename><surname>Hogan</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Technology &amp; Society</title>
+		<imprint>
+			<date type="published" when="2010">2010</date>
+		</imprint>
+	</monogr>
+	<note>Bulletin of Science</note>
+</biblStruct>
+
+<biblStruct xml:id="b40">
+	<analytic>
+		<title level="a" type="main">Impact of &apos;Giving Cigarettes is Giving Harm&apos; campaign on knowledge and attitudes of Chinese smokers</title>
+		<author>
+			<persName><forename type="first">Li-Ling</forename><surname>Huang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">James</forename><forename type="middle">F</forename><surname>Thrasher</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yuan</forename><surname>Jiang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Qiang</forename><surname>Li</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Geoffrey</forename><forename type="middle">T</forename><surname>Fong</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yvette</forename><surname>Chang</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Katrina</forename><forename type="middle">M</forename></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Daniela</forename><forename type="middle">B</forename><surname>Friedman</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Tobacco Control Suppl</title>
+		<imprint>
+			<biblScope unit="volume">4</biblScope>
+			<biblScope unit="page" from="28" to="34" />
+			<date type="published" when="2015">2015</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b41">
+	<monogr>
+		<title level="m" type="main">What might have been-The communication of social support and women&apos;s post-miscarriage narrative reconstruction</title>
+		<author>
+			<persName><forename type="first">Jennifer</forename><forename type="middle">Leanne</forename><surname>Fairchild</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2009">2009</date>
+		</imprint>
+		<respStmt>
+			<orgName>University of Kentucky</orgName>
+		</respStmt>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b42">
+	<analytic>
+		<title level="a" type="main">Social and the Self-Management of Pregnancy, Mothering and Child Health</title>
+		<author>
+			<persName><forename type="first">Johnson</forename><surname>Sophia Alice</surname></persName>
+		</author>
+		<idno type="DOI">10.3390/soc4020330</idno>
+		<ptr target="https://doi.org/10.3390/soc4020330" />
+	</analytic>
+	<monogr>
+		<title level="j">Societies</title>
+		<imprint>
+			<biblScope unit="volume">4</biblScope>
+			<biblScope unit="page" from="330" to="350" />
+			<date type="published" when="2014">2014</date>
+		</imprint>
+	</monogr>
+	<note>Maternal Devices</note>
+</biblStruct>
+
+<biblStruct xml:id="b43">
+	<monogr>
+		<title level="m" type="main">Protocol for Responding to Participant Distress, Adapted Version for</title>
+		<author>
+			<persName><forename type="first">Elaine</forename><surname>Kasket</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2009">2009</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b44">
+	<analytic>
+		<title level="a" type="main">Internet-based treatment after loss: concept and case study</title>
+		<author>
+			<persName><forename type="first">Anette</forename><surname>Kersting</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Kristin</forename><surname>Kroker</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sarah</forename><surname>Schlicht</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Birgit</forename><surname>Wagner</surname></persName>
+		</author>
+		<idno type="DOI">10.3109/0167482X.2011.553974</idno>
+		<ptr target="https://doi.org/10.3109/0167482X.2011.553974" />
+	</analytic>
+	<monogr>
+		<title level="j">of Psychosomatic Obstetrics &amp; Gynecology</title>
+		<imprint>
+			<biblScope unit="volume">32</biblScope>
+			<biblScope unit="page" from="72" to="78" />
+			<date type="published" when="2011">2011</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b45">
+	<monogr>
+		<title level="m" type="main">The rules of bereavement work: emotion work in online perinatal loss support groups</title>
+		<author>
+			<persName><forename type="first">Jessica</forename><surname>Killeen</surname></persName>
+		</author>
+		<idno type="DOI">10.1186/1471-2393-15-S1-A16</idno>
+		<ptr target="https://doi.org/10.1186/1471-2393-15-S1-A16" />
+		<imprint>
+			<date type="published" when="2015">2015</date>
+			<biblScope unit="volume">15</biblScope>
+			<biblScope unit="page">A16</biblScope>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b46">
+	<analytic>
+		<title level="a" type="main">An empirical study of the factors affecting social network service use</title>
+		<author>
+			<persName><forename type="first">Ohbyung</forename><surname>Kwon</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Yixing</forename><surname>Wen</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Human Behavior</title>
+		<imprint>
+			<biblScope unit="volume">26</biblScope>
+			<biblScope unit="page" from="254" to="263" />
+			<date type="published" when="2010">2010</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b47">
+	<analytic>
+		<title level="a" type="main">We&apos;Re in It Together: Interpersonal Management of Disclosure in Social Services</title>
+		<author>
+			<persName><forename type="first">Airi</forename><surname>Lampinen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Vilma</forename><surname>Lehtinen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Asko</forename><surname>Lehmuskallio</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sakari</forename><surname>Tamminen</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the SIGCHI Conference on Human Factors in Computing Systems (CHI &apos;11)</title>
+				<meeting>the SIGCHI Conference on Human Factors in Computing Systems (CHI &apos;11)</meeting>
+		<imprint>
+			<date type="published" when="2011">2011</date>
+			<biblScope unit="page" from="3217" to="3226" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b48">
+	<monogr>
+		<title/>
+		<idno type="DOI">10.1145/1978942.1979420</idno>
+		<ptr target="https://doi.org/10.1145/1978942.1979420" />
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b49">
+	<monogr>
+		<title level="m" type="main">All My People Right Here, Right Now: management of group co-presence on a social networking site</title>
+		<author>
+			<persName><forename type="first">Airi</forename><surname>Lampinen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sakari</forename><surname>Tamminen</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Antti</forename><surname>Oulasvirta</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2009">2009</date>
+			<biblScope unit="page" from="281" to="290" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b50">
+	<monogr>
+		<title/>
+		<idno type="DOI">10.1145/1531674.1531717</idno>
+		<ptr target="https://doi.org/10.1145/1531674.1531717" />
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b51">
+	<analytic>
+		<title level="a" type="main">Self-Concealment: Conceptualization, Measurement, and Health Implications</title>
+		<author>
+			<persName><forename type="first">G</forename><surname>Dale</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Robert</forename><forename type="middle">L</forename><surname>Larson</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Chastain</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">of Social and Clinical</title>
+		<imprint>
+			<biblScope unit="volume">9</biblScope>
+			<biblScope unit="page" from="439" to="455" />
+			<date type="published" when="1990">1990</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b52">
+	<analytic>
+		<title level="a" type="main">Intimacy as an interpersonal process: The importance of partner disclosure, and perceived responsiveness interpersonal exchanges</title>
+		<author>
+			<persName><forename type="first">J</forename><surname>Laurenceau</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><forename type="middle">F</forename><surname>Barrett</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><forename type="middle">R</forename></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Journal of Personality and Social</title>
+		<imprint>
+			<biblScope unit="volume">74</biblScope>
+			<biblScope unit="page" from="1238" to="1251" />
+			<date type="published" when="1998">1998</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b53">
+	<monogr>
+		<title level="m" type="main">When a Dies: Pregnancy and Newborn Loss</title>
+		<author>
+			<persName><forename type="first">G</forename><surname>Irving</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="1992">1992</date>
+			<publisher>Yale University Press</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b54">
+	<analytic>
+		<title level="a" type="main">Emotional disclosure on networking sites: The role of structure and psychological needs</title>
+		<author>
+			<persName><forename type="first">William</forename><surname>Lin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Lin</forename><surname>Tov</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Qiu</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Computers in Human</title>
+		<imprint>
+			<biblScope unit="volume">41</biblScope>
+			<biblScope unit="page" from="342" to="350" />
+			<date type="published" when="2014">2014</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b55">
+	<monogr>
+		<title/>
+		<idno type="DOI">10.1016/j.chb.2014.09.045</idno>
+		<ptr target="https://doi.org/10.1016/j.chb.2014.09.045" />
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b56">
+	<analytic>
+		<title level="a" type="main">People Are Either Too Fake or Too Real&quot;: Opportunities and Challenges in Tie-Based Anonymity</title>
+		<author>
+			<persName><forename type="first">Nazanin</forename><surname>Ma</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Louise</forename><surname>Andalibi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mor</forename><surname>Barkhuus</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Naaman</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/3025453.3025956</idno>
+		<ptr target="https://doi.org/10.1145/3025453.3025956" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2017 CHI Conference on Human Factors in Computing Systems (CHI &apos;17)</title>
+				<meeting>the 2017 CHI Conference on Human Factors in Computing Systems (CHI &apos;17)</meeting>
+		<imprint>
+			<date type="published" when="2017">2017</date>
+			<biblScope unit="page" from="1781" to="1793" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b57">
+	<analytic>
+		<title level="a" type="main">2011. I tweet honestly, tweet passionately: Twitter users, context collapse, the imagined audience</title>
+		<author>
+			<persName><forename type="first">E</forename></persName>
+		</author>
+		<idno type="DOI">10.1177/1461444810365313</idno>
+		<ptr target="https://doi.org/10.1177/1461444810365313" />
+	</analytic>
+	<monogr>
+		<title level="j">New &amp; Society</title>
+		<imprint>
+			<biblScope unit="volume">13</biblScope>
+			<biblScope unit="page" from="114" to="133" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b58">
+	<analytic>
+		<title level="a" type="main">There Isn&apos;t Wifi in Heaven!</title>
+		<author>
+			<persName><surname>Marwick Nicole Ellison</surname></persName>
+		</author>
+		<idno type="DOI">10.1080/08838151.2012.705197</idno>
+		<ptr target="https://doi.org/10.1080/08838151.2012.705197" />
+	</analytic>
+	<monogr>
+		<title level="j">on Facebook Memorial Pages. of Broadcasting &amp; Electronic Media</title>
+		<imprint>
+			<biblScope unit="volume">56</biblScope>
+			<biblScope unit="page" from="378" to="400" />
+			<date type="published" when="2012">2012</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b59">
+	<analytic>
+		<title level="a" type="main">with Death in Design: Developing Systems for the Bereaved</title>
+		<author>
+			<persName><forename type="first">Ronald</forename><forename type="middle">M</forename><surname>Massimi</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Baecker</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/1978942.1979092</idno>
+		<ptr target="https://doi.org/10.1145/1978942.1979092" />
+	</analytic>
+	<monogr>
+		<title level="m">of the SIGCHI Conference Human Factors in Computing Systems (CHI &apos;11)</title>
+				<imprint>
+			<date type="published" when="2011">2011</date>
+			<biblScope unit="page" from="1001" to="1010" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b60">
+	<analytic>
+		<title level="a" type="main">Finding a New Normal: The Role of Technology in Life Disruptions</title>
+		<author>
+			<persName><forename type="first">Michael</forename><surname>Massimi</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jill</forename><forename type="middle">P</forename><surname>Dimond</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Christopher</forename><forename type="middle">A Le</forename><surname>Dantec</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">of the ACM 2012 Conference on Computer Supported Work (CSCW &apos;12)</title>
+				<imprint>
+			<date type="published" when="2012">2012</date>
+			<biblScope unit="page" from="719" to="728" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b61">
+	<monogr>
+		<title/>
+		<idno type="DOI">10.1145/2145204.2145314</idno>
+		<ptr target="https://doi.org/10.1145/2145204.2145314" />
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b62">
+	<analytic>
+		<title level="a" type="main">Identity Work on Social Media Sites: Disadvantaged Students&apos; College Transition Processes</title>
+		<author>
+			<persName><forename type="first">Tsubasa</forename><surname>Morioka</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Nicole</forename><forename type="middle">B</forename><surname>Ellison</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Michael</forename></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 19th ACM Conference on Computer-Supported Cooperative Work &amp; Social (CSCW &apos;16)</title>
+				<meeting>the 19th ACM Conference on Computer-Supported Cooperative Work &amp; Social (CSCW &apos;16)</meeting>
+		<imprint>
+			<date type="published" when="2016">2016</date>
+			<biblScope unit="page" from="848" to="859" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b63">
+	<monogr>
+		<title/>
+		<idno type="DOI">10.1145/2818048.2819959</idno>
+		<ptr target="https://doi.org/10.1145/2818048.2819959" />
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b64">
+	<analytic>
+		<title level="a" type="main">Social Networking Site Use by Mothers of Young Children</title>
+		<author>
+			<persName><forename type="first">Morris</forename><surname>Meredith Ringel</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2531602.2531603</idno>
+		<ptr target="https://doi.org/10.1145/2531602.2531603" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of 17th ACM Conference on Computer Supported Cooperative Work &amp; Social Computing (CSCW &apos;14)</title>
+				<meeting>17th ACM Conference on Computer Supported Cooperative Work &amp; Social Computing (CSCW &apos;14)</meeting>
+		<imprint>
+			<date type="published" when="2014">2014</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b65">
+	<analytic>
+		<title level="a" type="main">Towards a Preliminary Framework for Understanding Pregnancy Loss</title>
+		<author>
+			<persName><forename type="first">Christine</forename><surname>Moulder</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Journal Reproductive and Infant Psychology</title>
+		<imprint>
+			<biblScope unit="volume">12</biblScope>
+			<biblScope unit="page" from="65" to="67" />
+			<date type="published" when="1994">1994</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b66">
+	<monogr>
+		<title level="m" type="main">Never a simple journey: pregnancy following perinatal loss</title>
+		<author>
+			<persName><forename type="first">O'leary</forename><surname>Joann</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mph</forename><surname>Phd</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Ms</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2009">2009</date>
+			<biblScope unit="volume">28</biblScope>
+			<biblScope unit="page" from="12" to="17" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b67">
+	<monogr>
+		<title/>
+		<idno type="DOI">10.1080/02682620902996004</idno>
+		<ptr target="https://doi.org/10.1080/02682620902996004" />
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b68">
+	<analytic>
+		<title level="a" type="main">Finding Meaning in a Child&apos;s Violent Death: A Five-Year Prospective Analysis of Parents&apos; Personal Narratives and Empirical Data</title>
+		<author>
+			<persName><forename type="first">Shirley</forename><forename type="middle">A</forename><surname>Murphy</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">L</forename><forename type="middle">Clark</forename><surname>Johnson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Janet</forename><surname>Lohan</surname></persName>
+		</author>
+		<idno type="DOI">10.1080/07481180302879</idno>
+		<ptr target="https://doi.org/10.1080/07481180302879" />
+	</analytic>
+	<monogr>
+		<title level="j">Studies</title>
+		<imprint>
+			<biblScope unit="volume">5</biblScope>
+			<biblScope unit="page" from="381" to="404" />
+			<date type="published" when="2003">2003</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b69">
+	<analytic>
+		<title level="a" type="main">Determinants of depressive symptoms in the early weeks after miscarriage</title>
+		<author>
+			<persName><forename type="first">R</forename><surname>Neugebauer</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Kline</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>O'connor</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">P</forename><surname>Shrout</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Johnson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Skodol</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><surname>Wicks</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Susser</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Public Health</title>
+		<imprint>
+			<biblScope unit="volume">82</biblScope>
+			<biblScope unit="page" from="1332" to="1339" />
+			<date type="published" when="1992">1992</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b70">
+	<analytic>
+		<title level="a" type="main">It&apos;s Not That I Don&apos;T Have Problems, I&apos;M Just Not Putting Them on Facebook: Challenges and Opportunities in Using Online Social Networks for Health</title>
+		<author>
+			<persName><forename type="first">W</forename><surname>Mark</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Debra</forename><surname>Newman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sean</forename><forename type="middle">A</forename><surname>Lauterbach</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Paul</forename><surname>Munson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Margaret</forename><forename type="middle">E</forename><surname>Resnick</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Morris</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/1958824.1958876</idno>
+		<ptr target="https://doi.org/10.1145/1958824.1958876" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the ACM 2011 Conference on Computer Supported Cooperative Work (CSCW &apos;11)</title>
+				<meeting>the ACM 2011 Conference on Computer Supported Cooperative Work (CSCW &apos;11)</meeting>
+		<imprint>
+			<date type="published" when="2011">2011</date>
+			<biblScope unit="page" from="341" to="350" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b71">
+	<monogr>
+		<title level="m" type="main">A Disclosure Decision Model: How and When Will Self</title>
+		<author>
+			<persName><forename type="first">Julia</forename><surname>Omarzu</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2000">2000</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b72">
+	<analytic>
+		<title/>
+	</analytic>
+	<monogr>
+		<title level="j">Disclose. Personality and Social Psychology Review</title>
+		<imprint>
+			<biblScope unit="volume">4</biblScope>
+			<biblScope unit="page" from="174" to="185" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b73">
+	<monogr>
+		<title level="m" type="main">Every is Different&quot;: Designing mHealth for the Ecology</title>
+		<author>
+			<persName><forename type="first">Tamara</forename><surname>Peyton</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Erika</forename><surname>Poole</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Madhu</forename><surname>Reddy</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jennifer</forename><surname>Kraschnewski</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Cynthia</forename><surname>Chuang</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2014">2014. 2014</date>
+		</imprint>
+	</monogr>
+	<note>In of the</note>
+</biblStruct>
+
+<biblStruct xml:id="b74">
+	<monogr>
+		<idno type="DOI">10.1145/2598510.2598572</idno>
+		<ptr target="https://doi.org/10.1145/2598510.2598572" />
+		<title level="m">Conference on Designing Interactive Systems (DIS &apos;14)</title>
+				<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b75">
+	<analytic>
+		<title level="a" type="main">Let Me Know If You Need Anything &quot; : Support Realities of New Mothers</title>
+		<author>
+			<persName><forename type="first">Lucia</forename><surname>Prabhakar</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Anne</forename><surname>Guerra-Reyes</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Effron</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Kleinschmidt</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Charles</forename><surname>Driscoll</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Vanessa</forename><surname>Peters</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Majdah</forename><surname>Pereira</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Tom</forename><surname>Alshehri</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Katie</forename><forename type="middle">A</forename><surname>Ongwere</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Siek</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of Pervasive Health</title>
+				<meeting>Pervasive Health</meeting>
+		<imprint>
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b76">
+	<monogr>
+		<title level="m" type="main">to young people disclosing sexual assault: A resource for schools. Australian Institute of Family Studies</title>
+		<author>
+			<persName><surname>Quadara</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2008">2008</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b77">
+	<analytic>
+		<title level="a" type="main">Examining Effects of Anticipated Stigma, Centrality, Salience, Internalization, and Outness on Psychological Distress for People with Stigmatized Identities</title>
+		<author>
+			<persName><forename type="first">Diane</forename><forename type="middle">M</forename><surname>Quinn</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Michelle</forename><forename type="middle">K</forename><surname>Williams</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Francisco</forename><surname>Quintana</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jennifer</forename><forename type="middle">L</forename><surname>Gaskins</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Nicole</forename><forename type="middle">M</forename><surname>Overstreet</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Alefiyah</forename><surname>Pishori</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Valerie</forename><forename type="middle">A</forename><surname>Earnshaw</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Giselle</forename><surname>Perez</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Stephenie</forename><forename type="middle">R</forename><surname>Chaudoir</surname></persName>
+		</author>
+		<idno type="DOI">10.1371/journal.pone.0096977</idno>
+		<ptr target="https://doi.org/10.1371/journal.pone.0096977" />
+	</analytic>
+	<monogr>
+		<title level="j">PLOS ONE</title>
+		<imprint>
+			<biblScope unit="volume">9</biblScope>
+			<biblScope unit="page">e96977</biblScope>
+			<date type="published" when="2014">2014</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b78">
+	<analytic>
+		<title level="a" type="main">and well-being on social network sites: A longitudinal study on the effects of online and the positivity bias in SNS</title>
+		<author>
+			<persName><forename type="first">Leonard</forename><surname>Reinecke</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sabine</forename><surname>Trepte</surname></persName>
+		</author>
+		<idno type="DOI">10.1016/j.chb.2013.07.030</idno>
+		<ptr target="https://doi.org/10.1016/j.chb.2013.07.030" />
+	</analytic>
+	<monogr>
+		<title level="j">Computers in Human Behavior</title>
+		<imprint>
+			<biblScope unit="volume">30</biblScope>
+			<biblScope unit="page" from="95" to="102" />
+			<date type="published" when="2014">2014</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b79">
+	<analytic>
+		<title level="a" type="main">Emotion elicits the social sharing of emotion: Theory and empirical review</title>
+		<author>
+			<persName><forename type="first">Bernard</forename><surname>Rimé</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Emotion Review</title>
+		<imprint>
+			<biblScope unit="volume">1</biblScope>
+			<biblScope unit="page" from="60" to="85" />
+			<date type="published" when="2009">2009</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b80">
+	<analytic>
+		<title level="a" type="main">Personality and motivations associated with Facebook use</title>
+		<author>
+			<persName><forename type="first">Craig</forename><surname>Ross</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">R</forename><forename type="middle">Robert</forename><surname>Orr</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Emily</forename><forename type="middle">S</forename><surname>Orr</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mia</forename><surname>Sisic</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Arseneault</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Mary</forename><forename type="middle">G</forename><surname>Simmering</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Computers in Human Behavior</title>
+		<imprint>
+			<biblScope unit="volume">25</biblScope>
+			<biblScope unit="page" from="578" to="586" />
+			<date type="published" when="2009">2009</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b81">
+	<monogr>
+		<title level="m" type="main">Disclosing Oneself to a Stranger: Reciprocity and Its Limits</title>
+		<author>
+			<persName><forename type="first">Zick</forename><surname>Rubin</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="1975">1975</date>
+		</imprint>
+	</monogr>
+	<note>of Experimental Psychology</note>
+</biblStruct>
+
+<biblStruct xml:id="b82">
+	<analytic>
+		<title level="a" type="main">Video-Mediated Peer Support in an Online Community for Substance Use Disorders</title>
+		<author>
+			<persName><forename type="first">Sabirat</forename><surname>Rubya</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Svetlana</forename><surname>Yarosh</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the ACM Conference on Computer Supported Cooperative Work and Social Computing (CSCW &apos;17)</title>
+				<meeting>the ACM Conference on Computer Supported Cooperative Work and Social Computing (CSCW &apos;17)</meeting>
+		<imprint>
+			<date type="published" when="2017">2017</date>
+			<biblScope unit="page" from="1454" to="1469" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b83">
+	<monogr>
+		<title/>
+		<idno type="DOI">10.1145/2998181.2998246</idno>
+		<ptr target="https://doi.org/10.1145/2998181.2998246" />
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b84">
+	<analytic>
+		<title level="a" type="main">Are social networks useful to challenge stigma attached to mental disorders? Findings the time to change social campaign 2009-2014</title>
+		<author>
+			<persName><forename type="first">G</forename><surname>Sampogna</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">C</forename><surname>Henderson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">S</forename><surname>Thornicroft</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">I</forename><surname>Evans-Lacko</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">E</forename><surname>Bakolis</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Robinson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">V</forename><forename type="middle">Del</forename><surname>Luciano</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">A</forename><surname>Vecchio</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Fiorillo</surname></persName>
+		</author>
+		<idno type="DOI">10.1016/j.eurpsy.2017.01.279</idno>
+		<ptr target="https://doi.org/10.1016/j.eurpsy.2017.01.279" />
+	</analytic>
+	<monogr>
+		<title level="j">European Psychiatry</title>
+		<imprint>
+			<biblScope unit="volume">41</biblScope>
+			<biblScope unit="page">S89</biblScope>
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b85">
+	<analytic>
+		<title level="a" type="main">Epidemiologic measures the course and outcome of pregnancy</title>
+		<author>
+			<persName><forename type="first">David</forename><forename type="middle">A</forename><surname>Savitz</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Irva</forename><surname>Hertz-Picciotto</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Charles</forename><surname>Poole</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Andrew</forename><forename type="middle">F</forename><surname>Olshan</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Epidemiologic</title>
+		<imprint>
+			<biblScope unit="volume">24</biblScope>
+			<biblScope unit="page" from="91" to="101" />
+			<date type="published" when="2002">2002</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b86">
+	<analytic>
+		<title level="a" type="main">The Secret Life of Online Moms: Anonymity on YouBeMom</title>
+		<author>
+			<persName><forename type="first">Sarita Yardi</forename><surname>Schoenebeck</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the International AAAI Conference on Weblogs and Social Media</title>
+				<meeting>the International AAAI Conference on Weblogs and Social Media</meeting>
+		<imprint>
+			<date type="published" when="2013">2013</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b87">
+	<monogr>
+		<author>
+			<persName><forename type="first">Bryan</forename><surname>Semaan</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">M</forename><surname>Lauren</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Bryan</forename><surname>Dosono</surname></persName>
+		</author>
+		<title level="m">Military Masculinity and the Travails of Transitioning: Disclosure in Media. In of the 2017 ACM Conference on Computer Cooperative Work and Social Computing (CSCW &apos;17)</title>
+				<imprint>
+			<date type="published" when="2017">2017</date>
+			<biblScope unit="page" from="387" to="403" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b88">
+	<monogr>
+		<author>
+			<persName><forename type="first">E</forename><surname>Silverman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jay</forename><surname>Baglia</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/2998181.2998221</idno>
+		<ptr target="https://doi.org/10.1145/2998181.2998221" />
+		<title level="m">Communicating pregnancy loss: narrative as a method for change</title>
+				<imprint>
+			<date type="published" when="2015">2015</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b89">
+	<analytic>
+		<title level="a" type="main">Parents&apos; Grief following Pregnancy Loss: A Comparison of Mothers and Fathers</title>
+		<author>
+			<persName><forename type="first">Kandi</forename><forename type="middle">M</forename><surname>Stinson</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Judith</forename><forename type="middle">N</forename><surname>Lasker</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Janet</forename><surname>Lohmann</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Lori</forename><forename type="middle">J</forename><surname>Toedter</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Relations</title>
+		<imprint>
+			<biblScope unit="volume">41</biblScope>
+			<biblScope unit="page" from="218" to="223" />
+			<date type="published" when="1992">1992</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b90">
+	<monogr>
+		<title/>
+		<idno type="DOI">10.2307/584836</idno>
+		<ptr target="https://doi.org/10.2307/584836" />
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b91">
+	<monogr>
+		<title level="m" type="main">of research: Techniques and procedures for developing grounded theory</title>
+		<author>
+			<persName><forename type="first">Anselm</forename><surname>Strauss</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Juliet</forename><surname>Corbin</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="1998">1998</date>
+			<publisher>SAGE Publications</publisher>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b92">
+	<analytic>
+		<title level="a" type="main">The disinhibition effect</title>
+		<author>
+			<persName><forename type="first">John</forename><surname>Suler</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="m">Cyberpsychology &amp; the of the Internet, multimedia and virtual on and</title>
+				<imprint>
+			<date type="published" when="2004">2004</date>
+			<biblScope unit="volume">7</biblScope>
+			<biblScope unit="page" from="321" to="326" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b93">
+	<monogr>
+		<title/>
+		<idno type="DOI">10.1089/1094931041291295</idno>
+		<ptr target="https://doi.org/10.1089/1094931041291295" />
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b94">
+	<analytic>
+		<title level="a" type="main">Computermediated communication effects on disclosure, and interpersonal evaluations: getting to one another a bit at a time</title>
+		<author>
+			<persName><forename type="first">L</forename><forename type="middle">C</forename><surname>Tidwell</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">J</forename><forename type="middle">B</forename><surname>Walther</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Human Research</title>
+		<imprint>
+			<biblScope unit="volume">28</biblScope>
+			<biblScope unit="page" from="317" to="348" />
+			<date type="published" when="2002">2002</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b95">
+	<monogr>
+		<title level="m" type="main">Threats to belonging on Facebook: lurking and ostracism. Influence, ahead-of-print</title>
+		<author>
+			<persName><forename type="first">J</forename><surname>Stephanie</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Eric</forename><forename type="middle">J</forename><surname>Tobin</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Marnize</forename><surname>Vanman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Alexander</forename><forename type="middle">K</forename><surname>Verreynne</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Saeri</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2014">2014</date>
+			<biblScope unit="page" from="1" to="12" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b96">
+	<analytic>
+		<title level="a" type="main">There&apos;s a out there you might as well tap&apos;: Exploring the benefits of and barriers to exchanging informational and resources on Facebook</title>
+		<author>
+			<persName><forename type="first">Jessica</forename><surname>Vitak</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Nicole</forename><forename type="middle">B</forename><surname>Ellison</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Media &amp; Society</title>
+		<imprint>
+			<biblScope unit="volume">15</biblScope>
+			<biblScope unit="page" from="243" to="259" />
+			<date type="published" when="2013">2013</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b97">
+	<monogr>
+		<title/>
+		<idno type="DOI">10.1177/1461444812451566</idno>
+		<ptr target="https://doi.org/10.1177/1461444812451566" />
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b98">
+	<monogr>
+		<title level="m" type="main">You can&apos;t block people offline&quot;: examining how facebook&apos;s affordances the disclosure process</title>
+		<author>
+			<persName><forename type="first">Jessica</forename><surname>Vitak</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jinyoung</forename><surname>Kim</surname></persName>
+		</author>
+		<imprint>
+			<date type="published" when="2014">2014</date>
+			<biblScope unit="page" from="461" to="474" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b99">
+	<monogr>
+		<title/>
+		<idno type="DOI">10.1145/2531602.2531672</idno>
+		<ptr target="https://doi.org/10.1145/2531602.2531672" />
+		<imprint/>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b100">
+	<analytic>
+		<title level="a" type="main">The Role of Friends&apos; Appearance and Behavior on Evaluations of Individuals on Facebook: Are We by the Company We Keep?</title>
+		<author>
+			<persName><forename type="first">Joseph</forename><forename type="middle">B</forename><surname>Walther</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Brandon</forename><surname>Van Der Heide</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Sang-Yeon</forename><surname>Kim</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">David</forename><surname>Westerman</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Stephanie</forename><forename type="middle">Tom</forename><surname>Tong</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Human Research</title>
+		<imprint>
+			<biblScope unit="volume">34</biblScope>
+			<biblScope unit="page" from="28" to="49" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b101">
+	<analytic>
+		<title level="a" type="main">Grief, bonds, and relationships</title>
+		<author>
+			<persName><forename type="first">Robert</forename><forename type="middle">S</forename><surname>Weiss</surname></persName>
+		</author>
+		<idno type="DOI">10.1111/j.1468-2958.2007.00312.x84</idno>
+	</analytic>
+	<monogr>
+		<title level="m">Handbook of bereavement research: Consequences, and care</title>
+				<editor>
+			<persName><forename type="first">M</forename><forename type="middle">S</forename><surname>Stroebe</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">R</forename><forename type="middle">O</forename><surname>Hansson</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">W</forename><surname>Stroebe</surname></persName>
+		</editor>
+		<editor>
+			<persName><forename type="first">H</forename><surname>Schut</surname></persName>
+		</editor>
+		<meeting><address><addrLine>Washington, DC, US</addrLine></address></meeting>
+		<imprint>
+			<publisher>American Psychological Association</publisher>
+			<date type="published" when="2001">2001</date>
+			<biblScope unit="page" from="47" to="62" />
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b102">
+	<analytic>
+		<title level="a" type="main">Coordinating the Ordinary: Social Information Uses of Facebook by Adults</title>
+		<author>
+			<persName><forename type="first">Cliff</forename><surname>Donghee Yvette Wohn</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Jessica</forename><surname>Lampe</surname></persName>
+		</author>
+		<author>
+			<persName><forename type="first">Nicole</forename><forename type="middle">B</forename><surname>Vitak</surname></persName>
+		</author>
+		<author>
+			<persName><surname>Ellison</surname></persName>
+		</author>
+		<idno type="DOI">10.1145/1940761.1940808</idno>
+		<ptr target="https://doi.org/10.1145/1940761.1940808" />
+	</analytic>
+	<monogr>
+		<title level="m">Proceedings of the 2011 iConference (iConference &apos;11)</title>
+				<meeting>the 2011 iConference (iConference &apos;11)</meeting>
+		<imprint>
+			<date type="published" when="2011">2011</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b103">
+	<analytic>
+		<title level="a" type="main">Perceptions of on-line support An examination of perceived homophily, source credibility, communication and social support within on-line support groups</title>
+		<author>
+			<persName><forename type="first">Kevin</forename><surname>Wright</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Quarterly</title>
+		<imprint>
+			<biblScope unit="volume">48</biblScope>
+			<biblScope unit="page" from="44" to="59" />
+			<date type="published" when="2000">2000</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+<biblStruct xml:id="b104">
+	<analytic>
+		<title level="a" type="main">The stress-buffering effect of selfdisclosure on Facebook: An examination of stressful life events, social support, and mental health among college students</title>
+		<author>
+			<persName><forename type="first">Renwen</forename><surname>Zhang</surname></persName>
+		</author>
+	</analytic>
+	<monogr>
+		<title level="j">Human Behavior</title>
+		<imprint>
+			<biblScope unit="volume">75</biblScope>
+			<biblScope unit="page" from="527" to="537" />
+			<date type="published" when="2017">2017</date>
+		</imprint>
+	</monogr>
+</biblStruct>
+
+				</listBibl>
+			</div>
+		</back>
+	</text>
+</TEI>
